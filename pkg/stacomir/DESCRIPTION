@@ -1,0 +1,79 @@
+Package: stacomiR
+Type: Package
+Title: STACOMI stations de controle des migrations
+Version: 0.3.2704
+Date: 2011-02-19
+Author: Cedric Briand <cedric.briand@lavilaine.com>
+Maintainer: Cedric Briand <cedric.briand@lavilaine.com>
+Description: This package is intended to use with a specific PostgreSQL database to describe fish migrations.It is a part of the STACOMI project developed in France to centralize data obtained by fishway control devices.
+License: GPL
+Collate:
+  utilitaires.r
+  libraries.r
+  create_generic.r
+  messages.r
+  RefDC.r
+  RefDF.r
+  RefTaxon.r
+  RefStades.r
+  PasdeTemps.r
+  PasDeTempsJournalier.r
+  RefHorodate.r
+  Refpar.r
+  Refparquan.r
+  Refparqual.r
+  RefAnnee.r
+  Refperiode.r
+  RefCoe.r
+  RefListe.r
+  RefChoix.r
+  ReftextBox.r
+  RefCheckBox.r
+  RefPoidsMoyenPeche.r
+  RefStationMesure.r
+  ConnexionODBC.r
+  RequeteODBC.r
+  RequeteODBCwhere.r
+  RequeteODBCwheredate.r
+  BilanFonctionnementDC.r
+  BilanFonctionnementDF.r
+  BilanMigration.r
+  BilanMigrationInterAnnuelle.r
+  BilanConditionEnv.r
+  BilanMigrationConditionEnv.r
+  BilanMigrationPar.r
+  Bilan_stades_pigm.r
+  Bilan_lot.r
+  Bilan_taille.r
+  Bilan_poids_moyen.r
+  BilanEspeces.r
+  vector_to_listsql.r
+  fn_EcritBilanMensuel.r
+  fn_EcritBilanJournalier.r
+  fn_table_per_dis.r
+  fn_sql_dis.r
+  funSousListeBilanMigration.r
+  funSousListeBilanMigrationPar.r
+  funtraitement_poids.r
+  fungraph_civelle.r
+  fungraph.r
+  fungraph_env.r
+  funstat.r
+  funtable.r
+  funstatJournalier.r
+  funtraitementdate.r
+  interface_Bilan_lot.r
+  interface_bilan_poids_moyen.r
+  interface_Bilan_taille.r
+  interface_BilanConditionEnv.r
+  interface_BilanFonctionnementDC.r
+  interface_BilanFonctionnementDF.r
+  interface_BilanMigration.r
+  interface_BilanMigrationConditionEnv.r
+  interface_BilanMigrationInterannuelle.r
+  interface_BilanMigrationPar.r
+  interface_graphique.r
+  setAs.r
+LazyLoad: yes
+Depends: XML, methods, proto,tcltk2, RODBC, ggplot2, gWidgets, R2HTML, gWidgetsRGtk2, lattice, RColorBrewer, cairoDevice, xtable, Hmisc, ggplot2usr
+
