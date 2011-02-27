@@ -170,6 +170,9 @@ husr=function(h,...){
 hhelp=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE)
 }
+hlang=function(h,...){
+	eval(interface_chooselang(),envir = .GlobalEnv)
+}
 h0=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.15)
 	require('Rcmdr')
@@ -287,6 +290,8 @@ interface_graphique=function(){
 	menubarlist$Utilitaires$newgraph$icon="newplot"
 	menubarlist[[msg$interface_graphique$menu.3]]$About$handler = hhelp
 	menubarlist[[msg$interface_graphique$menu.3]]$About$icon="dialog-info"
+	menubarlist[[msg$interface_graphique$menu.3]]$lang$handler = hlang
+	menubarlist[[msg$interface_graphique$menu.3]]$lang$icon="dialog-info"
 	add(win, gmenu(menubarlist))
 	ggrouptotal<- ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
