@@ -196,6 +196,7 @@ funCalculeBilanTaille=function(h,...){
 	funout(get("msg",envir=envir_stacomi)$Bilan_taille.4)
 	funout(get("msg",envir=envir_stacomi)$Bilan_taille.5)
 	funout(get("msg",envir=envir_stacomi)$Bilan_taille.6)	
+	enabled(toolbarlist[["Grint"]])<-TRUE
 }
 
 #' fungraphInteract_tail uses the ggplot2usr interface to build the graphes
