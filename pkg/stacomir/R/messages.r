@@ -7,7 +7,7 @@
 #' Attention all msgs are starting with a letter "l" numbers are wrong when used as msgs within a list
 #' 
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-messages=function(){
+messages=function(lang="french"){
 	msg=list()
 # Referentiel (called after having checked it results from query from referential object are stored in envir_stacomi
 	msg$ref.1<-"Il faut choisir un dispositif de comptage,cliquez sur valider \n"

@@ -175,8 +175,19 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 chargexml=function(){ 
 	library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
-	filexml="C:/Program Files/stacomi/calcmig.xml"
-    #filexml="C:/Program Files(x86)/stacomi/calcmig.xml" #windows7
+	# use of stringr package 
+	# by default the xml file is in C:/Program Files/stacomi/ and we don't want to change that
+	filexml<-"C:/Program Files/stacomi/calcmig.xml"
+	#filexmlx86<-"C:/Program Files(x86)/stacomi/calcmig.xml" #windows7
+	filexmlR=str_c("C:/Program Files/R/R-2.12.1/library/stacomiR","/config/calcmig.xml")
+	test<-expression(doc<-(xmlInternalTreeParse(filexml)))
+	# if the file does not open, we will switch to the file located within the package
+	doc<-tryCatch(eval(test), error=paste("impossible to connect the configuration xml file"))
+	if (class(doc)[1]!="XMLInternalDocument") {
+		# then we test using the file from the package in the config folder
+		test<-expression(doc<-(xmlInternalTreeParse(filexmlR)))
+		doc<-tryCatch(eval(test), error=paste("impossible to connect the configuration xml file, either in c:/program file/stacomi or within the package"))
+	}		
 	doc = xmlInternalTreeParse(filexml)
 	doc=xmlRoot(doc)   # vire les infos d'ordre generales
 	tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit une liste
