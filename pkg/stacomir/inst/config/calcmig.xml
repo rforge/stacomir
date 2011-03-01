@@ -6,7 +6,7 @@
 		<pwd>iav</pwd>
 		<pgwd>~</pgwd>
 		<datawd>~\CalcmigData</datawd>
-		<lang>french</lang>		
+		<lang>French</lang>		
 	</Utilisateur>
 </Stacomi>
 <!--be sure to configure your odbc link to the database, the name is the name of the odbc link-->

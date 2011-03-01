@@ -182,13 +182,12 @@ chargexml=function(){
 	filexmlR=str_c("C:/Program Files/R/R-2.12.1/library/stacomiR","/config/calcmig.xml")
 	test<-expression(doc<-(xmlInternalTreeParse(filexml)))
 	# if the file does not open, we will switch to the file located within the package
-	doc<-tryCatch(eval(test), error=paste("impossible to connect the configuration xml file"))
-	if (class(doc)[1]!="XMLInternalDocument") {
+	doc<-try(eval(test), TRUE)
+	if (class(doc)[1]=="try-error") {
 		# then we test using the file from the package in the config folder
 		test<-expression(doc<-(xmlInternalTreeParse(filexmlR)))
-		doc<-tryCatch(eval(test), error=paste("impossible to connect the configuration xml file, either in c:/program file/stacomi or within the package"))
+		doc<-try(eval(test), FALSE)
 	}		
-	doc = xmlInternalTreeParse(filexml)
 	doc=xmlRoot(doc)   # vire les infos d'ordre generales
 	tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit une liste
 	datawd=tableau_config["datawd",]
