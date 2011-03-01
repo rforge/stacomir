@@ -181,9 +181,10 @@ chargexml=function(){
 	doc=xmlRoot(doc)   # vire les infos d'ordre generales
 	tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit une liste
 	datawd=tableau_config["datawd",]
+	lang=tableau_config["lang",]
 #pgwd=tableau_config["pgwd",]
 	baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
-	return(list("datawd"=datawd,"baseODBC"=baseODBC))
+	return(list("datawd"=datawd,"baseODBC"=baseODBC,"lang"=lang))
 }
 
 #' function used to print the html tables of output (see xtable documentation)

@@ -188,14 +188,18 @@ hx11=function(h,...){
 stacomi=function(gr_interface=TRUE){
 	# first loading of connexion and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
-	messages()
+	#defaut language assined at the beginning
+	messages(lang="french")
 	msg=get("msg",envir=envir_stacomi)
 	libraries()
-	liste_chemins=chargexml()
-	baseODBC=liste_chemins[["baseODBC"]]
-	datawd=liste_chemins[["datawd"]]
+	myxml=chargexml()
+	baseODBC=myxml[["baseODBC"]]
+	datawd=myxml[["datawd"]]
+	lang=myxml[["datawd"]]
 	assign("baseODBC",baseODBC,envir=.GlobalEnv)
 	assign("datawd",datawd,envir=.GlobalEnv)
+	messages(lang)
+	msg=get("msg",envir=envir_stacomi)
 	# loginWindow, will call the husr handler
 	if (gr_interface){
 	logw <- gwindow(msg$interface_graphique$log.1, 

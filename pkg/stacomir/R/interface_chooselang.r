@@ -16,8 +16,9 @@ interface_chooselang = function()
 	choix(listlang)
 	hassingnlang=function(h,...){		
 		lang<-get("refliste",envir_stacomi)@listechoix
-		assign("lang",lang,envir_stacomi)
-		quitte()
+		messages(lang)
+		close(win)
+		interface_graphique()
 	}
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
