@@ -108,7 +108,7 @@ husr=function(h,...){
 	con@baseODBC=baseODBC
 	e=expression(con<-connect(con))
 	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si ça plante la connexion n'est pas ouverte
-	test<-con@etat=="Connexion en cours"
+	test<-con@etat==get("msg",envir=envir_stacomi)$ConnexionODBC.6
 	if (exists("logw")) dispose(logw)
 	odbcCloseAll()
 	# if the test is OK launches the stacomi interface
@@ -188,6 +188,8 @@ hx11=function(h,...){
 stacomi=function(gr_interface=TRUE){
 	# first loading of connexion and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
+	# the first messages are necessary for the first access to the database, they are in French
+	msg<-messages()
 	myxml=chargexml()
 	baseODBC=myxml[["baseODBC"]]
 	datawd=myxml[["datawd"]]
@@ -197,10 +199,9 @@ stacomi=function(gr_interface=TRUE){
 	assign("datawd",datawd,envir=.GlobalEnv)
 	refMsg=new("RefMsg")
 	createmessage(refMsg)
+	
 	msg=get("msg",envir=envir_stacomi)
 	libraries()
-	messages(lang)
-	msg=get("msg",envir=envir_stacomi)
 	# loginWindow, will call the husr handler
 	if (gr_interface){
 	logw <- gwindow(msg$interface_graphique_log.1, 

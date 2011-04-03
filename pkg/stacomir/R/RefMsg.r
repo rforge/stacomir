@@ -26,12 +26,11 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 			return(objet)
 		})
 
-#' Loading method for RefMsg referential objects searching only those stages existing for a DC and a Taxon
+#' Loading method for RefMsg referential objects searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @exportMethod
-#'  dc_selectionne=6
 #'  objet=new("RefMsg")
 #'  charge_avec_filtre(objet,lang=lang)
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
@@ -45,7 +44,14 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 			objet@messagerlang<-requete@query
 			return(objet)
 		})
-
+#' createmessage method for RefMsg referential objects 
+#' @returnType S4 object
+#' @return An S4 object of class RefMsg
+#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @exportMethod
+#'  dc_selectionne=6
+#'  objet=new("RefMsg")
+#'  charge_avec_filtre(objet,lang=lang)
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(objet) {
 			objet<-charge(objet)
 			objet<-charge_avec_filtre(objet,lang=get("lang",envir=envir_stacomi))
@@ -60,11 +66,15 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 								X["mrl_text"],
 								X["msr_endofline2"]))
 			nettoye<-function(X){
-				X<-gsub(".00","",X)
+				X<-gsub(".00","",X)		
 				X<-gsub(' ', '', X)
+				X<-gsub("0","",X)
 				return(X)
 			}
+			# le interface_graphique_menu.2.10 est là deux fois, il faut le remettre à la main
 			buildmsg1<-nettoye(buildmsg1)
+			# le interface_graphique_menu.2.1 est là deux fois, il faut le remettre le 2.10 à la main
+			buildmsg1[match("interface_graphique_menu.2.9",buildmsg1)+1]<-"interface_graphique_menu.2.10"
 			buildmsg2<-gsub("\"", "",buildmsg2)
 			for (i in 1:length(buildmsg1)){
 				msg[buildmsg1[i]]<-buildmsg2[i]
