@@ -1,5 +1,5 @@
 # Nom fichier :        utilitaires.R
-# Projet :             controle migrateur / suivi passe
+# Projet :             stacomiR
 
 
 #############################################

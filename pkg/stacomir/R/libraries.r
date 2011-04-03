@@ -21,7 +21,8 @@ require('proto')
 require('xtable')
 #require('Hmisc')
 require('XML') 
-require('svMisc')        
+require('svMisc')   
+require('stringr')
 }
  # pour sa fonction Calendar
 #require('sma')# fonction is.odd

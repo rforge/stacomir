@@ -1,10 +1,10 @@
-# Nom fichier :        stacomi 
-# Projet :             controle migrateur 
-# Organisme :          IAV/CSP
+# Nom fichier :        interface_graphique 
+# Projet :             stacomiR 
+# Organisme :          IAV
 # Auteur :             Cedric Briand
 # Contact :            cedric.briand@lavilaine.com
 # Date de creation :   11/04/2006 15:51:44
-# Compatibilite :      PostgreSQL 8.3
+# Compatibilite :      PostgreSQL 9.0
 
 
 # fonctions handler utilisees par l'interface
@@ -107,7 +107,7 @@ husr=function(h,...){
 	assign("sch",paste(baseODBC[2],".",sep=""),.GlobalEnv)
 	con@baseODBC=baseODBC
 	e=expression(con<-connect(con))
-	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique$log.7) #finally=odbcClose(con@connexion)clause inutile car si ça plante la connexion n'est pas ouverte
+	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si ça plante la connexion n'est pas ouverte
 	test<-con@etat=="Connexion en cours"
 	if (exists("logw")) dispose(logw)
 	odbcCloseAll()
@@ -124,20 +124,20 @@ husr=function(h,...){
 		requete=connect(requete)
 		if (nrow(requete@query)==0){
 			# le lien ODBC fonctionne mais pointe vers la mauvaise base
-			gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique$log.8,
+			gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique$log.9,
+							get("msg",envir=envir_stacomi)$interface_graphique_log.9,
 							" :",
 							baseODBC[1],
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique$log.2,
+							get("msg",envir=envir_stacomi)$interface_graphique_log.2,
 							" :",
 							baseODBC[2],
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique$log.3,
+							get("msg",envir=envir_stacomi)$interface_graphique_log.3,
 							" :",
 							baseODBC[3]),						
-					title=get("msg",envir=envir_stacomi)$interface_graphique$log.5,
+					title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
 					icon = "error",
 					handler=hgmessage)		
 		} else {
@@ -149,20 +149,20 @@ husr=function(h,...){
 			}
 		}
 	} else {
-		gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique$log.6,
+		gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
 						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique$log.9,
+						get("msg",envir=envir_stacomi)$interface_graphique_log.9,
 						" :",
 						baseODBC[1],
 						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique$log.2,
+						get("msg",envir=envir_stacomi)$interface_graphique_log.2,
 						" :",
 						baseODBC[2],
 						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique$log.3,
+						get("msg",envir=envir_stacomi)$interface_graphique_log.3,
 						" :",
 						baseODBC[3]),						
-				title=get("msg",envir=envir_stacomi)$interface_graphique$log.5,
+				title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
 				icon = "error",
 				handler=hgmessage)
 	}	
@@ -188,21 +188,22 @@ hx11=function(h,...){
 stacomi=function(gr_interface=TRUE){
 	# first loading of connexion and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
-	#defaut language assined at the beginning
-	messages(lang="french")
-	msg=get("msg",envir=envir_stacomi)
-	libraries()
 	myxml=chargexml()
 	baseODBC=myxml[["baseODBC"]]
 	datawd=myxml[["datawd"]]
-	lang=myxml[["datawd"]]
+	lang=myxml[["lang"]]	
+	assign("lang",lang,envir=envir_stacomi)	
 	assign("baseODBC",baseODBC,envir=.GlobalEnv)
 	assign("datawd",datawd,envir=.GlobalEnv)
+	refMsg=new("RefMsg")
+	createmessage(refMsg)
+	msg=get("msg",envir=envir_stacomi)
+	libraries()
 	messages(lang)
 	msg=get("msg",envir=envir_stacomi)
 	# loginWindow, will call the husr handler
 	if (gr_interface){
-	logw <- gwindow(msg$interface_graphique$log.1, 
+	logw <- gwindow(msg$interface_graphique_log.1, 
 			name="log",
 			parent=c(0,0),
 			width=300,height=100)
@@ -216,12 +217,12 @@ stacomi=function(gr_interface=TRUE){
 			width = 10, 
 			container = logly)
 	assign("usrpwd",usrpwd,.GlobalEnv)
-	but=gbutton(text =  msg$interface_graphique$log.4,
+	but=gbutton(text =  msg$interface_graphique_log.4,
 			border=TRUE, 
 			handler = husr, 
 			container = logly)
-	logly[1,1]<-msg$interface_graphique$log.2
-	logly[2,1]<-msg$interface_graphique$log.3
+	logly[1,1]<-msg$interface_graphique_log.2
+	logly[2,1]<-msg$interface_graphique_log.3
 	logly[1,2]<-usrname
 	logly[2,2]<-usrpwd
 	logly[3,2]<-but
@@ -254,48 +255,48 @@ interface_graphique=function(){
 	## Menubar is defined by a list
 	menubarlist = list()
 	
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.1]]$handler =hDF
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.1]]$icon="gWidgetsRGtk2-rarrow"
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.2]]$handler =hDC
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.2]]$icon = "gtk-media-record"
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.3]]$handler=hOPE
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.3]]$icon="gtk-cancel"#"gtk-go-forward"
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.4]]$handler=hDFDC
-	menubarlist[[msg$interface_graphique$menu.1]][[msg$interface_graphique$menu.1.4]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.1]]$handler=hBilanMigration
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.1]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.2]]$handler=hBilanConditionEnv
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.2]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.3]]$handler=hBilanMigrationConditionEnv
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.3]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.4]]$handler=hBilanMigrationPar
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.4]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.5]]$handler=hBilanMigrationInterAnnuelle
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.5]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.6]]$handler=hBilanLots
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.6]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.7]]$handler=hpds
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.7]]$icon="gWidgetsRGtk2-evaluate"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.8]]$handler=hTail
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.8]]$icon="gWidgetsRGtk2-evaluate"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.13]]$icon="gWidgetsRGtk2-curve"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.13]]$handler=hBilanEspeces	
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.9]]$handler=hSt
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.9]]$icon="gWidgetsRGtk2-contour"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.10]]$handler=htodo
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.10]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.11]]$handler=htodo
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.11]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.12]]$handler=htodo
-	menubarlist[[msg$interface_graphique$menu.2]][[msg$interface_graphique$menu.2.12]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$handler =hDF
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$icon="gWidgetsRGtk2-rarrow"
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$handler =hDC
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$icon = "gtk-media-record"
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$handler=hOPE
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$icon="gtk-cancel"#"gtk-go-forward"
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$handler=hDFDC
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$handler=hBilanMigration
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$handler=hBilanMigrationConditionEnv
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$handler=hBilanMigrationPar
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$handler=hBilanMigrationInterAnnuelle
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$handler=hBilanLots
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$handler=hpds
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-evaluate"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$handler=hTail
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-evaluate"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-curve"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$handler=hBilanEspeces	
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$handler=hSt
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$handler=htodo
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$handler=htodo
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
 	menubarlist$Utilitaires$Rcmdr$handler=h0
 	menubarlist$Utilitaires$Rcmdr$icon="gWidgetsRGtk2-symbol_star"
 	menubarlist$Utilitaires$newgraph$handler=hx11
 	menubarlist$Utilitaires$newgraph$icon="newplot"
-	menubarlist[[msg$interface_graphique$menu.3]]$About$handler = hhelp
-	menubarlist[[msg$interface_graphique$menu.3]]$About$icon="dialog-info"
-	menubarlist[[msg$interface_graphique$menu.3]]$lang$handler = hlang
-	menubarlist[[msg$interface_graphique$menu.3]]$lang$icon="dialog-info"
+	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
+	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"
+	menubarlist[[msg$interface_graphique_menu.3]]$lang$handler = hlang
+	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
 	add(win, gmenu(menubarlist))
 	ggrouptotal<- ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 

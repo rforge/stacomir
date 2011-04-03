@@ -1,4 +1,4 @@
-# Nom fichier :        RequeteODBC (classe)
+# Nom fichier :        RequeteODBC.R 
 #' @title RequeteODBC class 
 #' @note Inherits from ConnexionODBC
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}

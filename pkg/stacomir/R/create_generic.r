@@ -13,6 +13,7 @@ setGeneric("calcule",def=function(objet,...) standardGeneric("calcule"))
 setGeneric("supprime",def=function(objet,...) standardGeneric("supprime"))
 setGeneric("graphe",def=function(objet,...) standardGeneric("graphe"))
 setGeneric("getvalue",def=function(objet,...) standardGeneric("getvalue"))
+setGeneric("createmessage",def=function(objet,...) standardGeneric("createmessage"))
 # nouvel environnement
 envir_stacomi <- new.env(parent = baseenv())
 # cree

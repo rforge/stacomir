@@ -1,8 +1,8 @@
 Package: stacomiR
 Type: Package
-Title: STACOMI stations de controle des migrations
-Version: 0.3.2704
-Date: 2011-02-19
+Title: STACOMI migration control
+Version: 0.4.9
+Date: 2011-03-30
 Author: Cedric Briand <cedric.briand@lavilaine.com>
 Maintainer: Cedric Briand <cedric.briand@lavilaine.com>
 Description: This package is intended to use with a specific PostgreSQL database to describe fish migrations.It is a part of the STACOMI project developed in France to centralize data obtained by fishway control devices.
@@ -31,6 +31,7 @@ Collate:
   RefCheckBox.r
   RefPoidsMoyenPeche.r
   RefStationMesure.r
+  RefMsg.r
   ConnexionODBC.r
   RequeteODBC.r
   RequeteODBCwhere.r

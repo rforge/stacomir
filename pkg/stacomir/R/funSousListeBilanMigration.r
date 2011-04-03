@@ -31,12 +31,12 @@ funSousListeBilanMigration=function(bilanMigration) {
 	##debug           
 	#  bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)  
 	#bilanMigration@pasDeTemps@noPasCourant=as.integer(-(difftime(as.POSIXlt(strptime("2006-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")),as.POSIXlt(strptime("2006-03-27 00:00:00",format="%Y-%m-%d %H:%M:%S")),unit="days")))  
-	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
+	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps),tz="GMT"),format="%Y-%m-%d %H:%M:%S")
 	while (getnoPasCourant(bilanMigration@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbPas
 		setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
-		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
-		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
+		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps),tz="GMT")
+		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps),tz="GMT")
 		
 		# finPas= as.POSIXlt(DateFin(bilanMigration@pasDeTemps))
 		#cat(paste("pas courant=",bilanMigration@pasDeTemps@noPasCourant,"\n") )
@@ -69,8 +69,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 			req<-connect(req)
 			rs=req@query
 			# Recherche des coefficients pour ponderer le taux et des dates d'application des taux
-			datesDebutTauxEch=as.POSIXlt(rs$txe_date_debut)
-			datesFinTauxEch=as.POSIXlt(rs$txe_date_fin)
+			datesDebutTauxEch=as.POSIXlt(rs$txe_date_debut,tz="GMT")
+			datesFinTauxEch=as.POSIXlt(rs$txe_date_fin,tz="GMT")
 			lesTauxEch=rs$txe_valeur_taux
 			
 			# Traitement special pour le premier et le dernier taux
@@ -148,8 +148,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 			if (nrow(rs)>0){
 				# Recherche des poids pour ponderer le coef et des dates d'application des coef
 				
-				dateDebutCoef=as.POSIXlt(rs$coe_date_debut)  # le vecteur date de debut d'application d'un taux
-				dateFinCoef=as.POSIXlt(rs$coe_date_fin)  # le vecteur date de fin d'application d'un taux
+				dateDebutCoef=as.POSIXlt(rs$coe_date_debut,tz="GMT")  # le vecteur date de debut d'application d'un taux
+				dateFinCoef=as.POSIXlt(rs$coe_date_fin,tz="GMT")  # le vecteur date de fin d'application d'un taux
 				coef=rs$coe_valeur_coefficient  # le vecteur valeur du taux
 				type=as.character(rs$qte_libelle) ; # le vecteur type de quantite
 				
@@ -255,8 +255,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 		
 		if (nrow(rs)>0){
 			
-			debutOpe=as.POSIXlt(rs$ope_date_debut)
-			finOpe= as.POSIXlt(rs$ope_date_fin)
+			debutOpe=as.POSIXlt(rs$ope_date_debut,tz="GMT")
+			finOpe= as.POSIXlt(rs$ope_date_fin,tz="GMT")
 			finOpe[finOpe==debutOpe]<-finOpe+1 # pour éviter les divisions par zéro pour les opérations de 0s
 			methode=rs$lot_methode_obtention
 			effectif=rs$effectif
@@ -272,11 +272,11 @@ funSousListeBilanMigration=function(bilanMigration) {
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
 			
 			
-			debut=pmax(as.double(debutOpe),as.double(debutPas))
-			fin=pmin(as.double(finOpe),as.double(finPas))
+			debut=max(debutOpe,debutPas)
+			fin=min(finOpe,finPas)
 			
 			# Repartition de l'effectif au prorata
-			effectif = effectif * as.double(difftime(fin,debut,units =  "secs")) / as.double(difftime(finOpe, debutOpe,units =  "secs"))
+			effectif = effectif * as.double(difftime(time1=fin,time2=debut,units =  "secs")) / as.double(difftime(time1=finOpe, time2=debutOpe,units =  "secs"))
 			
 			for (i in c("MESURE","CALCULE","EXPERT","PONCTUEL")){
 				assign(eval(paste("effectif_",i,sep="")),sum(effectif[methode==i]))
@@ -357,15 +357,15 @@ funSousListeBilanMigration=function(bilanMigration) {
 		rs=killfactor(req@query)
 		
 		if (nrow(rs)>0){
-			debutOpe=as.POSIXlt(rs$ope_date_debut)
-			finOpe= as.POSIXlt(rs$ope_date_fin)
+			debutOpe=as.POSIXlt(rs$ope_date_debut,tz="GMT")
+			finOpe= as.POSIXlt(rs$ope_date_fin,tz="GMT")
 			methode=as.character(rs$lot_methode_obtention)
 			quantite=rs$quantite
 			typeQte=as.character(rs$qte_libelle)
 			
 			
-			debut=pmax(as.double(debutOpe),as.double(debutPas)) #vector
-			fin=pmin(as.double(finOpe),as.double(finPas))       #vector
+			debut=max(debutOpe,debutPas) #vector
+			fin=pmin(finOpe,finPas)       #vector
 			
 			# Repartition de l'effectif au prorata
 			quantite = quantite * as.double(difftime(fin,debut,units =  "secs")) / as.double(difftime(finOpe, debutOpe,units =  "secs"))
