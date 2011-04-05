@@ -136,7 +136,7 @@ hbilanMigrationgraph = function(h,...) {
 	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	funout("graphs \n")
+	funout(get("msg",envir_stacomi)$BilanMigration.10)
 	
 	# si le bilan est journalier 
 	if (bilanMigration@pasDeTemps@dureePas==86400 & bilanMigration@pasDeTemps@dureePas==86400) {

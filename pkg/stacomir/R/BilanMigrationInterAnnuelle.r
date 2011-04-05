@@ -11,7 +11,7 @@
 #' @method connect
 #' @method supprime
 #' @method charge
-#' @references \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} 
+#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
 #' @seealso     Other Bilan Class
 #'	\code{\linkS4class{Bilan_lot}}
 #'	\code{\linkS4class{Bilan_poids_moyen}}

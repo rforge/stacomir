@@ -46,7 +46,7 @@ Objectif faire un calcul des poids moyens et permettre de reintegrere les coeffi
 \note{Un programme permet pour l'iav d'étendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees
 For the charge method dates for the request are from august to august (a glass eel season)
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
 showClass("Bilan_poids_moyen")
 objet=new("Bilan_poids_moyen")

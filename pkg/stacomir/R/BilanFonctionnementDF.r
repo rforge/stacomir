@@ -39,7 +39,7 @@
 #'	\code{\linkS4class{BilanMigrationConditionEnv}}
 #'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 #'	\code{\linkS4class{BilanMigrationPar}}	
-#' @references \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} 
+#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
 setClass(Class="BilanFonctionnementDF",
 		representation= representation(data="data.frame",
 				df="RefDF",

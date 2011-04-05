@@ -28,7 +28,7 @@ Objects can be created by calls of the form \code{new("BilanEspeces", ...)}.
     \item{connect}{\code{signature(objet = "BilanEspeces")}: connect method }
 	 }
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \author{Cedric Briand \email{cedric.briand@lavilaine.com}}
 \seealso{
     Other Bilan Classes

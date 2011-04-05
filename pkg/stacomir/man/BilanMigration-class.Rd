@@ -52,7 +52,7 @@ Objects can be created by calls of the form \code{new("BilanMigration", dc=new("
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
 showClass("BilanMigration")
 bilanMigration= new("BilanMigration")

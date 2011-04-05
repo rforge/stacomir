@@ -66,7 +66,7 @@ Au niveau du lot pere si il existe, on fait une requete permettant de recuperer 
 Eventuellement, la taille a pu etre rentree au niveau du lot (pas du sous lot) sans qu'une appartenance à une caracteristique ne soit apparente.
 Un traitement des donnees au chargement permet d'analyser si la taille correspond à un lot soit au niveau du lot soit au niveau du lot pere
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
 showClass("Bilan_taille")
 }

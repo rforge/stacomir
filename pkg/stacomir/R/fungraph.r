@@ -96,9 +96,9 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours\n"))
+	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne],
 			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
@@ -361,7 +361,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 			jour_an=TRUE,
 			jour_mois=FALSE,
 			heure=FALSE)
-	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7		
+	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7)
 	g<-ggplot(stktab, aes(x=mois,y=Effectifs,fill=type))+geom_bar(position="stack", stat="identity")+scale_fill_brewer(name="type",palette="Paired")
 	print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes

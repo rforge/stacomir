@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDC", .
     \item{connect}{\code{signature(objet = "BilanFonctionnementDC")}: connect method for BilanFonctionnementDC }
 	 }
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \author{ Cedric Briand \email{cedric.briand@lavilaine.com} }
 \seealso{
     Other Bilan Class

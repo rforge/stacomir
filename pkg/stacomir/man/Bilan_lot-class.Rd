@@ -28,7 +28,6 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
     \item{connect}{\code{signature(objet = "Bilan_lot")}:  charge method for Bilan_lot class }
 	 }
 }
-\references{}
 \author{Cedric Briand \email{cedric.briand@lavilaine.com}}
 \note{This class is displayed by interface_bilan_lot}
 \seealso{
@@ -46,7 +45,7 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\references{ \url{http://62.160.92.241:8066/tracstacomi/wiki/StacomiR} }
+\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
 showClass("Bilan_lot")
 objet=new("Bilan_lot")
