@@ -361,7 +361,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 			jour_an=TRUE,
 			jour_mois=FALSE,
 			heure=FALSE)
-	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7)
+	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7
 	g<-ggplot(stktab, aes(x=mois,y=Effectifs,fill=type))+geom_bar(position="stack", stat="identity")+scale_fill_brewer(name="type",palette="Paired")
 	print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
