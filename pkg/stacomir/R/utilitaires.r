@@ -179,7 +179,8 @@ chargexml=function(){
 	# by default the xml file is in C:/Program Files/stacomi/ and we don't want to change that
 	filexml<-"C:/Program Files/stacomi/calcmig.xml"
 	#filexmlx86<-"C:/Program Files(x86)/stacomi/calcmig.xml" #windows7
-	filexmlR=str_c("C:/Program Files/R/R-2.12.1/library/stacomiR","/config/calcmig.xml")
+	filexmlR=str_c(.libPaths(),"/stacomiR","/config/calcmig.xml")
+	# str_c(R.version$major,R.vers
 	test<-expression(doc<-(xmlInternalTreeParse(filexml)))
 	# if the file does not open, we will switch to the file located within the package
 	doc<-try(eval(test), TRUE)
