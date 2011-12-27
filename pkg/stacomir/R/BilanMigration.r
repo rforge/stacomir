@@ -84,37 +84,47 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			}
 			stopifnot(validObject(bilanMigration, test=TRUE))
 			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
-			data<-funSousListeBilanMigration(bilanMigration=bilanMigration)
-			tableau=data[,-c(2,3)]
-			tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])
-			tableau=tableau[,c(1:5,9,6:8)] 	
-			dimnames(tableau)=list(1:nrow(tableau),c(
-							"No.pas",
-							"Mesure",
-							"Calcule",
-							"Expert",
-							"Ponctuel",
-							"Effectif_total",
-							"Type_de_quantite",
-							"Taux_d_echappement",
-							"Coef_conversion"
-					))
-			tableau$Coef_conversion=as.numeric(tableau$Coef_conversion)
-			tableau$Coef_conversion[is.na(tableau$Coef_conversion)]=0
-			bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$Debut_pas),tz="GMT"),to=max(data$Debut_pas),
+			sum<-funBilanMigrationAnnuel(bilanMigration=bilanMigration)
+			if (!is.na(sum)){
+				data<-funSousListeBilanMigration(bilanMigration=bilanMigration)
+				
+				tableau=data[,-c(2,3)]
+				tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])
+				
+				sum[is.na(sum)]
+				#TODO vérifier pourquoi...
+				if(sum!=sum(tableau$"Effectif_total")) warning(paste("attention probleme, le total",sum,"est different de la somme des effectifs",sum(tableau$"Effectif_total"),"ceci peut se produire lorsque des operations sont a cheval sur plusieurs annees") )
+				tableau=tableau[,c(1:5,9,6:8)] 	
+				dimnames(tableau)=list(1:nrow(tableau),c(
+								"No.pas",
+								"Mesure",
+								"Calcule",
+								"Expert",
+								"Ponctuel",
+								"Effectif_total",
+								"Type_de_quantite",
+								"Taux_d_echappement",
+								"Coef_conversion"
+						))
+				tableau$Coef_conversion=as.numeric(tableau$Coef_conversion)
+				tableau$Coef_conversion[is.na(tableau$Coef_conversion)]=0
+				bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$Debut_pas)),to=max(data$Debut_pas),
 						by=as.numeric(bilanMigration@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
-			bilanMigration@duree<-bilanMigration@duree+3600 # ajout d'une heure pour retomber sur des horaires ronds ... et oui !
-			# traitement des coefficients de conversion poids effectif
-			
-			if (bilanMigration@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigration@stades@data$std_libelle=="civelle") 
-			{
-				tableau <-funtraitement_poids(tableau,duree=bilanMigration@duree)
+				# traitement des coefficients de conversion poids effectif
+				
+				if (bilanMigration@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigration@stades@data$std_libelle=="civelle") 
+				{
+					tableau <-funtraitement_poids(tableau,duree=bilanMigration@duree)
+				}
+				bilanMigration@data<-tableau
+				assign("bilanMigration",bilanMigration,envir_stacomi)
+				funout(get("msg",envir_stacomi)$BilanMigration.3)
+				assign("tableau",tableau,envir_stacomi)
+				funout(get("msg",envir_stacomi)$BilanMigration.4)
+			} else {
+				# no fish...
+				funout(get("msg",envir_stacomi)$BilanMigration.10)
 			}
-			bilanMigration@data<-tableau
-			assign("bilanMigration",bilanMigration,envir_stacomi)
-			funout(get("msg",envir_stacomi)$BilanMigration.3)
-			assign("tableau",tableau,envir_stacomi)
-			funout(get("msg",envir_stacomi)$BilanMigration.4)
 		})
 
 
@@ -136,7 +146,7 @@ hbilanMigrationgraph = function(h,...) {
 	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.10)
+	funout(get("msg",envir_stacomi)$BilanMigration.9)
 	
 	# si le bilan est journalier 
 	if (bilanMigration@pasDeTemps@dureePas==86400 & bilanMigration@pasDeTemps@dureePas==86400) {

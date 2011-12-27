@@ -74,7 +74,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
       if (length(les_annees[!index]>0)) 
       {
           funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.1,
-						  les_annees[!index],get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.2))
+						  paste(les_annees[!index],collapse=","),get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.2,"\n"))
       } # end if    
 
       # si toutes les annees sont presentes
@@ -135,6 +135,8 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 		funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)
 	}
     	objet<-connect(objet)
+		assign("bilanMigrationInterannuelle",objet,envir_stacomi)
+		funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.11)
     return(objet)
   }
 )
@@ -155,18 +157,20 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
         dat$annee=as.factor(dat$annee)
         
         dat=killfactor(dat)
-    
+   
          titre=paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.4,
-				 paste(unique(dat$annee), collapse=","),
+				 paste(min(dat$annee),max(dat$annee), collapse=":"),
 				 ", ",
 				 bilanMigrationInterAnnuelle@dc@data$dis_commentaires[bilanMigrationInterAnnuelle@dc@data$dc==bilanMigrationInterAnnuelle@dc@dc_selectionne])
          soustitre=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin, ", ", bilanMigrationInterAnnuelle@stades@data$std_libelle, sep="")
         g<-ggplot(dat,aes(x=jour,y=valeur))
-        g<-g+geom_line(aes(col=annee),position="dodge")+ opts(title=paste(titre, "\n", soustitre))+scale_x_datetime(name="date",major="months",minor="weeks", format="%d-%m")
+        g<-g+geom_line(aes(color=annee),position="dodge")+ opts(title=paste(titre, "\n", soustitre))+
+				scale_x_datetime(name="date",major="months",minor="weeks", format="%d-%m")
           print(g)
-    }
-    else
-    {
+		assign("g",g,envir=envir_stacomi)
+		funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+		
+    }    else     {
         funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.5)
     }
 }
@@ -230,9 +234,9 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
           dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
           dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
           dat=dat[,c("annee","jour","valeur")] 
-          dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S',tz="GMT")) 
-                    jour2000=seq.POSIXt(from=strptime("2000-01-01 00:00:00",format='%Y-%m-%d %H:%M:%S',tz="GMT"),
-          to=strptime("2000-12-31 00:00:00",format='%Y-%m-%d %H:%M:%S',tz="GMT"),
+          dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S')) 
+                    jour2000=seq.POSIXt(from=strptime("2000-01-01 00:00:00",format='%Y-%m-%d %H:%M:%S'),
+          to=strptime("2000-12-31 00:00:00",format='%Y-%m-%d %H:%M:%S'),
           by="day")
           for (j in unique(dat$annee)){
            jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]# les jours qui n'ont pas de bilan journalier pour ce jour 
@@ -242,8 +246,8 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
          # ci dessous calcul des sommes par semaine mois... Comme trunk.POSIXt ou floor ne prend pas 
          # la valeur week on est oblige de faire avec seq.POSIXt et calculer avec une boucle !
           if (!is.null(timesplit)){
-          seq_timesplit= seq.POSIXt(from=strptime("2000-01-01 00:00:00",format='%Y-%m-%d %H:%M:%S',tz="GMT"),
-          to=strptime("2000-12-31 00:00:00",format='%Y-%m-%d %H:%M:%S',tz="GMT"),
+          seq_timesplit= seq.POSIXt(from=strptime("2000-01-01 00:00:00",format='%Y-%m-%d %H:%M:%S'),
+          to=strptime("2000-12-31 00:00:00",format='%Y-%m-%d %H:%M:%S'),
           by=getvalue(new("Refperiode"),timesplit))
           # utilise la classe Refperiode pour avoir la correspondance entre le nom français et la variable utilisee par seq.POSIXt
           datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
@@ -419,6 +423,41 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 		}  # end for
 	} # end if
 }  # end function 
+
+# graphique des cumuls interannuels pour distinguer des tendances saisonnières, les données sont calculées par 
+# quinzaine puis centrées réduites
+hgraphBilanMigrationInterAnnuelle7 = function(h,...)
+{
+	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
+	
+	if(nrow(bilanMigrationInterAnnuelle@data)>0)
+	{
+		timesplit="quinzaine"
+		dat=bilanMigrationInterAnnuelle@data
+		dat=fundat(dat,timesplit)
+		dat=dat[order(dat$annee,dat[,timesplit]),]
+		dat$annee=as.factor(dat$annee)    
+		sum_per_year<-tapply(dat$valeur,dat$annee,sum)
+		sum_per_year<-data.frame(annee=names(sum_per_year),sum_per_year=sum_per_year)
+		dat<-merge(dat,sum_per_year,by="annee")
+		dat$std_valeur<-dat$valeur/dat$sum_per_year
+		g <- ggplot(dat,aes_string(x=timesplit,y="std_valeur"))
+		g<-g+geom_area(aes_string(y="std_valeur",fill="annee"),position="stack")
+		g <- g+scale_x_datetime(name=paste("mois"),major="month",minor=getvalue(new("Refperiode"),timesplit),
+				format="%b",lim=as.POSIXct(c(trunc((min(dat[dat$valeur!=0,timesplit])),"month"),ceil((max(dat[dat$valeur!="0",timesplit])),"month")))) 
+		g <- g+scale_y_continuous(name="Somme des pourcentages annuels de migration par quinzaine")
+		cols <- rainbow(length(levels(dat$annee)))
+		g <- g+scale_fill_manual(name="annee",value=cols)
+		g<-g+opts(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,
+						", saisonnalite de la migration")) 
+		print(g)
+		assign(paste("g",sep=""),g,envir_stacomi)
+		funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+		
+ 	}    else     {
+		funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.5)
+	}
+}
 ########################################
 # ecriture de fichiers dans le datawd
 ############################################

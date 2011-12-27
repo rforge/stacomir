@@ -25,12 +25,12 @@ interface_BilanMigrationInterAnnuelle = function()
 			nomassign="anneeDebut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3,
-			preselect=1)
+			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==min(bilanMigrationInterAnnuelle@anneeDebut@data)))
 	choix(bilanMigrationInterAnnuelle@anneeFin,
 			nomassign="anneeFin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
-			preselect=14)
+			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==max(bilanMigrationInterAnnuelle@anneeFin@data)))
 	choix(bilanMigrationInterAnnuelle@dc,objetBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
 	
 	# dans l'ordre 
@@ -45,6 +45,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	
 	toolbarlist1 = list(
 			aGraph=gaction(label="all",icon="lines",handler=hgraphBilanMigrationInterAnnuelle,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
+			aGraph7=gaction(label="cum15",icon="curve",handler=hgraphBilanMigrationInterAnnuelle7,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
 			aGraph3=gaction(label="cum",icon="graph2",handler=hgraphBilanMigrationInterAnnuelle3,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.7),
 			aTable=gaction(label="table",icon="dataframe",handler=htableBilanMigrationInterAnnuelle,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.8),
 			aQuit=gaction(label="fermer",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9)

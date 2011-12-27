@@ -95,6 +95,7 @@ source("setAs.r")
 # fonctions
 source("funSousListeBilanMigration.r")
 source("funSousListeBilanMigrationPar.R")
+source("funBilanMigrationAnnuel.R")
 source("funtraitement_poids.r")
 source("fungraph_civelle.r")
 source("fungraph.r")

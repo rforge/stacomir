@@ -48,7 +48,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		rs<-connect(req)@query
 		libelle_qal=as.character(rs$val_libelle)
 		valeurs_qal=c(valeurs_qal,"autre") # "tous" pour ceux qui n'ont pas de caracteristique qual correspondante
-		req@sql=paste("select par_nom from tg_parametre_par join ref.tr_parametrequalitatif_qal on qal_par_code=par_code where par_code='",    bilanMigrationPar@parqual@data$par_code,"';",sep="")
+		req@sql=paste("select par_nom from ref.tg_parametre_par join ref.tr_parametrequalitatif_qal on qal_par_code=par_code where par_code='",    bilanMigrationPar@parqual@data$par_code,"';",sep="")
 		rs<-connect(req)@query
 		nomparm=rs$par_nom
 		libelle_qal=c(libelle_qal,paste("Pas de parametre qualitatif :",nomparm)) 
@@ -346,12 +346,14 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
 			
-			debut=pmax(as.double(debutOpe),as.double(debutPas))
-			fin=pmin(as.double(finOpe),as.double(finPas))
+			debut<-debutOpe
+			fin<-finOpe
+			debut[debut<debutPas]<-debutPas
+			fin[fin>finPas]<-finPas
 			
 			# Repartition de l'effectif au prorata
-			effectif = effectif * as.double(difftime(fin,debut,units =  "secs")) / as.double(difftime(finOpe, debutOpe,units =  "secs"))
-			quantite=  quantite * as.double(difftime(fin,debut,units =  "secs")) / as.double(difftime(finOpe, debutOpe,units =  "secs"))
+			effectif = effectif *  as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
+			quantite=  quantite *  as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
 			if (bilanMigrationPar@parqual@data$par_nom!="aucune") { # il existe des caracteristiques qualitatives de lot			
 				# i=c(valeurs_qal,"tous")[2]
 				for (i in valeurs_qal){

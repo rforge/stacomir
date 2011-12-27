@@ -76,6 +76,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 			} else {
 				if (!objet@silent) print(resultatRequete)
 				objet@etat=as.character(resultatRequete)
+				print(objet@etat)
 			}
 			return(objet)
 		})

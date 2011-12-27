@@ -57,8 +57,9 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
 			requete<-connect(requete) 
-			funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+			
 		} # end for
+		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		# si l'utilisateur accepte de remplacer les valeurs
 		close(progres)
 		odbcClose(requete@connexion)

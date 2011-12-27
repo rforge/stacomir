@@ -37,7 +37,8 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 					" JOIN ",sch,"tj_dfesttype_dft ON dif_dis_identifiant=dft_df_identifiant",
 					" JOIN ",sch,"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant", 
 					" JOIN ref.tr_typedf_tdf ON tdf_code=dft_tdf_code",
-					" JOIN ref.tr_typedc_tdc ON dic_tdc_code=tdc_code", 
+					" JOIN ref.tr_typedc_tdc ON dic_tdc_code=tdc_code",
+					" WHERE  dft_rang=1",
 					" ORDER BY dis_identifiant;",sep="")
 			requete<-connect(requete) 
 			#funout("La requete est effectuee pour charger les Dispositifs de comptage \n")

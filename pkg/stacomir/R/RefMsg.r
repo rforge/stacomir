@@ -32,7 +32,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @exportMethod
 #'  objet=new("RefMsg")
-#'  charge_avec_filtre(objet,lang=lang)
+#'  charge_avec_filtre(objet,lang='French')
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC=baseODBC
@@ -47,11 +47,10 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 #' createmessage method for RefMsg referential objects 
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
+#' @note When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @exportMethod
-#'  dc_selectionne=6
 #'  objet=new("RefMsg")
-#'  charge_avec_filtre(objet,lang=lang)
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(objet) {
 			objet<-charge(objet)
 			objet<-charge_avec_filtre(objet,lang=get("lang",envir=envir_stacomi))
@@ -61,24 +60,52 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 			buildmsg$msr_endofline2<-ifelse(as.logical(buildmsg$"msr_endofline"),"\n","")
 			buildmsg1<-apply(buildmsg,1,function(X)str_c(X["msr_element"],
 								".",
+								as.integer(X["msr_number"])))
+			# special case for graphical interface which contains number like 2.1 ...
+			buildmsg1[buildmsg$msr_element=="interface_graphique_menu"]<-apply(buildmsg[buildmsg$msr_element=="interface_graphique_menu",],1,function(X)str_c(X["msr_element"],
+								".",
 								as.character(X["msr_number"])))
+			buildmsg1<-gsub(' ', '', buildmsg1)
 			buildmsg2<-apply(buildmsg,1,function(X)str_c(
 								X["mrl_text"],
 								X["msr_endofline2"]))
 			nettoye<-function(X){
 				X<-gsub(".00","",X)		
-				X<-gsub(' ', '', X)
 				X<-gsub("0","",X)
 				return(X)
 			}
-			# le interface_graphique_menu.2.10 est là deux fois, il faut le remettre à la main
-			buildmsg1<-nettoye(buildmsg1)
-			# le interface_graphique_menu.2.1 est là deux fois, il faut le remettre le 2.10 à la main
+			buildmsg1[buildmsg$msr_element=="interface_graphique_menu"]<-nettoye(buildmsg1[buildmsg$msr_element=="interface_graphique_menu"])
+		
+			
+			
+			# l' interface_graphique_menu.2.1 est là deux fois, il faut le remettre le 2.10 à la main
 			buildmsg1[match("interface_graphique_menu.2.9",buildmsg1)+1]<-"interface_graphique_menu.2.10"
-			buildmsg2<-gsub("\"", "",buildmsg2)
+			# here I'm dealing with "\" but only at the beginning and ending of strings
+			list<-gregexpr("(\")", buildmsg2)
+			for (i in 1:length(buildmsg2)){
+				if (length(list[[i]])<=2) buildmsg2[i]<-gsub("\"","", buildmsg2[i])						
+			}
+			# dealing with the special problems of vectors which I want as vector c("toto","titi") and not as "c(toto,titi)" 
+			# 
+			create_vector<-function(m){
+				# expressions contenant get
+				index<-grep("(c\\()",m)
+				# debug j<-index[1]
+				for (j in index){
+					list<-gregexpr("(\")", m[[j]])
+					# getting vector elements and coalescing them in a vector
+					m[[j]]<-do.call(c,lapply(2*(1:(length(list[[1]])/2))-1,function(i){
+										substring(m[[j]],list[[1]][i]+1,list[[1]][i+1]-1)
+									}))
+				}
+				return(m)
+				
+			}
+		
 			for (i in 1:length(buildmsg1)){
 				msg[buildmsg1[i]]<-buildmsg2[i]
 			}
+			msg<-create_vector(msg)
 			assign("msg",msg,envi=envir_stacomi)
 			return(NULL)
 		})
