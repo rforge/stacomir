@@ -87,7 +87,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 )
 
 # supprime les enregistrements de la base pour l'annee courante
-# objet<-bil
+# objet<-bmi
 setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
   definition=function(objet,...)
   { 
@@ -98,9 +98,14 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 	  dic= objet@dc@dc_selectionne
       requete=new("RequeteODBCwhere")
       requete@baseODBC=baseODBC
-      requete@select=paste("DELETE from t_bilanmigrationjournalier_bjo ")
-      requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,";",sep="")
+      requete@select=str_c("DELETE from ",sch,"t_bilanmigrationjournalier_bjo ")
+      requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
       requete<-connect(requete)
+	  requete=new("RequeteODBCwhere")
+	  requete@baseODBC=baseODBC
+	  requete@select=str_c("DELETE from ",sch,"t_bilanmigrationmensuel_bme ")
+	  requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
+	  requete<-connect(requete)
   }
 )
   
