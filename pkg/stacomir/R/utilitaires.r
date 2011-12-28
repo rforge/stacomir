@@ -123,6 +123,7 @@ quitte=function(...){
 	if (length(ls(pattern="frame",envir=.GlobalEnv))!=0) {
 		rm(list=ls(pattern="frame",envir=.GlobalEnv),envir=.GlobalEnv)
 	}
+	if (exists("p")) rm(p)
 }
 
 #' function used for some lattice graphes with dates 
