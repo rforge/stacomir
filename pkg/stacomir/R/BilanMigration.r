@@ -87,12 +87,8 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			sum<-funBilanMigrationAnnuel(bilanMigration=bilanMigration)
 			if (!is.na(sum)){
 				data<-funSousListeBilanMigration(bilanMigration=bilanMigration)
-				
 				tableau=data[,-c(2,3)]
 				tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])
-				
-				sum[is.na(sum)]
-				#TODO vérifier pourquoi...
 				if(sum!=sum(tableau$"Effectif_total")) warning(paste("attention probleme, le total",sum,"est different de la somme des effectifs",sum(tableau$"Effectif_total"),"ceci peut se produire lorsque des operations sont a cheval sur plusieurs annees") )
 				tableau=tableau[,c(1:5,9,6:8)] 	
 				dimnames(tableau)=list(1:nrow(tableau),c(
