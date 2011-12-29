@@ -63,7 +63,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		# si l'utilisateur accepte de remplacer les valeurs
 		close(progres)
 		odbcClose(requete@connexion)
-				# ecriture également du bilan mensuel
+		# ecriture également du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
