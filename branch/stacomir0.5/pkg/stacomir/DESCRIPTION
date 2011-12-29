@@ -1,8 +1,8 @@
 Package: stacomiR
 Type: Package
 Title: STACOMI migration control
-Version: 0.4.10
-Date: 2011-20-12
+Version: 0.5.20
+Date: 2011-29-12
 Author: Cedric Briand <cedric.briand@lavilaine.com>
 Maintainer: Cedric Briand <cedric.briand@lavilaine.com>
 Description: This package is intended to use with a specific PostgreSQL database to describe fish migrations.It is a part of the STACOMI project developed in France to centralize data obtained by fishway control devices.
