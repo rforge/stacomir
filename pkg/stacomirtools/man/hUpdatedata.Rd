@@ -7,4 +7,3 @@ If you want for instance to do some calculations in the dataframe and then reloa
 It uses the add and delete methods applicable to gframe to change the content of the combobox by re-building it}
 \author{cedric}
 \arguments{\item{h}{handler for gdroplist data}
-
