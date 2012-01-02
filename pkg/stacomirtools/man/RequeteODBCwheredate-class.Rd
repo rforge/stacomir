@@ -1,4 +1,4 @@
-\name{RequeteODBCwheredate}
+\name{RequeteODBCwheredate-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{RequeteODBCwheredate}

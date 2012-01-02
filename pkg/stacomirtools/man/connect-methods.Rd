@@ -1,6 +1,5 @@
 \name{connect-methods}
 \docType{methods}
-\alias{connect-methods}
 \alias{connect,RequeteODBC-method}
 \alias{connect,RequeteODBCwhere-method}
 \alias{connect,RequeteODBCwheredate-method}

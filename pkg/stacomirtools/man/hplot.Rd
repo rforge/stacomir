@@ -5,4 +5,4 @@
 \description{handler function}
 \author{cedric}
 \arguments{\item{h}{a handler}
-\item{...}{}}
+

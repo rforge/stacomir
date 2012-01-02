@@ -1,4 +1,4 @@
-\name{RequeteODBC}
+\name{RequeteODBC-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{RequeteODBC}
