@@ -1,0 +1,12 @@
+
+exportPattern("^[[:alpha:]]+")
+exportMethods(
+    "connect")
+exportClasses(
+     "RefTaxon",
+     "RefTextBox",
+     "RequeteODBC",
+     "RequeteODBCwhere",
+     "RequeteODBCwheredate")
+export(build_proto)
+export(ggplot2usr)
