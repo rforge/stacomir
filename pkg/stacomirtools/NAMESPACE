@@ -2,8 +2,7 @@ exportPattern("^[[:alpha:]]+")
 exportMethods(
     "connect")
 exportClasses(
-     "RefTaxon",
-     "RefTextBox",
+	"ConnexionODBC",
      "RequeteODBC",
      "RequeteODBCwhere",
      "RequeteODBCwheredate")

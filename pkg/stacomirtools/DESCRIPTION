@@ -1,8 +1,8 @@
-Package: ggplot2usr
+Package: stacomirtools
 Type: Package
 Title: stacomi ODBC connexion class and ggplot2 graphical interface for beginners
-Version: 0.1.1382
-Date: 2010-01-29
+Version: 0.2.19
+Date: 2012-01-02
 Author: Cedric Briand
 Maintainer: Cedric Briand<cedric.briand00@gmail.com>
 Description: (state=development) gWidget graphical interface to the
@@ -14,10 +14,6 @@ Collate:
     'RequeteODBCwhere.r'
     'RequeteODBCwheredate.r'
     'ggplot2usr.R'
-    'ggplot2usr_launch.R'
-    
+    'ggplot2usr_launch.R'    
 LazyLoad: yes
 Depends: proto, methods, ggplot2, gWidgets, gWidgetsRGtk2,RODBC
-
-
-

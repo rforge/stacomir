@@ -40,7 +40,7 @@ setClass(Class="ConnexionODBC",
 		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connexion="ANY"),
 		prototype = list(silent=TRUE),
 		validity=validite_ODBC)
-
+setGeneric("connect",def=function(objet,...) standardGeneric("connect"))
 
 #' connect method for ConnexionODBC class
 #' @returnType ConnectionODBC S4 object
