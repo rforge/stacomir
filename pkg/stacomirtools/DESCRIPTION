@@ -8,6 +8,16 @@ Maintainer: Cedric Briand<cedric.briand00@gmail.com>
 Description: (state=development) gWidget graphical interface to the
     ggplot2 package see http://had.co.nz/ggplot2/
 License: GPL (>= 2)
+Collate:
+    'ConnexionODBC.r'
+    'RequeteODBC.r'
+    'RequeteODBCwhere.r'
+    'RequeteODBCwheredate.r'
+    'ggplot2usr.R'
+    'ggplot2usr_launch.R'
+    
 LazyLoad: yes
-Depends: proto, ggplot2, gWidgets, gWidgetsRGtk2,RODBC
+Depends: proto, methods, ggplot2, gWidgets, gWidgetsRGtk2,RODBC
+
+
 

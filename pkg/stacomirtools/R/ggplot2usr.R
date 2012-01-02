@@ -20,7 +20,7 @@
 #' @param wash 
 #' @returnType 
 #' @return nblignes assigned in .Global
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 funout<-function(text,arret=FALSE,wash=FALSE){
 	if (exists("gSortie")) {
 		if (wash) dispose(gSortie)

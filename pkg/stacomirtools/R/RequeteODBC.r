@@ -1,7 +1,7 @@
 # Nom fichier :        RequeteODBC.R 
 #' @title RequeteODBC class 
 #' @note Inherits from ConnexionODBC
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot baseODBC="vector" (inherited from ConnexionODBC)
 #' @slot silent="logical" (inherited from ConnexionODBC)
 #' @slot etat="character" (inherited from ConnexionODBC)
@@ -19,7 +19,7 @@ setClass(Class="RequeteODBC",
 #' @note assign("showmerequest",1,envir=envir_stacomi) permet d'afficher toutes les requetes passant par la classe connect
 #' @returnType S4 object
 #' @return An object of class RequeteODBC
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #' objet=new("RequeteODBC")
 #' objet@open=TRUE
