@@ -8,7 +8,9 @@
 \description{ODBC Query. This class enables to retrieve data from the database. 
 This class is inherited by RequeteODBCwhere and RequeteODBCwheredate
 }
-
+\note{
+  Inherits from ConnexionODBC
+}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RequeteODBC", sql=character(), query=data.frame())}.
 	 \describe{

@@ -6,6 +6,11 @@
 
 \title{Class "RequeteODBCwheredate"}
 \description{Query with WHERE condition and overlaping dates clause.}
+\note{
+  Inherits from RequeteODBCwhere and uses its connect
+  method with a new SetAs
+}
+
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RequeteODBCwheredate", datedebut="POSIXlt",datefin="POSIXlt",colonnedebut="character",colonnefin="character")}.
 	 \describe{

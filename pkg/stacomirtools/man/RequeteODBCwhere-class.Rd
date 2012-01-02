@@ -6,6 +6,10 @@
 
 \title{Class "RequeteODBCwhere"}
 \description{SQL Query with WHERE and ORDER BY clauses.}
+\note{
+  Inherits from RequeteODBC the syntax is where="WHERE ..."
+  and =vector("AND...","AND...") order_by="ORDER BY.."
+}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RequeteODBCwhere", where=character(),and=vector(),order_by=character())}.
 	 \describe{
