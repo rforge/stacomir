@@ -2,20 +2,20 @@
 # Projet :             controle migrateur
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :   31/03/2008 17:21:30
 
 #' @title Refstades referential class to load message according to the langage chosen
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot data="data.frame"
-#' @example objet=new("RefMsg")
+#' @expamples objet=new("RefMsg")
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
 #' Loading method for RefMsg referential objects
 #' loads the common table ts_messager_msr
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("RefMsg")
 #'  charge(objet)
 setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {

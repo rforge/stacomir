@@ -2,7 +2,7 @@
 # Projet :             controle migrateur / suivi passe
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.comF
+# Contact :            cedric.briand00@gmail.comF
 # Date de creation :   07/02/2009 21:30:54
 # Compatibilite :      
 # Etat :               developpement en cours
@@ -102,13 +102,10 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple...
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
-#' @param choix a handler
-#' @param ... 
-#' @returnType 
-#' @return 
+#' @param h a handler  
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
-funbarchartDF = function(choix,...) {
+funbarchartDF = function(h,...) {
 	fonctionnementDF=charge(fonctionnementDF)
 	
 	if( nrow(fonctionnementDF@requete@query)==0 ) {
@@ -191,10 +188,7 @@ funbarchartDF = function(choix,...) {
 }   
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
-#' @param h 
-#' @param ... 
-#' @returnType 
-#' @return 
+#' @param h a handler
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
 funboxDF = function(h,...) {
@@ -316,7 +310,10 @@ funboxDF = function(h,...) {
 		text(x=debut,y=0.45, label=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.10, font=4,pos=4)
 	}
 }   
-#
+#' FuntableDF create a table output for BilanFonctionnementDF class
+#' @param h a handler
+#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @export
 funtableDF = function(h,...) {
 	fonctionnementDF=charge(fonctionnementDF)
 	

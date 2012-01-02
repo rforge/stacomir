@@ -2,7 +2,7 @@
 # Projet :             controle migrateur 
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :   07/02/2009 21:30:54
 # TODO Calcul des valeurs en interannuel pour le calage de la regression et d'une valeur par defaut des coefficients de conversion
 #' Bilan_poids_moyen class
@@ -18,7 +18,7 @@
 #' @method charge
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
-#' @example objet=new("Bilan_poids_moyen")
+#' @expamples objet=new("Bilan_poids_moyen")
 setClass(Class="Bilan_poids_moyen",        
 		representation= representation(data="data.frame",
 				dc="RefDC",

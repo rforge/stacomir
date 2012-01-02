@@ -5,7 +5,7 @@
 #' @slot bilanConditionEnv="BilanConditionEnv"
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @method calcule
-#' @example bilanMigrationConditionEnv= new("BilanMigration") 
+#' @expamples bilanMigrationConditionEnv= new("BilanMigration") 
 setClass(Class="BilanMigrationConditionEnv",representation=
 				representation(
 						bilanMigration="BilanMigration",

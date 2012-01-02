@@ -2,14 +2,14 @@
 #' @title Refparquan referential class choose a quantitative parameter
 #' @note The choice method of this class is inherited from the parent class
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example objet=new("Refparquan")
+#' @expamples objet=new("Refparquan")
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparquan
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("Refparquan")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparquan"),definition=function(objet) {
@@ -28,7 +28,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(objet) 
 #' @returnType S4 object
 #' @return An S4 object of class Refparqualn
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"

@@ -29,7 +29,7 @@ setClass(Class="BilanMigrationPar",
 				valeurs_possibles=data.frame()),
 		contains="BilanMigration")
 #object=bilanMigrationPar
-#' validity function for BilanMigrationPar
+
 setValidity("BilanMigrationPar",function(object)
 		{
 			rep1=length(object@dc)==1

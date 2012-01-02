@@ -8,7 +8,7 @@
 #' @slot datedebut="POSIXlt"
 #' @slot datefin="POSIXlt"
 #' @method charge
-#' @example coe= new("RefCoe")
+#' @expamples coe= new("RefCoe")
 setClass(Class="RefCoe",representation=
 				representation(data="data.frame",datedebut="POSIXlt",datefin="POSIXlt"),
 		prototype=prototype(data=data.frame()))
@@ -19,7 +19,7 @@ setClass(Class="RefCoe",representation=
 #' @return Object of class RefCoe
 #' @note Bien que je ne comprenne pourquoi, la connexion fonctionne si on ne pointe pas le schéma
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example objet<- new("RefCoe")
+#' @expamples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
 #' objet@datefin<-strptime("01/01/1997",format="%d/%m/%Y")
 #' charge(objet) # objet

@@ -7,7 +7,7 @@
 #' @slot data="data.frame"
 #' @slot datatempsal="data.frame"  format [,c("date","temperature","salinite")]
 #' @slot phi tableau des temps pigmentaires
-#' @slot Vparm paramètres du modèle tels qu'utilises dans GEMAC
+#' @slot Vparm parametres du modele tels qu'utilises dans GEMAC
 #' @slot dc="RefDC"
 #' @slot horodate="RefHorodate"
 #' @slot requete="RequeteODBCwheredate"
@@ -16,7 +16,7 @@
 #' @method connect
 #' @method charge
 #' @source BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model to predict the effect of temperature and salinity on glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67, 995-1009.
-#' @example objet=new("bilan_stades_pigm")
+#' @expamples objet=new("bilan_stades_pigm")
 setClass(Class="Bilan_stades_pigm",
 		representation= representation(data="data.frame",
 				datatempsal="data.frame",
@@ -77,16 +77,16 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				choixpere=c("lotpere","date")
 				funout(paste("Attention il peut y avoir plusieurs lots a la meme date, et certains stades sont fait sans lotpere (ex taille-poids-stade)\n"))
 				choixpere=select.list(choixpere,preselect="date",multiple=FALSE,
-						title=paste("Regroupement des ech par lot père ou par date ?"))
+						title=paste("Regroupement des ech par lot pere ou par date ?"))
 				if (choixpere=="lotpere"){
 					tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
 											+ stades$val_libelle))
-					tablestades<-tab2df(tablestades)# fonction développée dans utilitaires
-					# récupération des dates correspondant aux numéros d'opération
+					tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
+					# recuperation des dates correspondant aux numeros d'operation
 					# le format de ftable n'est pas celui d'un data frame
 					indx<-match(sort(unique(stades$lot_pere)),stades$lot_pere)
 					dates<-stades[indx,"ope_date_debut"]
-					# création d'une matrice qui somme les stades VA+VB et les stades VIA3 et VIA4
+					# creation d'une matrice qui somme les stades VA+VB et les stades VIA3 et VIA4
 					if ("VA"%in%dimnames(tablestades)){
 						tablestades$VB=tablestades$VB+tablestades$VA
 						tablestades=tablestades[,-c("VA")]
@@ -98,15 +98,14 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					tablestades=tablestades[order(dates),]   # on reclasse par dates
 					print(cbind(tablestades, "lot_pere"=sort(unique(stades$lot_pere))[order(dates)]))
 					dates=sort(dates)
-					# je colle les numéros de lots pères en les réordonnant en fonction du classt des dates
+					# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
 				} else if (choixpere=="date"){
-					# TODO ICI
 					tablestades=ftable(xtabs(stades$lot_effectif ~ stades$ope_date_debut +
 											+ stades$val_libelle))
 					print(xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
 											+ stades$val_libelle))
 					dates<-sort(unique(stades$ope_date_debut))
-					tablestades<-tab2df(tablestades) # fonction développée dans utilitaires
+					tablestades<-tab2df(tablestades) # fonction developpee dans utilitaires
 					if ("VA"%in%dimnames(tablestades)){
 						tablestades$VB=tablestades$VB+tablestades$VA
 						tablestades=tablestades[,-c("VA")]
@@ -126,7 +125,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				objet@dates<-dates
 			} else funout("pas de donnees de stades pigmentaires",arret=TRUE)
 			
-			# chargement du tableau des températures
+			# chargement du tableau des temperatures
 			requete@datedebut=as.POSIXlt(strptime(objet@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
 			requete@colonnedebut="env_date_debut"
 			requete@colonnefin="env_date_fin"
@@ -150,7 +149,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				objet@datatempsal$salinite=as.numeric(objet@salinite@label)
 				colnames(objet@datatempsal)<-c("date","temperature","salinite")
 			} else {
-				funout("pas de données de température, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
+				funout("pas de donnees de temperature, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
 			}
 			return(objet)
 		})
@@ -180,7 +179,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refCheckBox",envir_stacomi)) {
 				objet@options<-get("refCheckBox",envir_stacomi)
 			} else {
-				# rien de toutes façons les choix par défaut sont copiés dans envir_stacomi
+				# rien de toutes façons les choix par defaut sont copies dans envir_stacomi
 			}  
 			if (exists("refchoix",envir_stacomi)) {
 				objet@lmax<-get("refchoix",envir_stacomi)
@@ -192,7 +191,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refTextBox",envir_stacomi)) {
 				objet@salinite<-get("refTextBox",envir_stacomi)
 			} else {
-				# rien de toutes façons les choix par défaut sont copiés dans envir_stacomi
+				# rien de toutes façons les choix par defaut sont copies dans envir_stacomi
 			} 
 			if (exists("refStationMesure",envir_stacomi)) {
 				objet@stationMesure<-get("refStationMesure",envir_stacomi)
@@ -251,8 +250,8 @@ funphi<-function(parm,datatempsal){
 
 #'  fonction calculant à partir des lois gamma les coordonnees en x et y pour tracer un polygone, la fonction peut
 #'  fnstades peut etre utilisee pour tracer un polygone (neg=TRUE) ou simplement renvoyer les valeurs des fonctions gamma pour chaque stade
-#' @param par1  paramètre de la loi gamma du premier stade
-#' @param par2  paramètre de la loi gamma du second stade
+#' @param par1  parametre de la loi gamma du premier stade
+#' @param par2  parametre de la loi gamma du second stade
 #' @param phicum cumulated pigmentation times pour test : phicum=seq(0,20, length.out=100)
 #' @param phidates dates
 #' @param VB if TRUE, then calculation for stade VB which differs from the others
@@ -303,9 +302,9 @@ fun50<-function(obj,objc){
 #' @note les fonctions pigmentaires ne sont pas des fonctions statistiques standard,
 #' le calcul du 50% de la distribution est fait à l'aide de fun50
 #' cette fonction utilise fnstade pour calculer les valeurs des temps pigmentaires sur une echelle reguliere (phicum)
-#' @param lmax paramètre d'échelle de la fonction graphique, voir fnstades
+#' @param lmax parametre d'echelle de la fonction graphique, voir fnstades
 #' @param graph logical, on peut voir les courbes en faisant graph = TRUE 
-#' @example 
+#' @expamples 
 #' #not run
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=FALSE,lmax=1)
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=1)
@@ -416,7 +415,7 @@ fungraphstades<-function(
 		nb=TRUE, # affichage des effectifs
 		graphstades=TRUE,  # affichage du graphe pour evol stades
 		lmax=1, # largeur ex:0.8 pour eviter un chevauchement des graphes 
-		labelretro, # titre du graphe retro si celui-ci est tracé tout seul
+		labelretro, # titre du graphe retro si celui-ci est trace tout seul
 		labelgraphstades,
 		phi, # tableau des temps pigmentaires et des dates format "%d/%m/%Y"
 		maxVIA3=10, # valeur maximale autorisee pour VIA3 
@@ -615,9 +614,9 @@ fungraphstades<-function(
 }
 
 fungraphgg=function(h,...){
-	p<-ggplot(bilan_stades_pigm@data) # récupére le data.frame vue_ope_lot qui a été écrit après avoir
-	p<-p+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette écriture de geom_bar demande de bien mettre stat='identity', on peut alors passer à geom_bar un x et un y...
-			coord_polar(theta="y", start=pi)+ # coordonnées polaires = cercle
+	p<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
+	p<-p+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer à geom_bar un x et un y...
+			coord_polar(theta="y", start=pi)+ # coordonnees polaires = cercle
 			scale_fill_grey(name="stades pigmentaires",start=0.8, end=0.2)+ # scale_fill_grey permet d'avoir des graduations de gris
 			theme_bw() +  # on efface le fond gris
 			facet_wrap(~ope_date_debut,scale="free_y")+ # facet_wrap permet d'afficher un ruban unidimentionnel en deux dimensions (un graphique par date)
@@ -628,7 +627,7 @@ fungraphgg=function(h,...){
 }
 
 
-#' Fonction handler qui retourne le titre du graphique après le choix dans la date
+#' Fonction handler qui retourne le titre du graphique apres le choix dans la date
 #' @param h 
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 funtitle_bilan_stades_pigm=function(h,...){
@@ -679,10 +678,10 @@ interface_Bilan_stades_pigm = function()
 	gl=glabel(text=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group)
 	choix(bilan_stades_pigm@lmax)
 	choix(bilan_stades_pigm@options)
-	# on assigne directement (sans forcément changer les options...)
+	# on assigne directement (sans forcement changer les options...)
 	assign("refCheckBox",bilan_stades_pigm@options,envir_stacomi) 
 	choix(bilan_stades_pigm@salinite)
-	# on assigne directement (sans forcément changer les options...)
+	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,envir_stacomi)
 	choix(bilan_stades_pigm@stationMesure,title="choix de la temperature")
 	choix(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
@@ -697,7 +696,7 @@ interface_Bilan_stades_pigm = function()
 			affichecal=FALSE)
 	choix(bilan_stades_pigm@dc,objetBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
-	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des données")         
+	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
 	aSetTitle=gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
 	aGraph=gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=fungraphstadesh,tooltip="Graphique Principal")
 	aGraphgg=gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")

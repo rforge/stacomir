@@ -23,7 +23,7 @@
 #' @slot requete="RequeteODBCwheredate")
 #' @method connect
 #' @method charge
-#' @example objet=new("Bilan_lot")
+#' @expamples objet=new("Bilan_lot")
 setClass(Class="Bilan_lot",
 		representation= representation(data="data.frame",
 				dc="RefDC",taxons="RefTaxon",

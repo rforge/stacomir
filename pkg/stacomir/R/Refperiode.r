@@ -4,7 +4,7 @@
 #' @note pgval are used by seq.POSIXT
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot data="data.frame" providing correspondance between period and their english names
-#' @example objet = new("Refperiode")
+#' @expamples objet = new("Refperiode")
 setClass(Class="Refperiode",representation=
       representation(
           data="data.frame"          
@@ -18,7 +18,7 @@ setClass(Class="Refperiode",representation=
 #' @returnType "character"
 #' @return "a character to be used in seq.POSIXt
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  getvalue(new("Refperiode"),"quinzaine")
 setMethod("getvalue",signature=signature("Refperiode"), definition=function(objet,id,...)
   {return(as.character(objet@data[objet@data$id==id,"pgval"]))

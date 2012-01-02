@@ -6,7 +6,7 @@
 #' @slot df_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot data="data.frame"
-#' @example objet=new("RefDF")
+#' @expamples \ dontrun objet=new("RefDF")
 setClass(Class="RefDF",representation=
 				representation(df_selectionne="integer",ouvrage="integer",data="data.frame") )
                                
@@ -14,9 +14,9 @@ setClass(Class="RefDF",representation=
 #' @returnType S4 object
 #' @return An object of class RefDF
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
-#'  objet=new("RefDF")
-#' charge(objet)
+#' @expamples 
+#'  \dontrun {objet=new("RefDF")
+#' charge(objet)}
 setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 			requete=new("RequeteODBC")
 			requete@baseODBC=baseODBC
@@ -44,12 +44,12 @@ setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 #' Choice method for DF referential objects
 #' @note the choice method assigns an object of class refDF in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example   
+#' @expamples   \dontrun { 
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #'  objet=new("RefDF")
 #' objet<-charge(objet)
-#' choix(objet)
+#' choix(objet)}
 setMethod("choix",signature=signature("RefDF"),definition=function(objet) {
 			if (nrow(objet@data) > 0){
 				hDF=function(h,...){

@@ -30,8 +30,7 @@ setClass(Class="BilanEspeces",
 				liste=new("RefListe")
 		)
 )
-# bilanEspeces= new("BilanEspeces")
-#' setValidity method for BilanEspeces
+
 setValidity("BilanEspeces",function(object)
 		{
 			rep1=length(object@dc)==1
@@ -89,7 +88,7 @@ hBilanEspecescalc=function(h,...){
 #' @return BilanEspeces with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
-#' @example bilanEspeces=new("BilanEspeces")
+#' @expamples bilanEspeces=new("BilanEspeces")
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
 			bilanEspeces<-objet
@@ -260,7 +259,7 @@ hTableBilanEspeces=function(h,...) {
 #' Interface for BilanEspece class
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
-#' @example interface_BilanEspeces()
+#' @expamples interface_BilanEspeces()
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)

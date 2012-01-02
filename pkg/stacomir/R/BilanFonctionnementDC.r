@@ -2,7 +2,7 @@
 # Projet :             controle migrateur / suivi passe
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :   12/01/2009 14:38:09
 # Compatibilite :      
 # Etat :               developpement en cours, fonctionne 

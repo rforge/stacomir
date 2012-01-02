@@ -6,7 +6,7 @@
 #' @slot dc_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot data="data.frame"
-#' @example objet=new("RefDC")
+#' @expamples \dontrun{objet=new("RefDC")}
 setClass(Class="RefDC",representation=
 				representation(dc_selectionne="integer",ouvrage="integer",data="data.frame") ,
 		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),data=data.frame()),package="stacomi")
@@ -52,13 +52,12 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 #' @param objetBilan un objet bilan
 #' @param is.enabled a boolean indincating # see if deprecated...
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example
-#' win=gwindow()
+#' @expamples \dontrun{ win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#'objet=new("RefDC")
-#'objet<-charge(objet)
-#'objetBilan=new("BilanMigration")
-#' choix(objet=objet,objetBilan=objetBilan)
+#' objet=new("RefDC")
+#'	objet<-charge(objet)
+#'	objetBilan=new("BilanMigration")
+#' choix(objet=objet,objetBilan=objetBilan)}
 setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
 			if (nrow(objet@data) > 0){
 				hDC=function(h,...){

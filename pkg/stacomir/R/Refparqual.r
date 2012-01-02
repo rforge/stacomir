@@ -8,14 +8,14 @@
 #' par rapport à parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot valqual="data.frame" the list of qualitative parameters
-#' @example objet=new("Refparqual")
+#' @expamples objet=new("Refparqual")
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
 
 #' Loading method for Reparqual referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("Refparqual")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparqual"),definition=function(objet) {
@@ -33,7 +33,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
@@ -66,7 +66,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual with the valqual slot filled
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
@@ -93,7 +93,7 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example  
+#' @expamples  
 #'  objet=new("Refparqual")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

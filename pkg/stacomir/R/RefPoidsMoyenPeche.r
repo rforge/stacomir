@@ -2,7 +2,7 @@
 # Projet :             controle migrateur
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :  31/03/2008 17:21:25 / modif10/01/2009 22:50:42
 # Compatibilite :
 # Etat :               

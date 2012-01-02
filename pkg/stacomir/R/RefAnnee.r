@@ -19,7 +19,7 @@ validite_Annee=function(object)
 #' @slot data="data.frame" the list of parameters
 #' @method charge
 #' @method choix
-#' @example objet=new("RefAnnee")
+#' @expamples objet=new("RefAnnee")
 setClass(Class="RefAnnee",representation=
 				representation(data="data.frame",annee_selectionnee="numeric"),
 		validity=validite_Annee,
@@ -29,7 +29,7 @@ setClass(Class="RefAnnee",representation=
 #' @returnType S4 object
 #' @return An S4 object of class RefAnnee
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example   objet=new("RefAnnee")
+#' @expamples   objet=new("RefAnnee")
 #' charge(objet)
 #'  validObject( annee)
 #' showMethods("charge")
@@ -50,7 +50,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 #' @param funoutlabel the label that appears in funout
 #' @param titleFrame title for the frame
 #' @param preselect the number of the year selected in the gdroplist (integer)
-#' @example  objet=new("RefAnnee")
+#' @expamples  objet=new("RefAnnee")
 #' objet<-charge(objet)
 #' win=gwindow(title="test refAnnee")
 #' group=ggroup(container=win,horizontal=FALSE)

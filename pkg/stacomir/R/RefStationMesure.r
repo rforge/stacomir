@@ -4,7 +4,7 @@
 #' @title Refstades referential class to load the measures stations
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot data="data.frame"
-#' @example objet=new("RefStationMesure")
+#' @expamples objet=new("RefStationMesure")
 setClass (  Class="RefStationMesure", 
    representation=representation(data="data.frame"),
    prototype=prototype(data=data.frame())
@@ -14,7 +14,7 @@ setClass (  Class="RefStationMesure",
 #' @returnType S4 object
 #' @return An S4 object of class RefStationMesure
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("RefStationMesure")
 #'  charge(objet)
 setMethod("charge",
@@ -34,7 +34,7 @@ setMethod("charge",
 )
 #' Choice method for RefStationMesure referential object
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example  
+#' @expamples  
 #' objet=new("RefStationMesure")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

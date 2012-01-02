@@ -1,5 +1,5 @@
 # Nom fichier :        RefPar  (classe)
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :   22/03/2009 21:14:14
 
 #TODO  selection de plusieurs caracteristiques
@@ -7,14 +7,14 @@
 #' @title Refpar referential class choose a parameter
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot data="data.frame" the list of parameters
-#' @example objet=new("Refpar")
+#' @expamples objet=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
 
 #' Loading method for Repar referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("Refpar")
 #' charge(objet)
 setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
@@ -30,7 +30,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("Refpar")
 #' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
 setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
@@ -56,7 +56,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' @note this method choix is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example  
+#' @expamples  
 #'  objet=new("Refpar")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

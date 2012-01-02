@@ -2,7 +2,7 @@
 # Projet :             calcmig/prog/fonctions
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand@lavilaine.com
+# Contact :            cedric.briand00@gmail.com
 # Date de creation :   23/05/2006
 # Compatibilite :      R 2.8.0
 # Etat :               fonctionne

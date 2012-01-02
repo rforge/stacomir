@@ -4,7 +4,7 @@
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @slot liste choix="character" A vector of character to choose within a droplist
 #' @slot label="character" the title of the box
-#' @example objet=new("RefListe")
+#' @expamples objet=new("RefListe")
 setClass(Class="RefListe",representation= representation(listechoix="character",label="character"))
 
 
@@ -12,7 +12,7 @@ setClass(Class="RefListe",representation= representation(listechoix="character",
 #' @returnType S4 object
 #' @return An object of class RefListe
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("RefListe")
 #' charge(objet)
 setMethod("charge",signature=signature("RefListe"),definition=function(objet,vecteur,label) {
@@ -23,7 +23,7 @@ setMethod("charge",signature=signature("RefListe"),definition=function(objet,vec
 #' Choice method for RefListe referential objects
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example  
+#' @expamples  
 #'  objet=new("RefListe")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

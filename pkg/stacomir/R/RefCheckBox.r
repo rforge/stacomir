@@ -5,7 +5,7 @@
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
 #' @slot checked a vectore
-#' @example objet=new("RefCheckBox")
+#' @expamples objet=new("RefCheckBox")
 #' @method charge
 #' @method choix
 setClass(Class="RefCheckBox",representation= representation(title="character",labels="character",checked="logical"),
@@ -15,7 +15,7 @@ setClass(Class="RefCheckBox",representation= representation(title="character",la
 #' @returnType S4 object
 #' @return An S4 object of class RefCheckBox
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #'  objet=new("RefCheckBox")
 #' charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,title,labels,checked) {
@@ -27,7 +27,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,
 		})
 #' Choice method for ReCheckBox referential objects
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example 
+#' @expamples 
 #' objet=new("RefCheckBox")
 #' objet<- charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 #' win=gwindow(title="test RefCheckBox")
