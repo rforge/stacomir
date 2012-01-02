@@ -4,4 +4,4 @@
 \usage{hplot(h, ...)}
 \description{handler function}
 \author{cedric}
-\arguments{\item{h}{a handler}
+\arguments{\item{h}{a handler}}
