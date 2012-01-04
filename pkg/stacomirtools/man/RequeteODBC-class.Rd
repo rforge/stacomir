@@ -63,4 +63,5 @@ showClass("RequeteODBC")
  objet<-connect(objet)
 # the connexion is already closed, the query is printed
 }
+}
 \keyword{classes}

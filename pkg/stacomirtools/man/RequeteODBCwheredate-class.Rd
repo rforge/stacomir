@@ -58,4 +58,4 @@ Class \code{"\linkS4class{ConnexionODBC}"}, by class "RequeteODBCwhere", distanc
 \examples{
 showClass("RequeteODBCwheredate")
 }
-\keyword{classes}
+
