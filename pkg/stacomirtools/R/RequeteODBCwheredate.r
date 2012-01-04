@@ -58,8 +58,8 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 #' objet<-connect(objet)
 setMethod("connect",signature=signature("RequeteODBCwheredate"),definition=function(objet) {
 			requeteODBCwhere=as(objet,"RequeteODBCwhere")
-			requeteODBCwhere=connect(requeteODBCwhere) # utilise la méthode de la classe mère
-			# récupère au sein de l'objet les éléments de requeteODBC
+			requeteODBCwhere=connect(requeteODBCwhere) # use the connect method of ODBCwhere
+			# collects in the object the elements of the query
 			objet@where=requeteODBCwhere@where
 			objet@connexion=requeteODBCwhere@connexion
 			objet@query=requeteODBCwhere@query
