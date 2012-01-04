@@ -15,6 +15,7 @@ Collate:
     'RequeteODBCwhere.r'
     'RequeteODBCwheredate.r'
     'ggplot2usr.R'
-    'ggplot2usr_launch.R'    
+    'ggplot2usr_launch.R'
+    'utilitaires.r'    
 LazyLoad: yes
 Depends: proto, methods, ggplot2, gWidgets, gWidgetsRGtk2,RODBC

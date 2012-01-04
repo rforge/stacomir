@@ -7,9 +7,9 @@
 \arguments{
   \item{objet}{a data frame}
 
-  \item{old_variable_name}{}
+  \item{old_variable_name}{a character vector with old variables names}
 
-  \item{new_variable_name}{}
+  \item{new_variable_name}{a character vector with new variables names}
 }
 \value{
   objet
