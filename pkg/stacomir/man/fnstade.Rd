@@ -1,16 +1,45 @@
 \name{fnstade}
 \alias{fnstade}
-\title{fonction calculant a partir des lois gamma les coordonnees en x et y pour tracer un polygone, la fonction peut...}
-\usage{fnstade(par1, par2, phicum, phidates, VB=FALSE, neg=TRUE, lmax=1)}
-\description{fonction calculant à partir des lois gamma les coordonnees en x et y pour tracer un polygone, la fonction peut
-fnstades peut etre utilisee pour tracer un polygone (neg=TRUE) ou simplement renvoyer les valeurs des fonctions gamma pour chaque stade}
-\value{une liste avec x et y}
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
-\arguments{\item{par1}{paramètre de la loi gamma du premier stade}
-\item{par2}{paramètre de la loi gamma du second stade}
-\item{phicum}{cumulated pigmentation times pour test : phicum=seq(0,20, length.out=100)}
-\item{phidates}{dates}
-\item{VB}{if TRUE, then calculation for stade VB which differs from the others}
-\item{neg}{if FALSE la fonction renvoit le calcul des stades en fonction d'un temps pigmentaire}
-\item{lmax}{parametre d'echelle de la fonction graphique, lmax=0 permet de tracer les valeurs reelles 
-des abondances par stades au cours du temps, lmax=1 ou 0.8 permet de ramener à la meme echelle tous les stades}}
+\title{function drawing polygon from gamma law describing pigmentation change in glass eel}
+\description{function calculating from the gamma law the coordinates x and y allowing to draw a polygon, the function fnstade
+ may be used to draw a polygon(neg=TRUE) or simply return the values from gamma function of each stage}
+\usage{
+  fnstade(par1, par2 = NULL, phicum, phidates, VB = FALSE,
+    neg = TRUE, lmax = 1)
+}
+\arguments{
+  \item{par1}{parameter describing the gamma law for the first stage}
+
+  \item{par2}{parameter of the gamma law for the second stage}
+
+  \item{phicum}{cumulated pigmentation times for test :
+  phicum=seq(0,20, length.out=100)}
+
+  \item{phidates}{dates}
+
+  \item{VB}{if TRUE, then calculation for first stage VB which
+  differs from the others}
+
+  \item{neg}{if FALSE then calculation of stages according to
+  the pigmentation time}
+
+  \item{lmax}{scale parameter for the graphical function,
+  lmax=0 allows to draw the real values of abundances per stage
+  along time, lmax=1 or 0.8
+  will draw all stages at the same scale}
+}
+\value{
+  a list with x and y
+}
+\references{
+BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model to predict the effect of temperature and salinity on glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67, 995-1009.
+\url{http://www3.interscience.wiley.com/journal/118686679/abstract} 
+\url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.} 
+}
+\seealso{
+	\code{\linkS4class{Bilan_stades_pigm}}	
+}
+\author{
+  Cedric Briand \email{cedric.briand00@gmail.com}
+}
+

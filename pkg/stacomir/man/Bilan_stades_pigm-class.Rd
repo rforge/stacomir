@@ -61,6 +61,8 @@ The class uses temperature (from an abiotic measure station) and mean salinity t
 	\code{\linkS4class{BilanMigrationConditionEnv}}
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
+	\code{\link{fnstade}}	
+}
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
