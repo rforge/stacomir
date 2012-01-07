@@ -226,11 +226,12 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 }  # end function 
 
 ##########################################################################
-#   Fonction appellee pour traiter les donnees de migration interannuelle
-#   Cette fonction renomme les colonnes, remplace les nuls, et 
-#   Calcule les bilans pour des intervalles plus larges que le jour
-#   @ param timesplit "week"  "2 week" "month" doit pouvoir etre interprete par seq.POSIXT
-#   @ return dat= un data frame
+#'   @title statistics per time period
+#'   function called for bilamMigrationInterannelle objects
+#'   renames columnns replaces nulls,  
+#'   and calculates reports with time period larger than day
+#'   @param timesplit "week"  "2 week" "month" as provided to seq.POSIXT
+#'   @return dat  a data frame with max mean min per time period
 #####################################################################
 fundat=function(dat,timesplit=NULL)
 {

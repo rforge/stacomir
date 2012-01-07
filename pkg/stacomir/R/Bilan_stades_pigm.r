@@ -247,19 +247,32 @@ funphi<-function(parm,datatempsal){
 	return(list("dates"=duree,"phi_jour"=phi_jour))
 }
 
-
-#'  fonction calculant à partir des lois gamma les coordonnees en x et y pour tracer un polygone, la fonction peut
-#'  fnstades peut etre utilisee pour tracer un polygone (neg=TRUE) ou simplement renvoyer les valeurs des fonctions gamma pour chaque stade
-#' @param par1  parametre de la loi gamma du premier stade
-#' @param par2  parametre de la loi gamma du second stade
-#' @param phicum cumulated pigmentation times pour test : phicum=seq(0,20, length.out=100)
-#' @param phidates dates
-#' @param VB if TRUE, then calculation for stade VB which differs from the others
-#' @param neg if FALSE la fonction renvoit le calcul des stades en fonction d'un temps pigmentaire
-#' @param lmax parametre d'echelle de la fonction graphique, lmax=0 permet de tracer les valeurs reelles 
-#' des abondances par stades au cours du temps, lmax=1 ou 0.8 permet de ramener à la meme echelle tous les stades 
-#' @return une liste avec x et y
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' function drawing polygon from gamma law describing pigmentation change in                                                                                                             
+#' glass eel                                                                                                                                                                                                                                                                                                                                                                
+#' function calculating from the gamma law the coordinates x and y allowing to                                                                                                           
+#' draw a polygon, the function fnstade may be used to draw a polygon(neg=TRUE)                                                                                                          
+#' or simply return the values from gamma function of each stage                                                                                                                         
+#' @param par1 parameter describing the gamma law for the first stage                                                                                                                    
+#' @param par2 parameter of the gamma law for the second stage                                                                                                                           
+#' @param phicum cumulated pigmentation times for test : phicum=seq(0,20,                                                                                                                
+#' length.out=100)                                                                                                                                                                       
+#' @param phidates dates                                                                                                                                                                 
+#' @param VB if TRUE, then calculation for first stage VB which differs from                                                                                                             
+#' the others                                                                                                                                                                            
+#' @param neg if FALSE then calculation of stages according to the pigmentation                                                                                                          
+#' time                                                                                                                                                                                  
+#' @param lmax scale parameter for the graphical function, lmax=0 allows to                                                                                                              
+#' draw the real values of abundances per stage along time, lmax=1 or 0.8 will                                                                                                          
+#' draw all stages at the same scale                                                                                                                                                     
+#' @return a list with x and y                                                                                                                                                         
+#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
+#' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
+#' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A                                                                                                                
+#' stage-structured model to predict the effect of temperature and salinity on                                                                                                           
+#' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,                                                                                                                
+#' 995-1009.                                                                                                                                                                             
+#' \\url{http://www3.interscience.wiley.com/journal/118686679/abstract}                                                                                                                  
+#' \\url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
 fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	if (neg){
 		phidates=as.numeric(as.POSIXct(strptime(phidates,format="%Y-%m-%d")))
@@ -289,7 +302,7 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	return(list("x"=x,"y"=y))
 }
 
-#' fundist calcule la loi de repartition, fait la somme et calcule ou est le 50 pourcent de la  distribution
+#' fundist eturns the value of obj where more than 50 percent of the distribution objc is reached
 #' @param obj 
 #' @param objc 
 #' @return d50
