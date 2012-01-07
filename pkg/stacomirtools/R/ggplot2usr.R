@@ -168,7 +168,9 @@ ggploti_build<-function(){
 	group_y<-ggi$groupBox_Y$getValue()
 	if (!exists("p", envir=.GlobalEnv)) {
 	p<<-ggplot(ggi$data)
+	if (exists("formul")){
 	funout(paste(formul,"\n"))
+	}
 	}
 	if (!exists("layerformula",envir=.GlobalEnv)) layerformula=""
 	if (stat_is_selected) {	
