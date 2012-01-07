@@ -21,4 +21,4 @@ Methods for function \code{coerce}  ie inherited from a mother class
 \item{\code{signature(from = "RequeteODBCwheredate", to = "RequeteODBCwhere")}}{ ~~describe this method here }
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s)}
+

@@ -4,7 +4,6 @@
 \alias{Bilan_stades_pigm-class}
 \alias{charge,Bilan_stades_pigm-method}
 \alias{connect,Bilan_stades_pigm-method}
-
 \title{Class "Bilan_stades_pigm" Bilan class} 
 \description{The pigment stages analysis has been developed to allow to analyze the change in pigment stage structure for glass eel (Anguilla anguilla).
  The class uses the parameters calibrated by Briand et al. , 2005 to backcalculate the probable date when the glass eels arrived in the estuary (i.e. at a fully transparent stage VB.
@@ -15,23 +14,23 @@ Objects can be created by calls of the form \code{new("Bilan_stades_pigm", ...)}
 }
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~~ }
-    \item{\code{datatempsal}:}{Object of class \code{"data.frame"} ~~ }
-    \item{\code{tablestades}:}{Object of class \code{"data.frame"} ~~ }
-    \item{\code{phi}:}{Object of class \code{"list"} ~~ }
-    \item{\code{dates}:}{Object of class \code{"POSIXt"} ~~ }
-    \item{\code{Vparm}:}{Object of class \code{"list"} ~~ }
-    \item{\code{dc}:}{Object of class \code{"RefDC"} ~~ }
-    \item{\code{stationMesure}:}{Object of class \code{"RefStationMesure"} ~~ }
-    \item{\code{horodate}:}{Object of class \code{"RefHorodate"} ~~ }
-    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"} ~~ }
-    \item{\code{datefin}:}{Object of class \code{"POSIXlt"} ~~ }
-    \item{\code{lmax}:}{Object of class \code{"RefChoix"} ~~ }
-    \item{\code{options}:}{Object of class \code{"RefCheckBox"} ~~ }
-    \item{\code{salinite}:}{Object of class \code{"RefTextBox"} ~~ }
-    \item{\code{labelretro}:}{Object of class \code{"character"} ~~ }
-    \item{\code{labelgraphstades}:}{Object of class \code{"character"} ~~ }
-    \item{\code{effectifs}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{data}:}{Object of class \code{"data.frame"} data }
+    \item{\code{datatempsal}:}{Object of class \code{"data.frame"} temperature and salinity data }
+    \item{\code{tablestades}:}{Object of class \code{"data.frame"} pigment stage table }
+    \item{\code{phi}:}{Object of class \code{"list"} pigmentation time }
+    \item{\code{dates}:}{Object of class \code{"POSIXt"} dates }
+    \item{\code{Vparm}:}{Object of class \code{"list"} parameters for pigmentation evolution }
+    \item{\code{dc}:}{Object of class \code{"RefDC"} the counting device }
+    \item{\code{stationMesure}:}{Object of class \code{"RefStationMesure"} the station measuring salintiy }
+    \item{\code{horodate}:}{Object of class \code{"RefHorodate"} date }
+    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"} beginning date }
+    \item{\code{datefin}:}{Object of class \code{"POSIXlt"} ending date }
+    \item{\code{lmax}:}{Object of class \code{"RefChoix"} see \link{fnstade} }
+    \item{\code{options}:}{Object of class \code{"RefCheckBox"}  }
+    \item{\code{salinite}:}{Object of class \code{"RefTextBox"} constant value of the salinity used in the model }
+    \item{\code{labelretro}:}{Object of class \code{"character"} \link{fungraphstades}}
+    \item{\code{labelgraphstades}:}{Object of class \code{"character"} link{fungraphstades} }
+    \item{\code{effectifs}:}{Object of class \code{"numeric"} link{fungraphstades} }
   }
 }
 \section{Methods}{
@@ -45,7 +44,7 @@ BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model 
 \url{http://www3.interscience.wiley.com/journal/118686679/abstract} 
 \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.} 
 }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 \note{This class is displayed by interface_bilan_stades_pigm, 
 The class uses temperature (from an abiotic measure station) and mean salinity to calculate the change towards one stage}
 \seealso{
@@ -68,3 +67,4 @@ The class uses temperature (from an abiotic measure station) and mean salinity t
 showClass("Bilan_stades_pigm")
 }
 \keyword{classes}
+\keyword{dynamic}

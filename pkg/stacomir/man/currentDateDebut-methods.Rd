@@ -9,7 +9,7 @@
 \section{Methods}{
 \describe{
 
-\item{\code{signature(objet = "PasDeTemps")}}{ ~~describe this method here }
+\item{\code{signature(objet = "PasDeTemps")}}{beginning time of the current timestep  }
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s)}
+

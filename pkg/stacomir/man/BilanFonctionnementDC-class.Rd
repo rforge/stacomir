@@ -26,7 +26,7 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDC", .
 	 }
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
-\author{ Cedric Briand \email{cedric.briand@lavilaine.com} }
+\author{ Cedric Briand \email{cedric.briand00@gmail.com} }
 \seealso{
     Other Bilan Class
 	\code{\linkS4class{Bilan_lot}}
@@ -46,3 +46,4 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDC", .
 showClass("BilanFonctionnementDC")
 }
 \keyword{classes}
+\keyword{dynamic}

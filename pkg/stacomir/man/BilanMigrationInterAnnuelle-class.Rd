@@ -8,7 +8,7 @@
 \alias{supprime,BilanMigrationInterAnnuelle-method}
 
 \title{Class "BilanMigrationInterAnnuelle"}
-\description{Several year overview of fish migrations. It enables to draw 2 compare a year with statistics from several year, and to extract data
+\description{Several year overview of fish migrations. It enables to compare migration for one year with statistics (min, max, mean) from several year, and to extract data
 This class need prior call from bilanMigration to fill in the t_bilanmigrationjour_bjo as it loads the data in this table
 }
 \section{Objects from the Class}{
@@ -33,7 +33,7 @@ Objects can be created by calls of the form \code{new("BilanMigrationInterAnnuel
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
 \seealso{
     Other Bilan Class
@@ -54,3 +54,4 @@ Objects can be created by calls of the form \code{new("BilanMigrationInterAnnuel
 showClass("BilanMigrationInterAnnuelle")
 }
 \keyword{classes}
+\keyword{dynamic}

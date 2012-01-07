@@ -3,21 +3,21 @@
 \docType{class}
 \alias{BilanMigrationPar-class}
 
-\title{Class "BilanMigrationPar"}
-\description{calcul de migration integrant des caracteristiques qualitatives 
-ou quantitatives de lots ou les deux  ex poids les anguilles avec classes de taille par pas de temps
-developpement : je commence par lui passer deux param puis possiblite de ne pas en choisir dans la boite ="aucun"
+\title{Class BilanMigrationPar, Migration report along with quantitative and qualitative characteristics}
+\description{Migration along with qualitative or quantitative characteristics 
+or both  (e.g.) weight of eels according to the size class per period of time,
+weight of fish according to gender...
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("BilanMigrationPar", ...)}.
-	 ~~ describe objects here ~~ 
+	they are loaded by the interface using interface_BilanMigrationPar function
 }
 \section{Slots}{
 	 \describe{
     \item{\code{parquan}:}{Object of class \code{"Refparquan"} }
     \item{\code{parqual}:}{Object of class \code{"Refparqual"}  }
-    \item{\code{echantillon}:}{Object of class \code{"RefChoix"}  }
-    \item{\code{valeurs_possibles}:}{valeurs possibles d'un parametre qualitatif (discret)}
+    \item{\code{echantillon}:}{Object of class \code{"RefChoix"} do we add subsample ? }
+    \item{\code{valeurs_possibles}:}{possible values for a qualitative parameter }
     \item{\code{dc}:}{Object of class \code{"RefDC"}  inherited from class \code{"BilanMigration"}}
     \item{\code{taxons}:}{Object of class \code{"RefTaxon"}  inherited from class \code{"BilanMigration"}}
     \item{\code{stades}:}{Object of class \code{"RefStades"}  inherited from class \code{"BilanMigration"}}
@@ -37,8 +37,10 @@ Class \code{"\linkS4class{BilanMigration}"}, directly.
 }
 }}
 
-\author{ Cedric Briand \email{cedric.briand@lavilaine.com}}
-
+\author{ Cedric Briand \email{cedric.briand00@gmail.com}}
+\note{
+program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
+}
 \seealso{
     Other Bilan Class
 	\code{\linkS4class{Bilan_lot}}
@@ -58,3 +60,4 @@ Class \code{"\linkS4class{BilanMigration}"}, directly.
 showClass("BilanMigrationPar")
 }
 \keyword{classes}
+\keyword{dynamic}

@@ -20,12 +20,12 @@ Objects can be created by calls of the form \code{new("BilanMigration", dc=new("
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{dc}:}{Object of class \code{"RefDC"} ~ The control device }
-    \item{\code{taxons}:}{Object of class \code{"RefTaxon"} ~ The race of the concerned fish}
-    \item{\code{stades}:}{Object of class \code{"RefStades"} ~ The phase of the concerned fish}
-    \item{\code{pasDeTemps}:}{Object of class \code{"PasDeTempsJournalier"} ~ The time step }
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Datas}
-    \item{\code{duree}:}{Object of class \code{"POSIXct"} ~ Duration of the overview}
+    \item{\code{dc}:}{Object of class \code{"RefDC"}  The control device }
+    \item{\code{taxons}:}{Object of class \code{"RefTaxon"}  The race of the concerned fish}
+    \item{\code{stades}:}{Object of class \code{"RefStades"}  The phase of the concerned fish}
+    \item{\code{pasDeTemps}:}{Object of class \code{"PasDeTempsJournalier"}  The time step }
+    \item{\code{data}:}{Object of class \code{"data.frame"} report data}
+    \item{\code{duree}:}{Object of class \code{"POSIXct"}  Duration of the overview}
   }
 }
 \section{Methods}{
@@ -35,7 +35,7 @@ Objects can be created by calls of the form \code{new("BilanMigration", dc=new("
 	 }
 }
 
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 
 \seealso{
     Other Bilan Class
@@ -58,3 +58,4 @@ showClass("BilanMigration")
 bilanMigration= new("BilanMigration")
 }
 \keyword{classes}
+\keyword{dynamic}

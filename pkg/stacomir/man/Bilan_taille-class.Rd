@@ -6,24 +6,24 @@
 \alias{connect,Bilan_taille-method}
 
 \title{Class "Bilan_taille" Bilan class }
-\description{class Bilan_taille  Cette classe permet de charger les deux caracteristiques quantitatives de lot  : Taille et taille fourche.}
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\description{Bilan_taille class This class allows to load the following quantitative sample characteristics : full size, mostly used for yellow eels.}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Bilan_taille", ...)}
 }
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~~ }
-    \item{\code{dc}:}{Object of class \code{"RefDC"} ~~ }
-    \item{\code{taxons}:}{Object of class \code{"RefTaxon"} ~~ }
-    \item{\code{stades}:}{Object of class \code{"RefStades"} ~~ }
-    \item{\code{parquan}:}{Object of class \code{"Refparquan"} ~~ }
-    \item{\code{parqual}:}{Object of class \code{"Refparqual"} ~~ }
-    \item{\code{horodate}:}{Object of class \code{"RefHorodate"} ~~ }
-    \item{\code{requete}:}{Object of class \code{"RequeteODBC"} ~~ }
-    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"} ~~ }
-    \item{\code{datefin}:}{Object of class \code{"POSIXlt"} ~~ }
+    \item{\code{data}:}{Object of class \code{"data.frame"} data for the Bilan }
+    \item{\code{dc}:}{Object of class \code{"RefDC"} the counting device }
+    \item{\code{taxons}:}{Object of class \code{"RefTaxon"}  }
+    \item{\code{stades}:}{Object of class \code{"RefStades"}  }
+    \item{\code{parquan}:}{Object of class \code{"Refparquan"} quantitative parameter here fixed to size parameters }
+    \item{\code{parqual}:}{Object of class \code{"Refparqual"} qualitative parameter for instance sex or pigment stage can be null }
+    \item{\code{horodate}:}{Object of class \code{"RefHorodate"} date }
+    \item{\code{requete}:}{Object of class \code{"RequeteODBC"} the connection }
+    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"} beginning }
+    \item{\code{datefin}:}{Object of class \code{"POSIXlt"} ending date }
   }
 }
 \section{Methods}{
@@ -32,15 +32,7 @@ Objects can be created by calls of the form \code{new("Bilan_taille", ...)}
     \item{connect}{\code{signature(objet = "Bilan_taille")}: connect method for Bilan_taille class }
 	 }
 }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
-\note{ Explication du traitement :Dans les operations de piegeage, les anguilles peuvent etre passees au crible et separees en groupe
-Ces groupes sont bases sur des courbes de selectivite en fonction de la maille, en gros la separation se fait au niveau de la L50 pour Arzal
-Il est necessaire pour chaque taille individuelle l'appartenance à une caracteristique qualitative de lot (groupe de taille ex grandes anguillettes)
-Cette appartenance est recherchee au niveau du lot par une requete  permettant l'affichage sur une meme ligne de deux caracteristiques differentes
-Au niveau du lot pere si il existe, on fait une requete permettant de recuperer les caracteritiques qualitatives de lot du lot pere
-Eventuellement, la taille a pu etre rentree au niveau du lot (pas du sous lot) sans qu'une appartenance à une caracteristique ne soit apparente.
-Un traitement des donnees au chargement permet d'analyser si la taille correspond à un lot soit au niveau du lot soit au niveau du lot pere
-}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 \seealso{
     Other Bilan Classes
 	\code{\linkS4class{Bilan_lot}}
@@ -57,17 +49,15 @@ Un traitement des donnees au chargement permet d'analyser si la taille correspon
 	\code{\linkS4class{BilanMigrationPar}}	
 }
 \details{
-Explication du traitement :
-Dans les operations de piegeage, les anguilles peuvent etre passees au crible et separees en groupe
-Ces groupes sont bases sur des courbes de selectivite en fonction de la maille, en gros la separation se fait au niveau de la L50 pour Arzal
-Il est necessaire pour chaque taille individuelle l'appartenance à une caracteristique qualitative de lot (groupe de taille ex grandes anguillettes)
-Cette appartenance est recherchee au niveau du lot par une requete  permettant l'affichage sur une meme ligne de deux caracteristiques differentes
-Au niveau du lot pere si il existe, on fait une requete permettant de recuperer les caracteritiques qualitatives de lot du lot pere
-Eventuellement, la taille a pu etre rentree au niveau du lot (pas du sous lot) sans qu'une appartenance à une caracteristique ne soit apparente.
-Un traitement des donnees au chargement permet d'analyser si la taille correspond à un lot soit au niveau du lot soit au niveau du lot pere
+Eels trapped are usually screened and separated into groups, this is not good practise but still in use
+The groups used in stacomi are based on the selectivity curve according to the mesh, roughly the separation takes place at the L50 for Arzal
+So individuals might refer to one size class  (eg the size group of large eels)
+This affiliation is sought at the subsample level by a query to display on a single line two different characteristics size and size group
+Once the data are loaded, the program checks if the size class group is indicated at the sample or susample level
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
 \examples{
 showClass("Bilan_taille")
 }
 \keyword{classes}
+\keyword{dynamic}

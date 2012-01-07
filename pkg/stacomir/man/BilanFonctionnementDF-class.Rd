@@ -5,19 +5,19 @@
 \alias{charge,BilanFonctionnementDF-method}
 \alias{connect,BilanFonctionnementDF-method}
 
-\title{Class "BilanFonctionnementDF" Bilan du fonctionnement du dispositif de franchissement }
+\title{Class "BilanFonctionnementDF" Report fishway work}
 \description{ The DF (Dispositif de Franchissement) is a fishway. It may be automated and work only at certain times
- This Bilan allows to see the detail of its work.
+ This report allows to see the detail of its work.
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("BilanFonctionnementDF")}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} }
-    \item{\code{df}:}{Object of class \code{"RefDF"}}
+    \item{\code{data}:}{Object of class \code{"data.frame"} data of the report }
+    \item{\code{df}:}{Object of class \code{"RefDF"} fishway}
     \item{\code{horodate}:}{Object of class \code{"RefHorodate"} }
-    \item{\code{requete}:}{Object of class \code{"RequeteODBCwheredate"} }
+    \item{\code{requete}:}{Object of class \code{"RequeteODBCwheredate"} request }
   }
 }
 \section{Methods}{
@@ -27,7 +27,7 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDF")}.
 	 }
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 
 \seealso{
     Other Bilan Class
@@ -48,3 +48,4 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDF")}.
 showClass("BilanFonctionnementDF")
 }
 \keyword{classes}
+\keyword{dynamic}

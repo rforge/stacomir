@@ -5,7 +5,7 @@
 \alias{charge,BilanEspeces-method}
 \alias{connect,BilanEspeces-method}
 
-\title{Class "BilanEspeces" Bilan des especes presentes sur un DC}
+\title{Class "BilanEspeces" Report of the species present at a counting device for a given period}
 \description{this class is used to make the assessment of all species, and their number, per month
 it writes either an histogram or a pie chart of number per year/week/month 
 }
@@ -14,12 +14,12 @@ Objects can be created by calls of the form \code{new("BilanEspeces", ...)}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{dc}:}{Object of class \code{"RefDC"}}
-    \item{\code{horodate}:}{Object of class \code{"RefHorodate"}}
-    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"}}
-    \item{\code{datefin}:}{Object of class \code{"POSIXlt"}}
-    \item{\code{data}:}{Object of class \code{"data.frame"}}
-    \item{\code{liste}:}{Object of class \code{"RefListe"}}
+    \item{\code{dc}:}{Object of class \code{"RefDC"} the counting device}
+    \item{\code{horodate}:}{Object of class \code{"RefHorodate"} date}
+    \item{\code{datedebut}:}{Object of class \code{"POSIXlt"} beginning date}
+    \item{\code{datefin}:}{Object of class \code{"POSIXlt"} ending date}
+    \item{\code{data}:}{Object of class \code{"data.frame"} data for the report}
+    \item{\code{liste}:}{Object of class \code{"RefListe"} lists the possible value of time period}
   }
 }
 \section{Methods}{
@@ -29,7 +29,7 @@ Objects can be created by calls of the form \code{new("BilanEspeces", ...)}.
 	 }
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 \seealso{
     Other Bilan Classes
 	\code{\linkS4class{Bilan_lot}}
@@ -49,3 +49,4 @@ Objects can be created by calls of the form \code{new("BilanEspeces", ...)}.
 showClass("BilanEspeces")
 }
 \keyword{classes}
+\keyword{dynamic}

@@ -25,7 +25,8 @@
 \alias{charge,RefStationMesure-method}
 \alias{charge,RefTaxon-method}
 \alias{charge,RefTextBox-method}
-\title{Methods for Function charge}
+\alias{charge,RefMsg-method}
+\title{Charge method for referential (ref) and report (bilan) object}
 \description{
  This methods loads the data, it is in fact sometimes redundant with connect which should be
  reserved for instances of RequeteODBC and daughter classes. See individual .r files for help and examples
@@ -33,52 +34,59 @@
 \section{Methods}{
 \describe{
 
-\item{\code{signature(objet = "Bilan_lot")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Bilan_lot")}}{ loading method for Bilan_lot class }
 
-\item{\code{signature(objet = "Bilan_poids_moyen")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Bilan_poids_moyen")}}{ loading method for Bilan_poids_moyen class }
 
-\item{\code{signature(objet = "Bilan_stades_pigm")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Bilan_stades_pigm")}}{loading method for Bilan_stades_pigm class  }
 
-\item{\code{signature(objet = "Bilan_taille")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Bilan_taille")}}{ loading method for Bilan_taille }
 
-\item{\code{signature(objet = "BilanConditionEnv")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanConditionEnv")}}{ loading method for BilanCondtionEnv class }
 
-\item{\code{signature(objet = "BilanEspeces")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanEspeces")}}{  loading method for BilanEspeces verifies the content of
+  objects and calls the connect method }
 
-\item{\code{signature(objet = "BilanFonctionnementDC")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanFonctionnementDC")}}{ loading method for BilanFonctionnementDC class  }
 
-\item{\code{signature(objet = "BilanFonctionnementDF")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanFonctionnementDF")}}{ loading method for BilanFonctionnementDF class }
 
-\item{\code{signature(objet = "BilanMigrationInterAnnuelle")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanMigrationInterAnnuelle")}}{ loading method for BilanMigrationInterannuelle class }
 
-\item{\code{signature(objet = "RefAnnee")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefAnnee")}}{  Loading method for RefAnnee referential objects, selects
+  year avalaible in the t_operation_ope table }
 
-\item{\code{signature(objet = "RefCheckBox")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefCheckBox")}}{ Loading method for ReCheckBox referential objects}
 
-\item{\code{signature(objet = "RefChoix")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefChoix")}}{ Loading method for Rechoix referential objects}
 
-\item{\code{signature(objet = "RefCoe")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefCoe")}}{ loads the coefficients for the period defined in class
+  The slots datedebut and datefin have to be filled before
+  using charge }
 
-\item{\code{signature(objet = "RefDC")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefDC")}}{ loads the counting devices of the control station }
 
-\item{\code{signature(objet = "RefDF")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefDF")}}{ Loading method for DF referential objects}
 
-\item{\code{signature(objet = "RefListe")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefListe")}}{ Loading method for Refliste referential objects}
 
-\item{\code{signature(objet = "Refpar")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Refpar")}}{ Loading method for Repar referential objects }
 
-\item{\code{signature(objet = "Refparqual")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Refparqual")}}{ Loading method for Reparqual referential objects }
 
-\item{\code{signature(objet = "Refparquan")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Refparquan")}}{ Loading method for Reparquan referential objects }
 
 \item{\code{signature(objet = "RefPoidsMoyenPeche")}}{ ~~describe this method here }
 
-\item{\code{signature(objet = "RefStades")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefStades")}}{ Loading method for RefStades referential objects}
 
-\item{\code{signature(objet = "RefStationMesure")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefStationMesure")}}{ Loading method for RefStationMesure referential object }
 
-\item{\code{signature(objet = "RefTaxon")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefTaxon")}}{ Loading method for RefTaxon referential objects }
 
-\item{\code{signature(objet = "RefTextBox")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefTextBox")}}{ Loading method for ReTextBox referential objects }
+
+\item{\code{signature(objet = "RefMsg")}}{ Loading method for RefMsg referential objects loads the  common table ts_messager_msr }
 }}
 \keyword{methods}
+\keyword{database}

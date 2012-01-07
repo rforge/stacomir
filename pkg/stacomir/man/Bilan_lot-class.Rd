@@ -28,7 +28,7 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
     \item{connect}{\code{signature(objet = "Bilan_lot")}:  charge method for Bilan_lot class }
 	 }
 }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 \note{This class is displayed by interface_bilan_lot}
 \seealso{
     Other Bilan Class
@@ -51,3 +51,4 @@ showClass("Bilan_lot")
 objet=new("Bilan_lot")
 }
 \keyword{classes}
+\keyword{dynamic}

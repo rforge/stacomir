@@ -9,7 +9,7 @@
 \section{Methods}{
 \describe{
 
-\item{\code{signature(objet = "PasDeTemps")}}{ ~~describe this method here }
+\item{\code{signature(objet = "PasDeTemps")}}{ finishing time of the current time step}
 }}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s)}

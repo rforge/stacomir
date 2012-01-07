@@ -12,12 +12,12 @@ Objectif faire un calcul des poids moyens et permettre de reintegrere les coeffi
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~~ }
-    \item{\code{dc}:}{Object of class \code{"RefDC"} ~~ }
-    \item{\code{anneedebut}:}{Object of class \code{"RefAnnee"} ~~ }
-    \item{\code{anneefin}:}{Object of class \code{"RefAnnee"} ~~ }
-    \item{\code{coe}:}{Object of class \code{"RefCoe"} ~~ }
-    \item{\code{liste}:}{Object of class \code{"RefListe"} ~~ }
+    \item{\code{data}:}{Object of class \code{"data.frame"} data for bilan lot }
+    \item{\code{dc}:}{Object of class \code{"RefDC"} refDC an instantiation of the counting device class}
+    \item{\code{anneedebut}:}{Object of class \code{"RefAnnee"} refAnnee allows to choose year of beginning }
+    \item{\code{anneefin}:}{Object of class \code{"RefAnnee"} refAnnee allows to choose year of ending }
+    \item{\code{coe}:}{Object of class \code{"RefCoe"} class loading coefficient of conversion between quantity (weights or volumes of glass eel) and numbers }
+    \item{\code{liste}:}{Object of class \code{"RefListe"} RefListe referential class choose within a list, here do you want subsamples or not }
   }
 }
 \section{Methods}{
@@ -42,7 +42,7 @@ Objectif faire un calcul des poids moyens et permettre de reintegrere les coeffi
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 \note{Un programme permet pour l'iav d'étendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees
 For the charge method dates for the request are from august to august (a glass eel season)
 }
@@ -52,3 +52,4 @@ showClass("Bilan_poids_moyen")
 objet=new("Bilan_poids_moyen")
 }
 \keyword{classes}
+\keyword{dynamic}

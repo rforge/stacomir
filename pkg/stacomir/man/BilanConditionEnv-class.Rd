@@ -26,7 +26,7 @@ Objects can be created by calls of the form \code{new("BilanConditionEnv", horod
 	 }
 }
 %\references{ ~~put references to the literature/web site here ~~ }
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 %\note{ ~~further notes~~ }
 
 \seealso{
@@ -49,3 +49,4 @@ Objects can be created by calls of the form \code{new("BilanConditionEnv", horod
 showClass("BilanConditionEnv")
 }
 \keyword{classes}
+\keyword{dynamic}
