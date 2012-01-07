@@ -3,7 +3,7 @@
 #' @name Bilan_stades_pigm
 #' @title Bilan_stades_pigm Bilan class 
 #' @note This class is displayed by interface_bilan_stades_pigm
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @slot datatempsal="data.frame"  format [,c("date","temperature","salinite")]
 #' @slot phi tableau des temps pigmentaires
@@ -52,7 +52,7 @@ setClass(Class="Bilan_stades_pigm",
 #' connect method for Bilan_stades_pigm
 #' @return An object of class Bilan_stades_pigm
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
 			# pour debug objet<-new("Bilan_stades_pigm")
 			#  chargement du tableau des stades pigmentaires
@@ -157,7 +157,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 #' 
 #' @returnType class Bilan_stades_pigm
 #' @return Bilan_stades_pigm with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #  objet<-bilan_stades_pigm
 setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
 			if (exists("refDC",envir_stacomi)) {
@@ -236,7 +236,7 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 #' @param parm parameters of the model
 #' @param datatempsal data.frame containing temperatures and salinities
 #' @return list("dates"=duree,"phi_jour"=phi_jour)
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 funphi<-function(parm,datatempsal){
 	temperature=datatempsal$temperature
 	salinity=datatempsal$salinite
@@ -259,7 +259,7 @@ funphi<-function(parm,datatempsal){
 #' @param lmax parametre d'echelle de la fonction graphique, lmax=0 permet de tracer les valeurs reelles 
 #' des abondances par stades au cours du temps, lmax=1 ou 0.8 permet de ramener à la meme echelle tous les stades 
 #' @return une liste avec x et y
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	if (neg){
 		phidates=as.numeric(as.POSIXct(strptime(phidates,format="%Y-%m-%d")))
@@ -293,7 +293,7 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 #' @param obj 
 #' @param objc 
 #' @return d50
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fun50<-function(obj,objc){
 	d50<-obj[objc>0.5][1]
 	return(d50)
@@ -347,9 +347,10 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	return(out)   
 }
 
+#' @title main launching function for class Bilan_stades_pigm
 #' Function with handler which calls charge (and thus connect) and calculates the title
 #' @param h 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funcalcbilan_stades_pigm<-function(h,...){
 	bilan_stades_pigm<-charge(bilan_stades_pigm)
@@ -406,7 +407,7 @@ fungraphstadesh=function(h,...){
 #' @param dates 
 #' @param Vparm 
 #' @returnType 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fungraphstades<-function(
 		tablestades,
 		retrocalcul=TRUE,  # deuxieme partie du graphe dans ce cas fournir datatempsal
@@ -629,7 +630,7 @@ fungraphgg=function(h,...){
 
 #' Fonction handler qui retourne le titre du graphique apres le choix dans la date
 #' @param h 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 funtitle_bilan_stades_pigm=function(h,...){
 	wintitle=gwindow()
 	hgettext=function(h,...){
@@ -659,7 +660,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")

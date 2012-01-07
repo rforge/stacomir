@@ -4,7 +4,7 @@
 #' @param object 
 #' @returnType logical
 #' @return the test for the object Refannee
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 validite_Annee=function(object)
 {
 	rep1= class(object@data)=="data.frame"
@@ -15,7 +15,7 @@ validite_Annee=function(object)
 #definition de la classe
 
 #' @title RefAnnee referencial class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame" the list of parameters
 #' @method charge
 #' @method choix
@@ -28,7 +28,7 @@ setClass(Class="RefAnnee",representation=
 #' Loading method for RefAnnee referential objects, selects year avalaible in the t_operation_ope table
 #' @returnType S4 object
 #' @return An S4 object of class RefAnnee
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples   objet=new("RefAnnee")
 #' charge(objet)
 #'  validObject( annee)
@@ -45,7 +45,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 		})
 
 #' choice method for RefAnnee referential objects assign the object in envir_stacomi
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @param nomassign the name to be asssigned in envir_stacomi
 #' @param funoutlabel the label that appears in funout
 #' @param titleFrame title for the frame

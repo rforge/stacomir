@@ -6,7 +6,7 @@
 #' @note Classe permettant de charger la liste de parametres qualitatifs
 #' et de les selectionner herite de Refpar dont elle utilie la methode choix
 #' par rapport à parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @expamples objet=new("Refparqual")
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
@@ -14,7 +14,7 @@ setClass(Class="Refparqual",representation= representation(valqual="data.frame")
 #' Loading method for Reparqual referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("Refparqual")
 #'  charge(objet)
@@ -32,7 +32,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #' Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -65,7 +65,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #' et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual with the valqual slot filled
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -92,7 +92,7 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 #' @note the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples  
 #'  objet=new("Refparqual")
 #' win=gwindow()

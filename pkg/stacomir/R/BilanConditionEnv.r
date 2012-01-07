@@ -7,7 +7,7 @@
 #' @slot data=data.frame
 #' @method connect
 #' @method charge
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setClass(Class="BilanConditionEnv",
 		representation=representation(
@@ -25,7 +25,7 @@ setClass(Class="BilanConditionEnv",
 
 #' connect method for BilanConditionEnv class
 #' @return an object of BilanConditionEnv class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("connect",signature=signature("BilanConditionEnv"),
 		definition=function(objet,h) {
@@ -56,7 +56,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 )
 
 #' charge method for BilanCondtionEnv class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(objet,h) {
 			
@@ -85,7 +85,7 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 #' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hbilanConditionEnvgraph = function(h,...) 
 {

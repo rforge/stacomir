@@ -1,17 +1,15 @@
 #' functions called in DF and DC
-#' @param typeperiode 
-#' @param tempsdebut 
-#' @param tempsfin 
-#' @param libelle 
-#' @param date 
+#' @param typeperiode ref.tr_typearretdisp_tar(per_tar_code) the code of the period (see table ref.tr_typearretdisp_tar)
+#' @param tempsdebut ref.tr_typearretdisp_tar(per_date_debut) starting timestamp of the period
+#' @param tempsfin ref.tr_typearretdisp_tar(per_date_fin) ending timestamp of the period
+#' @param libelle ref.tr_typearretdisp_tar(libelle )description of the period type
+#' @param date boolean should the function return a POSIXt or date value
 #' @returnType list
 #' @return listeg
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @note returns either Posixt or date if date=TRUE
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
-# typeperiode=fonctionnementDF$per_tar_code
-#tempsdebut= fonctionnementDF$per_date_debut
-#tempsfin=fonctionnementDF$per_date_fin
-#libelle=fonctionnementDF$libelle
+
 fn_table_per_dis <-function(typeperiode, tempsdebut, tempsfin,libelle,date=TRUE){
 listeg=list()
 for (j in 1:5){

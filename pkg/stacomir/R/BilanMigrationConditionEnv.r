@@ -3,7 +3,7 @@
 #' class BilanMigrationCondtionEnv 
 #' @slot bilanMigration="BilanMigration"
 #' @slot bilanConditionEnv="BilanConditionEnv"
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @method calcule
 #' @expamples bilanMigrationConditionEnv= new("BilanMigration") 
 setClass(Class="BilanMigrationConditionEnv",representation=
@@ -35,7 +35,7 @@ setValidity("BilanMigrationConditionEnv",
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hbilanMigrationConditionEnvcalc=function(h,...){
 	calcule(h$action)

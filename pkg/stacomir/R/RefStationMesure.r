@@ -2,7 +2,7 @@
 # Date de creation :   02/01/2009 15:02:40
 
 #' @title Refstades referential class to load the measures stations
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @expamples objet=new("RefStationMesure")
 setClass (  Class="RefStationMesure", 
@@ -13,7 +13,7 @@ setClass (  Class="RefStationMesure",
 #' Loading method for RefStationMesure referential object
 #' @returnType S4 object
 #' @return An S4 object of class RefStationMesure
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefStationMesure")
 #'  charge(objet)
@@ -33,7 +33,7 @@ setMethod("charge",
           }
 )
 #' Choice method for RefStationMesure referential object
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples  
 #' objet=new("RefStationMesure")
 #' win=gwindow()

@@ -2,7 +2,7 @@
 
 #' interface for BilanMigrationConditionEnv class
 #' @aliases interface_BilanMigration
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_BilanMigrationConditionEnv = function()
 {

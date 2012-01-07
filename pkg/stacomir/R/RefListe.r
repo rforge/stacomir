@@ -1,7 +1,7 @@
 # Nom fichier :        RefListe   (classe)
 # Description          Classe permettant charger un choix dans une liste utilisée par un objetBilan
 #' @title RefListe referential class choose within a list
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot liste choix="character" A vector of character to choose within a droplist
 #' @slot label="character" the title of the box
 #' @expamples objet=new("RefListe")
@@ -11,7 +11,7 @@ setClass(Class="RefListe",representation= representation(listechoix="character",
 #' Loading method for Refliste referential objects
 #' @returnType S4 object
 #' @return An object of class RefListe
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefListe")
 #' charge(objet)
@@ -22,7 +22,7 @@ setMethod("charge",signature=signature("RefListe"),definition=function(objet,vec
 		})
 #' Choice method for RefListe referential objects
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples  
 #'  objet=new("RefListe")
 #' win=gwindow()

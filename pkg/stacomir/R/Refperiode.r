@@ -2,7 +2,7 @@
 
 #' @title Refperiode referential class to choose a period
 #' @note pgval are used by seq.POSIXT
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame" providing correspondance between period and their english names
 #' @expamples objet = new("Refperiode")
 setClass(Class="Refperiode",representation=
@@ -17,7 +17,7 @@ setClass(Class="Refperiode",representation=
 #' Returns the POSIXt value of a given name
 #' @returnType "character"
 #' @return "a character to be used in seq.POSIXt
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  getvalue(new("Refperiode"),"quinzaine")
 setMethod("getvalue",signature=signature("Refperiode"), definition=function(objet,id,...)

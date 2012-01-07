@@ -1,7 +1,7 @@
 # Nom fichier :        libraries.R
 
 #' function to call and load the libraries used in stacomi
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 
 libraries=function() {
 necessary = c('tcltk2', 'RODBC','ggplot2','gWidgets' ,'R2HTML','gWidgetsRGtk2',
@@ -16,7 +16,7 @@ require('Hmisc')
 options(guiToolkit = "RGtk2")
 require('lattice')
 require('RColorBrewer')
-require('ggplot2usr')
+require('stacomirtools')
 require('proto') 
 require('xtable')
 #require('Hmisc')

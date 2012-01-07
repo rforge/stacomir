@@ -2,10 +2,10 @@
 # Projet :             controle migrateur calmig/prog/classe
 # Date de creation :   31/03/2008 17:21:18
 
+#' @title #' Class Bilan espece Report of the species present at a counting device for a given period
 #' this class is used to make the assessment of all species, and their number, per month
 #' #' it writes an histogram of number per month
-#' it
-#' class BilanEspeces
+#' class BilanEspeces 
 #' @slot dc="RefDC"
 #' @slot horodate="RefHorodate"
 #' @slot stades="RefStades"
@@ -13,9 +13,8 @@
 #' @slot datefin="POSIXlt"
 #' @slot data="data.frame"
 #' @slot duree="POSIXct"
-#' @slot liste="RefListe" liste des pas de temps possibles pour le découpage, les valeurs sont passées dans l'interface
-#' @method calcule
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @slot liste="RefListe" lists the possible value of time period
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
@@ -40,7 +39,7 @@ setValidity("BilanEspeces",function(object)
 
 #' connect method for BilanEspeces
 #' @return bilanEspeces instance with request corresponding to the user choices
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
 			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
@@ -76,7 +75,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hBilanEspecescalc=function(h,...){
 	charge(h$action)
@@ -86,7 +85,7 @@ hBilanEspecescalc=function(h,...){
 #' charge method for BilanEspeces
 #' verifies the content of objects and calls the connect method
 #' @return BilanEspeces with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 #' @expamples bilanEspeces=new("BilanEspeces")
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
@@ -126,7 +125,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 #' @note pas besoin de refaire tourner calcul si une autre liste à été chargée, les effectifs <0 sont transformés en positifs
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 
 hCamembert = function(h,...) {	
@@ -192,7 +191,7 @@ hCamembert = function(h,...) {
 #' trace un histogramme des espèces fréquentant la passe... 
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hHistogramme = function(h,...) {
 	if (exists("BilanEspeces",envir_stacomi)) {
@@ -236,7 +235,7 @@ hHistogramme = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hTableBilanEspeces=function(h,...) {
 	funout("Tableau de sortie \n")
@@ -257,7 +256,7 @@ hTableBilanEspeces=function(h,...) {
 }
 
 #' Interface for BilanEspece class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 #' @expamples interface_BilanEspeces()
 interface_BilanEspeces=function(){

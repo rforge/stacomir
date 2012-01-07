@@ -12,7 +12,7 @@
 #' @param heure 
 #' @returnType data.frame
 #' @return data 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funtraitementdate=function(data, # tableau de donnees à importer
 		nom_coldt, # nom de la colonne

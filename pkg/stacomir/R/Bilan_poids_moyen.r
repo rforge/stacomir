@@ -16,7 +16,7 @@
 #' @slot liste="RefListe"
 #' @method connect
 #' @method charge
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 #' @expamples objet=new("Bilan_poids_moyen")
 setClass(Class="Bilan_poids_moyen",        
@@ -36,7 +36,7 @@ setClass(Class="Bilan_poids_moyen",
 #' connect method for Bilan_Poids_moyen
 #' @return Bilan_Poids_Moyen request corresponding to user choices
 #' @note dates for the request are from august to august (a glass eel season)
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
 			#CHARGEMENT DU TABLEAU DES POIDS MOYENS
@@ -76,7 +76,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 #' @param h a handler 
 #' @returnType Bilan_poids_moyen class
 #' @return Bilan_poids_moyen with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
 			if (exists("refliste",envir_stacomi)) {      
@@ -106,10 +106,14 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 
 
 fungraphBilan_poids_moyen = function(h,...) {
-	if (exists("toolbarlistgraph",.GlobalEnv)) delete(group,toolbarlistgraph) 
-	rm("toolbarlistgraph",envir= .GlobalEnv)
-	if (exists("toolbarlistgraph1",.GlobalEnv)) delete(group,toolbarlistgraph1) 
-	rm("toolbarlistgraph1",envir= .GlobalEnv)
+	if (exists("toolbarlistgraph",.GlobalEnv)) {
+		delete(group,toolbarlistgraph) 
+		rm("toolbarlistgraph",envir= .GlobalEnv)
+	}
+	if (exists("toolbarlistgraph1",.GlobalEnv)) 
+	{delete(group,toolbarlistgraph1) 
+		rm("toolbarlistgraph1",envir= .GlobalEnv)
+	}
 	if ((!exists("peche", envir=envir_stacomi))){
 		# si il existe j'ai traffique l'objet bilan poids moyen à la main
 		# et je ne souhaite pas qu'il soit ecrase
@@ -198,8 +202,8 @@ fungraphBilan_poids_moyen = function(h,...) {
 	hexp=function(h,...){
 		# export d'un tableau que l'on peut ecrire dans la base
 		gconfirm(get("msg",envir_stacomi)$Bilan_poids_moyen.16,
-		title=get("msg",envir_stacomi)$Bilan_poids_moyen.17,
-		handler=hreg,action="export")
+				title=get("msg",envir_stacomi)$Bilan_poids_moyen.17,
+				handler=hreg,action="export")
 	}
 	hquit=function(h,...){
 		delete(toolbarlistgraph,group)

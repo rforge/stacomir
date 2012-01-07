@@ -2,7 +2,7 @@
 #' @param vect 
 #' @returnType character
 #' @return listsql a list of value
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 vector_to_listsql<-function(vect)
 {

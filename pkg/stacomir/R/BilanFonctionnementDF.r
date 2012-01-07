@@ -25,7 +25,7 @@
 #' @slot df = Object of class \code{"RefDF"}
 #' @slot horodate = Object of class \code{"RefHorodate"}
 #' @slot requete = Object of class \code{"RequeteODBCwheredate"}
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @seealso     Other Bilan Class
 #'	\code{\linkS4class{Bilan_lot}}
 #'	\code{\linkS4class{Bilan_poids_moyen}}
@@ -103,7 +103,7 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 # Compte tenu de la structure des donnees ce n'est pas si simple...
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
 #' @param h a handler  
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funbarchartDF = function(h,...) {
 	fonctionnementDF=charge(fonctionnementDF)
@@ -189,7 +189,7 @@ funbarchartDF = function(h,...) {
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funboxDF = function(h,...) {
 	
@@ -312,7 +312,7 @@ funboxDF = function(h,...) {
 }   
 #' FuntableDF create a table output for BilanFonctionnementDF class
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funtableDF = function(h,...) {
 	fonctionnementDF=charge(fonctionnementDF)

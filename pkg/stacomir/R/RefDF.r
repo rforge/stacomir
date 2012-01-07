@@ -2,7 +2,7 @@
 
 #' @title RefDF referential class to load the DF dataframe
 #' @note Contains description data of all DF from the database along with the selected df (integer)
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot df_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot data="data.frame"
@@ -13,7 +13,7 @@ setClass(Class="RefDF",representation=
 #' Loading method for DF referential objects
 #' @returnType S4 object
 #' @return An object of class RefDF
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  \dontrun {objet=new("RefDF")
 #' charge(objet)}
@@ -43,7 +43,7 @@ setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 
 #' Choice method for DF referential objects
 #' @note the choice method assigns an object of class refDF in the environment envir_stacomi
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples   \dontrun { 
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

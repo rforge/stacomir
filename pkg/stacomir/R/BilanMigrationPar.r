@@ -1,10 +1,10 @@
 # Nom fichier :        BilanMigrationCar    (classe)
 # Date de creation :   31/03/2008 17:21:18
 
-#' Class BilanMigrationPar
-#' calcul de migration integrant des caracteristiques qualitatives 
-#' ou quantitatives de lots ou les deux  ex poids les anguilles avec classes de taille par pas de temps
-#' developpement : je commence par lui passer deux param puis possiblite de ne pas en choisir dans la boite ="aucun"
+#' @title Class BilanMigrationPar, Migration report along with quantitative and qualitative characteristics
+#' Migration along with qualitative or quantitative characteristics 
+#'or both  (e.g.) weight of eels according to the size class per period of time,
+#'weight of fish according to gender...
 #' @slot parquan = "Refparquan"
 #' @slot parqual = "Refparqual"
 #' @slot echantillon = "RefChoix"
@@ -17,7 +17,8 @@
 #' @slot duree="POSIXct" inherited from BilanMigration
 #' @method calcule
 #' @method graphe
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setClass(Class="BilanMigrationPar",
 		representation=representation(parquan="Refparquan",
 				parqual="Refparqual",
@@ -163,7 +164,7 @@ hbilanMigrationParstat=function(h,...){
 
 #' graphe method for BilanMigrationPar
 #' @param choix
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("graphe",signature=signature("BilanMigrationPar"),definition=function(objet,choix=1,...){ 
 			###########################
 			bilanMigrationPar<-objet # ne pas passer dessus en debug manuel

@@ -38,7 +38,7 @@ interface_BilanTaille = function()
     aGrint=gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
     aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
     aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
-    aCalc=gaction(handler=funCalculeBilanTaille,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_taille.2)
+    aCalc=gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_taille.2)
     toolbarlist <- list(
     	#	barchart=aBarchart, 
     		Calc=aCalc,

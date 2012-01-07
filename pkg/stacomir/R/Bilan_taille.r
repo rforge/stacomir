@@ -1,15 +1,16 @@
 # Nom fichier :        Bilantaille.R    (classe)
 
 #' class Bilan_taille
-#' #  Cette classe permet de charger les deux caracteristiques quantitatives de lot  : Taille et taille fourche.
-#'  Explication du traitement :
-#'  Dans les operations de piegeage, les anguilles peuvent etre passees au crible et separees en groupe
-#'  Ces groupes sont bases sur des courbes de selectivite en fonction de la maille, en gros la separation se fait au niveau de la L50 pour Arzal
-#'  Il est necessaire pour chaque taille individuelle l'appartenance à une caracteristique qualitative de lot (groupe de taille ex grandes anguillettes)
-#'  Cette appartenance est recherchee au niveau du lot par une requete  permettant l'affichage sur une meme ligne de deux caracteristiques differentes
-#'  Au niveau du lot pere si il existe, on fait une requete permettant de recuperer les caracteritiques qualitatives de lot du lot pere
-#'  Eventuellement, la taille a pu etre rentree au niveau du lot (pas du sous lot) sans qu'une appartenance à une caracteristique ne soit apparente.
-#'  Un traitement des donnees au chargement permet d'analyser si la taille correspond à un lot soit au niveau du lot soit au niveau du lot pere
+#' #  Bilan_taille class This class allows to load the following quantitative sample characteristics : full size and forked tail size and video size.
+#' @note 
+#' Explanation of treatment:
+#' Eels trapped are usually screened and separated into groups, this is not good practise but still in use
+#' The groups used in stacomi are based on the selectivity curve according to the mesh, roughly the separation takes place at the L50 for Arzal
+#' So individuals might refer to one size class  (eg the size group of large eels)
+#' This affiliation is sought at the subsample level by a query to display on a single line two different characteristics size and size group
+#' Once the data are loaded, the program checks if the size class group is indicated at the sample or susample level
+
+
 #' @slot data="data.frame"
 #' @slot dc="RefDC"
 #' @slot taxons="RefTaxon"
@@ -22,7 +23,7 @@
 #' @slot datefin="POSIXlt"
 #' @method connect
 #' @method charge
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setClass(Class="Bilan_taille",
 		representation= representation(data="data.frame",
@@ -47,7 +48,7 @@ setClass(Class="Bilan_taille",
 #' connect method for class Bilan_taille
 #' @returnType object of class Bilan_taille
 #' @return bilan_taille with requete field filled
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("connect",signature=signature("Bilan_taille"),definition=function(objet,h) {
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
 			objet@requete@baseODBC=baseODBC
@@ -111,7 +112,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 
 #objet=new("Bilan_taille")
 #' charge method for Bilan_taille
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("charge",signature=signature("Bilan_taille"),definition=function(objet) {
 			if (exists("refDC",envir_stacomi)) {
 				objet@dc<-get("refDC",envir_stacomi)
@@ -159,12 +160,15 @@ setMethod("charge",signature=signature("Bilan_taille"),definition=function(objet
 			
 			return(objet)
 		})
-
-#' funCalculeBilanTaille
+hcalculeBilanTaille<-function(h,...){
+	calcule(h$action)
+}
+#' Calcule method for BilanTaille
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-funCalculeBilanTaille=function(h,...){
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+setMethod("calcule",signature=signature("Bilan_taille"),definition=function(objet) {
+	bilan_taille<-objet
 	bilan_taille=charge(bilan_taille)
 	vue=bilan_taille@requete@query # on recupere le data.frame
 	vue$ope_dic_identifiant=as.factor(vue$ope_dic_identifiant)
@@ -197,12 +201,12 @@ funCalculeBilanTaille=function(h,...){
 	funout(get("msg",envir=envir_stacomi)$Bilan_taille.5)
 	funout(get("msg",envir=envir_stacomi)$Bilan_taille.6)	
 	enabled(toolbarlist[["Grint"]])<-TRUE
-}
+})
 
 #' fungraphInteract_tail uses the ggplot2usr interface to build the graphes
 #' @param h a handler
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fungraphInteract_tail = function(h,...) {
 	if(!exists(x="bilan_taille",envir=envir_stacomi)) funout(get("msg",envir=envir_stacomi)$Bilan_taille.7)
 	else bilan_taille=get("bilan_taille",envir=envir_stacomi)@data
@@ -217,7 +221,7 @@ fungraphInteract_tail = function(h,...) {
 #' function used to display a table of the data
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 funtableBilan_tail = function(h,...) {
 	bilan_taille=charge(bilan_taille)
 	vue=bilan_taille@requete@query # on recupere le data.frame

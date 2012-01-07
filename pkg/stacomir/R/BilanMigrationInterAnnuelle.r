@@ -25,7 +25,7 @@
 #'	\code{\linkS4class{BilanMigrationConditionEnv}}
 #'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 #'	\code{\linkS4class{BilanMigrationPar}}	
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
 						dc="RefDC",
@@ -47,7 +47,7 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 #' connect method for BilanMigrationInterannuelle class
 #' @returnType S4 class BilanMigrationInterannuelle
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 		definition=function(objet,...)

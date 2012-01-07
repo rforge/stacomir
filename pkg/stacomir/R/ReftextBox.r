@@ -1,7 +1,7 @@
 # Nom fichier :        RefTextBox   (classe)
 
 #' @title RefTextBox referencial class allows to a value within a glabel
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
 #' @slot checked a vectore
@@ -13,7 +13,7 @@ setClass(Class="RefTextBox",representation= representation(title="character",lab
 #' Loading method for ReTextBox referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefTextBox
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefTextBox")
 #' charge(objet,title="un titre",label="20")
@@ -23,7 +23,7 @@ setMethod("charge",signature=signature("RefTextBox"),definition=function(objet,t
 			return(objet)
 		})
 #' Choice method for ReTextBox referential objects
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #' objet=new("RefTextBox")
 #' objet<- charge(objet,title="le titre",label="20")

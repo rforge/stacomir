@@ -1,7 +1,7 @@
 # Nom fichier :        interface_poids_moyen.R    (interface)
 
 #' interface for Bilan_poids_moyen class 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_BilanPoidsMoyen = function()
 {
@@ -10,7 +10,7 @@ interface_BilanPoidsMoyen = function()
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
         bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
-    bilan_poids_moyen@liste=charge(objet=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label="choix de la categorie d'effectif")
+    bilan_poids_moyen@liste=charge(objet=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la catégorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
     group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -23,11 +23,7 @@ interface_BilanPoidsMoyen = function()
     # supprimer les widgets fils si ils existent (appel de la methode delete)
     # appeller la methode choix pour l'affichage du fils si il existe
     ### premiere toobar
-    aGraph=gaction(label="plot",icon="lines",handler=fungraphBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)
-    aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.3)
-    aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4)
-    toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
-    add(group, gmenu(toolbarlist))
+
     
     addSpring(group)
     graphes=ggraphics(width=800,height=650)
@@ -38,10 +34,15 @@ interface_BilanPoidsMoyen = function()
     choix(bilan_poids_moyen@dc,objetBilan=NULL,is.enabled=TRUE)
     choix(bilan_poids_moyen@anneedebut,
 			nomassign="refAnneeDebut",
-			titleFrame=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)
+			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3)#annee debut
     choix(bilan_poids_moyen@anneefin,
 			nomassign="refAnneeFin",
-			titleFrame=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.6)
+			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5)#annee fin
+	aGraph=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2,icon="lines",handler=fungraphBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)#load
+	aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.3)
+	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4)
+	toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
+	add(group, gmenu(toolbarlist))
     
     # Les methodes choix suivantes sont passees en cascade à l'interieur des methodes choix
     #choix(bilan_lot@taxons,is.enabled=FALSE)

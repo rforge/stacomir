@@ -3,7 +3,7 @@
 #' @title RefCoe referential class 
 #' @note Class loading coefficient of conversion between quantity (weights or volumes of glass eel) and numbers 
 #' between a starting and finishing date
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @slot datedebut="POSIXlt"
 #' @slot datefin="POSIXlt"
@@ -18,7 +18,7 @@ setClass(Class="RefCoe",representation=
 #' @returnType Object of class RefCoe
 #' @return Object of class RefCoe
 #' @note Bien que je ne comprenne pourquoi, la connexion fonctionne si on ne pointe pas le schéma
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
 #' objet@datefin<-strptime("01/01/1997",format="%d/%m/%Y")

@@ -17,7 +17,7 @@
 #' @param duree 
 #' @param taxon 
 #' @param stade 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 #mat <- matrix(1:6,3,2)

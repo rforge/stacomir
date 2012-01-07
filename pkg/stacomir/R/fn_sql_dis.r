@@ -4,7 +4,7 @@
 #' @param dateFin 
 #' @returnType character
 #' @return sql query 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fn_sql_dis<-function    (per_dis_identifiant,
                         dateDebut=as.Date(duree[min(index)]),

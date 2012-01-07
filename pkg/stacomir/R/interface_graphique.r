@@ -13,7 +13,7 @@
 #' @param h 
 #' @param ...
 #' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hx11 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 hDF=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
@@ -91,7 +91,7 @@ hBilanEspeces=function(h,...){
 #' @note gr_interface is copied by stacomi into envir_stacomi.
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 
 husr=function(h,...){
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
@@ -184,7 +184,7 @@ hx11=function(h,...){
 
 #' Function that loads the loginwindow, tests connection, and then destroys the window
 #' @param baseODBC the ODBC connection chain contains user and password
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connexion and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
@@ -233,7 +233,7 @@ stacomi=function(gr_interface=TRUE){
 }
 
 #' lancement du programme, cette fonction recupere d'abord les chemins ODBC et le repertoire de travail à partir du fichier XML
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_graphique=function(){
 	msg=get("msg",envir=envir_stacomi) # appel dans chaque sous fonction

@@ -2,7 +2,7 @@
 # pour le developpement load("devt.Rdata")
 # chargement des classes
 #' interface for BilanMigrationPar class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_BilanMigrationPar = function()
 {

@@ -1,7 +1,7 @@
 # Nom fichier :        RefChoix   (classe)
 
 #' @title RefChoix referencial class allows to choose within several values with radiobuttons
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot listechoix="character" a character vector giving possible choices
 #' @slot label="character" the title of the box giving the possible choices
 #' @slot selected="integer"  the initial selected value (as an index) first=1 used in gradio
@@ -13,7 +13,7 @@ setClass(Class="RefChoix",representation= representation(listechoix="character",
 #' Loading method for Rechoix referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefChoix
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' #' @expamples 
 #'  objet=new("RefChoix")
 #' charge(objet,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
@@ -24,7 +24,7 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(objet,vec
 			return(objet)
 		})
 #' Choice method for Rechoix referential objects
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefChoix")
 #'  objet<-charge(objet,vecteur=c("oui","non"),label="essai",selected=as.integer(1))

@@ -6,7 +6,7 @@
 #' @param taxon 
 #' @param stade 
 #' @param stations 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fungraph_env=function(tableau,duree,taxon,stade,stations){
 	bilanMigrationConditionEnv@bilanMigration@dc<-get("refDC",envir_stacomi)

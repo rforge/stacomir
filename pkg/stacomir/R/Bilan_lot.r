@@ -13,7 +13,7 @@
 #' @name Bilan_lot
 #' @title Bilan_lot Bilan class calls the content of the table of characteristics of lot
 #' @note This class is displayed by interface_bilan_lot
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @slot dc="RefDC"
 #' @slot taxons="RefTaxon"
@@ -44,7 +44,7 @@ setClass(Class="Bilan_lot",
 #' connect method for Bilan_lot
 #' @return An object of class bilan_lot Bilan_lot
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h) {
 #  construit une requete ODBCwheredate
@@ -69,7 +69,7 @@ setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h
 #' charge method for Bilan_lot class
 #' @returnType an instance for class Bilan_lot
 #' @return Bilan_lot with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 #  objet<-bilan_lot
 setMethod("charge",signature=signature("Bilan_lot"),definition=function(objet,h) {
@@ -124,7 +124,7 @@ funboxBilan_lot = function(h,...) {
 #' fungraphInteract_lot calls the ggplotusr interface to draw plots
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fungraphInteract_lot = function(h,...) {
 	bilan_lot=charge(bilan_lot)
@@ -172,7 +172,7 @@ fungraphInteract_lot = function(h,...) {
 #' funtableBilan_lot shows a table of results in gdf
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funtableBilan_lot = function(h,...) {
 	bilan_lot=charge(bilan_lot)

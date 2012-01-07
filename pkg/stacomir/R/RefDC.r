@@ -2,7 +2,7 @@
 
 #' @title RefDC referential class 
 #' @note Class to load DC
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot dc_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot data="data.frame"
@@ -15,7 +15,7 @@ setClass(Class="RefDC",representation=
 #' Referential class RefDC loads the counting devices of the control station
 #' @returnType Object of class RefDC
 #' @return Object of class RefDC
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 			requete=new("RequeteODBC")
 			requete@baseODBC=baseODBC
@@ -46,12 +46,13 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 			return(objet)
 		})
 #' choice method for RefDC
-#' @note la methode choix à pour arguments un objet Bilan car le RefDC est appelle depuis un objet Bilan(ex Bilan_lot) 
-#' par defaut la valeur est nulle, mais si il existe la methode appelle le widget suivant (taxon) et le charge en fonction du choix fait pour RefDC
-#' a l'aide de la methode charge_sans_fitre de l'objet RefStade_filtre qui herite de RefStades
-#' @param objetBilan un objet bilan
+#' @note   The choix method has for arguments a report (bilan) object
+#'  (e.g) is called from a report Bilan(e.g Bilan_lot).
+#'   By default,  the value of the objetbilan is null.
+#'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
+#' and fills it with the method \link charge_avec_filtre #' @param objetBilan un objet bilan
 #' @param is.enabled a boolean indincating # see if deprecated...
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples \dontrun{ win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' objet=new("RefDC")

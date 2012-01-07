@@ -5,7 +5,7 @@
 #TODO  selection de plusieurs caracteristiques
 
 #' @title Refpar referential class choose a parameter
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame" the list of parameters
 #' @expamples objet=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
@@ -13,7 +13,7 @@ setClass(Class="Refpar",representation= representation(data="data.frame"))
 #' Loading method for Repar referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("Refpar")
 #' charge(objet)
@@ -29,7 +29,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 #' Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("Refpar")
 #' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
@@ -55,7 +55,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
 #' @note this method choix is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples  
 #'  objet=new("Refpar")
 #' win=gwindow()

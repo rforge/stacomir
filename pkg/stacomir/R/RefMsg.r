@@ -6,7 +6,7 @@
 # Date de creation :   31/03/2008 17:21:30
 
 #' @title Refstades referential class to load message according to the langage chosen
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @expamples objet=new("RefMsg")
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
@@ -14,7 +14,7 @@ setClass(Class="RefMsg",representation= representation(messager="data.frame",mes
 #' loads the common table ts_messager_msr
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefMsg")
 #'  charge(objet)
@@ -29,7 +29,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 #' Loading method for RefMsg referential objects searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @exportMethod
 #'  objet=new("RefMsg")
 #'  charge_avec_filtre(objet,lang='French')
@@ -48,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @exportMethod
 #'  objet=new("RefMsg")
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(objet) {

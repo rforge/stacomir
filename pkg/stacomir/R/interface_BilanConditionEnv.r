@@ -1,7 +1,7 @@
 # Nom fichier :        interface_BilanConditionEnv    (classe)
 
 #' Interface for class conditionEnv
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_ConditionEnv = function()
 {

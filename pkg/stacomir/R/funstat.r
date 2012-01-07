@@ -8,7 +8,7 @@
 #' @param DC 
 #' @returnType data.frame
 #' @return resum
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funstat=function(tableau,duree,taxon,stade,DC){
 	funout(get("msg",envir=envir_stacomi)$funstat.1)

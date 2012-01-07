@@ -2,7 +2,7 @@
 #' fn_EcritBilanJournier writes the daily migration in the t_bilanmigrationjournalier_bjo table
 #' @note the user is asked whether or not he wants to overwrite data, if no data are present in the database, the import is done anyway
 #' @param bilanMigration 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fn_EcritBilanJournalier<-function(bilanMigration){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau

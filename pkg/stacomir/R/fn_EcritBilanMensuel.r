@@ -1,4 +1,9 @@
-#' Not fully developped no suppression
+#' This writes monthly data in t_bilanmensuel_mens table
+#' @note suppresses the data first
+#' @param bilanMigration,resum 
+#' @description Launched by fun_EcritBilanJournalier
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
 	t_bilanmigrationmensuel_bme=killfactor(

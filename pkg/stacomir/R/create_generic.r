@@ -7,7 +7,7 @@
 setGeneric("choix",def=function(objet,...) standardGeneric("choix"))
 setGeneric("charge",def=function(objet,...) standardGeneric("charge"))
 setGeneric("charge_avec_filtre",def=function(objet,...) standardGeneric("charge_avec_filtre"))
-setGeneric("connect",def=function(objet,...) standardGeneric("connect"))
+#setGeneric("connect",def=function(objet,...) standardGeneric("connect")) # package stacomirtools
 setGeneric("chargecomplement",def=function(objet,...) standardGeneric("chargecomplement"))
 setGeneric("calcule",def=function(objet,...) standardGeneric("calcule"))
 setGeneric("supprime",def=function(objet,...) standardGeneric("supprime"))

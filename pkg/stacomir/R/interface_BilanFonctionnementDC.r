@@ -2,7 +2,7 @@
 
 
 #' interface for BilanFonctionnementDC class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 interface_BilanFonctionnementDC = function()
 {
     fonctionnementDC=new("BilanFonctionnementDC")

@@ -1,7 +1,7 @@
 # Nom fichier :        RefStades   (classe)
 
 #' @title Refstades referential class to load and choose the list of stage
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @expamples objet=new("RefStades")
 setClass(Class="RefStades",representation=representation(data="data.frame") )
@@ -9,7 +9,7 @@ setClass(Class="RefStades",representation=representation(data="data.frame") )
 #' Loading method for RefStades referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefStades
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefStades")
 #'  charge(objet)
@@ -23,7 +23,7 @@ setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 #' Loading method for RefStades referential objects searching only those stages existing for a DC and a Taxon
 #' @returnType S4 object
 #' @return An S4 object of class RefStades
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -48,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 		})
 #' Choice method for RefStades referential objects
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefStades")
 #' win=gwindow()

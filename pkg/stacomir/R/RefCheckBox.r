@@ -1,7 +1,7 @@
 # Nom fichier :        RefCheckBox   (classe)
 
 #' @title RefCheckBox referencial class allows to choose for several parms with checkbox
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
 #' @slot checked a vectore
@@ -14,7 +14,7 @@ setClass(Class="RefCheckBox",representation= representation(title="character",la
 #' Loading method for ReCheckBox referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefCheckBox
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #'  objet=new("RefCheckBox")
 #' charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
@@ -26,7 +26,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,
 			return(objet)
 		})
 #' Choice method for ReCheckBox referential objects
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples 
 #' objet=new("RefCheckBox")
 #' objet<- charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))

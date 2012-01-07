@@ -14,7 +14,7 @@
 #' @param duree 
 #' @returnType data.frame
 #' @return tableau
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funtraitement_poids=function(tableau,duree) { 
 	index=tableau$No.pas+1

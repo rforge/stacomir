@@ -6,14 +6,14 @@
 # Date de creation :   31/03/2008 17:21:30
 
 #' @title Refstades referential class to load and choose the list of taxa
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot data="data.frame"
 #' @expamples \dontrun {objet=new("RefTaxon")}
 setClass(Class="RefTaxon",representation= representation(data="data.frame" ))
 #' Loading method for RefTaxon referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefTaxon
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples \dontrun {
 #'  objet=new("RefTaxon")
 #'  charge(objet)}
@@ -28,7 +28,7 @@ setMethod("charge",signature=signature("RefTaxon"),definition=function(objet) {
 #' Loading method for RefTaxon referential objects searching only those stages existing for a DC and a Taxon
 #' @returnType S4 object
 #' @return An S4 object of class RefTaxon
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @exportMethod charge_avec_filtre
 #' @expamples \dontrun {
 #'  dc_selectionne=6
@@ -50,7 +50,7 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 			return(objet)
 		})
 #' Choice method for Reftaxon referential objects
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples  \dontrun {
 #'  objet=new("RefTaxon")
 #' win=gwindow()
