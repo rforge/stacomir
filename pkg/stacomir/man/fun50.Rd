@@ -12,6 +12,9 @@
 \value{
   d50
 }
+\seealso{
+	\code{\linkS4class{Bilan_stades_pigm}}	
+}
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}
 }
