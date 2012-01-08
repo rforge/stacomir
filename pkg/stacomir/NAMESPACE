@@ -36,7 +36,6 @@ exportClasses(
      "BilanMigrationConditionEnv",
      "BilanMigrationInterAnnuelle",
      "BilanMigrationPar",
-     "ConnexionODBC",
      "PasDeTemps",
      "PasDeTempsChar",
      "PasDeTempsJournalier",
@@ -56,8 +55,5 @@ exportClasses(
      "RefStades",
      "RefStationMesure",
      "RefTaxon",
-     "RefTextBox",
-     "RequeteODBC",
-     "RequeteODBCwhere",
-     "RequeteODBCwheredate" 
+     "RefTextBox"
 )
