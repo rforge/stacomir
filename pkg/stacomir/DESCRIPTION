@@ -5,8 +5,9 @@ Version: 0.4
 Date: 2012-01-08
 Author: Cedric Briand <cedric.briand@lavilaine.com>
 Maintainer: Cedric Briand <cedric.briand@lavilaine.com>
-database to describe fish migrations.It is a part of the STACOMI project
-developed in France to centralize data obtained by fishway control devices.
+Graphical outputs and treatment for a database of fishway monitoring. It is a part of the STACOMI project
+developed in France by the ONEMA institute to centralize data obtained by fishway control devices. Version 0.4 is now available in
+english and spanish and could be translated in other languages. \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
 License: GPL
 Collate:
     'utilitaires.r'
