@@ -1,8 +1,8 @@
 Package: stacomirtools
 Type: Package
 Title: stacomi ODBC connexion class and ggplot2 graphical interface for beginners
-Version: 0.2.36
-Date: 2012-01-04
+Version: 0.2
+Date: 2012-01-08
 Author: Cedric Briand
 Maintainer: Cedric Briand<cedric.briand00@gmail.com>
 Description: (state=development) gWidget graphical interface to the
