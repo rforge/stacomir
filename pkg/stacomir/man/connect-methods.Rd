@@ -3,22 +3,20 @@
 \alias{connect,RequeteODBC-method}
 \alias{connect,RequeteODBCwhere-method}
 \alias{connect,RequeteODBCwheredate-method}
-\title{ Methods for Function connect}
+\title{ connect method for referential and bilan class}
 \description{
 see individual .r files for help and examples
+  connect method loads a request to the database and
+  returns either an error or a data.frame
 }
 \section{Methods}{
 \describe{
-\item{\code{signature(objet = "ConnexionODBC")}}{connect an odbc database,and eventually leaves it open for further queries,
-the connexion may send message in the native language if stacomiR package is in use}
-\item{\code{signature(objet = "RequeteODBC")}}{ connect an odbc database,performs an sql request}
-\item{\code{signature(objet = "RequeteODBCwhere")}}{ connect an odbc database,performs an sql request with where clause}
-\item{\code{signature(objet = "RequeteODBCwheredate")}}{connect an odbc database,performs an sql request with where clause for an interval }
+\item{\code{signature(objet = "BilanMigrationInterannuelle")}}
+\item{\code{signature(objet = "BilanConditionEnv")}}
+\item{\code{signature(objet = "Bilan_stades_pigm")}}
+\item{\code{signature(objet = "Bilan_taille")}}
+\item{\code{signature(objet = "Bilan_Poids_Moyen")}}
+\item{\code{signature(objet = "BilanEspeces")}}
 }}
-\keyword{methods}
-\examples{
-## 
-#objet<-new("RequeteODBCwhere")
-#connect(objet)
-}
 
+\keyword{methods}
