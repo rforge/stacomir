@@ -5,8 +5,7 @@ Version: 0.2
 Date: 2012-01-08
 Author: Cedric Briand
 Maintainer: Cedric Briand<cedric.briand00@gmail.com>
-Description: (state=development) gWidget graphical interface to the
-    ggplot2 package see http://had.co.nz/ggplot2/, also S4 class wrappers
+Description: gWidget graphical interface to the ggplot2 package see http://had.co.nz/ggplot2/, also S4 class wrappers
 	for odbc connexion.
 License: GPL (>= 2)
 Collate:
