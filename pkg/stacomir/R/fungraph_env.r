@@ -1,11 +1,19 @@
 # Nom fichier :        fungraph_env.R
 
-#' graph function for BilanMigrationEnv
-#' @param tableau 
-#' @param duree 
-#' @param taxon 
-#' @param stade 
-#' @param stations 
+#' Function for class BilanMigrationEnv drawing both the response of
+#' environment variables...
+#' 
+#' graph function for BilanMigrationEnv, draws both the response of environment
+#' variables (temperature, moon phases...) and the migration for a species and
+#' a stage
+#' 
+#' 
+#' @usage fungraph_env(tableau, duree, taxon, stade, stations)
+#' @param tableau data issued from a bilanMigration
+#' @param duree a vector of class POSIXt
+#' @param taxon the species
+#' @param stade the stage
+#' @param stations one or several measure stations
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fungraph_env=function(tableau,duree,taxon,stade,stations){

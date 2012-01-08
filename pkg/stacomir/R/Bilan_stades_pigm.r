@@ -106,13 +106,13 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 											+ stades$val_libelle))
 					dates<-sort(unique(stades$ope_date_debut))
 					tablestades<-tab2df(tablestades) # fonction developpee dans utilitaires
-					if ("VA"%in%dimnames(tablestades)){
+					if ("VA"%in%dimnames(tablestades)[[2]]){
 						tablestades$VB=tablestades$VB+tablestades$VA
 						tablestades=tablestades[,-c("VA")]
 					}
-					if ("VIA4"%in%dimnames(tablestades)){
+					if ("VIA4"%in%dimnames(tablestades)[[2]]){
 						tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
-						tablestades=tablestades[,-"VIA4"]
+						tablestades=tablestades[,-match("VIA4",dimnames(tablestades)[[2]])]
 					}
 					dimnames(tablestades) <- list(as.character(dates),
 							c("VB","VIA0","VIA1","VIA2","VIA3"))
@@ -311,21 +311,41 @@ fun50<-function(obj,objc){
 	d50<-obj[objc>0.5][1]
 	return(d50)
 }
-#' fundist =fonction pour le calcul de la mediane de la distribution des donction pigmentaires
-#' @note les fonctions pigmentaires ne sont pas des fonctions statistiques standard,
-#' le calcul du 50% de la distribution est fait à l'aide de fun50
-#' cette fonction utilise fnstade pour calculer les valeurs des temps pigmentaires sur une echelle reguliere (phicum)
-#' @param lmax parametre d'echelle de la fonction graphique, voir fnstades
-#' @param graph logical, on peut voir les courbes en faisant graph = TRUE 
-#' @expamples 
-#' #not run
+#' fundist =function to calculate the median of the distribution of pigment
+#' stages
+#' 
+#' 
+#' 
+#' @usage fundist(Vparm, phicum, graph = TRUE, lmax = 1)
+#' @param lmax scale parameterof the graphical function see fnstades
+#' @param graph logical, to see the curves type graph = TRUE
+#' @note pigment stage functions are not standard statistical distribution,
+#' calculating where 50% of the distribution lies is done with fun50 this
+#' function uses \link{fnstade} to calculate the values of pigment times on a
+#' regular scale (phicum)
+#' @examples
+#' 
+#' \dontrun{
+#' Vparm<-list()
+#'  below param for briand et al.,2005 pigmentation function in glass eel
+#' Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
+#' Vparm$pigment_stage$p2<-0.835
+#' Vparm$pigment_stage$p3<-1.56
+#' Vparm$pigment_stage$p4<-3.682
+#' Vparm$pigmentation$teta<- 30 # bounding parameters for beta function
+#' Vparm$pigmentation$sigma<-40 # bounding parameters for beta function
+#' Vparm$pigmentation$sigma2<--5 # bounding parameters for beta function
+#' Vparm$pigmentation$p5<- 4.566 # param for beta function
+#' Vparm$pigmentation$p6<-8.141
+#' Vparm$pigmentation$p7<-0.071 # param for beta function
+#' Vparm$pigmentation$p8<-0.426
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=FALSE,lmax=1)
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=1)
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=0)
-#' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
+#' plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
 #' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[2]]),col="firebrick") 
-#' #end not run
-
+#' }
+#' 
 fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VB=fnstade(par1=Vparm$pigment_stage[[1]],VB=TRUE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VBc=cumsum(VB$y)/sum(VB$y)  # surface

@@ -2,22 +2,21 @@
 # Projet :             calcmig/fonctions
 
 # Description :       graph pour bilan migration autres que civelles
-# Data needed
-# Packages needed
-# remarques
-#
-#--------------------------------
-#  graphs 
-#---------------------------------
 
 
 #' Function for BilanMigration graphes including numbers DF DC operations
-#' @param bilanMigration 
-#' @param tableau 
-#' @param duree 
-#' @param taxon 
-#' @param stade 
+#' 
+#' This graph is for species other than glass eel
+#' 
+#' 
+#' @usage fungraph(bilanMigration, tableau, duree, taxon, stade)
+#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param table=tableau a data frame with the results
+#' @param duree a vector POSIXt
+#' @param taxon the species
+#' @param stade the stage
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+
 #' @export
 fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 #mat <- matrix(1:6,3,2)

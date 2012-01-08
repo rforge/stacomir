@@ -3,12 +3,19 @@
 # Description :       graph pour bilan migration journalier civelles
 
 
-#' Graph function for glass eel migration. Differs from fungraph as it does not draw the ggplot graph for month
-#' @param bilanMigration 
-#' @param table=tableau 
-#' @param duree 
-#' @param taxon 
-#' @param stade 
+#' Graph function for glass eel migration. Differs from fungraph as it does not
+#' draw the ggplot graph for month
+#' 
+#' This graph will also plot numbers and bars according to whether the glass
+#' eel have been counted through weight or numbers
+#' 
+#' 
+#' @usage fungraph_civelle(bilanMigration, table, duree, taxon, stade)
+#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param table=tableau a data frame with the results
+#' @param duree a vector POSIXt
+#' @param taxon the species
+#' @param stade the stage
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
