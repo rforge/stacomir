@@ -6,7 +6,6 @@ exportMethods(
     "chargecomplement",
     "choix",
     "coerce",
-    "coerce<-",
     "connect",
     "currentDateDebut",
     "currentDateFin",
