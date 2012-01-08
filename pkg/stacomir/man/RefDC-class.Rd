@@ -30,9 +30,8 @@ Objects can be created by calls of the form \code{new("RefDC", dc_selectionne=in
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
-\author{cedric.briand@lavilaine.com}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

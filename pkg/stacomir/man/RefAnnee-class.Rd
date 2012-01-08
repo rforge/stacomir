@@ -24,7 +24,7 @@ Objects can be created by calls of the form \code{new("RefAnnee", data=data.fram
 	 }
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 %\note{ ~~further notes~~ }
 
 % ~Make other sections like Warning with \section{Warning }{....} ~

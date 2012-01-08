@@ -23,7 +23,6 @@ Objects can be created by calls of the form \code{new("Refperiode", ...)}.
 
 \examples{
 showClass("Refperiode")
-new("refperiode")
-see .r files for further examples
+new("Refperiode")
 }
 \keyword{classes}

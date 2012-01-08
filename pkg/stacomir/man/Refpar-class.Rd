@@ -26,7 +26,7 @@ Objects can be created by calls of the form \code{new("Refpar", data)}.
     \item{choix}{\code{signature(objet = "Refpar")}: Enables to the user to select a parameter}
 	 }
 }
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}
@@ -44,7 +44,7 @@ Objects can be created by calls of the form \code{new("Refpar", data)}.
 	\code{\linkS4class{RefStationMesure}}
 	\code{\linkS4class{RefTaxon}}																				 
 }
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
 \examples{
 showClass("Refpar")

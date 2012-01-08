@@ -27,8 +27,7 @@ Objects can be created by calls of the form \code{new("RefListe", listechoix, la
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

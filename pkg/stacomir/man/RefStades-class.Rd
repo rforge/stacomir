@@ -26,7 +26,6 @@ Objects can be created by calls of the form \code{new("RefStades", data="data.fr
     \item{choix}{\code{signature(objet = "RefStades")}: Enables to the user to select the phase}
 	 }
 }
-\author{cedric.briand@lavilaine.com}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}
@@ -44,7 +43,7 @@ Objects can be created by calls of the form \code{new("RefStades", data="data.fr
 	\code{\linkS4class{RefStationMesure}}
 	\code{\linkS4class{RefTaxon}}																				 
 }
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
 \examples{
 showClass("RefStades")

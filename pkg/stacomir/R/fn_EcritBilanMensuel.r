@@ -1,7 +1,11 @@
 #' This writes monthly data in t_bilanmensuel_mens table
-#' @note suppresses the data first
-#' @param bilanMigration,resum 
-#' @description Launched by fun_EcritBilanJournalier
+#' 
+#' Launched by fun_EcritBilanJournalier
+#' 
+#' 
+#' @usage fn_EcritBilanMensuel(bilanMigration, resum)
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
+#' @param resum data frame with summary per month
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){

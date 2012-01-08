@@ -7,7 +7,6 @@
 
 \title{Class "Bilan_taille" Bilan class }
 \description{Bilan_taille class This class allows to load the following quantitative sample characteristics : full size, mostly used for yellow eels.}
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Bilan_taille", ...)}

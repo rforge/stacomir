@@ -34,9 +34,8 @@ Class \code{"\linkS4class{Refpar}"}, directly.
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
-\author{cedric.briand@lavilaine.com}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

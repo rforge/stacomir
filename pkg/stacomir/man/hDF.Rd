@@ -1,18 +1,29 @@
 \name{hDF}
-\title{handler function used by the main interface...}
-\usage{hDF(h, ...)}
-\description{handler function used by the main interface}
-\alias{hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv,}
-\alias{hBilanMigrationPar,}
+\alias{h0,}
 \alias{hBilanConditionEnv,}
 \alias{hBilanLots,}
-\alias{hTail,}
+\alias{hBilanMigrationPar,}
+\alias{hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv,}
+\alias{hDF}
+\alias{hhelp,}
 \alias{hpds,}
 \alias{hSt,}
+\alias{hTail,}
 \alias{htodo,}
-\alias{hhelp,}
-\alias{h0,}
 \alias{hx11}
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
-\arguments{\item{h}{}
-\item{...}{}}
+\title{handler function used by the main interface}
+\usage{
+  hDF(h, ...)
+}
+\arguments{
+  \item{h}{}
+
+  \item{...}{}
+}
+\description{
+  handler function used by the main interface
+}
+\author{
+  Cedric Briand \email{cedric.briand00@gmail.com}
+}
+

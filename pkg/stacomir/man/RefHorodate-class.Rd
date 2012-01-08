@@ -31,7 +31,7 @@ Objects can be created by calls of the form \code{new("RefHorodate", ...)}.
 	 }
 }
 
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand00@gmail.com}}
 
 \seealso{
     Other referential classes

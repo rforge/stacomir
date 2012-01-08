@@ -50,7 +50,7 @@ Objects can be created by calls of the form \code{new("PasDeTemps", dateDebut="P
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
 \seealso{
 	\code{\linkS4class{PasDeTempsJournalier}}

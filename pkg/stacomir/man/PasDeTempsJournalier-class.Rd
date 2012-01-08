@@ -33,7 +33,7 @@ Class \code{"\linkS4class{PasDeTemps}"}, directly.
 	 }
 }
 
-\author{cedric.briand@lavilaine.com}
+\author{cedric.briand00@gmail.com}
 
 \seealso{
 	\code{\linkS4class{PasDeTemps}}

@@ -1,5 +1,13 @@
 \name{libraries}
 \alias{libraries}
-\title{function to call and load the libraries used in stacomi...}
-\description{function to call and load the libraries used in stacomi}
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\title{function to call and load the libraries used in stacomi}
+\usage{
+  libraries()
+}
+\description{
+  function to call and load the libraries used in stacomi
+}
+\author{
+  Cedric Briand \email{cedric.briand00@gmail.com}
+}
+

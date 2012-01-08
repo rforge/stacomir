@@ -1,5 +1,4 @@
 \name{Bilan_poids_moyen-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{Bilan_poids_moyen-class}
 \alias{charge,Bilan_poids_moyen-method}
