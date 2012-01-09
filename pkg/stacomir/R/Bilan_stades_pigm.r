@@ -50,6 +50,8 @@ setClass(Class="Bilan_stades_pigm",
 		))
 #
 #' connect method for Bilan_stades_pigm
+#' @note will try to get data for the temperature (refstation) only if retrocalcul is checked
+#'  by default it is note when lanching
 #' @return An object of class Bilan_stades_pigm
 #' @param h a handler
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
@@ -78,82 +80,102 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				funout(paste("Attention il peut y avoir plusieurs lots a la meme date, et certains stades sont fait sans lotpere (ex taille-poids-stade)\n"))
 				choixpere=select.list(choixpere,preselect="date",multiple=FALSE,
 						title=paste("Regroupement des ech par lot pere ou par date ?"))
-				if (choixpere=="lotpere"){
-					tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
-											+ stades$val_libelle))
-					tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
-					# recuperation des dates correspondant aux numeros d'operation
-					# le format de ftable n'est pas celui d'un data frame
-					indx<-match(sort(unique(stades$lot_pere)),stades$lot_pere)
-					dates<-stades[indx,"ope_date_debut"]
-					# creation d'une matrice qui somme les stades VA+VB et les stades VIA3 et VIA4
-					if ("VA"%in%dimnames(tablestades)){
-						tablestades$VB=tablestades$VB+tablestades$VA
-						tablestades=tablestades[,-c("VA")]
-					}
-					if ("VIA4"%in%dimnames(tablestades)){
-						tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
-						tablestades=tablestades[,-"VIA4"]
-					}
-					tablestades=tablestades[order(dates),]   # on reclasse par dates
-					print(cbind(tablestades, "lot_pere"=sort(unique(stades$lot_pere))[order(dates)]))
-					dates=sort(dates)
-					# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
-				} else if (choixpere=="date"){
-					tablestades=ftable(xtabs(stades$lot_effectif ~ stades$ope_date_debut +
-											+ stades$val_libelle))
-					print(xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
-											+ stades$val_libelle))
-					dates<-sort(unique(stades$ope_date_debut))
-					tablestades<-tab2df(tablestades) # fonction developpee dans utilitaires
-					if ("VA"%in%dimnames(tablestades)[[2]]){
-						tablestades$VB=tablestades$VB+tablestades$VA
-						tablestades=tablestades[,-c("VA")]
-					}
-					if ("VIA4"%in%dimnames(tablestades)[[2]]){
-						tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
-						tablestades=tablestades[,-match("VIA4",dimnames(tablestades)[[2]])]
-					}
-					dimnames(tablestades) <- list(as.character(dates),
-							c("VB","VIA0","VIA1","VIA2","VIA3"))
-				}
-# transformation en pourcentages
+				lst<-fntablestade(stades,choixpere)
+				dates<-lst[["dates"]]
+				tablestades<-lst[["tablestades"]]
+				# transformation en pourcentages
 				effectifs=rowSums(tablestades)
 				objet@effectifs<-effectifs
 				tablestades=tablestades/effectifs
 				objet@tablestades<-tablestades
 				objet@dates<-dates
 			} else funout("pas de donnees de stades pigmentaires",arret=TRUE)
-			
-			# chargement du tableau des temperatures
-			requete@datedebut=as.POSIXlt(strptime(objet@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
-			requete@colonnedebut="env_date_debut"
-			requete@colonnefin="env_date_fin"
-			requete@select=paste("SELECT", 
-					" env_date_debut,",
-					" env_date_fin,",
-					" env_methode_obtention,",
-					" val_libelle as env_val_identifiant,",
-					" env_valeur_quantitatif,",
-					" env_stm_identifiant",
-					" FROM ",sch,"tj_conditionenvironnementale_env",
-					" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
-			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
-			tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
-			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
-			requete<-connect(requete)
-			funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
-			if (nrow (requete@query)>0)	{
-				if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
-				objet@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
-				objet@datatempsal$salinite=as.numeric(objet@salinite@label)
-				colnames(objet@datatempsal)<-c("date","temperature","salinite")
-			} else {
-				funout("pas de donnees de temperature, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
+			if (objet@options@checked[2]){
+				# chargement du tableau des temperatures
+				requete@datedebut=as.POSIXlt(strptime(objet@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
+				requete@colonnedebut="env_date_debut"
+				requete@colonnefin="env_date_fin"
+				requete@select=paste("SELECT", 
+						" env_date_debut,",
+						" env_date_fin,",
+						" env_methode_obtention,",
+						" val_libelle as env_val_identifiant,",
+						" env_valeur_quantitatif,",
+						" env_stm_identifiant",
+						" FROM ",sch,"tj_conditionenvironnementale_env",
+						" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
+				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
+				tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
+				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
+				requete<-connect(requete)
+				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
+				if (nrow (requete@query)>0)	{
+					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
+					objet@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
+					objet@datatempsal$salinite=as.numeric(objet@salinite@label)
+					colnames(objet@datatempsal)<-c("date","temperature","salinite")
+				} else {
+					funout("pas de donnees de temperature, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
+				}
 			}
 			return(objet)
 		})
 
+#' function calculating a table with pigment stages VB to VIA3 from lines retreived from the database
+#' containing individual characteristic of glass eel
+#' 
+#' this function is called from within the charge method it was separated from the charge method
+#' as it it convenient to use elsewhere
+#' @usage fntablestade(stades,choixpere="lotpere")
+#' @param stades a data frame containing stage values
+#' @param choixlotpere either "date" or "lot_pere" the first will group pigment stage by date, 
+#' the second will allow to keep separate lines when several samples have been collected a given day   
+#' @value a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
+#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
+#' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
+fntablestade<-function(stades,choixpere="lotpere"){
+	if (choixpere=="lotpere"){
+		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
+								+ stades$val_libelle))
+		tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
+		# recuperation des dates correspondant aux numeros d'operation
+		# le format de ftable n'est pas celui d'un data frame
+		indx<-match(sort(unique(stades$lot_pere)),stades$lot_pere)
+		dates<-stades[indx,"ope_date_debut"]
+		# creation d'une matrice qui somme les stades VA+VB et les stades VIA3 et VIA4
+		if ("VA"%in%dimnames(tablestades)){
+			tablestades$VB=tablestades$VB+tablestades$VA
+			tablestades=tablestades[,-c("VA")]
+		}
+		if ("VIA4"%in%dimnames(tablestades)){
+			tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
+			tablestades=tablestades[,-"VIA4"]
+		}
+		tablestades=tablestades[order(dates),]   # on reclasse par dates
+		print(cbind(tablestades, "lot_pere"=sort(unique(stades$lot_pere))[order(dates)]))
+		dates=sort(dates)
+		# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
+	} else if (choixpere=="date"){
+		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$ope_date_debut +
+								+ stades$val_libelle))
+		print(xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
+								+ stades$val_libelle))
+		dates<-sort(unique(stades$ope_date_debut))
+		tablestades<-tab2df(tablestades) # fonction developpee dans utilitaires
+		if ("VA"%in%dimnames(tablestades)[[2]]){
+			tablestades$VB=tablestades$VB+tablestades$VA
+			tablestades=tablestades[,-c("VA")]
+		}
+		if ("VIA4"%in%dimnames(tablestades)[[2]]){
+			tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
+			tablestades=tablestades[,-match("VIA4",dimnames(tablestades)[[2]])]
+		}
+		dimnames(tablestades) <- list(as.character(dates),
+				c("VB","VIA0","VIA1","VIA2","VIA3"))
+	}
+	
+	return(list("tablestades"=tablestades,"dates"=dates))
+}		
 #' 
 #' @returnType class Bilan_stades_pigm
 #' @return Bilan_stades_pigm with slots filled with user choice
@@ -193,10 +215,12 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			} else {
 				# rien de toutes façons les choix par defaut sont copies dans envir_stacomi
 			} 
-			if (exists("refStationMesure",envir_stacomi)) {
-				objet@stationMesure<-get("refStationMesure",envir_stacomi)
-			} else {
-				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
+			if (objet@options@checked[2]){
+				if (exists("refStationMesure",envir_stacomi)) {
+					objet@stationMesure<-get("refStationMesure",envir_stacomi)
+				} else {
+					funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
+				}
 			}
 			objet<-connect(objet)			
 			return(objet)
@@ -405,8 +429,8 @@ funcalcbilan_stades_pigm<-function(h,...){
 	enabled(toolbarlist[["Graphgg"]])<-TRUE
 	assign("bilan_stades_pigm",bilan_stades_pigm,.GlobalEnv)
 }
-#' Fonction handler pour fungraphstades
-fungraphstadesh=function(h,...){
+#' handler function for fungraphstades
+hfungraphstades=function(h,...){
 	fungraphstades(
 			tablestades=bilan_stades_pigm@tablestades,
 			retrocalcul=bilan_stades_pigm@options@checked[2],
@@ -596,7 +620,7 @@ fungraphstades<-function(
 					curv[[strdates[j]]][[4]]$y+
 					curv[[strdates[j]]][[5]]$y
 			for (k in 5:1){
-						polygon(x=curv[[strdates[j]]][[k]]$x,
+				polygon(x=curv[[strdates[j]]][[k]]$x,
 						y=nrow(tablestades)-j+1+curvsum,
 						col=gray(5:1/6)[k],
 						lty=1,
@@ -720,7 +744,7 @@ interface_Bilan_stades_pigm = function()
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
 	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choix de la largeur des distributions",selected=as.integer(2))
-	bilan_stades_pigm@options<-charge(bilan_stades_pigm@options,title="options du graphique",labels=c("graphstades","retrocalcul","points","nb"),checked=c(TRUE,TRUE,TRUE,TRUE))
+	bilan_stades_pigm@options<-charge(bilan_stades_pigm@options,title="options du graphique",labels=c("graphstades","retrocalcul","points","nb"),checked=c(TRUE,FALSE,TRUE,TRUE))
 	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= "Valeur de la salinite moyenne, cliquer pour editer",label="15")
 	
 	quitte() # vidange de l'interface
@@ -750,7 +774,7 @@ interface_Bilan_stades_pigm = function()
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
 	aSetTitle=gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
-	aGraph=gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=fungraphstadesh,tooltip="Graphique Principal")
+	aGraph=gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
 	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
 	

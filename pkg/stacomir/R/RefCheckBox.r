@@ -42,7 +42,7 @@ setMethod("choix",signature=signature("RefCheckBox"),definition=function(objet) 
 					# car l'objet dans .GlobalEnv n'est pas à jour...
 					objet<-get("refCheckBox",envir_stacomi)
 				}
-				objet@checked[i]<-svalue(choix[[i]])
+				objet@checked[i]<-svalue(the_choice[[i]])
 				assign("refCheckBox",objet,envir_stacomi)
 				funout(paste("choix",objet@labels[i],"\n"))
 			}
@@ -50,9 +50,9 @@ setMethod("choix",signature=signature("RefCheckBox"),definition=function(objet) 
 			frame_check<<-gframe(objet@title)	
 			##=>selection de plusieurs caracteristiques
 			add(group,frame_check)
-			choix=list()
+			the_choice=list()
 			for(i in 1: length(objet@labels)){
-				choix[[i]]=gcheckbox(text=objet@labels[i], action=i,checked = objet@checked[i],container=frame_check,handler=hlist)
+				the_choice[[i]]=gcheckbox(text=objet@labels[i], action=i,checked = objet@checked[i],container=frame_check,handler=hlist)
 			}
 		})
 
