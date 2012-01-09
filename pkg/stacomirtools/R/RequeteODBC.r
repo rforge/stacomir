@@ -30,7 +30,7 @@ setClass(Class="RequeteODBC",
 #' odbcCloseAll()
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet) {     
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
-			worksanyway<-function(){
+			
 				msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
 				msg2<-"connexion trial :"
 				msg3<-"connexion impossible"
@@ -48,7 +48,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 					}
 					return(df)
 				}
-			}
+			
 			# The connection might already be opened, we will avoid to go through there !
 			if (is.null(objet@connexion)){ 
 				if (exists("envir_stacomi")){
@@ -61,11 +61,11 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 						msg6<-get("msg",envir=envir_stacomi)$RequeteODBC.6
 						verbose<-exists("showmerequest",envir=envir_stacomi)
 					} else {
-					worksanyway()
+					# msg not changed loaded at the beginning
 					verbose<-exists("showmerequest",envir=envir_stacomi)
 					}
 				} else {
-					worksanyway()
+					# msg not changed loaded at the beginning
 					verbose<-FALSE # cannot exist in envir_stacomi as envir_stacomi does not exists
 				}
 				if (length(objet@baseODBC)!=3)  {
