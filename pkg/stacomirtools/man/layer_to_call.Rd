@@ -1,6 +1,6 @@
 \name{layer_to_call}
 \alias{layer_to_call}
-\title{Function used to build layer calls and write print their formula...}
+\title{Function used to build layer calls and print their formula...}
 \usage{layer_to_call(layer_name, layer_type, position, param, aes)}
 \description{Function used to build layer calls and write print their formula}
 \details{transfers arguments " " into NULL and the others in variable of class call
