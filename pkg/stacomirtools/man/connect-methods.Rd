@@ -17,6 +17,7 @@ the connexion may send message in the native language if stacomiR package is in 
 }}
 \keyword{methods}
 \examples{
+ showMethods("connect")
 ## 
 #objet<-new("RequeteODBCwhere")
 #connect(objet)

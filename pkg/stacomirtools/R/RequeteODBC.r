@@ -30,7 +30,22 @@ setClass(Class="RequeteODBC",
 #' odbcCloseAll()
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet) {     
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
-			
+			if (exists("envir_stacomi")){
+				if (exists("msg",envir_stacomi)){
+					msg1<-get("msg",envir=envir_stacomi)$RequeteODBC.1
+					msg2<-get("msg",envir=envir_stacomi)$RequeteODBC.2
+					msg3<-get("msg",envir=envir_stacomi)$RequeteODBC.3
+					msg4<-get("msg",envir=envir_stacomi)$RequeteODBC.4
+					msg5<-get("msg",envir=envir_stacomi)$RequeteODBC.5
+					msg6<-get("msg",envir=envir_stacomi)$RequeteODBC.6
+					verbose<-exists("showmerequest",envir=envir_stacomi)
+				} else {
+					# msg not changed loaded at the beginning
+					verbose<-exists("showmerequest",envir=envir_stacomi)
+				}
+			} else {
+				# msg not changed loaded at the beginning
+				verbose<-FALSE # cannot exist in envir_stacomi as envir_stacomi does not exists
 				msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
 				msg2<-"connexion trial :"
 				msg3<-"connexion impossible"
@@ -48,26 +63,11 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 					}
 					return(df)
 				}
+			}
+
 			
 			# The connection might already be opened, we will avoid to go through there !
-			if (is.null(objet@connexion)){ 
-				if (exists("envir_stacomi")){
-					if (exists("msg",envir_stacomi)){
-						msg1<-get("msg",envir=envir_stacomi)$RequeteODBC.1
-						msg2<-get("msg",envir=envir_stacomi)$RequeteODBC.2
-						msg3<-get("msg",envir=envir_stacomi)$RequeteODBC.3
-						msg4<-get("msg",envir=envir_stacomi)$RequeteODBC.4
-						msg5<-get("msg",envir=envir_stacomi)$RequeteODBC.5
-						msg6<-get("msg",envir=envir_stacomi)$RequeteODBC.6
-						verbose<-exists("showmerequest",envir=envir_stacomi)
-					} else {
-					# msg not changed loaded at the beginning
-					verbose<-exists("showmerequest",envir=envir_stacomi)
-					}
-				} else {
-					# msg not changed loaded at the beginning
-					verbose<-FALSE # cannot exist in envir_stacomi as envir_stacomi does not exists
-				}
+			if (is.null(objet@connexion)){ 				
 				if (length(objet@baseODBC)!=3)  {
 					if (exists("baseODBC",envir=.GlobalEnv)) {
 						objet@baseODBC<-get("baseODBC",envir=.GlobalEnv)  
