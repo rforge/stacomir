@@ -64,7 +64,7 @@ The class uses temperature (from an abiotic measure station) and mean salinity t
 	\code{\linkS4class{BilanMigrationPar}}	
 	\code{\link{fnstade}}	
 }
-}
+
 
 \examples{
 showClass("Bilan_stades_pigm")

@@ -64,11 +64,16 @@ funtraitement_poids=function(tableau,duree) {
 	req@order_by<-"order by coe_date_debut"
 	req<-connect(req)
 	coe<-req@query
-	#annees bissextiles
+	coe$coe_date_debut
+	#annees bissextiles and missing data
 	if (length(coe$coe_valeur_coefficient)<length(tableau$Effectif_total.e)){
-		toto<-1:length(coe$coe_valeur_coefficient)
-		tableau$poids_depuis_effectifs<-tableau$Poids_total
-		tableau$poids_depuis_effectifs[toto]=tableau$Effectif_total.e[toto]/
+		if (sum(tableaupoids$Coef_conversion)>0){			
+		funout(get("msg",envir=envir_stacomi)$funtraitement_poids.3)#there are some coefficient but they are incomplete
+		warnings(get("msg",envir=envir_stacomi)$funtraitement_poids.3)
+		}
+		mtch<-match(as.character(coe$coe_date_debut),as.character(as.Date(round(duree,"day"))))
+		tableau$poids_depuis_effectifs<-0  
+		tableau[mtch,"poids_depuis_effectifs"]=tableau[mtch,"Effectif_total.e"]/
 				coe$coe_valeur_coefficient
 		#tableau$Coef_conversion.e[toto]<-coe$coe_valeur_coefficient
 	}   else {

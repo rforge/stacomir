@@ -7,27 +7,24 @@
 \alias{getRefHorodate,RefHorodate-method}
 \alias{setRefHorodate,RefHorodate-method}
 
-\title{Class "RefHorodate" ~~~ }
-\description{	 objet utilisee pour sa methode de chargement du choix dans la date
-dans fonctionnement DC, avec methode de affichage annee en cours et annee precedente
-de modifier facilement l'annee affichee par defaut en changeant decal
-horodate="POSIXt"
+\title{Class "RefHorodate"}
+\description{	choice of date with method to show current and previous year
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RefHorodate", ...)}.
-	 ~~ describe objects here ~~ 
+	  
 }
 \section{Slots}{
   \describe{
-    \item{\code{horodate}:}{Object of class \code{"POSIXt"} ~~ }
+    \item{\code{horodate}:}{Object of class \code{"POSIXt"} }
   }
 }
 \section{Methods}{
   \describe{
-    \item{choix}{\code{signature(objet = "RefHorodate")}: ... }
-    \item{getanneeprec}{\code{signature(objet = "RefHorodate")}: ... }
-    \item{getRefHorodate}{\code{signature(objet = "RefHorodate")}: ... }
-    \item{setRefHorodate}{\code{signature(objet = "RefHorodate")}: ... }
+    \item{choix}{\code{signature(objet = "RefHorodate")}: gui choice }
+    \item{getanneeprec}{\code{signature(objet = "RefHorodate")}: get previous year}
+    \item{getRefHorodate}{\code{signature(objet = "RefHorodate")}: get method for horodate }
+    \item{setRefHorodate}{\code{signature(objet = "RefHorodate")}: set method for horodate }
 	 }
 }
 

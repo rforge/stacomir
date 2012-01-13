@@ -10,16 +10,9 @@
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RefDC", dc_selectionne=integer(), ouvrage=integer(), data=data.frame())}.
 	 \describe{
-    \item{\code{dc_selectionne}:}{Object of class \code{"integer"} ~ The selected device}
-    \item{\code{ouvrage}:}{Object of class \code{"integer"} ~ The attached work}
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Datas concerning the control device}
-  }
-}
-\section{Slots}{
-	 \describe{
-    \item{\code{dc_selectionne}:}{Object of class \code{"integer"} ~ The selected device}
-    \item{\code{ouvrage}:}{Object of class \code{"integer"} ~ The attached work}
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Datas concerning the control device}
+    \item{\code{dc_selectionne}:}{Object of class \code{"integer"}The selected device}
+    \item{\code{ouvrage}:}{Object of class \code{"integer"}  The attached dam}
+    \item{\code{data}:}{Object of class \code{"data.frame"}  Datas concerning the control device}
   }
 }
 
