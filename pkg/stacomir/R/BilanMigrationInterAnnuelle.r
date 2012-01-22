@@ -193,7 +193,7 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 	newdat=newdat[order(newdat$jour),] # pour avoir les range sur l'ensemble des valeurs dispo et pas seult l'annee en cours
 	choix=select.list(choices=as.character(unique(dat$annee)[order(unique(dat$annee))]),
 			preselect=as.character(max(dat$annee)),
-					"choix annee",multiple=TRUE)
+			"choix annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")        
 	if (length(choix)>0) { 
 		# le layout pour l'affichage des graphiques
@@ -245,8 +245,8 @@ fundat=function(dat,timesplit=NULL)
 		dat=dat[,c("annee","jour","valeur")] 
 		dat$jour=trunc.POSIXt(dat$jour, units='days')
 		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
-
-
+		
+		
 		# ci dessous calcul des sommes par semaine mois... Comme trunk.POSIXt ou floor ne prend pas 
 		# la valeur week on est oblige de faire avec seq.POSIXt et calculer avec une boucle !
 		if (!is.null(timesplit)){
@@ -261,8 +261,8 @@ fundat=function(dat,timesplit=NULL)
 			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numérique
 			# ci dessous on remplace une double boucle par un truc plus rapide
 			for (j in 1:(length(seq_timesplit)-1)){
-						dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
-					}
+				dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
+			}
 			dat[dat$jour>=seq_timesplit[length(seq_timesplit)],timesplit]<-seq_timesplit[length(seq_timesplit)]
 			dat[,"interv"]<-paste(dat[,"annee"],dat[,timesplit]) # on veut les valeurs uniques par annee et timesplit
 			res<-tapply(dat$valeur,dat[,"interv"],sum,na.rm=TRUE)
@@ -283,7 +283,7 @@ fundat=function(dat,timesplit=NULL)
 			} # end for
 		}
 		# calcul des valeurs min et max et moyenne en fonction de la coupure (jour, semaine,quinzaine, mois)
-	
+		
 		maxdat<-tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE)
 		mindat<-tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE)
 		meandat<-tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE)
@@ -378,10 +378,15 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 			tmp[tmp$moyenne==0,"comp"]<-"0"
 			tmp$annee=as.factor(as.numeric(as.character(tmp$annee)))
 			newdat$comp<-NA
+			# for graphical reasons
 			g <- ggplot(tmp,aes_string(x=timesplit,y="valeur"))
 			g <- g+geom_crossbar(data=newdat,aes_string(x=timesplit, y="moyenne",ymin="mintab",ymax="maxtab"),fill="grey60",alpha=0.5,size=0.5)
 			g <- g+geom_crossbar(stat="identity",aes_string(ymin="valeur",ymax="valeur",col="comp"),fatten=2)
-			g <- g+scale_x_datetime(name=paste("mois"),major="month",minor=getvalue(new("Refperiode"),timesplit), format="%b",lim=as.POSIXct(c(trunc((min(tmp[tmp$com!="0",timesplit])),"month"),ceil((max(tmp[tmp$com!="0",timesplit])),"month")))) 
+			g <- g+scale_x_datetime(name=paste("mois"),major="month",minor=getvalue(new("Refperiode"),timesplit), format="%b",
+					#lim=as.POSIXct(c(trunc((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
+					#				ceil((max(tmp[tmp$com!="0",timesplit])),"month")+delai))
+			) 
+			# pb the limit truncs the value
 			g <- g+scale_y_continuous(name="effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
 			g <- g+scale_colour_manual(name=thechoix,value=cols)
@@ -431,7 +436,11 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 			g <- ggplot(tmp,aes_string(x=timesplit,y="valeur"))
 			g<-g+geom_bar(stat="identity",aes_string(y="valeur",fill="comp"),alpha=0.5)
 			g<-g+geom_pointrange(data=newdat,aes_string(x=timesplit, y="moyenne",ymin="mintab",ymax="maxtab"),alpha=1)
-			g <- g+scale_x_datetime(name=paste("mois"),major="month",minor=getvalue(new("Refperiode"),timesplit), format="%b",lim=as.POSIXct(c(trunc((min(tmp[tmp$com!="0",timesplit])),"month"),ceil((max(tmp[tmp$com!="0",timesplit])),"month")))) 
+			g <- g+scale_x_datetime(name=paste("mois"),major="month",minor=getvalue(new("Refperiode"),timesplit), 
+					format="%b",
+					#lim=as.POSIXct(c(trunc((min(tmp[tmp$com!="0",timesplit])),"month"),
+					#				ceil((max(tmp[tmp$com!="0",timesplit])),"month")))
+			) 
 			g <- g+scale_y_continuous(name="effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
 			g <- g+scale_fill_manual(name=choix,value=cols)
