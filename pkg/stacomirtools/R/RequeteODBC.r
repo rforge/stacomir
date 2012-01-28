@@ -42,6 +42,23 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 				} else {
 					# msg not changed loaded at the beginning
 					verbose<-exists("showmerequest",envir=envir_stacomi)
+					msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
+					msg2<-"connexion trial :"
+					msg3<-"connexion impossible"
+					msg4<-"connexion successfull"
+					msg5<-"request trial"
+					msg6<-"success"
+					funout<-function(text,arret=FALSE){
+						if(arret) stop(text) else print(text)
+						return(NULL)
+					}	
+					killfactor=function(df){
+						for (i in 1:ncol(df))
+						{
+							if(is.factor(df[,i])) df[,i]=as.character(df[,i])
+						}
+						return(df)
+					}
 				}
 			} else {
 				# msg not changed loaded at the beginning
