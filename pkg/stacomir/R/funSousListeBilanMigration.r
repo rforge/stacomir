@@ -368,11 +368,13 @@ funSousListeBilanMigration=function(bilanMigration) {
 			typeQte=as.character(rs$qte_libelle)
 			
 			
-			debut=max(debutOpe,debutPas) #vector
-			fin=pmin(finOpe,finPas)       #vector
+			debut<-debutOpe
+			fin<-finOpe
+			debut[debut<debutPas]<-debutPas
+			fin[fin>finPas]<-finPas
 			
 			# Repartition de l'effectif au prorata
-			quantite = quantite * as.double(difftime(fin,debut,units =  "secs")) / as.double(difftime(finOpe, debutOpe,units =  "secs"))
+			quantite = quantite * as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
 			
 			
 			#premiere boucle sur le type de quantite, poids resistivite...
