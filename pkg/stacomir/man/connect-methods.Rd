@@ -10,13 +10,20 @@ see individual .r files for help and examples
   returns either an error or a data.frame
 }
 \section{Methods}{
+
 \describe{
-\item{\code{signature(objet = "BilanMigrationInterannuelle")}}
-\item{\code{signature(objet = "BilanConditionEnv")}}
-\item{\code{signature(objet = "Bilan_stades_pigm")}{will try to get data for the temperature (refstation) only if retrocalcul is checked  by default it is note when lanching}}
-\item{\code{signature(objet = "Bilan_taille")}}
-\item{\code{signature(objet = "Bilan_Poids_Moyen")}}
-\item{\code{signature(objet = "BilanEspeces")}}
+
+\item{\code{signature(objet = "BilanMigrationInterannuelle")}}{}
+
+\item{\code{signature(objet = "BilanConditionEnv")}}{}
+
+\item{\code{signature(objet = "Bilan_stades_pigm")}}{will try to get data for the temperature (refstation) only if retrocalcul is checked  by default it is note when launching}
+
+\item{\code{signature(objet = "Bilan_taille")}}{}
+
+\item{\code{signature(objet = "Bilan_Poids_Moyen")}}{}
+
+\item{\code{signature(objet = "BilanEspeces")}}{}
 }}
 
 \keyword{methods}

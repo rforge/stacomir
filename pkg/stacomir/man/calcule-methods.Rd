@@ -17,9 +17,9 @@
 to be refined, performs both query and calculation, the calcul calls for \link{funBilanMigrationAnnuel}
 and \link{funSousListeBilanMigration} }
 
-\item{\code{signature(objet = "BilanMigrationConditionEnv")}}{ collects object assigned to \envir{envir_stacomi} and loads the \link{BilanConditionEnv} }
+\item{\code{signature(objet = "BilanMigrationConditionEnv")}}{ collects object assigned to environement \code{envir_stacomi} and loads the \link{BilanConditionEnv} }
 
-\item{\code{signature(objet = "BilanMigrationPar")}}{collects object assigned to \envir{envir_stacomi} and checks for validity}
+\item{\code{signature(objet = "BilanMigrationPar")}}{collects object assigned to environment \code{envir_stacomi} and checks for validity}
 
 \item{\code{signature(objet = "BilanTaille")}}{calls charge, does some computation on samples and subsamples and calls function funtraitementdate
 }}}
