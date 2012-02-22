@@ -38,10 +38,10 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC=baseODBC
 			requete@select=paste("SELECT DISTINCT ON (tax_rang) tax_code, tax_nom_latin, tax_nom_commun, tax_ntx_code, tax_tax_code", 
-					" FROM ",sch,"tg_dispositif_dis",
-					" JOIN ",sch,"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant",
 					" JOIN ref.tr_taxon_tax on lot_tax_code=tax_code",sep="")
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@order_by="ORDER BY tax_rang ASC"  

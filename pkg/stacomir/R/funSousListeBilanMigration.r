@@ -59,7 +59,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			# recherche des taux qui recoupent la periode du pas de temps
 			req@sql = paste(
 					" SELECT txe_date_debut, txe_date_fin, txe_valeur_taux " ,
-					" FROM   ",sch,"tj_tauxechappement_txe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_tauxechappement_txe " ,
 					" WHERE  txe_tax_code = '" , as.character(bilanMigration@taxons@data$tax_code) , "'" ,
 					" AND txe_std_code = '" , as.character(bilanMigration@stades@data$std_code) , "'" ,
 					" AND txe_ouv_identifiant ='" , as.character(bilanMigration@dc@ouvrage) , "'" ,     
@@ -136,7 +136,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			# recherche des coef qui recoupent la periode du pas de temps
 			req@sql = paste(" SELECT coe_date_debut, coe_date_fin, coe_valeur_coefficient, qte_libelle" ,
-					" FROM   ",sch,"tj_coefficientconversion_coe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe " ,
 					" INNER JOIN ref.tr_typequantitelot_qte ON coe_qte_code = qte_code" ,
 					" WHERE  coe_tax_code = '" , bilanMigration@taxons@data$tax_code , "'" ,
 					" AND coe_std_code = '" , bilanMigration@stades@data$std_code, "'" ,
@@ -240,8 +240,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 		# Calcul de la somme des effectifs
 		# On ne prend pas les echantillons
 		req@sql=paste(" SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif " ,
-				" FROM   ",sch,"t_operation_ope " ,
-				"        INNER JOIN ",sch,"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
+				" FROM   ",get("sch",envir=envir_stacomi),"t_operation_ope " ,
+				"        INNER JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
 				" WHERE  ope_dic_identifiant ='" , dcCode , "' ",
 				"        AND lot_effectif IS NOT NULL " ,
 				"        AND lot_lot_identifiant IS NULL " ,
@@ -343,8 +343,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 		# recherche des operations qui recoupent la periode du pas de temps
 		# On ne prend pas les echantillons
 		req@sql = paste( "SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, qte_libelle, SUM(lot_quantite) AS quantite " ,
-				" FROM   ",sch,"t_operation_ope " ,
-				"        INNER JOIN ",sch,"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
+				" FROM   ",get("sch",envir=envir_stacomi),"t_operation_ope " ,
+				"        INNER JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
 				"        INNER JOIN ref.tr_typequantitelot_qte ON lot_qte_code = qte_code" ,
 				" WHERE  ope_dic_identifiant ='" , dcCode , "' ",
 				"        AND lot_quantite IS NOT NULL " ,

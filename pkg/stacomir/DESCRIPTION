@@ -77,7 +77,6 @@ Collate:
     'setAs.r'
 LazyLoad: yes
 Depends:
-    XML,
     methods,
     proto,
     tcltk2,
@@ -93,4 +92,5 @@ Depends:
     Hmisc,
     stacomirtools,
     stringr,
-    svMisc
+    svMisc,
+    Rcmdr

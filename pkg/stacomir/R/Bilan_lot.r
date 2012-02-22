@@ -49,7 +49,7 @@ setClass(Class="Bilan_lot",
 setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h) {
 #  construit une requete ODBCwheredate
 			objet@requete@baseODBC=baseODBC
-			objet@requete@select= paste("SELECT * FROM ",sch,"vue_lot_ope_car",sep="")
+			objet@requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
 			objet@requete@colonnedebut="ope_date_debut"
 			objet@requete@colonnefin="ope_date_fin"
 			objet@requete@order_by="ORDER BY ope_date_debut"

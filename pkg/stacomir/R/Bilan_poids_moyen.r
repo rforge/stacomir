@@ -52,7 +52,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 					" ope_date_debut+(ope_date_fin-ope_date_debut)/2 as datemoy,",
 					" date_part('year', ope_date_debut) as annee,",
 					" date_part('month',ope_date_debut) as mois",
-					" FROM ",sch,"vue_lot_ope_car_qan",sep="")
+					" FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car_qan",sep="")
 			requete@and=paste(" AND ope_dic_identifiant=",objet@dc@dc_selectionne,
 					" AND std_libelle='civelle'",
 					ifelse(objet@liste@listechoix=="tous", "",paste(" AND  lot_effectif", objet@liste@listechoix)),
@@ -194,7 +194,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 			requete=new("RequeteODBC")
 			requete@baseODBC
 			requete@baseODBC=baseODBC
-			requete@sql=paste("COPY ",sch,"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
+			requete@sql=paste("COPY ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
 			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
 		}
 	}

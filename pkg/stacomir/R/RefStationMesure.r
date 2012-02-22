@@ -24,7 +24,7 @@ setMethod("charge",
         			requete=new("RequeteODBC")
         			requete@baseODBC=baseODBC
         			requete@sql= paste("SELECT stm_identifiant, stm_libelle, stm_sta_code, stm_par_code, stm_description",
-                    " FROM ",sch,"tj_stationmesure_stm", 
+                    " FROM ",get("sch",envir=envir_stacomi),"tj_stationmesure_stm", 
 					" ORDER BY stm_identifiant;",sep="")
         			requete@silent = TRUE;
         			requete<-connect(requete)    

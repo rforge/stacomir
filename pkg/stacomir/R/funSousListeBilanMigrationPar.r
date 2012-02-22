@@ -81,7 +81,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			# recherche des taux qui recoupent la periode du pas de temps
 			req@sql = paste(
 					" SELECT txe_date_debut, txe_date_fin, txe_valeur_taux " ,
-					" FROM   ",sch,"tj_tauxechappement_txe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_tauxechappement_txe " ,
 					" WHERE  txe_tax_code = '" , as.character(bilanMigrationPar@taxons@data$tax_code) , "'" ,
 					" AND txe_std_code = '" , as.character(bilanMigrationPar@stades@data$std_code) , "'" ,
 					" AND txe_ouv_identifiant ='" , as.character(bilanMigrationPar@dc@ouvrage) , "'" ,     
@@ -155,7 +155,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			
 			# recherche des coef qui recoupent la periode du pas de temps
 			req@sql = paste(" SELECT coe_date_debut, coe_date_fin, coe_valeur_coefficient, qte_libelle" ,
-					" FROM   ",sch,"tj_coefficientconversion_coe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe " ,
 					" INNER JOIN ref.tr_typequantitelot_qte ON coe_qte_code = qte_code" ,
 					" WHERE  coe_tax_code = '" , bilanMigrationPar@taxons@data$tax_code , "'" ,
 					" AND coe_std_code = '" , bilanMigrationPar@stades@data$std_code, "'" ,
@@ -262,7 +262,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" CASE when car_val_identifiant is not null then car_val_identifiant",
 					" ELSE lot_pere_val_identifiant",
 					" END as car_val_identifiant_tous", 
-					" FROM ",sch,"vue_ope_lot_ech_parqual", 
+					" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
@@ -275,7 +275,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		} else if (bilanMigrationPar@parqual@data$par_nom=="aucune") {
 			# Caracteristique quantitative uniquement
 			req@sql=paste("SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif, SUM(car_valeur_quantitatif) AS quantite",
-					" FROM ",sch,"vue_ope_lot_ech_parquan",    
+					" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",    
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
@@ -299,7 +299,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ELSE lot_pere_val_identifiant",
 					" END as car_val_identifiant_tous",
 					" FROM (",
-					" SELECT * FROM ",sch,"vue_ope_lot_ech_parquan", 
+					" SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,

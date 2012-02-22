@@ -40,7 +40,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" per_etat_fonctionnement,",
 					" per_tar_code,",
 					" tar_libelle AS libelle",
-					" FROM  ",sch,"t_periodefonctdispositif_per per",
+					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
 			objet@requete@colonnedebut<-"per_date_debut"
 			objet@requete@colonnefin<-"per_date_fin"

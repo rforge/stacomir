@@ -106,6 +106,6 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 				msg[buildmsg1[i]]<-buildmsg2[i]
 			}
 			msg<-create_vector(msg)
-			assign("msg",msg,envi=envir_stacomi)
+			assign("msg",msg,envir=envir_stacomi)
 			return(NULL)
 		})
