@@ -7,7 +7,7 @@
 \alias{fungraphBilan_poids_moyen}
 \title{Class "Bilan_poids_moyen"}
 \description{Bilan_poids_moyen class
-Objectif faire un calcul des poids moyens et permettre de reintegrere les coefficents de conversion poids effectif
+The objective is to calculate mean weight of glass eel which are counted from weight measurements and to reintegrate weight to number coefficients
 }
 \section{Slots}{
 	 \describe{
@@ -42,7 +42,8 @@ Objectif faire un calcul des poids moyens et permettre de reintegrere les coeffi
 	\code{\linkS4class{BilanMigrationPar}}	
 }
 \author{Cedric Briand \email{cedric.briand00@gmail.com}}
-\note{Un programme permet pour l'iav d'étendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees
+\note{
+We have also tools available to import glass eel measurement from experimental fishing in the estuary
 For the charge method dates for the request are from august to august (a glass eel season)
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
