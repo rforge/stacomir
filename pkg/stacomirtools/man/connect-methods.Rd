@@ -1,8 +1,12 @@
 \name{connect-methods}
+\alias{connect-methods}
+\alias{connect}
 \docType{methods}
+\alias{connect,ConnexionODBC-method}
 \alias{connect,RequeteODBC-method}
 \alias{connect,RequeteODBCwhere-method}
 \alias{connect,RequeteODBCwheredate-method}
+
 \title{ Methods for Function connect}
 \description{
 see individual .r files for help and examples

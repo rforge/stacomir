@@ -1,7 +1,6 @@
 \name{ConnexionODBC-class}
 \docType{class}
 \alias{ConnexionODBC-class}
-\alias{connect,ConnexionODBC-method}
 \alias{ConnexionODBC}
 
 \title{Class "ConnexionODBC"}

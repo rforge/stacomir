@@ -1,5 +1,5 @@
 \name{RequeteODBCwheredate-class}
-\alias{connect,RequeteODBCwheredate-method}
+\alias{RequeteODBCwheredate-class}
 \docType{class}
 \title{Class "RequeteODBCwheredate"}
 \description{Query with WHERE condition and overlaping dates clause.}
