@@ -3,6 +3,9 @@
 \title{Main launch function...}
 \usage{ggplot2usr(data, envir=.GlobalEnv)}
 \description{Main launch function}
+\arguments{
+\item{data}{the data frame displayed as a first choice by the ggplot2usr interface}
+\item{envir}{the environment}}
 \examples{
  data("mtcars") # the dataframe used are listed in the base environment .GlobalEnv 
  data("diamonds") # so that at least two dataframes appear in the list

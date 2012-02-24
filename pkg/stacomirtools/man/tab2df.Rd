@@ -1,11 +1,11 @@
 \name{tab2df}
 \alias{tab2df}
-\title{Function to transform a ftable into dataframe but just keeping the counts works with ftable of dim 2}
+\title{Function to transform a ftable into dataframe but just keeping the counts, works with ftable of dim 2}
 \usage{
   tab2df(tab)
 }
 \arguments{
-  \item{tab}{}
+  \item{tab}{a flat table}
 }
 \description{
   Function to transform a ftable into dataframe but just

@@ -1,9 +1,7 @@
 \name{RequeteODBC-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{RequeteODBC}
 \alias{connect,RequeteODBC-method}
-
 \title{Class "RequeteODBC"}
 \description{ODBC Query. This class enables to retrieve data from the database. 
 This class is inherited by RequeteODBCwhere and RequeteODBCwheredate

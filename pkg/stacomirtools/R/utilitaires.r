@@ -44,20 +44,6 @@ chnames=function(objet,
 	return(objet)
 }
 
-#' fonction pour renvoyer les index dans b  des valeurs du vecteur a
-#' b peut apparaitre plusieurs fois dans a
-#' @note attention le vecteur de resultat est dans le desordre
-#' @param a 
-#' @param b 
-#' @returnType vector
-#' @return index of b in a
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
-ind=function(a,b){
-	index=(1:length(b))[b%in%a]
-	return(index)
-}
-
 #' fonction qui retourne l'index des valeurs repetees d'un vecteur
 #' @param a 
 #' @returnType vector

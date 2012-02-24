@@ -5,4 +5,7 @@
 \description{this handler first analyses the action (which is the name of the BoxinLayout)
 then calls the load_aes function}
 \author{cedric}
-\arguments{\item{h}{a handler}}
+\arguments{
+\item{h}{a handler}
+\item{...}{other arguments to be passed to the function}
+}

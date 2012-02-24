@@ -1,18 +1,17 @@
 \name{induk}
 \alias{induk}
-\title{fonction qui renvoit l'index des valeurs apparaissant une seule fois}
+\title{unique values of a vector}
 \usage{
   induk(a)
 }
 \arguments{
-  \item{a}{}
+  \item{a}{a vector}
 }
 \value{
   the index unique values within a vector
 }
 \description{
-  fonction qui renvoit l'index des valeurs apparaissant une
-  seule fois
+returns the index of values appearing only once in a vector : match(unique(a),a), replicated values are not returned on their second occurence
 }
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}

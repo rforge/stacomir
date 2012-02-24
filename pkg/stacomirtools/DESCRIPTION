@@ -17,4 +17,4 @@ Collate:
     'ggplot2usr_launch.R'
     'utilitaires.r'    
 LazyLoad: yes
-Depends: proto, methods, ggplot2, gWidgets, gWidgetsRGtk2,RODBC
+Depends: proto, methods, ggplot2, gWidgets, gWidgetsRGtk2,RODBC,xtable

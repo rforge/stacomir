@@ -4,4 +4,4 @@
 \usage{load_aes(layer_choice)}
 \description{this functions loads the graphical interface with default elements from layer}
 \author{cedric}
-\arguments{\item{layer_choice}{}}
+\arguments{\item{layer_choice}{either "geom" or "stat"}}

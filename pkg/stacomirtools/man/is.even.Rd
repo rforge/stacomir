@@ -5,7 +5,7 @@
   is.even(x)
 }
 \arguments{
-  \item{x}{}
+  \item{x}{integer}
 }
 \value{
   a logical

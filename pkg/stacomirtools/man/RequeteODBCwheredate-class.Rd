@@ -1,9 +1,6 @@
 \name{RequeteODBCwheredate-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{RequeteODBCwheredate}
 \alias{connect,RequeteODBCwheredate-method}
-
+\docType{class}
 \title{Class "RequeteODBCwheredate"}
 \description{Query with WHERE condition and overlaping dates clause.}
 \note{

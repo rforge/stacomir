@@ -9,6 +9,6 @@ a character vector is also returned to write the proper formula}
 \author{cedric}
 \arguments{\item{layer_name}{name of the layer}
 \item{layer_type}{currently only "geom" or "stat" for layer type object}
-\item{position}{}
-\item{param}{}
-\item{aes}{}}
+\item{position}{a position as used in ggplot2}
+\item{param}{parameters for a geom}
+\item{aes}{aestetics for a geom}}

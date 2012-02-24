@@ -1,18 +1,17 @@
 \name{indrepeated}
 \alias{indrepeated}
-\title{fonction qui retourne l'index des valeurs repetees d'un vecteur}
+\title{index of repeated values}
 \usage{
   indrepeated(a)
 }
 \arguments{
-  \item{a}{}
+  \item{a}{a vector}
 }
 \value{
-  the index of repeated values within a vector
+  the index of repeated values within a vector (this function returns the index of all values not returned by induk)
 }
 \description{
-  fonction qui retourne l'index des valeurs repetees d'un
-  vecteur
+  returns the index of repeated values within a vector
 }
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}

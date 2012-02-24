@@ -1,5 +1,4 @@
 \name{ConnexionODBC-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{ConnexionODBC-class}
 \alias{connect,ConnexionODBC-method}

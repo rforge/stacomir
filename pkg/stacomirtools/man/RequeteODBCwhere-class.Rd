@@ -1,10 +1,8 @@
 \name{RequeteODBCwhere-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{RequeteODBCwhere}
 \alias{connect,RequeteODBCwhere-method}
-
+\docType{class}
 \title{Class "RequeteODBCwhere"}
+
 \description{SQL Query with WHERE and ORDER BY clauses.}
 \note{
   Inherits from RequeteODBC the syntax is where="WHERE ..."

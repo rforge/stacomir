@@ -5,7 +5,7 @@
   ex(d = NULL)
 }
 \arguments{
-  \item{d}{}
+  \item{d}{a dataframe}
 }
 \description{
   ex fonction to write to excel, not used within the
