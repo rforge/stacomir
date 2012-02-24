@@ -2,3 +2,9 @@
 \alias{funSousListeBilanMigration}
 \title{funSousListeBilanMigration}
 \usage{funSousListeBilanMigration(bilanMigration)}
+\description{
+workhorse function for bilanMigration. Calculates the number for a stage and a taxa per day. 
+The operation for the fishway is never from 00:00 to 00:00 so the number per day is calculated 
+according to the ration between the duration of the operation and the duration of the day.
+This function will allow daily reports to be saved into the database when graph is launched
+}
