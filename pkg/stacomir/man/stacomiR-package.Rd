@@ -32,7 +32,7 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 \keyword{ database }
 \seealso{
 \code{\link[<pkg>XML<pkg>]{XML}}
-\code{\link[<pkg>methods<pkg>]{methods}
+\code{\link[<pkg>methods<pkg>]{methods}}
 \code{\link[<pkg>proto<pkg>]{proto}}
 \code{\link[<pkg>tcltk2<pkg>]{tcltk2}}
 \code{\link[<pkg>RODBC<pkg>]{RODBC}}

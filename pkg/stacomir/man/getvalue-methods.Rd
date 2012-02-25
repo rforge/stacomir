@@ -9,7 +9,8 @@
 \section{Methods}{
 \describe{
 
-\item{\code{signature(objet = "Refperiode")}}{ ~~describe this method here }
+\item{\code{signature(objet = "Refperiode")}}{ Returns the POSIXt value of a given name
 }}
+}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s)}
+

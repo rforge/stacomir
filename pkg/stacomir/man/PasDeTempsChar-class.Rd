@@ -1,7 +1,7 @@
-\name{PasDeTempsChar}
-\Rdversion{1.1}
+\name{PasDeTempsChar-class}
 \docType{class}
 \alias{PasDeTempsChar}
+\alias{PasDeTempsChar-class}
 \alias{coerce,PasDeTempsChar,PasDeTemps-method}
 
 \title{Class "PasDeTempsChar"}
@@ -24,7 +24,6 @@ Objects can be created by calls of the form \code{new("PasDeTempsChar", ...)}
 }
 
 \author{cedric.briand00@gmail.com}
-%\note{ ~~further notes~~ }
 
 \seealso{
   \code{\linkS4class{PasDeTemps}}

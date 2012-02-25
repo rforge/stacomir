@@ -1,6 +1,6 @@
-\name{RefAnnee}
-\Rdversion{1.1}
+\name{RefAnnee-class}
 \docType{class}
+\alias{RefAnnee-class}
 \alias{RefAnnee}
 \alias{charge,RefAnnee-method}
 \alias{choix,RefAnnee-method}
@@ -37,7 +37,7 @@ Objects can be created by calls of the form \code{new("RefAnnee", data=data.fram
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

@@ -1,7 +1,7 @@
 \name{Bilan_taille-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{Bilan_taille-class}
+\alias{Bilan_taille}
 \alias{charge,Bilan_taille-method}
 \alias{connect,Bilan_taille-method}
 

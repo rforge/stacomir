@@ -1,7 +1,7 @@
 \name{Refperiode-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{Refperiode-class}
+\alias{Refperiode}
 \alias{getvalue,Refperiode-method}
 
 \title{Class "Refperiode" referential class}
@@ -20,7 +20,9 @@ Objects can be created by calls of the form \code{new("Refperiode", ...)}.
     \item{getvalue}{\code{signature(objet = "Refperiode")}: ... }
 	 }
 }
-
+\note{
+  pgval are used by seq.POSIXT
+}
 \examples{
 showClass("Refperiode")
 new("Refperiode")

@@ -1,7 +1,7 @@
-\name{Refpar}
-\Rdversion{1.1}
+\name{Refpar-class}
 \docType{class}
 \alias{Refpar}
+\alias{Refpar-class}
 \alias{charge,Refpar-method}
 \alias{charge_avec_filtre,Refpar-method}
 \alias{choix,Refpar-method}
@@ -35,7 +35,7 @@ Objects can be created by calls of the form \code{new("Refpar", data)}.
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

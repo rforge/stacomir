@@ -1,6 +1,7 @@
 \name{Bilan_poids_moyen-class}
 \docType{class}
 \alias{Bilan_poids_moyen-class}
+\alias{Bilan_poids_moyen}
 \alias{charge,Bilan_poids_moyen-method}
 \alias{connect,Bilan_poids_moyen-method}
 \alias{funtableBilan_poids_moyen}

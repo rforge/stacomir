@@ -1,7 +1,8 @@
-\name{PasDeTempsJournalier}
+\name{PasDeTempsJournalier-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{PasDeTempsJournalier}
+\alias{PasDeTempsJournalier-class}
 \alias{choix,PasDeTempsJournalier-method}
 
 \title{Class "PasDeTempsJournalier" }

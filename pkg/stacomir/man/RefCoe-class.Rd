@@ -1,7 +1,7 @@
-\name{RefCoe}
-\Rdversion{1.1}
+\name{RefCoe-class}
 \docType{class}
 \alias{RefCoe}
+\alias{RefCoe-class}
 \alias{charge,RefCoe-method}
 
 \title{Class "RefCoe"}
@@ -24,6 +24,11 @@ Objects can be created by calls of the form \code{new("RefCoe")}.
 }
 
 \author{cedric.briand00@gmail.com}
+\note{
+  Class loading coefficient of conversion between quantity
+  (weights or volumes of glass eel) and numbers between a
+  starting and finishing date
+}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}
@@ -33,7 +38,7 @@ Objects can be created by calls of the form \code{new("RefCoe")}.
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

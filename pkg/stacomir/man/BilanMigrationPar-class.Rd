@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{BilanMigrationPar-class}
-
+\alias{BilanMigrationPar}
 \title{Class BilanMigrationPar, Migration report along with quantitative and qualitative characteristics}
 \description{Migration along with qualitative or quantitative characteristics 
 or both  (e.g.) weight of eels according to the size class per period of time,

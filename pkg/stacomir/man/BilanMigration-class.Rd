@@ -1,7 +1,8 @@
-\name{BilanMigration}
+\name{BilanMigration-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{BilanMigration}
+\alias{BilanMigration-class}
 \alias{calcule,BilanMigration-method}
 \alias{coerce,BilanMigration,BilanMigrationInterAnnuelle-method}
 

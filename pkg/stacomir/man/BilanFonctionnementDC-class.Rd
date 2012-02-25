@@ -2,6 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{BilanFonctionnementDC-class}
+\alias{BilanFonctionnementDC}
 \alias{charge,BilanFonctionnementDC-method}
 \alias{connect,BilanFonctionnementDC-method}
 

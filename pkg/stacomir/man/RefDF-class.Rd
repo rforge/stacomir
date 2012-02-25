@@ -1,7 +1,7 @@
-\name{RefDF}
-\Rdversion{1.1}
+\name{RefDF-class}
 \docType{class}
 \alias{RefDF}
+\alias{RefDF-class}
 \alias{charge,RefDF-method}
 \alias{choix,RefDF-method}
 
@@ -40,7 +40,7 @@ Objects can be created by calls of the form \code{new("RefDF", df_selectionne=in
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

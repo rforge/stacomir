@@ -2,6 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{BilanEspeces-class}
+\alias{BilanEspeces}
 \alias{charge,BilanEspeces-method}
 \alias{connect,BilanEspeces-method}
 

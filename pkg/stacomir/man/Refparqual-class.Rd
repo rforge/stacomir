@@ -1,7 +1,7 @@
-\name{Refparqual}
-\Rdversion{1.1}
+\name{Refparqual-class}
 \docType{class}
 \alias{Refparqual}
+\alias{Refparqual-class}
 \alias{charge,Refparqual-method}
 \alias{charge_avec_filtre,Refparqual-method}
 \alias{chargecomplement,Refparqual-method}
@@ -45,7 +45,7 @@ Class \code{"\linkS4class{Refpar}"}, directly.
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

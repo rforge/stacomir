@@ -1,6 +1,6 @@
-\name{BilanConditionEnv}
-\Rdversion{1.1}
+\name{BilanConditionEnv-class}
 \docType{class}
+\alias{BilanConditionEnv-class}
 \alias{BilanConditionEnv}
 \alias{charge,BilanConditionEnv-method}
 \alias{connect,BilanConditionEnv-method}

@@ -1,7 +1,7 @@
-\name{PasDeTemps}
-\Rdversion{1.1}
+\name{PasDeTemps-class}
 \docType{class}
 \alias{PasDeTemps}
+\alias{PasDeTemps-class}
 \alias{choix,PasDeTemps-method}
 \alias{coerce,PasDeTempsChar,PasDeTemps-method}
 \alias{currentDateDebut,PasDeTemps-method}

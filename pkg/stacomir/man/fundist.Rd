@@ -9,12 +9,16 @@
   \item{graph}{logical, to see the curves type
   graph = TRUE}
 }
+\description {
+see code
+}
 \note{
   pigment stage functions are not standard statistical distribution,
  calculating where 50\% of the distribution lies is done with fun50
   this function uses \link{fnstade} to calculate the values  
   of pigment times on a regular scale (phicum)
 }
+
 \examples{
 
  Vparm<-list()

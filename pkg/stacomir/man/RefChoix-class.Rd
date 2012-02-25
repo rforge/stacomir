@@ -1,7 +1,8 @@
-\name{RefChoix}
+\name{RefChoix-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{RefChoix}
+\alias{RefChoix-class}
 \alias{charge,RefChoix-method}
 \alias{choix,RefChoix-method}
 
@@ -34,7 +35,7 @@ Objects can be created by calls of the form \code{new("RefChoix", listechoix=cha
 	\code{\linkS4class{RefDC}}	
 	\code{\linkS4class{RefDF}}
 	\code{\linkS4class{RefListe}}
-	\code{\linkS4class{RefPar}}	
+	\code{\linkS4class{Refpar}}	
 	\code{\linkS4class{Refparqual}}
 	\code{\linkS4class{Refparquan}}
 	\code{\linkS4class{RefPoidsMoyenPeche}}

@@ -1,5 +1,4 @@
 \name{Bilan_stades_pigm-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{Bilan_stades_pigm-class}
 \alias{charge,Bilan_stades_pigm-method}

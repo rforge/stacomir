@@ -1,7 +1,8 @@
-\name{BilanMigrationConditionEnv}
+\name{BilanMigrationConditionEnv-class}
 \Rdversion{1.1}
 \docType{class}
 \alias{BilanMigrationConditionEnv}
+\alias{BilanMigrationConditionEnv-class}
 \alias{calcule,BilanMigrationConditionEnv-method}
 
 \title{Class "BilanMigrationConditionEnv"}
