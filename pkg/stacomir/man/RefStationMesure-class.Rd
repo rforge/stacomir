@@ -1,9 +1,7 @@
-\name{RefStationMesure}
-\Rdversion{1.1}
+\name{RefStationMesure-class}
 \docType{class}
+\alias{RefStationMesure-class}
 \alias{RefStationMesure}
-\alias{charge,RefStationMesure-method}
-\alias{choix,RefStationMesure-method}
 \title{Class "RefStationMesure"}
 \description{Enables to load measure stations and to select one of them}
 \section{Objects from the Class}{

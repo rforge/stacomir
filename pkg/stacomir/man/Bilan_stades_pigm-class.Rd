@@ -1,8 +1,7 @@
 \name{Bilan_stades_pigm-class}
 \docType{class}
 \alias{Bilan_stades_pigm-class}
-\alias{charge,Bilan_stades_pigm-method}
-\alias{connect,Bilan_stades_pigm-method}
+\alias{Bilan_stades_pigm}
 \title{Class "Bilan_stades_pigm" Bilan class} 
 \description{The pigment stages analysis has been developed to allow to analyze the change in pigment stage structure for glass eel (Anguilla anguilla).
  The class uses the parameters calibrated by Briand et al. , 2005 to backcalculate the probable date when the glass eels arrived in the estuary (i.e. at a fully transparent stage VB.

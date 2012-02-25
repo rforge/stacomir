@@ -2,7 +2,6 @@
 \docType{class}
 \alias{Refperiode-class}
 \alias{Refperiode}
-\alias{getvalue,Refperiode-method}
 
 \title{Class "Refperiode" referential class}
 \description{	Refperiode referential class to choose a period}

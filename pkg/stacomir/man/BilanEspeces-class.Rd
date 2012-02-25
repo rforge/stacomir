@@ -3,8 +3,6 @@
 \docType{class}
 \alias{BilanEspeces-class}
 \alias{BilanEspeces}
-\alias{charge,BilanEspeces-method}
-\alias{connect,BilanEspeces-method}
 
 \title{Class "BilanEspeces" Report of the species present at a counting device for a given period}
 \description{this class is used to make the assessment of all species, and their number, per month

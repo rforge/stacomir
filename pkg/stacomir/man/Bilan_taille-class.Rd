@@ -2,8 +2,6 @@
 \docType{class}
 \alias{Bilan_taille-class}
 \alias{Bilan_taille}
-\alias{charge,Bilan_taille-method}
-\alias{connect,Bilan_taille-method}
 
 \title{Class "Bilan_taille" Bilan class }
 \description{Bilan_taille class This class allows to load the following quantitative sample characteristics : full size, mostly used for yellow eels.}

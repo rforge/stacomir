@@ -1,8 +1,6 @@
 \name{RefCheckBox-class}
 \docType{class}
 \alias{RefCheckBox-class}
-\alias{charge,RefCheckBox-method}
-\alias{choix,RefCheckBox-method}
 
 \title{Class "RefCheckBox" RefCheckBox }
 \description{referential class allows to choose for several parms with checkbox}

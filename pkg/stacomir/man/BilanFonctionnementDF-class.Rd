@@ -1,10 +1,7 @@
 \name{BilanFonctionnementDF-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{BilanFonctionnementDF-class}
 \alias{BilanFonctionnementDF}
-\alias{charge,BilanFonctionnementDF-method}
-\alias{connect,BilanFonctionnementDF-method}
 
 \title{Class "BilanFonctionnementDF" Report fishway work}
 \description{ The DF (Dispositif de Franchissement) is a fishway. It may be automated and work only at certain times

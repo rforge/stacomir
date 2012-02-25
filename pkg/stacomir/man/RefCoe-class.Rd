@@ -2,7 +2,6 @@
 \docType{class}
 \alias{RefCoe}
 \alias{RefCoe-class}
-\alias{charge,RefCoe-method}
 
 \title{Class "RefCoe"}
 \description{	Enables to load conversion coefficients quantity-number}

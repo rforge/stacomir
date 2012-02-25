@@ -2,9 +2,7 @@
 \docType{class}
 \alias{Refpar}
 \alias{Refpar-class}
-\alias{charge,Refpar-method}
-\alias{charge_avec_filtre,Refpar-method}
-\alias{choix,Refpar-method}
+
 
 \title{Class "Refpar" }
 \description{ Class enabling to load the list of parameters and select one of them}

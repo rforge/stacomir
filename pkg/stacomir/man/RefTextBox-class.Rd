@@ -1,9 +1,8 @@
 \name{RefTextBox-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{RefTextBox-class}
-\alias{charge,RefTextBox-method}
-\alias{choix,RefTextBox-method}
+\alias{RefTextBox}
+
 
 \title{Class "RefTextBox" ~~~ }
 \description{	 ~~ A concise (1-5 lines) description of what the class is.  ~~}

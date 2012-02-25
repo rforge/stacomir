@@ -2,10 +2,6 @@
 \docType{class}
 \alias{Bilan_poids_moyen-class}
 \alias{Bilan_poids_moyen}
-\alias{charge,Bilan_poids_moyen-method}
-\alias{connect,Bilan_poids_moyen-method}
-\alias{funtableBilan_poids_moyen}
-\alias{fungraphBilan_poids_moyen}
 \title{Class "Bilan_poids_moyen"}
 \description{Bilan_poids_moyen class
 The objective is to calculate mean weight of glass eel which are counted from weight measurements and to reintegrate weight to number coefficients

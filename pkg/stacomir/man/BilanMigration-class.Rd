@@ -3,7 +3,6 @@
 \docType{class}
 \alias{BilanMigration}
 \alias{BilanMigration-class}
-\alias{calcule,BilanMigration-method}
 \alias{coerce,BilanMigration,BilanMigrationInterAnnuelle-method}
 
 \title{Class "BilanMigration"}

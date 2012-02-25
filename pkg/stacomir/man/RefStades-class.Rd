@@ -2,9 +2,6 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{RefStades}
-\alias{charge,RefStades-method}
-\alias{charge_avec_filtre,RefStades-method}
-\alias{choix,RefStades-method}
 
 \title{Class "RefStades"}
 \description{Representation of a fish phase}

@@ -1,10 +1,7 @@
 \name{Bilan_lot-class}
 \docType{class}
 \alias{Bilan_lot-class}
-\alias{charge,Bilan_lot-method}
-\alias{connect,Bilan_lot-method}
-\alias{fungraphInteract_lot}
-\alias{funtableBilan_lot}
+\alias{Bilan_lot}
 \title{Class "Bilan_lot"}
 \description{Bilan_lot Bilan class calls the content of the table tj_caracteristiquelot_car}
 \section{Objects from the Class}{

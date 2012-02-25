@@ -2,8 +2,6 @@
 \docType{class}
 \alias{RefDF}
 \alias{RefDF-class}
-\alias{charge,RefDF-method}
-\alias{choix,RefDF-method}
 
 \title{Class "RefDF"}
 \description{Representation of a fishway,  Contains description data of all fishways from the database

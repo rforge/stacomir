@@ -2,10 +2,7 @@
 \docType{class}
 \alias{BilanMigrationInterAnnuelle-class}
 \alias{BilanMigrationInterAnnuelle}
-\alias{charge,BilanMigrationInterAnnuelle-method}
-\alias{coerce,BilanMigration,BilanMigrationInterAnnuelle-method}
-\alias{connect,BilanMigrationInterAnnuelle-method}
-\alias{supprime,BilanMigrationInterAnnuelle-method}
+
 
 \title{Class "BilanMigrationInterAnnuelle"}
 \description{Several year overview of fish migrations. It enables to compare migration for one year with statistics (min, max, mean) from several year, and to extract data

@@ -3,7 +3,6 @@
 \docType{class}
 \alias{BilanMigrationConditionEnv}
 \alias{BilanMigrationConditionEnv-class}
-\alias{calcule,BilanMigrationConditionEnv-method}
 
 \title{Class "BilanMigrationConditionEnv"}
 \description{Enables to compute an annual overview of fish migration and environmental conditions in the same chart}

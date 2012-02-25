@@ -2,8 +2,6 @@
 \docType{class}
 \alias{BilanConditionEnv-class}
 \alias{BilanConditionEnv}
-\alias{charge,BilanConditionEnv-method}
-\alias{connect,BilanConditionEnv-method}
 
 \title{class BilanConditionEnv simple output of one or several environmental conditions...}
 

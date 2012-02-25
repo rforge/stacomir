@@ -12,4 +12,4 @@
 \item{\code{signature(objet = "PasDeTemps")}}{ final date}
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s)}
+

@@ -3,6 +3,15 @@
 \alias{connect,RequeteODBC-method}
 \alias{connect,RequeteODBCwhere-method}
 \alias{connect,RequeteODBCwheredate-method}
+\alias{connect,BilanConditionEnv-method}
+\alias{connect,BilanEspeces-method}
+\alias{connect,BilanFonctionnementDC-method}
+\alias{connect,BilanFonctionnementDF-method}
+\alias{connect,BilanMigrationInterAnnuelle-method}
+\alias{connect,Bilan_lot-method}
+\alias{connect,Bilan_poids_moyen-method}
+\alias{connect,Bilan_stades_pigm-method}
+\alias{connect,Bilan_taille-method}
 \title{ connect method for referential and bilan class}
 \description{
 see individual .r files for help and examples

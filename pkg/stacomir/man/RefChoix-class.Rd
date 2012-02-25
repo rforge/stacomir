@@ -3,8 +3,7 @@
 \docType{class}
 \alias{RefChoix}
 \alias{RefChoix-class}
-\alias{charge,RefChoix-method}
-\alias{choix,RefChoix-method}
+
 
 \title{Class "RefChoix"}
 \description{RefChoix referential class allows to choose within several values with radiobuttons}

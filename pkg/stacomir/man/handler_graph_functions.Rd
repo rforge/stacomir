@@ -3,6 +3,7 @@
 \alias{hbilanEspeces}
 \alias{funbarchartDC}
 \alias{funbarchartDF}
+\alias{fungraphInteract_lot}
 \alias{funboxDC}
 \alias{funboxDF}
 \alias{hCamembert}
@@ -47,7 +48,7 @@
       \item \code{\linkS4class{BilanMigrationPar}}{\code{hbilanMigrationPargraph} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=1}
       \item \code{\linkS4class{BilanMigrationPar}}{\code{hbilanMigrationPargraph2} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=2}
       \item \code{\linkS4class{Bilan_stades_pigm}}{\code{hfungraphstades} Calls the function \code{fungraphstades}}
-      
+      \item \code{\linkS4class{Bilan_lot}}{\code{fungraphInteract_lot} plot using the stacomirtools ggplot2 interface}
    }
 }
 \note{

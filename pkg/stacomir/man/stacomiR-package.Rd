@@ -12,12 +12,11 @@ Stacomi enables to read informations in a database about fish migrations to buil
 Package: \tab stacomiR\cr
 Type: \tab Package\cr
 Version: \tab 0.4\cr
-Date: \tab 2011-02-09\cr
+Date: \tab 2011-02-25\cr
 License: \tab GPL license\cr
 LazyLoad: \tab yes\cr
 Depends: \tab methods\cr
 }
-
 To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal
 }
 \author{
@@ -27,9 +26,9 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
 }
 
-\keyword{ package }
-\keyword{ dynamic }
-\keyword{ database }
+\keyword{package}
+\keyword{dynamic}
+\keyword{database}
 \seealso{
 \code{\link[<pkg>XML<pkg>]{XML}}
 \code{\link[<pkg>methods<pkg>]{methods}}
@@ -43,7 +42,6 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 \code{\link[<pkg>lattice<pkg>]{lattice}}
 \code{\link[<pkg>RColorBrewer<pkg>]{RColorBrewer}}
 \code{\link[<pkg>Hmisc<pkg>]{Hmisc}}
-}
 }
 
 \examples{

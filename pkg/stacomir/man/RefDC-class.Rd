@@ -3,8 +3,6 @@
 \docType{class}
 \alias{RefDC-class}
 \alias{RefDC}
-\alias{charge,RefDC-method}
-\alias{choix,RefDC-method}
 
 \title{Class "RefDC"}
 \description{Description of a control device.}

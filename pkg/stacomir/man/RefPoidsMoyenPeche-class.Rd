@@ -2,7 +2,6 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{RefPoidsMoyenPeche}
-\alias{charge,RefPoidsMoyenPeche-method}
 
 \title{Class "RefPoidsMoyenPeche"}
 \description{Class which enables to load bunches of elver of experimental fishings}

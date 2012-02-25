@@ -9,7 +9,7 @@ No idea what this one does
 \section{Methods}{
 \describe{
 
-\item{\code{signature(objet = "BilanMigrationInterAnnuelle")}}{ ~~describe this method here }
+\item{\code{signature(objet = "BilanMigrationInterAnnuelle")}}{ Delete a record in the database}
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s)}
+

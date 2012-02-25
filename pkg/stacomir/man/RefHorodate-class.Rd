@@ -2,10 +2,6 @@
 \docType{class}
 \alias{RefHorodate-class}
 \alias{RefHorodate}
-\alias{choix,RefHorodate-method}
-\alias{getanneeprec,RefHorodate-method}
-\alias{getRefHorodate,RefHorodate-method}
-\alias{setRefHorodate,RefHorodate-method}
 
 \title{Class "RefHorodate"}
 \description{	choice of date with method to show current and previous year

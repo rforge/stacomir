@@ -2,8 +2,6 @@
 \docType{class}
 \alias{RefListe-class}
 \alias{RefListe}
-\alias{charge,RefListe-method}
-\alias{choix,RefListe-method}
 
 \title{Class "RefListe"}
 \description{Enables to load a "RefChoix" object fom a list given by a "Bilan" object}

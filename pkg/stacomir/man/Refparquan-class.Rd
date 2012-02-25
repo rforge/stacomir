@@ -2,8 +2,7 @@
 \docType{class}
 \alias{Refparquan}
 \alias{Refparquan-class}
-\alias{charge,Refparquan-method}
-\alias{charge_avec_filtre,Refparquan-method}
+
 
 \title{Class "Refparquan"}
 \description{Class enabling to load the list of quantitative parameters and to select one of them. It inherits from 'Refpar', uses its 'choix' method}

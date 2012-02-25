@@ -1,11 +1,8 @@
-\name{RefTaxon}
+\name{RefTaxon-class}
 \Rdversion{1.1}
 \docType{class}
+\alias{RefTaxon-class}
 \alias{RefTaxon}
-\alias{charge,RefTaxon-method}
-\alias{charge_avec_filtre,RefTaxon-method}
-\alias{choix,RefTaxon-method}
-
 \title{Class "RefTaxon"}
 \description{Races of a fish, and enables to select one of them}
 \section{Objects from the Class}{

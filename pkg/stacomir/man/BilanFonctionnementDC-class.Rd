@@ -1,10 +1,8 @@
 \name{BilanFonctionnementDC-class}
-\Rdversion{1.1}
 \docType{class}
 \alias{BilanFonctionnementDC-class}
 \alias{BilanFonctionnementDC}
-\alias{charge,BilanFonctionnementDC-method}
-\alias{connect,BilanFonctionnementDC-method}
+
 
 \title{Class "BilanFonctionnementDC" Bilan du fonctionnement du dispositif de comptage}
 \description{The counting device is not always working. It may me stopped either following a monitoring protocol, or due to misfunction of the device,

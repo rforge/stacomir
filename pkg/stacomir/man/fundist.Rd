@@ -4,12 +4,12 @@
   fundist(Vparm, phicum, graph = TRUE, lmax = 1)
 }
 \arguments{
-  \item{lmax}{scale parameterof the graphical function see fnstades}
-
-  \item{graph}{logical, to see the curves type
-  graph = TRUE}
+  \item{Vparm}{parameters for the gamma functions describing pigment stages}
+  \item{phicum}{cumulated pigmentation time}
+  \item{graph}{logical, to see the curves type  graph = TRUE}
+  \item{lmax}{scale parameter of the graphical function see \link{fnstades}}
 }
-\description {
+\description{
 see code
 }
 \note{
@@ -20,8 +20,7 @@ see code
 }
 
 \examples{
-
- Vparm<-list()
+Vparm<-list()
 # below param for briand et al.,2005 pigmentation function in glass eel
 Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
 Vparm$pigment_stage$p2<-0.835

@@ -2,10 +2,6 @@
 \docType{class}
 \alias{Refparqual}
 \alias{Refparqual-class}
-\alias{charge,Refparqual-method}
-\alias{charge_avec_filtre,Refparqual-method}
-\alias{chargecomplement,Refparqual-method}
-\alias{choix,Refparqual-method}
 
 \title{Class "Refparqual"}
 \description{ Class enabling to load the list of qualitative parameters and to select one of them. It inherits from 'Refpar', uses its 'choix' method}
