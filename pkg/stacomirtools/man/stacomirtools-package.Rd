@@ -3,8 +3,8 @@
 \description{
 this package is intented to be used by beginners who will be able to access to the different layers of the ggplot2 package
 is yet far from providing the full capability of the ggplot2, but will help in building the first graphs and print their formula
-: this package is still in developpement and full of bugs, so far intended only for showing the aim of the project
-has been inially developped within a french project, which builds a database for migratory fishes control stations, along with several graphical tools
+: this package is so far intended only for showing the aim of the project
+has been initially developed within a French project, which builds a database for migratory fishes control stations, along with several graphical tools
 help the users to 'view' their data
 }
 \details{\tabular{ll}{
