@@ -3,7 +3,6 @@
 \docType{class}
 \alias{BilanMigration}
 \alias{BilanMigration-class}
-\alias{coerce,BilanMigration,BilanMigrationInterAnnuelle-method}
 
 \title{Class "BilanMigration"}
 \description{Balance of fish migrations}

@@ -1,8 +1,7 @@
-\name{RefStades}
-\Rdversion{1.1}
+\name{RefStades-class}
 \docType{class}
+\alias{RefStades-class}
 \alias{RefStades}
-
 \title{Class "RefStades"}
 \description{Representation of a fish phase}
 \section{Objects from the Class}{

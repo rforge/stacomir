@@ -2,6 +2,9 @@
 \alias{funSousListeBilanMigration}
 \title{funSousListeBilanMigration}
 \usage{funSousListeBilanMigration(bilanMigration)}
+\arguments{
+  \item{bilanMigration}{an objet of class \code\linkS4class{BilanMigration}}
+}
 \description{
 workhorse function for bilanMigration. Calculates the number for a stage and a taxa per day. 
 The operation for the fishway is never from 00:00 to 00:00 so the number per day is calculated 

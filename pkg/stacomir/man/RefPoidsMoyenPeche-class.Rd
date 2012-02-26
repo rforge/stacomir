@@ -1,8 +1,7 @@
 \name{RefPoidsMoyenPeche}
-\Rdversion{1.1}
 \docType{class}
+\alias{RefPoidsMoyenPeche-class}
 \alias{RefPoidsMoyenPeche}
-
 \title{Class "RefPoidsMoyenPeche"}
 \description{Class which enables to load bunches of elver of experimental fishings}
 \section{Objects from the Class}{

@@ -35,6 +35,8 @@
   \item{dates}{}
 
   \item{Vparm}{parameters for pigment stage function}
+  
+  \item{effectifs}{logical : do you want to display numbers on the graph}
 }
 \description{
   see R code for details

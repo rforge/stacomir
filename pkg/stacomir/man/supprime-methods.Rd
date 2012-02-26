@@ -1,6 +1,7 @@
 \name{supprime-methods}
 \docType{methods}
 \alias{supprime-methods}
+\alias{supprime}
 \alias{supprime,BilanMigrationInterAnnuelle-method}
 \title{ Methods for Function supprime}
 \description{

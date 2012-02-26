@@ -1,4 +1,5 @@
 \name{fundat}
+\alias{fundat}
 \title{statistics per time period}
 \value{
 a data frame with mean, max, and min calculated for each timesplit

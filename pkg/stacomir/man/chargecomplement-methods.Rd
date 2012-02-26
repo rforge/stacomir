@@ -1,5 +1,6 @@
 \name{chargecomplement-methods}
 \docType{methods}
+\alias{chargecomplement}
 \alias{chargecomplement-methods}
 \alias{chargecomplement,Refparqual-method}
 \title{ Methods for Function chargecomplement}

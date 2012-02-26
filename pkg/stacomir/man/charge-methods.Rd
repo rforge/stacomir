@@ -1,6 +1,7 @@
 \name{charge-methods}
 \docType{methods}
 \alias{charge-methods}
+\alias{charge}
 \alias{charge,Bilan_lot-method}
 \alias{charge,Bilan_poids_moyen-method}
 \alias{charge,Bilan_stades_pigm-method}

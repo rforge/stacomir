@@ -3,6 +3,7 @@
 \alias{PasDeTempsChar}
 \alias{PasDeTempsChar-class}
 \alias{coerce,PasDeTempsChar,PasDeTemps-method}
+\alias{validite_PasDeTempsChar}
 
 \title{Class "PasDeTempsChar"}
 \description{ Character to represent a PasDeTemps}

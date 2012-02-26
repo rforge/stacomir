@@ -2,8 +2,6 @@
 \docType{class}
 \alias{RefAnnee-class}
 \alias{RefAnnee}
-\alias{charge,RefAnnee-method}
-\alias{choix,RefAnnee-method}
 
 \title{Class "RefAnnee"}
 \description{RefAnnee referential class to choose years}

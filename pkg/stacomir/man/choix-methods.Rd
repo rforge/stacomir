@@ -1,6 +1,7 @@
 \name{choix-methods}
 \docType{methods}
 \alias{choix-methods}
+\alias{choix}
 \alias{choix,PasDeTemps-method}
 \alias{choix,PasDeTempsJournalier-method}
 \alias{choix,RefAnnee-method}
@@ -77,7 +78,7 @@ class (ex Reftaxon) and copy the user choice in the environment "envir_stacomi"
   (e.g) is called from a report Bilan(e.g Bilan_lot).
    By default,  the value of the objetbilan is null.
    When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-  and fills it with the method  \code{ \link{charge_avec_filtre}}
+  and fills it with the method  \code{\link{charge_avec_filtre-methods}}
   \enumerate{
 	\item \code{signature(objet = "RefDC")}the choice method assigns an object of class refDF in the
   environment envir_stacomi.

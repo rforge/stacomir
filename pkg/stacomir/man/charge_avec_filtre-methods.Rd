@@ -1,6 +1,7 @@
 \name{charge_avec_filtre-methods}
 \docType{methods}
 \alias{charge_avec_filtre-methods}
+\alias{charge_avec_filtre}
 \alias{charge_avec_filtre,Refpar-method}
 \alias{charge_avec_filtre,Refparqual-method}
 \alias{charge_avec_filtre,Refparquan-method}

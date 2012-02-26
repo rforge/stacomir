@@ -2,36 +2,45 @@
 \docType{class}
 \alias{PasDeTemps}
 \alias{PasDeTemps-class}
-\alias{choix,PasDeTemps-method}
-\alias{coerce,PasDeTempsChar,PasDeTemps-method}
 \alias{currentDateDebut,PasDeTemps-method}
+\alias{currentDateDebut}
 \alias{currentDateFin,PasDeTemps-method}
+\alias{currentDateFin}
 \alias{DateFin,PasDeTemps-method}
+\alias{DateFin}
+\alias{LesPasDeTemps}
+\alias{ValeurPasDeTemps}
 \alias{getAnnees,PasDeTemps-method}
+\alias{getAnnees}
 \alias{getdateDebut,PasDeTemps-method}
+\alias{getdateDebut}
 \alias{getLibellesPas,PasDeTemps-method}
+\alias{getLibellesPas}
 \alias{getnoPasCourant,PasDeTemps-method}
+\alias{getnoPasCourant}
 \alias{setdateDebut,PasDeTemps-method}
+\alias{setdateDebut}
 \alias{suivant,PasDeTemps-method}
-
+\alias{suivant}
+\alias{validite_PasDeTemps}
 \title{Class "PasDeTemps"}
 \description{Describes a time step}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("PasDeTemps", dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
  \describe{
-    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"} ~ Starting date }
-    \item{\code{dureePas}:}{Object of class \code{"numeric"} ~ Step length }
-    \item{\code{nbPas}:}{Object of class \code{"numeric"} ~ Number of steps }
-    \item{\code{noPasCourant}:}{Object of class \code{"integer"} ~ Number of the current step }
+    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"}  Starting date }
+    \item{\code{dureePas}:}{Object of class \code{"numeric"}  Step length }
+    \item{\code{nbPas}:}{Object of class \code{"numeric"}  Number of steps }
+    \item{\code{noPasCourant}:}{Object of class \code{"integer"}  Number of the current step }
   }
 }
 
 \section{Slots}{
 	 \describe{
-    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"} ~ Starting date }
-    \item{\code{dureePas}:}{Object of class \code{"numeric"} ~ Step length }
-    \item{\code{nbPas}:}{Object of class \code{"numeric"} ~ Number of steps }
-    \item{\code{noPasCourant}:}{Object of class \code{"integer"} ~ Number of the current step }
+    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"}  Starting date }
+    \item{\code{dureePas}:}{Object of class \code{"numeric"}  Step length }
+    \item{\code{nbPas}:}{Object of class \code{"numeric"} Number of steps }
+    \item{\code{noPasCourant}:}{Object of class \code{"integer"}  Number of the current step }
   }
 }
 \section{Methods}{

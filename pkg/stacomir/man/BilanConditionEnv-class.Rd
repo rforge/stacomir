@@ -11,7 +11,8 @@ Objects can be created by calls of the form \code{new("BilanConditionEnv", horod
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{horodate}:}{Object of class \code{"Horodate"} : Starting and ending date}
+    \item{\code{datedebut}:}{Object of class \code{"Horodate"} : Starting and ending date}
+    \item{\code{datefin}:}{Object of class \code{"Horodate"} : Starting and ending date}    
     \item{\code{stationMesure}:}{Object of class \code{"RefStationMesure"} : The measure(s) station(s)}
     \item{\code{data}:}{Object of class \code{"data.frame"} : Environmental data}
     \item{\code{requete}:}{Object of class \code{"RequeteODBCwheredate"} : Query to get informations about the environmental conditions }

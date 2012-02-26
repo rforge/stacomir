@@ -4,6 +4,7 @@
 \alias{htableBilanMigrationInterAnnuelle}
 \alias{hTableBilanEspeces}
 \alias{hTableBilanMigration}
+\alias{hbilanMigrationstat}
 \alias{funtableDC}
 \alias{funtableDF}
 \alias{funtableBilan_tail}
@@ -21,7 +22,7 @@
   The handler functions are linked to S4 classes, but due to gwidget programming cannot be programmed as S4 methods
   function called by handler which display table or stats either as .csv or html
   the stats are stored in the \strong{Calcmig} folder which location can be changed by changing
-  the calcmig.xml function in the \file {c:\\program files\\stacomi} folder
+  the calcmig.xml function in the \file{c:\\program files\\stacomi} folder
 \enumerate{
 \item \code{\linkS4class{BilanConditionEnv}}{ \code{hbilanConditionEnvstat}}
 \item \code{\linkS4class{BilanMigrationPar}}{ \code{hbilanMigrationParstat} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=3}

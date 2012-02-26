@@ -1,4 +1,5 @@
 \name{fundist}
+\alias{fundist}
 \title{fundist =function to calculate the median of the distribution of pigment stages}
 \usage{
   fundist(Vparm, phicum, graph = TRUE, lmax = 1)
@@ -7,7 +8,7 @@
   \item{Vparm}{parameters for the gamma functions describing pigment stages}
   \item{phicum}{cumulated pigmentation time}
   \item{graph}{logical, to see the curves type  graph = TRUE}
-  \item{lmax}{scale parameter of the graphical function see \link{fnstades}}
+  \item{lmax}{scale parameter of the graphical function see \link{fnstade}}
 }
 \description{
 see code

@@ -1,4 +1,4 @@
-\name{interface_Bilan_stades_pigm}
+\name{interface functions}
 \alias{interface_Bilan_stades_pigm}
 \title{An interface that calls the object to build the user interface}
 \usage{

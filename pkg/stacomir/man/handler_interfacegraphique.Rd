@@ -9,7 +9,7 @@
 \alias{hOPE}
 \alias{hDFDC}
 \alias{hBilanMigration}
-\alias{hBilanMigrationInterannuelle}
+\alias{hBilanMigrationInterAnnuelle}
 \alias{hBilanMigrationConditionEnv}
 \alias{hDF}
 \alias{hhelp}
@@ -17,6 +17,8 @@
 \alias{hSt}
 \alias{hTail}
 \alias{htodo}
+\alias{hlang}
+\alias{husr}
 \alias{hx11}
 \title{handler function used by the main interface to call bilan classes}
 \usage{

@@ -2,7 +2,9 @@
 \alias{hbilanMigrationcalc}
 \alias{calchBilanEspecescalc}
 \alias{hbilanMigrationConditionEnvcalc}
-\alias{hbilanMigrationParcalc(h, ...)}
+\alias{hbilanMigrationParcalc}
+\alias{hBilanEspecescalc}
+\alias{hcalculeBilanTaille}
 \title{function called by handler which do the main calculations for a Bilan class}
 \usage{
  hbilanMigrationcalc(h, ...)

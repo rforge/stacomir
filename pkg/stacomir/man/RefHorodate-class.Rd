@@ -2,6 +2,7 @@
 \docType{class}
 \alias{RefHorodate-class}
 \alias{RefHorodate}
+\alias{validite_RefHorodate}
 
 \title{Class "RefHorodate"}
 \description{	choice of date with method to show current and previous year

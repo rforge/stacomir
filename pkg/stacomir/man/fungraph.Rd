@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{bilanMigration}{an objet of class \code{\linkS4class{BilanMigration}}}
-  \item{table=tableau}{a data frame with the results}
+  \item{tableau}{a data frame with the results}
   \item{duree}{a vector POSIXt}
   \item{taxon}{the species}
   \item{stade}{the stage}

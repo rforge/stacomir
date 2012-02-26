@@ -1,7 +1,6 @@
 \name{stacomiR-package}
 \Rdversion{1.1}
 \alias{stacomi-package}
-\alias{stacomi}
 \docType{package}
 \title{package stacomiR Stations de Controle des Migrations, Fish Migration control}
 \description{
@@ -30,18 +29,7 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 \keyword{dynamic}
 \keyword{database}
 \seealso{
-\code{\link[<pkg>XML<pkg>]{XML}}
-\code{\link[<pkg>methods<pkg>]{methods}}
-\code{\link[<pkg>proto<pkg>]{proto}}
-\code{\link[<pkg>tcltk2<pkg>]{tcltk2}}
-\code{\link[<pkg>RODBC<pkg>]{RODBC}}
-\code{\link[<pkg>ggplot2<pkg>]{ggplot2}}
-\code{\link[<pkg>gWidgets<pkg>]{gWidgets}}
-\code{\link[<pkg>R2HTML<pkg>]{R2HTML}}
-\code{\link[<pkg>gWidgetsRGtk2<pkg>]{gWidgetsRGtk2}}
-\code{\link[<pkg>lattice<pkg>]{lattice}}
-\code{\link[<pkg>RColorBrewer<pkg>]{RColorBrewer}}
-\code{\link[<pkg>Hmisc<pkg>]{Hmisc}}
+\code{\link[pkg]{stacomiRtools}}
 }
 
 \examples{

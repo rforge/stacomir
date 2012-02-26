@@ -5,7 +5,8 @@
   funcalcbilan_stades_pigm(h, ...)
 }
 \arguments{
-  \item{h}{}
+  \item{h}{a handler}
+  \item{...}{additional arguments}
 }
 \description{
   Function with handler which calls charge (and thus

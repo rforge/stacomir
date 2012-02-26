@@ -1,6 +1,7 @@
 \name{calcule-methods}
 \docType{methods}
 \alias{calcule-methods}
+\alias{calcule}
 \alias{calcule,BilanMigration-method}
 \alias{calcule,BilanMigrationConditionEnv-method}
 \alias{calcule,BilanMigrationPar-method}

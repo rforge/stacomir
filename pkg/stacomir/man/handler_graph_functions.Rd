@@ -4,15 +4,20 @@
 \alias{funbarchartDC}
 \alias{funbarchartDF}
 \alias{fungraphInteract_lot}
+\alias{funbarchartBilan_lot}
+\alias{funboxBilan_lot}
 \alias{funboxDC}
 \alias{funboxDF}
 \alias{hCamembert}
 \alias{hHistogramme}
 \alias{hbilanMigrationConditionEnvgraph}
 \alias{hbilanMigrationgraph}
+\alias{hbilanMigrationgraph2}
 \alias{hbilanMigrationPargraph}
 \alias{hbilanMigrationPargraph2}
 \alias{hfungraphstades}
+\alias{fungraphgg}
+\alias{fungraphInteract_tail}
 \alias{hgraphBilanMigrationInterAnnuelle}
 \alias{hgraphBilanMigrationInterAnnuelle2}
 \alias{hgraphBilanMigrationInterAnnuelle3}
@@ -49,6 +54,10 @@
       \item \code{\linkS4class{BilanMigrationPar}}{\code{hbilanMigrationPargraph2} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=2}
       \item \code{\linkS4class{Bilan_stades_pigm}}{\code{hfungraphstades} Calls the function \code{fungraphstades}}
       \item \code{\linkS4class{Bilan_lot}}{\code{fungraphInteract_lot} plot using the stacomirtools ggplot2 interface}
+      \item \code{\linkS4class{Bilan_taille}}{\code{fungraphInteract_tail} interactive plot for size}
+      \item \code{\linkS4class{Bilan_stades_pigm}}{\code{fungraphgg}  interactive plot for ggplot2}
+      \item \code{\linkS4class{Bilan_stades_pigm}}{\code{hfungraphstades}  interactive plot for ggplot2}
+
    }
 }
 \note{
