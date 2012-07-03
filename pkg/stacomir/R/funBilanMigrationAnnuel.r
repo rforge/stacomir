@@ -24,8 +24,8 @@ funBilanMigrationAnnuel=function(bilanMigration) {
 	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
 	year=as.numeric(strftime(as.POSIXlt(bilanMigration@pasDeTemps@dateDebut),format="%Y"))
 	dcCode = as.character(bilanMigration@dc@dc_selectionne)
-  	req@sql = paste(" select sum(lot_effectif) as effectif from ",get("sch",envir=envir_stacomi),"t_operation_ope ",
-					" join ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant where ope_dic_identifiant=",dcCode,
+  	req@sql = paste(" select sum(lot_effectif) as effectif from ",sch,"t_operation_ope ",
+					" join ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant where ope_dic_identifiant=",dcCode,
 					" and extract(year from ope_date_debut)=", year,
 					" and lot_tax_code='",bilanMigration@taxons@data$tax_code,
 					"' and lot_std_code='",bilanMigration@stades@data$std_code,

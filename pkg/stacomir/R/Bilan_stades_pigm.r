@@ -60,7 +60,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 			#  chargement du tableau des stades pigmentaires
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC=baseODBC
-			requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
+			requete@select= paste("SELECT * FROM ",sch,"vue_lot_ope_car",sep="")
 			requete@colonnedebut="ope_date_debut"
 			requete@colonnefin="ope_date_fin"
 			requete@order_by="ORDER BY ope_date_debut"
@@ -102,7 +102,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 						" val_libelle as env_val_identifiant,",
 						" env_valeur_quantitatif,",
 						" env_stm_identifiant",
-						" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
+						" FROM ",sch,"tj_conditionenvironnementale_env",
 						" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 				tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)

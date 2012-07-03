@@ -104,7 +104,7 @@ husr=function(h,...){
 		# on prend les valeurs choisies par défaut dans baseODBC
 		# rien
 	}
-	assign("sch",paste(baseODBC[2],".",sep=""),envir_stacomi)
+	assign("sch",paste(baseODBC[2],".",sep=""),envir=.GlobalEnv)
 	con@baseODBC=baseODBC
 	e=expression(con<-connect(con))
 	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si ça plante la connexion n'est pas ouverte

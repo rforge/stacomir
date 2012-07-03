@@ -56,7 +56,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 				funout(get("msg",envir=envir_stacomi)$Bilan_taille.1,arret=TRUE)
 			} else if (objet@parquan@data$par_nom=="aucune") {
 				#caracteristique qualitative uniquement
-				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual" ,
+				sql=paste("SELECT * FROM ",sch,"vue_ope_lot_ech_parqual" ,
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -66,7 +66,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 				
 			} else if (objet@parqual@data$par_nom=="aucune") {
 				# Caracteristique quantitative uniquement
-				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",
+				sql=paste("SELECT * FROM ",sch,"vue_ope_lot_ech_parquan",
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -83,7 +83,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 						#"--colonnes communes aux deux tableaux", 
 						#" -- tableau donnant les lots et sous lots contenant un poids pour anguille",
 						"SELECT * FROM (",
-						"SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
+						"SELECT * FROM ",sch,"vue_ope_lot_ech_parquan", 
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -93,7 +93,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 						" LEFT JOIN", 
 						#" --tableau donnant les lots et sous lots contenant le type de caracteristique" ,
 						" (SELECT lot_identifiant as lot_identifiant1,car_val_identifiant ",
-						"  FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
+						"  FROM ",sch,"vue_ope_lot_ech_parqual", 
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,     
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,

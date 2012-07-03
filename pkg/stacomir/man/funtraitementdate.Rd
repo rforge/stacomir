@@ -36,4 +36,3 @@
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}
 }
-
