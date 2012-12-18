@@ -9,19 +9,19 @@
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("PasDeTempsJournalier", dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
  \describe{
-    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"} ~ Starting date }
-    \item{\code{dureePas}:}{Object of class \code{"numeric"} ~ Step length }
-    \item{\code{nbPas}:}{Object of class \code{"numeric"} ~ Number of steps }
-    \item{\code{noPasCourant}:}{Object of class \code{"integer"} ~ Number of the current step }
+    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"}  Starting date }
+    \item{\code{dureePas}:}{Object of class \code{"numeric"}  Step length }
+    \item{\code{nbPas}:}{Object of class \code{"numeric"}  Number of steps }
+    \item{\code{noPasCourant}:}{Object of class \code{"integer"}  Number of the current step }
   }
 }
 
 \section{Slots}{
 	 \describe{
-    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"} ~ Starting date }
-    \item{\code{dureePas}:}{Object of class \code{"numeric"} ~ Step length }
-    \item{\code{nbPas}:}{Object of class \code{"numeric"} ~ Number of steps }
-    \item{\code{noPasCourant}:}{Object of class \code{"integer"} ~ Number of the current step }
+    \item{\code{dateDebut}:}{Object of class \code{"POSIXt"}  Starting date }
+    \item{\code{dureePas}:}{Object of class \code{"numeric"}  Step length }
+    \item{\code{nbPas}:}{Object of class \code{"numeric"} Number of steps }
+    \item{\code{noPasCourant}:}{Object of class \code{"integer"}  Number of the current step }
   }
 }
 \section{Extends}{
