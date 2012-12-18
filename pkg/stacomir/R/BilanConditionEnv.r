@@ -126,7 +126,8 @@ hbilanConditionEnvgraph = function(h,...)
 			
 			# creation du graphe
 			g<-ggplot(datstm,aes_string(x="env_date_debut",y=nameColonne))  
-			g<-g+geom_line(aes_string(colour=nameColonne))+scale_y_continuous(stm$stm_libelle)+ scale_x_datetime(name="date",major="months", minor="weeks", format="%b-%y")
+			g<-g+geom_line(aes_string(colour=nameColonne))+scale_y_continuous(stm$stm_libelle)+
+					scale_x_datetime(name="date")
 			
 			# affichage du graphe à l'ecran
 			print(g, vp=vplayout(i,1))
@@ -156,4 +157,7 @@ hbilanConditionEnvstat = function(h,...)
 	for (i in names(liste)){
 		funout(paste(" station",i,":\nMin  ; 1st Qu.;  Median  ;    Mean   ; 3rd Qu.  ;     Max   ;    Na's  ) = \n",paste(liste[[i]],collapse="   ;   "),"\n"))
 	}
+	path=file.path(path.expand(datawd),paste("env_cond.csv",sep=""),fsep ="\\")
+	write.table(dat,path,sep=';',row.names=FALSE)
+	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path,"\n"))
 }

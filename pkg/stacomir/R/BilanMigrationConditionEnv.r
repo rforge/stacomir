@@ -17,7 +17,7 @@ setClass(Class="BilanMigrationConditionEnv",representation=
 		
 		)
 )
- 
+
 
 setValidity("BilanMigrationConditionEnv",
 		function(object)
@@ -123,7 +123,7 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 	#tableauCE1=data.frame("env_date_debut"=duree, "env_stm_identifiant"="essai2", "env_valeur_quantitatif"=sin((1:length(duree))/50))
 	#tableauCE=rbind(tableauCE,tableauCE1)
 	tableauCE$env_date_debutchar=as.character(as.Date(tableauCE$env_date_debut))  
-
+	
 	if (nrow(stations)==0) { 
 		funout(funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.4))
 		#assign(x="bilanCondition",bilanMigrationConditionEnv@bilanMigration,envir=envir_stacomi)
@@ -159,11 +159,11 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 			# le merge ci dessous est l'equivalent d'une jointure gauche (LEFT JOIN)
 			tableau<-merge(tableau,tableauCEst,by.x = "dureechar", by.y = "env_date_debutchar",  all.x = TRUE)
 			# les donnees sont normalement collees dans le tableau dans une nouvelle colonne et aux dates correspondantes
-		if (length(duree)!=nrow(tableau)) funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5,
-						nrow(tableau),
-						get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6,
-						length(duree),
-						")\n"),arret=TRUE)
+			if (length(duree)!=nrow(tableau)) funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5,
+								nrow(tableau),
+								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6,
+								length(duree),
+								")\n"),arret=TRUE)
 			#si la jointure à rajoute des lignes ça craint je ne sais pas comment se fera le traitement
 		} # end for
 		taxon= as.character(bilanMigrationConditionEnv@bilanMigration@taxons@data$tax_nom_latin)

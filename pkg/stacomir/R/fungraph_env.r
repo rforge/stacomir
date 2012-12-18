@@ -28,8 +28,7 @@ fungraph_env=function(tableau,duree,taxon,stade,stations){
 			semaine=TRUE,
 			jour_an=TRUE,
 			jour_mois=FALSE,
-			heure=FALSE)
-	
+			heure=FALSE)	
 	couleurs=rep(brewer.pal(8,"Accent"),2)
 	maxeff=floor(log10(max(tableau$Effectif_total,na.rm=TRUE)))
 	lab_les_stations=stations$stm_libelle
@@ -37,7 +36,8 @@ fungraph_env=function(tableau,duree,taxon,stade,stations){
 		tableau[,paste("couleur",i,sep="")]<-couleurs[i]
 		if (stations$stm_typevar[i]=="quantitatif") {
 			diff=maxeff-round(log10(max(tableau[,stations$stm_libelle[i]],na.rm=TRUE)))
-			if (diff!=0 ){
+		
+			if (diff!=0 & !is.na(diff)){
 				tableau[,stations$stm_libelle[i]] = as.numeric(tableau[,stations$stm_libelle[i]])*10^diff    
 				lab_les_stations[i]=paste(stations$stm_libelle[i],".10^",diff,sep="")
 			} # end if
@@ -46,7 +46,7 @@ fungraph_env=function(tableau,duree,taxon,stade,stations){
 	tableau$yqualitatif=(10^(maxeff))/2
 	name=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,", ",paste(lab_les_stations,collapse=", "),sep="")
 	g<-ggplot(tableau, aes(x=duree,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
-			scale_y_continuous(name=name)+opts(title=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee ))
+			scale_y_continuous(name=name)+labs(title=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee ))
 	for (i in 1:nrow(stations)){
 		if (stations$stm_typevar[i]=="quantitatif") {
 			if (all(!is.na(tableau[,stations$stm_libelle[i]]))){

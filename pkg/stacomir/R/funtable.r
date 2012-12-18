@@ -29,7 +29,7 @@ funtable=function(tableau,duree,taxon,stade,DC,resum){
     path2=file.path(path.expand(datawd),paste("res",annee,".csv",sep=""),fsep ="\\")
   	write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";",append=TRUE)
   	path2html=file.path(path.expand(datawd),paste("res",annee,".html",sep=""),fsep ="\\")
-  	funout(paste("ecriture de",path2,"\n"))
+  	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2,"\n"))
   	 funhtml(resum,
             caption=paste("Sommes mensuelles",annee),
             top=TRUE,

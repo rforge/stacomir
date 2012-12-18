@@ -23,6 +23,7 @@ require('xtable')
 require('XML') 
 require('svMisc')   
 require('stringr')
+require('grid')
 #require('Rcmdr') not done there as is causes the interface to load
 }
  # pour sa fonction Calendar
