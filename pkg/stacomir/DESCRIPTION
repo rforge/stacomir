@@ -94,4 +94,5 @@ Depends:
     stringr,
     svMisc,
     Rcmdr,
-    reshape2
+    reshape2,
+    scales
