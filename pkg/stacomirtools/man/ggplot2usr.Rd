@@ -9,7 +9,8 @@
 \examples{
  data("mtcars") # the dataframe used are listed in the base environment .GlobalEnv 
  data("diamonds") # so that at least two dataframes appear in the list
- ggplot2usr(data="mtcars")
+# todo check ggplot2usr and change accordingly
+# ggplot2usr(data="mtcars")
 # at this stage you should see a frame with the following content
 # BUTTON FRAME
 # button geom<>stat => switches between geom and stat
