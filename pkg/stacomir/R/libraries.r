@@ -24,6 +24,7 @@ require('XML')
 require('svMisc')   
 require('stringr')
 require('grid')
+require(reshape2)
 #require('Rcmdr') not done there as is causes the interface to load
 }
  # pour sa fonction Calendar

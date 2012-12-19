@@ -93,4 +93,5 @@ Depends:
     stacomirtools,
     stringr,
     svMisc,
-    Rcmdr
+    Rcmdr,
+    reshape2
