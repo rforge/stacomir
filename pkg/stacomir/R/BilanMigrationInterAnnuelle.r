@@ -291,7 +291,8 @@ fundat=function(dat,timesplit=NULL)
 		mindat<-tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE)
 		meandat<-tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE)
 		datsummary<-data.frame("maxtab"=maxdat,"mintab"=mindat,"moyenne"=meandat)
-		datsummary[,timesplit]<-names(maxdat)
+		datsummary<-datsummary[!is.infinite(datsummary$maxtab),]# the minimum and max of empty set are -Inf and Inf respectively
+		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
 		dat[,timesplit]<-as.character(dat[,timesplit])
 		dat<-merge(dat,datsummary,by=timesplit)
 		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est nécessaire pour les ggplot
@@ -311,13 +312,15 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)	
 	dat=bilanMigrationInterAnnuelle@data
 	dat=fundat(dat)
-	#dat=dat[order(dat$annee,dat$jour),]      
+	#dat=dat[order(dat$annee,dat$jour),] 
+	dat$valeur[is.na(dat$valeur)]<-0 # sinon si il ne reste qu'une ligne peut planter
 	the_choix=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(dat$annee)),"choix annee",multiple=FALSE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")      
 	#################
 	# Calcul des cumsum
 	###################
-	dat<-dat[!is.na(dat$valeur),]
+
+	#dat$valeur[dat$valeur<0]<-0
 	for (an in unique(dat$annee)){
 		# an=as.character(unique(dat$annee)) ;an<-an[1]
 		dat[dat$annee==an,"cumsum"]<-cumsum(dat[dat$annee==an,"valeur"])
@@ -326,7 +329,8 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	dat$cumsum=dat$cumsum/dat$total_annuel
 	dat$jour=as.Date(dat$jour)
 	dat$annee=as.factor(dat$annee)
-	
+	# bug, enlève les années avec seulement une ligne
+
 	#################
 	# Graphique
 	###################
