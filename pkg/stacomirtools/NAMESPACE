@@ -5,8 +5,6 @@ exportClasses(
      "RequeteODBC",
      "RequeteODBCwhere",
      "RequeteODBCwheredate")
-export(build_proto)
-export(ggplot2usr)
 export(chnames)
 export(indrepeated)
 export(is.even)

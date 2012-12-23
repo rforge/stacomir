@@ -44,17 +44,9 @@ chnames=function(objet,
 	return(objet)
 }
 
-#' fonction qui retourne l'index des valeurs repetees d'un vecteur
-#' @param a 
-#' @returnType vector
-#' @return the index of repeated values within a vector
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
-indrepeated=function(a){
-	sol=match(unique(a),a)     #index des valeurs uniques
-	rep=a[-sol]  # valeurs repetees
-	return(ind(rep,a))   # index des valeurs repetees
-}
+# fonction qui retourne l'index des valeurs repetees d'un vecteur
+# see duplicated
+
 #' fonction qui renvoit l'index des valeurs apparaissant une seule fois
 #' @param a 
 #' @returnType vector
@@ -87,7 +79,7 @@ killfactor=function(df){
 #' @export
 ex<-function(d=NULL){
 	if (is.null(d)){
-		xl=tk_select.list(ls(envir=globalenv()), preselect = NULL, multiple = FALSE, title = "choisir l'objet")
+		xl=select.list(choices=ls(envir=globalenv()), preselect = NULL, multiple = FALSE, title = "choisir l'objet")
 		write.table(get(xl),"clipboard",sep="\t",col.names=NA)
 	} else {
 		write.table(d,"clipboard",sep="\t",col.names=NA)
