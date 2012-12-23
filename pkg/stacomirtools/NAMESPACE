@@ -6,12 +6,10 @@ exportClasses(
      "RequeteODBCwhere",
      "RequeteODBCwheredate")
 export(chnames)
-export(indrepeated)
 export(is.even)
 export(is.odd)
 export(killfactor)
 export(tab2df)
 export(induk)
-export(indrepeated)
 export(ex)
 export(funhtml)
