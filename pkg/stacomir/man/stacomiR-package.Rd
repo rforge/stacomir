@@ -10,8 +10,8 @@ Stacomi enables to read informations in a database about fish migrations to buil
 \tabular{ll}{
 Package: \tab stacomiR\cr
 Type: \tab Package\cr
-Version: \tab 0.4\cr
-Date: \tab 2011-02-25\cr
+Version: \tab 0.4.1\cr
+Date: \tab 2011-12-24\cr
 License: \tab GPL license\cr
 LazyLoad: \tab yes\cr
 Depends: \tab methods\cr

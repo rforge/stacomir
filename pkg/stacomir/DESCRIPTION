@@ -1,13 +1,13 @@
 Package: stacomiR
 Type: Package
 Title: STACOMI migration control
-Version: 0.4
-Date: 2012-02-09
+Version: 0.4.1
+Date: 2012-12-24
 Author: Cedric Briand <cedric.briand@lavilaine.com>
 Maintainer: Cedric Briand <cedric.briand@lavilaine.com>
 Description: Graphical outputs and treatment for a database of fishway monitoring. 
 	It is a part of the STACOMI project developed in France by the ONEMA institute to centralize data obtained by fishway monitoring. 
-	Version 0.4 is now available in english and spanish and could be translated in other languages. \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
+	Version 0.4.1 is now available in english and spanish and could be translated in other languages. \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
 License: GPL
 Collate:
     'utilitaires.r'

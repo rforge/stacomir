@@ -10,7 +10,7 @@ interface_BilanPoidsMoyen = function()
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
         bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
-    bilan_poids_moyen@liste=charge(objet=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la catégorie d'effectif
+    bilan_poids_moyen@liste=charge(objet=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la catï¿½gorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
     group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -26,7 +26,7 @@ interface_BilanPoidsMoyen = function()
 
     
     addSpring(group)
-    graphes=ggraphics(width=800,height=650)
+    graphes=ggraphics(width=600,height=400)
     add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     assign("graphes",graphes,envir=.GlobalEnv)
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
@@ -44,12 +44,12 @@ interface_BilanPoidsMoyen = function()
 	toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
 	add(group, gmenu(toolbarlist))
     
-    # Les methodes choix suivantes sont passees en cascade à l'interieur des methodes choix
+    # Les methodes choix suivantes sont passees en cascade ï¿½ l'interieur des methodes choix
     #choix(bilan_lot@taxons,is.enabled=FALSE)
     #choix(bilan_lot@stades,is.enabled=FALSE)
     #choix(bilan_lot@par,is.enabled=FALSE)
     
-    # TODO ajouter une fonction eval ou la liste du combo box est diminuee à l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
+    # TODO ajouter une fonction eval ou la liste du combo box est diminuee ï¿½ l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
     
     #toolbarlist$Calc$handler = connect(fonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"

@@ -122,14 +122,14 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 
 #' handler du calcul hCamembert
 #' trace un camembert des especes ou un camembert par periode...
-#' @note pas besoin de refaire tourner calcul si une autre liste à été chargée, les effectifs <0 sont transformés en positifs
+#' @note pas besoin de refaire tourner calcul si une autre liste ï¿½ ï¿½tï¿½ chargï¿½e, les effectifs <0 sont transformï¿½s en positifs
 #' @param h 
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 
 hCamembert = function(h,...) {	
-	# TODO règler le pb de handler et transformation en histo ?
+	# TODO rï¿½gler le pb de handler et transformation en histo ?
 	if (exists("bilanEspeces",envir_stacomi)) {
 		bilanEspeces<-get("bilanEspeces",envir_stacomi)
 	} else {      
@@ -142,7 +142,7 @@ hCamembert = function(h,...) {
 	tableEspeces=bilanEspeces@data
 	if (nrow(tableEspeces)==0) funout(get("msg",envir_stacomi)$BilanEspeces.5,arret=TRUE)
 	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
-	# je ne garde taxons_stades que pour les espèces présentant plusieurs stades
+	# je ne garde taxons_stades que pour les espï¿½ces prï¿½sentant plusieurs stades
 	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
 	if (length(nbstades[nbstades>1])>0){
 		les_multiples=names(nbstades[nbstades>1])
@@ -158,7 +158,7 @@ hCamembert = function(h,...) {
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
 			"aucun"=as.data.frame(xtabs(lot_effectif~taxon_stades,data=tableEspeces)))
-	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le mê nb de colonnes
+	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le mï¿½ nb de colonnes
 # graphique ggplot
 	
 	p<-ggplot(sumEspeces)
@@ -186,9 +186,9 @@ hCamembert = function(h,...) {
 }
 
 
-#TODO développer cette fonction
+#TODO dï¿½velopper cette fonction
 #' handler du calcul hHistogramme
-#' trace un histogramme des espèces fréquentant la passe... 
+#' trace un histogramme des espï¿½ces frï¿½quentant la passe... 
 #' @param h 
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
@@ -299,7 +299,7 @@ interface_BilanEspeces=function(){
 	)    
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	addSpring(group)
-	graphes=ggraphics(width=650,height=650)
+	graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

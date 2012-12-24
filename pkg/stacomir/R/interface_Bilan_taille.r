@@ -51,7 +51,7 @@ interface_BilanTaille = function()
 	enabled(toolbarlist[["table"]])<-FALSE
     add(ggroupboutonsbas, gtoolbar(toolbarlist))
     addSpring(group)
-    graphes=ggraphics(width=800,height=650)
+    graphes=ggraphics(width=600,height=400)
     add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     assign("graphes",graphes,envir=.GlobalEnv)
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)

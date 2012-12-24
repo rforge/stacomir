@@ -3,7 +3,7 @@
 \alias{Bilan_lot-class}
 \alias{Bilan_lot}
 \title{Class "Bilan_lot"}
-\description{Bilan_lot Bilan class calls the content of the table tj_caracteristiquelot_car}
+\description{Bilan_lot Bilan class calls the content of the postgres view vue_lot_ope_car}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
 }
@@ -22,6 +22,7 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
   \describe{
     \item{charge}{\code{signature(objet = "Bilan_lot")}:  connect method for Bilan_lot }
     \item{connect}{\code{signature(objet = "Bilan_lot")}:  charge method for Bilan_lot class }
+    \item{calcule}{\code{signature(objet = "Bilan_lot")}:  calcule method for Bilan_lot class, works on the query result to transform it, uses \code{funtraitementdate} }
 	 }
 }
 \author{Cedric Briand \email{cedric.briand@lavilaine.com}}

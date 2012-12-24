@@ -201,7 +201,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refCheckBox",envir_stacomi)) {
 				objet@options<-get("refCheckBox",envir_stacomi)
 			} else {
-				# rien de toutes façons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes faï¿½ons les choix par defaut sont copies dans envir_stacomi
 			}  
 			if (exists("refchoix",envir_stacomi)) {
 				objet@lmax<-get("refchoix",envir_stacomi)
@@ -213,7 +213,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refTextBox",envir_stacomi)) {
 				objet@salinite<-get("refTextBox",envir_stacomi)
 			} else {
-				# rien de toutes façons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes faï¿½ons les choix par defaut sont copies dans envir_stacomi
 			} 
 			if (objet@options@checked[2]){
 				if (exists("refStationMesure",envir_stacomi)) {
@@ -388,8 +388,8 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 		x11()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
-	#traitement à part de VB
-	# raison = ça marche pas sinon
+	#traitement ï¿½ part de VB
+	# raison = ï¿½a marche pas sinon
 	# dans le modele VB = 1-p(VIA0) proba de ne pas etre au stade suivant ? 
 	out=c( VB$x[VB$x>Vparm$pigment_stage[[1]]][1],
 			fun50(VIA0$x,VIA0c),
@@ -538,7 +538,7 @@ fungraphstades<-function(
 		cherchenuls[cherchenuls>0]=1
 		cherchenuls=cbind(cherchenuls,rep(1,length(dates)))
 		# cherchenul cherche les stades nuls (sans valeur) pour ne pas renvoyer de warning
-		# correpondant à un depassement du temps pigmentaire :
+		# correpondant ï¿½ un depassement du temps pigmentaire :
 		# ex : les temps physiologiques remontent un mois avant, les stades VIA3
 		# auraient necessite 1 mois et demi mais ils sont absents du jeu de donnees   
 		
@@ -548,12 +548,12 @@ fungraphstades<-function(
 			# et on calcule le cumul du vecteur inverse
 			phicum=cumsum(rev(phi$phi_jour[1:match(strdates[j],phi$dates)]))
 			phicum=phicum[phicum<maxVIA3]
-			# pour des raisons graphiques, je m'arrete à un temps pigmentaire de maxVIA3
-			# au delà on sait que c'est 100% de VIA3
+			# pour des raisons graphiques, je m'arrete ï¿½ un temps pigmentaire de maxVIA3
+			# au delï¿½ on sait que c'est 100% de VIA3
 			# il faudrait avoir modelise jusqu'au stade VIA4
 			# on va chercher la date correspondante
 			phidates=rev(phi$dates[1:match(strdates[j],phi$dates)])[1:length(phicum)]
-			# structures des stades en x et y calcules à partir de la fonction gamma
+			# structures des stades en x et y calcules ï¿½ partir de la fonction gamma
 			# x = les phicum (croissant en remontant dans le temps
 			# y = la distribution dist/max(dist) entre zero et 1
 			#
@@ -573,7 +573,7 @@ fungraphstades<-function(
 			curv[[strdates[j]]]$VIA3$y=tablestades[j,5]*curv[[strdates[j]]]$VIA3$y
 			# tps qui etait un fichier de temps pigmentaires est ici remplace par un fichier de dates
 			for (k in 1:6){
-				# dans le cas normal premier element superieur à tps, dates correcpondante remplace tps
+				# dans le cas normal premier element superieur ï¿½ tps, dates correcpondante remplace tps
 				if (sum(phicum>tps[j,k])>0) {
 					tps[j,k]=phidates[phicum>tps[j,k]][1]
 				} else {
@@ -646,7 +646,7 @@ fungraphstades<-function(
 	}
 	if (graphstades)  {
 		# stades cumules calcul necessaire pour points et graphique durees
-		# le graphique ne supporte pas plusieurs echantillons à la m^ date d'ou le choix
+		# le graphique ne supporte pas plusieurs echantillons ï¿½ la m^ date d'ou le choix
 		
 		par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=gray(5:1/6),ordre=c(1,2,3,4,5),
@@ -691,7 +691,7 @@ fungraphstades<-function(
 
 fungraphgg=function(h,...){
 	p<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
-	p<-p+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer à geom_bar un x et un y...
+	p<-p+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer ï¿½ geom_bar un x et un y...
 			coord_polar(theta="y", start=pi)+ # coordonnees polaires = cercle
 			scale_fill_grey(name="stades pigmentaires",start=0.8, end=0.2)+ # scale_fill_grey permet d'avoir des graduations de gris
 			theme_bw() +  # on efface le fond gris
@@ -793,7 +793,7 @@ interface_Bilan_stades_pigm = function()
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
 	addSpring(group)
-	graphes=ggraphics(width=800,height=650)
+	graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
 	assign("graphes",graphes,envir=.GlobalEnv) 
 	# A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
