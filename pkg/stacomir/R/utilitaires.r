@@ -144,10 +144,10 @@ graphdate<-function(vectordate){
 #' @return text
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fun_char_spe<-function(text){
-	text=gsub("e","e",text)
-	text=gsub("e","e",text)
-	text=gsub("e","e",text)
-	text=gsub("�","a",text)
+	text=gsub("é","e",text)
+	text=gsub("è","e",text)
+	text=gsub("ê","e",text)
+	text=gsub("à","a",text)
 	return(text)}
 #' this function uses gfile, edits a text with info and changing colors
 #' @param text 
