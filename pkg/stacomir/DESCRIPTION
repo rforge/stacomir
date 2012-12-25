@@ -89,7 +89,6 @@ Depends:
     RColorBrewer,
     cairoDevice,
     xtable,
-    Hmisc,
     stacomirtools,
     stringr,
     svMisc,
