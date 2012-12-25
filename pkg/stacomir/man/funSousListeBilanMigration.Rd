@@ -3,7 +3,7 @@
 \title{funSousListeBilanMigration}
 \usage{funSousListeBilanMigration(bilanMigration)}
 \arguments{
-  \item{bilanMigration}{an objet of class \code{\linkS4class{BilanMigration}}
+  \item{bilanMigration}{an objet of class \code{\linkS4class{BilanMigration}}}
 }
 \description{
 workhorse function for bilanMigration. Calculates the number for a stage and a taxa per day. 

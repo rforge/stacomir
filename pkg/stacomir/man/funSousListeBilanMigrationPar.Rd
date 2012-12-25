@@ -3,7 +3,7 @@
 \title{funSousListeBilanMigrationPar}
 \usage{funSousListeBilanMigrationPar(bilanMigrationPar)}
 \arguments{
-  \item{bilanMigrationPar}{an objet of class \code{\linkS4class{BilanMigrationPar}}
+  \item{bilanMigrationPar}{an objet of class \code{\linkS4class{BilanMigrationPar}}}
 }
 \description{
 see \code{funSousListeBilanMigration} This function is similar to bilanMigration but allows
