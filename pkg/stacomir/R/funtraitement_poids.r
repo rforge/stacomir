@@ -26,7 +26,7 @@ funtraitement_poids=function(tableau,duree) {
 	tableauconvert=tableaupoids[,2:6]
 	tableauconvert=tableauconvert*tableaupoids$Coef_conversion       # les coeff sont du type 2.54 et non 0.3
 	if (sum(tableaupoids$Coef_conversion)==0) funout(get("msg",envir=envir_stacomi)$funtraitement_poids.2)
-	# creation d'une tableau (matricepoids) à 5 colonnes comprenant les effectifs convertis
+	# creation d'une tableau (matricepoids) ï¿½ 5 colonnes comprenant les effectifs convertis
 	matricepoids=cbind(tableaupoids[,1],tableauconvert,tableaupoids[,2:6],tableaupoids$Coef_conversion)
 	dimnames(matricepoids)=list(1:length(tableaupoids[,1]),c(
 					"No.pas",
@@ -54,7 +54,7 @@ funtraitement_poids=function(tableau,duree) {
 	
 	# recuperation des coefficients de conversion quantite effectif
 	req=new("RequeteODBCwheredate")
-	req@baseODBC<-baseODBC
+	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@select="select * from tj_coefficientconversion_coe"
 	req@datedebut<-as.POSIXlt(duree[min(index)])
 	req@datefin<-as.POSIXlt(duree[max(index)])

@@ -8,7 +8,7 @@
 #' @slot parquan = "Refparquan"
 #' @slot parqual = "Refparqual"
 #' @slot echantillon = "RefChoix"
-#' @slot valeurs_possibles : data.frame valeurs possibles d'un paramètre qualitatif (discret)
+#' @slot valeurs_possibles : data.frame valeurs possibles d'un paramï¿½tre qualitatif (discret)
 #' @slot dc="RefDC" inherited from BilanMigration
 #' @slot taxons="RefTaxon" inherited from BilanMigration
 #' @slot stades="RefStades" inherited from BilanMigration
@@ -132,7 +132,7 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			# pour sauvegarder sous excel
 		})
 #' le handler appelle la methode generique graphe sur l'objet choix=1
-#' @param h, passé par le handler
+#' @param h, passï¿½ par le handler
 hbilanMigrationPargraph = function(h,...) {
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -142,7 +142,7 @@ hbilanMigrationPargraph = function(h,...) {
 	}
 }
 #' le handler appelle la methode generique graphe sur l'objet choix=2
-#' @param h, passé par le handler
+#' @param h, passï¿½ par le handler
 hbilanMigrationPargraph2=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -152,7 +152,7 @@ hbilanMigrationPargraph2=function(h,...){
 	}
 }
 #' le handler appelle la methode generique graphe sur l'objet choix 3
-#' @param h, passé par le handler
+#' @param h, passï¿½ par le handler
 hbilanMigrationParstat=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -212,10 +212,10 @@ setMethod("graphe",signature=signature("BilanMigrationPar"),definition=function(
 				gdf(table, container=TRUE)
 				nomdc=bilanMigrationPar@dc@data$df_code[match(bilanMigrationPar@dc@dc_selectionne,bilanMigrationPar@dc@data$dc)]
 				annee=unique(strftime(as.POSIXlt(bilanMigrationPar@duree),"%Y"))
-				path1=file.path(path.expand(datawd),paste(nmvarqan,"_mensuel_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")) 
-				path1=file.path(path.expand(datawd),paste(nmvarqan,"_journalier_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(bilanMigrationPar@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n"))
 			} # end choix3 

@@ -50,10 +50,10 @@ setClass(Class="BilanFonctionnementDF",
 				requete=new("RequeteODBCwheredate"))
 )
 
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant à l'objet fonctionnement DC
+# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant ï¿½ l'objet fonctionnement DC
 setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(objet,h) {
 #  construit une requete ODBCwheredate
-			objet@requete@baseODBC=baseODBC
+			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			objet@requete@select= paste("SELECT",
 					" per_dis_identifiant,",
 					" per_date_debut,",
@@ -62,7 +62,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 					" per_etat_fonctionnement,",
 					" per_tar_code,",
 					" tar_libelle AS libelle",
-					" FROM  ",sch,"t_periodefonctdispositif_per per",
+					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
 			objet@requete@colonnedebut="per_date_debut"
 			objet@requete@colonnefin="per_date_fin"
@@ -139,7 +139,7 @@ funbarchartDF = function(h,...) {
 							title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
 							label=sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per)))) 
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur à tempsdebut
+		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur ï¿½ tempsdebut
 		while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
 			
 			#if (z>0) stop("erreur")
@@ -326,10 +326,10 @@ funtableDF = function(h,...) {
 	t_periodefonctdispositif_per$per_date_fin=as.character(t_periodefonctdispositif_per$per_date_fin)
 	gdf(t_periodefonctdispositif_per, container=TRUE)
 	annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
-  path1=file.path(path.expand(datawd),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
+  path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
 	write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 	funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1,"\n"))
-	path1html=file.path(path.expand(datawd),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
+	path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
    	funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1html,get("msg",envir=envir_stacomi)$BilanFonctionnementDF.15))
    funhtml(t_periodefonctdispositif_per,
             caption=paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,sep=""),

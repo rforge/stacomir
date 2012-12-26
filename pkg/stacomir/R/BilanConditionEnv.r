@@ -31,7 +31,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 		definition=function(objet,h) {
 			#  construit une requete ODBCwheredate
 			requete=new("RequeteODBCwheredate")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=strptime(objet@datedebut,format="%Y-%m-%d")
 			requete@datefin=strptime(objet@datefin,format="%Y-%m-%d")
 			requete@colonnedebut="env_date_debut"
@@ -43,7 +43,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 							" val_libelle as env_val_identifiant,",
 							" env_valeur_quantitatif,",
 							" env_stm_identifiant",
-							" FROM ",sch,"tj_conditionenvironnementale_env",
+							" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
 							" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 			tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
@@ -129,7 +129,7 @@ hbilanConditionEnvgraph = function(h,...)
 			g<-g+geom_line(aes_string(colour=nameColonne))+scale_y_continuous(stm$stm_libelle)+
 					scale_x_datetime(name="date")
 			
-			# affichage du graphe à l'ecran
+			# affichage du graphe a  l'ecran
 			print(g, vp=vplayout(i,1))
 			
 			# ajout du graphe dans la liste      
@@ -157,7 +157,7 @@ hbilanConditionEnvstat = function(h,...)
 	for (i in names(liste)){
 		funout(paste(" station",i,":\nMin  ; 1st Qu.;  Median  ;    Mean   ; 3rd Qu.  ;     Max   ;    Na's  ) = \n",paste(liste[[i]],collapse="   ;   "),"\n"))
 	}
-	path=file.path(path.expand(datawd),paste("env_cond.csv",sep=""),fsep ="\\")
+	path=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("env_cond.csv",sep=""),fsep ="\\")
 	write.table(dat,path,sep=';',row.names=FALSE)
 	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path,"\n"))
 }

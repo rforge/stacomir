@@ -6,12 +6,12 @@
 # Date de creation :   12/01/2009 14:38:09
 # Compatibilite :      
 # Etat :               developpement en cours, fonctionne 
-# programmer l'affichage du choix de la date  (classe horodate devt en cours) =>  PB à regler dans la relation calendar horodate
+# programmer l'affichage du choix de la date  (classe horodate devt en cours) =>  PB ï¿½ regler dans la relation calendar horodate
 # 05/02/2009 21:21:40 OK fonctionne
 # programmer les graphiques, et notamment les coupures entre les mois, a partir de la table des dates de debut et de fin
 # il faut inserer des lignes correspondant aux debuts et fin de mois afin qu'aucun intervalle ne se trouve a cheval sur deux mois
-# 05/02/2009 21:21:54 OK done => il faudra penser à inserer ce type de modif pour le fonctionnement du DF
-# Description          Calcul du fonctionnement du DC à partir des parametres
+# 05/02/2009 21:21:54 OK done => il faudra penser ï¿½ inserer ce type de modif pour le fonctionnement du DF
+# Description          Calcul du fonctionnement du DC ï¿½ partir des parametres
 #                      extraits de la base migrateur
 # Interface graphique : attribue au bouton DC
 # Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choix de graphiques  OK fonctionne
@@ -28,10 +28,10 @@ setClass(Class="BilanFonctionnementDC",
 				requete=new("RequeteODBCwheredate"))
 )
 
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant à l'objet fonctionnement DC
+# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant ï¿½ l'objet fonctionnement DC
 setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(objet,h) {
 #  construit une requete ODBCwheredate
-			objet@requete@baseODBC<-baseODBC
+			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			objet@requete@select= sql<-paste("SELECT",
 					" per_dis_identifiant,",
 					" per_date_debut,",
@@ -40,7 +40,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" per_etat_fonctionnement,",
 					" per_tar_code,",
 					" tar_libelle AS libelle",
-					" FROM  ",sch,"t_periodefonctdispositif_per per",
+					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
 			objet@requete@colonnedebut<-"per_date_debut"
 			objet@requete@colonnefin<-"per_date_fin"
@@ -102,7 +102,7 @@ funbarchartDC = function(h,...) {
 	for(j in 1:nrow(t_periodefonctdispositif_per)){     # pour toutes les lignes du ResultSet...
 		#cat( j )
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-		lemoissuivant<-seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur à tempsdebut
+		lemoissuivant<-seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur ï¿½ tempsdebut
 		
 		# on est a cheval sur deux periodes 
 		while (tempsfin[j]>lemoissuivant)
@@ -266,10 +266,10 @@ funtableDC = function(h,...) {
 	t_periodefonctdispositif_per$per_date_fin<-as.character(t_periodefonctdispositif_per$per_date_fin)
 	gdf(t_periodefonctdispositif_per, container=TRUE)
 	annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
-	path1=file.path(path.expand(datawd),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
+	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
 	write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 	funout(paste(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1,"\n"))
-	path1html<-file.path(path.expand(datawd),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
+	path1html<-file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
 	funout(paste(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1html,get("msg",envir_stacomi)$BilanFonctionnementDC.15))
 	funhtml(t_periodefonctdispositif_per,
 			caption=paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,sep=""),

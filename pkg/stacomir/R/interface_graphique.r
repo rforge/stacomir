@@ -101,13 +101,13 @@ husr=function(h,...){
 		baseODBC[2]<-svalue(usrname)
 		baseODBC[3]<-svalue(usrpwd)
 	} else {
-		# on prend les valeurs choisies par défaut dans baseODBC
+		# on prend les valeurs choisies par dï¿½faut dans baseODBC
 		# rien
 	}
-	assign("sch",paste(baseODBC[2],".",sep=""),envir=.GlobalEnv)
+	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 	con@baseODBC=baseODBC
 	e=expression(con<-connect(con))
-	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si ça plante la connexion n'est pas ouverte
+	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si ï¿½a plante la connexion n'est pas ouverte
 	test<-con@etat==get("msg",envir=envir_stacomi)$ConnexionODBC.6
 	if (exists("logw")) dispose(logw)
 	odbcCloseAll()
@@ -117,9 +117,9 @@ husr=function(h,...){
 		stacomi(gr_interface=TRUE)
 		# en cas d'erreur on relance une demande de mot de passe
 	}
-	if (test) { # il existe un lien ODBC mais qui pointe peut être ailleurs
+	if (test) { # il existe un lien ODBC mais qui pointe peut ï¿½tre ailleurs
 		requete=new("RequeteODBC")
-		requete@baseODBC=baseODBC
+		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@sql="select count(*) from ref.tr_taxon_tax"
 		requete=connect(requete)
 		if (nrow(requete@query)==0){
@@ -142,7 +142,7 @@ husr=function(h,...){
 					handler=hgmessage)		
 		} else {
 			# l'utilisateur peut avoir choisi une autre base que celle qui est dans le fichier xml
-			assign("baseODBC",baseODBC,envir=.GlobalEnv)
+			assign("baseODBC",baseODBC,envir=envir_stacomi)
 			gr_interface<-get("gr_interface",envir=envir_stacomi)
 			if (gr_interface){
 				interface_graphique()
@@ -195,8 +195,8 @@ stacomi=function(gr_interface=TRUE){
 	datawd=myxml[["datawd"]]
 	lang=myxml[["lang"]]	
 	assign("lang",lang,envir=envir_stacomi)	
-	assign("baseODBC",baseODBC,envir=.GlobalEnv)
-	assign("datawd",datawd,envir=.GlobalEnv)
+	assign("baseODBC",baseODBC,envir=envir_stacomi)
+	assign("datawd",datawd,envir=envir_stacomi)
 	refMsg=new("RefMsg")
 	createmessage(refMsg)
 	
@@ -232,7 +232,7 @@ stacomi=function(gr_interface=TRUE){
 	}
 }
 
-#' lancement du programme, cette fonction recupere d'abord les chemins ODBC et le repertoire de travail à partir du fichier XML
+#' lancement du programme, cette fonction recupere d'abord les chemins ODBC et le repertoire de travail ï¿½ partir du fichier XML
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 interface_graphique=function(){
@@ -240,8 +240,8 @@ interface_graphique=function(){
 	if (exists("graphes"))  rm(list=c("graphes"),envir=.GlobalEnv)
 	if (exists("ggroupboutonsbas"))  rm(list=c("ggroupboutonsbas"),envir=.GlobalEnv) 
 	if (exists("group"))  rm(list=c("group"),envir=.GlobalEnv)
-	if (!file.exists(path.expand(datawd))) {
-		dir.create(path.expand(datawd))
+	if (!file.exists(path.expand(get("datawd",envir=envir_stacomi)))) {
+		dir.create(path.expand(get("datawd",envir=envir_stacomi)))
 	}
 	
 	col.sortie=rep(c("pink","purple","red","orange","green","blue","cyan","magenta"),20) # couleurs pour le texte
@@ -314,7 +314,7 @@ interface_graphique=function(){
 	
 	add(ggrouptotal,ggrouptotal1,expand=FALSE)
 	
-# De nouveau un groupe vertical de boutons qui sera pousse à gauche quand le graphique sera insere
+# De nouveau un groupe vertical de boutons qui sera pousse ï¿½ gauche quand le graphique sera insere
 	ggroupboutons=ggroup(horizontal=FALSE)
 	assign("ggroupboutons",ggroupboutons,envir=.GlobalEnv)
 	

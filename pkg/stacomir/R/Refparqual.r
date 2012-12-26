@@ -5,7 +5,7 @@
 #' @title Refparqual referential class choose a parameter
 #' @note Classe permettant de charger la liste de parametres qualitatifs
 #' et de les selectionner herite de Refpar dont elle utilie la methode choix
-#' par rapport à parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
+#' par rapport ï¿½ parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @expamples objet=new("Refparqual")
@@ -20,7 +20,7 @@ setClass(Class="Refparqual",representation= representation(valqual="data.frame")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparqual"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
 			requete<-connect(requete)
@@ -41,13 +41,13 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne,stade_selectionne)
 setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
-					" FROM ",sch,"tg_dispositif_dis",
-					" JOIN ",sch,"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant",
-					" JOIN ",sch,"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
 					" JOIN ref.tg_parametre_par on par_code=car_par_code",
 					" JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text",sep="")
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
@@ -76,7 +76,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 setMethod("chargecomplement",signature=signature("Refparqual"),definition=function(objet) {
 			if (nrow(objet@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(objet@data)),arret=TRUE)
 			requete=new("RequeteODBC")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
 					" WHERE val_qal_code='",objet@data$par_code,
 					"' ORDER BY val_rang",sep="")

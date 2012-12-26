@@ -23,7 +23,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	# Boucle sur chacune des periodes du pas de temps
 	#
 	# *********************
-#la methode suivant fait passer le pas de temps courant à -1
+#la methode suivant fait passer le pas de temps courant ï¿½ -1
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	assign("progres",winProgressBar(title = "cumul val. quant. par pas de temps",
@@ -81,7 +81,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			# recherche des taux qui recoupent la periode du pas de temps
 			req@sql = paste(
 					" SELECT txe_date_debut, txe_date_fin, txe_valeur_taux " ,
-					" FROM   ",sch,"tj_tauxechappement_txe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_tauxechappement_txe " ,
 					" WHERE  txe_tax_code = '" , as.character(bilanMigrationPar@taxons@data$tax_code) , "'" ,
 					" AND txe_std_code = '" , as.character(bilanMigrationPar@stades@data$std_code) , "'" ,
 					" AND txe_ouv_identifiant ='" , as.character(bilanMigrationPar@dc@ouvrage) , "'" ,     
@@ -155,7 +155,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			
 			# recherche des coef qui recoupent la periode du pas de temps
 			req@sql = paste(" SELECT coe_date_debut, coe_date_fin, coe_valeur_coefficient, qte_libelle" ,
-					" FROM   ",sch,"tj_coefficientconversion_coe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe " ,
 					" INNER JOIN ref.tr_typequantitelot_qte ON coe_qte_code = qte_code" ,
 					" WHERE  coe_tax_code = '" , bilanMigrationPar@taxons@data$tax_code , "'" ,
 					" AND coe_std_code = '" , bilanMigrationPar@stades@data$std_code, "'" ,
@@ -262,7 +262,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" CASE when car_val_identifiant is not null then car_val_identifiant",
 					" ELSE lot_pere_val_identifiant",
 					" END as car_val_identifiant_tous", 
-					" FROM ",sch,"vue_ope_lot_ech_parqual", 
+					" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
@@ -275,7 +275,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		} else if (bilanMigrationPar@parqual@data$par_nom=="aucune") {
 			# Caracteristique quantitative uniquement
 			req@sql=paste("SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif, SUM(car_valeur_quantitatif) AS quantite",
-					" FROM ",sch,"vue_ope_lot_ech_parquan",    
+					" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",    
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
@@ -286,7 +286,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ORDER BY ope_date_debut",sep="")
 		} else {
 			#les deux caracteristiques sont choisies, il faut faire un Bilancroise
-			# attention je choisis un left  join ça veut dire certaines caracteristiques quant n'ont pas de contrepartie quantitative     
+			# attention je choisis un left  join ï¿½a veut dire certaines caracteristiques quant n'ont pas de contrepartie quantitative     
 			req@sql=paste(
 					" SELECT ope_date_debut,",
 					" ope_date_fin,",  
@@ -299,7 +299,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ELSE lot_pere_val_identifiant",
 					" END as car_val_identifiant_tous",
 					" FROM (",
-					" SELECT * FROM ",sch,"vue_ope_lot_ech_parquan", 
+					" SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
 					" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
 					echantillons,
 					" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
@@ -342,7 +342,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			# Si l'operation se termine apres la fin du pas mais ne debute pas avant, il faut conserver une seule partie de l'operation
 			# Si l'operation commence avant le pas de temps et se termine apres, on ne conserve qu'une partie de l'operation
 			# Cas ou l'operation est inferieure ou egale au pas de temps : pas de probleme, on compte l'operation complete
-			# ce qui revient à dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
+			# ce qui revient ï¿½ dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
 			# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
 			
@@ -409,7 +409,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	if (bilanMigrationPar@parqual@data$par_nom!="aucune") {
 		param_qual=data.frame("val_qal_code"=valeurs_qal,"lib"=libelle_qal)
 	} else
-	{ param_qual=data.frame()# affectation ulterieur à la classe
+	{ param_qual=data.frame()# affectation ulterieur ï¿½ la classe
 	}
 	return (list(tablecalcmig,param_qual))
 	

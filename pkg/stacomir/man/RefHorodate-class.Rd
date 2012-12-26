@@ -3,6 +3,9 @@
 \alias{RefHorodate-class}
 \alias{RefHorodate}
 \alias{validite_RefHorodate}
+\alias{getanneeprec}
+\alias{getRefHorodate}
+\alias{setRefHorodate}
 
 \title{Class "RefHorodate"}
 \description{	choice of date with method to show current and previous year

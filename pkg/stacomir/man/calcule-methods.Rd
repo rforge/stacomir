@@ -6,6 +6,7 @@
 \alias{calcule,BilanMigrationConditionEnv-method}
 \alias{calcule,BilanMigrationPar-method}
 \alias{calcule,Bilan_taille-method}
+\alias{calcule,Bilan_lot-method}
 \title{ Methods for Function calcule }
 \description{
  calcule is called when a class needs computation and not only data collected from the database, it 
@@ -18,7 +19,8 @@ to be refined, performs both query and calculation, the calcul calls for \link{f
 and \link{funSousListeBilanMigration} }
 \item{\code{signature(objet = "BilanMigrationConditionEnv")}}{ collects object assigned to environement \code{envir_stacomi} and loads the \link{BilanConditionEnv} }
 \item{\code{signature(objet = "BilanMigrationPar")}}{collects object assigned to environment \code{envir_stacomi} and checks for validity}
-\item{\code{signature(objet = "BilanTaille")}}{calls charge, does some computation on samples and subsamples and calls function funtraitementdate
-}}}
+\item{\code{signature(objet = "BilanTaille")}}{calls charge, does some computation on samples and subsamples and calls function funtraitementdate}
+\item{\code{signature(objet = "Bilan_Lot")}}{performs all calculations before use in graphical functions \code{fundensityBilan_lot} \code{funboxplotBilan_lot} \code{funpointBilan_lot}}
+}}
 \keyword{methods}
 \keyword{manip}

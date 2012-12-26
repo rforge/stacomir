@@ -19,18 +19,18 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 					# stack re-ordonne les tab de donnees !
 					stack(resum,select=c(1:13)),  
 					format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
-					substr(toupper(sch),1,nchar(toupper(sch))-1)
+					substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 			)
 	)
 	
 	# la requete pour la suppression
 	requete=new("RequeteODBC")
-	requete@baseODBC=baseODBC
+	objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	requete@open<-TRUE # on laisse la base ouverte
 	
 	# ecriture dans la base...
 	for (i in 1:nrow(t_bilanmigrationmensuel_bme)) {
-		requete@sql=paste("INSERT INTO ",sch,"t_bilanMigrationMensuel_bme (",			
+		requete@sql=paste("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanMigrationMensuel_bme (",			
 				"bme_dis_identifiant,bme_tax_code,bme_std_code,bme_annee,bme_labelquantite,bme_valeur,bme_mois,bme_horodateexport,bme_org_code)",
 				" VALUES ('",paste(t_bilanmigrationmensuel_bme[i,],collapse="','"),"');",sep="")
 		requete<-connect(requete)   

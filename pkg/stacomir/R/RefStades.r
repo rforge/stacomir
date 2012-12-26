@@ -31,12 +31,12 @@ setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 #'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne)
 setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(objet,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (std_rang) std_code, std_libelle", 
-					" FROM ",sch,"tg_dispositif_dis",
-					" JOIN ",sch,"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant",
 					" JOIN ref.tr_stadedeveloppement_std on lot_std_code=std_code",sep="")
 			requete@where=paste("where dis_identifiant='",dc_selectionne,"'",sep="")
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"'",sep="")
@@ -66,7 +66,7 @@ setMethod("choix",signature=signature("RefStades"),definition=function(objet,obj
 					funout(get("msg",envir=envir_stacomi)$RefStades.2)
 					if (!is.null(objetBilan)) {
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne premnant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choix à laquelle on ne passe pas d'objetBilan en parametre 
+						# elle est alors affichee des le debut par la methode choix ï¿½ laquelle on ne passe pas d'objetBilan en parametre 
 						#il y a bien un objet par dans l'objet Bilan             
 						if (class(try(objetBilan@par,silent=TRUE))!="try-error") {
 							objetBilan@par<<-charge_avec_filtre(objet=objetBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)

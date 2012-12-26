@@ -18,11 +18,6 @@ Objects can be created by calls of the form \code{new("PasDeTempsChar", ...)}
     \item{\code{noPasCourant}:}{Object of class \code{"integer"} ~ The current number of the step }
   }
 }
-\section{Methods}{
-  \describe{
-    \item{coerce}{\code{signature(from = "PasDeTempsChar", to = "PasDeTemps")}: ... }
-	 }
-}
 
 \author{cedric.briand00@gmail.com}
 

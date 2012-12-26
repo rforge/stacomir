@@ -94,4 +94,5 @@ Depends:
     svMisc,
     Rcmdr,
     reshape2,
-    scales
+    Hmisc,
+    cluster

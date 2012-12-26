@@ -17,7 +17,7 @@ setClass(Class="RefCoe",representation=
 #' The slots datedebut and datefin have to be filled before using charge
 #' @returnType Object of class RefCoe
 #' @return Object of class RefCoe
-#' @note Bien que je ne comprenne pourquoi, la connexion fonctionne si on ne pointe pas le schéma
+#' @note Bien que je ne comprenne pourquoi, la connexion fonctionne si on ne pointe pas le schï¿½ma
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
@@ -25,17 +25,17 @@ setClass(Class="RefCoe",representation=
 #' charge(objet) # objet
 setMethod("charge",signature=signature("RefCoe"),definition=function(objet){
 			requete=new("RequeteODBCwheredate")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=objet@datedebut
 			requete@datefin=objet@datefin
 			requete@colonnedebut="coe_date_debut"
 			requete@colonnefin="coe_date_fin"
 			requete@select=paste("select * from ",
-					baseODBC[2],
+					get("sch",envir=envir_stacomi),
 					".tj_coefficientconversion_coe")
 			requete@and=" and  coe_tax_code='2038' and coe_std_code='CIV' and coe_qte_code='1'"
 			requete=connect(requete)  
 			objet@data<-requete@query
 			return(objet)
 		})
-# pas de methode choix, le choix est dejà fait dans l'annee de l'interface
+# pas de methode choix, le choix est dejï¿½ fait dans l'annee de l'interface

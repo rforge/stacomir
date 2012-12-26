@@ -59,7 +59,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			# recherche des taux qui recoupent la periode du pas de temps
 			req@sql = paste(
 					" SELECT txe_date_debut, txe_date_fin, txe_valeur_taux " ,
-					" FROM   ",sch,"tj_tauxechappement_txe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_tauxechappement_txe " ,
 					" WHERE  txe_tax_code = '" , as.character(bilanMigration@taxons@data$tax_code) , "'" ,
 					" AND txe_std_code = '" , as.character(bilanMigration@stades@data$std_code) , "'" ,
 					" AND txe_ouv_identifiant ='" , as.character(bilanMigration@dc@ouvrage) , "'" ,     
@@ -136,7 +136,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			# recherche des coef qui recoupent la periode du pas de temps
 			req@sql = paste(" SELECT coe_date_debut, coe_date_fin, coe_valeur_coefficient, qte_libelle" ,
-					" FROM   ",sch,"tj_coefficientconversion_coe " ,
+					" FROM   ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe " ,
 					" INNER JOIN ref.tr_typequantitelot_qte ON coe_qte_code = qte_code" ,
 					" WHERE  coe_tax_code = '" , bilanMigration@taxons@data$tax_code , "'" ,
 					" AND coe_std_code = '" , bilanMigration@stades@data$std_code, "'" ,
@@ -146,7 +146,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			#cat(paste("Requete SQL : \n" , req@sql,  "\n"))
 			req=connect(req)
-			rs=killfactor(req@query) # pour éviter certains pb
+			rs=killfactor(req@query) # pour ï¿½viter certains pb
 			coef=NULL
 			if (nrow(rs)>0){
 				# Recherche des poids pour ponderer le coef et des dates d'application des coef
@@ -240,8 +240,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 		# Calcul de la somme des effectifs
 		# On ne prend pas les echantillons
 		req@sql=paste(" SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif " ,
-				" FROM   ",sch,"t_operation_ope " ,
-				"        INNER JOIN ",sch,"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
+				" FROM   ",get("sch",envir=envir_stacomi),"t_operation_ope " ,
+				"        INNER JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
 				" WHERE  ope_dic_identifiant ='" , dcCode , "' ",
 				"        AND lot_effectif IS NOT NULL " ,
 				"        AND lot_lot_identifiant IS NULL " ,
@@ -260,7 +260,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			debutOpe=as.POSIXlt(rs$ope_date_debut)
 			finOpe= as.POSIXlt(rs$ope_date_fin)
-			finOpe[finOpe==debutOpe]<-finOpe+1 # pour éviter les divisions par zéro pour les opérations de 0s
+			finOpe[finOpe==debutOpe]<-finOpe+1 # pour ï¿½viter les divisions par zï¿½ro pour les opï¿½rations de 0s
 			methode=rs$lot_methode_obtention
 			effectif=rs$effectif
 			
@@ -270,15 +270,15 @@ funSousListeBilanMigration=function(bilanMigration) {
 			# Si l'operation se termine apres la fin du pas mais ne debute pas avant, il faut conserver une seule partie de l'operation
 			# Si l'operation commence avant le pas de temps et se termine apres, on ne conserve qu'une partie de l'operation
 			# Cas ou l'operation est inferieure ou egale au pas de temps : pas de probleme, on compte l'operation complete
-			# ce qui revient à dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
+			# ce qui revient ï¿½ dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
 			# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
-			# et que se passe t'il pour plusieurs opérations dans la même journée ????
+			# et que se passe t'il pour plusieurs opï¿½rations dans la mï¿½me journï¿½e ????
 			debut<-debutOpe
 			fin<-finOpe
 			debut[debut<debutPas]<-debutPas
 			fin[fin>finPas]<-finPas
-			# debut et fin correspondent au troncage des opérations qui dépassent du pas
+			# debut et fin correspondent au troncage des opï¿½rations qui dï¿½passent du pas
 			# Repartition de l'effectif au prorata
 			effectif = effectif * as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
 			
@@ -343,8 +343,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 		# recherche des operations qui recoupent la periode du pas de temps
 		# On ne prend pas les echantillons
 		req@sql = paste( "SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, qte_libelle, SUM(lot_quantite) AS quantite " ,
-				" FROM   ",sch,"t_operation_ope " ,
-				"        INNER JOIN ",sch,"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
+				" FROM   ",get("sch",envir=envir_stacomi),"t_operation_ope " ,
+				"        INNER JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot ON ope_identifiant = lot_ope_identifiant " ,
 				"        INNER JOIN ref.tr_typequantitelot_qte ON lot_qte_code = qte_code" ,
 				" WHERE  ope_dic_identifiant ='" , dcCode , "' ",
 				"        AND lot_quantite IS NOT NULL " ,

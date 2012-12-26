@@ -58,9 +58,9 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			std = objet@stades@data$std_code
 			dic= objet@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
-			requete@select=paste("SELECT * FROM ",sch,"t_bilanmigrationjournalier_bjo",sep="")
+			requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
 			requete@order_by=" ORDER BY bjo_jour "
 			requete<-connect(requete)
 			
@@ -97,13 +97,13 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			std = objet@stades@data$std_code
 			dic= objet@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
-			requete@select=str_c("DELETE from ",sch,"t_bilanmigrationjournalier_bjo ")
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
-			requete@select=str_c("DELETE from ",sch,"t_bilanmigrationmensuel_bme ")
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)
 		}
@@ -157,7 +157,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		dat=bilanMigrationInterAnnuelle@data        
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
 		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
-		# il faut un champ date, on ramene tout les monde à
+		# il faut un champ date, on ramene tout les monde ï¿½
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
 		
@@ -180,7 +180,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 	}
 }
 
-# graphe affichant les migrations journalières
+# graphe affichant les migrations journalieres
 hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -257,11 +257,11 @@ fundat=function(dat,timesplit=NULL)
 					to=strptime("2000-12-31",format='%Y-%m-%d'),
 					by=getvalue(new("Refperiode"),timesplit))
 			seq_timesplit<-as.Date(trunc(seq_timesplit, units='days'))
-			# utilise la classe Refperiode pour avoir la correspondance entre le nom français et la variable utilisee par seq.POSIXt
+			# utilise la classe Refperiode pour avoir la correspondance entre le nom franï¿½ais et la variable utilisee par seq.POSIXt
 			#datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
 			#colnames(datc)<-c(timesplit,"annee")
 			# calcul des sommes par annee et par periode
-			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numérique
+			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numï¿½rique
 			# ci dessous on remplace une double boucle par un truc plus rapide
 			for (j in 1:(length(seq_timesplit)-1)){
 				dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
@@ -279,7 +279,7 @@ fundat=function(dat,timesplit=NULL)
 			jour2000=as.Date(trunc.POSIXt(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
 							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), units='days'))
 			for (j in unique(dat$annee)){
-				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutés avec zéro
+				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutï¿½s avec zï¿½ro
 				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]
 				dat0=data.frame("jour"=jour2000restant,"annee"=j, "valeur"=NA)
 				dat=rbind(dat,dat0)
@@ -295,7 +295,7 @@ fundat=function(dat,timesplit=NULL)
 		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
 		dat[,timesplit]<-as.character(dat[,timesplit])
 		dat<-merge(dat,datsummary,by=timesplit)
-		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est nécessaire pour les ggplot
+		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est nï¿½cessaire pour les ggplot
 		rm(maxdat,mindat,meandat)
 		dat<-dat[order(dat$annee,dat[,timesplit]),]
 		# renvoit la premiere occurence qui correspond, pour n'importe quel jour min, max et moyenne sont OK
@@ -329,7 +329,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	dat$cumsum=dat$cumsum/dat$total_annuel
 	dat$jour=as.Date(dat$jour)
 	dat$annee=as.factor(dat$annee)
-	# bug, enlève les années avec seulement une ligne
+	# bug, enlï¿½ve les annï¿½es avec seulement une ligne
 
 	#################
 	# Graphique
@@ -425,7 +425,7 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 
 
 ########################################
-# Fonction similaire à la précédente mais pointrange et geom_bar
+# Fonction similaire ï¿½ la prï¿½cï¿½dente mais pointrange et geom_bar
 # interannuelle hebdomadaire. fonctionne pour mensuelle et quizaine et hebdomadaire
 ############################################
 hgraphBilanMigrationInterAnnuelle5 = function(h,...)
@@ -448,8 +448,8 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 
 	# dat=dat[dat$moyenne!=0,] # pour des raisons graphiques on ne garde pas les effectifs nuls generes par fundat
 	newdat=dat[match(unique(dat[,timesplit]),dat[,timesplit]),]
-	newdat=newdat[order(newdat[,"keeptimesplit"]),] # il peut y avoir des années pour le calcul de range qui s'ajoutent 
-	# et viennent d'autres années, il faut donc réordonner.
+	newdat=newdat[order(newdat[,"keeptimesplit"]),] # il peut y avoir des annï¿½es pour le calcul de range qui s'ajoutent 
+	# et viennent d'autres annï¿½es, il faut donc rï¿½ordonner.
 #	dat[,timesplit]<-gdata::reorder(dat[,timesplit], new.order=match(levels(dat[,timesplit]),newdat[,timesplit]))	
 #	levels(dat[,timesplit])<-newdat[,timesplit]	
 #	levels(newdat[,timesplit])<-newdat[,timesplit]	
@@ -488,8 +488,8 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 	} # end if
 }  # end function 
 
-# graphique des cumuls interannuels pour distinguer des tendances saisonnières, les données sont calculées par 
-# quinzaine puis centrées réduites
+# graphique des cumuls interannuels pour distinguer des tendances saisonniï¿½res, les donnï¿½es sont calculï¿½es par 
+# quinzaine puis centrï¿½es rï¿½duites
 hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)

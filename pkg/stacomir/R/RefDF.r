@@ -19,7 +19,7 @@ setClass(Class="RefDF",representation=
 #' charge(objet)}
 setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql = paste("select dis_identifiant as DF,",
 					" dis_date_creation,",
 					" dis_date_suppression,",
@@ -30,10 +30,10 @@ setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 					" dif_localisation,",
 					" dif_orientation,",
 					" tdf_libelle as type_DF",
-					" from ",sch,"tg_dispositif_dis",
-					" JOIN ",sch,"t_dispositiffranchissement_dif ON dif_dis_identifiant=dis_identifiant",
-					" JOIN ",sch,"tj_dfesttype_dft ON dif_dis_identifiant=dft_df_identifiant",
-					" JOIN ",sch,"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant",   
+					" from ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositiffranchissement_dif ON dif_dis_identifiant=dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"tj_dfesttype_dft ON dif_dis_identifiant=dft_df_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant",   
 					" JOIN ref.tr_typedf_tdf ON tdf_code=dft_tdf_code",
 					" ORDER BY dis_identifiant;",sep="")
 			requete<-connect(requete) 

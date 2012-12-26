@@ -44,7 +44,7 @@ setValidity("BilanEspeces",function(object)
 setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
 			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
 			requete=new("RequeteODBCwheredate")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=bilanEspeces@datedebut
 			requete@datefin=bilanEspeces@datefin
 			requete@colonnedebut="ope_date_debut"
@@ -54,8 +54,8 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 					" date_part('year', ope_date_debut) as annee,",
 					" date_part('month',ope_date_debut) as mois,",
 					" date_part('week',ope_date_debut) as semaine",
-					" FROM ",sch,"t_operation_ope",
-					" INNER JOIN ",sch,"t_lot_lot ON ope_identifiant=lot_ope_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"t_operation_ope",
+					" INNER JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot ON ope_identifiant=lot_ope_identifiant",
 					" INNER JOIN ref.tr_taxon_tax on tax_code=lot_tax_code",
 					" INNER JOIN ref.tr_stadedeveloppement_std on std_code=lot_std_code",
 					sep="")

@@ -25,7 +25,7 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			requete@datefin=objet@datefin
 			requete@colonnedebut="datedebutpeche"
 			requete@colonnefin="datefinpeche"
-			requete@baseODBC=baseODBCmortciv
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select="SELECT lot_identifiant,
 					datedebutpeche AS ope_date_debut ,
 					datefinpeche AS ope_date_fin,
@@ -42,5 +42,5 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			objet@data<-requete@query
 			return(objet)
 		})
-# pas de methode choix, le choix est dejà fait dans l'annee de l'interface
+# pas de methode choix, le choix est dejï¿½ fait dans l'annee de l'interface
 #charge(refPoidsMoyenPeche)

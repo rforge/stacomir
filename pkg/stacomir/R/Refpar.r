@@ -19,7 +19,7 @@ setClass(Class="Refpar",representation= representation(data="data.frame"))
 #' charge(objet)
 setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("SELECT par_code, par_nom  from ref.tg_parametre_par")
 			requete<-connect(requete)
 			funout(get("msg",envir=envir_stacomi)$Refpar.1)
@@ -35,13 +35,13 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 #' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
 setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
-					" FROM ",sch,"tg_dispositif_dis",
-					" JOIN ",sch,"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
-					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant",
-					" JOIN ",sch,"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant",
+					" JOIN ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
 					" JOIN ref.tg_parametre_par on par_code=car_par_code",sep="")
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")

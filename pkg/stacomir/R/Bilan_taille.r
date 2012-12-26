@@ -51,12 +51,12 @@ setClass(Class="Bilan_taille",
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("connect",signature=signature("Bilan_taille"),definition=function(objet,h) {
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
-			objet@requete@baseODBC=baseODBC
+			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			if (objet@parquan@data$par_nom=="aucune" & objet@parqual@data$par_nom=="aucune") {
 				funout(get("msg",envir=envir_stacomi)$Bilan_taille.1,arret=TRUE)
 			} else if (objet@parquan@data$par_nom=="aucune") {
 				#caracteristique qualitative uniquement
-				sql=paste("SELECT * FROM ",sch,"vue_ope_lot_ech_parqual" ,
+				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual" ,
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -66,7 +66,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 				
 			} else if (objet@parqual@data$par_nom=="aucune") {
 				# Caracteristique quantitative uniquement
-				sql=paste("SELECT * FROM ",sch,"vue_ope_lot_ech_parquan",
+				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -76,14 +76,14 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 				
 			} else {
 				#les deux caracteristiques sont choisies, il faut faire un Bilancroise
-				# attention je choisis un left  join ça veut dire certaines caracteristiques quant n'ont pas de contrepartie qualitatives
+				# attention je choisis un left  join ï¿½a veut dire certaines caracteristiques quant n'ont pas de contrepartie qualitatives
 				# Pour essai voir Anguilles_nombreouPoids2.sql
 				# --Bilan croise
 				sql=paste(
 						#"--colonnes communes aux deux tableaux", 
 						#" -- tableau donnant les lots et sous lots contenant un poids pour anguille",
 						"SELECT * FROM (",
-						"SELECT * FROM ",sch,"vue_ope_lot_ech_parquan", 
+						"SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
@@ -93,7 +93,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 						" LEFT JOIN", 
 						#" --tableau donnant les lots et sous lots contenant le type de caracteristique" ,
 						" (SELECT lot_identifiant as lot_identifiant1,car_val_identifiant ",
-						"  FROM ",sch,"vue_ope_lot_ech_parqual", 
+						"  FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
 						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
 						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,     
 						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,

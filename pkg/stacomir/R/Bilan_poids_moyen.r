@@ -7,7 +7,7 @@
 # TODO Calcul des valeurs en interannuel pour le calage de la regression et d'une valeur par defaut des coefficients de conversion
 #' Bilan_poids_moyen class
 #' Objectif faire un calcul des poids moyens et permettre de reintegrere les coefficents de conversion poids effectif
-#' @note Un programme permet pour l'iav d'étendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees OK done internal IAV
+#' @note Un programme permet pour l'iav d'ï¿½tendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees OK done internal IAV
 #' @slot data="data.frame"
 #' @slot dc="RefDC"
 #' @slot anneedebut="RefAnnee"
@@ -41,7 +41,7 @@ setClass(Class="Bilan_poids_moyen",
 setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
 			#CHARGEMENT DU TABLEAU DES POIDS MOYENS
 			requete=new("RequeteODBCwheredate")
-			requete@baseODBC=baseODBC
+			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=strptime(paste(objet@anneedebut@annee_selectionnee-1,"-08-01",sep=""),format="%Y-%m-%d")
 			requete@datefin=strptime(paste(objet@anneefin@annee_selectionnee,"-08-01",sep=""),format="%Y-%m-%d")
 			requete@colonnedebut="ope_date_debut"
@@ -52,7 +52,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 					" ope_date_debut+(ope_date_fin-ope_date_debut)/2 as datemoy,",
 					" date_part('year', ope_date_debut) as annee,",
 					" date_part('month',ope_date_debut) as mois",
-					" FROM ",sch,"vue_lot_ope_car_qan",sep="")
+					" FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car_qan",sep="")
 			requete@and=paste(" AND ope_dic_identifiant=",objet@dc@dc_selectionne,
 					" AND std_libelle='civelle'",
 					ifelse(objet@liste@listechoix=="tous", "",paste(" AND  lot_effectif", objet@liste@listechoix)),
@@ -115,7 +115,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 		rm("toolbarlistgraph1",envir= .GlobalEnv)
 	}
 	if ((!exists("peche", envir=envir_stacomi))){
-		# si il existe j'ai traffique l'objet bilan poids moyen à la main
+		# si il existe j'ai traffique l'objet bilan poids moyen ï¿½ la main
 		# et je ne souhaite pas qu'il soit ecrase
 		bilan_poids_moyen=charge(bilan_poids_moyen)
 	}
@@ -133,7 +133,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 	don=donnees[,c(8,6,4,1)]
 	coe=coeff[,c(9,8)]
 	
-	# graphique des poids moyens en fonction du milieu de l'operation de contrôle)
+	# graphique des poids moyens en fonction du milieu de l'operation de contrï¿½le)
 	# la date est la date moyenne du lot
 	
 # fonction handler appellees
@@ -192,9 +192,8 @@ fungraphBilan_poids_moyen = function(h,...) {
 			funout(paste(get("msg",envir_stacomi)$Bilan_poids_moyen.15,fileout,"\n"))
 			
 			requete=new("RequeteODBC")
-			requete@baseODBC
-			requete@baseODBC=baseODBC
-			requete@sql=paste("COPY ",sch,"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
+			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
+			requete@sql=paste("COPY ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
 			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
 		}
 	}

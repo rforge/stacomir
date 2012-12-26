@@ -116,7 +116,7 @@ quitte=function(...){
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
-			miettes=miettes[!miettes%in%c("msg")]
+			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC")]
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}

@@ -29,11 +29,11 @@ tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit un
 
 les_utilisateurs <- tableau_config[1]
 datawd=tableau_config["datawd",]
-#assign("datawd",datawd,envir=.GlobalEnv)
+assign("datawd",datawd,envir=envir_stacomi)
 pgwd=tableau_config["pgwd",]
 baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
 setwd(pgwd)
-# pour voir apparaitre toutes les requètes dans R
+# pour voir apparaitre toutes les requï¿½tes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
 source ("libraries.r")
 
@@ -49,7 +49,7 @@ source("funstatJournalier.r")
 source("fn_EcritBilanMensuel.r")
 source("fn_EcritBilanJournalier.r")                        
 
-#listes de connection à la base de donnee (programmation S4)
+#listes de connection ï¿½ la base de donnee (programmation S4)
 source("create_generic.r") 
 #cree les fonctions generiques et l'environnement envir_stacomi
 source("RefDF.r")

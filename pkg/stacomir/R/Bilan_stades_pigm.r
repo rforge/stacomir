@@ -59,8 +59,8 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 			# pour debug objet<-new("Bilan_stades_pigm")
 			#  chargement du tableau des stades pigmentaires
 			requete=new("RequeteODBCwheredate")
-			requete@baseODBC=baseODBC
-			requete@select= paste("SELECT * FROM ",sch,"vue_lot_ope_car",sep="")
+			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
+			requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
 			requete@colonnedebut="ope_date_debut"
 			requete@colonnefin="ope_date_fin"
 			requete@order_by="ORDER BY ope_date_debut"
@@ -102,7 +102,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 						" val_libelle as env_val_identifiant,",
 						" env_valeur_quantitatif,",
 						" env_stm_identifiant",
-						" FROM ",sch,"tj_conditionenvironnementale_env",
+						" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
 						" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 				tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
@@ -388,8 +388,8 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 		x11()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
-	#traitement � part de VB
-	# raison = �a marche pas sinon
+	#traitement a part de VB
+	# raison = ca marche pas sinon
 	# dans le modele VB = 1-p(VIA0) proba de ne pas etre au stade suivant ? 
 	out=c( VB$x[VB$x>Vparm$pigment_stage[[1]]][1],
 			fun50(VIA0$x,VIA0c),

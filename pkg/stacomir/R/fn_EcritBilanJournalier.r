@@ -23,7 +23,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			rep(jour_dans_lannee_non_nuls,ncol(data)),
 			stack(data),  
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
-			substr(toupper(sch),1,nchar(toupper(sch))-1)
+			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 	)
 	t_bilanmigrationjournalier_bjo= killfactor(t_bilanmigrationjournalier_bjo[!is.na(t_bilanmigrationjournalier_bjo$values),])
 	
@@ -37,7 +37,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		# suppression des donnees actuellement presentes dans la base
 		supprime(bil)			
 		requete=new("RequeteODBC")
-		requete@baseODBC=baseODBC
+		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
 		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
@@ -53,7 +53,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 					label=sprintf("%d%% progression",
 							round(100*zz)))     
-			requete@sql=paste( "INSERT INTO ",sch,"t_bilanmigrationjournalier_bjo (",			
+			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
 			requete<-connect(requete) 
@@ -63,7 +63,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		# si l'utilisateur accepte de remplacer les valeurs
 		close(progres)
 		odbcClose(requete@connexion)
-		# ecriture également du bilan mensuel
+		# ecriture ï¿½galement du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
@@ -83,7 +83,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	else  # sinon on ecrit les resultats quoiqu'il arrive
 	{
 		requete=new("RequeteODBC")
-		requete@baseODBC=baseODBC
+		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
 		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
@@ -99,7 +99,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 					label=sprintf("%d%% progression",
 							round(100*zz)))
-			requete@sql=paste( "INSERT INTO ",sch,"t_bilanmigrationjournalier_bjo (",			
+			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")

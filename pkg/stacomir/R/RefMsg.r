@@ -35,7 +35,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 #'  charge_avec_filtre(objet,lang='French')
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
 			requete=new("RequeteODBCwhere")
-			requete@baseODBC=baseODBC
+			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=str_c("SELECT mrl_id,mrl_msr_id,	mrl_text", 
 					" FROM ref.ts_messagerlang_mrl")
 			requete@where=str_c("where mrl_lang='",lang,"'")
@@ -78,7 +78,7 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 		
 			
 			
-			# l' interface_graphique_menu.2.1 est là deux fois, il faut le remettre le 2.10 à la main
+			# l' interface_graphique_menu.2.1 est lï¿½ deux fois, il faut le remettre le 2.10 ï¿½ la main
 			buildmsg1[match("interface_graphique_menu.2.9",buildmsg1)+1]<-"interface_graphique_menu.2.10"
 			# here I'm dealing with "\" but only at the beginning and ending of strings
 			list<-gregexpr("(\")", buildmsg2)
