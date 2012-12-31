@@ -20,12 +20,11 @@ rm(list=ls(all=TRUE))
 #  if (exists("graphes")) {rm(graphes) }
 #ci dessous en lancement manuel il est necessaire d'indiquer le chemin du repertoire de travail
 # avant toute chose
-require(XML)
+#require(XML)
 options(guiToolkit = "RGtk2")
-filexml="C:/Program Files/stacomi/calcmig.xml"
-doc = xmlInternalTreeParse(filexml)
-doc=xmlRoot(doc)   # vire les infos d'ordre generales
-tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit une liste
+filecsv="C:/Program Files/stacomi/calcmig.csv"
+doc<-read.csv(filecsv,header=TRUE,sep=";")
+tableau_config = t(doc) 
 
 les_utilisateurs <- tableau_config[1]
 datawd=tableau_config["datawd",]

@@ -1,9 +1,9 @@
 # creation des fonctions generiques...
 
 # la clasee baseODBC n'a plus besoin d'un baseODBC par defaut
-#liste_chemins=chargexml()
+#liste_chemins=chargecsv()
 #baseODBC=liste_chemins[["baseODBC"]]
-#listes de connection à la base de donnee (programmation S4)
+#listes de connection ï¿½ la base de donnee (programmation S4)
 setGeneric("choix",def=function(objet,...) standardGeneric("choix"))
 setGeneric("charge",def=function(objet,...) standardGeneric("charge"))
 setGeneric("charge_avec_filtre",def=function(objet,...) standardGeneric("charge_avec_filtre"))

@@ -31,7 +31,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 		definition=function(objet,h) {
 			#  construit une requete ODBCwheredate
 			requete=new("RequeteODBCwheredate")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=strptime(objet@datedebut,format="%Y-%m-%d")
 			requete@datefin=strptime(objet@datefin,format="%Y-%m-%d")
 			requete@colonnedebut="env_date_debut"

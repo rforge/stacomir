@@ -30,7 +30,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	mois=paste("15",substr(as.character(mois),1,3))
 	index=as.vector(tableau$No.pas[jmois==15])
 	x=1:nrow(tableau)
-	debut=unclass(as.POSIXct((min(duree))))[[1]] # attention arrondit à un jour de moins
+	debut=unclass(as.POSIXct((min(duree))))[[1]] # attention arrondit ï¿½ un jour de moins
 	fin=unclass(as.POSIXct(max(duree)))[[1]]
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne]) # commentaires sur le DC
 	###################################
@@ -84,6 +84,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	# Requete de la base
 	################################### 
 	req<-new("RequeteODBC")
+	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@sql<-paste("SELECT * FROM  t_operation_ope ",
 			"WHERE ope_date_debut >= '",
 			strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
@@ -197,7 +198,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 						date=FALSE)
 		nomperiode<-vector()
 		for (j in 1 : length(listeperiode)){
-			#recuperation du vecteur de noms (dans l'ordre) à partir de la liste
+			#recuperation du vecteur de noms (dans l'ordre) ï¿½ partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
 			#ecriture pour chaque type de periode                       
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 

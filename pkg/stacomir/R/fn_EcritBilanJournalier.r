@@ -37,7 +37,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		# suppression des donnees actuellement presentes dans la base
 		supprime(bil)			
 		requete=new("RequeteODBC")
-		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
 		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
@@ -83,7 +83,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	else  # sinon on ecrit les resultats quoiqu'il arrive
 	{
 		requete=new("RequeteODBC")
-		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
 		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,

@@ -19,7 +19,7 @@ setClass(Class="RefDF",representation=
 #' charge(objet)}
 setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql = paste("select dis_identifiant as DF,",
 					" dis_date_creation,",
 					" dis_date_suppression,",

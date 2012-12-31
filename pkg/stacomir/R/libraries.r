@@ -4,24 +4,26 @@
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 
 libraries=function() {
-necessary = c('tcltk2', 'RODBC','ggplot2','gWidgets' ,'R2HTML','gWidgetsRGtk2',
-		'lattice','RColorBrewer','Rcmdr','proto','xtable','XML','svMisc','Hmisc')
+necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
+		'lattice','RColorBrewer','Rcmdr','xtable','scales','reshape2','grid','stringr')  # 'tcltk2','XML', 'Hmisc''svMisc''proto''R2HTML'
 if(!all(necessary %in% installed.packages()[, 'Package']))
 	install.packages(necessary[!necessary %in% installed.packages()[, 'Package']], dep = T)
-require('tcltk2')
+#if (!'XML'%in%installed.packages()[, 'Package']) install.packages("XML", repos = "http://www.omegahat.org/R")
+#require('tcltk2')
 require('ggplot2')
 require('gWidgets')
 require('RODBC')
-require('Hmisc')
+#require('Hmisc')
 options(guiToolkit = "RGtk2")
 require('lattice')
 require('RColorBrewer')
 require('stacomirtools')
-require('proto') 
+#require('R2HTML')
+#require('proto') 
 require('xtable')
 #require('Hmisc')
-require('XML') 
-require('svMisc')   
+#if(require('XML')) library('XML') 
+#require('svMisc')   
 require('stringr')
 require('grid')
 require('reshape2')

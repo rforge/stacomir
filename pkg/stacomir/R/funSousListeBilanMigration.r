@@ -17,6 +17,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	# Boucle sur chacune des periodes du pas de temps
 	# *********************
 	req=new("RequeteODBC")
+	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	req@open<-TRUE
 	progres<-winProgressBar(title = "calcul des effectifs par pas de temps",
 			label = "progression %",

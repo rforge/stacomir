@@ -58,7 +58,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			std = objet@stades@data$std_code
 			dic= objet@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
 			requete@order_by=" ORDER BY bjo_jour "
@@ -97,12 +97,12 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			std = objet@stades@data$std_code
 			dic= objet@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)

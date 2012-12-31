@@ -33,5 +33,5 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 }
 
 \examples{
-  stacomi()
+  #stacomi()
 }

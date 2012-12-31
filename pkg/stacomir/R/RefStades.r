@@ -15,6 +15,7 @@ setClass(Class="RefStades",representation=representation(data="data.frame") )
 #'  charge(objet)
 setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 			req=new("RequeteODBC") 
+			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT std_code, std_libelle FROM ref.tr_stadedeveloppement_std ORDER BY std_code ;"
 			req=connect(req)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-req@query
@@ -31,7 +32,7 @@ setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 #'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne)
 setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(objet,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (std_rang) std_code, std_libelle", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",

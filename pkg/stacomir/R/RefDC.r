@@ -18,7 +18,7 @@ setClass(Class="RefDC",representation=
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql=  paste("select dis_identifiant as DC,",
 					" dis_date_creation,",
 					" dis_date_suppression,",

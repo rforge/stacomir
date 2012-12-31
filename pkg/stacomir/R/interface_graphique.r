@@ -94,6 +94,7 @@ hBilanEspeces=function(h,...){
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 
 husr=function(h,...){
+	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
 	# test de la connexion
 	con=new("ConnexionODBC")
@@ -105,7 +106,7 @@ husr=function(h,...){
 		# rien
 	}
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
-	con@baseODBC=baseODBC
+	con@baseODBC=get("baseODBC",envir=envir_stacomi)
 	e=expression(con<-connect(con))
 	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si �a plante la connexion n'est pas ouverte
 	test<-con@etat==get("msg",envir=envir_stacomi)$ConnexionODBC.6
@@ -119,7 +120,7 @@ husr=function(h,...){
 	}
 	if (test) { # il existe un lien ODBC mais qui pointe peut �tre ailleurs
 		requete=new("RequeteODBC")
-		objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@sql="select count(*) from ref.tr_taxon_tax"
 		requete=connect(requete)
 		if (nrow(requete@query)==0){
@@ -190,10 +191,10 @@ stacomi=function(gr_interface=TRUE){
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
 	# the first messages are necessary for the first access to the database, they are in French
 	msg<-messages()
-	myxml=chargexml()
-	baseODBC=myxml[["baseODBC"]]
-	datawd=myxml[["datawd"]]
-	lang=myxml[["lang"]]	
+	mylinks=chargecsv()
+	baseODBC=mylinks[["baseODBC"]]
+	datawd=mylinks[["datawd"]]
+	lang=mylinks[["lang"]]	
 	assign("lang",lang,envir=envir_stacomi)	
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	assign("datawd",datawd,envir=envir_stacomi)

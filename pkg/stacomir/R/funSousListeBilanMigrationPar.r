@@ -26,6 +26,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 #la methode suivant fait passer le pas de temps courant � -1
 	req=new("RequeteODBC")
 	req@open<-TRUE
+	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	assign("progres",winProgressBar(title = "cumul val. quant. par pas de temps",
 					label = "progression %",
 					min = 0,

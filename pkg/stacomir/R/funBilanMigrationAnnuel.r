@@ -18,6 +18,7 @@ funBilanMigrationAnnuel=function(bilanMigration) {
 	# Boucle sur chacune des periodes du pas de temps
 	# *********************
 	req=new("RequeteODBC")
+	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	##############################			
 	##############################"  
 	dateDebut=strftime(as.POSIXlt(bilanMigration@pasDeTemps@dateDebut),format="%Y-%m-%d %H:%M:%S")

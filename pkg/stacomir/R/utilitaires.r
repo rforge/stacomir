@@ -5,6 +5,14 @@
 #############################################
 # functions copied from Hmisc
 #############################################
+monthDays<-
+		function (time) 
+{
+	time <- as.POSIXlt(time)
+	time$mday[] <- time$sec[] <- time$min <- time$hour <- 0
+	time$mon <- time$mon + 1
+	return(as.POSIXlt(as.POSIXct(time))$mday)
+}
 #' round.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
 #' of compatibility with xtable
 #' @param x 
@@ -95,6 +103,58 @@ trunc.POSIXt<-function (x, units = c("secs", "mins", "hours", "days", "months",
 	}
 	return(x)
 }
+#' ceil.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
+#' of compatibility with xtable
+#' @param x 
+#' @param digits 
+#' @returnType POSIXlt
+#' @return a truncated time value
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+ceil.POSIXt<-function (x, units = c("secs", "mins", "hours", "days", "months", 
+				"years"), ...) 
+{
+	units <- match.arg(units)
+	x <- as.POSIXlt(x)
+	isdst <- x$isdst
+	if (length(x$sec) > 0 && x != trunc.POSIXt(x, units = units)) {
+		switch(units, secs = {
+					x$sec <- ceiling(x$sec)
+				}, mins = {
+					x$sec <- 0
+					x$min <- x$min + 1
+				}, hours = {
+					x$sec <- 0
+					x$min <- 0
+					x$hour <- x$hour + 1
+				}, days = {
+					x$sec <- 0
+					x$min <- 0
+					x$hour <- 0
+					x$mday <- x$mday + 1
+					isdst <- x$isdst <- -1
+				}, months = {
+					x$sec <- 0
+					x$min <- 0
+					x$hour <- 0
+					x$mday <- 1
+					x$mon <- x$mon + 1
+					isdst <- x$isdst <- -1
+				}, years = {
+					x$sec <- 0
+					x$min <- 0
+					x$hour <- 0
+					x$mday <- 1
+					x$mon <- 0
+					x$year <- x$year + 1
+					isdst <- x$isdst <- -1
+				})
+		x <- as.POSIXlt(as.POSIXct(x))
+		if (isdst == -1) {
+			x$isdst <- -1
+		}
+	}
+	return(x)
+}
 
 ###########################################
 # functions used by the graphical interface
@@ -144,10 +204,10 @@ graphdate<-function(vectordate){
 #' @return text
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 fun_char_spe<-function(text){
-	text=gsub("é","e",text)
-	text=gsub("è","e",text)
-	text=gsub("ê","e",text)
-	text=gsub("à","a",text)
+	text=gsub("\u00e9","e",text) #é
+	text=gsub("\u00e8","e",text) #è
+	text=gsub("\u00ea","e",text) #ê
+	text=gsub("\u00e0","a",text) #à
 	return(text)}
 #' this function uses gfile, edits a text with info and changing colors
 #' @param text 
@@ -158,40 +218,46 @@ fun_char_spe<-function(text){
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 funout<-function(text,arret=FALSE,wash=FALSE){
 	if (exists("gSortie")) {
-	if (wash) dispose(gSortie)
-	nbligne=nbligne+1
-	text<-fun_char_spe(text)
-	add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
-					col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
-	if (nbligne==20) nbligne=1
-	nbligne<<-nbligne
+		if (wash) dispose(gSortie)
+		nbligne=nbligne+1
+		text<-fun_char_spe(text)
+		add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
+						col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
+		if (nbligne==20) nbligne=1
+		nbligne<<-nbligne
 	} 
 	# this is printed anyway
 	if(arret) stop(text) else print(text)
 }
-#' chargexml loads the informations stored in c:/program files/stacomi/calcmig.xml file
+#' chargecsv loads the informations stored in c:/program files/stacomi/calcmig.csv file
 #' @returnType list
 #' @return a list with the datawd place and the baseODBC vector
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-chargexml=function(){ 
-	library(XML)  # chargement du package XML
+chargecsv=function(){ 
+	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
 	# use of stringr package 
-	# by default the xml file is in C:/Program Files/stacomi/ and we don't want to change that
-	filexml<-"C:/Program Files/stacomi/calcmig.xml"
-	#filexmlx86<-"C:/Program Files(x86)/stacomi/calcmig.xml" #windows7
-	filexmlR=str_c(.libPaths(),"/stacomiR","/config/calcmig.xml")
-	# str_c(R.version$major,R.vers
-	test<-expression(doc<-(xmlInternalTreeParse(filexml)))
+	# by default the csv file is in C:/Program Files/stacomi/ and we don't want to change that
+	filecsv<-"C:/Program Files/stacomi/calcmig.csv"
+	# note this will only be tested once the program is packages otherwise the path is inst/config/calcmig.csv
+	filecsvR=file.path(.libPaths(),"stacomiR","config","calcmig.csv")
+	
+	test<-file.access(filecsv,0)==0
 	# if the file does not open, we will switch to the file located within the package
-	doc<-try(eval(test), TRUE)
-	if (class(doc)[1]=="try-error") {
+	if (test) {
+		doc<-read.csv(filecsv,header=TRUE,sep=";")
 		# then we test using the file from the package in the config folder
-		test<-expression(doc<-(xmlInternalTreeParse(filexmlR)))
-		doc<-try(eval(test), FALSE)
-	}		
-	doc=xmlRoot(doc)   # vire les infos d'ordre generales
-	tableau_config = xmlSApply(doc, function(x) xmlSApply(x, xmlValue)) # renvoit une liste
+	} else {
+		test2<-file.access(filecsvR,0)==0
+		if (test2) {
+			doc<-read.csc(filecsvR,hearder=TRUE,sep=";")
+		} else {
+			stop("internal error, no access to the csv configuration file")
+		}		
+	}
+	
+	
+	tableau_config = t(doc) # renvoit une liste
 	datawd=tableau_config["datawd",]
 	lang=tableau_config["lang",]
 #pgwd=tableau_config["pgwd",]

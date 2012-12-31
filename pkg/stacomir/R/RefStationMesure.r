@@ -22,7 +22,7 @@ setMethod("charge",
           definition=function(objet) 
           {
         			requete=new("RequeteODBC")
-        			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+        			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
         			requete@sql= paste("SELECT stm_identifiant, stm_libelle, stm_sta_code, stm_par_code, stm_description",
                     " FROM ",get("sch",envir=envir_stacomi),"tj_stationmesure_stm", 
 					" ORDER BY stm_identifiant;",sep="")

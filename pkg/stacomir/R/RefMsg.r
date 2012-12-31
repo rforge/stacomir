@@ -19,7 +19,8 @@ setClass(Class="RefMsg",representation= representation(messager="data.frame",mes
 #'  objet=new("RefMsg")
 #'  charge(objet)
 setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
-			req=new("RequeteODBC") 
+			req=new("RequeteODBC")
+			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT * from ref.ts_messager_msr  ORDER BY msr_id ASC ;"
 			req=connect(req)  # appel de la methode connect de l'objet requeteODBC
 			objet@messager<-req@query
@@ -35,7 +36,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 #'  charge_avec_filtre(objet,lang='French')
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=str_c("SELECT mrl_id,mrl_msr_id,	mrl_text", 
 					" FROM ref.ts_messagerlang_mrl")
 			requete@where=str_c("where mrl_lang='",lang,"'")

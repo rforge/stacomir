@@ -19,6 +19,7 @@ setClass(Class="RefTaxon",representation= representation(data="data.frame" ))
 #'  charge(objet)}
 setMethod("charge",signature=signature("RefTaxon"),definition=function(objet) {
 			req=new("RequeteODBC") 
+			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT tax_code, tax_nom_latin, tax_nom_commun, tax_ntx_code, tax_tax_code FROM ref.tr_taxon_tax  ORDER BY tax_rang ASC ;"
 			req=connect(req)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-req@query
@@ -36,7 +37,7 @@ setMethod("charge",signature=signature("RefTaxon"),definition=function(objet) {
 #'  charge_avec_filtre(objet,dc_selectionne=dc_selectionne)}
 setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=function(objet,dc_selectionne) {
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (tax_rang) tax_code, tax_nom_latin, tax_nom_commun, tax_ntx_code, tax_tax_code", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",

@@ -112,6 +112,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	# Requete de la base
 	################################### 
 	req<-new("RequeteODBC")
+	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@sql=paste("SELECT * FROM  t_operation_ope ",
 			"WHERE ope_date_debut >= '",
 			as.Date(duree[min(index)]),
@@ -226,7 +227,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 						libelle=fonctionnementDF$libelle)
 		nomperiode<-vector()
 		for (j in 1 : length(listeperiode)){
-			#recuperation du vecteur de noms (dans l'ordre) à partir de la liste
+			#recuperation du vecteur de noms (dans l'ordre) ï¿½ partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
 			#ecriture pour chaque type de periode                       
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 

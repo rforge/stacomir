@@ -44,7 +44,7 @@ setValidity("BilanEspeces",function(object)
 setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
 			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
 			requete=new("RequeteODBCwheredate")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=bilanEspeces@datedebut
 			requete@datefin=bilanEspeces@datefin
 			requete@colonnedebut="ope_date_debut"

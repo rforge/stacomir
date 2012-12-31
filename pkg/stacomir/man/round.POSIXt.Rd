@@ -19,6 +19,6 @@ of compatibility with xtable}
   cannot be loaded for reasons of compatibility with xtable
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+ Charles Dupont 
 }
 

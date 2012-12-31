@@ -25,14 +25,14 @@ setClass(Class="RefCoe",representation=
 #' charge(objet) # objet
 setMethod("charge",signature=signature("RefCoe"),definition=function(objet){
 			requete=new("RequeteODBCwheredate")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=objet@datedebut
 			requete@datefin=objet@datefin
 			requete@colonnedebut="coe_date_debut"
 			requete@colonnefin="coe_date_fin"
-			requete@select=paste("select * from ",
+			requete@select=str_c("select * from ",
 					get("sch",envir=envir_stacomi),
-					".tj_coefficientconversion_coe")
+					"tj_coefficientconversion_coe")
 			requete@and=" and  coe_tax_code='2038' and coe_std_code='CIV' and coe_qte_code='1'"
 			requete=connect(requete)  
 			objet@data<-requete@query

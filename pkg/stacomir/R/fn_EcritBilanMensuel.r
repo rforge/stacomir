@@ -25,7 +25,7 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	
 	# la requete pour la suppression
 	requete=new("RequeteODBC")
-	objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+	requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	requete@open<-TRUE # on laisse la base ouverte
 	
 	# ecriture dans la base...

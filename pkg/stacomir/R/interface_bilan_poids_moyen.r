@@ -5,16 +5,16 @@
 #' @export
 interface_BilanPoidsMoyen = function()
 {
-    bilan_poids_moyen=new("Bilan_poids_moyen")
+    quitte()  # vidange de l'interface
+	bilan_poids_moyen=new("Bilan_poids_moyen")
     assign("bilan_poids_moyen",bilan_poids_moyen,envir = .GlobalEnv)
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
-        bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
+    bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
     bilan_poids_moyen@liste=charge(objet=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la cat�gorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
     group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-    quitte() # vidange de l'interface
     assign("group",group,envir = .GlobalEnv)
     add(ggroupboutons,group)
     gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.1,container=group)

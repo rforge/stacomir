@@ -78,8 +78,6 @@ Collate:
 LazyLoad: yes
 Depends:
     methods,
-    proto,
-    tcltk2,
     RODBC,
     ggplot2,
     gWidgets,
@@ -87,12 +85,11 @@ Depends:
     gWidgetsRGtk2,
     lattice,
     RColorBrewer,
-    cairoDevice,
     xtable,
     stacomirtools,
     stringr,
     svMisc,
-    Rcmdr,
     reshape2,
-    Hmisc,
-    cluster
+    cluster,
+    scales,
+    grid

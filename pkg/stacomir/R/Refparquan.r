@@ -14,7 +14,7 @@ setClass(Class="Refparquan",contains="Refpar")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparquan"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "SELECT * FROM ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code"
 			requete<-connect(requete)
@@ -36,7 +36,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(objet) 
 #'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne,stade_selectionne)		
 setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",

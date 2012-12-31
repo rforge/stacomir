@@ -1,16 +1,19 @@
 \name{trunc.POSIXt}
-\alias{trunc.POSIXt}
-\title{trunc.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
+\alias{ceil.POSIXt}
+\title{trunc.POSIXT and ceil.POSIXt function imported from depuis Hmisc that cannot be loaded for reasons
 of compatibility with xtable}
 \usage{
   trunc.POSIXt(x,
+    units = c("secs", "mins", "hours", "days", "months", "years"),
+    ...)
+  ceil.POSIXt(x,
     units = c("secs", "mins", "hours", "days", "months", "years"),
     ...)
 }
 \arguments{
   \item{x}{}
 
-  \item{digits}{}
+  \item{units}{}
 }
 \value{
   a truncated time value
@@ -20,6 +23,6 @@ of compatibility with xtable}
   cannot be loaded for reasons of compatibility with xtable
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Charles Dupont
 }
 

@@ -20,7 +20,7 @@ setClass(Class="Refparqual",representation= representation(valqual="data.frame")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparqual"),definition=function(objet) {
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
 			requete<-connect(requete)
@@ -41,7 +41,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne,stade_selectionne)
 setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
@@ -76,7 +76,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 setMethod("chargecomplement",signature=signature("Refparqual"),definition=function(objet) {
 			if (nrow(objet@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(objet@data)),arret=TRUE)
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
 					" WHERE val_qal_code='",objet@data$par_code,
 					"' ORDER BY val_rang",sep="")

@@ -7,7 +7,7 @@
 # TODO Calcul des valeurs en interannuel pour le calage de la regression et d'une valeur par defaut des coefficients de conversion
 #' Bilan_poids_moyen class
 #' Objectif faire un calcul des poids moyens et permettre de reintegrere les coefficents de conversion poids effectif
-#' @note Un programme permet pour l'iav d'�tendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees OK done internal IAV
+#' @note Un programme permet pour l'iav d'etendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees OK done internal IAV
 #' @slot data="data.frame"
 #' @slot dc="RefDC"
 #' @slot anneedebut="RefAnnee"
@@ -38,6 +38,7 @@ setClass(Class="Bilan_poids_moyen",
 #' @note dates for the request are from august to august (a glass eel season)
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
+# objet<-bilan_poids_moyen
 setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
 			#CHARGEMENT DU TABLEAU DES POIDS MOYENS
 			requete=new("RequeteODBCwheredate")
@@ -65,8 +66,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 			objet@coe@datefin=requete@datefin
 			objet@coe<-charge(objet@coe)
 			funout(get("msg",envir_stacomi)$Bilan_poids_moyen.1)
-			funout(paste(nrow(objet@coe@data),get("msg",envir_stacomi)$Bilan_poids_moyen.2))
-			
+			funout(paste(nrow(objet@coe@data),get("msg",envir_stacomi)$Bilan_poids_moyen.2))			
 			return(objet)
 		})
 
@@ -99,7 +99,8 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)       
 			}                    
-			objet<-connect(objet)    
+			objet<-connect(objet)
+			assign("bilan_poids_moyen",objet,envir=envir_stacomi)
 			return(objet) 
 		})
 
@@ -115,7 +116,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 		rm("toolbarlistgraph1",envir= .GlobalEnv)
 	}
 	if ((!exists("peche", envir=envir_stacomi))){
-		# si il existe j'ai traffique l'objet bilan poids moyen � la main
+		# si il existe j'ai traffique l'objet bilan poids moyen a la main
 		# et je ne souhaite pas qu'il soit ecrase
 		bilan_poids_moyen=charge(bilan_poids_moyen)
 	}
@@ -123,7 +124,6 @@ fungraphBilan_poids_moyen = function(h,...) {
 	coeff=bilan_poids_moyen@coe@data
 	coeff$poids_moyen=1/coeff$coe_valeur_coefficient
 	coeff$date=as.POSIXct(coeff$coe_date_debut)
-	assign("bilan_poids_moyen",bilan_poids_moyen,envir_stacomi)#assign("bilan_lot",vue_ope_lot,envir_stacomi)
 	funout(get("msg",envir_stacomi)$Bilan_poids_moyen.3)
 	# changement des noms
 	donnees=chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin","lot_effectif","poids","poids_moyen","duree","datemoy"),
@@ -131,7 +131,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 	# correction de manques d'effectifs dans la base
 	if (sum(is.na(donnees$effectif))>0) warnings(paste(get("msg",envir_stacomi)$Bilan_poids_moyen.4, paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" ")))
 	don=donnees[,c(8,6,4,1)]
-	coe=coeff[,c(9,8)]
+	coe=coeff[,c(10,9)]
 	
 	# graphique des poids moyens en fonction du milieu de l'operation de contr�le)
 	# la date est la date moyenne du lot

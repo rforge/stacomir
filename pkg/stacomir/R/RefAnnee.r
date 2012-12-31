@@ -35,10 +35,10 @@ setClass(Class="RefAnnee",representation=
 #' showMethods("charge")
 setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 			requete=new("RequeteODBC")
-			objet@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
 					get("sch",envir=envir_stacomi),
-					".t_operation_ope) as tabletemp")
+					"t_operation_ope) as tabletemp",sep="")
 			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-requete@query
 			return(objet)
