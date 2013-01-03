@@ -5,8 +5,7 @@
   stacomi(gr_interface = TRUE)
 }
 \arguments{
-  \item{baseODBC}{the ODBC connection chain contains user
-  and password}
+  \item{gr_interface}{Will be used to launch the program as graphical interface or in command line}
 }
 \description{
   Function that loads the loginwindow, tests connection,

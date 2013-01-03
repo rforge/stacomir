@@ -5,7 +5,8 @@
   funtitle_bilan_stades_pigm(h, ...)
 }
 \arguments{
-  \item{h}{}
+  \item{h}{A handler}
+  \item{...}{Other arguments passed to the function}
 }
 \description{
   Fonction handler qui retourne le titre du graphique apres

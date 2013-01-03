@@ -32,7 +32,7 @@
 
   \item{maxVIA3}{10, maximum value of pigment time for VIA3, limits the duration of this longer stage }
 
-  \item{dates}{}
+  \item{dates}{dates}
 
   \item{Vparm}{parameters for pigment stage function}
   

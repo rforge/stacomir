@@ -12,11 +12,11 @@
 \alias{funtableBilan_lot}
 \title{function called by handler which display statistical results}
 \usage{
- hbilanConditionEnvstat(h, ...)
+ hbilanConditionEnvstat(h, \dots)
 }
 \arguments{
   \item{h}{the handler}
-  \item{...}{additional arguments passed to the function}
+  \item{\dots}{additional arguments passed to the function}
 }
 \description{
   The handler functions are linked to S4 classes, but due to gwidget programming cannot be programmed as S4 methods

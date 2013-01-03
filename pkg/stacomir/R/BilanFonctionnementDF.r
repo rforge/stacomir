@@ -227,7 +227,7 @@ funboxDF = function(h,...) {
 			#bty="n",
 			cex=0.8)
 	r <- round(range(duree), "day")
-	axis(1, at=graphdate(seq(r[1], r[2], by="weeks")),label=strftime(as.POSIXlt(seq(r[1], r[2], by="weeks")),format="%d-%b"))
+	axis(1, at=graphdate(seq(r[1], r[2], by="weeks")),labels=strftime(as.POSIXlt(seq(r[1], r[2], by="weeks")),format="%d-%b"))
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {
 		rect(      xleft=debut, 
 				ybottom=0.6,

@@ -27,7 +27,7 @@ class (ex Reftaxon) and copy the user choice in the environment "envir_stacomi"
   \item{objetBilan}{un objet bilan}
 
   \item{is.enabled}{a boolean indincating # see if
-  deprecated...}
+  deprecated}
 
   \item{nomassign}{the name to be asssigned in
   envir_stacomi}

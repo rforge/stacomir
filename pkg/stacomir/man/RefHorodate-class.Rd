@@ -3,15 +3,17 @@
 \alias{RefHorodate-class}
 \alias{RefHorodate}
 \alias{validite_RefHorodate}
+\alias{getanneeprec,RefHorodate-method}
 \alias{getanneeprec}
+\alias{getRefHorodate,RefHorodate-method}
 \alias{getRefHorodate}
+\alias{setRefHorodate,RefHorodate-method}
 \alias{setRefHorodate}
-
 \title{Class "RefHorodate"}
 \description{	choice of date with method to show current and previous year
 }
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("RefHorodate", ...)}.
+Objects can be created by calls of the form \code{new("RefHorodate", \dots)}.
 	  
 }
 \section{Slots}{

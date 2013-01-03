@@ -7,7 +7,6 @@
 \description{	Refperiode referential class to choose a period}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Refperiode", ...)}.
-	 ~~ describe objects here ~~ 
 }
 \section{Slots}{
   \describe{

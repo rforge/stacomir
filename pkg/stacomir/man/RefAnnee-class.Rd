@@ -11,8 +11,8 @@ Objects can be created by calls of the form \code{new("RefAnnee", data=data.fram
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Every year in the database}
-    \item{\code{annee_selectionnee}:}{Object of class \code{"numeric"} ~ The year selected by user}
+    \item{\code{data}:}{Object of class \code{"data.frame"}  Every year in the database}
+    \item{\code{annee_selectionnee}:}{Object of class \code{"numeric"}  The year selected by user}
   }
 }
 \section{Methods}{

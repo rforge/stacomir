@@ -170,8 +170,8 @@ fntablestade<-function(stades,choixpere="lotpere"){
 			tablestades$VIA3=tablestades$VIA3+tablestades$VIA4
 			tablestades=tablestades[,-match("VIA4",dimnames(tablestades)[[2]])]
 		}
-		dimnames(tablestades) <- list(as.character(dates),
-				c("VB","VIA0","VIA1","VIA2","VIA3"))
+		#dimnames(tablestades) <- list(as.character(dates),
+		#		c("VB","VIA0","VIA1","VIA2","VIA3"))
 	}
 	
 	return(list("tablestades"=tablestades,"dates"=dates))
@@ -201,7 +201,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refCheckBox",envir_stacomi)) {
 				objet@options<-get("refCheckBox",envir_stacomi)
 			} else {
-				# rien de toutes fa�ons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes facons les choix par defaut sont copies dans envir_stacomi
 			}  
 			if (exists("refchoix",envir_stacomi)) {
 				objet@lmax<-get("refchoix",envir_stacomi)
@@ -646,7 +646,7 @@ fungraphstades<-function(
 	}
 	if (graphstades)  {
 		# stades cumules calcul necessaire pour points et graphique durees
-		# le graphique ne supporte pas plusieurs echantillons � la m^ date d'ou le choix
+		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choix
 		
 		par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=gray(5:1/6),ordre=c(1,2,3,4,5),
@@ -690,16 +690,16 @@ fungraphstades<-function(
 }
 
 fungraphgg=function(h,...){
-	p<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
-	p<-p+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer � geom_bar un x et un y...
+	g<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
+	g<-g+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer � geom_bar un x et un y...
 			coord_polar(theta="y", start=pi)+ # coordonnees polaires = cercle
 			scale_fill_grey(name="stades pigmentaires",start=0.8, end=0.2)+ # scale_fill_grey permet d'avoir des graduations de gris
 			theme_bw() +  # on efface le fond gris
-			facet_wrap(~ope_date_debut,scale="free_y")+ # facet_wrap permet d'afficher un ruban unidimentionnel en deux dimensions (un graphique par date)
-			opts(title="Stades pigmentaires",labels=c(x="",y="effectifs")) # options
-	print(p)
-	assign("p",p,.GlobalEnv)
-	funout("l'objet graphique est disponible dans l'environnement principal, tapper p")
+			facet_wrap(~ope_date_debut,scales="free_y")+ # facet_wrap permet d'afficher un ruban unidimentionnel en deux dimensions (un graphique par date)
+			ggtitle("Stades pigmentaires",labels=c(x="",y="effectifs")) # options
+	print(g)
+	assign("g",g,"envir_stacomi")
+	funout("l'objet graphique est disponible dans l'environnement principal, tapper g<-get('g',envir=envir_stacomi)")
 }
 
 

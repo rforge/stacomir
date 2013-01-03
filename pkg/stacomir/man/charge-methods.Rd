@@ -77,7 +77,7 @@
 
 \item{\code{signature(objet = "Refparquan")}}{ Loading method for Reparquan referential objects }
 
-\item{\code{signature(objet = "RefPoidsMoyenPeche")}}{ ~~describe this method here }
+\item{\code{signature(objet = "RefPoidsMoyenPeche")}}{ Loading method for RefPoidsMoyenPeche referential objects}
 
 \item{\code{signature(objet = "RefStades")}}{ Loading method for RefStades referential objects}
 

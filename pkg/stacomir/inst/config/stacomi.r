@@ -48,7 +48,7 @@ source("funstatJournalier.r")
 source("fn_EcritBilanMensuel.r")
 source("fn_EcritBilanJournalier.r")                        
 
-#listes de connection � la base de donnee (programmation S4)
+#listes de connection a la base de donnee (programmation S4)
 source("create_generic.r") 
 #cree les fonctions generiques et l'environnement envir_stacomi
 source("RefDF.r")

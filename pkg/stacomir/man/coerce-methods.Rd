@@ -12,13 +12,13 @@ Methods for function \code{coerce}  ie inherited from a mother class
 \section{Methods}{
 \describe{
 
-\item{\code{signature(from = "BilanMigration", to = "BilanMigrationInterAnnuelle")}}{ ~~describe this method here }
+\item{\code{signature(from = "BilanMigration", to = "BilanMigrationInterAnnuelle")}}{  }
 
-\item{\code{signature(from = "PasDeTempsChar", to = "PasDeTemps")}}{ ~~describe this method here }
+\item{\code{signature(from = "PasDeTempsChar", to = "PasDeTemps")}}{  }
 
-\item{\code{signature(from = "RequeteODBCwhere", to = "RequeteODBC")}}{ ~~describe this method here }
+\item{\code{signature(from = "RequeteODBCwhere", to = "RequeteODBC")}}{ }
 
-\item{\code{signature(from = "RequeteODBCwheredate", to = "RequeteODBCwhere")}}{ ~~describe this method here }
+\item{\code{signature(from = "RequeteODBCwheredate", to = "RequeteODBCwhere")}}{  }
 }}
 \keyword{methods}
 

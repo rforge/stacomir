@@ -7,18 +7,18 @@
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RefStationMesure", ...)}.
 	\describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Datas concerning the measure station}
+    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Data concerning the measure station}
 	}
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Datas concerning the measure station}
+    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Data concerning the measure station}
   }
 }
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefStationMesure")}: Loads the measure stations }
-    \item{choix}{\code{signature(objet = "RefStationMesure")}: Enabes to select one in the list }
+    \item{choix}{\code{signature(objet = "RefStationMesure")}: Enables to select one in the list }
 	 }
 }
 

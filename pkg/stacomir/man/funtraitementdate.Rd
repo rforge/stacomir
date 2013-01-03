@@ -10,28 +10,27 @@
   \item{data}{a data frame containing a Date or POSIXt
   column}
 
-  \item{nom_coldt}{}
+  \item{nom_coldt}{the name of the column containing date or POSIXt entry to be processed}
 
-  \item{annee}{}
+  \item{annee}{logical do you want a column describing year to be added to the dataframe}
 
-  \item{mois}{}
+  \item{mois}{logical, add column with month}
 
-  \item{quinzaine}{}
+  \item{quinzaine}{logical, add column with 15 days}
 
-  \item{semaine}{}
+  \item{semaine}{logical, add column with weeks}
 
-  \item{jour_an}{}
+  \item{jour_an}{logical, add column with day of year}
 
-  \item{jour_mois}{}
+  \item{jour_mois}{logical, add column with day of month}
 
-  \item{heure}{}
+  \item{heure}{logical, add column with hour}
 }
 \value{
   data
 }
 \description{
-  This function extracts temporal characteristics from a
-  dataframe
+  This function extracts temporal characteristics from a  dataframe
 }
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}

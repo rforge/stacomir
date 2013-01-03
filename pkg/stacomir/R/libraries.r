@@ -7,7 +7,7 @@ libraries=function() {
 necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
 		'lattice','RColorBrewer','Rcmdr','xtable','scales','reshape2','grid','stringr')  # 'tcltk2','XML', 'Hmisc''svMisc''proto''R2HTML'
 if(!all(necessary %in% installed.packages()[, 'Package']))
-	install.packages(necessary[!necessary %in% installed.packages()[, 'Package']], dep = T)
+	install.packages(necessary[!necessary %in% installed.packages()[, 'Package']], dependencies = TRUE)
 #if (!'XML'%in%installed.packages()[, 'Package']) install.packages("XML", repos = "http://www.omegahat.org/R")
 #require('tcltk2')
 require('ggplot2')

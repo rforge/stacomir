@@ -174,11 +174,6 @@ hhelp=function(h,...){
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
 }
-h0=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.15)
-	require('Rcmdr')
-	eval(call("Commander"))
-}
 hx11=function(h,...){
 	x11()
 }
@@ -291,10 +286,8 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
-	menubarlist$Utilitaires$Rcmdr$handler=h0
-	menubarlist$Utilitaires$Rcmdr$icon="gWidgetsRGtk2-symbol_star"
-	menubarlist$Utilitaires$newgraph$handler=hx11
-	menubarlist$Utilitaires$newgraph$icon="newplot"
+	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hx11
+	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$handler = hlang

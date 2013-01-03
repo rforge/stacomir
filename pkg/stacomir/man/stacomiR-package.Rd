@@ -29,7 +29,7 @@ Author and Maintainer : \email{cedric.briand00@gmail.com}
 \keyword{dynamic}
 \keyword{database}
 \seealso{
-\code{\link[pkg]{stacomiRtools}}
+\pkg{stacomiRtools}
 }
 
 \examples{

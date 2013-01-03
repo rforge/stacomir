@@ -5,7 +5,7 @@
   fn_EcritBilanJournalier(bilanMigration)
 }
 \arguments{
-  \item{bilanMigration}{}
+  \item{bilanMigration}{an object of class 	\code{\linkS4class{BilanMigration}}	}
 }
 \description{
   fn_EcritBilanJournier writes the daily migration in the

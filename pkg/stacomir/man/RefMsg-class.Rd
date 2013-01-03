@@ -2,6 +2,7 @@
 \docType{class}
 \alias{RefMsg-class}
 \alias{RefMsg}
+\alias{createmessage,RefMsg-method}
 \title{RefMsg referential class to load message according to the language chosen}
 \description{
   RefMsg referential class to load message according to

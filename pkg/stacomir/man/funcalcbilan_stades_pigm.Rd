@@ -2,11 +2,11 @@
 \alias{funcalcbilan_stades_pigm}
 \title{main launching function for class Bilan_stades_pigm}
 \usage{
-  funcalcbilan_stades_pigm(h, ...)
+  funcalcbilan_stades_pigm(h, \dots)
 }
 \arguments{
   \item{h}{a handler}
-  \item{...}{additional arguments}
+  \item{ \dots}{additional arguments}
 }
 \description{
   Function with handler which calls charge (and thus

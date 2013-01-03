@@ -8,14 +8,14 @@
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Refparqual", ...)}.
 	 \describe{
-    \item{\code{valqual}:}{Object of class \code{"data.frame"} ~ Values of qualitatives parameters}
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Qualitatives parameters }
+    \item{\code{valqual}:}{Object of class \code{"data.frame"} Values of qualitatives parameters}
+    \item{\code{data}:}{Object of class \code{"data.frame"} Qualitatives parameters }
   }
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{valqual}:}{Object of class \code{"data.frame"} ~ Values of qualitatives parameters}
-    \item{\code{data}:}{Object of class \code{"data.frame"} ~ Qualitatives parameters }
+    \item{\code{valqual}:}{Object of class \code{"data.frame"} Values of qualitatives parameters}
+    \item{\code{data}:}{Object of class \code{"data.frame"} Qualitatives parameters }
   }
 }
 \section{Extends}{

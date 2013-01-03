@@ -1,5 +1,7 @@
 \name{createmessage}
+\docType{methods}
 \alias{createmessage}
+\alias{createmessage-method}
 \title{createmessage method for RefMsg referential objects}
 \value{
   An S4 object of class RefMsg

@@ -1,26 +1,23 @@
 \name{trunc.POSIXt}
 \alias{ceil.POSIXt}
-\title{trunc.POSIXT and ceil.POSIXt function imported from depuis Hmisc that cannot be loaded for reasons
-of compatibility with xtable}
+\alias{trunc.POSIXt}
+\alias{round.POSIXt}
+\title{trunc.POSIXT and ceil.POSIXt function imported from Hmisc that cannot be loaded in Rforge}
 \usage{
-  trunc.POSIXt(x,
-    units = c("secs", "mins", "hours", "days", "months", "years"),
-    ...)
-  ceil.POSIXt(x,
-    units = c("secs", "mins", "hours", "days", "months", "years"),
-    ...)
+  \method{trunc.POSIXt}{POSIXt}(x, units = c("secs", "mins", "hours", "days", "months", "years"),  \dots)
+  \method{ceil.POSIXt}{POSIXt}(x, units = c("secs", "mins", "hours", "days", "months", "years"),   \dots)
+  \method{round.POSIXt}{POSIXt}(x, units = c("secs", "mins", "hours", "days", "months", "years"),   \dots)
 }
 \arguments{
-  \item{x}{}
-
-  \item{units}{}
+  \item{x}{date to be floored, ceilinged, truncated, or rounded}
+  \item{units}{unit to that is is rounded up or down to. }
+  \item{\dots}{further arguments to be passed to or from other methods}
 }
 \value{
-  a truncated time value
+  An object of class POSIXlt.
 }
 \description{
-  trunc.POSIXT function imported from depuis Hmisc that
-  cannot be loaded for reasons of compatibility with xtable
+  functions imported from Hmisc 
 }
 \author{
   Charles Dupont

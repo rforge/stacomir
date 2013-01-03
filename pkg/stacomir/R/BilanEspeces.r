@@ -129,7 +129,6 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 #' @export
 
 hCamembert = function(h,...) {	
-	# TODO r�gler le pb de handler et transformation en histo ?
 	if (exists("bilanEspeces",envir_stacomi)) {
 		bilanEspeces<-get("bilanEspeces",envir_stacomi)
 	} else {      
@@ -158,78 +157,35 @@ hCamembert = function(h,...) {
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
 			"aucun"=as.data.frame(xtabs(lot_effectif~taxon_stades,data=tableEspeces)))
-	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m� nb de colonnes
+	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m nb de colonnes
 # graphique ggplot
 	
-	p<-ggplot(sumEspeces)
-	p<-p+geom_bar(aes(x="",y=Effectif,fill=taxon_stades,width=1)) + 
-			opts(title = paste("Bilan Especes, DC",bilanEspeces@dc@dc_selectionne,"\n",bilanEspeces@datedebut,"=>",bilanEspeces@datefin))+
-			opts(axis.title.x=theme_blank())+opts(plot.title = theme_text(size=15, colour="gray",vjust=1))
+	g<-ggplot(sumEspeces)
+	g<-g+geom_bar(aes(x="",y=Effectif,fill=taxon_stades,width=1),stat="identity") + 
+			ggtitle(paste("Bilan Especes, DC",bilanEspeces@dc@dc_selectionne,"\n",bilanEspeces@datedebut,"=>",bilanEspeces@datefin))
+			#theme(axis.line.x=element_line("none"))+theme(axis.title.x= element_text("none"))
 	if (bilanEspeces@liste@listechoix!="aucun"){
 		facet<-switch(bilanEspeces@liste@listechoix,
 				"annee"=as.formula(~annee),
 				"mois"=as.formula(~mois),
 				"semaine"=as.formula(~semaine))
-		p<-p+facet_wrap(facet,scales="free")
+		g<-g+facet_wrap(facet,scales="fixed")
 	}
 	if (nb<=8) {
-		p<-p+scale_fill_brewer(palette="Accent",name="Taxa")   
+		g<-g+scale_fill_brewer(palette="Accent",name="Taxa")   
 	} else if (nb<=12){
-		p<-p+scale_fill_brewer(palette="Set3",name="Taxa")   
+		p<-g+scale_fill_brewer(palette="Set3",name="Taxa")   
 	}else{
-		p<-p+scale_fill_manual(values=rainbow(nb))
+		g<-g+scale_fill_manual(values=rainbow(nb))
 	}
 	if(h$action=="pie"){
-		p<-p+ coord_polar(theta="y", start=pi)
+		g<-g+ coord_polar(theta="y", start=pi)+xlab('') +ylab('')
 	}
-	print(p)   
+	print(g)   
+	g<<-g
 }
 
 
-#TODO d�velopper cette fonction
-#' handler du calcul hHistogramme
-#' trace un histogramme des esp�ces fr�quentant la passe... 
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
-hHistogramme = function(h,...) {
-	if (exists("BilanEspeces",envir_stacomi)) {
-		BilanEspeces<-get("BilanEspeces",envir_stacomi)
-	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
-	}
-	taxon= as.character(BilanEspeces@taxons@data$tax_nom_latin)
-	stade= as.character(BilanEspeces@stades@data$std_libelle)
-	DC=as.numeric(BilanEspeces@dc@dc_selectionne)	
-	if (BilanEspeces@pasDeTemps@dureePas==86400 & BilanEspeces@pasDeTemps@dureePas==86400) {
-		BilanEspeces@data$duree=BilanEspeces@duree
-		# pour sauvegarder sous excel
-		BilanEspeces@data<-funtraitementdate(BilanEspeces@data,
-				nom_coldt="duree",
-				annee=FALSE,
-				mois=TRUE,
-				quinzaine=TRUE,
-				semaine=TRUE,
-				jour_an=TRUE,
-				jour_mois=FALSE,
-				heure=FALSE)
-		BilanEspeces@data$Cumsum=cumsum(BilanEspeces@data$Effectif_total)
-		# pour sauvegarder sous excel
-		annee=unique(strftime(as.POSIXlt(BilanEspeces@duree),"%Y"))
-		dis_commentaire=  as.character(BilanEspeces@dc@data$dis_commentaires[BilanEspeces@dc@data$dc%in%BilanEspeces@dc@dc_selectionne]) 
-		update_geom_defaults("step", aes(size = 3))
-		p<-ggplot(BilanEspeces@data)+
-				geom_step(aes(x=duree,y=Cumsum,colour=mois))+
-				ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-				opts(plot.title=theme_text(size=10,colour="blue"),
-						title=paste(get("msg",envir_stacomi)$BilanMigration.7,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))   
-		print(p)	
-	} else {
-		funout(get("msg",envir_stacomi)$BilanMigration.8)
-	}
-}
-#TODO developper cette fonction (pour l'instant fausse)
 #' handler du calcul BilanEspeces : traitements 
 #' appelle les fonctions funstat et funtable pour faire le bilan des migrations
 #' dans des fichiers csv
@@ -238,21 +194,39 @@ hHistogramme = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 hTableBilanEspeces=function(h,...) {
-	funout("Tableau de sortie \n")
-	if (exists("BilanEspeces",envir_stacomi)) 
-	{
-		BilanEspeces<-get("BilanEspeces",envir_stacomi)
-	} 
-	else 
-	{      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+	if (exists("bilanEspeces",envir_stacomi)) {
+		bilanEspeces<-get("bilanEspeces",envir_stacomi)
+	} else {      
+		funout(get("msg",envir_stacomi)$BilanEspeces.4,arret=TRUE)
 	}
-	taxon= as.character(BilanEspeces@taxons@data$tax_nom_latin)
-	stade= as.character(BilanEspeces@stades@data$std_libelle)
-	DC=as.numeric(BilanEspeces@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
-	resum=funstat(tableau=BilanEspeces@data,duree=BilanEspeces@duree,taxon,stade,DC)
-	funtable(tableau=BilanEspeces@data,duree=BilanEspeces@duree,taxon,stade,DC,resum)
+	DC=as.numeric(bilanEspeces@dc@dc_selectionne)	
+	# update of refliste which does not need calcul button pushed
+	bilanEspeces@liste<-get("refliste",envir_stacomi)   
+	
+	tableEspeces=bilanEspeces@data
+	if (nrow(tableEspeces)==0) funout(get("msg",envir_stacomi)$BilanEspeces.5,arret=TRUE)
+	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
+	# je ne garde taxons_stades que pour les esp�ces pr�sentant plusieurs stades
+	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
+	if (length(nbstades[nbstades>1])>0){
+		les_multiples=names(nbstades[nbstades>1])
+		tableEspeces[!tableEspeces$taxon_stades%in%les_multiples,"taxon_stades"]<-tableEspeces$tax_nom_latin[!tableEspeces$taxon_stades%in%les_multiples]
+	} else tableEspeces$taxon_stades<-tableEspeces$tax_nom_latin
+	# TODO ajouter les effectifs en fin de taxons_stades ???
+	nb=length(unique(tableEspeces$taxon_stade))
+	if (min(tableEspeces$lot_effectif)<0) {funout(get("msg",envir_stacomi)$BilanEspeces.6)
+		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
+	}
+	now<-bilanEspeces@horodate@horodate
+	sumEspeces=switch(bilanEspeces@liste@listechoix,
+			"annee"=as.data.frame(xtabs(lot_effectif~taxon_stades+annee,data=tableEspeces)),
+			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
+			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
+			"aucun"=as.data.frame(xtabs(lot_effectif~taxon_stades,data=tableEspeces)))
+	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m nb de colonnes	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
+	path=file.path(normalizePath(path.expand(get("datawd",envir=envir_stacomi))),paste("tableEspece",now,".csv",sep=""),fsep ="\\")
+	write.table(sumEspeces,path,row.names=TRUE,col.names=TRUE,sep=";",append=FALSE)
+	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path,"\n"))
 }
 
 #' Interface for BilanEspece class
@@ -285,8 +259,7 @@ interface_BilanEspeces=function(){
 			decal=-1,
 			affichecal=FALSE)
 	choix(bilanEspeces@dc,objetBilan=bilanEspeces,is.enabled=TRUE)
-	choix(bilanEspeces@liste)
-	
+	choix(bilanEspeces@liste)	
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
 	add(ggroupboutons,ggroupboutonsbas)

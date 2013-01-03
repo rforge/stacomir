@@ -5,11 +5,11 @@
   funout(text, arret = FALSE, wash = FALSE)
 }
 \arguments{
-  \item{text}{}
+  \item{text}{the text to display both in the gtk interface and in the R console}
 
-  \item{arret}{}
+  \item{arret}{should this cause the program to stop ?}
 
-  \item{wash}{}
+  \item{wash}{Should the console be cleared after displaying the message}
 }
 \value{
   nblignes assigned in .Global

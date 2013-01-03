@@ -23,6 +23,7 @@
 \alias{suivant,PasDeTemps-method}
 \alias{suivant}
 \alias{validite_PasDeTemps}
+\alias{dureePas}
 \title{Class "PasDeTemps"}
 \description{Describes a time step}
 \section{Objects from the Class}{
@@ -46,7 +47,6 @@ Objects can be created by calls of the form \code{new("PasDeTemps", dateDebut="P
 \section{Methods}{
   \describe{
     \item{choix}{\code{signature(objet = "PasDeTemps")}: Enables to initialize a PasDeTemps object}
-    \item{coerce}{\code{signature(from = "PasDeTempsChar", to = "PasDeTemps")}: ... }
     \item{currentDateDebut}{\code{signature(objet = "PasDeTemps")}: Returns the current starting date}
     \item{currentDateFin}{\code{signature(objet = "PasDeTemps")}: Returns the current ending date}
     \item{DateFin}{\code{signature(objet = "PasDeTemps")}: Returns the ending date}

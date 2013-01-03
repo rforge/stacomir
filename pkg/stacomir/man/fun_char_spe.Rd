@@ -5,7 +5,7 @@
   fun_char_spe(text)
 }
 \arguments{
-  \item{text}{}
+  \item{text}{a text string which might contain no utf8 characters}
 }
 \value{
   text

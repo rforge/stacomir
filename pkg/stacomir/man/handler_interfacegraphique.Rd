@@ -1,7 +1,6 @@
 \name{handler_interfacegraphique}
 \alias{hbilanMigration}
 \alias{hBilanEspeces}
-\alias{h0}
 \alias{hBilanConditionEnv}
 \alias{hBilanLots}
 \alias{hBilanMigrationPar}
@@ -22,13 +21,13 @@
 \alias{hx11}
 \title{handler function used by the main interface to call bilan classes}
 \usage{
- hBilanLots(h, ...)
- hBilanMigration(h, ...)
- hBilanEspeces(h,...)
+ hBilanLots(h, \dots)
+ hBilanMigration(h, \dots)
+ hBilanEspeces(h,\dots)
 }
 \arguments{
   \item{h}{the handler}
-  \item{...}{additional arguments passed to the function}
+  \item{\dots}{additional arguments passed to the function}
 }
 \description{
   Handler functions used by interface_graphique the main interface
