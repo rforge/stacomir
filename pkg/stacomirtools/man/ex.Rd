@@ -1,6 +1,6 @@
 \name{ex}
 \alias{ex}
-\title{ex fonction to write to excel, not used within the program but can still be used}
+\title{ex fonction to write to the clipboard}
 \usage{
   ex(d = NULL)
 }
@@ -8,8 +8,7 @@
   \item{d}{a dataframe}
 }
 \description{
-  ex fonction to write to excel, not used within the
-  program but can still be used
+  ex fonction to write to the clipboard
 }
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}
