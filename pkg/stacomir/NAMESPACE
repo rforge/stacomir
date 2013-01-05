@@ -57,4 +57,5 @@ exportClasses(
      "RefTaxon",
      "RefTextBox"
 )
-S3method(trunc.POSIXt, POSIXt)
+S3method(trunc, POSIXt)
+S3method(round, POSIXt)
