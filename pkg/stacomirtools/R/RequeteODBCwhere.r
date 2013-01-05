@@ -12,7 +12,7 @@
 #' @slot baseODBC="vector" 	(inherited from ConnexionODBC)
 #' @slot silent="logical" 	(inherited from ConnexionODBC)
 #' @slot etat="character" 	(inherited from ConnexionODBC)
-#' @slot connexion="ANY" 	(inherited from ConnexionODBC)
+#' @slot connection="ANY" 	(inherited from ConnexionODBC)
 #' @slot sql="character" 	(inherited from RequeteODBC)
 #' @slot query="data.frame"	(inherited from RequeteODBC)
 #' @slot open="logical" 	(inherited from RequeteODBC)
@@ -46,10 +46,10 @@ setAs("RequeteODBCwhere","RequeteODBC",function(from,to){
 #' objet<-connect(objet)
 setMethod("connect",signature=signature("RequeteODBCwhere"),definition=function(objet) {
 			requeteODBC=as(objet,"RequeteODBC")
-			requeteODBC=connect(requeteODBC) # utilise la méthode de la classe mère
-			# récupère au sein de l'objet les éléments de requeteODBC
+			requeteODBC=connect(requeteODBC) # utilise la mï¿½thode de la classe mï¿½re
+			# rï¿½cupï¿½re au sein de l'objet les ï¿½lï¿½ments de requeteODBC
 			objet@sql=requeteODBC@sql
-			objet@connexion=requeteODBC@connexion
+			objet@connection=requeteODBC@connection
 			objet@query=requeteODBC@query
 			objet@etat=requeteODBC@etat
 			return(objet)

@@ -5,7 +5,7 @@
 \description{Query with WHERE condition and overlaping dates clause.}
 \note{
   Inherits from RequeteODBCwhere and uses its connect
-  method with a new SetAs
+  method with a new SetAs. This function is only usefull in databases supporting the "overlaps" statement.
 }
 
 \section{Objects from the Class}{
@@ -31,7 +31,7 @@ Objects can be created by calls of the form \code{new("RequeteODBCwheredate", da
     \item{\code{baseODBC}:}{Object of class \code{"vector"} ~ The database}
     \item{\code{silent}:}{Object of class \code{"logical"} ~ The mode}
     \item{\code{etat}:}{Object of class \code{"character"} ~ The state}
-    \item{\code{connexion}:}{Object of class \code{"ANY"} ~ The connexion}
+    \item{\code{connection}:}{Object of class \code{"ANY"} ~ The connection}
   }
 }
 \section{Extends}{

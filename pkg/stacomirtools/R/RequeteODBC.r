@@ -5,10 +5,10 @@
 #' @slot baseODBC="vector" (inherited from ConnexionODBC)
 #' @slot silent="logical" (inherited from ConnexionODBC)
 #' @slot etat="character" (inherited from ConnexionODBC)
-#' @slot connexion="ANY" (inherited from ConnexionODBC)
+#' @slot connection="ANY" (inherited from ConnexionODBC)
 #' @slot sql="character"
 #' @slot query="data.frame"
-#' @slot open=logical is the connexion left open after the request ?
+#' @slot open=logical is the connection left open after the request ?
 #' @expamples objet=new("RequeteODBC")
 setClass(Class="RequeteODBC",
 		representation= representation(sql="character",query="data.frame",open="logical"),
@@ -26,7 +26,7 @@ setClass(Class="RequeteODBC",
 #' objet@baseODBC=baseODBC
 #' objet@sql= "select * from t_lot_lot limit 100"
 #' objet<-connect(objet)
-#' odbcClose(objet@connexion)
+#' odbcClose(objet@connection)
 #' odbcCloseAll()
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet) {     
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
@@ -43,9 +43,9 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 					# msg not changed loaded at the beginning
 					verbose<-exists("showmerequest",envir=envir_stacomi)
 					msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
-					msg2<-"connexion trial :"
-					msg3<-"connexion impossible"
-					msg4<-"connexion successfull"
+					msg2<-"connection trial :"
+					msg3<-"connection impossible"
+					msg4<-"connection successfull"
 					msg5<-"request trial"
 					msg6<-"success"
 					funout<-function(text,arret=FALSE){
@@ -64,9 +64,9 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 				# msg not changed loaded at the beginning
 				verbose<-FALSE # cannot exist in envir_stacomi as envir_stacomi does not exists
 				msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
-				msg2<-"connexion trial :"
-				msg3<-"connexion impossible"
-				msg4<-"connexion successfull"
+				msg2<-"connection trial :"
+				msg3<-"connection impossible"
+				msg4<-"connection successfull"
 				msg5<-"request trial"
 				msg6<-"success"
 				funout<-function(text,arret=FALSE){
@@ -84,7 +84,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 
 			
 			# The connection might already be opened, we will avoid to go through there !
-			if (is.null(objet@connexion)){ 				
+			if (is.null(objet@connection)){ 				
 				if (length(objet@baseODBC)!=3)  {
 					if (exists("baseODBC",envir=.GlobalEnv)) {
 						objet@baseODBC<-get("baseODBC",envir=.GlobalEnv)  
@@ -92,36 +92,36 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 						funout(msg1,arret=TRUE)
 					}
 				}
-				# ouverture de la connection ODBC
+				# opening of ODBC connection
 				e=expression(channel <-odbcConnect(objet@baseODBC[1],
 								uid = objet@baseODBC[2],
 								pwd = objet@baseODBC[3],
 								case = "tolower",
 								believeNRows = FALSE))
 				if (!objet@silent) funout(paste(msg2,objet@baseODBC[1],"\n"))
-				# renvoit du resultat d'un try catch expression dans
-				#l'objet Connexion courante, soit un vecteur caractere
-				objet@connexion<-tryCatch(eval(e), error=paste(msg3 ,objet@baseODBC)) 
+				# send the result of a try catch expression in
+				#the Currentconnection object ie a character vector
+				objet@connection<-tryCatch(eval(e), error=paste(msg3 ,objet@baseODBC)) 
 				# un objet S3 RODBC
-				if (class(objet@connexion)=="RODBC") {
+				if (class(objet@connection)=="RODBC") {
 					if (!objet@silent)funout(msg4)
 					objet@etat=msg4# success
 				} else {
-					objet@etat<-objet@connexion # report of the error
-					objet@connexion<-NULL
+					objet@etat<-objet@connection # report of the error
+					objet@connection<-NULL
 					funout(msg3,arret=TRUE)
 				}
 				# sending the query
 			} 
 			if (!objet@silent) funout(msg5) # query trial
 			if (verbose) print(objet@sql)
-			e=expression(query<-sqlQuery(objet@connexion,objet@sql,errors=TRUE))
+			e=expression(query<-sqlQuery(objet@connection,objet@sql,errors=TRUE))
 			if (objet@open) {
-				# If we want to leave the connexion open no finally clause
+				# If we want to leave the connection open no finally clause
 				resultatRequete<-tryCatch(eval(e),error = function(e) e)
 			} else {
-				# otherwise the connexion is closed while ending the request
-				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=odbcClose(objet@connexion))
+				# otherwise the connection is closed while ending the request
+				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=odbcClose(objet@connection))
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
 				if (!objet@silent) funout(msg6)

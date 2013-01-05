@@ -1,7 +1,7 @@
 \name{stacomirtools-package}
 \title{RODBC connector class and some utilities}
 \description{
-This package contains S4 wrapper for ODBC connection and some utilities
+This package contains S4 wrappers for ODBC connection and some utilities
 }
 \details{\tabular{ll}{
 Package: \tab stacomirtools\cr

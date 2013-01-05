@@ -11,7 +11,7 @@ Objects can be created by calls of the form \code{new("ConnexionODBC", ...)}.
     \item{\code{baseODBC}:}{Object of class \code{"vector"} The database }
     \item{\code{silent}:}{Object of class \code{"logical"} The mode }
     \item{\code{etat}:}{Object of class \code{"character"} The state }
-    \item{\code{connexion}:}{Object of class \code{"ANY"} The connection }
+    \item{\code{connection}:}{Object of class \code{"ANY"} The connection }
   }
 }
 \section{Slots}{
@@ -19,7 +19,7 @@ Objects can be created by calls of the form \code{new("ConnexionODBC", ...)}.
     \item{\code{baseODBC}:}{Object of class \code{"vector"} The database }
     \item{\code{silent}:}{Object of class \code{"logical"} The mode }
     \item{\code{etat}:}{Object of class \code{"character"} The state }
-    \item{\code{connexion}:}{Object of class \code{"ANY"} The connection }
+    \item{\code{connection}:}{Object of class \code{"ANY"} The connection }
   }
 }
 \section{Methods}{
@@ -39,10 +39,10 @@ showClass("ConnexionODBC")
 \dontrun{
  # this is the mother class, you don't have to use it, please use requeteODBC and daughter class instead
  objet<-new("ConnexionODBC")
- objet@baseODBC<-c("myodbcconnexion","myusername","mypassword")
+ objet@baseODBC<-c("myODBCconnection","myusername","mypassword")
  objet@silent<-FALSE
  objet<-connect(objet)
- odbcClose(objet@connexion)
+ odbcClose(objet@connection)
 }
 }
 \keyword{classes}

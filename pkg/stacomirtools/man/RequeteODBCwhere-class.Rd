@@ -22,7 +22,7 @@ Objects can be created by calls of the form \code{new("RequeteODBCwhere", where=
 	\item{\code{baseODBC}:}{Object of class \code{"vector"}  The name, user and password of the database}
     \item{\code{silent}:}{Object of class \code{"logical"}  TRUE if the query must be executed silently, FALSE else}
     \item{\code{etat}:}{Object of class \code{"character"}  The state of the query (Connecting, successful,...) }
-    \item{\code{connexion}:}{Object of class \code{"ANY"}  The database connexion}
+    \item{\code{connection}:}{Object of class \code{"ANY"}  The database connection}
   }
 }
 
@@ -48,7 +48,7 @@ showClass("RequeteODBCwhere")
 \dontrun{
  test<-0
  objet=new("RequeteODBCwhere")
- objet@baseODBC=c("myodbcconnexion","myusername","mypassword")
+ objet@baseODBC=c("myodbcconnection","myusername","mypassword")
  objet@select= "select * from mytable limit 100"
  # assuming mycol, mycol1 and mycol2 are numeric
  objet@where=paste(" where mycol>",test,sep="")

@@ -4,7 +4,7 @@
 # Contact :            cedric.briand00@gmail.com
 # Date de creation :   06/02/2007 10:58:37
 # Etat :               OK
-# Description          Classe de connexion à la base de donnee
+# Description          Classe de connection ï¿½ la base de donnee
 #**********************************************************************
 
 #validation function
@@ -23,30 +23,30 @@ validite_ODBC=function(object)
 #' @slot baseODBC="vector" (of length 3, character)
 #' @slot silent="logical"
 #' @slot etat="ANY" # can be -1 or string
-#' @slot connexion="ANY" # could be both string or S3
+#' @slot connection="ANY" # could be both string or S3
 #' @slot sql="character"
 #' @slot query="data.frame"
-#' @return connexionODBC an S4 object of class connexionODBC
+#' @return connectionODBC an S4 object of class connectionODBC
 #' @examples 
 #' objet=new("ConnexionODBC")
-#' objet@baseODBC=c("myodbcconnexion","myusername","mypassword")
+#' objet@baseODBC=c("myODBCconnection","myusername","mypassword")
 #' objet@silent=FALSE
 #' objet<-connect(objet)
-#' odbcClose(objet@connexion)
-setClass(Class="ConnexionODBC",
-		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connexion="ANY"),
+#' odbcClose(objet@connection)
+setClass(Class="ConnectionODBC",
+		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connection="ANY"),
 		prototype = list(silent=TRUE),
 		validity=validite_ODBC)
 setGeneric("connect",def=function(objet,...) standardGeneric("connect"))
 
 #' connect method for ConnexionODBC class
 #' @returnType ConnectionODBC S4 object
-#' @return a connexion with slot filled
+#' @return a connection with slot filled
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @examples objet=new("ConnexionODBC")
 #' objet@baseODBC=baseODBC
 #' connect(objet)
-setMethod("connect",signature=signature("ConnexionODBC"),definition=function(objet) {     
+setMethod("connect",signature=signature("ConnectionODBC"),definition=function(objet) {     
 			if (length(objet@baseODBC)!=3)  {
 				if (exists("baseODBC",envir=.GlobalEnv)){ 
 					objet@baseODBC<-get("baseODBC",envir=.GlobalEnv) 
@@ -74,26 +74,26 @@ setMethod("connect",signature=signature("ConnexionODBC"),definition=function(obj
 				if(exists("envir_stacomi")){
 					print(paste(get("msg",envir_stacomi)$ConnexionODBC.3,objet@baseODBC[1]))
 				} else {
-					print(paste("connexion trial, warning this class should only be used for test: ",objet@baseODBC[1]))
+					print(paste("connection trial, warning this class should only be used for test: ",objet@baseODBC[1]))
 				}
 			}	
-			# sends the result of a trycatch connexion in the
-			#l'object (current connexion), e.g. a character vector
-			connexion_error<-if(exists("envir_stacomi")){
+			# sends the result of a trycatch connection in the
+			#l'object (current connection), e.g. a character vector
+			connection_error<-if(exists("envir_stacomi")){
 						error=paste(get("msg",envir_stacomi)$ConnexionODBC.4,objet@baseODBC[1])
 					} else {
-						error="impossible connexion"
+						error="impossible connection"
 					}
-			connexionCourante<-tryCatch(eval(e), error=connexion_error) 
-			if (class(connexionCourante)=="RODBC") {
+			currentConnection<-tryCatch(eval(e), error=connection_error) 
+			if (class(currentConnection)=="RODBC") {
 				if (!objet@silent){
 					if(exists("envir_stacomi")){
 						print(get("msg",envir_stacomi)$ConnexionODBC.5)
 					} else {
-						print("connexion successful")
+						print("connection successful")
 					}
 				} 
-				objet@connexion=connexionCourante  # an objet S3 RODBC
+				objet@connection=currentConnection  # an objet S3 RODBC
 				if(exists("envir_stacomi")){
 					state<-get("msg",envir_stacomi)$ConnexionODBC.6
 				} else {
@@ -101,8 +101,8 @@ setMethod("connect",signature=signature("ConnexionODBC"),definition=function(obj
 				}
 				objet@etat=state
 			} else {
-				funout(connexionCourante)
-				objet@etat=connexionCourante # reporting error
+				funout(currentConnection)
+				objet@etat=currentConnection # reporting error
 			}
 			return(objet)
 		})

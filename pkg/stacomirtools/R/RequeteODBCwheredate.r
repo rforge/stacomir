@@ -14,7 +14,7 @@
 #' @slot baseODBC="vector" 		(inherited from ConnexionODBC)
 #' @slot silent="logical" 		(inherited from ConnexionODBC)
 #' @slot etat="character" 		(inherited from ConnexionODBC)
-#' @slot connexion="ANY" 		(inherited from ConnexionODBC)
+#' @slot connection="ANY" 		(inherited from ConnexionODBC)
 #' @slot sql="character" 		(inherited from RequeteODBC)
 #' @slot query="data.frame"		(inherited from RequeteODBC)
 #' @slot open="logical" 		(inherited from RequeteODBC)
@@ -61,7 +61,7 @@ setMethod("connect",signature=signature("RequeteODBCwheredate"),definition=funct
 			requeteODBCwhere=connect(requeteODBCwhere) # use the connect method of ODBCwhere
 			# collects in the object the elements of the query
 			objet@where=requeteODBCwhere@where
-			objet@connexion=requeteODBCwhere@connexion
+			objet@connection=requeteODBCwhere@connection
 			objet@query=requeteODBCwhere@query
 			objet@etat=requeteODBCwhere@etat
 			objet@sql=requeteODBCwhere@sql

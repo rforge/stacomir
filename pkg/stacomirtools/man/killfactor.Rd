@@ -1,6 +1,6 @@
 \name{killfactor}
 \alias{killfactor}
-\title{very usefull function used to "kill" these bloody factors that appears, noticeably after loading with odbc}
+\title{very usefull function remove factor that appear, noticeably after loading with ODBC}
 \usage{
   killfactor(df)
 }
@@ -11,8 +11,7 @@
   df
 }
 \description{
-  very usefull function used to "kill" these bloody factors
-  that appears, noticeably after loading with odbc
+  function used to remove factors that appear, noticeably after loading with ODBC
 }
 \author{
   Cedric Briand \email{cedric.briand00@gmail.com}
