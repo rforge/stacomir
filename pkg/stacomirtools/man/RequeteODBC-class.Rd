@@ -7,7 +7,7 @@
 This class is inherited by RequeteODBCwhere and RequeteODBCwheredate
 }
 \note{
-  Inherits from ConnexionODBC
+  Inherits from ConnectionODBC
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("RequeteODBC", sql=character(), query=data.frame())}.
@@ -23,7 +23,7 @@ Objects can be created by calls of the form \code{new("RequeteODBC", sql=charact
 }
 
 \section{Extends}{
-Class \code{"\linkS4class{ConnexionODBC}"}, directly.
+Class \code{"\linkS4class{ConnectionODBC}"}, directly.
 }
 \section{Methods}{
   \describe{
@@ -34,7 +34,7 @@ Class \code{"\linkS4class{ConnexionODBC}"}, directly.
 \author{cedric.briand00@gmail.com}
 
 \seealso{
-	\code{\linkS4class{ConnexionODBC}}
+	\code{\linkS4class{ConnectionODBC}}
 	\code{\linkS4class{RequeteODBCwhere}}
 	\code{\linkS4class{RequeteODBCwheredate}}
 }

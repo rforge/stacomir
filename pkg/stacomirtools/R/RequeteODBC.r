@@ -1,11 +1,11 @@
 # Nom fichier :        RequeteODBC.R 
 #' @title RequeteODBC class 
-#' @note Inherits from ConnexionODBC
+#' @note Inherits from ConnectionODBC
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @slot baseODBC="vector" (inherited from ConnexionODBC)
-#' @slot silent="logical" (inherited from ConnexionODBC)
-#' @slot etat="character" (inherited from ConnexionODBC)
-#' @slot connection="ANY" (inherited from ConnexionODBC)
+#' @slot baseODBC="vector" (inherited from ConnectionODBC)
+#' @slot silent="logical" (inherited from ConnectionODBC)
+#' @slot etat="character" (inherited from ConnectionODBC)
+#' @slot connection="ANY" (inherited from ConnectionODBC)
 #' @slot sql="character"
 #' @slot query="data.frame"
 #' @slot open=logical is the connection left open after the request ?
@@ -13,7 +13,7 @@
 setClass(Class="RequeteODBC",
 		representation= representation(sql="character",query="data.frame",open="logical"),
 		prototype = list(silent=TRUE,open=FALSE),
-		contains="ConnexionODBC")
+		contains="ConnectionODBC")
 
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note assign("showmerequest",1,envir=envir_stacomi) permet d'afficher toutes les requetes passant par la classe connect

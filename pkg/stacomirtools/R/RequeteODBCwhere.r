@@ -9,10 +9,10 @@
 #' @slot where="character"
 #' @slot and="vector"
 #' @slot order_by="character"
-#' @slot baseODBC="vector" 	(inherited from ConnexionODBC)
-#' @slot silent="logical" 	(inherited from ConnexionODBC)
-#' @slot etat="character" 	(inherited from ConnexionODBC)
-#' @slot connection="ANY" 	(inherited from ConnexionODBC)
+#' @slot baseODBC="vector" 	(inherited from ConnectionODBC)
+#' @slot silent="logical" 	(inherited from ConnectionODBC)
+#' @slot etat="character" 	(inherited from ConnectionODBC)
+#' @slot connection="ANY" 	(inherited from ConnectionODBC)
 #' @slot sql="character" 	(inherited from RequeteODBC)
 #' @slot query="data.frame"	(inherited from RequeteODBC)
 #' @slot open="logical" 	(inherited from RequeteODBC)

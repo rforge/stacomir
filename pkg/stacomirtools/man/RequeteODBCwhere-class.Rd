@@ -28,7 +28,7 @@ Objects can be created by calls of the form \code{new("RequeteODBCwhere", where=
 
 \section{Extends}{
 Class \code{"\linkS4class{RequeteODBC}"}, directly.
-Class \code{"\linkS4class{ConnexionODBC}"}, by class "RequeteODBC", distance 2.
+Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBC", distance 2.
 }
 \section{Methods}{
   \describe{
@@ -39,7 +39,7 @@ Class \code{"\linkS4class{ConnexionODBC}"}, by class "RequeteODBC", distance 2.
 \author{cedric.briand00@gmail.com}
 
 \seealso{
-	\code{\linkS4class{ConnexionODBC}}
+	\code{\linkS4class{ConnectionODBC}}
 	\code{\linkS4class{RequeteODBC}}
 	\code{\linkS4class{RequeteODBCwheredate}}
 }

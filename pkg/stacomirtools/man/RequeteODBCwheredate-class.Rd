@@ -37,7 +37,7 @@ Objects can be created by calls of the form \code{new("RequeteODBCwheredate", da
 \section{Extends}{
 Class \code{"\linkS4class{RequeteODBCwhere}"}, directly.
 Class \code{"\linkS4class{RequeteODBC}"}, by class "RequeteODBCwhere", distance 2.
-Class \code{"\linkS4class{ConnexionODBC}"}, by class "RequeteODBCwhere", distance 3.
+Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBCwhere", distance 3.
 }
 \section{Methods}{
   \describe{
@@ -48,7 +48,7 @@ Class \code{"\linkS4class{ConnexionODBC}"}, by class "RequeteODBCwhere", distanc
 \author{cedric.briand00@gmail.com}
 
 \seealso{
-	\code{\linkS4class{ConnexionODBC}}
+	\code{\linkS4class{ConnectionODBC}}
 	\code{\linkS4class{RequeteODBC}}
 	\code{\linkS4class{RequeteODBCwhere}}
 }
