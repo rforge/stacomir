@@ -5,10 +5,10 @@ Version: 0.3
 Date: 2012-12-23
 Author: Cedric Briand
 Maintainer: Cedric Briand<cedric.briand00@gmail.com>
-Description: S4 class wrappers 	for odbc connexion.
+Description: S4 class wrappers 	for odbc connection.
 License: GPL (>= 2)
 Collate:
-    'ConnexionODBC.r'
+    'ConnectionODBC.r'
     'RequeteODBC.r'
     'RequeteODBCwhere.r'
     'RequeteODBCwheredate.r'
