@@ -6,8 +6,8 @@
     couleur = 1:dim(ymat)[2], \dots)
 }
 \arguments{
-  \item{xmat}{}
-  \item{ymat}{}
+  \item{xmat}{a matrix of x values of the polygons}
+  \item{ymat}{a matrix where the number of rows is of the same length as xmat}
   \item{ordre}{the order in which the polygons will be drawn}
   \item{couleur}{a color vector}
   \item{\dots}{additional arguments passed to the function}

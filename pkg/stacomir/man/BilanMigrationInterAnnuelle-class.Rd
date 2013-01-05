@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("BilanMigrationInterAnnuel
   \describe{
     \item{charge}{\code{signature(objet = "BilanMigrationInterAnnuelle")}: Loads informations about the migrations}
     \item{coerce}{\code{signature(from = "BilanMigration", to = "BilanMigrationInterAnnuelle")}: ... }
-    \item{connect}{\code{signature(objet = "BilanMigrationInterAnnuelle")}: Connexion to the database}
+    \item{connect}{\code{signature(objet = "BilanMigrationInterAnnuelle")}: Connection to the database}
     \item{supprime}{\code{signature(objet = "BilanMigrationInterAnnuelle")}: Delete a record in the database}
 	 }
 }

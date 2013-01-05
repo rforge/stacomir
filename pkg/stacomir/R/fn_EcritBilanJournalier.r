@@ -62,7 +62,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		# si l'utilisateur accepte de remplacer les valeurs
 		close(progres)
-		odbcClose(requete@connexion)
+		odbcClose(requete@connection)
 		# ecriture �galement du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
@@ -106,7 +106,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			requete<-connect(requete)   
 		} # end for
 		close(progres)
-		odbcClose(requete@connexion)
+		odbcClose(requete@connection)
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)

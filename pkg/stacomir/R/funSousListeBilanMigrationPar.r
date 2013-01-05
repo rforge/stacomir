@@ -36,7 +36,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			envir = .GlobalEnv)
 	##############################			
 	on.exit(close(progres))
-	on.exit(if(!is.null(req@connexion)) odbcClose(req@connexion))   # ne pas lancer en debug
+	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
 	##############################"
 # recuperation des valeurs possibles du parametre qualitatif (hors boucle)			
 	if (bilanMigrationPar@parqual@data$par_nom!="aucune"){

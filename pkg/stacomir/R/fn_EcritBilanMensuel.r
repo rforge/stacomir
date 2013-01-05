@@ -35,7 +35,7 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 				" VALUES ('",paste(t_bilanmigrationmensuel_bme[i,],collapse="','"),"');",sep="")
 		requete<-connect(requete)   
 	} # end for
-	odbcClose(requete@connexion)
+	odbcClose(requete@connection)
 funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n"))	
 } # end function
 

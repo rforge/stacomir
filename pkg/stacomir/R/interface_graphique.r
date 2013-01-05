@@ -87,7 +87,7 @@ hBilanEspeces=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.19,wash=TRUE)
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
-#' this handler test the connexion and if it works loads the stacomi interface
+#' this handler test the connection and if it works loads the stacomi interface
 #' @note gr_interface is copied by stacomi into envir_stacomi.
 #' @param h 
 #' @param ... 
@@ -96,8 +96,8 @@ hBilanEspeces=function(h,...){
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
-	# test de la connexion
-	con=new("ConnexionODBC")
+	# test de la connection
+	con=new("ConnectionODBC")
 	if (gr_interface){
 		baseODBC[2]<-svalue(usrname)
 		baseODBC[3]<-svalue(usrpwd)
@@ -108,8 +108,8 @@ husr=function(h,...){
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 	con@baseODBC=get("baseODBC",envir=envir_stacomi)
 	e=expression(con<-connect(con))
-	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connexion)clause inutile car si �a plante la connexion n'est pas ouverte
-	test<-con@etat==get("msg",envir=envir_stacomi)$ConnexionODBC.6
+	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si �a plante la connection n'est pas ouverte
+	test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
 	if (exists("logw")) dispose(logw)
 	odbcCloseAll()
 	# if the test is OK launches the stacomi interface
@@ -182,7 +182,7 @@ hx11=function(h,...){
 #' @param baseODBC the ODBC connection chain contains user and password
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 stacomi=function(gr_interface=TRUE){
-	# first loading of connexion and odbc info using chargexml()
+	# first loading of connection and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
 	# the first messages are necessary for the first access to the database, they are in French
 	msg<-messages()

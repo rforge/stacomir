@@ -17,7 +17,7 @@ setClass(Class="RefCoe",representation=
 #' The slots datedebut and datefin have to be filled before using charge
 #' @returnType Object of class RefCoe
 #' @return Object of class RefCoe
-#' @note Bien que je ne comprenne pourquoi, la connexion fonctionne si on ne pointe pas le sch�ma
+#' @note Bien que je ne comprenne pourquoi, la connection fonctionne si on ne pointe pas le sch�ma
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @expamples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")

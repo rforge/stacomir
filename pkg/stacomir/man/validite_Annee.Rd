@@ -5,7 +5,7 @@
   validite_Annee(object)
 }
 \arguments{
-  \item{object}{}
+  \item{object}{An object of class \code{\linkS4class{RefAnnee}}}
 }
 \value{
   the test for the object Refannee

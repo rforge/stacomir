@@ -57,3 +57,4 @@ exportClasses(
      "RefTaxon",
      "RefTextBox"
 )
+S3method(trunc.POSIXt, POSIXt)

@@ -46,7 +46,6 @@ Collate:
     'Bilan_taille.r'
     'Bilan_poids_moyen.r'
     'BilanEspeces.r'
-    'vector_to_listsql.r'
     'fn_EcritBilanMensuel.r'
     'fn_EcritBilanJournalier.r'
     'fn_table_per_dis.r'

@@ -12,7 +12,7 @@ messages=function(lang="French"){
 	msg$RequeteODBC.1<-"Error ODBC =>Define a vector baseODBC with the name of the ODBC link, user and password \n"
 	msg$RequeteODBC.2<-"Connection trial :"
 	msg$RequeteODBC.3<-"Connection failure :"
-	msg$RequeteODBC.4<-"Connexion successful \n"
+	msg$RequeteODBC.4<-"Connection successful \n"
 	msg$RequeteODBC.5<-"Trying query \n"
 	msg$RequeteODBC.6<-"Query succeded \n"
 # RequeteODBCwhere

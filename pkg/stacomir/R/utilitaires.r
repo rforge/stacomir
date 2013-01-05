@@ -13,18 +13,17 @@ monthDays<-
 	time$mon <- time$mon + 1
 	return(as.POSIXlt(as.POSIXct(time))$mday)
 }
-#' round.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
-#' of compatibility with xtable
+#' round.POSIXT function imported from  Hmisc that cannot be loaded
 #' @param x 
 #' @param digits 
 #' @returnType POSIXct
 #' @return a rounded time value
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Charles Dupont
 round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
-				"years")) 
+				"years"),...) 
 {
 	if (is.numeric(digits) && digits == 0) 
-		digits <- "secs"
+		units <- "secs"
 	units <- match.arg(digits)
 	month.length <- monthDays(x)
 	x <- as.POSIXlt(x)
@@ -57,17 +56,17 @@ round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 				})
 	return(trunc(as.POSIXct(x), units = units))
 }
-#' trunc.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
-#' of compatibility with xtable
+#' trunc.POSIXT function imported from depuis Hmisc that cannot be loaded 
 #' @param x 
 #' @param digits 
 #' @returnType POSIXlt
 #' @return a truncated time value
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-trunc.POSIXt<-function (x, units = c("secs", "mins", "hours", "days", "months", 
+#' @author Charles Dupont
+trunc.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
 				"years"), ...) 
 {
-	units <- match.arg(units)
+	#UseMethod("trunc.POSIXt")
+	units <- match.arg(digits)
 	x <- as.POSIXlt(x)
 	isdst <- x$isdst
 	if (length(x$sec) > 0) 
@@ -103,17 +102,16 @@ trunc.POSIXt<-function (x, units = c("secs", "mins", "hours", "days", "months",
 	}
 	return(x)
 }
-#' ceil.POSIXT function imported from depuis Hmisc that cannot be loaded for reasons
-#' of compatibility with xtable
+#' ceil.POSIXT function imported from depuis Hmisc that cannot be loaded 
 #' @param x 
 #' @param digits 
 #' @returnType POSIXlt
 #' @return a truncated time value
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-ceil.POSIXt<-function (x, units = c("secs", "mins", "hours", "days", "months", 
+#' @author Charles Dupont
+ceil.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
 				"years"), ...) 
 {
-	units <- match.arg(units)
+	units <- match.arg(digits)
 	x <- as.POSIXlt(x)
 	isdst <- x$isdst
 	if (length(x$sec) > 0 && x != trunc.POSIXt(x, units = units)) {
@@ -265,3 +263,35 @@ chargecsv=function(){
 	return(list("datawd"=datawd,"baseODBC"=baseODBC,"lang"=lang))
 }
 
+
+#' Transforms a vector into a string called within an sql command  e.g. c(A,B,C) => in ('A','B','C')
+#' @param vect 
+#' @returnType character
+#' @return listsql a list of value
+#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @export
+vector_to_listsql<-function(vect)
+{
+	
+	# vect = un vecteur caractere
+	if (length(vect)==1) 
+	{
+		listsql=paste("(","'",vect,"'",")",sep="")
+	}
+	
+	if (length(vect)>2)
+	{
+		listsql=paste("(","'",vect[1],"'",",", sep="")
+		for(j in 2:(length(vect)-1)){
+			listsql=paste(listsql,"'",vect[j],"'",",",sep="")
+		}
+		listsql=paste(listsql,"'",vect[length(vect)],"'",")", sep="")
+	} 
+	else if  (length(vect)==2)
+	{
+		listsql=paste("(","'",vect[1],"'",",", sep="")
+		listsql=paste(listsql,"'",vect[length(vect)],"'",")", sep="") 
+	}
+	
+	return(listsql)
+} 

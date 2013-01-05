@@ -246,7 +246,7 @@ fundat=function(dat,timesplit=NULL)
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
 		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
 		dat=dat[,c("annee","jour","valeur")] 
-		dat$jour=trunc.POSIXt(dat$jour, units='days')
+		dat$jour=trunc.POSIXt(dat$jour, digits='days')
 		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
 		
 		
@@ -256,7 +256,7 @@ fundat=function(dat,timesplit=NULL)
 			seq_timesplit= seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
 					to=strptime("2000-12-31",format='%Y-%m-%d'),
 					by=getvalue(new("Refperiode"),timesplit))
-			seq_timesplit<-as.Date(trunc(seq_timesplit, units='days'))
+			seq_timesplit<-as.Date(trunc(seq_timesplit, digits='days'))
 			# utilise la classe Refperiode pour avoir la correspondance entre le nom fran�ais et la variable utilisee par seq.POSIXt
 			#datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
 			#colnames(datc)<-c(timesplit,"annee")
@@ -277,7 +277,7 @@ fundat=function(dat,timesplit=NULL)
 			# si nul on remplace par jour pour generer le script en dessous
 			timesplit="jour"
 			jour2000=as.Date(trunc.POSIXt(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
-							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), units='days'))
+							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), digits='days'))
 			for (j in unique(dat$annee)){
 				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajout�s avec z�ro
 				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]

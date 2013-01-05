@@ -27,7 +27,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			width = 400)
 	##############################			
 	on.exit(close(progres)) # fermeture de la barre de progres
-	on.exit(if(!is.null(req@connexion)) odbcClose(req@connexion))   # ne pas lancer en debug
+	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
 	##############################"
 	##debug           
 	#  bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)  
