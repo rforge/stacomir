@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("BilanConditionEnv", horod
 	 }
 }
 %\references{ ~~put references to the literature/web site here ~~ }
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 %\note{ ~~further notes~~ }
 
 \seealso{

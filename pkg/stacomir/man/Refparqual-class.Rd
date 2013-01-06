@@ -30,7 +30,7 @@ Class \code{"\linkS4class{Refpar}"}, directly.
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 
 \seealso{
     Other referential classes

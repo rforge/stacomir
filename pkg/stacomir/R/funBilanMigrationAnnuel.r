@@ -2,7 +2,7 @@
 # Projet :             calcmig/prog/fonctions
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   23/05/2022
 # Compatibilite :      R 2.14
 # Etat :               fonctionne

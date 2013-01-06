@@ -2,7 +2,7 @@
 # Projet :             GEMAC/Prog global
 # Organisme :          IAV/CEMAGREF
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   02/12/2005 14:28:09
 # Description :         Fonction de conversion entre classes
 # Data needed

@@ -36,6 +36,6 @@
 \item \code{\linkS4class{Bilan_lot}}{ \code{funtableBilan_lot}function for showing table in gdf } 
 }}
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

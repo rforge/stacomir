@@ -44,7 +44,7 @@ BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model 
 \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.} 
 \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
 }
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \note{This class is displayed by interface_bilan_stades_pigm, 
 The class uses temperature (from an abiotic measure station) and mean salinity to calculate the change towards one stage}
 \seealso{

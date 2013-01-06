@@ -28,7 +28,7 @@ Objects can be created by calls of the form \code{new("BilanEspeces", ...)}.
 	 }
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \seealso{
     Other Bilan Classes
 	\code{\linkS4class{Bilan_lot}}

@@ -15,6 +15,6 @@
   This graph will also plot numbers and bars according to whether the glass eel have been counted through weight or numbers
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

@@ -6,6 +6,6 @@
     envir_stacomi \code{envir_stacomi <- new.env(parent = baseenv())} is the environment where most object created by the interface are stored
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

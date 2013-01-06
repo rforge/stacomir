@@ -29,7 +29,7 @@ Objects can be created by calls of the form \code{new("Bilan_taille", ...)}
     \item{connect}{\code{signature(objet = "Bilan_taille")}: connect method for Bilan_taille class }
 	 }
 }
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \seealso{
     Other Bilan Classes
 	\code{\linkS4class{Bilan_lot}}

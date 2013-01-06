@@ -23,7 +23,7 @@ Objects can be created by calls of the form \code{new("RefTaxon", ...)}.
     \item{choix}{\code{signature(objet = "RefTaxon")}: Enables to select one of the available fish races}
 	 }
 }
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

@@ -40,6 +40,6 @@ BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model 
 	\code{\linkS4class{Bilan_stades_pigm}}	
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

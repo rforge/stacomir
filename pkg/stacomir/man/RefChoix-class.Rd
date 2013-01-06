@@ -24,7 +24,7 @@ Objects can be created by calls of the form \code{new("RefChoix", listechoix=cha
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

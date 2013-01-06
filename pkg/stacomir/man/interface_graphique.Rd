@@ -9,6 +9,6 @@
   and then launches the GwidgetRgtk graphical interface to stacomi.
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

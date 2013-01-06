@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDF")}.
 	 }
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 
 \seealso{
     Other Bilan Class

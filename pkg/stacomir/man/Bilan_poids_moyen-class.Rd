@@ -38,7 +38,7 @@ The objective is to calculate mean weight of glass eel which are counted from we
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\author{Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \note{
 We have also tools available to import glass eel measurement from experimental fishing in the estuary
 For the charge method dates for the request are from august to august (a glass eel season)

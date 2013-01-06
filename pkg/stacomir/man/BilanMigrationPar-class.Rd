@@ -35,7 +35,7 @@ Class \code{"\linkS4class{BilanMigration}"}, directly.
     \item{graphe}{\code{signature(objet = "BilanMigrationPar")}: method with a parameter choix to join several graphes called by several handlers (buttons)}
 }}
 
-\author{ Cedric Briand \email{cedric.briand00@gmail.com}}
+\author{ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \note{
 program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
 }

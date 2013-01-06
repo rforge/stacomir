@@ -2,7 +2,7 @@
 # Projet :             controle migrateur 
 # Organisme :          IAV/ONEMA
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   11/04/2006 15:51:44
 # Compatibilite :      PostgreSQL 8.4
 #                      R 2.10.1                                        

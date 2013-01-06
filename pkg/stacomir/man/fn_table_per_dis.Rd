@@ -23,6 +23,6 @@ returns either POSIXt or date if date=TRUE
 }
 
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

@@ -32,6 +32,6 @@
   collect the conversion coefficients, this function is used for glass eel which are most often weighted, not counted
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

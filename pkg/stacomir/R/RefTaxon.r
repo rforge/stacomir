@@ -2,7 +2,7 @@
 # Projet :             controle migrateur
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   31/03/2008 17:21:30
 
 #' @title Refstades referential class to load and choose the list of taxa

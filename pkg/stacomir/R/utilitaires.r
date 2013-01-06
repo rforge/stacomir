@@ -22,14 +22,13 @@ monthDays<-
 round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
 				"years"),...) 
 {
-	if (is.numeric(digits) && digits == 0) 
-		units <- "secs"
+	if (is.numeric(digits) && digits == 0) 	digits <- "secs"
 	units <- match.arg(digits)
 	month.length <- monthDays(x)
 	x <- as.POSIXlt(x)
 	if (length(x$sec) > 0) 
 		switch(units, secs = {
-					x$sec <- x$sec + 0.5
+					x$sec <- x$sec
 				}, mins = {
 					x$sec <- x$sec + 30
 				}, hours = {
@@ -54,7 +53,7 @@ round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 					x$mon <- x$mon + 6
 					isdst <- x$isdst <- -1
 				})
-	return(trunc(as.POSIXct(x), units = units))
+	return(trunc(as.POSIXct(x), digits = units))
 }
 #' trunc.POSIXT function imported from depuis Hmisc that cannot be loaded 
 #' @param x 
@@ -114,7 +113,7 @@ ceil.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 	units <- match.arg(digits)
 	x <- as.POSIXlt(x)
 	isdst <- x$isdst
-	if (length(x$sec) > 0 && x != trunc.POSIXt(x, units = units)) {
+	if (length(x$sec) > 0 && x != trunc.POSIXt(x, digits = units)) {
 		switch(units, secs = {
 					x$sec <- ceiling(x$sec)
 				}, mins = {

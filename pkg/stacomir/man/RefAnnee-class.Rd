@@ -22,7 +22,7 @@ Objects can be created by calls of the form \code{new("RefAnnee", data=data.fram
 	 }
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 %\note{ ~~further notes~~ }
 
 % ~Make other sections like Warning with \section{Warning }{....} ~

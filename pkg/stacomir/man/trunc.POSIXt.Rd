@@ -2,7 +2,7 @@
 \alias{ceil.POSIXt}
 \alias{trunc.POSIXt}
 \alias{round.POSIXt}
-\title{trunc.POSIXT and ceil.POSIXt function imported from Hmisc that cannot be loaded in Rforge}
+\title{trunc.POSIXt and ceil.POSIXt function copied from Hmisc that cannot be loaded in Rforge}
 \usage{
   \method{trunc}{POSIXt}(x, digits = c("secs", "mins", "hours", "days", "months", "years"),  \dots)
   \method{ceil}{POSIXt}(x, digits = c("secs", "mins", "hours", "days", "months", "years"),   \dots)
@@ -17,7 +17,8 @@
   An object of class POSIXlt.
 }
 \description{
-  functions imported from Hmisc 
+  functions imported from Hmisc -
+  
 }
 \author{
   Charles Dupont

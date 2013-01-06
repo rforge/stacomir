@@ -2,7 +2,7 @@
 # Projet :             controle migrateur 
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   07/02/2009 21:30:54
 # TODO Calcul des valeurs en interannuel pour le calage de la regression et d'une valeur par defaut des coefficients de conversion
 #' Bilan_poids_moyen class

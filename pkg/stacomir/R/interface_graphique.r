@@ -2,7 +2,7 @@
 # Projet :             stacomiR 
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   11/04/2006 15:51:44
 # Compatibilite :      PostgreSQL 9.0
 

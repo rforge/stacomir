@@ -19,7 +19,7 @@ Depends: \tab methods\cr
 To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal
 }
 \author{
-Author and Maintainer : \email{cedric.briand00@gmail.com}
+Author and Maintainer : \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \references{
 \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}

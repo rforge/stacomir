@@ -1,5 +1,5 @@
 # Nom fichier :        RefPar  (classe)
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   22/03/2009 21:14:14
 
 #TODO  selection de plusieurs caracteristiques

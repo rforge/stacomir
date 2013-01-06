@@ -2,7 +2,7 @@
 # Projet :             controle migrateur
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :  31/03/2008 17:21:25
 # Compatibilite :
 # Etat :               developpement
@@ -107,7 +107,7 @@ setClass(Class="PasDeTempsChar",representation=
 # Conversion de classe
 ################################################################
 
-#Conversion depuis la classe charactere à la classe numerique
+#Conversion depuis la classe charactere ï¿½ la classe numerique
 setAs("PasDeTempsChar","PasDeTemps",   # from to
 		function(from,to){
 			index=LesPasDeTemps[,"LabelPasDeTemps"]%in%from@dureePas
@@ -144,8 +144,7 @@ setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=functi
 			# bug cht heure
 			if (objet@dureePas==86400) {
 				CurrentDateDebut=round.POSIXt(CurrentDateDebut,"days")
-			}
-			
+			}			
 			return(CurrentDateDebut)
 		})
 
@@ -178,7 +177,7 @@ setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(o
 			return ( strftime(as.POSIXlt(objet@dateDebut),format="%Y-%m-%d %H:%M:%S") )
 		})
 
-#Fixe la date de debut à partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S" ou "%Y-%m-%d" (classe pas de temps journalier)
+#Fixe la date de debut ï¿½ partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S" ou "%Y-%m-%d" (classe pas de temps journalier)
 setGeneric("setdateDebut",def=function(objet,...) standardGeneric("setdateDebut"))
 setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(objet,string){
 			objet@dateDebut=if (!is.na(strptime(string,format="%Y-%m-%d %H:%M:%S"))) strptime(string,format="%Y-%m-%d %H:%M:%S") else
@@ -216,11 +215,11 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 					assign("pasDeTemps",objet,envir_stacomi)
 					#funout("Les pas de temps ont ete charges\n")
 					#print(objet)
-					# pour l'instant pour une raison inexpliquee, je n'arrive pas à traduire
+					# pour l'instant pour une raison inexpliquee, je n'arrive pas ï¿½ traduire
 					# objet@nbPas dans l'environnement principal alors que  objet@dureePas
 					# est remplace dans objet => ???????  je ne comprens pas....
 					# Je le remplace par un assign du meme objet mais ce n'est pas propre car cela
-					# suppose que je ne peux avoir que lepas à passer à cette fonction
+					# suppose que je ne peux avoir que lepas ï¿½ passer ï¿½ cette fonction
 					
 					#dispose(winpa)
 				}

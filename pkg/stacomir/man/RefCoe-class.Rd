@@ -22,7 +22,7 @@ Objects can be created by calls of the form \code{new("RefCoe")}.
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 \note{
   Class loading coefficient of conversion between quantity
   (weights or volumes of glass eel) and numbers between a

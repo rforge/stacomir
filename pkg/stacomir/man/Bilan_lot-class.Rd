@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
     \item{calcule}{\code{signature(objet = "Bilan_lot")}:  calcule method for Bilan_lot class, works on the query result to transform it, uses \code{funtraitementdate} }
 	 }
 }
-\author{Cedric Briand \email{cedric.briand@lavilaine.com}}
+\author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \note{This class is displayed by interface_bilan_lot}
 \seealso{
     Other Bilan Class

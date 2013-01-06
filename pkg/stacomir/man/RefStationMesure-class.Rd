@@ -22,7 +22,7 @@ Objects can be created by calls of the form \code{new("RefStationMesure", ...)}.
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 \seealso{
     Other referential classes
 	\code{\linkS4class{RefAnnee}}

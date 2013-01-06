@@ -41,7 +41,7 @@ Objects can be created by calls of the form \code{new("Refpar", data)}.
 	\code{\linkS4class{RefStationMesure}}
 	\code{\linkS4class{RefTaxon}}																				 
 }
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 
 \examples{
 showClass("Refpar")

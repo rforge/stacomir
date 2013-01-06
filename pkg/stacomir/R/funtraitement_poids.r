@@ -2,7 +2,7 @@
 # Projet :             calmig/prog/fonctions
 # Organisme :          IAV/CSP
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   17 mai 2004
 # Compatibilite :      R 2.8.0
 # Etat :               OK

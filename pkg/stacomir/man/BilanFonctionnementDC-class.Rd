@@ -25,7 +25,7 @@ Objects can be created by calls of the form \code{new("BilanFonctionnementDC", .
 	 }
 }
 \references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
-\author{ Cedric Briand \email{cedric.briand00@gmail.com} }
+\author{ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr} }
 \seealso{
     Other Bilan Class
 	\code{\linkS4class{Bilan_lot}}

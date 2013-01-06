@@ -408,8 +408,8 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 							ymin="mintab",ymax="maxtab"),fill="grey60",alpha=0.5,size=0.5)
 			g <- g+geom_crossbar(stat="identity",aes_string(ymin="valeur",ymax="valeur",col="comp"),fatten=2)
 			#g <- g+scale_x_date(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("Refperiode"),label=date_format("%b"),timesplit))
-			#lim=as.POSIXct(c(trunc((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
-			#				ceil((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
+			#lim=as.POSIXct(c(trunc.POSIXt((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
+			#				ceil.POSIXt((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
 			# pb the limit truncs the value
 			g <- g+scale_y_continuous(name="effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
@@ -526,7 +526,7 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 		g <- ggplot(dat,aes_string(x=timesplit,y="std_valeur"))
 		g<-g+geom_area(aes_string(y="std_valeur",fill="annee"),position="stack")
 		g <- g+scale_x_datetime(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("Refperiode"),timesplit),label=date_format("%b"),
-				lim=as.POSIXct(c(trunc((min(dat[dat$valeur!=0,timesplit])),"month"),ceil((max(dat[dat$valeur!="0",timesplit])),"month")))) 
+				lim=as.POSIXct(c(trunc.POSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),ceil.POSIXt((max(dat[dat$valeur!="0",timesplit])),"month")))) 
 		g <- g+scale_y_continuous(name="Somme des pourcentages annuels de migration par quinzaine")
 		cols <- rainbow(length(levels(dat$annee)))
 		g <- g+scale_fill_manual(name="annee",values=cols)

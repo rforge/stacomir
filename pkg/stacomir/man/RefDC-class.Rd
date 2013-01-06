@@ -22,7 +22,7 @@ Objects can be created by calls of the form \code{new("RefDC", dc_selectionne=in
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 
 \seealso{
     Other referential classes

@@ -19,6 +19,6 @@ Allows to point the middle of the gamma distribution for each stage
 	\code{\linkS4class{Bilan_stades_pigm}}	
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 
