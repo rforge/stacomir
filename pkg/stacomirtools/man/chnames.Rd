@@ -18,6 +18,6 @@
   This function replaces the variable names in a data.frame
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

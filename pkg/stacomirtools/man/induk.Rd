@@ -14,6 +14,6 @@
 returns the index of values appearing only once in a vector : match(unique(a),a), replicated values are not returned on their second occurence
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 

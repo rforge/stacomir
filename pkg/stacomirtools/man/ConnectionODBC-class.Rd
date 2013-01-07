@@ -32,7 +32,7 @@ Opens the connection but does not close it.
 This function is intended to be used with stacomiR package, where the error message are collected from the database
 It has also been programmed to work without the stacomiR package, as it will test for the existence of envir_stacomi environment.
 }
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 
 \examples{
 showClass("ConnectionODBC")

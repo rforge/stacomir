@@ -1,10 +1,10 @@
 # Nom fichier :        ConnectionODBC (classe)
 # Organisme :          IAV
 # Auteur :             Cedric Briand
-# Contact :            cedric.briand00@gmail.com
+# Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   06/02/2007 10:58:37
 # Etat :               OK
-# Description          Classe de connection � la base de donnee
+# Description          Classe de connexion a la base de donnee
 #**********************************************************************
 
 #validation function

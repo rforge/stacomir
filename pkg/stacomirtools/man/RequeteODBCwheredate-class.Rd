@@ -45,7 +45,7 @@ Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBCwhere", distan
 	 }
 }
 
-\author{cedric.briand00@gmail.com}
+\author{cedric.briand"at"eptb-vilaine.fr}
 
 \seealso{
 	\code{\linkS4class{ConnectionODBC}}

@@ -14,6 +14,6 @@
   function used to remove factors that appear, noticeably after loading with ODBC
 }
 \author{
-  Cedric Briand \email{cedric.briand00@gmail.com}
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 
