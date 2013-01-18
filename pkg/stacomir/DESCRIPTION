@@ -2,7 +2,7 @@ Package: stacomiR
 Type: Package
 Title: STACOMI migration control
 Version: 0.4.1
-Date: 2012-12-24
+Date: 2013-01-18
 Author: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
 Maintainer: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
 Description: Graphical outputs and treatment for a database of fishway monitoring. 
