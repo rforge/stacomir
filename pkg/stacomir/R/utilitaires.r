@@ -247,7 +247,7 @@ chargecsv=function(){
 	} else {
 		test2<-file.access(filecsvR,0)==0
 		if (test2) {
-			doc<-read.csv(filecsvR,hearder=TRUE,sep=";")
+			doc<-read.csv(filecsvR,header=TRUE,sep=";")
 		} else {
 			stop("internal error, no access to the csv configuration file")
 		}		
