@@ -106,6 +106,7 @@ husr=function(h,...){
 		# rien
 	}
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
+	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	con@baseODBC=get("baseODBC",envir=envir_stacomi)
 	e=expression(con<-connect(con))
 	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si �a plante la connection n'est pas ouverte
