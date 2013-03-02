@@ -77,6 +77,7 @@ Collate:
 LazyLoad: yes
 Depends:
     methods,
+    Hmisc,
     RODBC,
     ggplot2,
     gWidgets,
