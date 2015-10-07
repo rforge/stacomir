@@ -342,7 +342,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,get("msg",envir_stacomi)$BilanMigrationInterannuelle.9,amplitude))
 	g<-g+scale_y_continuous(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.8)
 	g<-g+scale_x_date(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.7,breaks="months", minor_breaks="weeks", label=date_format("%b"),lim=range(dat[dat$valeur>0&dat$cumsum!=1,"jour"]))# date 
-	g<-g+scale_colour_manual(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.6,values=c(brewer.pal(9,"Set1"),brewer.pal(8,"Set2")))# annee
+	g<-g+scale_colour_hue(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.6,l=70, c=150)# annee
 	print(g) 
 	assign("g",g,envir_stacomi)
 	funout(get("msg",envir_stacomi)$BilanMigrationPar.6)

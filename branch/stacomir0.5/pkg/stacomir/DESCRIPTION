@@ -78,5 +78,5 @@ Collate:
   interface_chooselang.r
   setAs.r
 LazyLoad: yes
-Depends: XML, methods, proto,tcltk2, RODBC, ggplot2, gWidgets, R2HTML, gWidgetsRGtk2, lattice, RColorBrewer, cairoDevice, xtable, Hmisc, ggplot2usr,stringr
+Depends: XML, methods, proto,tcltk2, RODBC, ggplot2, gWidgets, R2HTML, gWidgetsRGtk2, lattice, RColorBrewer, cairoDevice, xtable, Hmisc, ggplot2usr,stringr,scales
 

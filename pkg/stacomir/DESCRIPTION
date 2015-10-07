@@ -91,4 +91,5 @@ Depends:
     reshape2,
     cluster,
     scales,
-    grid
+    grid,
+    lubridate

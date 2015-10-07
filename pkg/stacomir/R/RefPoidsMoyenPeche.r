@@ -25,7 +25,7 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			requete@datefin=objet@datefin
 			requete@colonnedebut="datedebutpeche"
 			requete@colonnefin="datefinpeche"
-			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-baseODBCmortciv
 			requete@select="SELECT lot_identifiant,
 					datedebutpeche AS ope_date_debut ,
 					datefinpeche AS ope_date_fin,

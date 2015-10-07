@@ -23,6 +23,7 @@ require('xtable')
 require('XML') 
 require('svMisc')   
 require('stringr')
+require('scales')
 }
  # pour sa fonction Calendar
 #require('sma')# fonction is.odd

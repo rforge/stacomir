@@ -101,11 +101,14 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 		})
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple...
+# le programme découpe les périodes qui sont a cheval sur deux mois
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
 #' @param h a handler  
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
 funbarchartDF = function(h,...) {
+	# TEMP 2015
+	require(lubridate)
 	fonctionnementDF=charge(fonctionnementDF)
 	
 	if( nrow(fonctionnementDF@requete@query)==0 ) {
@@ -115,16 +118,19 @@ funbarchartDF = function(h,...) {
 	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)
 	t_periodefonctdispositif_per=fonctionnementDF@requete@query # on recupere le data.frame   
 	# l'objectif du programme ci dessous est de calculer la duree mensuelle de fonctionnement du dispositif.
-	tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
+	#tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
+	#tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
+	tempsdebut<-t_periodefonctdispositif_per$per_date_debut
+	tempsfin<-t_periodefonctdispositif_per$per_date_fin
 	# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
 	tempsdebut[tempsdebut<fonctionnementDF@requete@datedebut]<-fonctionnementDF@requete@datedebut
 	# id pour fin
 	tempsfin[tempsfin>fonctionnementDF@requete@datefin]<-fonctionnementDF@requete@datefin
 	t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin)
 	# BUG 06/02/2009 11:51:49 si la date choisie n'est pas le debut du mois
-	seqmois=seq(from=tempsdebut[1],to=round.POSIXt(tempsfin[nrow(t_periodefonctdispositif_per)],"month"),by="month",tz = "GMT")
+	seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
 	seqmois=as.POSIXlt(round(seqmois,digits="months"))
+	seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
 		progres<-winProgressBar(title =get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
 			label = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5,
@@ -139,7 +145,7 @@ funbarchartDF = function(h,...) {
 							title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
 							label=sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per)))) 
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur � tempsdebut
+		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
 		while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
 			
 			#if (z>0) stop("erreur")
@@ -164,12 +170,12 @@ funbarchartDF = function(h,...) {
 #modif de l'ordre pour apparence graphique
   
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
-	g<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree,fill=libelle))+facet_grid(annee~.)+opts(title=paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
+	g<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree,fill=libelle))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
 	g<-g+geom_bar(stat='identity')+scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
 	#modif de l'ordre pour apparence graphique
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
 	t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
-	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+opts(title=paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
+	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
 	g1<-g1+geom_bar(stat='identity',aes(fill=fonctionnement))+scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
    
    if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {

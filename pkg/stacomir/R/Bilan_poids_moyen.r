@@ -119,7 +119,8 @@ fungraphBilan_poids_moyen = function(h,...) {
 		# si il existe j'ai traffique l'objet bilan poids moyen a la main
 		# et je ne souhaite pas qu'il soit ecrase
 		bilan_poids_moyen=charge(bilan_poids_moyen)
-	}
+	} 
+	
 	donnees=bilan_poids_moyen@data # on recupere le data.frame
 	coeff=bilan_poids_moyen@coe@data
 	coeff$poids_moyen=1/coeff$coe_valeur_coefficient
