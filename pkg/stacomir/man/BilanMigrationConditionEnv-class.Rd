@@ -21,7 +21,7 @@ Objects can be created by calls of the form \code{new("BilanMigrationConditionEn
 }
 \section{Methods}{
   \describe{
-    \item{calcule}{\code{signature(objet = "BilanMigrationConditionEnv")}: Retrieves all the needed informations from the database }
+    \item{calcule}{\code{signature(objet = "BilanMigrationConditionEnv")}: Retrieves all the needed information from the database }
 	 }
 }
 
