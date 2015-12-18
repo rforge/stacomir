@@ -7,7 +7,7 @@ Author: Cedric Briand <cedric.briand00@gmail.com>
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 Description: Graphical outputs and treatment for a database of fishway monitoring. 
 	It is a part of the STACOMI project developed in France by the ONEMA institute to centralize data obtained by fishway monitoring. 
-	Version 0.4.1 is available in French English and Spanish. \url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
+	Version 0.4.1 is available in French English and Spanish. \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 License: GPL
 Collate:
     'utilitaires.r'

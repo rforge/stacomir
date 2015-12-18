@@ -411,7 +411,7 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 			#lim=as.POSIXct(c(trunc.POSIXt((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
 			#				ceil.POSIXt((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
 			# pb the limit truncs the value
-			g <- g+scale_y_continuous(name="effectif")
+			g <- g+ylab("effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
 			g <- g+scale_colour_manual(name=thechoix,values=cols)
 			g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,", bilan par",timesplit,unique(as.character(tmp$annee)),"/",amplitude))
