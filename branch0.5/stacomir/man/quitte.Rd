@@ -1,0 +1,19 @@
+\name{quitte}
+\alias{quitte}
+\title{function used to clean the objects whithin the group and the graphes
+and also elements remaining in the envir_stacomi environment}
+\usage{
+  quitte(\dots)
+}
+\arguments{
+  \item{\dots}{additional arguments passed to the function}
+}
+\description{
+  function used to clean the objects whithin the group and
+  the graphes and also elements remaining in the
+  envir_stacomi environment
+}
+\author{
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
+

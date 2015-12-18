@@ -1,0 +1,15 @@
+exportMethods(
+    "connect")
+exportClasses(
+	"ConnectionODBC",
+     "RequeteODBC",
+     "RequeteODBCwhere",
+     "RequeteODBCwheredate")
+export(chnames)
+export(is.even)
+export(is.odd)
+export(killfactor)
+export(tab2df)
+export(induk)
+export(ex)
+export(funhtml)

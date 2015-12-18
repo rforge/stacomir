@@ -1,0 +1,24 @@
+\name{fn_sql_dis}
+\alias{fn_sql_dis}
+\title{This function is programmed to be called in fungraph and fungraphcivelle}
+\usage{
+  fn_sql_dis(per_dis_identifiant,
+    dateDebut = as.Date(duree[min(index)]),
+    dateFin = as.Date(duree[max(index)]))
+}
+\arguments{
+  \item{per_dis_identifiant}{period of function of either fishway or counting device}
+  \item{dateDebut}{starting date}
+  \item{dateFin}{ending date}
+}
+\value{
+  sql query
+}
+\description{
+  This function is programmed to be called in fungraph and
+  fungraphcivelle
+}
+\author{
+  Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
+
