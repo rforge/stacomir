@@ -87,9 +87,10 @@ interface_BilanMigrationInterAnnuelle = function()
 	add(ggroupboutonsbas, gtoolbar(toolbarlist2)) 
 	add(ggroupboutonsbas, gtoolbar(toolbarlist3))
 	addSpring(group)
-	graphes=ggraphics(width=600,height=400)
-	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	assign("graphes",graphes,envir=.GlobalEnv) 
+	#graphes=ggraphics(width=600,height=400)
+	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+	#assign("graphes",graphes,envir=.GlobalEnv) 
+	x11()
 	
 # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 	

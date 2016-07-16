@@ -45,9 +45,9 @@ interface_BilanFonctionnementDC = function()
     
     add(group, gmenu(toolbarlist))
     addSpring(group)
-    graphes=ggraphics(width=600,height=400)
-    add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+    #graphes=ggraphics(width=600,height=400)
+    #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    
-    assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=.GlobalEnv)
+	x11()
 }

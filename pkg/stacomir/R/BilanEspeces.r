@@ -270,9 +270,10 @@ interface_BilanEspeces=function(){
 			Stat=gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.6),    
 			annuler=gaction(handler= quitte,icon = "close",label="quitter")
 	)    
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	addSpring(group)
-	graphes=ggraphics(width=600,height=400)
+	#add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	#addSpring(group)
+	#graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+	x11()
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

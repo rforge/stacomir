@@ -43,8 +43,9 @@ interface_BilanMigrationPar = function()
     annuler=gaction(handler= quitte,icon = "close",label=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.7))
     add(ggroupboutonsbas, gtoolbar(toolbarlist))
     addSpring(group)
-    graphes=ggraphics(width=600,height=400)
-    add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    assign("graphes",graphes,envir=.GlobalEnv)
+    #graphes=ggraphics(width=600,height=400)
+    #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+    #assign("graphes",graphes,envir=.GlobalEnv)
+	x11()
 
 }
