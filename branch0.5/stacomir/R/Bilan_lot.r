@@ -203,7 +203,6 @@ funpointBilan_lot = function(h,...) {
 
 }  
 
-
 #' funtableBilan_lot shows a table of results in gdf
 #' @param h 
 #' @param ... 

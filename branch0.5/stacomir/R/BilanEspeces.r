@@ -272,7 +272,8 @@ interface_BilanEspeces=function(){
 	)    
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	addSpring(group)
-	graphes=ggraphics(width=600,height=400)
-	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	assign("graphes",graphes,envir=.GlobalEnv) 
+	#graphes=ggraphics(width=600,height=400)
+	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+	#assign("graphes",graphes,envir=.GlobalEnv) 
+	x11()
 }

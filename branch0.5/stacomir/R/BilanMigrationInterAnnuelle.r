@@ -329,7 +329,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	dat$cumsum=dat$cumsum/dat$total_annuel
 	dat$jour=as.Date(dat$jour)
 	dat$annee=as.factor(dat$annee)
-	# bug, enl�ve les ann�es avec seulement une ligne
+	# bug, enleve les annees avec seulement une ligne
 
 	#################
 	# Graphique

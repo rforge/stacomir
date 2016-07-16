@@ -33,7 +33,8 @@ interface_BilanMigrationMult=function(){
 	)    
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	addSpring(group)
-	graphes=ggraphics(width=650,height=650)
-	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	assign("graphes",graphes,envir=.GlobalEnv) 
+	#graphes=ggraphics(width=650,height=650)
+	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
+	#assign("graphes",graphes,envir=.GlobalEnv) 
+	x11()
 }

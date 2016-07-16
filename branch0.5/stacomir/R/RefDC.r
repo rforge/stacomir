@@ -105,3 +105,105 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 			}
 		})
 # pour test #choix(objet)
+
+
+
+#' choice method for RefDC
+#' @note la methode choix à pour arguments un objet Bilan car le RefDC est appelle depuis un objet Bilan(ex Bilan_lot) 
+#' par defaut la valeur est nulle, mais si il existe la methode appelle le widget suivant (taxon) et le charge en fonction du choix fait pour RefDC
+#' a l'aide de la methode charge_sans_fitre de l'objet RefStade_filtre qui herite de RefStades
+#' @param objetBilan un objet bilan
+#' @param is.enabled a boolean indincating # see if deprecated...
+#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @example
+#' win=gwindow()
+#' group=ggroup(container=win,horizontal=FALSE)
+#'objet=new("RefDC")
+#'objet<-charge(objet)
+#'objetBilan=new("BilanMigration")
+#' choixmult(objet=objet,objetBilan=objetBilan)
+#' group = ggroup(horizontal=FALSE)  
+#' assign("group",group,envir = .GlobalEnv)  
+#' add(ggroupboutons,group)
+setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
+			if (nrow(objet@data) > 0){
+				hDC=function(h,...){
+					objet@dc_selectionne<-as.integer(tbdestdc[,][tbdestdc[,]!=""])
+					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
+					assign("refDC",objet,envir_stacomi)
+					# TODO addmsg   "Le (s) DC (s) a (ont) ete selectionne(s) \n"
+					funout(get("msg",envir=envir_stacomi)$RefDC.1)
+					# si il existe un objet fils; supprimer
+					# referentiel fils, celui charge par la methode charge_avec_filtre
+					# ici comme on fait appel à un autre objet il faut appeller le conteneur qui contient l'objet
+					if (!is.null(objetBilan)) {
+						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
+						if("RefTaxon"%in%as.character(getSlots(class(objetBilan)))){
+							objetBilan@taxons<<-charge_avec_filtre(objet=objetBilan@taxons,dc_selectionne=get("refDC",objet,envir_stacomi)@dc_selectionne)
+							# suppresses all tab larger than 1 (dc)
+							if (length(nb)>1){
+								for (i in 2:length(nb)){
+									svalue(nb) <- i							
+									dispose(nb) ## dispose current tab
+								}}
+							choixmult(objetBilan@taxons,objetBilan,is.enabled=TRUE)
+							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
+						}
+					}
+					# changing tab of nb to next tab
+					if (svalue(nb)<length(nb)){
+						svalue(nb)<-svalue(nb)+1	
+					}
+					#dispose(winst)
+				} 
+				# Handler d'affichage du tableau
+				# below the widget structure [=> within (=> type
+				# group(ggroup)[nb(notebook)[groupdc(ggroup&tab)[[frameDCsource(gframe)[tbsourcedc(gtable)],frameDCdest(gframe)[tbdcdest(gtable)]],OKbutton]]
+				nb <<- gnotebook(container=group)				
+				DC=objet@data[,c("dc","dis_commentaires","type_dc")]
+				#TODO addmsg
+				groupdc<<-ggroup(cont=nb, label="dc")   ## "add" called by constructor this is a tab of the notebook
+				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,cont=groupdc)
+				tbsourcedc  = gtable(DC,cont=frameDCsource)
+				size(tbsourcedc)<-c(200,250)
+				#TODO addmsg
+				frameDCdest<-gframe("deposez ici",cont=groupdc)
+				# need for a fixed size data.frame otherwise errors when adding new lines
+				xx<-data.frame(choix=rep("",8))
+				xx$choix<-as.character(xx$choix)
+				tbdestdc=gtable(xx,cont=frameDCdest)
+				adddropsource(tbsourcedc)
+				adddroptarget(tbdestdc)				
+				adddropmotion(tbdestdc,handler=function(h,...) {
+							valeurs<-tbdestdc[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcedc)%in%valeurs){
+								tbdestdc[length(valeurs)+1,1]<-svalue(tbsourcedc)
+							}
+						})
+				addHandlerDoubleclick(tbsourcedc,handler=function(h,...) {
+							valeurs<-tbdestdc[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcedc)%in%valeurs){
+								tbdestdc[length(valeurs)+1,1]<-svalue(h$obj)
+							}
+						})
+				adddropsource(tbdestdc)
+				adddroptarget(tbsourcedc)
+				removedc<-function(){
+					valeurs<-tbdestdc[,]
+					valeurs<-valeurs[valeurs!=""]
+					valeurs<-valeurs[-match(svalue(tbdestdc),valeurs)]
+					tbdestdc[,]<-c(valeurs,rep("",8-length(valeurs)))
+				}
+				adddropmotion(tbsourcedc,handler=function(h,...) {
+							removedc()
+						})
+				addHandlerDoubleclick(tbdestdc,handler=function(h,...) {
+							removedc()
+						})
+				gbutton("ok", cont = groupdc, handler = hDC)
+			} else {
+				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
+			}
+		})

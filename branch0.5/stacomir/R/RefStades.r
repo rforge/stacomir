@@ -33,7 +33,7 @@ setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(objet,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=paste("SELECT DISTINCT ON (std_rang) std_code, std_libelle", 
+			requete@select=paste("SELECT distinct on(std_code) std_code, std_libelle", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
@@ -41,7 +41,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 					" JOIN ref.tr_stadedeveloppement_std on lot_std_code=std_code",sep="")
 			requete@where=paste("where dis_identifiant='",dc_selectionne,"'",sep="")
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"'",sep="")
-			requete@order_by="ORDER BY std_rang"  
+			requete@order_by="ORDER BY std_code"  
 			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-requete@query
 			if (nrow(objet@data)==0) funout(get("msg",envir=envir_stacomi)$RefStades.1,arret=TRUE)
