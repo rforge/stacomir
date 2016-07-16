@@ -39,7 +39,7 @@ setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=functio
 					pas=svalue(choixpas)
 					nbpas=as.numeric(svalue(choixnbpas)) 
 					objet@nbPas<-nbpas
-					objet@dureePas<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
+					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					objet=setdateDebut(objet,as.POSIXlt(svalue(datedeb)))
 					svalue(datedefin)<-as.Date(DateFin(objet))
 					assign("pasDeTemps",objet,envir_stacomi)

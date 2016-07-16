@@ -29,6 +29,7 @@ interface_BilanPoidsMoyen = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
+	x11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     choix(bilan_poids_moyen@liste)
     choix(bilan_poids_moyen@dc,objetBilan=NULL,is.enabled=TRUE)

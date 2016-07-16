@@ -107,7 +107,7 @@ setClass(Class="PasDeTempsChar",representation=
 # Conversion de classe
 ################################################################
 
-#Conversion depuis la classe charactere � la classe numerique
+#Conversion depuis la classe charactere  la classe numerique
 setAs("PasDeTempsChar","PasDeTemps",   # from to
 		function(from,to){
 			index=LesPasDeTemps[,"LabelPasDeTemps"]%in%from@dureePas

@@ -204,7 +204,7 @@ stacomi=function(gr_interface=TRUE){
 	logw <- gwindow(msg$interface_graphique_log.1, 
 			name="log",
 			parent=c(0,0),
-			width=300,height=100)
+			width=100,height=100)
 	assign("logw",logw,envir=.GlobalEnv)
 	logly=glayout(container=logw)
 	usrname<- gedit(text = baseODBC[2], 
@@ -247,7 +247,7 @@ interface_graphique=function(){
 	assign("nbligne",nbligne,.GlobalEnv)
 	
 	library(gWidgets)
-	win <- gwindow(msg$interface_graphique.16, name="main",parent=c(0,0),width=1000,height=600)
+	win <- gwindow(msg$interface_graphique.16, name="main",parent=c(0,0),width=100,height=100)
 	assign("win",win,envir=.GlobalEnv)
 	
 	## Menubar is defined by a list
@@ -299,7 +299,7 @@ interface_graphique=function(){
 	
 	add(win,ggrouptotal)
 	
-	gSortie=gtext(msg$interface_graphique.18,width =800 , height = 150,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
+	gSortie=gtext(msg$interface_graphique.18,width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
 	assign("gSortie",gSortie,envir=.GlobalEnv) 
 	
 	add(ggrouptotal,  gSortie,  expand=FALSE)

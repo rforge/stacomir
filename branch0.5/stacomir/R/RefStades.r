@@ -33,7 +33,7 @@ setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
 setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(objet,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=paste("SELECT distinct on(std_code) std_code, std_libelle", 
+			requete@select=paste("SELECT DISTINCT ON (std_code) std_code, std_libelle", 
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic on dis_identifiant=dic_dis_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_operation_ope on ope_dic_identifiant=dic_dis_identifiant",
