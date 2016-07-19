@@ -11,14 +11,15 @@ Objects can be created by calls of the form \code{new("RefDC", dc_selectionne=in
 	 \describe{
     \item{\code{dc_selectionne}:}{Object of class \code{"integer"}The selected device}
     \item{\code{ouvrage}:}{Object of class \code{"integer"}  The attached dam}
-    \item{\code{data}:}{Object of class \code{"data.frame"}  Datas concerning the control device}
+    \item{\code{station}:}{Object of class \code{"character"}  The attached migration monitoring station, this is necessary to join the table of escapments calculated at the station level}
+    \item{\code{data}:}{Object of class \code{"data.frame"}  data pertaining to the control device}
   }
 }
 
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefDC")}: Loads informations about the control device }
-    \item{choix}{\code{signature(objet = "RefDC")}: Enables to the user to selected the device }
+    \item{choix}{\code{signature(objet = "RefDC")}: Enables the user to selected the device }
 	 }
 }
 

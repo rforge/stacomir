@@ -5,11 +5,12 @@
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @slot dc_selectionne="integer"
 #' @slot ouvrage="integer"
+#' @slot station="character"
 #' @slot data="data.frame"
 #' @expamples \dontrun{objet=new("RefDC")}
 setClass(Class="RefDC",representation=
-				representation(dc_selectionne="integer",ouvrage="integer",data="data.frame") ,
-		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),data=data.frame()),package="stacomi")
+				representation(dc_selectionne="integer",ouvrage="integer",station="character",data="data.frame") ,
+		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),station=character(),data=data.frame()),package="stacomi")
 
 
 #' Referential class RefDC loads the counting devices of the control station
@@ -30,12 +31,14 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 					" dif_localisation,",
 					" dif_orientation,",
 					" tdf_libelle as type_DF,",
-					" tdc_libelle as type_DC",
+					" tdc_libelle as type_DC,",
+					"sta_code",
 					" FROM ",get("sch",envir=envir_stacomi),"tg_dispositif_dis",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositifcomptage_dic ON dic_dis_identifiant =dis_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_dispositiffranchissement_dif ON dif_dis_identifiant=dic_dif_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"tj_dfesttype_dft ON dif_dis_identifiant=dft_df_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant", 
+					" JOIN ",get("sch",envir=envir_stacomi),"t_station_sta on ouv_sta_code=sta_code", 
 					" JOIN ref.tr_typedf_tdf ON tdf_code=dft_tdf_code",
 					" JOIN ref.tr_typedc_tdc ON dic_tdc_code=tdc_code",
 					" WHERE  dft_rang=1",
@@ -64,6 +67,7 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 				hDC=function(h,...){
 					objet@dc_selectionne<-svalue(choix)
 					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
+					objet@station=objet@data$sta_code[objet@data$dc%in%objet@dc_selectionne]
 					assign("refDC",objet,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
 					# si il existe un objet fils; supprimer
