@@ -208,7 +208,7 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 					pas=svalue(choixpas)
 					nbpas=as.numeric(svalue(choixnbpas)) 
 					objet@nbPas<-nbpas
-					objet@dureePas<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
+					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					objet=setdateDebut(objet,svalue(datedeb))
 					#objet@nbPas<<-nbpas
 					#objet@dureePas<<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
@@ -226,7 +226,7 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 				hchoixpas=function(h,...){
 					pas=svalue(choixpas)
 					nbPas=as.numeric(svalue(choixnbpas))
-					objet@dureePas<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
+					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					objet@nbPas<-nbPas 
 					objet=setdateDebut(objet,svalue(datedeb))
 					#print(objet@dateDebut)
@@ -260,6 +260,63 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 			} else funout(get("msg",envir=envir_stacomi)$PasdeTemps.3, arret=TRUE)
 		})
 
+		
+#' choice method for PasdeTemps
+#' this method differs from choix as it is called within a notebook,
+#' it does not allow for multiple choice to be made
+#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+
+		setMethod("choixmult",signature=signature("PasDeTemps"),definition=function(objet) {
+					if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
+						hwinpa=function(h,...){
+							pas=svalue(choixpas)
+							nbpas=as.numeric(svalue(choixnbpas)) 
+							objet@nbPas<<-nbpas
+							objet@dureePas<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+							objet=setdateDebut(objet,svalue(datedeb))						
+							assign("pasDeTemps",objet,envir_stacomi)
+							funout("Les pas de temps ont ete charges\n")
+							# charge le deuxième onglet du notebook
+							#svalue(notebook)<-2
+						}
+						hchoixpas=function(h,...){
+							#browser()
+							pas=svalue(choixpas)
+							nbPas=as.numeric(svalue(choixnbpas))
+							objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+							objet@nbPas<-nbPas 
+							objet=setdateDebut(objet,svalue(datedeb))
+							#print(objet@dateDebut)							
+							#assign("date",svalue(datedeb),envir = .GlobalEnv)     
+							add(datedefin,strftime(as.POSIXlt(DateFin(objet)),format="%Y-%m-%d %H:%M:%S"),
+									font.attr=c(foreground.colors="red") )
+							hwinpa(h)
+						}
+						hchoixdatedebut=function(h,...){
+							# TODO a developper
+						}
+						groupdate<<-ggroup(cont=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
+						winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=groupdate,horizontal=FALSE)
+						pg<-ggroup(horizontal=FALSE,cont=winpa)
+						glabel("Date de debut",container=pg)
+						datedeb<-gedit(getdateDebut(objet),cont=pg,handler=hchoixpas,width=15)
+						datedebut2=as.character(strftime(objet@dateDebut,"%Y-%m-%d"))
+						datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
+									svalue(datedeb)<-as.character(strftime(
+													strptime(svalue(datedeb2),"%Y-%m-%d"),
+													"%Y-%m-%d %H:%M:%S"))
+									hchoixpas(h)				
+								} )
+						glabel(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=winpa)
+						pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
+						choixpas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoixpas) 
+						glabel(get("msg",envir=envir_stacomi)$PasdeTemps.2,container=winpa)
+						choixnbpas=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoixpas,width=15)
+						datedefin<-gtext(get("msg",envir=envir_stacomi)$PasdeTemps.4,height=50,container=winpa) # Date de fin
+						gbutton("OK", container=winpa,handler=hwinpa,icon="execute")
+					} else funout(get("msg",envir=envir_stacomi)$PasdeTemps.3, arret=TRUE)
+				})
+		
 # showClass("PasDeTemps")
 # validObject( pasDeTemps)
 # showMethods("suivant")

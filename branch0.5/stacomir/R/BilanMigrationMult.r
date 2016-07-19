@@ -76,19 +76,7 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			return(bilanMigrationMult)
 })
 
-#' connect method for BilanMigrationMult
-#' @return BilanMigrationMult with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @export
-#' @example 
-setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
-			bilanMigrationMult<-objet
-			req=new("RequeteODBC")
-			req@open<-TRUE
-			on.exit(if(!is.null(req@connexion)) odbcClose(req@connexion))   # ne pas lancer en debug
-			dateFin=strftime(as.POSIXlt(DateFin(bilanMigrationMult@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
-#
-		})
+
 
 
 #' calcule method for BilanMigration,does the calculation once data are filled in with the connect method
@@ -96,8 +84,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
-			bilanMigrationMult<-charge(bilanMigrationMult)
-			bilanMigrationMult<-connect(bilanMigrationMult)
+			browser()
 			data<-funSousListeBilanMigration(bilanMigration=bilanMigration)				
 			tableau=data[,-c(2,3)]
 			tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])				
@@ -179,7 +166,6 @@ hbilanMigrationMultgraph = function(h,...) {
 #' @export
 hbilanMigrationMultcalc=function(h,...){
 	bilanMigrationMult<-charge(bilanMigrationMult)
-	bilanMigrationMult<-connect(bilanMigrationMult)
 	bilanMigrationMult<-calcule(bilanMigrationMult)
 }
 

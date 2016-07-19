@@ -86,7 +86,6 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			sum<-funBilanMigrationAnnuel(bilanMigration=bilanMigration)
 			if (!is.na(sum)){
-				browser()
 				data<-funSousListeBilanMigration(bilanMigration=bilanMigration)
 				tableau=data[,-c(2,3)]
 				tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])

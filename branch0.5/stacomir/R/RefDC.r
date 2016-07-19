@@ -131,7 +131,6 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 					objet@dc_selectionne<-as.integer(tbdestdc[,][tbdestdc[,]!=""])
 					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
 					assign("refDC",objet,envir_stacomi)
-					# TODO addmsg   "Le (s) DC (s) a (ont) ete selectionne(s) \n"
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
 					# si il existe un objet fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
@@ -141,37 +140,39 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 						if("RefTaxon"%in%as.character(getSlots(class(objetBilan)))){
 							objetBilan@taxons<<-charge_avec_filtre(objet=objetBilan@taxons,dc_selectionne=get("refDC",objet,envir_stacomi)@dc_selectionne)
 							# suppresses all tab larger than 1 (dc)
-							if (length(nb)>1){
-								for (i in 2:length(nb)){
-									svalue(nb) <- i							
-									dispose(nb) ## dispose current tab
+							if (length(notebook)>2){
+								for (i in 3:length(notebook)){
+									svalue(notebook) <- i							
+									dispose(notebook) ## dispose current tab
 								}}
 							choixmult(objetBilan@taxons,objetBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
-					# changing tab of nb to next tab
-					if (svalue(nb)<length(nb)){
-						svalue(nb)<-svalue(nb)+1	
+					# changing tab of notebook to next tab
+					if (svalue(notebook)<length(notebook)){
+						svalue(notebook)<-svalue(notebook)+1	
 					}
 					#dispose(winst)
 				} 
 				# Handler d'affichage du tableau
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[nb(notebook)[groupdc(ggroup&tab)[[frameDCsource(gframe)[tbsourcedc(gtable)],frameDCdest(gframe)[tbdcdest(gtable)]],OKbutton]]
-				nb <<- gnotebook(container=group)				
+			
 				DC=objet@data[,c("dc","dis_commentaires","type_dc")]
 				#TODO addmsg
-				groupdc<<-ggroup(cont=nb, label="dc")   ## "add" called by constructor this is a tab of the notebook
+				groupdc<<-ggroup(cont=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
 				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,cont=groupdc)
-				tbsourcedc  = gtable(DC,cont=frameDCsource)
-				size(tbsourcedc)<-c(200,250)
-				#TODO addmsg
+				size(frameDCsource)<-c(250,300)
+				tbsourcedc  = gtable(DC,cont=frameDCsource,expand = TRUE, fill = TRUE)
+								
 				frameDCdest<-gframe("deposez ici",cont=groupdc)
+				size(frameDCdest)<-c(60,300)
+				#addSpring(groupdc)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choix=rep("",8))
 				xx$choix<-as.character(xx$choix)
-				tbdestdc=gtable(xx,cont=frameDCdest)
+				tbdestdc=gtable(xx,cont=frameDCdest,expand=TRUE, fill=TRUE)
 				adddropsource(tbsourcedc)
 				adddroptarget(tbdestdc)				
 				adddropmotion(tbdestdc,handler=function(h,...) {

@@ -27,8 +27,8 @@ doc<-read.csv(filecsv,header=TRUE,sep=";")
 tableau_config = t(doc) 
 
 les_utilisateurs <- tableau_config[1]
-datawd=tableau_config["datawd",]
-assign("datawd",datawd,envir=envir_stacomi)
+#datawd=tableau_config["datawd",]
+#assign("datawd",datawd,envir=envir_stacomi)
 pgwd=tableau_config["pgwd",]
 baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
 setwd(pgwd)
@@ -74,6 +74,7 @@ source("RefMsg.r")
 source("BilanFonctionnementDC.r")
 source("BilanFonctionnementDF.r")
 source("BilanMigration.r")
+source("BilanMigrationMult.r")
 source("BilanConditionEnv.r")
 source("BilanMigrationConditionEnv.r")
 source("BilanMigrationPar.r")
@@ -107,6 +108,7 @@ source("interface_BilanMigrationConditionEnv.r")
 source("interface_BilanMigrationPar.r")
 source("interface_BilanFonctionnementDC.r")
 source("interface_BilanFonctionnementDF.r")
+source("interface_BilanMigrationMult.r")
 source("interface_graphique.r")
 # interface_BilanEspeces dans BilanEspeces
  stacomi(gr_interface=TRUE)

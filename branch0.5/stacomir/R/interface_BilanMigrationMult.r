@@ -15,11 +15,19 @@ interface_BilanMigrationMult=function(){
 	bilanMigrationMult@stades=charge(bilanMigrationMult@stades)
 	bilanMigrationMult@dc=charge(bilanMigrationMult@dc)   
 	quitte()
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group = ggroup(horizontal=TRUE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
+	# the notebook will contain all elements from 
+	#######################
+	#TODO TESTER ICI ICI ICI
+	# ajout avec choixmult pour pas de temps.
+	########################
+	notebook <<- gnotebook(container=group)	
+	size(notebook)<-c(400,300)
 	add(ggroupboutons,group)
-	choix(bilanMigrationMult@pasDeTemps)
+	choixmult(bilanMigrationMult@pasDeTemps)
 	choixmult(bilanMigrationMult@dc,objetBilan=bilanMigrationMult,is.enabled=TRUE)
+	svalue(notebook)<-1
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
 	add(ggroupboutons,ggroupboutonsbas)

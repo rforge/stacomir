@@ -5,6 +5,7 @@
 #baseODBC=liste_chemins[["baseODBC"]]
 #listes de connection � la base de donnee (programmation S4)
 setGeneric("choix",def=function(objet,...) standardGeneric("choix"))
+setGeneric("choixmult",def=function(objet,...) standardGeneric("choixmult"))
 setGeneric("charge",def=function(objet,...) standardGeneric("charge"))
 setGeneric("charge_avec_filtre",def=function(objet,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(objet,...) standardGeneric("connect")) # package stacomirtools

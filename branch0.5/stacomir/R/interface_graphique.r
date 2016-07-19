@@ -39,6 +39,11 @@ hBilanMigration=function(h,...){
 	eval(interface_BilanMigration(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
+hBilanMigrationMult=function(h,...){
+	funout(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE)
+	eval(interface_BilanMigrationMult(),envir = .GlobalEnv)
+}
+#' handler function used by the main interface
 hBilanMigrationInterAnnuelle=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.6,wash=TRUE)
 	eval(interface_BilanMigrationInterAnnuelle(),envir = .GlobalEnv)
@@ -287,6 +292,8 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gWidgetsRGtk2-curve"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hx11
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
@@ -295,6 +302,7 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
 	add(win, gmenu(menubarlist))
 	ggrouptotal<- ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
+	# gsortie est au dessus de la fenêtre
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
 	
 	add(win,ggrouptotal)
