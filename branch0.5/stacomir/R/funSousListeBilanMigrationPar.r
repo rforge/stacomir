@@ -85,7 +85,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" FROM   ",get("sch",envir=envir_stacomi),"tj_tauxechappement_txe " ,
 					" WHERE  txe_tax_code = '" , as.character(bilanMigrationPar@taxons@data$tax_code) , "'" ,
 					" AND txe_std_code = '" , as.character(bilanMigrationPar@stades@data$std_code) , "'" ,
-					" AND txe_ouv_identifiant ='" , as.character(bilanMigrationPar@dc@ouvrage) , "'" ,     
+					" AND txe_sta_code ='" , as.character(bilanMigrationPar@dc@station) , "'" ,     
 					" AND txe_valeur_taux IS NOT NULL" ,
 					" AND (txe_date_debut, txe_date_fin) OVERLAPS (TIMESTAMP '" , getdateDebut(bilanMigrationPar@pasDeTemps) , "', TIMESTAMP '" , dateFin , "')" ,
 					" ;",sep="" )

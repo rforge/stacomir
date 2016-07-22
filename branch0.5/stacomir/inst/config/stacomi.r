@@ -112,3 +112,4 @@ source("interface_BilanMigrationMult.r")
 source("interface_graphique.r")
 # interface_BilanEspeces dans BilanEspeces
  stacomi(gr_interface=TRUE)
+ 

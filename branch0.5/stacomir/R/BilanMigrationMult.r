@@ -74,7 +74,7 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			stopifnot(validObject(bilanMigrationMult, test=TRUE))
 			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			return(bilanMigrationMult)
-})
+		})
 
 
 
@@ -84,8 +84,20 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
-			browser()
-			data<-funSousListeBilanMigration(bilanMigration=bilanMigration)				
+			#browser()
+#			'data.frame':	365 obs. of  10 variables:
+#					$ No_pas            : int  0 1 2 3 4 5 6 7 8 9 ...
+#			$ Debut_pas         : POSIXct, format: "2012-01-01" "2012-01-02" ...
+#			$ Fin_pas           : POSIXct, format: "2012-01-02" "2012-01-03" ...
+#			$ Mesure            : num  0 0 0 2.19 3.5 ...
+#			$ Calcule           : num  0 0 0 0 0 0 0 0 0 0 ...
+#			$ Expert            : num  0 0 0 0 0 0 0 0 0 0 ...
+#			$ Ponctuel          : num  0 0 0 0 0 0 0 0 0 0 ...
+#			$ type_de_quantite  : Factor w/ 1 level "effectif": 1 1 1 1 1 1 1 1 1 1 ...
+#			$ taux_d_echappement: num  -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 ...
+#			$ Coef_conversion   : num  NA NA NA NA NA NA NA NA NA NA ...
+			
+			data<-funSousListeBilanMigration(bilanMigration=bilanMigrationMult)				
 			tableau=data[,-c(2,3)]
 			tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])				
 			if(sum!=sum(tableau$"Effectif_total")) warning(paste("attention probleme, le total",sum,"est different de la somme des effectifs",sum(tableau$"Effectif_total"),"ceci peut se produire lorsque des operations sont a cheval sur plusieurs annees") )
@@ -118,7 +130,41 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			funout(get("msg",envir_stacomi)$BilanMigration.4)
 		})
 
+setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
+			bilanMigrationMult<-objet
+			# retrieve the argument of the function and passes it to bilanMigrationMult
+			# easier to debug
+			req=new("RequeteODBCwheredate")
+			req@baseODBC<-get("baseODBC", envir=envir_stacomi)			
+			req@colonnedebut<-"ope_date_debut"
+			req@colonnefin<-"ope_date_fin"
+			req@datedebut=as.POSIXlt(bilanMigration@pasDeTemps@dateDebut)
+			req@datefin=as.POSIXlt(DateFin(bilanMigration@pasDeTemps))
+			dc = vector_to_listsql(bilanMigrationMult@dc@dc_selectionne)
+			tax=vector_to_listsql(bilanMigrationMult@taxons@data$tax_code)
+			std=vector_to_listsql(bilanMigrationMult@stades@data$std_code)
+			sch=get("sch",envir=envir_stacomi)
+			req@select = str_c("SELECT lot_tax_code,
+							lot_std_code,
+							lot_effectif, 
+							lot_quantite,
+							lot_qte_code,
+							lot_dev_code, 
+							lot_methode_obtention",
+					" FROM ",sch,"t_operation_ope",
+					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant")
+			# removing character marks
+			req@select<-str_replace_all(req@select,"[\r\n\t]" , "")
+			# the where clause is returned by ODBCWheredate
+			req@and=str_c(" AND ope_dic_identifiant in",dc,
+					" AND lot_tax_code in ",tax,
+					" AND lot_std_code in ",std,
+					" AND lot_lot_identifiant IS NULL")
+			req<-connect(req)
+			rs=req@query	
+			return(rs)	
 
+})				
 
 #' handler du calcul hBilanMigrationgraph
 #' appelle les fonctions fungraph pour faire le bilan des migrations
