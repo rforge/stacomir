@@ -84,6 +84,12 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
+			
+			objet<-bilanMigrationMult
+			if (nrow(bilanMigrationMult@data)==0) {
+				funout("Message temporaire, Aucune donnée")
+			}
+			
 			#browser()
 #			'data.frame':	365 obs. of  10 variables:
 #					$ No_pas            : int  0 1 2 3 4 5 6 7 8 9 ...
@@ -97,7 +103,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 #			$ taux_d_echappement: num  -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 ...
 #			$ Coef_conversion   : num  NA NA NA NA NA NA NA NA NA NA ...
 			
-			data<-funSousListeBilanMigration(bilanMigration=bilanMigrationMult)				
+			data<-funSousListeBilanMigration(bilanMigrationMult=bilanMigrationMult)				
 			tableau=data[,-c(2,3)]
 			tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])				
 			if(sum!=sum(tableau$"Effectif_total")) warning(paste("attention probleme, le total",sum,"est different de la somme des effectifs",sum(tableau$"Effectif_total"),"ceci peut se produire lorsque des operations sont a cheval sur plusieurs annees") )
@@ -115,19 +121,20 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					))
 			tableau$Coef_conversion=as.numeric(tableau$Coef_conversion)
 			tableau$Coef_conversion[is.na(tableau$Coef_conversion)]=0
-			bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$Debut_pas)),to=max(data$Debut_pas),
-					by=as.numeric(bilanMigration@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
+			bilanMigrationMult@duree=seq.POSIXt(from=as.POSIXlt(min(data$Debut_pas)),to=max(data$Debut_pas),
+					by=as.numeric(bilanMigrationMult@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
 			# traitement des coefficients de conversion poids effectif
 			
-			if (bilanMigration@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigration@stades@data$std_libelle=="civelle") 
+			if (bilanMigrationMult@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigrationMult@stades@data$std_libelle=="civelle") 
 			{
-				tableau <-funtraitement_poids(tableau,duree=bilanMigration@duree)
+				tableau <-funtraitement_poids(tableau,duree=bilanMigrationMult@duree)
 			}
 			bilanMigration@data<-tableau
-			assign("bilanMigration",bilanMigration,envir_stacomi)
+			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigration.3)
 			assign("tableau",tableau,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigration.4)
+			return(bilanMigrationMult)
 		})
 
 setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
@@ -161,8 +168,8 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 					" AND lot_std_code in ",std,
 					" AND lot_lot_identifiant IS NULL")
 			req<-connect(req)
-			rs=req@query	
-			return(rs)	
+			bilanMigrationMult@data=req@query				
+			return(bilanMigrationMult)
 
 })				
 
@@ -212,6 +219,7 @@ hbilanMigrationMultgraph = function(h,...) {
 #' @export
 hbilanMigrationMultcalc=function(h,...){
 	bilanMigrationMult<-charge(bilanMigrationMult)
+	bilanMigrationMult<-connect(bilanMigrationMult)
 	bilanMigrationMult<-calcule(bilanMigrationMult)
 }
 
