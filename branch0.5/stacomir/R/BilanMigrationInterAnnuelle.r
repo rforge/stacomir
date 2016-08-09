@@ -1,31 +1,48 @@
 # Nom fichier :        BilanMigrationInterAnnuel.R
-#' class BilanMigrationInterannuelle
-#' Several year overview of fish migrations. It enables to draw 2 compare a year with statistics from several year, and to extract data
-#' This class need prior call from bilanMigration to fill in the t_bilanmigrationjour_bjo as it loads the data in this table
-#' @slot dc =Object of class \code{"RefDC"} The counting device of the fishway
-#' @slot taxons =Object of class \code{"RefTaxon"} : the fish taxa
-#' @slot stades =Object of class \code{"RefStades"} : the fish stage
-#' @slot data =Object of class \code{"RefStades"} : migration data
-#' @slot anneeDebut =Object of class \code{"RefAnnee"} : the starting year
-#' @slot anneeFin =Object of class \code{"RefAnnee"} : the finishing year
-#' @method connect
-#' @method supprime
-#' @method charge
-#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
-#' @seealso     Other Bilan Class
-#'	\code{\linkS4class{Bilan_lot}}
-#'	\code{\linkS4class{Bilan_poids_moyen}}
-#'	\code{\linkS4class{Bilan_stades_pigm}}	
-#'	\code{\linkS4class{Bilan_taille}}
-#'	\code{\linkS4class{BilanConditionEnv}}
-#'	\code{\linkS4class{BilanEspeces}}
-#'	\code{\linkS4class{BilanFonctionnementDC}}
-#'	\code{\linkS4class{BilanFonctionnementDF}}	
-#'	\code{\linkS4class{BilanMigration}}	
-#'	\code{\linkS4class{BilanMigrationConditionEnv}}
-#'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
-#'	\code{\linkS4class{BilanMigrationPar}}	
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "BilanMigrationConditionEnv"
+#' 
+#' Enables to compute an annual overview of fish migration and environmental
+#' conditions in the same chart
+#' 
+#' 
+#' @name BilanMigrationConditionEnv-class
+#' @aliases BilanMigrationConditionEnv BilanMigrationConditionEnv-class
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanMigrationConditionEnv",
+#' bilanMigration=new("BilanMigration"),
+#' bilanConditionEnv=new("BilanConditionEnv"))}.  \describe{
+#' \item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
+#' migration overview }\item{:}{Object of class \code{"BilanMigration"} The
+#' migration overview } \item{list("bilanConditionEnv")}{Object of class
+#' \code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
+#' class \code{"BilanConditionEnv"} The environmental overview} }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanMigrationConditionEnv")
+#' 
+#' @exportClass 
+
+
+
+
+
+
+
+
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
 						dc="RefDC",
@@ -236,6 +253,22 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 #'   @param timesplit "week"  "2 week" "month" as provided to seq.POSIXT
 #'   @return dat  a data frame with max mean min per time period
 #####################################################################
+
+
+
+
+
+
+#' statistics per time period
+#' 
+#' function called for bilamMigrationInterannelle objects renames columns
+#' replaces nulls, and calculates reports with time period larger than day
+#' 
+#' 
+#' @param dat a data frame
+#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT
+#' @return a data frame with mean, max, and min calculated for each timesplit
+#' @seealso \code{\linkS4class{Bilan_poids_moyen}}
 fundat=function(dat,timesplit=NULL)
 {
 	

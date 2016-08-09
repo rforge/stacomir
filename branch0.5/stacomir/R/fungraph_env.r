@@ -1,5 +1,11 @@
 # Nom fichier :        fungraph_env.R
 
+
+
+
+
+
+
 #' Function for class BilanMigrationEnv drawing both the response of
 #' environment variables...
 #' 
@@ -8,14 +14,12 @@
 #' a stage
 #' 
 #' 
-#' @usage fungraph_env(tableau, duree, taxon, stade, stations)
 #' @param tableau data issued from a bilanMigration
 #' @param duree a vector of class POSIXt
 #' @param taxon the species
 #' @param stade the stage
 #' @param stations one or several measure stations
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph_env=function(tableau,duree,taxon,stade,stations){
 	bilanMigrationConditionEnv@bilanMigration@dc<-get("refDC",envir_stacomi)
 	annee=strftime(as.POSIXlt(mean(duree)),"%Y")

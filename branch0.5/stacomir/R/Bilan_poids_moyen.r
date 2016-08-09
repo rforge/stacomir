@@ -4,21 +4,57 @@
 # Auteur :             Cedric Briand
 # Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   07/02/2009 21:30:54
-# TODO Calcul des valeurs en interannuel pour le calage de la regression et d'une valeur par defaut des coefficients de conversion
-#' Bilan_poids_moyen class
-#' Objectif faire un calcul des poids moyens et permettre de reintegrere les coefficents de conversion poids effectif
-#' @note Un programme permet pour l'iav d'etendre le chargement des donnees de la base mortciv pour etendre la gamme des valeurs modelisees OK done internal IAV
-#' @slot data="data.frame"
-#' @slot dc="RefDC"
-#' @slot anneedebut="RefAnnee"
-#' @slot anneefin="RefAnnee"
-#' @slot coe="RefCoe"
-#' @slot liste="RefListe"
-#' @method connect
-#' @method charge
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
-#' @expamples objet=new("Bilan_poids_moyen")
+#' Class "Bilan_poids_moyen"
+#' 
+#' Bilan_poids_moyen class The objective is to calculate mean weight of glass
+#' eel which are counted from weight measurements and to reintegrate weight to
+#' number coefficients
+#' 
+#' 
+#' @name Bilan_poids_moyen-class
+#' @aliases Bilan_poids_moyen-class Bilan_poids_moyen
+
+#' @note We have also tools available to import glass eel measurement from
+#' experimental fishing in the estuary For the charge method dates for the
+#' request are from august to august (a glass eel season)
+#' @section Slots: \describe{ \item{list("data")}{Object of class
+#' \code{"data.frame"} data for bilan lot }\item{:}{Object of class
+#' \code{"data.frame"} data for bilan lot } \item{list("dc")}{Object of class
+#' \code{"RefDC"} refDC an instantiation of the counting device
+#' class}\item{:}{Object of class \code{"RefDC"} refDC an instantiation of the
+#' counting device class} \item{list("anneedebut")}{Object of class
+#' \code{"RefAnnee"} refAnnee allows to choose year of beginning
+#' }\item{:}{Object of class \code{"RefAnnee"} refAnnee allows to choose year
+#' of beginning } \item{list("anneefin")}{Object of class \code{"RefAnnee"}
+#' refAnnee allows to choose year of ending }\item{:}{Object of class
+#' \code{"RefAnnee"} refAnnee allows to choose year of ending }
+#' \item{list("coe")}{Object of class \code{"RefCoe"} class loading coefficient
+#' of conversion between quantity (weights or volumes of glass eel) and numbers
+#' }\item{:}{Object of class \code{"RefCoe"} class loading coefficient of
+#' conversion between quantity (weights or volumes of glass eel) and numbers }
+#' \item{list("liste")}{Object of class \code{"RefListe"} RefListe referential
+#' class choose within a list, here do you want subsamples or not
+#' }\item{:}{Object of class \code{"RefListe"} RefListe referential class
+#' choose within a list, here do you want subsamples or not } }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("Bilan_poids_moyen")
+#' objet=new("Bilan_poids_moyen")
+#' 
+#' @exportClass 
 setClass(Class="Bilan_poids_moyen",        
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -106,6 +142,20 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 
 
 
+
+
+
+
+
+
+#' fungraphBilan_poids_moyen
+#' 
+#' Function for bilanPoidsMoyen also allowing to pass some objects from the
+#' peche iav database
+#' 
+#' 
+#' @param h handler
+#' @param \dots additional arguments passed to the function
 fungraphBilan_poids_moyen = function(h,...) {
 	if (exists("toolbarlistgraph",.GlobalEnv)) {
 		delete(group,toolbarlistgraph) 

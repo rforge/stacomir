@@ -2,19 +2,37 @@
 # Projet :             controle migrateur calmig/prog/classe
 # Date de creation :   31/03/2008 17:21:18
 
-#' @title #' Class Bilan espece Report of the species present at a counting device for a given period
-#' this class is used to make the assessment of all species, and their number, per month
-#' #' it writes an histogram of number per month
-#' class BilanEspeces 
-#' @slot dc="RefDC"
-#' @slot horodate="RefHorodate"
-#' @slot stades="RefStades"
-#' @slot datedebut="POSIXlt"
-#' @slot datefin="POSIXlt"
-#' @slot data="data.frame"
-#' @slot duree="POSIXct"
-#' @slot liste="RefListe" lists the possible value of time period
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "BilanEspeces" Report of the species present at a counting device for
+#' a given period
+#' 
+#' this class is used to make the assessment of all species, and their number,
+#' per month it writes either an histogram or a pie chart of number per
+#' year/week/month
+#' 
+#' 
+#' @name BilanEspeces-class
+#' @aliases BilanEspeces-class BilanEspeces
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanEspeces", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanEspeces")
+#' 
+#' @exportClass 
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
@@ -87,7 +105,7 @@ hBilanEspecescalc=function(h,...){
 #' @return BilanEspeces with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
-#' @expamples bilanEspeces=new("BilanEspeces")
+#' @examples bilanEspeces=new("BilanEspeces")
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
 			bilanEspeces<-objet
@@ -232,7 +250,7 @@ hTableBilanEspeces=function(h,...) {
 #' Interface for BilanEspece class
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @export
-#' @expamples interface_BilanEspeces()
+#' @examples interface_BilanEspeces()
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)

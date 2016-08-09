@@ -5,17 +5,23 @@
 # Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   31/03/2008 17:21:30
 
-#' @title Refstades referential class to load message according to the langage chosen
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' RefMsg referential class to load message according to the language chosen
+#' 
+#' @name RefMsg-class
+#' @aliases RefMsg-class RefMsg createmessage,RefMsg-method
+
 #' @slot data="data.frame"
-#' @expamples objet=new("RefMsg")
+#' @section Methods: \describe{ \item{createmessage}{\code{signature(objet =
+#' "RefMsg")}: creates a message } }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
 #' Loading method for RefMsg referential objects
 #' loads the common table ts_messager_msr
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
+#' @family Referential objects
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("RefMsg")
 #'  charge(objet)
 setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {

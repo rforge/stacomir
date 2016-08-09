@@ -3,11 +3,8 @@
 #' Launched by fun_EcritBilanJournalier
 #' 
 #' 
-#' @usage fn_EcritBilanMensuel(bilanMigration, resum)
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param resum data frame with summary per month
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
 	t_bilanmigrationmensuel_bme=killfactor(

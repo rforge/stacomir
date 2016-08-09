@@ -1,11 +1,14 @@
 #' This function is programmed to be called in fungraph and fungraphcivelle
-#' @param per_dis_identifiant 
-#' @param dateDebut 
-#' @param dateFin 
-#' @returnType character
-#' @return sql query 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' 
+#' This function is programmed to be called in fungraph and fungraphcivelle
+#' 
+#' 
+#' @param per_dis_identifiant period of function of either fishway or counting
+#' device
+#' @param dateDebut starting date
+#' @param dateFin ending date
+#' @return sql query
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fn_sql_dis<-function    (per_dis_identifiant,
                         dateDebut=as.Date(duree[min(index)]),
                         dateFin=as.Date(duree[max(index)]))

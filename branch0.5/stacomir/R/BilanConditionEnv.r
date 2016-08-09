@@ -1,14 +1,37 @@
 # Nom fichier :        BilanConditionEnv    (classe)
 # Date de creation :   24/06/2009 13:49:20
 # constructeur d'un bilan des conditions environnementales
-#' class BilanConditionEnv simple output of one or several environemental conditons
-#' @slot horodate="RefHorodate"
-#' @slot stationMesure=="RefStationMesure"
-#' @slot data=data.frame
-#' @method connect
-#' @method charge
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' class BilanConditionEnv simple output of one or several environmental
+#' conditions...
+#' 
+#' Annual overview of environmental conditions. Enables to draw charts and
+#' write files.
+#' 
+#' 
+#' @name BilanConditionEnv-class
+#' @aliases BilanConditionEnv-class BilanConditionEnv
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanConditionEnv", horodate=new("Horodate"),
+#' stationMesure=new("RefStationMesure"), data=data.frame(),
+#' requete=new("RequeteODBCwheredate"))}.
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanConditionEnv")
+#' 
+#' @exportClass 
 setClass(Class="BilanConditionEnv",
 		representation=representation(
 				horodate="RefHorodate",

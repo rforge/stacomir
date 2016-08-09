@@ -7,23 +7,39 @@
 #* Modifications :
 #* ---------------
 #* Les boites en chargent plus l'ensemble de la liste mais seulement celles ayant une correspondance dans la base
-#* Adaptation � ggplotusr v1.0
 #* integration des msg pour internationalisation
 #********************************************
+#' Class "Bilan_lot"
+#' 
+#' Bilan_lot Bilan class calls the content of the postgres view vue_lot_ope_car
+#' 
+#' 
 #' @name Bilan_lot
-#' @title Bilan_lot Bilan class calls the content of the table of characteristics of lot
+#' @aliases Bilan_lot-class Bilan_lot
+
 #' @note This class is displayed by interface_bilan_lot
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @slot data="data.frame"
-#' @slot dc="RefDC"
-#' @slot taxons="RefTaxon"
-#' @slot stades="RefStades"
-#' @slot par="Refpar"
-#' @slot horodate="RefHorodate"
-#' @slot requete="RequeteODBCwheredate")
-#' @method connect
-#' @method charge
-#' @expamples objet=new("Bilan_lot")
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Bilan_lot", ...)}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references
+#' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette%20BilanLot}
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("Bilan_lot")
+#' objet=new("Bilan_lot")
+#' 
+#' @exportClass 
 setClass(Class="Bilan_lot",
 		representation= representation(
 				data="data.frame",

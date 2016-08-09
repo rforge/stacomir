@@ -2,15 +2,59 @@
 # Projet :             controle migrateur calmig/prog/classe
 # Date de creation :   31/03/2008 17:21:18
 
-#' class BilanMigration
-#' @slot dc="RefDC"
-#' @slot taxons="RefTaxon"
-#' @slot stades="RefStades"
-#' @slot pasDeTemps="PasDeTempsJournalier"
-#' @slot data="data.frame"
-#' @slot duree="POSIXct"
-#' @method calcule
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "BilanMigration"
+#' 
+#' Balance of fish migrations
+#' 
+#' 
+#' @name BilanMigration-class
+#' @aliases BilanMigration BilanMigration-class
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanMigration",
+#' dc=new("RefDC"),taxons=("RefTaxon"),stades=("RefStades"),pasDeTemps=("PasDeTempsJournalier"),data=data.frame(),
+#' duree=new(POSIXct) )}.  
+#' \describe{ 
+#' \item{list("dc")}{Object of class
+#' \code{"RefDC"}: the control device }
+#' \item{:}{Object of class \code{"RefDC"}:
+#' the control device } \item{list("taxons")}{Object of class
+#' \code{"RefTaxon"}: the taxa of the fish}
+#' \item{:}{Object of class
+#' \code{"RefTaxon"}: the taxa of the fish} 
+#' \item{list("stades")}{Object of
+#' class \code{"RefStades"} : the stage of the fish}\item{:}{Object of class
+#' \code{"RefStades"} : the stage of the fish} 
+#' \item{list("pasDeTemps")}{Object
+#' of class \code{"PasDeTempsJournalier"} : the time step constrained to daily
+#' value and 365 days}
+#' \item{:}{Object of class \code{"PasDeTempsJournalier"} :
+#' the time step constrained to daily value and 365 days}
+#' \item{list("data")}{Object of class \code{"data.frame"} :
+#' data}
+#' \item{:}{Object of class \code{"data.frame"} : data}
+#' \item{list("duree")}{Object of class \code{"POSIXct"} : duration of the
+#' analysis}
+#' \item{:}{Object of class \code{"POSIXct"} : duration of the
+#' analysis} }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @examples
+#' 
+#' showClass("BilanMigration")
+#' bilanMigration= new("BilanMigration")
+#' 
+#' @export 
 setClass(Class="BilanMigration",
 		representation=
 				representation(dc="RefDC",taxons="RefTaxon",stades="RefStades",pasDeTemps="PasDeTempsJournalier",data="data.frame",duree="POSIXct"),
@@ -88,23 +132,23 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			if (!is.na(sum)){
 				data<-funSousListeBilanMigration(bilanMigration=bilanMigration)
 				tableau=data[,-c(2,3)]
-				tableau$"Effectif_total"=rowSums(data[,c("Mesure","Calcule","Expert","Ponctuel")])
+				tableau$"Effectif_total"=rowSums(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL")])
 				if(sum!=sum(tableau$"Effectif_total")) warning(paste("attention probleme, le total",sum,"est different de la somme des effectifs",sum(tableau$"Effectif_total"),"ceci peut se produire lorsque des operations sont a cheval sur plusieurs annees") )
 				tableau=tableau[,c(1:5,9,6:8)] 	
 				dimnames(tableau)=list(1:nrow(tableau),c(
 								"No.pas",
-								"Mesure",
-								"Calcule",
-								"Expert",
-								"Ponctuel",
+								"MESURE",
+								"CALCULE",
+								"EXPERT",
+								"PONCTUEL",
 								"Effectif_total",
-								"Type_de_quantite",
+								"type_de_quantite",
 								"Taux_d_echappement",
-								"Coef_conversion"
+								"coe_valeur_coefficient"
 						))
-				tableau$Coef_conversion=as.numeric(tableau$Coef_conversion)
-				tableau$Coef_conversion[is.na(tableau$Coef_conversion)]=0
-				bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$Debut_pas)),to=max(data$Debut_pas),
+				tableau$coe_valeur_coefficient=as.numeric(tableau$coe_valeur_coefficient)
+				tableau$coe_valeur_coefficient[is.na(tableau$coe_valeur_coefficient)]=0
+				bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$debut_pas)),to=max(data$debut_pas),
 						by=as.numeric(bilanMigration@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
 				# traitement des coefficients de conversion poids effectif
 				

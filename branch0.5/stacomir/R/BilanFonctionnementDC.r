@@ -16,7 +16,37 @@
 # Interface graphique : attribue au bouton DC
 # Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choix de graphiques  OK fonctionne
 
+#' Class "BilanFonctionnementDC" Bilan du fonctionnement du dispositif de
+#' comptage
+#' 
+#' The counting device is not always working. It may me stopped either
+#' following a monitoring protocol, or due to misfunction of the device, this
+#' class allows to draw graphics allowing an overview of the device operation
+#' 
+#' 
+#' @name BilanFonctionnementDC-class
+#' @aliases BilanFonctionnementDC-class BilanFonctionnementDC
 
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanFonctionnementDC", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanFonctionnementDC")
+#' 
+#' @exportClass 
 setClass(Class="BilanFonctionnementDC",
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -153,6 +183,21 @@ funboxDC = function(h,...) {
 	mypalette<-brewer.pal(12,"Paired")
 	#display.brewer.all()
 	mypalette1<-c("#1B9E77","#AE017E","orange", brewer.pal(12,"Paired"))
+
+
+
+
+
+
+
+#' function used for some lattice graphes with dates
+#' 
+#' function used for some lattice graphes with dates
+#' 
+#' 
+#' @param vectordate date or POSIXt
+#' @return vectordate (without class)
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 	graphdate<-function(vectordate){
 		attributes(vectordate)<-NULL
 		unclass(vectordate)

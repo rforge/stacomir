@@ -1,10 +1,22 @@
 # Nom fichier :        BilanMigrationCar    (classe)
 # Date de creation :   31/03/2008 17:21:18
 
-#' @title Class BilanMigrationPar, Migration report along with quantitative and qualitative characteristics
-#' Migration along with qualitative or quantitative characteristics 
-#'or both  (e.g.) weight of eels according to the size class per period of time,
-#'weight of fish according to gender...
+#' Class BilanMigrationPar, Migration report along with quantitative and
+#' qualitative characteristics
+#' 
+#' Migration along with qualitative or quantitative characteristics or both
+#' (e.g.) weight of eels according to the size class per period of time, weight
+#' of fish according to gender...
+#' 
+#' 
+#' @name BilanMigrationPar-class
+#' @aliases BilanMigrationPar-class BilanMigrationPar
+
+#' @note program : default two parameter choice, checking box "aucun" will
+#' allow the program to ignore the parameter
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanMigrationPar", ...)}.  they are loaded by the interface
+#' using interface_BilanMigrationPar function.
 #' @slot parquan = "Refparquan"
 #' @slot parqual = "Refparqual"
 #' @slot echantillon = "RefChoix"
@@ -18,6 +30,22 @@
 #' @method calcule
 #' @method graphe
 #' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanMigrationPar")
+#' 
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 setClass(Class="BilanMigrationPar",
 		representation=representation(parquan="Refparquan",
@@ -110,15 +138,15 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			res<-funSousListeBilanMigrationPar(bilanMigrationPar=bilanMigrationPar)
 			if (exists("progres")) close(progres)
 			data<-res[[1]]
-			data[,"Debut_pas"]<-as.POSIXct(strptime(x=data[,"Debut_pas"],format="%Y-%m-%d"))   # je repasse de caractere 
-			data[,"Fin_pas"]<-as.POSIXct(strptime(data[,"Fin_pas"],format="%Y-%m-%d"))
+			data[,"debut_pas"]<-as.POSIXct(strptime(x=data[,"debut_pas"],format="%Y-%m-%d"))   # je repasse de caractere 
+			data[,"fin_pas"]<-as.POSIXct(strptime(data[,"fin_pas"],format="%Y-%m-%d"))
 			bilanMigrationPar@valeurs_possibles<-res[[2]]   # definitions des niveaux de parametres qualitatifs rencontres.
 			# funout("\n")
 			#	assign("data",data,envir_stacomi)
 			#funout("la table bilan migration est stockee dans l'environnement envir_stacomi\n")
 			#data<-get("data",envir_stacomi)
 			# chargement des donnees suivant le format chargement_donnees1  
-			bilanMigrationPar@duree=seq.POSIXt(from=min(data$Debut_pas),to=max(data$Debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
+			bilanMigrationPar@duree=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
 			
 			if (bilanMigrationPar@taxons@data$tax_nom_commun=="Anguilla anguilla"& bilanMigrationPar@stades@data$std_libelle=="civelle") 
 			{
@@ -169,7 +197,7 @@ setMethod("graphe",signature=signature("BilanMigrationPar"),definition=function(
 			###########################
 			bilanMigrationPar<-objet # ne pas passer dessus en debug manuel
 			##########################
-			colnames(bilanMigrationPar@data)<-gsub("Debut_pas","Date",colnames(bilanMigrationPar@data))
+			colnames(bilanMigrationPar@data)<-gsub("debut_pas","Date",colnames(bilanMigrationPar@data))
 			if (bilanMigrationPar@parqual@data$par_nom!="aucune"& bilanMigrationPar@parquan@data$par_nom!="aucune") {# il y a des qualites et des quantites de lots
 				nmvarqan=gsub(" ","_",bilanMigrationPar@parquan@data$par_nom) # nom variable quantitative
 				colnames(bilanMigrationPar@data)<-gsub("quantite",nmvarqan,colnames(bilanMigrationPar@data))

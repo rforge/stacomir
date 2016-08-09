@@ -1,15 +1,41 @@
 # Nom fichier :        RefParquan   (classe)
-#' @title Refparquan referential class choose a quantitative parameter
-#' @note The choice method of this class is inherited from the parent class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples objet=new("Refparquan")
+#' Class "Refparquan"
+#' 
+#' Class enabling to load the list of quantitative parameters and to select one
+#' of them. It inherits from 'Refpar', uses its 'choix' method
+#' 
+#' 
+#' @name Refparquan-class
+#' @aliases Refparquan Refparquan-class
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Refparquan", data=data.frame())}.  \describe{
+#' \item{list("data")}{Object of class \code{"data.frame"} ~ Quantitative
+#' parameters }\item{:}{Object of class \code{"data.frame"} ~ Quantitative
+#' parameters } }
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
+#' @family Referential objects
+#' @include Refpar.r
+#' @examples
+#' 
+#' showClass("Refparquan")
+#' 
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparquan
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("Refparquan")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparquan"),definition=function(objet) {
@@ -28,7 +54,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(objet) 
 #' @returnType S4 object
 #' @return An S4 object of class Refparqualn
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"

@@ -1,14 +1,36 @@
 # Nom fichier :        RefCoe(classe)
 
-#' @title RefCoe referential class 
-#' @note Class loading coefficient of conversion between quantity (weights or volumes of glass eel) and numbers 
-#' between a starting and finishing date
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "RefCoe"
+#' 
+#' Enables to load conversion coefficients quantity-number
+#' 
+#' 
+#' @name RefCoe-class
+#' @aliases RefCoe RefCoe-class
+
+#' @note Class loading coefficient of conversion between quantity (weights or
+#' volumes of glass eel) and numbers between a starting and finishing date
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("RefCoe")}.
 #' @slot data="data.frame"
 #' @slot datedebut="POSIXlt"
 #' @slot datefin="POSIXlt"
 #' @method charge
-#' @expamples coe= new("RefCoe")
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @family Referential objects
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("RefCoe")
+#' 
 setClass(Class="RefCoe",representation=
 				representation(data="data.frame",datedebut="POSIXlt",datefin="POSIXlt"),
 		prototype=prototype(data=data.frame()))
@@ -19,7 +41,7 @@ setClass(Class="RefCoe",representation=
 #' @return Object of class RefCoe
 #' @note Bien que je ne comprenne pourquoi, la connection fonctionne si on ne pointe pas le sch�ma
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples objet<- new("RefCoe")
+#' @examples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
 #' objet@datefin<-strptime("01/01/1997",format="%d/%m/%Y")
 #' charge(objet) # objet

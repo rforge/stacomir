@@ -107,7 +107,7 @@ husr=function(h,...){
 		baseODBC[2]<-svalue(usrname)
 		baseODBC[3]<-svalue(usrpwd)
 	} else {
-		# on prend les valeurs choisies par d�faut dans baseODBC
+		# on prend les valeurs choisies par defaut dans baseODBC
 		# rien
 	}
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
@@ -184,9 +184,20 @@ hx11=function(h,...){
 	x11()
 }
 
-#' Function that loads the loginwindow, tests connection, and then destroys the window
-#' @param baseODBC the ODBC connection chain contains user and password
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+
+
+
+
+#' Function that loads the loginwindow, tests connection, and then destroys the
+#' window
+#' 
+#' Function that loads the loginwindow, tests connection, and then destroys the
+#' window
+#' 
+#' 
+#' @param gr_interface Will be used to launch the program as graphical
+#' interface or in command line
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
@@ -196,14 +207,21 @@ stacomi=function(gr_interface=TRUE){
 	baseODBC=mylinks[["baseODBC"]]
 	datawd=mylinks[["datawd"]]
 	lang=mylinks[["lang"]]	
+	sqldf.options=mylinks[["sqldf.options"]]	
 	assign("lang",lang,envir=envir_stacomi)	
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	assign("datawd",datawd,envir=envir_stacomi)
+	assign("sqldf.options",sqldf.options,envir=envir_stacomi)
 	refMsg=new("RefMsg")
 	createmessage(refMsg)
 	
 	msg=get("msg",envir=envir_stacomi)
 	libraries()
+	options(sqldf.RPostgreSQL.user = sqldf.options["sqldf.uid"], 
+			sqldf.RPostgreSQL.password =sqldf.options["sqldf.pwd"],
+			sqldf.RPostgreSQL.dbname = sqldf.options["sqldf.dbname"],
+			sqldf.RPostgreSQL.host = sqldf.options["sqldf.host"],#  1.100.1.6
+			sqldf.RPostgreSQL.port = sqldf.options["sqldf.port"])
 	# loginWindow, will call the husr handler
 	if (gr_interface){
 	logw <- gwindow(msg$interface_graphique_log.1, 
@@ -230,13 +248,26 @@ stacomi=function(gr_interface=TRUE){
 	logly[2,2]<-usrpwd
 	logly[3,2]<-but
 	} else {
+
+		
 		husr(gr_interface=FALSE)
 	}
 }
 
-#' lancement du programme, cette fonction recupere d'abord les chemins ODBC et le repertoire de travail � partir du fichier XML
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+
+
+
+
+
+
+#' Program launch, this function first gathers the ODBC path from the csv file
+#' 
+#' Program launch, this function fist gathers the ODBC path and working
+#' directory from the csv file and then launches the GwidgetRgtk graphical
+#' interface to stacomi.
+#' 
+#' 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_graphique=function(){
 	msg=get("msg",envir=envir_stacomi) # appel dans chaque sous fonction
 	if (exists("graphes"))  rm(list=c("graphes"),envir=.GlobalEnv)

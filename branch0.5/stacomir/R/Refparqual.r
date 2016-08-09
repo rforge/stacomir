@@ -2,20 +2,44 @@
 # Projet :             controle migrateur
 # Date de creation :   22/03/2009 21:14:14
 
-#' @title Refparqual referential class choose a parameter
-#' @note Classe permettant de charger la liste de parametres qualitatifs
-#' et de les selectionner herite de Refpar dont elle utilie la methode choix
-#' par rapport � parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "Refparqual"
+#' 
+#' Class enabling to load the list of qualitative parameters and to select one
+#' of them. It inherits from 'Refpar', uses its 'choix' method
+#' 
+#' 
+#' @name Refparqual-class
+#' @aliases Refparqual Refparqual-class
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Refparqual", ...)}.  \describe{ \item{list("valqual")}{Object of
+#' class \code{"data.frame"} Values of qualitatives parameters}\item{:}{Object
+#' of class \code{"data.frame"} Values of qualitatives parameters}
+#' \item{list("data")}{Object of class \code{"data.frame"} Qualitatives
+#' parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
+#' parameters } }
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
 #' @slot valqual="data.frame" the list of qualitative parameters
-#' @expamples objet=new("Refparqual")
+#' @include Refpar.r
+#' @family Referential objects
+#' @examples
+#' 
+#' showClass("Refparqual")
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
 
 #' Loading method for Reparqual referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("Refparqual")
 #'  charge(objet)
 setMethod("charge",signature=signature("Refparqual"),definition=function(objet) {
@@ -33,7 +57,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
@@ -66,7 +90,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual with the valqual slot filled
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
@@ -93,7 +117,7 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples  
+#' @examples  
 #'  objet=new("Refparqual")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

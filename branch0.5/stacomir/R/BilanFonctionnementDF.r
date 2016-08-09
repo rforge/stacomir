@@ -19,27 +19,35 @@
 # Definiton de la classe et des methodes
 ############################################
 #' Class "BilanFonctionnementDF" Bilan du fonctionnement du dispositif de franchissement
-#' The DF (Dispositif de Franchissement) is a fishway. It may be automated and work only at certain times
-#' This Bilan allows to see the detail of its work.
-#' @slot data = Object of class \code{"data.frame"}
-#' @slot df = Object of class \code{"RefDF"}
-#' @slot horodate = Object of class \code{"RefHorodate"}
-#' @slot requete = Object of class \code{"RequeteODBCwheredate"}
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @seealso     Other Bilan Class
-#'	\code{\linkS4class{Bilan_lot}}
-#'	\code{\linkS4class{Bilan_poids_moyen}}
-#'	\code{\linkS4class{Bilan_stades_pigm}}	
-#'	\code{\linkS4class{Bilan_taille}}
-#'	\code{\linkS4class{BilanConditionEnv}}
-#'	\code{\linkS4class{BilanEspeces}}
-#'	\code{\linkS4class{BilanFonctionnementDC}}
-#'	\code{\linkS4class{BilanFonctionnementDF}}	
-#'	\code{\linkS4class{BilanMigration}}	
-#'	\code{\linkS4class{BilanMigrationConditionEnv}}
-#'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
-#'	\code{\linkS4class{BilanMigrationPar}}	
-#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
+#' Class "BilanFonctionnementDF" Report fishway work
+#' 
+#' The DF (Dispositif de Franchissement) is a fishway. It may be automated and
+#' work only at certain times This report allows to see the detail of its work.
+#' 
+#' 
+#' @name BilanFonctionnementDF-class
+#' @aliases BilanFonctionnementDF-class BilanFonctionnementDF
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanFonctionnementDF")}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references ~put references to the literature/web site here ~
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("BilanFonctionnementDF")
+#' 
+#' @exportClass 
 setClass(Class="BilanFonctionnementDF",
 		representation= representation(data="data.frame",
 				df="RefDF",

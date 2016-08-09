@@ -1,22 +1,48 @@
 # Nom fichier :        Bilan_stades_pigm.R    (classe)
 
-#' @name Bilan_stades_pigm
-#' @title Bilan_stades_pigm Bilan class 
-#' @note This class is displayed by interface_bilan_stades_pigm
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @slot data="data.frame"
-#' @slot datatempsal="data.frame"  format [,c("date","temperature","salinite")]
-#' @slot phi tableau des temps pigmentaires
-#' @slot Vparm parametres du modele tels qu'utilises dans GEMAC
-#' @slot dc="RefDC"
-#' @slot horodate="RefHorodate"
-#' @slot requete="RequeteODBCwheredate"
-#' @slot lmax="Refchoix"
-#' @slot options="RefCheckBox"
-#' @method connect
-#' @method charge
-#' @source BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model to predict the effect of temperature and salinity on glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67, 995-1009.
-#' @expamples objet=new("bilan_stades_pigm")
+#' Class "Bilan_stades_pigm" Bilan class
+#' 
+#' The pigment stages analysis has been developed to allow to analyze the
+#' change in pigment stage structure for glass eel (Anguilla anguilla).  The
+#' class uses the parameters calibrated by Briand et al. , 2005 to
+#' backcalculate the probable date when the glass eels arrived in the estuary
+#' (i.e. at a fully transparent stage VB. The evolution of pigment stages is
+#' modeled with gamma functions which use a pigment time calculated from daily
+#' temperatures and salinities.  LThe temperatures has a major influence on the
+#' glass eel pigment stage evolution.
+#' 
+#' 
+#' @name Bilan_stades_pigm-class
+#' @aliases Bilan_stades_pigm-class Bilan_stades_pigm fntablestade
+
+#' @note This class is displayed by interface_bilan_stades_pigm, The class uses
+#' temperature (from an abiotic measure station) and mean salinity to calculate
+#' the change towards one stage
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Bilan_stades_pigm", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}} \code{\link{fnstade}}
+#' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
+#' stage-structured model to predict the effect of temperature and salinity on
+#' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
+#' 995-1009.
+#' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
+#' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
+#' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("Bilan_stades_pigm")
+#' @exportClass 
 setClass(Class="Bilan_stades_pigm",
 		representation= representation(data="data.frame",
 				datatempsal="data.frame",
@@ -228,8 +254,20 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple... 
 
+
+
+
+
 #' plots polygons
-#' @returnType class Bilan_stades_pigm
+#' 
+#' plots polygons
+#' 
+#' 
+#' @param xmat a matrix of x values of the polygons
+#' @param ymat a matrix where the number of rows is of the same length as xmat
+#' @param ordre the order in which the polygons will be drawn
+#' @param couleur a color vector
+#' @param \dots additional arguments passed to the function
 #' @return Bilan_stades_pigm with slots filled with user choice
 #' @author Laurent Beaulaton \email{laurent.beaulaton@@onema.fr}
 surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
@@ -256,11 +294,21 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 # parametres du modele
 
 
+
+
+
+
+
+
 #' Function to calculate pigmentation times.
+#' 
+#' Function to calculate pigmentation times.
+#' 
+#' 
 #' @param parm parameters of the model
 #' @param datatempsal data.frame containing temperatures and salinities
 #' @return list("dates"=duree,"phi_jour"=phi_jour)
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funphi<-function(parm,datatempsal){
 	temperature=datatempsal$temperature
 	salinity=datatempsal$salinite
@@ -271,32 +319,41 @@ funphi<-function(parm,datatempsal){
 	return(list("dates"=duree,"phi_jour"=phi_jour))
 }
 
-#' function drawing polygon from gamma law describing pigmentation change in                                                                                                             
-#' glass eel                                                                                                                                                                                                                                                                                                                                                                
-#' function calculating from the gamma law the coordinates x and y allowing to                                                                                                           
-#' draw a polygon, the function fnstade may be used to draw a polygon(neg=TRUE)                                                                                                          
-#' or simply return the values from gamma function of each stage                                                                                                                         
-#' @param par1 parameter describing the gamma law for the first stage                                                                                                                    
-#' @param par2 parameter of the gamma law for the second stage                                                                                                                           
-#' @param phicum cumulated pigmentation times for test : phicum=seq(0,20,                                                                                                                
-#' length.out=100)                                                                                                                                                                       
-#' @param phidates dates                                                                                                                                                                 
-#' @param VB if TRUE, then calculation for first stage VB which differs from                                                                                                             
-#' the others                                                                                                                                                                            
-#' @param neg if FALSE then calculation of stages according to the pigmentation                                                                                                          
-#' time                                                                                                                                                                                  
-#' @param lmax scale parameter for the graphical function, lmax=0 allows to                                                                                                              
-#' draw the real values of abundances per stage along time, lmax=1 or 0.8 will                                                                                                          
-#' draw all stages at the same scale                                                                                                                                                     
-#' @return a list with x and y                                                                                                                                                         
-#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
-#' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
-#' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A                                                                                                                
-#' stage-structured model to predict the effect of temperature and salinity on                                                                                                           
-#' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,                                                                                                                
-#' 995-1009.                                                                                                                                                                             
-#' \\url{http://www3.interscience.wiley.com/journal/118686679/abstract}                                                                                                                  
-#' \\url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
+
+
+
+
+
+
+#' function drawing polygon from gamma law describing pigmentation change in
+#' glass eel
+#' 
+#' function calculating from the gamma law the coordinates x and y allowing to
+#' draw a polygon, the function fnstade may be used to draw a polygon(neg=TRUE)
+#' or simply return the values from gamma function of each stage
+#' 
+#' 
+#' @param par1 parameter describing the gamma law for the first stage
+#' @param par2 parameter of the gamma law for the second stage
+#' @param phicum cumulated pigmentation times for test : phicum=seq(0,20,
+#' length.out=100)
+#' @param phidates dates
+#' @param VB if TRUE, then calculation for first stage VB which differs from
+#' the others
+#' @param neg if FALSE then calculation of stages according to the pigmentation
+#' time
+#' @param lmax scale parameter for the graphical function, lmax=0 allows to
+#' draw the real values of abundances per stage along time, lmax=1 or 0.8 will
+#' draw all stages at the same scale
+#' @return a list with x and y
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso \code{\linkS4class{Bilan_stades_pigm}}
+#' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
+#' stage-structured model to predict the effect of temperature and salinity on
+#' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
+#' 995-1009.
+#' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
+#' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
 fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	if (neg){
 		phidates=as.numeric(as.POSIXct(strptime(phidates,format="%Y-%m-%d")))
@@ -326,32 +383,52 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	return(list("x"=x,"y"=y))
 }
 
-#' fundist eturns the value of obj where more than 50 percent of the distribution objc is reached
-#' @param obj 
-#' @param objc 
-#' @return d50
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+
+
+
+
+
+
+#' used by \code{fundist} function, returns the value of obj where more than 50
+#' percent of the distribution objc is reached
+#' 
+#' Allows to point the middle of the gamma distribution for each stage
+#' 
+#' 
+#' @param obj the pigment time scale
+#' @param objc cumulated gamma curve
+#' @return d50 the center of the distribution for the different stages
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 fun50<-function(obj,objc){
 	d50<-obj[objc>0.5][1]
 	return(d50)
 }
+
+
+
+
+
+
 #' fundist =function to calculate the median of the distribution of pigment
 #' stages
 #' 
+#' see code
 #' 
 #' 
-#' @usage fundist(Vparm, phicum, graph = TRUE, lmax = 1)
-#' @param lmax scale parameterof the graphical function see fnstades
+#' @param Vparm parameters for the gamma functions describing pigment stages
+#' @param phicum cumulated pigmentation time
 #' @param graph logical, to see the curves type graph = TRUE
+#' @param lmax scale parameter of the graphical function see \link{fnstade}
 #' @note pigment stage functions are not standard statistical distribution,
-#' calculating where 50% of the distribution lies is done with fun50 this
+#' calculating where 50\% of the distribution lies is done with fun50 this
 #' function uses \link{fnstade} to calculate the values of pigment times on a
 #' regular scale (phicum)
+#' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 #' @examples
 #' 
-#' \dontrun{
 #' Vparm<-list()
-#'  below param for briand et al.,2005 pigmentation function in glass eel
+#' # below param for briand et al.,2005 pigmentation function in glass eel
 #' Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
 #' Vparm$pigment_stage$p2<-0.835
 #' Vparm$pigment_stage$p3<-1.56
@@ -368,7 +445,6 @@ fun50<-function(obj,objc){
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=0)
 #' plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
 #' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[2]]),col="firebrick") 
-#' }
 #' 
 fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VB=fnstade(par1=Vparm$pigment_stage[[1]],VB=TRUE,phicum=phicum,neg=FALSE,lmax=lmax)
@@ -404,11 +480,22 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	return(out)   
 }
 
-#' @title main launching function for class Bilan_stades_pigm
-#' Function with handler which calls charge (and thus connect) and calculates the title
-#' @param h 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+
+
+
+
+
+
+#' main launching function for class Bilan_stades_pigm
+#' 
+#' Function with handler which calls charge (and thus connect) and calculates
+#' the title
+#' 
+#' 
+#' @param h a handler
+#' @param additional arguments
+#' @param list() additional arguments
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funcalcbilan_stades_pigm<-function(h,...){
 	bilan_stades_pigm<-charge(bilan_stades_pigm)
 	if (nrow(bilan_stades_pigm@datatempsal)>0){
@@ -449,15 +536,18 @@ hfungraphstades=function(h,...){
 	)
 }
 
+
+
+
+
+
+
 #' Main function for class Bilan_stades_pigm allowing to calculate and then
 #' draw the graphs
 #' 
 #' see R code for details
 #' 
 #' 
-#' @usage fungraphstades(tablestades, retrocalcul = TRUE, datatempsal, points =
-#' TRUE, nb = TRUE, graphstades = TRUE, lmax = 1, labelretro, labelgraphstades,
-#' phi, maxVIA3 = 10, dates, Vparm, effectifs)
 #' @param tablestades a data frame with stages VB VIA0 VIA1 VIA2 VIA3
 #' @param retrocalcul Logical TRUE or FALSE, do you want to retrocalculate when
 #' the glass eel have arrived in the estuary, in this case provide datatempsal,
@@ -477,12 +567,13 @@ hfungraphstades=function(h,...){
 #' graphical interface
 #' @param labelgraphstades label for stage graph, can be changed in the
 #' graphical interface
-#' @param phi table of pigmentation time and dates format "%d/%m/%Y"
+#' @param phi table of pigmentation time and dates format "\%d/\%m/\%Y"
 #' @param maxVIA3 10, maximum value of pigment time for VIA3, limits the
 #' duration of this longer stage
-#' @param dates
+#' @param dates dates
 #' @param Vparm parameters for pigment stage function
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @param effectifs logical : do you want to display numbers on the graph
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraphstades<-function(
 		tablestades,
 		retrocalcul=TRUE,  # deuxieme partie du graphe dans ce cas fournir datatempsal
@@ -703,9 +794,22 @@ fungraphgg=function(h,...){
 }
 
 
-#' Fonction handler qui retourne le titre du graphique apres le choix dans la date
-#' @param h 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+
+
+
+
+
+
+#' Fonction handler qui retourne le titre du graphique apres le choix dans la
+#' date
+#' 
+#' Fonction handler qui retourne le titre du graphique apres le choix dans la
+#' date
+#' 
+#' 
+#' @param h A handler
+#' @param ... Other arguments passed to the function
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtitle_bilan_stades_pigm=function(h,...){
 	wintitle=gwindow()
 	hgettext=function(h,...){

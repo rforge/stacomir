@@ -1,20 +1,30 @@
 # function fn_EcritBilanJournalier.r
-#' fn_EcritBilanJournier writes the daily migration in the t_bilanmigrationjournalier_bjo table
-#' @note the user is asked whether or not he wants to overwrite data, if no data are present in the database, the import is done anyway
-#' @param bilanMigration 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+
+
+
+
+
+
+#' fn_EcritBilanJournier writes the daily migration in the
+#' t_bilanmigrationjournalier_bjo table
+#' 
+#' 
+#' 
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
+#' @note the user is asked whether or not he wants to overwrite data, if no
+#' data are present in the database, the import is done anyway
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fn_EcritBilanJournalier<-function(bilanMigration){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau
 	# je cherche les colonnes que je ne veux pas retenir
 	data=bilanMigration@data	
 	jour_dans_lannee_non_nuls=strftime(bilanMigration@duree,'%Y-%m-%d %H:%M:%S')[data$Effectif_total!=0]
 	data=data[data$Effectif_total!=0,]
-	col_a_retirer=match(c("No.pas","Type_de_quantite"),colnames(data))
+	col_a_retirer=match(c("No.pas","type_de_quantite"),colnames(data))
 	data=data[,-col_a_retirer]
 	data$"Taux_d_echappement"[data$Taux_d_echappement==-1]<-NA 
-	data$Coef_conversion[data$"Coef_conversion"==1]<-NA 
-	peuventpaszero=match(c("Taux_d_echappement","Coef_conversion"),colnames(data))
+	data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
+	peuventpaszero=match(c("Taux_d_echappement","coe_valeur_coefficient"),colnames(data))
 	data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
 	t_bilanmigrationjournalier_bjo=cbind(bilanMigration@dc@dc_selectionne,
 			bilanMigration@taxons@data$tax_code,

@@ -3,18 +3,45 @@
 # Date de creation :   22/03/2009 21:14:14
 
 #TODO  selection de plusieurs caracteristiques
+#' Class "Refpar"
+#' 
+#' Class enabling to load the list of parameters and select one of them
+#' 
+#' 
+#' @name Refpar-class
+#' @aliases Refpar Refpar-class
 
-#' @title Refpar referential class choose a parameter
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Refpar", data)}.  \describe{ \item{list("data")}{Object of class
+#' \code{"data.frame"} ~ All the parameters stored in the
+#' database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
+#' stored in the database} }
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
 #' @slot data="data.frame" the list of parameters
-#' @expamples objet=new("Refpar")
+#' @family Referential objects
+
+#' @examples
+#' 
+#' showClass("Refpar")
+#' 
+
+#' @examples objet=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
 
 #' Loading method for Repar referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("Refpar")
 #' charge(objet)
 setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
@@ -30,7 +57,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("Refpar")
 #' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
 setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
@@ -56,7 +83,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' @note this method choix is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples  
+#' @examples  
 #'  objet=new("Refpar")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)

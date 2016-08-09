@@ -1,10 +1,17 @@
 # Nom fichier :        RefAnnee(classe)
 
+
+
+
+
 #' validite_Annee tests for validity within the class
-#' @param object 
-#' @returnType logical
+#' 
+#' validite_Annee tests for validity within the class
+#' 
+#' 
+#' @param object An object of class \code{\linkS4class{RefAnnee}}
 #' @return the test for the object Refannee
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 validite_Annee=function(object)
 {
 	rep1= class(object@data)=="data.frame"
@@ -14,12 +21,31 @@ validite_Annee=function(object)
 }
 #definition de la classe
 
-#' @title RefAnnee referencial class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @slot data="data.frame" the list of parameters
+#' @title RefAnnee referential class to choose years
+#' @name RefAnnee-class
+#' @aliases RefAnnee-class RefAnnee
+
+#' #' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("RefAnnee", data=data.frame(), annee_selectionnee=numeric())}.
+#'#' @slot data="data.frame" the list of parameters
+#' @slot annee_selectionnee="numeric"
 #' @method charge
 #' @method choix
-#' @expamples objet=new("RefAnnee")
+#'  @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
+#' @family Referential objects
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @examples
+#' 
+#' showClass("RefAnnee")
+#' 
 setClass(Class="RefAnnee",representation=
 				representation(data="data.frame",annee_selectionnee="numeric"),
 		validity=validite_Annee,
@@ -29,7 +55,7 @@ setClass(Class="RefAnnee",representation=
 #' @returnType S4 object
 #' @return An S4 object of class RefAnnee
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples   objet=new("RefAnnee")
+#' @examples   objet=new("RefAnnee")
 #' charge(objet)
 #'  validObject( annee)
 #' showMethods("charge")
@@ -50,7 +76,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 #' @param funoutlabel the label that appears in funout
 #' @param titleFrame title for the frame
 #' @param preselect the number of the year selected in the gdroplist (integer)
-#' @expamples  objet=new("RefAnnee")
+#' @examples  objet=new("RefAnnee")
 #' objet<-charge(objet)
 #' win=gwindow(title="test refAnnee")
 #' group=ggroup(container=win,horizontal=FALSE)

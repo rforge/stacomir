@@ -5,16 +5,38 @@
 # Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   31/03/2008 17:21:30
 
-#' @title Refstades referential class to load and choose the list of taxa
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "RefTaxon"
+#' 
+#' Races of a fish, and enables to select one of them
+#' 
+#' 
+#' @name RefTaxon-class
+#' @aliases RefTaxon-class RefTaxon
+
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("RefTaxon", ...)}.  \describe{ \item{list("data")}{Object of class
+#' \code{"data.frame"} ~ Races available in the database}\item{:}{Object of
+#' class \code{"data.frame"} ~ Races available in the database} }
 #' @slot data="data.frame"
-#' @expamples \dontrun {objet=new("RefTaxon")}
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("RefTaxon")
 setClass(Class="RefTaxon",representation= representation(data="data.frame" ))
 #' Loading method for RefTaxon referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefTaxon
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples \dontrun {
+#' @examples \dontrun {
 #'  objet=new("RefTaxon")
 #'  charge(objet)}
 setMethod("charge",signature=signature("RefTaxon"),definition=function(objet) {
@@ -31,7 +53,7 @@ setMethod("charge",signature=signature("RefTaxon"),definition=function(objet) {
 #' @return An S4 object of class RefTaxon
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
 #' @exportMethod charge_avec_filtre
-#' @expamples \dontrun {
+#' @examples \dontrun {
 #'  dc_selectionne=6
 #'  objet=new("RefTaxon")
 #'  charge_avec_filtre(objet,dc_selectionne=dc_selectionne)}
@@ -52,7 +74,7 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 		})
 #' Choice method for Reftaxon referential objects
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples  \dontrun {
+#' @examples  \dontrun {
 #'  objet=new("RefTaxon")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
@@ -101,9 +123,12 @@ setMethod("choixmult",signature=signature("RefTaxon"),definition=function(objet,
 					assign("refTaxons",objet,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefTaxon.4)
 					if (!is.null(objetBilan)) {
-						objetBilan@stades<<-charge_avec_filtre(objet=objetBilan@stades,
+						objetBilan@taxons<-objet
+						objetBilan@stades<-charge_avec_filtre(objet=objetBilan@stades,
 								dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
-								taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code)
+								taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code
+								)
+						assign(get("objetBilan",envir=envir_stacomi),objetBilan,envir=envir_stacomi)
 						# suppresses all tab larger than 3 (taxon)
 						if (length(notebook)>3){
 							for (i in 4:length(notebook)){
@@ -167,6 +192,40 @@ setMethod("choixmult",signature=signature("RefTaxon"),definition=function(objet,
 						})
 				gbutton("ok", cont = grouptaxon, handler = htax)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
+				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
 			}
+		})
+
+
+#' load method for RefTaxon
+#' 
+#' the load method is intented to have the same behaviour as choix (which creates a
+#' widget in the graphical interface) but from the command line. The values passed to the load function
+#' for taxon can be either numeric (2038 = Anguilla anguilla) or character.  
+#' @param taxons the vector of taxon, can be either code (numeric) or latin name
+#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @family load functions
+#' @example
+#'objet=new("RefTaxon")
+#'objet<-charge(objet)
+#'objetBilan=new("BilanMigrationMult")
+#' load(objet=objet,objetBilan=objetBilan,"Anguilla anguilla")
+
+setMethod("load",signature=signature("RefTaxon"),definition=function(objet,taxons) {
+			if (is.null(taxons)) {
+				funout(get("msg",envir=envir_stacomi)$RefTaxon.5,arret=TRUE)
+			} else	if (class(taxons)=="character"){	
+				libellemanquants<-taxons[!taxons%in%objet@data$tax_nom_latin]
+				if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,str_c(libellemanquants,collapse=", ")))
+				objet@data<-objet@data[objet@data$tax_nom_latin%in%taxons,]
+			} else if (class(taxons)=="numeric"){
+				codemanquants<-taxons[!taxons%in%objet@data$tax_code]
+				if (length(codemanquants)>0) stop(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,str_c(codemanquants,collapse=", ")))
+				objet@data<-objet@data[objet@data$tax_code%in%taxons,]
+			}
+			if (nrow(objet@data)==0 )	{
+				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
+			}
+			assign("refTaxon",objet,envir=envir_stacomi)
+			return(objet)
 		})

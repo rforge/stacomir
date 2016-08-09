@@ -59,8 +59,8 @@ rm(UNE_SECONDE,UNE_MINUTE,DIX_MINUTES,QUINZE_MINUTES,TRENTE_MINUTES,UNE_HEURE,DO
 validite_PasDeTemps=function(object)
 {
   retValue=NULL
-	rep1= class(object@dateDebut)[1]=="POSIXt"
-	if (!rep1) retValue="object@dateDebut is not of class POSIXt"  
+	rep1= class(object@dateDebut)[1]=="POSIXlt"
+	if (!rep1) retValue="object@dateDebut is not of class POSIXlt"  
 	rep2=length(object@dureePas)==1
 	if (!rep2) retValue=paste(retValue,"length(object@dureePas) !=1") 
 	rep3=length(object@nbPas)==1
@@ -70,9 +70,44 @@ validite_PasDeTemps=function(object)
 	return(ifelse(rep1 & rep2 & rep3 & rep4,TRUE,retValue))
 }
 #definition de la classe
+#' Class "PasDeTemps"
+#' 
+#' Describes a time step
+#' 
+#' 
+#' @name PasDeTemps-class
+#' @aliases PasDeTemps PasDeTemps-class currentDateDebut,PasDeTemps-method
+#' currentDateDebut currentDateFin,PasDeTemps-method currentDateFin
+#' DateFin,PasDeTemps-method DateFin LesPasDeTemps ValeurPasDeTemps
+#' getAnnees,PasDeTemps-method getAnnees getdateDebut,PasDeTemps-method
+#' getdateDebut getLibellesPas,PasDeTemps-method getLibellesPas
+#' getnoPasCourant,PasDeTemps-method getnoPasCourant
+#' setdateDebut,PasDeTemps-method setdateDebut suivant,PasDeTemps-method
+#' suivant validite_PasDeTemps dureePas
 
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("PasDeTemps",
+#' dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
+#' \describe{ 
+#' \item{list("dateDebut")}{Object of class \code{"POSIXt"} Starting
+#' date }
+#' \item{:}{Object of class \code{"POSIXt"} Starting date }
+#' \item{list("dureePas")}{Object of class \code{"numeric"} Step length
+#' }\item{:}{Object of class \code{"numeric"} Step length }
+#' \item{list("nbPas")}{Object of class \code{"numeric"} Number of steps
+#' }\item{:}{Object of class \code{"numeric"} Number of steps }
+#' \item{list("noPasCourant")}{Object of class \code{"integer"} Number of the
+#' current step }\item{:}{Object of class \code{"integer"} Number of the
+#' current step } }
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso \code{\linkS4class{PasDeTempsJournalier}}
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("PasDeTemps")
+#' 
 setClass(Class="PasDeTemps",representation=
-				representation(dateDebut="POSIXt",dureePas="numeric",nbPas="numeric",noPasCourant="integer"),
+				representation(dateDebut="POSIXlt",dureePas="numeric",nbPas="numeric",noPasCourant="integer"),
 		validity=validite_PasDeTemps,
 		prototype=prototype(dateDebut=as.POSIXlt(trunc.POSIXt(Sys.time(),"year")),
 				dureePas=as.numeric(86400),
@@ -83,16 +118,32 @@ setClass(Class="PasDeTemps",representation=
 
 validite_PasDeTempsChar=function(object)
 {
-	rep1= class(object@dateDebut)[1]=="POSIXt"
+	rep1= class(object@dateDebut)[1]=="POSIXlt"
 	rep2=length(object@dureePas)==1
 	rep3=length(object@nbPas)==1
 	rep4=length(object@noPasCourant)==1
 	rep5= object@dureePas%in%LesPasDeTemps[,"LabelPasDeTemps"]
 	return(ifelse(rep1 & rep2 & rep3 & rep4 & rep5,TRUE,c(1:5)[!c(rep1, rep2, rep3, rep4,rep5)]))
 }
+#' Class "PasDeTempsChar"
+#' 
+#' Character to represent a PasDeTemps
+#' 
+#' 
+#' @name PasDeTempsChar-class
+#' @aliases PasDeTempsChar PasDeTempsChar-class validite_PasDeTempsChar
 
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("PasDeTempsChar", \dots{})}
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso \code{\linkS4class{PasDeTemps}}
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("PasDeTempsChar")
+#' 
 setClass(Class="PasDeTempsChar",representation=
-				representation(dateDebut="POSIXt",dureePas="character",nbPas="numeric",noPasCourant="integer"),
+				representation(dateDebut="POSIXlt",dureePas="character",nbPas="numeric",noPasCourant="integer"),
 		validity=validite_PasDeTempsChar,
 		prototype=prototype(dateDebut=as.POSIXlt(strptime("2008-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S"),tz="GMT"),
 				dureePas=as.character("1 jour"),

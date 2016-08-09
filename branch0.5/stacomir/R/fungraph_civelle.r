@@ -3,6 +3,12 @@
 # Description :       graph pour bilan migration journalier civelles
 
 
+
+
+
+
+
+
 #' Graph function for glass eel migration. Differs from fungraph as it does not
 #' draw the ggplot graph for month
 #' 
@@ -10,16 +16,18 @@
 #' eel have been counted through weight or numbers
 #' 
 #' 
-#' @usage fungraph_civelle(bilanMigration, table, duree, taxon, stade)
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
-#' @param table=tableau a data frame with the results
+#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}} or an
+#' #' object of class \code{\linkS4class{BilanMigrationMult}}
+#' @param table a data frame with the results
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
-fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
+#' @param dc the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 # calcul des variables
+	# pour adapter aux bilanMigrationMult, ligne par défaut...
+	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
 	mois= months(duree)
 	jour= strftime(as.POSIXlt(duree),"%j")
@@ -30,9 +38,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	fin=unclass(as.Date(duree[max(index)]))[[1]]
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
-	
-	bilanMigration<-bilanMigration
-	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne])
+	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n"))
 	###################################
 	# Graph annuel couvrant sequence >0
@@ -45,7 +51,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	#par("bg"=gray(0.8))
 	par("mar"=c(3, 4, 3, 2) + 0.1)
 	#mypalette<-rainbow(20)
-	plot(as.Date(duree),eff/1000,
+	plot(as.Date(duree,"Europe/Paris"),eff/1000,
 			col=mypalette[8],
 			type="h",
 			xlim=c(debut,fin),
@@ -75,7 +81,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.15,
-			labels=paste(round(sum(table$poids_depuis_effectifs)/1000,2)," kg"),
+			labels=paste(round(sum(table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette[8], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8 ,
@@ -85,7 +91,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			adj=1)
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
-			labels=paste(round(sum(table$Poids_total)/1000,2)," kg"),
+			labels=paste(round(sum(table$Poids_total,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette[10], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8,
@@ -95,7 +101,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			adj=1)
 	text(  x=debut+3+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.1,
-			labels=paste(round(sum(table$Poids_total,table$poids_depuis_effectifs)/1000,2)," kg"),
+			labels=paste(round(sum(table$Poids_total,table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col="black", 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8,
@@ -120,7 +126,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			"AND ope_date_fin <= '" ,
 			as.Date(duree[max(index)]),
 			" 00:00:00' ",
-			"AND ope_dic_identifiant=",bilanMigration@dc@dc_selectionne,
+			"AND ope_dic_identifiant=",dc,
 			"ORDER BY ope_date_debut; ",sep = "")
 	t_operation_ope<-connect(req)@query
 	# sortie de commentaires
@@ -132,13 +138,13 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	
 
 	req@sql<-fn_sql_dis(per_dis_identifiant=
-					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne],
+					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
 	fonctionnementDF<-connect(req)@query
 	
 	
-	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@dc_selectionne,
+	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
 	fonctionnementDC<-connect(req)@query
@@ -246,7 +252,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         
@@ -344,7 +350,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         

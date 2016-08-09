@@ -54,9 +54,9 @@
       \item \code{\linkS4class{BilanMigrationPar}}{\code{hbilanMigrationPargraph} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=1}
       \item \code{\linkS4class{BilanMigrationPar}}{\code{hbilanMigrationPargraph2} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=2}
       \item \code{\linkS4class{Bilan_stades_pigm}}{\code{hfungraphstades} Calls the function \code{fungraphstades}}
-      \item \code{\linkS4class{Bilan_lot}}{\code{fundensityBilan_lot} uses ggplot to draw ribbon plots \url{http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette\%20BilanLot}}
-      \item \code{\linkS4class{Bilan_lot}}{\code{funBoxplotBilan_lot} uses ggplot to create a boxplot, help in \url{http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette\%20BilanLot}}
-      \item \code{\linkS4class{Bilan_lot}}{\code{funpointBilan_lot} uses ggplot to draw dot plots \url{http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette\%20BilanLot}}
+      \item \code{\linkS4class{Bilan_lot}}{\code{fundensityBilan_lot} uses ggplot to draw ribbon plots \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot}}
+      \item \code{\linkS4class{Bilan_lot}}{\code{funBoxplotBilan_lot} uses ggplot to create a boxplot, help in \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot}}
+      \item \code{\linkS4class{Bilan_lot}}{\code{funpointBilan_lot} uses ggplot to draw dot plots \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot}}
  
       \item \code{\linkS4class{Bilan_taille}}{\code{fungraphInteract_tail} interactive plot for size}
       \item \code{\linkS4class{Bilan_stades_pigm}}{\code{fungraphgg}  interactive plot for ggplot2}

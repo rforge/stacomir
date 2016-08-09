@@ -1,4 +1,4 @@
-\name{Bilan_lot-class}
+\name{Bilan_lot}
 \docType{class}
 \alias{Bilan_lot-class}
 \alias{Bilan_lot}
@@ -42,7 +42,7 @@ Objects can be created by calls of the form \code{new("Bilan_lot", ...)}
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette\%20BilanLot} }
+\references{ \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot} }
 \examples{
 showClass("Bilan_lot")
 objet=new("Bilan_lot")

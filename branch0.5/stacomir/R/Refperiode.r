@@ -1,10 +1,23 @@
 # Nom fichier :        Ref_periode.R
 
-#' @title Refperiode referential class to choose a period
+#' Class "Refperiode" referential class
+#' 
+#' Refperiode referential class to choose a period
+#' 
+#' 
+#' @name Refperiode-class
+#' @aliases Refperiode-class Refperiode
+
 #' @note pgval are used by seq.POSIXT
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Refperiode", ...)}.
+#' @keywords classes
 #' @slot data="data.frame" providing correspondance between period and their english names
-#' @expamples objet = new("Refperiode")
+#' @family Referential objects
+#' @examples
+#' 
+#' showClass("Refperiode")
+#' new("Refperiode")
 setClass(Class="Refperiode",representation=
       representation(
           data="data.frame"          
@@ -18,7 +31,7 @@ setClass(Class="Refperiode",representation=
 #' @returnType "character"
 #' @return "a character to be used in seq.POSIXt
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  getvalue(new("Refperiode"),"quinzaine")
 setMethod("getvalue",signature=signature("Refperiode"), definition=function(objet,id,...)
   {return(as.character(objet@data[objet@data$id==id,"pgval"]))

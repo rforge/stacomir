@@ -12,6 +12,22 @@
 #* Modifications :
 
 
+
+
+
+
+
+
+#' funSousListeBilanMigration
+#' 
+#' workhorse function for bilanMigration. Calculates the number for a stage and
+#' a taxa per day.  The operation for the fishway is never from 00:00 to 00:00
+#' so the number per day is calculated according to the ration between the
+#' duration of the operation and the duration of the day. This function will
+#' allow daily reports to be saved into the database when graph is launched
+#' 
+#' 
+#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
 funSousListeBilanMigration=function(bilanMigration) {
 	# *********************
 	# Boucle sur chacune des periodes du pas de temps
@@ -309,28 +325,28 @@ funSousListeBilanMigration=function(bilanMigration) {
 		if (!exists("tablecalcmig")){
 			tablecalcmig=data.frame(
 					"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-					"Debut_pas"=debutPas       ,
-					"Fin_pas"=finPas           ,
-					"Mesure"=effectif_MESURE   ,
-					"Calcule"=effectif_CALCULE  ,
-					"Expert"=effectif_EXPERT    ,
-					"Ponctuel"=effectif_PONCTUEL  ,
+					"debut_pas"=debutPas       ,
+					"fin_pas"=finPas           ,
+					"MESURE"=effectif_MESURE   ,
+					"CALCULE"=effectif_CALCULE  ,
+					"EXPERT"=effectif_EXPERT    ,
+					"PONCTUEL"=effectif_PONCTUEL  ,
 					"type_de_quantite"="effectif",    # dans le cas suivant par exemple type = "poids"
 					"taux_d_echappement" = tauxEch,
-					"Coef_conversion"=as.numeric(NA))
+					"coe_valeur_coefficient"=as.numeric(NA))
 		} else   {
 			tablecalcmig=rbind(tablecalcmig,
 					data.frame(
 							"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-							"Debut_pas"=debutPas       ,
-							"Fin_pas"=finPas           ,
-							"Mesure"=effectif_MESURE   ,
-							"Calcule"=effectif_CALCULE  ,
-							"Expert"=effectif_EXPERT    ,
-							"Ponctuel"=effectif_PONCTUEL  ,
+							"debut_pas"=debutPas       ,
+							"fin_pas"=finPas           ,
+							"MESURE"=effectif_MESURE   ,
+							"CALCULE"=effectif_CALCULE  ,
+							"EXPERT"=effectif_EXPERT    ,
+							"PONCTUEL"=effectif_PONCTUEL  ,
 							"type_de_quantite"="effectif",    # dans le cas suivant par exemple type = "poids"
 							"taux_d_echappement" = tauxEch,
-							"Coef_conversion"=as.numeric(NA)))
+							"coe_valeur_coefficient"=as.numeric(NA)))
 		}
 		
 		# ---------------------
@@ -389,15 +405,15 @@ funSousListeBilanMigration=function(bilanMigration) {
 				tablecalcmig=rbind(tablecalcmig,
 						data.frame(
 								"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-								"Debut_pas"=as.POSIXct(debutPas)       ,
-								"Fin_pas"=as.POSIXct(finPas)           ,
-								"Mesure"=quantite_MESURE   ,
-								"Calcule"=quantite_CALCULE  ,
-								"Expert"=quantite_EXPERT    ,
-								"Ponctuel"=quantite_PONCTUEL  ,
+								"debut_pas"=as.POSIXct(debutPas)       ,
+								"fin_pas"=as.POSIXct(finPas)           ,
+								"MESURE"=quantite_MESURE   ,
+								"CALCULE"=quantite_CALCULE  ,
+								"EXPERT"=quantite_EXPERT    ,
+								"PONCTUEL"=quantite_PONCTUEL  ,
 								"type_de_quantite"=j,    # dans le cas suivant par exemple type = "poids"
 								"taux_d_echappement" = tauxEch,
-								"Coef_conversion"=ifelse( !is.null(lescoeff[[j]]), as.numeric(lescoeff[[j]]), NA) ))  #
+								"coe_valeur_coefficient"=ifelse( !is.null(lescoeff[[j]]), as.numeric(lescoeff[[j]]), NA) ))  #
 				
 			} # fin de la boucle d'ecriture par type de qte
 		}  else {# fin du if nrow>0

@@ -42,7 +42,7 @@ Objects can be created by calls of the form \code{new("Bilan_stades_pigm", ...)}
 BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A stage-structured model to predict the effect of temperature and salinity on glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67, 995-1009.
 \url{http://www3.interscience.wiley.com/journal/118686679/abstract} 
 \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.} 
-\url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
+\url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 }
 \author{Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}
 \note{This class is displayed by interface_bilan_stades_pigm, 

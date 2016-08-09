@@ -16,6 +16,20 @@
 # load(file="EXAMPLES/devt.Rdata")
 #@param  bilanMigrationPar
 #@return une liste de deux dataframe
+
+
+
+
+
+
+#' funSousListeBilanMigrationPar
+#' 
+#' see \code{funSousListeBilanMigration} This function is similar to
+#' bilanMigration but allows to count weights for a taxa and stage.
+#' 
+#' 
+#' @param bilanMigrationPar an objet of class
+#' \code{\linkS4class{BilanMigrationPar}}
 funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	
 	# *********************
@@ -387,8 +401,8 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		} 
 		j=nrow(tablecalcmig)+1
 		tablecalcmig[j,"No_pas"]=bilanMigrationPar@pasDeTemps@noPasCourant   
-		tablecalcmig[j,"Debut_pas"]=strftime(debutPas,format="%Y-%m-%d") # je passe en caractere sinon ne marche pas      
-		tablecalcmig[j,"Fin_pas"]=strftime(finPas,format="%Y-%m-%d")           
+		tablecalcmig[j,"debut_pas"]=strftime(debutPas,format="%Y-%m-%d") # je passe en caractere sinon ne marche pas      
+		tablecalcmig[j,"fin_pas"]=strftime(finPas,format="%Y-%m-%d")           
 		tablecalcmig[j,"taux_d_echappement"] = tauxEch
 		if (bilanMigrationPar@parqual@data$par_nom!="aucune") { # il existe des caracteristiques qualitatives de lot			
 			for (i in valeurs_qal){

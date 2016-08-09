@@ -51,7 +51,7 @@ Objects can be created by calls of the form \code{new("BilanMigration", dc=new("
 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 	\code{\linkS4class{BilanMigrationPar}}	
 }
-\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
+\references{ \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} }
 \examples{
 showClass("BilanMigration")
 bilanMigration= new("BilanMigration")

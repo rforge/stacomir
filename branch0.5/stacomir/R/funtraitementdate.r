@@ -1,19 +1,29 @@
 # Nom fichier :        funtraitementdate.R    (classe)
 
+
+
+
+
+
+
 #' This function extracts temporal characteristics from a dataframe
+#' 
+#' This function extracts temporal characteristics from a dataframe
+#' 
+#' 
 #' @param data a data frame containing a Date or POSIXt column
-#' @param nom_coldt 
-#' @param annee 
-#' @param mois 
-#' @param quinzaine 
-#' @param semaine 
-#' @param jour_an 
-#' @param jour_mois 
-#' @param heure 
-#' @returnType data.frame
-#' @return data 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @param nom_coldt the name of the column containing date or POSIXt entry to
+#' be processed
+#' @param annee logical do you want a column describing year to be added to the
+#' dataframe
+#' @param mois logical, add column with month
+#' @param quinzaine logical, add column with 15 days
+#' @param semaine logical, add column with weeks
+#' @param jour_an logical, add column with day of year
+#' @param jour_mois logical, add column with day of month
+#' @param heure logical, add column with hour
+#' @return data
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtraitementdate=function(data, # tableau de donnees à importer
 		nom_coldt, # nom de la colonne
 		annee=TRUE,

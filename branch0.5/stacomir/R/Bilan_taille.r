@@ -1,30 +1,41 @@
 # Nom fichier :        Bilantaille.R    (classe)
 
-#' class Bilan_taille
-#' #  Bilan_taille class This class allows to load the following quantitative sample characteristics : full size and forked tail size and video size.
-#' @note 
-#' Explanation of treatment:
-#' Eels trapped are usually screened and separated into groups, this is not good practise but still in use
-#' The groups used in stacomi are based on the selectivity curve according to the mesh, roughly the separation takes place at the L50 for Arzal
-#' So individuals might refer to one size class  (eg the size group of large eels)
-#' This affiliation is sought at the subsample level by a query to display on a single line two different characteristics size and size group
-#' Once the data are loaded, the program checks if the size class group is indicated at the sample or susample level
+#' Class "Bilan_taille" Bilan class
+#' 
+#' Bilan_taille class This class allows to load the following quantitative
+#' sample characteristics : full size, mostly used for yellow eels.
+#' 
+#' Eels trapped are usually screened and separated into groups, this is not
+#' good practise but still in use The groups used in stacomi are based on the
+#' selectivity curve according to the mesh, roughly the separation takes place
+#' at the L50 for Arzal So individuals might refer to one size class (eg the
+#' size group of large eels) This affiliation is sought at the subsample level
+#' by a query to display on a single line two different characteristics size
+#' and size group Once the data are loaded, the program checks if the size
+#' class group is indicated at the sample or susample level
+#' 
+#' @name Bilan_taille-class
+#' @aliases Bilan_taille-class Bilan_taille
 
-
-#' @slot data="data.frame"
-#' @slot dc="RefDC"
-#' @slot taxons="RefTaxon"
-#' @slot stades="RefStades"
-#' @slot parquan="Refparquan"
-#' @slot parqual="Refparqual"
-#' @slot horodate="RefHorodate"
-#' @slot requete="RequeteODBC"
-#' @slot datedebut="POSIXlt"
-#' @slot datefin="POSIXlt"
-#' @method connect
-#' @method charge
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Bilan_taille", ...)}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @keywords classes dynamic
+#' @examples
+#' 
+#' showClass("Bilan_taille")
+#' @exportClass 
 setClass(Class="Bilan_taille",
 		representation= representation(data="data.frame",
 				dc="RefDC",

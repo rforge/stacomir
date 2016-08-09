@@ -11,8 +11,20 @@
 #*
 #* Modifications :
 
-#' this functions performs the sum over the year
-#' attention this function does not count subsamples.
+
+
+
+
+
+
+#' this functions performs the sum over the year attention this function does
+#' not count subsamples.
+#' 
+#' this functions performs the sum over the year attention this function does
+#' not count subsamples.
+#' 
+#' 
+#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
 funBilanMigrationAnnuel=function(bilanMigration) {
 	# *********************
 	# Boucle sur chacune des periodes du pas de temps

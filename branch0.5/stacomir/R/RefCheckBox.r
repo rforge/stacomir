@@ -2,12 +2,35 @@
 
 #' @title RefCheckBox referencial class allows to choose for several parms with checkbox
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Class "RefCheckBox" RefCheckBox
+#' 
+#' referential class allows to choose for several parms with checkbox
+#' 
+#' 
+#' @name RefCheckBox-class
+
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
-#' @slot checked a vectore
-#' @expamples objet=new("RefCheckBox")
+#' @slot checked a vector
 #' @method charge
 #' @method choix
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("RefCheckBox", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @references ~put references to the literature/web site here ~
+#' @family Referential objects
+#' @keywords classes
+#' @examples
+#' 
+#' showClass("RefCheckBox")
 setClass(Class="RefCheckBox",representation= representation(title="character",labels="character",checked="logical"),
 		prototype=prototype(title="liste de choix",labels="choix",checked=FALSE))
 
@@ -15,7 +38,7 @@ setClass(Class="RefCheckBox",representation= representation(title="character",la
 #' @returnType S4 object
 #' @return An S4 object of class RefCheckBox
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #'  objet=new("RefCheckBox")
 #' charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,title,labels,checked) {
@@ -27,7 +50,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,
 		})
 #' Choice method for ReCheckBox referential objects
 #' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @expamples 
+#' @examples 
 #' objet=new("RefCheckBox")
 #' objet<- charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 #' win=gwindow(title="test RefCheckBox")
