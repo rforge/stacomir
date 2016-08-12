@@ -19,7 +19,7 @@ validite_ODBC=function(object)
 
 #' @title ConnectionODBC class 
 #' @note Mother class for connection, opens the connection but does not shut it
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot baseODBC="vector" (of length 3, character)
 #' @slot silent="logical"
 #' @slot etat="ANY" # can be -1 or string
@@ -42,7 +42,7 @@ setGeneric("connect",def=function(objet,...) standardGeneric("connect"))
 #' connect method for ConnectionODBC class
 #' @returnType ConnectionODBC S4 object
 #' @return a connection with slot filled
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @examples objet=new("ConnectionODBC")
 #' objet@baseODBC=baseODBC
 #' connect(objet)

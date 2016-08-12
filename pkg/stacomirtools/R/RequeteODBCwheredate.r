@@ -43,7 +43,7 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 #' @note method modified from v0.2.1240 to use the connect method of the mother class which in turn will use the method of the mother class
 #' @returnType S4 object
 #' @return An object of class RequeteODBCwheredate
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #' objet<-new("RequeteODBCwheredate")
 #' objet@baseODBC<-baseODBC

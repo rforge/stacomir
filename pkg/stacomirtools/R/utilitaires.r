@@ -14,7 +14,7 @@
 #' @param append is the file appended to the previous one ?
 #' @param digits 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=TRUE,digits=NULL,...){
 	data[is.na(data)]<-""
 	xt=xtable(data, caption=caption,digits=digits)
@@ -31,7 +31,7 @@ funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=
 #' @param new_variable_name 
 #' @returnType data.frame
 #' @return objet
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 chnames=function(objet,
 		old_variable_name,
@@ -51,7 +51,7 @@ chnames=function(objet,
 #' @param a 
 #' @returnType vector
 #' @return the index unique  values within a vector
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 induk=function(a){
 	sol=match(unique(a),a)     #index des valeurs uniques
@@ -63,7 +63,7 @@ induk=function(a){
 #' @param df a data.frame
 #' @returnType data.frame
 #' @return df
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 killfactor=function(df){
 	for (i in 1:ncol(df))
@@ -75,7 +75,7 @@ killfactor=function(df){
 
 #' ex fonction to write to excel, not used within the program but can still be used
 #' @param d 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 ex<-function(d=NULL){
 	if (is.null(d)){
@@ -92,7 +92,7 @@ ex<-function(d=NULL){
 #' @param x 
 #' @returnType logical
 #' @return a logical
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 is.odd=function (x) 
 {
@@ -112,7 +112,7 @@ is.odd=function (x)
 #' @param x 
 #' @returnType logical
 #' @return a logical
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 is.even=function (x) 
 {
@@ -131,7 +131,7 @@ is.even=function (x)
 
 #' Function to transform a ftable into dataframe but just keeping the counts works with ftable of dim 2
 #' @param tab 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 tab2df=function(tab){
 	if (length((attributes(tab)$dim))>2) stop("only works with tables of dim 2")
