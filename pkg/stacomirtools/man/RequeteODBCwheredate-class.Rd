@@ -41,7 +41,7 @@ Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBCwhere", distan
 }
 \section{Methods}{
   \describe{
-    \item{connect}{\code{signature(objet = "RequeteODBCwheredate")}: Connexion to the database}
+    \item{connect}{\code{signature(object = "RequeteODBCwheredate")}: Connexion to the database}
 	 }
 }
 

@@ -9,7 +9,7 @@
 #' @slot sql="character"
 #' @slot query="data.frame"
 #' @slot open=logical is the connection left open after the request ?
-#' @expamples objet=new("RequeteODBC")
+#' @expamples object=new("RequeteODBC")
 setClass(Class="RequeteODBC",
 		representation= representation(sql="character",query="data.frame",open="logical"),
 		prototype = list(silent=TRUE,open=FALSE),
@@ -17,18 +17,17 @@ setClass(Class="RequeteODBC",
 
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note assign("showmerequest",1,envir=envir_stacomi) permet d'afficher toutes les requetes passant par la classe connect
-#' @returnType S4 object
 #' @return An object of class RequeteODBC
 #' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
-#' objet=new("RequeteODBC")
-#' objet@open=TRUE
-#' objet@baseODBC=baseODBC
-#' objet@sql= "select * from t_lot_lot limit 100"
-#' objet<-connect(objet)
-#' odbcClose(objet@connection)
+#' object=new("RequeteODBC")
+#' object@open=TRUE
+#' object@baseODBC=baseODBC
+#' object@sql= "select * from t_lot_lot limit 100"
+#' object<-connect(object)
+#' odbcClose(object@connection)
 #' odbcCloseAll()
-setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet) {     
+setMethod("connect",signature=signature("RequeteODBC"),definition=function(object) {     
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
 			if (exists("envir_stacomi")){
 				if (exists("msg",envir_stacomi)){
@@ -84,53 +83,53 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objet
 
 			
 			# The connection might already be opened, we will avoid to go through there !
-			if (is.null(objet@connection)){ 				
-				if (length(objet@baseODBC)!=3)  {
+			if (is.null(object@connection)){ 				
+				if (length(object@baseODBC)!=3)  {
 					if (exists("baseODBC",envir=.GlobalEnv)) {
-						objet@baseODBC<-get("baseODBC",envir=.GlobalEnv)  
+						object@baseODBC<-get("baseODBC",envir=.GlobalEnv)  
 					} else {
 						funout(msg1,arret=TRUE)
 					}
 				}
 				# opening of ODBC connection
-				e=expression(channel <-odbcConnect(objet@baseODBC[1],
-								uid = objet@baseODBC[2],
-								pwd = objet@baseODBC[3],
+				e=expression(channel <-odbcConnect(object@baseODBC[1],
+								uid = object@baseODBC[2],
+								pwd = object@baseODBC[3],
 								case = "tolower",
 								believeNRows = FALSE))
-				if (!objet@silent) funout(paste(msg2,objet@baseODBC[1],"\n"))
+				if (!object@silent) funout(paste(msg2,object@baseODBC[1],"\n"))
 				# send the result of a try catch expression in
 				#the Currentconnection object ie a character vector
-				objet@connection<-tryCatch(eval(e), error=paste(msg3 ,objet@baseODBC)) 
-				# un objet S3 RODBC
-				if (class(objet@connection)=="RODBC") {
-					if (!objet@silent)funout(msg4)
-					objet@etat=msg4# success
+				object@connection<-tryCatch(eval(e), error=paste(msg3 ,object@baseODBC)) 
+				# un object S3 RODBC
+				if (class(object@connection)=="RODBC") {
+					if (!object@silent)funout(msg4)
+					object@etat=msg4# success
 				} else {
-					objet@etat<-objet@connection # report of the error
-					objet@connection<-NULL
+					object@etat<-object@connection # report of the error
+					object@connection<-NULL
 					funout(msg3,arret=TRUE)
 				}
 				# sending the query
 			} 
-			if (!objet@silent) funout(msg5) # query trial
-			if (verbose) print(objet@sql)
-			e=expression(query<-sqlQuery(objet@connection,objet@sql,errors=TRUE))
-			if (objet@open) {
+			if (!object@silent) funout(msg5) # query trial
+			if (verbose) print(object@sql)
+			e=expression(query<-sqlQuery(object@connection,object@sql,errors=TRUE))
+			if (object@open) {
 				# If we want to leave the connection open no finally clause
 				resultatRequete<-tryCatch(eval(e),error = function(e) e)
 			} else {
 				# otherwise the connection is closed while ending the request
-				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=odbcClose(objet@connection))
+				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=odbcClose(object@connection))
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
-				if (!objet@silent) funout(msg6)
-				objet@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
-				objet@etat=msg6
+				if (!object@silent) funout(msg6)
+				object@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
+				object@etat=msg6
 			} else {
-				if (!objet@silent) print(resultatRequete)
-				objet@etat=as.character(resultatRequete)
-				print(objet@etat)
+				if (!object@silent) print(resultatRequete)
+				object@etat=as.character(resultatRequete)
+				print(object@etat)
 			}
-			return(objet)
+			return(object)
 		})

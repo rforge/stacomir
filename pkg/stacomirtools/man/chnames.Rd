@@ -2,17 +2,17 @@
 \alias{chnames}
 \title{This function replaces the variable names in a data.frame}
 \usage{
-  chnames(objet, old_variable_name, new_variable_name)
+  chnames(object, old_variable_name, new_variable_name)
 }
 \arguments{
-  \item{objet}{a data frame}
+  \item{object}{a data frame}
 
   \item{old_variable_name}{a character vector with old variables names}
 
   \item{new_variable_name}{a character vector with new variables names}
 }
 \value{
-  objet
+  object
 }
 \description{
   This function replaces the variable names in a data.frame

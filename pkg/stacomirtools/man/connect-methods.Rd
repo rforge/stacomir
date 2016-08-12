@@ -13,17 +13,17 @@ see individual .r files for help and examples
 }
 \section{Methods}{
 \describe{
-\item{\code{signature(objet = "ConnectionODBC")}}{connect an ODBC database,and eventually leaves it open for further queries,
+\item{\code{signature(object = "ConnectionODBC")}}{connect an ODBC database,and eventually leaves it open for further queries,
 the connection may send message in the native language if stacomiR package is in use}
-\item{\code{signature(objet = "RequeteODBC")}}{ connect an ODBC database,performs an sql request}
-\item{\code{signature(objet = "RequeteODBCwhere")}}{ connect an ODBC database,performs an sql request with where clause}
-\item{\code{signature(objet = "RequeteODBCwheredate")}}{connect an ODBC database,performs an sql request with where clause for an interval }
+\item{\code{signature(object = "RequeteODBC")}}{ connect an ODBC database,performs an sql request}
+\item{\code{signature(object = "RequeteODBCwhere")}}{ connect an ODBC database,performs an sql request with where clause}
+\item{\code{signature(object = "RequeteODBCwheredate")}}{connect an ODBC database,performs an sql request with where clause for an interval }
 }}
 \keyword{methods}
 \examples{
  showMethods("connect")
 ## 
-#objet<-new("RequeteODBCwhere")
-#connect(objet)
+#object<-new("RequeteODBCwhere")
+#connect(object)
 }
 

@@ -18,14 +18,14 @@
 #' @slot sql="character" 		(inherited from RequeteODBC)
 #' @slot query="data.frame"		(inherited from RequeteODBC)
 #' @slot open="logical" 		(inherited from RequeteODBC)
-#' @examples objet=new("RequeteODBCwhere")
+#' @examples object=new("RequeteODBCwhere")
 setClass(Class="RequeteODBCwheredate",
 		representation= representation(datedebut="POSIXlt",datefin="POSIXlt",colonnedebut="character",colonnefin="character"),
 		prototype = list(silent=TRUE,open=FALSE),contains="RequeteODBCwhere")
 
 
 setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
-			requeteODBCwhere=new("RequeteODBCwhere")
+			requeteODBCwhere=method::new("RequeteODBCwhere")
 			requeteODBCwhere@where=paste("WHERE (",from@colonnedebut,
 					", ",from@colonnefin,
 					") overlaps (DATE '",
@@ -41,30 +41,29 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 		})
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note method modified from v0.2.1240 to use the connect method of the mother class which in turn will use the method of the mother class
-#' @returnType S4 object
 #' @return An object of class RequeteODBCwheredate
 #' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
-#' objet<-new("RequeteODBCwheredate")
-#' objet@baseODBC<-baseODBC
-#' objet@select<- "select * from t_operation_ope"
-#' objet@datedebut=strptime("1996-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
-#' objet@datefin=strptime("2000-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
-#' objet@colonnedebut="ope_date_debut"
-#' objet@colonnefin="ope_date_fin"
-#' objet@and<-c("AND ope_dic_identifiant=1","AND ope_dic_identifiant=2")
-#' objet@order_by<-"ORDER BY ope_identifiant"
-#' objet@silent=FALSE
-#' objet<-connect(objet)
-setMethod("connect",signature=signature("RequeteODBCwheredate"),definition=function(objet) {
-			requeteODBCwhere=as(objet,"RequeteODBCwhere")
+#' object<-new("RequeteODBCwheredate")
+#' object@baseODBC<-baseODBC
+#' object@select<- "select * from t_operation_ope"
+#' object@datedebut=strptime("1996-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
+#' object@datefin=strptime("2000-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
+#' object@colonnedebut="ope_date_debut"
+#' object@colonnefin="ope_date_fin"
+#' object@and<-c("AND ope_dic_identifiant=1","AND ope_dic_identifiant=2")
+#' object@order_by<-"ORDER BY ope_identifiant"
+#' object@silent=FALSE
+#' object<-connect(object)
+setMethod("connect",signature=signature("RequeteODBCwheredate"),definition=function(object) {
+			requeteODBCwhere=method:as(object,"RequeteODBCwhere")
 			requeteODBCwhere=connect(requeteODBCwhere) # use the connect method of ODBCwhere
 			# collects in the object the elements of the query
-			objet@where=requeteODBCwhere@where
-			objet@connection=requeteODBCwhere@connection
-			objet@query=requeteODBCwhere@query
-			objet@etat=requeteODBCwhere@etat
-			objet@sql=requeteODBCwhere@sql
-			return(objet)
+			object@where=requeteODBCwhere@where
+			object@connection=requeteODBCwhere@connection
+			object@query=requeteODBCwhere@query
+			object@etat=requeteODBCwhere@etat
+			object@sql=requeteODBCwhere@sql
+			return(object)
 		})
 

@@ -28,28 +28,27 @@ validite_ODBC=function(object)
 #' @slot query="data.frame"
 #' @return connectionODBC an S4 object of class connectionODBC
 #' @examples 
-#' objet=new("ConnectionODBC")
-#' objet@baseODBC=c("myODBCconnection","myusername","mypassword")
-#' objet@silent=FALSE
-#' objet<-connect(objet)
-#' odbcClose(objet@connection)
+#' object=new("ConnectionODBC")
+#' object@baseODBC=c("myODBCconnection","myusername","mypassword")
+#' object@silent=FALSE
+#' object<-connect(object)
+#' odbcClose(object@connection)
 setClass(Class="ConnectionODBC",
 		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connection="ANY"),
 		prototype = list(silent=TRUE),
 		validity=validite_ODBC)
-setGeneric("connect",def=function(objet,...) standardGeneric("connect"))
+setGeneric("connect",def=function(object,...) standardGeneric("connect"))
 
 #' connect method for ConnectionODBC class
-#' @returnType ConnectionODBC S4 object
 #' @return a connection with slot filled
 #' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @examples objet=new("ConnectionODBC")
-#' objet@baseODBC=baseODBC
-#' connect(objet)
-setMethod("connect",signature=signature("ConnectionODBC"),definition=function(objet) {     
-			if (length(objet@baseODBC)!=3)  {
+#' @examples object=new("ConnectionODBC")
+#' object@baseODBC=baseODBC
+#' connect(object)
+setMethod("connect",signature=signature("ConnectionODBC"),definition=function(object) {     
+			if (length(object@baseODBC)!=3)  {
 				if (exists("baseODBC",envir=.GlobalEnv)){ 
-					objet@baseODBC<-get("baseODBC",envir=.GlobalEnv) 
+					object@baseODBC<-get("baseODBC",envir=.GlobalEnv) 
 				} else {
 					if(exists("envir_stacomi")){# the program is called within stacomiR
 						funout(get("msg",envir_stacomi)$ConnectionODBC.1,arret=TRUE)
@@ -58,9 +57,9 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 					}
 				}
 			}
-			e=expression(channel <-odbcConnect(objet@baseODBC[1],
-							uid = objet@baseODBC[2],
-							pwd = objet@baseODBC[3],
+			e=expression(channel <-odbcConnect(object@baseODBC[1],
+							uid = object@baseODBC[2],
+							pwd = object@baseODBC[3],
 							case = "tolower",
 							believeNRows = FALSE))
 			if (!exists("odbcConnect")) {
@@ -70,39 +69,39 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 					stop("the RODBC library is necessary, please load the package")
 				}
 			}
-			if (!objet@silent) {
+			if (!object@silent) {
 				if(exists("envir_stacomi")){
-					print(paste(get("msg",envir_stacomi)$ConnectionODBC.3,objet@baseODBC[1]))
+					print(paste(get("msg",envir_stacomi)$ConnectionODBC.3,object@baseODBC[1]))
 				} else {
-					print(paste("connection trial, warning this class should only be used for test: ",objet@baseODBC[1]))
+					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				}
 			}	
 			# sends the result of a trycatch connection in the
 			#l'object (current connection), e.g. a character vector
 			connection_error<-if(exists("envir_stacomi")){
-						error=paste(get("msg",envir_stacomi)$ConnectionODBC.4,objet@baseODBC[1])
+						error=paste(get("msg",envir_stacomi)$ConnectionODBC.4,object@baseODBC[1])
 					} else {
 						error="impossible connection"
 					}
 			currentConnection<-tryCatch(eval(e), error=connection_error) 
 			if (class(currentConnection)=="RODBC") {
-				if (!objet@silent){
+				if (!object@silent){
 					if(exists("envir_stacomi")){
 						print(get("msg",envir_stacomi)$ConnectionODBC.5)
 					} else {
 						print("connection successful")
 					}
 				} 
-				objet@connection=currentConnection  # an objet S3 RODBC
+				object@connection=currentConnection  # an object S3 RODBC
 				if(exists("envir_stacomi")){
 					state<-get("msg",envir_stacomi)$ConnectionODBC.6
 				} else {
 					state<-"connected"
 				}
-				objet@etat=state
+				object@etat=state
 			} else {
 				funout(currentConnection)
-				objet@etat=currentConnection # reporting error
+				object@etat=currentConnection # reporting error
 			}
-			return(objet)
+			return(object)
 		})
