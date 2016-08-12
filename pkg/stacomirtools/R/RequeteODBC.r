@@ -120,11 +120,11 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 				resultatRequete<-tryCatch(eval(e),error = function(e) e)
 			} else {
 				# otherwise the connection is closed while ending the request
-				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=odbcClose(object@connection))
+				resultatRequete<-tryCatch(eval(e),error = function(e) e,finally=RODBC::odbcClose(object@connection))
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
 				if (!object@silent) funout(msg6)
-				object@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
+				object@query=killfactor(RODBC::query)     # instead of query 11/08/2009 11:55:20
 				object@etat=msg6
 			} else {
 				if (!object@silent) print(resultatRequete)

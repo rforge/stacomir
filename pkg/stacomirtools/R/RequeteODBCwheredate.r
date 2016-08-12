@@ -25,7 +25,7 @@ setClass(Class="RequeteODBCwheredate",
 
 
 setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
-			requeteODBCwhere=method::new("RequeteODBCwhere")
+			requeteODBCwhere=new("RequeteODBCwhere")
 			requeteODBCwhere@where=paste("WHERE (",from@colonnedebut,
 					", ",from@colonnefin,
 					") overlaps (DATE '",
@@ -56,7 +56,7 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 #' object@silent=FALSE
 #' object<-connect(object)
 setMethod("connect",signature=signature("RequeteODBCwheredate"),definition=function(object) {
-			requeteODBCwhere=method:as(object,"RequeteODBCwhere")
+			requeteODBCwhere=as(object,"RequeteODBCwhere")
 			requeteODBCwhere=connect(requeteODBCwhere) # use the connect method of ODBCwhere
 			# collects in the object the elements of the query
 			object@where=requeteODBCwhere@where

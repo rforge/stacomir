@@ -24,7 +24,7 @@ setClass(Class="RequeteODBCwhere",
 
 
 setAs("RequeteODBCwhere","RequeteODBC",function(from,to){
-			requeteODBC=method::new("RequeteODBC")
+			requeteODBC=new("RequeteODBC")
 			requeteODBC@sql=paste(from@select,from@where,paste(from@and,collapse=" "),from@order_by,";",sep=" ")
 			requeteODBC@baseODBC=from@baseODBC
 			requeteODBC@silent=from@silent

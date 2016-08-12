@@ -14,5 +14,4 @@ Collate:
     'RequeteODBCwheredate.r'
     'utilitaires.r'    
 LazyLoad: yes
-Depends:methods
-Imports: RODBC,xtable,utils
+Imports: methods,RODBC,xtable,utils
