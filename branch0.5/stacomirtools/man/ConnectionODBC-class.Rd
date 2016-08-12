@@ -24,7 +24,7 @@ Objects can be created by calls of the form \code{new("ConnectionODBC", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{connect}{\code{signature(objet = "ConnectionODBC")}: Connection to the database }
+    \item{connect}{\code{signature(object = "ConnectionODBC")}: Connection to the database }
 	 }
 }
 \note{
@@ -38,11 +38,11 @@ It has also been programmed to work without the stacomiR package, as it will tes
 showClass("ConnectionODBC")
 \dontrun{
  # this is the mother class, you don't have to use it, please use requeteODBC and daughter class instead
- objet<-new("ConnectionODBC")
- objet@baseODBC<-c("myODBCconnection","myusername","mypassword")
- objet@silent<-FALSE
- objet<-connect(objet)
- odbcClose(objet@connection)
+ object<-new("ConnectionODBC")
+ object@baseODBC<-c("myODBCconnection","myusername","mypassword")
+ object@silent<-FALSE
+ object<-connect(object)
+ odbcClose(object@connection)
 }
 }
 \keyword{classes}

@@ -32,7 +32,7 @@ Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBC", distance 2.
 }
 \section{Methods}{
   \describe{
-    \item{connect}{\code{signature(objet = "RequeteODBCwhere")}: Connect to the database }
+    \item{connect}{\code{signature(object = "RequeteODBCwhere")}: Connect to the database }
 	 }
 }
 
@@ -47,17 +47,17 @@ Class \code{"\linkS4class{ConnectionODBC}"}, by class "RequeteODBC", distance 2.
 showClass("RequeteODBCwhere")
 \dontrun{
  test<-0
- objet=new("RequeteODBCwhere")
- objet@baseODBC=c("myodbcconnection","myusername","mypassword")
- objet@select= "select * from mytable limit 100"
+ object=new("RequeteODBCwhere")
+ object@baseODBC=c("myodbcconnection","myusername","mypassword")
+ object@select= "select * from mytable limit 100"
  # assuming mycol, mycol1 and mycol2 are numeric
- objet@where=paste(" where mycol>",test,sep="")
- objet@and=paste(" and mycol2>",test," and mycol3<",test,sep="")
- objet@order_by=" order by mycol1" 
- objet<-connect(objet)
- # now objet@sql contains the syntax of the query. By changing the test variable, one can see how the
+ object@where=paste(" where mycol>",test,sep="")
+ object@and=paste(" and mycol2>",test," and mycol3<",test,sep="")
+ object@order_by=" order by mycol1" 
+ object<-connect(object)
+ # now object@sql contains the syntax of the query. By changing the test variable, one can see how the
  # function might be usefull
- # objet@query contains the resulting data.frame
+ # object@query contains the resulting data.frame
  }
 }
 \keyword{classes}
