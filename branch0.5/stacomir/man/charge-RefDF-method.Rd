@@ -14,8 +14,8 @@ An object of class RefDF
 Loading method for DF referential objects
 }
 \examples{
- \dontrun {
-object=new("RefDF")
+\dontrun{
+ object=new("RefDF")
 charge(object)
 }
 }

@@ -14,7 +14,7 @@ An S4 object of class RefTaxon
 Loading method for RefTaxon referential objects
 }
 \examples{
-\dontrun {
+\dontrun{
  object=new("RefTaxon")
  charge(object)}
 }

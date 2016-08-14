@@ -11,13 +11,14 @@
 Choice method for Reftaxon referential objects with only one taxa selected
 }
 \examples{
- \dontrun {
+ \dontrun{
  object=new("RefTaxon")
 win=gwindow()
 group<-ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
-bilanMigration=new(BilanMigration)
-choix(object,objectBilan=bilanMigration)}
+bilanMigration<-new(BilanMigration)
+choix(object,objectBilan=bilanMigration)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

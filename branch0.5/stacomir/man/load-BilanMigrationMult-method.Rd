@@ -13,7 +13,7 @@ The load method fills in the data slot for RefDC, RefTaxon, RefStades and then
 uses the load methods of these object to "select" the data.
 }
 \examples{
- \dontrun {
+ \dontrun{
 bilanMigrationMult=load(bilanMigrationMult,
  dc=c(5,6,12),
  taxons=c("Anguilla anguilla"),

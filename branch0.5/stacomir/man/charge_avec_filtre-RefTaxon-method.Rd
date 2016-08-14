@@ -14,7 +14,7 @@ An S4 object of class RefTaxon
 Loading method for RefTaxon referential objects searching only those stages existing for a DC and a Taxon
 }
 \examples{
-\dontrun {
+\dontrun{
  dc_selectionne=6
  object=new("RefTaxon")
  charge_avec_filtre(object,dc_selectionne=dc_selectionne)}

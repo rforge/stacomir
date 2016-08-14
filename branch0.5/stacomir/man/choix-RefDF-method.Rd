@@ -15,7 +15,7 @@ the choice method assigns an object of class refDF in the environment envir_stac
 }
 \examples{
  
- \dontrun { 
+ \dontrun{ 
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object=new("RefDF")
