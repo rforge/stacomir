@@ -9,7 +9,7 @@ method with a parameter choix to join several graphes called by several handlers
 }
 \section{Methods}{
 \describe{
-\item{\code{signature(objet = "BilanMigrationPar")}}{
+\item{\code{signature(object = "BilanMigrationPar")}}{
 method with a parameter choix to join several graphes called by several handlers (buttons) }
 }}
 \keyword{methods}
