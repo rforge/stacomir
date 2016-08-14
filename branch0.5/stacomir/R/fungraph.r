@@ -10,12 +10,12 @@
 #' 
 #' 
 #' @usage fungraph(bilanMigration, tableau, duree, taxon, stade)
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param table=tableau a data frame with the results
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
 
 
@@ -25,7 +25,7 @@
 
 #' Function for BilanMigration graphes including numbers DF DC operations
 #' 
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}} or an
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
 #' object of class \code{\linkS4class{BilanMigrationMult}}
 #' @param tableau a data frame with the results
 #' @param duree a vector POSIXt

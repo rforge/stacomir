@@ -47,13 +47,13 @@ setClass(Class="RefPoidsMoyenPeche",representation=
 				representation(data="data.frame",datedebut="POSIXlt",datefin="POSIXlt"),
 		prototype=prototype(data=data.frame()))
 # pour test  
-# objet= new("RefPoidsMoyenPeche")
+# object= new("RefPoidsMoyenPeche")
 
 #retourne la liste des annees presentes dans la base
-setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function(objet){
+setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function(object){
 			requete=new("RequeteODBCwheredate")
-			requete@datedebut=objet@datedebut
-			requete@datefin=objet@datefin
+			requete@datedebut=object@datedebut
+			requete@datefin=object@datefin
 			requete@colonnedebut="datedebutpeche"
 			requete@colonnefin="datefinpeche"
 			requete@baseODBC<-baseODBCmortciv
@@ -70,8 +70,8 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 					FROM vue_ope_lot_poids"
 			requete@and=""
 			requete=connect(requete)  
-			objet@data<-requete@query
-			return(objet)
+			object@data<-requete@query
+			return(object)
 		})
 # pas de methode choix, le choix est dej� fait dans l'annee de l'interface
 #charge(refPoidsMoyenPeche)

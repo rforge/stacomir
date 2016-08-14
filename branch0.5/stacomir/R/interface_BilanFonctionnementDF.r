@@ -1,6 +1,6 @@
 # Nom fichier :        interface_BilanFonctionnementDF.R    (classe)
 #' interface for BilanFonctionnementDF class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanFonctionnementDF = function()
 {
     fonctionnementDF=new("BilanFonctionnementDF")

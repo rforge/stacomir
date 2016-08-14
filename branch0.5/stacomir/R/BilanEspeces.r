@@ -12,7 +12,8 @@
 #' 
 #' @name BilanEspeces-class
 #' @aliases BilanEspeces-class BilanEspeces
-
+#' @include RefDC.r
+#' @include RefListe.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanEspeces", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -32,7 +33,7 @@
 #' 
 #' showClass("BilanEspeces")
 #' 
-#' @exportClass 
+#' @export 
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
@@ -57,10 +58,10 @@ setValidity("BilanEspeces",function(object)
 
 #' connect method for BilanEspeces
 #' @return bilanEspeces instance with request corresponding to the user choices
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
-			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
+setMethod("connect",signature=signature("BilanEspeces"),definition=function(object) {
+			bilanEspeces<-object # pour faciliter la debug, l'argument formel de la classe doit etre forcement object !
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=bilanEspeces@datedebut
@@ -93,7 +94,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hBilanEspecescalc=function(h,...){
 	charge(h$action)
@@ -103,12 +104,12 @@ hBilanEspecescalc=function(h,...){
 #' charge method for BilanEspeces
 #' verifies the content of objects and calls the connect method
 #' @return BilanEspeces with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @examples bilanEspeces=new("BilanEspeces")
-setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
+setMethod("charge",signature=signature("BilanEspeces"),definition=function(object,...){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
-			bilanEspeces<-objet
+			bilanEspeces<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanEspeces@dc<-get("refDC",envir_stacomi)
 			} else {
@@ -143,7 +144,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 #' @note pas besoin de refaire tourner calcul si une autre liste � �t� charg�e, les effectifs <0 sont transform�s en positifs
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 
 hCamembert = function(h,...) {	
@@ -209,7 +210,7 @@ hCamembert = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hTableBilanEspeces=function(h,...) {
 	if (exists("bilanEspeces",envir_stacomi)) {
@@ -248,7 +249,7 @@ hTableBilanEspeces=function(h,...) {
 }
 
 #' Interface for BilanEspece class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @examples interface_BilanEspeces()
 interface_BilanEspeces=function(){
@@ -256,7 +257,7 @@ interface_BilanEspeces=function(){
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)
 	funout(get("msg",envir=envir_stacomi)$interface_BilanEspeces.1)
 	bilanEspeces@dc=charge(bilanEspeces@dc)   
-	bilanEspeces@liste=charge(objet=bilanEspeces@liste,
+	bilanEspeces@liste=charge(object=bilanEspeces@liste,
 			vecteur=c("aucun","semaine","mois","annee"),
 			label=get("msg",envir=envir_stacomi)$interface_BilanEspeces.7)
 	quitte()
@@ -276,7 +277,7 @@ interface_BilanEspeces=function(){
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilanEspeces@dc,objetBilan=bilanEspeces,is.enabled=TRUE)
+	choix(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
 	choix(bilanEspeces@liste)	
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)

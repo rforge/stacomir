@@ -46,7 +46,7 @@
 #' 
 #' showClass("BilanFonctionnementDC")
 #' 
-#' @exportClass 
+#' @export 
 setClass(Class="BilanFonctionnementDC",
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -58,11 +58,11 @@ setClass(Class="BilanFonctionnementDC",
 				requete=new("RequeteODBCwheredate"))
 )
 
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'objet fonctionnement DC
-setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(objet,h) {
+# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'object fonctionnement DC
+setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
-			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			objet@requete@select= sql<-paste("SELECT",
+			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			object@requete@select= sql<-paste("SELECT",
 					" per_dis_identifiant,",
 					" per_date_debut,",
 					" per_date_fin,",
@@ -72,37 +72,37 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" tar_libelle AS libelle",
 					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
-			objet@requete@colonnedebut<-"per_date_debut"
-			objet@requete@colonnefin<-"per_date_fin"
-			objet@requete@order_by<-"ORDER BY per_date_debut"
-			objet@requete@and<-paste("AND per_dis_identifiant=",objet@dc@dc_selectionne )
-#objet@requete@where=#defini dans la methode ODBCwheredate
-			objet@requete<-connect(objet@requete) # appel de la methode connect de l'objet ODBCWHEREDATE
+			object@requete@colonnedebut<-"per_date_debut"
+			object@requete@colonnefin<-"per_date_fin"
+			object@requete@order_by<-"ORDER BY per_date_debut"
+			object@requete@and<-paste("AND per_dis_identifiant=",object@dc@dc_selectionne )
+#object@requete@where=#defini dans la methode ODBCwheredate
+			object@requete<-connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$BilanFonctionnementDC.1)
-			return(objet)
+			return(object)
 		})
 
-setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(objet,h) {
+setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)				}     
 			
 			if (exists("fonctionnementDC_date_debut",envir_stacomi)) {
-				objet@requete@datedebut<-get("fonctionnementDC_date_debut",envir_stacomi)@horodate
+				object@requete@datedebut<-get("fonctionnementDC_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)	
 			}
 			
 			if (exists("fonctionnementDC_date_fin",envir_stacomi)) {
-				objet@requete@datefin<-get("fonctionnementDC_date_fin",envir_stacomi)@horodate
+				object@requete@datefin<-get("fonctionnementDC_date_fin",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)	
 			}			
-			objet<-connect(objet)			
-			return(objet)
+			object<-connect(object)			
+			return(object)
 		})
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple... 

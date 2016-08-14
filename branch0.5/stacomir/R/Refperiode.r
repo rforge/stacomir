@@ -28,11 +28,10 @@ setClass(Class="Refperiode",representation=
       )
 )
 #' Returns the POSIXt value of a given name
-#' @returnType "character"
 #' @return "a character to be used in seq.POSIXt
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #'  getvalue(new("Refperiode"),"quinzaine")
-setMethod("getvalue",signature=signature("Refperiode"), definition=function(objet,id,...)
-  {return(as.character(objet@data[objet@data$id==id,"pgval"]))
+setMethod("getvalue",signature=signature("Refperiode"), definition=function(object,id,...)
+  {return(as.character(object@data[object@data$id==id,"pgval"]))
   } ) 

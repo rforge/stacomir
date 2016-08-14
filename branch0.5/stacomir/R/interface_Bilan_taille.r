@@ -16,7 +16,7 @@ interface_BilanTaille = function()
 	add(ggroupboutons,group)
 	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_taille.1,container=group)
 	# dans l'ordre 
-	# dans le handler, modifier le contenu de l'objet fils si il existe
+	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choix pour l'affichage du fils si il existe
 	
@@ -34,7 +34,7 @@ interface_BilanTaille = function()
 			decal=-1,
 			affichecal=FALSE)
 	
-	choix(bilan_taille@dc,objetBilan=bilan_taille,is.enabled=TRUE)
+	choix(bilan_taille@dc,objectBilan=bilan_taille,is.enabled=TRUE)
 	aGrint=gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
 	aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
 	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)

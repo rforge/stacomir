@@ -26,7 +26,7 @@ test_that("Teste que l'environnement de travail est bien créé",{
 
 test_that("Teste la méthode charge les messages de référence",
 		{
-			objet=new("RefMsg")
-			objet<-charge(objet)	
-			expect_true(nrow(objet@messager)>0)
+			object=new("RefMsg")
+			object<-charge(object)	
+			expect_true(nrow(object@messager)>0)
 		})

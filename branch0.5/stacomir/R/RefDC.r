@@ -5,27 +5,14 @@
 #' Description of a control device.
 #' 
 #' 
-#' @name RefDC-class
-#' @aliases RefDC-class RefDC
-
-#' @slot dc_selectionne="integer"
-#' @slot ouvrage="integer"
-#' @slot station="character"
-#' @slot data="data.frame"
+#' @slot dc_selectionne Object of class \code{"integer"}, The selected device
+#' @slot ouvrage Object of class \code{"integer"}, the attached dam
+#' @slot station Object of class \code{"character"}, the attached migration monitoring station, this is necessary to join the
+#' table of escapments calculated at the station level.
+#' @slot data Object of class \code{"data.frame"} data pertaining to the control device
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefDC", dc_selectionne=integer(), ouvrage=integer(),
-#' data=data.frame())}.  \describe{ \item{list("dc_selectionne")}{Object of
-#' class \code{"integer"}The selected device}\item{:}{Object of class
-#' \code{"integer"}The selected device} \item{list("ouvrage")}{Object of class
-#' \code{"integer"} The attached dam}\item{:}{Object of class \code{"integer"}
-#' The attached dam} \item{list("station")}{Object of class \code{"character"}
-#' The attached migration monitoring station, this is necessary to join the
-#' table of escapments calculated at the station level}\item{:}{Object of class
-#' \code{"character"} The attached migration monitoring station, this is
-#' necessary to join the table of escapments calculated at the station level}
-#' \item{list("data")}{Object of class \code{"data.frame"} data pertaining to
-#' the control device}\item{:}{Object of class \code{"data.frame"} data
-#' pertaining to the control device} }
+#' data=data.frame())}.  
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
 #' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
@@ -43,14 +30,12 @@
 #' 
 setClass(Class="RefDC",representation=
 				representation(dc_selectionne="integer",ouvrage="integer",station="character",data="data.frame") ,
-		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),station=character(),data=data.frame()),
-		validity=)
+		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),station=character(),data=data.frame())
+)
 
 
-#' validity check for class RefDC
-#' @describeIn RefDC
-setValidity("RefDC",function(object)
-		{
+
+setValidity("RefDC",method=function(object){
 			if (length(object@dc_selectionne)!=0){		
 				if (nrow(object@data)>0) {
 					concord<-object@dc_selectionne%in%object@data$dc					
@@ -67,11 +52,10 @@ setValidity("RefDC",function(object)
 			
 		}   
 )
-#' Referential class RefDC loads the counting devices of the control station
-#' @returnType Object of class RefDC
+#' Method to load the counting devices of the control station
 #' @return Object of class RefDC
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql=  paste("select dis_identifiant as DC,",
@@ -99,44 +83,47 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 					" ORDER BY dis_identifiant;",sep="")
 			requete<-connect(requete) 
 			#funout("La requete est effectuee pour charger les Dispositifs de comptage \n")
-			objet@data<-requete@query
-			return(objet)
+			object@data<-requete@query
+			return(object)
 		})
 #' choice method for RefDC
+#' 
 #' @note   The choix method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_lot).
-#'   By default,  the value of the objetbilan is null.
+#'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-#' and fills it with the method \link charge_avec_filtre #' @param objetBilan un objet bilan
-#' @param is.enabled a boolean indincating # see if deprecated...
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' and fills it with the method \link{charge_avec_filtre} 
+#' @param objectBilan the objectBilan from which this frame was called
+#' @param is.enabled a boolean indicating whether the current frame will be enabled. Selecting a "parent"
+#' frame may cause some frame to be disabled. When created the frame is enabled.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples \dontrun{ win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet=new("RefDC")
-#'	objet<-charge(objet)
-#'	objetBilan=new("BilanMigration")
-#' choix(objet=objet,objetBilan=objetBilan)}
-setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
-			if (nrow(objet@data) > 0){
+#' object=new("RefDC")
+#' object<-charge(object)
+#' objectBilan=new("BilanMigration")
+#' choix(object=object,objectBilan=objectBilan)}
+setMethod("choix",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+			if (nrow(object@data) > 0){
 				hDC=function(h,...){
-					objet@dc_selectionne<-svalue(choix)
-					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
-					objet@station=objet@data$sta_code[objet@data$dc%in%objet@dc_selectionne]
-					assign("refDC",objet,envir_stacomi)
+					object@dc_selectionne<-svalue(choix)
+					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
+					object@station=object@data$sta_code[object@data$dc%in%object@dc_selectionne]
+					assign("refDC",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
-					# si il existe un objet fils; supprimer
+					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel ï¿½ un autre objet il faut appeller le conteneur qui contient l'objet
-					if (!is.null(objetBilan)) {
+					# ici comme on fait appel ï¿½ un autre object il faut appeller le conteneur qui contient l'object
+					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
-						if("RefTaxon"%in%as.character(getSlots(class(objetBilan)))){
-							objetBilan@taxons<<-charge_avec_filtre(objet=objetBilan@taxons,dc_selectionne=get("refDC",objet,envir_stacomi)@dc_selectionne)
+						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
+							objectBilan@taxons<<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",object,envir_stacomi)@dc_selectionne)
 							if (exists("frame_tax")) delete(group,frame_tax)
 							if (exists("frame_std")) delete(group,frame_std)
 							if (exists("frame_par")) delete(group,frame_par)
 							if (exists("frame_parquan")) delete(group,frame_parquan)
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choix(objetBilan@taxons,objetBilan,is.enabled=TRUE)
+							choix(objectBilan@taxons,objectBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
@@ -146,14 +133,14 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 				hDCi=function(h,...){
 					w=gwindow(get("msg",envir=envir_stacomi)$RefDC.3,width=400)
 					wg=ggroup(horizontal=FALSE,cont=w)
-					tab=gtable(objet@data[,c(1,4,7,8,11,12)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
+					tab=gtable(object@data[,c(1,4,7,8,11,12)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
 					bg<-ggroup(cont=wg)
 					addSpring(bg)
 					gbutton(get("msg",envir=envir_stacomi)$RefDC.4, cont=bg, handler = function(h,...) dispose(w))
 				}
 				frame_DC<<-gframe(get("msg",envir=envir_stacomi)$RefDC.5)
 				add(group,frame_DC)
-				DC_identifiant=objet@data$dc
+				DC_identifiant=object@data$dc
 				choix=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
 				gbutton(get("msg",envir=envir_stacomi)$RefDC.6, container=frame_DC,handler=hDCi) 
 				enabled(frame_DC)<-is.enabled
@@ -161,55 +148,63 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}
-			return(objet)
+			return(object)
 		})
-# pour test #choix(objet)
+# pour test #choix(object)
 
 
 
 #' choixmult, selection method for refDC allowing to select several DC
+#' 
 #' @note   The choix method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_lot).
-#'   By default,  the value of the objetbilan is null.
+#'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-#' and fills it with the method \link charge_avec_filtre #' @param objetBilan un objet bilan
-#' @param is.enabled a boolean indicating if the widget is to be selectable
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @examples \dontrun{ win=gwindow()
+#' and fills it with the method \link{charge_avec_filtre}
+#' @param object An objet of class RefDC
+#' @param objectBilan A bilan object
+#' @param is.enabled A boolean indicating if the widget can be seleted at launch
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#' \dontrun{ 
+#' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet=new("RefDC")
-#'	objet<-charge(objet)
-#'	objetBilan=new("BilanMigrationMult")
-#' choixmult(objet=objet,objetBilan=objetBilan)}
-setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
-			if (nrow(objet@data) > 0){
+#' object=new("RefDC")
+#' object<-charge(object)
+#' objectBilan=new("BilanMigrationMult")
+#' choixmult(object=object,objectBilan=objectBilan)
+#'}
+setMethod("choixmult",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+			
+			if (nrow(object@data) > 0){
 				hDC=function(h,...){
-					objet@dc_selectionne<-as.integer(tbdestdc[,][tbdestdc[,]!=""])
-					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
-					objet@station= objet@data$sta_code[objet@data$dc%in%objet@dc_selectionne]
-					assign("refDC",objet,envir_stacomi)
+					#browser()
+					object@dc_selectionne<-as.integer(tbdestdc[,][tbdestdc[,]!=""])
+					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
+					object@station= as.character(object@data$sta_code[object@data$dc%in%object@dc_selectionne])
+					assign("refDC",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
-					# si il existe un objet fils; supprimer
+					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel à un autre objet il faut appeller le conteneur qui contient l'objet
-					if (!is.null(objetBilan)) {
+					# ici comme on fait appel à un autre object il faut appeller le conteneur qui contient l'object
+					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
-						if("RefTaxon"%in%as.character(getSlots(class(objetBilan)))){
+						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
 							
-						
-							objetBilan@dc<-objet
-							objetBilan@taxons<-charge_avec_filtre(objet=objetBilan@taxons,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne)
+							
+							objectBilan@dc<-object
+							objectBilan@taxons<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne)
 							# the name was created by the interface
-							# as I can't get the name from within the function (deparse(substitute(objetBilan does not return
+							# as I can't get the name from within the function (deparse(substitute(objectBilan does not return
 							# "bilanMigrationMult"
-							assign(get("objetBilan",envir=envir_stacomi),objetBilan,envir=envir_stacomi)
+							assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
 							# suppresses all tab larger than 1 (dc)
 							if (length(notebook)>2){
 								for (i in 3:length(notebook)){
 									svalue(notebook) <- i							
 									dispose(notebook) ## dispose current tab
 								}}
-							choixmult(objetBilan@taxons,objetBilan,is.enabled=TRUE)
+							choixmult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
@@ -223,7 +218,7 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[nb(notebook)[groupdc(ggroup&tab)[[frameDCsource(gframe)[tbsourcedc(gtable)],frameDCdest(gframe)[tbdcdest(gtable)]],OKbutton]]
 				
-				DC=objet@data[,c("dc","dis_commentaires","type_dc")]
+				DC=object@data[,c("dc","dis_commentaires","type_dc")]
 				#TODO addmsg
 				groupdc<<-ggroup(cont=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
 				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,cont=groupdc)
@@ -234,7 +229,7 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 				size(frameDCdest)<-c(60,300)
 				#addSpring(groupdc)
 				# need for a fixed size data.frame otherwise errors when adding new lines
-				xx<-data.frame(choix=rep("",8))
+				xx<-data.frame(choix=rep("",12))
 				xx$choix<-as.character(xx$choix)
 				tbdestdc=gtable(xx,cont=frameDCdest,expand=TRUE, fill=TRUE)
 				adddropsource(tbsourcedc)
@@ -271,7 +266,7 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}
-			return(objet)
+			return(object)
 		})
 
 
@@ -281,19 +276,20 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(objet,obj
 #' widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the RefDC only 
 #' takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
 #' The values passed to the load function are then checked with the setValidty method.
-#' Finally, if an objetBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
+#' Finally, if an objectBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
+#' @param object an object of class RefDC
 #' @param dc a character vector of dc chosen
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family load functions
-#' @example
+#' @examples
 #' \dontrun{
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#'objet=new("RefDC")
-#'objet<-charge(objet)
-#'objetBilan=new("BilanMigrationMult")
-#' load(objet=objet,objetBilan=objetBilan,dc=1)}
-setMethod("load",signature=signature("RefDC"),definition=function(objet,dc) {
+#'object=new("RefDC")
+#'object<-charge(object)
+#'objectBilan=new("BilanMigrationMult")
+#' load(object=object,objectBilan=objectBilan,dc=1)}
+setMethod("load",signature=signature("RefDC"),definition=function(object,dc) {
 			if (class(dc)=="numeric") {
 				dc<-as.integer(dc) 
 			}else if	(class(dc)=="character"){
@@ -301,14 +297,14 @@ setMethod("load",signature=signature("RefDC"),definition=function(objet,dc) {
 			}
 			if (any(is.na(dc))) stop ("NA values dc")
 			
-
-			objet@dc_selectionne<-dc
-			validObject(objet) 		
+			
+			object@dc_selectionne<-dc
+			validObject(object) 		
 # the method validObject verifies that the dc is in the data slot of RefDC			
-
-			objet@ouvrage= objet@data$dif_ouv_identifiant[ objet@data$dc%in% objet@dc_selectionne]
-			objet@station= objet@data$sta_code[ objet@data$dc%in% objet@dc_selectionne]
-			objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
-			assign("refDC",objet,envir=envir_stacomi)
-			return(objet)
+			
+			object@ouvrage= object@data$dif_ouv_identifiant[ object@data$dc%in% object@dc_selectionne]
+			object@station= as.character(object@data$sta_code[ object@data$dc%in% object@dc_selectionne])
+			object@ouvrage=object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
+			assign("refDC",object,envir=envir_stacomi)
+			return(object)
 		})

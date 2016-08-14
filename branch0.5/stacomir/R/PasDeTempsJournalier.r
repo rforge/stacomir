@@ -6,7 +6,7 @@
 # Date de creation :  31/03/2008 17:21:25
 # Compatibilite :
 # Etat :               developpement
-# Description          calcul et affichage des pas de temps (classe objet)
+# Description          calcul et affichage des pas de temps (classe object)
 #**********************************************************************
 #*
 
@@ -20,12 +20,8 @@
 #' Representation of a PasDeTemps object with a step length equal to one day.
 #' It receives an heritance from PasDeTemps
 #' 
-#' 
-#' @name PasDeTempsJournalier-class
-#' @aliases PasDeTempsJournalier PasDeTempsJournalier-class
 #' validite_PasDeTempsJournalier
-
-#' @include class-PasdeTemps.r
+#' @include PasdeTemps.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("PasDeTempsJournalier",
 #' dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
@@ -50,8 +46,7 @@ setClass(Class="PasDeTempsJournalier",contains="PasDeTemps",
 )
 
 
-#' validity check for class class PasDeTempsJournalier
-#' @describeIn PasDeTempsJournalier
+
 setValidity(Class="PasDeTempsJournalier",function(object)
 		{
 			retValue<-NULL
@@ -63,24 +58,24 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			if (!rep3) retValue=paste(retValue,get("msg",envir=envir_stacomi)$PasdeTempsJournalier.2)
 			return(ifelse( rep1 & rep2 & rep3 ,TRUE,retValue)   )
 		})	
-# pour test #objet=new("PasDeTempsJournalier")
-setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=function(objet) {
+# pour test #object=new("PasDeTempsJournalier")
+setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
 					pas=svalue(choixpas)
 					nbpas=as.numeric(svalue(choixnbpas)) 
-					objet@nbPas<-nbpas
-					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
-					objet=setdateDebut(objet,as.POSIXlt(svalue(datedeb)))
-					svalue(datedefin)<-as.Date(DateFin(objet))
-					assign("pasDeTemps",objet,envir_stacomi)
+					object@nbPas<-nbpas
+					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+					object=setdateDebut(object,as.POSIXlt(svalue(datedeb)))
+					svalue(datedefin)<-as.Date(DateFin(object))
+					assign("pasDeTemps",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.8)
 					#dispose(winpa)
 				}
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.3,container=group,horizontal=FALSE)
 				pg<-glayout(cont=winpa)
 				pg[1,1]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.4)
-				datedeb<-gedit(as.Date(getdateDebut(objet)),handler=hwinpa,width=10)
+				datedeb<-gedit(as.Date(getdateDebut(object)),handler=hwinpa,width=10)
 				pg[2,1]<-datedeb
 				pg[3,1]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.5)
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
@@ -109,14 +104,13 @@ setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=functio
 #' widget in the graphical interface) but from the command line.  
 #' @param datedebut a character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object
 #' @param datefin a character of POSIXct object
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @family load functions
-#' @example
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
 #' \dontrun{
-#'objet=new("RefDC")
-#'objet<-charge(objet)
-#' load(objet=objet,datedebut="2012-01-01",datefin="2013-01-01")}
-setMethod("load",signature=signature("PasDeTempsJournalier"),definition=function(objet,datedebut,datefin) {
+#'object=new("RefDC")
+#'object<-charge(object)
+#' load(object=object,datedebut="2012-01-01",datefin="2013-01-01")}
+setMethod("load",signature=signature("PasDeTempsJournalier"),definition=function(object,datedebut,datefin) {
 			if (class(datedebut)=="character") {
 				if (grepl("/",datedebut)){
 					datedebut=strptime(datedebut, format="%d/%m/%Y")
@@ -151,8 +145,8 @@ setMethod("load",signature=signature("PasDeTempsJournalier"),definition=function
 						stop ("datefin not parsed to datetime try format like '01/01/2017'")
 					}	
 				}
-					objet@dateDebut<-as.POSIXlt(datedebut)
-					objet@nbPas=as.numeric(difftime(datefin,datedebut,unit="days"))
-					validObject(objet) 			
-					return(objet)
+					object@dateDebut<-as.POSIXlt(datedebut)
+					object@nbPas=as.numeric(difftime(datefin,datedebut,unit="days"))
+					validObject(object) 			
+					return(object)
 				})

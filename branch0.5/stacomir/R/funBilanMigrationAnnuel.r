@@ -24,7 +24,7 @@
 #' not count subsamples.
 #' 
 #' 
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 funBilanMigrationAnnuel=function(bilanMigration) {
 	# *********************
 	# Boucle sur chacune des periodes du pas de temps

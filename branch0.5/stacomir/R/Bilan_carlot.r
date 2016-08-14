@@ -1,30 +1,19 @@
-# Nom fichier :        Bilanlot.R    (classe)
-# Date de creation :   07/02/2009 21:30:54
-# Compatibilite :      
-# Etat :               Fonctionne
-#                     L'affichage de cette classe est gere par interface_bilan_lot
-#**********************************************************************                                                                  
-#* Modifications :
-#* ---------------
-#* Les boites en chargent plus l'ensemble de la liste mais seulement celles ayant une correspondance dans la base
-#* integration des msg pour internationalisation
-#********************************************
-#' Class "Bilan_lot"
+#' Class "Bilan_carlot"
 #' 
-#' Bilan_lot Bilan class calls the content of the postgres view vue_lot_ope_car
+#' Bilan_carlot Bilan class calls the content of the postgres view vue_lot_ope_car, it displays the
+#' results of a categorical variable, or quantitative variable attached for lot, for instance,
+#' it can be used to analyse size or sex
 #' 
-#' 
-#' @name Bilan_lot
-#' @aliases Bilan_lot-class Bilan_lot
-
 #' @note This class is displayed by interface_bilan_lot
 #' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("Bilan_lot", ...)}
+#' \code{new("Bilan_carlot", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}
 #' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{Bilan_stades_pigm}} 
+#' \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} 
+#' \code{\linkS4class{BilanEspeces}}
 #' \code{\linkS4class{BilanFonctionnementDC}}
 #' \code{\linkS4class{BilanFonctionnementDF}}
 #' \code{\linkS4class{BilanMigration}}
@@ -32,15 +21,14 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @references
-#' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette%20BilanLot}
-#' @keywords classes
+#' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot}
 #' @examples
 #' 
-#' showClass("Bilan_lot")
-#' objet=new("Bilan_lot")
+#' showClass("Bilan_carlot")
+#' object=new("Bilan_carlot")
 #' 
-#' @exportClass 
-setClass(Class="Bilan_lot",
+#' @export 
+setClass(Class="Bilan_carlot",
 		representation= representation(
 				data="data.frame",
 				dc="RefDC",
@@ -58,84 +46,89 @@ setClass(Class="Bilan_lot",
 				requete=new("RequeteODBCwheredate")
 		))
 #
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'objet fonctionnement DC
-#' connect method for Bilan_lot
-#' @return An objet of class bilan_lot Bilan_lot
+
+#' connect method for Bilan_carlot
+#' 
+#' @return An object of class bilan_lot Bilan_carlot
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @param ... additional parameters passed to the method
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h) {
+setMethod("connect",signature=signature("Bilan_carlot"),definition=function(object,h,...) {
 #  construit une requete ODBCwheredate
-			objet@requete@baseODBC=get("baseODBC",envir=envir_stacomi)
-			objet@requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
-			objet@requete@colonnedebut="ope_date_debut"
-			objet@requete@colonnefin="ope_date_fin"
-			objet@requete@order_by="ORDER BY ope_date_debut"
-			objet@requete@and=paste(" AND ope_dic_identifiant=",objet@dc@dc_selectionne,
-					" AND lot_tax_code= '", objet@taxons@data$tax_code,
-					"' AND lot_std_code= '", objet@stades@data$std_code,
-					"' AND car_par_code='", objet@par@data$par_code, "'",sep="")
-#objet@requete@where=#defini dans la methode ODBCwheredate
-			objet@requete<-connect(objet@requete) # appel de la methode connect de l'objet ODBCWHEREDATE
-			objet@data<-objet@requete@query
-			funout(get("msg",envir_stacomi)$Bilan_lot.1)
-			return(objet)
+			object@requete@baseODBC=get("baseODBC",envir=envir_stacomi)
+			object@requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
+			object@requete@colonnedebut="ope_date_debut"
+			object@requete@colonnefin="ope_date_fin"
+			object@requete@order_by="ORDER BY ope_date_debut"
+			object@requete@and=paste(" AND ope_dic_identifiant=",object@dc@dc_selectionne,
+					" AND lot_tax_code= '", object@taxons@data$tax_code,
+					"' AND lot_std_code= '", object@stades@data$std_code,
+					"' AND car_par_code='", object@par@data$par_code, "'",sep="")
+#object@requete@where=#defini dans la methode ODBCwheredate
+			object@requete<-connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
+			object@data<-object@requete@query
+			funout(get("msg",envir_stacomi)$Bilan_carlot.1)
+			return(object)
 		})
-# Cette methode permet de verifier que les boites ont ete cliquees et va chercher les
-# objets qui sont colles dans l'environnement envir_stacomi de l'interface 
-#objet<-bilan_lot
-#' charge method for Bilan_lot class
-#' @returnType an instance for class Bilan_lot
-#' @return Bilan_lot with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+
+
+#' charge method for Bilan_carlot class
+#' 
+#' this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
+#' envir_stacomi
+#' @return Bilan_carlot with slots filled with user choice
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#  objet<-bilan_lot
-setMethod("charge",signature=signature("Bilan_lot"),definition=function(objet,h) {
+#' @return An object of the class
+setMethod("charge",signature=signature("Bilan_carlot"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
 			} 
 			if (exists("refTaxons",envir_stacomi)) {
-				objet@taxons<-get("refTaxons",envir_stacomi)
+				object@taxons<-get("refTaxons",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
-				objet@stades<-get("refStades",envir_stacomi)
+				object@stades<-get("refStades",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
-				objet@par<-get("refpar",envir_stacomi)
+				object@par<-get("refpar",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.4,arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_lot_date_debut",envir_stacomi)) {
-				objet@requete@datedebut<-get("bilan_lot_date_debut",envir_stacomi)@horodate
+				object@requete@datedebut<-get("bilan_lot_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_lot_date_fin",envir_stacomi)) {
-				objet@requete@datefin<-get("bilan_lot_date_fin",envir_stacomi)@horodate
+				object@requete@datefin<-get("bilan_lot_date_fin",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
 			}         
-			objet<-connect(objet)
+			object<-connect(object)
 			
-			return(objet)
+			return(object)
 		})
 
-#' Calcule method for Bilan_lot
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("calcule",signature=signature("Bilan_lot"),definition=function(objet,h) {
-			bilan_lot<-objet
+#' Calcule method for Bilan_carlot
+#' 
+#' 
+#' @param h A handler
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(object,h) {
+			bilan_lot<-object
 			if(nrow(bilan_lot@data)==0) {
-				funout(get("msg",envir_stacomi)$Bilan_lot.2, arret=TRUE)
+				funout(get("msg",envir_stacomi)$Bilan_carlot.2, arret=TRUE)
 			}   
 			vue_ope_lot=bilan_lot@requete@query # on recupere le data.frame
 			nom_variable=bilan_lot@par@data$par_nom
@@ -166,15 +159,19 @@ setMethod("calcule",signature=signature("Bilan_lot"),definition=function(objet,h
 			bilan_lot@data<-vue_ope_lot
 			assign("bilan_lot",bilan_lot,envir_stacomi)#assign("bilan_lot",vue_ope_lot,envir_stacomi)
 			assign("vue_ope_lot",vue_ope_lot,envir=.GlobalEnv)
-			funout(get("msg",envir_stacomi)$Bilan_lot.3)
+			funout(get("msg",envir_stacomi)$Bilan_carlot.3)
 			return(bilan_lot)
 		})
-#' fundensityBilan_lot uses ggplot to draw plots
+
+
+#' fundensityBilan_carlot uses ggplot2 to draw density plots
+#' 
+#' assigns an object g in envir_stacomi for eventual modification of the plot
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-fundensityBilan_lot = function(h,...) {
+fundensityBilan_carlot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
 	bilan_lot<-calcule(bilan_lot)
 	g<-ggplot(bilan_lot@data,aes(x=val_quant))
@@ -185,50 +182,57 @@ fundensityBilan_lot = function(h,...) {
 			coord_flip()
 	print(g) 
 	assign("g",g,envir_stacomi)
-	funout(get("msg",envir_stacomi)$Bilan_lot.4)
-}   
-#' funboxplotBilan_lot uses ggplot to draw plots
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+	funout(get("msg",envir_stacomi)$Bilan_carlot.4)
+}
+
+#' Boxplots for ggplot2
+#' 
+#' assigns an object g in envir_stacomi for eventual modification of the plot
+#' @param h A handler passed by the graphical interface
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funboxplotBilan_lot = function(h,...) {
+funboxplotBilan_carlot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
 	bilan_lot<-calcule(bilan_lot)
 	g<-ggplot(bilan_lot@data)
 	g<-g+geom_boxplot(aes(x=quinzaine,y=val_quant))
 	print(g) 
 	assign("g",g,envir_stacomi)
-	funout(get("msg",envir_stacomi)$Bilan_lot.4)
+	funout(get("msg",envir_stacomi)$Bilan_carlot.4)
 }
 
 
-#' funpointBilan_lot uses ggplot to draw plots
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' Point graph from ggplot
+#' 
+#' assigns an object g in envir_stacomi for eventual modification of the plot
+#' @param h handler passed by the graphical interface
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funpointBilan_lot = function(h,...) {
+funpointBilan_carlot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
 	bilan_lot<-calcule(bilan_lot)
 	g<-ggplot(bilan_lot@data)
 	g<-g+geom_point(aes(x=date,y=val_quant))
 	print(g) 
 	assign("g",g,envir_stacomi)
-	funout(get("msg",envir_stacomi)$Bilan_lot.4)
+	funout(get("msg",envir_stacomi)$Bilan_carlot.4)
 
 }  
 
-#' funtableBilan_lot shows a table of results in gdf
-#' @param h 
+#' table function
+#' 
+#' funtableBilan_carlot shows a table of results in gdf
+#' @param h hanlder passed by the graphical interface
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funtableBilan_lot = function(h,...) {
+funtableBilan_carlot = function(h,...) {
 	bilan_lot=charge(bilan_lot)
 	vue_ope_lot=bilan_lot@requete@query # on recupere le data.frame
 	assign("bilan_lot",bilan_lot,envir_stacomi)#assign("bilan_lot",vue_ope_lot,envir_stacomi)
-	funout(get("msg",envir_stacomi)$Bilan_lot.3)
+	funout(get("msg",envir_stacomi)$Bilan_carlot.3)
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

@@ -1,5 +1,5 @@
 # Nom fichier :        RefListe   (classe)
-# Description          Classe permettant charger un choix dans une liste utilisée par un objetBilan
+# Description          Classe permettant charger un choix dans une liste utilisée par un objectBilan
 #' Class "RefListe"
 #' 
 #' Enables to load a "RefChoix" object fom a list given by a "Bilan" object
@@ -34,38 +34,37 @@ setClass(Class="RefListe",representation= representation(listechoix="character",
 
 
 #' Loading method for Refliste referential objects
-#' @returnType S4 object
 #' @return An object of class RefListe
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
-#'  objet=new("RefListe")
-#' charge(objet)
-setMethod("charge",signature=signature("RefListe"),definition=function(objet,vecteur,label) {
-			objet@listechoix=vecteur
-			objet@label=label
-			return(objet)
+#'  object=new("RefListe")
+#' charge(object)
+setMethod("charge",signature=signature("RefListe"),definition=function(object,vecteur,label) {
+			object@listechoix=vecteur
+			object@label=label
+			return(object)
 		})
 #' Choice method for RefListe referential objects
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
-#'  objet=new("RefListe")
+#'  object=new("RefListe")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet<-charge(objet)
-#' choix(objet)
-setMethod("choix",signature=signature("RefListe"),definition=function(objet,is.enabled=TRUE) {
+#' object<-charge(object)
+#' choix(object)
+setMethod("choix",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
 			hlist=function(h,...){
 					valeurchoisie=svalue(choix)
-					objet@listechoix<-objet@listechoix[list_libelle%in%valeurchoisie]
+					object@listechoix<-object@listechoix[list_libelle%in%valeurchoisie]
 					#dispose(car)
-					assign("refliste",objet,envir_stacomi)
-					funout(paste(objet@label,"\n"))
+					assign("refliste",object,envir_stacomi)
+					funout(paste(object@label,"\n"))
 				}
-				frame_list<<-gframe(objet@label)
+				frame_list<<-gframe(object@label)
 				# TODO à modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
 				add(group,frame_list)
-				list_libelle=fun_char_spe(objet@listechoix)
+				list_libelle=fun_char_spe(object@listechoix)
 				choix=gdroplist(items=list_libelle,container=frame_list,handler=hlist)
 				enabled(frame_list)<-is.enabled
 				gbutton("OK", container=frame_list,handler=hlist)

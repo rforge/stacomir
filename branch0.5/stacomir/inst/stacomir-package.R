@@ -28,7 +28,7 @@
 #' @examples
 #' 
 #' showClass("Bilan_lot")
-#' objet=new("Bilan_lot")
+#' object=new("Bilan_lot")
 #' 
 NULL
 
@@ -84,7 +84,7 @@ NULL
 #' @examples
 #' 
 #' showClass("Bilan_poids_moyen")
-#' objet=new("Bilan_poids_moyen")
+#' object=new("Bilan_poids_moyen")
 #' 
 NULL
 
@@ -529,17 +529,17 @@ NULL
 #' calcule,BilanMigrationConditionEnv-method calcule,BilanMigrationPar-method
 #' calcule,Bilan_taille-method calcule,Bilan_lot-method
 #' @docType methods
-#' @section Methods: \describe{ \item{list("signature(objet =
+#' @section Methods: \describe{ \item{list("signature(object =
 #' \"BilanMigration\")")}{ to be refined, performs both query and calculation,
 #' the calcul calls for \link{funBilanMigrationAnnuel} and
-#' \link{funSousListeBilanMigration} } \item{list("signature(objet =
+#' \link{funSousListeBilanMigration} } \item{list("signature(object =
 #' \"BilanMigrationConditionEnv\")")}{ collects object assigned to environement
 #' \code{envir_stacomi} and loads the \link{BilanConditionEnv} }
-#' \item{list("signature(objet = \"BilanMigrationPar\")")}{collects object
+#' \item{list("signature(object = \"BilanMigrationPar\")")}{collects object
 #' assigned to environment \code{envir_stacomi} and checks for validity}
-#' \item{list("signature(objet = \"BilanTaille\")")}{calls charge, does some
+#' \item{list("signature(object = \"BilanTaille\")")}{calls charge, does some
 #' computation on samples and subsamples and calls function funtraitementdate}
-#' \item{list("signature(objet = \"Bilan_Lot\")")}{performs all calculations
+#' \item{list("signature(object = \"Bilan_Lot\")")}{performs all calculations
 #' before use in graphical functions \code{fundensityBilan_lot}
 #' \code{funboxplotBilan_lot} \code{funpointBilan_lot}} }
 #' @keywords methods manip
@@ -572,80 +572,80 @@ NULL
 #' @docType methods
 #' @section Methods: \describe{
 #' 
-#' \item{list("signature(objet = \"Bilan_lot\")")}{ loading method for
+#' \item{list("signature(object = \"Bilan_lot\")")}{ loading method for
 #' Bilan_lot class }
 #' 
-#' \item{list("signature(objet = \"Bilan_poids_moyen\")")}{ loading method for
+#' \item{list("signature(object = \"Bilan_poids_moyen\")")}{ loading method for
 #' Bilan_poids_moyen class }
 #' 
-#' \item{list("signature(objet = \"Bilan_stades_pigm\")")}{loading method for
+#' \item{list("signature(object = \"Bilan_stades_pigm\")")}{loading method for
 #' Bilan_stades_pigm class }
 #' 
-#' \item{list("signature(objet = \"Bilan_taille\")")}{ loading method for
+#' \item{list("signature(object = \"Bilan_taille\")")}{ loading method for
 #' Bilan_taille }
 #' 
-#' \item{list("signature(objet = \"BilanConditionEnv\")")}{ loading method for
+#' \item{list("signature(object = \"BilanConditionEnv\")")}{ loading method for
 #' BilanCondtionEnv class }
 #' 
-#' \item{list("signature(objet = \"BilanEspeces\")")}{ loading method for
+#' \item{list("signature(object = \"BilanEspeces\")")}{ loading method for
 #' BilanEspeces verifies the content of objects and calls the connect method }
 #' 
-#' \item{list("signature(objet = \"BilanFonctionnementDC\")")}{ loading method
+#' \item{list("signature(object = \"BilanFonctionnementDC\")")}{ loading method
 #' for BilanFonctionnementDC class }
 #' 
-#' \item{list("signature(objet = \"BilanFonctionnementDF\")")}{ loading method
+#' \item{list("signature(object = \"BilanFonctionnementDF\")")}{ loading method
 #' for BilanFonctionnementDF class }
 #' 
-#' \item{list("signature(objet = \"BilanMigrationInterAnnuelle\")")}{ loading
+#' \item{list("signature(object = \"BilanMigrationInterAnnuelle\")")}{ loading
 #' method for BilanMigrationInterannuelle class }
 #' 
-#' \item{list("signature(objet = \"RefAnnee\")")}{ Loading method for RefAnnee
+#' \item{list("signature(object = \"RefAnnee\")")}{ Loading method for RefAnnee
 #' referential objects, selects year avalaible in the t_operation_ope table }
 #' 
-#' \item{list("signature(objet = \"RefCheckBox\")")}{ Loading method for
+#' \item{list("signature(object = \"RefCheckBox\")")}{ Loading method for
 #' ReCheckBox referential objects}
 #' 
-#' \item{list("signature(objet = \"RefChoix\")")}{ Loading method for Rechoix
+#' \item{list("signature(object = \"RefChoix\")")}{ Loading method for Rechoix
 #' referential objects}
 #' 
-#' \item{list("signature(objet = \"RefCoe\")")}{ loads the coefficients for the
+#' \item{list("signature(object = \"RefCoe\")")}{ loads the coefficients for the
 #' period defined in class The slots datedebut and datefin have to be filled
 #' before using charge }
 #' 
-#' \item{list("signature(objet = \"RefDC\")")}{ loads the counting devices of
+#' \item{list("signature(object = \"RefDC\")")}{ loads the counting devices of
 #' the control station }
 #' 
-#' \item{list("signature(objet = \"RefDF\")")}{ Loading method for DF
+#' \item{list("signature(object = \"RefDF\")")}{ Loading method for DF
 #' referential objects}
 #' 
-#' \item{list("signature(objet = \"RefListe\")")}{ Loading method for Refliste
+#' \item{list("signature(object = \"RefListe\")")}{ Loading method for Refliste
 #' referential objects}
 #' 
-#' \item{list("signature(objet = \"Refpar\")")}{ Loading method for Repar
+#' \item{list("signature(object = \"Refpar\")")}{ Loading method for Repar
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"Refparqual\")")}{ Loading method for
+#' \item{list("signature(object = \"Refparqual\")")}{ Loading method for
 #' Reparqual referential objects }
 #' 
-#' \item{list("signature(objet = \"Refparquan\")")}{ Loading method for
+#' \item{list("signature(object = \"Refparquan\")")}{ Loading method for
 #' Reparquan referential objects }
 #' 
-#' \item{list("signature(objet = \"RefPoidsMoyenPeche\")")}{ Loading method for
+#' \item{list("signature(object = \"RefPoidsMoyenPeche\")")}{ Loading method for
 #' RefPoidsMoyenPeche referential objects}
 #' 
-#' \item{list("signature(objet = \"RefStades\")")}{ Loading method for
+#' \item{list("signature(object = \"RefStades\")")}{ Loading method for
 #' RefStades referential objects}
 #' 
-#' \item{list("signature(objet = \"RefStationMesure\")")}{ Loading method for
+#' \item{list("signature(object = \"RefStationMesure\")")}{ Loading method for
 #' RefStationMesure referential object }
 #' 
-#' \item{list("signature(objet = \"RefTaxon\")")}{ Loading method for RefTaxon
+#' \item{list("signature(object = \"RefTaxon\")")}{ Loading method for RefTaxon
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"RefTextBox\")")}{ Loading method for
+#' \item{list("signature(object = \"RefTextBox\")")}{ Loading method for
 #' ReTextBox referential objects }
 #' 
-#' \item{list("signature(objet = \"RefMsg\")")}{ Loading method for RefMsg
+#' \item{list("signature(object = \"RefMsg\")")}{ Loading method for RefMsg
 #' referential objects loads the common table ts_messager_msr } }
 #' @keywords methods database
 NULL
@@ -667,27 +667,27 @@ NULL
 #' @docType methods
 #' @section Methods: \describe{
 #' 
-#' \item{list("signature(objet = \"Refpar\")")}{ Loading method for Repar
+#' \item{list("signature(object = \"Refpar\")")}{ Loading method for Repar
 #' referential objects searching only those parameters existing for a DC, a
 #' Taxon, and a stade}
 #' 
-#' \item{list("signature(objet = \"Refparqual\")")}{ Loading method for
+#' \item{list("signature(object = \"Refparqual\")")}{ Loading method for
 #' Reparqual referential objects searching only those parameters existing for a
 #' DC, a Taxon, and a stade }
 #' 
-#' \item{list("signature(objet = \"Refparquan\")")}{ Loading method for
+#' \item{list("signature(object = \"Refparquan\")")}{ Loading method for
 #' Reparquan referential objects searching only those parameters existing for a
 #' DC, a Taxon, and a stade }
 #' 
-#' \item{list("signature(objet = \"RefStades\")")}{ Loading method for
+#' \item{list("signature(object = \"RefStades\")")}{ Loading method for
 #' RefStades referential objects searching only those stages existing for a DC
 #' and a Taxon}
 #' 
-#' \item{list("signature(objet = \"RefTaxon\")")}{ Loading method for RefTaxon
+#' \item{list("signature(object = \"RefTaxon\")")}{ Loading method for RefTaxon
 #' referential objects searching only those stages existing for a DC and a
 #' Taxon }
 #' 
-#' \item{list("signature(objet = \"RefMsg\")")}{ Loading method for RefMsg
+#' \item{list("signature(object = \"RefMsg\")")}{ Loading method for RefMsg
 #' referential objects searching ref.ts_messagerlang_mrl for the lines
 #' corresponding to lang, the language chosen for the interface} }
 #' @keywords methods database
@@ -711,7 +711,7 @@ NULL
 #' @docType methods
 #' @section Methods: \describe{
 #' 
-#' \item{list("signature(objet = \"Refparqual\")")}{collexts possible values
+#' \item{list("signature(object = \"Refparqual\")")}{collexts possible values
 #' for a qualitative parameter, for instance for parameter sex would be values
 #' male & female } }
 #' @keywords methods database
@@ -721,9 +721,9 @@ NULL
 #' dc_selectionne=6
 #' taxon_selectionne=2038
 #' stade_selectionne="AGJ"
-#' objet=new("Refparqual")
-#' objet<-charge(objet)
-#' chargecomplement(objet)
+#' object=new("Refparqual")
+#' object<-charge(object)
+#' chargecomplement(object)
 #' }
 #' 
 NULL
@@ -747,7 +747,7 @@ NULL
 #' choix,Refpar-method choix,Refparqual-method choix,RefStades-method
 #' choix,RefStationMesure-method choix,RefTaxon-method choix,RefTextBox-method
 #' @docType methods
-#' @param objetBilan un objet bilan
+#' @param objectBilan un object bilan
 #' @param is.enabled a boolean indincating # see if deprecated
 #' @param nomassign the name to be asssigned in envir_stacomi
 #' @param funoutlabel the label that appears in funout
@@ -755,70 +755,70 @@ NULL
 #' @param preselect the number of the year selected in the gdroplist (integer)
 #' @note The choice method has for arguments a report (bilan) object (e.g) is
 #' called from a report Bilan(e.g Bilan_lot).  By default, the value of the
-#' objetbilan is null.  When it is not the method calls the daughter widgets
+#' objectbilan is null.  When it is not the method calls the daughter widgets
 #' (e.g. the dc widget will call species) and fills it with the method
 #' \code{\link{charge_avec_filtre-methods}} \enumerate{ \item
-#' \code{signature(objet = "RefDC")}the choice method assigns an object of
-#' class refDF in the environment envir_stacomi.  \item \code{signature(objet =
+#' \code{signature(object = "RefDC")}the choice method assigns an object of
+#' class refDF in the environment envir_stacomi.  \item \code{signature(object =
 #' "RefStades")} the method tests if the load is called from within a "bilan"
 #' object, and loads par, parqual, or parquan objects accordingly.  \item
-#' \code{signature(objet = "RefPar")} the choice method assigns an object of
+#' \code{signature(object = "RefPar")} the choice method assigns an object of
 #' class Refpar named refpar in the environment envir_stacomi \item
-#' \code{signature(objet = "RefParquan")} this method choix is also on sons
+#' \code{signature(object = "RefParquan")} this method choix is also on sons
 #' objects Refparquan, hence the parameters,however it was redefined in
 #' refparqual to load the possible values of qualitative parameters \item
-#' \code{signature(objet = "RefParqual")} the choice method assigns an object
+#' \code{signature(object = "RefParqual")} the choice method assigns an object
 #' of class Refparqual named refparqual in the environment envir_stacomi this
 #' method rewrites the method from Refpar, as it integrates a request of the
 #' possible values of qualitative parameters, hence the parameters, however it
 #' was redefined in refparqual to load the possible values of qualitative
-#' parameters.  \item \code{signature(objet = "RefList")} the choice method
+#' parameters.  \item \code{signature(object = "RefList")} the choice method
 #' assigns an object of class refList named refListe in the environment
 #' envir_stacomi }
 #' @section Methods: \describe{
 #' 
-#' \item{list("signature(objet = \"PasDeTemps\")")}{ choice method for class
+#' \item{list("signature(object = \"PasDeTemps\")")}{ choice method for class
 #' PasdeTemps, allows to choose the timestep }
 #' 
-#' \item{list("signature(objet = \"PasDeTempsJournalier\")")}{ choice method
+#' \item{list("signature(object = \"PasDeTempsJournalier\")")}{ choice method
 #' for daily timestep }
 #' 
-#' \item{list("signature(objet = \"RefAnnee\")")}{ choice method for RefAnnee
+#' \item{list("signature(object = \"RefAnnee\")")}{ choice method for RefAnnee
 #' referential objects assign the object in envir_stacomi }
 #' 
-#' \item{list("signature(objet = \"RefCheckBox\")")}{ choice method for
+#' \item{list("signature(object = \"RefCheckBox\")")}{ choice method for
 #' RefCheckBox referential objects }
 #' 
-#' \item{list("signature(objet = \"RefChoix\")")}{ Choice method for Refchoix
+#' \item{list("signature(object = \"RefChoix\")")}{ Choice method for Refchoix
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"RefDC\")")}{ choice method for RefDC }
+#' \item{list("signature(object = \"RefDC\")")}{ choice method for RefDC }
 #' 
-#' \item{list("signature(objet = \"RefDF\")")}{ Choice method for DF
+#' \item{list("signature(object = \"RefDF\")")}{ Choice method for DF
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"RefHorodate\")")}{ Choice method for
+#' \item{list("signature(object = \"RefHorodate\")")}{ Choice method for
 #' RefHorodate referential objects }
 #' 
-#' \item{list("signature(objet = \"RefListe\")")}{ Choice method for RefListe
+#' \item{list("signature(object = \"RefListe\")")}{ Choice method for RefListe
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"Refpar\")")}{ Choice method for Refpar
+#' \item{list("signature(object = \"Refpar\")")}{ Choice method for Refpar
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"Refparqual\")")}{ Choice method for
+#' \item{list("signature(object = \"Refparqual\")")}{ Choice method for
 #' Refparqual referential objects }
 #' 
-#' \item{list("signature(objet = \"RefStades\")")}{ Choice method for RefStades
+#' \item{list("signature(object = \"RefStades\")")}{ Choice method for RefStades
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"RefStationMesure\")")}{ Choice method for
+#' \item{list("signature(object = \"RefStationMesure\")")}{ Choice method for
 #' RefStationMesure referential object }
 #' 
-#' \item{list("signature(objet = \"RefTaxon\")")}{ Choice method for Reftaxon
+#' \item{list("signature(object = \"RefTaxon\")")}{ Choice method for Reftaxon
 #' referential objects }
 #' 
-#' \item{list("signature(objet = \"RefTextBox\")")}{ Choice method for
+#' \item{list("signature(object = \"RefTextBox\")")}{ Choice method for
 #' ReTextBox referential objects } }
 #' @keywords methods dynamic
 NULL
@@ -877,19 +877,19 @@ NULL
 #' 
 #' \describe{
 #' 
-#' \item{list("signature(objet = \"BilanMigrationInterannuelle\")")}{}
+#' \item{list("signature(object = \"BilanMigrationInterannuelle\")")}{}
 #' 
-#' \item{list("signature(objet = \"BilanConditionEnv\")")}{}
+#' \item{list("signature(object = \"BilanConditionEnv\")")}{}
 #' 
-#' \item{list("signature(objet = \"Bilan_stades_pigm\")")}{will try to get data
+#' \item{list("signature(object = \"Bilan_stades_pigm\")")}{will try to get data
 #' for the temperature (refstation) only if retrocalcul is checked by default
 #' it is note when launching}
 #' 
-#' \item{list("signature(objet = \"Bilan_taille\")")}{}
+#' \item{list("signature(object = \"Bilan_taille\")")}{}
 #' 
-#' \item{list("signature(objet = \"Bilan_Poids_Moyen\")")}{}
+#' \item{list("signature(object = \"Bilan_Poids_Moyen\")")}{}
 #' 
-#' \item{list("signature(objet = \"BilanEspeces\")")}{} }
+#' \item{list("signature(object = \"BilanEspeces\")")}{} }
 #' @keywords methods
 NULL
 
@@ -927,7 +927,7 @@ NULL
 #' @name getvalue-methods
 #' @aliases getvalue getvalue-methods getvalue,Refperiode-method
 #' @docType methods
-#' @section Methods: \describe{ \item{list("signature(objet =
+#' @section Methods: \describe{ \item{list("signature(object =
 #' \"Refperiode\")")}{ Returns the POSIXt value of a given name }}
 #' @keywords methods
 NULL
@@ -945,7 +945,7 @@ NULL
 #' @name graphe-methods
 #' @aliases graphe-methods graphe graphe,BilanMigrationPar-method
 #' @docType methods
-#' @section Methods: \describe{ \item{list("signature(objet =
+#' @section Methods: \describe{ \item{list("signature(object =
 #' \"BilanMigrationPar\")")}{ method with a parameter choix to join several
 #' graphes called by several handlers (buttons) } }
 #' @keywords methods

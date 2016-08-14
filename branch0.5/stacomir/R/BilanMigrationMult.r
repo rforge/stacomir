@@ -5,23 +5,32 @@
 #' \code{new("BilanMigrationMult",
 #' dc=new("RefDC"),taxons=("RefTaxon"),stades=new("RefStades"),pasDeTemps=new("PasDeTempsJournalier"),data=data.frame(),calcdata=list(),
 #' coef_conversion=data.frame()}.  
-#' @note This class makes different calculations than BilanMigration, it does not handle escapement coefficients,
-#' it uses quantities other than numbers if necessary (only filled in for glass eel in the connect method)
+#' @note A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
+#' called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
+#' On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
+#' Operations are monitoring during a period. To each operation, several species of fishes can be recorded (samples). In the case of migratory 
+#' fishes the stage of development is important as it may indicate generic migrations, to and fro, between the river and the sea.
+#' Hence a Multiple Migration Bilan is built from several one or several counting devices (DC), one or several Taxa (Taxon), one or several stages
+#' (stage). The migration can be also recorded not as numbers, but in the case of glass eels, as weight, which will be later transformed to number, 
+#' from daily conversion coefficients. The methods in this class test whether the counts are numbers or another type of quantity.
+#' This class makes different calculations than BilanMigration, it does not handle escapement coefficients,
+#' it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
 #' @name BilanMigrationMult-class
 #' @aliases BilanMigrationMult BilanMigrationMult-class
-#' @slot dc="RefDC" an objet of class RefDC
-#' @slot taxons="RefTaxon"
-#' @slot stades="RefStades"
-#' @slot pasDeTemps="PasDeTempsJournalier"
-#' @slot data="data.frame"
-#' @slot calcdata="list" of calculated daily data, one per dc
-#' @slot coef_conversion="data.frame"
+#' @slot dc An object of class \code{RefDC}
+#' @slot taxons An object of class \code{RefTaxon}
+#' @slot stades An object of class \code{RefStades}
+#' @slot pasDeTemps An object of class \code{PasDeTempsJournalier}
+#' @slot data A data.frame containing raw data filled by the connect method
+#' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
+#' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
+#' method if any weight are found in the data slot.
 #' @examples
 #' 
 #' showClass("BilanMigrationMult")
 #' bilanMigration= new("BilanMigrationMult")
 #' @export
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="BilanMigrationMult",
 		representation=
 				representation(dc="RefDC",
@@ -43,8 +52,6 @@ setClass(Class="BilanMigrationMult",
 		) 
 )
 
-#' validity check for class BilanMigrationMult
-#' @describeIn BilanMigrationMult
 setValidity("BilanMigrationMult",function(object)
 		{
 			rep1=length(object@dc)>=1
@@ -58,8 +65,10 @@ setValidity("BilanMigrationMult",function(object)
 		}   
 )
 
-#' initialize method for BilanMigrationMult, allows a more elaborate constuctor than new
-#' @describeIn BilanMigrationMult
+#' initialize method for BilanMigrationMult
+#' 
+#'  allows a more elaborate constuctor than new through use of charge methods
+#' of Referential objects in the class
 setMethod("initialize", "BilanMigrationMult", function(.Object, ...) {
 			# callNextMethod() calls the method first inherited method, ie the
 			# method that would have been called if the current method did not exist
@@ -77,12 +86,12 @@ setMethod("initialize", "BilanMigrationMult", function(.Object, ...) {
 
 
 #' charge method for BilanMigrationMult
+#' 
+#' Used by the graphical interface to collect and test objects in the environment envir_stacomi
 #' @return BilanMigrationMult with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @family charge methods
-#' @describeIn BilanMigrationMult
-setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
-			bilanMigrationMult<-objet
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
+			bilanMigrationMult<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationMult@dc<-get("refDC",envir_stacomi)
 			} else {
@@ -116,47 +125,56 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 
 
 #' command line interface for BilanMigrationMult class
+#' 
 #' The load method fills in the data slot for RefDC, RefTaxon, RefStades and then 
-#' uses the load methods of these object to "select" the data to be used later.
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @describeIn BilanMigrationMult
-#' @family load functions
+#' uses the load methods of these object to "select" the data.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("load",signature=signature("BilanMigrationMult"),definition=function(objet,dc,taxons,stades,datedebut,datefin,...){
-			bilanMigrationMult<-objet
+#' @examples
+#'  \dontrun{
+#' bilanMigrationMult=load(bilanMigrationMult,
+#'  dc=c(5,6,12),
+#'  taxons=c("Anguilla anguilla"),
+#'  stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
+#' bilanMigrationMult=calcule(bilanMigrationMult)
+#' hbilanMigrationMultgraph()
+#' hbilanMigrationMultgraph2()
+#' hbilanMigrationMultgraph3()
+#' }
+setMethod("load",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
+			bilanMigrationMult<-object
 			fonctionnementDC=new("BilanFonctionnementDC")
 			# appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
 			assign("fonctionnementDC",fonctionnementDC,envir = envir_stacomi)
 			bilanMigrationMult@dc=charge(bilanMigrationMult@dc)
 			# loads and verifies the dc
-			bilanMigrationMult@dc<-load(objet=bilanMigrationMult@dc,dc)
+			bilanMigrationMult@dc<-load(object=bilanMigrationMult@dc,dc)
 			# only taxa present in the bilanMigration are used
-			bilanMigrationMult@taxons<-charge_avec_filtre(objet=bilanMigrationMult@taxons,bilanMigrationMult@dc@dc_selectionne)			
+			bilanMigrationMult@taxons<-charge_avec_filtre(object=bilanMigrationMult@taxons,bilanMigrationMult@dc@dc_selectionne)			
 			bilanMigrationMult@taxons<-load(bilanMigrationMult@taxons,taxons)
-			bilanMigrationMult@stades<-charge_avec_filtre(objet=bilanMigrationMult@stades,bilanMigrationMult@dc@dc_selectionne,bilanMigrationMult@taxons@data$tax_code)	
+			bilanMigrationMult@stades<-charge_avec_filtre(object=bilanMigrationMult@stades,bilanMigrationMult@dc@dc_selectionne,bilanMigrationMult@taxons@data$tax_code)	
 			bilanMigrationMult@stades<-load(bilanMigrationMult@stades,stades)
 			bilanMigrationMult@pasDeTemps<-load(bilanMigrationMult@pasDeTemps,datedebut,datefin)
 			assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
 			return(bilanMigrationMult)
 		})
 
-#' calcule method for BilanMigrationMult, does the calculation once data are filled 
+#' calcule method for BilanMigrationMult
+#' 
+#'  does the calculation once data are filled 
 #' in with the connect method
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
 #' @note The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigrationMult with slots filled by user choice
-#' @exportMethod 
-#' @family calcule methods
-#' @describeIn BilanMigrationMult
-setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(objet,negative=FALSE,...){ 
+#' @export
+setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,...){ 
 			
-			bilanMigrationMult<-objet
+			bilanMigrationMult<-object
 			bilanMigrationMult=connect(bilanMigrationMult)
-			if (nrow(bilanMigrationMult@data)==0) {
-				funout("Message temporaire, Aucune donnée")
-			}
+			cat(stringr::str_c("nrow=",nrow(bilanMigrationMult@data)))
+			
 			bilanMigrationMult@data$duree=difftime(bilanMigrationMult@data$ope_date_fin,bilanMigrationMult@data$ope_date_debut,unit="days")
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
@@ -174,10 +192,11 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					data<-fun_bilanMigrationMult_Overlaps(time.sequence = time.sequence, datasub = datasub,negative=negative)
 					# pour compatibilité avec les bilanMigration
 					data$taux_d_echappement=-1					
-					lestableaux[[str_c("dc_",dic)]][["data"]]<-data
-					lestableaux[[str_c("dc_",dic)]][["method"]]<-"overlaps"
+					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
+					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"overlaps"
 					contient_poids<-"poids"%in%datasub$type_de_quantite
-					lestableaux[[str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
+					lestableaux[[stringr::str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
+					lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 					if (contient_poids){
 						coe<-bilanMigrationMult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
 						data$coe_date_debut<-as.Date(data$debut_pas)
@@ -186,7 +205,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 						data <-fun_weight_conversion(tableau=data,duree=bilanMigrationMult@time.sequence)
 					}
 					
-					lestableaux[[str_c("dc_",dic)]][["data"]]<-data
+					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					
 				} else {
 					#----------------------
@@ -195,9 +214,11 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					data<-fun_bilanMigrationMult(time.sequence = time.sequence,datasub=datasub,negative=negative)
 					data$taux_d_echappement=-1
 					data$coe_valeur_coefficient=NA
-					lestableaux[[str_c("dc_",dic)]][["data"]]<-data
-					lestableaux[[str_c("dc_",dic)]][["method"]]<-"sum"
-					lestableaux[[str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
+					
+					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
+					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"sum"
+					lestableaux[[stringr::str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
+					lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 				}
 			}	# end for dic
 			# TODO developper une méthode pour sumneg 
@@ -208,15 +229,15 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			return(bilanMigrationMult)
 		})
 
-#' connect method for BilanMigrationMult,
+#' connect method for BilanMigrationMult
+#' 
+#' 
 #' a single query collects data from the database
 #' @return BilanMigrationMult with slot @data filled from the database
-#' @exportMethod 
-#' @family connect methods
-#' @describeIn BilanMigrationMult
-setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
+#' @export
+setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
 			# récuperation du BilanMigration
-			bilanMigrationMult<-objet
+			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug
 			req=new("RequeteODBCwheredate")
@@ -229,7 +250,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			tax=vector_to_listsql(bilanMigrationMult@taxons@data$tax_code)
 			std=vector_to_listsql(bilanMigrationMult@stades@data$std_code)
 			sch=get("sch",envir=envir_stacomi)
-			req@select = str_c("SELECT 
+			req@select = stringr::str_c("SELECT 
 							ope_identifiant,
 							lot_identifiant,
 							ope_date_debut,
@@ -251,7 +272,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			# removing character marks
 			req@select<-str_replace_all(req@select,"[\r\n\t]" , "")
 			# the where clause is returned by ODBCWheredate
-			req@and=str_c(" AND ope_dic_identifiant in",dc,
+			req@and=stringr::str_c(" AND ope_dic_identifiant in",dc,
 					" AND lot_tax_code in ",tax,
 					" AND lot_std_code in ",std,
 					" AND lot_lot_identifiant IS NULL")
@@ -279,21 +300,36 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			
 		})				
 
-#' handler du calcul hBilanMigrationgraph
-#' appelle les fonctions fungraph pour faire le bilan des migrations
-#' et permet la sauvegarde des bilans journaliers dans la base
-#' @note pb si autre chose que journalier les pas de temps ont été contraints à des pas de temps journaliers pour ce graphique
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @seealso BilanMigrationMult
 
-hbilanMigrationMultgraph = function(h=null,...) {
+ 
+#' handler for graphe method in BilanMigrationMult class
+#' 
+#' internal use
+#' @param h handler
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
-		bilanMigration<-get("bilanMigrationMult",envir_stacomi)
+		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
+	plot(bilanMigrationMult)
+}
+
+
+#' Main plot method
+#' 
+#' calls \link{fungraph} et \link{fungraph_civelle} functions to plot as many "bilanmigration"
+#' as needed
+#' @note the function will test for the existence of data for one dc, one taxa, and one stage
+#' before running
+#' @param x the bilanMigration
+#' @param  y=null to conform with plot method 
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x,y=null,...){ 
+	bilanMigrationMult<-x
 	lestaxons= bilanMigrationMult@taxons@data
 	lesstades= bilanMigrationMult@stades@data
 	lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
@@ -302,75 +338,79 @@ hbilanMigrationMultgraph = function(h=null,...) {
 	for (dcnum in 1:length(lesdc)){
 		for (taxonnum in 1:nrow(lestaxons)){
 			for (stadenum in 1:nrow(lesstades)){
-		
+				
 				taxon=lestaxons[taxonnum,"tax_nom_latin"]
 				stade=lesstades[stadenum,"std_libelle"]
 				dc=lesdc[dcnum]
-							
+				
 				# préparation du jeu de données pour la fonction fungraph_civ
 				#developpée pour la classe BilanMigration
-				data<-bilanMigrationMult@calcdata[[str_c("dc_",dc)]][["data"]]
+				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
 								data$lot_std_code==lesstades[stadenum,"std_code"],]
 				
-				if (nrow(data)>0){
-				
-					funout(paste("dc=",dc,
+				if (!is.null(data)){
+					if	(nrow(data)>0){
+						
+						funout(paste("dc=",dc,
+										taxon,
+										stade))	
+						if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
+						data_without_hole<-merge(
+								data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+										debut_pas=bilanMigrationMult@time.sequence),
+								data,
+								by=c("No.pas","debut_pas"),
+								all.x=TRUE
+						)
+						data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
+						data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
+						data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
+						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+						if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
+								taxon=="Anguilla anguilla"&
+								stade=="civelle") {
+							#----------------------------------
+							# bilan migration avec poids (civelles
+							#-----------------------------------------
+							x11()
+							fungraph_civelle(bilanMigration=bilanMigrationMult,
+									table=data_without_hole,
+									duree=bilanMigrationMult@time.sequence,
+									taxon=taxon,
+									stade=stade,
+									dc=dc)
+						}	else {
+							#----------------------------------
+							# bilan migration standard
+							#-----------------------------------------
+							x11()
+							fungraph(bilanMigration=bilanMigrationMult,
+									tableau=data_without_hole,
+									duree=bilanMigrationMult@time.sequence,
 									taxon,
-									stade))	
-					if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
-					data_without_hole<-merge(
-							data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
-									debut_pas=bilanMigrationMult@time.sequence),
-							data,
-							by=c("No.pas","debut_pas"),
-							all.x=TRUE
-					)
-					data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
-					data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
-					data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
-					data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
-					if (bilanMigrationMult@calcdata[[str_c("dc_",dc)]][["contient_poids"]]&
-							taxon=="Anguilla anguilla"&
-							stade=="civelle") {
-					#----------------------------------
-						# bilan migration avec poids (civelles
-					#-----------------------------------------
-						x11()
-						fungraph_civelle(bilanMigration=bilanMigrationMult,
-								table=data_without_hole,
-								duree=bilanMigrationMult@time.sequence,
-								taxon=taxon,
-								stade=stade,
-								dc=dc)
-					}	else {
-						#----------------------------------
-						# bilan migration standard
-						#-----------------------------------------
-						x11()
-						fungraph(bilanMigration=bilanMigrationMult,
-								tableau=data_without_hole,
-								duree=bilanMigrationMult@time.sequence,
-								taxon,
-								stade,
-								dc)
-					}
-				} # end nrow(data)>0		
-				# ecriture du bilan journalier, ecrit aussi le bilan mensuel
-				#fn_EcritBilanJournalier(bilanMigrationMult)
-				
+									stade,
+									dc)
+						}
+					} # end nrow(data)>0		
+					# ecriture du bilan journalier, ecrit aussi le bilan mensuel
+					#fn_EcritBilanJournalier(bilanMigrationMult)
+					
+				}
 			}
 		}
 	}
 	#&&&&&&&&&&&&&&&&&&&&&&&&&fin de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 	
-}
-#' handler du graphique BilanMigrationMult
-#' realise le calcul du bilan migration, l'ecrit dans l'environnement envir_stacomi
-#' traite eventuellement les quantites de lots (si c'est des civelles)
+})
+
+
+#' handler for calculations
+#' 
+#'  internal use for graphical interface
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso BilanMigrationMult
 hbilanMigrationMultcalc=function(h=null,...){
 	bilanMigrationMult<-get("bilanMigrationMult",envir=envir_stacomi)
@@ -380,81 +420,238 @@ hbilanMigrationMultcalc=function(h=null,...){
 }
 
 #' handler du calcul hBilanMigrationgraph2
-#' appelle les fonctions fungraph pour faire un graphe annuel des 
+#' 
 #' cumuls de migration au cours du temps
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
-		bilanMigration<-get("bilanMigrationMult",envir_stacomi)
+		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
-	stade= as.character(bilanMigration@stades@data$std_libelle)
-	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	if (bilanMigration@pasDeTemps@dureePas==86400 & bilanMigration@pasDeTemps@dureePas==86400) {
-		bilanMigration@data$duree=bilanMigration@duree
-		# pour sauvegarder sous excel
-		bilanMigration@data<-funtraitementdate(bilanMigration@data,
-				nom_coldt="duree",
-				annee=FALSE,
-				mois=TRUE,
-				quinzaine=TRUE,
-				semaine=TRUE,
-				jour_an=TRUE,
-				jour_mois=FALSE,
-				heure=FALSE)
-		bilanMigration@data$Cumsum=cumsum(bilanMigration@data$Effectif_total)
-		# pour sauvegarder sous excel
-		annee=unique(strftime(as.POSIXlt(bilanMigration@duree),"%Y"))
-		dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne]) 
-		update_geom_defaults("step", aes(size = 3))
-		p<-ggplot(bilanMigration@data)+
-				geom_step(aes(x=duree,y=Cumsum,colour=mois))+
-				ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-				opts(plot.title=theme_text(size=10,colour="blue"),
-						title=paste(get("msg",envir_stacomi)$BilanMigration.7,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))   
-		print(p)	
-	} else {
-		funout(get("msg",envir_stacomi)$BilanMigration.8)
-	}
+	cumplot(bilanMigrationMult)
 }
 
-#' handler du calcul BilanMigrationstat : traitements 
-#' appelle les fonctions funstat et funtable pour faire le bilan des migrations
-#' dans des fichiers csv
+
+#' Method to create Cumulated graphs for BilanMigrationMult. 
+#' 
+#' Data are summed per day for different dc taxa and stages
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("cumplot",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
+	bilanMigrationMult<-object		
+	lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
+	lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
+	grdata<-data.frame()
+	for (i in 1:length(bilanMigrationMult@calcdata)){
+		data<-bilanMigrationMult@calcdata[[i]]$data
+		# extracting similar columns (not those calculated)
+		data<-data[,c(
+						"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+						"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+				)]
+		grdata<-rbind(grdata,data)
+	}
+	names(grdata)<-tolower(names(grdata))
+	grdata<-sqldf("select sum(effectif_total) as effectif_total,
+					\"no.pas\",
+					debut_pas
+					from grdata
+					group by debut_pas,\"no.pas\"
+					order by debut_pas")
+	grdata_without_hole<-merge(
+			data.frame(no.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+					debut_pas=bilanMigrationMult@time.sequence),
+			grdata,
+			by=c("no.pas","debut_pas"),
+			all.x=TRUE
+	)
+	grdata_without_hole<-funtraitementdate(grdata_without_hole,
+			nom_coldt="debut_pas",
+			annee=FALSE,
+			mois=TRUE,
+			quinzaine=TRUE,
+			semaine=TRUE,
+			jour_an=TRUE,
+			jour_mois=FALSE,
+			heure=FALSE)
+	grdata_without_hole<-grdata_without_hole[order(grdata_without_hole$no.pas),]
+	grdata_without_hole$effectif_total[is.na(grdata_without_hole$effectif_total)]<-0
+	
+	grdata_without_hole$cumsum=cumsum(grdata_without_hole$effectif_total)
+	annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
+	dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
+	update_geom_defaults("step", aes(size = 3))
+	
+	p<-ggplot(grdata_without_hole)+
+			geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
+			ylab(get("msg",envir_stacomi)$BilanMigration.6)+
+			theme(plot.title=element_text(size=10,colour="blue"))+
+			ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") )  
+	print(p)	
+	
+})
+
+
+#' hanler
+#' 
+#' internal use
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+hbilanMigrationMultgraph3 = function(h=null,...) {
+	if (exists("bilanMigrationMult",envir_stacomi)) {
+		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
+	} else {      
+		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+	}
+	plot1(bilanMigrationMult)
+}
+
+
+#' Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)
+#' 
+#' Tests are done to get the structure of 
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export 
+setMethod("plot1",signature=signature("BilanMigrationMult"),definition=function(object,...){
+	bilanMigrationMult<-object
+	lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
+	lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
+	grdata<-data.frame()
+	for (i in 1:length(bilanMigrationMult@calcdata)){
+		data<-bilanMigrationMult@calcdata[[i]]$data
+		# extracting similar columns (not those calculated)
+		data<-data[,c(
+						"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+						"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+				)]
+		grdata<-rbind(grdata,data)
+	}
+	names(grdata)<-tolower(names(grdata))	
+	grdata<-funtraitementdate(grdata,
+			nom_coldt="debut_pas",
+			annee=FALSE,
+			mois=TRUE,
+			quinzaine=TRUE,
+			semaine=TRUE,
+			jour_an=TRUE,
+			jour_mois=FALSE,
+			heure=FALSE)
+	annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
+	dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
+	grdata<-chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
+	grdata$DC<-as.factor(grdata$DC)
+	grdata$taxon<-as.factor(grdata$taxon)
+	if (length(unique(grdata$taxon))==1){
+		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+				geom_bar(position="stack", stat="identity")+
+				facet_grid(DC~.,scale="free_y")+
+				scale_fill_brewer(palette="Set2")
+	} else if  (length(unique(grdata$stade))==1){
+		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
+				geom_bar(position="stack", stat="identity")+
+				facet_grid(DC~.,scale="free_y")+
+				scale_fill_brewer(palette="Set2")	
+	} else {
+		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+				geom_bar(position="stack", stat="identity")+
+				facet_grid(DC+taxon~.,scale="free_y")+
+				scale_fill_brewer(palette="Set2")		
+	}
+	
+	
+	
+	print(p)	
+	
+})
+#' handler function 
+#' 
+#' internal use
+#' @param h 
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigrationMult=function(h=null,...) {
 	funout("Tableau de sortie \n")
-	if (exists("bilanMigration",envir_stacomi)) 
+	if (exists("bilanMigrationMult",envir_stacomi)) 
 	{
-		bilanMigration<-get("bilanMigration",envir_stacomi)
+		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} 
 	else 
 	{      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
-	stade= as.character(bilanMigration@stades@data$std_libelle)
-	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
-	resum=funstat(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC)
-	funtable(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC,resum)
+	summary(bilanMigrationMult)
 }
+
+#' summary for bilanMigrationMult 
+#' calls functions funstat and funtable to create migration overviews
+#' and generate csv and html output in the user data directory
+#' 
+#' @param ... 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("summary",signature=signature("BilanMigrationMult"),definition=function(object,...){
+	bilanMigrationMult<-object		
+	lestaxons= bilanMigrationMult@taxons@data
+	lesstades= bilanMigrationMult@stades@data
+	lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
+	funout(get("msg",envir_stacomi)$BilanMigration.9)
+	#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	for (dcnum in 1:length(lesdc)){
+		for (taxonnum in 1:nrow(lestaxons)){
+			for (stadenum in 1:nrow(lesstades)){
+				
+				taxon=lestaxons[taxonnum,"tax_nom_latin"]
+				stade=lesstades[stadenum,"std_libelle"]
+				DC=lesdc[dcnum]
+				
+				# préparation du jeu de données pour la fonction fungraph_civ
+				#developpée pour la classe BilanMigration
+				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
+								data$lot_std_code==lesstades[stadenum,"std_code"],]
+				
+				if (!is.null(data)){
+					if	(nrow(data)>0){
+						
+						if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
+						data_without_hole<-merge(
+								data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+										debut_pas=bilanMigrationMult@time.sequence),
+								data,
+								by=c("No.pas","debut_pas"),
+								all.x=TRUE
+						)
+						data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
+						data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
+						data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
+						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+						
+						resum=funstat(tableau=data_without_hole,duree=bilanMigrationMult@time.sequence,taxon,stade,DC)
+						funtable(tableau=data_without_hole,duree=bilanMigrationMult@time.sequence,taxon,stade,DC,resum)
+						
+					}
+				}
+			}
+		}
+	}
+	
+	
+})
 
 #' handler to print the command line
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 houtBilanMigrationMult=function(h=null,...) {
 	if (exists("refStades",envir_stacomi)) 	{
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
-		out(bilanMigrationMult)
+		print(bilanMigrationMult)
 	} 
 	else 
 	{      
@@ -463,51 +660,47 @@ houtBilanMigrationMult=function(h=null,...) {
 }
 
 #' Method to print the command line of the object
-#' @name out
-#' @alias out,-method
-#' 
-#' @returnType 
 #' @return NULL
-#' 
 #' @author cedric.briand
 #' @docType methods
 #' @export
-setMethod("out",signature=signature("BilanMigrationMult"),definition=function(objet,...){ 
+setMethod("print",signature=signature("BilanMigrationMult"),definition=function(x,...){ 
 			sortie1<-"bilanMigrationMult=new(bilanMigrationMult)\n"
-			sortie2<-str_c("bilanMigrationMult=load(bilanMigrationMult,",
-					"dc=c(",str_c(objet@dc@dc_selectionne,collapse=","),"),",
-					"taxons=c(",str_c(shQuote(objet@taxons@data$tax_nom_latin),collapse=","),"),",
-					"stades=c(",str_c(shQuote(objet@stades@data$std_code),collapse=","),"),",			
-					"datedebut=",shQuote(strftime(objet@pasDeTemps@dateDebut,format="%d/%m/%Y")),
-					",datefin=",shQuote(strftime(DateFin(objet@pasDeTemps),format="%d/%m/%Y")),")")
+			sortie2<-stringr::str_c("bilanMigrationMult=load(bilanMigrationMult,",
+					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
+					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
+					"stades=c(",stringr::str_c(shQuote(x@stades@data$std_code),collapse=","),"),",			
+					"datedebut=",shQuote(strftime(objext@pasDeTemps@dateDebut,format="%d/%m/%Y")),
+					",datefin=",shQuote(strftime(DateFin(x@pasDeTemps),format="%d/%m/%Y")),")")
 			# removing backslashes
-			funout(str_c(sortie1,sortie2))
+			funout(stringr::str_c(sortie1,sortie2))
 			return(NULL)
 		})
 
-#' Function to calculate daily migration from migration monitoring whose length is more than one day
+#' Function to calculate daily migration using overlaps functions
+#' 
+#' Function to calculate daily migration from migration monitoring whose length is more than one day,
+#' this calculation relies on the (false) assumption that migration is evenly spread over time. 
 #' @param time.sequence the time sequence to be filled in with new data
 #' @param datasub the initial dataset
 #' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
-#' @returnType data.frame
-#' @return A data.frame, with numbers split from operation period
 #' to time.sequence period and summed over the new sequence. A migration operation spanning several days will
 #' be converted to "daily" values assuming that the migration was regular over time. The function
 #' returns one row per taxa, stages, counting device. It does not account for the destination of taxa. It returns
 #' separate rows for quantities and numbers. Several columns are according to the type of measure (MESURE, CALCULE, PONCTUEL or EXPERT).
 #' @seealso calcule,BilanMigrationMult-method
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALSE) {
 	mat1<-as.data.frame(cbind(as.numeric(time.sequence),as.numeric(time.sequence+as.difftime(1,units="days"))))
 	mat2<-as.data.frame(cbind(as.numeric(datasub$ope_date_debut),as.numeric(datasub$ope_date_fin)))
 	rownames(mat1)<-as.character(time.sequence)
 	rownames(mat2)<-datasub$lot_identifiant
-	imat1<-Intervals(mat1)
+	imat1<-intervals::Intervals(mat1)
 	closed(imat1)<-c(FALSE,FALSE)
-	imat2<-Intervals(mat2)
+	imat2<-intervals::Intervals(mat2)
 	closed(imat2)<-c(FALSE,FALSE)
-	listei<-interval_overlap(imat2,imat1)
+	listei<-intervals::interval_overlap(imat2,imat1)
 	listei2<-listei # copie de la liste pour l'écraser
 	for (i in 1:length(listei)){
 		vec<-listei[[i]]
@@ -549,6 +742,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	dfts<-merge(df.ts,df,by="ts_id")
 	datasub1<-merge(dfts,datasub,by="lot_identifiant")
 	# ci dessous pour faire du group by c'est quand même bien de passer par sqldf
+	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis à des entiers
 	if (negative){
 		datasub2<-sqldf("SELECT  debut_pas,
 						fin_pas,
@@ -607,16 +801,17 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 
 
 
+#' Calculate daily migration by simple repartition
+#' 
 #' Function to calculate daily migration from migration monitoring whose length is less than one day,
 #'  typically video recording whose period are instant events.
 #' @param time.sequence the time sequence to be filled in with new data
 #' @param datasub the initial dataset
 #' #' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
-#' @returnType data.frame
 #' @return A data.frame with number summed over over the time.sequence. 
 #' The function returns the same output than \link{fun_bilanMigrationMult_Overlaps}
 #' but is intended to work faster
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 	df.ts=data.frame(debut_pas=time.sequence,
@@ -683,9 +878,8 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' performs a query to collect the conversion coefficients
 #' @param tableau 
 #' @param duree 
-#' @returnType data.frame
-#' @return tableau
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @return tableau, the data frame
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_weight_conversion=function(tableau,duree) { 
 	funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))

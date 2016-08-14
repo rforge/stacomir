@@ -27,7 +27,7 @@
 #' allow daily reports to be saved into the database when graph is launched
 #' 
 #' 
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 funSousListeBilanMigration=function(bilanMigration) {
 	# *********************
 	# Boucle sur chacune des periodes du pas de temps
@@ -195,7 +195,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				
 				# on multiplie le vecteur coeff par le vecteur des periodes pour obtenir une moyenne ponderee
 				coef = as.double(coef * periode)
-				# coef est un objet difftime avec methode sum non definie si je ne marque pas as.double
+				# coef est un object difftime avec methode sum non definie si je ne marque pas as.double
 				lescoeff=list()
 				# lescoeff = une liste dont le nom correspond au type et qui contient le coeff pondere
 				# on passe en revue les type de coefficient de conversion possible

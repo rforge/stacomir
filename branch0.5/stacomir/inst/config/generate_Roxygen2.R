@@ -1,0 +1,35 @@
+# TODO: Add comment
+# 
+# Author: cedric.briand
+###############################################################################
+
+install.packages("roxygen2")
+install.packages("Rd2roxygen") # reverse documentation
+####################"
+# reversing documentation
+######################"
+require(Rd2roxygen)
+setwd("F:/workspace/stacomir/branch0.5/")
+Rd2roxygen(pkg="stacomir")
+#########"
+# pour les classes S4
+##########
+files<-list.files("F:/workspace/stacomir/branch0.5/stacomir/man")
+files<-files[grep("class",files)]
+for (i in 1:length(files)){
+parse_and_save(stringr::str_c("F:/workspace/stacomir/branch0.5/stacomir/man/",files[i]),
+		gsub(".rd","",stringr::str_c("F:/temp/",files[i])))
+}
+#########################""
+# Building documentation
+######################
+#use either :
+require(devtools)
+document("F:/workspace/stacomir/branch0.5/stacomir")
+# or :
+vignette("roxygen2")
+require(roxygen2)
+roxygen2::roxygenise("F:/workspace/stacomir/branch0.5/stacomir");warnings()[1:10]
+# Après la compilation, dans le namespace virer ???
+export("object=new(\"RefMsg\")")
+exportMethods("")

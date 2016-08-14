@@ -35,7 +35,7 @@
 #' @examples
 #' 
 #' showClass("Bilan_taille")
-#' @exportClass 
+#' @export 
 setClass(Class="Bilan_taille",
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -57,32 +57,31 @@ setClass(Class="Bilan_taille",
 				requete=new("RequeteODBC")))
 
 #' connect method for class Bilan_taille
-#' @returnType object of class Bilan_taille
 #' @return bilan_taille with requete field filled
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("connect",signature=signature("Bilan_taille"),definition=function(objet,h) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("connect",signature=signature("Bilan_taille"),definition=function(object,h) {
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
-			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			if (objet@parquan@data$par_nom=="aucune" & objet@parqual@data$par_nom=="aucune") {
+			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			if (object@parquan@data$par_nom=="aucune" & object@parqual@data$par_nom=="aucune") {
 				funout(get("msg",envir=envir_stacomi)$Bilan_taille.1,arret=TRUE)
-			} else if (objet@parquan@data$par_nom=="aucune") {
+			} else if (object@parquan@data$par_nom=="aucune") {
 				#caracteristique qualitative uniquement
 				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual" ,
-						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
-						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
-						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
-						" AND car_par_code = '",objet@parqual@data$par_code,"'" ,
-						" AND (ope_date_debut, ope_date_fin) OVERLAPS (DATE '",objet@datedebut,"',DATE '",objet@datefin,"') " ,
+						" WHERE ope_dic_identifiant ='",object@dc@dc_selectionne,"'",
+						" AND lot_tax_code = '",object@taxons@data$tax_code,"'" ,
+						" AND lot_std_code = '",object@stades@data$std_code,"'" ,
+						" AND car_par_code = '",object@parqual@data$par_code,"'" ,
+						" AND (ope_date_debut, ope_date_fin) OVERLAPS (DATE '",object@datedebut,"',DATE '",object@datefin,"') " ,
 						" ORDER BY ope_date_debut",sep="")
 				
-			} else if (objet@parqual@data$par_nom=="aucune") {
+			} else if (object@parqual@data$par_nom=="aucune") {
 				# Caracteristique quantitative uniquement
 				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",
-						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
-						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
-						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
-						" AND car_par_code = '",objet@parquan@data$par_code,"'" ,
-						" AND (ope_date_debut, ope_date_fin) OVERLAPS (DATE '",objet@datedebut,"',DATE '",objet@datefin,"') " ,
+						" WHERE ope_dic_identifiant ='",object@dc@dc_selectionne,"'",
+						" AND lot_tax_code = '",object@taxons@data$tax_code,"'" ,
+						" AND lot_std_code = '",object@stades@data$std_code,"'" ,
+						" AND car_par_code = '",object@parquan@data$par_code,"'" ,
+						" AND (ope_date_debut, ope_date_fin) OVERLAPS (DATE '",object@datedebut,"',DATE '",object@datefin,"') " ,
 						" ORDER BY ope_date_debut",sep="")
 				
 			} else {
@@ -95,60 +94,60 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 						#" -- tableau donnant les lots et sous lots contenant un poids pour anguille",
 						"SELECT * FROM (",
 						"SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
-						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
-						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,
-						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
-						" AND car_par_code = '",objet@parquan@data$par_code,"'" ,
-						" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",objet@datedebut,"',TIMESTAMP '",objet@datefin,"') " ,
+						" WHERE ope_dic_identifiant ='",object@dc@dc_selectionne,"'",
+						" AND lot_tax_code = '",object@taxons@data$tax_code,"'" ,
+						" AND lot_std_code = '",object@stades@data$std_code,"'" ,
+						" AND car_par_code = '",object@parquan@data$par_code,"'" ,
+						" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",object@datedebut,"',TIMESTAMP '",object@datefin,"') " ,
 						" ) AS qan",
 						" LEFT JOIN", 
 						#" --tableau donnant les lots et sous lots contenant le type de caracteristique" ,
 						" (SELECT lot_identifiant as lot_identifiant1,car_val_identifiant ",
 						"  FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
-						" WHERE ope_dic_identifiant ='",objet@dc@dc_selectionne,"'",
-						" AND lot_tax_code = '",objet@taxons@data$tax_code,"'" ,     
-						" AND lot_std_code = '",objet@stades@data$std_code,"'" ,
-						" AND car_par_code = '",objet@parqual@data$par_code,"'" ,
-						" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",objet@datedebut,"',TIMESTAMP '",objet@datefin,"') " ,
+						" WHERE ope_dic_identifiant ='",object@dc@dc_selectionne,"'",
+						" AND lot_tax_code = '",object@taxons@data$tax_code,"'" ,     
+						" AND lot_std_code = '",object@stades@data$std_code,"'" ,
+						" AND car_par_code = '",object@parqual@data$par_code,"'" ,
+						" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",object@datedebut,"',TIMESTAMP '",object@datefin,"') " ,
 						" )as qal ",
 						" ON qan.lot_identifiant=qal.lot_identifiant1",
 						" ORDER BY ope_date_debut",sep="")
 			}
-			objet@requete@sql=sql	
-#objet@requete@where=#defini dans la methode ODBCwheredate
-			objet@requete<-connect(objet@requete) # appel de la methode connect de l'objet requeteODBC
+			object@requete@sql=sql	
+#object@requete@where=#defini dans la methode ODBCwheredate
+			object@requete<-connect(object@requete) # appel de la methode connect de l'object requeteODBC
 			funout(get("msg",envir=envir_stacomi)$l1)
-			return(objet)
+			return(object)
 		})
 
-#objet=new("Bilan_taille")
+#object=new("Bilan_taille")
 #' charge method for Bilan_taille
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("charge",signature=signature("Bilan_taille"),definition=function(objet) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("charge",signature=signature("Bilan_taille"),definition=function(object) {
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.1,arret=TRUE)
 			} 
 			if (exists("refTaxons",envir_stacomi)) {
-				objet@taxons<-get("refTaxons",envir_stacomi)
+				object@taxons<-get("refTaxons",envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.2,arret=TRUE)
 				
 			}
 			if (exists("refStades",envir_stacomi)) {
-				objet@stades<-get("refStades",envir_stacomi)
+				object@stades<-get("refStades",envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.3,arret=TRUE)
 			}
 			if (exists("refparquan",envir_stacomi)){
-				objet@parquan<-get("refparquan",envir_stacomi)
+				object@parquan<-get("refparquan",envir_stacomi)
 			} else 
 			{
 				funout(get("msg",envir=envir_stacomi)$ref.7,arret=TRUE)
 			}
 			if (exists("refparqual",envir_stacomi)){
-				objet@parqual<-get("refparqual",envir_stacomi)
+				object@parqual<-get("refparqual",envir_stacomi)
 			} else 
 			{
 				funout(get("msg",envir=envir_stacomi)$ref.8,arret=TRUE)
@@ -156,20 +155,20 @@ setMethod("charge",signature=signature("Bilan_taille"),definition=function(objet
 			}         
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_taille_date_debut",envir_stacomi)) {
-				objet@datedebut<-get("bilan_taille_date_debut",envir_stacomi)@horodate
+				object@datedebut<-get("bilan_taille_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.5,arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_taille_date_fin",envir_stacomi)) {
-				objet@datefin<-get("bilan_taille_date_fin",envir_stacomi)@horodate
+				object@datefin<-get("bilan_taille_date_fin",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
 			} 
 			funout(get("msg",envir=envir_stacomi)$Bilan_taille.2)        
-			objet<-connect(objet)
+			object<-connect(object)
 			
-			return(objet)
+			return(object)
 		})
 hcalculeBilanTaille<-function(h,...){
 	calcule(h$action)
@@ -177,9 +176,9 @@ hcalculeBilanTaille<-function(h,...){
 #' Calcule method for BilanTaille
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("calcule",signature=signature("Bilan_taille"),definition=function(objet) {
-			bilan_taille<-objet
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("calcule",signature=signature("Bilan_taille"),definition=function(object) {
+			bilan_taille<-object
 			bilan_taille=charge(bilan_taille)
 			vue=bilan_taille@requete@query # on recupere le data.frame
 			vue$ope_dic_identifiant=as.factor(vue$ope_dic_identifiant)
@@ -217,7 +216,7 @@ setMethod("calcule",signature=signature("Bilan_taille"),definition=function(obje
 #' fungraphInteract_tail uses the ggplot2usr interface to build the graphes
 #' @param h a handler
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraphInteract_tail = function(h,...) {
 	if(!exists(x="bilan_taille",envir=envir_stacomi)) {
 		funout(get("msg",envir=envir_stacomi)$Bilan_taille.7)
@@ -241,7 +240,7 @@ fungraphInteract_tail = function(h,...) {
 #' function used to display a table of the data
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 	funtableBilan_tail = function(h,...) {
 		bilan_taille=charge(bilan_taille)
 		vue=bilan_taille@requete@query # on recupere le data.frame

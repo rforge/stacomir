@@ -36,34 +36,32 @@
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
 
 #' Loading method for Reparqual referential objects
-#' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
-#'  objet=new("Refparqual")
-#'  charge(objet)
-setMethod("charge",signature=signature("Refparqual"),definition=function(objet) {
+#'  object=new("Refparqual")
+#'  charge(object)
+setMethod("charge",signature=signature("Refparqual"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
 			requete<-connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
-			objet@data<-requete@query
-			return(objet)
+			object@data<-requete@query
+			return(object)
 		})
 
 #' Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade
-#' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
-#'  objet=new("Refparqual")
-#'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne,stade_selectionne)
-setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
+#'  object=new("Refparqual")
+#'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)
+setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
@@ -78,36 +76,35 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
 			requete=connect(requete)
-			objet@data<-requete@query
-			if (nrow(objet@data)==0) {objet@data=data.frame("par_code"=NA,"par_nom"="aucune")
-			} else objet@data=rbind(objet@data,c(NA,"aucune"))
-			return(objet)
+			object@data<-requete@query
+			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
+			} else object@data=rbind(object@data,c(NA,"aucune"))
+			return(object)
 		})
 
 #'  method chargecomplement
-#' cette methode est appellee apres la selection de l'objet (data ne contient plus qu'une seule ligne)
+#' cette methode est appellee apres la selection de l'object (data ne contient plus qu'une seule ligne)
 #' et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
-#' @returnType S4 object
 #' @return An S4 object of class Refparqual with the valqual slot filled
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
-#'  objet=new("Refparqual")
-#'  objet<-charge(objet)
-#'  chargecomplement(objet)		
-setMethod("chargecomplement",signature=signature("Refparqual"),definition=function(objet) {
-			if (nrow(objet@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(objet@data)),arret=TRUE)
+#'  object=new("Refparqual")
+#'  object<-charge(object)
+#'  chargecomplement(object)		
+setMethod("chargecomplement",signature=signature("Refparqual"),definition=function(object) {
+			if (nrow(object@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data)),arret=TRUE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
-					" WHERE val_qal_code='",objet@data$par_code,
+					" WHERE val_qal_code='",object@data$par_code,
 					"' ORDER BY val_rang",sep="")
 			requete<-connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
-			objet@valqual<-requete@query
-			return(objet)
+			object@valqual<-requete@query
+			return(object)
 		})
 
 
@@ -116,25 +113,25 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 #' @note the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
-#'  objet=new("Refparqual")
+#'  object=new("Refparqual")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet<-charge(objet)
-#' choix(objet)
-setMethod("choix",signature=signature("Refparqual"),definition=function(objet,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
-			if (nrow(objet@data) > 0){
+#' object<-charge(object)
+#' choix(object)
+setMethod("choix",signature=signature("Refparqual"),definition=function(object,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choix)
-					objet@data<-objet@data[car_libelle%in%carchoisi ,]
-					objet<-chargecomplement(objet)
-					assign(nomassign,objet,envir_stacomi)
+					object@data<-object@data[car_libelle%in%carchoisi ,]
+					object<-chargecomplement(object)
+					assign(nomassign,object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$Refpar.3)
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
-				car_libelle=fun_char_spe(objet@data$par_nom)
+				car_libelle=fun_char_spe(object@data$par_nom)
 				choix=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else stop(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)

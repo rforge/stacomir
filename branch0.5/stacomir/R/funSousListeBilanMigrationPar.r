@@ -28,7 +28,7 @@
 #' bilanMigration but allows to count weights for a taxa and stage.
 #' 
 #' 
-#' @param bilanMigrationPar an objet of class
+#' @param bilanMigrationPar an object of class
 #' \code{\linkS4class{BilanMigrationPar}}
 funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	
@@ -210,7 +210,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			
 			# on multiplie le vecteur coeff par le vecteur des periodes pour obtenir une moyenne ponderee
 			coef = as.double(coef * periode)
-			# coef est un objet difftime avec methode sum non definie si je ne marque pas as.double
+			# coef est un object difftime avec methode sum non definie si je ne marque pas as.double
 			lescoeff=list()
 			# lescoeff = une liste dont le nom correspond au type et qui contient le coeff pondere
 			# on passe en revue les type de coefficient de conversion possible

@@ -32,35 +32,33 @@
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
-#' @returnType S4 object
 #' @return An S4 object of class Refparquan
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
-#'  objet=new("Refparquan")
-#'  charge(objet)
-setMethod("charge",signature=signature("Refparquan"),definition=function(objet) {
+#'  object=new("Refparquan")
+#'  charge(object)
+setMethod("charge",signature=signature("Refparquan"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "SELECT * FROM ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code"
 			requete<-connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
-			objet@data<-requete@query
-			return(objet)
+			object@data<-requete@query
+			return(object)
 		})
 
 
 #' Loading method for Reparquan referential objects searching only those parameters existing for a DC, a Taxon, and a stade
-#' @returnType S4 object
 #' @return An S4 object of class Refparqualn
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
-#'  objet=new("Refparquan")
-#'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne,stade_selectionne)		
-setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
+#'  object=new("Refparquan")
+#'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)		
+setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
@@ -75,8 +73,8 @@ setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=func
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
 			requete=connect(requete) 
-			objet@data<-requete@query
-			if (nrow(objet@data)==0) {objet@data=data.frame("par_code"=NA,"par_nom"="aucune")
-			} else objet@data=rbind(objet@data,c(NA,"aucune"))
-			return(objet)
+			object@data<-requete@query
+			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
+			} else object@data=rbind(object@data,c(NA,"aucune"))
+			return(object)
 		})

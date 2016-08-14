@@ -6,9 +6,8 @@
 #' @param taxon 
 #' @param stade 
 #' @param DC 
-#' @returnType data.frame
 #' @return resum
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funstat=function(tableau,duree,taxon,stade,DC){
 	funout(get("msg",envir=envir_stacomi)$funstat.1)

@@ -3,93 +3,83 @@ Type: Package
 Title: STACOMI migration control
 Version: 0.4.1
 Date: 2013-01-18
-Author: Cedric Briand <cedric.briand00@gmail.com>
-Maintainer: Cedric Briand <cedric.briand00@gmail.com>
-Description: Graphical outputs and treatment for a database of fishway monitoring. 
-	It is a part of the STACOMI project developed in France by the ONEMA institute to centralize data obtained by fishway monitoring. 
-	Version 0.4.1 is available in French English and Spanish. \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+Author: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
+Maintainer: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
+Description: Graphical outputs and treatment for a database of fishway monitoring. It is a part of the STACOMI project developed in France by the ONEMA
+    institute to centralize data obtained by fishway monitoring. Version 0.4.1 is available in French English and Spanish. \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 License: GPL
 Collate:
     'utilitaires.r'
-    'libraries.r'
     'create_generic.r'
-    'messages.r'
+    'RefStationMesure.r'
+    'RefHorodate.r'
+    'BilanConditionEnv.r'
+    'RefListe.r'
     'RefDC.r'
+    'BilanEspeces.r'
+    'BilanFonctionnementDC.r'
     'RefDF.r'
-    'RefTaxon.r'
-    'RefStades.r'
+    'BilanFonctionnementDF.r'
     'PasdeTemps.r'
     'PasDeTempsJournalier.r'
-    'RefHorodate.r'
-    'Refpar.r'
-    'Refparquan.r'
-    'Refparqual.r'
+    'RefStades.r'
+    'RefTaxon.r'
+    'BilanMigration.r'
+    'BilanMigrationConditionEnv.r'
     'RefAnnee.r'
-    'Refperiode.r'
-    'RefCoe.r'
-    'RefListe.r'
+    'BilanMigrationInterAnnuelle.r'
+    'BilanMigrationMult.r'
     'RefChoix.r'
+    'Refpar.r'
+    'Refparqual.r'
+    'Refparquan.r'
+    'BilanMigrationPar.r'
+    'Bilan_carlot.r'
+    'RefCoe.r'
+    'Bilan_poids_moyen.r'
     'ReftextBox.r'
     'RefCheckBox.r'
-    'RefPoidsMoyenPeche.r'
-    'RefStationMesure.r'
-    'RefMsg.r'
-    'BilanFonctionnementDC.r'
-    'BilanFonctionnementDF.r'
-    'BilanMigration.r'
-    'BilanMigrationInterAnnuelle.r'
-    'BilanConditionEnv.r'
-    'BilanMigrationConditionEnv.r'
-    'BilanMigrationPar.r'
     'Bilan_stades_pigm.r'
-    'Bilan_lot.r'
     'Bilan_taille.r'
-    'Bilan_poids_moyen.r'
-    'BilanEspeces.r'
-    'fn_EcritBilanMensuel.r'
+    'RefMsg.r'
+    'RefPoidsMoyenPeche.r'
+    'Refperiode.r'
     'fn_EcritBilanJournalier.r'
-    'fn_table_per_dis.r'
+    'fn_EcritBilanMensuel.r'
     'fn_sql_dis.r'
+    'fn_table_per_dis.r'
+    'funBilanMigrationAnnuel.r'
     'funSousListeBilanMigration.r'
     'funSousListeBilanMigrationPar.r'
-    'funBilanMigrationAnnuel.r'
-    'funtraitement_poids.r'
-    'fungraph_civelle.r'
     'fungraph.r'
+    'fungraph_civelle.r'
     'fungraph_env.r'
     'funstat.r'
-    'funtable.r'
     'funstatJournalier.r'
+    'funtable.r'
+    'funtraitement_poids.r'
     'funtraitementdate.r'
-    'interface_Bilan_lot.r'
-    'interface_bilan_poids_moyen.r'
-    'interface_Bilan_taille.r'
     'interface_BilanConditionEnv.r'
     'interface_BilanFonctionnementDC.r'
     'interface_BilanFonctionnementDF.r'
     'interface_BilanMigration.r'
     'interface_BilanMigrationConditionEnv.r'
     'interface_BilanMigrationInterannuelle.r'
+    'interface_BilanMigrationMult.r'
     'interface_BilanMigrationPar.r'
-    'interface_graphique.r'
+    'interface_Bilan_lot.r'
+    'interface_Bilan_taille.r'
+    'interface_bilan_poids_moyen.r'
     'interface_chooselang.r'
+    'interface_graphique.r'
+    'libraries.r'
+    'messages.r'
     'setAs.r'
 LazyLoad: yes
 Depends:
     methods,
-    Hmisc,
     RODBC,
-    ggplot2,
     gWidgets,
     gWidgetsRGtk2,
-    R2HTML,
-    lattice,
-    RColorBrewer,
-    xtable,
-    stacomirtools,
-    stringr,
-    reshape2,
-    cluster,
-    scales,
-    grid,
-    lubridate
+    stacomirtools
+RoxygenNote: 5.0.1

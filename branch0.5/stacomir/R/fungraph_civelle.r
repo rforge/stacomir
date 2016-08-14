@@ -16,7 +16,7 @@
 #' eel have been counted through weight or numbers
 #' 
 #' 
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}} or an
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
 #' #' object of class \code{\linkS4class{BilanMigrationMult}}
 #' @param table a data frame with the results
 #' @param duree a vector POSIXt

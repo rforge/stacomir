@@ -2,8 +2,7 @@
 
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanLot = function()
 {  
     bilan_lot=new("Bilan_lot")
@@ -21,7 +20,7 @@ interface_BilanLot = function()
     add(ggroupboutons,group)
     gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group)
     # dans l'ordre 
-    # dans le handler, modifier le contenu de l'objet fils si il existe
+    # dans le handler, modifier le contenu de l'object fils si il existe
     # supprimer les widgets fils si ils existent (appel de la methode delete)
     # appeller la methode choix pour l'affichage du fils si il existe
     
@@ -37,7 +36,7 @@ interface_BilanLot = function()
 			decal=-1,
 			affichecal=FALSE)
     
-    choix(bilan_lot@dc,objetBilan=bilan_lot,is.enabled=TRUE)
+    choix(bilan_lot@dc,objectBilan=bilan_lot,is.enabled=TRUE)
     # Les methodes choix suivantes sont passees en cascade � l'interieur des methodes choix
     #choix(bilan_lot@taxons,is.enabled=FALSE)
     #choix(bilan_lot@stades,is.enabled=FALSE)

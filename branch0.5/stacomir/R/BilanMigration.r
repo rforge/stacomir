@@ -9,11 +9,13 @@
 #' 
 #' @name BilanMigration-class
 #' @aliases BilanMigration BilanMigration-class
-
+#' @include RefTaxon.r
+#' @include RefStades.r
+#' @include PasDeTempsJournalier.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanMigration",
 #' dc=new("RefDC"),taxons=("RefTaxon"),stades=("RefStades"),pasDeTemps=("PasDeTempsJournalier"),data=data.frame(),
-#' duree=new(POSIXct) )}.  
+#' time.sequence=new(POSIXct) )}.  
 #' \describe{ 
 #' \item{list("dc")}{Object of class
 #' \code{"RefDC"}: the control device }
@@ -33,7 +35,7 @@
 #' \item{list("data")}{Object of class \code{"data.frame"} :
 #' data}
 #' \item{:}{Object of class \code{"data.frame"} : data}
-#' \item{list("duree")}{Object of class \code{"POSIXct"} : duration of the
+#' \item{list("time.sequence")}{Object of class \code{"POSIXct"} : duration of the
 #' analysis}
 #' \item{:}{Object of class \code{"POSIXct"} : duration of the
 #' analysis} }
@@ -57,13 +59,13 @@
 #' @export 
 setClass(Class="BilanMigration",
 		representation=
-				representation(dc="RefDC",taxons="RefTaxon",stades="RefStades",pasDeTemps="PasDeTempsJournalier",data="data.frame",duree="POSIXct"),
+				representation(dc="RefDC",taxons="RefTaxon",stades="RefStades",pasDeTemps="PasDeTempsJournalier",data="data.frame",time.sequence="POSIXct"),
 		prototype=prototype(dc=new("RefDC"),
 				taxons=new("RefTaxon"),
 				stades=new("RefStades"),
 				pasDeTemps=new("PasDeTempsJournalier"),
 				data=data.frame(),
-				duree=as.POSIXct(Sys.time()) 
+				time.sequence=as.POSIXct(Sys.time()) 
 		))
 # bilanMigration= new("BilanMigration")
 
@@ -86,8 +88,7 @@ setValidity("BilanMigration",function(object)
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationcalc=function(h,...){
 	calcule( h$action)
 }
@@ -95,10 +96,10 @@ hbilanMigrationcalc=function(h,...){
 
 #' calcule method for BilanMigration
 #' @return BilanMigration with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("calcule",signature=signature("BilanMigration"),definition=function(objet,...){ 
-			bilanMigration<-objet
+setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,...){ 
+			bilanMigration<-object
 			#pour l'instant ne lancer que si les fenetre sont fermees
 			# funout("lancement updateplot \n")
 			if (exists("refDC",envir_stacomi)) {
@@ -148,13 +149,13 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 						))
 				tableau$coe_valeur_coefficient=as.numeric(tableau$coe_valeur_coefficient)
 				tableau$coe_valeur_coefficient[is.na(tableau$coe_valeur_coefficient)]=0
-				bilanMigration@duree=seq.POSIXt(from=as.POSIXlt(min(data$debut_pas)),to=max(data$debut_pas),
-						by=as.numeric(bilanMigration@pasDeTemps@dureePas)) # il peut y avoir des lignes repetees poids effectif
+				bilanMigration@time.sequence=seq.POSIXt(from=as.POSIXlt(min(data$debut_pas)),to=max(data$debut_pas),
+						by=as.numeric(bilanMigration@pasDeTemps@time.sequencePas)) # il peut y avoir des lignes repetees poids effectif
 				# traitement des coefficients de conversion poids effectif
 				
 				if (bilanMigration@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigration@stades@data$std_libelle=="civelle") 
 				{
-					tableau <-funtraitement_poids(tableau,duree=bilanMigration@duree)
+					tableau <-funtraitement_poids(tableau,time.sequence=bilanMigration@time.sequence)
 				}
 				bilanMigration@data<-tableau
 				assign("bilanMigration",bilanMigration,envir_stacomi)
@@ -175,8 +176,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @note pb si autre chose que journalier les pas de temps ont été contraints à des pas de temps journaliers pour ce graphique
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -189,14 +189,14 @@ hbilanMigrationgraph = function(h,...) {
 	funout(get("msg",envir_stacomi)$BilanMigration.9)
 	
 	# si le bilan est journalier 
-	if (bilanMigration@pasDeTemps@dureePas==86400 & bilanMigration@pasDeTemps@dureePas==86400) {
+	if (bilanMigration@pasDeTemps@time.sequencePas==86400 & bilanMigration@pasDeTemps@time.sequencePas==86400) {
 		
 		# pour sauvegarder sous excel
 		if (taxon=="Anguilla anguilla"& stade=="civelle") {
-			fungraph_civelle(bilanMigration=bilanMigration,bilanMigration@data,bilanMigration@duree,taxon=taxon,stade=stade)
+			fungraph_civelle(bilanMigration=bilanMigration,bilanMigration@data,bilanMigration@time.sequence,taxon=taxon,stade=stade)
 		}
 		else {
-			fungraph(bilanMigration=bilanMigration,tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade)
+			fungraph(bilanMigration=bilanMigration,tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade)
 		}
 		
 	} else {
@@ -212,8 +212,7 @@ hbilanMigrationgraph = function(h,...) {
 #' cumuls de migration au cours du temps
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -223,11 +222,11 @@ hbilanMigrationgraph2 = function(h,...) {
 	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	if (bilanMigration@pasDeTemps@dureePas==86400 & bilanMigration@pasDeTemps@dureePas==86400) {
-		bilanMigration@data$duree=bilanMigration@duree
+	if (bilanMigration@pasDeTemps@time.sequencePas==86400 & bilanMigration@pasDeTemps@time.sequencePas==86400) {
+		bilanMigration@data$time.sequence=bilanMigration@time.sequence
 		# pour sauvegarder sous excel
 		bilanMigration@data<-funtraitementdate(bilanMigration@data,
-				nom_coldt="duree",
+				nom_coldt="time.sequence",
 				annee=FALSE,
 				mois=TRUE,
 				quinzaine=TRUE,
@@ -237,11 +236,11 @@ hbilanMigrationgraph2 = function(h,...) {
 				heure=FALSE)
 		bilanMigration@data$Cumsum=cumsum(bilanMigration@data$Effectif_total)
 		# pour sauvegarder sous excel
-		annee=unique(strftime(as.POSIXlt(bilanMigration@duree),"%Y"))
+		annee=unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))
 		dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne]) 
 		update_geom_defaults("step", aes(size = 3))
 		p<-ggplot(bilanMigration@data)+
-				geom_step(aes(x=duree,y=Cumsum,colour=mois))+
+				geom_step(aes(x=time.sequence,y=Cumsum,colour=mois))+
 				ylab(get("msg",envir_stacomi)$BilanMigration.6)+
 				opts(plot.title=theme_text(size=10,colour="blue"),
 						title=paste(get("msg",envir_stacomi)$BilanMigration.7,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))   
@@ -256,8 +255,7 @@ hbilanMigrationgraph2 = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigration=function(h,...) {
 	funout("Tableau de sortie \n")
 	if (exists("bilanMigration",envir_stacomi)) 
@@ -272,6 +270,6 @@ hTableBilanMigration=function(h,...) {
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
 	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
-	resum=funstat(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC)
-	funtable(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC,resum)
+	resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC)
+	funtable(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC,resum)
 }

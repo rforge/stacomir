@@ -1,6 +1,4 @@
-# Nom fichier :        Bilan_stades_pigm.R    (classe)
-
-#' Class "Bilan_stades_pigm" Bilan class
+#' Bilan class for pigment stage structure analysis (glass eel)
 #' 
 #' The pigment stages analysis has been developed to allow to analyze the
 #' change in pigment stage structure for glass eel (Anguilla anguilla).  The
@@ -8,13 +6,10 @@
 #' backcalculate the probable date when the glass eels arrived in the estuary
 #' (i.e. at a fully transparent stage VB. The evolution of pigment stages is
 #' modeled with gamma functions which use a pigment time calculated from daily
-#' temperatures and salinities.  LThe temperatures has a major influence on the
+#' temperatures and salinities.  The temperatures has a major influence on the
 #' glass eel pigment stage evolution.
-#' 
-#' 
-#' @name Bilan_stades_pigm-class
-#' @aliases Bilan_stades_pigm-class Bilan_stades_pigm fntablestade
-
+#' @include RefCheckBox.r
+#' @include ReftextBox.r
 #' @note This class is displayed by interface_bilan_stades_pigm, The class uses
 #' temperature (from an abiotic measure station) and mean salinity to calculate
 #' the change towards one stage
@@ -23,14 +18,17 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
 #' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{Bilan_stades_pigm}} 
+#' \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} 
+#' \code{\linkS4class{BilanEspeces}}
 #' \code{\linkS4class{BilanFonctionnementDC}}
 #' \code{\linkS4class{BilanFonctionnementDF}}
 #' \code{\linkS4class{BilanMigration}}
 #' \code{\linkS4class{BilanMigrationConditionEnv}}
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
-#' \code{\linkS4class{BilanMigrationPar}} \code{\link{fnstade}}
+#' \code{\linkS4class{BilanMigrationPar}} 
+#' \code{\link{fnstade}}
 #' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
 #' stage-structured model to predict the effect of temperature and salinity on
 #' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
@@ -38,11 +36,10 @@
 #' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
 #' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
 #' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
-#' @keywords classes dynamic
 #' @examples
 #' 
 #' showClass("Bilan_stades_pigm")
-#' @exportClass 
+#' @export 
 setClass(Class="Bilan_stades_pigm",
 		representation= representation(data="data.frame",
 				datatempsal="data.frame",
@@ -76,13 +73,15 @@ setClass(Class="Bilan_stades_pigm",
 		))
 #
 #' connect method for Bilan_stades_pigm
+#' 
+#' 
 #' @note will try to get data for the temperature (refstation) only if retrocalcul is checked
-#'  by default it is note when lanching
+#'  by default it is not when lanching
 #' @return An object of class Bilan_stades_pigm
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
-			# pour debug objet<-new("Bilan_stades_pigm")
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(object,h) {
+			# pour debug object<-new("Bilan_stades_pigm")
 			#  chargement du tableau des stades pigmentaires
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
@@ -90,15 +89,15 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 			requete@colonnedebut="ope_date_debut"
 			requete@colonnefin="ope_date_fin"
 			requete@order_by="ORDER BY ope_date_debut"
-			requete@datedebut=strptime(objet@datedebut,format="%Y-%m-%d")
-			requete@datefin=strptime(objet@datefin,format="%Y-%m-%d")
-			requete@and=paste(" AND ope_dic_identifiant=",objet@dc@dc_selectionne,
+			requete@datedebut=strptime(object@datedebut,format="%Y-%m-%d")
+			requete@datefin=strptime(object@datefin,format="%Y-%m-%d")
+			requete@and=paste(" AND ope_dic_identifiant=",object@dc@dc_selectionne,
 					" AND lot_tax_code= '2038'",
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
-			requete<-connect(requete) # appel de la methode connect de l'objet ODBCWHEREDATE
+			requete<-connect(requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$Bilan_stades_pigm.1)
-			objet@data<-killfactor(requete@query)
+			object@data<-killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
 				stades<-killfactor(requete@query)
@@ -111,14 +110,14 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tablestades<-lst[["tablestades"]]
 				# transformation en pourcentages
 				effectifs=rowSums(tablestades)
-				objet@effectifs<-effectifs
+				object@effectifs<-effectifs
 				tablestades=tablestades/effectifs
-				objet@tablestades<-tablestades
-				objet@dates<-dates
+				object@tablestades<-tablestades
+				object@dates<-dates
 			} else funout("pas de donnees de stades pigmentaires",arret=TRUE)
-			if (objet@options@checked[2]){
+			if (object@options@checked[2]){
 				# chargement du tableau des temperatures
-				requete@datedebut=as.POSIXlt(strptime(objet@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
+				requete@datedebut=as.POSIXlt(strptime(object@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
 				requete@colonnedebut="env_date_debut"
 				requete@colonnefin="env_date_fin"
 				requete@select=paste("SELECT", 
@@ -131,34 +130,33 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 						" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
 						" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
-				tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
+				tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 				requete<-connect(requete)
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 				if (nrow (requete@query)>0)	{
 					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
-					objet@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
-					objet@datatempsal$salinite=as.numeric(objet@salinite@label)
-					colnames(objet@datatempsal)<-c("date","temperature","salinite")
+					object@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
+					object@datatempsal$salinite=as.numeric(object@salinite@label)
+					colnames(object@datatempsal)<-c("date","temperature","salinite")
 				} else {
 					funout("pas de donnees de temperature, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
 				}
 			}
-			return(objet)
+			return(object)
 		})
 
 #' function calculating a table with pigment stages VB to VIA3 from lines retreived from the database
-#' containing individual characteristic of glass eel
-#' 
+#' containing individual characteristic of glass eel#' 
 #' this function is called from within the charge method it was separated from the charge method
 #' as it it convenient to use elsewhere
 #' @usage fntablestade(stades,choixpere="lotpere")
 #' @param stades a data frame containing stage values
 #' @param choixlotpere either "date" or "lot_pere" the first will group pigment stage by date, 
 #' the second will allow to keep separate lines when several samples have been collected a given day   
-#' @value a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
-#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
-#' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
+#' @return a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
+#' @author Cedric Briand \\email{cedric.briand"at"eptb-vilaine.fr}                                                                                                                           
+#' @seealso \code{\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
 fntablestade<-function(stades,choixpere="lotpere"){
 	if (choixpere=="lotpere"){
 		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
@@ -202,54 +200,55 @@ fntablestade<-function(stades,choixpere="lotpere"){
 	
 	return(list("tablestades"=tablestades,"dates"=dates))
 }		
+#' Charge : method used by the graphical interface to buid object from values
+#' stored in envir_stacomi
 #' 
-#' @returnType class Bilan_stades_pigm
 #' @return Bilan_stades_pigm with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#  objet<-bilan_stades_pigm
-setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+
+setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
 			} 	
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_stades_pigm_date_debut",envir_stacomi)) {
-				objet@datedebut<-get("bilan_stades_pigm_date_debut",envir_stacomi)@horodate
+				object@datedebut<-get("bilan_stades_pigm_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
 			}
 			if (exists("bilan_stades_pigm_date_fin",envir_stacomi)) {
-				objet@datefin<-get("bilan_stades_pigm_date_fin",envir_stacomi)@horodate
+				object@datefin<-get("bilan_stades_pigm_date_fin",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
 			}         
 			if (exists("refCheckBox",envir_stacomi)) {
-				objet@options<-get("refCheckBox",envir_stacomi)
+				object@options<-get("refCheckBox",envir_stacomi)
 			} else {
 				# rien de toutes facons les choix par defaut sont copies dans envir_stacomi
 			}  
 			if (exists("refchoix",envir_stacomi)) {
-				objet@lmax<-get("refchoix",envir_stacomi)
+				object@lmax<-get("refchoix",envir_stacomi)
 			} else {
-				# l'assignation d'un objet liste choix remplace la liste des valeurs possibles
+				# l'assignation d'un object liste choix remplace la liste des valeurs possibles
 				# par la valeur choisie (pour l'instant "0.8")
-				objet@lmax@listechoix<-"0.8"
+				object@lmax@listechoix<-"0.8"
 			}
 			if (exists("refTextBox",envir_stacomi)) {
-				objet@salinite<-get("refTextBox",envir_stacomi)
+				object@salinite<-get("refTextBox",envir_stacomi)
 			} else {
 				# rien de toutes fa�ons les choix par defaut sont copies dans envir_stacomi
 			} 
-			if (objet@options@checked[2]){
+			if (object@options@checked[2]){
 				if (exists("refStationMesure",envir_stacomi)) {
-					objet@stationMesure<-get("refStationMesure",envir_stacomi)
+					object@stationMesure<-get("refStationMesure",envir_stacomi)
 				} else {
 					funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
 				}
 			}
-			objet<-connect(objet)			
-			return(objet)
+			object<-connect(object)			
+			return(object)
 		})
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple... 
@@ -269,7 +268,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 #' @param couleur a color vector
 #' @param \dots additional arguments passed to the function
 #' @return Bilan_stades_pigm with slots filled with user choice
-#' @author Laurent Beaulaton \email{laurent.beaulaton@@onema.fr}
+#' @author Laurent Beaulaton \email{laurent.beaulaton"at"onema.fr}
 surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 	x=c(xmat,rev(xmat))
 	nbcol=dim(ymat)[2]
@@ -286,23 +285,11 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 	plot(x[1:nblig],total,type="l",ylim=c(0,max(total)*1.1),...)
 	for (i in 1:nbcol) polygon(x,nouvmat[,i],col=couleur[i])	
 }
-#------------------------------------------------------
-#  calcul du temps pigmentaire
-#  (necessite les fichiers de temperature et de salinite
-#   si absent, indiquer NULL dans la fonction graphique
-#------------------------------------------------------
-# parametres du modele
-
-
-
-
-
 
 
 
 #' Function to calculate pigmentation times.
 #' 
-#' Function to calculate pigmentation times.
 #' 
 #' 
 #' @param parm parameters of the model
@@ -333,19 +320,19 @@ funphi<-function(parm,datatempsal){
 #' or simply return the values from gamma function of each stage
 #' 
 #' 
-#' @param par1 parameter describing the gamma law for the first stage
-#' @param par2 parameter of the gamma law for the second stage
+#' @param par1 Parameter describing the gamma law for the first stage
+#' @param par2 Parameter of the gamma law for the second stage
 #' @param phicum cumulated pigmentation times for test : phicum=seq(0,20,
 #' length.out=100)
-#' @param phidates dates
-#' @param VB if TRUE, then calculation for first stage VB which differs from
+#' @param phidates Dates
+#' @param VB If TRUE, then calculation for first stage VB which differs from
 #' the others
-#' @param neg if FALSE then calculation of stages according to the pigmentation
+#' @param neg If FALSE then calculation of stages according to the pigmentation
 #' time
-#' @param lmax scale parameter for the graphical function, lmax=0 allows to
+#' @param lmax Scale parameter for the graphical function, lmax=0 allows to
 #' draw the real values of abundances per stage along time, lmax=1 or 0.8 will
 #' draw all stages at the same scale
-#' @return a list with x and y
+#' @return A list with x and y
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 #' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
@@ -395,9 +382,9 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 #' Allows to point the middle of the gamma distribution for each stage
 #' 
 #' 
-#' @param obj the pigment time scale
-#' @param objc cumulated gamma curve
-#' @return d50 the center of the distribution for the different stages
+#' @param obj The pigment time scale
+#' @param objc Cumulated gamma curve
+#' @return d50 The center of the distribution for the different stages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 fun50<-function(obj,objc){
@@ -416,10 +403,10 @@ fun50<-function(obj,objc){
 #' see code
 #' 
 #' 
-#' @param Vparm parameters for the gamma functions describing pigment stages
-#' @param phicum cumulated pigmentation time
-#' @param graph logical, to see the curves type graph = TRUE
-#' @param lmax scale parameter of the graphical function see \link{fnstade}
+#' @param Vparm Parameters for the gamma functions describing pigment stages
+#' @param phicum Cumulated pigmentation time
+#' @param graph Logical, to see the curves type graph = TRUE
+#' @param lmax Scale parameter of the graphical function see \link{fnstade}
 #' @note pigment stage functions are not standard statistical distribution,
 #' calculating where 50\% of the distribution lies is done with fun50 this
 #' function uses \link{fnstade} to calculate the values of pigment times on a
@@ -492,7 +479,7 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 #' the title
 #' 
 #' 
-#' @param h a handler
+#' @param h A handler
 #' @param additional arguments
 #' @param list() additional arguments
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -516,6 +503,7 @@ funcalcbilan_stades_pigm<-function(h,...){
 	enabled(toolbarlist[["Graphgg"]])<-TRUE
 	assign("bilan_stades_pigm",bilan_stades_pigm,.GlobalEnv)
 }
+
 #' handler function for fungraphstades
 hfungraphstades=function(h,...){
 	fungraphstades(
@@ -548,7 +536,7 @@ hfungraphstades=function(h,...){
 #' see R code for details
 #' 
 #' 
-#' @param tablestades a data frame with stages VB VIA0 VIA1 VIA2 VIA3
+#' @param tablestades A data frame with stages VB VIA0 VIA1 VIA2 VIA3
 #' @param retrocalcul Logical TRUE or FALSE, do you want to retrocalculate when
 #' the glass eel have arrived in the estuary, in this case provide datatempsal,
 #' data for temperature and salinity
@@ -559,7 +547,7 @@ hfungraphstades=function(h,...){
 #' pigmentation graph
 #' @param nb Do you want to write number in sample in the pigmentation stage
 #' graph
-#' @param graphstades do you want to draw the graph of cumulated stage
+#' @param graphstades Do you want to draw the graph of cumulated stage
 #' @param lmax parameter for retrocalcul graph, see \link{fnstade} scale
 #' parameter for the graphical function, use 0.8 to avoid overlapping of the
 #' polygons from several samples or dates
@@ -780,6 +768,8 @@ fungraphstades<-function(
 	}
 }
 
+
+#' gglot function to draw graps of pigment stages
 fungraphgg=function(h,...){
 	g<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
 	g<-g+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer � geom_bar un x et un y...
@@ -790,7 +780,7 @@ fungraphgg=function(h,...){
 			ggtitle("Stades pigmentaires",labels=c(x="",y="effectifs")) # options
 	print(g)
 	assign("g",g,"envir_stacomi")
-	funout("l'objet graphique est disponible dans l'environnement principal, tapper g<-get('g',envir=envir_stacomi)")
+	funout("l'object graphique est disponible dans l'environnement principal, tapper g<-get('g',envir=envir_stacomi)")
 }
 
 
@@ -800,11 +790,9 @@ fungraphgg=function(h,...){
 
 
 
-#' Fonction handler qui retourne le titre du graphique apres le choix dans la
+#' Handler function which retrun the graphics titles
 #' date
 #' 
-#' Fonction handler qui retourne le titre du graphique apres le choix dans la
-#' date
 #' 
 #' 
 #' @param h A handler
@@ -838,8 +826,10 @@ funtitle_bilan_stades_pigm=function(h,...){
 }
 
 #' An interface that calls the object to build the user interface
+#' 
+#' 
 #' @note always has to be called within a group constructed and deleted using quitte()
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
@@ -874,7 +864,7 @@ interface_Bilan_stades_pigm = function()
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilan_stades_pigm@dc,objetBilan=bilan_stades_pigm,is.enabled=TRUE)
+	choix(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
 	aSetTitle=gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)

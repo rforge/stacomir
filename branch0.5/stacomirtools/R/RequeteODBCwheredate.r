@@ -42,7 +42,7 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note method modified from v0.2.1240 to use the connect method of the mother class which in turn will use the method of the mother class
 #' @return An object of class RequeteODBCwheredate
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @expamples 
 #' object<-new("RequeteODBCwheredate")
 #' object@baseODBC<-baseODBC

@@ -6,7 +6,7 @@
 # Date de creation :  31/03/2008 17:21:25
 # Compatibilite :
 # Etat :               developpement
-# Description          calcul et affichage des pas de temps (classe objet)
+# Description          calcul et affichage des pas de temps (classe object)
 #**********************************************************************
 #*
 
@@ -55,7 +55,7 @@ rm(UNE_SECONDE,UNE_MINUTE,DIX_MINUTES,QUINZE_MINUTES,TRENTE_MINUTES,UNE_HEURE,DO
 ################################################################
 # Declarations de classe
 ################################################################
-#fonction pour valider les objets de classe Pas deTemps
+#fonction pour valider les objects de classe Pas deTemps
 validite_PasDeTemps=function(object)
 {
   retValue=NULL
@@ -173,13 +173,13 @@ setAs("PasDeTempsChar","PasDeTemps",   # from to
 # methodes standard
 ################################################################
 # retourne le pas courant
-setGeneric("getnoPasCourant",def=function(objet,...) standardGeneric("getnoPasCourant"))
-setMethod("getnoPasCourant",signature=signature("PasDeTemps"),definition=function(objet) objet@noPasCourant)
+setGeneric("getnoPasCourant",def=function(object,...) standardGeneric("getnoPasCourant"))
+setMethod("getnoPasCourant",signature=signature("PasDeTemps"),definition=function(object) object@noPasCourant)
 
 # retourne la date de fin
-setGeneric("DateFin",def=function(objet,...) standardGeneric("DateFin"))
-setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(objet){
-			DateFin=objet@dateDebut+ objet@dureePas*(objet@nbPas)
+setGeneric("DateFin",def=function(object,...) standardGeneric("DateFin"))
+setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(object){
+			DateFin=object@dateDebut+ object@dureePas*(object@nbPas)
 			# pour les pb de changement d'heure
 			
 			return(DateFin)
@@ -189,11 +189,11 @@ setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(objet)
 
 
 #Retourne la date de debut correspondant au no de pas courant
-setGeneric("currentDateDebut",def=function(objet,...) standardGeneric("currentDateDebut"))
-setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=function(objet){
-			CurrentDateDebut=objet@dateDebut+ objet@dureePas*objet@noPasCourant
+setGeneric("currentDateDebut",def=function(object,...) standardGeneric("currentDateDebut"))
+setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=function(object){
+			CurrentDateDebut=object@dateDebut+ object@dureePas*object@noPasCourant
 			# bug cht heure
-			if (objet@dureePas==86400) {
+			if (object@dureePas==86400) {
 				CurrentDateDebut=round.POSIXt(CurrentDateDebut,"days")
 			}			
 			return(CurrentDateDebut)
@@ -203,73 +203,73 @@ setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=functi
 # currentDateDebut(pasDeTemps)
 
 # Retourne la date de fin correspondant au no de pas courant
-setGeneric("currentDateFin",def=function(objet,...) standardGeneric("currentDateFin"))
-setMethod("currentDateFin",signature=signature("PasDeTemps"),definition=function(objet){
-			CurrentDateFin=objet@dateDebut+ objet@dureePas*(objet@noPasCourant+as.integer(1))
+setGeneric("currentDateFin",def=function(object,...) standardGeneric("currentDateFin"))
+setMethod("currentDateFin",signature=signature("PasDeTemps"),definition=function(object){
+			CurrentDateFin=object@dateDebut+ object@dureePas*(object@noPasCourant+as.integer(1))
 			# bug cht heure 
-			if (objet@dureePas==86400) {
+			if (object@dureePas==86400) {
 				CurrentDateFin=round.POSIXt(CurrentDateFin,"days")
 			}
 			return(CurrentDateFin)
 		})
 
 #Avance au pas de temps suivant et retourne lengthno du nouveau pas de temps
-setGeneric("suivant",def=function(objet,...) standardGeneric("suivant"))
-setMethod("suivant",signature=signature("PasDeTemps"),definition=function(objet){
-			objet@noPasCourant =objet@noPasCourant+as.integer(1)
-			if (currentDateFin(objet)>DateFin(objet)) {
-				objet@noPasCourant = as.integer(-1)
+setGeneric("suivant",def=function(object,...) standardGeneric("suivant"))
+setMethod("suivant",signature=signature("PasDeTemps"),definition=function(object){
+			object@noPasCourant =object@noPasCourant+as.integer(1)
+			if (currentDateFin(object)>DateFin(object)) {
+				object@noPasCourant = as.integer(-1)
 			}
-			return (objet)
+			return (object)
 		})
 # retourne le libelle complet comme champ charactere
-setGeneric("getdateDebut",def=function(objet,...) standardGeneric("getdateDebut"))
-setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(objet){
-			return ( strftime(as.POSIXlt(objet@dateDebut),format="%Y-%m-%d %H:%M:%S") )
+setGeneric("getdateDebut",def=function(object,...) standardGeneric("getdateDebut"))
+setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(object){
+			return ( strftime(as.POSIXlt(object@dateDebut),format="%Y-%m-%d %H:%M:%S") )
 		})
 
 #Fixe la date de debut ï¿½ partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S" ou "%Y-%m-%d" (classe pas de temps journalier)
-setGeneric("setdateDebut",def=function(objet,...) standardGeneric("setdateDebut"))
-setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(objet,string){
-			objet@dateDebut=if (!is.na(strptime(string,format="%Y-%m-%d %H:%M:%S"))) strptime(string,format="%Y-%m-%d %H:%M:%S") else
+setGeneric("setdateDebut",def=function(object,...) standardGeneric("setdateDebut"))
+setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(object,string){
+			object@dateDebut=if (!is.na(strptime(string,format="%Y-%m-%d %H:%M:%S"))) strptime(string,format="%Y-%m-%d %H:%M:%S") else
       strptime(string,format="%Y-%m-%d") 
-			return(objet) 
+			return(object) 
 		})
-# objet=setdateDebut(objet,"2008-05-01 00:00:00")
-# getdateDebut(objet)
+# object=setdateDebut(object,"2008-05-01 00:00:00")
+# getdateDebut(object)
 
-setGeneric("getLibellesPas",def=function(objet,...) standardGeneric("getLibellesPas"))
-setMethod("getLibellesPas",signature=signature("PasDeTemps"),definition=function(objet){
+setGeneric("getLibellesPas",def=function(object,...) standardGeneric("getLibellesPas"))
+setMethod("getLibellesPas",signature=signature("PasDeTemps"),definition=function(object){
 			ret=paste(LesPasDeTemps$LabelPasDeTemps)
 			return (ret )
 		})
-setGeneric("getAnnees",def=function(objet,...) standardGeneric("getAnnees"))
-setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(objet){
-			 dateFin=DateFin(objet)
-			 dateDebut=objet@dateDebut
+setGeneric("getAnnees",def=function(object,...) standardGeneric("getAnnees"))
+setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(object){
+			 dateFin=DateFin(object)
+			 dateDebut=object@dateDebut
 			 seq=seq.POSIXt(from=dateDebut,to=dateFin,by="day")
 			 seq=seq[-length(seq)]# dans le bilan Migration la derniere valeur n'est pas prise en compte
 			 annees=unique(strftime(seq,"%Y"))
   		return (as.numeric(annees))
 		})
-# pour test #objet=new("PasDeTemps")    
-setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
+# pour test #object=new("PasDeTemps")    
+setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
 					pas=svalue(choixpas)
 					nbpas=as.numeric(svalue(choixnbpas)) 
-					objet@nbPas<-nbpas
-					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
-					objet=setdateDebut(objet,svalue(datedeb))
-					#objet@nbPas<<-nbpas
-					#objet@dureePas<<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
-					assign("pasDeTemps",objet,envir_stacomi)
+					object@nbPas<-nbpas
+					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+					object=setdateDebut(object,svalue(datedeb))
+					#object@nbPas<<-nbpas
+					#object@dureePas<<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
+					assign("pasDeTemps",object,envir_stacomi)
 					#funout("Les pas de temps ont ete charges\n")
-					#print(objet)
+					#print(object)
 					# pour l'instant pour une raison inexpliquee, je n'arrive pas ï¿½ traduire
-					# objet@nbPas dans l'environnement principal alors que  objet@dureePas
-					# est remplace dans objet => ???????  je ne comprens pas....
-					# Je le remplace par un assign du meme objet mais ce n'est pas propre car cela
+					# object@nbPas dans l'environnement principal alors que  object@dureePas
+					# est remplace dans object => ???????  je ne comprens pas....
+					# Je le remplace par un assign du meme object mais ce n'est pas propre car cela
 					# suppose que je ne peux avoir que lepas ï¿½ passer ï¿½ cette fonction
 					
 					#dispose(winpa)
@@ -277,13 +277,13 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 				hchoixpas=function(h,...){
 					pas=svalue(choixpas)
 					nbPas=as.numeric(svalue(choixnbpas))
-					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
-					objet@nbPas<-nbPas 
-					objet=setdateDebut(objet,svalue(datedeb))
-					#print(objet@dateDebut)
+					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+					object@nbPas<-nbPas 
+					object=setdateDebut(object,svalue(datedeb))
+					#print(object@dateDebut)
 					
 					#assign("date",svalue(datedeb),envir = .GlobalEnv)     
-					add(datedefin,strftime(as.POSIXlt(DateFin(objet)),format="%Y-%m-%d %H:%M:%S"),
+					add(datedefin,strftime(as.POSIXlt(DateFin(object)),format="%Y-%m-%d %H:%M:%S"),
 							font.attr=c(foreground.colors="red") )
 					hwinpa(h)
 				}
@@ -293,8 +293,8 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=group,horizontal=FALSE)
 				pg<-ggroup(horizontal=FALSE,cont=winpa)
 				glabel("Date de debut",container=pg)
-				datedeb<-gedit(getdateDebut(objet),cont=pg,handler=hchoixpas,width=15)
-				datedebut2=as.character(strftime(objet@dateDebut,"%Y-%m-%d"))
+				datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoixpas,width=15)
+				datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
 				datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
 							svalue(datedeb)<-as.character(strftime(
 											strptime(svalue(datedeb2),"%Y-%m-%d"),
@@ -315,17 +315,17 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 #' choice method for PasdeTemps
 #' this method differs from choix as it is called within a notebook,
 #' it does not allow for multiple choice to be made
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
-		setMethod("choixmult",signature=signature("PasDeTemps"),definition=function(objet) {
+		setMethod("choixmult",signature=signature("PasDeTemps"),definition=function(object) {
 					if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 						hwinpa=function(h,...){
 							pas=svalue(choixpas)
 							nbpas=as.numeric(svalue(choixnbpas)) 
-							objet@nbPas<<-nbpas
-							objet@dureePas<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
-							objet=setdateDebut(objet,svalue(datedeb))						
-							assign("pasDeTemps",objet,envir_stacomi)
+							object@nbPas<<-nbpas
+							object@dureePas<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+							object=setdateDebut(object,svalue(datedeb))						
+							assign("pasDeTemps",object,envir_stacomi)
 							funout("Les pas de temps ont ete charges\n")
 							# charge le deuxième onglet du notebook
 							#svalue(notebook)<-2
@@ -334,12 +334,12 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 							#browser()
 							pas=svalue(choixpas)
 							nbPas=as.numeric(svalue(choixnbpas))
-							objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
-							objet@nbPas<-nbPas 
-							objet=setdateDebut(objet,svalue(datedeb))
-							#print(objet@dateDebut)							
+							object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+							object@nbPas<-nbPas 
+							object=setdateDebut(object,svalue(datedeb))
+							#print(object@dateDebut)							
 							#assign("date",svalue(datedeb),envir = .GlobalEnv)     
-							add(datedefin,strftime(as.POSIXlt(DateFin(objet)),format="%Y-%m-%d %H:%M:%S"),
+							add(datedefin,strftime(as.POSIXlt(DateFin(object)),format="%Y-%m-%d %H:%M:%S"),
 									font.attr=c(foreground.colors="red") )
 							hwinpa(h)
 						}
@@ -350,8 +350,8 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(objet) {
 						winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=groupdate,horizontal=FALSE)
 						pg<-ggroup(horizontal=FALSE,cont=winpa)
 						glabel("Date de debut",container=pg)
-						datedeb<-gedit(getdateDebut(objet),cont=pg,handler=hchoixpas,width=15)
-						datedebut2=as.character(strftime(objet@dateDebut,"%Y-%m-%d"))
+						datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoixpas,width=15)
+						datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
 						datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
 									svalue(datedeb)<-as.character(strftime(
 													strptime(svalue(datedeb2),"%Y-%m-%d"),

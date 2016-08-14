@@ -12,9 +12,8 @@
 #' performs a query to collect the conversion coefficients
 #' @param tableau 
 #' @param duree 
-#' @returnType data.frame
 #' @return tableau
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funtraitement_poids=function(tableau,duree) { 
 	index=tableau$No.pas+1

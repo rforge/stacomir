@@ -13,7 +13,7 @@
 #' 
 #' @name Bilan_poids_moyen-class
 #' @aliases Bilan_poids_moyen-class Bilan_poids_moyen
-
+#' @include RefCoe.r
 #' @note We have also tools available to import glass eel measurement from
 #' experimental fishing in the estuary For the charge method dates for the
 #' request are from august to august (a glass eel season)
@@ -52,9 +52,9 @@
 #' @examples
 #' 
 #' showClass("Bilan_poids_moyen")
-#' objet=new("Bilan_poids_moyen")
+#' object=new("Bilan_poids_moyen")
 #' 
-#' @exportClass 
+#' @export 
 setClass(Class="Bilan_poids_moyen",        
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -72,15 +72,15 @@ setClass(Class="Bilan_poids_moyen",
 #' connect method for Bilan_Poids_moyen
 #' @return Bilan_Poids_Moyen request corresponding to user choices
 #' @note dates for the request are from august to august (a glass eel season)
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-# objet<-bilan_poids_moyen
-setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
+# object<-bilan_poids_moyen
+setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(object,h) {
 			#CHARGEMENT DU TABLEAU DES POIDS MOYENS
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
-			requete@datedebut=strptime(paste(objet@anneedebut@annee_selectionnee-1,"-08-01",sep=""),format="%Y-%m-%d")
-			requete@datefin=strptime(paste(objet@anneefin@annee_selectionnee,"-08-01",sep=""),format="%Y-%m-%d")
+			requete@datedebut=strptime(paste(object@anneedebut@annee_selectionnee-1,"-08-01",sep=""),format="%Y-%m-%d")
+			requete@datefin=strptime(paste(object@anneefin@annee_selectionnee,"-08-01",sep=""),format="%Y-%m-%d")
 			requete@colonnedebut="ope_date_debut"
 			requete@colonnefin="ope_date_fin"
 			requete@select= paste("SELECT lot_identifiant,ope_date_debut,ope_date_fin,lot_effectif,car_valeur_quantitatif as poids,",
@@ -90,54 +90,53 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 					" date_part('year', ope_date_debut) as annee,",
 					" date_part('month',ope_date_debut) as mois",
 					" FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car_qan",sep="")
-			requete@and=paste(" AND ope_dic_identifiant=",objet@dc@dc_selectionne,
+			requete@and=paste(" AND ope_dic_identifiant=",object@dc@dc_selectionne,
 					" AND std_libelle='civelle'",
-					ifelse(objet@liste@listechoix=="tous", "",paste(" AND  lot_effectif", objet@liste@listechoix)),
+					ifelse(object@liste@listechoix=="tous", "",paste(" AND  lot_effectif", object@liste@listechoix)),
 					" AND upper(car_methode_obtention::text) = 'MESURE'::text",
 					" AND car_par_code='A111'",sep="")
 			requete<-connect(requete)			
-			objet@data<-requete@query			
+			object@data<-requete@query			
 			#CHARGEMENT DES COEFFICIENTS DE CONVERSION
-			objet@coe@datedebut=requete@datedebut
-			objet@coe@datefin=requete@datefin
-			objet@coe<-charge(objet@coe)
+			object@coe@datedebut=requete@datedebut
+			object@coe@datefin=requete@datefin
+			object@coe<-charge(object@coe)
 			funout(get("msg",envir_stacomi)$Bilan_poids_moyen.1)
-			funout(paste(nrow(objet@coe@data),get("msg",envir_stacomi)$Bilan_poids_moyen.2))			
-			return(objet)
+			funout(paste(nrow(object@coe@data),get("msg",envir_stacomi)$Bilan_poids_moyen.2))			
+			return(object)
 		})
 
 # Cette methode permet de verifier que les boites ont ete cliquees et va chercher les
-# objets qui sont colles dans l'environnement envir_stacomi de l'interface 
+# objects qui sont colles dans l'environnement envir_stacomi de l'interface 
 #' charge method for Bilan_poids_moyen class
 #' @param h a handler 
-#' @returnType Bilan_poids_moyen class
 #' @return Bilan_poids_moyen with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(objet,h) {
+setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(object,h) {
 			if (exists("refliste",envir_stacomi)) {      
-				objet@liste<-get("refliste",envir_stacomi)      
+				object@liste<-get("refliste",envir_stacomi)      
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.9, arret=TRUE)             
 			} 
 			if (exists("refDC",envir_stacomi)) {      
-				objet@dc<-get("refDC",envir_stacomi)      
+				object@dc<-get("refDC",envir_stacomi)      
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)          
 			}            
 			if (exists("refAnneeDebut",envir_stacomi)) {      
-				objet@anneedebut<-get("refAnneeDebut",envir_stacomi)      
+				object@anneedebut<-get("refAnneeDebut",envir_stacomi)      
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.10,arret=TRUE)             
 			}
 			if (exists("refAnneeFin",envir_stacomi)) {      
-				objet@anneefin<-get("refAnneeFin",envir_stacomi)      
+				object@anneefin<-get("refAnneeFin",envir_stacomi)      
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)       
 			}                    
-			objet<-connect(objet)
-			assign("bilan_poids_moyen",objet,envir=envir_stacomi)
-			return(objet) 
+			object<-connect(object)
+			assign("bilan_poids_moyen",object,envir=envir_stacomi)
+			return(object) 
 		})
 
 
@@ -166,7 +165,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 		rm("toolbarlistgraph1",envir= .GlobalEnv)
 	}
 	if ((!exists("peche", envir=envir_stacomi))){
-		# si il existe j'ai traffique l'objet bilan poids moyen a la main
+		# si il existe j'ai traffique l'object bilan poids moyen a la main
 		# et je ne souhaite pas qu'il soit ecrase
 		bilan_poids_moyen=charge(bilan_poids_moyen)
 	} 
@@ -245,7 +244,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 			requete=new("RequeteODBC")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
 			requete@sql=paste("COPY ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
-			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
+			requete=connect(requete)  # appel de la methode connect de l'object requeteODBC
 		}
 	}
 	

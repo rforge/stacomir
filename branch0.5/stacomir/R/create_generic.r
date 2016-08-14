@@ -4,20 +4,21 @@
 #liste_chemins=chargecsv()
 #baseODBC=liste_chemins[["baseODBC"]]
 #listes de connection � la base de donnee (programmation S4)
-setGeneric("choix",def=function(objet,...) standardGeneric("choix"))
-setGeneric("choixmult",def=function(objet,...) standardGeneric("choixmult"))
+setGeneric("choix",def=function(object,...) standardGeneric("choix"))
+setGeneric("choixmult",def=function(object,...) standardGeneric("choixmult"))
 # load method to work outside the graphical interface
-setGeneric("load",def=function(objet,...) standardGeneric("load"))
-setGeneric("charge",def=function(objet,...) standardGeneric("charge"))
-setGeneric("charge_avec_filtre",def=function(objet,...) standardGeneric("charge_avec_filtre"))
-#setGeneric("connect",def=function(objet,...) standardGeneric("connect")) # package stacomirtools
-setGeneric("chargecomplement",def=function(objet,...) standardGeneric("chargecomplement"))
-setGeneric("calcule",def=function(objet,...) standardGeneric("calcule"))
-setGeneric("supprime",def=function(objet,...) standardGeneric("supprime"))
-setGeneric("graphe",def=function(objet,...) standardGeneric("graphe"))
-setGeneric("getvalue",def=function(objet,...) standardGeneric("getvalue"))
-setGeneric("out",def=function(objet,...) standardGeneric("out"))
-setGeneric("createmessage",def=function(objet,...) standardGeneric("createmessage"))
+setGeneric("load",def=function(object,...) standardGeneric("load"))
+setGeneric("charge",def=function(object,...) standardGeneric("charge"))
+setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
+#setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
+setGeneric("chargecomplement",def=function(object,...) standardGeneric("chargecomplement"))
+setGeneric("calcule",def=function(object,...) standardGeneric("calcule"))
+setGeneric("supprime",def=function(object,...) standardGeneric("supprime"))
+setGeneric("cumplot",def=function(object,...) standardGeneric("cumplot"))
+setGeneric("plot1",def=function(object,...) standardGeneric("plot1"))
+setGeneric("getvalue",def=function(object,...) standardGeneric("getvalue"))
+setGeneric("out",def=function(object,...) standardGeneric("out"))
+setGeneric("createmessage",def=function(object,...) standardGeneric("createmessage"))
 # nouvel environnement
 
 
@@ -34,4 +35,3 @@ setGeneric("createmessage",def=function(objet,...) standardGeneric("createmessag
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 envir_stacomi <- new.env(parent = emptyenv())
-# cree

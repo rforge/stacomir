@@ -1,13 +1,12 @@
-# Nom fichier :        interface_BilanMigrationMult
-
 #' graphical interface for BilanMigrationMult class
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @describeIn BilanMigrationMult
-#' @export
+#' 
+#' launches the graphical interface after the main gwidget dialog has been launched
+#' This function is called from a handler in the main graphical interface
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationMult=function(){
 	quitte()
-	objetBilan="bilanMigrationMult"
-	assign("objetBilan",objetBilan,envir=envir_stacomi)
+	objectBilan="bilanMigrationMult"
+	assign("objectBilan",objectBilan,envir=envir_stacomi)
 	bilanMigrationMult=new("BilanMigrationMult")
 	assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
 	fonctionnementDC=new("BilanFonctionnementDC")
@@ -29,7 +28,7 @@ interface_BilanMigrationMult=function(){
 	size(notebook)<-c(400,300)
 	add(ggroupboutons,group)
 	choixmult(bilanMigrationMult@pasDeTemps)
-	choixmult(bilanMigrationMult@dc,objetBilan=bilanMigrationMult,is.enabled=TRUE)
+	choixmult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
 	svalue(notebook)<-1
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)
@@ -38,8 +37,9 @@ interface_BilanMigrationMult=function(){
 	# getStockIcons()
 	toolbarlist = list(
 			Calc=gaction(handler=hbilanMigrationMultcalc, action=bilanMigrationMult, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.2),
-			Graph=gaction(handler=hbilanMigrationMultgraph, icon="graph", label="graph", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
+			Graph=gaction(handler=hbilanMigrationMult_graphe, icon="graph", label="graph", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
 			Graph2=gaction(handler=hbilanMigrationMultgraph2, icon="graph2", label="grcum", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.4),
+			Graph3=gaction(handler=hbilanMigrationMultgraph3, icon="gWidgetsRGtk2-barplot", label="gr(tous)", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
 			Stat=gaction(handler=hTableBilanMigrationMult, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.5),    
 			Out=gaction(handler=houtBilanMigrationMult, icon="gtk-info", label="code", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationMult.1),    
 			annuler=gaction(handler= quitte,icon = "close",label="quitter")

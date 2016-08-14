@@ -35,7 +35,7 @@
 #' 
 #' showClass("BilanMigrationConditionEnv")
 #' 
-#' @exportClass 
+#' @export 
 setClass(Class="BilanMigrationConditionEnv",representation=
 				representation(
 						bilanMigration="BilanMigration",
@@ -65,46 +65,46 @@ setValidity("BilanMigrationConditionEnv",
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hbilanMigrationConditionEnvcalc=function(h,...){
 	calcule(h$action)
 	# calcule(bilanMigrationConditionEnv)
 }
-#objet<-bilanMigrationConditionEnv
-setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition=function(objet,...){ 
+#object<-bilanMigrationConditionEnv
+setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition=function(object,...){ 
 			# le chargement de bilanMigration utilise la methode calcule de BilanMigration
-			# qui charge les objets et en plus fait un calcul dessus, à la fin cette methode assigne les objets
+			# qui charge les objects et en plus fait un calcul dessus, à la fin cette methode assigne les objects
 			# dans l'environnement stacomi et c'est là qu'il faut aller les chercher
 			# pour eviter de lancer les calculs et d'avoir la demande de stations à la fin du bilan migration...
 			if (!exists("refStationMesure",envir_stacomi)) {
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
 			}    
-			calcule(objet@bilanMigration)
-			objet@bilanMigration=get("bilanMigration",envir=envir_stacomi)
-			# j'extraie les dates de debut et de fin de l'objet pas de temps de l'objet bilanmigration
-			# il faut stocker un ojet RefHorodate dans l'environnement envir_stacomi pour reussir à le recharger dans l'objet
+			calcule(object@bilanMigration)
+			object@bilanMigration=get("bilanMigration",envir=envir_stacomi)
+			# j'extraie les dates de debut et de fin de l'object pas de temps de l'object bilanmigration
+			# il faut stocker un ojet RefHorodate dans l'environnement envir_stacomi pour reussir à le recharger dans l'object
 			# bilanCOnditionEnv
 			horodatedebut=new("RefHorodate")
-			horodatedebut@horodate=objet@bilanMigration@pasDeTemps@dateDebut  # format POSIXlt
+			horodatedebut@horodate=object@bilanMigration@pasDeTemps@dateDebut  # format POSIXlt
 			horodatefin=new("RefHorodate")
-			horodatefin@horodate=DateFin(objet@bilanMigration@pasDeTemps)    # format ¨POSIXct
+			horodatefin@horodate=DateFin(object@bilanMigration@pasDeTemps)    # format ¨POSIXct
 			# tiens c'est bizarre deux classes differents (POSIXlt et POSIXt) rentrent dans horodate
-			# ben oui parce que RefHorodate est un objet de classe POSIXT qui dans R est le papa des deux autres...
+			# ben oui parce que RefHorodate est un object de classe POSIXT qui dans R est le papa des deux autres...
 			horodatefin@horodate=as.POSIXlt(horodatefin@horodate) 
 			# ces dates sont necessaire pour initialiser le bilanConditionEnv qui dans son interface
 			# fournit d'une date de debut et d'une date de fin
-			# normalement l'interface assigne les objets bilanConditionEnv_date_debut dans l'environnement env_stacomi
-			# ces objets sont au format POSIXlt
+			# normalement l'interface assigne les objects bilanConditionEnv_date_debut dans l'environnement env_stacomi
+			# ces objects sont au format POSIXlt
 			# ls(envir=envir_stacomi) 
 			# Usage assign(x, value, pos = -1, envir = as.environment(pos),..)
 			assign(x="bilanConditionEnv_date_debut",horodatedebut,envir=envir_stacomi)
 			assign(x="bilanConditionEnv_date_fin",horodatefin,envir=envir_stacomi)
-			objet@bilanConditionEnv=charge(objet@bilanConditionEnv) # là ça marche
-			# les objets sont maintenant charges et calcules, j'assigne BilanConditionEnv qui les contient
+			object@bilanConditionEnv=charge(object@bilanConditionEnv) # là ça marche
+			# les objects sont maintenant charges et calcules, j'assigne BilanConditionEnv qui les contient
 			# dans l'environnement envir_stacomi
 			funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.1)
-			assign("bilanMigrationConditionEnv",objet,envir=envir_stacomi)
+			assign("bilanMigrationConditionEnv",object,envir=envir_stacomi)
 			enabled(toolbarlist[["Graph"]])<-TRUE
 		})
 

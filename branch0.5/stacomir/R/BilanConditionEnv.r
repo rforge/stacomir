@@ -9,6 +9,10 @@
 #' 
 #' 
 #' @name BilanConditionEnv-class
+#' @include RefHorodate.r 
+#' @include RefStationMesure.r
+#' @include create_generic.r
+#' @include utilitaires.r
 #' @aliases BilanConditionEnv-class BilanConditionEnv
 
 #' @section Objects from the Class: Objects can be created by calls of the form
@@ -31,7 +35,7 @@
 #' 
 #' showClass("BilanConditionEnv")
 #' 
-#' @exportClass 
+#' @export 
 setClass(Class="BilanConditionEnv",
 		representation=representation(
 				horodate="RefHorodate",
@@ -48,15 +52,15 @@ setClass(Class="BilanConditionEnv",
 
 #' connect method for BilanConditionEnv class
 #' @return an object of BilanConditionEnv class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanConditionEnv"),
-		definition=function(objet,h) {
+		definition=function(object,h,..) {
 			#  construit une requete ODBCwheredate
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@datedebut=strptime(objet@datedebut,format="%Y-%m-%d")
-			requete@datefin=strptime(objet@datefin,format="%Y-%m-%d")
+			requete@datedebut=strptime(object@datedebut,format="%Y-%m-%d")
+			requete@datefin=strptime(object@datefin,format="%Y-%m-%d")
 			requete@colonnedebut="env_date_debut"
 			requete@colonnefin="env_date_fin"
 			requete@select=paste("SELECT", 
@@ -69,46 +73,46 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 							" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
 							" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
-			tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
+			tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 			requete<-connect(requete)			
-			objet@data<-killfactor(requete@query)
+			object@data<-killfactor(requete@query)
 			funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
-			return(objet)
+			return(object)
 		}
 )
 
 #' charge method for BilanCondtionEnv class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(objet,h) {
+setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(object,h) {
 			
 			if (exists("refStationMesure",envir_stacomi)) {
-				objet@stationMesure<-get("refStationMesure",envir_stacomi)
+				object@stationMesure<-get("refStationMesure",envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
 			}     
 			
 			if (exists("bilanConditionEnv_date_debut",envir_stacomi)) {
-				objet@datedebut<-get("bilanConditionEnv_date_debut",envir_stacomi)@horodate
+				object@datedebut<-get("bilanConditionEnv_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.5,arret=TRUE)
 			}
 			
 			if (exists("bilanConditionEnv_date_fin",envir_stacomi))  {
-				objet@datefin<-get("bilanConditionEnv_date_fin",envir_stacomi)@horodate
+				object@datefin<-get("bilanConditionEnv_date_fin",envir_stacomi)@horodate
 			}else {
 				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
 			}      		
-			objet<-connect(objet)
-			return(objet)
+			object<-connect(object)
+			return(object)
 		})
 
 # affiche un graphe si des CE sont dans la base pendant la periode selectionnee
 #' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hbilanConditionEnvgraph = function(h,...) 
 {

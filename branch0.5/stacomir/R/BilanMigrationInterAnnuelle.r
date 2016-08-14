@@ -7,7 +7,7 @@
 #' 
 #' @name BilanMigrationConditionEnv-class
 #' @aliases BilanMigrationConditionEnv BilanMigrationConditionEnv-class
-
+#' @include RefAnnee.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanMigrationConditionEnv",
 #' bilanMigration=new("BilanMigration"),
@@ -34,7 +34,7 @@
 #' 
 #' showClass("BilanMigrationConditionEnv")
 #' 
-#' @exportClass 
+#' @export
 
 
 
@@ -62,18 +62,17 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 )
 
 #' connect method for BilanMigrationInterannuelle class
-#' @returnType S4 class BilanMigrationInterannuelle
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			# tableau contenant toutes les annees
-			les_annees = (objet@anneeDebut@annee_selectionnee):(objet@anneeFin@annee_selectionnee)
-			tax = objet@taxons@data$tax_code
-			std = objet@stades@data$std_code
-			dic= objet@dc@dc_selectionne
+			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
+			tax = object@taxons@data$tax_code
+			std = object@stades@data$std_code
+			dic= object@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
@@ -82,10 +81,10 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			requete<-connect(requete)
 			
 			# resultat de la requete
-			objet@data<- killfactor(requete@query)
+			object@data<- killfactor(requete@query)
 			
 			# recuperation des indices des annees presentes dans la base
-			index=unique(objet@data$bjo_annee) %in% les_annees
+			index=unique(object@data$bjo_annee) %in% les_annees
 			
 			# s'il manque des donnees pour certaines annees selectionnnees" 
 			if (length(les_annees[!index]>0)) 
@@ -99,71 +98,71 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.3,
 								paste(les_annees[index],collapse=","), "\n")) 
 			}  
-			return(objet)
+			return(object)
 		}
 )
 
 # supprime les enregistrements de la base pour l'annee courante
-# objet<-bmi
+# object<-bmi
 setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			# recuperation des annees taxons et stades concernes
-			les_annees = (objet@anneeDebut@annee_selectionnee):(objet@anneeFin@annee_selectionnee)
-			tax = objet@taxons@data$tax_code
-			std = objet@stades@data$std_code
-			dic= objet@dc@dc_selectionne
+			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
+			tax = object@taxons@data$tax_code
+			std = object@stades@data$std_code
+			dic= object@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
+			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
+			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
 			requete<-connect(requete)
 		}
 )
 
-#  objet = bilanMigrationInterAnnuelle
+#  object = bilanMigrationInterAnnuelle
 setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
 			}
 			if (exists("refTaxons",envir_stacomi)) {
-				objet@taxons<-get("refTaxons",envir_stacomi)
+				object@taxons<-get("refTaxons",envir_stacomi)
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
-				objet@stades<-get("refStades",envir_stacomi)
+				object@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
 				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
 			}
 			if (exists("anneeDebut",envir_stacomi)) {
-				objet@anneeDebut<-get("anneeDebut",envir_stacomi)
+				object@anneeDebut<-get("anneeDebut",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.10,arret=TRUE)
 			}  	
 			if (exists("anneeFin",envir_stacomi)) {
-				objet@anneeFin<-get("anneeFin",envir_stacomi)
+				object@anneeFin<-get("anneeFin",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)
 			}
-			objet<-connect(objet)
-			assign("bilanMigrationInterannuelle",objet,envir_stacomi)
+			object<-connect(object)
+			assign("bilanMigrationInterannuelle",object,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.11)
-			return(objet)
+			return(object)
 		}
 )
 # graphique de toutes les migrations interannuelles les unes sur les autres    
-# objet = bilanMigrationInterAnnuelle = objet
+# object = bilanMigrationInterAnnuelle = object
 hgraphBilanMigrationInterAnnuelle = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -231,7 +230,7 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 			g <- g+	geom_line(aes(y=moyenne),col=I("brown"),data=tmp)
 			g <- g+geom_point(aes(y=moyenne,col=I("red")),size=0.8,data=tmp)		           
 			g <- g+ scale_colour_manual(name=amplitudechoix, values=c("orange3","red"),
-							labels=c(the_choix[i],str_c("Moyenne interannuelle",amplitude)))+
+							labels=c(the_choix[i],stringr::str_c("Moyenne interannuelle",amplitude)))+
 					guides(fill = guide_legend(reverse=TRUE))
 			g <- g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,unique(as.character(tmp$annee)),"/",amplitude))
 			g <- g+scale_x_datetime(name="effectif",breaks="months",minor_breaks="weeks", labels=date_format("%d-%m"))

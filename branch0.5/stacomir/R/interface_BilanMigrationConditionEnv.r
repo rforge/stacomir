@@ -2,8 +2,7 @@
 
 #' interface for BilanMigrationConditionEnv class
 #' @aliases interface_BilanMigration
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationConditionEnv = function()
 {
 	bilanMigrationConditionEnv=new("BilanMigrationConditionEnv")
@@ -20,7 +19,7 @@ interface_BilanMigrationConditionEnv = function()
 	
 	choix(bilanMigrationConditionEnv@bilanMigration@pasDeTemps)
 	choix(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
-	choix(bilanMigrationConditionEnv@bilanMigration@dc,objetBilan=bilanMigrationConditionEnv@bilanMigration,is.enabled=TRUE)
+	choix(bilanMigrationConditionEnv@bilanMigration@dc,objectBilan=bilanMigrationConditionEnv@bilanMigration,is.enabled=TRUE)
 	
 	ggroupboutonsbas = ggroup(horizontal=FALSE)
 	add(ggroupboutons,ggroupboutonsbas)

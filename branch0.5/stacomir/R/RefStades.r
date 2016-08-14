@@ -7,7 +7,6 @@
 #' 
 #' @name RefStades-class
 #' @aliases RefStades-class RefStades
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefStades", data="data.frame")}.  \describe{
 #' \item{list("data")}{Object of class \code{"data.frame"} ~ The phases
@@ -31,30 +30,28 @@
 setClass(Class="RefStades",representation=representation(data="data.frame") )
 
 #' Loading method for RefStades referential objects
-#' @returnType S4 object
 #' @return An S4 object of class RefStades
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
-#'  objet=new("RefStades")
-#'  charge(objet)
-setMethod("charge",signature=signature("RefStades"),definition=function(objet) {
+#'  object=new("RefStades")
+#'  charge(object)
+setMethod("charge",signature=signature("RefStades"),definition=function(object) {
 			req=new("RequeteODBC") 
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT std_code, std_libelle FROM ref.tr_stadedeveloppement_std ORDER BY std_code ;"
-			req=connect(req)  # appel de la methode connect de l'objet requeteODBC
-			objet@data<-req@query
-			return(objet)
+			req=connect(req)  # appel de la methode connect de l'object requeteODBC
+			object@data<-req@query
+			return(object)
 		})
 #' Loading method for RefStades referential objects searching only those stages existing for a DC and a Taxon
-#' @returnType S4 object
 #' @return An S4 object of class RefStades
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
-#'  objet=new("RefStades")
-#'  charge_avec_filtre(objet,dc_selectionne,taxon_selectionne)
-setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(objet,dc_selectionne,taxon_selectionne) {
+#'  object=new("RefStades")
+#'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne)
+setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(object,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (std_code) std_code, std_libelle", 
@@ -66,65 +63,65 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 			requete@where=paste("where dis_identifiant in ",vector_to_listsql(dc_selectionne),sep="")
 			requete@and=paste("and lot_tax_code in ",vector_to_listsql(taxon_selectionne),sep="")
 			requete@order_by="ORDER BY std_code"  
-			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
-			objet@data<-requete@query
-			if (nrow(objet@data)==0) funout(get("msg",envir=envir_stacomi)$RefStades.1,arret=TRUE)
-			return(objet)
+			requete=connect(requete)  # appel de la methode connect de l'object requeteODBC
+			object@data<-requete@query
+			if (nrow(object@data)==0) funout(get("msg",envir=envir_stacomi)$RefStades.1,arret=TRUE)
+			return(object)
 		})
 #' Choice method for RefStades referential objects
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
-#'  objet=new("RefStades")
+#'  object=new("RefStades")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet<-charge(objet)
+#' object<-charge(object)
 #' bilanMigrationPar=new(BilanMigrationPar)
-#' # objetBilan=bilan_taille # pour autre test
-#' choix(objet,objetBilan=bilanMigrationPar)
-setMethod("choix",signature=signature("RefStades"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
-			if (nrow(objet@data) > 0){
+#' # objectBilan=bilan_taille # pour autre test
+#' choix(object,objectBilan=bilanMigrationPar)
+setMethod("choix",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+			if (nrow(object@data) > 0){
 				hstd=function(h,...){
 					stades=svalue(choix)
-					objet@data<-objet@data[std_libelle%in%stades ,]
-					assign("refStades",objet,envir_stacomi)
+					object@data<-object@data[std_libelle%in%stades ,]
+					assign("refStades",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefStades.2)
-					if (!is.null(objetBilan)) {
+					if (!is.null(objectBilan)) {
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne premnant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choix ï¿½ laquelle on ne passe pas d'objetBilan en parametre 
-						#il y a bien un objet par dans l'objet Bilan             
-						if (class(try(objetBilan@par,silent=TRUE))!="try-error") {
-							objetBilan@par<<-charge_avec_filtre(objet=objetBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+						# elle est alors affichee des le debut par la methode choix ï¿½ laquelle on ne passe pas d'objectBilan en parametre 
+						#il y a bien un object par dans l'object Bilan             
+						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
+							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (exists("frame_par")) delete(group,frame_par)
-							choix(objetBilan@par,is.enabled=TRUE)
+							choix(objectBilan@par,is.enabled=TRUE)
 						} 
-						#il y a bien un objet parqual dans l'objet Bilan						
-						if (class(try(objetBilan@parqual,silent=TRUE))!="try-error") {
-							objetBilan@parqual<<-charge_avec_filtre(objet=objetBilan@parqual,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+						#il y a bien un object parqual dans l'object Bilan						
+						if (class(try(objectBilan@parqual,silent=TRUE))!="try-error") {
+							objectBilan@parqual<<-charge_avec_filtre(object=objectBilan@parqual,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choix(objetBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
+							choix(objectBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
 						}
-#il y a bien un objet parquan dans l'objet Bilan
-						if (class(try(objetBilan@parquan,silent=TRUE))!="try-error") {
-							objetBilan@parquan<<-charge_avec_filtre(objet=objetBilan@parquan,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							if (class(objetBilan)=="Bilan_taille" )
+#il y a bien un object parquan dans l'object Bilan
+						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
+							objectBilan@parquan<<-charge_avec_filtre(object=objectBilan@parquan,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							if (class(objectBilan)=="Bilan_taille" )
 							{
-								if (nrow(objetBilan@parquan@data)>0) {
-									objetBilan@parquan@data=objetBilan@parquan@data[objetBilan@parquan@data$par_code=="1786"|  #taille
-													objetBilan@parquan@data$par_code=="1785"|     # taille fourche
-													is.na(objetBilan@parquan@data$par_code)|objetBilan@parquan@data$par_code=="C001",]     # aucune
+								if (nrow(objectBilan@parquan@data)>0) {
+									objectBilan@parquan@data=objectBilan@parquan@data[objectBilan@parquan@data$par_code=="1786"|  #taille
+													objectBilan@parquan@data$par_code=="1785"|     # taille fourche
+													is.na(objectBilan@parquan@data$par_code)|objectBilan@parquan@data$par_code=="C001",]     # aucune
 								}
 							}
 							if (exists("frame_parquan")) delete(group,frame_parquan)
-							choix(objetBilan@parquan,label=get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE)
+							choix(objectBilan@parquan,label=get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE)
 						}
 						
 					}
 				}
 				frame_std<<-gframe(get("msg",envir=envir_stacomi)$RefStades.6)
 				add(group,frame_std)
-				std_libelle=fun_char_spe(objet@data$std_libelle)
+				std_libelle=fun_char_spe(object@data$std_libelle)
 				choix=gcombobox(std_libelle,container=frame_std,handler=hstd)
 				enabled(frame_std)<-is.enabled
 				gbutton("OK", container=frame_std,handler=hstd)
@@ -133,26 +130,26 @@ setMethod("choix",signature=signature("RefStades"),definition=function(objet,obj
 
 #' Multiple Choice method for RefStades referential objects
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
-#' @example  
-#'  objet=new("RefStades")
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#'  object=new("RefStades")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet<-charge(objet)
+#' object<-charge(object)
 #' bilanMigrationPar=new(BilanMigrationPar)
-#' # objetBilan=bilan_taille # for other test
-#' choixmult(objet,objetBilan=bilanMigrationPar)		
-setMethod("choixmult",signature=signature("RefStades"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
+#' # objectBilan=bilan_taille # for other test
+#' choixmult(object,objectBilan=bilanMigrationPar)		
+setMethod("choixmult",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			
-			if (nrow(objet@data) > 0){
+			if (nrow(object@data) > 0){
 				hstd=function(h,...){
 					stades=tbdeststd[,][tbdeststd[,]!=""]
-					objet@data<-objet@data[std_libelle%in%stades ,]
-					assign("refStades",objet,envir_stacomi)
+					object@data<-object@data[std_libelle%in%stades ,]
+					assign("refStades",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefStades.2)
-					if (!is.null(objetBilan)) {
-						objetBilan@stades<-objet
-						assign(get("objetBilan",envir=envir_stacomi),objetBilan,envir=envir_stacomi)
+					if (!is.null(objectBilan)) {
+						objectBilan@stades<-object
+						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
 						
 						# suppresses all tab larger than 3 (stage))
 						if (length(notebook)>4){
@@ -162,38 +159,38 @@ setMethod("choixmult",signature=signature("RefStades"),definition=function(objet
 							}
 						}
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne prenant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choix à laquelle on ne passe pas d'objetBilan en parametre 
-						#il y a bien un objet par dans l'objet Bilan 
-						if (class(try(objetBilan@par,silent=TRUE))!="try-error") {
-							objetBilan@par<-charge_avec_filtre(objet=objetBilan@par,
+						# elle est alors affichee des le debut par la methode choix à laquelle on ne passe pas d'objectBilan en parametre 
+						#il y a bien un object par dans l'object Bilan 
+						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
+							objectBilan@par<-charge_avec_filtre(object=objectBilan@par,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							choixmult(objetBilan@par,is.enabled=TRUE)
+							choixmult(objectBilan@par,is.enabled=TRUE)
 						} 
-						#il y a bien un objet parqual dans l'objet Bilan						
-						if (class(try(objetBilan@parqual,silent=TRUE))!="try-error") {
-							objetBilan@parqual<-charge_avec_filtre(objet=objetBilan@parqual,
+						#il y a bien un object parqual dans l'object Bilan						
+						if (class(try(objectBilan@parqual,silent=TRUE))!="try-error") {
+							objectBilan@parqual<-charge_avec_filtre(object=objectBilan@parqual,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							choixmult(objetBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
+							choixmult(objectBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
 						}
-#il y a bien un objet parquan dans l'objet Bilan
-						if (class(try(objetBilan@parquan,silent=TRUE))!="try-error") {
-							objetBilan@parquan<-charge_avec_filtre(objet=objetBilan@parquan,
+#il y a bien un object parquan dans l'object Bilan
+						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
+							objectBilan@parquan<-charge_avec_filtre(object=objectBilan@parquan,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							if (class(objetBilan)=="Bilan_taille" )
+							if (class(objectBilan)=="Bilan_taille" )
 							{
-								if (nrow(objetBilan@parquan@data)>0) {
-									objetBilan@parquan@data=objetBilan@parquan@data[objetBilan@parquan@data$par_code=="1786"|  #taille
-													objetBilan@parquan@data$par_code=="1785"|     # taille fourche
-													is.na(objetBilan@parquan@data$par_code)|objetBilan@parquan@data$par_code=="C001",]     # aucune
+								if (nrow(objectBilan@parquan@data)>0) {
+									objectBilan@parquan@data=objectBilan@parquan@data[objectBilan@parquan@data$par_code=="1786"|  #taille
+													objectBilan@parquan@data$par_code=="1785"|     # taille fourche
+													is.na(objectBilan@parquan@data$par_code)|objectBilan@parquan@data$par_code=="C001",]     # aucune
 								}
 							}
-							choixmult(objetBilan@parquan,label=get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE)
+							choixmult(objectBilan@parquan,label=get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE)
 						}
 						if (svalue(notebook)<length(notebook)){
 							svalue(notebook)<-svalue(notebook)+1	
@@ -204,7 +201,7 @@ setMethod("choixmult",signature=signature("RefStades"),definition=function(objet
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
 				#TODO addmsg
-				std_libelle=fun_char_spe(objet@data$std_libelle)
+				std_libelle=fun_char_spe(object@data$std_libelle)
 				groupstd<<-ggroup() 
 				add(notebook,groupstd,label="stade")
 				framestdsource<-gframe(get("msg",envir=envir_stacomi)$RefStades.6,cont=groupstd)
@@ -259,24 +256,24 @@ setMethod("choixmult",signature=signature("RefStades"),definition=function(objet
 #' widget in the graphical interface) but from the command line. The values passed to the load function
 #' for stades is the code.  Any numeric value will be discarded
 #' @param stades the vector of stages chosen
-#' @author Cedric Briand \email{cedric.briand@@lavilaine.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family load functions
-#' @example
-#'objet=new("RefTaxon")
-#'objet<-charge(objet)
-#'objetBilan=new("BilanMigrationMult")
-#' load(objet=objet,objetBilan=objetBilan,"Anguilla anguilla")
+#' @examples
+#'object=new("RefTaxon")
+#'object<-charge(object)
+#'objectBilan=new("BilanMigrationMult")
+#' load(object=object,objectBilan=objectBilan,"Anguilla anguilla")
 
-setMethod("load",signature=signature("RefStades"),definition=function(objet,stades) {
+setMethod("load",signature=signature("RefStades"),definition=function(object,stades) {
 			if (is.null(stades)) {
 				funout(get("msg",envir=envir_stacomi)$RefStades.7,arret=TRUE)
 			}
-			libellemanquants<-stades[!stades%in%objet@data$std_code]
-			if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefStades.8,str_c(libellemanquants,collapse=", ")))
-			objet@data<-objet@data[objet@data$std_code%in%stades,]					
-			if (nrow(objet@data)==0 )	{
+			libellemanquants<-stades[!stades%in%object@data$std_code]
+			if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefStades.8,stringr::str_c(libellemanquants,collapse=", ")))
+			object@data<-object@data[object@data$std_code%in%stades,]					
+			if (nrow(object@data)==0 )	{
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
 			}
-			assign("refStade",objet,envir=envir_stacomi)
-			return(objet)
+			assign("refStade",object,envir=envir_stacomi)
+			return(object)
 		})

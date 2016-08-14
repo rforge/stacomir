@@ -1,19 +1,10 @@
-# Nom fichier :        interface_graphique 
-# Projet :             stacomiR 
-# Organisme :          IAV
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   11/04/2006 15:51:44
-# Compatibilite :      PostgreSQL 9.0
-
-
-# fonctions handler utilisees par l'interface
-
 #' handler function used by the main interface
-#' @param h 
-#' @param ...
+#' 
+#' 
+#' @param h A handler
+#' @param ... Other parameters
 #' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hx11 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hDF=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
@@ -96,7 +87,7 @@ hBilanEspeces=function(h,...){
 #' @note gr_interface is copied by stacomi into envir_stacomi.
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -194,8 +185,10 @@ hx11=function(h,...){
 #' Function that loads the loginwindow, tests connection, and then destroys the
 #' window
 #' 
-#' 
 #' @param gr_interface Will be used to launch the program as graphical
+#' @importMethodsFrom package stacomirtools connect
+#' @import stringr
+#' @import intervals
 #' interface or in command line
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
