@@ -41,7 +41,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
-	assign("progres",winProgressBar(title = "cumul val. quant. par pas de temps",
+	assign("progres",utils::winProgressBar(title = "cumul val. quant. par pas de temps",
 					label = "progression %",
 					min = 0,
 					max = 1, 
@@ -76,7 +76,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	#bilanMigrationPar@pasDeTemps@noPasCourant=as.integer(-(difftime(as.POSIXlt(strptime("2006-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")),as.POSIXlt(strptime("2006-03-27 00:00:00",format="%Y-%m-%d %H:%M:%S")),unit="days")))  
 	while (getnoPasCourant(bilanMigrationPar@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbPas
-		setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
+		utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))
 		#finPas=as.POSIXlt(DateFin(bilanMigrationPar@pasDeTemps)) # pour debug avoir quelque chose dans le resultset

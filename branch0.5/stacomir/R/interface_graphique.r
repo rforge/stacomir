@@ -186,9 +186,26 @@ hx11=function(h,...){
 #' window
 #' 
 #' @param gr_interface Will be used to launch the program as graphical
-#' @importMethodsFrom package stacomirtools connect
 #' @import stringr
 #' @import intervals
+#' @import RColorBrewer
+#' @import package gWidgets
+#' @import package gWidgetsRGtk2
+#' @import package ggplot2
+#' @importFrom methods as
+#' @importFrom methods new
+#' @importFrom methods slot
+#' @importFrom methods slot<-
+#' @importFrom grid viewport
+#' @importFrom grid pushViewport
+#' @importFrom grid grid.newpage
+#' @importFrom grid grid.layout
+#' @importFrom utils winProgressBar
+#' @importFrom utils setwinProgressBar
+#' @importFrom utils read.csv
+#' @importFrom utils stack
+#' @importFrom RODBC odbcClose
+#' 
 #' interface or in command line
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
@@ -209,7 +226,7 @@ stacomi=function(gr_interface=TRUE){
 	createmessage(refMsg)
 	
 	msg=get("msg",envir=envir_stacomi)
-	libraries()
+	#libraries()
 	options(sqldf.RPostgreSQL.user = sqldf.options["sqldf.uid"], 
 			sqldf.RPostgreSQL.password =sqldf.options["sqldf.pwd"],
 			sqldf.RPostgreSQL.dbname = sqldf.options["sqldf.dbname"],

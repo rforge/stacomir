@@ -9,7 +9,6 @@
 #' t_bilanmigrationjournalier_bjo table
 #' 
 #' 
-#' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @note the user is asked whether or not he wants to overwrite data, if no
 #' data are present in the database, the import is done anyway
@@ -31,11 +30,11 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			bilanMigration@stades@data$std_code,
 			unique(strftime(as.POSIXlt(bilanMigration@duree),"%Y")),
 			rep(jour_dans_lannee_non_nuls,ncol(data)),
-			stack(data),  
+			utils::stack(data),  
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
 			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 	)
-	t_bilanmigrationjournalier_bjo= killfactor(t_bilanmigrationjournalier_bjo[!is.na(t_bilanmigrationjournalier_bjo$values),])
+	t_bilanmigrationjournalier_bjo= stacomirtools::killfactor(t_bilanmigrationjournalier_bjo[!is.na(t_bilanmigrationjournalier_bjo$values),])
 	
 	#####
 	# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
@@ -50,7 +49,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
-		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
+		progres<-utils::winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
 				label = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.4,
 				min = 0,
 				max = 1, 
@@ -58,7 +57,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 				width = 400)
 		for (i in 1:nrow(t_bilanmigrationjournalier_bjo)) {				
 			zz=i/nrow(t_bilanmigrationjournalier_bjo)				
-			setWinProgressBar(progres,
+			utils::setWinProgressBar(progres,
 					zz,
 					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 					label=sprintf("%d%% progression",
@@ -83,7 +82,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	
 	if (nrow(bil@data)>0)
 	{ 
-		choix<-gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+		choix<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
 						unique(bil@data$bjo_horodateexport),
 						get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
 				handler=hconfirm) # voulez vous le remplacer ?
@@ -116,7 +115,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			requete<-connect(requete)   
 		} # end for
 		close(progres)
-		odbcClose(requete@connection)
+		RODBC::odbcClose(requete@connection)
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)

@@ -34,9 +34,9 @@ baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pw
 setwd(pgwd)
 # pour voir apparaitre toutes les requ�tes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
-source ("libraries.r")
+#source ("libraries.r")
 
-libraries()
+#libraries()
 
 source("utilitaires.r") # contient  funout (pour ecrire dans la console) et filechoose
 source("messages.R")
@@ -79,7 +79,7 @@ source("BilanConditionEnv.r")
 source("BilanMigrationConditionEnv.r")
 source("BilanMigrationPar.r")
 source("BilanMigrationInterAnnuelle.r")
-source("Bilan_lot.r")
+source("Bilan_carlot.r")
 source("Bilan_taille.r") 
 source("Bilan_poids_moyen.r")
 source("BilanEspeces.r")
@@ -111,5 +111,5 @@ source("interface_BilanFonctionnementDF.r")
 source("interface_BilanMigrationMult.r")
 source("interface_graphique.r")
 # interface_BilanEspeces dans BilanEspeces
- stacomi(gr_interface=FALSE)
+ stacomi(gr_interface=TRUE)
  

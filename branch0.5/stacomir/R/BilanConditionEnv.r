@@ -76,7 +76,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 			tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 			requete<-connect(requete)			
-			object@data<-killfactor(requete@query)
+			object@data<-stacomirtools::killfactor(requete@query)
 			funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 			return(object)
 		}
@@ -125,9 +125,9 @@ hbilanConditionEnvgraph = function(h,...)
 	if(length(unique(dat$env_stm_identifiant))!=0)
 	{
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(unique(dat$env_stm_identifiant)),1,just="center")))
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(unique(dat$env_stm_identifiant)),1,just="center")))
 		# la liste des graphes calcules
 		lesGraphes=list()
 		if(length(unique(dat$env_stm_identifiant))!= nrow(bilanConditionEnv@stationMesure@data))

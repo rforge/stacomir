@@ -33,7 +33,7 @@ fungraph_env=function(tableau,duree,taxon,stade,stations){
 			jour_an=TRUE,
 			jour_mois=FALSE,
 			heure=FALSE)	
-	couleurs=rep(brewer.pal(8,"Accent"),2)
+	couleurs=rep(RColorBrewer::brewer.pal(8,"Accent"),2)
 	maxeff=floor(log10(max(tableau$Effectif_total,na.rm=TRUE)))
 	lab_les_stations=stations$stm_libelle
 	for (i in 1:nrow(stations)){

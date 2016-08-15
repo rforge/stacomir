@@ -180,9 +180,9 @@ funboxDC = function(h,...) {
 	duree<-seq.POSIXt(from=fonctionnementDC@requete@datedebut,to=fonctionnementDC@requete@datefin,by="day")
 	debut<-unclass(as.Date(duree[1]))[[1]]
 	fin<-unclass(as.Date(duree[length(duree)]))[[1]]
-	mypalette<-brewer.pal(12,"Paired")
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#display.brewer.all()
-	mypalette1<-c("#1B9E77","#AE017E","orange", brewer.pal(12,"Paired"))
+	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
 
 
 

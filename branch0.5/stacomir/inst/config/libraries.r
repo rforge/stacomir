@@ -13,7 +13,7 @@
 #' 
 #' function to call and load the libraries used in stacomi
 #' 
-#' 
+#' @import tcltk2
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 libraries=function() {
 necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
@@ -21,10 +21,10 @@ necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
 if(!all(necessary %in% installed.packages()[, 'Package']))
 	install.packages(necessary[!necessary %in% installed.packages()[, 'Package']], dependencies = TRUE)
 #if (!'XML'%in%installed.packages()[, 'Package']) install.packages("XML", repos = "http://www.omegahat.org/R")
-require('tcltk2')
-#require('ggplot2')
-require('gWidgets')
-require('RODBC')
+#require('tcltk2')
+require('ggplot2')
+#require('gWidgets') # already called by depends
+#require('RODBC')
 ##require('Hmisc')
 options(guiToolkit = "RGtk2")
 #require('lattice')

@@ -10,8 +10,8 @@
 #' @return sql query
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fn_sql_dis<-function    (per_dis_identifiant,
-                        dateDebut=as.Date(duree[min(index)]),
-                        dateFin=as.Date(duree[max(index)]))
+                        dateDebut,
+                        dateFin)
         {
                         
         sql=paste("SELECT",

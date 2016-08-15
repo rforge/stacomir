@@ -97,10 +97,10 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND car_par_code='1791'",sep="")
 			requete<-connect(requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$Bilan_stades_pigm.1)
-			object@data<-killfactor(requete@query)
+			object@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
-				stades<-killfactor(requete@query)
+				stades<-stacomirtools::killfactor(requete@query)
 				choixpere=c("lotpere","date")
 				funout(paste("Attention il peut y avoir plusieurs lots a la meme date, et certains stades sont fait sans lotpere (ex taille-poids-stade)\n"))
 				choixpere=select.list(choixpere,preselect="date",multiple=FALSE,
@@ -136,7 +136,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 				if (nrow (requete@query)>0)	{
 					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
-					object@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
+					object@datatempsal<-stacomirtools::killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
 					object@datatempsal$salinite=as.numeric(object@salinite@label)
 					colnames(object@datatempsal)<-c("date","temperature","salinite")
 				} else {
@@ -347,14 +347,14 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	}
 	sequ=phicum
 	if (VB){ #VB
-		dist1<-pgamma(sequ,par1)
+		dist1<-stats::pgamma(sequ,par1)
 		dist=1-dist1
 	} else if (is.null(par2)) { # VIA3
-		dist1<-pgamma(sequ,par1)
+		dist1<-stats::pgamma(sequ,par1)
 		dist=dist1
 	}  else if (!is.null(par2)){      # VIA0...VIA3
-		dist1<-pgamma(sequ,par1)
-		dist2<- pgamma(sequ,par2)
+		dist1<-stats::pgamma(sequ,par1)
+		dist2<- stats::pgamma(sequ,par2)
 		dist=dist1-dist2          
 	}
 	if (lmax>0){

@@ -105,7 +105,6 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 #' @note The program cuts periods which overlap between two month
 #' @param h a handler  
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @import lubridate
 #' @export
 funbarchartDF = function(h,...) {
 	# TEMP 2015
@@ -130,9 +129,9 @@ funbarchartDF = function(h,...) {
 	# BUG 06/02/2009 11:51:49 si la date choisie n'est pas le debut du mois
 	seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
 	seqmois=as.POSIXlt(round(seqmois,digits="months"))
-	seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
+	#seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
-	progres<-winProgressBar(title =get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
+	progres<-utils::winProgressBar(title =get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
 			label = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5,
 			min = 0,
 			max = 1, 
@@ -141,7 +140,7 @@ funbarchartDF = function(h,...) {
 	z=0 # compteur tableau t_periodefonctdispositif_per_mois
 	for(j in 1:nrow(t_periodefonctdispositif_per)){
 		#cat( j )
-		setWinProgressBar(progres,j/nrow(t_periodefonctdispositif_per),
+		utils::setWinProgressBar(progres,j/nrow(t_periodefonctdispositif_per),
 				title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
 				label=sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per)))) 
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
@@ -183,9 +182,9 @@ funbarchartDF = function(h,...) {
 		x11 (40,40) ;print(g1)
 	}else    {
 		x11(60,40)  
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(1,2,just="center")))
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(1,2,just="center")))
 		print(g, vp=vplayout(1,1))
 		print(g1, vp=vplayout(1,2))
 	}
@@ -215,9 +214,9 @@ funboxDF = function(h,...) {
 	duree=seq.POSIXt(from=fonctionnementDF@requete@datedebut,to=fonctionnementDF@requete@datefin,by="day")
 	debut=graphdate(duree[1])
 	fin=graphdate(duree[length(duree)])
-	mypalette<-brewer.pal(12,"Paired")
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#display.brewer.all()
-	mypalette1<-c("#1B9E77","#AE017E","orange", brewer.pal(12,"Paired"))
+	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
 	
 	###################################         
 	# creation d'un graphique vide (2)

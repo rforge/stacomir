@@ -304,12 +304,12 @@ chargecsv=function(){
 	test<-file.access(filecsv,0)==0
 	# if the file does not open, we will switch to the file located within the package
 	if (test) {
-		doc<-read.csv(filecsv,header=TRUE,sep=";")
+		doc<-utils::read.csv(filecsv,header=TRUE,sep=";")
 		# then we test using the file from the package in the config folder
 	} else {
 		test2<-file.access(filecsvR,0)==0
 		if (test2) {
-			doc<-read.csv(filecsvR,header=TRUE,sep=";")
+			doc<-utils::read.csv(filecsvR,header=TRUE,sep=";")
 		} else {
 			stop("internal error, no access to the csv configuration file")
 		}		

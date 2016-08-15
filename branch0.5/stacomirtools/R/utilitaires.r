@@ -62,7 +62,7 @@ induk=function(a){
 #' @return df
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-killfactor=function(df){
+stacomirtools::killfactor=function(df){
 	for (i in 1:ncol(df))
 	{
 		if(is.factor(df[,i])) df[,i]=as.character(df[,i])

@@ -7,7 +7,7 @@
 #' @param resum data frame with summary per month
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
-	t_bilanmigrationmensuel_bme=killfactor(
+	t_bilanmigrationmensuel_bme=stacomirtools::killfactor(
 			cbind(bilanMigration@dc@dc_selectionne,
 					bilanMigration@taxons@data$tax_code,
 					bilanMigration@stades@data$std_code,

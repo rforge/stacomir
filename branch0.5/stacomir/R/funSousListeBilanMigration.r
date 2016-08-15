@@ -35,7 +35,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	req=new("RequeteODBC")
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	req@open<-TRUE
-	progres<-winProgressBar(title = "calcul des effectifs par pas de temps",
+	progres<-utils::winProgressBar(title = "calcul des effectifs par pas de temps",
 			label = "progression %",
 			min = 0,
 			max = 1, 
@@ -53,7 +53,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
 	while (getnoPasCourant(bilanMigration@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbPas
-		setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
+		utils::setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
 		if(finPas!=round(finPas,"day")) stop("problemes d'arrondi dans le calcul de la date, verifier la fonction funsouslistebilanmigration")
@@ -163,7 +163,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			#cat(paste("Requete SQL : \n" , req@sql,  "\n"))
 			req=connect(req)
-			rs=killfactor(req@query) # pour �viter certains pb
+			rs=stacomirtools::killfactor(req@query) # pour eviter certains pb
 			coef=NULL
 			if (nrow(rs)>0){
 				# Recherche des poids pour ponderer le coef et des dates d'application des coef
@@ -375,7 +375,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 		
 		#cat(paste("Requete SQL : \n" , sql))
 		req=connect(req)
-		rs=killfactor(req@query)
+		rs=stacomirtools::killfactor(req@query)
 		
 		if (nrow(rs)>0){
 			debutOpe=as.POSIXlt(rs$ope_date_debut)

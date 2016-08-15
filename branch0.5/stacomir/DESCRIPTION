@@ -1,13 +1,17 @@
 Package: stacomiR
-Type: Package
+Version: 0.5.0
+Date: 2016-09-01
 Title: STACOMI migration control
-Version: 0.4.1
-Date: 2013-01-18
-Author: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
-Maintainer: Cedric Briand <cedric.briand"at"eptb-vilaine.fr>
+Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"),
+		     email = "cedric.briand@eptb-vilaine.fr"),
+	      person("Marion", "Legrand", role = "aut"),
+	      email="tableau-salt-loire@logrami.fr"))
+Author: Cedric Briand [aut, cre],
+		Marion Legrand [aut]     
+Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 Description: Graphical outputs and treatment for a database of fishway monitoring. It is a part of the STACOMI project developed in France by the ONEMA
     institute to centralize data obtained by fishway monitoring. Version 0.4.1 is available in French English and Spanish. \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
-License: GPL
+License: GPL (>= 2)
 Collate:
     'utilitaires.r'
     'create_generic.r'
@@ -76,10 +80,14 @@ Collate:
     'messages.r'
     'setAs.r'
 LazyLoad: yes
-Depends:
-    methods,
-    RODBC,
-    gWidgets,
-    gWidgetsRGtk2,
+Depends:     
     stacomirtools
+Import:
+	RODBC,
+	intervals,
+	RColorBrewer,
+	methods,
+	stringr,
+	gWidgets,
+    gWidgetsRGtk2	
 RoxygenNote: 5.0.1

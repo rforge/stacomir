@@ -88,7 +88,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	mtext(text=paste(get("msg",envir=envir_stacomi)$fungraph.6,
 					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE))),
 			side=3,
-			col=brewer.pal(5,"Paired")[5],
+			col=RColorBrewer::brewer.pal(5,"Paired")[5],
 			cex=0.8)
 	
 	legend(x=0,
@@ -141,7 +141,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################         
 	# creation d'un graphique vide (2)
 	###################################
-	mypalette<-brewer.pal(12,"Paired")
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
@@ -359,7 +359,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 			ybottom=0,
 			xright=graphdate(as.POSIXct(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = brewer.pal(8,brew),
+			col = RColorBrewer::brewer.pal(8,brew),
 			border = NA, 
 			lwd = 1)
 	

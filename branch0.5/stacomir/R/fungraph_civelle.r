@@ -47,7 +47,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	vec<-c(rep(1,15),rep(2,2),rep(3,2),4,rep(5,6))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
-	mypalette<-brewer.pal(12,"Paired")
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#par("bg"=gray(0.8))
 	par("mar"=c(3, 4, 3, 2) + 0.1)
 	#mypalette<-rainbow(20)
@@ -376,7 +376,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 			ybottom=0,
 			xright=graphdate(as.Date(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = brewer.pal(4,"Paired"),
+			col = RColorBrewer::brewer.pal(4,"Paired"),
 			border = NA, 
 			lwd = 1)
 	

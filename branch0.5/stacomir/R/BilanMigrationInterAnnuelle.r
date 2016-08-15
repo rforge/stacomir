@@ -1,4 +1,3 @@
-# Nom fichier :        BilanMigrationInterAnnuel.R
 #' Class "BilanMigrationConditionEnv"
 #' 
 #' Enables to compute an annual overview of fish migration and environmental
@@ -81,7 +80,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			requete<-connect(requete)
 			
 			# resultat de la requete
-			object@data<- killfactor(requete@query)
+			object@data<- stacomirtools::killfactor(requete@query)
 			
 			# recuperation des indices des annees presentes dans la base
 			index=unique(object@data$bjo_annee) %in% les_annees
@@ -177,7 +176,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
 		
-		dat=killfactor(dat)
+		dat=stacomirtools::killfactor(dat)
 		
 		titre=paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.4,
 				paste(min(dat$annee),max(dat$annee), collapse=":"),
@@ -213,9 +212,9 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")        
 	if (length(the_choix)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choix),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(the_choix),1,just="center")))   
 		for(i in 1:length(the_choix))
 		{
 			amplitudechoix<-paste(the_choix[i],'/',amplitude)
@@ -416,9 +415,9 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 	levels(newdat[,timesplit])<-newdat[,timesplit] # to have the factor in the right order from january to dec
 	if (length(thechoix)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(thechoix),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(thechoix),1,just="center")))   
 		for(i in 1:length(thechoix))  { 
 			selection=as.numeric(as.character(dat$annee))==as.numeric(thechoix)[i] 
 			tmp <- dat[selection,]
@@ -492,9 +491,9 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 	
 	if (length(the_choix)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choix),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(the_choix),1,just="center")))   
 		for(i in 1:length(the_choix))  { 
 			selection=as.numeric(as.character(dat$annee))==as.numeric(the_choix)[i] 
 			tmp <- dat[selection,]

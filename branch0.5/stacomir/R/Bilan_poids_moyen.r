@@ -250,7 +250,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 	
 	hexp=function(h,...){
 		# export d'un tableau que l'on peut ecrire dans la base
-		gconfirm(get("msg",envir_stacomi)$Bilan_poids_moyen.16,
+		gWidgets::gconfirm(get("msg",envir_stacomi)$Bilan_poids_moyen.16,
 				title=get("msg",envir_stacomi)$Bilan_poids_moyen.17,
 				handler=hreg,action="export")
 	}
