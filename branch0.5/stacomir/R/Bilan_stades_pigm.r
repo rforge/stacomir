@@ -159,7 +159,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
 fntablestade<-function(stades,choixpere="lotpere"){
 	if (choixpere=="lotpere"){
-		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
+		tablestades=stats::ftable(stats::xtabs(stades$lot_effectif ~ stades$lot_pere +
 								+ stades$val_libelle))
 		tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
 		# recuperation des dates correspondant aux numeros d'operation
@@ -180,9 +180,9 @@ fntablestade<-function(stades,choixpere="lotpere"){
 		dates=sort(dates)
 		# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
 	} else if (choixpere=="date"){
-		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$ope_date_debut +
+		tablestades=stats::ftable(stats::xtabs(stades$lot_effectif ~ stades$ope_date_debut +
 								+ stades$val_libelle))
-		print(xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
+		print(stats::xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
 								+ stades$val_libelle))
 		dates<-sort(unique(stades$ope_date_debut))
 		tablestades<-tab2df(tablestades) # fonction developpee dans utilitaires

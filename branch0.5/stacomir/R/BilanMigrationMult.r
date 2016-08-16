@@ -784,7 +784,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
 	}
 	stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
-	datasub3<-dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
+	datasub3<-dplyr::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
 	if (!"MESURE"%in%colnames(datasub3)) 	datasub3$MESURE=0
 	if (!"CALCULE"%in%colnames(datasub3)) 	datasub3$CALCULE=0
 	if (!"EXPERT"%in%colnames(datasub3)) 	datasub3$EXPERT=0

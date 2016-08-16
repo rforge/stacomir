@@ -205,6 +205,12 @@ hx11=function(h,...){
 #' @importFrom utils read.csv
 #' @importFrom utils stack
 #' @importFrom RODBC odbcClose
+#' @importFrom stats ftable
+#' @importFrom stats xtabs
+#' @import package RPostgreSQL
+#' @import package sqldf
+#' @importFrom dplyr dcast
+#' @importFrom reshape2 melt
 #' 
 #' interface or in command line
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

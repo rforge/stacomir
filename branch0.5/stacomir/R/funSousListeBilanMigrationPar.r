@@ -129,7 +129,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 				periodePas = 0  # var temporaire pour la duree d'application d'un certain taux
 				
 				# Boucle sur chaque taux et application d'un coefficient de ponderation
-				for (i in 1: lenth(lesTauxEch)) {
+				for (i in 1: length(lesTauxEch)) {
 					# tauxI * dureeI
 					periodePas = datesFinTauxEch[i] - datesDebutTauxEch[i]
 					tauxEch = tauxEch + as.double(lesTauxEch[i]*periodePas)

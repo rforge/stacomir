@@ -212,14 +212,14 @@ setMethod("plot",signature=signature("BilanMigrationPar"),definition=function(x,
 			if (bilanMigrationPar@parqual@data$par_nom!="aucune"& bilanMigrationPar@parquan@data$par_nom!="aucune") {# il y a des qualites et des quantites de lots
 				nmvarqan=gsub(" ","_",bilanMigrationPar@parquan@data$par_nom) # nom variable quantitative
 				colnames(bilanMigrationPar@data)<-gsub("quantite",nmvarqan,colnames(bilanMigrationPar@data))
-				mb=melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bilanMigrationPar@data)))
+				mb=reshape2::melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bilanMigrationPar@data)))
 				# ici je ne sors que les variables quantitatives pour les graphes ulterieurs (j'ignore les effectifs) 
 			} else if (bilanMigrationPar@parqual@data$par_nom!="aucune"){ # c'est que des caracteristiques qualitatives
-				mb=melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep("effectif",colnames(bilanMigrationPar@data)))  # effectifs en fonction des variables qualitatives, il n'y a qu'une seule colonne     
+				mb=reshape2::melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep("effectif",colnames(bilanMigrationPar@data)))  # effectifs en fonction des variables qualitatives, il n'y a qu'une seule colonne     
 			} else if (bilanMigrationPar@parquan@data$par_nom!="aucune"){ # c'est que des caracteristiques quantitatives
 				nmvarqan=gsub(" ","_",bilanMigrationPar@parquan@data$par_nom) # nom variable quantitative
 				colnames(bilanMigrationPar@data)<-gsub("quantite",nmvarqan,colnames(bilanMigrationPar@data)) # je renomme la variable quant
-				mb=melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bilanMigrationPar@data))) # valeurs quantitatives (il n'y a qu'une) 
+				mb=reshape2::melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bilanMigrationPar@data))) # valeurs quantitatives (il n'y a qu'une) 
 			} else if (bilanMigrationPar@parquan@data$par_nom=="aucune"&bilanMigrationPar@parqual@data$par_nom=="aucune"){
 				stop("normalement ce cas est impossible")
 				# ce cas est impossible
