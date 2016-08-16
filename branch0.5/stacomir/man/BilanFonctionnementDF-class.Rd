@@ -2,10 +2,8 @@
 % Please edit documentation in R/BilanFonctionnementDF.r
 \docType{class}
 \name{BilanFonctionnementDF-class}
-\alias{BilanFonctionnementDF}
 \alias{BilanFonctionnementDF-class}
-\title{Class "BilanFonctionnementDF" Bilan du fonctionnement du dispositif de franchissement
-Class "BilanFonctionnementDF" Report fishway work}
+\title{Class "BilanFonctionnementDF" Report fishway work}
 \description{
 The DF (Dispositif de Franchissement) is a fishway. It may be automated and
 work only at certain times This report allows to see the detail of its work.
@@ -28,8 +26,10 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+\code{\linkS4class{Bilan_stades_pigm}} 
+\code{\linkS4class{Bilan_taille}}
+\code{\linkS4class{BilanConditionEnv}} 
+\code{\linkS4class{BilanEspeces}}
 \code{\linkS4class{BilanFonctionnementDC}}
 \code{\linkS4class{BilanFonctionnementDF}}
 \code{\linkS4class{BilanMigration}}

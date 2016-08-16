@@ -21,7 +21,7 @@ The choix method has for arguments a report (bilan) object
  (e.g) is called from a report Bilan(e.g Bilan_lot).
   By default,  the value of the objectbilan is null.
   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-and fills it with the method \link {charge_avec_filtre}
+and fills it with the method \link{charge_avec_filtre}
 }
 \examples{
 \dontrun{ win=gwindow()

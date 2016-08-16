@@ -3,8 +3,7 @@
 \docType{methods}
 \name{charge,Bilan_stades_pigm-method}
 \alias{charge,Bilan_stades_pigm-method}
-\title{Charge : method used by the graphical interface to buid object from values
-stored in envir_stacomi}
+\title{Charge method for BilanStadePigm}
 \usage{
 \S4method{charge}{Bilan_stades_pigm}(object, h)
 }
@@ -12,7 +11,7 @@ stored in envir_stacomi}
 Bilan_stades_pigm with slots filled with user choice
 }
 \description{
-Charge : method used by the graphical interface to buid object from values
+method used by the graphical interface to build object from values
 stored in envir_stacomi
 }
 \author{
