@@ -95,7 +95,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@silent=TRUE
 		requete@open=TRUE
-		progres<-winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
+		progres<-utils::winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 				label = "progression %",
 				min = 0,
 				max = 1, 

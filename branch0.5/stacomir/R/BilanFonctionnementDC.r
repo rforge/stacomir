@@ -1,21 +1,3 @@
-# Nom fichier :        BilanFonctionnementDC.R    (classe)
-# Projet :             controle migrateur / suivi passe
-# Organisme :          IAV/CSP
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   12/01/2009 14:38:09
-# Compatibilite :      
-# Etat :               developpement en cours, fonctionne 
-# programmer l'affichage du choix de la date  (classe horodate devt en cours) =>  PB � regler dans la relation calendar horodate
-# 05/02/2009 21:21:40 OK fonctionne
-# programmer les graphiques, et notamment les coupures entre les mois, a partir de la table des dates de debut et de fin
-# il faut inserer des lignes correspondant aux debuts et fin de mois afin qu'aucun intervalle ne se trouve a cheval sur deux mois
-# 05/02/2009 21:21:54 OK done => il faudra penser � inserer ce type de modif pour le fonctionnement du DF
-# Description          Calcul du fonctionnement du DC � partir des parametres
-#                      extraits de la base migrateur
-# Interface graphique : attribue au bouton DC
-# Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choix de graphiques  OK fonctionne
-
 #' Class "BilanFonctionnementDC" Bilan du fonctionnement du dispositif de
 #' comptage
 #' 
@@ -150,17 +132,17 @@ funbarchartDC = function(h,...) {
 	t_periodefonctdispositif_per_mois$mois1<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
 	t_periodefonctdispositif_per_mois$mois<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
 	t_periodefonctdispositif_per_mois$annee<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
-	superpose.polygon<-trellis.par.get("superpose.polygon")
+	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
 	superpose.polygon$col<-c("#4C00FF","orange")    
 	superpose.polygon$border<-FALSE
-	trellis.par.set("superpose.polygon",superpose.polygon) 
-	bar<-barchart(
+	lattice::trellis.par.set("superpose.polygon",superpose.polygon) 
+	bar<-lattice::barchart(
 			as.numeric(t_periodefonctdispositif_per_mois$sumduree)~as.factor(t_periodefonctdispositif_per_mois$mois)|as.factor(t_periodefonctdispositif_per_mois$annee),
 			groups=t_periodefonctdispositif_per_mois$per_tar_code,
 			stack=TRUE,
 			xlab=get("msg",envir_stacomi)$BilanFonctionnementDC.3,
 			ylab=get("msg",envir_stacomi)$BilanFonctionnementDC.4,
-			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,fonctionnementDC@dc@dc_selectionne), gp=gpar(col="grey", fontsize=8)), 
+			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,fonctionnementDC@dc@dc_selectionne), gp=grid::gpar(col="grey", fontsize=8)), 
 			auto.key=list(rectangles=TRUE,space="bottom",
 					text=c(get("msg",envir_stacomi)$BilanFonctionnementDC.6,get("msg",envir_stacomi)$FonctionnementDC.7)),
 			scales= list(x=list(t_periodefonctdispositif_per_mois$mois),
@@ -216,23 +198,23 @@ funboxDC = function(h,...) {
 			#bty="n",
 			cex=0.8)
 	r <- as.Date(round(range(duree), "day"))
-	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
+	graphics::axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {    # s'il n'y a pas de periode de fontionnement dans la base
-		rect(   xleft=debut, 
+		graphics::rect(   xleft=debut, 
 				ybottom=0.6,
 				xright=fin,
 				ytop=0.9, 
 				col = mypalette[4],
 				border = NA, 
 				lwd = 1)                     
-		rect(   xleft=debut, 
+		graphics::rect(   xleft=debut, 
 				ybottom=0.1,
 				xright=fin,
 				ytop=0.4, 
 				col = mypalette[1],
 				border = NA, 
 				lwd = 1)
-		legend(  x= "bottom",
+		graphics::legend(  x= "bottom",
 				legend=get("msg",envir_stacomi)$BilanFonctionnementDC.10 ,# three terms in the legend
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
@@ -242,7 +224,7 @@ funboxDC = function(h,...) {
 	} else {
 		
 		if (sum(t_periodefonctdispositif_per$per_etat_fonctionnement==1)>0){ 
-			rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==1])), 
+			graphics::rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==1])), 
 					ybottom=0.6,
 					xright=graphdate(as.Date(t_periodefonctdispositif_per$per_date_fin[t_periodefonctdispositif_per$per_etat_fonctionnement==1])),
 					ytop=0.9, 
@@ -250,7 +232,7 @@ funboxDC = function(h,...) {
 					border = NA, 
 					lwd = 1) }
 		if (sum(t_periodefonctdispositif_per$per_etat_fonctionnement==0)>0)                           { 
-			rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==0])), 
+			graphics::rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==0])), 
 					ybottom=0.6,
 					xright=graphdate(as.Date(t_periodefonctdispositif_per$per_date_fin[t_periodefonctdispositif_per$per_etat_fonctionnement==0])),
 					ytop=0.9, 
@@ -266,7 +248,7 @@ funboxDC = function(h,...) {
 		
 		for (j in 1 : length(listeperiode)){
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17)   
-			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
+			graphics::rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=0.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=0.4, 
@@ -274,7 +256,7 @@ funboxDC = function(h,...) {
 					border = NA, 
 					lwd = 1)        
 		}
-		legend  (x= debut,
+		graphics::legend  (x= debut,
 				y=0.6,
 				legend= get("msg",envir_stacomi)$BilanFonctionnementDC.11,
 				pch=c(15,15),
@@ -284,7 +266,7 @@ funboxDC = function(h,...) {
 				text.width=(fin-debut)/6 ,
 				cex=0.8
 		)                                               
-		legend  (x= debut,
+		graphics::legend  (x= debut,
 				y=0.1,
 				legend= c(nomperiode),
 				pch=c(15,15),
@@ -294,8 +276,8 @@ funboxDC = function(h,...) {
 				text.width=(fin-debut)/4,
 				cex=0.8
 		)
-		text(x=debut,y=0.95, label=get("msg",envir_stacomi)$BilanFonctionnementDC.12,font=4,pos=4) 
-		text(x=debut,y=0.45, label=get("msg",envir_stacomi)$BilanFonctionnementDC.13, font=4,pos=4)
+		graphics::text(x=debut,y=0.95, label=get("msg",envir_stacomi)$BilanFonctionnementDC.12,font=4,pos=4) 
+		graphics::text(x=debut,y=0.45, label=get("msg",envir_stacomi)$BilanFonctionnementDC.13, font=4,pos=4)
 	}
 }   
 #

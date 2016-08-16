@@ -169,17 +169,22 @@ funbarchartDF = function(h,...) {
 #modif de l'ordre pour apparence graphique
 	
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
-	g<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree,fill=libelle))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
-	g<-g+geom_bar(stat='identity')+scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
+	g<- ggplot(t_periodefonctdispositif_per_mois,
+			aes(x=mois,y=duree,fill=libelle))+
+	facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
+	g<-g+geom_bar(stat='identity')+
+			scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
 	#modif de l'ordre pour apparence graphique
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
 	t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
 	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
-	g1<-g1+geom_bar(stat='identity',aes(fill=fonctionnement))+scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
+	g1<-g1+
+			geom_bar(stat='identity',aes(fill=fonctionnement))+
+			scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
 	
 	if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {
-		x11(40,40); print(g)
-		x11 (40,40) ;print(g1)
+		grDevices::x11(40,40); print(g)
+		grDevices::x11 (40,40) ;print(g1)
 	}else    {
 		x11(60,40)  
 		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
@@ -232,7 +237,7 @@ funboxDF = function(h,...) {
 			#bty="n",
 			cex=0.8)
 	r <- round(range(duree), "day")
-	axis(1, at=graphdate(seq(r[1], r[2], by="weeks")),labels=strftime(as.POSIXlt(seq(r[1], r[2], by="weeks")),format="%d-%b"))
+	graphics::axis(1, at=graphdate(seq(r[1], r[2], by="weeks")),labels=strftime(as.POSIXlt(seq(r[1], r[2], by="weeks")),format="%d-%b"))
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {
 		rect(      xleft=debut, 
 				ybottom=0.6,

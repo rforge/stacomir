@@ -187,7 +187,9 @@ hx11=function(h,...){
 #' 
 #' @param gr_interface Will be used to launch the program as graphical
 #' @import stringr
-#' @import intervals
+#' @import intervals intervals
+#' @import intervals closed<-
+#' @import intervals interval_overlap
 #' @import RColorBrewer
 #' @import package gWidgets
 #' @import package gWidgetsRGtk2
@@ -211,7 +213,16 @@ hx11=function(h,...){
 #' @import package sqldf
 #' @importFrom dplyr dcast
 #' @importFrom reshape2 melt
-#' 
+#' @importFrom lattice barchart
+#' @importFrom lattice trellis.par.get
+#' @importFrom lattice trellis.par.set 
+#' @importFrom grid gpar
+#' @importFrom grDevices x11
+#' @importFrom graphics axis.Date
+#' @importFrom graphics rect
+#' @importFrom graphics legend
+#' @importFrom graphics text
+#' @importFrom graphics axis
 #' interface or in command line
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){

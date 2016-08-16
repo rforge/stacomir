@@ -697,9 +697,9 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	rownames(mat1)<-as.character(time.sequence)
 	rownames(mat2)<-datasub$lot_identifiant
 	imat1<-intervals::Intervals(mat1)
-	closed(imat1)<-c(FALSE,FALSE)
+	interval::closed(imat1)<-c(FALSE,FALSE)
 	imat2<-intervals::Intervals(mat2)
-	closed(imat2)<-c(FALSE,FALSE)
+	interval::closed(imat2)<-c(FALSE,FALSE)
 	listei<-intervals::interval_overlap(imat2,imat1)
 	listei2<-listei # copie de la liste pour l'écraser
 	for (i in 1:length(listei)){
@@ -719,12 +719,12 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 					difftime(
 							time.sequence[vec[1]]+as.difftime(1,units="days"),
 							datasub[datasub$lot_identifiant==idlot,"ope_date_debut"],
-							unit="days"),
+							units="days"),
 					rep(1,length(vec)-2),
 					difftime(
 							datasub[datasub$lot_identifiant==idlot,"ope_date_fin"],
 							time.sequence[vec[length(vec)]],
-							unit="days")
+							units="days")
 			)
 			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramène à 1
 			stopifnot(all.equal(as.numeric(sum(listei2[[i]])),1))					
