@@ -270,7 +270,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 					" FROM ",sch,"t_operation_ope",
 					" JOIN ",sch,"t_lot_lot on lot_ope_identifiant=ope_identifiant")
 			# removing character marks
-			req@select<-str_replace_all(req@select,"[\r\n\t]" , "")
+			req@select<-stringr::str_replace_all(req@select,"[\r\n\t]" , "")
 			# the where clause is returned by ODBCWheredate
 			req@and=stringr::str_c(" AND ope_dic_identifiant in",dc,
 					" AND lot_tax_code in ",tax,

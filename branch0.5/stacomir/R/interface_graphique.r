@@ -186,32 +186,34 @@ hx11=function(h,...){
 #' window
 #' 
 #' @param gr_interface Will be used to launch the program as graphical
+#' interface or in command line
 #' @import stringr
-#' @import intervals intervals
-#' @import intervals closed<-
-#' @import intervals interval_overlap
+#' @importFrom intervals Intervals
+#' @importFrom intervals closed<-
+#' @importFrom intervals interval_overlap
 #' @import RColorBrewer
-#' @import package gWidgets
-#' @import package gWidgetsRGtk2
-#' @import package ggplot2
+#' @import gWidgets
+#' @import gWidgetsRGtk2
+#' @import ggplot2
 #' @importFrom methods as
 #' @importFrom methods new
 #' @importFrom methods slot
-#' @importFrom methods slot<-
+#' @importFrom methods "slot<-"
 #' @importFrom grid viewport
 #' @importFrom grid pushViewport
 #' @importFrom grid grid.newpage
 #' @importFrom grid grid.layout
 #' @importFrom utils winProgressBar
-#' @importFrom utils setwinProgressBar
+#' @importFrom utils setWinProgressBar
 #' @importFrom utils read.csv
 #' @importFrom utils stack
+#' @importFrom utils globalVariables 
 #' @importFrom RODBC odbcClose
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
-#' @import package RPostgreSQL
-#' @import package sqldf
-#' @importFrom dplyr dcast
+#' @import RPostgreSQL
+#' @import sqldf
+#' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
 #' @importFrom lattice barchart
 #' @importFrom lattice trellis.par.get
@@ -223,7 +225,6 @@ hx11=function(h,...){
 #' @importFrom graphics legend
 #' @importFrom graphics text
 #' @importFrom graphics axis
-#' interface or in command line
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
@@ -381,4 +382,5 @@ interface_graphique=function(){
 	
 	add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
-
+# http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+utils::globalVariables(c("quinzaine", "mois","val_quant","duree"))

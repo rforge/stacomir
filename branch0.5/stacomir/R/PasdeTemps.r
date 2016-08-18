@@ -69,7 +69,7 @@ validite_PasDeTemps=function(object)
 	if (!rep4) retValue=paste(retValue,"length(object@noPasCourant) !=1")
 	return(ifelse(rep1 & rep2 & rep3 & rep4,TRUE,retValue))
 }
-#definition de la classe
+
 #' Class "PasDeTemps"
 #' 
 #' Describes a time step
@@ -101,7 +101,7 @@ validite_PasDeTemps=function(object)
 #' current step } }
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @seealso \code{\linkS4class{PasDeTempsJournalier}}
-#' @keywords classes
+#' @concept Bilan Object
 #' @examples
 #' 
 #' showClass("PasDeTemps")

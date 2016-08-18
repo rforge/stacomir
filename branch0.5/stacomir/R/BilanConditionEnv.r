@@ -30,7 +30,7 @@
 #' \code{\linkS4class{BilanMigrationConditionEnv}}
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
-#' @keywords classes dynamic
+#' @concept Bilan Object 
 #' @examples
 #' 
 #' showClass("BilanConditionEnv")

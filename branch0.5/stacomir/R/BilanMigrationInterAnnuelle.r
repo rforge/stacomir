@@ -8,40 +8,35 @@
 #' @aliases BilanMigrationConditionEnv BilanMigrationConditionEnv-class
 #' @include RefAnnee.r
 #' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("BilanMigrationConditionEnv",
-#' bilanMigration=new("BilanMigration"),
-#' bilanConditionEnv=new("BilanConditionEnv"))}.  \describe{
-#' \item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
-#' migration overview }\item{:}{Object of class \code{"BilanMigration"} The
-#' migration overview } \item{list("bilanConditionEnv")}{Object of class
-#' \code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
-#' class \code{"BilanConditionEnv"} The environmental overview} }
+#' 	\code{new("BilanMigrationConditionEnv",
+#' 	bilanMigration=new("BilanMigration"),
+#' 	bilanConditionEnv=new("BilanConditionEnv"))}.  
+#' \describe{
+#' 	\item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
+#' 	migration overview }\item{:}{Object of class \code{"BilanMigration"} The
+#' 	migration overview } \item{list("bilanConditionEnv")}{Object of class
+#' 	\code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
+#' 	class \code{"BilanConditionEnv"} The environmental overview} }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
-#' \code{\linkS4class{BilanMigrationPar}}
+#' 	\code{\linkS4class{Bilan_poids_moyen}}
+#' 	\code{\linkS4class{Bilan_stades_pigm}} 
+#' 	\code{\linkS4class{Bilan_taille}}
+#' 	\code{\linkS4class{BilanConditionEnv}} 
+#' 	\code{\linkS4class{BilanEspeces}}
+#' 	\code{\linkS4class{BilanFonctionnementDC}}
+#' 	\code{\linkS4class{BilanFonctionnementDF}}
+#' 	\code{\linkS4class{BilanMigration}}
+#' 	\code{\linkS4class{BilanMigrationConditionEnv}}
+#' 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' 	\code{\linkS4class{BilanMigrationPar}}
 #' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
-#' @keywords classes dynamic
+#' @concept Bilan Object 
 #' @examples
 #' 
 #' showClass("BilanMigrationConditionEnv")
 #' 
 #' @export
-
-
-
-
-
-
-
-
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
 						dc="RefDC",

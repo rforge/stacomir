@@ -200,12 +200,13 @@ fntablestade<-function(stades,choixpere="lotpere"){
 	
 	return(list("tablestades"=tablestades,"dates"=dates))
 }		
-#' Charge : method used by the graphical interface to buid object from values
+#' Charge method for BilanStadePigm
+#' 
+#' method used by the graphical interface to build object from values
 #' stored in envir_stacomi
 #' 
 #' @return Bilan_stades_pigm with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
 setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
@@ -250,15 +251,8 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			object<-connect(object)			
 			return(object)
 		})
-# Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
-# Compte tenu de la structure des donnees ce n'est pas si simple... 
 
 
-
-
-
-#' plots polygons
-#' 
 #' plots polygons
 #' 
 #' 
@@ -290,8 +284,7 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 
 #' Function to calculate pigmentation times.
 #' 
-#' 
-#' 
+#'  
 #' @param parm parameters of the model
 #' @param datatempsal data.frame containing temperatures and salinities
 #' @return list("dates"=duree,"phi_jour"=phi_jour)

@@ -50,8 +50,7 @@ setGeneric("setRefHorodate",def=function(object,...) standardGeneric("setRefHoro
 
 #' Method to set the Horodate
 #' 
-#' @return An Object of class "RefHorodate"
-#' 
+#' @return An Object of class "RefHorodate" 
 #' @author cedric.briand
 #' @docType methods
 #' @export

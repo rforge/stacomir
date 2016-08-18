@@ -40,7 +40,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 #' @examples 
 #'  object=new("RefMsg")
 #'  charge_avec_filtre(object,lang='French')
-#' @exportMethod 
+#' @export
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(object,lang) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -59,8 +59,8 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 #' @note When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#'  object=new("RefMsg")
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(object) {
+			#object=new("RefMsg")
 			object<-charge(object)
 			object<-charge_avec_filtre(object,lang=get("lang",envir=envir_stacomi))
 			if (nrow(object@messager)!=nrow(object@messagerlang)) stop("internal error, check messager and messagerlang length, they should match")
