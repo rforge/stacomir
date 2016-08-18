@@ -225,7 +225,7 @@ setMethod("plot",signature=signature("BilanMigrationPar"),definition=function(x,
 				stop("normalement ce cas est impossible")
 				# ce cas est impossible
 			}
-			mb=chnames(mb,"value","sommes")
+			mb=stacomirtools::chnames(mb,"value","sommes")
 			mb=funtraitementdate(data=mb,nom_coldt="Date") 
 			# transformation du tableau de donnees
 			

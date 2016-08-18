@@ -195,10 +195,6 @@ hx11=function(h,...){
 #' @import gWidgets
 #' @import gWidgetsRGtk2
 #' @import ggplot2
-#' @importFrom methods as
-#' @importFrom methods new
-#' @importFrom methods slot
-#' @importFrom methods "slot<-"
 #' @importFrom grid viewport
 #' @importFrom grid pushViewport
 #' @importFrom grid grid.newpage
@@ -226,6 +222,7 @@ hx11=function(h,...){
 #' @importFrom graphics legend
 #' @importFrom graphics text
 #' @importFrom graphics axis
+#' @importFrom graphics par
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
@@ -377,7 +374,7 @@ interface_graphique=function(){
 	
 	add(ggrouptotal,ggrouptotal1,expand=FALSE)
 	
-# De nouveau un groupe vertical de boutons qui sera pousse ï¿½ gauche quand le graphique sera insere
+# De nouveau un groupe vertical de boutons qui sera pousse a gauche quand le graphique sera insere
 	ggroupboutons=ggroup(horizontal=FALSE)
 	assign("ggroupboutons",ggroupboutons,envir=.GlobalEnv)
 	
@@ -385,6 +382,10 @@ interface_graphique=function(){
 }
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
-utils::globalVariables(c("quinzaine", "mois","val_quant","duree"))
+utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs","group"))
+
+# plots assigned
+
+# reoxygenize fails if data are not loaded
 setwd("F:/workspace/stacomir/branch0.5/stacomir")
 data("bMM_Arzal")

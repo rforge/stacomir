@@ -4,10 +4,6 @@
 #' 
 #' Refperiode referential class to choose a period
 #' 
-#' 
-#' @name Refperiode-class
-#' @aliases Refperiode-class Refperiode
-
 #' @note pgval are used by seq.POSIXT
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Refperiode", ...)}.

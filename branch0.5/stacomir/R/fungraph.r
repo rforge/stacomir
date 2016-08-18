@@ -36,7 +36,7 @@
 fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
-	# pour adapter aux bilanMigrationMult, ligne par défaut...
+	# pour adapter aux bilanMigrationMult, ligne par dï¿½faut...
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
@@ -58,7 +58,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	layout(mat)
 	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
 	#par("bg"=gray(0.8))
-	par("mar"=c(3, 4, 3, 2) + 0.1)
+	graphics::parpar("mar"=c(3, 4, 3, 2) + 0.1)
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
@@ -142,7 +142,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	# creation d'un graphique vide (2)
 	###################################
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::parpar("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -241,7 +241,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	# creation d'un graphique vide (3)
 	###################################                 
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -340,7 +340,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################                 
 	
 	
-	par("mar"=c(2, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(2, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,1,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -354,7 +354,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################         
 	# operations
 	###################################  
-	if(is.odd(bilanMigration@dc@dc_selectionne)) brew="Paired" else brew="Accent"
+	if(stacomirtools::is.odd(bilanMigration@dc@dc_selectionne)) brew="Paired" else brew="Accent"
 	rect(   xleft =graphdate(as.POSIXct(t_operation_ope$ope_date_debut)), 
 			ybottom=0,
 			xright=graphdate(as.POSIXct(t_operation_ope$ope_date_fin)),

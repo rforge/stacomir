@@ -43,7 +43,7 @@ setClass(Class="BilanFonctionnementDC",
 #' connect method for BilanFonctionnementDC
 #' 
 #' loads the working periods and type of arrest or disfunction of the DC
-#' @return  An object of class \ref{BilanFonctionnementDC}
+#' @return  An object of class \code{BilanFonctionnementDC}
 #' 
 #' @author cedric.briand
 setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {

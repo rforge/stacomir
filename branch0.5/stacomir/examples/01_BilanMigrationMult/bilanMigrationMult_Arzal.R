@@ -1,4 +1,4 @@
-library(stacomiR)
+#library(stacomiR)
 # launches the application in the command line
 stacomi(gr_interface=FALSE)
 # here is the structure of the class

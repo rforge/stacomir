@@ -6,9 +6,6 @@
 #' 
 #' Balance of fish migrations
 #' 
-#' 
-#' @name BilanMigration-class
-#' @aliases BilanMigration BilanMigration-class
 #' @include RefTaxon.r
 #' @include RefStades.r
 #' @include PasDeTempsJournalier.r
@@ -174,7 +171,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' handler du calcul hBilanMigrationgraph
 #' appelle les fonctions fungraph pour faire le bilan des migrations
 #' et permet la sauvegarde des bilans journaliers dans la base
-#' @note pb si autre chose que journalier les pas de temps ont été contraints à des pas de temps journaliers pour ce graphique
+#' @note pb si autre chose que journalier les pas de temps ont ï¿½tï¿½ contraints ï¿½ des pas de temps journaliers pour ce graphique
 #' @param h 
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

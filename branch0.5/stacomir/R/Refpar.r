@@ -8,9 +8,6 @@
 #' Class enabling to load the list of parameters and select one of them
 #' 
 #' 
-#' @name Refpar-class
-#' @aliases Refpar Refpar-class
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Refpar", data)}.  \describe{ \item{list("data")}{Object of class
 #' \code{"data.frame"} ~ All the parameters stored in the

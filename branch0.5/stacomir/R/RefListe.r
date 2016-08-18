@@ -1,13 +1,10 @@
 # Nom fichier :        RefListe   (classe)
-# Description          Classe permettant charger un choix dans une liste utilisée par un objectBilan
+# Description          Classe permettant charger un choix dans une liste utilisï¿½e par un objectBilan
 #' Class "RefListe"
 #' 
 #' Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 #' 
 #' 
-#' @name RefListe-class
-#' @aliases RefListe-class RefListe
-
 #' @slot liste choix="character" A vector of character to choose within a droplist
 #' @slot label="character" the title of the box
 #' @section Objects from the Class: Objects can be created by calls of the form
@@ -62,7 +59,7 @@ setMethod("choix",signature=signature("RefListe"),definition=function(object,is.
 					funout(paste(object@label,"\n"))
 				}
 				frame_list<<-gframe(object@label)
-				# TODO à modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
+				# TODO ï¿½ modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
 				add(group,frame_list)
 				list_libelle=fun_char_spe(object@listechoix)
 				choix=gdroplist(items=list_libelle,container=frame_list,handler=hlist)

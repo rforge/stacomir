@@ -5,9 +5,6 @@
 #' of them. It inherits from 'Refpar', uses its 'choix' method
 #' 
 #' 
-#' @name Refparquan-class
-#' @aliases Refparquan Refparquan-class
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Refparquan", data=data.frame())}.  \describe{
 #' \item{list("data")}{Object of class \code{"data.frame"} ~ Quantitative

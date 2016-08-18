@@ -151,7 +151,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 					jour_an=TRUE,
 					jour_mois=FALSE,
 					heure=FALSE)
-			vue_ope_lot=chnames(vue_ope_lot,
+			vue_ope_lot=stacomirtools::chnames(vue_ope_lot,
 					c("ope_identifiant","lot_identifiant","ope_dic_identifiant","lot_pere",             
 							"ope_date_debut","ope_date_fin","lot_effectif","lot_quantite","lot_tax_code","lot_std_code","tax_nom_latin","std_libelle","dev_code","dev_libelle","par_nom","car_par_code","car_methode_obtention","car_val_identifiant",    "car_valeur_quantitatif","val_libelle", "annee","mois","quinzaine","semaine","jour_365"),
 					c("ope","lot","dic","lot_pere",             

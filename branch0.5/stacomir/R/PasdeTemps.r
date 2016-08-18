@@ -75,16 +75,6 @@ validite_PasDeTemps=function(object)
 #' Describes a time step
 #' 
 #' 
-#' @name PasDeTemps-class
-#' @aliases PasDeTemps PasDeTemps-class currentDateDebut,PasDeTemps-method
-#' currentDateDebut currentDateFin,PasDeTemps-method currentDateFin
-#' DateFin,PasDeTemps-method DateFin LesPasDeTemps ValeurPasDeTemps
-#' getAnnees,PasDeTemps-method getAnnees getdateDebut,PasDeTemps-method
-#' getdateDebut getLibellesPas,PasDeTemps-method getLibellesPas
-#' getnoPasCourant,PasDeTemps-method getnoPasCourant
-#' setdateDebut,PasDeTemps-method setdateDebut suivant,PasDeTemps-method
-#' suivant validite_PasDeTemps dureePas
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("PasDeTemps",
 #' dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
@@ -130,9 +120,6 @@ validite_PasDeTempsChar=function(object)
 #' Character to represent a PasDeTemps
 #' 
 #' 
-#' @name PasDeTempsChar-class
-#' @aliases PasDeTempsChar PasDeTempsChar-class validite_PasDeTempsChar
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("PasDeTempsChar", \dots{})}
 #' @author cedric.briand"at"eptb-vilaine.fr
@@ -327,7 +314,7 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 							object=setdateDebut(object,svalue(datedeb))						
 							assign("pasDeTemps",object,envir_stacomi)
 							funout("Les pas de temps ont ete charges\n")
-							# charge le deuxième onglet du notebook
+							# charge le deuxiï¿½me onglet du notebook
 							#svalue(notebook)<-2
 						}
 						hchoixpas=function(h,...){

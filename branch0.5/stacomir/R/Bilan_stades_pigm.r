@@ -665,7 +665,7 @@ fungraphstades<-function(
 		newdates=seq(from=xlim[1],to=xlim[2],by="day")
 		
 		if (graphstades) { 
-			par("mar"=c(2, 4, 0, 2)+ 0.1)
+			graphics::par("mar"=c(2, 4, 0, 2)+ 0.1)
 # si l'autre graphique n'est pas trace on etend les marges
 			main1=""
 		} else {
@@ -720,7 +720,7 @@ fungraphstades<-function(
 		# stades cumules calcul necessaire pour points et graphique durees
 		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choix
 		
-		par("mar"=c(2, 4, 3, 2)+ 0.1)
+	graphics::par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=gray(5:1/6),ordre=c(1,2,3,4,5),
 				axe=TRUE,
 				xaxt="n",

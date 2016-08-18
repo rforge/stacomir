@@ -1,24 +1,8 @@
-# Nom fichier :        RefPoidsMoyenPeche(classe)
-# Projet :             controle migrateur
-# Organisme :          IAV
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :  31/03/2008 17:21:25 / modif10/01/2009 22:50:42
-# Compatibilite :
-# Etat :               
-# Description          Classe appellee pour sa methode charge qui permet le chargement des lots de la base MORTCIV des peches experimentales
-#                      entre une date de debut et une date de fin 
-#                      Utilise dans Bilan_poids_moyen uniquement pour Arzal
-#                      
-
 #' Class "RefPoidsMoyenPeche"
 #' 
 #' Class which enables to load bunches of elver of experimental fishings
 #' 
 #' 
-#' @name RefPoidsMoyenPeche
-#' @aliases RefPoidsMoyenPeche-class RefPoidsMoyenPeche
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefPoidsMoyenPeche",
 #' data=data.frame(),datedebut="POSIXlt",datefin="POSIXlt")}.  \describe{
@@ -73,5 +57,5 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			object@data<-requete@query
 			return(object)
 		})
-# pas de methode choix, le choix est dej� fait dans l'annee de l'interface
+# pas de methode choix, le choix est deja fait dans l'annee de l'interface
 #charge(refPoidsMoyenPeche)

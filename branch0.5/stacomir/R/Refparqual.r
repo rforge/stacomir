@@ -8,9 +8,6 @@
 #' of them. It inherits from 'Refpar', uses its 'choix' method
 #' 
 #' 
-#' @name Refparqual-class
-#' @aliases Refparqual Refparqual-class
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Refparqual", ...)}.  \describe{ \item{list("valqual")}{Object of
 #' class \code{"data.frame"} Values of qualitatives parameters}\item{:}{Object

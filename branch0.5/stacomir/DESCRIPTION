@@ -73,27 +73,26 @@ Collate:
     'interface_Bilan_taille.r'
     'interface_bilan_poids_moyen.r'
     'interface_chooselang.r'
-    'interface_graphique.r'
     'messages.r'
     'setAs.r'
+    'stacomi.r'
 LazyLoad: yes
-LazyData: true   			
+LazyData: true
 Depends:
+    R (>= 3.0.0),
+    methods,
     stacomirtools
 Imports:
     RODBC,
     intervals,
     RColorBrewer,
-    methods,
     stringr,
     gWidgets,
     gWidgetsRGtk2,
     RPostgreSQL,
-    dplyr,
     ggplot2,
     reshape2,
     sqldf,
-    methods,
     graphics,
     utils,
     stats,

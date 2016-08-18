@@ -26,7 +26,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 # calcul des variables
-	# pour adapter aux bilanMigrationMult, ligne par défaut...
+	# pour adapter aux bilanMigrationMult, ligne par dï¿½faut...
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
 	mois= months(duree)
@@ -49,7 +49,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	layout(mat)
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#par("bg"=gray(0.8))
-	par("mar"=c(3, 4, 3, 2) + 0.1)
+	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
 	#mypalette<-rainbow(20)
 	plot(as.Date(duree,"Europe/Paris"),eff/1000,
 			col=mypalette[8],
@@ -160,7 +160,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	# creation d'un graphique vide (2)
 	###################################
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -260,7 +260,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	###################################                 
 	
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -358,7 +358,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	###################################                 
 	
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,1,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -384,7 +384,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	###################################
 	# Graph mensuel 
 	####################################
-	par("mar"=c(4, 4, 1, 2) + 0.1)
+	graphics::par("mar"=c(4, 4, 1, 2) + 0.1)
 	petitmois=substr(as.character(mois),1,3)
 	effmois=tapply(eff, mois, sum, na.rm=TRUE)[c(5,4,9,2,8,7,6,1,12,11,10,3)]
 	effmois.p=tapply(eff.p, mois, sum, na.rm=TRUE)[c(5,4,9,2,8,7,6,1,12,11,10,3)]

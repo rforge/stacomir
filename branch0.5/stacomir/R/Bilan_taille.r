@@ -14,9 +14,6 @@
 #' and size group Once the data are loaded, the program checks if the size
 #' class group is indicated at the sample or susample level
 #' 
-#' @name Bilan_taille-class
-#' @aliases Bilan_taille-class Bilan_taille
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Bilan_taille", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

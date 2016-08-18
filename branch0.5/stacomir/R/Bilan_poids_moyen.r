@@ -11,8 +11,6 @@
 #' number coefficients
 #' 
 #' 
-#' @name Bilan_poids_moyen-class
-#' @aliases Bilan_poids_moyen-class Bilan_poids_moyen
 #' @include RefCoe.r
 #' @note We have also tools available to import glass eel measurement from
 #' experimental fishing in the estuary For the charge method dates for the
@@ -178,7 +176,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 	coeff$date=as.POSIXct(coeff$coe_date_debut)
 	funout(get("msg",envir_stacomi)$Bilan_poids_moyen.3)
 	# changement des noms
-	donnees=chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin","lot_effectif","poids","poids_moyen","duree","datemoy"),
+	donnees=stacomirtools::chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin","lot_effectif","poids","poids_moyen","duree","datemoy"),
 			c("lot","date","date_fin","effectif","poids","poids_moyen","duree","date"))
 	# correction de manques d'effectifs dans la base
 	if (sum(is.na(donnees$effectif))>0) warnings(paste(get("msg",envir_stacomi)$Bilan_poids_moyen.4, paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" ")))
@@ -190,8 +188,10 @@ fungraphBilan_poids_moyen = function(h,...) {
 	
 # fonction handler appellees
 	hgra=function(h,...){
-		p<<-qplot(x=date,y=poids_moyen,data=don) 
+		p<-qplot(x=date,y=poids_moyen,data=don) 
 		print(p)
+		assign("p",p,envir=envir_stacomi)
+		funout("object p assigned to envir_stacomi")
 	}
 	hcoe=function(h,...){
 		type_poids= switch (bilan_poids_moyen@liste@listechoix,

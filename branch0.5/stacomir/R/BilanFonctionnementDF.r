@@ -40,7 +40,7 @@ setClass(Class="BilanFonctionnementDF",
 #' connect method for BilanFonctionnementDF
 #' 
 #' loads the working periods and type of arrest or disfunction of the DF
-#' @return  An object of class \ref{BilanFonctionnementDF}
+#' @return  An object of class \code{BilanFonctionnementDF}
 #' 
 #' @author cedric.briand
 setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(object,h) {
@@ -163,7 +163,7 @@ funbarchartDF = function(h,...) {
 	close(progres)
 	
 # graphique 
-	t_periodefonctdispositif_per_mois<-chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
+	t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
 			new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
 #modif de l'ordre pour apparence graphique
 	

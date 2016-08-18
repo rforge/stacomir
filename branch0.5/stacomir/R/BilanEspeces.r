@@ -10,8 +10,6 @@
 #' year/week/month
 #' 
 #' 
-#' @name BilanEspeces-class
-#' @aliases BilanEspeces-class BilanEspeces
 #' @include RefDC.r
 #' @include RefListe.r
 #' @section Objects from the Class: Objects can be created by calls of the form

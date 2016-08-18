@@ -4,8 +4,6 @@
 #' conditions in the same chart
 #' 
 #' 
-#' @name BilanMigrationConditionEnv-class
-#' @aliases BilanMigrationConditionEnv BilanMigrationConditionEnv-class
 #' @include RefAnnee.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' 	\code{new("BilanMigrationConditionEnv",
@@ -166,7 +164,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		# TODO traitement des poids
 		dat=bilanMigrationInterAnnuelle@data        
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
+		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
 		# il faut un champ date, on ramene tout les monde �
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
@@ -270,7 +268,7 @@ fundat=function(dat,timesplit=NULL)
 		# ci dessous les calculs s'appliquent bien aux jours
 		# remplacement des valeurs manquantes par des zeros par creation d'une sequence journaliere
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
+		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
 		dat=dat[,c("annee","jour","valeur")] 
 		dat$jour=trunc.POSIXt(dat$jour, digits='days')
 		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
@@ -576,7 +574,7 @@ htableBilanMigrationInterAnnuelle = function(h,...)
 	# TODO traitement des poids
 	dat=bilanMigrationInterAnnuelle@data
 	dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-	dat<-chnames(dat,c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur","bjo_horodateexport"),    c("DC","Taxon","Stade","Annee","Jour","Label_quantite","Nombre","Date d'export du bilan"))
+	dat<-stacomirtools::chnames(dat,c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur","bjo_horodateexport"),    c("DC","Taxon","Stade","Annee","Jour","Label_quantite","Nombre","Date d'export du bilan"))
 	dat$Annee=as.factor(dat$Annee)
 	dat = dat[,-1]
 	tmp = dat$Jour

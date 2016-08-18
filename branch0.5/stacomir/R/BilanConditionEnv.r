@@ -7,14 +7,10 @@
 #' Annual overview of environmental conditions. Enables to draw charts and
 #' write files.
 #' 
-#' 
-#' @name BilanConditionEnv-class
 #' @include RefHorodate.r 
 #' @include RefStationMesure.r
 #' @include create_generic.r
 #' @include utilitaires.r
-#' @aliases BilanConditionEnv-class BilanConditionEnv
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanConditionEnv", horodate=new("Horodate"),
 #' stationMesure=new("RefStationMesure"), data=data.frame(),
@@ -146,7 +142,7 @@ hbilanConditionEnvgraph = function(h,...)
 			
 			# toutes les mesures pour la station de mesure selectionnee
 			nameColonne <- as.character(stm$stm_libelle)
-			datstm <- chnames(dat,"env_valeur_quantitatif", nameColonne) 
+			datstm <- stacomirtools::chnames(dat,"env_valeur_quantitatif", nameColonne) 
 			datstm <- datstm[datstm$env_stm_identifiant==stmidentifiant,]
 			
 			#AES<-structure(as.list(c("x"=as.name(datstm$env_date_debut),"y"=as.name(eval(nameColonne)))),class="uneval")
@@ -177,7 +173,7 @@ hbilanConditionEnvstat = function(h,...)
 	
 	# le dataframe contenant le res de la requete
 	dat<-bilanConditionEnv@data
-	dat<-chnames(dat,"env_stm_identifiant","stm_identifiant")
+	dat<-stacomirtools::chnames(dat,"env_stm_identifiant","stm_identifiant")
 	dat<-merge(dat,bilanConditionEnv@stationMesure@data,by="stm_identifiant")
 	funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.5)
 	liste = tapply(dat$env_valeur_quantitatif,dat$stm_libelle,summary)

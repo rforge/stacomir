@@ -5,8 +5,6 @@
 #' Representation of a fish phase
 #' 
 #' 
-#' @name RefStades-class
-#' @aliases RefStades-class RefStades
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefStades", data="data.frame")}.  \describe{
 #' \item{list("data")}{Object of class \code{"data.frame"} ~ The phases
@@ -159,7 +157,7 @@ setMethod("choixmult",signature=signature("RefStades"),definition=function(objec
 							}
 						}
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne prenant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choix à laquelle on ne passe pas d'objectBilan en parametre 
+						# elle est alors affichee des le debut par la methode choix ï¿½ laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan 
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
 							objectBilan@par<-charge_avec_filtre(object=objectBilan@par,

@@ -4,19 +4,17 @@
 #' This migration count can be built either by the graphical interface or in command line
 #' \code{new("BilanMigrationMult",
 #' dc=new("RefDC"),taxons=("RefTaxon"),stades=new("RefStades"),pasDeTemps=new("PasDeTempsJournalier"),data=data.frame(),calcdata=list(),
-#' coef_conversion=data.frame()}.  
+#' coef_conversion=data.frame())}.  
 #' @note A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
 #' called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
 #' On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
-#' Operations are monitoring during a period. To each operation, several species of fishes can be recorded (samples). In the case of migratory 
+#' Operations are monitoring operations during a period. For each operation, several species of fishes can be recorded (samples). In the case of migratory 
 #' fishes the stage of development is important as it may indicate generic migrations, to and fro, between the river and the sea.
 #' Hence a Multiple Migration Bilan is built from several one or several counting devices (DC), one or several Taxa (Taxon), one or several stages
 #' (stage). The migration can be also recorded not as numbers, but in the case of glass eels, as weight, which will be later transformed to number, 
 #' from daily conversion coefficients. The methods in this class test whether the counts are numbers or another type of quantity.
 #' This class makes different calculations than BilanMigration, it does not handle escapement coefficients,
 #' it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
-#' @name BilanMigrationMult-class
-#' @aliases BilanMigrationMult BilanMigrationMult-class
 #' @slot dc An object of class \code{RefDC}
 #' @slot taxons An object of class \code{RefTaxon}
 #' @slot stades An object of class \code{RefStades}
@@ -187,7 +185,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					# bilans avec overlaps
 					#----------------------
 					data<-fun_bilanMigrationMult_Overlaps(time.sequence = time.sequence, datasub = datasub,negative=negative)
-					# pour compatibilité avec les bilanMigration
+					# pour compatibilitï¿½ avec les bilanMigration
 					data$taux_d_echappement=-1					
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"overlaps"
@@ -218,7 +216,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 				}
 			}	# end for dic
-			# TODO developper une méthode pour sumneg 
+			# TODO developper une mï¿½thode pour sumneg 
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigrationMult.3)
@@ -233,7 +231,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 #' @return BilanMigrationMult with slot @data filled from the database
 #' @export
 setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
-			# récuperation du BilanMigration
+			# rï¿½cuperation du BilanMigration
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug
@@ -276,7 +274,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req<-connect(req)
 			bilanMigrationMult@data=req@query	
 			
-			# récuperation des coefficients si il y a des civelles dans le bilan
+			# rï¿½cuperation des coefficients si il y a des civelles dans le bilan
 			if (2038%in%bilanMigrationMult@taxons@data$tax_code&'CIV'%in%bilanMigrationMult@stades@data$std_code){
 				req=new("RequeteODBCwheredate")
 				req@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -340,8 +338,8 @@ setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x
 				stade=lesstades[stadenum,"std_libelle"]
 				dc=lesdc[dcnum]
 				
-				# préparation du jeu de données pour la fonction fungraph_civ
-				#developpée pour la classe BilanMigration
+				# prï¿½paration du jeu de donnï¿½es pour la fonction fungraph_civ
+				#developpï¿½e pour la classe BilanMigration
 				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
 								data$lot_std_code==lesstades[stadenum,"std_code"],]
@@ -541,7 +539,7 @@ setMethod("plot1",signature=signature("BilanMigrationMult"),definition=function(
 			heure=FALSE)
 	annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
 	dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
-	grdata<-chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
+	grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
 	grdata$DC<-as.factor(grdata$DC)
 	grdata$taxon<-as.factor(grdata$taxon)
 	if (length(unique(grdata$taxon))==1){
@@ -607,8 +605,8 @@ setMethod("summary",signature=signature("BilanMigrationMult"),definition=functio
 				stade=lesstades[stadenum,"std_libelle"]
 				DC=lesdc[dcnum]
 				
-				# préparation du jeu de données pour la fonction fungraph_civ
-				#developpée pour la classe BilanMigration
+				# prï¿½paration du jeu de donnï¿½es pour la fonction fungraph_civ
+				#developpï¿½e pour la classe BilanMigration
 				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
 				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
 								data$lot_std_code==lesstades[stadenum,"std_code"],]
@@ -698,19 +696,19 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	imat2<-intervals::Intervals(mat2)
 	intervals::closed(imat2)<-c(FALSE,FALSE)
 	listei<-intervals::interval_overlap(imat2,imat1)
-	listei2<-listei # copie de la liste pour l'écraser
+	listei2<-listei # copie de la liste pour l'ï¿½craser
 	for (i in 1:length(listei)){
 		vec<-listei[[i]]
 		if (length(vec)==0){
 			# pas de lot
 			listei2[[i]]=0
 		} else 	if (length(vec)==1){
-			# l'ensemble du lot est inclus dans la journée
+			# l'ensemble du lot est inclus dans la journï¿½e
 			listei2[[i]]=1
 		} else {
-			# le premier jour va du début de l'opé à la fin de la première date
+			# le premier jour va du dï¿½but de l'opï¿½ ï¿½ la fin de la premiï¿½re date
 			# puis n-2 jour
-			# puis le dernier jour de la date de début à la fin de l'ope
+			# puis le dernier jour de la date de dï¿½but ï¿½ la fin de l'ope
 			idlot=names(listei)[i]
 			tps=c(
 					difftime(
@@ -723,7 +721,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 							time.sequence[vec[length(vec)]],
 							units="days")
 			)
-			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramène à 1
+			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramï¿½ne ï¿½ 1
 			stopifnot(all.equal(as.numeric(sum(listei2[[i]])),1))					
 		}
 	}
@@ -738,8 +736,8 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 			ts_id=as.numeric(strftime(time.sequence,format="%j")),stringsAsFactors =FALSE)
 	dfts<-merge(df.ts,df,by="ts_id")
 	datasub1<-merge(dfts,datasub,by="lot_identifiant")
-	# ci dessous pour faire du group by c'est quand même bien de passer par sqldf
-	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis à des entiers
+	# ci dessous pour faire du group by c'est quand mï¿½me bien de passer par sqldf
+	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis ï¿½ des entiers
 	if (negative){
 		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
@@ -790,7 +788,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	datasub3$CALCULE[is.na(datasub3$CALCULE)]<-0
 	datasub3$EXPERT[is.na(datasub3$EXPERT)]<-0
 	datasub3$PONCTUEL[is.na(datasub3$PONCTUEL)]<-0
-	# pour compatibilité
+	# pour compatibilitï¿½
 	datasub3<-cbind(data.frame("No.pas"=as.numeric(strftime(datasub3$debut_pas,format="%j"))-1),datasub3)
 	datasub3$Effectif_total=rowSums(datasub3[,c("MESURE","CALCULE","EXPERT","PONCTUEL")])
 	return(datasub3)
@@ -816,7 +814,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 			ts_id=strftime(time.sequence,format="%j"),stringsAsFactors =FALSE)
 	datasub$ts_id<-strftime(datasub$ope_date_debut,format="%j")
 	datasub1<-merge(df.ts,datasub,by="ts_id")
-	# ci dessous pour faire du group by c'est quand même bien de passer par sqldf
+	# ci dessous pour faire du group by c'est quand mï¿½me bien de passer par sqldf
 	if (negative){
 		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
