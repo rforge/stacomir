@@ -71,7 +71,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 #' 
 #' used by the graphical interface to retreive the objects of Referential classes
 #' assigned to envir_stacomi
-#' @return  An object of class \ref{BilanFonctionnementDF}
+#' @return  An object of class \code{BilanFonctionnementDF}
 #' 
 #' @author cedric.briand
 setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object,h) {

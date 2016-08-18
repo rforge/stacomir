@@ -105,7 +105,7 @@ husr=function(h,...){
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	con@baseODBC=get("baseODBC",envir=envir_stacomi)
 	e=expression(con<-connect(con))
-	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si �a plante la connection n'est pas ouverte
+	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
 	test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
 	if (exists("logw")) dispose(logw)
 	odbcCloseAll()
@@ -115,7 +115,7 @@ husr=function(h,...){
 		stacomi(gr_interface=TRUE)
 		# en cas d'erreur on relance une demande de mot de passe
 	}
-	if (test) { # il existe un lien ODBC mais qui pointe peut �tre ailleurs
+	if (test) { # il existe un lien ODBC mais qui pointe peut ï¿½tre ailleurs
 		requete=new("RequeteODBC")
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@sql="select count(*) from ref.tr_taxon_tax"
@@ -218,6 +218,7 @@ hx11=function(h,...){
 #' @importFrom lattice barchart
 #' @importFrom lattice trellis.par.get
 #' @importFrom lattice trellis.par.set 
+#' @importFrom lattice simpleKey
 #' @importFrom grid gpar
 #' @importFrom grDevices x11
 #' @importFrom graphics axis.Date
@@ -361,7 +362,7 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
 	add(win, gmenu(menubarlist))
 	ggrouptotal<- ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
-	# gsortie est au dessus de la fen�tre
+	# gsortie est au dessus de la fenêtre
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
 	
 	add(win,ggrouptotal)
@@ -376,11 +377,14 @@ interface_graphique=function(){
 	
 	add(ggrouptotal,ggrouptotal1,expand=FALSE)
 	
-# De nouveau un groupe vertical de boutons qui sera pousse � gauche quand le graphique sera insere
+# De nouveau un groupe vertical de boutons qui sera pousse ï¿½ gauche quand le graphique sera insere
 	ggroupboutons=ggroup(horizontal=FALSE)
 	assign("ggroupboutons",ggroupboutons,envir=.GlobalEnv)
 	
 	add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+
 utils::globalVariables(c("quinzaine", "mois","val_quant","duree"))
+setwd("F:/workspace/stacomir/branch0.5/stacomir")
+data("bMM_Arzal")

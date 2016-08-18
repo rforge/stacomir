@@ -20,9 +20,6 @@ showClass("BilanFonctionnementDF")
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-\references{
-~put references to the literature/web site here ~
-}
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{Bilan_poids_moyen}}
@@ -37,6 +34,7 @@ Other Bilan Class \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
-\keyword{classes}
-\keyword{dynamic}
+\concept{
+Bilan Object
+}
 

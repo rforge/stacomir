@@ -57,5 +57,7 @@ cedric.briand"at"eptb-vilaine.fr
 \seealso{
 \code{\linkS4class{PasDeTempsJournalier}}
 }
-\keyword{classes}
+\concept{
+Bilan Object
+}
 

@@ -6,9 +6,6 @@
 #' class allows to draw graphics allowing an overview of the device operation
 #' 
 #' 
-#' @name BilanFonctionnementDC-class
-#' @aliases BilanFonctionnementDC-class BilanFonctionnementDC
-
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanFonctionnementDC", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -40,7 +37,15 @@ setClass(Class="BilanFonctionnementDC",
 				requete=new("RequeteODBCwheredate"))
 )
 
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'object fonctionnement DC
+
+
+
+#' connect method for BilanFonctionnementDC
+#' 
+#' loads the working periods and type of arrest or disfunction of the DC
+#' @return  An object of class \ref{BilanFonctionnementDC}
+#' 
+#' @author cedric.briand
 setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -64,6 +69,13 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 			return(object)
 		})
 
+#' charge method for BilanFonctionnementDC
+#' 
+#' used by the graphical interface to retreive the objects of Referential classes
+#' assigned to envir_stacomi
+#' @return  An object of class \code{BilanFonctionnementDC}
+#' 
+#' @author cedric.briand
 setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
@@ -89,6 +101,13 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple... 
 
+#' Function to create a barchart (lattice) corresponding to the periods
+#' @param h A handler
+#' @param ... 
+#' @return assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi
+#' 
+#' @author cedric.briand
+#' @export
 funbarchartDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	
@@ -152,6 +171,13 @@ funbarchartDC = function(h,...) {
 	funout(get("msg",envir_stacomi)$BilanFonctionnementDC.8)	
 }   
 
+
+#' function used for some lattice graph 
+#' 
+#' @param h A handler
+#' @param ... 
+#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDC = function(h,...) {  
 	fonctionnementDC=charge(fonctionnementDC)
 	
@@ -166,20 +192,6 @@ funboxDC = function(h,...) {
 	#display.brewer.all()
 	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
 
-
-
-
-
-
-
-#' function used for some lattice graphes with dates
-#' 
-#' function used for some lattice graphes with dates
-#' 
-#' 
-#' @param vectordate date or POSIXt
-#' @return vectordate (without class)
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 	graphdate<-function(vectordate){
 		attributes(vectordate)<-NULL
 		unclass(vectordate)
@@ -280,7 +292,13 @@ funboxDC = function(h,...) {
 		graphics::text(x=debut,y=0.45, label=get("msg",envir_stacomi)$BilanFonctionnementDC.13, font=4,pos=4)
 	}
 }   
-#
+
+
+
+#' FuntableDC create a table output for BilanFonctionnementDC class
+#' @param h a handler
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 funtableDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	

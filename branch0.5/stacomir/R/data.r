@@ -1,5 +1,5 @@
 #' An object of class bilanMigrationMult with data loaded
-#'
+#' 
 #' This data corresponds to the data collected from three fishways
 #' and correspond to the migration station at Arzal in 2011 for all
 #' stages of eel (Anguilla anguilla)
@@ -19,22 +19,14 @@
 #'   			\item{lot_tax_code}{species id}
 #'   			\item{lot_std_code}{stage id}
 #'   			\item{value}{the value}
-#' 				\item{type_de_quantite}{either effectif (number) or poids (weights)}
-#' 				\item{lot_dev_code}{destination of the fishes}
-#' 				\item{lot_methode_obtention}{method of data collection, measured, calculated...} 
-#' 				}
-#'             }
+#'   			\item{type_de_quantite}{either effectif (number) or poids (weights)}
+#'   			\item{lot_dev_code}{destination of the fishes}
+#'   			\item{lot_methode_obtention}{method of data collection, measured, calculated...} 
+#'   			}
+#'   }
 #'   \item{calcdata}{slot to be filled with the calcule method} 
 #'   \item{coef_conversion} {A data frame with 364 observations with daily coefficients to convert from weight to numbers}
 #'   \item{time.sequence} {A time sequence generated for the bilan, used internally by the object}
-#' 	
-#'   ...
 #' }
-#' the \code{PasDeTempsJournalier} calculated for all 2011}
-
-#' 
-#' 
-#' 
-#' }
-#' 
+#' @keywords data
 "bMM_Arzal"

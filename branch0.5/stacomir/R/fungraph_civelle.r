@@ -394,35 +394,35 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 			cbind(effmois.p,"type"="1","mois"=1:12))
 	
 	
-	superpose.polygon<-trellis.par.get("superpose.polygon")
+	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
 	superpose.polygon$col=   mypalette[c(10,8)]
 	superpose.polygon$border=FALSE
-	trellis.par.set("superpose.polygon",superpose.polygon)
-	fontsize<-trellis.par.get("fontsize")
+	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
+	fontsize<-lattice::trellis.par.get("fontsize")
 	fontsize$text=10
-	trellis.par.set("fontsize",fontsize)
-	par.main.text<-trellis.par.get("par.main.text")
+	lattice::trellis.par.set("fontsize",fontsize)
+	par.main.text<-lattice::trellis.par.get("par.main.text")
 	par.main.text$cex=1
 	par.main.text$font=1
-	trellis.par.set("par.main.text",par.main.text)
+	lattice::trellis.par.set("par.main.text",par.main.text)
 	
 	
-	par.ylab.text<-trellis.par.get("par.ylab.text")
+	par.ylab.text<-lattice::trellis.par.get("par.ylab.text")
 	par.ylab.text$cex=0.8
-	trellis.par.set("par.ylab.text",par.ylab.text) 
-	par.xlab.text<-trellis.par.get("par.xlab.text")
+	lattice::trellis.par.set("par.ylab.text",par.ylab.text) 
+	par.xlab.text<-lattice::trellis.par.get("par.xlab.text")
 	par.xlab.text$cex=0.8
-	trellis.par.set("par.xlab.text",par.xlab.text)
+	lattice::trellis.par.set("par.xlab.text",par.xlab.text)
 	
 	
-	bar<-barchart(eff/1000~as.factor(mois),
+	bar<-lattice::barchart(eff/1000~as.factor(mois),
 			groups=as.factor(type),
 			xlab=get("msg",envir=envir_stacomi)$fungraph_civelle.14,
 			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.15,
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-			key=simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
+			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
 					rectangles = TRUE, 
 					points=FALSE, 
 					x=0.70,

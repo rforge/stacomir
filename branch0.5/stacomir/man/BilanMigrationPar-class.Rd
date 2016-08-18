@@ -72,4 +72,7 @@ Other Bilan Class
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
+\concept{
+Bilan Object
+}
 

@@ -8,7 +8,7 @@
 \S4method{charge}{BilanFonctionnementDF}(object, h)
 }
 \value{
-An object of class \ref{BilanFonctionnementDF}
+An object of class \code{BilanFonctionnementDF}
 }
 \description{
 used by the graphical interface to retreive the objects of Referential classes

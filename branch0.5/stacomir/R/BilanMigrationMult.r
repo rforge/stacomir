@@ -25,11 +25,8 @@
 #' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
 #' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
-#' @examples
-#' 
-#' showClass("BilanMigrationMult")
-#' bilanMigration= new("BilanMigrationMult")
 #' @export
+#' @example examples/01_BilanMigrationMult/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="BilanMigrationMult",
 		representation=
@@ -456,7 +453,7 @@ setMethod("cumplot",signature=signature("BilanMigrationMult"),definition=functio
 		grdata<-rbind(grdata,data)
 	}
 	names(grdata)<-tolower(names(grdata))
-	grdata<-sqldf("select sum(effectif_total) as effectif_total,
+	grdata<-sqldf::sqldf("select sum(effectif_total) as effectif_total,
 					\"no.pas\",
 					debut_pas
 					from grdata
@@ -697,9 +694,9 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	rownames(mat1)<-as.character(time.sequence)
 	rownames(mat2)<-datasub$lot_identifiant
 	imat1<-intervals::Intervals(mat1)
-	interval::closed(imat1)<-c(FALSE,FALSE)
+	intervals::closed(imat1)<-c(FALSE,FALSE)
 	imat2<-intervals::Intervals(mat2)
-	interval::closed(imat2)<-c(FALSE,FALSE)
+	intervals::closed(imat2)<-c(FALSE,FALSE)
 	listei<-intervals::interval_overlap(imat2,imat1)
 	listei2<-listei # copie de la liste pour l'écraser
 	for (i in 1:length(listei)){
@@ -744,7 +741,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	# ci dessous pour faire du group by c'est quand même bien de passer par sqldf
 	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis à des entiers
 	if (negative){
-		datasub2<-sqldf("SELECT  debut_pas,
+		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
 						sum(value*coef) as value,
 						type_de_quantite,
@@ -771,7 +768,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite"
 		)
 	} else {
-		datasub2<-sqldf("SELECT  debut_pas,
+		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
 						sum(value*coef) as value,
 						type_de_quantite,
@@ -784,7 +781,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
 	}
 	stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
-	datasub3<-dplyr::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
+	datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
 	if (!"MESURE"%in%colnames(datasub3)) 	datasub3$MESURE=0
 	if (!"CALCULE"%in%colnames(datasub3)) 	datasub3$CALCULE=0
 	if (!"EXPERT"%in%colnames(datasub3)) 	datasub3$EXPERT=0
@@ -821,7 +818,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 	datasub1<-merge(df.ts,datasub,by="ts_id")
 	# ci dessous pour faire du group by c'est quand même bien de passer par sqldf
 	if (negative){
-		datasub2<-sqldf("SELECT  debut_pas,
+		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
 						sum(value) as value,
 						type_de_quantite,
@@ -847,7 +844,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 						GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
 	} else {
-		datasub2<-sqldf("SELECT  debut_pas,
+		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
 						sum(value) as value,
 						type_de_quantite,
@@ -860,7 +857,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite")
 	}
 	stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
-	datasub3<-dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
+	datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
 	if (!"MESURE"%in%colnames(datasub3)) 	datasub3$MESURE=0
 	if (!"CALCULE"%in%colnames(datasub3)) 	datasub3$CALCULE=0
 	if (!"EXPERT"%in%colnames(datasub3)) 	datasub3$EXPERT=0

@@ -30,6 +30,3 @@ document("F:/workspace/stacomir/branch0.5/stacomir")
 vignette("roxygen2")
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/branch0.5/stacomir");warnings()[1:10]
-# Après la compilation, dans le namespace virer ???
-export("object=new(\"RefMsg\")")
-exportMethods("")

@@ -1,19 +1,5 @@
-# Nom fichier :        libraries.R
-
-#' function to call and load the libraries used in stacomi
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
-
-
-
-
-
-
 #' function to call and load the libraries used in stacomi
 #' 
-#' function to call and load the libraries used in stacomi
-#' 
-#' @import tcltk2
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 libraries=function() {
 necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
@@ -30,6 +16,7 @@ options(guiToolkit = "RGtk2")
 #require('lattice')
 #require('RColorBrewer')
 require('stacomirtools')
+require('RODBC')
 ##require('R2HTML')
 ##require('proto') 
 #require('xtable')

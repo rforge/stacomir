@@ -45,6 +45,7 @@ Other Bilan Classes \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
-\keyword{classes}
-\keyword{dynamic}
+\concept{
+Bilan Object
+}
 

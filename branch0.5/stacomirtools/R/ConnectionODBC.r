@@ -64,14 +64,14 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 							believeNRows = FALSE))
 			if (!exists("odbcConnect")) {
 				if(exists("envir_stacomi")){
-					funout(get("msg",envir_stacomi)$ConnectionODBC.2,arret=TRUE)
+					funout("The RODBC library is necessary, please load the package",arret=TRUE)
 				} else	  {
 					stop("the RODBC library is necessary, please load the package")
 				}
 			}
 			if (!object@silent) {
 				if(exists("envir_stacomi")){
-					print(paste(get("msg",envir_stacomi)$ConnectionODBC.3,object@baseODBC[1]))
+					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				} else {
 					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				}

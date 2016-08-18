@@ -51,8 +51,10 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 \seealso{
 Other Bilan Classes \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+\code{\linkS4class{Bilan_stades_pigm}} 
+\code{\linkS4class{Bilan_taille}}
+\code{\linkS4class{BilanConditionEnv}} 
+\code{\linkS4class{BilanEspeces}}
 \code{\linkS4class{BilanFonctionnementDC}}
 \code{\linkS4class{BilanFonctionnementDF}}
 \code{\linkS4class{BilanMigration}}
@@ -60,6 +62,7 @@ Other Bilan Classes \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
-\keyword{classes}
-\keyword{dynamic}
+\concept{
+Bilan Object
+}
 

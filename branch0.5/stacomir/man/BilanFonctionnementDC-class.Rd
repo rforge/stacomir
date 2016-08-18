@@ -2,7 +2,6 @@
 % Please edit documentation in R/BilanFonctionnementDC.r
 \docType{class}
 \name{BilanFonctionnementDC-class}
-\alias{BilanFonctionnementDC}
 \alias{BilanFonctionnementDC-class}
 \title{Class "BilanFonctionnementDC" Bilan du fonctionnement du dispositif de
 comptage}
@@ -38,6 +37,7 @@ Other Bilan Class \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
-\keyword{classes}
-\keyword{dynamic}
+\concept{
+Bilan Object
+}
 

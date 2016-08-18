@@ -2,15 +2,12 @@ Package: stacomiR
 Version: 0.5.0
 Date: 2016-09-01
 Title: STACOMI migration control
-Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"),
-		     email = "cedric.briand@eptb-vilaine.fr"),
-	      person("Marion", "Legrand", role = "aut"),
-	      email="tableau-salt-loire@logrami.fr"))
-Author: Cedric Briand [aut, cre],
-		Marion Legrand [aut]     
-Maintainer: Cedric Briand <cedric.briand00@gmail.com>
-Description: Graphical outputs and treatment for a database of fishway monitoring. It is a part of the STACOMI project developed in France by the ONEMA
-    institute to centralize data obtained by fishway monitoring. Version 0.4.1 is available in French English and Spanish. \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand@eptb-vilaine.fr"),
+	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"))
+Description: Graphical outputs and treatment for a database of fishway
+    monitoring. It is a part of the STACOMI project developed in France by the ONEMA
+    institute to centralize data obtained by fishway monitoring. Version 0.4.1 is
+    available in French English and Spanish.
 License: GPL (>= 2)
 Collate:
     'utilitaires.r'
@@ -48,6 +45,7 @@ Collate:
     'RefMsg.r'
     'RefPoidsMoyenPeche.r'
     'Refperiode.r'
+    'data.r'
     'fn_EcritBilanJournalier.r'
     'fn_EcritBilanMensuel.r'
     'fn_sql_dis.r'
@@ -76,18 +74,32 @@ Collate:
     'interface_bilan_poids_moyen.r'
     'interface_chooselang.r'
     'interface_graphique.r'
-    'libraries.r'
     'messages.r'
     'setAs.r'
 LazyLoad: yes
-Depends:     
+LazyData: true   			
+Depends:
     stacomirtools
-Import:
-	RODBC,
-	intervals,
-	RColorBrewer,
-	methods,
-	stringr,
-	gWidgets,
-    gWidgetsRGtk2	
+Imports:
+    RODBC,
+    intervals,
+    RColorBrewer,
+    methods,
+    stringr,
+    gWidgets,
+    gWidgetsRGtk2,
+    RPostgreSQL,
+    dplyr,
+    ggplot2,
+    reshape2,
+    sqldf,
+    methods,
+    graphics,
+    utils,
+    stats,
+    lattice
+Author: Cedric Briand [aut, cre],
+    Marion Legrand [aut]
+Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 RoxygenNote: 5.0.1
+NeedsCompilation: no

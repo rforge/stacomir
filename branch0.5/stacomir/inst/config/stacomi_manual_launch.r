@@ -32,11 +32,11 @@ les_utilisateurs <- tableau_config[1]
 pgwd=tableau_config["pgwd",]
 baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
 setwd(pgwd)
-# pour voir apparaitre toutes les requ�tes dans R
+# pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
-#source ("libraries.r")
+source ("F:/workspace/stacomir/branch0.5/stacomir/inst/config/libraries.r")
 
-#libraries()
+libraries()
 
 source("utilitaires.r") # contient  funout (pour ecrire dans la console) et filechoose
 source("messages.R")
@@ -109,7 +109,8 @@ source("interface_BilanMigrationPar.r")
 source("interface_BilanFonctionnementDC.r")
 source("interface_BilanFonctionnementDF.r")
 source("interface_BilanMigrationMult.r")
-source("interface_graphique.r")
+source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
- stacomi(gr_interface=TRUE)
- 
+ stacomi(gr_interface=FALSE)
+ # pour aller chercher les donnees
+ setwd("F:/workspace/stacomir/branch0.5/stacomir")
