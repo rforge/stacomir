@@ -2,7 +2,6 @@
 % Please edit documentation in R/BilanMigration.r
 \docType{class}
 \name{BilanMigration-class}
-\alias{BilanMigration}
 \alias{BilanMigration-class}
 \title{Class "BilanMigration"}
 \description{

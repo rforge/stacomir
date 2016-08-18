@@ -2,7 +2,6 @@
 % Please edit documentation in R/RefStades.r
 \docType{class}
 \name{RefStades-class}
-\alias{RefStades}
 \alias{RefStades-class}
 \title{Class "RefStades"}
 \description{
@@ -39,7 +38,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
-  \code{\link{RefPoidsMoyenPeche}},
+  \code{\link{RefPoidsMoyenPeche-class}},
   \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},

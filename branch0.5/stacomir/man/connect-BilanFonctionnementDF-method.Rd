@@ -8,7 +8,7 @@
 \S4method{connect}{BilanFonctionnementDF}(object, h)
 }
 \value{
-An object of class \ref{BilanFonctionnementDF}
+An object of class \code{BilanFonctionnementDF}
 }
 \description{
 loads the working periods and type of arrest or disfunction of the DF

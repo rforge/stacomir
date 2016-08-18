@@ -19,7 +19,7 @@ appelle les fonctions fungraph pour faire le bilan des migrations
 et permet la sauvegarde des bilans journaliers dans la base
 }
 \note{
-pb si autre chose que journalier les pas de temps ont été contraints à des pas de temps journaliers pour ce graphique
+pb si autre chose que journalier les pas de temps ont ï¿½tï¿½ contraints ï¿½ des pas de temps journaliers pour ce graphique
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

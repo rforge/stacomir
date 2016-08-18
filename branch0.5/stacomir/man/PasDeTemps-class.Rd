@@ -2,30 +2,7 @@
 % Please edit documentation in R/PasdeTemps.r
 \docType{class}
 \name{PasDeTemps-class}
-\alias{DateFin}
-\alias{DateFin,PasDeTemps-method}
-\alias{LesPasDeTemps}
-\alias{PasDeTemps}
 \alias{PasDeTemps-class}
-\alias{ValeurPasDeTemps}
-\alias{currentDateDebut}
-\alias{currentDateDebut,PasDeTemps-method}
-\alias{currentDateFin}
-\alias{currentDateFin,PasDeTemps-method}
-\alias{dureePas}
-\alias{getAnnees}
-\alias{getAnnees,PasDeTemps-method}
-\alias{getLibellesPas}
-\alias{getLibellesPas,PasDeTemps-method}
-\alias{getdateDebut}
-\alias{getdateDebut,PasDeTemps-method}
-\alias{getnoPasCourant}
-\alias{getnoPasCourant,PasDeTemps-method}
-\alias{setdateDebut}
-\alias{setdateDebut,PasDeTemps-method}
-\alias{suivant}
-\alias{suivant,PasDeTemps-method}
-\alias{validite_PasDeTemps}
 \title{Class "PasDeTemps"}
 \description{
 Describes a time step

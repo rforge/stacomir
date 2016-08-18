@@ -2,7 +2,6 @@
 % Please edit documentation in R/BilanEspeces.r
 \docType{class}
 \name{BilanEspeces-class}
-\alias{BilanEspeces}
 \alias{BilanEspeces-class}
 \title{Class "BilanEspeces" Report of the species present at a counting device for
 a given period}

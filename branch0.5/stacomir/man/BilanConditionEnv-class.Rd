@@ -2,7 +2,6 @@
 % Please edit documentation in R/BilanConditionEnv.r
 \docType{class}
 \name{BilanConditionEnv-class}
-\alias{BilanConditionEnv}
 \alias{BilanConditionEnv-class}
 \title{class BilanConditionEnv simple output of one or several environmental
 conditions...}

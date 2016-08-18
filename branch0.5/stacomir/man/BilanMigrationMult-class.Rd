@@ -2,7 +2,6 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \docType{class}
 \name{BilanMigrationMult-class}
-\alias{BilanMigrationMult}
 \alias{BilanMigrationMult-class}
 \title{class BilanMigrationMult}
 \description{
@@ -10,7 +9,7 @@ Migration counts for several Fish counting devices (DC), several taxa and severa
 This migration count can be built either by the graphical interface or in command line
 \code{new("BilanMigrationMult",
 dc=new("RefDC"),taxons=("RefTaxon"),stades=new("RefStades"),pasDeTemps=new("PasDeTempsJournalier"),data=data.frame(),calcdata=list(),
-coef_conversion=data.frame()}.
+coef_conversion=data.frame())}.
 }
 \section{Slots}{
 
@@ -34,7 +33,7 @@ method if any weight are found in the data slot.}
 A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
 called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
 On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
-Operations are monitoring during a period. To each operation, several species of fishes can be recorded (samples). In the case of migratory 
+Operations are monitoring operations during a period. For each operation, several species of fishes can be recorded (samples). In the case of migratory 
 fishes the stage of development is important as it may indicate generic migrations, to and fro, between the river and the sea.
 Hence a Multiple Migration Bilan is built from several one or several counting devices (DC), one or several Taxa (Taxon), one or several stages
 (stage). The migration can be also recorded not as numbers, but in the case of glass eels, as weight, which will be later transformed to number, 
@@ -43,7 +42,7 @@ This class makes different calculations than BilanMigration, it does not handle 
 it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
 }
 \examples{
-library(stacomiR)
+#library(stacomiR)
 # launches the application in the command line
 stacomi(gr_interface=FALSE)
 # here is the structure of the class

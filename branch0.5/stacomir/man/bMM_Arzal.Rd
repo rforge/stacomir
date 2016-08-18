@@ -25,8 +25,8 @@
   			}
   }
   \item{calcdata}{slot to be filled with the calcule method} 
-  \item{coef_conversion} {A data frame with 364 observations with daily coefficients to convert from weight to numbers}
-  \item{time.sequence} {A time sequence generated for the bilan, used internally by the object}
+  \item{coef_conversion}{A data frame with 364 observations with daily coefficients to convert from weight to numbers}
+  \item{time.sequence}{A time sequence generated for the bilan, used internally by the object}
 }}
 \usage{
 bMM_Arzal

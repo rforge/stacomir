@@ -2,7 +2,6 @@
 % Please edit documentation in R/Refparquan.r
 \docType{class}
 \name{Refparquan-class}
-\alias{Refparquan}
 \alias{Refparquan-class}
 \title{Class "Refparquan"}
 \description{
@@ -40,7 +39,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
-  \code{\link{RefPoidsMoyenPeche}},
+  \code{\link{RefPoidsMoyenPeche-class}},
   \code{\link{RefStades-class}},
   \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},

@@ -2,7 +2,6 @@
 % Please edit documentation in R/Refpar.r
 \docType{class}
 \name{Refpar-class}
-\alias{Refpar}
 \alias{Refpar-class}
 \title{Class "Refpar"}
 \description{
@@ -44,7 +43,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
-  \code{\link{RefPoidsMoyenPeche}},
+  \code{\link{RefPoidsMoyenPeche-class}},
   \code{\link{RefStades-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},

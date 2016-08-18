@@ -8,7 +8,7 @@
 \S4method{connect}{BilanFonctionnementDC}(object, h)
 }
 \value{
-An object of class \ref{BilanFonctionnementDC}
+An object of class \code{BilanFonctionnementDC}
 }
 \description{
 loads the working periods and type of arrest or disfunction of the DC

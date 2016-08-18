@@ -2,9 +2,7 @@
 % Please edit documentation in R/PasdeTemps.r
 \docType{class}
 \name{PasDeTempsChar-class}
-\alias{PasDeTempsChar}
 \alias{PasDeTempsChar-class}
-\alias{validite_PasDeTempsChar}
 \title{Class "PasDeTempsChar"}
 \description{
 Character to represent a PasDeTemps

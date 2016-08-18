@@ -2,7 +2,6 @@
 % Please edit documentation in R/Bilan_taille.r
 \docType{class}
 \name{Bilan_taille-class}
-\alias{Bilan_taille}
 \alias{Bilan_taille-class}
 \title{Class "Bilan_taille" Bilan class}
 \description{

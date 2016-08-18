@@ -2,7 +2,6 @@
 % Please edit documentation in R/RefListe.r
 \docType{class}
 \name{RefListe-class}
-\alias{RefListe}
 \alias{RefListe-class}
 \title{Class "RefListe"}
 \description{
@@ -45,7 +44,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},
-  \code{\link{RefPoidsMoyenPeche}},
+  \code{\link{RefPoidsMoyenPeche-class}},
   \code{\link{RefStades-class}},
   \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},

@@ -2,7 +2,6 @@
 % Please edit documentation in R/Bilan_poids_moyen.r
 \docType{class}
 \name{Bilan_poids_moyen-class}
-\alias{Bilan_poids_moyen}
 \alias{Bilan_poids_moyen-class}
 \title{Class "Bilan_poids_moyen"}
 \description{
