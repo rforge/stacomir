@@ -67,13 +67,13 @@ setMethod("getanneeprec",signature=signature("RefHorodate"),definition=function(
 		})
 
 
-#' choix method for RefHorodate
+#' choice method for RefHorodate
 #' 
 #' @return Selects the date in the graphical interface
 #' 
 #' @author cedric.briand
 #' @docType methods
-setMethod("choix",signature=signature("RefHorodate"),definition=function(object,label="date",nomassign="horodate",funoutlabel="nous avons le choix dans la date\n",decal=0,affichecal=TRUE) {
+setMethod("choice",signature=signature("RefHorodate"),definition=function(object,label="date",nomassign="horodate",funoutlabel="nous avons le choice dans la date\n",decal=0,affichecal=TRUE) {
 			hwinhor=function(h,...){
 				object=setRefHorodate(object,svalue(horodate))
 				if (affichecal){

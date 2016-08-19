@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanMigrationPar.r
 \name{hbilanMigrationPargraph2}
 \alias{hbilanMigrationPargraph2}
-\title{le handler appelle la methode generique graphe sur l'object choix=2}
+\title{le handler appelle la methode generique graphe sur l'object choice=2}
 \usage{
 hbilanMigrationPargraph2(h, ...)
 }
@@ -10,6 +10,6 @@ hbilanMigrationPargraph2(h, ...)
 \item{h, }{passed by the handler}
 }
 \description{
-le handler appelle la methode generique graphe sur l'object choix=2
+le handler appelle la methode generique graphe sur l'object choice=2
 }
 

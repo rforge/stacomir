@@ -4,12 +4,10 @@
 \alias{funtable}
 \title{function to print and save statistics in .csv and .html formats}
 \usage{
-funtable(tableau, duree, taxon, stade, DC, resum)
+funtable(tableau, time.sequence, taxon, stade, DC, resum)
 }
 \arguments{
 \item{tableau}{}
-
-\item{duree}{}
 
 \item{taxon}{}
 
@@ -18,6 +16,8 @@ funtable(tableau, duree, taxon, stade, DC, resum)
 \item{DC}{}
 
 \item{resum}{}
+
+\item{duree}{}
 }
 \description{
 function to print and save statistics in .csv and .html formats

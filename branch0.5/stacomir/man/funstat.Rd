@@ -4,12 +4,12 @@
 \alias{funstat}
 \title{Function to calculate statistics per month}
 \usage{
-funstat(tableau, duree, taxon, stade, DC)
+funstat(tableau, time.sequence, taxon, stade, DC)
 }
 \arguments{
 \item{tableau}{}
 
-\item{duree}{}
+\item{time.sequence}{}
 
 \item{taxon}{}
 

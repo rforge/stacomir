@@ -57,5 +57,5 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			object@data<-requete@query
 			return(object)
 		})
-# pas de methode choix, le choix est deja fait dans l'annee de l'interface
+# pas de methode choice, le choice est deja fait dans l'annee de l'interface
 #charge(refPoidsMoyenPeche)

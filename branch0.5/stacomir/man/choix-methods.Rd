@@ -1,23 +1,23 @@
-\name{choix-methods}
+\name{choice-methods}
 \docType{methods}
-\alias{choix-methods}
-\alias{choix}
-\alias{choix,PasDeTemps-method}
-\alias{choix,PasDeTempsJournalier-method}
-\alias{choix,RefAnnee-method}
-\alias{choix,RefCheckBox-method}
-\alias{choix,RefChoix-method}
-\alias{choix,RefDC-method}
-\alias{choix,RefDF-method}
-\alias{choix,RefHorodate-method}
-\alias{choix,RefListe-method}
-\alias{choix,Refpar-method}
-\alias{choix,Refparqual-method}
-\alias{choix,RefStades-method}
-\alias{choix,RefStationMesure-method}
-\alias{choix,RefTaxon-method}
-\alias{choix,RefTextBox-method}
-\title{Methods for Function choix}
+\alias{choice-methods}
+\alias{choice}
+\alias{choice,PasDeTemps-method}
+\alias{choice,PasDeTempsJournalier-method}
+\alias{choice,RefAnnee-method}
+\alias{choice,RefCheckBox-method}
+\alias{choice,RefChoix-method}
+\alias{choice,RefDC-method}
+\alias{choice,RefDF-method}
+\alias{choice,RefHorodate-method}
+\alias{choice,RefListe-method}
+\alias{choice,Refpar-method}
+\alias{choice,Refparqual-method}
+\alias{choice,RefStades-method}
+\alias{choice,RefStationMesure-method}
+\alias{choice,RefTaxon-method}
+\alias{choice,RefTextBox-method}
+\title{Methods for Function choice}
 \description{
 These methods are used within the graphical interface to load the referential elements of each
 class (ex Reftaxon) and copy the user choice in the environment "envir_stacomi"
@@ -51,7 +51,7 @@ class (ex Reftaxon) and copy the user choice in the environment "envir_stacomi"
 
 \item{\code{signature(object = "RefCheckBox")}}{ choice method for RefCheckBox referential objects }
 
-\item{\code{signature(object = "RefChoix")}}{ Choice method for Refchoix referential objects }
+\item{\code{signature(object = "RefChoix")}}{ Choice method for Refchoice referential objects }
 
 \item{\code{signature(object = "RefDC")}}{ choice method for RefDC }
 
@@ -86,7 +86,7 @@ class (ex Reftaxon) and copy the user choice in the environment "envir_stacomi"
   "bilan" object, and loads par, parqual, or parquan objects accordingly.
 	\item \code{signature(object = "RefPar")} the choice method assigns an object of class Refpar 
 	named refpar in the environment envir_stacomi
-	\item \code{signature(object = "RefParquan")} this method choix is also on sons objects Refparquan,
+	\item \code{signature(object = "RefParquan")} this method choice is also on sons objects Refparquan,
   hence the parameters,however it was redefined in refparqual to load the possible values of qualitative parameters
 	\item \code{signature(object = "RefParqual")} the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi this
   method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative  parameters, 

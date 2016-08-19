@@ -6,7 +6,7 @@
 \title{Class "Refparqual"}
 \description{
 Class enabling to load the list of qualitative parameters and to select one
-of them. It inherits from 'Refpar', uses its 'choix' method
+of them. It inherits from 'Refpar', uses its 'choice' method
 }
 \section{Slots}{
 
@@ -39,7 +39,7 @@ Other referential classes \code{\linkS4class{RefAnnee}}
 \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
 
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},

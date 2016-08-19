@@ -16,8 +16,8 @@ interface_BilanMigration=function(){
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
 	add(ggroupboutons,group)
-	choix(bilanMigration@pasDeTemps)
-	choix(bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)
+	choice(bilanMigration@pasDeTemps)
+	choice(bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
@@ -34,5 +34,5 @@ interface_BilanMigration=function(){
 	#graphes=ggraphics(width=600,height=600)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv) 
-	grDevice::X11()
+	grDevices::X11()
 }

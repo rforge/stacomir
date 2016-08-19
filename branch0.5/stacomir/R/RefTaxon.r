@@ -76,12 +76,12 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 #' group<-ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' bilanMigration<-new(BilanMigration)
-#' choix(object,objectBilan=bilanMigration)
+#' choice(object,objectBilan=bilanMigration)
 #' }
-setMethod("choix",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+setMethod("choice",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				htax=function(h,...){
-					taxons=svalue(choix)
+					taxons=svalue(choice)
 					object@data<-object@data[tax_libelle%in%taxons ,]
 					assign("refTaxons",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefTaxon.1)
@@ -91,13 +91,13 @@ setMethod("choix",signature=signature("RefTaxon"),definition=function(object,obj
 						if (exists("frame_par")) delete(group,frame_par)
 						if (exists("frame_parquan")) delete(group,frame_parquan)
 						if (exists("frame_parqual")) delete(group,frame_parqual)
-						choix(objectBilan@stades,objectBilan,is.enabled=TRUE)						
+						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 				}
 				frame_tax<<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2)
 				add(group,frame_tax)
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
-				choix=gdroplist(tax_libelle,container=frame_tax,handler=htax)
+				choice=gdroplist(tax_libelle,container=frame_tax,handler=htax)
 				enabled(frame_tax)<-is.enabled
 				gbutton("OK", container=frame_tax,handler=htax)
 			} else funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
@@ -112,8 +112,8 @@ setMethod("choix",signature=signature("RefTaxon"),definition=function(object,obj
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' bilanMigration=new(BilanMigration)
-#' choixmult(object,objectBilan=bilanMigration)
-setMethod("choixmult",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+#' choicemult(object,objectBilan=bilanMigration)
+setMethod("choicemult",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				htax=function(h,...){
 					taxons=tbdesttaxon[,][tbdesttaxon[,]!=""]
@@ -134,7 +134,7 @@ setMethod("choixmult",signature=signature("RefTaxon"),definition=function(object
 								dispose(notebook) ## dispose current tab
 							}
 						}
-						choixmult(objectBilan@stades,objectBilan,is.enabled=TRUE)						
+						choicemult(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 					# changing tab of notebook to next tab
 					if (svalue(notebook)<length(notebook)){
@@ -154,8 +154,8 @@ setMethod("choixmult",signature=signature("RefTaxon"),definition=function(object
 				#TODO addmsg
 				frametaxondest<-gframe("deposez ici",cont=grouptaxon)
 				# need for a fixed size data.frame otherwise errors when adding new lines
-				xx<-data.frame(choix=rep("",8))
-				xx$choix<-as.character(xx$choix)
+				xx<-data.frame(choice=rep("",8))
+				xx$choice<-as.character(xx$choice)
 				tbdesttaxon=gtable(xx,cont=frametaxondest,expand = TRUE, fill = TRUE)
 				size(tbdesttaxon)<-c(160,300)
 				adddropsource(tbsourcetaxon)
@@ -195,20 +195,20 @@ setMethod("choixmult",signature=signature("RefTaxon"),definition=function(object
 		})
 
 
-#' load method for RefTaxon
+#' choice_c method for RefTaxon
 #' 
-#' the load method is intented to have the same behaviour as choix (which creates a
-#' widget in the graphical interface) but from the command line. The values passed to the load function
+#' the choice_cc method is intented to have the same behaviour as choice (which creates a
+#' widget in the graphical interface) but from the command line. The values passed to the choice_c method
 #' for taxon can be either numeric (2038 = Anguilla anguilla) or character.  
 #' @param object An object from the class RefTaxon
 #' @param taxons The vector of taxon, can be either code (numeric) or latin name
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
-#'object=new("RefTaxon")
-#'object<-charge(object)
-#'objectBilan=new("BilanMigrationMult")
-#' load(object=object,objectBilan=objectBilan,"Anguilla anguilla")
-setMethod("load",signature=signature("RefTaxon"),definition=function(object,taxons) {
+#' object=new("RefTaxon")
+#' object<-charge(object)
+#' objectBilan=new("BilanMigrationMult")
+#' choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
+setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,taxons) {
 			if (is.null(taxons)) {
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.5,arret=TRUE)
 			} else	if (class(taxons)=="character"){	

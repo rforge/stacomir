@@ -59,11 +59,11 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			return(ifelse( rep1 & rep2 & rep3 ,TRUE,retValue)   )
 		})	
 # pour test #object=new("PasDeTempsJournalier")
-setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=function(object) {
+setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
-					pas=svalue(choixpas)
-					nbpas=as.numeric(svalue(choixnbpas)) 
+					pas=svalue(choicepas)
+					nbpas=as.numeric(svalue(choicenbpas)) 
 					object@nbPas<-nbpas
 					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object=setdateDebut(object,as.POSIXlt(svalue(datedeb)))
@@ -79,12 +79,12 @@ setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=functio
 				pg[2,1]<-datedeb
 				pg[3,1]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.5)
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
-				choixpas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
-				pg[4,1]<-choixpas 
-				enabled(choixpas)=FALSE
+				choicepas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
+				pg[4,1]<-choicepas 
+				enabled(choicepas)=FALSE
 				pg[3,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.6)
-				choixnbpas=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
-				pg[4,2]<-choixnbpas
+				choicenbpas=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
+				pg[4,2]<-choicenbpas
 				pg[1,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.7,container=pg)
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE
@@ -98,19 +98,19 @@ setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=functio
 # showMethods("suivant")
 
 
-#' load method for class PasDeTempsJournalier
+#' choice_c method for class PasDeTempsJournalier
 #' 
-#' the load method is intented to have the same behaviour as choix (which creates a
+#' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  
 #' @param datedebut a character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object
 #' @param datefin a character of POSIXct object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' \dontrun{
-#'object=new("RefDC")
-#'object<-charge(object)
-#' load(object=object,datedebut="2012-01-01",datefin="2013-01-01")}
-setMethod("load",signature=signature("PasDeTempsJournalier"),definition=function(object,datedebut,datefin) {
+#'  object=new("RefDC")
+#'  object<-charge(object)
+#'  choice_c(object=object,datedebut="2012-01-01",datefin="2013-01-01")}
+setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=function(object,datedebut,datefin) {
 			if (class(datedebut)=="character") {
 				if (grepl("/",datedebut)){
 					datedebut=strptime(datedebut, format="%d/%m/%Y")

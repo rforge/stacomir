@@ -17,9 +17,9 @@ interface_BilanMigrationConditionEnv = function()
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	
-	choix(bilanMigrationConditionEnv@bilanMigration@pasDeTemps)
-	choix(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
-	choix(bilanMigrationConditionEnv@bilanMigration@dc,objectBilan=bilanMigrationConditionEnv@bilanMigration,is.enabled=TRUE)
+	choice(bilanMigrationConditionEnv@bilanMigration@pasDeTemps)
+	choice(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
+	choice(bilanMigrationConditionEnv@bilanMigration@dc,objectBilan=bilanMigrationConditionEnv@bilanMigration,is.enabled=TRUE)
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
@@ -37,5 +37,5 @@ interface_BilanMigrationConditionEnv = function()
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv)
-	grDevice::X11()
+	grDevices::X11()
 }

@@ -119,7 +119,7 @@ funbarchartDC = function(h,...) {
 	# l'objectif du programme ci dessous est de calculer la duree mensuelle de fonctionnement du dispositif.
 	tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
+	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
 	tempsdebut[tempsdebut<fonctionnementDC@requete@datedebut]<-fonctionnementDC@requete@datedebut
 	# id pour fin
 	tempsfin[tempsfin>fonctionnementDC@requete@datefin]<-fonctionnementDC@requete@datefin

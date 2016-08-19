@@ -29,7 +29,7 @@
 #' 
 #' showClass("RefCheckBox")
 setClass(Class="RefCheckBox",representation= representation(title="character",labels="character",checked="logical"),
-		prototype=prototype(title="liste de choix",labels="choix",checked=FALSE))
+		prototype=prototype(title="liste de choice",labels="choice",checked=FALSE))
 
 #' Loading method for ReCheckBox referential objects
 #' @return An S4 object of class RefCheckBox
@@ -51,19 +51,19 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(object
 #' object<- charge(object,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 #' win=gwindow(title="test RefCheckBox")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(object) 
+#' choice(object) 
 #' dispose(win)
-setMethod("choix",signature=signature("RefCheckBox"),definition=function(object) {
+setMethod("choice",signature=signature("RefCheckBox"),definition=function(object) {
 			hlist=function(h,...){
 				i=h$action
 				if (exists("refCheckBox",envir_stacomi)) {
-					# on récupère les valeurs de l'object assigné précédement
-					# car l'object dans .GlobalEnv n'est pas à jour...
+					# on rï¿½cupï¿½re les valeurs de l'object assignï¿½ prï¿½cï¿½dement
+					# car l'object dans .GlobalEnv n'est pas ï¿½ jour...
 					object<-get("refCheckBox",envir_stacomi)
 				}
 				object@checked[i]<-svalue(the_choice[[i]])
 				assign("refCheckBox",object,envir_stacomi)
-				funout(paste("choix",object@labels[i],"\n"))
+				funout(paste("choice",object@labels[i],"\n"))
 			}
 			
 			frame_check<<-gframe(object@title)	

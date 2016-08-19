@@ -2,7 +2,7 @@
 #' Class "Refparquan"
 #' 
 #' Class enabling to load the list of quantitative parameters and to select one
-#' of them. It inherits from 'Refpar', uses its 'choix' method
+#' of them. It inherits from 'Refpar', uses its 'choice' method
 #' 
 #' 
 #' @section Objects from the Class: Objects can be created by calls of the form

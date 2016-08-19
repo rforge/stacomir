@@ -162,7 +162,7 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.7,
 								sta,
 								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.8,
-								paste(unique(tableauCEst$env_date_debutchar[indrepeated(tableauCEst$env_date_debutchar)]),sep=""),
+								paste(unique(tableauCEst$env_date_debutchar[duplicated(tableauCEst$env_date_debutchar)]),sep=""),
 								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.9),arret=FALSE)
 				tableauCEst<-tableauCEst[induk(tableauCEst$env_date_debutchar),]
 			}

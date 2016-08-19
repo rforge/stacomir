@@ -78,12 +78,12 @@ setMethod("charge",signature=signature("RefDF"),definition=function(object) {
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object=new("RefDF")
 #' object<-charge(object)
-#' choix(object)
+#' choice(object)
 #' }
-setMethod("choix",signature=signature("RefDF"),definition=function(object) {
+setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 			if (nrow(object@data) > 0){
 				hDF=function(h,...){
-					object@df_selectionne=svalue(choix)
+					object@df_selectionne=svalue(choice)
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$df%in%object@df_selectionne]
 					#cat("passe par la")
 					assign("refDF",object,envir_stacomi)
@@ -101,7 +101,7 @@ setMethod("choix",signature=signature("RefDF"),definition=function(object) {
 				}
 				frameDF=gframe(get("msg",envir=envir_stacomi)$RefDF.3,container=group)
 				DF_identifiant=object@data$df
-				choix=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
+				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
 				gbutton(get("msg",envir=envir_stacomi)$RefDC.6, container=frameDF,handler=hDFi)
 				gbutton("OK", container=frameDF,handler=hDF)
 			} else {

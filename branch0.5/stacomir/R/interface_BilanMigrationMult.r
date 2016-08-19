@@ -22,13 +22,13 @@ interface_BilanMigrationMult=function(){
 	# the notebook will contain all elements from 
 	#######################
 	#TODO TESTER ICI ICI ICI
-	# ajout avec choixmult pour pas de temps.
+	# ajout avec choicemult pour pas de temps.
 	########################
 	notebook <<- gnotebook(container=group)	
 	size(notebook)<-c(400,300)
 	add(ggroupboutons,group)
-	choixmult(bilanMigrationMult@pasDeTemps)
-	choixmult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
+	choicemult(bilanMigrationMult@pasDeTemps)
+	choicemult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
 	svalue(notebook)<-1
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)
@@ -49,6 +49,6 @@ interface_BilanMigrationMult=function(){
 	#graphes=ggraphics(width=650,height=650)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv) 
-	grDevice::X11()
+	grDevices::X11()
 }
 

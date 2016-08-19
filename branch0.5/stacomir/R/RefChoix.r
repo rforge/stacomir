@@ -4,9 +4,9 @@
 #' radiobuttons
 #' 
 #' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("RefChoix", listechoix=character() ,label=character()
+#' \code{new("RefChoix", listechoice=character() ,label=character()
 #' ,selected=integer())}.
-#' @slot listechoix A character vector giving possible choices
+#' @slot listechoice A character vector giving possible choices
 #' @slot label A character, title of the box giving the possible choices
 #' @slot selected An \code{Integer}  the initial selected value (as an index), first=1 used in gradio
 #' @author cedric.briand"at"eptb-vilaine.fr
@@ -30,9 +30,9 @@
 #' 
 #' showClass("RefChoix")
 #' 
-setClass(Class="RefChoix",representation= representation(listechoix="character",label="character",selected="integer"))
+setClass(Class="RefChoix",representation= representation(listechoice="character",label="character",selected="integer"))
 
-#' Loading method for Rechoix referential objects
+#' Loading method for Rechoice referential objects
 #' 
 #' 
 #' @family Referential objects
@@ -45,12 +45,12 @@ setClass(Class="RefChoix",representation= representation(listechoix="character",
 #'  object=new("RefChoix")
 #' charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 setMethod("charge",signature=signature("RefChoix"),definition=function(object,vecteur,label,selected) {
-			object@listechoix=vecteur
+			object@listechoice=vecteur
 			object@label=label
 			object@selected=selected
 			return(object)
 		})
-#' Choice method for Rechoix referential objects
+#' Choice method for Rechoice referential objects
 #' 
 #' Used by the graphical interface.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -59,20 +59,20 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(object,ve
 #'  object<-charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 #' win=gwindow(title="test refChoix")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(object) 
+#' choice(object) 
 #' dispose(win)
-setMethod("choix",signature=signature("RefChoix"),definition=function(object) {
+setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 			hlist=function(h,...){
-				valeurchoisie=svalue(choix)
-				object@listechoix<-valeurchoisie
-				assign("refchoix",object,envir_stacomi)
+				valeurchoisie=svalue(choice)
+				object@listechoice<-valeurchoisie
+				assign("refchoice",object,envir_stacomi)
 				funout(paste(object@label,"\n"))
 			}
-			frame_choix<<-gframe(object@label)
+			frame_choice<<-gframe(object@label)
 			
 			##=>selection de plusieurs caracteristiques
-			add(group,frame_choix)
-			list_libelle=fun_char_spe(object@listechoix)
-			choix=gradio(items=list_libelle,selected=object@selected,horizontal=TRUE,container=frame_choix,handler=hlist)
+			add(group,frame_choice)
+			list_libelle=fun_char_spe(object@listechoice)
+			choice=gradio(items=list_libelle,selected=object@selected,horizontal=TRUE,container=frame_choice,handler=hlist)
 		})
 

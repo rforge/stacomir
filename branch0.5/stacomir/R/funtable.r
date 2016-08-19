@@ -1,5 +1,3 @@
-# Nom fichier :        funtable.R
-
 #' function to print and save statistics in .csv and .html formats
 #' @param tableau 
 #' @param duree 
@@ -9,7 +7,7 @@
 #' @param resum 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funtable=function(tableau,duree,taxon,stade,DC,resum){
+funtable=function(tableau,time.sequence,taxon,stade,DC,resum){
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
 	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")

@@ -10,7 +10,7 @@ interface_BilanPoidsMoyen = function()
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
     bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
-    bilan_poids_moyen@liste=charge(object=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la cat�gorie d'effectif
+    bilan_poids_moyen@liste=charge(object=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choice de la cat�gorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -20,7 +20,7 @@ interface_BilanPoidsMoyen = function()
     # dans l'ordre 
     # dans le handler, modifier le contenu de l'object fils si il existe
     # supprimer les widgets fils si ils existent (appel de la methode delete)
-    # appeller la methode choix pour l'affichage du fils si il existe
+    # appeller la methode choice pour l'affichage du fils si il existe
     ### premiere toobar
 
     
@@ -28,14 +28,14 @@ interface_BilanPoidsMoyen = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
-	grDevice::X11()
+	grDevices::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    choix(bilan_poids_moyen@liste)
-    choix(bilan_poids_moyen@dc,objectBilan=NULL,is.enabled=TRUE)
-    choix(bilan_poids_moyen@anneedebut,
+    choice(bilan_poids_moyen@liste)
+    choice(bilan_poids_moyen@dc,objectBilan=NULL,is.enabled=TRUE)
+    choice(bilan_poids_moyen@anneedebut,
 			nomassign="refAnneeDebut",
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3)#annee debut
-    choix(bilan_poids_moyen@anneefin,
+    choice(bilan_poids_moyen@anneefin,
 			nomassign="refAnneeFin",
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5)#annee fin
 	aGraph=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2,icon="lines",handler=fungraphBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)#load
@@ -44,10 +44,10 @@ interface_BilanPoidsMoyen = function()
 	toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
 	add(group, gmenu(toolbarlist))
     
-    # Les methodes choix suivantes sont passees en cascade � l'interieur des methodes choix
-    #choix(bilan_lot@taxons,is.enabled=FALSE)
-    #choix(bilan_lot@stades,is.enabled=FALSE)
-    #choix(bilan_lot@par,is.enabled=FALSE)
+    # Les methodes choice suivantes sont passees en cascade � l'interieur des methodes choice
+    #choice(bilan_lot@taxons,is.enabled=FALSE)
+    #choice(bilan_lot@stades,is.enabled=FALSE)
+    #choice(bilan_lot@par,is.enabled=FALSE)
     
     # TODO ajouter une fonction eval ou la liste du combo box est diminuee � l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
     

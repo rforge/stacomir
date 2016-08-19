@@ -76,13 +76,13 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC )
+		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@duree,taxon,stade,DC )
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	}#end function hconfirm
 	
 	if (nrow(bil@data)>0)
 	{ 
-		choix<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+		choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
 						unique(bil@data$bjo_horodateexport),
 						get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
 				handler=hconfirm) # voulez vous le remplacer ?
@@ -120,7 +120,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,duree=bilanMigration@duree,taxon,stade,DC)
+		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@duree,taxon,stade,DC)
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	} # end else
 } # end function

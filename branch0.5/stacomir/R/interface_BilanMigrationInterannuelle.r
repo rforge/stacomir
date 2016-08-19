@@ -20,22 +20,22 @@ interface_BilanMigrationInterAnnuelle = function()
 	
 	# pour preselectionner une date on lui fournit l'indice de la date dans le RefAnnee. indice = 11 pour 2005
 	
-	choix(bilanMigrationInterAnnuelle@anneeDebut,
+	choice(bilanMigrationInterAnnuelle@anneeDebut,
 			nomassign="anneeDebut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3,
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==min(bilanMigrationInterAnnuelle@anneeDebut@data)))
-	choix(bilanMigrationInterAnnuelle@anneeFin,
+	choice(bilanMigrationInterAnnuelle@anneeFin,
 			nomassign="anneeFin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==max(bilanMigrationInterAnnuelle@anneeFin@data)))
-	choix(bilanMigrationInterAnnuelle@dc,objectBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
+	choice(bilanMigrationInterAnnuelle@dc,objectBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
 	
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
-	# appeller la methode choix pour l'affichage du fils si il existe
+	# appeller la methode choice pour l'affichage du fils si il existe
 	### premiere toobar
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
@@ -89,7 +89,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv) 
-	grDevice::X11()
+	grDevices::X11()
 	
 # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 	

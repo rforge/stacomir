@@ -10,11 +10,11 @@ interface_chooselang = function()
     assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	listlang<-new("RefListe")
-	listlang@listechoix=c("french","english","spanish")
+	listlang@listechoice=c("french","english","spanish")
 	listlang@label="choose language"
-	choix(listlang)
+	choice(listlang)
 	hassingnlang=function(h,...){		
-		lang<-get("refliste",envir_stacomi)@listechoix
+		lang<-get("refliste",envir_stacomi)@listechoice
 		messages(lang)
 		close(win)
 		interface_graphique()

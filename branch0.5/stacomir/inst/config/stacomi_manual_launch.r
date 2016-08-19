@@ -62,7 +62,7 @@ source("Refparquan.r")
 source("Refparqual.r")
 source("RefAnnee.r")
 source("RefCoe.r") # coeff de conversion poids effectif
-source("RefListe.r") #liste de donnees pour un choix
+source("RefListe.r") #liste de donnees pour un choice
 source("RefChoix.r")
 source("ReftextBox.r")
 source("RefCheckBox.r")

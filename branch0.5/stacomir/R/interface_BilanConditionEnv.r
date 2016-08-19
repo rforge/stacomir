@@ -15,18 +15,18 @@ interface_ConditionEnv = function()
    gWidgets::add(ggroupboutons,group)
     
     # date de debut et de fin
-    choix(bilanConditionEnv@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+    choice(bilanConditionEnv@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilanConditionEnv_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-    choix(bilanConditionEnv@horodate,
+    choice(bilanConditionEnv@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilanConditionEnv_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-    choix(bilanConditionEnv@stationMesure)
+    choice(bilanConditionEnv@stationMesure)
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
@@ -42,5 +42,5 @@ interface_ConditionEnv = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
-	grDevice::X11()
+	grDevices::X11()
 }

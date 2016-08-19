@@ -18,13 +18,13 @@ test_that("Teste que le lien ODBC existe et a la bonne longueur",{
 			expect_equal(length(result$sqldf),3)
 		})
 
-test_that("Teste que l'environnement de travail est bien créé",{
+test_that("Teste que l'environnement de travail est bien crï¿½ï¿½",{
 			expect_true(exists("envir_stacomi"))
 		})
 
 
 
-test_that("Teste la méthode charge les messages de référence",
+test_that("Teste la mï¿½thode charge les messages de rï¿½fï¿½rence",
 		{
 			object=new("RefMsg")
 			object<-charge(object)	

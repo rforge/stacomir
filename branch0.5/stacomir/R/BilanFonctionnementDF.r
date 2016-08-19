@@ -120,7 +120,7 @@ funbarchartDF = function(h,...) {
 	#tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsdebut<-t_periodefonctdispositif_per$per_date_debut
 	tempsfin<-t_periodefonctdispositif_per$per_date_fin
-	# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
+	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
 	tempsdebut[tempsdebut<fonctionnementDF@requete@datedebut]<-fonctionnementDF@requete@datedebut
 	# id pour fin
 	tempsfin[tempsfin>fonctionnementDF@requete@datefin]<-fonctionnementDF@requete@datefin

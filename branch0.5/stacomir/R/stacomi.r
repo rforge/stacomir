@@ -172,7 +172,7 @@ hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
 }
 hX11=function(h,...){
-	grDevice::X11()
+	grDevices::X11()
 }
 
 
@@ -209,7 +209,6 @@ hX11=function(h,...){
 #' @importFrom utils stack
 #' @importFrom utils globalVariables
 #' @importFrom utils select.list write.table 
-#' @importFrom RODBC odbcClose
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
 #' @importFrom reshape2 dcast
@@ -220,6 +219,7 @@ hX11=function(h,...){
 #' @importFrom stats as.formula coef na.fail nls pbeta predict sd
 #' @importFrom grDevices X11 X11 gray rainbow
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
@@ -378,13 +378,15 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs",
 				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
 				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
 				"effectif_total","fonctionnement","fonctionnementDF","quantite_CALCULE",
-						"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type" ))
+						"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
+						'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','poids_moyen',
+						'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel"))
 
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
 				"col.sortie","ggroupboutons","ggroupboutonsbas","graphes",
-				"frame_annee","frame_check","frame_choix","frame_par","frame_parqual","frame_parquan",
-				"frame_std","frame_tax","logw"))
+				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
+				"frame_std","frame_tax","logw","bilan_stades_pigm","usrname","usrpwd"))
 # Progressbar
 utils::globalVariables(c("progres"))
 # reoxygenize fails if data are not loaded

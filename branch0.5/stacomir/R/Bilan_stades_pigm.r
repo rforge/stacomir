@@ -101,11 +101,11 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 			if (nrow (requete@query)>0)	{
 				
 				stades<-stacomirtools::killfactor(requete@query)
-				choixpere=c("lotpere","date")
+				choicepere=c("lotpere","date")
 				funout(paste("Attention il peut y avoir plusieurs lots a la meme date, et certains stades sont fait sans lotpere (ex taille-poids-stade)\n"))
-				choixpere=select.list(choixpere,preselect="date",multiple=FALSE,
+				choicepere=select.list(choicepere,preselect="date",multiple=FALSE,
 						title=paste("Regroupement des ech par lot pere ou par date ?"))
-				lst<-fntablestade(stades,choixpere)
+				lst<-fntablestade(stades,choicepere)
 				dates<-lst[["dates"]]
 				tablestades<-lst[["tablestades"]]
 				# transformation en pourcentages
@@ -150,15 +150,15 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 #' containing individual characteristic of glass eel#' 
 #' this function is called from within the charge method it was separated from the charge method
 #' as it it convenient to use elsewhere
-#' @usage fntablestade(stades,choixpere="lotpere")
+#' @usage fntablestade(stades,choicepere="lotpere")
 #' @param stades a data frame containing stage values
-#' @param choixlotpere either "date" or "lot_pere" the first will group pigment stage by date, 
+#' @param choicelotpere either "date" or "lot_pere" the first will group pigment stage by date, 
 #' the second will allow to keep separate lines when several samples have been collected a given day   
 #' @return a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
 #' @author Cedric Briand \\email{cedric.briand"at"eptb-vilaine.fr}                                                                                                                           
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
-fntablestade<-function(stades,choixpere="lotpere"){
-	if (choixpere=="lotpere"){
+fntablestade<-function(stades,choicepere="lotpere"){
+	if (choicepere=="lotpere"){
 		tablestades=stats::ftable(stats::xtabs(stades$lot_effectif ~ stades$lot_pere +
 								+ stades$val_libelle))
 		tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
@@ -179,7 +179,7 @@ fntablestade<-function(stades,choixpere="lotpere"){
 		print(cbind(tablestades, "lot_pere"=sort(unique(stades$lot_pere))[order(dates)]))
 		dates=sort(dates)
 		# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
-	} else if (choixpere=="date"){
+	} else if (choicepere=="date"){
 		tablestades=stats::ftable(stats::xtabs(stades$lot_effectif ~ stades$ope_date_debut +
 								+ stades$val_libelle))
 		print(stats::xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
@@ -227,19 +227,19 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refCheckBox",envir_stacomi)) {
 				object@options<-get("refCheckBox",envir_stacomi)
 			} else {
-				# rien de toutes facons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes facons les choice par defaut sont copies dans envir_stacomi
 			}  
-			if (exists("refchoix",envir_stacomi)) {
-				object@lmax<-get("refchoix",envir_stacomi)
+			if (exists("refchoice",envir_stacomi)) {
+				object@lmax<-get("refchoice",envir_stacomi)
 			} else {
-				# l'assignation d'un object liste choix remplace la liste des valeurs possibles
+				# l'assignation d'un object liste choice remplace la liste des valeurs possibles
 				# par la valeur choisie (pour l'instant "0.8")
-				object@lmax@listechoix<-"0.8"
+				object@lmax@listechoice<-"0.8"
 			}
 			if (exists("refTextBox",envir_stacomi)) {
 				object@salinite<-get("refTextBox",envir_stacomi)
 			} else {
-				# rien de toutes fa�ons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes fa�ons les choice par defaut sont copies dans envir_stacomi
 			} 
 			if (object@options@checked[2]){
 				if (exists("refStationMesure",envir_stacomi)) {
@@ -438,10 +438,10 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VIA3= fnstade(par1=Vparm$pigment_stage[[4]],VB=FALSE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VIA3c=cumsum(VIA3$y)/sum(VIA3$y)  # surface
 	if(graph){
-		grDevice::X11()
+		grDevices::X11()
 		matplot(VB$x,cbind(VB$y,VIA0$y,VIA1$y,VIA2$y,VIA3$y))
 		
-		grDevice::X11()
+		grDevices::X11()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
 	#traitement a part de VB
@@ -494,11 +494,12 @@ funcalcbilan_stades_pigm<-function(h,...){
 	enabled(toolbarlist[["SetTitle"]])<-TRUE
 	enabled(toolbarlist[["Graph"]])<-TRUE
 	enabled(toolbarlist[["Graphgg"]])<-TRUE
-	assign("bilan_stades_pigm",bilan_stades_pigm,.GlobalEnv)
+	assign("bilan_stades_pigm",bilan_stades_pigm,envir_stacomi)
 }
 
 #' handler function for fungraphstades
 hfungraphstades=function(h,...){
+	bilan_stades_pigm<-get("bilan_stades_pigm",envir_stacomi)
 	fungraphstades(
 			tablestades=bilan_stades_pigm@tablestades,
 			retrocalcul=bilan_stades_pigm@options@checked[2],
@@ -506,7 +507,7 @@ hfungraphstades=function(h,...){
 			points=bilan_stades_pigm@options@checked[3],
 			nb=bilan_stades_pigm@options@checked[4],
 			graphstades=bilan_stades_pigm@options@checked[1],  
-			lmax=as.numeric(bilan_stades_pigm@lmax@listechoix), 
+			lmax=as.numeric(bilan_stades_pigm@lmax@listechoice), 
 			labelretro=bilan_stades_pigm@labelretro,
 			labelgraphstades=bilan_stades_pigm@labelgraphstades,
 			phi=bilan_stades_pigm@phi, # tableau des temps pigmentaires et des dates format "%d/%m/%Y"
@@ -718,7 +719,7 @@ fungraphstades<-function(
 	}
 	if (graphstades)  {
 		# stades cumules calcul necessaire pour points et graphique durees
-		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choix
+		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choice
 		
 	graphics::par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=grDevices::gray(5:1/6),ordre=c(1,2,3,4,5),
@@ -770,7 +771,7 @@ fungraphgg=function(h,...){
 			scale_fill_grey(name="stades pigmentaires",start=0.8, end=0.2)+ # scale_fill_grey permet d'avoir des graduations de gris
 			theme_bw() +  # on efface le fond gris
 			facet_wrap(~ope_date_debut,scales="free_y")+ # facet_wrap permet d'afficher un ruban unidimentionnel en deux dimensions (un graphique par date)
-			ggtitle("Stades pigmentaires",labels=c(x="",y="effectifs")) # options
+			ggtitle("Stades pigmentaires")+xlab("")+ylab("effectifs")
 	print(g)
 	assign("g",g,"envir_stacomi")
 	funout("l'object graphique est disponible dans l'environnement principal, tapper g<-get('g',envir=envir_stacomi)")
@@ -792,21 +793,21 @@ fungraphgg=function(h,...){
 #' @param ... Other arguments passed to the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtitle_bilan_stades_pigm=function(h,...){
-	wintitle=gwindow()
+	wintitle=gWidgets::gwindow()
 	hgettext=function(h,...){
 		if(bilan_stades_pigm@labelgraphstades!=svalue(titre2)|bilan_stades_pigm@labelretro!=svalue(titre4)){
 			bilan_stades_pigm@labelgraphstades<-gsub("\n","",svalue(titre2))
 			bilan_stades_pigm@labelretro<-gsub("\n","",svalue(titre4))
-			assign("bilan_stades_pigm",bilan_stades_pigm,envir=.GlobalEnv)		
+			assign("bilan_stades_pigm",bilan_stades_pigm,envir=envir_stacomi)		
 			funout("modification du titre \n")
 		}
 		dispose(wintitle)
 	}
-	group1<-ggroup(horizontal=FALSE,container=wintitle)
-	titre1 <- glabel( text= "Titre du graphique de stades pigmentaires (graphstades = TRUE)", editable=FALSE,container=group1)
-	titre2 <- gtext( text= bilan_stades_pigm@labelgraphstades,font.attr= c(foreground.colors="blueblue"),height=40,container=group1)  
-	titre3 <- glabel( text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
-	titre4 <- gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
+	group1<-gWidgets::ggroup(horizontal=FALSE,container=wintitle)
+	titre1 <- gWidgets::glabel( text= "Titre du graphique de stades pigmentaires (graphstades = TRUE)", editable=FALSE,container=group1)
+	titre2 <- gWidgets::gtext( text= bilan_stades_pigm@labelgraphstades,font.attr= c(foreground.colors="blueblue"),height=40,container=group1)  
+	titre3 <- gWidgets::glabel( text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
+	titre4 <- gWidgets::gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
 	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
 	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
@@ -826,11 +827,11 @@ funtitle_bilan_stades_pigm=function(h,...){
 interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
-	assign("bilan_stades_pigm",bilan_stades_pigm,envir = .GlobalEnv)
+	assign("bilan_stades_pigm",bilan_stades_pigm,envir = envir_stacomi)
 	funout(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.2)
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
-	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choix de la largeur des distributions",selected=as.integer(2))
+	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
 	bilan_stades_pigm@options<-charge(bilan_stades_pigm@options,title="options du graphique",labels=c("graphstades","retrocalcul","points","nb"),checked=c(TRUE,FALSE,TRUE,TRUE))
 	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= "Valeur de la salinite moyenne, cliquer pour editer",label="15")
 	
@@ -839,25 +840,25 @@ interface_Bilan_stades_pigm = function()
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	gl=glabel(text=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group)
-	choix(bilan_stades_pigm@lmax)
-	choix(bilan_stades_pigm@options)
+	choice(bilan_stades_pigm@lmax)
+	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refCheckBox",bilan_stades_pigm@options,envir_stacomi) 
-	choix(bilan_stades_pigm@salinite)
+	choice(bilan_stades_pigm@salinite)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,envir_stacomi)
-	choix(bilan_stades_pigm@stationMesure,title="choix de la temperature")
-	choix(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
+	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilan_stades_pigm_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-	choix(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilan_stades_pigm_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
+	choice(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
 	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
@@ -883,7 +884,7 @@ interface_Bilan_stades_pigm = function()
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
 	#assign("graphes",graphes,envir=.GlobalEnv) 	
-	grDevice::X11()
+	grDevices::X11()
 	# A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }
 

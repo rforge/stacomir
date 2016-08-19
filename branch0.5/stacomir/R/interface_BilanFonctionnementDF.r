@@ -13,13 +13,13 @@ interface_BilanFonctionnementDF = function()
     
    gWidgets::add(ggroupboutons,group)
     
-    choix(fonctionnementDF@df)
-	choix(fonctionnementDF@horodate,
+    choice(fonctionnementDF@df)
+	choice(fonctionnementDF@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="fonctionnementDF_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-	choix(fonctionnementDF@horodate,
+	choice(fonctionnementDF@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="fonctionnementDF_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
@@ -43,5 +43,5 @@ interface_BilanFonctionnementDF = function()
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     #assign("graphes",graphes,envir=.GlobalEnv)
-	grDevice::X11()
+	grDevices::X11()
 }

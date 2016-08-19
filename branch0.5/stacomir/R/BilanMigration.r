@@ -239,8 +239,8 @@ hbilanMigrationgraph2 = function(h,...) {
 		p<-ggplot(bilanMigration@data)+
 				geom_step(aes(x=time.sequence,y=Cumsum,colour=mois))+
 				ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-				opts(plot.title=theme_text(size=10,colour="blue"),
-						title=paste(get("msg",envir_stacomi)$BilanMigration.7,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))   
+				ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep="")) + 
+				theme(plot.title = element_text(size=10,colour="blue"))
 		print(p)	
 	} else {
 		funout(get("msg",envir_stacomi)$BilanMigration.8)
@@ -267,6 +267,10 @@ hTableBilanMigration=function(h,...) {
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
 	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
-	resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC)
+	resum=funstat(tableau=bilanMigration@data,
+			bilanMigration@time.sequence,
+			taxon,
+			stade,
+			DC)
 	funtable(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC,resum)
 }

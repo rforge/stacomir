@@ -30,19 +30,19 @@ setMethod("charge",signature=signature("RefTextBox"),definition=function(object,
 #' object<- charge(object,title="le titre",label="20")
 #' win=gwindow(title="test RefTextBox")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(object) 
+#' choice(object) 
 #' dispose(win)
-setMethod("choix",signature=signature("RefTextBox"),definition=function(object) {
+setMethod("choice",signature=signature("RefTextBox"),definition=function(object) {
 			hlist=function(h,...){
-				object@label<-svalue(choix)
+				object@label<-svalue(choice)
 				assign("refTextBox",object,envir_stacomi)
-				funout(paste("choix",object@label,"\n"))
+				funout(paste("choice",object@label,"\n"))
 			}
 			
 			frame_text<-gframe(object@title)	
 			assign("frame_text",frame_text,.GlobalEnv)
 			add(group,frame_text)
-			choix=glabel(text=object@label,container=frame_text,handler=hlist,editable=TRUE)
-			addhandlerchanged(choix,handler=hlist)
+			choice=glabel(text=object@label,container=frame_text,handler=hlist,editable=TRUE)
+			addhandlerchanged(choice,handler=hlist)
 		})
 

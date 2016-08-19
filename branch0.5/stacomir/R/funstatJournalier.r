@@ -2,16 +2,16 @@
 
 #' function to create daily statistics
 #' @param tableau 
-#' @param duree 
+#' @param time.sequence 
 #' @param taxon 
 #' @param stade 
 #' @param DC 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funstatJournalier=function(tableau,duree,taxon,stade,DC){
-	mois=months(duree)
+funstatJournalier=function(tableau,time.sequence,taxon,stade,DC){
+	mois=months(time.sequence)
 	moislab=unique(mois)
-	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	somme=tapply(tableau$Effectif_total, mois, sum, na.rm=TRUE) # sums
 	moyennes_journalieres=tapply(tableau$Effectif_total, mois, mean, na.rm=TRUE) # means
 	ecarts_types=tapply(tableau$Effectif_total, mois, sd, na.rm=TRUE) # std. deviations

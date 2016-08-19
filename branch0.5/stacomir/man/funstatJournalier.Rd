@@ -4,12 +4,12 @@
 \alias{funstatJournalier}
 \title{function to create daily statistics}
 \usage{
-funstatJournalier(tableau, duree, taxon, stade, DC)
+funstatJournalier(tableau, time.sequence, taxon, stade, DC)
 }
 \arguments{
 \item{tableau}{}
 
-\item{duree}{}
+\item{time.sequence}{}
 
 \item{taxon}{}
 

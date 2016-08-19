@@ -43,7 +43,7 @@ Other referential classes
 \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
 
-Other Referential objects: \code{\link{RefCheckBox-class}},
+Other Referential.objects: \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},

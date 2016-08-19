@@ -2,18 +2,18 @@
 
 #' Function to calculate statistics per month
 #' @param tableau 
-#' @param duree 
+#' @param time.sequence 
 #' @param taxon 
 #' @param stade 
 #' @param DC 
 #' @return resum
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funstat=function(tableau,duree,taxon,stade,DC){
+funstat=function(tableau,time.sequence,taxon,stade,DC){
 	funout(get("msg",envir=envir_stacomi)$funstat.1)
-	mois=strftime(as.POSIXlt(duree),"%m")
+	mois=strftime(as.POSIXlt(time.sequence),"%m")
 	moislab=unique(mois)
-	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	somme=tapply(tableau$Effectif_total, mois, sum, na.rm=TRUE) # sums
 	moyennes_journalieres=tapply(tableau$Effectif_total, mois, mean, na.rm=TRUE) # means
 	#ecarts_types=tapply(tableau$Effectif_total, mois, sd, na.rm=TRUE) # std. deviations

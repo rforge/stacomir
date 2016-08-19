@@ -88,7 +88,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 		})
 #' choice method for RefDC
 #' 
-#' @note   The choix method has for arguments a report (bilan) object
+#' @note   The choice method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_lot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
@@ -102,11 +102,11 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 #' object=new("RefDC")
 #' object<-charge(object)
 #' objectBilan=new("BilanMigration")
-#' choix(object=object,objectBilan=objectBilan)}
-setMethod("choix",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+#' choice(object=object,objectBilan=objectBilan)}
+setMethod("choice",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hDC=function(h,...){
-					object@dc_selectionne<-svalue(choix)
+					object@dc_selectionne<-svalue(choice)
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
 					object@station=object@data$sta_code[object@data$dc%in%object@dc_selectionne]
 					assign("refDC",object,envir_stacomi)
@@ -123,7 +123,7 @@ setMethod("choix",signature=signature("RefDC"),definition=function(object,object
 							if (exists("frame_par")) delete(group,frame_par)
 							if (exists("frame_parquan")) delete(group,frame_parquan)
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choix(objectBilan@taxons,objectBilan,is.enabled=TRUE)
+							choice(objectBilan@taxons,objectBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
@@ -141,7 +141,7 @@ setMethod("choix",signature=signature("RefDC"),definition=function(object,object
 				frame_DC<<-gframe(get("msg",envir=envir_stacomi)$RefDC.5)
 				add(group,frame_DC)
 				DC_identifiant=object@data$dc
-				choix=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
+				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
 				gbutton(get("msg",envir=envir_stacomi)$RefDC.6, container=frame_DC,handler=hDCi) 
 				enabled(frame_DC)<-is.enabled
 				gbutton("OK", container=frame_DC,handler=hDC)
@@ -150,13 +150,13 @@ setMethod("choix",signature=signature("RefDC"),definition=function(object,object
 			}
 			return(object)
 		})
-# pour test #choix(object)
+# pour test #choice(object)
 
 
 
-#' choixmult, selection method for refDC allowing to select several DC
+#' choicemult, selection method for refDC allowing to select several DC
 #' 
-#' @note   The choix method has for arguments a report (bilan) object
+#' @note   The choice method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_lot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
@@ -172,9 +172,9 @@ setMethod("choix",signature=signature("RefDC"),definition=function(object,object
 #' object=new("RefDC")
 #' object<-charge(object)
 #' objectBilan=new("BilanMigrationMult")
-#' choixmult(object=object,objectBilan=objectBilan)
+#' choicemult(object=object,objectBilan=objectBilan)
 #'}
-setMethod("choixmult",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+setMethod("choicemult",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			
 			if (nrow(object@data) > 0){
 				hDC=function(h,...){
@@ -204,7 +204,7 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(object,ob
 									svalue(notebook) <- i							
 									dispose(notebook) ## dispose current tab
 								}}
-							choixmult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
+							choicemult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
@@ -229,8 +229,8 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(object,ob
 				size(frameDCdest)<-c(60,300)
 				#addSpring(groupdc)
 				# need for a fixed size data.frame otherwise errors when adding new lines
-				xx<-data.frame(choix=rep("",12))
-				xx$choix<-as.character(xx$choix)
+				xx<-data.frame(choice=rep("",12))
+				xx$choice<-as.character(xx$choice)
 				tbdestdc=gtable(xx,cont=frameDCdest,expand=TRUE, fill=TRUE)
 				adddropsource(tbsourcedc)
 				adddroptarget(tbdestdc)				
@@ -270,26 +270,26 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(object,ob
 		})
 
 
-#' load method for RefDC
+#' choice_c method for RefDC
 #' 
-#' the load method is intented to have the same behaviour as choix (which creates a
+#' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the RefDC only 
 #' takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
-#' The values passed to the load function are then checked with the setValidty method.
+#' The values passed to thchoice_cchargec method are then checked with the setValidty method.
 #' Finally, if an objectBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
 #' @param object an object of class RefDC
 #' @param dc a character vector of dc chosen
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @family load functions
 #' @examples
 #' \dontrun{
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#'object=new("RefDC")
-#'object<-charge(object)
-#'objectBilan=new("BilanMigrationMult")
-#' load(object=object,objectBilan=objectBilan,dc=1)}
-setMethod("load",signature=signature("RefDC"),definition=function(object,dc) {
+#' object=new("RefDC")
+#' object<-charge(object)
+#' objectBilan=new("BilanMigrationMult")
+#' choice_c(object=object,objectBilan=objectBilan,dc=1)
+#' }
+setMethod("choice_c",signature=signature("RefDC"),definition=function(object,dc) {
 			if (class(dc)=="numeric") {
 				dc<-as.integer(dc) 
 			}else if	(class(dc)=="character"){

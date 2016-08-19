@@ -10,14 +10,14 @@ Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 \section{Slots}{
 
 \describe{
-\item{\code{liste}}{choix="character" A vector of character to choose within a droplist}
+\item{\code{liste}}{choice="character" A vector of character to choose within a droplist}
 
 \item{\code{label="character"}}{the title of the box}
 }}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
-\code{new("RefListe", listechoix, label)}.  \describe{
-\item{list("listechoix")}{Object of class \code{"character"}}\item{:}{Object
+\code{new("RefListe", listechoice, label)}.  \describe{
+\item{list("listechoice")}{Object of class \code{"character"}}\item{:}{Object
 of class \code{"character"}} \item{list("label")}{Object of class
 \code{"character"}}\item{:}{Object of class \code{"character"}} }
 }
@@ -39,7 +39,7 @@ Other referential classes \code{\linkS4class{RefAnnee}}
 \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
 
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},

@@ -7,12 +7,12 @@ containing individual characteristic of glass eel#'
 this function is called from within the charge method it was separated from the charge method
 as it it convenient to use elsewhere}
 \usage{
-fntablestade(stades,choixpere="lotpere")
+fntablestade(stades,choicepere="lotpere")
 }
 \arguments{
 \item{stades}{a data frame containing stage values}
 
-\item{choixlotpere}{either "date" or "lot_pere" the first will group pigment stage by date, 
+\item{choicelotpere}{either "date" or "lot_pere" the first will group pigment stage by date, 
 the second will allow to keep separate lines when several samples have been collected a given day}
 }
 \value{

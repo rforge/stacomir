@@ -25,7 +25,7 @@ showClass("Refperiode")
 new("Refperiode")
 }
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},

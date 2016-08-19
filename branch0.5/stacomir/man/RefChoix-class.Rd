@@ -11,7 +11,7 @@ radiobuttons
 \section{Slots}{
 
 \describe{
-\item{\code{listechoix}}{A character vector giving possible choices}
+\item{\code{listechoice}}{A character vector giving possible choices}
 
 \item{\code{label}}{A character, title of the box giving the possible choices}
 
@@ -19,7 +19,7 @@ radiobuttons
 }}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
-\code{new("RefChoix", listechoix=character() ,label=character()
+\code{new("RefChoix", listechoice=character() ,label=character()
 ,selected=integer())}.
 }
 \examples{
@@ -47,7 +47,7 @@ Other referential classes
 \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
 
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefCoe-class}}, \code{\link{RefDC-class}},
   \code{\link{RefDF-class}},

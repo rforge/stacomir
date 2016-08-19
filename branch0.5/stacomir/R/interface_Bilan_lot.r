@@ -22,25 +22,25 @@ interface_BilanLot = function()
     # dans l'ordre 
     # dans le handler, modifier le contenu de l'object fils si il existe
     # supprimer les widgets fils si ils existent (appel de la methode delete)
-    # appeller la methode choix pour l'affichage du fils si il existe
+    # appeller la methode choice pour l'affichage du fils si il existe
     
     
-    choix(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+    choice(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilan_lot_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-    choix(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+    choice(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilan_lot_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
     
-    choix(bilan_lot@dc,objectBilan=bilan_lot,is.enabled=TRUE)
-    # Les methodes choix suivantes sont passees en cascade � l'interieur des methodes choix
-    #choix(bilan_lot@taxons,is.enabled=FALSE)
-    #choix(bilan_lot@stades,is.enabled=FALSE)
-    #choix(bilan_lot@par,is.enabled=FALSE)
+    choice(bilan_lot@dc,objectBilan=bilan_lot,is.enabled=TRUE)
+    # Les methodes choice suivantes sont passees en cascade � l'interieur des methodes choice
+    #choice(bilan_lot@taxons,is.enabled=FALSE)
+    #choice(bilan_lot@stades,is.enabled=FALSE)
+    #choice(bilan_lot@par,is.enabled=FALSE)
     #toolbarlist$Calc$handler = connect(fonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
@@ -78,6 +78,6 @@ interface_BilanLot = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
     #assign("graphes",graphes,envir=.GlobalEnv) 
-	grDevice::X11()
+	grDevices::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }

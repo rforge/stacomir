@@ -240,11 +240,11 @@ setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(obje
   		return (as.numeric(annees))
 		})
 # pour test #object=new("PasDeTemps")    
-setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) {
+setMethod("choice",signature=signature("PasDeTemps"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
-					pas=svalue(choixpas)
-					nbpas=as.numeric(svalue(choixnbpas)) 
+					pas=svalue(choicepas)
+					nbpas=as.numeric(svalue(choicenbpas)) 
 					object@nbPas<-nbpas
 					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object=setdateDebut(object,svalue(datedeb))
@@ -261,9 +261,9 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 					
 					#dispose(winpa)
 				}
-				hchoixpas=function(h,...){
-					pas=svalue(choixpas)
-					nbPas=as.numeric(svalue(choixnbpas))
+				hchoicepas=function(h,...){
+					pas=svalue(choicepas)
+					nbPas=as.numeric(svalue(choicenbpas))
 					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object@nbPas<-nbPas 
 					object=setdateDebut(object,svalue(datedeb))
@@ -274,25 +274,25 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 							font.attr=c(foreground.colors="red") )
 					hwinpa(h)
 				}
-				hchoixdatedebut=function(h,...){
+				hchoicedatedebut=function(h,...){
 					# TODO a developper
 				}
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=group,horizontal=FALSE)
 				pg<-ggroup(horizontal=FALSE,cont=winpa)
 				glabel("Date de debut",container=pg)
-				datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoixpas,width=15)
+				datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoicepas,width=15)
 				datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
 				datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
 							svalue(datedeb)<-as.character(strftime(
 											strptime(svalue(datedeb2),"%Y-%m-%d"),
 											"%Y-%m-%d %H:%M:%S"))
-							hchoixpas(h)				
+							hchoicepas(h)				
 						} )
 				glabel(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=winpa)
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
-				choixpas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoixpas) 
+				choicepas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoicepas) 
 				glabel(get("msg",envir=envir_stacomi)$PasdeTemps.2,container=winpa)
-				choixnbpas=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoixpas,width=15)
+				choicenbpas=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoicepas,width=15)
 				datedefin<-gtext(get("msg",envir=envir_stacomi)$PasdeTemps.4,height=50,container=winpa) # Date de fin
 				gbutton("OK", container=winpa,handler=hwinpa,icon="execute")
 			} else funout(get("msg",envir=envir_stacomi)$PasdeTemps.3, arret=TRUE)
@@ -300,15 +300,15 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 
 		
 #' choice method for PasdeTemps
-#' this method differs from choix as it is called within a notebook,
+#' this method differs from choice as it is called within a notebook,
 #' it does not allow for multiple choice to be made
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
-		setMethod("choixmult",signature=signature("PasDeTemps"),definition=function(object) {
+		setMethod("choicemult",signature=signature("PasDeTemps"),definition=function(object) {
 					if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 						hwinpa=function(h,...){
-							pas=svalue(choixpas)
-							nbpas=as.numeric(svalue(choixnbpas)) 
+							pas=svalue(choicepas)
+							nbpas=as.numeric(svalue(choicenbpas)) 
 							object@nbPas<<-nbpas
 							object@dureePas<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 							object=setdateDebut(object,svalue(datedeb))						
@@ -317,10 +317,10 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 							# charge le deuxi�me onglet du notebook
 							#svalue(notebook)<-2
 						}
-						hchoixpas=function(h,...){
+						hchoicepas=function(h,...){
 							#browser()
-							pas=svalue(choixpas)
-							nbPas=as.numeric(svalue(choixnbpas))
+							pas=svalue(choicepas)
+							nbPas=as.numeric(svalue(choicenbpas))
 							object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 							object@nbPas<-nbPas 
 							object=setdateDebut(object,svalue(datedeb))
@@ -330,26 +330,26 @@ setMethod("choix",signature=signature("PasDeTemps"),definition=function(object) 
 									font.attr=c(foreground.colors="red") )
 							hwinpa(h)
 						}
-						hchoixdatedebut=function(h,...){
+						hchoicedatedebut=function(h,...){
 							# TODO a developper
 						}
 						groupdate<<-ggroup(cont=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
 						winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=groupdate,horizontal=FALSE)
 						pg<-ggroup(horizontal=FALSE,cont=winpa)
 						glabel("Date de debut",container=pg)
-						datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoixpas,width=15)
+						datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoicepas,width=15)
 						datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
 						datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
 									svalue(datedeb)<-as.character(strftime(
 													strptime(svalue(datedeb2),"%Y-%m-%d"),
 													"%Y-%m-%d %H:%M:%S"))
-									hchoixpas(h)				
+									hchoicepas(h)				
 								} )
 						glabel(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=winpa)
 						pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
-						choixpas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoixpas) 
+						choicepas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoicepas) 
 						glabel(get("msg",envir=envir_stacomi)$PasdeTemps.2,container=winpa)
-						choixnbpas=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoixpas,width=15)
+						choicenbpas=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoicepas,width=15)
 						datedefin<-gtext(get("msg",envir=envir_stacomi)$PasdeTemps.4,height=50,container=winpa) # Date de fin
 						gbutton("OK", container=winpa,handler=hwinpa,icon="execute")
 					} else funout(get("msg",envir=envir_stacomi)$PasdeTemps.3, arret=TRUE)

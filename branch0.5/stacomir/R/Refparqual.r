@@ -5,7 +5,7 @@
 #' Class "Refparqual"
 #' 
 #' Class enabling to load the list of qualitative parameters and to select one
-#' of them. It inherits from 'Refpar', uses its 'choix' method
+#' of them. It inherits from 'Refpar', uses its 'choice' method
 #' 
 #' 
 #' @section Objects from the Class: Objects can be created by calls of the form
@@ -79,7 +79,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 			return(object)
 		})
 
-#'  method chargecomplement
+#'  method charge_complement
 #' cette methode est appellee apres la selection de l'object (data ne contient plus qu'une seule ligne)
 #' et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
 #' @return An S4 object of class Refparqual with the valqual slot filled
@@ -90,8 +90,8 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #'  stade_selectionne="AGJ"
 #'  object=new("Refparqual")
 #'  object<-charge(object)
-#'  chargecomplement(object)		
-setMethod("chargecomplement",signature=signature("Refparqual"),definition=function(object) {
+#'  charge_complement(object)		
+setMethod("charge_complement",signature=signature("Refparqual"),definition=function(object) {
 			if (nrow(object@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data)),arret=TRUE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -105,7 +105,7 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 		})
 
 
-# la methode choix differe de celle de Refpar car elle integre la requete des valeurs possibles des parametres qualitatifs		
+# la methode choice differe de celle de Refpar car elle integre la requete des valeurs possibles des parametres qualitatifs		
 #' Choix=Choice method for Refparqual referential objects
 #' @note the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
@@ -116,20 +116,20 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
-#' choix(object)
-setMethod("choix",signature=signature("Refparqual"),definition=function(object,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+#' choice(object)
+setMethod("choice",signature=signature("Refparqual"),definition=function(object,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
-					carchoisi=svalue(choix)
+					carchoisi=svalue(choice)
 					object@data<-object@data[car_libelle%in%carchoisi ,]
-					object<-chargecomplement(object)
+					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$Refpar.3)
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
-				choix=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else stop(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
 		})

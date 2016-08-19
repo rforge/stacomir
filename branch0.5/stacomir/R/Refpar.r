@@ -75,7 +75,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 		})
 #' Choice method for Refpar referential objects
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
-#' @note this method choix is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
+#' @note this method choice is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
@@ -83,11 +83,11 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
-#' choix(object)
-setMethod("choix",signature=signature("Refpar"),definition=function(object,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+#' choice(object)
+setMethod("choice",signature=signature("Refpar"),definition=function(object,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
-					carchoisi=svalue(choix)
+					carchoisi=svalue(choice)
 					object@data<-object@data[car_libelle%in%carchoisi ,]
 					assign(nomassign,object,envir_stacomi)
 				 funout(get("msg",envir=envir_stacomi)$Refpar.3)
@@ -98,7 +98,7 @@ setMethod("choix",signature=signature("Refpar"),definition=function(object,label
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
-				choix=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else funout(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
 		})

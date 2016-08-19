@@ -1,15 +1,15 @@
 # Nom fichier :        RefListe   (classe)
-# Description          Classe permettant charger un choix dans une liste utilis�e par un objectBilan
+# Description          Classe permettant charger un choice dans une liste utilis�e par un objectBilan
 #' Class "RefListe"
 #' 
 #' Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 #' 
 #' 
-#' @slot liste choix="character" A vector of character to choose within a droplist
+#' @slot liste choice="character" A vector of character to choose within a droplist
 #' @slot label="character" the title of the box
 #' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("RefListe", listechoix, label)}.  \describe{
-#' \item{list("listechoix")}{Object of class \code{"character"}}\item{:}{Object
+#' \code{new("RefListe", listechoice, label)}.  \describe{
+#' \item{list("listechoice")}{Object of class \code{"character"}}\item{:}{Object
 #' of class \code{"character"}} \item{list("label")}{Object of class
 #' \code{"character"}}\item{:}{Object of class \code{"character"}} }
 #' @author cedric.briand"at"eptb-vilaine.fr
@@ -27,7 +27,7 @@
 #' 
 #' showClass("RefListe")
 #' 
-setClass(Class="RefListe",representation= representation(listechoix="character",label="character"))
+setClass(Class="RefListe",representation= representation(listechoice="character",label="character"))
 
 
 #' Loading method for Refliste referential objects
@@ -37,7 +37,7 @@ setClass(Class="RefListe",representation= representation(listechoix="character",
 #'  object=new("RefListe")
 #' charge(object)
 setMethod("charge",signature=signature("RefListe"),definition=function(object,vecteur,label) {
-			object@listechoix=vecteur
+			object@listechoice=vecteur
 			object@label=label
 			return(object)
 		})
@@ -49,11 +49,11 @@ setMethod("charge",signature=signature("RefListe"),definition=function(object,ve
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
-#' choix(object)
-setMethod("choix",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
+#' choice(object)
+setMethod("choice",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
 			hlist=function(h,...){
-					valeurchoisie=svalue(choix)
-					object@listechoix<-object@listechoix[list_libelle%in%valeurchoisie]
+					valeurchoisie=svalue(choice)
+					object@listechoice<-object@listechoice[list_libelle%in%valeurchoisie]
 					#dispose(car)
 					assign("refliste",object,envir_stacomi)
 					funout(paste(object@label,"\n"))
@@ -61,8 +61,8 @@ setMethod("choix",signature=signature("RefListe"),definition=function(object,is.
 				frame_list<<-gframe(object@label)
 				# TODO � modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
 				add(group,frame_list)
-				list_libelle=fun_char_spe(object@listechoix)
-				choix=gdroplist(items=list_libelle,container=frame_list,handler=hlist)
+				list_libelle=fun_char_spe(object@listechoice)
+				choice=gdroplist(items=list_libelle,container=frame_list,handler=hlist)
 				enabled(frame_list)<-is.enabled
 				gbutton("OK", container=frame_list,handler=hlist)
 				})

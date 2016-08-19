@@ -169,7 +169,7 @@ hCamembert = function(h,...) {
 	if (min(tableEspeces$lot_effectif)<0) {funout(get("msg",envir_stacomi)$BilanEspeces.6)
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
-	sumEspeces=switch(bilanEspeces@liste@listechoix,
+	sumEspeces=switch(bilanEspeces@liste@listechoice,
 			"annee"=as.data.frame(xtabs(lot_effectif~taxon_stades+annee,data=tableEspeces)),
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
@@ -181,8 +181,8 @@ hCamembert = function(h,...) {
 	g<-g+geom_bar(aes(x="",y=Effectif,fill=taxon_stades,width=1),stat="identity") + 
 			ggtitle(paste("Bilan Especes, DC",bilanEspeces@dc@dc_selectionne,"\n",bilanEspeces@datedebut,"=>",bilanEspeces@datefin))
 			#theme(axis.line.x=element_line("none"))+theme(axis.title.x= element_text("none"))
-	if (bilanEspeces@liste@listechoix!="aucun"){
-		facet<-switch(bilanEspeces@liste@listechoix,
+	if (bilanEspeces@liste@listechoice!="aucun"){
+		facet<-switch(bilanEspeces@liste@listechoice,
 				"annee"=as.formula(~annee),
 				"mois"=as.formula(~mois),
 				"semaine"=as.formula(~semaine))
@@ -235,7 +235,7 @@ hTableBilanEspeces=function(h,...) {
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
 	now<-bilanEspeces@horodate@horodate
-	sumEspeces=switch(bilanEspeces@liste@listechoix,
+	sumEspeces=switch(bilanEspeces@liste@listechoice,
 			"annee"=as.data.frame(xtabs(lot_effectif~taxon_stades+annee,data=tableEspeces)),
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
@@ -263,20 +263,20 @@ interface_BilanEspeces=function(){
 	assign("group",group,envir = .GlobalEnv)  
 	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_BilanEspeces.2,container=group)
 	add(ggroupboutons,group)
-	choix(bilanEspeces@horodate,
+	choice(bilanEspeces@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilanEspeces_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-	choix(bilanEspeces@horodate,
+	choice(bilanEspeces@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilanEspeces_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
-	choix(bilanEspeces@liste)	
+	choice(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
+	choice(bilanEspeces@liste)	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
@@ -291,6 +291,6 @@ interface_BilanEspeces=function(){
 	#gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	grDevice::X11()
+	grDevices::X11()
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

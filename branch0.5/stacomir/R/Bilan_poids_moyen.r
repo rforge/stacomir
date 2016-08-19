@@ -92,7 +92,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 					" FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car_qan",sep="")
 			requete@and=paste(" AND ope_dic_identifiant=",object@dc@dc_selectionne,
 					" AND std_libelle='civelle'",
-					ifelse(object@liste@listechoix=="tous", "",paste(" AND  lot_effectif", object@liste@listechoix)),
+					ifelse(object@liste@listechoice=="tous", "",paste(" AND  lot_effectif", object@liste@listechoice)),
 					" AND upper(car_methode_obtention::text) = 'MESURE'::text",
 					" AND car_par_code='A111'",sep="")
 			requete<-stacomirtools::connect(requete)			
@@ -194,7 +194,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 		funout("object p assigned to envir_stacomi")
 	}
 	hcoe=function(h,...){
-		type_poids= switch (bilan_poids_moyen@liste@listechoix,
+		type_poids= switch (bilan_poids_moyen@liste@listechoice,
 				">1"=get("msg",envir_stacomi)$Bilan_poids_moyen.5,
 				"=1"=get("msg",envir_stacomi)$Bilan_poids_moyen.6,
 				"tous"=get("msg",envir_stacomi)$Bilan_poids_moyen.7)  
@@ -219,8 +219,8 @@ fungraphBilan_poids_moyen = function(h,...) {
 		jour=as.numeric(strftime(as.POSIXlt(seq),format="%j"))
 		coe=data.frame("date"=seq,"poids_moyen"=NA,"effectif"=NA,"lot"=NA,"jour"=jour)
 		
-		fm <- nls(formula=poids_moyen ~ a*cos(2*pi*(jour-T)/365)+b ,data=don,start=list(a=10,T=30,b=10))
-		pred<-predict(fm, newdata=coe)
+		fm <- stats::nls(formula=poids_moyen ~ a*cos(2*pi*(jour-T)/365)+b ,data=don,start=list(a=10,T=30,b=10))
+		pred<-stats::predict(fm, newdata=coe)
 		com=paste(get("msg",envir_stacomi)$Bilan_poids_moyen.13,paste("a=",round(coef(fm),2)[1],"T=",round(coef(fm),2)[2],"b=",round(coef(fm),2)[3],collapse=""))
 		if (h$action=="reg" ){     # bouton reg clique
 			hcoe(h)
@@ -238,7 +238,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 					"coe_commentaires"=com)
 			fileout= paste("C:/base/","import_coe",bilan_poids_moyen@anneedebut@annee_selectionnee,bilan_poids_moyen@anneefin@annee_selectionnee,".csv",sep="")
 			#attention ecrit dans C:/base....
-			write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
+			utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
 			assign("import_coe",import_coe,envir=envir_stacomi)
 			funout(get("msg",envir_stacomi)$Bilan_poids_moyen.14)
 			funout(paste(get("msg",envir_stacomi)$Bilan_poids_moyen.15,fileout,"\n"))

@@ -5,14 +5,14 @@
 \alias{plot,BilanMigrationPar,ANY-method}
 \title{plot method for BilanMigrationPar}
 \usage{
-\S4method{plot}{BilanMigrationPar,ANY}(x, y = null, choix = 1, ...)
+\S4method{plot}{BilanMigrationPar,ANY}(x, y = null, choice = 1, ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigrationPar}
 
 \item{y}{null to conform to generic plot method}
 
-\item{choix}{1=barplot, 2=xyplot, 3=summary table}
+\item{choice}{1=barplot, 2=xyplot, 3=summary table}
 }
 \description{
 plot method for BilanMigrationPar

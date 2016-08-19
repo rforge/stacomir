@@ -3,7 +3,7 @@
 \docType{methods}
 \name{charge,RefChoix-method}
 \alias{charge,RefChoix-method}
-\title{Loading method for Rechoix referential objects}
+\title{Loading method for Rechoice referential objects}
 \usage{
 \S4method{charge}{RefChoix}(object, vecteur, label, selected)
 }
@@ -18,7 +18,7 @@
 An S4 object of class RefChoix
 }
 \description{
-Loading method for Rechoix referential objects
+Loading method for Rechoice referential objects
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -27,7 +27,7 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 }
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},

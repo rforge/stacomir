@@ -62,11 +62,11 @@ setMethod("charge",
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
-#' choix(object)
-setMethod("choix",signature=signature("RefStationMesure"),definition=function(object,is.enabled=TRUE,title=get("msg",envir=envir_stacomi)$RefStationMesure.3) {
+#' choice(object)
+setMethod("choice",signature=signature("RefStationMesure"),definition=function(object,is.enabled=TRUE,title=get("msg",envir=envir_stacomi)$RefStationMesure.3) {
 			if (nrow(object@data) > 0){
 				hSTM=function(h,...){
-          stationMesure=svalue(choix,index=TRUE)
+          stationMesure=svalue(choice,index=TRUE)
           if(length(stationMesure)==0)
           {
              funout(get("msg",envir=envir_stacomi)$RefStationMesure.1,arret=TRUE)
@@ -81,7 +81,7 @@ setMethod("choix",signature=signature("RefStationMesure"),definition=function(ob
 				frame_stationMesure<<-gexpandgroup(title)
 				add(group,frame_stationMesure)
 				stm_libelle=fun_char_spe(object@data$stm_libelle)
-				choix=gcheckboxgroup(stm_libelle,container=frame_stationMesure)
+				choice=gcheckboxgroup(stm_libelle,container=frame_stationMesure)
 				enabled(frame_stationMesure)<-is.enabled
 				gbutton("OK", container=frame_stationMesure,handler=hSTM)
 			} 

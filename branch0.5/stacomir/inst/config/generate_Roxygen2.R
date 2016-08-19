@@ -27,6 +27,6 @@ parse_and_save(stringr::str_c("F:/workspace/stacomir/branch0.5/stacomir/man/",fi
 require(devtools)
 document("F:/workspace/stacomir/branch0.5/stacomir")
 # or :
-vignette("roxygen2")
+#vignette("roxygen2")
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/branch0.5/stacomir");warnings()[1:10]

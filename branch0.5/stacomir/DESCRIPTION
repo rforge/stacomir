@@ -81,9 +81,9 @@ LazyData: true
 Depends:
     R (>= 3.0.0),
     methods,
-    stacomirtools
+    stacomirtools,
+    RODBC
 Imports:
-    RODBC,
     intervals,
     RColorBrewer,
     stringr,
@@ -96,7 +96,8 @@ Imports:
     graphics,
     utils,
     stats,
-    lattice
+    lattice,
+    grDevices
 Author: Cedric Briand [aut, cre],
     Marion Legrand [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>

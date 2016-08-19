@@ -9,10 +9,10 @@
 \alias{hDF}
 \alias{hSt,}
 \alias{hTail,}
+\alias{hX11}
 \alias{hhelp,}
 \alias{hpds,}
 \alias{htodo,}
-\alias{hX11}
 \title{handler function used by the main interface}
 \usage{
 hDF(h, ...)

@@ -82,9 +82,9 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object){
 #' object<-charge(object)
 #' win=gwindow(title="test refAnnee")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
+#' choice(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
 #' dispose(win)
-setMethod("choix",
+setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 
 				funoutlabel=get("msg",envir=envir_stacomi)$RefAnnee.2,
@@ -92,14 +92,14 @@ setMethod("choix",
 				preselect=1){
 			if (nrow(object@data) > 0){      
 				hannee=function(h,...){      
-					object@annee_selectionnee<-svalue(choix)					
+					object@annee_selectionnee<-svalue(choice)					
 					assign(nomassign,object,envir_stacomi)
 					funout(funoutlabel)      
 				}    
 				frame_annee<<-gframe(titleFrame)    
 				add(group,frame_annee)    
 				annees=object@data$year    
-				choix=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
+				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
 				gbutton("OK", container=frame_annee,handler=hannee)  
 			} else { 
 				funout(get("msg",envir=envir_stacomi)$RefAnnee.3,arret=TRUE)  

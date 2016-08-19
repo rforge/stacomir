@@ -121,13 +121,13 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 
 #' command line interface for BilanMigrationMult class
 #' 
-#' The load method fills in the data slot for RefDC, RefTaxon, RefStades and then 
-#' uses the load methods of these object to "select" the data.
+#' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades and then 
+#' uses the choice_c methods of these object to "select" the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @examples
 #'  \dontrun{
-#' bilanMigrationMult=load(bilanMigrationMult,
+#' bilanMigrationMult=choice_c(bilanMigrationMult,
 #'  dc=c(5,6,12),
 #'  taxons=c("Anguilla anguilla"),
 #'  stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
@@ -136,20 +136,20 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' hbilanMigrationMultgraph2()
 #' hbilanMigrationMultgraph3()
 #' }
-setMethod("load",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
+setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
 			bilanMigrationMult<-object
 			fonctionnementDC=new("BilanFonctionnementDC")
 			# appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
 			assign("fonctionnementDC",fonctionnementDC,envir = envir_stacomi)
 			bilanMigrationMult@dc=charge(bilanMigrationMult@dc)
 			# loads and verifies the dc
-			bilanMigrationMult@dc<-load(object=bilanMigrationMult@dc,dc)
+			bilanMigrationMult@dc<-choice_c(object=bilanMigrationMult@dc,dc)
 			# only taxa present in the bilanMigration are used
 			bilanMigrationMult@taxons<-charge_avec_filtre(object=bilanMigrationMult@taxons,bilanMigrationMult@dc@dc_selectionne)			
-			bilanMigrationMult@taxons<-load(bilanMigrationMult@taxons,taxons)
+			bilanMigrationMult@taxons<-choice_c(bilanMigrationMult@taxons,taxons)
 			bilanMigrationMult@stades<-charge_avec_filtre(object=bilanMigrationMult@stades,bilanMigrationMult@dc@dc_selectionne,bilanMigrationMult@taxons@data$tax_code)	
-			bilanMigrationMult@stades<-load(bilanMigrationMult@stades,stades)
-			bilanMigrationMult@pasDeTemps<-load(bilanMigrationMult@pasDeTemps,datedebut,datefin)
+			bilanMigrationMult@stades<-choice_c(bilanMigrationMult@stades,stades)
+			bilanMigrationMult@pasDeTemps<-choice_c(bilanMigrationMult@pasDeTemps,datedebut,datefin)
 			assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
 			return(bilanMigrationMult)
 		})
@@ -368,7 +368,7 @@ setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x
 							#----------------------------------
 							# bilan migration avec poids (civelles
 							#-----------------------------------------
-							grDevice::X11()
+							grDevices::X11()
 							fungraph_civelle(bilanMigration=bilanMigrationMult,
 									table=data_without_hole,
 									duree=bilanMigrationMult@time.sequence,
@@ -379,7 +379,7 @@ setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x
 							#----------------------------------
 							# bilan migration standard
 							#-----------------------------------------
-							grDevice::X11()
+							grDevices::X11()
 							fungraph(bilanMigration=bilanMigrationMult,
 									tableau=data_without_hole,
 									duree=bilanMigrationMult@time.sequence,
@@ -627,8 +627,11 @@ setMethod("summary",signature=signature("BilanMigrationMult"),definition=functio
 						data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
 						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
 						
-						resum=funstat(tableau=data_without_hole,duree=bilanMigrationMult@time.sequence,taxon,stade,DC)
-						funtable(tableau=data_without_hole,duree=bilanMigrationMult@time.sequence,taxon,stade,DC,resum)
+						resum=funstat(tableau=data_without_hole,
+								time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC)
+						funtable(tableau=data_without_hole,
+								time.sequence=bilanMigrationMult@time.sequence,
+								taxon,stade,DC,resum)
 						
 					}
 				}
@@ -661,7 +664,7 @@ houtBilanMigrationMult=function(h=null,...) {
 #' @export
 setMethod("print",signature=signature("BilanMigrationMult"),definition=function(x,...){ 
 			sortie1<-"bilanMigrationMult=new(bilanMigrationMult)\n"
-			sortie2<-stringr::str_c("bilanMigrationMult=load(bilanMigrationMult,",
+			sortie2<-stringr::str_c("bilanMigrationMult=choice_c(bilanMigrationMult,",
 					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
 					"stades=c(",stringr::str_c(shQuote(x@stades@data$std_code),collapse=","),"),",			
