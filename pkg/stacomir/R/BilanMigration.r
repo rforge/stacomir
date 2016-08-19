@@ -10,7 +10,7 @@
 #' @slot data="data.frame"
 #' @slot duree="POSIXct"
 #' @method calcule
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setClass(Class="BilanMigration",
 		representation=
 				representation(dc="RefDC",taxons="RefTaxon",stades="RefStades",pasDeTemps="PasDeTempsJournalier",data="data.frame",duree="POSIXct"),
@@ -42,7 +42,7 @@ setValidity("BilanMigration",function(object)
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hbilanMigrationcalc=function(h,...){
 	calcule( h$action)
@@ -51,7 +51,7 @@ hbilanMigrationcalc=function(h,...){
 
 #' calcule method for BilanMigration
 #' @return BilanMigration with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("calcule",signature=signature("BilanMigration"),definition=function(objet,...){ 
 			bilanMigration<-objet
@@ -131,7 +131,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @note pb si autre chose que journalier les pas de temps ont été contraints à des pas de temps journaliers pour ce graphique
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
@@ -168,7 +168,7 @@ hbilanMigrationgraph = function(h,...) {
 #' cumuls de migration au cours du temps
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
@@ -212,7 +212,7 @@ hbilanMigrationgraph2 = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hTableBilanMigration=function(h,...) {
 	funout("Tableau de sortie \n")

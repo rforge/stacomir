@@ -17,7 +17,7 @@ Objects can be created by calls of the form \code{new("RefCheckBox", ...)}.
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefCheckBox")}: ... }
-    \item{choix}{\code{signature(objet = "RefCheckBox")}: ... }
+    \item{choice}{\code{signature(objet = "RefCheckBox")}: ... }
 	 }
 }
 \references{ ~put references to the literature/web site here ~ }

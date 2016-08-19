@@ -21,7 +21,7 @@ Objects can be created by calls of the form \code{new("Refpar", data)}.
   \describe{
     \item{charge}{\code{signature(objet = "Refpar")}: Loads the parameters }
     \item{charge_avec_filtre}{\code{signature(objet = "Refpar")}: Loads the parameters with a filter}
-    \item{choix}{\code{signature(objet = "Refpar")}: Enables to the user to select a parameter}
+    \item{choice}{\code{signature(objet = "Refpar")}: Enables to the user to select a parameter}
 	 }
 }
 \seealso{

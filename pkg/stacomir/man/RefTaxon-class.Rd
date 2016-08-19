@@ -20,7 +20,7 @@ Objects can be created by calls of the form \code{new("RefTaxon", ...)}.
   \describe{
     \item{charge}{\code{signature(objet = "RefTaxon")}: Loads races in the database}
     \item{charge_avec_filtre}{\code{signature(objet = "RefTaxon")}: Loads the races wich are concerned by a device (control or clearing) }
-    \item{choix}{\code{signature(objet = "RefTaxon")}: Enables to select one of the available fish races}
+    \item{choice}{\code{signature(objet = "RefTaxon")}: Enables to select one of the available fish races}
 	 }
 }
 \author{cedric.briand"at"eptb-vilaine.fr}

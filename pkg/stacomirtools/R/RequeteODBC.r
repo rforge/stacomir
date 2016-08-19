@@ -124,7 +124,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
 				if (!object@silent) funout(msg6)
-				object@query=killfactor(RODBC::query)     # instead of query 11/08/2009 11:55:20
+				object@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
 				object@etat=msg6
 			} else {
 				if (!object@silent) print(resultatRequete)

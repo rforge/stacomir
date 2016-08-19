@@ -52,7 +52,7 @@ So individuals might refer to one size class  (eg the size group of large eels)
 This affiliation is sought at the subsample level by a query to display on a single line two different characteristics size and size group
 Once the data are loaded, the program checks if the size class group is indicated at the sample or susample level
 }
-\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
+\references{ \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} }
 \examples{
 showClass("Bilan_taille")
 }

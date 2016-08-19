@@ -4,9 +4,9 @@
 
 #' @title Refparqual referential class choose a parameter
 #' @note Classe permettant de charger la liste de parametres qualitatifs
-#' et de les selectionner herite de Refpar dont elle utilie la methode choix
+#' et de les selectionner herite de Refpar dont elle utilie la methode choice
 #' par rapport � parquan, cette classe possede en plus lun vecteur des valeurs possibles des parametres qualitatifs
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @expamples objet=new("Refparqual")
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
@@ -14,7 +14,7 @@ setClass(Class="Refparqual",representation= representation(valqual="data.frame")
 #' Loading method for Reparqual referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("Refparqual")
 #'  charge(objet)
@@ -23,7 +23,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			objet@data<-requete@query
 			return(objet)
@@ -32,7 +32,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(objet) 
 #' Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -53,7 +53,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete)
+			requete<-stacomirtools::connect(requete)
 			objet@data<-requete@query
 			if (nrow(objet@data)==0) {objet@data=data.frame("par_code"=NA,"par_nom"="aucune")
 			} else objet@data=rbind(objet@data,c(NA,"aucune"))
@@ -65,7 +65,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #' et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
 #' @returnType S4 object
 #' @return An S4 object of class Refparqual with the valqual slot filled
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -80,29 +80,29 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
 					" WHERE val_qal_code='",objet@data$par_code,
 					"' ORDER BY val_rang",sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			objet@valqual<-requete@query
 			return(objet)
 		})
 
 
-# la methode choix differe de celle de Refpar car elle integre la requete des valeurs possibles des parametres qualitatifs		
+# la methode choice differe de celle de Refpar car elle integre la requete des valeurs possibles des parametres qualitatifs		
 #' Choix=Choice method for Refparqual referential objects
 #' @note the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples  
 #'  objet=new("Refparqual")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' objet<-charge(objet)
-#' choix(objet)
-setMethod("choix",signature=signature("Refparqual"),definition=function(objet,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+#' choice(objet)
+setMethod("choice",signature=signature("Refparqual"),definition=function(objet,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(objet@data) > 0){
 				hcar=function(h,...){
-					carchoisi=svalue(choix)
+					carchoisi=svalue(choice)
 					objet@data<-objet@data[car_libelle%in%carchoisi ,]
 					objet<-chargecomplement(objet)
 					assign(nomassign,objet,envir_stacomi)
@@ -111,7 +111,7 @@ setMethod("choix",signature=signature("Refparqual"),definition=function(objet,la
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(objet@data$par_nom)
-				choix=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else stop(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
 		})

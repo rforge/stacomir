@@ -69,7 +69,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			req<-connect(req)
+			req<-stacomirtools::connect(req)
 			rs=req@query
 			lesTauxEch=rs$txe_valeur_taux
 			if (length(lesTauxEch) > 0) {
@@ -147,7 +147,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			#cat(paste("Requete SQL : \n" , req@sql,  "\n"))
 			req=connect(req)
-			rs=killfactor(req@query) # pour �viter certains pb
+			rs=stacomirtools::killfactor(req@query) # pour �viter certains pb
 			coef=NULL
 			if (nrow(rs)>0){
 				# Recherche des poids pour ponderer le coef et des dates d'application des coef
@@ -359,7 +359,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 		
 		#cat(paste("Requete SQL : \n" , sql))
 		req=connect(req)
-		rs=killfactor(req@query)
+		rs=stacomirtools::killfactor(req@query)
 		
 		if (nrow(rs)>0){
 			debutOpe=as.POSIXlt(rs$ope_date_debut)

@@ -2,7 +2,7 @@
 
 #' @title RefDF referential class to load the DF dataframe
 #' @note Contains description data of all DF from the database along with the selected df (integer)
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot df_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot data="data.frame"
@@ -13,7 +13,7 @@ setClass(Class="RefDF",representation=
 #' Loading method for DF referential objects
 #' @returnType S4 object
 #' @return An object of class RefDF
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  \dontrun {objet=new("RefDF")
 #' charge(objet)}
@@ -36,24 +36,24 @@ setMethod("charge",signature=signature("RefDF"),definition=function(objet) {
 					" JOIN ",get("sch",envir=envir_stacomi),"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant",   
 					" JOIN ref.tr_typedf_tdf ON tdf_code=dft_tdf_code",
 					" ORDER BY dis_identifiant;",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			objet@data<-requete@query
 			return(objet)
 		})
 
 #' Choice method for DF referential objects
 #' @note the choice method assigns an object of class refDF in the environment envir_stacomi
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples   \dontrun { 
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #'  objet=new("RefDF")
 #' objet<-charge(objet)
-#' choix(objet)}
-setMethod("choix",signature=signature("RefDF"),definition=function(objet) {
+#' choice(objet)}
+setMethod("choice",signature=signature("RefDF"),definition=function(objet) {
 			if (nrow(objet@data) > 0){
 				hDF=function(h,...){
-					objet@df_selectionne=svalue(choix)
+					objet@df_selectionne=svalue(choice)
 					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$df%in%objet@df_selectionne]
 					#cat("passe par la")
 					assign("refDF",objet,envir_stacomi)
@@ -71,7 +71,7 @@ setMethod("choix",signature=signature("RefDF"),definition=function(objet) {
 				}
 				frameDF=gframe(get("msg",envir=envir_stacomi)$RefDF.3,container=group)
 				DF_identifiant=objet@data$df
-				choix=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
+				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
 				gbutton(get("msg",envir=envir_stacomi)$RefDC.6, container=frameDF,handler=hDFi)
 				gbutton("OK", container=frameDF,handler=hDF)
 			} else {

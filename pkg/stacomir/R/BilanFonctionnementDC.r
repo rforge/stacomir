@@ -6,7 +6,7 @@
 # Date de creation :   12/01/2009 14:38:09
 # Compatibilite :      
 # Etat :               developpement en cours, fonctionne 
-# programmer l'affichage du choix de la date  (classe horodate devt en cours) =>  PB � regler dans la relation calendar horodate
+# programmer l'affichage du choice de la date  (classe horodate devt en cours) =>  PB � regler dans la relation calendar horodate
 # 05/02/2009 21:21:40 OK fonctionne
 # programmer les graphiques, et notamment les coupures entre les mois, a partir de la table des dates de debut et de fin
 # il faut inserer des lignes correspondant aux debuts et fin de mois afin qu'aucun intervalle ne se trouve a cheval sur deux mois
@@ -14,7 +14,7 @@
 # Description          Calcul du fonctionnement du DC � partir des parametres
 #                      extraits de la base migrateur
 # Interface graphique : attribue au bouton DC
-# Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choix de graphiques  OK fonctionne
+# Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choice de graphiques  OK fonctionne
 
 
 setClass(Class="BilanFonctionnementDC",
@@ -88,7 +88,7 @@ funbarchartDC = function(h,...) {
 	# l'objectif du programme ci dessous est de calculer la duree mensuelle de fonctionnement du dispositif.
 	tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
+	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
 	tempsdebut[tempsdebut<fonctionnementDC@requete@datedebut]<-fonctionnementDC@requete@datedebut
 	# id pour fin
 	tempsfin[tempsfin>fonctionnementDC@requete@datefin]<-fonctionnementDC@requete@datefin

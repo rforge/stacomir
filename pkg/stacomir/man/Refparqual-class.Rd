@@ -4,7 +4,7 @@
 \alias{Refparqual-class}
 
 \title{Class "Refparqual"}
-\description{ Class enabling to load the list of qualitative parameters and to select one of them. It inherits from 'Refpar', uses its 'choix' method}
+\description{ Class enabling to load the list of qualitative parameters and to select one of them. It inherits from 'Refpar', uses its 'choice' method}
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("Refparqual", ...)}.
 	 \describe{
@@ -26,7 +26,7 @@ Class \code{"\linkS4class{Refpar}"}, directly.
     \item{charge}{\code{signature(objet = "Refparqual")}: Loads the qualitative parameters }
     \item{charge_avec_filtre}{\code{signature(objet = "Refparqual")}: Loads the qualitative parameters with a filter (quiery has WHERE part...)}
     \item{chargecomplement}{\code{signature(objet = "Refparqual")}: Loads the corresponding values for the selected qualitative parameter}
-    \item{choix}{\code{signature(objet = "Refparqual")}: Enables to the user to choose the qualitative parameter}
+    \item{choice}{\code{signature(objet = "Refparqual")}: Enables to the user to choose the qualitative parameter}
 	 }
 }
 

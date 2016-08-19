@@ -15,7 +15,7 @@
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 
 #' @export
 fungraph=function(bilanMigration,tableau,duree,taxon,stade){
@@ -350,7 +350,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	###################################
 	# Graph mensuel 
 	####################################
-	x11(7,4)
+	X11(7,4)
 	stktab=cbind(stack(tableau[,c(2,3,4,5)]),"duree"=rep(duree,4))
 	stktab<-funtraitementdate(stktab,
 			nom_coldt="duree",

@@ -19,7 +19,7 @@ Objects can be created by calls of the form \code{new("RefStades", data="data.fr
   \describe{
     \item{charge}{\code{signature(objet = "RefStades")}: Loads the phases in the database}
     \item{charge_avec_filtre}{\code{signature(objet = "RefStades")}: Loads the phases in the database. The filter is the control device}
-    \item{choix}{\code{signature(objet = "RefStades")}: Enables to the user to select the phase}
+    \item{choice}{\code{signature(objet = "RefStades")}: Enables to the user to select the phase}
 	 }
 }
 \seealso{

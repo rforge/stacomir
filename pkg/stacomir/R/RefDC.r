@@ -2,7 +2,7 @@
 
 #' @title RefDC referential class 
 #' @note Class to load DC
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot dc_selectionne="integer"
 #' @slot ouvrage="integer"
 #' @slot station="character"
@@ -16,7 +16,7 @@ setClass(Class="RefDC",representation=
 #' Referential class RefDC loads the counting devices of the control station
 #' @returnType Object of class RefDC
 #' @return Object of class RefDC
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -43,29 +43,29 @@ setMethod("charge",signature=signature("RefDC"),definition=function(objet) {
 					" JOIN ref.tr_typedc_tdc ON dic_tdc_code=tdc_code",
 					" WHERE  dft_rang=1",
 					" ORDER BY dis_identifiant;",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			#funout("La requete est effectuee pour charger les Dispositifs de comptage \n")
 			objet@data<-requete@query
 			return(objet)
 		})
 #' choice method for RefDC
-#' @note   The choix method has for arguments a report (bilan) object
+#' @note   The choice method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_lot).
 #'   By default,  the value of the objetbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
 #' and fills it with the method \link charge_avec_filtre #' @param objetBilan un objet bilan
 #' @param is.enabled a boolean indincating # see if deprecated...
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples \dontrun{ win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' objet=new("RefDC")
 #'	objet<-charge(objet)
 #'	objetBilan=new("BilanMigration")
-#' choix(objet=objet,objetBilan=objetBilan)}
-setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
+#' choice(objet=objet,objetBilan=objetBilan)}
+setMethod("choice",signature=signature("RefDC"),definition=function(objet,objetBilan=NULL,is.enabled=TRUE) {
 			if (nrow(objet@data) > 0){
 				hDC=function(h,...){
-					objet@dc_selectionne<-svalue(choix)
+					objet@dc_selectionne<-svalue(choice)
 					objet@ouvrage= objet@data$dif_ouv_identifiant[objet@data$dc%in%objet@dc_selectionne]
 					objet@station=objet@data$sta_code[objet@data$dc%in%objet@dc_selectionne]
 					assign("refDC",objet,envir_stacomi)
@@ -82,7 +82,7 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 							if (exists("frame_par")) delete(group,frame_par)
 							if (exists("frame_parquan")) delete(group,frame_parquan)
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choix(objetBilan@taxons,objetBilan,is.enabled=TRUE)
+							choice(objetBilan@taxons,objetBilan,is.enabled=TRUE)
 							funout(get("msg",envir=envir_stacomi)$RefDC.2)	
 						}
 					}
@@ -100,7 +100,7 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 				frame_DC<<-gframe(get("msg",envir=envir_stacomi)$RefDC.5)
 				add(group,frame_DC)
 				DC_identifiant=objet@data$dc
-				choix=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
+				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
 				gbutton(get("msg",envir=envir_stacomi)$RefDC.6, container=frame_DC,handler=hDCi) 
 				enabled(frame_DC)<-is.enabled
 				gbutton("OK", container=frame_DC,handler=hDC)
@@ -108,4 +108,4 @@ setMethod("choix",signature=signature("RefDC"),definition=function(objet,objetBi
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}
 		})
-# pour test #choix(objet)
+# pour test #choice(objet)

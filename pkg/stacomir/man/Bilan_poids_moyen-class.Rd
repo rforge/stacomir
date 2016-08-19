@@ -43,7 +43,7 @@ The objective is to calculate mean weight of glass eel which are counted from we
 We have also tools available to import glass eel measurement from experimental fishing in the estuary
 For the charge method dates for the request are from august to august (a glass eel season)
 }
-\references{ \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} }
+\references{ \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} }
 \examples{
 showClass("Bilan_poids_moyen")
 objet=new("Bilan_poids_moyen")

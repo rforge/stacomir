@@ -2,7 +2,7 @@
 #' fn_EcritBilanJournier writes the daily migration in the t_bilanmigrationjournalier_bjo table
 #' @note the user is asked whether or not he wants to overwrite data, if no data are present in the database, the import is done anyway
 #' @param bilanMigration 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 fn_EcritBilanJournalier<-function(bilanMigration){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau
@@ -25,7 +25,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
 			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 	)
-	t_bilanmigrationjournalier_bjo= killfactor(t_bilanmigrationjournalier_bjo[!is.na(t_bilanmigrationjournalier_bjo$values),])
+	t_bilanmigrationjournalier_bjo= stacomirtools::killfactor(t_bilanmigrationjournalier_bjo[!is.na(t_bilanmigrationjournalier_bjo$values),])
 	
 	#####
 	# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
@@ -56,7 +56,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			
 		} # end for
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
@@ -73,7 +73,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	
 	if (nrow(bil@data)>0)
 	{ 
-		choix<-gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+		choice<-gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
 						unique(bil@data$bjo_horodateexport),
 						get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
 				handler=hconfirm) # voulez vous le remplacer ?
@@ -103,7 +103,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			requete<-connect(requete)   
+			requete<-stacomirtools::connect(requete)   
 		} # end for
 		close(progres)
 		odbcClose(requete@connection)

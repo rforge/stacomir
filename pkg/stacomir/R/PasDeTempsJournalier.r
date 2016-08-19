@@ -33,11 +33,11 @@ setClass(Class="PasDeTempsJournalier",contains="PasDeTemps",
 )
 
 # pour test #objet=new("PasDeTempsJournalier")
-setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=function(objet) {
+setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=function(objet) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
-					pas=svalue(choixpas)
-					nbpas=as.numeric(svalue(choixnbpas)) 
+					pas=svalue(choicepas)
+					nbpas=as.numeric(svalue(choicenbpas)) 
 					objet@nbPas<-nbpas
 					objet@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					objet=setdateDebut(objet,as.POSIXlt(svalue(datedeb)))
@@ -53,12 +53,12 @@ setMethod("choix",signature=signature("PasDeTempsJournalier"),definition=functio
 				pg[2,1]<-datedeb
 				pg[3,1]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.5)
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
-				choixpas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
-				pg[4,1]<-choixpas 
-				enabled(choixpas)=FALSE
+				choicepas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
+				pg[4,1]<-choicepas 
+				enabled(choicepas)=FALSE
 				pg[3,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.6)
-				choixnbpas=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
-				pg[4,2]<-choixnbpas
+				choicenbpas=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
+				pg[4,2]<-choicenbpas
 				pg[1,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.7,container=pg)
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE

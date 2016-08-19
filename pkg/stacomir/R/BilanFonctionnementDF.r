@@ -25,7 +25,7 @@
 #' @slot df = Object of class \code{"RefDF"}
 #' @slot horodate = Object of class \code{"RefHorodate"}
 #' @slot requete = Object of class \code{"RequeteODBCwheredate"}
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @seealso     Other Bilan Class
 #'	\code{\linkS4class{Bilan_lot}}
 #'	\code{\linkS4class{Bilan_poids_moyen}}
@@ -39,7 +39,7 @@
 #'	\code{\linkS4class{BilanMigrationConditionEnv}}
 #'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 #'	\code{\linkS4class{BilanMigrationPar}}	
-#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} 
 setClass(Class="BilanFonctionnementDF",
 		representation= representation(data="data.frame",
 				df="RefDF",
@@ -104,7 +104,7 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 # le programme découpe les périodes qui sont a cheval sur deux mois
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
 #' @param h a handler  
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funbarchartDF = function(h,...) {
 	# TEMP 2015
@@ -122,7 +122,7 @@ funbarchartDF = function(h,...) {
 	#tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsdebut<-t_periodefonctdispositif_per$per_date_debut
 	tempsfin<-t_periodefonctdispositif_per$per_date_fin
-	# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
+	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
 	tempsdebut[tempsdebut<fonctionnementDF@requete@datedebut]<-fonctionnementDF@requete@datedebut
 	# id pour fin
 	tempsfin[tempsfin>fonctionnementDF@requete@datefin]<-fonctionnementDF@requete@datefin
@@ -179,10 +179,10 @@ funbarchartDF = function(h,...) {
 	g1<-g1+geom_bar(stat='identity',aes(fill=fonctionnement))+scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
    
    if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {
-    x11(40,40); print(g)
-    x11 (40,40) ;print(g1)
+    X11(40,40); print(g)
+    X11 (40,40) ;print(g1)
    }else    {
-   x11(60,40)  
+   X11(60,40)  
    vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
    grid.newpage()
    pushViewport(viewport(layout = grid.layout(1,2,just="center")))
@@ -195,7 +195,7 @@ funbarchartDF = function(h,...) {
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funboxDF = function(h,...) {
 	
@@ -318,7 +318,7 @@ funboxDF = function(h,...) {
 }   
 #' FuntableDF create a table output for BilanFonctionnementDF class
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funtableDF = function(h,...) {
 	fonctionnementDF=charge(fonctionnementDF)

@@ -159,7 +159,7 @@ ceil.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 #' function used to clean the objects whithin the group and the graphes
 #' and also elements remaining in the envir_stacomi environment
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 quitte=function(...){
 	if (exists("ggroupboutonsbas")) delete(ggroupboutons,ggroupboutonsbas)
 	if (exists("group")) {
@@ -187,7 +187,7 @@ quitte=function(...){
 #' @param vectordate date or POSIXt 
 #' @returnType vector
 #' @return vectordate (without class)
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 graphdate<-function(vectordate){
 	vectordate<-as.POSIXct(vectordate)
 	attributes(vectordate)<-NULL
@@ -199,7 +199,7 @@ graphdate<-function(vectordate){
 #' @param text 
 #' @returnType character
 #' @return text
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 fun_char_spe<-function(text){
 	text=gsub("\u00e9","e",text) #é
 	text=gsub("\u00e8","e",text) #è
@@ -212,7 +212,7 @@ fun_char_spe<-function(text){
 #' @param wash 
 #' @returnType 
 #' @return nblignes assigned in .Global
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 funout<-function(text,arret=FALSE,wash=FALSE){
 	if (exists("gSortie")) {
 		if (wash) dispose(gSortie)
@@ -229,7 +229,7 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 #' chargecsv loads the informations stored in c:/program files/stacomi/calcmig.csv file
 #' @returnType list
 #' @return a list with the datawd place and the baseODBC vector
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 chargecsv=function(){ 
 	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
@@ -258,7 +258,7 @@ chargecsv=function(){
 	datawd=tableau_config["datawd",]
 	lang=tableau_config["lang",]
 #pgwd=tableau_config["pgwd",]
-	baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
+	baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",],tableau_config["host",],tableau_config["port",])
 	return(list("datawd"=datawd,"baseODBC"=baseODBC,"lang"=lang))
 }
 
@@ -267,7 +267,7 @@ chargecsv=function(){
 #' @param vect 
 #' @returnType character
 #' @return listsql a list of value
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 vector_to_listsql<-function(vect)
 {

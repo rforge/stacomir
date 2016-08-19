@@ -32,7 +32,7 @@ funBilanMigrationAnnuel=function(bilanMigration) {
 					"' and lot_std_code='",bilanMigration@stades@data$std_code,
 					"' and lot_lot_identifiant is null",
 					" ;",sep="" )
-			req<-connect(req)
+			req<-stacomirtools::connect(req)
 			rs=req@query			
 	return (rs)
 

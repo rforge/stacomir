@@ -19,7 +19,7 @@ Objects can be created by calls of the form \code{new("RefDC", dc_selectionne=in
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefDC")}: Loads informations about the control device }
-    \item{choix}{\code{signature(objet = "RefDC")}: Enables the user to selected the device }
+    \item{choice}{\code{signature(objet = "RefDC")}: Enables the user to selected the device }
 	 }
 }
 

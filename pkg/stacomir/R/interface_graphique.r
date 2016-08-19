@@ -12,8 +12,8 @@
 #' handler function used by the main interface
 #' @param h 
 #' @param ...
-#' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hx11 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hX11 
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 hDF=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
@@ -91,7 +91,7 @@ hBilanEspeces=function(h,...){
 #' @note gr_interface is copied by stacomi into envir_stacomi.
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -123,7 +123,7 @@ husr=function(h,...){
 		requete=new("RequeteODBC")
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@sql="select count(*) from ref.tr_taxon_tax"
-		requete=connect(requete)
+		requete<-stacomirtools::connect(requete)
 		if (nrow(requete@query)==0){
 			# le lien ODBC fonctionne mais pointe vers la mauvaise base
 			gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
@@ -175,13 +175,13 @@ hhelp=function(h,...){
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
 }
-hx11=function(h,...){
-	x11()
+hX11=function(h,...){
+	grDevices::X11()
 }
 
 #' Function that loads the loginwindow, tests connection, and then destroys the window
 #' @param baseODBC the ODBC connection chain contains user and password
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	assign("gr_interface",gr_interface,envir=envir_stacomi)
@@ -230,7 +230,7 @@ stacomi=function(gr_interface=TRUE){
 }
 
 #' lancement du programme, cette fonction recupere d'abord les chemins ODBC et le repertoire de travail � partir du fichier XML
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 interface_graphique=function(){
 	msg=get("msg",envir=envir_stacomi) # appel dans chaque sous fonction
@@ -287,7 +287,7 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hx11
+	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"

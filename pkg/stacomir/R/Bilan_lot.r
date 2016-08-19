@@ -13,7 +13,7 @@
 #' @name Bilan_lot
 #' @title Bilan_lot Bilan class calls the content of the table of characteristics of lot
 #' @note This class is displayed by interface_bilan_lot
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame"
 #' @slot dc="RefDC"
 #' @slot taxons="RefTaxon"
@@ -45,8 +45,9 @@ setClass(Class="Bilan_lot",
 # Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'objet fonctionnement DC
 #' connect method for Bilan_lot
 #' @return An objet of class bilan_lot Bilan_lot
+#' @family connect methods
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h) {
 #  construit une requete ODBCwheredate
@@ -71,7 +72,8 @@ setMethod("connect",signature=signature("Bilan_lot"),definition=function(objet,h
 #' charge method for Bilan_lot class
 #' @returnType an instance for class Bilan_lot
 #' @return Bilan_lot with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @family charge methods
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 #  objet<-bilan_lot
 setMethod("charge",signature=signature("Bilan_lot"),definition=function(objet,h) {
@@ -113,9 +115,11 @@ setMethod("charge",signature=signature("Bilan_lot"),definition=function(objet,h)
 		})
 
 #' Calcule method for Bilan_lot
+#' @family charge methods
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @export
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_lot"),definition=function(objet,h) {
 			bilan_lot<-objet
 			if(nrow(bilan_lot@data)==0) {
@@ -156,7 +160,7 @@ setMethod("calcule",signature=signature("Bilan_lot"),definition=function(objet,h
 #' fundensityBilan_lot uses ggplot to draw plots
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 fundensityBilan_lot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
@@ -174,7 +178,7 @@ fundensityBilan_lot = function(h,...) {
 #' funboxplotBilan_lot uses ggplot to draw plots
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funboxplotBilan_lot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
@@ -190,7 +194,7 @@ funboxplotBilan_lot = function(h,...) {
 #' funpointBilan_lot uses ggplot to draw plots
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funpointBilan_lot = function(h,...) {
 	bilan_lot<-charge(bilan_lot)
@@ -206,7 +210,7 @@ funpointBilan_lot = function(h,...) {
 #' funtableBilan_lot shows a table of results in gdf
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funtableBilan_lot = function(h,...) {
 	bilan_lot=charge(bilan_lot)

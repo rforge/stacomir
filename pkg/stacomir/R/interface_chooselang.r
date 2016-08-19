@@ -2,30 +2,30 @@
 
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 interface_chooselang = function()
 {    
 	quitte() # vidange de l'interface
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	listlang<-new("RefListe")
-	listlang@listechoix=c("french","english","spanish")
+	listlang@listechoice=c("french","english","spanish")
 	listlang@label="choose language"
-	choix(listlang)
+	choice(listlang)
 	hassingnlang=function(h,...){		
-		lang<-get("refliste",envir_stacomi)@listechoix
+		lang<-get("refliste",envir_stacomi)@listechoice
 		messages(lang)
 		close(win)
 		interface_graphique()
 	}
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
-	add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			annuler=gaction(handler= hassingnlang,icon = "close",label="quitter")
+			annuler=gWidgets::gaction(handler= hassingnlang,icon = "close",label="quitter")
 	)    
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	addSpring(group)
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::addSpring(group)
 }

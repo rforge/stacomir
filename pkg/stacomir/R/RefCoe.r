@@ -3,7 +3,7 @@
 #' @title RefCoe referential class 
 #' @note Class loading coefficient of conversion between quantity (weights or volumes of glass eel) and numbers 
 #' between a starting and finishing date
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame"
 #' @slot datedebut="POSIXlt"
 #' @slot datefin="POSIXlt"
@@ -18,7 +18,7 @@ setClass(Class="RefCoe",representation=
 #' @returnType Object of class RefCoe
 #' @return Object of class RefCoe
 #' @note Bien que je ne comprenne pourquoi, la connection fonctionne si on ne pointe pas le sch�ma
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples objet<- new("RefCoe")
 #' objet@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
 #' objet@datefin<-strptime("01/01/1997",format="%d/%m/%Y")
@@ -30,12 +30,12 @@ setMethod("charge",signature=signature("RefCoe"),definition=function(objet){
 			requete@datefin=objet@datefin
 			requete@colonnedebut="coe_date_debut"
 			requete@colonnefin="coe_date_fin"
-			requete@select=str_c("select * from ",
+			requete@select=stringr::str_c("select * from ",
 					get("sch",envir=envir_stacomi),
 					"tj_coefficientconversion_coe")
 			requete@and=" and  coe_tax_code='2038' and coe_std_code='CIV' and coe_qte_code='1'"
-			requete=connect(requete)  
+			requete<-stacomirtools::connect(requete)  
 			objet@data<-requete@query
 			return(objet)
 		})
-# pas de methode choix, le choix est dej� fait dans l'annee de l'interface
+# pas de methode choice, le choice est dej� fait dans l'annee de l'interface

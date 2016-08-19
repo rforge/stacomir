@@ -6,7 +6,7 @@
 #' @param taxon 
 #' @param stade 
 #' @param DC 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funstatJournalier=function(tableau,duree,taxon,stade,DC){
 	mois=months(duree)

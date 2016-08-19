@@ -9,14 +9,14 @@ validite_RefHorodate=function(object)
 }
 
 
-#'Classe objet utilisee pour sa methode de chargement du choix dans la date
+#'Classe objet utilisee pour sa methode de chargement du choice dans la date
 #'Utilise dans fonctionnement DC, avec methode de affichage annee en cours et annee precedente
 #'Possibilite de modifier facilement l'annee affichee par defaut en changeant decal
 #'@slot horodate="POSIXt"
 #'@method getRefHorodate
 #'@method setRefHorodate
 #'@method getanneeprec
-#'@method choix
+#'@method choice
 setClass(Class="RefHorodate",representation=
 				representation(horodate="POSIXt"),
 		validity=validite_RefHorodate,
@@ -28,7 +28,7 @@ setMethod("getRefHorodate",signature=signature("RefHorodate"),definition=functio
 			return ( strftime(as.POSIXlt(objet@horodate),format="%Y-%m-%d %H:%M:%S") )
 		})
 
-#Fixe la date de debut à partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S"
+#Fixe la date de debut ï¿½ partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S"
 setGeneric("setRefHorodate",def=function(objet,...) standardGeneric("setRefHorodate"))
 setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=function(objet,string){
 			objet@horodate=strptime(string,format="%Y-%m-%d %H:%M:%S")
@@ -43,7 +43,7 @@ setMethod("getanneeprec",signature=signature("RefHorodate"),definition=function(
 		})
 
 
-setMethod("choix",signature=signature("RefHorodate"),definition=function(objet,label="date",nomassign="horodate",funoutlabel="nous avons le choix dans la date\n",decal=0,affichecal=TRUE) {
+setMethod("choice",signature=signature("RefHorodate"),definition=function(objet,label="date",nomassign="horodate",funoutlabel="nous avons le choice dans la date\n",decal=0,affichecal=TRUE) {
 			hwinhor=function(h,...){
 				objet=setRefHorodate(objet,svalue(horodate))
 				if (affichecal){

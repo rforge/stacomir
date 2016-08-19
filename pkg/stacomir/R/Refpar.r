@@ -5,7 +5,7 @@
 #TODO  selection de plusieurs caracteristiques
 
 #' @title Refpar referential class choose a parameter
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame" the list of parameters
 #' @expamples objet=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
@@ -13,7 +13,7 @@ setClass(Class="Refpar",representation= representation(data="data.frame"))
 #' Loading method for Repar referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("Refpar")
 #' charge(objet)
@@ -21,7 +21,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("SELECT par_code, par_nom  from ref.tg_parametre_par")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			funout(get("msg",envir=envir_stacomi)$Refpar.1)
 			objet@data<-requete@query
 			return(objet)
@@ -29,7 +29,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
 #' Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 #' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("Refpar")
 #' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
@@ -46,26 +46,26 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
+			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-requete@query
 			if (nrow(objet@data)==0) funout(get("msg",envir=envir_stacomi)$Refpar.2,arret=TRUE)
 			return(objet)
 		})
 #' Choice method for Refpar referential objects
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
-#' @note this method choix is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
+#' @note this method choice is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples  
 #'  objet=new("Refpar")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' objet<-charge(objet)
-#' choix(objet)
-setMethod("choix",signature=signature("Refpar"),definition=function(objet,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+#' choice(objet)
+setMethod("choice",signature=signature("Refpar"),definition=function(objet,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(objet@data) > 0){
 				hcar=function(h,...){
-					carchoisi=svalue(choix)
+					carchoisi=svalue(choice)
 					objet@data<-objet@data[car_libelle%in%carchoisi ,]
 					assign(nomassign,objet,envir_stacomi)
 				 funout(get("msg",envir=envir_stacomi)$Refpar.3)
@@ -76,7 +76,7 @@ setMethod("choix",signature=signature("Refpar"),definition=function(objet,label=
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(objet@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
-				choix=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else funout(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
 		})

@@ -14,7 +14,7 @@
 #' @slot data="data.frame"
 #' @slot duree="POSIXct"
 #' @slot liste="RefListe" lists the possible value of time period
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
@@ -39,7 +39,7 @@ setValidity("BilanEspeces",function(object)
 
 #' connect method for BilanEspeces
 #' @return bilanEspeces instance with request corresponding to the user choices
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
 			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
@@ -64,7 +64,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 					" AND lot_lot_identifiant IS NULL",
 					" AND lot_effectif IS NOT NULL",
 					sep="")
-			requete<-connect(requete)	
+			requete<-stacomirtools::connect(requete)	
 			if (requete@etat!="Requete reussie \n") funout(get("msg",envir=envir_stacomi)$BilanEspeces.3,arret=TRUE)
 			bilanEspeces@data<-requete@query					
 			return(bilanEspeces)
@@ -75,7 +75,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hBilanEspecescalc=function(h,...){
 	charge(h$action)
@@ -85,7 +85,7 @@ hBilanEspecescalc=function(h,...){
 #' charge method for BilanEspeces
 #' verifies the content of objects and calls the connect method
 #' @return BilanEspeces with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 #' @expamples bilanEspeces=new("BilanEspeces")
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
@@ -125,7 +125,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 #' @note pas besoin de refaire tourner calcul si une autre liste � �t� charg�e, les effectifs <0 sont transform�s en positifs
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 
 hCamembert = function(h,...) {	
@@ -152,7 +152,7 @@ hCamembert = function(h,...) {
 	if (min(tableEspeces$lot_effectif)<0) {funout(get("msg",envir_stacomi)$BilanEspeces.6)
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
-	sumEspeces=switch(bilanEspeces@liste@listechoix,
+	sumEspeces=switch(bilanEspeces@liste@listechoice,
 			"annee"=as.data.frame(xtabs(lot_effectif~taxon_stades+annee,data=tableEspeces)),
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
@@ -164,8 +164,8 @@ hCamembert = function(h,...) {
 	g<-g+geom_bar(aes(x="",y=Effectif,fill=taxon_stades,width=1),stat="identity") + 
 			ggtitle(paste("Bilan Especes, DC",bilanEspeces@dc@dc_selectionne,"\n",bilanEspeces@datedebut,"=>",bilanEspeces@datefin))
 			#theme(axis.line.x=element_line("none"))+theme(axis.title.x= element_text("none"))
-	if (bilanEspeces@liste@listechoix!="aucun"){
-		facet<-switch(bilanEspeces@liste@listechoix,
+	if (bilanEspeces@liste@listechoice!="aucun"){
+		facet<-switch(bilanEspeces@liste@listechoice,
 				"annee"=as.formula(~annee),
 				"mois"=as.formula(~mois),
 				"semaine"=as.formula(~semaine))
@@ -191,7 +191,7 @@ hCamembert = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hTableBilanEspeces=function(h,...) {
 	if (exists("bilanEspeces",envir_stacomi)) {
@@ -218,7 +218,7 @@ hTableBilanEspeces=function(h,...) {
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
 	now<-bilanEspeces@horodate@horodate
-	sumEspeces=switch(bilanEspeces@liste@listechoix,
+	sumEspeces=switch(bilanEspeces@liste@listechoice,
 			"annee"=as.data.frame(xtabs(lot_effectif~taxon_stades+annee,data=tableEspeces)),
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
@@ -230,7 +230,7 @@ hTableBilanEspeces=function(h,...) {
 }
 
 #' Interface for BilanEspece class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 #' @expamples interface_BilanEspeces()
 interface_BilanEspeces=function(){
@@ -242,38 +242,38 @@ interface_BilanEspeces=function(){
 			vecteur=c("aucun","semaine","mois","annee"),
 			label=get("msg",envir=envir_stacomi)$interface_BilanEspeces.7)
 	quitte()
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
 	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_BilanEspeces.2,container=group)
 	add(ggroupboutons,group)
-	choix(bilanEspeces@horodate,
+	choice(bilanEspeces@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilanEspeces_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-	choix(bilanEspeces@horodate,
+	choice(bilanEspeces@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilanEspeces_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilanEspeces@dc,objetBilan=bilanEspeces,is.enabled=TRUE)
-	choix(bilanEspeces@liste)	
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	choice(bilanEspeces@dc,objetBilan=bilanEspeces,is.enabled=TRUE)
+	choice(bilanEspeces@liste)	
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
-	add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.3),
-			Graph=gaction(label="pie",tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.4,icon="bubbles",handler=hCamembert,action="pie"),
-			Graph2=gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.5,action="graph"),
-			Stat=gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.6),    
-			annuler=gaction(handler= quitte,icon = "close",label="quitter")
+			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.3),
+			Graph=gWidgets::gaction(label="pie",tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.4,icon="bubbles",handler=hCamembert,action="pie"),
+			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.5,action="graph"),
+			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.6),    
+			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter")
 	)    
-	#add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	#addSpring(group)
+	#gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	#gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	x11()
+	grDevices::X11()
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

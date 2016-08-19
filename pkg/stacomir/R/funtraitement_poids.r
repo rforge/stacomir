@@ -14,12 +14,11 @@
 #' @param duree 
 #' @returnType data.frame
 #' @return tableau
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funtraitement_poids=function(tableau,duree) { 
 	index=tableau$No.pas+1
-	funout(get("msg",envir=envir_stacomi)$funtraitement_poids.1)
-	
+	funout(get("msg",envir=envir_stacomi)$funtraitement_poids.1)	
 	tableaupoids=subset(tableau,tableau$Type_de_quantite==unique(tableau$Type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$Type_de_quantite==unique(tableau$Type_de_quantite)[1])
 	# Conversion des  poids en effectifs
@@ -62,7 +61,7 @@ funtraitement_poids=function(tableau,duree) {
 	req@colonnefin<-"coe_date_fin"
 	req@and<-c("and coe_tax_code='2038'","and coe_std_code='CIV'")
 	req@order_by<-"order by coe_date_debut"
-	req<-connect(req)
+	req<-stacomirtools::connect(req)
 	coe<-req@query
 	coe$coe_date_debut
 	#annees bissextiles and missing data

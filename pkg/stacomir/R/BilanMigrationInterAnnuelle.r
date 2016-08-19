@@ -11,7 +11,7 @@
 #' @method connect
 #' @method supprime
 #' @method charge
-#' @references \url{http://trac.eptb-vilaine.fr:8066/tracstacomi} 
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} 
 #' @seealso     Other Bilan Class
 #'	\code{\linkS4class{Bilan_lot}}
 #'	\code{\linkS4class{Bilan_poids_moyen}}
@@ -25,7 +25,7 @@
 #'	\code{\linkS4class{BilanMigrationConditionEnv}}
 #'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
 #'	\code{\linkS4class{BilanMigrationPar}}	
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
 						dc="RefDC",
@@ -47,7 +47,7 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 #' connect method for BilanMigrationInterannuelle class
 #' @returnType S4 class BilanMigrationInterannuelle
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 		definition=function(objet,...)
@@ -62,10 +62,10 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
 			requete@order_by=" ORDER BY bjo_jour "
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			
 			# resultat de la requete
-			objet@data<- killfactor(requete@query)
+			objet@data<- stacomirtools::killfactor(requete@query)
 			
 			# recuperation des indices des annees presentes dans la base
 			index=unique(objet@data$bjo_annee) %in% les_annees
@@ -98,14 +98,14 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			dic= objet@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
+			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
+			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 		}
 )
 
@@ -161,7 +161,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
 		
-		dat=killfactor(dat)
+		dat=stacomirtools::killfactor(dat)
 		
 		titre=paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.4,
 				paste(min(dat$annee),max(dat$annee), collapse=":"),
@@ -191,37 +191,37 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 	dat=dat[dat$moyenne!=0,] # pour des raisons graphiques on ne garde pas les effectifs nuls generes par fundat
 	newdat=dat[match(unique(as.character(dat$jour)),as.character(dat$jour)),]
 	newdat=newdat[order(newdat$jour),] # pour avoir les range sur l'ensemble des valeurs dispo et pas seult l'annee en cours
-	the_choix=select.list(choices=as.character(unique(dat$annee)[order(unique(dat$annee))]),
+	the_choice=select.list(choices=as.character(unique(dat$annee)[order(unique(dat$annee))]),
 			preselect=as.character(max(dat$annee)),
-			"choix annee",multiple=TRUE)
+			"choice annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")        
-	if (length(the_choix)>0) { 
+	if (length(the_choice)>0) { 
 		# le layout pour l'affichage des graphiques
 		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
 		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choix),1,just="center")))   
-		for(i in 1:length(the_choix))
+		pushViewport(viewport(layout = grid.layout(length(the_choice),1,just="center")))   
+		for(i in 1:length(the_choice))
 		{
-			amplitudechoix<-paste(the_choix[i],'/',amplitude)
-			tmp <- dat[as.numeric(as.character(dat$annee))==as.numeric(the_choix)[i],]
+			amplitudechoice<-paste(the_choice[i],'/',amplitude)
+			tmp <- dat[as.numeric(as.character(dat$annee))==as.numeric(the_choice)[i],]
 			tmp$annee=as.character(tmp$annee)
 			g <- ggplot(newdat,aes(x=jour,y=valeur))
 			g <- g+geom_ribbon(aes(ymin=mintab, ymax=maxtab,fill="amplitude"),color="grey20")
 			g <- g+geom_bar(aes(fill=I("orange")),position="dodge",stat="identity",alpha=0.9,data=tmp)
-			g<- g+ scale_fill_manual(name=eval(amplitudechoix), values=c("grey80","orange"),
-					labels = c("amplitude historique",the_choix[i]))
+			g<- g+ scale_fill_manual(name=eval(amplitudechoice), values=c("grey80","orange"),
+					labels = c("amplitude historique",the_choice[i]))
 			g <- g+geom_point(aes(y=valeur,col=annee),data=tmp,size=0.5)  
 			g <- g+	geom_line(aes(y=moyenne),col=I("brown"),data=tmp)
 			g <- g+geom_point(aes(y=moyenne,col=I("red")),size=0.8,data=tmp)		           
-			g <- g+ scale_colour_manual(name=amplitudechoix, values=c("orange3","red"),
-							labels=c(the_choix[i],str_c("Moyenne interannuelle",amplitude)))+
+			g <- g+ scale_colour_manual(name=amplitudechoice, values=c("orange3","red"),
+							labels=c(the_choice[i],stringr::str_c("Moyenne interannuelle",amplitude)))+
 					guides(fill = guide_legend(reverse=TRUE))
 			g <- g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,unique(as.character(tmp$annee)),"/",amplitude))
 			g <- g+scale_x_datetime(name="effectif",breaks="months",minor_breaks="weeks", labels=date_format("%d-%m"))
 			g<-g+theme_bw()
 			print(g, vp=vplayout(i,1)) 
 			assign(paste("g",i,sep=""),g,envir_stacomi)
-			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(choix),collapse=","),"\n"))
+			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(choice),collapse=","),"\n"))
 		}  # end for
 		
 		
@@ -314,7 +314,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	dat=fundat(dat)
 	#dat=dat[order(dat$annee,dat$jour),] 
 	dat$valeur[is.na(dat$valeur)]<-0 # sinon si il ne reste qu'une ligne peut planter
-	the_choix=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(dat$annee)),"choix annee",multiple=FALSE)
+	the_choice=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(dat$annee)),"choice annee",multiple=FALSE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")      
 	#################
 	# Calcul des cumsum
@@ -336,7 +336,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	###################
 	
 	g <- ggplot(dat,aes(x=jour,y=cumsum))
-	tmp<-dat[as.numeric(as.character(dat$annee))==as.numeric(the_choix),]
+	tmp<-dat[as.numeric(as.character(dat$annee))==as.numeric(the_choice),]
 	g <- g+geom_step(aes(col=annee,size=total_annuel))
 	g <- g+geom_step(data=tmp,col="black",lty=2)
 	g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,get("msg",envir_stacomi)$BilanMigrationInterannuelle.9,amplitude))
@@ -376,19 +376,19 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 	# dat=dat[dat$moyenne!=0,] # pour des raisons graphiques on ne garde pas les effectifs nuls generes par fundat
 	newdat=dat[match(unique(dat[,timesplit]),dat[,timesplit]),]
 	newdat=newdat[order(newdat[,"keeptimesplit"]),] # pour avoir les range sur l'ensemble des valeurs dispo et pas seult l'annee en cours
-	thechoix=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choix annee",multiple=TRUE)
+	thechoice=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choice annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="") 
 	# here change 12/2012 the geom_crossbar now needs a factor, label change according to timesplit
 
 	newdat[,timesplit]<-as.factor(newdat[,timesplit])
 	levels(newdat[,timesplit])<-newdat[,timesplit] # to have the factor in the right order from january to dec
-	if (length(thechoix)>0) { 
+	if (length(thechoice)>0) { 
 		# le layout pour l'affichage des graphiques
 		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
 		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(thechoix),1,just="center")))   
-		for(i in 1:length(thechoix))  { 
-			selection=as.numeric(as.character(dat$annee))==as.numeric(thechoix)[i] 
+		pushViewport(viewport(layout = grid.layout(length(thechoice),1,just="center")))   
+		for(i in 1:length(thechoice))  { 
+			selection=as.numeric(as.character(dat$annee))==as.numeric(thechoice)[i] 
 			tmp <- dat[selection,]
 			tmp[tmp$valeur>=tmp$moyenne,"comp"]<-">=moy"
 			tmp[tmp$valeur<tmp$moyenne,"comp"]<-"<moy"
@@ -413,12 +413,12 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 			# pb the limit truncs the value
 			g <- g+ylab("effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
-			g <- g+scale_colour_manual(name=thechoix,values=cols)
+			g <- g+scale_colour_manual(name=thechoice,values=cols)
 			g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,", bilan par",timesplit,unique(as.character(tmp$annee)),"/",amplitude))
 			g<-g+ theme_bw()
 			print(g, vp=vplayout(i,1)) 
 			assign(paste("g",i,sep=""),g,envir_stacomi)
-			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(thechoix),collapse=","),"\n"))
+			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(thechoice),collapse=","),"\n"))
 		}  # end for
 	} # end if
 }  # end function 
@@ -454,17 +454,17 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 #	levels(dat[,timesplit])<-newdat[,timesplit]	
 #	levels(newdat[,timesplit])<-newdat[,timesplit]	
 
-	the_choix=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choix annee",multiple=TRUE)
+	the_choice=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choice annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="") 
 	
 	
-	if (length(the_choix)>0) { 
+	if (length(the_choice)>0) { 
 		# le layout pour l'affichage des graphiques
 		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
 		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choix),1,just="center")))   
-		for(i in 1:length(the_choix))  { 
-			selection=as.numeric(as.character(dat$annee))==as.numeric(the_choix)[i] 
+		pushViewport(viewport(layout = grid.layout(length(the_choice),1,just="center")))   
+		for(i in 1:length(the_choice))  { 
+			selection=as.numeric(as.character(dat$annee))==as.numeric(the_choice)[i] 
 			tmp <- dat[selection,]
 			tmp[tmp$valeur>=tmp$moyenne,"comp"]<-">=moy"
 			tmp[tmp$valeur<tmp$moyenne,"comp"]<-"<moy"
@@ -479,11 +479,11 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 			g<-g+geom_bar(stat="identity",aes_string(y="valeur",fill="comp"),alpha=0.7)			
 			g <- g+scale_y_continuous(name="effectif")
 			cols <- c("max" = "blue","min" = "red",">=moy" = "darkgreen", "<moy" = "darkorange","0"="grey10")
-			g <- g+scale_fill_manual(name=the_choix,values=cols)
+			g <- g+scale_fill_manual(name=the_choice,values=cols)
 			g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,", bilan par",timesplit,unique(as.character(tmp$annee)),"/",amplitude))
 			print(g, vp=vplayout(i,1)) 
 			assign(paste("g",i,sep=""),g,envir_stacomi)
-			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(the_choix),collapse=","),"\n"))
+			funout(paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.10,"i=",paste(1:length(the_choice),collapse=","),"\n"))
 		}  # end for
 	} # end if
 }  # end function 

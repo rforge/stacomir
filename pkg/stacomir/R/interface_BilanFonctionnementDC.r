@@ -2,7 +2,7 @@
 
 
 #' interface for BilanFonctionnementDC class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 interface_BilanFonctionnementDC = function()
 {
     fonctionnementDC=new("BilanFonctionnementDC")
@@ -11,18 +11,18 @@ interface_BilanFonctionnementDC = function()
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
     fonctionnementDC@dc=charge(fonctionnementDC@dc)
     
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
     assign("group",group,envir = .GlobalEnv)
     
-    add(ggroupboutons,group)
-    choix(fonctionnementDC@dc)
-    choix(fonctionnementDC@horodate,
+   gWidgets::add(ggroupboutons,group)
+    choice(fonctionnementDC@dc)
+    choice(fonctionnementDC@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="fonctionnementDC_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-    choix(fonctionnementDC@horodate,
+    choice(fonctionnementDC@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="fonctionnementDC_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
@@ -32,10 +32,10 @@ interface_BilanFonctionnementDC = function()
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
     
-    aBarchart=gaction(label="barchart",icon="barplot",handler=funbarchartDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)         
-    aBox=gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
-    aTable=gaction(label="table",icon="dataframe",handler=funtableDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
-    aQuit=gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
+    aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)         
+    aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
+    aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
+    aQuit=gWidgets::gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
     
     toolbarlist <- list(
     		barchart=aBarchart, 
@@ -44,10 +44,10 @@ interface_BilanFonctionnementDC = function()
     		Quit = aQuit)
     
     add(group, gmenu(toolbarlist))
-    addSpring(group)
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     #assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevices::X11()
 }

@@ -16,7 +16,7 @@
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 # calcul des variables

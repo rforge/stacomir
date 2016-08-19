@@ -32,7 +32,7 @@ Class \code{"\linkS4class{BilanMigration}"}, directly.
 \section{Methods}{
 \describe{
     \item{charge}{\code{signature(objet = "BilanMigrationPar")}: does the verification and calculation, the calls to the database are done within a function}
-    \item{graphe}{\code{signature(objet = "BilanMigrationPar")}: method with a parameter choix to join several graphes called by several handlers (buttons)}
+    \item{graphe}{\code{signature(objet = "BilanMigrationPar")}: method with a parameter choice to join several graphes called by several handlers (buttons)}
 }}
 
 \author{ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}}

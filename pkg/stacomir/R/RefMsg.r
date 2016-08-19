@@ -6,7 +6,7 @@
 # Date de creation :   31/03/2008 17:21:30
 
 #' @title Refstades referential class to load message according to the langage chosen
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame"
 #' @expamples objet=new("RefMsg")
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
@@ -14,7 +14,7 @@ setClass(Class="RefMsg",representation= representation(messager="data.frame",mes
 #' loads the common table ts_messager_msr
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("RefMsg")
 #'  charge(objet)
@@ -30,18 +30,18 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
 #' Loading method for RefMsg referential objects searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @exportMethod
 #'  objet=new("RefMsg")
 #'  charge_avec_filtre(objet,lang='French')
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@select=str_c("SELECT mrl_id,mrl_msr_id,	mrl_text", 
+			requete@select=stringr::str_c("SELECT mrl_id,mrl_msr_id,	mrl_text", 
 					" FROM ref.ts_messagerlang_mrl")
-			requete@where=str_c("where mrl_lang='",lang,"'")
+			requete@where=stringr::str_c("where mrl_lang='",lang,"'")
 			requete@order_by="ORDER BY mrl_msr_id ASC"  
-			requete=connect(requete)  
+			requete<-stacomirtools::connect(requete)  
 			objet@messagerlang<-requete@query
 			return(objet)
 		})
@@ -49,8 +49,8 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 #' @returnType S4 object
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
-#' @exportMethod
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @export
 #'  objet=new("RefMsg")
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(objet) {
 			objet<-charge(objet)
@@ -59,15 +59,15 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 			msg=list()
 			buildmsg<-merge(objet@messager,objet@messagerlang,by.x="msr_id",by.y="mrl_msr_id")
 			buildmsg$msr_endofline2<-ifelse(as.logical(buildmsg$"msr_endofline"),"\n","")
-			buildmsg1<-apply(buildmsg,1,function(X)str_c(X["msr_element"],
+			buildmsg1<-apply(buildmsg,1,function(X)stringr::str_c(X["msr_element"],
 								".",
 								as.integer(X["msr_number"])))
 			# special case for graphical interface which contains number like 2.1 ...
-			buildmsg1[buildmsg$msr_element=="interface_graphique_menu"]<-apply(buildmsg[buildmsg$msr_element=="interface_graphique_menu",],1,function(X)str_c(X["msr_element"],
+			buildmsg1[buildmsg$msr_element=="interface_graphique_menu"]<-apply(buildmsg[buildmsg$msr_element=="interface_graphique_menu",],1,function(X)stringr::str_c(X["msr_element"],
 								".",
 								as.character(X["msr_number"])))
 			buildmsg1<-gsub(' ', '', buildmsg1)
-			buildmsg2<-apply(buildmsg,1,function(X)str_c(
+			buildmsg2<-apply(buildmsg,1,function(X)stringr::str_c(
 								X["mrl_text"],
 								X["msr_endofline2"]))
 			nettoye<-function(X){

@@ -18,7 +18,7 @@ Objects can be created by calls of the form \code{new("RefAnnee", data=data.fram
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet="RefAnnee")}: Loads the availabe years in the database }
-    \item{choix}{\code{signature(objet="RefAnnee")}: Displays a panel to enable the user to choose a year}
+    \item{choice}{\code{signature(objet="RefAnnee")}: Displays a panel to enable the user to choose a year}
 	 }
 }
 %\references{ ~put references to the literature/web site here ~ }

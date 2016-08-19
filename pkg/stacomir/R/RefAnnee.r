@@ -4,7 +4,7 @@
 #' @param object 
 #' @returnType logical
 #' @return the test for the object Refannee
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 validite_Annee=function(object)
 {
 	rep1= class(object@data)=="data.frame"
@@ -15,10 +15,10 @@ validite_Annee=function(object)
 #definition de la classe
 
 #' @title RefAnnee referencial class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame" the list of parameters
 #' @method charge
-#' @method choix
+#' @method choice
 #' @expamples objet=new("RefAnnee")
 setClass(Class="RefAnnee",representation=
 				representation(data="data.frame",annee_selectionnee="numeric"),
@@ -28,7 +28,7 @@ setClass(Class="RefAnnee",representation=
 #' Loading method for RefAnnee referential objects, selects year avalaible in the t_operation_ope table
 #' @returnType S4 object
 #' @return An S4 object of class RefAnnee
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples   objet=new("RefAnnee")
 #' charge(objet)
 #'  validObject( annee)
@@ -39,13 +39,13 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 			requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
 					get("sch",envir=envir_stacomi),
 					"t_operation_ope) as tabletemp",sep="")
-			requete=connect(requete)  # appel de la methode connect de l'objet requeteODBC
+			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'objet requeteODBC
 			objet@data<-requete@query
 			return(objet)
 		})
 
 #' choice method for RefAnnee referential objects assign the object in envir_stacomi
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @param nomassign the name to be asssigned in envir_stacomi
 #' @param funoutlabel the label that appears in funout
 #' @param titleFrame title for the frame
@@ -54,9 +54,9 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(objet){
 #' objet<-charge(objet)
 #' win=gwindow(title="test refAnnee")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(objet,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
+#' choice(objet,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
 #' dispose(win)
-setMethod("choix",
+setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(objet,
 				nomassign="refAnnee", 
 				funoutlabel=get("msg",envir=envir_stacomi)$RefAnnee.2,
@@ -64,14 +64,14 @@ setMethod("choix",
 				preselect=1){
 			if (nrow(objet@data) > 0){      
 				hannee=function(h,...){      
-					objet@annee_selectionnee<-svalue(choix)					
+					objet@annee_selectionnee<-svalue(choice)					
 					assign(nomassign,objet,envir_stacomi)
 					funout(funoutlabel)      
 				}    
 				frame_annee<<-gframe(titleFrame)    
 				add(group,frame_annee)    
 				annees=objet@data$year    
-				choix=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
+				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
 				gbutton("OK", container=frame_annee,handler=hannee)  
 			} else { 
 				funout(get("msg",envir=envir_stacomi)$RefAnnee.3,arret=TRUE)  

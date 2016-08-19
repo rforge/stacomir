@@ -46,7 +46,7 @@ Objects can be created by calls of the form \code{new("PasDeTemps", dateDebut="P
 }
 \section{Methods}{
   \describe{
-    \item{choix}{\code{signature(objet = "PasDeTemps")}: Enables to initialize a PasDeTemps object}
+    \item{choice}{\code{signature(objet = "PasDeTemps")}: Enables to initialize a PasDeTemps object}
     \item{currentDateDebut}{\code{signature(objet = "PasDeTemps")}: Returns the current starting date}
     \item{currentDateFin}{\code{signature(objet = "PasDeTemps")}: Returns the current ending date}
     \item{DateFin}{\code{signature(objet = "PasDeTemps")}: Returns the ending date}

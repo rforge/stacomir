@@ -19,7 +19,7 @@ Objects can be created by calls of the form \code{new("RefTextBox", ...)}.
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefTextBox")}: ... }
-    \item{choix}{\code{signature(objet = "RefTextBox")}: ... }
+    \item{choice}{\code{signature(objet = "RefTextBox")}: ... }
 	 }
 }
 \references{ ~put references to the literature/web site here ~ }

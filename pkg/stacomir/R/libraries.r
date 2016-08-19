@@ -1,7 +1,7 @@
 # Nom fichier :        libraries.R
 
 #' function to call and load the libraries used in stacomi
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 
 libraries=function() {
 necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',

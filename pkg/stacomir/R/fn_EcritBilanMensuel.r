@@ -6,11 +6,11 @@
 #' @usage fn_EcritBilanMensuel(bilanMigration, resum)
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param resum data frame with summary per month
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
-	t_bilanmigrationmensuel_bme=killfactor(
+	t_bilanmigrationmensuel_bme=stacomirtools::killfactor(
 			cbind(bilanMigration@dc@dc_selectionne,
 					bilanMigration@taxons@data$tax_code,
 					bilanMigration@stades@data$std_code,
@@ -33,7 +33,7 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 		requete@sql=paste("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanMigrationMensuel_bme (",			
 				"bme_dis_identifiant,bme_tax_code,bme_std_code,bme_annee,bme_labelquantite,bme_valeur,bme_mois,bme_horodateexport,bme_org_code)",
 				" VALUES ('",paste(t_bilanmigrationmensuel_bme[i,],collapse="','"),"');",sep="")
-		requete<-connect(requete)   
+		requete<-stacomirtools::connect(requete)   
 	} # end for
 	odbcClose(requete@connection)
 funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n"))	

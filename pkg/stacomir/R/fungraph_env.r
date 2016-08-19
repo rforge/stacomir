@@ -14,7 +14,7 @@
 #' @param taxon the species
 #' @param stade the stage
 #' @param stations one or several measure stations
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 fungraph_env=function(tableau,duree,taxon,stade,stations){
 	bilanMigrationConditionEnv@bilanMigration@dc<-get("refDC",envir_stacomi)

@@ -29,7 +29,7 @@ Class \code{"\linkS4class{PasDeTemps}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{choix}{\code{signature(objet = "PasDeTempsJournalier")}: Enables to initialize a PasDeTempsJournalier }
+    \item{choice}{\code{signature(objet = "PasDeTempsJournalier")}: Enables to initialize a PasDeTempsJournalier }
 	 }
 }
 

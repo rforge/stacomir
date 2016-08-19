@@ -1,20 +1,20 @@
 # Nom fichier :        RefCheckBox   (classe)
 
 #' @title RefCheckBox referencial class allows to choose for several parms with checkbox
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
 #' @slot checked a vectore
 #' @expamples objet=new("RefCheckBox")
 #' @method charge
-#' @method choix
+#' @method choice
 setClass(Class="RefCheckBox",representation= representation(title="character",labels="character",checked="logical"),
-		prototype=prototype(title="liste de choix",labels="choix",checked=FALSE))
+		prototype=prototype(title="liste de choice",labels="choice",checked=FALSE))
 
 #' Loading method for ReCheckBox referential objects
 #' @returnType S4 object
 #' @return An S4 object of class RefCheckBox
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("RefCheckBox")
 #' charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
@@ -26,25 +26,25 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(objet,
 			return(objet)
 		})
 #' Choice method for ReCheckBox referential objects
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #' objet=new("RefCheckBox")
 #' objet<- charge(objet,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 #' win=gwindow(title="test RefCheckBox")
 #' group=ggroup(container=win,horizontal=FALSE)
-#' choix(objet) 
+#' choice(objet) 
 #' dispose(win)
-setMethod("choix",signature=signature("RefCheckBox"),definition=function(objet) {
+setMethod("choice",signature=signature("RefCheckBox"),definition=function(objet) {
 			hlist=function(h,...){
 				i=h$action
 				if (exists("refCheckBox",envir_stacomi)) {
-					# on récupère les valeurs de l'objet assigné précédement
-					# car l'objet dans .GlobalEnv n'est pas à jour...
+					# on rï¿½cupï¿½re les valeurs de l'objet assignï¿½ prï¿½cï¿½dement
+					# car l'objet dans .GlobalEnv n'est pas ï¿½ jour...
 					objet<-get("refCheckBox",envir_stacomi)
 				}
 				objet@checked[i]<-svalue(the_choice[[i]])
 				assign("refCheckBox",objet,envir_stacomi)
-				funout(paste("choix",objet@labels[i],"\n"))
+				funout(paste("choice",objet@labels[i],"\n"))
 			}
 			
 			frame_check<<-gframe(objet@title)	

@@ -23,7 +23,7 @@
 #' @slot datefin="POSIXlt"
 #' @method connect
 #' @method charge
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setClass(Class="Bilan_taille",
 		representation= representation(data="data.frame",
@@ -48,7 +48,7 @@ setClass(Class="Bilan_taille",
 #' connect method for class Bilan_taille
 #' @returnType object of class Bilan_taille
 #' @return bilan_taille with requete field filled
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("connect",signature=signature("Bilan_taille"),definition=function(objet,h) {
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
 			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -112,7 +112,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 
 #objet=new("Bilan_taille")
 #' charge method for Bilan_taille
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("charge",signature=signature("Bilan_taille"),definition=function(objet) {
 			if (exists("refDC",envir_stacomi)) {
 				objet@dc<-get("refDC",envir_stacomi)
@@ -166,7 +166,7 @@ hcalculeBilanTaille<-function(h,...){
 #' Calcule method for BilanTaille
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_taille"),definition=function(objet) {
 			bilan_taille<-objet
 			bilan_taille=charge(bilan_taille)
@@ -206,7 +206,7 @@ setMethod("calcule",signature=signature("Bilan_taille"),definition=function(obje
 #' fungraphInteract_tail uses the ggplot2usr interface to build the graphes
 #' @param h a handler
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 fungraphInteract_tail = function(h,...) {
 	if(!exists(x="bilan_taille",envir=envir_stacomi)) {
 		funout(get("msg",envir=envir_stacomi)$Bilan_taille.7)
@@ -230,7 +230,7 @@ fungraphInteract_tail = function(h,...) {
 #' function used to display a table of the data
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 	funtableBilan_tail = function(h,...) {
 		bilan_taille=charge(bilan_taille)
 		vue=bilan_taille@requete@query # on recupere le data.frame

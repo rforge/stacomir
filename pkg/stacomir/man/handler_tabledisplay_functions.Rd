@@ -25,7 +25,7 @@
   the calcmig.xml function in the \file{c:\\program files\\stacomi} folder
 \enumerate{
 \item \code{\linkS4class{BilanConditionEnv}}{ \code{hbilanConditionEnvstat}}
-\item \code{\linkS4class{BilanMigrationPar}}{ \code{hbilanMigrationParstat} Calls the generic method \code{graphe,BilanMigrationPar-method} with choix=3}
+\item \code{\linkS4class{BilanMigrationPar}}{ \code{hbilanMigrationParstat} Calls the generic method \code{graphe,BilanMigrationPar-method} with choice=3}
 \item \code{\linkS4class{BilanMigrationInterAnnuelle}}{ \code{htableBilanMigrationInterAnnuelle} }
 \item \code{\linkS4class{BilanEspeces}}{ \code{hTableBilanEspeces} }
 \item \code{\linkS4class{BilanMigration}}{ \code{hTableBilanMigration} calls functions \code{funstat} and \code{funtable} to perform calculations and store them in .csv and .html files}

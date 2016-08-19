@@ -1,14 +1,14 @@
 # Nom fichier :        RefParquan   (classe)
 #' @title Refparquan referential class choose a quantitative parameter
 #' @note The choice method of this class is inherited from the parent class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples objet=new("Refparquan")
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
 #' @returnType S4 object
 #' @return An S4 object of class Refparquan
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  objet=new("Refparquan")
 #'  charge(objet)
@@ -17,7 +17,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(objet) 
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "SELECT * FROM ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code"
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			objet@data<-requete@query
 			return(objet)
@@ -27,7 +27,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(objet) 
 #' Loading method for Reparquan referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 #' @returnType S4 object
 #' @return An S4 object of class Refparqualn
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @expamples 
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
@@ -48,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=func
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			objet@data<-requete@query
 			if (nrow(objet@data)==0) {objet@data=data.frame("par_code"=NA,"par_nom"="aucune")
 			} else objet@data=rbind(objet@data,c(NA,"aucune"))

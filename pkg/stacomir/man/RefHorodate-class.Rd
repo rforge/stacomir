@@ -23,7 +23,7 @@ Objects can be created by calls of the form \code{new("RefHorodate", \dots)}.
 }
 \section{Methods}{
   \describe{
-    \item{choix}{\code{signature(objet = "RefHorodate")}: gui choice }
+    \item{choice}{\code{signature(objet = "RefHorodate")}: gui choice }
     \item{getanneeprec}{\code{signature(objet = "RefHorodate")}: get previous year}
     \item{getRefHorodate}{\code{signature(objet = "RefHorodate")}: get method for horodate }
     \item{setRefHorodate}{\code{signature(objet = "RefHorodate")}: set method for horodate }

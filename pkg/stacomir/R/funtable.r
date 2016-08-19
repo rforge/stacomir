@@ -7,7 +7,7 @@
 #' @param stade 
 #' @param DC 
 #' @param resum 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funtable=function(tableau,duree,taxon,stade,DC,resum){
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))

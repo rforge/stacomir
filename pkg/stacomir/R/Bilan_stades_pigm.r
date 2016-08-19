@@ -3,7 +3,7 @@
 #' @name Bilan_stades_pigm
 #' @title Bilan_stades_pigm Bilan class 
 #' @note This class is displayed by interface_bilan_stades_pigm
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @slot data="data.frame"
 #' @slot datatempsal="data.frame"  format [,c("date","temperature","salinite")]
 #' @slot phi tableau des temps pigmentaires
@@ -11,7 +11,7 @@
 #' @slot dc="RefDC"
 #' @slot horodate="RefHorodate"
 #' @slot requete="RequeteODBCwheredate"
-#' @slot lmax="Refchoix"
+#' @slot lmax="Refchoice"
 #' @slot options="RefCheckBox"
 #' @method connect
 #' @method charge
@@ -54,7 +54,7 @@ setClass(Class="Bilan_stades_pigm",
 #'  by default it is note when lanching
 #' @return An object of class Bilan_stades_pigm
 #' @param h a handler
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
 			# pour debug objet<-new("Bilan_stades_pigm")
 			#  chargement du tableau des stades pigmentaires
@@ -70,17 +70,17 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND lot_tax_code= '2038'",
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
-			requete<-connect(requete) # appel de la methode connect de l'objet ODBCWHEREDATE
+			requete<-stacomirtools::connect(requete) # appel de la methode connect de l'objet ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$Bilan_stades_pigm.1)
-			objet@data<-killfactor(requete@query)
+			objet@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
-				stades<-killfactor(requete@query)
-				choixpere=c("lotpere","date")
+				stades<-stacomirtools::killfactor(requete@query)
+				choicepere=c("lotpere","date")
 				funout(paste("Attention il peut y avoir plusieurs lots a la meme date, et certains stades sont fait sans lotpere (ex taille-poids-stade)\n"))
-				choixpere=select.list(choixpere,preselect="date",multiple=FALSE,
+				choicepere=select.list(choicepere,preselect="date",multiple=FALSE,
 						title=paste("Regroupement des ech par lot pere ou par date ?"))
-				lst<-fntablestade(stades,choixpere)
+				lst<-fntablestade(stades,choicepere)
 				dates<-lst[["dates"]]
 				tablestades<-lst[["tablestades"]]
 				# transformation en pourcentages
@@ -107,11 +107,11 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 				tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
-				requete<-connect(requete)
+				requete<-stacomirtools::connect(requete)
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 				if (nrow (requete@query)>0)	{
 					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
-					objet@datatempsal<-killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
+					objet@datatempsal<-stacomirtools::killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
 					objet@datatempsal$salinite=as.numeric(objet@salinite@label)
 					colnames(objet@datatempsal)<-c("date","temperature","salinite")
 				} else {
@@ -126,15 +126,15 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 #' 
 #' this function is called from within the charge method it was separated from the charge method
 #' as it it convenient to use elsewhere
-#' @usage fntablestade(stades,choixpere="lotpere")
+#' @usage fntablestade(stades,choicepere="lotpere")
 #' @param stades a data frame containing stage values
-#' @param choixlotpere either "date" or "lot_pere" the first will group pigment stage by date, 
+#' @param choicelotpere either "date" or "lot_pere" the first will group pigment stage by date, 
 #' the second will allow to keep separate lines when several samples have been collected a given day   
 #' @value a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
-#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
+#' @author Cedric Briand \\email{cedric.briand@@eptb-vilaine.fr}                                                                                                                           
 #' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
-fntablestade<-function(stades,choixpere="lotpere"){
-	if (choixpere=="lotpere"){
+fntablestade<-function(stades,choicepere="lotpere"){
+	if (choicepere=="lotpere"){
 		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$lot_pere +
 								+ stades$val_libelle))
 		tablestades<-tab2df(tablestades)# fonction developpee dans utilitaires
@@ -155,7 +155,7 @@ fntablestade<-function(stades,choixpere="lotpere"){
 		print(cbind(tablestades, "lot_pere"=sort(unique(stades$lot_pere))[order(dates)]))
 		dates=sort(dates)
 		# je colle les numeros de lots peres en les reordonnant en fonction du classt des dates
-	} else if (choixpere=="date"){
+	} else if (choicepere=="date"){
 		tablestades=ftable(xtabs(stades$lot_effectif ~ stades$ope_date_debut +
 								+ stades$val_libelle))
 		print(xtabs(stades$lot_effectif  ~ stades$ope_date_debut +
@@ -179,7 +179,7 @@ fntablestade<-function(stades,choixpere="lotpere"){
 #' 
 #' @returnType class Bilan_stades_pigm
 #' @return Bilan_stades_pigm with slots filled with user choice
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #  objet<-bilan_stades_pigm
 setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(objet,h) {
 			if (exists("refDC",envir_stacomi)) {
@@ -201,19 +201,19 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refCheckBox",envir_stacomi)) {
 				objet@options<-get("refCheckBox",envir_stacomi)
 			} else {
-				# rien de toutes facons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes facons les choice par defaut sont copies dans envir_stacomi
 			}  
-			if (exists("refchoix",envir_stacomi)) {
-				objet@lmax<-get("refchoix",envir_stacomi)
+			if (exists("refchoice",envir_stacomi)) {
+				objet@lmax<-get("refchoice",envir_stacomi)
 			} else {
-				# l'assignation d'un objet liste choix remplace la liste des valeurs possibles
+				# l'assignation d'un objet liste choice remplace la liste des valeurs possibles
 				# par la valeur choisie (pour l'instant "0.8")
-				objet@lmax@listechoix<-"0.8"
+				objet@lmax@listechoice<-"0.8"
 			}
 			if (exists("refTextBox",envir_stacomi)) {
 				objet@salinite<-get("refTextBox",envir_stacomi)
 			} else {
-				# rien de toutes fa�ons les choix par defaut sont copies dans envir_stacomi
+				# rien de toutes fa�ons les choice par defaut sont copies dans envir_stacomi
 			} 
 			if (objet@options@checked[2]){
 				if (exists("refStationMesure",envir_stacomi)) {
@@ -260,7 +260,7 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 #' @param parm parameters of the model
 #' @param datatempsal data.frame containing temperatures and salinities
 #' @return list("dates"=duree,"phi_jour"=phi_jour)
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 funphi<-function(parm,datatempsal){
 	temperature=datatempsal$temperature
 	salinity=datatempsal$salinite
@@ -289,7 +289,7 @@ funphi<-function(parm,datatempsal){
 #' draw the real values of abundances per stage along time, lmax=1 or 0.8 will                                                                                                          
 #' draw all stages at the same scale                                                                                                                                                     
 #' @return a list with x and y                                                                                                                                                         
-#' @author Cedric Briand \\email{cedric.briand00@@gmail.com}                                                                                                                           
+#' @author Cedric Briand \\email{cedric.briand@@eptb-vilaine.fr}                                                                                                                           
 #' @seealso \\code{\\linkS4class{Bilan_stades_pigm}}                                                                                                                                    
 #' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A                                                                                                                
 #' stage-structured model to predict the effect of temperature and salinity on                                                                                                           
@@ -330,7 +330,7 @@ fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 #' @param obj 
 #' @param objc 
 #' @return d50
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 fun50<-function(obj,objc){
 	d50<-obj[objc>0.5][1]
 	return(d50)
@@ -382,10 +382,10 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VIA3= fnstade(par1=Vparm$pigment_stage[[4]],VB=FALSE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VIA3c=cumsum(VIA3$y)/sum(VIA3$y)  # surface
 	if(graph){
-		x11()
+		grDevices::X11()
 		matplot(VB$x,cbind(VB$y,VIA0$y,VIA1$y,VIA2$y,VIA3$y))
 		
-		x11()
+		grDevices::X11()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
 	#traitement a part de VB
@@ -407,7 +407,7 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 #' @title main launching function for class Bilan_stades_pigm
 #' Function with handler which calls charge (and thus connect) and calculates the title
 #' @param h 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 funcalcbilan_stades_pigm<-function(h,...){
 	bilan_stades_pigm<-charge(bilan_stades_pigm)
@@ -438,7 +438,7 @@ hfungraphstades=function(h,...){
 			points=bilan_stades_pigm@options@checked[3],
 			nb=bilan_stades_pigm@options@checked[4],
 			graphstades=bilan_stades_pigm@options@checked[1],  
-			lmax=as.numeric(bilan_stades_pigm@lmax@listechoix), 
+			lmax=as.numeric(bilan_stades_pigm@lmax@listechoice), 
 			labelretro=bilan_stades_pigm@labelretro,
 			labelgraphstades=bilan_stades_pigm@labelgraphstades,
 			phi=bilan_stades_pigm@phi, # tableau des temps pigmentaires et des dates format "%d/%m/%Y"
@@ -482,7 +482,7 @@ hfungraphstades=function(h,...){
 #' duration of this longer stage
 #' @param dates
 #' @param Vparm parameters for pigment stage function
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 fungraphstades<-function(
 		tablestades,
 		retrocalcul=TRUE,  # deuxieme partie du graphe dans ce cas fournir datatempsal
@@ -646,7 +646,7 @@ fungraphstades<-function(
 	}
 	if (graphstades)  {
 		# stades cumules calcul necessaire pour points et graphique durees
-		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choix
+		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choice
 		
 		par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=gray(5:1/6),ordre=c(1,2,3,4,5),
@@ -703,9 +703,9 @@ fungraphgg=function(h,...){
 }
 
 
-#' Fonction handler qui retourne le titre du graphique apres le choix dans la date
+#' Fonction handler qui retourne le titre du graphique apres le choice dans la date
 #' @param h 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 funtitle_bilan_stades_pigm=function(h,...){
 	wintitle=gwindow()
 	hgettext=function(h,...){
@@ -723,19 +723,19 @@ funtitle_bilan_stades_pigm=function(h,...){
 	titre3 <- glabel( text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
 	titre4 <- gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
-	aOK=gaction(label="OK",icon="gtk-ok",handler=hgettext)         
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
+	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
 	toolbarlist <- list(
 			OK=aOK, 
 			Quit = aQuit)
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	add(group1,ggroupboutonsbas)
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 }
 
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
@@ -743,40 +743,40 @@ interface_Bilan_stades_pigm = function()
 	funout(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.2)
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
-	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choix de la largeur des distributions",selected=as.integer(2))
+	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
 	bilan_stades_pigm@options<-charge(bilan_stades_pigm@options,title="options du graphique",labels=c("graphstades","retrocalcul","points","nb"),checked=c(TRUE,FALSE,TRUE,TRUE))
 	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= "Valeur de la salinite moyenne, cliquer pour editer",label="15")
 	
 	quitte() # vidange de l'interface
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	gl=glabel(text=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group)
-	choix(bilan_stades_pigm@lmax)
-	choix(bilan_stades_pigm@options)
+	choice(bilan_stades_pigm@lmax)
+	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refCheckBox",bilan_stades_pigm@options,envir_stacomi) 
-	choix(bilan_stades_pigm@salinite)
+	choice(bilan_stades_pigm@salinite)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,envir_stacomi)
-	choix(bilan_stades_pigm@stationMesure,title="choix de la temperature")
-	choix(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
+	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilan_stades_pigm_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-	choix(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilan_stades_pigm_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choix(bilan_stades_pigm@dc,objetBilan=bilan_stades_pigm,is.enabled=TRUE)
+	choice(bilan_stades_pigm@dc,objetBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
-	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
-	aSetTitle=gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
-	aGraph=gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
-	aGraphgg=gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
+	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
+	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
+	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 
@@ -788,15 +788,15 @@ interface_Bilan_stades_pigm = function()
 	enabled(toolbarlist[["SetTitle"]])<-FALSE
 	enabled(toolbarlist[["Graph"]])<-FALSE
 	enabled(toolbarlist[["Graphgg"]])<-FALSE
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
-	add(ggroupboutons,ggroupboutonsbas)
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
-	addSpring(group)
+	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
 	#assign("graphes",graphes,envir=.GlobalEnv) 	
-	x11()
+	grDevices::X11()
 	# A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }
 

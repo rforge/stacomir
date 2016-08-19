@@ -22,7 +22,7 @@ To use the stacomiR package, simply load the library using \code{library(stacomi
 Author and Maintainer : \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \references{
-\url{http://trac.eptb-vilaine.fr:8066/tracstacomi}
+\url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 }
 
 \keyword{package}

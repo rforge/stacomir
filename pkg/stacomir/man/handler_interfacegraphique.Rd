@@ -18,7 +18,7 @@
 \alias{htodo}
 \alias{hlang}
 \alias{husr}
-\alias{hx11}
+\alias{hX11}
 \title{handler function used by the main interface to call bilan classes}
 \usage{
  hBilanLots(h, \dots)

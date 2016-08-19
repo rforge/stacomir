@@ -24,7 +24,7 @@ Objects can be created by calls of the form \code{new("RefDF", df_selectionne=in
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefDF")}: Loads informations about the device}
-    \item{choix}{\code{signature(objet = "RefDF")}: Enables the user to select a device}
+    \item{choice}{\code{signature(objet = "RefDF")}: Enables the user to select a device}
 	 }
 }
 

@@ -59,7 +59,7 @@
 
 \item{\code{signature(objet = "RefCheckBox")}}{ Loading method for ReCheckBox referential objects}
 
-\item{\code{signature(objet = "RefChoix")}}{ Loading method for Rechoix referential objects}
+\item{\code{signature(objet = "RefChoix")}}{ Loading method for Rechoice referential objects}
 
 \item{\code{signature(objet = "RefCoe")}}{ loads the coefficients for the period defined in class
   The slots datedebut and datefin have to be filled before

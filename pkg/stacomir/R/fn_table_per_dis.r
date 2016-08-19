@@ -7,7 +7,7 @@
 #' @returnType list
 #' @return listeg
 #' @note returns either Posixt or date if date=TRUE
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 
 fn_table_per_dis <-function(typeperiode, tempsdebut, tempsfin,libelle,date=TRUE){
@@ -16,19 +16,19 @@ for (j in 1:5){
         if (!date){
         # pour utilisation ulterieure de la classe Posixct
             if (sum(unique(typeperiode)==j)>0){
-                choix_periode <-typeperiode==j
-                liste<-list(    "debut"=tempsdebut[choix_periode],
-                                "fin"=tempsfin[choix_periode],
-                                "nom"=libelle[choix_periode][1])
+                choice_periode <-typeperiode==j
+                liste<-list(    "debut"=tempsdebut[choice_periode],
+                                "fin"=tempsfin[choice_periode],
+                                "nom"=libelle[choice_periode][1])
                 listeg[[as.character(j)]]<-liste
                 }
          # pour utilisation ulterieure de la classe date       
         }  else {
                 if (sum(unique(typeperiode)==j)>0){
-                choix_periode <-typeperiode==j
-                liste<-list(    "debut"=as.Date(tempsdebut[choix_periode]),
-                                "fin"=as.Date(tempsfin[choix_periode]),
-                                "nom"=as.character(libelle[choix_periode][1]))
+                choice_periode <-typeperiode==j
+                liste<-list(    "debut"=as.Date(tempsdebut[choice_periode]),
+                                "fin"=as.Date(tempsfin[choice_periode]),
+                                "nom"=as.character(libelle[choice_periode][1]))
                 listeg[[as.character(j)]]<-liste
                 }
         }

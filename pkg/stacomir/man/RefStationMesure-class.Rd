@@ -18,7 +18,7 @@ Objects can be created by calls of the form \code{new("RefStationMesure", ...)}.
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefStationMesure")}: Loads the measure stations }
-    \item{choix}{\code{signature(objet = "RefStationMesure")}: Enables to select one in the list }
+    \item{choice}{\code{signature(objet = "RefStationMesure")}: Enables to select one in the list }
 	 }
 }
 

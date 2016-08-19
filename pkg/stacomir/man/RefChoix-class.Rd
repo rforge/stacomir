@@ -8,11 +8,11 @@
 \title{Class "RefChoix"}
 \description{RefChoix referential class allows to choose within several values with radiobuttons}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("RefChoix", listechoix=character() ,label=character() ,selected=integer())}.
+Objects can be created by calls of the form \code{new("RefChoix", listechoice=character() ,label=character() ,selected=integer())}.
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{listechoix}:}{Object of class \code{"character"}}
+    \item{\code{listechoice}:}{Object of class \code{"character"}}
     \item{\code{label}:}{Object of class \code{"character"} ~ Item label }
     \item{\code{selected}:}{Object of class \code{"integer"} ~ Selected item }
   }
@@ -20,7 +20,7 @@ Objects can be created by calls of the form \code{new("RefChoix", listechoix=cha
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefChoix")}: Loads the date }
-    \item{choix}{\code{signature(objet = "RefChoix")}: Enables to the user to select a date }
+    \item{choice}{\code{signature(objet = "RefChoix")}: Enables to the user to select a date }
 	 }
 }
 

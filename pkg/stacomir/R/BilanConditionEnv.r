@@ -7,7 +7,7 @@
 #' @slot data=data.frame
 #' @method connect
 #' @method charge
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setClass(Class="BilanConditionEnv",
 		representation=representation(
@@ -25,7 +25,7 @@ setClass(Class="BilanConditionEnv",
 
 #' connect method for BilanConditionEnv class
 #' @return an object of BilanConditionEnv class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanConditionEnv"),
 		definition=function(objet,h) {
@@ -48,15 +48,15 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 			tmp<-vector_to_listsql(objet@stationMesure@data$stm_identifiant)
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
-			requete<-connect(requete)			
-			objet@data<-killfactor(requete@query)
+			requete<-stacomirtools::connect(requete)			
+			objet@data<-stacomirtools::killfactor(requete@query)
 			funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 			return(objet)
 		}
 )
 
 #' charge method for BilanCondtionEnv class
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(objet,h) {
 			
@@ -85,7 +85,7 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 #' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand00@@gmail.com}
+#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
 #' @export
 hbilanConditionEnvgraph = function(h,...) 
 {

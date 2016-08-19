@@ -6,22 +6,22 @@
 \title{Class "RefListe"}
 \description{Enables to load a "RefChoix" object fom a list given by a "Bilan" object}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("RefListe", listechoix, label)}.
+Objects can be created by calls of the form \code{new("RefListe", listechoice, label)}.
 	\describe{
-    \item{\code{listechoix}:}{Object of class \code{"character"}}
+    \item{\code{listechoice}:}{Object of class \code{"character"}}
     \item{\code{label}:}{Object of class \code{"character"}}
   }
 }
 \section{Slots}{
 	 \describe{
-    \item{\code{listechoix}:}{Object of class \code{"character"}}
+    \item{\code{listechoice}:}{Object of class \code{"character"}}
     \item{\code{label}:}{Object of class \code{"character"}}
   }
 }
 \section{Methods}{
   \describe{
     \item{charge}{\code{signature(objet = "RefListe")}: Loads a RefList}
-    \item{choix}{\code{signature(objet = "RefListe")}: Enables to initialize a RefList}
+    \item{choice}{\code{signature(objet = "RefListe")}: Enables to initialize a RefList}
 	 }
 }
 
