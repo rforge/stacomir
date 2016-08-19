@@ -50,7 +50,7 @@ setMethod("charge",
                     " FROM ",get("sch",envir=envir_stacomi),"tj_stationmesure_stm", 
 					" ORDER BY stm_identifiant;",sep="")
         			requete@silent = TRUE;
-        			requete<-connect(requete)    
+        			requete<-stacomirtools::connect(requete)    
         			object@data<-requete@query
         			return(object)
           }

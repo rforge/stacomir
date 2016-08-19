@@ -48,9 +48,9 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
-	#par("bg"=gray(0.8))
+	#par("bg"=grDevices::gray(0.8))
 	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
-	#mypalette<-rainbow(20)
+	#mypalette<-grDevices::rainbow(20)
 	plot(as.Date(duree,"Europe/Paris"),eff/1000,
 			col=mypalette[8],
 			type="h",
@@ -128,7 +128,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 			" 00:00:00' ",
 			"AND ope_dic_identifiant=",dc,
 			"ORDER BY ope_date_debut; ",sep = "")
-	t_operation_ope<-connect(req)@query
+	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
@@ -141,13 +141,13 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
-	fonctionnementDF<-connect(req)@query
+	fonctionnementDF<-stacomirtools::connect(req)@query
 	
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
-	fonctionnementDC<-connect(req)@query
+	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
 	graphdate<-function(vectordate){

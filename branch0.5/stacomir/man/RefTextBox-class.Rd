@@ -3,9 +3,10 @@
 \docType{class}
 \name{RefTextBox-class}
 \alias{RefTextBox-class}
-\title{RefTextBox referencial class 
-
-allows to a put a value within a glabel}
+\title{RefTextBox referencial class}
+\description{
+allows to a put a value within a glabel
+}
 \section{Slots}{
 
 \describe{

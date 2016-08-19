@@ -56,15 +56,15 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	if (bilanMigrationPar@parqual@data$par_nom!="aucune"){
 		req@sql=paste("select val_identifiant from ref.tr_valeurparametrequalitatif_val where val_qal_code='",
 				bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		valeurs_qal=as.character(rs$val_identifiant)
 		req@sql=paste("select val_libelle from ref.tr_valeurparametrequalitatif_val where val_qal_code='",
 				bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		libelle_qal=as.character(rs$val_libelle)
 		valeurs_qal=c(valeurs_qal,"autre") # "tous" pour ceux qui n'ont pas de caracteristique qual correspondante
 		req@sql=paste("select par_nom from ref.tg_parametre_par join ref.tr_parametrequalitatif_qal on qal_par_code=par_code where par_code='",    bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		nomparm=rs$par_nom
 		libelle_qal=c(libelle_qal,paste("Pas de parametre qualitatif :",nomparm)) 
 		stopifnot(length(valeurs_qal)==length(libelle_qal))
@@ -105,7 +105,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			rs<-connect(req)@query
+			rs<-stacomirtools::connect(req)@query
 			# Recherche des coefficients pour ponderer le taux et des dates d'application des taux
 			datesDebutTauxEch=as.POSIXlt(rs$txe_date_debut)
 			datesFinTauxEch=as.POSIXlt(rs$txe_date_fin)
@@ -179,7 +179,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			rs<-connect(req)@query
+			rs<-stacomirtools::connect(req)@query
 			
 			# Recherche des poids pour ponderer le coef et des dates d'application des coef
 			
@@ -340,7 +340,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		}# end else
 		
 		#cat(paste("Requete SQL : \n" , sql))
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		#cat(nrow(rs))
 		if (nrow(rs)>0){
 			

@@ -63,7 +63,7 @@ setMethod("charge",signature=signature("RefDF"),definition=function(object) {
 					" JOIN ",get("sch",envir=envir_stacomi),"t_ouvrage_ouv on dif_ouv_identifiant=ouv_identifiant",   
 					" JOIN ref.tr_typedf_tdf ON tdf_code=dft_tdf_code",
 					" ORDER BY dis_identifiant;",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
 			return(object)
 		})

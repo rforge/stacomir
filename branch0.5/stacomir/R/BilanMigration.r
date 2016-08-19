@@ -81,11 +81,11 @@ setValidity("BilanMigration",function(object)
 		}   
 )
 
-#' handler du graphique BilanMigration
-#' realise le calcul du bilan migration, l'ecrit dans l'environnement envir_stacomi
-#' traite eventuellement les quantites de lots (si c'est des civelles)
-#' @param h 
-#' @param ... 
+#' handler for calculations BilanMigration
+#' 
+#'  internal use
+#' @param h handler
+#' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationcalc=function(h,...){
 	calcule( h$action)
@@ -168,10 +168,9 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 
 
 
-#' handler du calcul hBilanMigrationgraph
-#' appelle les fonctions fungraph pour faire le bilan des migrations
-#' et permet la sauvegarde des bilans journaliers dans la base
-#' @note pb si autre chose que journalier les pas de temps ont �t� contraints � des pas de temps journaliers pour ce graphique
+#' handler hBilanMigrationgraph
+#' calls the fungraph for BilanMigration and allows the saving of daily and monthly counts in the database
+#' @note pb if other than daily value, the time steps have been constrained to daily values for this plot
 #' @param h 
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -205,11 +204,11 @@ hbilanMigrationgraph = function(h,...) {
 	fn_EcritBilanJournalier(bilanMigration)
 }
 
-#' handler du calcul hBilanMigrationgraph2
-#' appelle les fonctions fungraph pour faire un graphe annuel des 
-#' cumuls de migration au cours du temps
-#' @param h 
-#' @param ... 
+#' handler for calcul hBilanMigrationgraph2
+#' 
+#' Step plot over time
+#' @param h handler
+#' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
@@ -248,11 +247,11 @@ hbilanMigrationgraph2 = function(h,...) {
 	}
 }
 
-#' handler du calcul BilanMigrationstat : traitements 
-#' appelle les fonctions funstat et funtable pour faire le bilan des migrations
-#' dans des fichiers csv
-#' @param h 
-#' @param ... 
+#' handler for summary function
+#' calls functions funstat and funtable to build summary tables in html and
+#' csv files
+#' @param h Handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigration=function(h,...) {
 	funout("Tableau de sortie \n")

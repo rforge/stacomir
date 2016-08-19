@@ -85,7 +85,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			req<-connect(req)
+			req<-stacomirtools::connect(req)
 			rs=req@query
 			lesTauxEch=rs$txe_valeur_taux
 			if (length(lesTauxEch) > 0) {
@@ -162,7 +162,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , req@sql,  "\n"))
-			req=connect(req)
+			req=stacomirtools::connect(req)
 			rs=stacomirtools::killfactor(req@query) # pour eviter certains pb
 			coef=NULL
 			if (nrow(rs)>0){
@@ -270,7 +270,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				" ;" ,sep="")
 		
 		#cat(paste("Requete SQL : \n" , req@sql))
-		req=connect(req)
+		req=stacomirtools::connect(req)
 		rs=req@query
 		
 		if (nrow(rs)>0){
@@ -374,7 +374,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				" ;" ,sep="")
 		
 		#cat(paste("Requete SQL : \n" , sql))
-		req=connect(req)
+		req=stacomirtools::connect(req)
 		rs=stacomirtools::killfactor(req@query)
 		
 		if (nrow(rs)>0){

@@ -13,7 +13,7 @@ interface_BilanMigrationConditionEnv = function()
 	bilanMigrationConditionEnv@bilanMigration@stades=charge(bilanMigrationConditionEnv@bilanMigration@stades)
 	bilanMigrationConditionEnv@bilanMigration@dc=charge(bilanMigrationConditionEnv@bilanMigration@dc)
 	quitte()
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	
@@ -21,21 +21,21 @@ interface_BilanMigrationConditionEnv = function()
 	choix(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
 	choix(bilanMigrationConditionEnv@bilanMigration@dc,objectBilan=bilanMigrationConditionEnv@bilanMigration,is.enabled=TRUE)
 	
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
-	add(ggroupboutons,ggroupboutonsbas)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gaction(handler = hbilanMigrationConditionEnvcalc,action=bilanMigrationConditionEnv,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationConditionEnv.1),
-			Graph=gaction(handler = hbilanMigrationConditionEnvgraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
-			#Graph2=gaction(handler = hbilanMigrationConditionEnvgraph2,icon = "graph2",label="grcum",tooltip="graphe cumul"),
-			#Stat =gaction(handler= hbilanMigrationConditionEnvstat,icon = "matrix",label="stat",tooltip="tables bilan en .csv"),
-			annuler=gaction(handler= quitte,icon = "close",label="quitter"))
+			Calc=gWidgets::gaction(handler = hbilanMigrationConditionEnvcalc,action=bilanMigrationConditionEnv,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationConditionEnv.1),
+			Graph=gWidgets::gaction(handler = hbilanMigrationConditionEnvgraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
+			#Graph2=gWidgets::gaction(handler = hbilanMigrationConditionEnvgraph2,icon = "graph2",label="grcum",tooltip="graphe cumul"),
+			#Stat =gWidgets::gaction(handler= hbilanMigrationConditionEnvstat,icon = "matrix",label="stat",tooltip="tables bilan en .csv"),
+			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter"))
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
 	enabled(toolbarlist[["Graph"]])<-FALSE
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
-	addSpring(group)
+	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevice::X11()
 }

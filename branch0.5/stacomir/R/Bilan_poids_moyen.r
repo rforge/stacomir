@@ -95,7 +95,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 					ifelse(object@liste@listechoix=="tous", "",paste(" AND  lot_effectif", object@liste@listechoix)),
 					" AND upper(car_methode_obtention::text) = 'MESURE'::text",
 					" AND car_par_code='A111'",sep="")
-			requete<-connect(requete)			
+			requete<-stacomirtools::connect(requete)			
 			object@data<-requete@query			
 			#CHARGEMENT DES COEFFICIENTS DE CONVERSION
 			object@coe@datedebut=requete@datedebut
@@ -246,7 +246,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 			requete=new("RequeteODBC")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
 			requete@sql=paste("COPY ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe FROM '",fileout, "' USING DELIMITERS ';' WITH CSV HEADER NULL AS '';",sep="")
-			requete=connect(requete)  # appel de la methode connect de l'object requeteODBC
+			requete=stacomirtools::connect(requete)  # appel de la methode stacomirtools::connect de l'object requeteODBC
 		}
 	}
 	
@@ -261,12 +261,12 @@ fungraphBilan_poids_moyen = function(h,...) {
 		delete(toolbarlistgraph1,group)  
 	}
 	### deuxieme toobar    
-	aGra=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.18,icon="lines",handler=hgra)
-	aCoe=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.19,icon="Coe",handler=hcoe,action="coe") 
-	aSize=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.20,icon="gWidgetsRGtk2-bubbles",handler=hsize)         
-	aReg=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.21,icon="gWidgetsRGtk2-function1",handler=hreg,action="reg")
-	aExp=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.22,icon="gWidgetsRGtk2-dataframe",handler=hexp)         
-	aQuit1=gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.23,icon="close", handler=hquit)
+	aGra=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.18,icon="lines",handler=hgra)
+	aCoe=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.19,icon="Coe",handler=hcoe,action="coe") 
+	aSize=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.20,icon="gWidgetsRGtk2-bubbles",handler=hsize)         
+	aReg=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.21,icon="gWidgetsRGtk2-function1",handler=hreg,action="reg")
+	aExp=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.22,icon="gWidgetsRGtk2-dataframe",handler=hexp)         
+	aQuit1=gWidgets::gaction(label=get("msg",envir_stacomi)$Bilan_poids_moyen.23,icon="close", handler=hquit)
 	toolbarlistgraph <- gmenu(list(gra=aGra,coe=aCoe,size=aSize))
 	assign("toolbarlistgraph",toolbarlistgraph,.GlobalEnv)
 	toolbarlistgraph1<-gmenu(list(reg=aReg,exp=aExp,Quit1=aQuit1))

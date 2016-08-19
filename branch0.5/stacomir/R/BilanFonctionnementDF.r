@@ -61,7 +61,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 			object@requete@order_by="ORDER BY per_date_debut"
 			object@requete@and=paste("AND per_dis_identifiant=",object@df@df_selectionne )
 #object@requete@where=#defini dans la methode ODBCwheredate
-			object@requete<-connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
+			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.1)
 			return(object)
 		})
@@ -182,10 +182,10 @@ funbarchartDF = function(h,...) {
 			scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
 	
 	if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {
-		grDevices::x11(40,40); print(g)
-		grDevices::x11 (40,40) ;print(g1)
+		grDevices::X11(40,40); print(g)
+		grDevices::X11 (40,40) ;print(g1)
 	}else    {
-		x11(60,40)  
+		X11(60,40)  
 		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
 		grid::grid.newpage()
 		grid::pushViewport(grid::viewport(layout = grid::grid.layout(1,2,just="center")))

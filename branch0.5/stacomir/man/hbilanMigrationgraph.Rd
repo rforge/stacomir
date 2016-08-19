@@ -2,9 +2,8 @@
 % Please edit documentation in R/BilanMigration.r
 \name{hbilanMigrationgraph}
 \alias{hbilanMigrationgraph}
-\title{handler du calcul hBilanMigrationgraph
-appelle les fonctions fungraph pour faire le bilan des migrations
-et permet la sauvegarde des bilans journaliers dans la base}
+\title{handler hBilanMigrationgraph
+calls the fungraph for BilanMigration and allows the saving of daily and monthly counts in the database}
 \usage{
 hbilanMigrationgraph(h, ...)
 }
@@ -14,12 +13,11 @@ hbilanMigrationgraph(h, ...)
 \item{...}{}
 }
 \description{
-handler du calcul hBilanMigrationgraph
-appelle les fonctions fungraph pour faire le bilan des migrations
-et permet la sauvegarde des bilans journaliers dans la base
+handler hBilanMigrationgraph
+calls the fungraph for BilanMigration and allows the saving of daily and monthly counts in the database
 }
 \note{
-pb si autre chose que journalier les pas de temps ont �t� contraints � des pas de temps journaliers pour ce graphique
+pb if other than daily value, the time steps have been constrained to daily values for this plot
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

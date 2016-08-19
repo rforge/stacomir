@@ -64,7 +64,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 			object@requete@order_by<-"ORDER BY per_date_debut"
 			object@requete@and<-paste("AND per_dis_identifiant=",object@dc@dc_selectionne )
 #object@requete@where=#defini dans la methode ODBCwheredate
-			object@requete<-connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
+			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$BilanFonctionnementDC.1)
 			return(object)
 		})

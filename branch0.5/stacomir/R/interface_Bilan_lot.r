@@ -14,10 +14,10 @@ interface_BilanLot = function()
     bilan_lot@stades=charge(bilan_lot@stades)
     bilan_lot@par=charge(bilan_lot@par)    
      
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte() # vidange de l'interface
     assign("group",group,envir = .GlobalEnv)
-    add(ggroupboutons,group)
+   gWidgets::add(ggroupboutons,group)
     gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group)
     # dans l'ordre 
     # dans le handler, modifier le contenu de l'object fils si il existe
@@ -46,22 +46,22 @@ interface_BilanLot = function()
     #getStockIcons(toolkit=guiToolkit())
 
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion
-	aPoint=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7,
+	aPoint=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7,
 			icon="gWidgetsRGtk2-cloud",
 			handler=funpointBilan_lot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.11 => density
-	aDensity=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11,
+	aDensity=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11,
 			icon="gWidgetsRGtk2-density",
 			handler=fundensityBilan_lot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11)
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.10 => boxplot
-	aBoxplot=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10,
+	aBoxplot=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10,
 			icon="gWidgetsRGtk2-boxplot",
 			handler=funboxplotBilan_lot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10)
-	aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_lot,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
-    aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_lot,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
+    aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
     
     toolbarlist <- list(    
     		plot=aPoint,
@@ -69,15 +69,15 @@ interface_BilanLot = function()
 			boxplot= aBoxplot,
     		table=aTable,
     		Quit = aQuit)
-    ggroupboutonsbas = ggroup(horizontal=FALSE)
-    add(ggroupboutons,ggroupboutonsbas)
-    add(ggroupboutonsbas, gtoolbar(toolbarlist))
+    ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+    gWidgets::add(ggroupboutons,ggroupboutonsbas)
+    gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
     assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     
-    addSpring(group)
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
     #assign("graphes",graphes,envir=.GlobalEnv) 
-	x11()
+	grDevice::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }

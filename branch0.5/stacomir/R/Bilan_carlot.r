@@ -67,7 +67,7 @@ setMethod("connect",signature=signature("Bilan_carlot"),definition=function(obje
 					"' AND lot_std_code= '", object@stades@data$std_code,
 					"' AND car_par_code='", object@par@data$par_code, "'",sep="")
 #object@requete@where=#defini dans la methode ODBCwheredate
-			object@requete<-connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
+			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			object@data<-object@requete@query
 			funout(get("msg",envir_stacomi)$Bilan_carlot.1)
 			return(object)

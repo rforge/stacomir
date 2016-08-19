@@ -57,8 +57,8 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
 	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
-	#par("bg"=gray(0.8))
-	graphics::parpar("mar"=c(3, 4, 3, 2) + 0.1)
+	#par("bg"=grDevices::gray(0.8))
+	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
@@ -109,7 +109,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 			strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"),
 			"' AND ope_dic_identifiant=",dc,
 			" ORDER BY ope_date_debut; ",sep = "")
-	t_operation_ope<-connect(req)@query
+	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
@@ -120,12 +120,12 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
-	fonctionnementDF<-connect(req)@query
+	fonctionnementDF<-stacomirtools::connect(req)@query
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
 			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
-	fonctionnementDC<-connect(req)@query
+	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
 	
@@ -142,7 +142,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	# creation d'un graphique vide (2)
 	###################################
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
-	graphics::parpar("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -367,7 +367,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################
 	# Graph mensuel 
 	####################################
-	x11(7,4)
+	X11(7,4)
 	stktab=cbind(stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"duree"=rep(duree,4))
 	stktab<-funtraitementdate(stktab,
 			nom_coldt="duree",

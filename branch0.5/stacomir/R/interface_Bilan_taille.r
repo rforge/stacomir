@@ -11,7 +11,7 @@ interface_BilanTaille = function()
 	#bilan_taille@stades=charge(bilan_taille@stades)
 	#bilan_taille@par=charge(bilan_taille@par)
 	quitte() # vidange de l'interface
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_taille.1,container=group)
@@ -35,26 +35,26 @@ interface_BilanTaille = function()
 			affichecal=FALSE)
 	
 	choix(bilan_taille@dc,objectBilan=bilan_taille,is.enabled=TRUE)
-	aGrint=gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
-	aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
-	aCalc=gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_taille.2)
+	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_taille.2)
 	toolbarlist <- list(
 			#	barchart=aBarchart, 
 			Calc=aCalc,
 			Grint=aGrint,
 			table=aTable,
 			Quit = aQuit)
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
-	add(ggroupboutons,ggroupboutonsbas)  
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)  
 	enabled(toolbarlist[["Grint"]])<-FALSE
 	enabled(toolbarlist[["table"]])<-FALSE
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	addSpring(group)
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=.GlobalEnv)
-	x11()	
+	grDevice::X11()	
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
 	assign("ggroupboutonsbas",ggroupboutonsbas,envir = .GlobalEnv)
 }

@@ -2,21 +2,17 @@
 % Please edit documentation in R/BilanMigration.r
 \name{hbilanMigrationgraph2}
 \alias{hbilanMigrationgraph2}
-\title{handler du calcul hBilanMigrationgraph2
-appelle les fonctions fungraph pour faire un graphe annuel des 
-cumuls de migration au cours du temps}
+\title{handler for calcul hBilanMigrationgraph2}
 \usage{
 hbilanMigrationgraph2(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{handler}
 
-\item{...}{}
+\item{...}{additional parameters}
 }
 \description{
-handler du calcul hBilanMigrationgraph2
-appelle les fonctions fungraph pour faire un graphe annuel des 
-cumuls de migration au cours du temps
+Step plot over time
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

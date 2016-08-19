@@ -271,7 +271,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 					" AND lot_tax_code in ",tax,
 					" AND lot_std_code in ",std,
 					" AND lot_lot_identifiant IS NULL")
-			req<-connect(req)
+			req<-stacomirtools::connect(req)
 			bilanMigrationMult@data=req@query	
 			
 			# r�cuperation des coefficients si il y a des civelles dans le bilan
@@ -285,7 +285,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 				req@colonnefin<-"coe_date_fin"
 				req@and<-c("and coe_tax_code='2038'","and coe_std_code='CIV'")
 				req@order_by<-"order by coe_date_debut"
-				req<-connect(req)
+				req<-stacomirtools::connect(req)
 				bilanMigrationMult@coef_conversion<-req@query
 				
 			}
@@ -368,7 +368,7 @@ setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x
 							#----------------------------------
 							# bilan migration avec poids (civelles
 							#-----------------------------------------
-							x11()
+							grDevice::X11()
 							fungraph_civelle(bilanMigration=bilanMigrationMult,
 									table=data_without_hole,
 									duree=bilanMigrationMult@time.sequence,
@@ -379,7 +379,7 @@ setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x
 							#----------------------------------
 							# bilan migration standard
 							#-----------------------------------------
-							x11()
+							grDevice::X11()
 							fungraph(bilanMigration=bilanMigrationMult,
 									tableau=data_without_hole,
 									duree=bilanMigrationMult@time.sequence,
@@ -665,7 +665,7 @@ setMethod("print",signature=signature("BilanMigrationMult"),definition=function(
 					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
 					"stades=c(",stringr::str_c(shQuote(x@stades@data$std_code),collapse=","),"),",			
-					"datedebut=",shQuote(strftime(objext@pasDeTemps@dateDebut,format="%d/%m/%Y")),
+					"datedebut=",shQuote(strftime(x@pasDeTemps@dateDebut,format="%d/%m/%Y")),
 					",datefin=",shQuote(strftime(DateFin(x@pasDeTemps),format="%d/%m/%Y")),")")
 			# removing backslashes
 			funout(stringr::str_c(sortie1,sortie2))

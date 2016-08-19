@@ -71,7 +71,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 			tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
-			requete<-connect(requete)			
+			requete<-stacomirtools::connect(requete)			
 			object@data<-stacomirtools::killfactor(requete@query)
 			funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 			return(object)

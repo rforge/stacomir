@@ -61,7 +61,7 @@ setMethod("charge",signature=signature("RefCoe"),definition=function(object){
 					get("sch",envir=envir_stacomi),
 					"tj_coefficientconversion_coe")
 			requete@and=" and  coe_tax_code='2038' and coe_std_code='CIV' and coe_qte_code='1'"
-			requete=connect(requete)  
+			requete<-connect(requete)  
 			object@data<-requete@query
 			return(object)
 		})

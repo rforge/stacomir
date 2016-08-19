@@ -2,22 +2,22 @@
 % Please edit documentation in R/BilanEspeces.r
 \name{hCamembert}
 \alias{hCamembert}
-\title{handler du calcul hCamembert
-trace un camembert des especes ou un camembert par periode...}
+\title{handler for pie chart
+draws a pie chart of species or a pie chart per period}
 \usage{
 hCamembert(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{handler}
 
-\item{...}{}
+\item{...}{other parameters passed to the function}
 }
 \description{
-handler du calcul hCamembert
-trace un camembert des especes ou un camembert par periode...
+handler for pie chart
+draws a pie chart of species or a pie chart per period
 }
 \note{
-pas besoin de refaire tourner calcul si une autre liste � �t� charg�e, les effectifs <0 sont transform�s en positifs
+no need to re-run calcul if another list has been loaded, negative numbers are converted to positive
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

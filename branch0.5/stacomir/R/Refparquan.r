@@ -39,7 +39,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(object)
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "SELECT * FROM ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code"
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			object@data<-requete@query
 			return(object)
@@ -69,7 +69,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=func
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
 			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
 			} else object@data=rbind(object@data,c(NA,"aucune"))

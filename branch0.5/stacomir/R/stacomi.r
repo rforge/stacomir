@@ -3,7 +3,7 @@
 #' 
 #' @param h A handler
 #' @param ... Other parameters
-#' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hx11 
+#' @aliases hDC,hOPE,hDFDC,hBilanMigration,hBilanMigrationInterannuelle,hBilanMigrationConditionEnv, hBilanMigrationPar, hBilanConditionEnv, hBilanLots, hTail, hpds, hSt, htodo,  hhelp, h0, hX11 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hDF=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE)
@@ -104,7 +104,7 @@ husr=function(h,...){
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	con@baseODBC=get("baseODBC",envir=envir_stacomi)
-	e=expression(con<-connect(con))
+	e=expression(con<-stacomirtools::connect(con))
 	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
 	test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
 	if (exists("logw")) dispose(logw)
@@ -119,10 +119,10 @@ husr=function(h,...){
 		requete=new("RequeteODBC")
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@sql="select count(*) from ref.tr_taxon_tax"
-		requete=connect(requete)
+		requete<-stacomirtools::connect(requete)
 		if (nrow(requete@query)==0){
 			# le lien ODBC fonctionne mais pointe vers la mauvaise base
-			gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
+			gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
 							"\n",
 							get("msg",envir=envir_stacomi)$interface_graphique_log.9,
 							" :",
@@ -147,7 +147,7 @@ husr=function(h,...){
 			}
 		}
 	} else {
-		gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
+		gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
 						"\n",
 						get("msg",envir=envir_stacomi)$interface_graphique_log.9,
 						" :",
@@ -171,8 +171,8 @@ hhelp=function(h,...){
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
 }
-hx11=function(h,...){
-	x11()
+hX11=function(h,...){
+	grDevice::X11()
 }
 
 
@@ -188,13 +188,17 @@ hx11=function(h,...){
 #' @param gr_interface Will be used to launch the program as graphical
 #' interface or in command line
 #' @import stringr
-#' @importFrom intervals Intervals
-#' @importFrom intervals closed<-
-#' @importFrom intervals interval_overlap
 #' @import RColorBrewer
 #' @import gWidgets
 #' @import gWidgetsRGtk2
 #' @import ggplot2
+#' @import RPostgreSQL
+#' @import sqldf
+#' @import methods
+#' @import stacomirtools
+#' @importFrom intervals Intervals
+#' @importFrom intervals closed<-
+#' @importFrom intervals interval_overlap
 #' @importFrom grid viewport
 #' @importFrom grid pushViewport
 #' @importFrom grid grid.newpage
@@ -203,26 +207,18 @@ hx11=function(h,...){
 #' @importFrom utils setWinProgressBar
 #' @importFrom utils read.csv
 #' @importFrom utils stack
-#' @importFrom utils globalVariables 
+#' @importFrom utils globalVariables
+#' @importFrom utils select.list write.table 
 #' @importFrom RODBC odbcClose
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
-#' @import RPostgreSQL
-#' @import sqldf
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
-#' @importFrom lattice barchart
-#' @importFrom lattice trellis.par.get
-#' @importFrom lattice trellis.par.set 
-#' @importFrom lattice simpleKey
+#' @importFrom lattice barchart trellis.par.get trellis.par.set simpleKey
 #' @importFrom grid gpar
-#' @importFrom grDevices x11
-#' @importFrom graphics axis.Date
-#' @importFrom graphics rect
-#' @importFrom graphics legend
-#' @importFrom graphics text
-#' @importFrom graphics axis
-#' @importFrom graphics par
+#' @importFrom graphics layout matplot mtext points polygon segments par axis text legend rect axis.Date
+#' @importFrom stats as.formula coef na.fail nls pbeta predict sd
+#' @importFrom grDevices X11 X11 gray rainbow
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 stacomi=function(gr_interface=TRUE){
 	# first loading of connection and odbc info using chargexml()
@@ -250,40 +246,35 @@ stacomi=function(gr_interface=TRUE){
 			sqldf.RPostgreSQL.port = sqldf.options["sqldf.port"])
 	# loginWindow, will call the husr handler
 	if (gr_interface){
-	logw <- gwindow(msg$interface_graphique_log.1, 
-			name="log",
-			parent=c(0,0),
-			width=100,height=100)
-	assign("logw",logw,envir=.GlobalEnv)
-	logly=glayout(container=logw)
-	usrname<- gedit(text = baseODBC[2], 
-			width = 10, 
-			container = logly)
-	assign("usrname",usrname,.GlobalEnv)
-	usrpwd<- gedit(text = baseODBC[3], 
-			width = 10, 
-			container = logly)
-	assign("usrpwd",usrpwd,.GlobalEnv)
-	but=gbutton(text =  msg$interface_graphique_log.4,
-			border=TRUE, 
-			handler = husr, 
-			container = logly)
-	logly[1,1]<-msg$interface_graphique_log.2
-	logly[2,1]<-msg$interface_graphique_log.3
-	logly[1,2]<-usrname
-	logly[2,2]<-usrpwd
-	logly[3,2]<-but
+		logw <- gWidgets::gwindow(msg$interface_graphique_log.1, 
+				name="log",
+				parent=c(0,0),
+				width=100,height=100)
+		assign("logw",logw,envir=.GlobalEnv)
+		logly=gWidgets::glayout(container=logw)
+		usrname<- gWidgets::gedit(text = baseODBC[2], 
+				width = 10, 
+				container = logly)
+		assign("usrname",usrname,.GlobalEnv)
+		usrpwd<- gWidgets::gedit(text = baseODBC[3], 
+				width = 10, 
+				container = logly)
+		assign("usrpwd",usrpwd,.GlobalEnv)
+		but=gWidgets::gbutton(text =  msg$interface_graphique_log.4,
+				border=TRUE, 
+				handler = husr, 
+				container = logly)
+		logly[1,1]<-msg$interface_graphique_log.2
+		logly[2,1]<-msg$interface_graphique_log.3
+		logly[1,2]<-usrname
+		logly[2,2]<-usrpwd
+		logly[3,2]<-but
 	} else {
-
+		
 		
 		husr(gr_interface=FALSE)
 	}
 }
-
-
-
-
-
 
 
 #' Program launch, this function first gathers the ODBC path from the csv file
@@ -308,8 +299,7 @@ interface_graphique=function(){
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)
 	
-	library(gWidgets)
-	win <- gwindow(msg$interface_graphique.16, name="main",parent=c(0,0),width=100,height=100)
+	win <- gWidgets::gwindow(msg$interface_graphique.16, name="main",parent=c(0,0),width=100,height=100)
 	assign("win",win,envir=.GlobalEnv)
 	
 	## Menubar is defined by a list
@@ -351,41 +341,52 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hx11
+	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$handler = hlang
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
-	add(win, gmenu(menubarlist))
-	ggrouptotal<- ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
+	gWidgets::add(win, gmenu(menubarlist))
+	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
 	# gsortie est au dessus de la fenêtre
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
 	
-	add(win,ggrouptotal)
+	gWidgets::add(win,ggrouptotal)
 	
-	gSortie=gtext(msg$interface_graphique.18,width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
+	gSortie=gWidgets::gtext(msg$interface_graphique.18,width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
 	assign("gSortie",gSortie,envir=.GlobalEnv) 
 	
-	add(ggrouptotal,  gSortie,  expand=FALSE)
+	gWidgets::add(ggrouptotal,  gSortie,  expand=FALSE)
 # un groupe en dessous mais cette fois horizontal
-	ggrouptotal1<- ggroup(horizontal=TRUE) 
+	ggrouptotal1<- gWidgets::ggroup(horizontal=TRUE) 
 	assign("ggrouptotal1",ggrouptotal1,envir=.GlobalEnv) 
 	
-	add(ggrouptotal,ggrouptotal1,expand=FALSE)
+	gWidgets::add(ggrouptotal,ggrouptotal1,expand=FALSE)
 	
 # De nouveau un groupe vertical de boutons qui sera pousse a gauche quand le graphique sera insere
-	ggroupboutons=ggroup(horizontal=FALSE)
+	ggroupboutons=gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutons",ggroupboutons,envir=.GlobalEnv)
 	
-	add(ggrouptotal1,ggroupboutons,expand=FALSE)
+	gWidgets::add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
-# http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+# Variables used in aes arguments generate a note as being assigned to .globalEnv, either use aes_string,
+# or listing them below removes the warning in Rcheck. Discussion in stackoverflow about this, hadley wickham
+# considering this a hideous hack..
+utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs",
+				"..density..","Cumsum","Date","Effectif","Effectif_total",
+				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
+				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
+				"effectif_total","fonctionnement","fonctionnementDF","quantite_CALCULE",
+						"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type" ))
 
-utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs","group"))
-
-# plots assigned
-
+# Assignation in global environment for the use of gWidget interface (there is no way arround this)
+utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
+				"col.sortie","ggroupboutons","ggroupboutonsbas","graphes",
+				"frame_annee","frame_check","frame_choix","frame_par","frame_parqual","frame_parquan",
+				"frame_std","frame_tax","logw"))
+# Progressbar
+utils::globalVariables(c("progres"))
 # reoxygenize fails if data are not loaded
 setwd("F:/workspace/stacomir/branch0.5/stacomir")
 data("bMM_Arzal")

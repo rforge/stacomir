@@ -44,7 +44,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("SELECT par_code, par_nom  from ref.tg_parametre_par")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			funout(get("msg",envir=envir_stacomi)$Refpar.1)
 			object@data<-requete@query
 			return(object)
@@ -68,7 +68,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete)  # appel de la methode connect de l'object requeteODBC
+			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
 			if (nrow(object@data)==0) funout(get("msg",envir=envir_stacomi)$Refpar.2,arret=TRUE)
 			return(object)

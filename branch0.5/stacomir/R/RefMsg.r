@@ -27,7 +27,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 			req=new("RequeteODBC")
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT * from ref.ts_messager_msr  ORDER BY msr_id ASC ;"
-			req=connect(req)  # appel de la methode connect de l'object requeteODBC
+			req<-stacomirtools::connect(req)  # appel de la methode connect de l'object requeteODBC
 			object@messager<-req@query
 			return(object)
 		})
@@ -48,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 					" FROM ref.ts_messagerlang_mrl")
 			requete@where=stringr::str_c("where mrl_lang='",lang,"'")
 			requete@order_by="ORDER BY mrl_msr_id ASC"  
-			requete=connect(requete)  
+			requete<-stacomirtools::connect(requete)  
 			object@messagerlang<-requete@query
 			return(object)
 		})

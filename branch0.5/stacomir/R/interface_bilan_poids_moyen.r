@@ -13,9 +13,9 @@ interface_BilanPoidsMoyen = function()
     bilan_poids_moyen@liste=charge(object=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choix de la cat�gorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     assign("group",group,envir = .GlobalEnv)
-    add(ggroupboutons,group)
+   gWidgets::add(ggroupboutons,group)
     gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.1,container=group)
     # dans l'ordre 
     # dans le handler, modifier le contenu de l'object fils si il existe
@@ -24,11 +24,11 @@ interface_BilanPoidsMoyen = function()
     ### premiere toobar
 
     
-    addSpring(group)
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevice::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     choix(bilan_poids_moyen@liste)
     choix(bilan_poids_moyen@dc,objectBilan=NULL,is.enabled=TRUE)
@@ -38,9 +38,9 @@ interface_BilanPoidsMoyen = function()
     choix(bilan_poids_moyen@anneefin,
 			nomassign="refAnneeFin",
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5)#annee fin
-	aGraph=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2,icon="lines",handler=fungraphBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)#load
-	aTable=gaction(label="table",icon="dataframe",handler=funtableBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.3)
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4)
+	aGraph=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2,icon="lines",handler=fungraphBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)#load
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_poids_moyen,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.3)
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4)
 	toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
 	add(group, gmenu(toolbarlist))
     

@@ -37,7 +37,7 @@ setMethod("charge",signature=signature("RefStades"),definition=function(object) 
 			req=new("RequeteODBC") 
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT std_code, std_libelle FROM ref.tr_stadedeveloppement_std ORDER BY std_code ;"
-			req=connect(req)  # appel de la methode connect de l'object requeteODBC
+			req<-stacomirtools::connect(req)  # appel de la methode connect de l'object requeteODBC
 			object@data<-req@query
 			return(object)
 		})
@@ -61,7 +61,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 			requete@where=paste("where dis_identifiant in ",vector_to_listsql(dc_selectionne),sep="")
 			requete@and=paste("and lot_tax_code in ",vector_to_listsql(taxon_selectionne),sep="")
 			requete@order_by="ORDER BY std_code"  
-			requete=connect(requete)  # appel de la methode connect de l'object requeteODBC
+			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
 			if (nrow(object@data)==0) funout(get("msg",envir=envir_stacomi)$RefStades.1,arret=TRUE)
 			return(object)

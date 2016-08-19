@@ -65,7 +65,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			
 		} # end for
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
@@ -112,7 +112,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			requete<-connect(requete)   
+			requete<-stacomirtools::connect(requete)   
 		} # end for
 		close(progres)
 		RODBC::odbcClose(requete@connection)

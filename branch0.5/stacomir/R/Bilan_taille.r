@@ -112,7 +112,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 			}
 			object@requete@sql=sql	
 #object@requete@where=#defini dans la methode ODBCwheredate
-			object@requete<-connect(object@requete) # appel de la methode connect de l'object requeteODBC
+			object@requete<-stacomirtools::connect(object@requete) # appel de la methode stacomirtools::connect de l'object requeteODBC
 			funout(get("msg",envir=envir_stacomi)$l1)
 			return(object)
 		})

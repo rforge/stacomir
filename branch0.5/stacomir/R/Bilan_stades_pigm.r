@@ -95,7 +95,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND lot_tax_code= '2038'",
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
-			requete<-connect(requete) # appel de la methode connect de l'object ODBCWHEREDATE
+			requete<-stacomirtools::connect(requete) # appel de la methode stacomirtools::connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$Bilan_stades_pigm.1)
 			object@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
@@ -132,7 +132,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 				tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
-				requete<-connect(requete)
+				requete<-stacomirtools::connect(requete)
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
 				if (nrow (requete@query)>0)	{
 					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
@@ -438,10 +438,10 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VIA3= fnstade(par1=Vparm$pigment_stage[[4]],VB=FALSE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VIA3c=cumsum(VIA3$y)/sum(VIA3$y)  # surface
 	if(graph){
-		x11()
+		grDevice::X11()
 		matplot(VB$x,cbind(VB$y,VIA0$y,VIA1$y,VIA2$y,VIA3$y))
 		
-		x11()
+		grDevice::X11()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
 	#traitement a part de VB
@@ -694,7 +694,7 @@ fungraphstades<-function(
 			for (k in 5:1){
 				polygon(x=curv[[strdates[j]]][[k]]$x,
 						y=nrow(tablestades)-j+1+curvsum,
-						col=gray(5:1/6)[k],
+						col=grDevices::gray(5:1/6)[k],
 						lty=1,
 						lwd=1,
 						border=NA)
@@ -721,7 +721,7 @@ fungraphstades<-function(
 		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choix
 		
 	graphics::par("mar"=c(2, 4, 3, 2)+ 0.1)
-		surface(dates,tablestades,couleur=gray(5:1/6),ordre=c(1,2,3,4,5),
+		surface(dates,tablestades,couleur=grDevices::gray(5:1/6),ordre=c(1,2,3,4,5),
 				axe=TRUE,
 				xaxt="n",
 				ylab="% par stade",
@@ -731,7 +731,7 @@ fungraphstades<-function(
 		legend( x=as.numeric(as.POSIXct(xlim[1]))+(as.numeric(as.POSIXct(xlim[2]))-
 							as.numeric(as.POSIXct(xlim[1])))/80,
 				y=0.7,legend=c("VIA3","VIA2","VIA1","VIA0","VB"),
-				fill=gray(1:5/6),
+				fill=grDevices::gray(1:5/6),
 				bg="white",
 				bty="0"
 		)
@@ -808,14 +808,14 @@ funtitle_bilan_stades_pigm=function(h,...){
 	titre3 <- glabel( text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
 	titre4 <- gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
-	aOK=gaction(label="OK",icon="gtk-ok",handler=hgettext)         
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
+	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
 	toolbarlist <- list(
 			OK=aOK, 
 			Quit = aQuit)
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	add(group1,ggroupboutonsbas)
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 }
 
 #' An interface that calls the object to build the user interface
@@ -835,7 +835,7 @@ interface_Bilan_stades_pigm = function()
 	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= "Valeur de la salinite moyenne, cliquer pour editer",label="15")
 	
 	quitte() # vidange de l'interface
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	gl=glabel(text=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group)
@@ -859,11 +859,11 @@ interface_Bilan_stades_pigm = function()
 			affichecal=FALSE)
 	choix(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
-	aCalcul=gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
-	aSetTitle=gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
-	aGraph=gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
-	aGraphgg=gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
+	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
+	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
+	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
+	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 
@@ -875,15 +875,15 @@ interface_Bilan_stades_pigm = function()
 	enabled(toolbarlist[["SetTitle"]])<-FALSE
 	enabled(toolbarlist[["Graph"]])<-FALSE
 	enabled(toolbarlist[["Graphgg"]])<-FALSE
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
-	add(ggroupboutons,ggroupboutonsbas)
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
-	addSpring(group)
+	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
 	#assign("graphes",graphes,envir=.GlobalEnv) 	
-	x11()
+	grDevice::X11()
 	# A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }
 

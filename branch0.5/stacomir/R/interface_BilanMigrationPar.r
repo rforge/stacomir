@@ -21,30 +21,30 @@ interface_BilanMigrationPar = function()
     #######################
     # Interface Graphique 
     ##########################
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
     assign("group",group,envir = .GlobalEnv)
     
-    add(ggroupboutons,group)
+   gWidgets::add(ggroupboutons,group)
     choix(bilanMigrationPar@pasDeTemps)
     choix(bilanMigrationPar@echantillon)
     choix(bilanMigrationPar@dc,objectBilan=bilanMigrationPar,is.enabled=TRUE)
     
     
-    ggroupboutonsbas = ggroup(horizontal=FALSE)
-    add(ggroupboutons,ggroupboutonsbas)
+    ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+    gWidgets::add(ggroupboutons,ggroupboutonsbas)
     assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     toolbarlist = list(
-    Calc=gaction(handler = hbilanMigrationParcalc,icon = "new",label="calcul",action=bilanMigrationPar,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.3),
-    Graph=gaction(handler = hbilanMigrationPargraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.4),
-    Graph2=gaction(handler = hbilanMigrationPargraph2,icon = "graph2",label="grjour",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.5),
-    Stat =gaction(handler= hbilanMigrationParstat,icon = "matrix",label="stat",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.6),
-    annuler=gaction(handler= quitte,icon = "close",label=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.7))
-    add(ggroupboutonsbas, gtoolbar(toolbarlist))
-    addSpring(group)
+    Calc=gWidgets::gaction(handler = hbilanMigrationParcalc,icon = "new",label="calcul",action=bilanMigrationPar,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.3),
+    Graph=gWidgets::gaction(handler = hbilanMigrationPargraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.4),
+    Graph2=gWidgets::gaction(handler = hbilanMigrationPargraph2,icon = "graph2",label="grjour",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.5),
+    Stat =gWidgets::gaction(handler= hbilanMigrationParstat,icon = "matrix",label="stat",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.6),
+    annuler=gWidgets::gaction(handler= quitte,icon = "close",label=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.7))
+    gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevice::X11()
 
 }

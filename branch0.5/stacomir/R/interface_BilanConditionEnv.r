@@ -9,10 +9,10 @@ interface_ConditionEnv = function()
     bilanConditionEnv@stationMesure=charge(bilanConditionEnv@stationMesure)
     assign("bilanConditionEnv",bilanConditionEnv,envir=.GlobalEnv)
     
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
     assign("group",group,envir = .GlobalEnv)
-    add(ggroupboutons,group)
+   gWidgets::add(ggroupboutons,group)
     
     # date de debut et de fin
     choix(bilanConditionEnv@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
@@ -28,19 +28,19 @@ interface_ConditionEnv = function()
 			affichecal=FALSE)
     choix(bilanConditionEnv@stationMesure)
     
-    ggroupboutonsbas = ggroup(horizontal=FALSE)
-    add(ggroupboutons,ggroupboutonsbas)
+    ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+    gWidgets::add(ggroupboutons,ggroupboutonsbas)
     assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     
     toolbarlist = list(
-    #Calc=gaction(handler=hbilanConditionEnvcalc , action=bilanConditionEnv,icon = "new",label="calcul",tooltip="calcul des conditions environnementales entre deux dates"),
-    Graph=gaction(handler=hbilanConditionEnvgraph , icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.2),
-    Stat =gaction(handler=hbilanConditionEnvstat , icon = "matrix",label="stat",tooltip=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.3),
-    annuler=gaction(handler= quitte,icon = "close",label=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.4))
-    add(ggroupboutonsbas, gtoolbar(toolbarlist))
-    addSpring(group)
+    #Calc=gWidgets::gaction(handler=hbilanConditionEnvcalc , action=bilanConditionEnv,icon = "new",label="calcul",tooltip="calcul des conditions environnementales entre deux dates"),
+    Graph=gWidgets::gaction(handler=hbilanConditionEnvgraph , icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.2),
+    Stat =gWidgets::gaction(handler=hbilanConditionEnvstat , icon = "matrix",label="stat",tooltip=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.3),
+    annuler=gWidgets::gaction(handler= quitte,icon = "close",label=get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.4))
+    gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevice::X11()
 }

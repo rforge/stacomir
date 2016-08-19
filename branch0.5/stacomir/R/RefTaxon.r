@@ -38,7 +38,7 @@ setMethod("charge",signature=signature("RefTaxon"),definition=function(object) {
 			req=new("RequeteODBC") 
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT tax_code, tax_nom_latin, tax_nom_commun, tax_ntx_code, tax_tax_code FROM ref.tr_taxon_tax  ORDER BY tax_rang ASC ;"
-			req=connect(req)  # appel de la methode connect de l'object requeteODBC
+			req<-stacomirtools::connect(req)  # appel de la methode connect de l'object requeteODBC
 			object@data<-req@query
 			return(object)
 		})
@@ -62,7 +62,7 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 					" JOIN ref.tr_taxon_tax on lot_tax_code=tax_code",sep="")
 			requete@where=paste("where dis_identifiant in",vector_to_listsql(dc_selectionne))
 			requete@order_by="ORDER BY tax_rang ASC"  
-			requete=connect(requete)  
+			requete<-stacomirtools::connect(requete)  
 			object@data<-requete@query
 			return(object)
 		})

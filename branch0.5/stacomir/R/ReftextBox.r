@@ -1,6 +1,4 @@
-# Nom fichier :        RefTextBox   (classe)
-
-#' @title RefTextBox referencial class 
+#' RefTextBox referencial class 
 #' 
 #' allows to a put a value within a glabel
 #' @author cedric.briand"at"eptb-vilaine.fr

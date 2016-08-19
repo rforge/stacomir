@@ -53,7 +53,7 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 					date_part('month',datedebutpeche) AS mois  
 					FROM vue_ope_lot_poids"
 			requete@and=""
-			requete=connect(requete)  
+			requete<-stacomirtools::connect(requete)  
 			object@data<-requete@query
 			return(object)
 		})

@@ -12,7 +12,7 @@
 \alias{hhelp,}
 \alias{hpds,}
 \alias{htodo,}
-\alias{hx11}
+\alias{hX11}
 \title{handler function used by the main interface}
 \usage{
 hDF(h, ...)

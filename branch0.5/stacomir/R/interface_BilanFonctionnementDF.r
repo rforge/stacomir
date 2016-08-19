@@ -7,11 +7,11 @@ interface_BilanFonctionnementDF = function()
     assign("fonctionnementDF",fonctionnementDF,envir=.GlobalEnv)    
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
     fonctionnementDF@df=charge(fonctionnementDF@df)    
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
     assign("group",group,envir=.GlobalEnv)
     
-    add(ggroupboutons,group)
+   gWidgets::add(ggroupboutons,group)
     
     choix(fonctionnementDF@df)
 	choix(fonctionnementDF@horodate,
@@ -25,10 +25,10 @@ interface_BilanFonctionnementDF = function()
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1)
 	
-    aBarchart=gaction(label="barchart",icon="barplot",handler=funbarchartDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          
-    aBox=gaction(label="boites",icon="graph2",handler=funboxDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
-    aTable=gaction(label="table",icon="dataframe",handler=funtableDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
-    aQuit=gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
+    aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          
+    aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
+    aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
+    aQuit=gWidgets::gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
     
     toolbarlist <- list(
     		barchart=aBarchart, 
@@ -38,10 +38,10 @@ interface_BilanFonctionnementDF = function()
     
     add(group, gmenu(toolbarlist))
     add(group,gbutton(text = "graph", handler = function(h,...){X11()})) 
-    addSpring(group)
+    gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     #assign("graphes",graphes,envir=.GlobalEnv)
-	x11()
+	grDevice::X11()
 }

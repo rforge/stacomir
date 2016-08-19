@@ -43,7 +43,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(object)
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			object@data<-requete@query
 			return(object)
@@ -72,7 +72,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete=connect(requete)
+			requete<-stacomirtools::connect(requete)
 			object@data<-requete@query
 			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
 			} else object@data=rbind(object@data,c(NA,"aucune"))
@@ -98,7 +98,7 @@ setMethod("chargecomplement",signature=signature("Refparqual"),definition=functi
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
 					" WHERE val_qal_code='",object@data$par_code,
 					"' ORDER BY val_rang",sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			#funout("La requete est effectuee pour charger les parametres \n")
 			object@valqual<-requete@query
 			return(object)

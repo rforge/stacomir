@@ -81,7 +81,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 					" JOIN ref.tr_typedc_tdc ON dic_tdc_code=tdc_code",
 					" WHERE  dft_rang=1",
 					" ORDER BY dis_identifiant;",sep="")
-			requete<-connect(requete) 
+			requete<-stacomirtools::connect(requete) 
 			#funout("La requete est effectuee pour charger les Dispositifs de comptage \n")
 			object@data<-requete@query
 			return(object)
@@ -186,7 +186,7 @@ setMethod("choixmult",signature=signature("RefDC"),definition=function(object,ob
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
 					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel à un autre object il faut appeller le conteneur qui contient l'object
+					# ici comme on fait appel ï¿½ un autre object il faut appeller le conteneur qui contient l'object
 					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
 						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){

@@ -61,7 +61,7 @@ funtraitement_poids=function(tableau,duree) {
 	req@colonnefin<-"coe_date_fin"
 	req@and<-c("and coe_tax_code='2038'","and coe_std_code='CIV'")
 	req@order_by<-"order by coe_date_debut"
-	req<-connect(req)
+	req<-stacomirtools::connect(req)
 	coe<-req@query
 	coe$coe_date_debut
 	#annees bissextiles and missing data

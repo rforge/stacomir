@@ -2,21 +2,17 @@
 % Please edit documentation in R/BilanMigration.r
 \name{hbilanMigrationcalc}
 \alias{hbilanMigrationcalc}
-\title{handler du graphique BilanMigration
-realise le calcul du bilan migration, l'ecrit dans l'environnement envir_stacomi
-traite eventuellement les quantites de lots (si c'est des civelles)}
+\title{handler for calculations BilanMigration}
 \usage{
 hbilanMigrationcalc(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{handler}
 
-\item{...}{}
+\item{...}{additional parameters}
 }
 \description{
-handler du graphique BilanMigration
-realise le calcul du bilan migration, l'ecrit dans l'environnement envir_stacomi
-traite eventuellement les quantites de lots (si c'est des civelles)
+internal use
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

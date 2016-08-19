@@ -81,7 +81,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 					" AND lot_lot_identifiant IS NULL",
 					" AND lot_effectif IS NOT NULL",
 					sep="")
-			requete<-connect(requete)	
+			requete<-stacomirtools::connect(requete)	
 			if (requete@etat!="Requete reussie \n") funout(get("msg",envir=envir_stacomi)$BilanEspeces.3,arret=TRUE)
 			bilanEspeces@data<-requete@query					
 			return(bilanEspeces)
@@ -137,11 +137,11 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 		})
 
 
-#' handler du calcul hCamembert
-#' trace un camembert des especes ou un camembert par periode...
-#' @note pas besoin de refaire tourner calcul si une autre liste � �t� charg�e, les effectifs <0 sont transform�s en positifs
-#' @param h 
-#' @param ... 
+#' handler for pie chart
+#' draws a pie chart of species or a pie chart per period
+#' @note no need to re-run calcul if another list has been loaded, negative numbers are converted to positive
+#' @param h handler
+#' @param ... other parameters passed to the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 
@@ -193,7 +193,7 @@ hCamembert = function(h,...) {
 	} else if (nb<=12){
 		p<-g+scale_fill_brewer(palette="Set3",name="Taxa")   
 	}else{
-		g<-g+scale_fill_manual(values=rainbow(nb))
+		g<-g+scale_fill_manual(values=grDevices::rainbow(nb))
 	}
 	if(h$action=="pie"){
 		g<-g+ coord_polar(theta="y", start=pi)+xlab('') +ylab('')
@@ -259,7 +259,7 @@ interface_BilanEspeces=function(){
 			vecteur=c("aucun","semaine","mois","annee"),
 			label=get("msg",envir=envir_stacomi)$interface_BilanEspeces.7)
 	quitte()
-	group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
 	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_BilanEspeces.2,container=group)
 	add(ggroupboutons,group)
@@ -277,20 +277,20 @@ interface_BilanEspeces=function(){
 			affichecal=FALSE)
 	choix(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
 	choix(bilanEspeces@liste)	
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
-	add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.3),
-			Graph=gaction(label="pie",tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.4,icon="bubbles",handler=hCamembert,action="pie"),
-			Graph2=gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.5,action="graph"),
-			Stat=gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.6),    
-			annuler=gaction(handler= quitte,icon = "close",label="quitter")
+			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.3),
+			Graph=gWidgets::gaction(label="pie",tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.4,icon="bubbles",handler=hCamembert,action="pie"),
+			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.5,action="graph"),
+			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanEspeces.6),    
+			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter")
 	)    
-	#add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	#addSpring(group)
+	#gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	#gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	x11()
+	grDevice::X11()
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

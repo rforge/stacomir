@@ -70,7 +70,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 			requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
 			requete@order_by=" ORDER BY bjo_jour "
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			
 			# resultat de la requete
 			object@data<- stacomirtools::killfactor(requete@query)
@@ -108,12 +108,12 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
-			requete<-connect(requete)
+			requete<-stacomirtools::connect(requete)
 		}
 )
 
@@ -552,7 +552,7 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 		g <- g+scale_x_datetime(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("Refperiode"),timesplit),label=date_format("%b"),
 				lim=as.POSIXct(c(trunc.POSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),ceil.POSIXt((max(dat[dat$valeur!="0",timesplit])),"month")))) 
 		g <- g+scale_y_continuous(name="Somme des pourcentages annuels de migration par quinzaine")
-		cols <- rainbow(length(levels(dat$annee)))
+		cols <- grDevices::rainbow(length(levels(dat$annee)))
 		g <- g+scale_fill_manual(name="annee",values=cols)
 		g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,
 						", saisonnalite de la migration")) 

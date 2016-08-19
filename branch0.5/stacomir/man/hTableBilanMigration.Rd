@@ -2,21 +2,21 @@
 % Please edit documentation in R/BilanMigration.r
 \name{hTableBilanMigration}
 \alias{hTableBilanMigration}
-\title{handler du calcul BilanMigrationstat : traitements 
-appelle les fonctions funstat et funtable pour faire le bilan des migrations
-dans des fichiers csv}
+\title{handler for summary function
+calls functions funstat and funtable to build summary tables in html and
+csv files}
 \usage{
 hTableBilanMigration(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{Handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
-handler du calcul BilanMigrationstat : traitements 
-appelle les fonctions funstat et funtable pour faire le bilan des migrations
-dans des fichiers csv
+handler for summary function
+calls functions funstat and funtable to build summary tables in html and
+csv files
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

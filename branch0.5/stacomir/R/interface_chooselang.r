@@ -6,7 +6,7 @@
 interface_chooselang = function()
 {    
 	quitte() # vidange de l'interface
-    group = ggroup(horizontal=FALSE)   # doit toujours s'appeller group
+    group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
 	listlang<-new("RefListe")
@@ -19,12 +19,12 @@ interface_chooselang = function()
 		close(win)
 		interface_graphique()
 	}
-	ggroupboutonsbas = ggroup(horizontal=FALSE)
+	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
-	add(ggroupboutons,ggroupboutonsbas)
+	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			annuler=gaction(handler= hassingnlang,icon = "close",label="quitter")
+			annuler=gWidgets::gaction(handler= hassingnlang,icon = "close",label="quitter")
 	)    
-	add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	addSpring(group)
+	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
+	gWidgets::addSpring(group)
 }
