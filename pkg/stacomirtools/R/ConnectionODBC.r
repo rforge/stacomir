@@ -19,7 +19,7 @@ validite_ODBC=function(object)
 
 #' @title ConnectionODBC class 
 #' @note Mother class for connection, opens the connection but does not shut it
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @slot baseODBC="vector" (of length 3, character)
 #' @slot silent="logical"
 #' @slot etat="ANY" # can be -1 or string
@@ -41,7 +41,7 @@ setGeneric("connect",def=function(object,...) standardGeneric("connect"))
 
 #' connect method for ConnectionODBC class
 #' @return a connection with slot filled
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples object=new("ConnectionODBC")
 #' object@baseODBC=baseODBC
 #' connect(object)
@@ -64,14 +64,14 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 							believeNRows = FALSE))
 			if (!exists("odbcConnect")) {
 				if(exists("envir_stacomi")){
-					funout(get("msg",envir_stacomi)$ConnectionODBC.2,arret=TRUE)
+					funout("The RODBC library is necessary, please load the package",arret=TRUE)
 				} else	  {
 					stop("the RODBC library is necessary, please load the package")
 				}
 			}
 			if (!object@silent) {
 				if(exists("envir_stacomi")){
-					print(paste(get("msg",envir_stacomi)$ConnectionODBC.3,object@baseODBC[1]))
+					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				} else {
 					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				}

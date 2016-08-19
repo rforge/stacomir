@@ -1,7 +1,7 @@
 # Nom fichier :        RequeteODBC.R 
 #' @title RequeteODBC class 
 #' @note Inherits from ConnectionODBC
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @slot baseODBC="vector" (inherited from ConnectionODBC)
 #' @slot silent="logical" (inherited from ConnectionODBC)
 #' @slot etat="character" (inherited from ConnectionODBC)
@@ -18,7 +18,7 @@ setClass(Class="RequeteODBC",
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note assign("showmerequest",1,envir=envir_stacomi) permet d'afficher toutes les requetes passant par la classe connect
 #' @return An object of class RequeteODBC
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @expamples 
 #' object=new("RequeteODBC")
 #' object@open=TRUE
@@ -51,7 +51,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 						if(arret) stop(text) else print(text)
 						return(NULL)
 					}	
-					killfactor=function(df){
+					stacomirtools::killfactor=function(df){
 						for (i in 1:ncol(df))
 						{
 							if(is.factor(df[,i])) df[,i]=as.character(df[,i])
@@ -72,7 +72,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 					if(arret) stop(text) else print(text)
 					return(NULL)
 				}	
-				killfactor=function(df){
+				stacomirtools::killfactor=function(df){
 					for (i in 1:ncol(df))
 					{
 						if(is.factor(df[,i])) df[,i]=as.character(df[,i])
@@ -124,7 +124,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
 				if (!object@silent) funout(msg6)
-				object@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
+				object@query=stacomirtools::killfactor(query)     # instead of query 11/08/2009 11:55:20
 				object@etat=msg6
 			} else {
 				if (!object@silent) print(resultatRequete)

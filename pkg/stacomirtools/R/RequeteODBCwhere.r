@@ -4,7 +4,7 @@
 #' the syntax is where="WHERE ..."
 #' and =vector("AND...","AND...")
 #' order_by="ORDER BY.."
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @slot select="character"
 #' @slot where="character"
 #' @slot and="vector"
@@ -34,7 +34,7 @@ setAs("RequeteODBCwhere","RequeteODBC",function(from,to){
 #' connect method loads a request to the database and returns either an error or a data.frame
 #' @note method modified from v0.2.1240 to use the connect method of the mother class
 #' @return An object of class RequeteODBCwhere
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' object<-new("RequeteODBCwhere")
 #' object@baseODBC<-baseODBC
