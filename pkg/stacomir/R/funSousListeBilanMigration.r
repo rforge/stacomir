@@ -12,6 +12,22 @@
 #* Modifications :
 
 
+
+
+
+
+
+
+#' funSousListeBilanMigration
+#' 
+#' workhorse function for bilanMigration. Calculates the number for a stage and
+#' a taxa per day.  The operation for the fishway is never from 00:00 to 00:00
+#' so the number per day is calculated according to the ration between the
+#' duration of the operation and the duration of the day. This function will
+#' allow daily reports to be saved into the database when graph is launched
+#' 
+#' 
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 funSousListeBilanMigration=function(bilanMigration) {
 	# *********************
 	# Boucle sur chacune des periodes du pas de temps
@@ -19,7 +35,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	req=new("RequeteODBC")
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	req@open<-TRUE
-	progres<-winProgressBar(title = "calcul des effectifs par pas de temps",
+	progres<-utils::winProgressBar(title = "calcul des effectifs par pas de temps",
 			label = "progression %",
 			min = 0,
 			max = 1, 
@@ -37,7 +53,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
 	while (getnoPasCourant(bilanMigration@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbPas
-		setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
+		utils::setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
 		if(finPas!=round(finPas,"day")) stop("problemes d'arrondi dans le calcul de la date, verifier la fonction funsouslistebilanmigration")
@@ -146,8 +162,8 @@ funSousListeBilanMigration=function(bilanMigration) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , req@sql,  "\n"))
-			req=connect(req)
-			rs=stacomirtools::killfactor(req@query) # pour �viter certains pb
+			req=stacomirtools::connect(req)
+			rs=stacomirtools::killfactor(req@query) # pour eviter certains pb
 			coef=NULL
 			if (nrow(rs)>0){
 				# Recherche des poids pour ponderer le coef et des dates d'application des coef
@@ -179,7 +195,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				
 				# on multiplie le vecteur coeff par le vecteur des periodes pour obtenir une moyenne ponderee
 				coef = as.double(coef * periode)
-				# coef est un objet difftime avec methode sum non definie si je ne marque pas as.double
+				# coef est un object difftime avec methode sum non definie si je ne marque pas as.double
 				lescoeff=list()
 				# lescoeff = une liste dont le nom correspond au type et qui contient le coeff pondere
 				# on passe en revue les type de coefficient de conversion possible
@@ -254,7 +270,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				" ;" ,sep="")
 		
 		#cat(paste("Requete SQL : \n" , req@sql))
-		req=connect(req)
+		req=stacomirtools::connect(req)
 		rs=req@query
 		
 		if (nrow(rs)>0){
@@ -309,28 +325,28 @@ funSousListeBilanMigration=function(bilanMigration) {
 		if (!exists("tablecalcmig")){
 			tablecalcmig=data.frame(
 					"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-					"Debut_pas"=debutPas       ,
-					"Fin_pas"=finPas           ,
-					"Mesure"=effectif_MESURE   ,
-					"Calcule"=effectif_CALCULE  ,
-					"Expert"=effectif_EXPERT    ,
-					"Ponctuel"=effectif_PONCTUEL  ,
+					"debut_pas"=debutPas       ,
+					"fin_pas"=finPas           ,
+					"MESURE"=effectif_MESURE   ,
+					"CALCULE"=effectif_CALCULE  ,
+					"EXPERT"=effectif_EXPERT    ,
+					"PONCTUEL"=effectif_PONCTUEL  ,
 					"type_de_quantite"="effectif",    # dans le cas suivant par exemple type = "poids"
 					"taux_d_echappement" = tauxEch,
-					"Coef_conversion"=as.numeric(NA))
+					"coe_valeur_coefficient"=as.numeric(NA))
 		} else   {
 			tablecalcmig=rbind(tablecalcmig,
 					data.frame(
 							"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-							"Debut_pas"=debutPas       ,
-							"Fin_pas"=finPas           ,
-							"Mesure"=effectif_MESURE   ,
-							"Calcule"=effectif_CALCULE  ,
-							"Expert"=effectif_EXPERT    ,
-							"Ponctuel"=effectif_PONCTUEL  ,
+							"debut_pas"=debutPas       ,
+							"fin_pas"=finPas           ,
+							"MESURE"=effectif_MESURE   ,
+							"CALCULE"=effectif_CALCULE  ,
+							"EXPERT"=effectif_EXPERT    ,
+							"PONCTUEL"=effectif_PONCTUEL  ,
 							"type_de_quantite"="effectif",    # dans le cas suivant par exemple type = "poids"
 							"taux_d_echappement" = tauxEch,
-							"Coef_conversion"=as.numeric(NA)))
+							"coe_valeur_coefficient"=as.numeric(NA)))
 		}
 		
 		# ---------------------
@@ -358,7 +374,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				" ;" ,sep="")
 		
 		#cat(paste("Requete SQL : \n" , sql))
-		req=connect(req)
+		req=stacomirtools::connect(req)
 		rs=stacomirtools::killfactor(req@query)
 		
 		if (nrow(rs)>0){
@@ -389,15 +405,15 @@ funSousListeBilanMigration=function(bilanMigration) {
 				tablecalcmig=rbind(tablecalcmig,
 						data.frame(
 								"No_pas"=bilanMigration@pasDeTemps@noPasCourant   ,
-								"Debut_pas"=as.POSIXct(debutPas)       ,
-								"Fin_pas"=as.POSIXct(finPas)           ,
-								"Mesure"=quantite_MESURE   ,
-								"Calcule"=quantite_CALCULE  ,
-								"Expert"=quantite_EXPERT    ,
-								"Ponctuel"=quantite_PONCTUEL  ,
+								"debut_pas"=as.POSIXct(debutPas)       ,
+								"fin_pas"=as.POSIXct(finPas)           ,
+								"MESURE"=quantite_MESURE   ,
+								"CALCULE"=quantite_CALCULE  ,
+								"EXPERT"=quantite_EXPERT    ,
+								"PONCTUEL"=quantite_PONCTUEL  ,
 								"type_de_quantite"=j,    # dans le cas suivant par exemple type = "poids"
 								"taux_d_echappement" = tauxEch,
-								"Coef_conversion"=ifelse( !is.null(lescoeff[[j]]), as.numeric(lescoeff[[j]]), NA) ))  #
+								"coe_valeur_coefficient"=ifelse( !is.null(lescoeff[[j]]), as.numeric(lescoeff[[j]]), NA) ))  #
 				
 			} # fin de la boucle d'ecriture par type de qte
 		}  else {# fin du if nrow>0

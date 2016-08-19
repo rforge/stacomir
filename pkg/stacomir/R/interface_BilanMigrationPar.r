@@ -2,8 +2,7 @@
 # pour le developpement load("devt.Rdata")
 # chargement des classes
 #' interface for BilanMigrationPar class
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationPar = function()
 {
     bilanMigrationPar=new("BilanMigrationPar")
@@ -29,7 +28,7 @@ interface_BilanMigrationPar = function()
    gWidgets::add(ggroupboutons,group)
     choice(bilanMigrationPar@pasDeTemps)
     choice(bilanMigrationPar@echantillon)
-    choice(bilanMigrationPar@dc,objetBilan=bilanMigrationPar,is.enabled=TRUE)
+    choice(bilanMigrationPar@dc,objectBilan=bilanMigrationPar,is.enabled=TRUE)
     
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)

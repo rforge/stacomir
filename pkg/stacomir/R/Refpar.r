@@ -3,37 +3,59 @@
 # Date de creation :   22/03/2009 21:14:14
 
 #TODO  selection de plusieurs caracteristiques
-
-#' @title Refpar referential class choose a parameter
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' Class "Refpar"
+#' 
+#' Class enabling to load the list of parameters and select one of them
+#' 
+#' 
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("Refpar", data)}.  \describe{ \item{list("data")}{Object of class
+#' \code{"data.frame"} ~ All the parameters stored in the
+#' database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
+#' stored in the database} }
+#' @author cedric.briand"at"eptb-vilaine.fr
+#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' \code{\linkS4class{RefTaxon}}
+#' @keywords classes
 #' @slot data="data.frame" the list of parameters
-#' @expamples objet=new("Refpar")
+#' @family Referential objects
+
+#' @examples
+#' 
+#' showClass("Refpar")
+#' 
+
+#' @examples object=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
 
 #' Loading method for Repar referential objects
-#' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @expamples 
-#'  objet=new("Refpar")
-#' charge(objet)
-setMethod("charge",signature=signature("Refpar"),definition=function(objet) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#'  object=new("Refpar")
+#' charge(object)
+setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("SELECT par_code, par_nom  from ref.tg_parametre_par")
 			requete<-stacomirtools::connect(requete)
 			funout(get("msg",envir=envir_stacomi)$Refpar.1)
-			objet@data<-requete@query
-			return(objet)
+			object@data<-requete@query
+			return(object)
 		})
 #' Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
-#' @returnType S4 object
 #' @return An S4 object of class Refpar
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @expamples 
-#'  objet=new("Refpar")
-#' charge_avec_filtre(objet,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
-setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(objet,dc_selectionne,taxon_selectionne,stade_selectionne) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#'  object=new("Refpar")
+#' charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
+setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
@@ -46,35 +68,35 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 			requete@where=paste("where dis_identifiant=",dc_selectionne)
 			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
 			requete@order_by="ORDER BY par_code"  
-			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'objet requeteODBC
-			objet@data<-requete@query
-			if (nrow(objet@data)==0) funout(get("msg",envir=envir_stacomi)$Refpar.2,arret=TRUE)
-			return(objet)
+			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
+			object@data<-requete@query
+			if (nrow(object@data)==0) funout(get("msg",envir=envir_stacomi)$Refpar.2,arret=TRUE)
+			return(object)
 		})
 #' Choice method for Refpar referential objects
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
 #' @note this method choice is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @expamples  
-#'  objet=new("Refpar")
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples  
+#'  object=new("Refpar")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' objet<-charge(objet)
-#' choice(objet)
-setMethod("choice",signature=signature("Refpar"),definition=function(objet,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
-			if (nrow(objet@data) > 0){
+#' object<-charge(object)
+#' choice(object)
+setMethod("choice",signature=signature("Refpar"),definition=function(object,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choice)
-					objet@data<-objet@data[car_libelle%in%carchoisi ,]
-					assign(nomassign,objet,envir_stacomi)
+					object@data<-object@data[car_libelle%in%carchoisi ,]
+					assign(nomassign,object,envir_stacomi)
 				 funout(get("msg",envir=envir_stacomi)$Refpar.3)
 				}
 				#frame_par<<-gframe(label)
         assign(frameassign,gframe(label,horizontal=FALSE),envir= .GlobalEnv)
 				# pour pouvoir la supprimer ensuite
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
-				car_libelle=fun_char_spe(objet@data$par_nom)
+				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)

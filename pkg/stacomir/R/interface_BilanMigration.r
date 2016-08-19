@@ -1,8 +1,7 @@
 # Nom fichier :        interface_BilanMigration
 
 #' Interface for BilanMigration class
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigration=function(){
 	bilanMigration=new("BilanMigration")
 	assign("bilanMigration",bilanMigration,envir = .GlobalEnv)
@@ -18,7 +17,7 @@ interface_BilanMigration=function(){
 	assign("group",group,envir = .GlobalEnv)  
 	add(ggroupboutons,group)
 	choice(bilanMigration@pasDeTemps)
-	choice(bilanMigration@dc,objetBilan=bilanMigration,is.enabled=TRUE)
+	choice(bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)

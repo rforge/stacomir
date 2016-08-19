@@ -1,31 +1,40 @@
-# Nom fichier :        BilanMigrationInterAnnuel.R
-#' class BilanMigrationInterannuelle
-#' Several year overview of fish migrations. It enables to draw 2 compare a year with statistics from several year, and to extract data
-#' This class need prior call from bilanMigration to fill in the t_bilanmigrationjour_bjo as it loads the data in this table
-#' @slot dc =Object of class \code{"RefDC"} The counting device of the fishway
-#' @slot taxons =Object of class \code{"RefTaxon"} : the fish taxa
-#' @slot stades =Object of class \code{"RefStades"} : the fish stage
-#' @slot data =Object of class \code{"RefStades"} : migration data
-#' @slot anneeDebut =Object of class \code{"RefAnnee"} : the starting year
-#' @slot anneeFin =Object of class \code{"RefAnnee"} : the finishing year
-#' @method connect
-#' @method supprime
-#' @method charge
-#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi} 
-#' @seealso     Other Bilan Class
-#'	\code{\linkS4class{Bilan_lot}}
-#'	\code{\linkS4class{Bilan_poids_moyen}}
-#'	\code{\linkS4class{Bilan_stades_pigm}}	
-#'	\code{\linkS4class{Bilan_taille}}
-#'	\code{\linkS4class{BilanConditionEnv}}
-#'	\code{\linkS4class{BilanEspeces}}
-#'	\code{\linkS4class{BilanFonctionnementDC}}
-#'	\code{\linkS4class{BilanFonctionnementDF}}	
-#'	\code{\linkS4class{BilanMigration}}	
-#'	\code{\linkS4class{BilanMigrationConditionEnv}}
-#'	\code{\linkS4class{BilanMigrationInterAnnuelle}}
-#'	\code{\linkS4class{BilanMigrationPar}}	
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' Class "BilanMigrationConditionEnv"
+#' 
+#' Enables to compute an annual overview of fish migration and environmental
+#' conditions in the same chart
+#' 
+#' 
+#' @include RefAnnee.r
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' 	\code{new("BilanMigrationConditionEnv",
+#' 	bilanMigration=new("BilanMigration"),
+#' 	bilanConditionEnv=new("BilanConditionEnv"))}.  
+#' \describe{
+#' 	\item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
+#' 	migration overview }\item{:}{Object of class \code{"BilanMigration"} The
+#' 	migration overview } \item{list("bilanConditionEnv")}{Object of class
+#' 	\code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
+#' 	class \code{"BilanConditionEnv"} The environmental overview} }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' 	\code{\linkS4class{Bilan_poids_moyen}}
+#' 	\code{\linkS4class{Bilan_stades_pigm}} 
+#' 	\code{\linkS4class{Bilan_taille}}
+#' 	\code{\linkS4class{BilanConditionEnv}} 
+#' 	\code{\linkS4class{BilanEspeces}}
+#' 	\code{\linkS4class{BilanFonctionnementDC}}
+#' 	\code{\linkS4class{BilanFonctionnementDF}}
+#' 	\code{\linkS4class{BilanMigration}}
+#' 	\code{\linkS4class{BilanMigrationConditionEnv}}
+#' 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' 	\code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @concept Bilan Object 
+#' @examples
+#' 
+#' showClass("BilanMigrationConditionEnv")
+#' 
+#' @export
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
 						dc="RefDC",
@@ -45,18 +54,17 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 )
 
 #' connect method for BilanMigrationInterannuelle class
-#' @returnType S4 class BilanMigrationInterannuelle
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			# tableau contenant toutes les annees
-			les_annees = (objet@anneeDebut@annee_selectionnee):(objet@anneeFin@annee_selectionnee)
-			tax = objet@taxons@data$tax_code
-			std = objet@stades@data$std_code
-			dic= objet@dc@dc_selectionne
+			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
+			tax = object@taxons@data$tax_code
+			std = object@stades@data$std_code
+			dic= object@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
@@ -65,10 +73,10 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			requete<-stacomirtools::connect(requete)
 			
 			# resultat de la requete
-			objet@data<- stacomirtools::killfactor(requete@query)
+			object@data<- stacomirtools::killfactor(requete@query)
 			
 			# recuperation des indices des annees presentes dans la base
-			index=unique(objet@data$bjo_annee) %in% les_annees
+			index=unique(object@data$bjo_annee) %in% les_annees
 			
 			# s'il manque des donnees pour certaines annees selectionnnees" 
 			if (length(les_annees[!index]>0)) 
@@ -82,20 +90,20 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.3,
 								paste(les_annees[index],collapse=","), "\n")) 
 			}  
-			return(objet)
+			return(object)
 		}
 )
 
 # supprime les enregistrements de la base pour l'annee courante
-# objet<-bmi
+# object<-bmi
 setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			# recuperation des annees taxons et stades concernes
-			les_annees = (objet@anneeDebut@annee_selectionnee):(objet@anneeFin@annee_selectionnee)
-			tax = objet@taxons@data$tax_code
-			std = objet@stades@data$std_code
-			dic= objet@dc@dc_selectionne
+			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
+			tax = object@taxons@data$tax_code
+			std = object@stades@data$std_code
+			dic= object@dc@dc_selectionne
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
@@ -109,44 +117,44 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 		}
 )
 
-#  objet = bilanMigrationInterAnnuelle
+#  object = bilanMigrationInterAnnuelle
 setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(objet,...)
+		definition=function(object,...)
 		{ 
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
 			}
 			if (exists("refTaxons",envir_stacomi)) {
-				objet@taxons<-get("refTaxons",envir_stacomi)
+				object@taxons<-get("refTaxons",envir_stacomi)
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
-				objet@stades<-get("refStades",envir_stacomi)
+				object@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
 				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
 			}
 			if (exists("anneeDebut",envir_stacomi)) {
-				objet@anneeDebut<-get("anneeDebut",envir_stacomi)
+				object@anneeDebut<-get("anneeDebut",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.10,arret=TRUE)
 			}  	
 			if (exists("anneeFin",envir_stacomi)) {
-				objet@anneeFin<-get("anneeFin",envir_stacomi)
+				object@anneeFin<-get("anneeFin",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)
 			}
-			objet<-connect(objet)
-			assign("bilanMigrationInterannuelle",objet,envir_stacomi)
+			object<-connect(object)
+			assign("bilanMigrationInterannuelle",object,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.11)
-			return(objet)
+			return(object)
 		}
 )
 # graphique de toutes les migrations interannuelles les unes sur les autres    
-# objet = bilanMigrationInterAnnuelle = objet
+# object = bilanMigrationInterAnnuelle = object
 hgraphBilanMigrationInterAnnuelle = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -156,7 +164,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		# TODO traitement des poids
 		dat=bilanMigrationInterAnnuelle@data        
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
+		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
 		# il faut un champ date, on ramene tout les monde �
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
@@ -197,9 +205,9 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="")        
 	if (length(the_choice)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choice),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(the_choice),1,just="center")))   
 		for(i in 1:length(the_choice))
 		{
 			amplitudechoice<-paste(the_choice[i],'/',amplitude)
@@ -236,6 +244,22 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 #'   @param timesplit "week"  "2 week" "month" as provided to seq.POSIXT
 #'   @return dat  a data frame with max mean min per time period
 #####################################################################
+
+
+
+
+
+
+#' statistics per time period
+#' 
+#' function called for bilamMigrationInterannelle objects renames columns
+#' replaces nulls, and calculates reports with time period larger than day
+#' 
+#' 
+#' @param dat a data frame
+#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT
+#' @return a data frame with mean, max, and min calculated for each timesplit
+#' @seealso \code{\linkS4class{Bilan_poids_moyen}}
 fundat=function(dat,timesplit=NULL)
 {
 	
@@ -244,7 +268,7 @@ fundat=function(dat,timesplit=NULL)
 		# ci dessous les calculs s'appliquent bien aux jours
 		# remplacement des valeurs manquantes par des zeros par creation d'une sequence journaliere
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-		dat<-chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
+		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
 		dat=dat[,c("annee","jour","valeur")] 
 		dat$jour=trunc.POSIXt(dat$jour, digits='days')
 		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
@@ -341,7 +365,10 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	g <- g+geom_step(data=tmp,col="black",lty=2)
 	g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,get("msg",envir_stacomi)$BilanMigrationInterannuelle.9,amplitude))
 	g<-g+scale_y_continuous(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.8)
-	g<-g+scale_x_date(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.7,breaks="months", minor_breaks="weeks", label=date_format("%b"),lim=range(dat[dat$valeur>0&dat$cumsum!=1,"jour"]))# date 
+	g<-g+scale_x_date(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.7,breaks="months", 
+			minor_breaks="weeks", 
+			labels=date_format("%b"),
+			limits=range(dat[dat$valeur>0&dat$cumsum!=1,"jour"]))# date 
 	g<-g+scale_colour_hue(name=get("msg",envir_stacomi)$BilanMigrationInterannuelle.6,l=70, c=150)# annee
 	print(g) 
 	assign("g",g,envir_stacomi)
@@ -384,9 +411,9 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 	levels(newdat[,timesplit])<-newdat[,timesplit] # to have the factor in the right order from january to dec
 	if (length(thechoice)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(thechoice),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(thechoice),1,just="center")))   
 		for(i in 1:length(thechoice))  { 
 			selection=as.numeric(as.character(dat$annee))==as.numeric(thechoice)[i] 
 			tmp <- dat[selection,]
@@ -460,9 +487,9 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 	
 	if (length(the_choice)>0) { 
 		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid.newpage()
-		pushViewport(viewport(layout = grid.layout(length(the_choice),1,just="center")))   
+		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+		grid::grid.newpage()
+		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(the_choice),1,just="center")))   
 		for(i in 1:length(the_choice))  { 
 			selection=as.numeric(as.character(dat$annee))==as.numeric(the_choice)[i] 
 			tmp <- dat[selection,]
@@ -525,10 +552,12 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 		dat=dat[order(dat$annee,dat[,timesplit]),]
 		g <- ggplot(dat,aes_string(x=timesplit,y="std_valeur"))
 		g<-g+geom_area(aes_string(y="std_valeur",fill="annee"),position="stack")
-		g <- g+scale_x_datetime(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("Refperiode"),timesplit),label=date_format("%b"),
-				lim=as.POSIXct(c(trunc.POSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),ceil.POSIXt((max(dat[dat$valeur!="0",timesplit])),"month")))) 
+		g <- g+scale_x_datetime(name=paste("mois"),breaks="month",
+				minor_breaks=getvalue(new("Refperiode"),timesplit),
+				labels=date_format("%b"),
+				limits=as.POSIXct(c(trunc.POSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),ceil.POSIXt((max(dat[dat$valeur!="0",timesplit])),"month")))) 
 		g <- g+scale_y_continuous(name="Somme des pourcentages annuels de migration par quinzaine")
-		cols <- rainbow(length(levels(dat$annee)))
+		cols <- grDevices::rainbow(length(levels(dat$annee)))
 		g <- g+scale_fill_manual(name="annee",values=cols)
 		g<-g+labs(title=paste(bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,",",bilanMigrationInterAnnuelle@stades@data$std_libelle,
 						", saisonnalite de la migration")) 
@@ -550,10 +579,15 @@ htableBilanMigrationInterAnnuelle = function(h,...)
 	# TODO traitement des poids
 	dat=bilanMigrationInterAnnuelle@data
 	dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-	dat<-chnames(dat,c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur","bjo_horodateexport"),    c("DC","Taxon","Stade","Annee","Jour","Label_quantite","Nombre","Date d'export du bilan"))
+	dat<-stacomirtools::chnames(dat,c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur","bjo_horodateexport"),    c("DC","Taxon","Stade","Annee","Jour","Label_quantite","Nombre","Date d'export du bilan"))
 	dat$Annee=as.factor(dat$Annee)
 	dat = dat[,-1]
 	tmp = dat$Jour
 	DC = bilanMigrationInterAnnuelle@dc@dc_selectionne
-	funtable(tableau=dat,duree=tmp,taxon=bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,stade=bilanMigrationInterAnnuelle@stades@data$std_libelle,DC,resum=NULL)
+	funtable(tableau=dat,
+			time.sequence=tmp,
+			taxon=bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,
+			stade=bilanMigrationInterAnnuelle@stades@data$std_libelle,
+			DC,
+			resum=NULL)
 }

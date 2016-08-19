@@ -2,19 +2,36 @@
 # Projet :             controle migrateur calmig/prog/classe
 # Date de creation :   31/03/2008 17:21:18
 
-#' @title #' Class Bilan espece Report of the species present at a counting device for a given period
-#' this class is used to make the assessment of all species, and their number, per month
-#' #' it writes an histogram of number per month
-#' class BilanEspeces 
-#' @slot dc="RefDC"
-#' @slot horodate="RefHorodate"
-#' @slot stades="RefStades"
-#' @slot datedebut="POSIXlt"
-#' @slot datefin="POSIXlt"
-#' @slot data="data.frame"
-#' @slot duree="POSIXct"
-#' @slot liste="RefListe" lists the possible value of time period
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' Class "BilanEspeces" Report of the species present at a counting device for
+#' a given period
+#' 
+#' this class is used to make the assessment of all species, and their number,
+#' per month it writes either an histogram or a pie chart of number per
+#' year/week/month
+#' 
+#' 
+#' @include RefDC.r
+#' @include RefListe.r
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanEspeces", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @concept Bilan Object 
+#' @examples
+#' 
+#' showClass("BilanEspeces")
+#' 
+#' @export 
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
@@ -39,10 +56,10 @@ setValidity("BilanEspeces",function(object)
 
 #' connect method for BilanEspeces
 #' @return bilanEspeces instance with request corresponding to the user choices
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("connect",signature=signature("BilanEspeces"),definition=function(objet) {
-			bilanEspeces<-objet # pour faciliter la debug, l'argument formel de la classe doit etre forcement objet !
+setMethod("connect",signature=signature("BilanEspeces"),definition=function(object) {
+			bilanEspeces<-object # pour faciliter la debug, l'argument formel de la classe doit etre forcement object !
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@datedebut=bilanEspeces@datedebut
@@ -75,7 +92,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 #' traite eventuellement les quantites de lots (si c'est des civelles)
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hBilanEspecescalc=function(h,...){
 	charge(h$action)
@@ -85,12 +102,12 @@ hBilanEspecescalc=function(h,...){
 #' charge method for BilanEspeces
 #' verifies the content of objects and calls the connect method
 #' @return BilanEspeces with slots filled by user choice
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @expamples bilanEspeces=new("BilanEspeces")
-setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet,...){
+#' @examples bilanEspeces=new("BilanEspeces")
+setMethod("charge",signature=signature("BilanEspeces"),definition=function(object,...){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
-			bilanEspeces<-objet
+			bilanEspeces<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanEspeces@dc<-get("refDC",envir_stacomi)
 			} else {
@@ -120,12 +137,12 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objet
 		})
 
 
-#' handler du calcul hCamembert
-#' trace un camembert des especes ou un camembert par periode...
-#' @note pas besoin de refaire tourner calcul si une autre liste � �t� charg�e, les effectifs <0 sont transform�s en positifs
-#' @param h 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' handler for pie chart
+#' draws a pie chart of species or a pie chart per period
+#' @note no need to re-run calcul if another list has been loaded, negative numbers are converted to positive
+#' @param h handler
+#' @param ... other parameters passed to the function
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 
 hCamembert = function(h,...) {	
@@ -176,7 +193,7 @@ hCamembert = function(h,...) {
 	} else if (nb<=12){
 		p<-g+scale_fill_brewer(palette="Set3",name="Taxa")   
 	}else{
-		g<-g+scale_fill_manual(values=rainbow(nb))
+		g<-g+scale_fill_manual(values=grDevices::rainbow(nb))
 	}
 	if(h$action=="pie"){
 		g<-g+ coord_polar(theta="y", start=pi)+xlab('') +ylab('')
@@ -191,7 +208,7 @@ hCamembert = function(h,...) {
 #' dans des fichiers csv
 #' @param h 
 #' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hTableBilanEspeces=function(h,...) {
 	if (exists("bilanEspeces",envir_stacomi)) {
@@ -230,15 +247,15 @@ hTableBilanEspeces=function(h,...) {
 }
 
 #' Interface for BilanEspece class
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @expamples interface_BilanEspeces()
+#' @examples interface_BilanEspeces()
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)
 	funout(get("msg",envir=envir_stacomi)$interface_BilanEspeces.1)
 	bilanEspeces@dc=charge(bilanEspeces@dc)   
-	bilanEspeces@liste=charge(objet=bilanEspeces@liste,
+	bilanEspeces@liste=charge(object=bilanEspeces@liste,
 			vecteur=c("aucun","semaine","mois","annee"),
 			label=get("msg",envir=envir_stacomi)$interface_BilanEspeces.7)
 	quitte()
@@ -258,7 +275,7 @@ interface_BilanEspeces=function(){
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
-	choice(bilanEspeces@dc,objetBilan=bilanEspeces,is.enabled=TRUE)
+	choice(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
 	choice(bilanEspeces@liste)	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)

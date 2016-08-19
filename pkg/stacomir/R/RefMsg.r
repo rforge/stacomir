@@ -5,36 +5,43 @@
 # Contact :            cedric.briand"at"eptb-vilaine.fr
 # Date de creation :   31/03/2008 17:21:30
 
-#' @title Refstades referential class to load message according to the langage chosen
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @slot data="data.frame"
-#' @expamples objet=new("RefMsg")
+#' RefMsg referential class to load message according to the language chosen
+#' 
+#' @slot data A data.frame
+#' @section Methods: \describe{ \item{createmessage}{\code{signature(object =
+#' "RefMsg")}: creates a message } }
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
+
+
 #' Loading method for RefMsg referential objects
+#' 
 #' loads the common table ts_messager_msr
-#' @returnType S4 object
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @expamples 
-#'  objet=new("RefMsg")
-#'  charge(objet)
-setMethod("charge",signature=signature("RefMsg"),definition=function(objet) {
+#' @family Referential objects
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#'  object=new("RefMsg")
+#'  charge(object)
+setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 			req=new("RequeteODBC")
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			req@sql="SELECT * from ref.ts_messager_msr  ORDER BY msr_id ASC ;"
-			req=connect(req)  # appel de la methode connect de l'objet requeteODBC
-			objet@messager<-req@query
-			return(objet)
+			req<-stacomirtools::connect(req)  # appel de la methode connect de l'object requeteODBC
+			object@messager<-req@query
+			return(object)
 		})
 
-#' Loading method for RefMsg referential objects searching ref.ts_messagerlang_mrl for the lines corresponding to lang
-#' @returnType S4 object
+#' Loading method for RefMsg referential objects
+#' 
+#'  searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 #' @return An S4 object of class RefMsg
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @exportMethod
-#'  objet=new("RefMsg")
-#'  charge_avec_filtre(objet,lang='French')
-setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(objet,lang) {
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#'  object=new("RefMsg")
+#'  charge_avec_filtre(object,lang='French')
+#' @export
+setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(object,lang) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("SELECT mrl_id,mrl_msr_id,	mrl_text", 
@@ -42,22 +49,23 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 			requete@where=stringr::str_c("where mrl_lang='",lang,"'")
 			requete@order_by="ORDER BY mrl_msr_id ASC"  
 			requete<-stacomirtools::connect(requete)  
-			objet@messagerlang<-requete@query
-			return(objet)
+			object@messagerlang<-requete@query
+			return(object)
 		})
+
 #' createmessage method for RefMsg referential objects 
-#' @returnType S4 object
+#' 
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#'  objet=new("RefMsg")
-setMethod("createmessage",signature=signature("RefMsg"),definition=function(objet) {
-			objet<-charge(objet)
-			objet<-charge_avec_filtre(objet,lang=get("lang",envir=envir_stacomi))
-			if (nrow(objet@messager)!=nrow(objet@messagerlang)) stop("internal error, check messager and messagerlang length, they should match")
+setMethod("createmessage",signature=signature("RefMsg"),definition=function(object) {
+			#object=new("RefMsg")
+			object<-charge(object)
+			object<-charge_avec_filtre(object,lang=get("lang",envir=envir_stacomi))
+			if (nrow(object@messager)!=nrow(object@messagerlang)) stop("internal error, check messager and messagerlang length, they should match")
 			msg=list()
-			buildmsg<-merge(objet@messager,objet@messagerlang,by.x="msr_id",by.y="mrl_msr_id")
+			buildmsg<-merge(object@messager,object@messagerlang,by.x="msr_id",by.y="mrl_msr_id")
 			buildmsg$msr_endofline2<-ifelse(as.logical(buildmsg$"msr_endofline"),"\n","")
 			buildmsg1<-apply(buildmsg,1,function(X)stringr::str_c(X["msr_element"],
 								".",

@@ -3,6 +3,12 @@
 # Description :       graph pour bilan migration journalier civelles
 
 
+
+
+
+
+
+
 #' Graph function for glass eel migration. Differs from fungraph as it does not
 #' draw the ggplot graph for month
 #' 
@@ -10,16 +16,18 @@
 #' eel have been counted through weight or numbers
 #' 
 #' 
-#' @usage fungraph_civelle(bilanMigration, table, duree, taxon, stade)
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
-#' @param table=tableau a data frame with the results
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
+#' #' object of class \code{\linkS4class{BilanMigrationMult}}
+#' @param table a data frame with the results
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @export
-fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
+#' @param dc the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 # calcul des variables
+	# pour adapter aux bilanMigrationMult, ligne par d�faut...
+	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
 	mois= months(duree)
 	jour= strftime(as.POSIXlt(duree),"%j")
@@ -30,9 +38,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	fin=unclass(as.Date(duree[max(index)]))[[1]]
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
-	
-	bilanMigration<-bilanMigration
-	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne])
+	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n"))
 	###################################
 	# Graph annuel couvrant sequence >0
@@ -41,11 +47,11 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	vec<-c(rep(1,15),rep(2,2),rep(3,2),4,rep(5,6))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
-	mypalette<-brewer.pal(12,"Paired")
-	#par("bg"=gray(0.8))
-	par("mar"=c(3, 4, 3, 2) + 0.1)
-	#mypalette<-rainbow(20)
-	plot(as.Date(duree),eff/1000,
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
+	#par("bg"=grDevices::gray(0.8))
+	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
+	#mypalette<-grDevices::rainbow(20)
+	plot(as.Date(duree,"Europe/Paris"),eff/1000,
 			col=mypalette[8],
 			type="h",
 			xlim=c(debut,fin),
@@ -75,7 +81,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.15,
-			labels=paste(round(sum(table$poids_depuis_effectifs)/1000,2)," kg"),
+			labels=paste(round(sum(table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette[8], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8 ,
@@ -85,7 +91,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			adj=1)
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
-			labels=paste(round(sum(table$Poids_total)/1000,2)," kg"),
+			labels=paste(round(sum(table$Poids_total,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette[10], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8,
@@ -95,7 +101,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			adj=1)
 	text(  x=debut+3+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.1,
-			labels=paste(round(sum(table$Poids_total,table$poids_depuis_effectifs)/1000,2)," kg"),
+			labels=paste(round(sum(table$Poids_total,table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col="black", 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8,
@@ -120,9 +126,9 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			"AND ope_date_fin <= '" ,
 			as.Date(duree[max(index)]),
 			" 00:00:00' ",
-			"AND ope_dic_identifiant=",bilanMigration@dc@dc_selectionne,
+			"AND ope_dic_identifiant=",dc,
 			"ORDER BY ope_date_debut; ",sep = "")
-	t_operation_ope<-connect(req)@query
+	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
@@ -132,16 +138,16 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	
 
 	req@sql<-fn_sql_dis(per_dis_identifiant=
-					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne],
+					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
-	fonctionnementDF<-connect(req)@query
+	fonctionnementDF<-stacomirtools::connect(req)@query
 	
 	
-	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@dc_selectionne,
+	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
 			dateDebut=as.Date(duree[min(index)]),
 			dateFin=as.Date(duree[max(index)]))
-	fonctionnementDC<-connect(req)@query
+	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
 	graphdate<-function(vectordate){
@@ -154,7 +160,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	# creation d'un graphique vide (2)
 	###################################
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -246,7 +252,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         
@@ -254,7 +260,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	###################################                 
 	
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -344,7 +350,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         
@@ -352,7 +358,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	###################################                 
 	
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(duree),
 			seq(0,1,length.out=length(eff)),
 			xlim=c(debut,fin), 
@@ -370,7 +376,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			ybottom=0,
 			xright=graphdate(as.Date(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = brewer.pal(4,"Paired"),
+			col = RColorBrewer::brewer.pal(4,"Paired"),
 			border = NA, 
 			lwd = 1)
 	
@@ -378,7 +384,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 	###################################
 	# Graph mensuel 
 	####################################
-	par("mar"=c(4, 4, 1, 2) + 0.1)
+	graphics::par("mar"=c(4, 4, 1, 2) + 0.1)
 	petitmois=substr(as.character(mois),1,3)
 	effmois=tapply(eff, mois, sum, na.rm=TRUE)[c(5,4,9,2,8,7,6,1,12,11,10,3)]
 	effmois.p=tapply(eff.p, mois, sum, na.rm=TRUE)[c(5,4,9,2,8,7,6,1,12,11,10,3)]
@@ -388,35 +394,35 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade){
 			cbind(effmois.p,"type"="1","mois"=1:12))
 	
 	
-	superpose.polygon<-trellis.par.get("superpose.polygon")
+	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
 	superpose.polygon$col=   mypalette[c(10,8)]
 	superpose.polygon$border=FALSE
-	trellis.par.set("superpose.polygon",superpose.polygon)
-	fontsize<-trellis.par.get("fontsize")
+	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
+	fontsize<-lattice::trellis.par.get("fontsize")
 	fontsize$text=10
-	trellis.par.set("fontsize",fontsize)
-	par.main.text<-trellis.par.get("par.main.text")
+	lattice::trellis.par.set("fontsize",fontsize)
+	par.main.text<-lattice::trellis.par.get("par.main.text")
 	par.main.text$cex=1
 	par.main.text$font=1
-	trellis.par.set("par.main.text",par.main.text)
+	lattice::trellis.par.set("par.main.text",par.main.text)
 	
 	
-	par.ylab.text<-trellis.par.get("par.ylab.text")
+	par.ylab.text<-lattice::trellis.par.get("par.ylab.text")
 	par.ylab.text$cex=0.8
-	trellis.par.set("par.ylab.text",par.ylab.text) 
-	par.xlab.text<-trellis.par.get("par.xlab.text")
+	lattice::trellis.par.set("par.ylab.text",par.ylab.text) 
+	par.xlab.text<-lattice::trellis.par.get("par.xlab.text")
 	par.xlab.text$cex=0.8
-	trellis.par.set("par.xlab.text",par.xlab.text)
+	lattice::trellis.par.set("par.xlab.text",par.xlab.text)
 	
 	
-	bar<-barchart(eff/1000~as.factor(mois),
+	bar<-lattice::barchart(eff/1000~as.factor(mois),
 			groups=as.factor(type),
 			xlab=get("msg",envir=envir_stacomi)$fungraph_civelle.14,
 			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.15,
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-			key=simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
+			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
 					rectangles = TRUE, 
 					points=FALSE, 
 					x=0.70,

@@ -1,8 +1,7 @@
 # Nom fichier :        interface_BilanMigrationInterAnnuelle.R    (interface)
 
 #' interface for BilanMigrationInterannuelle class
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationInterAnnuelle = function()
 {
 	quitte() # vidange de l'interface
@@ -31,10 +30,10 @@ interface_BilanMigrationInterAnnuelle = function()
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==max(bilanMigrationInterAnnuelle@anneeFin@data)))
-	choice(bilanMigrationInterAnnuelle@dc,objetBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
+	choice(bilanMigrationInterAnnuelle@dc,objectBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
 	
 	# dans l'ordre 
-	# dans le handler, modifier le contenu de l'objet fils si il existe
+	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choice pour l'affichage du fils si il existe
 	### premiere toobar

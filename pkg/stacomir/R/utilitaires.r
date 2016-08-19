@@ -5,6 +5,20 @@
 #############################################
 # functions copied from Hmisc
 #############################################
+
+
+
+
+
+
+#' monthDays function imported from depuis Hmisc that cannot be loaded for
+#' reasons of compatibility with xtable
+#' 
+#' monthDays function imported from depuis Hmisc
+#' 
+#' 
+#' @param time A POSIXt or Date object describing the month or year in question
+#' @author Charles Dupont
 monthDays<-
 		function (time) 
 {
@@ -16,7 +30,6 @@ monthDays<-
 #' round.POSIXT function imported from  Hmisc that cannot be loaded
 #' @param x 
 #' @param digits 
-#' @returnType POSIXct
 #' @return a rounded time value
 #' @author Charles Dupont
 round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
@@ -55,11 +68,19 @@ round.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 				})
 	return(trunc(as.POSIXct(x), digits = units))
 }
-#' trunc.POSIXT function imported from depuis Hmisc that cannot be loaded 
-#' @param x 
-#' @param digits 
-#' @returnType POSIXlt
-#' @return a truncated time value
+
+
+
+
+#' trunc.POSIXt function copied from Hmisc that cannot be
+#' loaded in Rforge
+#' 
+#' 
+#' @param x Date to be floored, ceilinged, truncated, or rounded
+#' @param digits Unit to that is is rounded up or down to, called digit for
+#' compatibility with round or trunc generic method
+#' @param \dots Further arguments to be passed to or from other methods
+#' @return An object of class POSIXlt.
 #' @author Charles Dupont
 trunc.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
 				"years"), ...) 
@@ -102,9 +123,10 @@ trunc.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 	return(x)
 }
 #' ceil.POSIXT function imported from depuis Hmisc that cannot be loaded 
-#' @param x 
+#' 
+#' 
+#' @param x A POSIXt
 #' @param digits 
-#' @returnType POSIXlt
 #' @return a truncated time value
 #' @author Charles Dupont
 ceil.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months", 
@@ -156,10 +178,18 @@ ceil.POSIXt<-function (x, digits = c("secs", "mins", "hours", "days", "months",
 ###########################################
 # functions used by the graphical interface
 #############################################
-#' function used to clean the objects whithin the group and the graphes
-#' and also elements remaining in the envir_stacomi environment
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+
+
+
+
+
+
+#' function used to clean the objects whithin the group and the graphes and
+#' also elements remaining in the envir_stacomi environment
+#' 
+#' 
+#' @param \dots additional arguments passed to the function
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 quitte=function(...){
 	if (exists("ggroupboutonsbas")) delete(ggroupboutons,ggroupboutonsbas)
 	if (exists("group")) {
@@ -185,9 +215,8 @@ quitte=function(...){
 
 #' function used for some lattice graphes with dates 
 #' @param vectordate date or POSIXt 
-#' @returnType vector
 #' @return vectordate (without class)
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 graphdate<-function(vectordate){
 	vectordate<-as.POSIXct(vectordate)
 	attributes(vectordate)<-NULL
@@ -195,24 +224,40 @@ graphdate<-function(vectordate){
 	return(vectordate)
 }
 
-#' function used to remove special non utf8 character which cause the gtk interface to crash 
-#' @param text 
-#' @returnType character
+
+
+
+
+
+
+#' function used to remove special non utf8 character which cause the gtk
+#' interface to crash
+#' 
+#' 
+#' @param text a text string which might contain no utf8 characters
 #' @return text
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fun_char_spe<-function(text){
 	text=gsub("\u00e9","e",text) #é
 	text=gsub("\u00e8","e",text) #è
 	text=gsub("\u00ea","e",text) #ê
 	text=gsub("\u00e0","a",text) #à
 	return(text)}
+
+
+
+
+
+
 #' this function uses gfile, edits a text with info and changing colors
-#' @param text 
-#' @param arret 
-#' @param wash 
-#' @returnType 
-#' @return nblignes assigned in .Global
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' 
+#' 
+#' @param text The text to display both in the gtk interface and in the R
+#' console
+#' @param arret Should this cause the program to stop ?
+#' @param wash Should the console be cleared after displaying the message
+#' @return nblignes Assigned in .Global
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funout<-function(text,arret=FALSE,wash=FALSE){
 	if (exists("gSortie")) {
 		if (wash) dispose(gSortie)
@@ -224,12 +269,29 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 		nbligne<<-nbligne
 	} 
 	# this is printed anyway
-	if(arret) stop(text) else print(text)
+	if(arret) stop(text) else print(text,quote=FALSE)
 }
-#' chargecsv loads the informations stored in c:/program files/stacomi/calcmig.csv file
-#' @returnType list
+
+
+
+
+
+
+#' chargecsv loads the informations stored in c:/program
+#' files/stacomi/calcmig.csv file
+#' 
+#' be sure to configure your odbc link to the
+#' database, the name is the name of the first column of the calcmig.csv file
+#' uid, pwd are identifier and password to connect to the database, they should
+#' correspond to your own schema in the database pgwd, is the path to the R
+#' source if you plan not to use the compiler but develop from source
+#' https://r-forge.r-project.org/scm/?group_id=1019 datawd, is the the
+#' directory where you want to place the outputs, mostly tables, from the
+#' program, default to ~//CalcmigData lang, is either one of French, English or
+#' Spanish
+#' 
 #' @return a list with the datawd place and the baseODBC vector
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 chargecsv=function(){ 
 	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
@@ -242,12 +304,12 @@ chargecsv=function(){
 	test<-file.access(filecsv,0)==0
 	# if the file does not open, we will switch to the file located within the package
 	if (test) {
-		doc<-read.csv(filecsv,header=TRUE,sep=";")
+		doc<-utils::read.csv(filecsv,header=TRUE,sep=";")
 		# then we test using the file from the package in the config folder
 	} else {
 		test2<-file.access(filecsvR,0)==0
 		if (test2) {
-			doc<-read.csv(filecsvR,header=TRUE,sep=";")
+			doc<-utils::read.csv(filecsvR,header=TRUE,sep=";")
 		} else {
 			stop("internal error, no access to the csv configuration file")
 		}		
@@ -258,17 +320,26 @@ chargecsv=function(){
 	datawd=tableau_config["datawd",]
 	lang=tableau_config["lang",]
 #pgwd=tableau_config["pgwd",]
-	baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",],tableau_config["host",],tableau_config["port",])
-	return(list("datawd"=datawd,"baseODBC"=baseODBC,"lang"=lang))
+	baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
+	sqldf.options=c(tableau_config["sqldf.uid",],tableau_config["sqldf.pwd",],tableau_config["sqldf.dbname",],tableau_config["sqldf.host",],tableau_config["sqldf.port",])
+	return(list("datawd"=datawd,"baseODBC"=baseODBC,"lang"=lang,"sqldf.options"=sqldf.options))
 }
 
 
-#' Transforms a vector into a string called within an sql command  e.g. c(A,B,C) => in ('A','B','C')
-#' @param vect 
-#' @returnType character
+
+
+
+
+#' Transforms a vector into a string called within an sql command e.g.
+#' c('A','B','C') => in ('A','B','C')
+#' 
+#' Transforms a vector into a string called within an sql command e.g. c(A,B,C)
+#' => in ('A','B','C')
+#' 
+#' 
+#' @param vect a character vector
 #' @return listsql a list of value
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
-#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 vector_to_listsql<-function(vect)
 {
 	

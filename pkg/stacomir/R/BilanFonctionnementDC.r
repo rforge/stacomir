@@ -1,22 +1,31 @@
-# Nom fichier :        BilanFonctionnementDC.R    (classe)
-# Projet :             controle migrateur / suivi passe
-# Organisme :          IAV/CSP
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   12/01/2009 14:38:09
-# Compatibilite :      
-# Etat :               developpement en cours, fonctionne 
-# programmer l'affichage du choice de la date  (classe horodate devt en cours) =>  PB � regler dans la relation calendar horodate
-# 05/02/2009 21:21:40 OK fonctionne
-# programmer les graphiques, et notamment les coupures entre les mois, a partir de la table des dates de debut et de fin
-# il faut inserer des lignes correspondant aux debuts et fin de mois afin qu'aucun intervalle ne se trouve a cheval sur deux mois
-# 05/02/2009 21:21:54 OK done => il faudra penser � inserer ce type de modif pour le fonctionnement du DF
-# Description          Calcul du fonctionnement du DC � partir des parametres
-#                      extraits de la base migrateur
-# Interface graphique : attribue au bouton DC
-# Creer un graphique ("en boites") des resultats de fonctionnement du DC avec deux choice de graphiques  OK fonctionne
-
-
+#' Class "BilanFonctionnementDC" Bilan du fonctionnement du dispositif de
+#' comptage
+#' 
+#' The counting device is not always working. It may me stopped either
+#' following a monitoring protocol, or due to misfunction of the device, this
+#' class allows to draw graphics allowing an overview of the device operation
+#' 
+#' 
+#' @section Objects from the Class: Objects can be created by calls of the form
+#' \code{new("BilanFonctionnementDC", ...)}.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' \code{\linkS4class{Bilan_poids_moyen}}
+#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
+#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
+#' \code{\linkS4class{BilanFonctionnementDC}}
+#' \code{\linkS4class{BilanFonctionnementDF}}
+#' \code{\linkS4class{BilanMigration}}
+#' \code{\linkS4class{BilanMigrationConditionEnv}}
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{BilanMigrationPar}}
+#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
+#' @concept Bilan Object 
+#' @examples
+#' 
+#' showClass("BilanFonctionnementDC")
+#' 
+#' @export 
 setClass(Class="BilanFonctionnementDC",
 		representation= representation(data="data.frame",
 				dc="RefDC",
@@ -28,11 +37,19 @@ setClass(Class="BilanFonctionnementDC",
 				requete=new("RequeteODBCwheredate"))
 )
 
-# Methode pour donner les attributs de la classe RequeteODBCwheredate correspondant � l'objet fonctionnement DC
-setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(objet,h) {
+
+
+
+#' connect method for BilanFonctionnementDC
+#' 
+#' loads the working periods and type of arrest or disfunction of the DC
+#' @return  An object of class \code{BilanFonctionnementDC}
+#' 
+#' @author cedric.briand
+setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
-			objet@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			objet@requete@select= sql<-paste("SELECT",
+			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			object@requete@select= sql<-paste("SELECT",
 					" per_dis_identifiant,",
 					" per_date_debut,",
 					" per_date_fin,",
@@ -42,41 +59,55 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" tar_libelle AS libelle",
 					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
-			objet@requete@colonnedebut<-"per_date_debut"
-			objet@requete@colonnefin<-"per_date_fin"
-			objet@requete@order_by<-"ORDER BY per_date_debut"
-			objet@requete@and<-paste("AND per_dis_identifiant=",objet@dc@dc_selectionne )
-#objet@requete@where=#defini dans la methode ODBCwheredate
-			objet@requete<-connect(objet@requete) # appel de la methode connect de l'objet ODBCWHEREDATE
+			object@requete@colonnedebut<-"per_date_debut"
+			object@requete@colonnefin<-"per_date_fin"
+			object@requete@order_by<-"ORDER BY per_date_debut"
+			object@requete@and<-paste("AND per_dis_identifiant=",object@dc@dc_selectionne )
+#object@requete@where=#defini dans la methode ODBCwheredate
+			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
 			funout(get("msg",envir_stacomi)$BilanFonctionnementDC.1)
-			return(objet)
+			return(object)
 		})
 
-setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(objet,h) {
+#' charge method for BilanFonctionnementDC
+#' 
+#' used by the graphical interface to retreive the objects of Referential classes
+#' assigned to envir_stacomi
+#' @return  An object of class \code{BilanFonctionnementDC}
+#' 
+#' @author cedric.briand
+setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
 			if (exists("refDC",envir_stacomi)) {
-				objet@dc<-get("refDC",envir_stacomi)
+				object@dc<-get("refDC",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)				}     
 			
 			if (exists("fonctionnementDC_date_debut",envir_stacomi)) {
-				objet@requete@datedebut<-get("fonctionnementDC_date_debut",envir_stacomi)@horodate
+				object@requete@datedebut<-get("fonctionnementDC_date_debut",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)	
 			}
 			
 			if (exists("fonctionnementDC_date_fin",envir_stacomi)) {
-				objet@requete@datefin<-get("fonctionnementDC_date_fin",envir_stacomi)@horodate
+				object@requete@datefin<-get("fonctionnementDC_date_fin",envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)	
 			}			
-			objet<-connect(objet)			
-			return(objet)
+			object<-connect(object)			
+			return(object)
 		})
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
 # Compte tenu de la structure des donnees ce n'est pas si simple... 
 
+#' Function to create a barchart (lattice) corresponding to the periods
+#' @param h A handler
+#' @param ... 
+#' @return assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi
+#' 
+#' @author cedric.briand
+#' @export
 funbarchartDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	
@@ -120,17 +151,17 @@ funbarchartDC = function(h,...) {
 	t_periodefonctdispositif_per_mois$mois1<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
 	t_periodefonctdispositif_per_mois$mois<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
 	t_periodefonctdispositif_per_mois$annee<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
-	superpose.polygon<-trellis.par.get("superpose.polygon")
+	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
 	superpose.polygon$col<-c("#4C00FF","orange")    
 	superpose.polygon$border<-FALSE
-	trellis.par.set("superpose.polygon",superpose.polygon) 
-	bar<-barchart(
+	lattice::trellis.par.set("superpose.polygon",superpose.polygon) 
+	bar<-lattice::barchart(
 			as.numeric(t_periodefonctdispositif_per_mois$sumduree)~as.factor(t_periodefonctdispositif_per_mois$mois)|as.factor(t_periodefonctdispositif_per_mois$annee),
 			groups=t_periodefonctdispositif_per_mois$per_tar_code,
 			stack=TRUE,
 			xlab=get("msg",envir_stacomi)$BilanFonctionnementDC.3,
 			ylab=get("msg",envir_stacomi)$BilanFonctionnementDC.4,
-			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,fonctionnementDC@dc@dc_selectionne), gp=gpar(col="grey", fontsize=8)), 
+			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,fonctionnementDC@dc@dc_selectionne), gp=grid::gpar(col="grey", fontsize=8)), 
 			auto.key=list(rectangles=TRUE,space="bottom",
 					text=c(get("msg",envir_stacomi)$BilanFonctionnementDC.6,get("msg",envir_stacomi)$FonctionnementDC.7)),
 			scales= list(x=list(t_periodefonctdispositif_per_mois$mois),
@@ -140,6 +171,13 @@ funbarchartDC = function(h,...) {
 	funout(get("msg",envir_stacomi)$BilanFonctionnementDC.8)	
 }   
 
+
+#' function used for some lattice graph 
+#' 
+#' @param h A handler
+#' @param ... 
+#' @export
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDC = function(h,...) {  
 	fonctionnementDC=charge(fonctionnementDC)
 	
@@ -150,9 +188,10 @@ funboxDC = function(h,...) {
 	duree<-seq.POSIXt(from=fonctionnementDC@requete@datedebut,to=fonctionnementDC@requete@datefin,by="day")
 	debut<-unclass(as.Date(duree[1]))[[1]]
 	fin<-unclass(as.Date(duree[length(duree)]))[[1]]
-	mypalette<-brewer.pal(12,"Paired")
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#display.brewer.all()
-	mypalette1<-c("#1B9E77","#AE017E","orange", brewer.pal(12,"Paired"))
+	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
+
 	graphdate<-function(vectordate){
 		attributes(vectordate)<-NULL
 		unclass(vectordate)
@@ -171,23 +210,23 @@ funboxDC = function(h,...) {
 			#bty="n",
 			cex=0.8)
 	r <- as.Date(round(range(duree), "day"))
-	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
+	graphics::axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {    # s'il n'y a pas de periode de fontionnement dans la base
-		rect(   xleft=debut, 
+		graphics::rect(   xleft=debut, 
 				ybottom=0.6,
 				xright=fin,
 				ytop=0.9, 
 				col = mypalette[4],
 				border = NA, 
 				lwd = 1)                     
-		rect(   xleft=debut, 
+		graphics::rect(   xleft=debut, 
 				ybottom=0.1,
 				xright=fin,
 				ytop=0.4, 
 				col = mypalette[1],
 				border = NA, 
 				lwd = 1)
-		legend(  x= "bottom",
+		graphics::legend(  x= "bottom",
 				legend=get("msg",envir_stacomi)$BilanFonctionnementDC.10 ,# three terms in the legend
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
@@ -197,7 +236,7 @@ funboxDC = function(h,...) {
 	} else {
 		
 		if (sum(t_periodefonctdispositif_per$per_etat_fonctionnement==1)>0){ 
-			rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==1])), 
+			graphics::rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==1])), 
 					ybottom=0.6,
 					xright=graphdate(as.Date(t_periodefonctdispositif_per$per_date_fin[t_periodefonctdispositif_per$per_etat_fonctionnement==1])),
 					ytop=0.9, 
@@ -205,7 +244,7 @@ funboxDC = function(h,...) {
 					border = NA, 
 					lwd = 1) }
 		if (sum(t_periodefonctdispositif_per$per_etat_fonctionnement==0)>0)                           { 
-			rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==0])), 
+			graphics::rect(   xleft =graphdate(as.Date(t_periodefonctdispositif_per$per_date_debut[t_periodefonctdispositif_per$per_etat_fonctionnement==0])), 
 					ybottom=0.6,
 					xright=graphdate(as.Date(t_periodefonctdispositif_per$per_date_fin[t_periodefonctdispositif_per$per_etat_fonctionnement==0])),
 					ytop=0.9, 
@@ -221,7 +260,7 @@ funboxDC = function(h,...) {
 		
 		for (j in 1 : length(listeperiode)){
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17)   
-			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
+			graphics::rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=0.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=0.4, 
@@ -229,7 +268,7 @@ funboxDC = function(h,...) {
 					border = NA, 
 					lwd = 1)        
 		}
-		legend  (x= debut,
+		graphics::legend  (x= debut,
 				y=0.6,
 				legend= get("msg",envir_stacomi)$BilanFonctionnementDC.11,
 				pch=c(15,15),
@@ -239,7 +278,7 @@ funboxDC = function(h,...) {
 				text.width=(fin-debut)/6 ,
 				cex=0.8
 		)                                               
-		legend  (x= debut,
+		graphics::legend  (x= debut,
 				y=0.1,
 				legend= c(nomperiode),
 				pch=c(15,15),
@@ -249,11 +288,17 @@ funboxDC = function(h,...) {
 				text.width=(fin-debut)/4,
 				cex=0.8
 		)
-		text(x=debut,y=0.95, label=get("msg",envir_stacomi)$BilanFonctionnementDC.12,font=4,pos=4) 
-		text(x=debut,y=0.45, label=get("msg",envir_stacomi)$BilanFonctionnementDC.13, font=4,pos=4)
+		graphics::text(x=debut,y=0.95, label=get("msg",envir_stacomi)$BilanFonctionnementDC.12,font=4,pos=4) 
+		graphics::text(x=debut,y=0.45, label=get("msg",envir_stacomi)$BilanFonctionnementDC.13, font=4,pos=4)
 	}
 }   
-#
+
+
+
+#' FuntableDC create a table output for BilanFonctionnementDC class
+#' @param h a handler
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 funtableDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	

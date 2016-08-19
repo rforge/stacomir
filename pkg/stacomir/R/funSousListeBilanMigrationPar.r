@@ -16,6 +16,20 @@
 # load(file="EXAMPLES/devt.Rdata")
 #@param  bilanMigrationPar
 #@return une liste de deux dataframe
+
+
+
+
+
+
+#' funSousListeBilanMigrationPar
+#' 
+#' see \code{funSousListeBilanMigration} This function is similar to
+#' bilanMigration but allows to count weights for a taxa and stage.
+#' 
+#' 
+#' @param bilanMigrationPar an object of class
+#' \code{\linkS4class{BilanMigrationPar}}
 funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	
 	# *********************
@@ -27,7 +41,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
-	assign("progres",winProgressBar(title = "cumul val. quant. par pas de temps",
+	assign("progres",utils::winProgressBar(title = "cumul val. quant. par pas de temps",
 					label = "progression %",
 					min = 0,
 					max = 1, 
@@ -42,15 +56,15 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	if (bilanMigrationPar@parqual@data$par_nom!="aucune"){
 		req@sql=paste("select val_identifiant from ref.tr_valeurparametrequalitatif_val where val_qal_code='",
 				bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		valeurs_qal=as.character(rs$val_identifiant)
 		req@sql=paste("select val_libelle from ref.tr_valeurparametrequalitatif_val where val_qal_code='",
 				bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		libelle_qal=as.character(rs$val_libelle)
 		valeurs_qal=c(valeurs_qal,"autre") # "tous" pour ceux qui n'ont pas de caracteristique qual correspondante
 		req@sql=paste("select par_nom from ref.tg_parametre_par join ref.tr_parametrequalitatif_qal on qal_par_code=par_code where par_code='",    bilanMigrationPar@parqual@data$par_code,"';",sep="")
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		nomparm=rs$par_nom
 		libelle_qal=c(libelle_qal,paste("Pas de parametre qualitatif :",nomparm)) 
 		stopifnot(length(valeurs_qal)==length(libelle_qal))
@@ -62,7 +76,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	#bilanMigrationPar@pasDeTemps@noPasCourant=as.integer(-(difftime(as.POSIXlt(strptime("2006-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")),as.POSIXlt(strptime("2006-03-27 00:00:00",format="%Y-%m-%d %H:%M:%S")),unit="days")))  
 	while (getnoPasCourant(bilanMigrationPar@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbPas
-		setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
+		utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))
 		#finPas=as.POSIXlt(DateFin(bilanMigrationPar@pasDeTemps)) # pour debug avoir quelque chose dans le resultset
@@ -91,7 +105,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			rs<-connect(req)@query
+			rs<-stacomirtools::connect(req)@query
 			# Recherche des coefficients pour ponderer le taux et des dates d'application des taux
 			datesDebutTauxEch=as.POSIXlt(rs$txe_date_debut)
 			datesFinTauxEch=as.POSIXlt(rs$txe_date_fin)
@@ -115,7 +129,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 				periodePas = 0  # var temporaire pour la duree d'application d'un certain taux
 				
 				# Boucle sur chaque taux et application d'un coefficient de ponderation
-				for (i in 1: lenth(lesTauxEch)) {
+				for (i in 1: length(lesTauxEch)) {
 					# tauxI * dureeI
 					periodePas = datesFinTauxEch[i] - datesDebutTauxEch[i]
 					tauxEch = tauxEch + as.double(lesTauxEch[i]*periodePas)
@@ -165,7 +179,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ;",sep="" )
 			
 			#cat(paste("Requete SQL : \n" , sql,  "\n"))
-			rs<-connect(req)@query
+			rs<-stacomirtools::connect(req)@query
 			
 			# Recherche des poids pour ponderer le coef et des dates d'application des coef
 			
@@ -196,7 +210,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			
 			# on multiplie le vecteur coeff par le vecteur des periodes pour obtenir une moyenne ponderee
 			coef = as.double(coef * periode)
-			# coef est un objet difftime avec methode sum non definie si je ne marque pas as.double
+			# coef est un object difftime avec methode sum non definie si je ne marque pas as.double
 			lescoeff=list()
 			# lescoeff = une liste dont le nom correspond au type et qui contient le coeff pondere
 			# on passe en revue les type de coefficient de conversion possible
@@ -326,7 +340,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		}# end else
 		
 		#cat(paste("Requete SQL : \n" , sql))
-		rs<-connect(req)@query
+		rs<-stacomirtools::connect(req)@query
 		#cat(nrow(rs))
 		if (nrow(rs)>0){
 			
@@ -387,8 +401,8 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		} 
 		j=nrow(tablecalcmig)+1
 		tablecalcmig[j,"No_pas"]=bilanMigrationPar@pasDeTemps@noPasCourant   
-		tablecalcmig[j,"Debut_pas"]=strftime(debutPas,format="%Y-%m-%d") # je passe en caractere sinon ne marche pas      
-		tablecalcmig[j,"Fin_pas"]=strftime(finPas,format="%Y-%m-%d")           
+		tablecalcmig[j,"debut_pas"]=strftime(debutPas,format="%Y-%m-%d") # je passe en caractere sinon ne marche pas      
+		tablecalcmig[j,"fin_pas"]=strftime(finPas,format="%Y-%m-%d")           
 		tablecalcmig[j,"taux_d_echappement"] = tauxEch
 		if (bilanMigrationPar@parqual@data$par_nom!="aucune") { # il existe des caracteristiques qualitatives de lot			
 			for (i in valeurs_qal){

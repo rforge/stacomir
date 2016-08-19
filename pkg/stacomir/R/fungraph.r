@@ -10,18 +10,35 @@
 #' 
 #' 
 #' @usage fungraph(bilanMigration, tableau, duree, taxon, stade)
-#' @param bilanMigration an objet of class \code{\linkS4class{BilanMigration}}
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param table=tableau a data frame with the results
 #' @param duree a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @author Cedric Briand \email{cedric.briand@@eptb-vilaine.fr}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
-#' @export
-fungraph=function(bilanMigration,tableau,duree,taxon,stade){
+
+
+
+
+
+
+#' Function for BilanMigration graphes including numbers DF DC operations
+#' 
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
+#' object of class \code{\linkS4class{BilanMigrationMult}}
+#' @param tableau a data frame with the results
+#' @param duree a vector POSIXt
+#' @param taxon the species
+#' @param stade the stage
+#' @param dc the dc, default to null, only necessary for  \code{\linkS4class{BilanMigrationMult}}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
-	if(length(unique(tableau$Type_de_quantite))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
+	# pour adapter aux bilanMigrationMult, ligne par d�faut...
+	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
+	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
 	mois= months(duree)
 	jour= strftime(as.POSIXlt(duree),"%j")
@@ -32,23 +49,23 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	x=1:nrow(tableau)
 	debut=unclass(as.POSIXct((min(duree))))[[1]] # attention arrondit � un jour de moins
 	fin=unclass(as.POSIXct(max(duree)))[[1]]
-	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne]) # commentaires sur le DC
+	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc]) # commentaires sur le DC
 	###################################
 	# Definition du layout
 	####################################
 	vec<-c(rep(1,15),rep(2,2),rep(3,2),rep(4,3))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
-	mypalette<-rev(brewer.pal(4,"Paired"))
-	#par("bg"=gray(0.8))
-	par("mar"=c(3, 4, 3, 2) + 0.1)
+	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
+	#par("bg"=grDevices::gray(0.8))
+	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
-	gr<-matplot(x,cbind(tableau$Mesure+tableau$Calcule+tableau$Expert+tableau$Ponctuel,
-					tableau$Mesure+tableau$Calcule+tableau$Expert,
-					tableau$Mesure+tableau$Calcule,
-					tableau$Mesure),
+	gr<-matplot(x,cbind(tableau$MESURE+tableau$CALCULE+tableau$EXPERT+tableau$PONCTUEL,
+					tableau$MESURE+tableau$CALCULE+tableau$EXPERT,
+					tableau$MESURE+tableau$CALCULE,
+					tableau$MESURE),
 			col=mypalette[1:4],
 			type=c("h","h","h","h"),
 			pch=16,
@@ -69,16 +86,16 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 		axis(side=1)
 	}  	
 	mtext(text=paste(get("msg",envir=envir_stacomi)$fungraph.6,
-					round(sum(tableau$Mesure+tableau$Calcule+tableau$Expert+tableau$Ponctuel))),
+					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE))),
 			side=3,
-			col=brewer.pal(5,"Paired")[5],
+			col=RColorBrewer::brewer.pal(5,"Paired")[5],
 			cex=0.8)
 	
 	legend(x=0,
-			y=max(tableau$Mesure+tableau$Calcule+tableau$Expert+tableau$Ponctuel,na.rm=TRUE),
+			y=max(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),
 			legend= get("msg",envir=envir_stacomi)$fungraph.5,
 			pch=c(16),
-			col=c(mypalette[1:4]))
+			col=rev(c(mypalette[1:4])))
 	
 	###################################         
 	# Requete de la base
@@ -90,9 +107,9 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 			strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			"' AND ope_date_fin <= '" ,
 			strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"),
-			"' AND ope_dic_identifiant=",bilanMigration@dc@dc_selectionne,
+			"' AND ope_dic_identifiant=",dc,
 			" ORDER BY ope_date_debut; ",sep = "")
-	t_operation_ope<-connect(req)@query
+	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
@@ -100,15 +117,15 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
 	
-	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne],
+	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
-	fonctionnementDF<-connect(req)@query
+	fonctionnementDF<-stacomirtools::connect(req)@query
 	
-	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@dc_selectionne,
+	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
 			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
-	fonctionnementDC<-connect(req)@query
+	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
 	
@@ -124,8 +141,8 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	###################################         
 	# creation d'un graphique vide (2)
 	###################################
-	mypalette<-brewer.pal(12,"Paired")
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -217,14 +234,14 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         
 	# creation d'un graphique vide (3)
 	###################################                 
 	
-	par("mar"=c(0, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -315,7 +332,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
 				ncol=7,
-				text.width=(fin-debut)/6)
+				text.width=(fin-debut)/10)
 	}
 	
 	###################################         
@@ -323,7 +340,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	###################################                 
 	
 	
-	par("mar"=c(2, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(2, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(duree),
 			seq(0,1,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -337,12 +354,12 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	###################################         
 	# operations
 	###################################  
-	if(is.odd(bilanMigration@dc@dc_selectionne)) brew="Paired" else brew="Accent"
+	if(stacomirtools::is.odd(bilanMigration@dc@dc_selectionne)) brew="Paired" else brew="Accent"
 	rect(   xleft =graphdate(as.POSIXct(t_operation_ope$ope_date_debut)), 
 			ybottom=0,
 			xright=graphdate(as.POSIXct(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = brewer.pal(8,brew),
+			col = RColorBrewer::brewer.pal(8,brew),
 			border = NA, 
 			lwd = 1)
 	
@@ -351,7 +368,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 	# Graph mensuel 
 	####################################
 	X11(7,4)
-	stktab=cbind(stack(tableau[,c(2,3,4,5)]),"duree"=rep(duree,4))
+	stktab=cbind(stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"duree"=rep(duree,4))
 	stktab<-funtraitementdate(stktab,
 			nom_coldt="duree",
 			annee=FALSE,
@@ -361,9 +378,16 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade){
 			jour_an=TRUE,
 			jour_mois=FALSE,
 			heure=FALSE)
+	stktab$ind<-factor(stktab$ind, levels = c("MESURE","CALCULE","EXPERT","PONCTUEL"))
 	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7
-	g<-ggplot(stktab, aes(x=mois,y=Effectifs,fill=type))+geom_bar(position="stack", stat="identity")+scale_fill_brewer(name="type",palette="Paired")
-	print(g)
+	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
+	g<-ggplot(stktab, aes(x=mois,y=Effectifs,fill=type))+
+			geom_bar(position="stack", stat="identity")+
+			scale_fill_manual(name="type",values=c("MESURE"=mypalette[4],
+							"CALCULE"=mypalette[3],
+							"EXPERT"=mypalette[2],
+							"PONCTUEL"=mypalette[1]))
+		print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
 }
 
