@@ -27,14 +27,14 @@ doc<-read.csv(filecsv,header=TRUE,sep=";")
 tableau_config = t(doc) 
 
 les_utilisateurs <- tableau_config[1]
-datawd=tableau_config["datawd",]
-assign("datawd",datawd,envir=envir_stacomi)
+#datawd=tableau_config["datawd",]
+#assign("datawd",datawd,envir=envir_stacomi)
 pgwd=tableau_config["pgwd",]
 baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
 setwd(pgwd)
-# pour voir apparaitre toutes les requ�tes dans R
+# pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
-source ("libraries.r")
+source ("F:/workspace/stacomir/branch0.5/stacomir/inst/config/libraries.r")
 
 libraries()
 
@@ -74,11 +74,12 @@ source("RefMsg.r")
 source("BilanFonctionnementDC.r")
 source("BilanFonctionnementDF.r")
 source("BilanMigration.r")
+source("BilanMigrationMult.r")
 source("BilanConditionEnv.r")
 source("BilanMigrationConditionEnv.r")
 source("BilanMigrationPar.r")
 source("BilanMigrationInterAnnuelle.r")
-source("Bilan_lot.r")
+source("Bilan_carlot.r")
 source("Bilan_taille.r") 
 source("Bilan_poids_moyen.r")
 source("BilanEspeces.r")
@@ -107,6 +108,9 @@ source("interface_BilanMigrationConditionEnv.r")
 source("interface_BilanMigrationPar.r")
 source("interface_BilanFonctionnementDC.r")
 source("interface_BilanFonctionnementDF.r")
-source("interface_graphique.r")
+source("interface_BilanMigrationMult.r")
+source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
- stacomi(gr_interface=TRUE)
+ stacomi(gr_interface=FALSE)
+ # pour aller chercher les donnees
+ setwd("F:/workspace/stacomir/branch0.5/stacomir")
