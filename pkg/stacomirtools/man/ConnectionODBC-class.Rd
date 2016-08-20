@@ -37,7 +37,8 @@ It has also been programmed to work without the stacomiR package, as it will tes
 \examples{
 showClass("ConnectionODBC")
 \dontrun{
- # this is the mother class, you don't have to use it, please use requeteODBC and daughter class instead
+ ## this is the mother class, you don't have to use it, 
+ ## please use requeteODBC and daughter class instead
  object<-new("ConnectionODBC")
  object@baseODBC<-c("myODBCconnection","myusername","mypassword")
  object@silent<-FALSE

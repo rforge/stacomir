@@ -2,7 +2,8 @@
 \alias{funhtml}
 \title{function used to print the html tables of output (see xtable documentation)}
 \usage{
-  funhtml(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=TRUE,digits=NULL,...)
+  funhtml(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,
+  append=TRUE,digits=NULL,...)
 }
 \arguments{
   \item{data}{a data frame}

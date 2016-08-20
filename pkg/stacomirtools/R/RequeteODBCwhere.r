@@ -45,8 +45,7 @@ setAs("RequeteODBCwhere","RequeteODBC",function(from,to){
 #' object<-connect(object)
 setMethod("connect",signature=signature("RequeteODBCwhere"),definition=function(object) {
 			requeteODBC=as(object,"RequeteODBC")
-			requeteODBC=connect(requeteODBC) # utilise la m�thode de la classe m�re
-			# r�cup�re au sein de l'object les �l�ments de requeteODBC
+			requeteODBC=connect(requeteODBC) # uses mother class method
 			object@sql=requeteODBC@sql
 			object@connection=requeteODBC@connection
 			object@query=requeteODBC@query
