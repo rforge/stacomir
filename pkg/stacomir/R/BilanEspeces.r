@@ -26,10 +26,6 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @examples
-#' 
-#' showClass("BilanEspeces")
-#' 
 #' @export 
 setClass(Class="BilanEspeces",
 		representation=
@@ -103,7 +99,6 @@ hBilanEspecescalc=function(h,...){
 #' @return BilanEspeces with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @examples bilanEspeces=new("BilanEspeces")
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(object,...){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
 			bilanEspeces<-object
@@ -247,7 +242,6 @@ hTableBilanEspeces=function(h,...) {
 #' Interface for BilanEspece class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @examples interface_BilanEspeces()
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)

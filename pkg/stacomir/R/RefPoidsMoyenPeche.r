@@ -23,10 +23,6 @@
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefPoidsMoyenPeche")
-#' 
 setClass(Class="RefPoidsMoyenPeche",representation=
 				representation(data="data.frame",datedebut="POSIXlt",datefin="POSIXlt"),
 		prototype=prototype(data=data.frame()))

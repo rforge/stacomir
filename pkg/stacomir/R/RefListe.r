@@ -23,10 +23,6 @@
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefListe")
-#' 
 setClass(Class="RefListe",representation= representation(listechoice="character",label="character"))
 
 
@@ -34,8 +30,10 @@ setClass(Class="RefListe",representation= representation(listechoice="character"
 #' @return An object of class RefListe
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefListe")
 #' charge(object)
+#' }
 setMethod("charge",signature=signature("RefListe"),definition=function(object,vecteur,label) {
 			object@listechoice=vecteur
 			object@label=label
@@ -45,11 +43,13 @@ setMethod("charge",signature=signature("RefListe"),definition=function(object,ve
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
+#' \dontrun{
 #'  object=new("RefListe")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' choice(object)
+#' }
 setMethod("choice",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
 			hlist=function(h,...){
 					valeurchoisie=svalue(choice)

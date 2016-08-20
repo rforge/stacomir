@@ -92,10 +92,6 @@ validite_PasDeTemps=function(object)
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @seealso \code{\linkS4class{PasDeTempsJournalier}}
 #' @concept Bilan Object
-#' @examples
-#' 
-#' showClass("PasDeTemps")
-#' 
 setClass(Class="PasDeTemps",representation=
 				representation(dateDebut="POSIXlt",dureePas="numeric",nbPas="numeric",noPasCourant="integer"),
 		validity=validite_PasDeTemps,

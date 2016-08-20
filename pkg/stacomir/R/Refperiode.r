@@ -10,10 +10,6 @@
 #' @keywords classes
 #' @slot data="data.frame" providing correspondance between period and their english names
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("Refperiode")
-#' new("Refperiode")
 setClass(Class="Refperiode",representation=
       representation(
           data="data.frame"          

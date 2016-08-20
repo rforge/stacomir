@@ -390,5 +390,5 @@ utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","g
 # Progressbar
 utils::globalVariables(c("progres"))
 # reoxygenize fails if data are not loaded
-setwd("F:/workspace/stacomir/branch0.5/stacomir")
-data("bMM_Arzal")
+#setwd("F:/workspace/stacomir/branch0.5/stacomir")
+#data("bMM_Arzal")

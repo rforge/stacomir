@@ -22,10 +22,6 @@
 #' \code{\linkS4class{RefStades}} 
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
-#' @keywords classes
-#' @examples
-#' 
-#' showClass("RefTaxon")
 setClass(Class="RefTaxon",representation= representation(data="data.frame" ))
 #' Loading method for RefTaxon referential objects
 #' 
@@ -106,13 +102,15 @@ setMethod("choice",signature=signature("RefTaxon"),definition=function(object,ob
 #' Multiple Choice method for Reftaxon referential objects, the graphical interface is built to allow
 #' for multiple choices. See load for method in the command line.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples  
+#' @examples 
+#' \dontrun{ 
 #'  object=new("RefTaxon")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' bilanMigration=new(BilanMigration)
 #' choicemult(object,objectBilan=bilanMigration)
+#' }
 setMethod("choicemult",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				htax=function(h,...){
@@ -204,10 +202,12 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 #' @param taxons The vector of taxon, can be either code (numeric) or latin name
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
+#' \dontrun{
 #' object=new("RefTaxon")
 #' object<-charge(object)
 #' objectBilan=new("BilanMigrationMult")
 #' choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
+#' }
 setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,taxons) {
 			if (is.null(taxons)) {
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.5,arret=TRUE)

@@ -22,10 +22,10 @@
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @examples
-#' 
+#' \donrun{
 #' showClass("Bilan_carlot")
 #' object=new("Bilan_carlot")
-#' 
+#' }
 #' @export 
 setClass(Class="Bilan_carlot",
 		representation= representation(

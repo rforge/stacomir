@@ -24,10 +24,6 @@
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefDC")
-#' 
 setClass(Class="RefDC",representation=
 				representation(dc_selectionne="integer",ouvrage="integer",station="character",data="data.frame") ,
 		prototype=prototype(dc_selectionne=integer(),ouvrage=integer(),station=character(),data=data.frame())

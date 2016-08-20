@@ -32,10 +32,6 @@
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
-#' @examples
-#' 
-#' showClass("RefCoe")
-#' 
 setClass(Class="RefCoe",representation=
 				representation(data="data.frame",datedebut="POSIXlt",datefin="POSIXlt"),
 		prototype=prototype(data=data.frame()))
@@ -46,10 +42,13 @@ setClass(Class="RefCoe",representation=
 #' The slots datedebut and datefin have to be filled before using charge
 #' @return Object of class RefCoe
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples object<- new("RefCoe")
+#' @examples 
+#' \dontrun{
+#' object<- new("RefCoe")
 #' object@datedebut<-strptime("01/01/1996",format="%d/%m/%Y")
 #' object@datefin<-strptime("01/01/1997",format="%d/%m/%Y")
 #' charge(object) 
+#' }
 setMethod("charge",signature=signature("RefCoe"),definition=function(object){
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)

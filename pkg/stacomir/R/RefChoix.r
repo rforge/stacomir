@@ -26,10 +26,6 @@
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefChoix")
-#' 
 setClass(Class="RefChoix",representation= representation(listechoice="character",label="character",selected="integer"))
 
 #' Loading method for Rechoice referential objects
@@ -41,9 +37,11 @@ setClass(Class="RefChoix",representation= representation(listechoice="character"
 #' @param vecteur A vector of name, see example code.
 #' @param selected An integer indicating which object is selected at launch
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' #' @examples 
-#'  object=new("RefChoix")
+#' @examples 
+#' \dontrun{
+#' object=new("RefChoix")
 #' charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
+#' }
 setMethod("charge",signature=signature("RefChoix"),definition=function(object,vecteur,label,selected) {
 			object@listechoice=vecteur
 			object@label=label

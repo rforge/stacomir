@@ -49,10 +49,10 @@
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @examples
-#' 
+#'  \donrun{
 #' showClass("Bilan_poids_moyen")
 #' object=new("Bilan_poids_moyen")
-#' 
+#' }
 #' @export 
 setClass(Class="Bilan_poids_moyen",        
 		representation= representation(data="data.frame",

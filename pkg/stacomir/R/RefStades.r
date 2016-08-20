@@ -21,18 +21,16 @@
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefStades")
-#' 
 setClass(Class="RefStades",representation=representation(data="data.frame") )
 
 #' Loading method for RefStades referential objects
 #' @return An S4 object of class RefStades
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefStades")
 #'  charge(object)
+#' }
 setMethod("charge",signature=signature("RefStades"),definition=function(object) {
 			req=new("RequeteODBC") 
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -45,10 +43,12 @@ setMethod("charge",signature=signature("RefStades"),definition=function(object) 
 #' @return An S4 object of class RefStades
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  object=new("RefStades")
 #'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne)
+#' }
 setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=function(object,dc_selectionne,taxon_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -70,13 +70,15 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefStades")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' bilanMigrationPar=new(BilanMigrationPar)
-#' # objectBilan=bilan_taille # pour autre test
+#' objectBilan=bilan_taille # for another test
 #' choice(object,objectBilan=bilanMigrationPar)
+#' }
 setMethod("choice",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hstd=function(h,...){
@@ -130,13 +132,15 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefStades")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' bilanMigrationPar=new(BilanMigrationPar)
-#' # objectBilan=bilan_taille # for other test
-#' choicemult(object,objectBilan=bilanMigrationPar)		
+#' objectBilan=bilan_taille # for other test
+#' choicemult(object,objectBilan=bilanMigrationPar)	
+#' }
 setMethod("choicemult",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			
 			if (nrow(object@data) > 0){
@@ -256,10 +260,12 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 #' @param stades the vector of stages chosen
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
+#' \dontrun{
 #'object=new("RefTaxon")
 #'object<-charge(object)
 #'objectBilan=new("BilanMigrationMult")
 #' choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
+#' }
 
 setMethod("choice_c",signature=signature("RefStades"),definition=function(object,stades) {
 			if (is.null(stades)) {

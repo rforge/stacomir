@@ -113,4 +113,4 @@ source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
  stacomi(gr_interface=FALSE)
  # pour aller chercher les donnees
- setwd("F:/workspace/stacomir/branch0.5/stacomir")
+ setwd("F:/workspace/stacomir/pkg/stacomir")

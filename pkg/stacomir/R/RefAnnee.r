@@ -40,10 +40,6 @@ validite_Annee=function(object)
 #' @keywords classes
 #' @family Referential objects
 #' @author cedric.briand"at"eptb-vilaine.fr
-#' @examples
-#' 
-#' showClass("RefAnnee")
-#' 
 setClass(Class="RefAnnee",representation=
 				representation(data="data.frame",annee_selectionnee="numeric"),
 		validity=validite_Annee,
@@ -55,10 +51,13 @@ setClass(Class="RefAnnee",representation=
 #' @param object An object of class RefAnnee
 #' @return object An object of class RefAnnee with slot data filled with the selected value
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples   object=new("RefAnnee")
+#' @examples   
+#' \dontrun{
+#' object=new("RefAnnee")
 #' charge(object)
 #'  validObject( annee)
 #' showMethods("charge")
+#' }
 setMethod("charge",signature=signature("RefAnnee"),definition=function(object){
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -78,12 +77,15 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object){
 #' @param funoutlabel The label that appears in funout
 #' @param titleFrame Title for the frame
 #' @param preselect The number of the year selected in the gdroplist (integer)
-#' @examples  object=new("RefAnnee")
+#' @examples  
+#' \dontrun{
+#' object=new("RefAnnee")
 #' object<-charge(object)
 #' win=gwindow(title="test refAnnee")
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
 #' dispose(win)
+#' }
 setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 

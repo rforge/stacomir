@@ -27,10 +27,6 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @examples
-#' 
-#' showClass("BilanConditionEnv")
-#' 
 #' @export 
 setClass(Class="BilanConditionEnv",
 		representation=representation(

@@ -24,9 +24,6 @@
 #' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples
-#' 
-#' showClass("RefCheckBox")
 setClass(Class="RefCheckBox",representation= representation(title="character",labels="character",checked="logical"),
 		prototype=prototype(title="liste de choice",labels="choice",checked=FALSE))
 
@@ -34,8 +31,10 @@ setClass(Class="RefCheckBox",representation= representation(title="character",la
 #' @return An S4 object of class RefCheckBox
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefCheckBox")
 #' charge(object,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
+#' }
 setMethod("charge",signature=signature("RefCheckBox"),definition=function(object,title,labels,checked) {
 			if (length(labels) != length(checked)) stop ("les longeur de 'labels' et 'checked' sont differentes")
 			object@title=title
@@ -46,12 +45,14 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(object
 #' Choice method for ReCheckBox referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #' object=new("RefCheckBox")
 #' object<- charge(object,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 #' win=gwindow(title="test RefCheckBox")
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object) 
 #' dispose(win)
+#' '}
 setMethod("choice",signature=signature("RefCheckBox"),definition=function(object) {
 			hlist=function(h,...){
 				i=h$action

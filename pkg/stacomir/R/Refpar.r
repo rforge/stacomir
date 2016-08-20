@@ -25,21 +25,16 @@
 #' @keywords classes
 #' @slot data="data.frame" the list of parameters
 #' @family Referential objects
-
-#' @examples
-#' 
-#' showClass("Refpar")
-#' 
-
-#' @examples object=new("Refpar")
 setClass(Class="Refpar",representation= representation(data="data.frame"))
 
 #' Loading method for Repar referential objects
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("Refpar")
 #' charge(object)
+#' }
 setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -53,8 +48,10 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("Refpar")
 #' charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
+#' }
 setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -79,11 +76,13 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' @note to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
+#' \dontrun{
 #'  object=new("Refpar")
-#' win=gwindow()
-#' group=ggroup(container=win,horizontal=FALSE)
-#' object<-charge(object)
-#' choice(object)
+#'  win=gwindow()
+#'  group=ggroup(container=win,horizontal=FALSE)
+#'  object<-charge(object)
+#'  choice(object)
+#' }
 setMethod("choice",signature=signature("Refpar"),definition=function(object,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){

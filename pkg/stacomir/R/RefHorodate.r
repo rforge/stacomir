@@ -28,9 +28,6 @@ validite_RefHorodate=function(object)
 #' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
-#' @examples
-#' showClass("RefHorodate")
-#' 
 setClass(Class="RefHorodate",representation=
 				representation(horodate="POSIXt"),
 		validity=validite_RefHorodate,

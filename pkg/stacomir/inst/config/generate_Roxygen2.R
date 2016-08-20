@@ -28,5 +28,7 @@ require(devtools)
 document("F:/workspace/stacomir/branch0.5/stacomir")
 # or :
 #vignette("roxygen2")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+data("bMM_Arzal")
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]

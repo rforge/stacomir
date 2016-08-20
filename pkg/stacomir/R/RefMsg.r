@@ -21,8 +21,10 @@ setClass(Class="RefMsg",representation= representation(messager="data.frame",mes
 #' @family Referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefMsg")
 #'  charge(object)
+#' }
 setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 			req=new("RequeteODBC")
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -38,8 +40,10 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 #' @return An S4 object of class RefMsg
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefMsg")
 #'  charge_avec_filtre(object,lang='French')
+#' }
 #' @export
 setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function(object,lang) {
 			requete=new("RequeteODBCwhere")

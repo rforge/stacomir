@@ -29,9 +29,6 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-\references{
-~put references to the literature/web site here ~
-}
 \seealso{
 Other referential classes 
 \code{\linkS4class{RefAnnee}}

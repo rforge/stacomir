@@ -35,10 +35,8 @@
 #' 995-1009.
 #' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
 #' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
-#' \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 #' @examples
-#' 
-#' showClass("Bilan_stades_pigm")
+#' #' showClass("Bilan_stades_pigm")
 #' @export 
 setClass(Class="Bilan_stades_pigm",
 		representation= representation(data="data.frame",
@@ -406,7 +404,7 @@ fun50<-function(obj,objc){
 #' regular scale (phicum)
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 #' @examples
-#' 
+#'  \donrun{
 #' Vparm<-list()
 #' # below param for briand et al.,2005 pigmentation function in glass eel
 #' Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
@@ -425,7 +423,7 @@ fun50<-function(obj,objc){
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=0)
 #' plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
 #' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[2]]),col="firebrick") 
-#' 
+#' }
 fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VB=fnstade(par1=Vparm$pigment_stage[[1]],VB=TRUE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VBc=cumsum(VB$y)/sum(VB$y)  # surface

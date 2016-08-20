@@ -16,11 +16,11 @@ coef_conversion=data.frame())}.
 \describe{
 \item{\code{dc}}{An object of class \code{RefDC}}
 
-\item{\code{taxons}}{An object of class \code{RefTaxon}}
+\item{\code{taxons}}{An object of class \code{\link{RefTaxon}}}
 
-\item{\code{stades}}{An object of class \code{RefStades}}
+\item{\code{stades}}{An object of class \code{\link{RefStades}}}
 
-\item{\code{pasDeTemps}}{An object of class \code{PasDeTempsJournalier}}
+\item{\code{pasDeTemps}}{An object of class \code{\link{PasDeTempsJournalier}}}
 
 \item{\code{data}}{A data.frame containing raw data filled by the connect method}
 
@@ -35,6 +35,7 @@ called a control station (station). Most often, there is a dam, one or several f
 On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
 Operations are monitoring operations during a period. For each operation, several species of fishes can be recorded (samples). In the case of migratory 
 fishes the stage of development is important as it may indicate generic migrations, to and fro, between the river and the sea.
+
 Hence a Multiple Migration Bilan is built from several one or several counting devices (DC), one or several Taxa (Taxon), one or several stages
 (stage). The migration can be also recorded not as numbers, but in the case of glass eels, as weight, which will be later transformed to number, 
 from daily conversion coefficients. The methods in this class test whether the counts are numbers or another type of quantity.
@@ -42,9 +43,9 @@ This class makes different calculations than BilanMigration, it does not handle 
 it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
 }
 \examples{
-#library(stacomiR)
-# launches the application in the command line
-stacomi(gr_interface=FALSE)
+library(stacomiR)
+
+stacomi(gr_interface=FALSE) ## launches the application in the command line
 # here is the structure of the class
 showClass("BilanMigrationMult")
 data("bMM_Arzal")

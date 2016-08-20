@@ -5,15 +5,16 @@
 #' @slot title="character" the title of the box giving the possible choices
 #' @slot labels the logical parameters choice
 #' @slot checked a vector
-#' @examples object=new("RefTextBox")
 setClass(Class="RefTextBox",representation= representation(title="character",label="character"))
 
 #' Loading method for ReTextBox referential objects
 #' @return An S4 object of class RefTextBox
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefTextBox")
 #' charge(object,title="un titre",label="20")
+#' }
 setMethod("charge",signature=signature("RefTextBox"),definition=function(object,title,label) {
 			object@title=title
 			object@label=label
@@ -26,12 +27,14 @@ setMethod("charge",signature=signature("RefTextBox"),definition=function(object,
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #' object=new("RefTextBox")
 #' object<- charge(object,title="le titre",label="20")
 #' win=gwindow(title="test RefTextBox")
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object) 
 #' dispose(win)
+#' }
 setMethod("choice",signature=signature("RefTextBox"),definition=function(object) {
 			hlist=function(h,...){
 				object@label<-svalue(choice)

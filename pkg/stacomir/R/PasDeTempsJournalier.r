@@ -37,10 +37,6 @@
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @seealso \code{\linkS4class{PasDeTemps}}
 #' @keywords classes
-#' @examples
-#' 
-#' showClass("PasDeTempsJournalier")
-#' 
 setClass(Class="PasDeTempsJournalier",contains="PasDeTemps",
 		prototype=(dureePas=86400) 
 )
@@ -109,7 +105,8 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 #' \dontrun{
 #'  object=new("RefDC")
 #'  object<-charge(object)
-#'  choice_c(object=object,datedebut="2012-01-01",datefin="2013-01-01")}
+#'  choice_c(object=object,datedebut="2012-01-01",datefin="2013-01-01")
+#' }
 setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=function(object,datedebut,datefin) {
 			if (class(datedebut)=="character") {
 				if (grepl("/",datedebut)){

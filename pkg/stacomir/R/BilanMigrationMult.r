@@ -126,17 +126,6 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' uses the choice_c methods of these object to "select" the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @examples
-#'  \dontrun{
-#' bilanMigrationMult=choice_c(bilanMigrationMult,
-#'  dc=c(5,6,12),
-#'  taxons=c("Anguilla anguilla"),
-#'  stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-#' bilanMigrationMult=calcule(bilanMigrationMult)
-#' hbilanMigrationMultgraph()
-#' hbilanMigrationMultgraph2()
-#' hbilanMigrationMultgraph3()
-#' }
 setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
 			bilanMigrationMult<-object
 			fonctionnementDC=new("BilanFonctionnementDC")

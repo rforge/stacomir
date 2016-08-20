@@ -26,9 +26,6 @@
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
-#' @examples
-#' 
-#' showClass("RefStationMesure")
 setClass (Class="RefStationMesure", 
    representation=representation(data="data.frame"),
    prototype=prototype(data=data.frame())
@@ -38,8 +35,10 @@ setClass (Class="RefStationMesure",
 #' @return An S4 object of class RefStationMesure
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefStationMesure")
 #'  charge(object)
+#' }
 setMethod("charge",
           signature=signature("RefStationMesure"),     
           definition=function(object) 
@@ -58,11 +57,13 @@ setMethod("charge",
 #' Choice method for RefStationMesure referential object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
+#' \dontrun{
 #' object=new("RefStationMesure")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' choice(object)
+#' }
 setMethod("choice",signature=signature("RefStationMesure"),definition=function(object,is.enabled=TRUE,title=get("msg",envir=envir_stacomi)$RefStationMesure.3) {
 			if (nrow(object@data) > 0){
 				hSTM=function(h,...){

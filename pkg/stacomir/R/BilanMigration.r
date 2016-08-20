@@ -49,10 +49,6 @@
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @examples
-#' 
-#' showClass("BilanMigration")
-#' bilanMigration= new("BilanMigration")
-#' 
 #' @export 
 setClass(Class="BilanMigration",
 		representation=

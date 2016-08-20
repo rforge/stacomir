@@ -27,17 +27,16 @@
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @include Refpar.r
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("Refparqual")
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
 
 #' Loading method for Reparqual referential objects
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("Refparqual")
 #'  charge(object)
+#' }
 setMethod("charge",signature=signature("Refparqual"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -53,11 +52,13 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(object)
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
 #'  object=new("Refparqual")
 #'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)
+#' }
 setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -85,12 +86,14 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #' @return An S4 object of class Refparqual with the valqual slot filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
 #'  object=new("Refparqual")
 #'  object<-charge(object)
-#'  charge_complement(object)		
+#'  charge_complement(object)
+#' }		
 setMethod("charge_complement",signature=signature("Refparqual"),definition=function(object) {
 			if (nrow(object@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data)),arret=TRUE)
 			requete=new("RequeteODBC")
@@ -112,11 +115,13 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 #' to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
+#' \dontrun{
 #'  object=new("Refparqual")
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object<-charge(object)
 #' choice(object)
+#' }
 setMethod("choice",signature=signature("Refparqual"),definition=function(object,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){

@@ -25,9 +25,6 @@ object=new("Bilan_carlot")
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-\references{
-\url{http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki/Recette\%20BilanLot}
-}
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{Bilan_poids_moyen}}

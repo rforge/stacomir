@@ -22,9 +22,6 @@ showClass("BilanFonctionnementDC")
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-\references{
-\url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
-}
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_lot}}
 \code{\linkS4class{Bilan_poids_moyen}}

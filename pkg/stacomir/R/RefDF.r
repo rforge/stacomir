@@ -28,10 +28,6 @@
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
-#' @examples
-#' 
-#' showClass("RefDF")
-#' 
 setClass(Class="RefDF",representation=
 				representation(df_selectionne="integer",ouvrage="integer",data="data.frame") )
                                

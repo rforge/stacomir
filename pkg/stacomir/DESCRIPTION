@@ -1,7 +1,7 @@
 Package: stacomiR
 Version: 0.5.0
 Date: 2016-09-01
-Title: STACOMI migration control
+Title: Fish Migration Monitoring (stacomiR)
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand@eptb-vilaine.fr"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"))
 Description: Graphical outputs and treatment for a database of fishway

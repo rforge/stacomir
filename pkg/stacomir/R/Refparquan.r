@@ -22,18 +22,16 @@
 #' @keywords classes
 #' @family Referential objects
 #' @include Refpar.r
-#' @examples
-#' 
-#' showClass("Refparquan")
-#' 
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
 #' @return An S4 object of class Refparquan
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("Refparquan")
 #'  charge(object)
+#' }
 setMethod("charge",signature=signature("Refparquan"),definition=function(object) {
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -50,11 +48,13 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(object)
 #' @return An S4 object of class Refparqualn
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  dc_selectionne=6
 #'	taxon_selectionne=2038
 #'  stade_selectionne="AGJ"
 #'  object=new("Refparquan")
-#'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)		
+#'  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)
+#' }		
 setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
