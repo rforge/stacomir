@@ -114,6 +114,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			} 
 			if (!object@silent) funout(msg5) # query trial
 			if (verbose) print(object@sql)
+			query<-data.frame() # otherwise, query called in the later expression is evaluated as a global variable by RCheck
 			e=expression(query<-sqlQuery(object@connection,object@sql,errors=TRUE))
 			if (object@open) {
 				# If we want to leave the connection open no finally clause

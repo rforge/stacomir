@@ -129,11 +129,20 @@ is.even=function (x)
 #' @param tab 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-tab2df=function(tab){
+tab2df<-function(tab){
 	if (length((attributes(tab)$dim))>2) stop("only works with tables of dim 2")
 	df=as.data.frame(matrix(as.vector(tab),nrow(tab),ncol(tab)))
 	rownames(df)<-attributes(tab)$row.vars[[1]]
 	colnames(df)<-attributes(tab)$col.vars[[1]]	
 	return(df)
 }
-
+#' Function loaded in this package to avoid errors, if the package is called without stacomiR
+#' @param text The text to display
+#' @param arret Boolean should the program stop
+#' @param wash= FALSE only used when called from within stacomiR, and there is a widget interface,
+#' kept there for consistency 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+funout<-function(text,arret=FALSE,wash=FALSE){
+	if(arret) stop(text) else print(text,quote=FALSE)
+}

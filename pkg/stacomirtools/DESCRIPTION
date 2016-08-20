@@ -1,6 +1,6 @@
 Package: stacomirtools
 Type: Package
-Title: stacomi ODBC connection class
+Title: ODBC connection class for package stacomiR
 Version: 0.5.0
 Date: 2013-01-07
 Author: Cedric Briand
@@ -15,4 +15,5 @@ Collate:
     'utilitaires.r'   
     'stacomirtools.r' 
 LazyLoad: yes
-Imports: methods,RODBC,xtable,utils
+Depends:RODBC
+Imports: methods,xtable,utils
