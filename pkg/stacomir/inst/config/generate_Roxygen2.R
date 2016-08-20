@@ -29,4 +29,4 @@ document("F:/workspace/stacomir/branch0.5/stacomir")
 # or :
 #vignette("roxygen2")
 require(roxygen2)
-roxygen2::roxygenise("F:/workspace/stacomir/branch0.5/stacomir");warnings()[1:10]
+roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]

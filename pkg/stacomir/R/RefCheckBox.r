@@ -22,7 +22,6 @@
 #' \code{\linkS4class{RefStades}} 
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
-#' @references ~put references to the literature/web site here ~
 #' @family Referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples

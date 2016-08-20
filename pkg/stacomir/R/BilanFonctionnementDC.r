@@ -19,7 +19,6 @@
 #' \code{\linkS4class{BilanMigrationConditionEnv}}
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
-#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 #' @concept Bilan Object 
 #' @examples
 #' 

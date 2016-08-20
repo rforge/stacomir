@@ -25,7 +25,6 @@
 #' \code{\linkS4class{BilanMigrationConditionEnv}}
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
-#' @references \url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 #' @concept Bilan Object 
 #' @examples
 #' 
@@ -158,7 +157,7 @@ hCamembert = function(h,...) {
 	tableEspeces=bilanEspeces@data
 	if (nrow(tableEspeces)==0) funout(get("msg",envir_stacomi)$BilanEspeces.5,arret=TRUE)
 	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
-	# je ne garde taxons_stades que pour les esp�ces pr�sentant plusieurs stades
+	# only keeping taxon stage for species with several stages
 	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
 	if (length(nbstades[nbstades>1])>0){
 		les_multiples=names(nbstades[nbstades>1])
@@ -223,7 +222,6 @@ hTableBilanEspeces=function(h,...) {
 	tableEspeces=bilanEspeces@data
 	if (nrow(tableEspeces)==0) funout(get("msg",envir_stacomi)$BilanEspeces.5,arret=TRUE)
 	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
-	# je ne garde taxons_stades que pour les esp�ces pr�sentant plusieurs stades
 	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
 	if (length(nbstades[nbstades>1])>0){
 		les_multiples=names(nbstades[nbstades>1])

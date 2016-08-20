@@ -1,6 +1,6 @@
-#library(stacomiR)
-# launches the application in the command line
-stacomi(gr_interface=FALSE)
+library(stacomiR)
+
+stacomi(gr_interface=FALSE) ## launches the application in the command line
 # here is the structure of the class
 showClass("BilanMigrationMult")
 data("bMM_Arzal")

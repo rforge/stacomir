@@ -10,15 +10,16 @@
 #' On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
 #' Operations are monitoring operations during a period. For each operation, several species of fishes can be recorded (samples). In the case of migratory 
 #' fishes the stage of development is important as it may indicate generic migrations, to and fro, between the river and the sea.
+#' 
 #' Hence a Multiple Migration Bilan is built from several one or several counting devices (DC), one or several Taxa (Taxon), one or several stages
 #' (stage). The migration can be also recorded not as numbers, but in the case of glass eels, as weight, which will be later transformed to number, 
 #' from daily conversion coefficients. The methods in this class test whether the counts are numbers or another type of quantity.
 #' This class makes different calculations than BilanMigration, it does not handle escapement coefficients,
 #' it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
 #' @slot dc An object of class \code{RefDC}
-#' @slot taxons An object of class \code{RefTaxon}
-#' @slot stades An object of class \code{RefStades}
-#' @slot pasDeTemps An object of class \code{PasDeTempsJournalier}
+#' @slot taxons An object of class \code{\link{RefTaxon}}
+#' @slot stades An object of class \code{\link{RefStades}}
+#' @slot pasDeTemps An object of class \code{\link{PasDeTempsJournalier}}
 #' @slot data A data.frame containing raw data filled by the connect method
 #' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
 #' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
