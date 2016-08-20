@@ -55,9 +55,10 @@ showClass("RequeteODBCwhere")
  object@and=paste(" and mycol2>",test," and mycol3<",test,sep="")
  object@order_by=" order by mycol1" 
  object<-connect(object)
- # now object@sql contains the syntax of the query. By changing the test variable, one can see how the
- # function might be usefull
- # object@query contains the resulting data.frame
+ ## now object@sql contains the syntax of the query. 
+ ## By changing the test variable, one can see how the
+ ## function might be usefull
+ ##  object@query contains the resulting data.frame
  }
 }
 \keyword{classes}
