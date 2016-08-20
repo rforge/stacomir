@@ -36,10 +36,10 @@ class choose within a list, here do you want subsamples or not
 choose within a list, here do you want subsamples or not } }
 }
 \examples{
-
+ \dontrun{
 showClass("Bilan_poids_moyen")
 object=new("Bilan_poids_moyen")
-
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

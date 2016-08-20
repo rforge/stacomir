@@ -14,11 +14,6 @@ year/week/month
  Objects can be created by calls of the form
 \code{new("BilanEspeces", ...)}.
 }
-\examples{
-
-showClass("BilanEspeces")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

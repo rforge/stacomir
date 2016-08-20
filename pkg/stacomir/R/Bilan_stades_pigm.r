@@ -404,7 +404,7 @@ fun50<-function(obj,objc){
 #' regular scale (phicum)
 #' @seealso \code{\linkS4class{Bilan_stades_pigm}}
 #' @examples
-#'  \donrun{
+#'  \dontrun{
 #' Vparm<-list()
 #' # below param for briand et al.,2005 pigmentation function in glass eel
 #' Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage

@@ -12,11 +12,6 @@ work only at certain times This report allows to see the detail of its work.
  Objects can be created by calls of the form
 \code{new("BilanFonctionnementDF")}.
 }
-\examples{
-
-showClass("BilanFonctionnementDF")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

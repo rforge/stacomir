@@ -15,10 +15,12 @@ An S4 object of class RefStades
 Loading method for RefStades referential objects searching only those stages existing for a DC and a Taxon
 }
 \examples{
+\dontrun{
  dc_selectionne=6
 taxon_selectionne=2038
  object=new("RefStades")
  charge_avec_filtre(object,dc_selectionne,taxon_selectionne)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

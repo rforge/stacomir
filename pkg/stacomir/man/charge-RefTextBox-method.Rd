@@ -14,8 +14,10 @@ An S4 object of class RefTextBox
 Loading method for ReTextBox referential objects
 }
 \examples{
+\dontrun{
  object=new("RefTextBox")
 charge(object,title="un titre",label="20")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

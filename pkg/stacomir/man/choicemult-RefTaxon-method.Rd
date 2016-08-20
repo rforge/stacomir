@@ -14,13 +14,14 @@ Multiple Choice method for Reftaxon referential objects, the graphical interface
 for multiple choices. See load for method in the command line.
 }
 \examples{
- 
+\dontrun{ 
  object=new("RefTaxon")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
 bilanMigration=new(BilanMigration)
 choicemult(object,objectBilan=bilanMigration)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -18,11 +18,6 @@ Class used to select one or several years
  Objects can be created by calls of the form
 \code{new("RefAnnee", data=data.frame(), annee_selectionnee=numeric())}.
 }
-\examples{
-
-showClass("RefAnnee")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

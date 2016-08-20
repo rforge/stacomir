@@ -15,13 +15,15 @@ Multiple Choice method for RefStades referential objects
 the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
 }
 \examples{
+\dontrun{
  object=new("RefStades")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
 bilanMigrationPar=new(BilanMigrationPar)
-# objectBilan=bilan_taille # for other test
-choicemult(object,objectBilan=bilanMigrationPar)		
+objectBilan=bilan_taille # for other test
+choicemult(object,objectBilan=bilanMigrationPar)	
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

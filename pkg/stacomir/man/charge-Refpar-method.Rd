@@ -14,8 +14,10 @@ An S4 object of class Refpar
 Loading method for Repar referential objects
 }
 \examples{
+\dontrun{
  object=new("Refpar")
 charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -15,11 +15,13 @@ the choice method assigns an object of class refList named refListe in the envir
 }
 \examples{
  
+\dontrun{
  object=new("RefListe")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
 choice(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

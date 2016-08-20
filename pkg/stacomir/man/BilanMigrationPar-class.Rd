@@ -47,11 +47,6 @@ program : default two parameter choice, checking box "aucun" will allow the prog
 \code{new("BilanMigrationPar", ...)}.  they are loaded by the interface
 using interface_BilanMigrationPar function.
 }
-\examples{
-
-showClass("BilanMigrationPar")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 

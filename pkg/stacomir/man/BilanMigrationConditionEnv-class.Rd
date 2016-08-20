@@ -19,11 +19,6 @@ migration overview } \item{list("bilanConditionEnv")}{Object of class
 \code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
 class \code{"BilanConditionEnv"} The environmental overview} }
 }
-\examples{
-
-showClass("BilanMigrationConditionEnv")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

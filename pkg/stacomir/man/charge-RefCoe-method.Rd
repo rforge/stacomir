@@ -14,10 +14,12 @@ Object of class RefCoe
 The slots datedebut and datefin have to be filled before using charge
 }
 \examples{
+\dontrun{
 object<- new("RefCoe")
 object@datedebut<-strptime("01/01/1996",format="\%d/\%m/\%Y")
 object@datefin<-strptime("01/01/1997",format="\%d/\%m/\%Y")
 charge(object) 
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

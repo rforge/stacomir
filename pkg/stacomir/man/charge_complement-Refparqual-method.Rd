@@ -18,12 +18,14 @@ cette methode est appellee apres la selection de l'object (data ne contient plus
 et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
 }
 \examples{
+\dontrun{
  dc_selectionne=6
 taxon_selectionne=2038
  stade_selectionne="AGJ"
  object=new("Refparqual")
  object<-charge(object)
- charge_complement(object)		
+ charge_complement(object)
+}		
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

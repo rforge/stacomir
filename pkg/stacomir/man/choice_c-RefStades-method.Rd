@@ -16,10 +16,12 @@ widget in the graphical interface) but from the command line. The values passed 
 for stades is the code.  Any numeric value will be discarded
 }
 \examples{
+\dontrun{
 object=new("RefTaxon")
 object<-charge(object)
 objectBilan=new("BilanMigrationMult")
 choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

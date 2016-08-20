@@ -14,8 +14,10 @@ An S4 object of class RefStades
 Loading method for RefStades referential objects
 }
 \examples{
+\dontrun{
  object=new("RefStades")
  charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

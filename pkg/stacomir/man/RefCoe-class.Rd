@@ -26,11 +26,6 @@ volumes of glass eel) and numbers between a starting and finishing date
  Objects can be created by calls of the form
 \code{new("RefCoe")}.
 }
-\examples{
-
-showClass("RefCoe")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

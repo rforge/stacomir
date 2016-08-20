@@ -17,10 +17,6 @@ measure station}
  Objects can be created by calls of the form
 \code{new("RefStationMesure", ...)}.
 }
-\examples{
-
-showClass("RefStationMesure")
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

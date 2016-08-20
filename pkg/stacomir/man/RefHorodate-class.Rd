@@ -16,10 +16,6 @@ choice of date with method to show current and previous year
  Objects can be created by calls of the form
 \code{new("RefHorodate", \dots{})}.
 }
-\examples{
-showClass("RefHorodate")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

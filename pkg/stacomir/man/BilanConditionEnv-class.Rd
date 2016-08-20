@@ -15,11 +15,6 @@ write files.
 stationMesure=new("RefStationMesure"), data=data.frame(),
 requete=new("RequeteODBCwheredate"))}.
 }
-\examples{
-
-showClass("BilanConditionEnv")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

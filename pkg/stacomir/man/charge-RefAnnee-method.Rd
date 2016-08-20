@@ -17,10 +17,13 @@ object An object of class RefAnnee with slot data filled with the selected value
 Selects year avalaible in the t_operation_ope table
 }
 \examples{
-  object=new("RefAnnee")
+  
+\dontrun{
+object=new("RefAnnee")
 charge(object)
  validObject( annee)
 showMethods("charge")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

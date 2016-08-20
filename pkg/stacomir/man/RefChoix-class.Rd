@@ -22,11 +22,6 @@ radiobuttons
 \code{new("RefChoix", listechoice=character() ,label=character()
 ,selected=integer())}.
 }
-\examples{
-
-showClass("RefChoix")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

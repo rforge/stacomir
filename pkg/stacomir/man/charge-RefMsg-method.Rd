@@ -14,8 +14,10 @@ An S4 object of class RefMsg
 loads the common table ts_messager_msr
 }
 \examples{
+\dontrun{
  object=new("RefMsg")
  charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

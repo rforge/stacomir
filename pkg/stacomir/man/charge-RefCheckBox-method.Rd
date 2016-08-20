@@ -14,8 +14,10 @@ An S4 object of class RefCheckBox
 Loading method for ReCheckBox referential objects
 }
 \examples{
+\dontrun{
  object=new("RefCheckBox")
 charge(object,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

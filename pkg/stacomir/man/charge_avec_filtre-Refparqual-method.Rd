@@ -15,11 +15,13 @@ An S4 object of class Refparqual
 Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 }
 \examples{
+\dontrun{
  dc_selectionne=6
 taxon_selectionne=2038
  stade_selectionne="AGJ"
  object=new("Refparqual")
  charge_avec_filtre(object,dc_selectionne,taxon_selectionne,stade_selectionne)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

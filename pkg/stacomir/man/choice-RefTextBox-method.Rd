@@ -11,12 +11,14 @@
 Choice method for ReTextBox referential objects
 }
 \examples{
+\dontrun{
 object=new("RefTextBox")
 object<- charge(object,title="le titre",label="20")
 win=gwindow(title="test RefTextBox")
 group=ggroup(container=win,horizontal=FALSE)
 choice(object) 
 dispose(win)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

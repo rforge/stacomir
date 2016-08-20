@@ -48,7 +48,6 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @examples
 #' @export 
 setClass(Class="BilanMigration",
 		representation=

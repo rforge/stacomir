@@ -15,9 +15,6 @@ BilanEspeces with slots filled by user choice
 charge method for BilanEspeces
 verifies the content of objects and calls the connect method
 }
-\examples{
-bilanEspeces=new("BilanEspeces")
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

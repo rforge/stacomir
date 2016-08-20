@@ -24,11 +24,6 @@ table of escapments calculated at the station level.}
 \code{new("RefDC", dc_selectionne=integer(), ouvrage=integer(),
 data=data.frame())}.
 }
-\examples{
-
-showClass("RefDC")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

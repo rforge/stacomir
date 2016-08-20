@@ -14,8 +14,10 @@ An S4 object of class Refparqual
 Loading method for Reparqual referential objects
 }
 \examples{
+\dontrun{
  object=new("Refparqual")
  charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

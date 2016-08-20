@@ -21,11 +21,6 @@ Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 of class \code{"character"}} \item{list("label")}{Object of class
 \code{"character"}}\item{:}{Object of class \code{"character"}} }
 }
-\examples{
-
-showClass("RefListe")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

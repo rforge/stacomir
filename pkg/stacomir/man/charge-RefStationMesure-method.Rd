@@ -14,8 +14,10 @@ An S4 object of class RefStationMesure
 Loading method for RefStationMesure referential object
 }
 \examples{
+\dontrun{
  object=new("RefStationMesure")
  charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

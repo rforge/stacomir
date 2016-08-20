@@ -15,11 +15,6 @@ of them. It inherits from 'Refpar', uses its 'choice' method
 parameters }\item{:}{Object of class \code{"data.frame"} ~ Quantitative
 parameters } }
 }
-\examples{
-
-showClass("Refparquan")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

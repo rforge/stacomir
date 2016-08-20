@@ -15,8 +15,10 @@ An S4 object of class Refpar
 Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
 }
 \examples{
+\dontrun{
  object=new("Refpar")
 charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

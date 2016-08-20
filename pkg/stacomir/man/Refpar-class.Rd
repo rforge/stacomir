@@ -19,11 +19,6 @@ Class enabling to load the list of parameters and select one of them
 database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
 stored in the database} }
 }
-\examples{
-
-showClass("Refpar")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

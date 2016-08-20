@@ -18,10 +18,12 @@ widget in the graphical interface) but from the command line. The values passed 
 for taxon can be either numeric (2038 = Anguilla anguilla) or character.
 }
 \examples{
+\dontrun{
 object=new("RefTaxon")
 object<-charge(object)
 objectBilan=new("BilanMigrationMult")
 choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -22,10 +22,6 @@ of class \code{"data.frame"} Values of qualitatives parameters}
 parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
 parameters } }
 }
-\examples{
-
-showClass("Refparqual")
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

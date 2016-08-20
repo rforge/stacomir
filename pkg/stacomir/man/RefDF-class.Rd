@@ -20,11 +20,6 @@ data=data.frame())}.
 
 \item{\code{data}}{Object of class \code{"data.frame"} Data concerning the fishway}
 }}
-\examples{
-
-showClass("RefDF")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

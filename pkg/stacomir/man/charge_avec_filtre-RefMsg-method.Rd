@@ -14,8 +14,10 @@ An S4 object of class RefMsg
 searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 }
 \examples{
+\dontrun{
  object=new("RefMsg")
  charge_avec_filtre(object,lang='French')
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -17,10 +17,10 @@ This class is displayed by interface_bilan_lot
 \code{new("Bilan_carlot", ...)}
 }
 \examples{
-
+\dontrun{
 showClass("Bilan_carlot")
 object=new("Bilan_carlot")
-
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

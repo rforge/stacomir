@@ -19,11 +19,6 @@ pgval are used by seq.POSIXT
  Objects can be created by calls of the form
 \code{new("Refperiode", ...)}.
 }
-\examples{
-
-showClass("Refperiode")
-new("Refperiode")
-}
 \seealso{
 Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},

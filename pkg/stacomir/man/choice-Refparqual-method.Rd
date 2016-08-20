@@ -19,11 +19,13 @@ to load the possible values of qualitative parameters
 }
 \examples{
  
+\dontrun{
  object=new("Refparqual")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
 choice(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

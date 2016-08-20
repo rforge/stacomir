@@ -14,8 +14,10 @@ An object of class RefListe
 Loading method for Refliste referential objects
 }
 \examples{
+\dontrun{
  object=new("RefListe")
 charge(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

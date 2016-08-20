@@ -20,10 +20,6 @@ referential class allows to choose for several parms with checkbox
  Objects can be created by calls of the form
 \code{new("RefCheckBox", ...)}.
 }
-\examples{
-
-showClass("RefCheckBox")
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 

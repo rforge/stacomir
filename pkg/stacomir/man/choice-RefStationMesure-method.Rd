@@ -13,11 +13,13 @@ Choice method for RefStationMesure referential object
 }
 \examples{
  
+\dontrun{
 object=new("RefStationMesure")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object<-charge(object)
 choice(object)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

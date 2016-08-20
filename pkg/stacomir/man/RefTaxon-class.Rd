@@ -17,10 +17,6 @@ integrated into refBilan objects.
  Objects can be created by calls of the form
 \code{new("RefTaxon", ...)}.
 }
-\examples{
-
-showClass("RefTaxon")
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }
@@ -41,5 +37,4 @@ Other referential classes
 \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
 }
-\keyword{classes}
 

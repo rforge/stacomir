@@ -52,7 +52,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(object
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object) 
 #' dispose(win)
-#' '}
+#' }
 setMethod("choice",signature=signature("RefCheckBox"),definition=function(object) {
 			hlist=function(h,...){
 				i=h$action

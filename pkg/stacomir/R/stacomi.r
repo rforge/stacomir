@@ -196,6 +196,7 @@ hX11=function(h,...){
 #' @import sqldf
 #' @import methods
 #' @import stacomirtools
+#' @import RODBC
 #' @importFrom intervals Intervals
 #' @importFrom intervals closed<-
 #' @importFrom intervals interval_overlap

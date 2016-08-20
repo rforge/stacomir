@@ -18,11 +18,6 @@ year}\item{:}{Object of class \code{"POSIXlt"} ~ Starting year}
 \item{list("datefin")}{Object of class \code{"POSIXlt"} ~ Ending
 year}\item{:}{Object of class \code{"POSIXlt"} ~ Ending year} }
 }
-\examples{
-
-showClass("RefPoidsMoyenPeche")
-
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

@@ -24,8 +24,7 @@ the change towards one stage
 \code{new("Bilan_stades_pigm", ...)}.
 }
 \examples{
-
-showClass("Bilan_stades_pigm")
+#' showClass("Bilan_stades_pigm")
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -37,7 +36,6 @@ glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
 995-1009.
 \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
 \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
-\url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
 }
 \seealso{
 Other Bilan Classes \code{\linkS4class{Bilan_lot}}

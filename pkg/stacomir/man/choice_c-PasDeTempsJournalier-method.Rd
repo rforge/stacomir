@@ -20,7 +20,8 @@ widget in the graphical interface) but from the command line.
 \dontrun{
  object=new("RefDC")
  object<-charge(object)
- choice_c(object=object,datedebut="2012-01-01",datefin="2013-01-01")}
+ choice_c(object=object,datedebut="2012-01-01",datefin="2013-01-01")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -22,12 +22,15 @@
 Allows the selection of year and the assignment in environment envir_stacomi
 }
 \examples{
- object=new("RefAnnee")
+ 
+\dontrun{
+object=new("RefAnnee")
 object<-charge(object)
 win=gwindow(title="test refAnnee")
 group=ggroup(container=win,horizontal=FALSE)
 choice(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
 dispose(win)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

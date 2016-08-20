@@ -11,12 +11,14 @@
 Choice method for ReCheckBox referential objects
 }
 \examples{
+\dontrun{
 object=new("RefCheckBox")
 object<- charge(object,title="essai",labels=c("par1","par2","par3"),checked=c(TRUE,TRUE,TRUE))
 win=gwindow(title="test RefCheckBox")
 group=ggroup(container=win,horizontal=FALSE)
 choice(object) 
 dispose(win)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

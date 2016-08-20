@@ -20,11 +20,14 @@ An S4 object of class RefChoix
 \description{
 Loading method for Rechoice referential objects
 }
+\examples{
+\dontrun{
+object=new("RefChoix")
+charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
+}
+}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples 
- object=new("RefChoix")
-charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 }
 \seealso{
 Other Referential.objects: \code{\link{RefAnnee-class}},

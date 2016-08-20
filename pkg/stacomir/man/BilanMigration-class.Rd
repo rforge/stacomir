@@ -36,12 +36,6 @@ analysis}
 \item{:}{Object of class \code{"POSIXct"} : duration of the
 analysis} }
 }
-\examples{
-
-showClass("BilanMigration")
-bilanMigration= new("BilanMigration")
-
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
