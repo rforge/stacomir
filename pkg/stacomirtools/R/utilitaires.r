@@ -57,12 +57,13 @@ induk=function(a){
 }
 
 
-#' very usefull function used to "kill" these bloody factors that appears, noticeably after loading with odbc
+#' very usefull function used to "kill" the factors, noticeably after loading with odbc
+#' 
 #' @param df a data.frame
 #' @return df
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-stacomirtools::killfactor=function(df){
+killfactor=function(df){
 	for (i in 1:ncol(df))
 	{
 		if(is.factor(df[,i])) df[,i]=as.character(df[,i])

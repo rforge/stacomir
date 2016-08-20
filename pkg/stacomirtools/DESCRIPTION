@@ -12,6 +12,7 @@ Collate:
     'RequeteODBC.r'
     'RequeteODBCwhere.r'
     'RequeteODBCwheredate.r'
-    'utilitaires.r'    
+    'utilitaires.r'   
+    'stacomirtools.r' 
 LazyLoad: yes
 Imports: methods,RODBC,xtable,utils

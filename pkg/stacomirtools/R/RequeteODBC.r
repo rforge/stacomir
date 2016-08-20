@@ -51,7 +51,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 						if(arret) stop(text) else print(text)
 						return(NULL)
 					}	
-					stacomirtools::killfactor=function(df){
+					killfactor=function(df){
 						for (i in 1:ncol(df))
 						{
 							if(is.factor(df[,i])) df[,i]=as.character(df[,i])
@@ -72,7 +72,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 					if(arret) stop(text) else print(text)
 					return(NULL)
 				}	
-				stacomirtools::killfactor=function(df){
+				killfactor=function(df){
 					for (i in 1:ncol(df))
 					{
 						if(is.factor(df[,i])) df[,i]=as.character(df[,i])
@@ -124,7 +124,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			}
 			if ((class(resultatRequete)=="data.frame")[1]) {
 				if (!object@silent) funout(msg6)
-				object@query=stacomirtools::killfactor(query)     # instead of query 11/08/2009 11:55:20
+				object@query=killfactor(query)     # instead of query 11/08/2009 11:55:20
 				object@etat=msg6
 			} else {
 				if (!object@silent) print(resultatRequete)

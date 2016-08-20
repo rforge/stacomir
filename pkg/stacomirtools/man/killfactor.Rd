@@ -1,8 +1,8 @@
-\name{stacomirtools::killfactor}
-\alias{stacomirtools::killfactor}
+\name{killfactor}
+\alias{killfactor}
 \title{very usefull function remove factor that appear, noticeably after loading with ODBC}
 \usage{
-  stacomirtools::killfactor(df)
+  killfactor(df)
 }
 \arguments{
   \item{df}{a data.frame}
