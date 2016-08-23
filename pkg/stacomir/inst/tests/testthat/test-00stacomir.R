@@ -27,6 +27,7 @@ context("Database connection")
 
 test_that("Test that stacomirtools connects",{
 	require(stacomiR)
+	envir_stacomi <<- new.env(parent = emptyenv())
 	msg<-messages()
 	mylinks=chargecsv()
 	baseODBC=mylinks[["baseODBC"]]	
@@ -34,18 +35,18 @@ test_that("Test that stacomirtools connects",{
 	con@baseODBC=baseODBC
 	con<-connect(con)
 	expect_is(connect(con),'ConnectionODBC')
-	expect_equal(con@etat,"connected")
+	expect_equal(con@etat,NULL)
 	odbcCloseAll()
 })
 
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 			require(stacomiR)
-			
+			envir_stacomi <<- new.env(parent = emptyenv())
 			msg<-messages()
 			mylinks=chargecsv()
 			baseODBC=mylinks[["baseODBC"]]	
 			requete=new("RequeteODBC")
-			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@baseODBC<-baseODBC
 			requete@sql="select count(*) from ref.tr_taxon_tax"
 			requete<-stacomirtools::connect(requete)
 			expect_true(as.numeric(requete@query)>0)	
@@ -54,12 +55,13 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 
 test_that("Tests positive count for sch.t_operation_ope",{
 			require(stacomiR)
+			envir_stacomi <<- new.env(parent = emptyenv())
 			msg<-messages()
 			mylinks=chargecsv()
 			baseODBC=mylinks[["baseODBC"]]	
 			sch<-paste(baseODBC[2],".",sep="")
 			requete=new("RequeteODBC")
-			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)			
+			requete@baseODBC<-baseODBC	
 			requete@sql=paste("select count(*) from ",sch,"t_operation_ope",sep="")
 			requete<-stacomirtools::connect(requete)
 			expect_true(as.numeric(requete@query)>0)	
@@ -71,6 +73,7 @@ context("Loading program")
 
 test_that("Test that working environment is created",{
 			require(stacomiR)
+			stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
 			expect_true(exists("envir_stacomi"))
 		})
 
@@ -110,7 +113,7 @@ test_that("Test that  messages without connection are loaded and of the same len
 			object<-createmessage(object,TRUE)	
 			msgbase<-get("msg",envir=envir_stacomi)
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
 			msg<-get("msg",envir=envir_stacomi)
 			# objects should have the same length but different languages
 			expect_identical(length(msg),length(msgbase))

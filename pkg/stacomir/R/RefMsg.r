@@ -56,6 +56,8 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 #' @note When coming from the database, doublequotes are now escaped with an antislash (/"), those at the beginning and end are left as doublequotes, 
 #' the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+#' @keywords internal
 setMethod("createmessage",signature=signature("RefMsg"),definition=function(object,pre_launch_test) {
 			if (pre_launch_test){
 				#object=new("RefMsg")

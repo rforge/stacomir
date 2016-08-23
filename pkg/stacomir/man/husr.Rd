@@ -7,9 +7,9 @@
 husr(h, ...)
 }
 \arguments{
-\item{h}{a handler}
+\item{h}{A handler}
 
-\item{...}{}
+\item{...}{Other arguments}
 }
 \description{
 Internal function, tests the connection and if it works loads the stacomi interface

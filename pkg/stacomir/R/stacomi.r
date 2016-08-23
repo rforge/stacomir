@@ -89,32 +89,31 @@ hBilanEspeces=function(h,...){
 #' Internal function, tests the connection and if it works loads the stacomi interface
 #' @note \code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{pre_launch_test}
 #' 
-#' @param h a handler
-#' @param ... 
+#' @param h A handler
+#' @param ... Other arguments
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	# assigned when passing through stacomi
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
 	pre_launch_test<-get("pre_launch_test",envir_stacomi) # logical true or false
+	login_window<-get("login_window",envir_stacomi) # logical true or false
 	# test de la connection
-	if (login_window){
-		con=new("ConnectionODBC")
-		if (gr_interface){
+	if (login_window & gr_interface&pre_launch_test){	
 			baseODBC[2]<-svalue(usrname)
 			baseODBC[3]<-svalue(usrpwd)
+			assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
+			assign("baseODBC",baseODBC,envir=envir_stacomi)
 		} else {
-			# we take default values from calmig
-			# nothing is happening there
+			# nothing sch and baseODBC have been assigned from default value in stacomi()	
 		}
-		assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
-		assign("baseODBC",baseODBC,envir=envir_stacomi)
-		con@baseODBC=get("baseODBC",envir=envir_stacomi)
+		
 		# we dispose loginwindow
-		if (exists("logw")) dispose(logw)
-	}
+	
+	
 	if (pre_launch_test){
+		con=new("ConnectionODBC")
+		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
 		con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
 		test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
@@ -282,20 +281,26 @@ hX11=function(h,...){
 #' @export
 stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 	# first loading of connection and odbc info using chargexml()
+	envir_stacomi <<- new.env(parent = emptyenv())
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("pre_launch_test",pre_launch_test,envir=envir_stacomi)
-	# the first messages are necessary for the first access to the database, they are in French
-	envir_stacomi <- new.env(parent = emptyenv())
+	assign("login_window",login_window,envir=envir_stacomi)
+   # the first messages are necessary for the first access to the database, they are in French
 	msg<-messages()
 	mylinks=chargecsv()
 	baseODBC=mylinks[["baseODBC"]]
 	datawd=mylinks[["datawd"]]
 	lang=mylinks[["lang"]]	
 	sqldf.options=mylinks[["sqldf.options"]]	
+	# values assigned in the envir_stacomi
 	assign("lang",lang,envir=envir_stacomi)	
-	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	assign("datawd",datawd,envir=envir_stacomi)
 	assign("sqldf.options",sqldf.options,envir=envir_stacomi)
+	
+	# the following values may be overridden later in husr()
+	assign("baseODBC",baseODBC,envir=envir_stacomi)
+	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
+	
 	refMsg=new("RefMsg")
 	createmessage(refMsg,pre_launch_test)
 	

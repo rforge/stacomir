@@ -237,6 +237,7 @@ graphdate<-function(vectordate){
 #' @param text a text string which might contain no utf8 characters
 #' @return text
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 fun_char_spe<-function(text){
 	text=gsub("\u00e9","e",text) #é
 	text=gsub("\u00e8","e",text) #è
@@ -258,6 +259,7 @@ fun_char_spe<-function(text){
 #' @param wash Should the console be cleared after displaying the message
 #' @return nblignes Assigned in .Global
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funout<-function(text,arret=FALSE,wash=FALSE){
 	if (exists("gSortie")) {
 		if (wash) dispose(gSortie)
@@ -281,18 +283,21 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 #' files/stacomi/calcmig.csv file
 #' 
 #' be sure to configure your odbc link to the
-#' database, the name is the name of the first column of the calcmig.csv file
-#' uid, pwd are identifier and password to connect to the database, they should
-#' correspond to your own schema in the database pgwd, is the path to the R
-#' source if you plan not to use the compiler but develop from source
-#' https://r-forge.r-project.org/scm/?group_id=1019 datawd, is the the
+#' database, the name is the name of the first column of the calcmig.csv file. 
+#' 	\code{uid}, \code{pwd} are identifier and password to connect to the database, they should
+#' correspond to your own schema in the database. \code{pgwd} is the path to the R
+#' source if you plan not to use the compiler but run manually using inst/config/stacomi_manual_launch.R for development.\cr
+#' 	\code{datawd}, is the the
 #' directory where you want to place the outputs, mostly tables, from the
 #' program, default to ~//CalcmigData lang, is either one of French, English or
 #' Spanish
+#' 	other fields correspond to sqldf options.
+#' @note A version of the calcmig.csv is packaged in the config directory of the stacomiR library.
 #' 
 #' @return a list with the datawd place and the baseODBC vector
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
+#' @keywords internal
 chargecsv=function(){ 
 	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
@@ -341,6 +346,7 @@ chargecsv=function(){
 #' @param vect a character vector
 #' @return listsql a list of value
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 vector_to_listsql<-function(vect)
 {
 	

@@ -23,4 +23,5 @@ this function uses gfile, edits a text with info and changing colors
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 
