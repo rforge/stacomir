@@ -85,7 +85,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 #' choice method for RefDC
 #' 
 #' @note   The choice method has for arguments a report (bilan) object
-#'  (e.g) is called from a report Bilan(e.g Bilan_lot).
+#'  (e.g) is called from a report Bilan(e.g Bilan_carlot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
 #' and fills it with the method \link{charge_avec_filtre} 
@@ -128,11 +128,11 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 				# Handler d'affichage du tableau
 				hDCi=function(h,...){
 					w=gwindow(get("msg",envir=envir_stacomi)$RefDC.3,width=400)
-					wg=ggroup(horizontal=FALSE,cont=w)
+					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,4,7,8,11,12)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
-					bg<-ggroup(cont=wg)
+					bg<-ggroup(container=wg)
 					addSpring(bg)
-					gbutton(get("msg",envir=envir_stacomi)$RefDC.4, cont=bg, handler = function(h,...) dispose(w))
+					gbutton(get("msg",envir=envir_stacomi)$RefDC.4, container=bg, handler = function(h,...) dispose(w))
 				}
 				frame_DC<<-gframe(get("msg",envir=envir_stacomi)$RefDC.5)
 				add(group,frame_DC)
@@ -153,7 +153,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 #' choicemult, selection method for refDC allowing to select several DC
 #' 
 #' @note   The choice method has for arguments a report (bilan) object
-#'  (e.g) is called from a report Bilan(e.g Bilan_lot).
+#'  (e.g) is called from a report Bilan(e.g Bilan_carlot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
 #' and fills it with the method \link{charge_avec_filtre}
@@ -216,18 +216,18 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				
 				DC=object@data[,c("dc","dis_commentaires","type_dc")]
 				#TODO addmsg
-				groupdc<<-ggroup(cont=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
-				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,cont=groupdc)
+				groupdc<<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
+				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,container=groupdc)
 				size(frameDCsource)<-c(250,300)
-				tbsourcedc  = gtable(DC,cont=frameDCsource,expand = TRUE, fill = TRUE)
+				tbsourcedc  = gtable(DC,container=frameDCsource,expand = TRUE, fill = TRUE)
 				
-				frameDCdest<-gframe("deposez ici",cont=groupdc)
+				frameDCdest<-gframe("deposez ici",container=groupdc)
 				size(frameDCdest)<-c(60,300)
 				#addSpring(groupdc)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",12))
 				xx$choice<-as.character(xx$choice)
-				tbdestdc=gtable(xx,cont=frameDCdest,expand=TRUE, fill=TRUE)
+				tbdestdc=gtable(xx,container=frameDCdest,expand=TRUE, fill=TRUE)
 				adddropsource(tbsourcedc)
 				adddroptarget(tbdestdc)				
 				adddropmotion(tbdestdc,handler=function(h,...) {

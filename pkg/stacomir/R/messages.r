@@ -20,6 +20,8 @@
 #' 
 #' @param lang one of "French","Spanish","English"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+# exported for test_that
 messages=function(lang="French"){
 	msg=list()
 # RequeteODBC

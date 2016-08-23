@@ -2,20 +2,20 @@
 % Please edit documentation in R/stacomi.r
 \name{husr}
 \alias{husr}
-\title{this handler test the connection and if it works loads the stacomi interface}
+\title{Internal function, tests the connection and if it works loads the stacomi interface}
 \usage{
 husr(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
 \item{...}{}
 }
 \description{
-this handler test the connection and if it works loads the stacomi interface
+Internal function, tests the connection and if it works loads the stacomi interface
 }
 \note{
-gr_interface is copied by stacomi into envir_stacomi.
+\code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{pre_launch_test}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

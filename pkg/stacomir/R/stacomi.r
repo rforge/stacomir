@@ -83,46 +83,87 @@ hBilanEspeces=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.19,wash=TRUE)
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
-#' this handler test the connection and if it works loads the stacomi interface
-#' @note gr_interface is copied by stacomi into envir_stacomi.
-#' @param h 
+
+
+
+#' Internal function, tests the connection and if it works loads the stacomi interface
+#' @note \code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{pre_launch_test}
+#' 
+#' @param h a handler
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
+	# assigned when passing through stacomi
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
+	pre_launch_test<-get("pre_launch_test",envir_stacomi) # logical true or false
 	# test de la connection
-	con=new("ConnectionODBC")
-	if (gr_interface){
-		baseODBC[2]<-svalue(usrname)
-		baseODBC[3]<-svalue(usrpwd)
-	} else {
-		# on prend les valeurs choisies par defaut dans baseODBC
-		# rien
+	if (login_window){
+		con=new("ConnectionODBC")
+		if (gr_interface){
+			baseODBC[2]<-svalue(usrname)
+			baseODBC[3]<-svalue(usrpwd)
+		} else {
+			# we take default values from calmig
+			# nothing is happening there
+		}
+		assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
+		assign("baseODBC",baseODBC,envir=envir_stacomi)
+		con@baseODBC=get("baseODBC",envir=envir_stacomi)
+		# we dispose loginwindow
+		if (exists("logw")) dispose(logw)
 	}
-	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
-	assign("baseODBC",baseODBC,envir=envir_stacomi)
-	con@baseODBC=get("baseODBC",envir=envir_stacomi)
-	e=expression(con<-stacomirtools::connect(con))
-	con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
-	test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
-	if (exists("logw")) dispose(logw)
-	odbcCloseAll()
+	if (pre_launch_test){
+		e=expression(con<-connect(con))
+		con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
+		test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
+		odbcCloseAll()
+	}
 	# if the test is OK launches the stacomi interface
 	# function handler called by gmessage
 	hgmessage=function(h,...){
 		stacomi(gr_interface=TRUE)
-		# en cas d'erreur on relance une demande de mot de passe
+		# if there is an error, re-launches and asks for a password
 	}
-	if (test) { # il existe un lien ODBC mais qui pointe peut ï¿½tre ailleurs
-		requete=new("RequeteODBC")
-		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-		requete@sql="select count(*) from ref.tr_taxon_tax"
-		requete<-stacomirtools::connect(requete)
-		if (nrow(requete@query)==0){
-			# le lien ODBC fonctionne mais pointe vers la mauvaise base
-			gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
+	#############################
+	# second test to check that the database is working well
+	############################
+	if (pre_launch_test){
+		if (test) { # il existe un lien ODBC mais qui pointe peut etre ailleurs
+			requete=new("RequeteODBC")
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@sql="select count(*) from ref.tr_taxon_tax"
+			requete<-stacomirtools::connect(requete)
+			if (nrow(requete@query)==0){
+				# the odbc link does not work and might be pointing to a wrong schema
+				# this time the argument login_window will be ignored
+				gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
+								"\n",
+								get("msg",envir=envir_stacomi)$interface_graphique_log.9,
+								" :",
+								baseODBC[1],
+								"\n",
+								get("msg",envir=envir_stacomi)$interface_graphique_log.2,
+								" :",
+								baseODBC[2],
+								"\n",
+								get("msg",envir=envir_stacomi)$interface_graphique_log.3,
+								" :",
+								baseODBC[3]),						
+						title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
+						icon = "error",
+						handler=hgmessage)		
+			} else {
+				assign("baseODBC",baseODBC,envir=envir_stacomi)
+				if (gr_interface){
+					interface_graphique()
+				}
+			}# end else nrow(>0)
+		} else {
+			# the test has failed and the user will be prompted to another login window
+			# this time the argument loginwindow will be ignored
+			gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
 							"\n",
 							get("msg",envir=envir_stacomi)$interface_graphique_log.9,
 							" :",
@@ -137,33 +178,15 @@ husr=function(h,...){
 							baseODBC[3]),						
 					title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
 					icon = "error",
-					handler=hgmessage)		
-		} else {
-			# l'utilisateur peut avoir choisi une autre base que celle qui est dans le fichier xml
-			assign("baseODBC",baseODBC,envir=envir_stacomi)
-			gr_interface<-get("gr_interface",envir=envir_stacomi)
-			if (gr_interface){
-				interface_graphique()
-			}
-		}
+					handler=hgmessage)
+		} # end else test (else == the test didn't pass, we have to change the name and password	
 	} else {
-		gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
-						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique_log.9,
-						" :",
-						baseODBC[1],
-						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique_log.2,
-						" :",
-						baseODBC[2],
-						"\n",
-						get("msg",envir=envir_stacomi)$interface_graphique_log.3,
-						" :",
-						baseODBC[3]),						
-				title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
-				icon = "error",
-				handler=hgmessage)
-	}	
+		# here : pre_launch_test=FALSE
+		# we don't want to check the connection at all...
+		if (gr_interface){
+			interface_graphique()
+		}
+	}
 }
 hhelp=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE)
@@ -182,10 +205,30 @@ hX11=function(h,...){
 #' Function that loads the loginwindow, tests connection, and then destroys the
 #' window
 #' 
-#' Function that loads the loginwindow, tests connection, and then destroys the
-#' window
+#' @note The defaut behaviour of the program is to run through the following elements
+#'  \itemize{
+#'      \item{login window}{ The program opens a login window to prompt the user to give his usernames and passwords.
+#' 			default values will proposed from "C:\program files\stacomi\calcmig.csv" and if this file does not exists, 
+#' 			from \code{file.path(.libPaths(),"stacomiR","config","calcmig.csv")} as a default. If \code{login_window=FALSE}
+#' 			the program will skip the login window and use calcmig values for user (\code{uid}) and password(\code{pwd}) as a default.}
+#'      \item{tests for connection}{ Test for the existence of a calcmig.csv file, and then the existence of the file
+#' 			\code{usr.tr_taxon_tax} where usr is the username extracted from calcmig. These tests are only done if 
+#' 			\code{pre_launch_test=TRUE}. If the test don't pass, then the user is prompted for a "login window" even if argument
+#' 			\code{login_window} was set to \code{FALSE} at launch.}
+#'       \item{graphical interface}{ When either, previous tests have been run successfully, or the value for
+#'          \code{pre_launch_test=FALSE} the program will launch. If \code{graphical_interface} is \code{TRUE}, the program will use
+#'          a graphical interface \code{\link{interface_graphique}} to build the graphical interface, otherwise the program is expected to run
+#' 			through the command line.}
+#'  }
+#' When \code{pre_launch_test=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
+#'  And also essages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
+#' are only avalaible in english. 
 #' 
-#' @param gr_interface Will be used to launch the program as graphical
+#' @param gr_interface Boolean, if \code{TRUE} the program will launch the graphical interface
+#' @param login_window Boolean, if \code{TRUE} a login window will be displayed asking the user to specify
+#' user name.
+#' @param pre_launch_test Boolean, if \code{TRUE} pre launch tests will be run to test the connection validity
+#' @usage stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
 #' interface or in command line
 #' @import stringr
 #' @import RColorBrewer
@@ -197,6 +240,7 @@ hX11=function(h,...){
 #' @import methods
 #' @import stacomirtools
 #' @import RODBC
+#' @import Hmisc
 #' @importFrom intervals Intervals
 #' @importFrom intervals closed<-
 #' @importFrom intervals interval_overlap
@@ -220,11 +264,28 @@ hX11=function(h,...){
 #' @importFrom stats as.formula coef na.fail nls pbeta predict sd
 #' @importFrom grDevices X11 X11 gray rainbow
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
+#' 
+#'  require(stacomiR)
+#'  \dontrun{
+#' 	 ## launch stacomi with the graphical interface
+#' 	stacomi()
+#' }
+#'  ## launch stacomi but do not prompt for password
+#'  \dontrun{
+#' 	 ## launch stacomi with the graphical interface
+#' 	stacomi(login_window=FALSE)
+#' } 
+#' ##
+#' launch stacomi without connection to the database
+#' stacomi(gr_interface=FALSE,pre_launch_test=FALSE)
 #' @export
-stacomi=function(gr_interface=TRUE){
+stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 	# first loading of connection and odbc info using chargexml()
-	assign("gr_interface",gr_interface,envir=envir_stacomi)
+	assign("gr_interface",gr_interface,envir=envir_stacomi)	
+	assign("pre_launch_test",pre_launch_test,envir=envir_stacomi)
 	# the first messages are necessary for the first access to the database, they are in French
+	envir_stacomi <- new.env(parent = emptyenv())
 	msg<-messages()
 	mylinks=chargecsv()
 	baseODBC=mylinks[["baseODBC"]]
@@ -236,7 +297,7 @@ stacomi=function(gr_interface=TRUE){
 	assign("datawd",datawd,envir=envir_stacomi)
 	assign("sqldf.options",sqldf.options,envir=envir_stacomi)
 	refMsg=new("RefMsg")
-	createmessage(refMsg)
+	createmessage(refMsg,pre_launch_test)
 	
 	msg=get("msg",envir=envir_stacomi)
 	#libraries()
@@ -246,7 +307,8 @@ stacomi=function(gr_interface=TRUE){
 			sqldf.RPostgreSQL.host = sqldf.options["sqldf.host"],#  1.100.1.6
 			sqldf.RPostgreSQL.port = sqldf.options["sqldf.port"])
 	# loginWindow, will call the husr handler
-	if (gr_interface){
+	# user login
+	if (gr_interface&login_window&pre_launch_test){
 		logw <- gWidgets::gwindow(msg$interface_graphique_log.1, 
 				name="log",
 				parent=c(0,0),
@@ -271,18 +333,17 @@ stacomi=function(gr_interface=TRUE){
 		logly[2,2]<-usrpwd
 		logly[3,2]<-but
 	} else {
-		
-		
-		husr(gr_interface=FALSE)
+		husr(h=NULL)
 	}
+	invisible(NULL)
 }
 
 
-#' Program launch, this function first gathers the ODBC path from the csv file
-#' 
-#' Program launch, this function fist gathers the ODBC path and working
-#' directory from the csv file and then launches the GwidgetRgtk graphical
-#' interface to stacomi.
+
+
+#' Program launch, this function launches the GwidgetRgtk graphical
+#' interface to stacomi. To be able to run, some widgets (win, grouptotal, group...) 
+#' are assigned in the user environment \code{.GlobalEnv}. 
 #' 
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -379,15 +440,17 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs",
 				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
 				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
 				"effectif_total","fonctionnement","fonctionnementDF","quantite_CALCULE",
-						"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
-						'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','poids_moyen',
-						'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel"))
+				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
+				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
+				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
+				"taxon_stades","time.sequence"))
 
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
-				"col.sortie","ggroupboutons","ggroupboutonsbas","graphes",
+				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
 				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
-				"frame_std","frame_tax","logw","bilan_stades_pigm","usrname","usrpwd"))
+				"frame_std","frame_tax","frame_annee","frame_check","frame_choice",
+				"logw","bilan_stades_pigm","usrname","usrpwd","notebook"))
 # Progressbar
 utils::globalVariables(c("progres"))
 # reoxygenize fails if data are not loaded

@@ -97,9 +97,11 @@ Imports:
     utils,
     stats,
     lattice,
-    grDevices
+    grDevices,
+    Hmisc
 Author: Cedric Briand [aut, cre],
     Marion Legrand [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 RoxygenNote: 5.0.1
 NeedsCompilation: no
+Suggests: testthat

@@ -69,7 +69,7 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 					#dispose(winpa)
 				}
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.3,container=group,horizontal=FALSE)
-				pg<-glayout(cont=winpa)
+				pg<-glayout(container=winpa)
 				pg[1,1]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.4)
 				datedeb<-gedit(as.Date(getdateDebut(object)),handler=hwinpa,width=10)
 				pg[2,1]<-datedeb
@@ -143,7 +143,7 @@ setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=func
 					}	
 				}
 					object@dateDebut<-as.POSIXlt(datedebut)
-					object@nbPas=as.numeric(difftime(datefin,datedebut,unit="days"))
+					object@nbPas=as.numeric(difftime(datefin,datedebut,units="days"))
 					validObject(object) 			
 					return(object)
 				})

@@ -10,7 +10,7 @@ if(!all(necessary %in% installed.packages()[, 'Package']))
 #require('tcltk2')
 require('ggplot2')
 #require('gWidgets') # already called by depends
-#require('RODBC')
+require('RODBC')
 ##require('Hmisc')
 options(guiToolkit = "RGtk2")
 #require('lattice')

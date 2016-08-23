@@ -274,11 +274,12 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 					# TODO a developper
 				}
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=group,horizontal=FALSE)
-				pg<-ggroup(horizontal=FALSE,cont=winpa)
+				pg<-ggroup(horizontal=FALSE,container=winpa)
 				glabel("Date de debut",container=pg)
-				datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoicepas,width=15)
+				datedeb<-gedit(getdateDebut(object),
+						container=pg,handler=hchoicepas,width=15)
 				datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
-				datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
+				datedeb2<-gcalendar(datedebut2,container=pg,handler=function(h,...){
 							svalue(datedeb)<-as.character(strftime(
 											strptime(svalue(datedeb2),"%Y-%m-%d"),
 											"%Y-%m-%d %H:%M:%S"))
@@ -329,13 +330,13 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 						hchoicedatedebut=function(h,...){
 							# TODO a developper
 						}
-						groupdate<<-ggroup(cont=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
+						groupdate<<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
 						winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=groupdate,horizontal=FALSE)
-						pg<-ggroup(horizontal=FALSE,cont=winpa)
+						pg<-ggroup(horizontal=FALSE,container=winpa)
 						glabel("Date de debut",container=pg)
-						datedeb<-gedit(getdateDebut(object),cont=pg,handler=hchoicepas,width=15)
+						datedeb<-gedit(getdateDebut(object),container=pg,handler=hchoicepas,width=15)
 						datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
-						datedeb2<-gcalendar(datedebut2,cont=pg,handler=function(h,...){
+						datedeb2<-gcalendar(datedebut2,container=pg,handler=function(h,...){
 									svalue(datedeb)<-as.character(strftime(
 													strptime(svalue(datedeb2),"%Y-%m-%d"),
 													"%Y-%m-%d %H:%M:%S"))

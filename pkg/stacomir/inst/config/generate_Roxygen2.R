@@ -30,5 +30,7 @@ document("F:/workspace/stacomir/branch0.5/stacomir")
 #vignette("roxygen2")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 data("bMM_Arzal")
+data("msg")
+envir_stacomi <- new.env(parent = emptyenv())
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]

@@ -1,18 +1,18 @@
-# Nom fichier :        interface_Bilan_lot.R    (interface)
+# Nom fichier :        interface_Bilan_carlot.R    (interface)
 
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanLot = function()
 {  
-    bilan_lot=new("Bilan_lot")
-    assign("bilan_lot",bilan_lot,envir = .GlobalEnv)
+    bilan_carlot=new("Bilan_carlot")
+    assign("bilan_carlot",bilan_carlot,envir = .GlobalEnv)
     
     funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
-    bilan_lot@dc=charge(bilan_lot@dc)
-    bilan_lot@taxons=charge(bilan_lot@taxons)
-    bilan_lot@stades=charge(bilan_lot@stades)
-    bilan_lot@par=charge(bilan_lot@par)    
+    bilan_carlot@dc=charge(bilan_carlot@dc)
+    bilan_carlot@taxons=charge(bilan_carlot@taxons)
+    bilan_carlot@stades=charge(bilan_carlot@stades)
+    bilan_carlot@par=charge(bilan_carlot@par)    
      
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte() # vidange de l'interface
@@ -25,22 +25,22 @@ interface_BilanLot = function()
     # appeller la methode choice pour l'affichage du fils si il existe
     
     
-    choice(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
-			nomassign="bilan_lot_date_debut",
+    choice(bilan_carlot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+			nomassign="bilan_carlot_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2,
 			affichecal=FALSE)
-    choice(bilan_lot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
-			nomassign="bilan_lot_date_fin",
+    choice(bilan_carlot@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+			nomassign="bilan_carlot_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1,
 			affichecal=FALSE)
     
-    choice(bilan_lot@dc,objectBilan=bilan_lot,is.enabled=TRUE)
+    choice(bilan_carlot@dc,objectBilan=bilan_carlot,is.enabled=TRUE)
     # Les methodes choice suivantes sont passees en cascade � l'interieur des methodes choice
-    #choice(bilan_lot@taxons,is.enabled=FALSE)
-    #choice(bilan_lot@stades,is.enabled=FALSE)
-    #choice(bilan_lot@par,is.enabled=FALSE)
+    #choice(bilan_carlot@taxons,is.enabled=FALSE)
+    #choice(bilan_carlot@stades,is.enabled=FALSE)
+    #choice(bilan_carlot@par,is.enabled=FALSE)
     #toolbarlist$Calc$handler = connect(fonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
@@ -48,19 +48,19 @@ interface_BilanLot = function()
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion
 	aPoint=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7,
 			icon="gWidgetsRGtk2-cloud",
-			handler=funpointBilan_lot,
+			handler=funpointBilan_carlot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.11 => density
 	aDensity=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11,
 			icon="gWidgetsRGtk2-density",
-			handler=fundensityBilan_lot,
+			handler=fundensityBilan_carlot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11)
 	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.10 => boxplot
 	aBoxplot=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10,
 			icon="gWidgetsRGtk2-boxplot",
-			handler=funboxplotBilan_lot,
+			handler=funboxplotBilan_carlot,
 			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10)
-	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_lot,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_carlot,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_carlot.8)
     aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
     
     toolbarlist <- list(    

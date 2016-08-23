@@ -38,7 +38,7 @@ glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
 \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{Bilan_poids_moyen}}
 \code{\linkS4class{Bilan_stades_pigm}} 
 \code{\linkS4class{Bilan_taille}}

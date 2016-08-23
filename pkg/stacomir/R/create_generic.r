@@ -34,4 +34,4 @@ setGeneric("createmessage",def=function(object,...) standardGeneric("createmessa
 #' 
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-envir_stacomi <- new.env(parent = emptyenv())
+"envir_stacomi"

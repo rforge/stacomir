@@ -5,7 +5,10 @@
 \alias{createmessage,RefMsg-method}
 \title{createmessage method for RefMsg referential objects}
 \usage{
-\S4method{createmessage}{RefMsg}(object)
+\S4method{createmessage}{RefMsg}(object, pre_launch_test)
+}
+\arguments{
+\item{pre_launch_test}{Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package}
 }
 \value{
 An S4 object of class RefMsg
@@ -14,7 +17,8 @@ An S4 object of class RefMsg
 createmessage method for RefMsg referential objects
 }
 \note{
-When coming from the database, " are now /", those at the beginning and end are turned into ", the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
+When coming from the database, doublequotes are now escaped with an antislash (/"), those at the beginning and end are left as doublequotes, 
+the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -145,16 +145,16 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				grouptaxon<<-ggroup() 
 				add(notebook,grouptaxon,label="taxon")
-				frametaxonsource<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2,cont=grouptaxon)
-				tbsourcetaxon  = gtable(tax_libelle,cont=frametaxonsource,expand = TRUE, fill = TRUE)
+				frametaxonsource<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2,container=grouptaxon)
+				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
 				size(tbsourcetaxon)<-c(160,300) # les dimensions sont testees a la main 
 				# pour s'ajuster aux dimensions du notebook (largeur 400)
 				#TODO addmsg
-				frametaxondest<-gframe("deposez ici",cont=grouptaxon)
+				frametaxondest<-gframe("deposez ici",container=grouptaxon)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",8))
 				xx$choice<-as.character(xx$choice)
-				tbdesttaxon=gtable(xx,cont=frametaxondest,expand = TRUE, fill = TRUE)
+				tbdesttaxon=gtable(xx,container=frametaxondest,expand = TRUE, fill = TRUE)
 				size(tbdesttaxon)<-c(160,300)
 				adddropsource(tbsourcetaxon)
 				adddroptarget(tbdesttaxon)				

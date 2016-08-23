@@ -34,7 +34,7 @@ baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pw
 setwd(pgwd)
 # pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
-source ("F:/workspace/stacomir/branch0.5/stacomir/inst/config/libraries.r")
+source ("F:/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
 
 libraries()
 
@@ -111,6 +111,6 @@ source("interface_BilanFonctionnementDF.r")
 source("interface_BilanMigrationMult.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
- stacomi(gr_interface=FALSE)
+ stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
  # pour aller chercher les donnees
  setwd("F:/workspace/stacomir/pkg/stacomir")

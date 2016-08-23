@@ -1,35 +1,31 @@
 \name{stacomiR-package}
-\Rdversion{1.1}
-\alias{stacomi-package}
+\alias{stacomiR-package}
 \docType{package}
-\title{package stacomiR Stations de Controle des Migrations, Fish Migration control}
+\title{package Fish Migration Monitoring (stacomiR)- Stations de Contrôle des Migrations}
 \description{
-Stacomi enables to read informations in a database about fish migrations to build overviews of fish migrations and creating charts with datas.
+Stacomi enables to read informations in a database about fish migrations to build overviews of fish migrations and creating charts, plots, and summaries.
 }
 \details{
 \tabular{ll}{
 Package: \tab stacomiR\cr
 Type: \tab Package\cr
-Version: \tab 0.4.1\cr
+Version: \tab 0.5.0\cr
 Date: \tab 2013-01-17\cr
-License: \tab GPL license\cr
+License: \tab  GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 Depends: \tab methods\cr
 }
-To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal
+To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal.
+The use of stacomi(gr_interface=FALSE) allows to launch stacomi without graphical interface from the command line.
 }
 \author{
 Author and Maintainer : \email{cedric.briand"at"eptb-vilaine.fr}
 }
-\references{
-\url{http://w3.eptb-vilaine.fr:8080/tracstacomi}
-}
-
 \keyword{package}
 \keyword{dynamic}
 \keyword{database}
 \seealso{
-\pkg{stacomiRtools}
+\pkg{stacomirtools}
 }
 
 \examples{

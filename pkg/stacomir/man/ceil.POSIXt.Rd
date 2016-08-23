@@ -4,8 +4,8 @@
 \alias{ceil.POSIXt}
 \title{ceil.POSIXT function imported from depuis Hmisc that cannot be loaded}
 \usage{
-ceil.POSIXt(x, digits = c("secs", "mins", "hours", "days", "months", "years"),
-  ...)
+\method{ceil}{POSIXt}(x, digits = c("secs", "mins", "hours", "days", "months",
+  "years"), ...)
 }
 \arguments{
 \item{x}{A POSIXt}

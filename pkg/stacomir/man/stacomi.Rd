@@ -5,15 +5,56 @@
 \title{Function that loads the loginwindow, tests connection, and then destroys the
 window}
 \usage{
-stacomi(gr_interface = TRUE)
+stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
+interface or in command line
 }
 \arguments{
-\item{gr_interface}{Will be used to launch the program as graphical
-interface or in command line}
+\item{gr_interface}{Boolean, if \code{TRUE} the program will launch the graphical interface}
+
+\item{login_window}{Boolean, if \code{TRUE} a login window will be displayed asking the user to specify
+user name.}
+
+\item{pre_launch_test}{Boolean, if \code{TRUE} pre launch tests will be run to test the connection validity}
 }
 \description{
 Function that loads the loginwindow, tests connection, and then destroys the
 window
+}
+\note{
+The defaut behaviour of the program is to run through the following elements
+ \itemize{
+     \item{login window}{ The program opens a login window to prompt the user to give his usernames and passwords.
+			default values will proposed from "C:\program files\stacomi\calcmig.csv" and if this file does not exists, 
+			from \code{file.path(.libPaths(),"stacomiR","config","calcmig.csv")} as a default. If \code{login_window=FALSE}
+			the program will skip the login window and use calcmig values for user (\code{uid}) and password(\code{pwd}) as a default.}
+     \item{tests for connection}{ Test for the existence of a calcmig.csv file, and then the existence of the file
+			\code{usr.tr_taxon_tax} where usr is the username extracted from calcmig. These tests are only done if 
+			\code{pre_launch_test=TRUE}. If the test don't pass, then the user is prompted for a "login window" even if argument
+			\code{login_window} was set to \code{FALSE} at launch.}
+      \item{graphical interface}{ When either, previous tests have been run successfully, or the value for
+         \code{pre_launch_test=FALSE} the program will launch. If \code{graphical_interface} is \code{TRUE}, the program will use
+         a graphical interface \code{\link{interface_graphique}} to build the graphical interface, otherwise the program is expected to run
+			through the command line.}
+ }
+When \code{pre_launch_test=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
+ And also essages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
+are only avalaible in english.
+}
+\examples{
+
+ require(stacomiR)
+ \dontrun{
+	 ## launch stacomi with the graphical interface
+	stacomi()
+}
+ ## launch stacomi but do not prompt for password
+ \dontrun{
+	 ## launch stacomi with the graphical interface
+	stacomi(login_window=FALSE)
+} 
+##
+launch stacomi without connection to the database
+stacomi(gr_interface=FALSE,pre_launch_test=FALSE)
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -89,11 +89,11 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 				# Handler d'affichage du tableau
 				hDFi=function(h,...){
 					w=gwindow(get("msg",envir=envir_stacomi)$RefDF.2,width=400)
-					wg=ggroup(horizontal=FALSE,cont=w)
+					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,6,7)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
-					bg<-ggroup(cont=wg)
+					bg<-ggroup(container=wg)
 					addSpring(bg)
-					gbutton(get("msg",envir=envir_stacomi)$RefDC.4, cont=bg, handler = function(h,...) dispose(w))
+					gbutton(get("msg",envir=envir_stacomi)$RefDC.4, container=bg, handler = function(h,...) dispose(w))
 				}
 				frameDF=gframe(get("msg",envir=envir_stacomi)$RefDF.3,container=group)
 				DF_identifiant=object@data$df

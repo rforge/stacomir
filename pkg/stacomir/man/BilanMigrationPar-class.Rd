@@ -54,7 +54,7 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
 Other Bilan Class 
-\code{\linkS4class{Bilan_lot}}
+\code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{Bilan_poids_moyen}}
 \code{\linkS4class{Bilan_stades_pigm}} 
 \code{\linkS4class{Bilan_taille}}

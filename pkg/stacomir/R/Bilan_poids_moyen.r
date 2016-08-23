@@ -35,7 +35,7 @@
 #' }\item{:}{Object of class \code{"RefListe"} RefListe referential class
 #' choose within a list, here do you want subsamples or not } }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_lot}}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
 #' \code{\linkS4class{Bilan_poids_moyen}}
 #' \code{\linkS4class{Bilan_stades_pigm}} 
 #' \code{\linkS4class{Bilan_taille}}

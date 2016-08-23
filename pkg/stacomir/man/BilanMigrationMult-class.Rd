@@ -45,7 +45,7 @@ it uses quantities other than numbers if necessary (only used for glass eel in t
 \examples{
 library(stacomiR)
 
-stacomi(gr_interface=FALSE) ## launches the application in the command line
+stacomi(gr_interface=FALSE,) ## launches the application in the command line
 # here is the structure of the class
 showClass("BilanMigrationMult")
 data("bMM_Arzal")

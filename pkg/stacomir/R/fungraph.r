@@ -1,54 +1,32 @@
-# Nom fichier :        funraph.R
-# Projet :             calcmig/fonctions
-
-# Description :       graph pour bilan migration autres que civelles
-
-
 #' Function for BilanMigration graphes including numbers DF DC operations
 #' 
 #' This graph is for species other than glass eel
 #' 
 #' 
-#' @usage fungraph(bilanMigration, tableau, duree, taxon, stade)
+#' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade,...)
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param table=tableau a data frame with the results
-#' @param duree a vector POSIXt
+#' @param time.sequence a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
+#' @param ... other parameters passed but not used
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
-
-
-
-
-
-
-#' Function for BilanMigration graphes including numbers DF DC operations
-#' 
-#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
-#' object of class \code{\linkS4class{BilanMigrationMult}}
-#' @param tableau a data frame with the results
-#' @param duree a vector POSIXt
-#' @param taxon the species
-#' @param stade the stage
-#' @param dc the dc, default to null, only necessary for  \code{\linkS4class{BilanMigrationMult}}
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
+fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
 	# pour adapter aux bilanMigrationMult, ligne par d�faut...
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
-	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
-	mois= months(duree)
-	jour= strftime(as.POSIXlt(duree),"%j")
-	jmois=strftime(as.POSIXlt(duree),"%d")
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	mois= months(time.sequence)
+	jour= strftime(as.POSIXlt(time.sequence),"%j")
+	jmois=strftime(as.POSIXlt(time.sequence),"%d")
 	mois=unique(mois)
 	mois=paste("15",substr(as.character(mois),1,3))
 	index=as.vector(tableau$No.pas[jmois==15])
 	x=1:nrow(tableau)
-	debut=unclass(as.POSIXct((min(duree))))[[1]] # attention arrondit � un jour de moins
-	fin=unclass(as.POSIXct(max(duree)))[[1]]
+	debut=unclass(as.POSIXct((min(time.sequence))))[[1]] # attention arrondit � un jour de moins
+	fin=unclass(as.POSIXct(max(time.sequence)))[[1]]
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc]) # commentaires sur le DC
 	###################################
 	# Definition du layout
@@ -77,7 +55,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 			main=paste(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""),
 			cex.main=1)
 	print(gr)
-	if(bilanMigration@pasDeTemps@dureePas=="86400"){ # pas de temps journalier
+	if(bilanMigration@pasDeTemps@time.sequencePas=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
 		#axis(side=1,at=as.vector(x[jmois==1]),tick=TRUE,labels=FALSE)
@@ -104,9 +82,9 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@sql<-paste("SELECT * FROM  t_operation_ope ",
 			"WHERE ope_date_debut >= '",
-			strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
+			strftime(as.POSIXlt(time.sequence[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			"' AND ope_date_fin <= '" ,
-			strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"),
+			strftime(as.POSIXlt(time.sequence[max(x)]),format="%Y-%m-%d %H:%M:%S"),
 			"' AND ope_dic_identifiant=",dc,
 			" ORDER BY ope_date_debut; ",sep = "")
 	t_operation_ope<-stacomirtools::connect(req)@query
@@ -118,13 +96,13 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
-			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
-			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
+			dateDebut=strftime(as.POSIXlt(time.sequence[min(x)]),format="%Y-%m-%d %H:%M:%S"),
+			dateFin=strftime(as.POSIXlt(time.sequence[max(x)]),format="%Y-%m-%d %H:%M:%S"))
 	fonctionnementDF<-stacomirtools::connect(req)@query
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
-			dateDebut=strftime(as.POSIXlt(duree[min(x)]),format="%Y-%m-%d %H:%M:%S"),
-			dateFin=strftime(as.POSIXlt(duree[max(x)]),format="%Y-%m-%d %H:%M:%S"))
+			dateDebut=strftime(as.POSIXlt(time.sequence[min(x)]),format="%Y-%m-%d %H:%M:%S"),
+			dateFin=strftime(as.POSIXlt(time.sequence[max(x)]),format="%Y-%m-%d %H:%M:%S"))
 	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
@@ -143,7 +121,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
-	plot(   as.POSIXct(duree),
+	plot(   as.POSIXct(time.sequence),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
 			type= "n", 
@@ -242,7 +220,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	###################################                 
 	
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
-	plot(   as.POSIXct(duree),
+	plot(   as.POSIXct(time.sequence),
 			seq(0,3,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
 			type= "n", 
@@ -341,7 +319,7 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	
 	
 	graphics::par("mar"=c(2, 4, 0, 2)+ 0.1)  
-	plot(   as.POSIXct(duree),
+	plot(   as.POSIXct(time.sequence),
 			seq(0,1,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
 			type= "n", 
@@ -368,9 +346,9 @@ fungraph=function(bilanMigration,tableau,duree,taxon,stade,dc=null){
 	# Graph mensuel 
 	####################################
 	X11(7,4)
-	stktab=cbind(stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"duree"=rep(duree,4))
+	stktab=cbind(stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"time.sequence"=rep(time.sequence,4))
 	stktab<-funtraitementdate(stktab,
-			nom_coldt="duree",
+			nom_coldt="time.sequence",
 			annee=FALSE,
 			mois=TRUE,
 			quinzaine=TRUE,

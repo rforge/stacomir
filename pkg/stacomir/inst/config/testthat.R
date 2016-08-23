@@ -1,7 +1,4 @@
-# TODO: Add comment
-# 
-# Author: cedric.briand
-###############################################################################
-
 require(testthat)
-test_dir("F:/workspace/stacomir/branch0.5/stacomir/inst/test")
+test_dir("F:/workspace/stacomir/pkg/stacomir/inst/test/testthat")
+
+

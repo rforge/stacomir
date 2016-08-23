@@ -86,11 +86,11 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 				object<-getanneeprec(object,decal)
 			}
 			winhor=gframe(label,container=group,horizontal=!affichecal)
-			pg<-ggroup(horizontal=FALSE,cont=winhor)
-			horodate<-gedit(getRefHorodate(object),cont=pg,handler=hwinhor,width=20)
+			pg<-ggroup(horizontal=FALSE,container=winhor)
+			horodate<-gedit(getRefHorodate(object),container=pg,handler=hwinhor,width=20)
 			horodate2=as.character(strftime(object@horodate,"%Y-%m-%d"))
 			if (affichecal) {
-#				horocal<-gcalendar(horodate2,cont=pg,handler=function(h,...){
+#				horocal<-gcalendar(horodate2,container=pg,handler=function(h,...){
 #							svalue(horodate)<-as.character(strftime(
 #											strptime(svalue(horocal),"%Y-%m-%d"),
 #											"%Y-%m-%d %H:%M:%S"))

@@ -13,13 +13,20 @@
 #' \item{list("datefin")}{Object of class \code{"POSIXlt"} ~ Ending
 #' year}\item{:}{Object of class \code{"POSIXlt"} ~ Ending year} }
 #' @author cedric.briand"at"eptb-vilaine.fr
-#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
-#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
-#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
-#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
-#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
-#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
-#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
+#' @seealso Other referential classes 
+#' \code{\linkS4class{RefAnnee}}
+#' \code{\linkS4class{RefCheckBox}} 
+#' \code{\linkS4class{RefChoix}}
+#' \code{\linkS4class{RefCoe}} 
+#' \code{\linkS4class{RefDC}}
+#' \code{\linkS4class{RefDF}} 
+#' \code{\linkS4class{RefListe}}
+#' \code{\linkS4class{Refpar}} 
+#' \code{\linkS4class{Refparqual}}
+#' \code{\linkS4class{Refparquan}} 
+#' \code{\linkS4class{RefPoidsMoyenPeche}}
+#' \code{\linkS4class{RefStades}} 
+#' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
@@ -29,8 +36,17 @@ setClass(Class="RefPoidsMoyenPeche",representation=
 # pour test  
 # object= new("RefPoidsMoyenPeche")
 
-#retourne la liste des annees presentes dans la base
+
+
+#' Charge method for RefPoidsMoyenPeche
+#' 
+#' @return An object of class \code{\linkS4class{RefPoidsMoyenPeche}}
+#' 
+#' @author cedric.briand
+#' @docType methods
+#' @export
 setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function(object){
+			baseODBCmortciv<-get("baseODBCmortciv",envir=envir_stacomi)
 			requete=new("RequeteODBCwheredate")
 			requete@datedebut=object@datedebut
 			requete@datefin=object@datefin
@@ -53,5 +69,3 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 			object@data<-requete@query
 			return(object)
 		})
-# pas de methode choice, le choice est deja fait dans l'annee de l'interface
-#charge(refPoidsMoyenPeche)

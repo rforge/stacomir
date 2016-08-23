@@ -160,7 +160,9 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult=connect(bilanMigrationMult)
 			cat(stringr::str_c("nrow=",nrow(bilanMigrationMult@data)))
 			
-			bilanMigrationMult@data$duree=difftime(bilanMigrationMult@data$ope_date_fin,bilanMigrationMult@data$ope_date_debut,unit="days")
+			bilanMigrationMult@data$duree=difftime(bilanMigrationMult@data$ope_date_fin,
+					bilanMigrationMult@data$ope_date_debut,
+					units="days")
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
 			time.sequence<-seq.POSIXt(from=debut,to=fin,

@@ -292,6 +292,7 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 #' 
 #' @return a list with the datawd place and the baseODBC vector
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 chargecsv=function(){ 
 	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")

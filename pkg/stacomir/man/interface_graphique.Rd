@@ -2,14 +2,16 @@
 % Please edit documentation in R/stacomi.r
 \name{interface_graphique}
 \alias{interface_graphique}
-\title{Program launch, this function first gathers the ODBC path from the csv file}
+\title{Program launch, this function launches the GwidgetRgtk graphical
+interface to stacomi. To be able to run, some widgets (win, grouptotal, group...) 
+are assigned in the user environment \code{.GlobalEnv}.}
 \usage{
 interface_graphique()
 }
 \description{
-Program launch, this function fist gathers the ODBC path and working
-directory from the csv file and then launches the GwidgetRgtk graphical
-interface to stacomi.
+Program launch, this function launches the GwidgetRgtk graphical
+interface to stacomi. To be able to run, some widgets (win, grouptotal, group...) 
+are assigned in the user environment \code{.GlobalEnv}.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

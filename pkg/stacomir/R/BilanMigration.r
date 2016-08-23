@@ -37,7 +37,7 @@
 #' \item{:}{Object of class \code{"POSIXct"} : duration of the
 #' analysis} }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Class \code{\linkS4class{Bilan_lot}}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}
 #' \code{\linkS4class{Bilan_poids_moyen}}
 #' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
 #' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
