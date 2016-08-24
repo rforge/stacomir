@@ -30,3 +30,18 @@
 #' }
 #' @keywords data
 "bMM_Arzal"
+
+#' Messages
+#' 
+#' In english
+#'
+#' 
+#' @keywords data
+"msg"
+
+#' Working environment for stacomiR created when launching stacomi()
+#' 
+#' This is where the graphical interface stores its objects
+#' try \code{ls{envir=envir_stacomi)}
+#' @keywords environment
+"envir_stacomi"

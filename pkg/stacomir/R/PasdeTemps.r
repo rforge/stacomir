@@ -1,17 +1,3 @@
-# Nom fichier :        PasdeTemps (classe)
-# Projet :             controle migrateur
-# Organisme :          IAV
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :  31/03/2008 17:21:25
-# Compatibilite :
-# Etat :               developpement
-# Description          calcul et affichage des pas de temps (classe object)
-#**********************************************************************
-#*
-
-
-
 UNE_SECONDE     = as.difftime(c("0:0:1")) ;
 UNE_MINUTE      = 60 * UNE_SECONDE ;
 DIX_MINUTES     = 10 * UNE_MINUTE ;
@@ -95,7 +81,7 @@ validite_PasDeTemps=function(object)
 setClass(Class="PasDeTemps",representation=
 				representation(dateDebut="POSIXlt",stepDuration="numeric",nbStep="numeric",noPasCourant="integer"),
 		validity=validite_PasDeTemps,
-		prototype=prototype(dateDebut=as.POSIXlt(trunc.POSIXt(Sys.time(),"year")),
+		prototype=prototype(dateDebut=as.POSIXlt(Hmisc::trunc.POSIXt(Sys.time(),"year")),
 				stepDuration=as.numeric(86400),
 				nbStep=as.numeric(1),
 				noPasCourant=as.integer(0) ) )
@@ -177,7 +163,7 @@ setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=functi
 			CurrentDateDebut=object@dateDebut+ object@stepDuration*object@noPasCourant
 			# bug cht heure
 			if (object@stepDuration==86400) {
-				CurrentDateDebut=round.POSIXt(CurrentDateDebut,"days")
+				CurrentDateDebut=Hmisc::round.POSIXt(CurrentDateDebut,"days")
 			}			
 			return(CurrentDateDebut)
 		})
@@ -191,7 +177,7 @@ setMethod("currentDateFin",signature=signature("PasDeTemps"),definition=function
 			CurrentDateFin=object@dateDebut+ object@stepDuration*(object@noPasCourant+as.integer(1))
 			# bug cht heure 
 			if (object@stepDuration==86400) {
-				CurrentDateFin=round.POSIXt(CurrentDateFin,"days")
+				CurrentDateFin=Hmisc::round.POSIXt(CurrentDateFin,"days")
 			}
 			return(CurrentDateFin)
 		})

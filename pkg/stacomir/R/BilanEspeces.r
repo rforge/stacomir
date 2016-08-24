@@ -85,8 +85,8 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 #' handler du calcul du BilanEspeces
 #' realise le calcul du bilan especes, l'ecrit dans l'environnement envir_stacomi
 #' traite eventuellement les quantites de lots (si c'est des civelles)
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hBilanEspecescalc=function(h,...){
@@ -200,8 +200,8 @@ hCamembert = function(h,...) {
 #' handler du calcul BilanEspeces : traitements 
 #' appelle les fonctions funstat et funtable pour faire le bilan des migrations
 #' dans des fichiers csv
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hTableBilanEspeces=function(h,...) {

@@ -55,8 +55,8 @@ setValidity("BilanMigrationConditionEnv",
 #' handler du graphique BilanMigrationConditionEnv
 #' realise le calcul du bilan migration avec CE, l'ecrit dans l'environnement envir_stacomi
 #' traite eventuellement les quantites de lots (si c'est des civelles)
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hbilanMigrationConditionEnvcalc=function(h,...){

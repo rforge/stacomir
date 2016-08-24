@@ -97,8 +97,8 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 # Compte tenu de la structure des donnees ce n'est pas si simple... 
 
 #' Function to create a barchart (lattice) corresponding to the periods
-#' @param h A handler
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @return assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi
 #' 
 #' @author cedric.briand
@@ -169,8 +169,8 @@ funbarchartDC = function(h,...) {
 
 #' function used for some lattice graph 
 #' 
-#' @param h A handler
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @export
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDC = function(h,...) {  

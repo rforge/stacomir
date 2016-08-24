@@ -1,17 +1,7 @@
-# Nom fichier :        funtraitement_poids
-# Projet :             calmig/prog/fonctions
-# Organisme :          IAV/CSP
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   17 mai 2004
-# Compatibilite :      R 2.8.0
-# Etat :               OK
-# Description           tansformation des donnees de poids en nombre
-
 #' returns a table where weights and number are calculated from number and weights respectively
 #' performs a query to collect the conversion coefficients
-#' @param tableau 
-#' @param time.sequence 
+#' @param tableau A table passed BilanMigration
+#' @param time.sequence Time sequence passed from BilanMigration
 #' @return tableau
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

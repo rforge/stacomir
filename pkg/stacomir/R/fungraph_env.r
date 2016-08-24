@@ -1,11 +1,3 @@
-# Nom fichier :        fungraph_env.R
-
-
-
-
-
-
-
 #' Function for class BilanMigrationEnv drawing both the response of
 #' environment variables...
 #' 

@@ -280,7 +280,8 @@ hX11=function(h,...){
 #' @export
 stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 	# first loading of connection and odbc info using chargexml()
-	envir_stacomi <<- new.env(parent = emptyenv())
+	envir_stacomi <- new.env(parent = emptyenv())
+	assign("envir_stacomi",envir_stacomi,.GlobalEnv)
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("pre_launch_test",pre_launch_test,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
@@ -454,9 +455,11 @@ utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","g
 				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
 				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
 				"frame_std","frame_tax","frame_annee","frame_check","frame_choice",
-				"logw","bilan_stades_pigm","usrname","usrpwd","notebook"))
+				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind"))
 # Progressbar
 utils::globalVariables(c("progres"))
+# environment
+utils::globalVariables(c("envir_stacomi"))
 # reoxygenize fails if data are not loaded
 #setwd("F:/workspace/stacomir/branch0.5/stacomir")
 #data("bMM_Arzal")

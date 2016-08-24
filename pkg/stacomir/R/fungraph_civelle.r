@@ -11,7 +11,8 @@
 #' @param time.sequence a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @param dc the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @param dc the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @param ... additional parameters passed from the plot method to plot
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,...){
 # calcul des variables

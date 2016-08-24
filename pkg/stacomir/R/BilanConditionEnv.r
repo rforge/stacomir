@@ -102,8 +102,8 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 
 # affiche un graphe si des CE sont dans la base pendant la periode selectionnee
 #' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 hbilanConditionEnvgraph = function(h,...) 

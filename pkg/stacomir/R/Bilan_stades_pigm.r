@@ -699,9 +699,9 @@ fungraphstades<-function(
 						border=NA)
 				curvsum=curvsum-curv[[strdates[j]]][[k]]$y
 			}
-			segments(    x0=as.numeric(as.POSIXct(trunc.POSIXt(dates[j],digits="day"))),
+			segments(    x0=as.numeric(as.POSIXct(Hmisc::trunc.POSIXt(dates[j],digits="day"))),
 					y0=nrow(tablestades)+1,
-					x1=as.numeric(as.POSIXct(trunc.POSIXt(dates[j],digits="day"))),
+					x1=as.numeric(as.POSIXct(Hmisc::trunc.POSIXt(dates[j],digits="day"))),
 					y1=nrow(tablestades)-j+1,
 					lty=3,
 					col="gray")

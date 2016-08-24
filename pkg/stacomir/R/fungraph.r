@@ -5,12 +5,15 @@
 #' 
 #' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
 #' @param bilanMigration An object of class \code{\linkS4class{BilanMigration}}
-#' @param table=tableau A data frame with the results
+#' @param table=tableau A data frame with the with the following columns : No.pas,debut_pas,fin_pas,              
+#' ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
+#' EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient
+#' @note this function is intended to be called from the plot method in BilanMigrationMult and BilanMigration
 #' @param time.sequence A vector POSIXt
 #' @param taxon The species
 #' @param stade The stage
 #' @param dc The DC
-#' @param ... other parameters passed but not used
+#' @param ... other parameters passed from the plot method to the matplot function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 #mat <- matrix(1:6,3,2)

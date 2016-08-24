@@ -170,8 +170,8 @@ hcalculeBilanTaille<-function(h,...){
 	calcule(h$action)
 }
 #' Calcule method for BilanTaille
-#' @param h 
-#' @param ... 
+#' @param h A handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_taille"),definition=function(object) {
 			bilan_taille<-object
@@ -211,7 +211,7 @@ setMethod("calcule",signature=signature("Bilan_taille"),definition=function(obje
 
 #' fungraphInteract_tail uses the ggplot2usr interface to build the graphes
 #' @param h a handler
-#' @param ... 
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraphInteract_tail = function(h,...) {
 	if(!exists(x="bilan_taille",envir=envir_stacomi)) {
@@ -234,8 +234,8 @@ fungraphInteract_tail = function(h,...) {
 	
 #
 #' function used to display a table of the data
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 	funtableBilan_tail = function(h,...) {
 		bilan_taille=charge(bilan_taille)

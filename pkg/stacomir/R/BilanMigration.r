@@ -165,8 +165,8 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' handler hBilanMigrationgraph
 #' calls the fungraph for BilanMigration and allows the saving of daily and monthly counts in the database
 #' @note pb if other than daily value, the time steps have been constrained to daily values for this plot
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {

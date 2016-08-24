@@ -1,19 +1,6 @@
-# Nom fichier :        stacomi 
-# Projet :             controle migrateur 
-# Organisme :          IAV/ONEMA
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   11/04/2006 15:51:44
-# Compatibilite :      PostgreSQL 8.4
-#                      R 2.10.1                                        
-# Etat :               fonctionne 
-# Description          interface principale, fonction de lancement
-#                      chargement des librairies
-#**********************************************************************
-# initiation des parametres en fonctions des utilisateurs
+
 rm(list=ls(all=TRUE))
-# les donnees sont stockees dans un fichier xml stocke dans le repertoire par defaut,
-# ce fichier peut etre edite pour modifier des parametres
+
 
 ## lancement du programme proprement dit
 #  if (exists("group")) {rm(group)}

@@ -166,8 +166,8 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 #' fundensityBilan_carlot uses ggplot2 to draw density plots
 #' 
 #' assigns an object g in envir_stacomi for eventual modification of the plot
-#' @param h 
-#' @param ... 
+#' @param h A handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fundensityBilan_carlot = function(h,...) {
@@ -224,7 +224,7 @@ funpointBilan_carlot = function(h,...) {
 #' 
 #' funtableBilan_carlot shows a table of results in gdf
 #' @param h hanlder passed by the graphical interface
-#' @param ... 
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funtableBilan_carlot = function(h,...) {

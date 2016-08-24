@@ -292,8 +292,8 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 #' handler for graphe method in BilanMigrationMult class
 #' 
 #' internal use
-#' @param h handler
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
@@ -374,6 +374,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 									if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
 											taxon=="Anguilla anguilla"&
 											stade=="civelle") {
+										
 										#----------------------------------
 										# bilan migration avec poids (civelles
 										#-----------------------------------------
@@ -386,6 +387,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 												dc=dc,
 												...)
 									}	else {
+									
 										#----------------------------------
 										# bilan migration standard
 										#-----------------------------------------
@@ -516,8 +518,8 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 #' handler for calculations
 #' 
 #'  internal use for graphical interface
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso BilanMigrationMult
 hbilanMigrationMultcalc=function(h=null,...){
@@ -530,8 +532,8 @@ hbilanMigrationMultcalc=function(h=null,...){
 #' handler du calcul hBilanMigrationgraph2
 #' 
 #' cumuls de migration au cours du temps
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
@@ -546,8 +548,8 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 #' hanler
 #' 
 #' internal use
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationMultgraph3 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
@@ -565,8 +567,8 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 #' handler function 
 #' 
 #' internal use
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigrationMult=function(h=null,...) {
 	funout("Tableau de sortie \n")
@@ -585,7 +587,7 @@ hTableBilanMigrationMult=function(h=null,...) {
 #' calls functions funstat and funtable to create migration overviews
 #' and generate csv and html output in the user data directory
 #' 
-#' @param ... 
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,...){
@@ -641,8 +643,8 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 		})
 
 #' handler to print the command line
-#' @param h 
-#' @param ... 
+#' @param h a handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 houtBilanMigrationMult=function(h=null,...) {
 	if (exists("refStades",envir_stacomi)) 	{

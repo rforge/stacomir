@@ -37,7 +37,7 @@ interface_BilanMigrationMult=function(){
 	# getStockIcons()
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hbilanMigrationMultcalc, action=bilanMigrationMult, icon="new", label="calcul", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.2),
-			Graph=gWidgets::gaction(handler=hbilanMigrationMult_graphe, icon="graph", label="graph", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
+			Graph=gWidgets::gaction(handler=hbilanMigrationMult_graph, icon="graph", label="graph", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
 			Graph2=gWidgets::gaction(handler=hbilanMigrationMultgraph2, icon="graph2", label="grcum", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.4),
 			Graph3=gWidgets::gaction(handler=hbilanMigrationMultgraph3, icon="gWidgetsRGtk2-barplot", label="gr(tous)", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.3),
 			Stat=gWidgets::gaction(handler=hTableBilanMigrationMult, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.5),    

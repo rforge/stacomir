@@ -185,7 +185,7 @@ fungraphBilan_poids_moyen = function(h,...) {
 	# graphique des poids moyens en fonction du milieu de l'operation de contrele)
 	# la date est la date moyenne du lot
 	
-# fonction handler appellees
+
 	hgra=function(h,...){
 		p<-qplot(x=date,y=poids_moyen,data=don) 
 		print(p)
