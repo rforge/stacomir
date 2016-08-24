@@ -43,18 +43,16 @@ are only avalaible in english.
 \examples{
 
  require(stacomiR)
- \dontrun{
-	 ## launch stacomi with the graphical interface
+#launch stacomi with the graphical interface
+ \dontrun{ 	
 	stacomi()
 }
- ## launch stacomi but do not prompt for password
- \dontrun{
-	 ## launch stacomi with the graphical interface
+ # launch stacomi but do not prompt for password
+ \dontrun{	
 	stacomi(login_window=FALSE)
-} 
-##
-launch stacomi without connection to the database
-stacomi(gr_interface=FALSE,pre_launch_test=FALSE)
+}  
+#launch stacomi without connection to the database
+stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

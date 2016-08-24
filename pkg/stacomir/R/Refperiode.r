@@ -23,7 +23,9 @@ setClass(Class="Refperiode",representation=
 #' @return "a character to be used in seq.POSIXt
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  getvalue(new("Refperiode"),"quinzaine")
+#' }
 setMethod("getvalue",signature=signature("Refperiode"), definition=function(object,id,...)
   {return(as.character(object@data[object@data$id==id,"pgval"]))
   } ) 

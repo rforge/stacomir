@@ -11,12 +11,13 @@
 Used by the graphical interface.
 }
 \examples{
+\dontrun{
  object=new("RefChoix")
  object<-charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 win=gwindow(title="test refChoix")
 group=ggroup(container=win,horizontal=FALSE)
 choice(object) 
-dispose(win)
+dispose(win)}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

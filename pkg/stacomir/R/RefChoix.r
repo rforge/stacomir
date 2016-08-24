@@ -53,12 +53,13 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(object,ve
 #' Used by the graphical interface.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
+#' \dontrun{
 #'  object=new("RefChoix")
 #'  object<-charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 #' win=gwindow(title="test refChoix")
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object) 
-#' dispose(win)
+#' dispose(win)}
 setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 			hlist=function(h,...){
 				valeurchoisie=svalue(choice)

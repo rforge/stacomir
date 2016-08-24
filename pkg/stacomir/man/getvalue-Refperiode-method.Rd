@@ -14,7 +14,9 @@
 Returns the POSIXt value of a given name
 }
 \examples{
+\dontrun{
  getvalue(new("Refperiode"),"quinzaine")
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
