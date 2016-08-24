@@ -17,6 +17,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 #layout(mat)
 	# to adapt to bilanMigrationMult, default line...
 	#browser() 
+	#cat("fungraph")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
@@ -57,7 +58,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 			main=paste(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""),
 			cex.main=1,
 			...)
-	print(gr)
+	nothing<-print(gr)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
@@ -335,7 +336,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	###################################         
 	# operations
 	###################################  
-	if(stacomirtools::is.odd(bilanMigration@dc@dc_selectionne)) brew="Paired" else brew="Accent"
+	if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
 	rect(   xleft =graphdate(as.POSIXct(t_operation_ope$ope_date_debut)), 
 			ybottom=0,
 			xright=graphdate(as.POSIXct(t_operation_ope$ope_date_fin)),
@@ -364,15 +365,16 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	fillname<-get("msg",envir=envir_stacomi)$fungraph.7[2] #type
 	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
 	g<-ggplot(stktab, aes(x=mois,y=values,fill=ind))+
-			geom_bar(position="stack", stat="identity")+
+			geom_bar(position="dodge", stat="identity")+
 			scale_fill_manual(name=fillname,values=c("MESURE"=mypalette[4],
 							"CALCULE"=mypalette[3],
 							"EXPERT"=mypalette[2],
 							"PONCTUEL"=mypalette[1]))+
 			xlab(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+
 			ylab(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers
-		print(g)
+		nothing<-print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
+return(invisible(NULL))
 }
 
 

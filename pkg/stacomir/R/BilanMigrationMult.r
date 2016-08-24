@@ -325,11 +325,10 @@ hbilanMigrationMult_graph=function(h=null,...){
 # getGeneric("plot")
 # showMethods("plot")
 # methods("plot")
-setMethod("plot",signature(x = "BilanMigrationMult",y = "ANY"),definition=function(x, y="standard",...){ 
+setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=function(x, y,plot.type="standard",...){ 
 			#browser()
 			print("entering plot function")
 			#bilanMigrationMult<-bMM_Arzal
-			plot.type<-y
 			bilanMigrationMult<-x
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
@@ -347,7 +346,7 @@ setMethod("plot",signature(x = "BilanMigrationMult",y = "ANY"),definition=functi
 							taxon=lestaxons[taxonnum,"tax_nom_latin"]
 							stade=lesstades[stadenum,"std_libelle"]
 							dc=lesdc[dcnum]
-							print(paste(taxon,stade,dc))
+							#print(paste(taxon,stade,dc))
 							# preparation du jeu de donnees pour la fonction fungraph_civ
 							#developpee pour la classe BilanMigration
 							data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
@@ -358,8 +357,8 @@ setMethod("plot",signature(x = "BilanMigrationMult",y = "ANY"),definition=functi
 								if	(nrow(data)>0){
 									
 									funout(paste("dc=",dc,
-													taxon,
-													stade))	
+													"taxon"=taxon,
+													"stade"=stade))	
 									if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
 									data_without_hole<-merge(
 											data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
@@ -464,7 +463,6 @@ setMethod("plot",signature(x = "BilanMigrationMult",y = "ANY"),definition=functi
 			}
 #==========================type=3=============================
             if (plot.type=="multiple"){
-			bilanMigrationMult<-object
 			lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
 			lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
 			grdata<-data.frame()

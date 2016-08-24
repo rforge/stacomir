@@ -12,10 +12,10 @@ plot(x,y,plot.type=c("standard","step","multiple"))
 
 \item{y}{From the formals but missing}
 
-\item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
-
 \item{plot.type}{Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 \code{multiple}}
+
+\item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
 }
 \description{
 \itemize{

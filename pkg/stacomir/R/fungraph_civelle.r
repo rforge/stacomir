@@ -13,9 +13,10 @@
 #' @param stade the stage
 #' @param dc the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph_civelle=function(bilanMigration,table,time.sequenceime.sequence,taxon,stade,dc=null,...){
+fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,...){
 # calcul des variables
 	# pour adapter aux bilanMigrationMult, ligne par defaut...
+	#cat("fungraph_civelle")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	mois= months(time.sequence)

@@ -72,13 +72,16 @@ str(bMM_Arzal@data)
 # calculations
 bMM_Arzal<-calcule(bMM_Arzal)
 #Individual plot for all DC, taxon and stage where data present
-stacomiR::plot(bMM_Arzal,"standard")
+plot(bMM_Arzal,plot.type="standard")
 
 #cumulated migration at the station (all stages and DC grouped)
-cumplot(bMM_Arzal)
+plot(bMM_Arzal,plot.type="step")
+#some plots are a mixture of french and english
+#changing the reference table names to english should shift all to english.
+#same for spanish.
 # combined plot for ggplot2
-plot1(bMM_Arzal)
-# data will be written in the datadirectory specified in the stacomi/calcmig.csv file
+plot(bMM_Arzal,plot.type="multiple")
+# data will be written in the data directory specified in the stacomi/calcmig.csv file
 summary(bMM_Arzal)
 }
 \author{
