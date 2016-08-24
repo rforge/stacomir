@@ -260,15 +260,22 @@ fun_char_spe<-function(text){
 #' @return nblignes Assigned in .Global
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
+#' @export
+# internal= funout is exported to ease debug during tests but not showns to users
 funout<-function(text,arret=FALSE,wash=FALSE){
-	if (exists("gSortie")) {
-		if (wash) dispose(gSortie)
-		nbligne=nbligne+1
-		text<-fun_char_spe(text)
-		add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
-						col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
-		if (nbligne==20) nbligne=1
-		nbligne<<-nbligne
+	if (exists("gSortie",envir=.GlobalEnv)) {
+		if (isExtant(gSortie)){
+			if (wash) dispose(gSortie)
+			nbligne=nbligne+1
+			text<-fun_char_spe(text)
+			add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
+							col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
+			if (nbligne==20) nbligne=1
+			nbligne<<-nbligne
+		} else {
+			# gSortie exists but has not been removed
+			rm("gSortie",envir=.GlobalEnv)
+		}
 	} 
 	# this is printed anyway
 	if(arret) stop(text) else print(text,quote=FALSE)

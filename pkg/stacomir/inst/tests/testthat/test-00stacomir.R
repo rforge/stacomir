@@ -37,6 +37,7 @@ test_that("Test that stacomirtools connects",{
 	expect_is(connect(con),'ConnectionODBC')
 	expect_equal(con@etat,NULL)
 	odbcCloseAll()
+	rm("envir_stacomi",envir =.GlobalEnv)
 })
 
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
@@ -51,6 +52,7 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 			requete<-stacomirtools::connect(requete)
 			expect_true(as.numeric(requete@query)>0)	
 			odbcCloseAll()
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("Tests positive count for sch.t_operation_ope",{
@@ -66,6 +68,7 @@ test_that("Tests positive count for sch.t_operation_ope",{
 			requete<-stacomirtools::connect(requete)
 			expect_true(as.numeric(requete@query)>0)	
 			odbcCloseAll()
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 context("Loading program")
@@ -75,6 +78,8 @@ test_that("Test that working environment is created",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
 			expect_true(exists("envir_stacomi"))
+			dispose(logw)
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("Test that gWidget loginwindow is loaded ",{
@@ -82,6 +87,7 @@ test_that("Test that gWidget loginwindow is loaded ",{
 			stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
 			expect_true(exists("logw"))
 			dispose(logw)
+			rm("envir_stacomi",envir =.GlobalEnv)
 })
 
 test_that("Test that gWidget gr_interface is loaded, without pre_launch_test, nor login window",{
@@ -89,6 +95,7 @@ test_that("Test that gWidget gr_interface is loaded, without pre_launch_test, no
 			stacomi(gr_interface=TRUE,login_window=FALSE,pre_launch_test=FALSE)
 			expect_true(exists("win"))
 			dispose(win)
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
@@ -96,12 +103,18 @@ test_that("gWidget gr_interface is loaded, with pre launch_test, but without log
 			stacomi(gr_interface=TRUE,login_window=FALSE,pre_launch_test=TRUE)
 			expect_true(exists("win"))
 			dispose(win)
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 context("Messages")
 
 test_that("Test that messages are loaded from the database",
 		{
+			envir_stacomi <<- new.env(parent = emptyenv())
+			msg<-messages()
+			mylinks=chargecsv()
+			baseODBC=mylinks[["baseODBC"]]	
+			assign("baseODBC",baseODBC,envir=envir_stacomi)
 			object=new("RefMsg")
 			object<-charge(object)	
 			expect_true(nrow(object@messager)>0)
@@ -109,6 +122,7 @@ test_that("Test that messages are loaded from the database",
 
 test_that("Test that  messages without connection are loaded and of the same length",
 		{
+			assign("lang","English",envir=envir_stacomi)	
 			object=new("RefMsg")
 			object<-createmessage(object,TRUE)	
 			msgbase<-get("msg",envir=envir_stacomi)
@@ -117,4 +131,6 @@ test_that("Test that  messages without connection are loaded and of the same len
 			msg<-get("msg",envir=envir_stacomi)
 			# objects should have the same length but different languages
 			expect_identical(length(msg),length(msgbase))
+			rm("envir_stacomi",envir =.GlobalEnv)
+			rm(list=ls(all=TRUE))
 		})

@@ -17,7 +17,7 @@ the glass eel have arrived in the estuary, in this case provide datatempsal,
 data for temperature and salinity}
 
 \item{datatempsal}{to draw the graph of recalculated dates of arrival,
-provide this data.frame, format graphique des durees en estuaire, format
+provide this data.frame, format graphique des time.sequences en estuaire, format
 [,c("date","temperature","salinite")]}
 
 \item{points}{logical, do you want to draw the points on the cumulative

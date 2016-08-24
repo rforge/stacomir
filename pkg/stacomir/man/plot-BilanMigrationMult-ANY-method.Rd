@@ -5,22 +5,25 @@
 \alias{plot,BilanMigrationMult,ANY-method}
 \title{Main plot method}
 \usage{
-\S4method{plot}{BilanMigrationMult,ANY}(x, y = null, ...)
+plot(x,y,plot.type=c("standard","step","multiple"))
 }
 \arguments{
-\item{x}{the bilanMigration}
+\item{x}{An object of class BilanMigrationMult}
 
-\item{...}{}
+\item{y}{From the formals but missing}
 
-\item{y=null}{to conform with plot method}
+\item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
+
+\item{plot.type}{Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+\code{multiple}}
 }
 \description{
-calls \link{fungraph} et \link{fungraph_civelle} functions to plot as many "bilanmigration"
-as needed
+\itemize{
+		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
+			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
+		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
+		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 }
-\note{
-the function will test for the existence of data for one dc, one taxa, and one stage
-before running
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

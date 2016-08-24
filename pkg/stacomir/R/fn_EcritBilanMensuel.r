@@ -11,7 +11,7 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 			cbind(bilanMigration@dc@dc_selectionne,
 					bilanMigration@taxons@data$tax_code,
 					bilanMigration@stades@data$std_code,
-					unique(strftime(as.POSIXlt(bilanMigration@duree),"%Y")),
+					unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")),
 					rep(rownames(resum),12),
 					# stack re-ordonne les tab de donnees !
 					stack(resum,select=c(1:13)),  

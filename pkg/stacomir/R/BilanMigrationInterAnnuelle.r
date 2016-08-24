@@ -160,7 +160,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 		dat=bilanMigrationInterAnnuelle@data        
 		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
 		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
-		# il faut un champ date, on ramene tout les monde �
+		# il faut un champ date, on ramene tout les monde e
 		dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 		dat$annee=as.factor(dat$annee)
 		
@@ -276,11 +276,11 @@ fundat=function(dat,timesplit=NULL)
 					to=strptime("2000-12-31",format='%Y-%m-%d'),
 					by=getvalue(new("Refperiode"),timesplit))
 			seq_timesplit<-as.Date(trunc(seq_timesplit, digits='days'))
-			# utilise la classe Refperiode pour avoir la correspondance entre le nom fran�ais et la variable utilisee par seq.POSIXt
+			# utilise la classe Refperiode pour avoir la correspondance entre le nom franeais et la variable utilisee par seq.POSIXt
 			#datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
 			#colnames(datc)<-c(timesplit,"annee")
 			# calcul des sommes par annee et par periode
-			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un num�rique
+			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numerique
 			# ci dessous on remplace une double boucle par un truc plus rapide
 			for (j in 1:(length(seq_timesplit)-1)){
 				dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
@@ -298,7 +298,7 @@ fundat=function(dat,timesplit=NULL)
 			jour2000=as.Date(trunc.POSIXt(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
 							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), digits='days'))
 			for (j in unique(dat$annee)){
-				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajout�s avec z�ro
+				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutes avec zero
 				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]
 				dat0=data.frame("jour"=jour2000restant,"annee"=j, "valeur"=NA)
 				dat=rbind(dat,dat0)
@@ -314,7 +314,7 @@ fundat=function(dat,timesplit=NULL)
 		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
 		dat[,timesplit]<-as.character(dat[,timesplit])
 		dat<-merge(dat,datsummary,by=timesplit)
-		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est n�cessaire pour les ggplot
+		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est necessaire pour les ggplot
 		rm(maxdat,mindat,meandat)
 		dat<-dat[order(dat$annee,dat[,timesplit]),]
 		# renvoit la premiere occurence qui correspond, pour n'importe quel jour min, max et moyenne sont OK
@@ -447,7 +447,7 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 
 
 ########################################
-# Fonction similaire � la pr�c�dente mais pointrange et geom_bar
+# Fonction similaire e la precedente mais pointrange et geom_bar
 # interannuelle hebdomadaire. fonctionne pour mensuelle et quizaine et hebdomadaire
 ############################################
 hgraphBilanMigrationInterAnnuelle5 = function(h,...)
@@ -470,8 +470,8 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 
 	# dat=dat[dat$moyenne!=0,] # pour des raisons graphiques on ne garde pas les effectifs nuls generes par fundat
 	newdat=dat[match(unique(dat[,timesplit]),dat[,timesplit]),]
-	newdat=newdat[order(newdat[,"keeptimesplit"]),] # il peut y avoir des ann�es pour le calcul de range qui s'ajoutent 
-	# et viennent d'autres ann�es, il faut donc r�ordonner.
+	newdat=newdat[order(newdat[,"keeptimesplit"]),] # il peut y avoir des annees pour le calcul de range qui s'ajoutent 
+	# et viennent d'autres annees, il faut donc reordonner.
 #	dat[,timesplit]<-gdata::reorder(dat[,timesplit], new.order=match(levels(dat[,timesplit]),newdat[,timesplit]))	
 #	levels(dat[,timesplit])<-newdat[,timesplit]	
 #	levels(newdat[,timesplit])<-newdat[,timesplit]	
@@ -510,8 +510,8 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 	} # end if
 }  # end function 
 
-# graphique des cumuls interannuels pour distinguer des tendances saisonni�res, les donn�es sont calcul�es par 
-# quinzaine puis centr�es r�duites
+# graphique des cumuls interannuels pour distinguer des tendances saisonnieres, les donnees sont calculees par 
+# quinzaine puis centrees reduites
 hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)

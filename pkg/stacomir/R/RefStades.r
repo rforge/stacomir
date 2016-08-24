@@ -88,7 +88,7 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 					funout(get("msg",envir=envir_stacomi)$RefStades.2)
 					if (!is.null(objectBilan)) {
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne premnant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choice � laquelle on ne passe pas d'objectBilan en parametre 
+						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan             
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
 							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
@@ -161,7 +161,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 							}
 						}
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne prenant que les stades des taxon du dc par la methode charge_avec_filtre
-						# elle est alors affichee des le debut par la methode choice � laquelle on ne passe pas d'objectBilan en parametre 
+						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan 
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
 							objectBilan@par<-charge_avec_filtre(object=objectBilan@par,

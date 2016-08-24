@@ -104,6 +104,7 @@ husr=function(h,...){
 			baseODBC[3]<-svalue(usrpwd)
 			assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 			assign("baseODBC",baseODBC,envir=envir_stacomi)
+			dispose(logw)
 		} else {
 			# nothing sch and baseODBC have been assigned from default value in stacomi()	
 		}
@@ -207,7 +208,7 @@ hX11=function(h,...){
 #' @note The defaut behaviour of the program is to run through the following elements
 #'  \itemize{
 #'      \item{login window}{ The program opens a login window to prompt the user to give his usernames and passwords.
-#' 			default values will proposed from "C:\program files\stacomi\calcmig.csv" and if this file does not exists, 
+#' 			default values will proposed from "C:/program files/stacomi/calcmig.csv" and if this file does not exists, 
 #' 			from \code{file.path(.libPaths(),"stacomiR","config","calcmig.csv")} as a default. If \code{login_window=FALSE}
 #' 			the program will skip the login window and use calcmig values for user (\code{uid}) and password(\code{pwd}) as a default.}
 #'      \item{tests for connection}{ Test for the existence of a calcmig.csv file, and then the existence of the file
@@ -220,7 +221,7 @@ hX11=function(h,...){
 #' 			through the command line.}
 #'  }
 #' When \code{pre_launch_test=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
-#'  And also essages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
+#'  And also messages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
 #' are only avalaible in english. 
 #' 
 #' @param gr_interface Boolean, if \code{TRUE} the program will launch the graphical interface
@@ -440,7 +441,7 @@ interface_graphique=function(){
 # Variables used in aes arguments generate a note as being assigned to .globalEnv, either use aes_string,
 # or listing them below removes the warning in Rcheck. Discussion in stackoverflow about this, hadley wickham
 # considering this a hideous hack..
-utils::globalVariables(c("quinzaine", "mois","val_quant","duree","Effectifs",
+utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effectifs",
 				"..density..","Cumsum","Date","Effectif","Effectif_total",
 				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
 				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",

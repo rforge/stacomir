@@ -67,7 +67,7 @@ setValidity("BilanMigration",function(object)
 			rep2=length(object@taxons)==1
 			rep3=length(object@stades)==1
 			rep3=length(object@pasDeTemps)==1
-			rep4=(object@pasDeTemps@nbPas==365) # contrainte : pendant 365j
+			rep4=(object@pasDeTemps@nbStep==365) # contrainte : pendant 365j
 			rep5=as.numeric(strftime(object@pasDeTemps@dateDebut,'%d'))==1 # contrainte : depart = 1er janvier
 			rep6=as.numeric(strftime(object@pasDeTemps@dateDebut,'%m'))==1
 			
@@ -142,7 +142,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				tableau$coe_valeur_coefficient=as.numeric(tableau$coe_valeur_coefficient)
 				tableau$coe_valeur_coefficient[is.na(tableau$coe_valeur_coefficient)]=0
 				bilanMigration@time.sequence=seq.POSIXt(from=as.POSIXlt(min(data$debut_pas)),to=max(data$debut_pas),
-						by=as.numeric(bilanMigration@pasDeTemps@time.sequencePas)) # il peut y avoir des lignes repetees poids effectif
+						by=as.numeric(bilanMigration@pasDeTemps@stepDuration)) # il peut y avoir des lignes repetees poids effectif
 				# traitement des coefficients de conversion poids effectif
 				
 				if (bilanMigration@taxons@data$tax_nom_latin=="Anguilla anguilla"& bilanMigration@stades@data$std_libelle=="civelle") 
@@ -180,7 +180,7 @@ hbilanMigrationgraph = function(h,...) {
 	funout(get("msg",envir_stacomi)$BilanMigration.9)
 	
 	# si le bilan est journalier 
-	if (bilanMigration@pasDeTemps@time.sequencePas==86400 & bilanMigration@pasDeTemps@time.sequencePas==86400) {
+	if (bilanMigration@pasDeTemps@stepDuration==86400 & bilanMigration@pasDeTemps@stepDuration==86400) {
 		
 		# pour sauvegarder sous excel
 		if (taxon=="Anguilla anguilla"& stade=="civelle") {
@@ -213,7 +213,7 @@ hbilanMigrationgraph2 = function(h,...) {
 	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 	stade= as.character(bilanMigration@stades@data$std_libelle)
 	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	if (bilanMigration@pasDeTemps@time.sequencePas==86400 & bilanMigration@pasDeTemps@time.sequencePas==86400) {
+	if (bilanMigration@pasDeTemps@stepDuration==86400 & bilanMigration@pasDeTemps@stepDuration==86400) {
 		bilanMigration@data$time.sequence=bilanMigration@time.sequence
 		# pour sauvegarder sous excel
 		bilanMigration@data<-funtraitementdate(bilanMigration@data,

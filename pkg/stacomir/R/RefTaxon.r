@@ -217,7 +217,7 @@ setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,
 				object@data<-object@data[object@data$tax_nom_latin%in%taxons,]
 			} else if (class(taxons)=="numeric"){
 				codemanquants<-taxons[!taxons%in%object@data$tax_code]
-				if (length(codemanquants)>0) stop(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", ")))
+				if (length(codemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", ")))
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{

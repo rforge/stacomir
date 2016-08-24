@@ -54,7 +54,7 @@ setValidity("BilanMigrationMult",function(object)
 			rep2=length(object@taxons)>=1
 			rep3=length(object@stades)>=1
 			#	rep3=length(object@pasDeTemps)==1
-			#rep4=(object@pasDeTemps@nbPas==365) # contrainte : pendant 365j
+			#rep4=(object@pasDeTemps@nbStep==365) # contrainte : pendant 365j
 			#	rep5=as.numeric(strftime(object@pasDeTemps@dateDebut,'%d'))==1 # contrainte : depart = 1er janvier
 			#	rep6=as.numeric(strftime(object@pasDeTemps@dateDebut,'%m'))==1			
 			return(ifelse(rep1 & rep2 & rep3 , TRUE ,c(1:6)[!c(rep1, rep2, rep3)]))
@@ -160,24 +160,24 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult=connect(bilanMigrationMult)
 			cat(stringr::str_c("nrow=",nrow(bilanMigrationMult@data)))
 			
-			bilanMigrationMult@data$duree=difftime(bilanMigrationMult@data$ope_date_fin,
+			bilanMigrationMult@data$time.sequence=difftime(bilanMigrationMult@data$ope_date_fin,
 					bilanMigrationMult@data$ope_date_debut,
 					units="days")
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
 			time.sequence<-seq.POSIXt(from=debut,to=fin,
-					by=as.numeric(bilanMigrationMult@pasDeTemps@dureePas))
+					by=as.numeric(bilanMigrationMult@pasDeTemps@stepDuration))
 			bilanMigrationMult@time.sequence<-time.sequence
 			lestableaux<-list()
 			for (dic in unique(bilanMigrationMult@data$ope_dic_identifiant))	{
 				datasub<-bilanMigrationMult@data[bilanMigrationMult@data$ope_dic_identifiant==dic,]
 				
-				if (any(datasub$duree>(bilanMigrationMult@pasDeTemps@dureePas/86400))){				
+				if (any(datasub$time.sequence>(bilanMigrationMult@pasDeTemps@stepDuration/86400))){				
 					#----------------------
 					# bilans avec overlaps
 					#----------------------
 					data<-fun_bilanMigrationMult_Overlaps(time.sequence = time.sequence, datasub = datasub,negative=negative)
-					# pour compatibilit� avec les bilanMigration
+					# pour compatibilite avec les bilanMigration
 					data$taux_d_echappement=-1					
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"overlaps"
@@ -189,7 +189,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 						data$coe_date_debut<-as.Date(data$debut_pas)
 						data<-merge(data,coe,by="coe_date_debut")
 						data<-data[,-1] # removing coe_date_debut
-						data <-fun_weight_conversion(tableau=data,duree=bilanMigrationMult@time.sequence)
+						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigrationMult@time.sequence)
 					}
 					
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
@@ -208,7 +208,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 				}
 			}	# end for dic
-			# TODO developper une m�thode pour sumneg 
+			# TODO developper une methode pour sumneg 
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			funout(get("msg",envir_stacomi)$BilanMigrationMult.3)
@@ -223,7 +223,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 #' @return BilanMigrationMult with slot @data filled from the database
 #' @export
 setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
-			# r�cuperation du BilanMigration
+			# recuperation du BilanMigration
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug
@@ -266,7 +266,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req<-stacomirtools::connect(req)
 			bilanMigrationMult@data=req@query	
 			
-			# r�cuperation des coefficients si il y a des civelles dans le bilan
+			# recuperation des coefficients si il y a des civelles dans le bilan
 			if (2038%in%bilanMigrationMult@taxons@data$tax_code&'CIV'%in%bilanMigrationMult@stades@data$std_code){
 				req=new("RequeteODBCwheredate")
 				req@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -288,7 +288,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 		})				
 
 
- 
+
 #' handler for graphe method in BilanMigrationMult class
 #' 
 #' internal use
@@ -301,95 +301,218 @@ hbilanMigrationMult_graph=function(h=null,...){
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	plot(bilanMigrationMult)
+	plot(x=bilanMigrationMult,type="standard")
 }
 
 
 #' Main plot method
 #' 
-#' calls \link{fungraph} et \link{fungraph_civelle} functions to plot as many "bilanmigration"
-#' as needed
-#' @note the function will test for the existence of data for one dc, one taxa, and one stage
-#' before running
-#' @param x the bilanMigration
-#' @param  y=null to conform with plot method 
-#' @param ... 
+#' \itemize{
+#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
+#' 			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
+#' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
+#' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
+#' }
+#' @usage plot(x,y,plot.type=c("standard","step","multiple")) 
+#' @param x An object of class BilanMigrationMult
+#' @param y From the formals but missing
+#' @param plot.type Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+#' \code{multiple} 
+#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature("BilanMigrationMult"),definition=function(x,y=null,...){ 
-	bilanMigrationMult<-x
-	lestaxons= bilanMigrationMult@taxons@data
-	lesstades= bilanMigrationMult@stades@data
-	lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.9)
-	#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
-	for (dcnum in 1:length(lesdc)){
-		for (taxonnum in 1:nrow(lestaxons)){
-			for (stadenum in 1:nrow(lesstades)){
-				
-				taxon=lestaxons[taxonnum,"tax_nom_latin"]
-				stade=lesstades[stadenum,"std_libelle"]
-				dc=lesdc[dcnum]
-				
-				# pr�paration du jeu de donn�es pour la fonction fungraph_civ
-				#developp�e pour la classe BilanMigration
-				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
-				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
-								data$lot_std_code==lesstades[stadenum,"std_code"],]
-				
-				if (!is.null(data)){
-					if	(nrow(data)>0){
-						
-						funout(paste("dc=",dc,
-										taxon,
-										stade))	
-						if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
-						data_without_hole<-merge(
-								data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
-										debut_pas=bilanMigrationMult@time.sequence),
-								data,
-								by=c("No.pas","debut_pas"),
-								all.x=TRUE
-						)
-						data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
-						data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
-						data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
-						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
-						if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
-								taxon=="Anguilla anguilla"&
-								stade=="civelle") {
-							#----------------------------------
-							# bilan migration avec poids (civelles
-							#-----------------------------------------
-							grDevices::X11()
-							fungraph_civelle(bilanMigration=bilanMigrationMult,
-									table=data_without_hole,
-									duree=bilanMigrationMult@time.sequence,
-									taxon=taxon,
-									stade=stade,
-									dc=dc)
-						}	else {
-							#----------------------------------
-							# bilan migration standard
-							#-----------------------------------------
-							grDevices::X11()
-							fungraph(bilanMigration=bilanMigrationMult,
-									tableau=data_without_hole,
-									duree=bilanMigrationMult@time.sequence,
-									taxon,
-									stade,
-									dc)
+#' @export
+#method.skeleton("plot", "BilanMigrationMult") 
+# getGeneric("plot")
+# showMethods("plot")
+# methods("plot")
+setMethod("plot",signature(x = "BilanMigrationMult",y = "ANY"),definition=function(x, y="standard",...){ 
+			#browser()
+			print("entering plot function")
+			#bilanMigrationMult<-bMM_Arzal
+			plot.type<-y
+			bilanMigrationMult<-x
+			lestaxons= bilanMigrationMult@taxons@data
+			lesstades= bilanMigrationMult@stades@data
+			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)
+			#==========================type=1=============================
+			if (plot.type=="standard"){
+				print("plot type standard")
+				funout(get("msg",envir_stacomi)$BilanMigration.9)
+				#dcnum=2
+				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+				for (dcnum in 1:length(lesdc)){
+					for (taxonnum in 1:nrow(lestaxons)){
+						for (stadenum in 1:nrow(lesstades)){
+							
+							taxon=lestaxons[taxonnum,"tax_nom_latin"]
+							stade=lesstades[stadenum,"std_libelle"]
+							dc=lesdc[dcnum]
+							print(paste(taxon,stade,dc))
+							# preparation du jeu de donnees pour la fonction fungraph_civ
+							#developpee pour la classe BilanMigration
+							data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+							data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
+											data$lot_std_code==lesstades[stadenum,"std_code"],]
+							
+							if (!is.null(data)){
+								if	(nrow(data)>0){
+									
+									funout(paste("dc=",dc,
+													taxon,
+													stade))	
+									if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
+									data_without_hole<-merge(
+											data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+													debut_pas=bilanMigrationMult@time.sequence),
+											data,
+											by=c("No.pas","debut_pas"),
+											all.x=TRUE
+									)
+									data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
+									data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
+									data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
+									data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+									if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
+											taxon=="Anguilla anguilla"&
+											stade=="civelle") {
+										#----------------------------------
+										# bilan migration avec poids (civelles
+										#-----------------------------------------
+										grDevices::X11()
+										fungraph_civelle(bilanMigration=bilanMigrationMult,
+												table=data_without_hole,
+												time.sequence=bilanMigrationMult@time.sequence,
+												taxon=taxon,
+												stade=stade,
+												dc=dc,
+												...)
+									}	else {
+										#----------------------------------
+										# bilan migration standard
+										#-----------------------------------------
+										grDevices::X11()
+										fungraph(bilanMigration=bilanMigrationMult,
+												tableau=data_without_hole,
+												time.sequence=bilanMigrationMult@time.sequence,
+												taxon,
+												stade,
+												dc,
+												...)
+									}
+								} # end nrow(data)>0		
+								# ecriture du bilan journalier, ecrit aussi le bilan mensuel
+								#fn_EcritBilanJournalier(bilanMigrationMult)
+								
+							}
 						}
-					} # end nrow(data)>0		
-					# ecriture du bilan journalier, ecrit aussi le bilan mensuel
-					#fn_EcritBilanJournalier(bilanMigrationMult)
-					
+					}
 				}
+				#&&&&&&&&&&&&&&&&&&&&&&&&&fin de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			} 
+			
+#==========================type=2=============================
+			if (plot.type=="step"){
+				lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
+				lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
+				grdata<-data.frame()
+				for (i in 1:length(bilanMigrationMult@calcdata)){
+					data<-bilanMigrationMult@calcdata[[i]]$data
+					# extracting similar columns (not those calculated)
+					data<-data[,c(
+									"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+									"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+							)]
+					grdata<-rbind(grdata,data)
+				}
+				names(grdata)<-tolower(names(grdata))
+				grdata<-sqldf::sqldf("select sum(effectif_total) as effectif_total,
+								\"no.pas\",
+								debut_pas
+								from grdata
+								group by debut_pas,\"no.pas\"
+								order by debut_pas")
+				grdata_without_hole<-merge(
+						data.frame(no.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+								debut_pas=bilanMigrationMult@time.sequence),
+						grdata,
+						by=c("no.pas","debut_pas"),
+						all.x=TRUE
+				)
+				grdata_without_hole<-funtraitementdate(grdata_without_hole,
+						nom_coldt="debut_pas",
+						annee=FALSE,
+						mois=TRUE,
+						quinzaine=TRUE,
+						semaine=TRUE,
+						jour_an=TRUE,
+						jour_mois=FALSE,
+						heure=FALSE)
+				grdata_without_hole<-grdata_without_hole[order(grdata_without_hole$no.pas),]
+				grdata_without_hole$effectif_total[is.na(grdata_without_hole$effectif_total)]<-0
+				
+				grdata_without_hole$cumsum=cumsum(grdata_without_hole$effectif_total)
+				annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
+				dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
+				update_geom_defaults("step", aes(size = 3))
+				
+				p<-ggplot(grdata_without_hole)+
+						geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
+						ylab(get("msg",envir_stacomi)$BilanMigration.6)+
+						theme(plot.title=element_text(size=10,colour="blue"))+
+						ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") )  
+				print(p)	
 			}
-		}
-	}
-	#&&&&&&&&&&&&&&&&&&&&&&&&&fin de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
-	
-})
+#==========================type=3=============================
+            if (plot.type=="multiple"){
+			bilanMigrationMult<-object
+			lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
+			lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
+			grdata<-data.frame()
+			for (i in 1:length(bilanMigrationMult@calcdata)){
+				data<-bilanMigrationMult@calcdata[[i]]$data
+				# extracting similar columns (not those calculated)
+				data<-data[,c(
+								"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+								"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+						)]
+				grdata<-rbind(grdata,data)
+			}
+			names(grdata)<-tolower(names(grdata))	
+			grdata<-funtraitementdate(grdata,
+					nom_coldt="debut_pas",
+					annee=FALSE,
+					mois=TRUE,
+					quinzaine=TRUE,
+					semaine=TRUE,
+					jour_an=TRUE,
+					jour_mois=FALSE,
+					heure=FALSE)
+			annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
+			dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
+			grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
+			grdata$DC<-as.factor(grdata$DC)
+			grdata$taxon<-as.factor(grdata$taxon)
+			if (length(unique(grdata$taxon))==1){
+				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+						geom_bar(position="stack", stat="identity")+
+						facet_grid(DC~.,scale="free_y")+
+						scale_fill_brewer(palette="Set2")
+			} else if  (length(unique(grdata$stade))==1){
+				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
+						geom_bar(position="stack", stat="identity")+
+						facet_grid(DC~.,scale="free_y")+
+						scale_fill_brewer(palette="Set2")	
+			} else {
+				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+						geom_bar(position="stack", stat="identity")+
+						facet_grid(DC+taxon~.,scale="free_y")+
+						scale_fill_brewer(palette="Set2")		
+			}
+						
+			print(p)	
+			}
+#==========================end / type=3=============================			
+		})
 
 
 #' handler for calculations
@@ -418,69 +541,8 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	cumplot(bilanMigrationMult)
+	plot(bilanMigrationMult,plot.type="step")
 }
-
-
-#' Method to create Cumulated graphs for BilanMigrationMult. 
-#' 
-#' Data are summed per day for different dc taxa and stages
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
-setMethod("cumplot",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
-	bilanMigrationMult<-object		
-	lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
-	lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
-	grdata<-data.frame()
-	for (i in 1:length(bilanMigrationMult@calcdata)){
-		data<-bilanMigrationMult@calcdata[[i]]$data
-		# extracting similar columns (not those calculated)
-		data<-data[,c(
-						"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
-						"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
-				)]
-		grdata<-rbind(grdata,data)
-	}
-	names(grdata)<-tolower(names(grdata))
-	grdata<-sqldf::sqldf("select sum(effectif_total) as effectif_total,
-					\"no.pas\",
-					debut_pas
-					from grdata
-					group by debut_pas,\"no.pas\"
-					order by debut_pas")
-	grdata_without_hole<-merge(
-			data.frame(no.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
-					debut_pas=bilanMigrationMult@time.sequence),
-			grdata,
-			by=c("no.pas","debut_pas"),
-			all.x=TRUE
-	)
-	grdata_without_hole<-funtraitementdate(grdata_without_hole,
-			nom_coldt="debut_pas",
-			annee=FALSE,
-			mois=TRUE,
-			quinzaine=TRUE,
-			semaine=TRUE,
-			jour_an=TRUE,
-			jour_mois=FALSE,
-			heure=FALSE)
-	grdata_without_hole<-grdata_without_hole[order(grdata_without_hole$no.pas),]
-	grdata_without_hole$effectif_total[is.na(grdata_without_hole$effectif_total)]<-0
-	
-	grdata_without_hole$cumsum=cumsum(grdata_without_hole$effectif_total)
-	annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
-	dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
-	update_geom_defaults("step", aes(size = 3))
-	
-	p<-ggplot(grdata_without_hole)+
-			geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
-			ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-			theme(plot.title=element_text(size=10,colour="blue"))+
-			ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") )  
-	print(p)	
-	
-})
 
 
 #' hanler
@@ -495,67 +557,13 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	plot1(bilanMigrationMult)
+	plot(bilanMigrationMult,plot.type="multiple")
 }
 
 
-#' Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)
 #' 
-#' Tests are done to get the structure of 
-#' @param ... 
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export 
-setMethod("plot1",signature=signature("BilanMigrationMult"),definition=function(object,...){
-	bilanMigrationMult<-object
-	lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
-	lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
-	grdata<-data.frame()
-	for (i in 1:length(bilanMigrationMult@calcdata)){
-		data<-bilanMigrationMult@calcdata[[i]]$data
-		# extracting similar columns (not those calculated)
-		data<-data[,c(
-						"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
-						"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
-				)]
-		grdata<-rbind(grdata,data)
-	}
-	names(grdata)<-tolower(names(grdata))	
-	grdata<-funtraitementdate(grdata,
-			nom_coldt="debut_pas",
-			annee=FALSE,
-			mois=TRUE,
-			quinzaine=TRUE,
-			semaine=TRUE,
-			jour_an=TRUE,
-			jour_mois=FALSE,
-			heure=FALSE)
-	annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
-	dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
-	grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
-	grdata$DC<-as.factor(grdata$DC)
-	grdata$taxon<-as.factor(grdata$taxon)
-	if (length(unique(grdata$taxon))==1){
-		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
-				geom_bar(position="stack", stat="identity")+
-				facet_grid(DC~.,scale="free_y")+
-				scale_fill_brewer(palette="Set2")
-	} else if  (length(unique(grdata$stade))==1){
-		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
-				geom_bar(position="stack", stat="identity")+
-				facet_grid(DC~.,scale="free_y")+
-				scale_fill_brewer(palette="Set2")	
-	} else {
-		p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
-				geom_bar(position="stack", stat="identity")+
-				facet_grid(DC+taxon~.,scale="free_y")+
-				scale_fill_brewer(palette="Set2")		
-	}
-	
-	
-	
-	print(p)	
-	
-})
+#' 
+
 #' handler function 
 #' 
 #' internal use
@@ -582,57 +590,57 @@ hTableBilanMigrationMult=function(h=null,...) {
 #' @param ... 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("summary",signature=signature("BilanMigrationMult"),definition=function(object,...){
-	bilanMigrationMult<-object		
-	lestaxons= bilanMigrationMult@taxons@data
-	lesstades= bilanMigrationMult@stades@data
-	lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.9)
-	#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
-	for (dcnum in 1:length(lesdc)){
-		for (taxonnum in 1:nrow(lestaxons)){
-			for (stadenum in 1:nrow(lesstades)){
-				
-				taxon=lestaxons[taxonnum,"tax_nom_latin"]
-				stade=lesstades[stadenum,"std_libelle"]
-				DC=lesdc[dcnum]
-				
-				# pr�paration du jeu de donn�es pour la fonction fungraph_civ
-				#developp�e pour la classe BilanMigration
-				data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
-				data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
-								data$lot_std_code==lesstades[stadenum,"std_code"],]
-				
-				if (!is.null(data)){
-					if	(nrow(data)>0){
+setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,...){
+			bilanMigrationMult<-object		
+			lestaxons= bilanMigrationMult@taxons@data
+			lesstades= bilanMigrationMult@stades@data
+			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
+			funout(get("msg",envir_stacomi)$BilanMigration.9)
+			#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			for (dcnum in 1:length(lesdc)){
+				for (taxonnum in 1:nrow(lestaxons)){
+					for (stadenum in 1:nrow(lesstades)){
 						
-						if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
-						data_without_hole<-merge(
-								data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
-										debut_pas=bilanMigrationMult@time.sequence),
-								data,
-								by=c("No.pas","debut_pas"),
-								all.x=TRUE
-						)
-						data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
-						data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
-						data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
-						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+						taxon=lestaxons[taxonnum,"tax_nom_latin"]
+						stade=lesstades[stadenum,"std_libelle"]
+						DC=lesdc[dcnum]
 						
-						resum=funstat(tableau=data_without_hole,
-								time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC)
-						funtable(tableau=data_without_hole,
-								time.sequence=bilanMigrationMult@time.sequence,
-								taxon,stade,DC,resum)
+						# preparation du jeu de donnees pour la fonction fungraph_civ
+						#developpee pour la classe BilanMigration
+						data<-bilanMigrationMult@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+						data<-data[data$lot_tax_code==lestaxons[taxonnum,"tax_code"] &
+										data$lot_std_code==lesstades[stadenum,"std_code"],]
 						
+						if (!is.null(data)){
+							if	(nrow(data)>0){
+								
+								if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
+								data_without_hole<-merge(
+										data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
+												debut_pas=bilanMigrationMult@time.sequence),
+										data,
+										by=c("No.pas","debut_pas"),
+										all.x=TRUE
+								)
+								data_without_hole$CALCULE[is.na(data_without_hole$CALCULE)]<-0
+								data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
+								data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
+								data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+								
+								resum=funstat(tableau=data_without_hole,
+										time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC)
+								funtable(tableau=data_without_hole,
+										time.sequence=bilanMigrationMult@time.sequence,
+										taxon,stade,DC,resum)
+								
+							}
+						}
 					}
 				}
 			}
-		}
-	}
-	
-	
-})
+			
+			
+		})
 
 #' handler to print the command line
 #' @param h 
@@ -691,19 +699,19 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	imat2<-intervals::Intervals(mat2)
 	intervals::closed(imat2)<-c(FALSE,FALSE)
 	listei<-intervals::interval_overlap(imat2,imat1)
-	listei2<-listei # copie de la liste pour l'�craser
+	listei2<-listei # copie de la liste pour l'ecraser
 	for (i in 1:length(listei)){
 		vec<-listei[[i]]
 		if (length(vec)==0){
 			# pas de lot
 			listei2[[i]]=0
 		} else 	if (length(vec)==1){
-			# l'ensemble du lot est inclus dans la journ�e
+			# l'ensemble du lot est inclus dans la journee
 			listei2[[i]]=1
 		} else {
-			# le premier jour va du d�but de l'op� � la fin de la premi�re date
+			# le premier jour va du debut de l'ope e la fin de la premiere date
 			# puis n-2 jour
-			# puis le dernier jour de la date de d�but � la fin de l'ope
+			# puis le dernier jour de la date de debut e la fin de l'ope
 			idlot=names(listei)[i]
 			tps=c(
 					difftime(
@@ -716,7 +724,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 							time.sequence[vec[length(vec)]],
 							units="days")
 			)
-			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ram�ne � 1
+			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramene e 1
 			stopifnot(all.equal(as.numeric(sum(listei2[[i]])),1))					
 		}
 	}
@@ -731,8 +739,8 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 			ts_id=as.numeric(strftime(time.sequence,format="%j")),stringsAsFactors =FALSE)
 	dfts<-merge(df.ts,df,by="ts_id")
 	datasub1<-merge(dfts,datasub,by="lot_identifiant")
-	# ci dessous pour faire du group by c'est quand m�me bien de passer par sqldf
-	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis � des entiers
+	# ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
+	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis e des entiers
 	if (negative){
 		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
@@ -783,7 +791,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	datasub3$CALCULE[is.na(datasub3$CALCULE)]<-0
 	datasub3$EXPERT[is.na(datasub3$EXPERT)]<-0
 	datasub3$PONCTUEL[is.na(datasub3$PONCTUEL)]<-0
-	# pour compatibilit�
+	# pour compatibilite
 	datasub3<-cbind(data.frame("No.pas"=as.numeric(strftime(datasub3$debut_pas,format="%j"))-1),datasub3)
 	datasub3$Effectif_total=rowSums(datasub3[,c("MESURE","CALCULE","EXPERT","PONCTUEL")])
 	return(datasub3)
@@ -809,7 +817,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 			ts_id=strftime(time.sequence,format="%j"),stringsAsFactors =FALSE)
 	datasub$ts_id<-strftime(datasub$ope_date_debut,format="%j")
 	datasub1<-merge(df.ts,datasub,by="ts_id")
-	# ci dessous pour faire du group by c'est quand m�me bien de passer par sqldf
+	# ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
 	if (negative){
 		datasub2<-sqldf::sqldf("SELECT  debut_pas,
 						fin_pas,
@@ -867,11 +875,11 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' returns a table where weights and number are calculated from number and weights respectively
 #' performs a query to collect the conversion coefficients
 #' @param tableau 
-#' @param duree 
+#' @param time.sequence 
 #' @return tableau, the data frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-fun_weight_conversion=function(tableau,duree) { 
+fun_weight_conversion=function(tableau,time.sequence) { 
 	funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
 	nr<-table(tableau$type_de_quantite)[1]
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])

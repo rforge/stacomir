@@ -111,7 +111,7 @@ funbarchartDC = function(h,...) {
 	}
 	
 	t_periodefonctdispositif_per<-fonctionnementDC@requete@query # on recupere le data.frame   
-	# l'objectif du programme ci dessous est de calculer la duree mensuelle de fonctionnement du dispositif.
+	# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 	tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
@@ -128,7 +128,7 @@ funbarchartDC = function(h,...) {
 	for(j in 1:nrow(t_periodefonctdispositif_per)){     # pour toutes les lignes du ResultSet...
 		#cat( j )
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-		lemoissuivant<-seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur � tempsdebut
+		lemoissuivant<-seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur e tempsdebut
 		
 		# on est a cheval sur deux periodes 
 		while (tempsfin[j]>lemoissuivant)
@@ -142,7 +142,7 @@ funbarchartDC = function(h,...) {
 			if (is.na(lemoissuivant) ) break
 		}  
 	}
-	t_periodefonctdispositif_per_mois$sumduree<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
+	t_periodefonctdispositif_per_mois$sumtime.sequence<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
 	t_periodefonctdispositif_per_mois$mois1<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
 	t_periodefonctdispositif_per_mois$mois<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
 	t_periodefonctdispositif_per_mois$annee<-strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
@@ -151,7 +151,7 @@ funbarchartDC = function(h,...) {
 	superpose.polygon$border<-FALSE
 	lattice::trellis.par.set("superpose.polygon",superpose.polygon) 
 	bar<-lattice::barchart(
-			as.numeric(t_periodefonctdispositif_per_mois$sumduree)~as.factor(t_periodefonctdispositif_per_mois$mois)|as.factor(t_periodefonctdispositif_per_mois$annee),
+			as.numeric(t_periodefonctdispositif_per_mois$sumtime.sequence)~as.factor(t_periodefonctdispositif_per_mois$mois)|as.factor(t_periodefonctdispositif_per_mois$annee),
 			groups=t_periodefonctdispositif_per_mois$per_tar_code,
 			stack=TRUE,
 			xlab=get("msg",envir_stacomi)$BilanFonctionnementDC.3,
@@ -180,9 +180,9 @@ funboxDC = function(h,...) {
 		funout(get("msg",envir_stacomi)$BilanFonctionnementDC.2, arret=TRUE)
 	}  
 	t_periodefonctdispositif_per<-fonctionnementDC@requete@query # on recupere le data.frame
-	duree<-seq.POSIXt(from=fonctionnementDC@requete@datedebut,to=fonctionnementDC@requete@datefin,by="day")
-	debut<-unclass(as.Date(duree[1]))[[1]]
-	fin<-unclass(as.Date(duree[length(duree)]))[[1]]
+	time.sequence<-seq.POSIXt(from=fonctionnementDC@requete@datedebut,to=fonctionnementDC@requete@datefin,by="day")
+	debut<-unclass(as.Date(time.sequence[1]))[[1]]
+	fin<-unclass(as.Date(time.sequence[length(time.sequence)]))[[1]]
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#display.brewer.all()
 	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
@@ -194,8 +194,8 @@ funboxDC = function(h,...) {
 	###################################         
 	# creation d'un graphique vide (2)
 	###################################
-	plot(   as.Date(duree),
-			seq(0,1,length.out=length(duree)),
+	plot(   as.Date(time.sequence),
+			seq(0,1,length.out=length(time.sequence)),
 			xlim=c(debut,fin), 
 			type= "n", 
 			xlab="",
@@ -204,7 +204,7 @@ funboxDC = function(h,...) {
 			ylab=get("msg",envir_stacomi)$BilanFonctionnementDC.9,
 			#bty="n",
 			cex=0.8)
-	r <- as.Date(round(range(duree), "day"))
+	r <- as.Date(round(range(time.sequence), "day"))
 	graphics::axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {    # s'il n'y a pas de periode de fontionnement dans la base
 		graphics::rect(   xleft=debut, 

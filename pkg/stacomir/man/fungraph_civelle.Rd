@@ -5,7 +5,8 @@
 \title{Graph function for glass eel migration. Differs from fungraph as it does not
 draw the ggplot graph for month}
 \usage{
-fungraph_civelle(bilanMigration, table, duree, taxon, stade, dc = null)
+fungraph_civelle(bilanMigration, table, time.sequenceime.sequence, taxon, stade,
+  dc = null, ...)
 }
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}} or an
@@ -13,13 +14,13 @@ fungraph_civelle(bilanMigration, table, duree, taxon, stade, dc = null)
 
 \item{table}{a data frame with the results}
 
-\item{duree}{a vector POSIXt}
-
 \item{taxon}{the species}
 
 \item{stade}{the stage}
 
 \item{dc}{the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}}
+
+\item{time.sequence}{a vector POSIXt}
 }
 \description{
 This graph will also plot numbers and bars according to whether the glass

@@ -1,14 +1,3 @@
-# Nom fichier :        fungraph_civelle.R
-# Date de creation :  01/02/2006 15:37:44
-# Description :       graph pour bilan migration journalier civelles
-
-
-
-
-
-
-
-
 #' Graph function for glass eel migration. Differs from fungraph as it does not
 #' draw the ggplot graph for month
 #' 
@@ -19,23 +8,23 @@
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
 #' #' object of class \code{\linkS4class{BilanMigrationMult}}
 #' @param table a data frame with the results
-#' @param duree a vector POSIXt
+#' @param time.sequence a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
 #' @param dc the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
+fungraph_civelle=function(bilanMigration,table,time.sequenceime.sequence,taxon,stade,dc=null,...){
 # calcul des variables
-	# pour adapter aux bilanMigrationMult, ligne par d�faut...
+	# pour adapter aux bilanMigrationMult, ligne par defaut...
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
-	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
-	mois= months(duree)
-	jour= strftime(as.POSIXlt(duree),"%j")
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	mois= months(time.sequence)
+	jour= strftime(as.POSIXlt(time.sequence),"%j")
 	index=table$No.pas+1
 	eff=table$Effectif_total
 	eff.p=table$Effectif_total.p
-	debut=unclass(as.Date(duree[min(index)]))[[1]]
-	fin=unclass(as.Date(duree[max(index)]))[[1]]
+	debut=unclass(as.Date(time.sequence[min(index)]))[[1]]
+	fin=unclass(as.Date(time.sequence[max(index)]))[[1]]
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
@@ -51,7 +40,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	#par("bg"=grDevices::gray(0.8))
 	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
 	#mypalette<-grDevices::rainbow(20)
-	plot(as.Date(duree,"Europe/Paris"),eff/1000,
+	plot(as.Date(time.sequence,"Europe/Paris"),eff/1000,
 			col=mypalette[8],
 			type="h",
 			xlim=c(debut,fin),
@@ -63,12 +52,12 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 			cex.main=1,
 			font.main=1,
 			main=paste(get("msg",envir=envir_stacomi)$fungraph_civelle.3, dis_commentaire,",", 
-					taxon,",", stade,",", annee ))
+					taxon,",", stade,",", annee ),...)
 	#print(plot,position = c(0, .3, 1, .9), more = TRUE)
-	r <- as.Date(round(range(duree), "day"))
+	r <- as.Date(round(range(time.sequence), "day"))
 	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	
-	points(as.Date(duree),eff.p/1000,
+	points(as.Date(time.sequence),eff.p/1000,
 			type="h",
 			lty=1,
 			col=mypalette[10])
@@ -121,10 +110,10 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@sql=paste("SELECT * FROM  t_operation_ope ",
 			"WHERE ope_date_debut >= '",
-			as.Date(duree[min(index)]),
+			as.Date(time.sequence[min(index)]),
 			" 00:00:00' ",
 			"AND ope_date_fin <= '" ,
-			as.Date(duree[max(index)]),
+			as.Date(time.sequence[max(index)]),
 			" 00:00:00' ",
 			"AND ope_dic_identifiant=",dc,
 			"ORDER BY ope_date_debut; ",sep = "")
@@ -139,14 +128,14 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 
 	req@sql<-fn_sql_dis(per_dis_identifiant=
 					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
-			dateDebut=as.Date(duree[min(index)]),
-			dateFin=as.Date(duree[max(index)]))
+			dateDebut=as.Date(time.sequence[min(index)]),
+			dateFin=as.Date(time.sequence[max(index)]))
 	fonctionnementDF<-stacomirtools::connect(req)@query
 	
 	
 	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
-			dateDebut=as.Date(duree[min(index)]),
-			dateFin=as.Date(duree[max(index)]))
+			dateDebut=as.Date(time.sequence[min(index)]),
+			dateFin=as.Date(time.sequence[max(index)]))
 	fonctionnementDC<-stacomirtools::connect(req)@query
 	
 	
@@ -161,7 +150,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	###################################
 	
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
-	plot(   as.Date(duree),
+	plot(   as.Date(time.sequence),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
 			type= "n", 
@@ -233,7 +222,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 						libelle=fonctionnementDF$libelle)
 		nomperiode<-vector()
 		for (j in 1 : length(listeperiode)){
-			#recuperation du vecteur de noms (dans l'ordre) � partir de la liste
+			#recuperation du vecteur de noms (dans l'ordre) e partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
 			#ecriture pour chaque type de periode                       
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
@@ -261,7 +250,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	
 	
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
-	plot(   as.Date(duree),
+	plot(   as.Date(time.sequence),
 			seq(0,3,length.out=length(eff)),
 			xlim=c(debut,fin), 
 			type= "n", 
@@ -359,7 +348,7 @@ fungraph_civelle=function(bilanMigration,table,duree,taxon,stade,dc=null){
 	
 	
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
-	plot(   as.Date(duree),
+	plot(   as.Date(time.sequence),
 			seq(0,1,length.out=length(eff)),
 			xlim=c(debut,fin), 
 			type= "n", 

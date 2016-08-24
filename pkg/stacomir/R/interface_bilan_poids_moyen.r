@@ -10,7 +10,7 @@ interface_BilanPoidsMoyen = function()
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
     bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
-    bilan_poids_moyen@liste=charge(object=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choice de la cat�gorie d'effectif
+    bilan_poids_moyen@liste=charge(object=bilan_poids_moyen@liste,vecteur=c("=1",">1","tous"),label=get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5)# choice de la categorie d'effectif
     #bilan_poids_moyen@taxons=charge(bilan_poids_moyen@taxons)
     #bilan_poids_moyen@stades=charge(bilan_poids_moyen@stades)
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -44,12 +44,12 @@ interface_BilanPoidsMoyen = function()
 	toolbarlist <- list(barchart=aGraph,table=aTable,Quit = aQuit)
 	add(group, gmenu(toolbarlist))
     
-    # Les methodes choice suivantes sont passees en cascade � l'interieur des methodes choice
+    # Les methodes choice suivantes sont passees en cascade e l'interieur des methodes choice
     #choice(bilan_lot@taxons,is.enabled=FALSE)
     #choice(bilan_lot@stades,is.enabled=FALSE)
     #choice(bilan_lot@par,is.enabled=FALSE)
     
-    # TODO ajouter une fonction eval ou la liste du combo box est diminuee � l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
+    # TODO ajouter une fonction eval ou la liste du combo box est diminuee e l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
     
     #toolbarlist$Calc$handler = connect(fonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"

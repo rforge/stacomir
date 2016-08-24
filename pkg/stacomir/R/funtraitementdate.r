@@ -24,7 +24,7 @@
 #' @param heure logical, add column with hour
 #' @return data
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-funtraitementdate=function(data, # tableau de donnees à importer
+funtraitementdate=function(data, # tableau de donnees e importer
 		nom_coldt, # nom de la colonne
 		annee=TRUE,
 		mois=TRUE,
@@ -42,12 +42,12 @@ funtraitementdate=function(data, # tableau de donnees à importer
 	data$quinzaine[as.numeric(data$quinzaine)<10]= paste("0",data$quinzaine[as.numeric(data$quinzaine)<10],sep="")
 	data$quinzaine=as.factor(data$quinzaine)}
 	if (semaine) data$semaine=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%W"))
-	#%W : Week of the year as decimal number (00–53) using Monday as the first day of week (and typically with the first Monday of the year as day 1 of week 1). The UK convention
+	#%W : Week of the year as decimal number (00e53) using Monday as the first day of week (and typically with the first Monday of the year as day 1 of week 1). The UK convention
 	if (jour_an) data$jour_365=strftime(as.POSIXlt(data[,nom_coldt]),format="%j")                          
 	if (jour_mois)data$jour_mois=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%d"))  
-	# %d :  Day of the month as decimal number (01–31).
+	# %d :  Day of the month as decimal number (01e31).
 	if (heure)data$jour_mois=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%H"))  
-	#%H     Hours as decimal number (00–23).    
+	#%H     Hours as decimal number (00e23).    
 	return(data)
 }              
 

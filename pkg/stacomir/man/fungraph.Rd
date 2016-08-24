@@ -4,20 +4,22 @@
 \alias{fungraph}
 \title{Function for BilanMigration graphes including numbers DF DC operations}
 \usage{
-fungraph(bilanMigration, tableau, time.sequence, taxon, stade,...)
+fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
 }
 \arguments{
-\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
+\item{bilanMigration}{An object of class \code{\linkS4class{BilanMigration}}}
 
-\item{time.sequence}{a vector POSIXt}
+\item{time.sequence}{A vector POSIXt}
 
-\item{taxon}{the species}
+\item{taxon}{The species}
 
-\item{stade}{the stage}
+\item{stade}{The stage}
+
+\item{dc}{The DC}
 
 \item{...}{other parameters passed but not used}
 
-\item{table=tableau}{a data frame with the results}
+\item{table=tableau}{A data frame with the results}
 }
 \description{
 This graph is for species other than glass eel

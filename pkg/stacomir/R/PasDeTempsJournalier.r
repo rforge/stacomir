@@ -24,12 +24,12 @@
 #' @include PasdeTemps.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("PasDeTempsJournalier",
-#' dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
+#' dateDebut="POSIXt",stepDuration=numeric(),nbStep=numeric(),noPasCourant=integer())}.
 #' \describe{ \item{list("dateDebut")}{Object of class \code{"POSIXt"} Starting
 #' date }\item{:}{Object of class \code{"POSIXt"} Starting date }
-#' \item{list("dureePas")}{Object of class \code{"numeric"} Step length
+#' \item{list("stepDuration")}{Object of class \code{"numeric"} Step length
 #' }\item{:}{Object of class \code{"numeric"} Step length }
-#' \item{list("nbPas")}{Object of class \code{"numeric"} Number of steps
+#' \item{list("nbStep")}{Object of class \code{"numeric"} Number of steps
 #' }\item{:}{Object of class \code{"numeric"} Number of steps }
 #' \item{list("noPasCourant")}{Object of class \code{"integer"} Number of the
 #' current step }\item{:}{Object of class \code{"integer"} Number of the
@@ -38,7 +38,7 @@
 #' @seealso \code{\linkS4class{PasDeTemps}}
 #' @keywords classes
 setClass(Class="PasDeTempsJournalier",contains="PasDeTemps",
-		prototype=(dureePas=86400) 
+		prototype=(stepDuration=86400) 
 )
 
 
@@ -48,7 +48,7 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			retValue<-NULL
 			rep1 = validite_PasDeTemps(object)
 			if (!is.logical(rep1)) retValue<-rep1
-			rep2 = (object@dureePas==86400)
+			rep2 = (object@stepDuration==86400)
 			if (!rep2) retValue=paste(retValue,get("msg",envir=envir_stacomi)$PasdeTempsJournalier.1)
 			rep3 = length(getAnnees(object))==1
 			if (!rep3) retValue=paste(retValue,get("msg",envir=envir_stacomi)$PasdeTempsJournalier.2)
@@ -59,9 +59,9 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
 					pas=svalue(choicepas)
-					nbpas=as.numeric(svalue(choicenbpas)) 
-					object@nbPas<-nbpas
-					object@dureePas<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
+					nbStep=as.numeric(svalue(choicenbStep)) 
+					object@nbStep<-nbStep
+					object@stepDuration<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object=setdateDebut(object,as.POSIXlt(svalue(datedeb)))
 					svalue(datedefin)<-as.Date(DateFin(object))
 					assign("pasDeTemps",object,envir_stacomi)
@@ -79,8 +79,8 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 				pg[4,1]<-choicepas 
 				enabled(choicepas)=FALSE
 				pg[3,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.6)
-				choicenbpas=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
-				pg[4,2]<-choicenbpas
+				choicenbStep=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
+				pg[4,2]<-choicenbStep
 				pg[1,2]<-glabel(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.7,container=pg)
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE
@@ -143,7 +143,7 @@ setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=func
 					}	
 				}
 					object@dateDebut<-as.POSIXlt(datedebut)
-					object@nbPas=as.numeric(difftime(datefin,datedebut,units="days"))
+					object@nbStep=as.numeric(difftime(datefin,datedebut,units="days"))
 					validObject(object) 			
 					return(object)
 				})

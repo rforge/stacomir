@@ -16,12 +16,19 @@ devtools::use_data(msg,internal=FALSE,overwrite=TRUE)
 # from iav three dc with eels
 ##################################
 require(stacomiR)
-require(RODBC)
-stacomi(FALSE)
+stacomi(FALSE,FALSE,FALSE)
 bMM_Arzal=new("BilanMigrationMult")
-bMM_Arzal=load(bMM_Arzal,
+bMM_Arzal=choice_c(bMM_Arzal,
 dc=c(5,6,12),
 taxons=c("Anguilla anguilla"),
 stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
 bMM_Arzal<-connect(bMM_Arzal)
+# to avoid warnings at package checks
+bMM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bMM_Arzal@dc@data[,"dis_commentaires"],"UTF8")
+bMM_Arzal@dc@data[,"type_df"]<-iconv(bMM_Arzal@dc@data[,"type_df"],"UTF8")
+bMM_Arzal@dc@data[,"type_dc"]<-iconv(bMM_Arzal@dc@data[,"type_dc"],"UTF8")
+bMM_Arzal@dc@data[,"dif_localisation"]<-iconv(bMM_Arzal@dc@data[,"dif_localisation"],"UTF8")
+bMM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bMM_Arzal@taxons@data[,"tax_nom_commun"],"UTF8")
+bMM_Arzal@stades@data[,"std_libelle"]<-iconv(bMM_Arzal@stades@data[,"std_libelle"],"UTF8")
+setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bMM_Arzal,internal=FALSE,overwrite=TRUE)

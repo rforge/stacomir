@@ -15,17 +15,17 @@
 #' 
 #' 
 #' @param tableau data issued from a bilanMigration
-#' @param duree a vector of class POSIXt
+#' @param time.sequence a vector of class POSIXt
 #' @param taxon the species
 #' @param stade the stage
 #' @param stations one or several measure stations
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph_env=function(tableau,duree,taxon,stade,stations){
+fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 	bilanMigrationConditionEnv@bilanMigration@dc<-get("refDC",envir_stacomi)
-	annee=strftime(as.POSIXlt(mean(duree)),"%Y")
+	annee=strftime(as.POSIXlt(mean(time.sequence)),"%Y")
 	dis_commentaire=  as.character(bilanMigrationConditionEnv@bilanMigration@dc@data$dis_commentaires[bilanMigrationConditionEnv@bilanMigration@dc@data$dc%in%bilanMigrationConditionEnv@bilanMigration@dc@dc_selectionne]) # commentaires sur le DC
 	tableau<-funtraitementdate(tableau,
-			nom_coldt="duree",
+			nom_coldt="time.sequence",
 			annee=FALSE,
 			mois=TRUE,
 			quinzaine=TRUE,
@@ -49,22 +49,22 @@ fungraph_env=function(tableau,duree,taxon,stade,stations){
 	}  # end for
 	tableau$yqualitatif=(10^(maxeff))/2
 	name=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,", ",paste(lab_les_stations,collapse=", "),sep="")
-	g<-ggplot(tableau, aes(x=duree,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
+	g<-ggplot(tableau, aes(x=time.sequence,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
 			scale_y_continuous(name=name)+labs(title=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee ))
 	for (i in 1:nrow(stations)){
 		if (stations$stm_typevar[i]=="quantitatif") {
 			if (all(!is.na(tableau[,stations$stm_libelle[i]]))){
-			g<-g+geom_line(aes_string(x="duree",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=1)+
+			g<-g+geom_line(aes_string(x="time.sequence",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=1)+
 					scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
 			} else {
-				g<-g+geom_point(aes_string(x="duree",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=2)+
+				g<-g+geom_point(aes_string(x="time.sequence",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=2)+
 						scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
 			}
 		} else if (stations$stm_typevar[i]=="qualitatif") {
 			stableau=subset(tableau, !is.na(tableau[,stations$stm_libelle[i]]))
 			stableau[,stations$stm_libelle[i]]<- as.factor(as.character( stableau[,stations$stm_libelle[i]]))
 			if (stations$stm_par_code[i]=="AAAA")# phases lunaires
-				g<-g+geom_point(aes_string(x="duree",y="yqualitatif",colour=paste("couleur",i,sep=""),shape=stations$stm_libelle[i]),data=stableau,size=3)+
+				g<-g+geom_point(aes_string(x="time.sequence",y="yqualitatif",colour=paste("couleur",i,sep=""),shape=stations$stm_libelle[i]),data=stableau,size=3)+
 						scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
 		} else stop("erreur interne")
 	} # end for

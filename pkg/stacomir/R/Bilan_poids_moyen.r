@@ -84,7 +84,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 			requete@colonnefin="ope_date_fin"
 			requete@select= paste("SELECT lot_identifiant,ope_date_debut,ope_date_fin,lot_effectif,car_valeur_quantitatif as poids,",
 					" (car_valeur_quantitatif/lot_effectif) AS poids_moyen,",
-					" (ope_date_fin-ope_date_debut)/2 AS duree,",
+					" (ope_date_fin-ope_date_debut)/2 AS time.sequence,",
 					" ope_date_debut+(ope_date_fin-ope_date_debut)/2 as datemoy,",
 					" date_part('year', ope_date_debut) as annee,",
 					" date_part('month',ope_date_debut) as mois",
@@ -175,14 +175,14 @@ fungraphBilan_poids_moyen = function(h,...) {
 	coeff$date=as.POSIXct(coeff$coe_date_debut)
 	funout(get("msg",envir_stacomi)$Bilan_poids_moyen.3)
 	# changement des noms
-	donnees=stacomirtools::chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin","lot_effectif","poids","poids_moyen","duree","datemoy"),
-			c("lot","date","date_fin","effectif","poids","poids_moyen","duree","date"))
+	donnees=stacomirtools::chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin","lot_effectif","poids","poids_moyen","time.sequence","datemoy"),
+			c("lot","date","date_fin","effectif","poids","poids_moyen","time.sequence","date"))
 	# correction de manques d'effectifs dans la base
 	if (sum(is.na(donnees$effectif))>0) warnings(paste(get("msg",envir_stacomi)$Bilan_poids_moyen.4, paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" ")))
 	don=donnees[,c(8,6,4,1)]
 	coe=coeff[,c(10,9)]
 	
-	# graphique des poids moyens en fonction du milieu de l'operation de contr�le)
+	# graphique des poids moyens en fonction du milieu de l'operation de contrele)
 	# la date est la date moyenne du lot
 	
 # fonction handler appellees

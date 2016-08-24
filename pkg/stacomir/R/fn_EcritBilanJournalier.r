@@ -1,10 +1,3 @@
-# function fn_EcritBilanJournalier.r
-
-
-
-
-
-
 #' fn_EcritBilanJournier writes the daily migration in the
 #' t_bilanmigrationjournalier_bjo table
 #' 
@@ -17,7 +10,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau
 	# je cherche les colonnes que je ne veux pas retenir
 	data=bilanMigration@data	
-	jour_dans_lannee_non_nuls=strftime(bilanMigration@duree,'%Y-%m-%d %H:%M:%S')[data$Effectif_total!=0]
+	jour_dans_lannee_non_nuls=strftime(bilanMigration@time.sequence,'%Y-%m-%d %H:%M:%S')[data$Effectif_total!=0]
 	data=data[data$Effectif_total!=0,]
 	col_a_retirer=match(c("No.pas","type_de_quantite"),colnames(data))
 	data=data[,-col_a_retirer]
@@ -28,7 +21,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 	t_bilanmigrationjournalier_bjo=cbind(bilanMigration@dc@dc_selectionne,
 			bilanMigration@taxons@data$tax_code,
 			bilanMigration@stades@data$std_code,
-			unique(strftime(as.POSIXlt(bilanMigration@duree),"%Y")),
+			unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")),
 			rep(jour_dans_lannee_non_nuls,ncol(data)),
 			utils::stack(data),  
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
@@ -72,11 +65,11 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		# si l'utilisateur accepte de remplacer les valeurs
 		close(progres)
 		odbcClose(requete@connection)
-		# ecriture �galement du bilan mensuel
+		# ecriture egalement du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@duree,taxon,stade,DC )
+		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC )
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	}#end function hconfirm
 	
@@ -120,7 +113,7 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@duree,taxon,stade,DC)
+		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC)
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	} # end else
 } # end function

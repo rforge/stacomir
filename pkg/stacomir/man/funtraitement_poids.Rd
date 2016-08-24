@@ -5,12 +5,12 @@
 \title{returns a table where weights and number are calculated from number and weights respectively
 performs a query to collect the conversion coefficients}
 \usage{
-funtraitement_poids(tableau, duree)
+funtraitement_poids(tableau, time.sequence)
 }
 \arguments{
 \item{tableau}{}
 
-\item{duree}{}
+\item{time.sequence}{}
 }
 \value{
 tableau

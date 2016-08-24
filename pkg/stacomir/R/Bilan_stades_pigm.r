@@ -237,7 +237,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refTextBox",envir_stacomi)) {
 				object@salinite<-get("refTextBox",envir_stacomi)
 			} else {
-				# rien de toutes fa�ons les choice par defaut sont copies dans envir_stacomi
+				# rien de toutes faeons les choice par defaut sont copies dans envir_stacomi
 			} 
 			if (object@options@checked[2]){
 				if (exists("refStationMesure",envir_stacomi)) {
@@ -285,16 +285,16 @@ surface=function(xmat,ymat,ordre=1:dim(ymat)[2],couleur=1:dim(ymat)[2],...) {
 #'  
 #' @param parm parameters of the model
 #' @param datatempsal data.frame containing temperatures and salinities
-#' @return list("dates"=duree,"phi_jour"=phi_jour)
+#' @return list("dates"=time.sequence,"phi_jour"=phi_jour)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funphi<-function(parm,datatempsal){
 	temperature=datatempsal$temperature
 	salinity=datatempsal$salinite
-	duree=as.character(datatempsal$date)
-	phi_T=pbeta(temperature/parm$teta,parm$p5,parm$p6)  #(duree,nb_area)
+	time.sequence=as.character(datatempsal$date)
+	phi_T=pbeta(temperature/parm$teta,parm$p5,parm$p6)  #(time.sequence,nb_area)
 	phi_S=1-pbeta((salinity-parm$sigma2)/(parm$sigma-parm$sigma2),parm$p7,parm$p8)
 	phi_jour=phi_T*phi_S
-	return(list("dates"=duree,"phi_jour"=phi_jour))
+	return(list("dates"=time.sequence,"phi_jour"=phi_jour))
 }
 
 
@@ -533,7 +533,7 @@ hfungraphstades=function(h,...){
 #' the glass eel have arrived in the estuary, in this case provide datatempsal,
 #' data for temperature and salinity
 #' @param datatempsal to draw the graph of recalculated dates of arrival,
-#' provide this data.frame, format graphique des durees en estuaire, format
+#' provide this data.frame, format graphique des time.sequences en estuaire, format
 #' [,c("date","temperature","salinite")]
 #' @param points logical, do you want to draw the points on the cumulative
 #' pigmentation graph
@@ -557,7 +557,7 @@ hfungraphstades=function(h,...){
 fungraphstades<-function(
 		tablestades,
 		retrocalcul=TRUE,  # deuxieme partie du graphe dans ce cas fournir datatempsal
-		datatempsal,    # graphique des durees en estuaire, format [,c("date","temperature","salinite")]
+		datatempsal,    # graphique des time.sequences en estuaire, format [,c("date","temperature","salinite")]
 		points=TRUE,    # affichage des points
 		nb=TRUE, # affichage des effectifs
 		graphstades=TRUE,  # affichage du graphe pour evol stades
@@ -609,7 +609,7 @@ fungraphstades<-function(
 		cherchenuls[cherchenuls>0]=1
 		cherchenuls=cbind(cherchenuls,rep(1,length(dates)))
 		# cherchenul cherche les stades nuls (sans valeur) pour ne pas renvoyer de warning
-		# correpondant � un depassement du temps pigmentaire :
+		# correpondant e un depassement du temps pigmentaire :
 		# ex : les temps physiologiques remontent un mois avant, les stades VIA3
 		# auraient necessite 1 mois et demi mais ils sont absents du jeu de donnees   
 		
@@ -619,12 +619,12 @@ fungraphstades<-function(
 			# et on calcule le cumul du vecteur inverse
 			phicum=cumsum(rev(phi$phi_jour[1:match(strdates[j],phi$dates)]))
 			phicum=phicum[phicum<maxVIA3]
-			# pour des raisons graphiques, je m'arrete � un temps pigmentaire de maxVIA3
-			# au del� on sait que c'est 100% de VIA3
+			# pour des raisons graphiques, je m'arrete e un temps pigmentaire de maxVIA3
+			# au dele on sait que c'est 100% de VIA3
 			# il faudrait avoir modelise jusqu'au stade VIA4
 			# on va chercher la date correspondante
 			phidates=rev(phi$dates[1:match(strdates[j],phi$dates)])[1:length(phicum)]
-			# structures des stades en x et y calcules � partir de la fonction gamma
+			# structures des stades en x et y calcules e partir de la fonction gamma
 			# x = les phicum (croissant en remontant dans le temps
 			# y = la distribution dist/max(dist) entre zero et 1
 			#
@@ -644,7 +644,7 @@ fungraphstades<-function(
 			curv[[strdates[j]]]$VIA3$y=tablestades[j,5]*curv[[strdates[j]]]$VIA3$y
 			# tps qui etait un fichier de temps pigmentaires est ici remplace par un fichier de dates
 			for (k in 1:6){
-				# dans le cas normal premier element superieur � tps, dates correcpondante remplace tps
+				# dans le cas normal premier element superieur e tps, dates correcpondante remplace tps
 				if (sum(phicum>tps[j,k])>0) {
 					tps[j,k]=phidates[phicum>tps[j,k]][1]
 				} else {
@@ -716,7 +716,7 @@ fungraphstades<-function(
 		xlim=range(dates)
 	}
 	if (graphstades)  {
-		# stades cumules calcul necessaire pour points et graphique durees
+		# stades cumules calcul necessaire pour points et graphique time.sequences
 		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choice
 		
 	graphics::par("mar"=c(2, 4, 3, 2)+ 0.1)
@@ -764,7 +764,7 @@ fungraphstades<-function(
 #' gglot function to draw graps of pigment stages
 fungraphgg=function(h,...){
 	g<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
-	g<-g+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer � geom_bar un x et un y...
+	g<-g+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer e geom_bar un x et un y...
 			coord_polar(theta="y", start=pi)+ # coordonnees polaires = cercle
 			scale_fill_grey(name="stades pigmentaires",start=0.8, end=0.2)+ # scale_fill_grey permet d'avoir des graduations de gris
 			theme_bw() +  # on efface le fond gris

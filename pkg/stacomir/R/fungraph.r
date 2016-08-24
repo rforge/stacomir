@@ -3,18 +3,20 @@
 #' This graph is for species other than glass eel
 #' 
 #' 
-#' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade,...)
-#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
-#' @param table=tableau a data frame with the results
-#' @param time.sequence a vector POSIXt
-#' @param taxon the species
-#' @param stade the stage
+#' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
+#' @param bilanMigration An object of class \code{\linkS4class{BilanMigration}}
+#' @param table=tableau A data frame with the results
+#' @param time.sequence A vector POSIXt
+#' @param taxon The species
+#' @param stade The stage
+#' @param dc The DC
 #' @param ... other parameters passed but not used
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
+fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
-	# pour adapter aux bilanMigrationMult, ligne par d�faut...
+	# to adapt to bilanMigrationMult, default line...
+	#browser() 
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
@@ -25,7 +27,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 	mois=paste("15",substr(as.character(mois),1,3))
 	index=as.vector(tableau$No.pas[jmois==15])
 	x=1:nrow(tableau)
-	debut=unclass(as.POSIXct((min(time.sequence))))[[1]] # attention arrondit � un jour de moins
+	debut=unclass(as.POSIXct((min(time.sequence))))[[1]] # attention arrondit e un jour de moins
 	fin=unclass(as.POSIXct(max(time.sequence)))[[1]]
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc]) # commentaires sur le DC
 	###################################
@@ -53,9 +55,10 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 			ylab=get("msg",envir=envir_stacomi)$fungraph.2,
 			xlab=get("msg",envir=envir_stacomi)$fungraph.3,
 			main=paste(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""),
-			cex.main=1)
+			cex.main=1,
+			...)
 	print(gr)
-	if(bilanMigration@pasDeTemps@time.sequencePas=="86400"){ # pas de temps journalier
+	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
 		#axis(side=1,at=as.vector(x[jmois==1]),tick=TRUE,labels=FALSE)
@@ -193,7 +196,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 						date=FALSE)
 		nomperiode<-vector()
 		for (j in 1 : length(listeperiode)){
-			#recuperation du vecteur de noms (dans l'ordre) � partir de la liste
+			#recuperation du vecteur de noms (dans l'ordre) e partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
 			#ecriture pour chaque type de periode                       
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
@@ -341,12 +344,13 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 			border = NA, 
 			lwd = 1)
 	
-	
+	#browser()
 	###################################
 	# Graph mensuel 
 	####################################
+	# Pour les noms modifier get("msg",envir=envir_stacomi)$fungraph.7
 	X11(7,4)
-	stktab=cbind(stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"time.sequence"=rep(time.sequence,4))
+	stktab=cbind(utils::stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"time.sequence"=rep(time.sequence,4))
 	stktab<-funtraitementdate(stktab,
 			nom_coldt="time.sequence",
 			annee=FALSE,
@@ -357,14 +361,16 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=null,...){
 			jour_mois=FALSE,
 			heure=FALSE)
 	stktab$ind<-factor(stktab$ind, levels = c("MESURE","CALCULE","EXPERT","PONCTUEL"))
-	names(stktab)=get("msg",envir=envir_stacomi)$fungraph.7
+	fillname<-get("msg",envir=envir_stacomi)$fungraph.7[2] #type
 	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
-	g<-ggplot(stktab, aes(x=mois,y=Effectifs,fill=type))+
+	g<-ggplot(stktab, aes(x=mois,y=values,fill=ind))+
 			geom_bar(position="stack", stat="identity")+
-			scale_fill_manual(name="type",values=c("MESURE"=mypalette[4],
+			scale_fill_manual(name=fillname,values=c("MESURE"=mypalette[4],
 							"CALCULE"=mypalette[3],
 							"EXPERT"=mypalette[2],
-							"PONCTUEL"=mypalette[1]))
+							"PONCTUEL"=mypalette[1]))+
+			xlab(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+
+			ylab(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers
 		print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
 }

@@ -37,7 +37,7 @@ interface_BilanLot = function()
 			affichecal=FALSE)
     
     choice(bilan_carlot@dc,objectBilan=bilan_carlot,is.enabled=TRUE)
-    # Les methodes choice suivantes sont passees en cascade � l'interieur des methodes choice
+    # Les methodes choice suivantes sont passees en cascade e l'interieur des methodes choice
     #choice(bilan_carlot@taxons,is.enabled=FALSE)
     #choice(bilan_carlot@stades,is.enabled=FALSE)
     #choice(bilan_carlot@par,is.enabled=FALSE)

@@ -24,7 +24,7 @@ window
 The defaut behaviour of the program is to run through the following elements
  \itemize{
      \item{login window}{ The program opens a login window to prompt the user to give his usernames and passwords.
-			default values will proposed from "C:\program files\stacomi\calcmig.csv" and if this file does not exists, 
+			default values will proposed from "C:/program files/stacomi/calcmig.csv" and if this file does not exists, 
 			from \code{file.path(.libPaths(),"stacomiR","config","calcmig.csv")} as a default. If \code{login_window=FALSE}
 			the program will skip the login window and use calcmig values for user (\code{uid}) and password(\code{pwd}) as a default.}
      \item{tests for connection}{ Test for the existence of a calcmig.csv file, and then the existence of the file
@@ -37,7 +37,7 @@ The defaut behaviour of the program is to run through the following elements
 			through the command line.}
  }
 When \code{pre_launch_test=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
- And also essages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
+ And also messages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
 are only avalaible in english.
 }
 \examples{

@@ -52,14 +52,14 @@ funSousListeBilanMigration=function(bilanMigration) {
 	
 	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
 	while (getnoPasCourant(bilanMigration@pasDeTemps) != -1) {
-		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbPas
+		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbStep
 		utils::setWinProgressBar(progres,zz,title="calcul des effectifs par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
 		if(finPas!=round(finPas,"day")) stop("problemes d'arrondi dans le calcul de la date, verifier la fonction funsouslistebilanmigration")
 		# finPas= as.POSIXlt(DateFin(bilanMigration@pasDeTemps))
 		#cat(paste("pas courant=",bilanMigration@pasDeTemps@noPasCourant,"\n") )
-		#cat(paste("duree du pas",format(debutPas) ," -> ", format(finPas),"\n"))
+		#cat(paste("time.sequence du pas",format(debutPas) ," -> ", format(finPas),"\n"))
 		
 		
 		
@@ -107,19 +107,19 @@ funSousListeBilanMigration=function(bilanMigration) {
 				
 				
 				tauxEch = 0
-				cumulPeriodes = 0  # les durees cumulees des periodes d'application des taux
-				periodePas = 0  # var temporaire pour la duree d'application d'un certain taux
+				cumulPeriodes = 0  # les time.sequences cumulees des periodes d'application des taux
+				periodePas = 0  # var temporaire pour la time.sequence d'application d'un certain taux
 				
 				# Boucle sur chaque taux et application d'un coefficient de ponderation
 				for (i in 1: length(lesTauxEch)) {
-					# tauxI * dureeI
+					# tauxI * time.sequenceI
 					periodePas = datesFinTauxEch[i] - datesDebutTauxEch[i]
 					tauxEch = tauxEch + as.double(lesTauxEch[i]*periodePas)
 					
 					cumulPeriodes = as.double(cumulPeriodes + periodePas)
 					
 				}
-				# Divise par la duree cumulee pour retomber sur un taux
+				# Divise par la time.sequence cumulee pour retomber sur un taux
 				if (cumulPeriodes != 0) {
 					# Division par le cumul des periodes des taux et non par la periode du pas de temps pour le cas ou les taux ne seraient pas definis sur la totalite du pas
 					tauxEch = tauxEch / cumulPeriodes
@@ -203,7 +203,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 				if (length(unique(type))>=0){
 					for (letype in as.character(unique(type)) ) {						
 						lescoeff[[letype]]=sum(coef[type==letype])/sum(as.double(periode[type==letype]))						
-						# Pour chaque type de quantite, divise le cumul des coefs par la duree cumulee pour retomber sur un coef
+						# Pour chaque type de quantite, divise le cumul des coefs par la time.sequence cumulee pour retomber sur un coef
 						# le taux correspondant a chaque type de quantite
 					}						
 				}else { coef = -1}# pas de types de coeff
@@ -277,7 +277,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 			
 			debutOpe=as.POSIXlt(rs$ope_date_debut)
 			finOpe= as.POSIXlt(rs$ope_date_fin)
-			finOpe[finOpe==debutOpe]<-finOpe+1 # pour �viter les divisions par z�ro pour les op�rations de 0s
+			finOpe[finOpe==debutOpe]<-finOpe+1 # pour eviter les divisions par zero pour les operations de 0s
 			methode=rs$lot_methode_obtention
 			effectif=rs$effectif
 			
@@ -287,15 +287,15 @@ funSousListeBilanMigration=function(bilanMigration) {
 			# Si l'operation se termine apres la fin du pas mais ne debute pas avant, il faut conserver une seule partie de l'operation
 			# Si l'operation commence avant le pas de temps et se termine apres, on ne conserve qu'une partie de l'operation
 			# Cas ou l'operation est inferieure ou egale au pas de temps : pas de probleme, on compte l'operation complete
-			# ce qui revient � dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
+			# ce qui revient e dire que pour ce qui concerne la time.sequence de l'operation effectif sur le pas de temps
 			# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
-			# et que se passe t'il pour plusieurs op�rations dans la m�me journ�e ????
+			# et que se passe t'il pour plusieurs operations dans la meme journee ????
 			debut<-debutOpe
 			fin<-finOpe
 			debut[debut<debutPas]<-debutPas
 			fin[fin>finPas]<-finPas
-			# debut et fin correspondent au troncage des op�rations qui d�passent du pas
+			# debut et fin correspondent au troncage des operations qui depassent du pas
 			# Repartition de l'effectif au prorata
 			effectif = effectif * as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
 			

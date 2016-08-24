@@ -59,7 +59,7 @@ setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function
 					lot_effectif,
 					car_valeur_quantitatif as poids,
 					(car_valeur_quantitatif/lot_effectif) AS poids_moyen, 
-					(datefinpeche-datedebutpeche)/2 AS duree,
+					(datefinpeche-datedebutpeche)/2 AS time.sequence,
 					datedebutpeche+(datefinpeche-datedebutpeche)/2 AS datemoy,
 					date_part('year', datedebutpeche) AS annee,
 					date_part('month',datedebutpeche) AS mois  

@@ -111,6 +111,6 @@ source("interface_BilanFonctionnementDF.r")
 source("interface_BilanMigrationMult.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
- stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
+ #stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
  # pour aller chercher les donnees
  setwd("F:/workspace/stacomir/pkg/stacomir")

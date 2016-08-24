@@ -1,6 +1,6 @@
 #' function to print and save statistics in .csv and .html formats
 #' @param tableau 
-#' @param duree 
+#' @param time.sequence 
 #' @param taxon 
 #' @param stade 
 #' @param DC 
@@ -8,7 +8,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funtable=function(tableau,time.sequence,taxon,stade,DC,resum){
-	annee=unique(strftime(as.POSIXlt(duree),"%Y"))
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path1,"\n"))

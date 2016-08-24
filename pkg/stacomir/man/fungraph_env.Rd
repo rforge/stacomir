@@ -5,12 +5,12 @@
 \title{Function for class BilanMigrationEnv drawing both the response of
 environment variables...}
 \usage{
-fungraph_env(tableau, duree, taxon, stade, stations)
+fungraph_env(tableau, time.sequence, taxon, stade, stations)
 }
 \arguments{
 \item{tableau}{data issued from a bilanMigration}
 
-\item{duree}{a vector of class POSIXt}
+\item{time.sequence}{a vector of class POSIXt}
 
 \item{taxon}{the species}
 

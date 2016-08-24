@@ -11,11 +11,11 @@
 #' returns a table where weights and number are calculated from number and weights respectively
 #' performs a query to collect the conversion coefficients
 #' @param tableau 
-#' @param duree 
+#' @param time.sequence 
 #' @return tableau
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-funtraitement_poids=function(tableau,duree) { 
+funtraitement_poids=function(tableau,time.sequence) { 
 	index=tableau$No.pas+1
 	funout(get("msg",envir=envir_stacomi)$funtraitement_poids.1)
 	
@@ -55,8 +55,8 @@ funtraitement_poids=function(tableau,duree) {
 	req=new("RequeteODBCwheredate")
 	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	req@select="select * from tj_coefficientconversion_coe"
-	req@datedebut<-as.POSIXlt(duree[min(index)])
-	req@datefin<-as.POSIXlt(duree[max(index)])
+	req@datedebut<-as.POSIXlt(time.sequence[min(index)])
+	req@datefin<-as.POSIXlt(time.sequence[max(index)])
 	req@colonnedebut<-"coe_date_debut"
 	req@colonnefin<-"coe_date_fin"
 	req@and<-c("and coe_tax_code='2038'","and coe_std_code='CIV'")
@@ -70,7 +70,7 @@ funtraitement_poids=function(tableau,duree) {
 		funout(get("msg",envir=envir_stacomi)$funtraitement_poids.3)#there are some coefficient but they are incomplete
 		warnings(get("msg",envir=envir_stacomi)$funtraitement_poids.3)
 		}
-		mtch<-match(as.character(coe$coe_date_debut),as.character(as.Date(round(duree,"day"))))
+		mtch<-match(as.character(coe$coe_date_debut),as.character(as.Date(round(time.sequence,"day"))))
 		tableau$poids_depuis_effectifs<-0  
 		tableau[mtch,"poids_depuis_effectifs"]=tableau[mtch,"Effectif_total.e"]/
 				coe$coe_valeur_coefficient

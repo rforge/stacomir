@@ -147,7 +147,7 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			#funout("la table bilan migration est stockee dans l'environnement envir_stacomi\n")
 			#data<-get("data",envir_stacomi)
 			# chargement des donnees suivant le format chargement_donnees1  
-			bilanMigrationPar@time.sequence=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@time.sequencePas)) # il peut y avoir des lignes repetees poids effectif
+			bilanMigrationPar@time.sequence=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@stepDuration)) # il peut y avoir des lignes repetees poids effectif
 			
 			if (bilanMigrationPar@taxons@data$tax_nom_commun=="Anguilla anguilla"& bilanMigrationPar@stades@data$std_libelle=="civelle") 
 			{
@@ -160,48 +160,47 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			# graphiques (a affiner pb si autre chose que journalier)
 			# pour sauvegarder sous excel
 		})
-#' le handler appelle la methode generique graphe sur l'object choice=1
+#' le handler appelle la methode generique graphe sur l'object plot.type=1
 #' 
 #' @param h, passed by the handler
 hbilanMigrationPargraph = function(h,...) {
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
-		plot(bilanMigrationPar,choice=1)
+		plot(bilanMigrationPar,plot.type="barplot")
 	} else {      
 		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)
 	}
 }
-#' le handler appelle la methode generique graphe sur l'object choice=2
+#' le handler appelle la methode generique graphe sur l'object plot.type=2
 #' 
 #' @param h, passed by the handler
 hbilanMigrationPargraph2=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
-		plot(bilanMigrationPar,choice=2)
+		plot(bilanMigrationPar,plot.type="xyplot")
 	} else {      
 		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)
 	}
 }
-#' This handler calls the generic method graphe on object choice 3
+#' This handler calls the generic method graphe on object plot.type 3
 #' 
 #' 
 #' @param h, passed by
 hbilanMigrationParstat=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
-		plot(bilanMigrationPar,choice=3)
+		plot(bilanMigrationPar,plot.type="summary")
 	} else {      
 		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)		
 	}
 }
 
 #' plot method for BilanMigrationPar
-#' 
+#' @usage plot(x,plot.type=c("barplot","xyplot","summary"))
 #' @param x An object of class BilanMigrationPar
-#' @param y null to conform to generic plot method
-#' @param choice 1=barplot, 2=xyplot, 3=summary table
+#' @param plot.type =barplot, 2=xyplot, 3=summary table
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature("BilanMigrationPar"),definition=function(x,y=null,choice=1,...){ 
+setMethod("plot",signature=signature(x="BilanMigrationPar",y="missing"),definition=function(x,y,plot.type="barplot",...){ 
 			###########################
 			bilanMigrationPar<-x # ne pas passer dessus en debug manuel
 			##########################
@@ -225,23 +224,24 @@ setMethod("plot",signature=signature("BilanMigrationPar"),definition=function(x,
 			mb=funtraitementdate(data=mb,nom_coldt="Date") 
 			# transformation du tableau de donnees
 			
-			if (choice==1) {
+			if (plot.type=="barplot") {
 				
 				g<-ggplot(mb)
 				g<-g+geom_bar(aes(x=mois,y=sommes,fill=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
 				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
 				print(g)
-			} #end choice1
-			if (choice==2) { 
+			} #end plot.type = "barplot"
+			if (plot.type=="xyplot") { 
 				
 				g<-ggplot(mb)
 				g<-g+geom_point(aes(x=Date,y=sommes,col=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
 				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
 				print(g)
-			} #end choice2
-			if (choice==3) {
+			} #end plot.type="xyplot"
+			#TODO create summary method
+			if (plot.type=="summary") {
 				table=round(tapply(mb$somme,list(mb$mois,mb$variable),sum),1)
 				table=as.data.frame(table)
 				table[,"total"]<-rowSums(table)
@@ -254,7 +254,7 @@ setMethod("plot",signature=signature("BilanMigrationPar"),definition=function(x,
 				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(bilanMigrationPar@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n"))
-			} # end choice3 
+			} # end plot.type summary 
 		})
 
 

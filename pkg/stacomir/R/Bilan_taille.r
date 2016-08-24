@@ -82,7 +82,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 				
 			} else {
 				#les deux caracteristiques sont choisies, il faut faire un Bilancroise
-				# attention je choisis un left  join �a veut dire certaines caracteristiques quant n'ont pas de contrepartie qualitatives
+				# attention je choisis un left  join ea veut dire certaines caracteristiques quant n'ont pas de contrepartie qualitatives
 				# Pour essai voir Anguilles_nombreouPoids2.sql
 				# --Bilan croise
 				sql=paste(

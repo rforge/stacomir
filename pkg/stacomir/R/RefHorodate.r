@@ -39,7 +39,7 @@ setMethod("getRefHorodate",signature=signature("RefHorodate"),definition=functio
 			return ( strftime(as.POSIXlt(object@horodate),format="%Y-%m-%d %H:%M:%S") )
 		})
 
-#Fixe la date de debut � partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S"
+#Fixe la date de debut e partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S"
 setGeneric("setRefHorodate",def=function(object,...) standardGeneric("setRefHorodate"))
 
 

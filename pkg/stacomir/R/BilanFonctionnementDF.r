@@ -111,7 +111,7 @@ funbarchartDF = function(h,...) {
 	
 	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)
 	t_periodefonctdispositif_per=fonctionnementDF@requete@query # on recupere le data.frame   
-	# l'objectif du programme ci dessous est de calculer la duree mensuelle de fonctionnement du dispositif.
+	# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 	#tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	#tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsdebut<-t_periodefonctdispositif_per$per_date_debut
@@ -151,7 +151,7 @@ funbarchartDF = function(h,...) {
 			if (is.na(lemoissuivant) ) break
 		}  
 	}
-	t_periodefonctdispositif_per_mois$sumduree<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
+	t_periodefonctdispositif_per_mois$sumtime.sequence<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
 	t_periodefonctdispositif_per_mois$mois1= strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
 	t_periodefonctdispositif_per_mois$mois=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
 	t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
@@ -159,20 +159,20 @@ funbarchartDF = function(h,...) {
 	close(progres)
 	
 # graphique 
-	t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
+	t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumtime.sequence","per_tar_code","per_etat_fonctionnement"),
 			new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
 #modif de l'ordre pour apparence graphique
 	
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
 	g<- ggplot(t_periodefonctdispositif_per_mois,
-			aes(x=mois,y=duree,fill=libelle))+
+			aes(x=mois,y=time.sequence,fill=libelle))+
 	facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
 	g<-g+geom_bar(stat='identity')+
 			scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
 	#modif de l'ordre pour apparence graphique
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
 	t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
-	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
+	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=time.sequence))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
 	g1<-g1+
 			geom_bar(stat='identity',aes(fill=fonctionnement))+
 			scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
@@ -211,9 +211,9 @@ funboxDF = function(h,...) {
 		unclass(vectordate)
 		return(vectordate)
 	}
-	duree=seq.POSIXt(from=fonctionnementDF@requete@datedebut,to=fonctionnementDF@requete@datefin,by="day")
-	debut=graphdate(duree[1])
-	fin=graphdate(duree[length(duree)])
+	time.sequence=seq.POSIXt(from=fonctionnementDF@requete@datedebut,to=fonctionnementDF@requete@datefin,by="day")
+	debut=graphdate(time.sequence[1])
+	fin=graphdate(time.sequence[length(time.sequence)])
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#display.brewer.all()
 	mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
@@ -221,8 +221,8 @@ funboxDF = function(h,...) {
 	###################################         
 	# creation d'un graphique vide (2)
 	###################################
-	plot(   graphdate(duree),
-			seq(0,1,length.out=length(duree)),
+	plot(   graphdate(time.sequence),
+			seq(0,1,length.out=length(time.sequence)),
 			xlim=c(debut,fin), 
 			type= "n", 
 			xlab="",
@@ -231,7 +231,7 @@ funboxDF = function(h,...) {
 			ylab=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.9,
 			#bty="n",
 			cex=0.8)
-	r <- round(range(duree), "day")
+	r <- round(range(time.sequence), "day")
 	graphics::axis(1, at=graphdate(seq(r[1], r[2], by="weeks")),labels=strftime(as.POSIXlt(seq(r[1], r[2], by="weeks")),format="%d-%b"))
 	if (dim(t_periodefonctdispositif_per)[1]==0 ) {
 		rect(      xleft=debut, 

@@ -66,21 +66,21 @@ hbilanMigrationConditionEnvcalc=function(h,...){
 #object<-bilanMigrationConditionEnv
 setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition=function(object,...){ 
 			# le chargement de bilanMigration utilise la methode calcule de BilanMigration
-			# qui charge les objects et en plus fait un calcul dessus, � la fin cette methode assigne les objects
-			# dans l'environnement stacomi et c'est l� qu'il faut aller les chercher
-			# pour eviter de lancer les calculs et d'avoir la demande de stations � la fin du bilan migration...
+			# qui charge les objects et en plus fait un calcul dessus, e la fin cette methode assigne les objects
+			# dans l'environnement stacomi et c'est le qu'il faut aller les chercher
+			# pour eviter de lancer les calculs et d'avoir la demande de stations e la fin du bilan migration...
 			if (!exists("refStationMesure",envir_stacomi)) {
 				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
 			}    
 			calcule(object@bilanMigration)
 			object@bilanMigration=get("bilanMigration",envir=envir_stacomi)
 			# j'extraie les dates de debut et de fin de l'object pas de temps de l'object bilanmigration
-			# il faut stocker un ojet RefHorodate dans l'environnement envir_stacomi pour reussir � le recharger dans l'object
+			# il faut stocker un ojet RefHorodate dans l'environnement envir_stacomi pour reussir e le recharger dans l'object
 			# bilanCOnditionEnv
 			horodatedebut=new("RefHorodate")
 			horodatedebut@horodate=object@bilanMigration@pasDeTemps@dateDebut  # format POSIXlt
 			horodatefin=new("RefHorodate")
-			horodatefin@horodate=DateFin(object@bilanMigration@pasDeTemps)    # format �POSIXct
+			horodatefin@horodate=DateFin(object@bilanMigration@pasDeTemps)    # format ePOSIXct
 			# tiens c'est bizarre deux classes differents (POSIXlt et POSIXt) rentrent dans horodate
 			# ben oui parce que RefHorodate est un object de classe POSIXT qui dans R est le papa des deux autres...
 			horodatefin@horodate=as.POSIXlt(horodatefin@horodate) 
@@ -92,7 +92,7 @@ setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition
 			# Usage assign(x, value, pos = -1, envir = as.environment(pos),..)
 			assign(x="bilanConditionEnv_date_debut",horodatedebut,envir=envir_stacomi)
 			assign(x="bilanConditionEnv_date_fin",horodatefin,envir=envir_stacomi)
-			object@bilanConditionEnv=charge(object@bilanConditionEnv) # l� �a marche
+			object@bilanConditionEnv=charge(object@bilanConditionEnv) # le ea marche
 			# les objects sont maintenant charges et calcules, j'assigne BilanConditionEnv qui les contient
 			# dans l'environnement envir_stacomi
 			funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.1)
@@ -121,13 +121,13 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 		funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.2,arret=TRUE)
 	} # end ifelse
 	
-	# dans le bilanMigration, la duree est une sequence (pour l'instant bilanMigration seulement au format journalier)
+	# dans le bilanMigration, la time.sequence est une sequence (pour l'instant bilanMigration seulement au format journalier)
 	# c'est des dates en format POSIXct qui se decalent (changement d'heure)
 	# je les formate au jour, il semble qu'il y ait parfois des decalages de 1 jour
-	duree<-as.Date(as.POSIXlt(bilanMigrationConditionEnv@bilanMigration@duree,tz="GMT"))
+	time.sequence<-as.Date(as.POSIXlt(bilanMigrationConditionEnv@bilanMigration@time.sequence,tz="GMT"))
 	tableau<-bilanMigrationConditionEnv@bilanMigration@data
-	tableau<-cbind("duree"=duree,tableau)
-	tableau$dureechar<-as.character(tableau$duree)
+	tableau<-cbind("time.sequence"=time.sequence,tableau)
+	tableau$time.sequencechar<-as.character(tableau$time.sequence)
 	tableauCE<-bilanMigrationConditionEnv@bilanConditionEnv@data  # tableau conditions environnementales
 	if (nrow(tableauCE)==0) {
 		funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.3,arret=TRUE)
@@ -141,8 +141,8 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 	}
 	
 	# generation de donnees pour le graphe
-	#tableauCE=data.frame("env_date_debut"=duree, "env_stm_identifiant"="essai1","env_valeur_quantitatif"=rnorm(n=length(duree),20,5))
-	#tableauCE1=data.frame("env_date_debut"=duree, "env_stm_identifiant"="essai2", "env_valeur_quantitatif"=sin((1:length(duree))/50))
+	#tableauCE=data.frame("env_date_debut"=time.sequence, "env_stm_identifiant"="essai1","env_valeur_quantitatif"=rnorm(n=length(time.sequence),20,5))
+	#tableauCE1=data.frame("env_date_debut"=time.sequence, "env_stm_identifiant"="essai2", "env_valeur_quantitatif"=sin((1:length(time.sequence))/50))
 	#tableauCE=rbind(tableauCE,tableauCE1)
 	tableauCE$env_date_debutchar=as.character(as.Date(tableauCE$env_date_debut))  
 	
@@ -169,7 +169,7 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 				tableauCEst<-tableauCEst[,c("env_date_debutchar","env_valeur_quantitatif")]
 				tableauCEst<-stacomirtools::chnames(tableauCEst,"env_valeur_quantitatif",sta)
 				stations[stations$stm_libelle==sta,"stm_typevar"]<-"quantitatif"
-				# je renomme la colonne � rentrer par le nom de la station
+				# je renomme la colonne e rentrer par le nom de la station
 			}   else {
 				# variable qualitative
 				tableauCEst<-tableauCEst[,c("env_date_debutchar","env_val_identifiant")]
@@ -179,18 +179,18 @@ hbilanMigrationConditionEnvgraph = function(h,...) {
 				stations[stations$stm_libelle==sta,"stm_typevar"]<-"qualitatif"			
 			} # end else
 			# le merge ci dessous est l'equivalent d'une jointure gauche (LEFT JOIN)
-			tableau<-merge(tableau,tableauCEst,by.x = "dureechar", by.y = "env_date_debutchar",  all.x = TRUE)
+			tableau<-merge(tableau,tableauCEst,by.x = "time.sequencechar", by.y = "env_date_debutchar",  all.x = TRUE)
 			# les donnees sont normalement collees dans le tableau dans une nouvelle colonne et aux dates correspondantes
-			if (length(duree)!=nrow(tableau)) funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5,
+			if (length(time.sequence)!=nrow(tableau)) funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5,
 								nrow(tableau),
 								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6,
-								length(duree),
+								length(time.sequence),
 								")\n"),arret=TRUE)
-			#si la jointure � rajoute des lignes �a craint je ne sais pas comment se fera le traitement
+			#si la jointure e rajoute des lignes ea craint je ne sais pas comment se fera le traitement
 		} # end for
 		taxon= as.character(bilanMigrationConditionEnv@bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigrationConditionEnv@bilanMigration@stades@data$std_libelle)
-		fungraph_env(tableau,duree,taxon,stade,stations)
+		fungraph_env(tableau,time.sequence,taxon,stade,stations)
 	} # end else
 }# end function
 

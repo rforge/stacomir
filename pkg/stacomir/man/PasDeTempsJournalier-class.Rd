@@ -14,12 +14,12 @@ validite_PasDeTempsJournalier
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("PasDeTempsJournalier",
-dateDebut="POSIXt",dureePas=numeric(),nbPas=numeric(),noPasCourant=integer())}.
+dateDebut="POSIXt",stepDuration=numeric(),nbStep=numeric(),noPasCourant=integer())}.
 \describe{ \item{list("dateDebut")}{Object of class \code{"POSIXt"} Starting
 date }\item{:}{Object of class \code{"POSIXt"} Starting date }
-\item{list("dureePas")}{Object of class \code{"numeric"} Step length
+\item{list("stepDuration")}{Object of class \code{"numeric"} Step length
 }\item{:}{Object of class \code{"numeric"} Step length }
-\item{list("nbPas")}{Object of class \code{"numeric"} Number of steps
+\item{list("nbStep")}{Object of class \code{"numeric"} Number of steps
 }\item{:}{Object of class \code{"numeric"} Number of steps }
 \item{list("noPasCourant")}{Object of class \code{"integer"} Number of the
 current step }\item{:}{Object of class \code{"integer"} Number of the

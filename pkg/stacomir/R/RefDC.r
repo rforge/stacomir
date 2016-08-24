@@ -109,7 +109,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
 					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel � un autre object il faut appeller le conteneur qui contient l'object
+					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
 					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
 						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
@@ -182,7 +182,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 					funout(get("msg",envir=envir_stacomi)$RefDC.1)
 					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel � un autre object il faut appeller le conteneur qui contient l'object
+					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
 					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
 						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){

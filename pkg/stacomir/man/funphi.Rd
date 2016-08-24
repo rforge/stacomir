@@ -12,7 +12,7 @@ funphi(parm, datatempsal)
 \item{datatempsal}{data.frame containing temperatures and salinities}
 }
 \value{
-list("dates"=duree,"phi_jour"=phi_jour)
+list("dates"=time.sequence,"phi_jour"=phi_jour)
 }
 \description{
 Function to calculate pigmentation times.

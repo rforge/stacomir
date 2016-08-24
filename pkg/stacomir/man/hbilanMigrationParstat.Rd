@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanMigrationPar.r
 \name{hbilanMigrationParstat}
 \alias{hbilanMigrationParstat}
-\title{This handler calls the generic method graphe on object choice 3}
+\title{This handler calls the generic method graphe on object plot.type 3}
 \usage{
 hbilanMigrationParstat(h, ...)
 }
@@ -10,6 +10,6 @@ hbilanMigrationParstat(h, ...)
 \item{h, }{passed by}
 }
 \description{
-This handler calls the generic method graphe on object choice 3
+This handler calls the generic method graphe on object plot.type 3
 }
 

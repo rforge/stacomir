@@ -57,8 +57,8 @@ setMethod("choice",signature=signature("RefCheckBox"),definition=function(object
 			hlist=function(h,...){
 				i=h$action
 				if (exists("refCheckBox",envir_stacomi)) {
-					# on r�cup�re les valeurs de l'object assign� pr�c�dement
-					# car l'object dans .GlobalEnv n'est pas � jour...
+					# on recupere les valeurs de l'object assigne precedement
+					# car l'object dans .GlobalEnv n'est pas e jour...
 					object<-get("refCheckBox",envir_stacomi)
 				}
 				object@checked[i]<-svalue(the_choice[[i]])

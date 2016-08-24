@@ -16,16 +16,16 @@ hbilanMigrationMultgraph3()
 
 
 source("F:/workspace/stacomir/branch0.5/stacomir/inst/config/stacomi.r")
-# les options sont récupérées par défaut...
+# les options sont recuperees par defaut...
 # je les change pour les tests sur migration
-ls(envir=envir_stacomi) # liste des objects présents dans l'environnement de travail créé par le package
+ls(envir=envir_stacomi) # liste des objects presents dans l'environnement de travail cree par le package
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("migradour",2)
-# réassignation dans l'environnement de travail
+# reassignation dans l'environnement de travail
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","migradour.",envir_stacomi)
-rm(baseODBC,sch) # j'enlève les objects de l'environnement global
+rm(baseODBC,sch) # j'enleve les objects de l'environnement global
 
 options(sqldf.RPostgreSQL.user = "migradour", 
 		sqldf.RPostgreSQL.password ="migradour",

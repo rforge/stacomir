@@ -9,6 +9,8 @@ funtable(tableau, time.sequence, taxon, stade, DC, resum)
 \arguments{
 \item{tableau}{}
 
+\item{time.sequence}{}
+
 \item{taxon}{}
 
 \item{stade}{}
@@ -16,8 +18,6 @@ funtable(tableau, time.sequence, taxon, stade, DC, resum)
 \item{DC}{}
 
 \item{resum}{}
-
-\item{duree}{}
 }
 \description{
 function to print and save statistics in .csv and .html formats

@@ -37,7 +37,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	# Boucle sur chacune des periodes du pas de temps
 	#
 	# *********************
-#la methode suivant fait passer le pas de temps courant � -1
+#la methode suivant fait passer le pas de temps courant e -1
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
@@ -75,13 +75,13 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	#  bilanMigrationPar@pasDeTemps<-get("pasDeTemps",envir_stacomi)  
 	#bilanMigrationPar@pasDeTemps@noPasCourant=as.integer(-(difftime(as.POSIXlt(strptime("2006-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")),as.POSIXlt(strptime("2006-03-27 00:00:00",format="%Y-%m-%d %H:%M:%S")),unit="days")))  
 	while (getnoPasCourant(bilanMigrationPar@pasDeTemps) != -1) {
-		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbPas
+		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbStep
 		utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))
 		#finPas=as.POSIXlt(DateFin(bilanMigrationPar@pasDeTemps)) # pour debug avoir quelque chose dans le resultset
 		#cat(paste("pas courant=",bilanMigrationPar@pasDeTemps@noPasCourant,"\n") )
-		#cat(paste("duree du pas",format(debutPas) ," -> ", format(finPas),"\n"))
+		#cat(paste("time.sequence du pas",format(debutPas) ," -> ", format(finPas),"\n"))
 		
 		# *********************
 		#
@@ -125,19 +125,19 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 				
 				
 				tauxEch = 0
-				cumulPeriodes = 0  # les durees cumulees des periodes d'application des taux
-				periodePas = 0  # var temporaire pour la duree d'application d'un certain taux
+				cumulPeriodes = 0  # les time.sequences cumulees des periodes d'application des taux
+				periodePas = 0  # var temporaire pour la time.sequence d'application d'un certain taux
 				
 				# Boucle sur chaque taux et application d'un coefficient de ponderation
 				for (i in 1: length(lesTauxEch)) {
-					# tauxI * dureeI
+					# tauxI * time.sequenceI
 					periodePas = datesFinTauxEch[i] - datesDebutTauxEch[i]
 					tauxEch = tauxEch + as.double(lesTauxEch[i]*periodePas)
 					
 					cumulPeriodes = as.double(cumulPeriodes + periodePas)
 					
 				}
-				# Divise par la duree cumulee pour retomber sur un taux
+				# Divise par la time.sequence cumulee pour retomber sur un taux
 				if (cumulPeriodes != 0) {
 					# Division par le cumul des periodes des taux et non par la periode du pas de temps pour le cas ou les taux ne seraient pas definis sur la totalite du pas
 					tauxEch = tauxEch / cumulPeriodes
@@ -220,7 +220,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					
 					lescoeff[[letype]]=sum(coef[type==letype])/sum(as.double(periode[type==letype]))
 					
-					# Pour chaque type de quantite, divise le cumul des coefs par la duree cumulee pour retomber sur un coef
+					# Pour chaque type de quantite, divise le cumul des coefs par la time.sequence cumulee pour retomber sur un coef
 					# le taux correspondant a chaque type de quantite
 				}
 			}   else {
@@ -301,7 +301,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 					" ORDER BY ope_date_debut",sep="")
 		} else {
 			#les deux caracteristiques sont choisies, il faut faire un Bilancroise
-			# attention je choisis un left  join �a veut dire certaines caracteristiques quant n'ont pas de contrepartie quantitative     
+			# attention je choisis un left  join ea veut dire certaines caracteristiques quant n'ont pas de contrepartie quantitative     
 			req@sql=paste(
 					" SELECT ope_date_debut,",
 					" ope_date_fin,",  
@@ -357,7 +357,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			# Si l'operation se termine apres la fin du pas mais ne debute pas avant, il faut conserver une seule partie de l'operation
 			# Si l'operation commence avant le pas de temps et se termine apres, on ne conserve qu'une partie de l'operation
 			# Cas ou l'operation est inferieure ou egale au pas de temps : pas de probleme, on compte l'operation complete
-			# ce qui revient � dire que pour ce qui concerne la duree de l'operation effectif sur le pas de temps
+			# ce qui revient e dire que pour ce qui concerne la time.sequence de l'operation effectif sur le pas de temps
 			# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
 			# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
 			
@@ -424,7 +424,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	if (bilanMigrationPar@parqual@data$par_nom!="aucune") {
 		param_qual=data.frame("val_qal_code"=valeurs_qal,"lib"=libelle_qal)
 	} else
-	{ param_qual=data.frame()# affectation ulterieur � la classe
+	{ param_qual=data.frame()# affectation ulterieur e la classe
 	}
 	return (list(tablecalcmig,param_qual))
 	
