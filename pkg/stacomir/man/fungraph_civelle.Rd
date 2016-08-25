@@ -20,7 +20,9 @@ fungraph_civelle(bilanMigration, table, time.sequence, taxon, stade,
 
 \item{stade}{the stage}
 
-\item{dc}{the dc, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}}
+\item{dc}{the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}}
+
+\item{...}{additional parameters passed from the plot method to plot}
 }
 \description{
 This graph will also plot numbers and bars according to whether the glass

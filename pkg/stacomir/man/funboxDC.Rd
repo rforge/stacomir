@@ -7,9 +7,9 @@
 funboxDC(h, ...)
 }
 \arguments{
-\item{h}{A handler}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 function used for some lattice graph

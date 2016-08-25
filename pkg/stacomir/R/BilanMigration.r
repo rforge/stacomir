@@ -87,10 +87,11 @@ hbilanMigrationcalc=function(h,...){
 
 
 #' calcule method for BilanMigration
+#' @param object An object of class \code{\link{BilanMigration-class}}
 #' @return BilanMigration with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,...){ 
+setMethod("calcule",signature=signature("BilanMigration"),definition=function(object){ 
 			bilanMigration<-object
 			#pour l'instant ne lancer que si les fenetre sont fermees
 			# funout("lancement updateplot \n")

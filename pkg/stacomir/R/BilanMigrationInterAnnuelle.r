@@ -9,24 +9,26 @@
 #' 	\code{new("BilanMigrationConditionEnv",
 #' 	bilanMigration=new("BilanMigration"),
 #' 	bilanConditionEnv=new("BilanConditionEnv"))}.  
-#' \describe{
-#' 	\item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
-#' 	migration overview }\item{:}{Object of class \code{"BilanMigration"} The
-#' 	migration overview } \item{list("bilanConditionEnv")}{Object of class
-#' 	\code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
-#' 	class \code{"BilanConditionEnv"} The environmental overview} }
+#' @slot dc Object of class \code{\link{RefDC-class}}, the counting device
+#' @slot data Object of class \code{"data.frame"} data for bilan lot 
+#' @slot taxons An object of class \code{\link{RefTaxon-class}}
+#' @slot stades An object of class \code{\link{RefStades-class}}
+#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning
+#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
+#' refAnnee allows to choose last year of the Bilan
+#' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-#' 	\code{\linkS4class{Bilan_poids_moyen}}
-#' 	\code{\linkS4class{Bilan_stades_pigm}} 
-#' 	\code{\linkS4class{Bilan_taille}}
-#' 	\code{\linkS4class{BilanConditionEnv}} 
-#' 	\code{\linkS4class{BilanEspeces}}
-#' 	\code{\linkS4class{BilanFonctionnementDC}}
-#' 	\code{\linkS4class{BilanFonctionnementDF}}
-#' 	\code{\linkS4class{BilanMigration}}
-#' 	\code{\linkS4class{BilanMigrationConditionEnv}}
-#' 	\code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}, 
+#' 	\code{\linkS4class{Bilan_poids_moyen}}, 
+#' 	\code{\linkS4class{Bilan_stades_pigm}}, 
+#' 	\code{\linkS4class{Bilan_taille}}, 
+#' 	\code{\linkS4class{BilanConditionEnv}}, 
+#' 	\code{\linkS4class{BilanEspeces}}, 
+#' 	\code{\linkS4class{BilanFonctionnementDC}}, 
+#' 	\code{\linkS4class{BilanFonctionnementDF}}, 
+#' 	\code{\linkS4class{BilanMigration}},  
+#' 	\code{\linkS4class{BilanMigrationConditionEnv}}, 
+#' 	\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' 	\code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @export
@@ -49,11 +51,12 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 )
 
 #' connect method for BilanMigrationInterannuelle class
+#' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(object,...)
+		definition=function(object)
 		{ 
 			# tableau contenant toutes les annees
 			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
@@ -89,10 +92,14 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 		}
 )
 
-# supprime les enregistrements de la base pour l'annee courante
-# object<-bmi
+#' supprime method for BilanMigrationInterannuelle class
+#' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @return nothing
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+
 setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(object,...)
+		definition=function(object)
 		{ 
 			# recuperation des annees taxons et stades concernes
 			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
@@ -109,12 +116,18 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
 			requete<-stacomirtools::connect(requete)
+			return(invisible(NULL))
 		}
+		
 )
 
-#  object = bilanMigrationInterAnnuelle
+#' loading method for BilanMigrationInterannuelle class
+#' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @return An object of class  \link{BilanMigrationInterAnnuelle-class}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(object,...)
+		definition=function(object)
 		{ 
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)

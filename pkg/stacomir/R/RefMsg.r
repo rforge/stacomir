@@ -1,8 +1,6 @@
 #' RefMsg referential class to load message according to the language chosen
 #' 
 #' @slot data A data.frame
-#' @section Methods: \describe{ \item{createmessage}{\code{signature(object =
-#' "RefMsg")}: creates a message } }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="RefMsg",representation= representation(messager="data.frame",messagerlang="data.frame" ))
 
@@ -50,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 		})
 
 #' createmessage method for RefMsg referential objects 
-#' 
+#' @param ojbect An objet of class RefMsg
 #' @param pre_launch_test Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, doublequotes are now escaped with an antislash (/"), those at the beginning and end are left as doublequotes, 
@@ -117,7 +115,7 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 				msg<-create_vector(msg)
 				assign("msg",msg,envir=envir_stacomi)
 			} else	{ # !pre_launch_test
-				data("msg")
+				utils::data("msg")
 				assign("msg",msg,envir=envir_stacomi)
 			}
 			invisible(NULL)

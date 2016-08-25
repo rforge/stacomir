@@ -5,7 +5,12 @@
 \alias{connect,BilanConditionEnv-method}
 \title{connect method for BilanConditionEnv class}
 \usage{
-\S4method{connect}{BilanConditionEnv}(object, h, ..)
+\S4method{connect}{BilanConditionEnv}(object, h)
+}
+\arguments{
+\item{object}{An objet of class \link{BilanConditionEnv-class}}
+
+\item{h}{A handler}
 }
 \value{
 an object of BilanConditionEnv class

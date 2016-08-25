@@ -8,9 +8,9 @@ calls the fungraph for BilanMigration and allows the saving of daily and monthly
 hbilanMigrationgraph(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 handler hBilanMigrationgraph

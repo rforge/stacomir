@@ -7,15 +7,15 @@
 funstatJournalier(tableau, time.sequence, taxon, stade, DC)
 }
 \arguments{
-\item{tableau}{}
+\item{tableau}{A table}
 
-\item{time.sequence}{}
+\item{time.sequence}{Time sequence from BilanMigration and BilanMigrationMult}
 
-\item{taxon}{}
+\item{taxon}{A taxa}
 
-\item{stade}{}
+\item{stade}{A stage}
 
-\item{DC}{}
+\item{DC}{A counting device}
 }
 \description{
 function to create daily statistics

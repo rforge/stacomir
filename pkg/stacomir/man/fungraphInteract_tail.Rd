@@ -9,7 +9,7 @@ fungraphInteract_tail(h, ...)
 \arguments{
 \item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 fungraphInteract_tail uses the ggplot2usr interface to build the graphes

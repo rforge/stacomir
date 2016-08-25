@@ -8,7 +8,7 @@
 \S4method{calcule}{Bilan_carlot}(object, h)
 }
 \arguments{
-\item{h}{A handler}
+\item{object}{An object of class \code{\link{Bilan_carlot}}}
 
 \item{...}{Additional parameters}
 }

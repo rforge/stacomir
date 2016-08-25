@@ -229,7 +229,6 @@ hX11=function(h,...){
 #' user name.
 #' @param pre_launch_test Boolean, if \code{TRUE} pre launch tests will be run to test the connection validity
 #' @usage stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
-#' interface or in command line
 #' @import stringr
 #' @import RColorBrewer
 #' @import gWidgets
@@ -253,7 +252,7 @@ hX11=function(h,...){
 #' @importFrom utils read.csv
 #' @importFrom utils stack
 #' @importFrom utils globalVariables
-#' @importFrom utils select.list write.table 
+#' @importFrom utils select.list write.table data
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
 #' @importFrom reshape2 dcast
@@ -448,13 +447,13 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
 				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
-				"taxon_stades","time.sequence"))
+				"taxon_stades","time.sequence","sum","variable"))
 
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
 				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
 				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
-				"frame_std","frame_tax","frame_annee","frame_check","frame_choice",
+				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","refAnnee",
 				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind"))
 # Progressbar
 utils::globalVariables(c("progres"))

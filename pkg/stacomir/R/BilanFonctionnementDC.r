@@ -4,20 +4,22 @@
 #' The counting device is not always working. It may me stopped either
 #' following a monitoring protocol, or due to misfunction of the device, this
 #' class allows to draw graphics allowing an overview of the device operation
-#' 
-#' 
+#' @slot data A data frame 
+#' @slot dc An object of class \code{RefDC-class}
+#' @slot horodate An object of class \code{RefHorodate-class}
+#' @slot requete An object of class \code{RequeteODBCwheredate-class}
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanFonctionnementDC", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{Bilan_poids_moyen}}, 
+#' \code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
+#' \code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
+#' \code{\linkS4class{BilanFonctionnementDC}}, 
+#' \code{\linkS4class{BilanFonctionnementDF}}, 
+#' \code{\linkS4class{BilanMigration}}, 
+#' \code{\linkS4class{BilanMigrationConditionEnv}}, 
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @export 
@@ -38,7 +40,8 @@ setClass(Class="BilanFonctionnementDC",
 #' connect method for BilanFonctionnementDC
 #' 
 #' loads the working periods and type of arrest or disfunction of the DC
-#' @return  An object of class \code{BilanFonctionnementDC}
+#' @param objet An object of class \link{BilanFonctionnementDC-class}
+#' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
 setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
@@ -68,7 +71,9 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 #' 
 #' used by the graphical interface to retreive the objects of Referential classes
 #' assigned to envir_stacomi
-#' @return  An object of class \code{BilanFonctionnementDC}
+#' @param objet An object of class \link{BilanFonctionnementDC-class}
+#' @param h A handler passed from the graphical interface
+#' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
 setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
@@ -102,7 +107,6 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 #' @return assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi
 #' 
 #' @author cedric.briand
-#' @export
 funbarchartDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	
@@ -171,7 +175,6 @@ funbarchartDC = function(h,...) {
 #' 
 #' @param h a handler
 #' @param ... Additional parameters
-#' @export
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDC = function(h,...) {  
 	fonctionnementDC=charge(fonctionnementDC)
@@ -293,7 +296,6 @@ funboxDC = function(h,...) {
 #' FuntableDC create a table output for BilanFonctionnementDC class
 #' @param h a handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funtableDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)
 	

@@ -7,9 +7,9 @@
 fundensityBilan_carlot(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{A handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 assigns an object g in envir_stacomi for eventual modification of the plot

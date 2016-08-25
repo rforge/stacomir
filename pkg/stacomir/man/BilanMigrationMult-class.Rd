@@ -14,13 +14,13 @@ coef_conversion=data.frame())}.
 \section{Slots}{
 
 \describe{
-\item{\code{dc}}{An object of class \code{RefDC}}
+\item{\code{dc}}{An object of class \code{RefDC-class}}
 
-\item{\code{taxons}}{An object of class \code{\link{RefTaxon}}}
+\item{\code{taxons}}{An object of class \code{\link{RefTaxon-class}}}
 
-\item{\code{stades}}{An object of class \code{\link{RefStades}}}
+\item{\code{stades}}{An object of class \code{\link{RefStades-class}}}
 
-\item{\code{pasDeTemps}}{An object of class \code{\link{PasDeTempsJournalier}}}
+\item{\code{pasDeTemps}}{An object of class \code{\link{PasDeTempsJournalier-class}}}
 
 \item{\code{data}}{A data.frame containing raw data filled by the connect method}
 
@@ -28,6 +28,8 @@ coef_conversion=data.frame())}.
 
 \item{\code{coef_conversion}}{A data.frame of daily weight to number conversion coefficients, filled in by the connect
 method if any weight are found in the data slot.}
+
+\item{\code{time}}{sequence A POSIXt time sequence}
 }}
 \note{
 A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is

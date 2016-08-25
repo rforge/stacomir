@@ -8,9 +8,9 @@ performs a query to collect the conversion coefficients}
 fun_weight_conversion(tableau, time.sequence)
 }
 \arguments{
-\item{tableau}{}
+\item{tableau}{Table issued from BilanMigration}
 
-\item{time.sequence}{}
+\item{time.sequence}{Time sequence from BilanMigration}
 }
 \value{
 tableau, the data frame

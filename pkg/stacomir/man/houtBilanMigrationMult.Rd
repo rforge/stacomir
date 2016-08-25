@@ -7,9 +7,9 @@
 houtBilanMigrationMult(h = null, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 handler to print the command line

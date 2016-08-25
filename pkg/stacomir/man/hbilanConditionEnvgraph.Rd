@@ -7,9 +7,9 @@
 hbilanConditionEnvgraph(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period

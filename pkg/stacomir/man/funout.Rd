@@ -4,7 +4,7 @@
 \alias{funout}
 \title{this function uses gfile, edits a text with info and changing colors}
 \usage{
-funout(text, arret = FALSE, wash = FALSE)
+funout(text, arret = FALSE, wash = FALSE, ...)
 }
 \arguments{
 \item{text}{The text to display both in the gtk interface and in the R
@@ -13,6 +13,8 @@ console}
 \item{arret}{Should this cause the program to stop ?}
 
 \item{wash}{Should the console be cleared after displaying the message}
+
+\item{...}{Additional parameters passed to print}
 }
 \value{
 nblignes Assigned in .Global

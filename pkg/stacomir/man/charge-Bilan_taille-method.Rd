@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{Bilan_taille}(object)
 }
+\arguments{
+\item{object}{An object of class \code{\link{Bilan_taille}}}
+}
 \description{
 charge method for Bilan_taille
 }

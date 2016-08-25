@@ -21,7 +21,7 @@
 #' using interface_BilanMigrationPar function.
 #' @slot parquan An object of class \link{Refparquan-class}, quantitative parameter 
 #' @slot parqual An object of class \link{Refparqual-class}, quanlitative parameter
-#' @slot echantillon An object of class \link{RefChoix-class}", vector of choice
+#' @slot echantillon An object of class \link{RefChoix-class}, vector of choice
 #' @slot valeurs_possibles A \code{data.frame} choice among possible choice of a qualitative parameter (discrete)
 #' @slot dc an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}
 #' @slot taxons An object of class \link{RefTaxon-class} inherited from \link{BilanMigration-class}
@@ -32,20 +32,19 @@
 #' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso Other Bilan Class 
-#' \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} 
-#' \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} 
-#' \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' \code{\linkS4class{Bilan_carlot}},
+#' \code{\linkS4class{Bilan_poids_moyen}},
+#' \code{\linkS4class{Bilan_stades_pigm}},
+#' \code{\linkS4class{Bilan_taille}},
+#' \code{\linkS4class{BilanConditionEnv}}, 
+#' \code{\linkS4class{BilanEspeces}},
+#' \code{\linkS4class{BilanFonctionnementDC}},
+#' \code{\linkS4class{BilanFonctionnementDF}},
+#' \code{\linkS4class{BilanMigration}},
+#' \code{\linkS4class{BilanMigrationConditionEnv}},
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}},
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="BilanMigrationPar",
 		representation=representation(parquan="Refparquan",
 				parqual="Refparqual",
@@ -81,8 +80,8 @@ hbilanMigrationParcalc=function(h,...){
 #' calcule methode
 #' 
 #' 
-#'@param object "BilanMigrationPar" 
-setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function(object,...){ 
+#'@param object An object of class \code{\link{BilanMigrationPar}} 
+setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function(object){ 
 			bilanMigrationPar<-object  
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationPar@dc<-get("refDC",envir_stacomi)
@@ -196,11 +195,12 @@ hbilanMigrationParstat=function(h,...){
 }
 
 #' plot method for BilanMigrationPar
-#' @usage plot(x,plot.type=c("barplot","xyplot","summary"))
+#' 
+#' 
 #' @param x An object of class BilanMigrationPar
-#' @param plot.type =barplot, 2=xyplot, 3=summary table
+#' @param plot.type One of "barplot", "xyplot", "summary table"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature(x="BilanMigrationPar",y="missing"),definition=function(x,y,plot.type="barplot",...){ 
+setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=function(x,y,plot.type="barplot",...){ 
 			###########################
 			bilanMigrationPar<-x # ne pas passer dessus en debug manuel
 			##########################
@@ -220,14 +220,15 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="missing"),definiti
 				stop("normalement ce cas est impossible")
 				# ce cas est impossible
 			}
-			mb=stacomirtools::chnames(mb,"value","sommes")
+			mb=stacomirtools::chnames(mb,"value","sum")
 			mb=funtraitementdate(data=mb,nom_coldt="Date") 
 			# transformation du tableau de donnees
 			
 			if (plot.type=="barplot") {
 				
 				g<-ggplot(mb)
-				g<-g+geom_bar(aes(x=mois,y=sommes,fill=variable),stat='identity',stack=TRUE)
+				g<-g+geom_bar(aes(x=mois,y=sum,fill=variable),stat='identity',
+						stack=TRUE)
 				assign("g",g,envir_stacomi)
 				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
 				print(g)
@@ -235,14 +236,14 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="missing"),definiti
 			if (plot.type=="xyplot") { 
 				
 				g<-ggplot(mb)
-				g<-g+geom_point(aes(x=Date,y=sommes,col=variable),stat='identity',stack=TRUE)
+				g<-g+geom_point(aes(x=Date,y=sum,col=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
 				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
 				print(g)
 			} #end plot.type="xyplot"
 			#TODO create summary method
 			if (plot.type=="summary") {
-				table=round(tapply(mb$somme,list(mb$mois,mb$variable),sum),1)
+				table=round(tapply(mb$sum,list(mb$mois,mb$variable),sum),1)
 				table=as.data.frame(table)
 				table[,"total"]<-rowSums(table)
 				gdf(table, container=TRUE)

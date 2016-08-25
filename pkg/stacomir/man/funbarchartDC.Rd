@@ -7,9 +7,9 @@
 funbarchartDC(h, ...)
 }
 \arguments{
-\item{h}{A handler}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \value{
 assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi

@@ -1,13 +1,3 @@
-# Nom fichier :        funtraitementdate.R    (classe)
-
-
-
-
-
-
-
-#' This function extracts temporal characteristics from a dataframe
-#' 
 #' This function extracts temporal characteristics from a dataframe
 #' 
 #' 

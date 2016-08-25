@@ -13,19 +13,28 @@
 #' by a query to display on a single line two different characteristics size
 #' and size group Once the data are loaded, the program checks if the size
 #' class group is indicated at the sample or susample level
-#' 
+
+#' @slot dc an object of class \link{RefDC-class}
+#' @slot taxons An object of class \link{RefTaxon-class}
+#' @slot stades An object of class \link{RefStades-class} inherited from \link{BilanMigration-class}
+#' @slot parquan An object of class \link{Refparquan-class}, quantitative parameter 
+#' @slot parqual An object of class \link{Refparqual-class}, quanlitative parameter
+#' @slot horodate An object of class link{RefHorodate-class} 
+#' @slot requete An Object of class \link[stacomirtools]{RequeteODBC-class}
+#' @slot datedebut A POSIXlt value, starting horodate for the Bilan
+#' @slot datefin A POSIXlt value, ending horodate for the Bilan
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Bilan_taille", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}},
+#' \code{\linkS4class{Bilan_poids_moyen}},
+#' \code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
+#' \code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
+#' \code{\linkS4class{BilanFonctionnementDC}},
+#' \code{\linkS4class{BilanFonctionnementDF}},
+#' \code{\linkS4class{BilanMigration}},
+#' \code{\linkS4class{BilanMigrationConditionEnv}},
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}},
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @examples
@@ -53,6 +62,8 @@ setClass(Class="Bilan_taille",
 				requete=new("RequeteODBC")))
 
 #' connect method for class Bilan_taille
+#' @param object An object of class \code{\link{Bilan_taille}} 
+#' @param ... Additional parameters
 #' @return bilan_taille with requete field filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("connect",signature=signature("Bilan_taille"),definition=function(object,h) {
@@ -118,6 +129,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 
 #object=new("Bilan_taille")
 #' charge method for Bilan_taille
+#' @param object An object of class \code{\link{Bilan_taille}} 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("Bilan_taille"),definition=function(object) {
 			if (exists("refDC",envir_stacomi)) {
@@ -170,8 +182,7 @@ hcalculeBilanTaille<-function(h,...){
 	calcule(h$action)
 }
 #' Calcule method for BilanTaille
-#' @param h A handler
-#' @param ... Additional parameters
+#' @param object An object of class \code{\link{Bilan_taille}} 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_taille"),definition=function(object) {
 			bilan_taille<-object

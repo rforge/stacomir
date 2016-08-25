@@ -143,7 +143,8 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				# group(ggroup)[notebook(notebook)[grouptaxon(ggroup&tab)[[frametaxonsource(gframe)[tbsourcetaxon(gtable)],frametaxondest(gframe)[tbdtaxondest(gtable)]],OKbutton]]
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
-				grouptaxon<<-ggroup() 
+				grouptaxon<-ggroup() 
+				assign("grouptaxon",grouptaxon,.GlobalEnv)
 				add(notebook,grouptaxon,label="taxon")
 				frametaxonsource<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2,container=grouptaxon)
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
@@ -186,7 +187,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				addHandlerDoubleclick(tbdesttaxon,handler=function(h,...) {
 							removetaxon()
 						})
-				gbutton("ok", cont = grouptaxon, handler = htax)
+				gbutton("ok", container = grouptaxon, handler = htax)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
 			}

@@ -1,0 +1,59 @@
+%\VignetteIndexEntry{StacomiR}
+\documentclass[article,nojss]{jss}
+\usepackage{Sweave}
+\usepackage[latin1]{inputenc} %encodage du fichier source
+\usepackage[T1]{fontenc}  %gestion des accents (pour les pdf) 
+\usepackage{Sweave}
+\usepackage[francais]{babel}
+\graphicspath{{./images/}}
+\DeclareGraphicsExtensions{.pdf,.eps}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\newcommand{\tsc}[1]{\textsc{#1}}
+\newcommand{\aq}{\textbf{\textsf{AquaEnv}}}
+\newcommand{\lm}{\textbf{\textsf{minpack.lm}}}
+\newcommand{\R}{\proglang{R }}
+
+%% setting author and title
+\author{Cedric Briand \\EPTB-Vilaine \And 
+        Marion Legrand\\LOGRAMI}
+\title{Fish Migration Monitoring, package \pkg{stacomiR} \tsc{Sta}tion de
+\tsc{Cont}rôle des \tsc{Mig}rations}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Cédric Briand, Marion Legrand} %% comma-separated
+\Plaintitle{Fish Migration Monitoring} %% without formatting
+\Shorttitle{\pkg{stacomiR}: Fish Migration Monitoring} %% a short title (if
+% necessary)
+\Keywords{database, graphical interface, \proglang{r}}% not capitalized
+\Plainkeywords{database, graphical interface, R} %% without
+% formatting
+%% an abstract and keywords
+\Abstract{
+  Oh but this is still a draft for trial...
+}
+
+
+<<Preliminaries,echo=FALSE,results=hide>>=
+options(width=80)
+require(stacomiR)
+require(xtable)
+stacomi(FALSE,FALSE,TRUE)
+setwd("F:/workspace/stacomir/pkg/stacomir/inst/doc")
+# répertoires de travail (chaines utilisées comme raccourcis plus loin)
+imgwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/images/"
+tabwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/tables/"
+@
+
+\begin{document}
+\maketitle
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\section{Concepts}
+\section{Database structure and access}
+\section{Building a migration monitoring report}
+
+\end{document}

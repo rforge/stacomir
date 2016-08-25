@@ -46,11 +46,9 @@ setGeneric("setRefHorodate",def=function(object,...) standardGeneric("setRefHoro
 
 
 #' Method to set the Horodate
-#' 
 #' @return An Object of class "RefHorodate" 
 #' @author cedric.briand
 #' @docType methods
-#' @export
 setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=function(object,string){
 			object@horodate=strptime(string,format="%Y-%m-%d %H:%M:%S")
 			return(object) 

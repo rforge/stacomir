@@ -14,6 +14,15 @@ modeled with gamma functions which use a pigment time calculated from daily
 temperatures and salinities.  The temperatures has a major influence on the
 glass eel pigment stage evolution.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{data}}{}
+
+\item{\code{Vparm}}{default values for parm from Briand 2005 \code{list(pigment_stage=list("p1"=0.267,"p2"=0.835,"p3"=1.560,"p4"=3.682),
+pigmentation=list("teta"=30,"sigma"=40,"sigma2"=-5,"p5"=4.566,
+        "p6"=8.141,"p7"=0.071,"p8"=0.426))}}
+}}
 \note{
 This class is displayed by interface_bilan_stades_pigm, The class uses
 temperature (from an abiotic measure station) and mean salinity to calculate

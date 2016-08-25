@@ -204,7 +204,8 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
 				#TODO addmsg
 				std_libelle=fun_char_spe(object@data$std_libelle)
-				groupstd<<-ggroup() 
+				groupstd<-ggroup() 
+				assign("goupstd",groupstd,envir=.GlobalEnv)
 				add(notebook,groupstd,label="stade")
 				framestdsource<-gframe(get("msg",envir=envir_stacomi)$RefStades.6,container=groupstd)
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)
@@ -246,7 +247,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				addHandlerDoubleclick(tbdeststd,handler=function(h,...) {
 							removestd()
 						})
-				gbutton("ok", cont = groupstd, handler = hstd)
+				gbutton("ok", container = groupstd, handler = hstd)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}

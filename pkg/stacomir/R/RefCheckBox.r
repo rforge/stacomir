@@ -66,7 +66,8 @@ setMethod("choice",signature=signature("RefCheckBox"),definition=function(object
 				funout(paste("choice",object@labels[i],"\n"))
 			}
 			
-			frame_check<<-gframe(object@title)	
+			frame_check<-gframe(object@title)	
+			assign("frame_check",frame_check,envir=.GlobalEnv)
 			##=>selection de plusieurs caracteristiques
 			add(group,frame_check)
 			the_choice=list()

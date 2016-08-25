@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{Bilan_carlot}(object, h)
 }
+\arguments{
+\item{object}{An object of class \code{\link{Bilan_carlot}}}
+}
 \value{
 Bilan_carlot with slots filled with user choice
 

@@ -1,13 +1,10 @@
-# Nom fichier :        funstatJournalier.R
-
 #' function to create daily statistics
-#' @param tableau 
-#' @param time.sequence 
-#' @param taxon 
-#' @param stade 
-#' @param DC 
+#' @param tableau A table
+#' @param time.sequence Time sequence from BilanMigration and BilanMigrationMult
+#' @param taxon A taxa
+#' @param stade A stage
+#' @param DC A counting device
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funstatJournalier=function(tableau,time.sequence,taxon,stade,DC){
 	mois=months(time.sequence)
 	moislab=unique(mois)

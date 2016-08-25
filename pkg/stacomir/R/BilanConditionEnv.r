@@ -1,6 +1,3 @@
-# Nom fichier :        BilanConditionEnv    (classe)
-# Date de creation :   24/06/2009 13:49:20
-# constructeur d'un bilan des conditions environnementales
 #' class BilanConditionEnv simple output of one or several environmental
 #' conditions...
 #' 
@@ -11,6 +8,11 @@
 #' @include RefStationMesure.r
 #' @include create_generic.r
 #' @include utilitaires.r
+#' @slot horodate \link{RefHorodate-class}
+#' @slot stationMesure \link{RefStationMesure-class}
+#' @slot data \code{data.frame}
+#' @slot datedebut A \link[base]{-.POSIXt} value
+#' @slot datefin A \link[base]{-.POSIXt} value 
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanConditionEnv", horodate=new("Horodate"),
 #' stationMesure=new("RefStationMesure"), data=data.frame(),
@@ -43,11 +45,13 @@ setClass(Class="BilanConditionEnv",
 
 
 #' connect method for BilanConditionEnv class
+#' @param object An objet of class \link{BilanConditionEnv-class}
+#' @param h A handler
 #' @return an object of BilanConditionEnv class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanConditionEnv"),
-		definition=function(object,h,..) {
+		definition=function(object,h) {
 			#  construit une requete ODBCwheredate
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -75,6 +79,8 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 )
 
 #' charge method for BilanCondtionEnv class
+#' @param object An objet of class \link{BilanConditionEnv-class}
+#' @param h A handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(object,h) {
@@ -100,12 +106,11 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 			return(object)
 		})
 
-# affiche un graphe si des CE sont dans la base pendant la periode selectionnee
+
 #' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 hbilanConditionEnvgraph = function(h,...) 
 {
 	# chargement des conditions environnementales
@@ -162,7 +167,7 @@ hbilanConditionEnvgraph = function(h,...)
 	return (lesGraphes)
 }   
 
-# affichage de stats
+
 hbilanConditionEnvstat = function(h,...) 
 {
 	bilanConditionEnv=charge(bilanConditionEnv)

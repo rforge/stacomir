@@ -9,7 +9,7 @@ funtableBilan_carlot(h, ...)
 \arguments{
 \item{h}{hanlder passed by the graphical interface}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 funtableBilan_carlot shows a table of results in gdf

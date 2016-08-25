@@ -8,9 +8,9 @@ performs a query to collect the conversion coefficients}
 funtraitement_poids(tableau, time.sequence)
 }
 \arguments{
-\item{tableau}{}
+\item{tableau}{A table passed BilanMigration}
 
-\item{time.sequence}{}
+\item{time.sequence}{Time sequence passed from BilanMigration}
 }
 \value{
 tableau

@@ -5,7 +5,10 @@
 \alias{calcule,BilanMigration-method}
 \title{calcule method for BilanMigration}
 \usage{
-\S4method{calcule}{BilanMigration}(object, ...)
+\S4method{calcule}{BilanMigration}(object)
+}
+\arguments{
+\item{object}{An object of class \code{\link{BilanMigration-class}}}
 }
 \value{
 BilanMigration with slots filled by user choice

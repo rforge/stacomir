@@ -5,7 +5,10 @@
 \alias{connect,BilanMigrationInterAnnuelle-method}
 \title{connect method for BilanMigrationInterannuelle class}
 \usage{
-\S4method{connect}{BilanMigrationInterAnnuelle}(object, ...)
+\S4method{connect}{BilanMigrationInterAnnuelle}(object)
+}
+\arguments{
+\item{object}{An object of class \link{BilanMigrationInterAnnuelle-class}}
 }
 \value{
 bilanMigrationInterannuelle an instantianted object with values filled with user choice

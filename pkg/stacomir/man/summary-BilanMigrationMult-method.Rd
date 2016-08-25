@@ -10,7 +10,9 @@ and generate csv and html output in the user data directory}
 \S4method{summary}{BilanMigrationMult}(object, ...)
 }
 \arguments{
-\item{...}{}
+\item{object}{An object of class \code{\link{BilanMigrationMult-class}}}
+
+\item{...}{Additional parameters (not used there)}
 }
 \description{
 summary for bilanMigrationMult 

@@ -7,9 +7,9 @@
 funtableBilan_tail(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 function used to display a table of the data

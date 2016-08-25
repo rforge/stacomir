@@ -8,33 +8,43 @@
 Enables to compute an annual overview of fish migration and environmental
 conditions in the same chart
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dc}}{Object of class \code{\link{RefDC-class}}, the counting device}
+
+\item{\code{data}}{Object of class \code{"data.frame"} data for bilan lot}
+
+\item{\code{taxons}}{An object of class \code{\link{RefTaxon-class}}}
+
+\item{\code{stades}}{An object of class \code{\link{RefStades-class}}}
+
+\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning}
+
+\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
+refAnnee allows to choose last year of the Bilan}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 	\code{new("BilanMigrationConditionEnv",
 	bilanMigration=new("BilanMigration"),
-	bilanConditionEnv=new("BilanConditionEnv"))}.  
-\describe{
-	\item{list("bilanMigration")}{Object of class \code{"BilanMigration"} The
-	migration overview }\item{:}{Object of class \code{"BilanMigration"} The
-	migration overview } \item{list("bilanConditionEnv")}{Object of class
-	\code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
-	class \code{"BilanConditionEnv"} The environmental overview} }
+	bilanConditionEnv=new("BilanConditionEnv"))}.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-	\code{\linkS4class{Bilan_poids_moyen}}
-	\code{\linkS4class{Bilan_stades_pigm}} 
-	\code{\linkS4class{Bilan_taille}}
-	\code{\linkS4class{BilanConditionEnv}} 
-	\code{\linkS4class{BilanEspeces}}
-	\code{\linkS4class{BilanFonctionnementDC}}
-	\code{\linkS4class{BilanFonctionnementDF}}
-	\code{\linkS4class{BilanMigration}}
-	\code{\linkS4class{BilanMigrationConditionEnv}}
-	\code{\linkS4class{BilanMigrationInterAnnuelle}}
+Other Bilan Class \code{\linkS4class{Bilan_carlot}}, 
+	\code{\linkS4class{Bilan_poids_moyen}}, 
+	\code{\linkS4class{Bilan_stades_pigm}}, 
+	\code{\linkS4class{Bilan_taille}}, 
+	\code{\linkS4class{BilanConditionEnv}}, 
+	\code{\linkS4class{BilanEspeces}}, 
+	\code{\linkS4class{BilanFonctionnementDC}}, 
+	\code{\linkS4class{BilanFonctionnementDF}}, 
+	\code{\linkS4class{BilanMigration}},  
+	\code{\linkS4class{BilanMigrationConditionEnv}}, 
+	\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 	\code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

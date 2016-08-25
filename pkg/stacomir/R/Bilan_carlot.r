@@ -48,7 +48,8 @@ setClass(Class="Bilan_carlot",
 
 #' connect method for Bilan_carlot
 #' 
-#' @return An object of class bilan_lot Bilan_carlot
+#' @return An object of class \link{Bilan_carlot-class}
+#' @param object An object of class \link{Bilan_carlot-class}
 #' @param h a handler
 #' @param ... additional parameters passed to the method
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -76,6 +77,8 @@ setMethod("connect",signature=signature("Bilan_carlot"),definition=function(obje
 #' 
 #' this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
 #' envir_stacomi
+#' @param object An object of class \code{\link{Bilan_carlot}} 
+#' @param h a handler
 #' @return Bilan_carlot with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -120,9 +123,8 @@ setMethod("charge",signature=signature("Bilan_carlot"),definition=function(objec
 
 #' Calcule method for Bilan_carlot
 #' 
-#' 
-#' @param h A handler
-#' @param ... Additional parameters
+#' @param object An object of class \code{\link{Bilan_carlot}} 
+#' @param h a handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(object,h) {
 			bilan_lot<-object

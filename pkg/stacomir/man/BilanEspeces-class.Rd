@@ -10,6 +10,22 @@ this class is used to make the assessment of all species, and their number,
 per month it writes either an histogram or a pie chart of number per
 year/week/month
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dc}}{an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}}
+
+\item{\code{horodate}}{\link{RefHorodate-class}}
+
+\item{\code{datedebut}}{A \link[base]{-.POSIXt} value}
+
+\item{\code{datefin}}{A \link[base]{-.POSIXt} value}
+
+\item{\code{data}}{\code{data.frame}}
+
+\item{\code{liste}}{Object of class \code{\link{RefListe}} RefListe referential
+class choose within a list}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanEspeces", ...)}.
@@ -18,15 +34,16 @@ year/week/month
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
+Other Bilan Classes 
+\code{\linkS4class{Bilan_carlot}},
+\code{\linkS4class{Bilan_poids_moyen}},
+\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
+\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
+\code{\linkS4class{BilanFonctionnementDC}},
+\code{\linkS4class{BilanFonctionnementDF}},
+\code{\linkS4class{BilanMigration}},
+\code{\linkS4class{BilanMigrationConditionEnv}},
+\code{\linkS4class{BilanMigrationInterAnnuelle}},
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

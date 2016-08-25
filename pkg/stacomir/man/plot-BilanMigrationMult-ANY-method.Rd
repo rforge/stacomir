@@ -5,14 +5,14 @@
 \alias{plot,BilanMigrationMult,ANY-method}
 \title{Main plot method}
 \usage{
-plot(x,y,plot.type=c("standard","step","multiple"))
+\S4method{plot}{BilanMigrationMult,ANY}(x, y, plot.type = "standard", ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigrationMult}
 
 \item{y}{From the formals but missing}
 
-\item{plot.type}{Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+\item{plot.type}{One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 \code{multiple}}
 
 \item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}

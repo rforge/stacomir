@@ -1,5 +1,3 @@
-# Nom fichier :        interface_BilanMigration
-
 #' Interface for BilanMigration class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigration=function(){

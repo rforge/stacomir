@@ -88,17 +88,19 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 #'  (e.g) is called from a report Bilan(e.g Bilan_carlot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-#' and fills it with the method \link{charge_avec_filtre} 
+#' and fills it with the method \link{charge_avec_filtre,RefTaxon-method} 
 #' @param objectBilan the objectBilan from which this frame was called
 #' @param is.enabled a boolean indicating whether the current frame will be enabled. Selecting a "parent"
 #' frame may cause some frame to be disabled. When created the frame is enabled.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples \dontrun{ win=gwindow()
+#' @examples \dontrun{ 
+#' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
 #' object=new("RefDC")
 #' object<-charge(object)
 #' objectBilan=new("BilanMigration")
-#' choice(object=object,objectBilan=objectBilan)}
+#' choice(object=object,objectBilan=objectBilan)
+#'}
 setMethod("choice",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hDC=function(h,...){
@@ -156,7 +158,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 #'  (e.g) is called from a report Bilan(e.g Bilan_carlot).
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-#' and fills it with the method \link{charge_avec_filtre}
+#' and fills it with the method \link{charge_avec_filtre,RefTaxon-method}
 #' @param object An objet of class RefDC
 #' @param objectBilan A bilan object
 #' @param is.enabled A boolean indicating if the widget can be seleted at launch
@@ -216,7 +218,8 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				
 				DC=object@data[,c("dc","dis_commentaires","type_dc")]
 				#TODO addmsg
-				groupdc<<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
+				groupdc<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
+				assign("groupdc",groupdc,envir=.GlobalEnv)
 				frameDCsource<-gframe(get("msg",envir=envir_stacomi)$RefDC.5,container=groupdc)
 				size(frameDCsource)<-c(250,300)
 				tbsourcedc  = gtable(DC,container=frameDCsource,expand = TRUE, fill = TRUE)
@@ -258,7 +261,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				addHandlerDoubleclick(tbdestdc,handler=function(h,...) {
 							removedc()
 						})
-				gbutton("ok", cont = groupdc, handler = hDC)
+				gbutton("ok", containter = groupdc, handler = hDC)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}

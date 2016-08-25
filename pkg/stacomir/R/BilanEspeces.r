@@ -8,22 +8,29 @@
 #' this class is used to make the assessment of all species, and their number,
 #' per month it writes either an histogram or a pie chart of number per
 #' year/week/month
-#' 
-#' 
+#' @slot dc an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}
+#' @slot horodate \link{RefHorodate-class}
+#' @slot datedebut A \link[base]{-.POSIXt} value
+#' @slot datefin A \link[base]{-.POSIXt} value 
+#' @slot data \code{data.frame}
+#' @slot liste Object of class \code{\link{RefListe}} RefListe referential
+#' class choose within a list
+
 #' @include RefDC.r
 #' @include RefListe.r
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanEspeces", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
+#' @seealso Other Bilan Classes 
+#' \code{\linkS4class{Bilan_carlot}},
+#' \code{\linkS4class{Bilan_poids_moyen}},
+#' \code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
+#' \code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
+#' \code{\linkS4class{BilanFonctionnementDC}},
+#' \code{\linkS4class{BilanFonctionnementDF}},
+#' \code{\linkS4class{BilanMigration}},
+#' \code{\linkS4class{BilanMigrationConditionEnv}},
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}},
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @export 
@@ -50,6 +57,7 @@ setValidity("BilanEspeces",function(object)
 )
 
 #' connect method for BilanEspeces
+#' @param object An object of class \link{BilanEspeces-class}
 #' @return bilanEspeces instance with request corresponding to the user choices
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -96,10 +104,11 @@ hBilanEspecescalc=function(h,...){
 
 #' charge method for BilanEspeces
 #' verifies the content of objects and calls the connect method
+#' @param object An object of class \link{BilanEspeces-class}
 #' @return BilanEspeces with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("BilanEspeces"),definition=function(object,...){
+setMethod("charge",signature=signature("BilanEspeces"),definition=function(object){
 			funout(get("msg",envir_stacomi)$BilanEspeces.7)
 			bilanEspeces<-object
 			if (exists("refDC",envir_stacomi)) {

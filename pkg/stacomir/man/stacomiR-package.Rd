@@ -1,7 +1,7 @@
 \name{stacomiR-package}
 \alias{stacomiR-package}
 \docType{package}
-\title{package Fish Migration Monitoring (stacomiR)- Stations de Contrôle des Migrations}
+\title{package Fish Migration Monitoring (stacomiR)- Stations de Controle des Migrations}
 \description{
 Stacomi enables to read informations in a database about fish migrations to build overviews of fish migrations and creating charts, plots, and summaries.
 }

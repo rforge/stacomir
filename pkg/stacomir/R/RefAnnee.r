@@ -98,7 +98,8 @@ setMethod("choice",
 					assign(nomassign,object,envir_stacomi)
 					funout(funoutlabel)      
 				}    
-				frame_annee<<-gframe(titleFrame)    
+				frame_annee<-gframe(titleFrame) 
+				assign("frame_annee",frame_annee,envir=.GlobalEnv)
 				add(group,frame_annee)    
 				annees=object@data$year    
 				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    

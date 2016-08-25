@@ -17,12 +17,17 @@ fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
 
 \item{dc}{The DC}
 
-\item{...}{other parameters passed but not used}
+\item{...}{other parameters passed from the plot method to the matplot function}
 
-\item{table=tableau}{A data frame with the results}
+\item{table=tableau}{A data frame with the with the following columns : No.pas,debut_pas,fin_pas,
+ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
+EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 }
 \description{
 This graph is for species other than glass eel
+}
+\note{
+this function is intended to be called from the plot method in BilanMigrationMult and BilanMigration
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

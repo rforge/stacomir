@@ -9,6 +9,19 @@ conditions...}
 Annual overview of environmental conditions. Enables to draw charts and
 write files.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{horodate}}{\link{RefHorodate-class}}
+
+\item{\code{stationMesure}}{\link{RefStationMesure-class}}
+
+\item{\code{data}}{\code{data.frame}}
+
+\item{\code{datedebut}}{A \link[base]{-.POSIXt} value}
+
+\item{\code{datefin}}{A \link[base]{-.POSIXt} value}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanConditionEnv", horodate=new("Horodate"),

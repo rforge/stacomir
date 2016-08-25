@@ -7,9 +7,9 @@
 hbilanMigrationMult_graph(h = null, ...)
 }
 \arguments{
-\item{h}{handler}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 internal use

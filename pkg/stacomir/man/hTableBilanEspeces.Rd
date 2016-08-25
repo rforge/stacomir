@@ -9,9 +9,9 @@ dans des fichiers csv}
 hTableBilanEspeces(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 handler du calcul BilanEspeces : traitements 

@@ -12,10 +12,6 @@ RefMsg referential class to load message according to the language chosen
 \describe{
 \item{\code{data}}{A data.frame}
 }}
-\section{Methods}{
- \describe{ \item{createmessage}{\code{signature(object =
-"RefMsg")}: creates a message } }
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

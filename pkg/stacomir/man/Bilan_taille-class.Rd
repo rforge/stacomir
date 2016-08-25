@@ -18,6 +18,27 @@ by a query to display on a single line two different characteristics size
 and size group Once the data are loaded, the program checks if the size
 class group is indicated at the sample or susample level
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dc}}{an object of class \link{RefDC-class}}
+
+\item{\code{taxons}}{An object of class \link{RefTaxon-class}}
+
+\item{\code{stades}}{An object of class \link{RefStades-class} inherited from \link{BilanMigration-class}}
+
+\item{\code{parquan}}{An object of class \link{Refparquan-class}, quantitative parameter}
+
+\item{\code{parqual}}{An object of class \link{Refparqual-class}, quanlitative parameter}
+
+\item{\code{horodate}}{An object of class link{RefHorodate-class}}
+
+\item{\code{requete}}{An Object of class \link[stacomirtools]{RequeteODBC-class}}
+
+\item{\code{datedebut}}{A POSIXlt value, starting horodate for the Bilan}
+
+\item{\code{datefin}}{A POSIXlt value, ending horodate for the Bilan}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("Bilan_taille", ...)}
@@ -30,15 +51,15 @@ showClass("Bilan_taille")
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
+Other Bilan Classes \code{\linkS4class{Bilan_carlot}},
+\code{\linkS4class{Bilan_poids_moyen}},
+\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
+\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
+\code{\linkS4class{BilanFonctionnementDC}},
+\code{\linkS4class{BilanFonctionnementDF}},
+\code{\linkS4class{BilanMigration}},
+\code{\linkS4class{BilanMigrationConditionEnv}},
+\code{\linkS4class{BilanMigrationInterAnnuelle}},
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

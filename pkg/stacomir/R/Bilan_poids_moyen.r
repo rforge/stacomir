@@ -9,33 +9,25 @@
 #' Bilan_poids_moyen class The objective is to calculate mean weight of glass
 #' eel which are counted from weight measurements and to reintegrate weight to
 #' number coefficients
-#' 
-#' 
+#' #' 
 #' @include RefCoe.r
 #' @note We have also tools available to import glass eel measurement from
 #' experimental fishing in the estuary For the charge method dates for the
 #' request are from august to august (a glass eel season)
-#' @section Slots: \describe{ \item{list("data")}{Object of class
-#' \code{"data.frame"} data for bilan lot }\item{:}{Object of class
-#' \code{"data.frame"} data for bilan lot } \item{list("dc")}{Object of class
-#' \code{"RefDC"} refDC an instantiation of the counting device
-#' class}\item{:}{Object of class \code{"RefDC"} refDC an instantiation of the
-#' counting device class} \item{list("anneedebut")}{Object of class
-#' \code{"RefAnnee"} refAnnee allows to choose year of beginning
-#' }\item{:}{Object of class \code{"RefAnnee"} refAnnee allows to choose year
-#' of beginning } \item{list("anneefin")}{Object of class \code{"RefAnnee"}
-#' refAnnee allows to choose year of ending }\item{:}{Object of class
-#' \code{"RefAnnee"} refAnnee allows to choose year of ending }
-#' \item{list("coe")}{Object of class \code{"RefCoe"} class loading coefficient
+#' @slot data Object of class \code{"data.frame"} data for bilan lot 
+#' @slot dc Object of class \code{\link{RefDC-class}}, the counting device
+#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning
+#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
+#' refAnnee allows to choose last year of the Bilan
+#' @slot coe Object of class \code{\link{RefCoe}} class loading coefficient
 #' of conversion between quantity (weights or volumes of glass eel) and numbers
-#' }\item{:}{Object of class \code{"RefCoe"} class loading coefficient of
-#' conversion between quantity (weights or volumes of glass eel) and numbers }
-#' \item{list("liste")}{Object of class \code{"RefListe"} RefListe referential
-#' class choose within a list, here do you want subsamples or not
-#' }\item{:}{Object of class \code{"RefListe"} RefListe referential class
-#' choose within a list, here do you want subsamples or not } }
+#' @slot liste Object of class \code{\link{RefListe}} RefListe referential
+#' class choose within a list, here the choice is wether subsamples or not. Subsamples
+#' in the stacomi database are samples with a non null value for parent sample. Migration
+#' counts are never made on subsamples but those can be integrated to calculate mean weights.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
+#' @seealso 
+#' Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
 #' \code{\linkS4class{Bilan_poids_moyen}}
 #' \code{\linkS4class{Bilan_stades_pigm}} 
 #' \code{\linkS4class{Bilan_taille}}

@@ -7,9 +7,9 @@
 hbilanMigrationMultgraph2(h = null, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 cumuls de migration au cours du temps

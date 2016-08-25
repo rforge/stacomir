@@ -7,6 +7,11 @@
 \usage{
 \S4method{charge}{Bilan_stades_pigm}(object, h)
 }
+\arguments{
+\item{object}{An object of class \code{\link{Bilan_carlot}}}
+
+\item{h}{A handler}
+}
 \value{
 Bilan_stades_pigm with slots filled with user choice
 }

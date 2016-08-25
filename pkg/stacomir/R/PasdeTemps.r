@@ -316,7 +316,8 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 						hchoicedatedebut=function(h,...){
 							# TODO a developper
 						}
-						groupdate<<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
+						groupdate<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
+						assign("groupdate",groupdate,envir=.GlobalEnv)
 						winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=groupdate,horizontal=FALSE)
 						pg<-ggroup(horizontal=FALSE,container=winpa)
 						glabel("Date de debut",container=pg)

@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{pre_launch_test}{Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package}
+
+\item{ojbect}{An objet of class RefMsg}
 }
 \value{
 An S4 object of class RefMsg

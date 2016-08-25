@@ -7,9 +7,9 @@
 hTableBilanMigrationMult(h = null, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 internal use

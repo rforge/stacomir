@@ -7,6 +7,9 @@
 \usage{
 \S4method{connect}{BilanEspeces}(object)
 }
+\arguments{
+\item{object}{An object of class \link{BilanEspeces-class}}
+}
 \value{
 bilanEspeces instance with request corresponding to the user choices
 }

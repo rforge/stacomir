@@ -8,9 +8,7 @@
 \S4method{calcule}{Bilan_taille}(object)
 }
 \arguments{
-\item{h}{}
-
-\item{...}{}
+\item{object}{An object of class \code{\link{Bilan_taille}}}
 }
 \description{
 Calcule method for BilanTaille

@@ -5,10 +5,10 @@
 \alias{calcule,BilanMigrationPar-method}
 \title{calcule methode}
 \usage{
-\S4method{calcule}{BilanMigrationPar}(object, ...)
+\S4method{calcule}{BilanMigrationPar}(object)
 }
 \arguments{
-\item{object}{"BilanMigrationPar"}
+\item{object}{An object of class \code{\link{BilanMigrationPar}}}
 }
 \description{
 calcule methode

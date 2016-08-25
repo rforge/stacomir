@@ -7,21 +7,23 @@
 funstat(tableau, time.sequence, taxon, stade, DC)
 }
 \arguments{
-\item{tableau}{}
+\item{tableau}{A table with the following columns : No.pas,debut_pas,fin_pas,
+ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
+EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 
-\item{time.sequence}{}
+\item{time.sequence}{Passed from BilanMigration or BilanMigrationMult}
 
-\item{taxon}{}
+\item{taxon}{Taxa}
 
-\item{stade}{}
+\item{stade}{The Stage}
 
-\item{DC}{}
-}
-\value{
-resum
+\item{DC}{The counting device}
 }
 \description{
 Function to calculate statistics per month
+}
+\note{
+this function is intended to be called from within the summary method
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

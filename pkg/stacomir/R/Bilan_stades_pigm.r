@@ -8,6 +8,25 @@
 #' modeled with gamma functions which use a pigment time calculated from daily
 #' temperatures and salinities.  The temperatures has a major influence on the
 #' glass eel pigment stage evolution.
+#' @slot data (please_describe) 
+#' @slot datatempsal (please_describe) 
+#' @slot tablestades (please_describe)  
+#' @slot phi (please_describe) 
+#' @slot dates (please_describe) 
+#' @slot Vparm default values for parm from Briand 2005 \code{list(pigment_stage=list("p1"=0.267,"p2"=0.835,"p3"=1.560,"p4"=3.682),
+#'						pigmentation=list("teta"=30,"sigma"=40,"sigma2"=-5,"p5"=4.566,
+#'								"p6"=8.141,"p7"=0.071,"p8"=0.426))}
+#' @slot dc (please_describe) 
+#' @slot stationMesure (please_describe) 
+#' @slot horodate (please_describe) 
+#' @slot datedebut (please_describe) 
+#' @slot datefin (please_describe) 
+#' @slot lmax (please_describe) 
+#' @slot options (please_describe) 
+#' @slot salinite (please_describe) 
+#' @slot labelretro (please_describe) 
+#' @slot labelgraphstades (please_describe) 
+#' @slot effectifs (please_describe) 
 #' @include RefCheckBox.r
 #' @include ReftextBox.r
 #' @note This class is displayed by interface_bilan_stades_pigm, The class uses
@@ -202,7 +221,8 @@ fntablestade<-function(stades,choicepere="lotpere"){
 #' 
 #' method used by the graphical interface to build object from values
 #' stored in envir_stacomi
-#' 
+#' @param object An object of class \code{\link{Bilan_carlot}} 
+#' @param h A handler
 #' @return Bilan_stades_pigm with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(object,h) {

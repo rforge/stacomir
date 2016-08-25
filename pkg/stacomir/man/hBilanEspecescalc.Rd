@@ -9,9 +9,9 @@ traite eventuellement les quantites de lots (si c'est des civelles)}
 hBilanEspecescalc(h, ...)
 }
 \arguments{
-\item{h}{}
+\item{h}{a handler}
 
-\item{...}{}
+\item{...}{Additional parameters}
 }
 \description{
 handler du calcul du BilanEspeces

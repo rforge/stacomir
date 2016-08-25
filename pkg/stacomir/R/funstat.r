@@ -1,14 +1,15 @@
 # Nom fichier :        funstat.R
 
 #' Function to calculate statistics per month
-#' @param tableau 
-#' @param time.sequence 
-#' @param taxon 
-#' @param stade 
-#' @param DC 
-#' @return resum
+#' @param tableau A table with the following columns : No.pas,debut_pas,fin_pas,              
+#' ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
+#' EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient
+#' @note this function is intended to be called from within the summary method 
+#' @param time.sequence Passed from BilanMigration or BilanMigrationMult
+#' @param taxon  Taxa
+#' @param stade The Stage
+#' @param DC  The counting device
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funstat=function(tableau,time.sequence,taxon,stade,DC){
 	funout(get("msg",envir=envir_stacomi)$funstat.1)
 	mois=strftime(as.POSIXlt(time.sequence),"%m")

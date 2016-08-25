@@ -21,15 +21,17 @@ The choice method has for arguments a report (bilan) object
  (e.g) is called from a report Bilan(e.g Bilan_carlot).
   By default,  the value of the objectbilan is null.
   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
-and fills it with the method \link{charge_avec_filtre}
+and fills it with the method \link{charge_avec_filtre,RefTaxon-method}
 }
 \examples{
-\dontrun{ win=gwindow()
+\dontrun{ 
+win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
 object=new("RefDC")
 object<-charge(object)
 objectBilan=new("BilanMigration")
-choice(object=object,objectBilan=objectBilan)}
+choice(object=object,objectBilan=objectBilan)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -71,12 +71,13 @@ fun_char_spe<-function(text){
 #' console
 #' @param arret Should this cause the program to stop ?
 #' @param wash Should the console be cleared after displaying the message
+#' @param ... Additional parameters passed to print
 #' @return nblignes Assigned in .Global
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
 #' @export
 # internal= funout is exported to ease debug during tests but not showns to users
-funout<-function(text,arret=FALSE,wash=FALSE){
+funout<-function(text,arret=FALSE,wash=FALSE,...){
 	if (exists("gSortie",envir=.GlobalEnv)) {
 		if (isExtant(gSortie)){
 			if (wash) dispose(gSortie)
@@ -92,7 +93,7 @@ funout<-function(text,arret=FALSE,wash=FALSE){
 		}
 	} 
 	# this is printed anyway
-	if(arret) stop(text) else print(text,quote=FALSE)
+	if(arret) stop(text) else print(text,quote=FALSE,...)
 }
 
 

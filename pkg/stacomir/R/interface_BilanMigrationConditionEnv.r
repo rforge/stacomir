@@ -1,7 +1,6 @@
 # Nom fichier :        interface_BilanMigrationConditionEnv    
 
 #' interface for BilanMigrationConditionEnv class
-#' @aliases interface_BilanMigration
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationConditionEnv = function()
 {

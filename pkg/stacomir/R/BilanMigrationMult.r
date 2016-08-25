@@ -16,14 +16,15 @@
 #' from daily conversion coefficients. The methods in this class test whether the counts are numbers or another type of quantity.
 #' This class makes different calculations than BilanMigration, it does not handle escapement coefficients,
 #' it uses quantities other than numbers if necessary (only used for glass eel in the connect method).
-#' @slot dc An object of class \code{RefDC}
-#' @slot taxons An object of class \code{\link{RefTaxon}}
-#' @slot stades An object of class \code{\link{RefStades}}
-#' @slot pasDeTemps An object of class \code{\link{PasDeTempsJournalier}}
+#' @slot dc An object of class \code{RefDC-class}
+#' @slot taxons An object of class \code{\link{RefTaxon-class}}
+#' @slot stades An object of class \code{\link{RefStades-class}}
+#' @slot pasDeTemps An object of class \code{\link{PasDeTempsJournalier-class}}
 #' @slot data A data.frame containing raw data filled by the connect method
 #' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
 #' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
+#' @slot time sequence A POSIXt time sequence
 #' @export
 #' @example examples/01_BilanMigrationMult/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -148,13 +149,14 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' 
 #'  does the calculation once data are filled 
 #' in with the connect method
+#' @param object An object of class \code{\link{BilanMigrationMult-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
 #' @note The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigrationMult with slots filled by user choice
 #' @export
-setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,...){ 
+setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE){ 
 			
 			bilanMigrationMult<-object
 			bilanMigrationMult=connect(bilanMigrationMult)
@@ -313,10 +315,9 @@ hbilanMigrationMult_graph=function(h=null,...){
 #' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 #' }
-#' @usage plot(x,y,plot.type=c("standard","step","multiple")) 
 #' @param x An object of class BilanMigrationMult
 #' @param y From the formals but missing
-#' @param plot.type Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+#' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -495,17 +496,17 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 			if (length(unique(grdata$taxon))==1){
 				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
 						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC~.,scale="free_y")+
+						facet_grid(DC~.,scales="free_y")+
 						scale_fill_brewer(palette="Set2")
 			} else if  (length(unique(grdata$stade))==1){
 				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
 						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC~.,scale="free_y")+
+						facet_grid(DC~.,scales="free_y")+
 						scale_fill_brewer(palette="Set2")	
 			} else {
 				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
 						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC+taxon~.,scale="free_y")+
+						facet_grid(DC+taxon~.,scales="free_y")+
 						scale_fill_brewer(palette="Set2")		
 			}
 						
@@ -586,8 +587,8 @@ hTableBilanMigrationMult=function(h=null,...) {
 #' summary for bilanMigrationMult 
 #' calls functions funstat and funtable to create migration overviews
 #' and generate csv and html output in the user data directory
-#' 
-#' @param ... Additional parameters
+#' @param object An object of class \code{\link{BilanMigrationMult-class}}
+#' @param ... Additional parameters (not used there)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,...){
@@ -658,6 +659,8 @@ houtBilanMigrationMult=function(h=null,...) {
 }
 
 #' Method to print the command line of the object
+#' @param x An object of class BilanMigrationMult
+#' @param ... Additional parameters passed to print
 #' @return NULL
 #' @author cedric.briand
 #' @docType methods
@@ -671,8 +674,8 @@ setMethod("print",signature=signature("BilanMigrationMult"),definition=function(
 					"datedebut=",shQuote(strftime(x@pasDeTemps@dateDebut,format="%d/%m/%Y")),
 					",datefin=",shQuote(strftime(DateFin(x@pasDeTemps),format="%d/%m/%Y")),")")
 			# removing backslashes
-			funout(stringr::str_c(sortie1,sortie2))
-			return(NULL)
+			funout(stringr::str_c(sortie1,sortie2),...)
+			return(invisible(NULL))
 		})
 
 #' Function to calculate daily migration using overlaps functions
@@ -874,11 +877,10 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 
 #' returns a table where weights and number are calculated from number and weights respectively
 #' performs a query to collect the conversion coefficients
-#' @param tableau 
-#' @param time.sequence 
+#' @param tableau Table issued from BilanMigration
+#' @param time.sequence Time sequence from BilanMigration
 #' @return tableau, the data frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 fun_weight_conversion=function(tableau,time.sequence) { 
 	funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
 	nr<-table(tableau$type_de_quantite)[1]

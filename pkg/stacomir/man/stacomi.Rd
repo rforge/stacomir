@@ -6,7 +6,6 @@
 window}
 \usage{
 stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
-interface or in command line
 }
 \arguments{
 \item{gr_interface}{Boolean, if \code{TRUE} the program will launch the graphical interface}

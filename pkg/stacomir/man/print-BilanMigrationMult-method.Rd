@@ -7,6 +7,11 @@
 \usage{
 \S4method{print}{BilanMigrationMult}(x, ...)
 }
+\arguments{
+\item{x}{An object of class BilanMigrationMult}
+
+\item{...}{Additional parameters passed to print}
+}
 \description{
 Method to print the command line of the object
 }
