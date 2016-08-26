@@ -10,6 +10,17 @@ The counting device is not always working. It may me stopped either
 following a monitoring protocol, or due to misfunction of the device, this
 class allows to draw graphics allowing an overview of the device operation
 }
+\section{Slots}{
+
+\describe{
+\item{\code{data}}{A data frame}
+
+\item{\code{dc}}{An object of class \code{RefDC-class}}
+
+\item{\code{horodate}}{An object of class \code{RefHorodate-class}}
+
+\item{\code{requete}}{An object of class \code{RequeteODBCwheredate-class}}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanFonctionnementDC", ...)}.
@@ -19,14 +30,14 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
+\code{\linkS4class{Bilan_poids_moyen}}, 
+\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
+\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
+\code{\linkS4class{BilanFonctionnementDC}}, 
+\code{\linkS4class{BilanFonctionnementDF}}, 
+\code{\linkS4class{BilanMigration}}, 
+\code{\linkS4class{BilanMigrationConditionEnv}}, 
+\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

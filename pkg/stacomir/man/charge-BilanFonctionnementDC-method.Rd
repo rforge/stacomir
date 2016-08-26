@@ -7,8 +7,13 @@
 \usage{
 \S4method{charge}{BilanFonctionnementDC}(object, h)
 }
+\arguments{
+\item{h}{A handler passed from the graphical interface}
+
+\item{objet}{An object of class \link{BilanFonctionnementDC-class}}
+}
 \value{
-An object of class \code{BilanFonctionnementDC}
+An object of class \link{BilanFonctionnementDC-class}
 }
 \description{
 used by the graphical interface to retreive the objects of Referential classes

@@ -17,11 +17,41 @@ glass eel pigment stage evolution.
 \section{Slots}{
 
 \describe{
-\item{\code{data}}{}
+\item{\code{data}}{(please_describe)}
+
+\item{\code{datatempsal}}{(please_describe)}
+
+\item{\code{tablestades}}{(please_describe)}
+
+\item{\code{phi}}{(please_describe)}
+
+\item{\code{dates}}{(please_describe)}
 
 \item{\code{Vparm}}{default values for parm from Briand 2005 \code{list(pigment_stage=list("p1"=0.267,"p2"=0.835,"p3"=1.560,"p4"=3.682),
 pigmentation=list("teta"=30,"sigma"=40,"sigma2"=-5,"p5"=4.566,
         "p6"=8.141,"p7"=0.071,"p8"=0.426))}}
+
+\item{\code{dc}}{(please_describe)}
+
+\item{\code{stationMesure}}{(please_describe)}
+
+\item{\code{horodate}}{(please_describe)}
+
+\item{\code{datedebut}}{(please_describe)}
+
+\item{\code{datefin}}{(please_describe)}
+
+\item{\code{lmax}}{(please_describe)}
+
+\item{\code{options}}{(please_describe)}
+
+\item{\code{salinite}}{(please_describe)}
+
+\item{\code{labelretro}}{(please_describe)}
+
+\item{\code{labelgraphstades}}{(please_describe)}
+
+\item{\code{effectifs}}{(please_describe)}
 }}
 \note{
 This class is displayed by interface_bilan_stades_pigm, The class uses

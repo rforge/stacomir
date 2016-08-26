@@ -3,52 +3,37 @@
 \docType{class}
 \name{BilanMigration-class}
 \alias{BilanMigration-class}
-\title{Class "BilanMigration"}
+\title{Migration report for one DC, one species and one stage}
 \description{
-Balance of fish migrations
+Migration report for one DC, one species and one stage
 }
-\section{Objects from the Class}{
- Objects can be created by calls of the form
-\code{new("BilanMigration",
-dc=new("RefDC"),taxons=("RefTaxon"),stades=("RefStades"),pasDeTemps=("PasDeTempsJournalier"),data=data.frame(),
-time.sequence=new(POSIXct) )}.  
-\describe{ 
-\item{list("dc")}{Object of class
-\code{"RefDC"}: the control device }
-\item{:}{Object of class \code{"RefDC"}:
-the control device } \item{list("taxons")}{Object of class
-\code{"RefTaxon"}: the taxa of the fish}
-\item{:}{Object of class
-\code{"RefTaxon"}: the taxa of the fish} 
-\item{list("stades")}{Object of
-class \code{"RefStades"} : the stage of the fish}\item{:}{Object of class
-\code{"RefStades"} : the stage of the fish} 
-\item{list("pasDeTemps")}{Object
-of class \code{"PasDeTempsJournalier"} : the time step constrained to daily
-value and 365 days}
-\item{:}{Object of class \code{"PasDeTempsJournalier"} :
-the time step constrained to daily value and 365 days}
-\item{list("data")}{Object of class \code{"data.frame"} :
-data}
-\item{:}{Object of class \code{"data.frame"} : data}
-\item{list("time.sequence")}{Object of class \code{"POSIXct"} : duration of the
-analysis}
-\item{:}{Object of class \code{"POSIXct"} : duration of the
-analysis} }
-}
+\section{Slots}{
+
+\describe{
+\item{\code{dc}}{Object of class \link{RefDC-class}: the control device}
+
+\item{\code{taxons}}{Object of class \link{RefTaxon-class}: the species}
+
+\item{\code{stades}}{Object of class \link{RefStades-class} : the stage of the fish}
+
+\item{\code{pasDeTemps}}{Object of class \link{PasDeTempsJournalier-class} : the time step 
+constrained to daily value and 365 days}
+
+\item{\code{data}}{Object of class \code{data.frame}}
+}}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
+Other Bilan Class \code{\linkS4class{Bilan_carlot}}, 
+\code{\linkS4class{Bilan_poids_moyen}}, 
+\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
+\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
+\code{\linkS4class{BilanFonctionnementDC}}, 
+\code{\linkS4class{BilanFonctionnementDF}}, 
+\code{\linkS4class{BilanMigration}}, 
+\code{\linkS4class{BilanMigrationConditionEnv}}, 
+\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

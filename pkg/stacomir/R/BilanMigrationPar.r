@@ -1,7 +1,4 @@
-# Nom fichier :        BilanMigrationCar    (classe)
-# Date de creation :   31/03/2008 17:21:18
-
-#' Class BilanMigrationPar, Migration report along with quantitative and
+#' Migration report along with quantitative and
 #' qualitative characteristics
 #' 
 #' Migration along with qualitative or quantitative characteristics or both
@@ -14,7 +11,7 @@
 #' @include Refparquan.r
 #' @include Refparqual.r
 #' @include RefChoix.r
-#' @note the program by default uses two parameter choice, checking box "aucun" will
+#' @note The program by default uses two parameter choice, checking box "aucun" will
 #' allow the program to ignore the parameter
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanMigrationPar", ...)}.  they are loaded by the interface
@@ -27,22 +24,22 @@
 #' @slot taxons An object of class \link{RefTaxon-class} inherited from \link{BilanMigration-class}
 #' @slot stades An object of class \link{RefStades-class} inherited from \link{BilanMigration-class}
 #' @slot pasDeTemps An object of class \link{PasDeTempsJournalier-class} inherited from \link{BilanMigration-class}
-#' @slot data A\code{data.frame} inherited from \link{BilanMigration-class}, stores the results
+#' @slot data A \code{data.frame} inherited from \link{BilanMigration-class}, stores the results
 #' @slot time.sequence An object of class "POSIXct" inherited from \link{BilanMigration-class}
 #' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @seealso Other Bilan Class 
-#' \code{\linkS4class{Bilan_carlot}},
-#' \code{\linkS4class{Bilan_poids_moyen}},
-#' \code{\linkS4class{Bilan_stades_pigm}},
-#' \code{\linkS4class{Bilan_taille}},
+#' \code{\linkS4class{Bilan_carlot}}, 
+#' \code{\linkS4class{Bilan_poids_moyen}}, 
+#' \code{\linkS4class{Bilan_stades_pigm}}, 
+#' \code{\linkS4class{Bilan_taille}}, 
 #' \code{\linkS4class{BilanConditionEnv}}, 
-#' \code{\linkS4class{BilanEspeces}},
-#' \code{\linkS4class{BilanFonctionnementDC}},
-#' \code{\linkS4class{BilanFonctionnementDF}},
-#' \code{\linkS4class{BilanMigration}},
-#' \code{\linkS4class{BilanMigrationConditionEnv}},
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}},
+#' \code{\linkS4class{BilanEspeces}}, 
+#' \code{\linkS4class{BilanFonctionnementDC}}, 
+#' \code{\linkS4class{BilanFonctionnementDF}}, 
+#' \code{\linkS4class{BilanMigration}}, 
+#' \code{\linkS4class{BilanMigrationConditionEnv}}, 
+#' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 setClass(Class="BilanMigrationPar",
@@ -80,7 +77,7 @@ hbilanMigrationParcalc=function(h,...){
 #' calcule methode
 #' 
 #' 
-#'@param object An object of class \code{\link{BilanMigrationPar}} 
+#'@param object An object of class \code{\link{BilanMigrationPar-class}} 
 setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function(object){ 
 			bilanMigrationPar<-object  
 			if (exists("refDC",envir_stacomi)) {

@@ -3,13 +3,11 @@
 \docType{class}
 \name{BilanMigrationMult-class}
 \alias{BilanMigrationMult-class}
-\title{class BilanMigrationMult}
+\title{Migration reports for multiple DC / species / stages}
 \description{
 Migration counts for several Fish counting devices (DC), several taxa and several stages.
-This migration count can be built either by the graphical interface or in command line
-\code{new("BilanMigrationMult",
-dc=new("RefDC"),taxons=("RefTaxon"),stades=new("RefStades"),pasDeTemps=new("PasDeTempsJournalier"),data=data.frame(),calcdata=list(),
-coef_conversion=data.frame())}.
+This migration count can be built either by the graphical interface or from the command line 
+(see examples).
 }
 \section{Slots}{
 

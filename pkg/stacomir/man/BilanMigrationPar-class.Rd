@@ -3,7 +3,7 @@
 \docType{class}
 \name{BilanMigrationPar-class}
 \alias{BilanMigrationPar-class}
-\title{Class BilanMigrationPar, Migration report along with quantitative and
+\title{Migration report along with quantitative and
 qualitative characteristics}
 \description{
 Migration along with qualitative or quantitative characteristics or both
@@ -32,12 +32,12 @@ the operation is used to perform calculation.
 
 \item{\code{pasDeTemps}}{An object of class \link{PasDeTempsJournalier-class} inherited from \link{BilanMigration-class}}
 
-\item{\code{data}}{A\code{data.frame} inherited from \link{BilanMigration-class}, stores the results}
+\item{\code{data}}{A \code{data.frame} inherited from \link{BilanMigration-class}, stores the results}
 
 \item{\code{time.sequence}}{An object of class "POSIXct" inherited from \link{BilanMigration-class}}
 }}
 \note{
-the program by default uses two parameter choice, checking box "aucun" will
+The program by default uses two parameter choice, checking box "aucun" will
 allow the program to ignore the parameter
 
 program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter

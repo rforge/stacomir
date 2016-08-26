@@ -17,18 +17,44 @@ devtools::use_data(msg,internal=FALSE,overwrite=TRUE)
 ##################################
 require(stacomiR)
 stacomi(FALSE,FALSE,FALSE)
-bMM_Arzal=new("BilanMigrationMult")
-bMM_Arzal=choice_c(bMM_Arzal,
+bM_Arzal=new("BilanMigrationMult")
+bM_Arzal=choice_c(bM_Arzal,
 dc=c(5,6,12),
 taxons=c("Anguilla anguilla"),
 stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-bMM_Arzal<-connect(bMM_Arzal)
+bM_Arzal<-connect(bM_Arzal)
 # to avoid warnings at package checks
-bMM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bMM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"type_df"]<-iconv(bMM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"type_dc"]<-iconv(bMM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"dif_localisation"]<-iconv(bMM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bMM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bMM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bMM_Arzal@stades@data[,"std_libelle"]<-iconv(bMM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"dif_localisation"]<-iconv(bM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bMM_Arzal,internal=FALSE,overwrite=TRUE)
+devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
+
+
+#################################
+# generates dataset for BilanMigrationMult
+# from the vertical slot fishway located at the estuary of the Vilaine (Brittany)
+# Taxa Liza Ramada (Thinlip grey mullet) in 2015
+##################################
+
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		pre_launch_test=FALSE)	
+bM_Arzal=new("BilanMigration")
+bM_Arzal=choice_c(bM_Arzal,
+		dc=5,
+		taxons=c("Liza ramada"),
+		stades=c("IND"),
+		datedebut="2015-01-01",
+		datefin="2015-12-31")
+bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bM_Arzal@dc@data[,"dif_localisation"]<-iconv(bM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)

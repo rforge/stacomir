@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{An object of class \code{\link{Bilan_carlot}}}
 
-\item{...}{Additional parameters}
+\item{h}{a handler}
 }
 \description{
 Calcule method for Bilan_carlot

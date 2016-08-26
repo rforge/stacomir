@@ -8,12 +8,14 @@
 \S4method{connect}{Bilan_carlot}(object, h, ...)
 }
 \arguments{
+\item{object}{An object of class \link{Bilan_carlot-class}}
+
 \item{h}{a handler}
 
 \item{...}{additional parameters passed to the method}
 }
 \value{
-An object of class bilan_lot Bilan_carlot
+An object of class \link{Bilan_carlot-class}
 }
 \description{
 connect method for Bilan_carlot

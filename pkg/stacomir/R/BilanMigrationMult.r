@@ -1,10 +1,9 @@
-#' class BilanMigrationMult 
+#' Migration reports for multiple DC / species / stages
 #' 
 #' Migration counts for several Fish counting devices (DC), several taxa and several stages.
-#' This migration count can be built either by the graphical interface or in command line
-#' \code{new("BilanMigrationMult",
-#' dc=new("RefDC"),taxons=("RefTaxon"),stades=new("RefStades"),pasDeTemps=new("PasDeTempsJournalier"),data=data.frame(),calcdata=list(),
-#' coef_conversion=data.frame())}.  
+#' This migration count can be built either by the graphical interface or from the command line 
+#' (see examples).
+
 #' @note A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
 #' called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
 #' On each counting device, the migration is recorded. It can be either an instant recording (video control) or the use of traps,
@@ -24,7 +23,7 @@
 #' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
 #' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
-#' @slot time sequence A POSIXt time sequence
+#' @slot time.sequence A POSIXt time sequence
 #' @export
 #' @example examples/01_BilanMigrationMult/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

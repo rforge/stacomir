@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \code{\link{Bilan_carlot}}}
+
+\item{h}{a handler}
 }
 \value{
 Bilan_carlot with slots filled with user choice

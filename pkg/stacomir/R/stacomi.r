@@ -247,8 +247,6 @@ hX11=function(h,...){
 #' @importFrom grid pushViewport
 #' @importFrom grid grid.newpage
 #' @importFrom grid grid.layout
-#' @importFrom utils winProgressBar
-#' @importFrom utils setWinProgressBar
 #' @importFrom utils read.csv
 #' @importFrom utils stack
 #' @importFrom utils globalVariables

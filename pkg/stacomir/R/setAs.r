@@ -1,23 +1,3 @@
-# Nom fichier :        setAs.R
-# Projet :             GEMAC/Prog global
-# Organisme :          IAV/CEMAGREF
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   02/12/2005 14:28:09
-# Description :         Fonction de conversion entre classes
-# Data needed
-# Packages needed
-# remarques
-#
-#**********************************************************************
-#*
-#* Modifications :
-#* ---------------
-#* JJ-MM-AAAA #No Prenom NOM [INITIALES] :
-#*    explication de la modification
-#*
-#**********************************************************************
-# from=new("BilanMigration")
 setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from,to){
   anneeDebut=new("RefAnnee")
    anneeFin=new("RefAnnee")
@@ -31,3 +11,16 @@ setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from,to){
   bilanMigrationInterAnnuelle@anneeFin=anneeFin
   return(bilanMigrationInterAnnuelle)
 })
+
+
+setAs("BilanMigration","BilanMigrationMult",function(from,to){
+			bMM=new("BilanMigrationMult")
+			bMM@dc=from@dc
+			bMM@taxons=from@taxons
+			bMM@stades=from@stades
+			bMM@datedebut=from@datedebut
+			bMM@anneeFin=from@datefin
+			bMM@anneeFin=from@datefin
+			bMM@data=from@data
+			return(bMM)
+		})

@@ -7,8 +7,11 @@
 \usage{
 \S4method{connect}{BilanFonctionnementDC}(object, h)
 }
+\arguments{
+\item{objet}{An object of class \link{BilanFonctionnementDC-class}}
+}
 \value{
-An object of class \code{BilanFonctionnementDC}
+An object of class \link{BilanFonctionnementDC-class}
 }
 \description{
 loads the working periods and type of arrest or disfunction of the DC

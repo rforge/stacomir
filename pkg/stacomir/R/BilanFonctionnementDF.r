@@ -126,18 +126,23 @@ funbarchartDF = function(h,...) {
 	seqmois=as.POSIXlt(round(seqmois,digits="months"))
 	#seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
 	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
-	progres<-utils::winProgressBar(title =get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
-			label = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5,
-			min = 0,
-			max = 1, 
-			initial = 0,
-			width = 400)
+	############################
+	#progress bar
+	###########################
+	progwin <- gtkWindow()
+	progwin$setTitle(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4)
+	progress_bar <- gtkProgressBar()
+	gtkWidgetSetSizeRequest(progress_bar,600,100)
+	progwin$add(progress_bar)
+	progress_bar$setText(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+
+	
+
 	z=0 # compteur tableau t_periodefonctdispositif_per_mois
 	for(j in 1:nrow(t_periodefonctdispositif_per)){
-		#cat( j )
-		utils::setWinProgressBar(progres,j/nrow(t_periodefonctdispositif_per),
-				title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
-				label=sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per)))) 
+		#cat( j 
+		progress_bar$setFraction(progres,j/nrow(t_periodefonctdispositif_per)) 
+		gtkMainIterationDo(FALSE)
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
 		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
 		while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
@@ -155,8 +160,8 @@ funbarchartDF = function(h,...) {
 	t_periodefonctdispositif_per_mois$mois1= strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
 	t_periodefonctdispositif_per_mois$mois=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
 	t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
+	progress_bar$setText("All done.")
 	
-	close(progres)
 	
 # graphique 
 	t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumtime.sequence","per_tar_code","per_etat_fonctionnement"),
@@ -190,6 +195,7 @@ funbarchartDF = function(h,...) {
 	}
 	assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
 	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.8)
+	close(progress_bar)
 }   
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class

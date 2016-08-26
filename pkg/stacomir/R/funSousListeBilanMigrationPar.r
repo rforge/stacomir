@@ -41,13 +41,19 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
-	assign("progres",utils::winProgressBar(title = "cumul val. quant. par pas de temps",
-					label = "progression %",
-					min = 0,
-					max = 1, 
-					initial = 0,
-					width = 400),
-			envir = .GlobalEnv)
+#	assign("progres",utils::winProgressBar(title = "cumul val. quant. par pas de temps",
+#					label = "progression %",
+#					min = 0,
+#					max = 1, 
+#					initial = 0,
+#					width = 400),
+#			envir = .GlobalEnv)
+	progwin <- gtkWindow()
+	progwin$setTitle("cumul val. quant. par pas de temps")
+	progress_bar <- gtkProgressBar()
+	gtkWidgetSetSizeRequest(progress_bar,600,100)
+	progwin$add(progress_bar)
+	progress_bar$setText(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
 	##############################			
 	on.exit(close(progres))
 	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
@@ -76,7 +82,10 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	#bilanMigrationPar@pasDeTemps@noPasCourant=as.integer(-(difftime(as.POSIXlt(strptime("2006-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")),as.POSIXlt(strptime("2006-03-27 00:00:00",format="%Y-%m-%d %H:%M:%S")),unit="days")))  
 	while (getnoPasCourant(bilanMigrationPar@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbStep
-		utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
+
+		progress_bar$setFraction(progres,zz)
+		gtkMainIterationDo(FALSE)
+		#utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))
 		#finPas=as.POSIXlt(DateFin(bilanMigrationPar@pasDeTemps)) # pour debug avoir quelque chose dans le resultset

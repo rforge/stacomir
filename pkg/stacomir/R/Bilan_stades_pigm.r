@@ -221,7 +221,7 @@ fntablestade<-function(stades,choicepere="lotpere"){
 #' 
 #' method used by the graphical interface to build object from values
 #' stored in envir_stacomi
-#' @param object An object of class \code{\link{Bilan_carlot}} 
+#' @param object An object of class \code{\link{Bilan_stades_pigm-class}} 
 #' @param h A handler
 #' @return Bilan_stades_pigm with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

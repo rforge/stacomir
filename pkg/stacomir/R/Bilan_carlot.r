@@ -123,7 +123,7 @@ setMethod("charge",signature=signature("Bilan_carlot"),definition=function(objec
 
 #' Calcule method for Bilan_carlot
 #' 
-#' @param object An object of class \code{\link{Bilan_carlot}} 
+#' @param object An object of class \code{\link{Bilan_carlot-class}} 
 #' @param h a handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(object,h) {
