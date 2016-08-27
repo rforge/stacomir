@@ -194,3 +194,49 @@ vector_to_listsql<-function(vect)
 	
 	return(listsql)
 } 
+
+
+#' Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
+#' This progress bar has a button to close. Use 
+#' @param title THe title of the bar
+#' @param progress_text The text to display for progression
+#' @param width Width of the progress bar
+#' @param height Height of the progress bar
+#' @param pulse Do you want the widget to pulse
+#' @returnType 
+#' @return 
+#' 
+#' @author cedric.briand
+#' @examples 
+#' \dontrun{
+#' mygtkProgressBar("Trial","progress text")
+#' fraction_progressed=seq(0,1,length.out=50)
+#' for(i in fraction_progressed) {
+#'      Sys.sleep(0.1)
+#'     progress_bar$setFraction(i)
+#' }
+#' dispose(dialog)
+#' }
+#' @export
+mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
+# the main window of the progress  bar
+	# title="titre"
+	# text="le texte"
+	dialog <- gtkDialog(title=title, NULL, NULL,
+			"gtk-close", GtkResponseType["none"],
+			show = FALSE)
+	assign("dialog",dialog,envir=.Global_env)
+	## Ensure that the dialog box is destroyed when the user responds.
+	gSignalConnect(dialog, "response", gtkWidgetDestroy)
+	
+	## Add the label, and show everything we've added to the dialog.
+	progress_bar <- gtkProgressBar()
+	assign("progress_bar",progress_bar,.GlobalEnv)
+	gtkWidgetSetSizeRequest(progress_bar,width=width,height=height)
+	dialog[["vbox"]]$add(progress_bar)
+	progress_bar$setText(progress_text)
+	if (pulse) gtkProgressBarPulse(progress_bar)
+	dialog$showAll()
+}
+
+

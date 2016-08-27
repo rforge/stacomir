@@ -48,14 +48,11 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 #					initial = 0,
 #					width = 400),
 #			envir = .GlobalEnv)
-	progwin <- gtkWindow()
-	progwin$setTitle("cumul val. quant. par pas de temps")
-	progress_bar <- gtkProgressBar()
-	gtkWidgetSetSizeRequest(progress_bar,600,100)
-	progwin$add(progress_bar)
-	progress_bar$setText(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+	mygtkProgressBar(title="cumul val. quant. par pas de temps",
+			progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+
 	##############################			
-	on.exit(close(progres))
+	on.exit(dispose(dialog))
 	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
 	##############################"
 # recuperation des valeurs possibles du parametre qualitatif (hors boucle)			
@@ -83,7 +80,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	while (getnoPasCourant(bilanMigrationPar@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbStep
 
-		progress_bar$setFraction(progres,zz)
+		progress_bar$setFraction(zz)
 		gtkMainIterationDo(FALSE)
 		#utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
