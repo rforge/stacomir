@@ -21,7 +21,9 @@ class group is indicated at the sample or susample level
 \section{Slots}{
 
 \describe{
-\item{\code{dc}}{an object of class \link{RefDC-class}}
+\item{\code{data}}{A data frame}
+
+\item{\code{dc}}{An object of class \link{RefDC-class}}
 
 \item{\code{taxons}}{An object of class \link{RefTaxon-class}}
 
@@ -51,15 +53,15 @@ showClass("Bilan_taille")
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_carlot}},
-\code{\linkS4class{Bilan_poids_moyen}},
-\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
-\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
-\code{\linkS4class{BilanFonctionnementDC}},
-\code{\linkS4class{BilanFonctionnementDF}},
-\code{\linkS4class{BilanMigration}},
-\code{\linkS4class{BilanMigrationConditionEnv}},
-\code{\linkS4class{BilanMigrationInterAnnuelle}},
+Other Bilan Classes \code{\linkS4class{Bilan_carlot}}, 
+\code{\linkS4class{Bilan_poids_moyen}}, 
+\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
+\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
+\code{\linkS4class{BilanFonctionnementDC}}, 
+\code{\linkS4class{BilanFonctionnementDF}}, 
+\code{\linkS4class{BilanMigration}}, 
+\code{\linkS4class{BilanMigrationConditionEnv}}, 
+\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{

@@ -203,8 +203,7 @@ vector_to_listsql<-function(vect)
 #' @param width Width of the progress bar
 #' @param height Height of the progress bar
 #' @param pulse Do you want the widget to pulse
-#' @returnType 
-#' @return 
+#' @return nothing but progress_bar and dialog gwidgets are assigned to .globalEnv
 #' 
 #' @author cedric.briand
 #' @examples 
@@ -237,6 +236,7 @@ mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
 	progress_bar$setText(progress_text)
 	if (pulse) gtkProgressBarPulse(progress_bar)
 	dialog$showAll()
+	return(invisible(NULL))
 }
 
 

@@ -8,7 +8,7 @@
 \S4method{calcule}{BilanMigrationPar}(object)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigrationPar}}}
+\item{object}{An object of class \code{\link{BilanMigrationPar-class}}}
 }
 \description{
 calcule methode

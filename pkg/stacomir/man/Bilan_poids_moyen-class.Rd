@@ -22,10 +22,10 @@ number coefficients
 \item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
 refAnnee allows to choose last year of the Bilan}
 
-\item{\code{coe}}{Object of class \code{\link{RefCoe}} class loading coefficient
+\item{\code{coe}}{Object of class \code{\link{RefCoe-class}} class loading coefficient
 of conversion between quantity (weights or volumes of glass eel) and numbers}
 
-\item{\code{liste}}{Object of class \code{\link{RefListe}} RefListe referential
+\item{\code{liste}}{Object of class \code{\link{RefListe-class}} RefListe referential
 class choose within a list, here the choice is wether subsamples or not. Subsamples
 in the stacomi database are samples with a non null value for parent sample. Migration
 counts are never made on subsamples but those can be integrated to calculate mean weights.}

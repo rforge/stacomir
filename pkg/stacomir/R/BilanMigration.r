@@ -66,10 +66,10 @@ hbilanMigrationcalc=function(h,...){
 #' @param taxons Either a species name in latin or the SANDRE code for species (ie 2038=Anguilla anguilla),
 #' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c-RefTaxon-method}
 #' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c-RefStades-method}
-#' @param datedebut The starting date as a character, formats like \code{%Y-%m-%d} or \code{%d-%m-%Y} can be used as input
+#' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades, and RefPasDeTempsJournalier and then 
-#' uses the choice_c methods of these object to "select" the data.
+#' uses the choice_c methods of these object to select the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanMigration"),definition=function(object,dc,taxons,stades,datedebut,datefin){

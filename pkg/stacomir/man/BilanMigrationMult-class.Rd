@@ -27,7 +27,7 @@ This migration count can be built either by the graphical interface or from the 
 \item{\code{coef_conversion}}{A data.frame of daily weight to number conversion coefficients, filled in by the connect
 method if any weight are found in the data slot.}
 
-\item{\code{time}}{sequence A POSIXt time sequence}
+\item{\code{time.sequence}}{A POSIXt time sequence}
 }}
 \note{
 A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is

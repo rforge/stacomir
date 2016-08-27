@@ -8,7 +8,7 @@
 \S4method{connect}{Bilan_taille}(object, h)
 }
 \arguments{
-\item{object}{An object of class \code{\link{Bilan_taille}}}
+\item{object}{An object of class \code{\link{Bilan_taille-class}}}
 
 \item{...}{Additional parameters}
 }
