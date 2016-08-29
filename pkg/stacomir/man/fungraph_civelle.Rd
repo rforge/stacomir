@@ -6,7 +6,7 @@
 draw the ggplot graph for month}
 \usage{
 fungraph_civelle(bilanMigration, table, time.sequence, taxon, stade,
-  dc = null, ...)
+  dc = null, silent, ...)
 }
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}} or an
@@ -21,6 +21,8 @@ fungraph_civelle(bilanMigration, table, time.sequence, taxon, stade,
 \item{stade}{the stage}
 
 \item{dc}{the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}}
+
+\item{silent}{Message displayed or not}
 
 \item{...}{additional parameters passed from the plot method to plot}
 }

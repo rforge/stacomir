@@ -52,7 +52,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
 
 	##############################			
-	on.exit(dispose(dialog))
+	on.exit(dispose(progres))
 	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
 	##############################"
 # recuperation des valeurs possibles du parametre qualitatif (hors boucle)			
@@ -81,7 +81,8 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 		zz=(getnoPasCourant(bilanMigrationPar@pasDeTemps)+1)/bilanMigrationPar@pasDeTemps@nbStep
 
 		progress_bar$setFraction(zz)
-		gtkMainIterationDo(FALSE)
+		progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
+		RGtk2::gtkMainIterationDo(FALSE)
 		#utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))

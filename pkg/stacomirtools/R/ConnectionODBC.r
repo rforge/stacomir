@@ -47,8 +47,8 @@ setGeneric("connect",def=function(object,...) standardGeneric("connect"))
 #' connect(object)
 setMethod("connect",signature=signature("ConnectionODBC"),definition=function(object) {     
 			if (length(object@baseODBC)!=3)  {
-				if (exists("baseODBC",envir=.GlobalEnv)){ 
-					object@baseODBC<-get("baseODBC",envir=.GlobalEnv) 
+				if (exists("baseODBC",envir=envir_stacomi)){ 
+					object@baseODBC<-get("baseODBC",envir=envir_stacomi) 
 				} else {
 					if(exists("envir_stacomi")){# the program is called within stacomiR
 						funout(get("msg",envir_stacomi)$ConnectionODBC.1,arret=TRUE)

@@ -7,7 +7,7 @@ interface_ConditionEnv = function()
     bilanConditionEnv=new("BilanConditionEnv")
     funout(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.1)
     bilanConditionEnv@stationMesure=charge(bilanConditionEnv@stationMesure)
-    assign("bilanConditionEnv",bilanConditionEnv,envir=.GlobalEnv)
+    assign("bilanConditionEnv",bilanConditionEnv,envir=envir_stacomi)
     
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
@@ -30,7 +30,7 @@ interface_ConditionEnv = function()
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
-    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
     
     toolbarlist = list(
     #Calc=gWidgets::gaction(handler=hbilanConditionEnvcalc , action=bilanConditionEnv,icon = "new",label="calcul",tooltip="calcul des conditions environnementales entre deux dates"),
@@ -41,6 +41,6 @@ interface_ConditionEnv = function()
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    #assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 }

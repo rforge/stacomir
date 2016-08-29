@@ -1,5 +1,3 @@
-# Nom fichier :        funstat.R
-
 #' Function to calculate statistics per month
 #' @param tableau A table with the following columns : No.pas,debut_pas,fin_pas,              
 #' ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
@@ -9,8 +7,9 @@
 #' @param taxon  Taxa
 #' @param stade The Stage
 #' @param DC  The counting device
+#' @param silent Message displayed or not
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-funstat=function(tableau,time.sequence,taxon,stade,DC){
+funstat=function(tableau,time.sequence,taxon,stade,DC,silent){
 	funout(get("msg",envir=envir_stacomi)$funstat.1)
 	mois=strftime(as.POSIXlt(time.sequence),"%m")
 	moislab=unique(mois)
@@ -40,9 +39,11 @@ funstat=function(tableau,time.sequence,taxon,stade,DC){
 		resum["Poids_total","bilan"]=round(sum(Poids_total, na.rm=TRUE),2)
 	}
 	resum=cbind("label"=paste("DC",DC,taxon,stade,annee,sep="_"),resum)
- # funout(paste(DC,taxon,stade,annee,"\n"))
- 	#funout(paste("DC","code_taxon","code_stade","annee","\n"))
-  funout(get("msg",envir=envir_stacomi)$funstat.1)   	
-	print( resum["somme",])
+	# funout(paste(DC,taxon,stade,annee,"\n"))
+	#funout(paste("DC","code_taxon","code_stade","annee","\n"))
+	if(!silent) {
+		funout(get("msg",envir=envir_stacomi)$funstat.1)   	
+		print( resum["somme",])
+	}
 	return(resum)
 }

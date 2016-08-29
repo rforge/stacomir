@@ -1,4 +1,4 @@
-setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from,to){
+setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from){
   anneeDebut=new("RefAnnee")
    anneeFin=new("RefAnnee")
   anneeDebut@annee_selectionnee=min(getAnnees(from@pasDeTemps))
@@ -13,14 +13,13 @@ setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from,to){
 })
 
 
-setAs("BilanMigration","BilanMigrationMult",function(from,to){
+setAs("BilanMigration","BilanMigrationMult",function(from){
 			bMM=new("BilanMigrationMult")
 			bMM@dc=from@dc
 			bMM@taxons=from@taxons
 			bMM@stades=from@stades
-			bMM@datedebut=from@datedebut
-			bMM@anneeFin=from@datefin
-			bMM@anneeFin=from@datefin
+			bMM@pasDeTemps=from@pasDeTemps
+			bMM@coef_conversion=from@coef_conversion
 			bMM@data=from@data
 			return(bMM)
 		})

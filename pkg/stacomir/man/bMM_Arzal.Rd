@@ -30,11 +30,16 @@
 }}
 \usage{
 bMM_Arzal
+
+bMM_Arzal
 }
 \description{
 This data corresponds to the data collected from three fishways
 and correspond to the migration station at Arzal in 2011 for all
 stages of eel (Anguilla anguilla)
+
+This data corresponds to the data collected at the vertical slot fishway
+in 2015, video recording of the thin lipped mullet Liza ramada migration
 }
 \keyword{data}
 

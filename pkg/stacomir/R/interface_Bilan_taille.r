@@ -4,7 +4,7 @@
 interface_BilanTaille = function()
 {
 	bilan_taille=new("Bilan_taille")
-	assign("bilan_taille",bilan_taille,envir=.GlobalEnv)
+	assign("bilan_taille",bilan_taille,envir=envir_stacomi)
 	#funout("chargement de la vue (vue_ope_lot) et choice du dc et des pas de temps\n")
 	bilan_taille@dc=charge(bilan_taille@dc)
 	#bilan_taille@taxons=charge(bilan_taille@taxons)
@@ -53,8 +53,8 @@ interface_BilanTaille = function()
 	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	#assign("graphes",graphes,envir=.GlobalEnv)
+	#assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()	
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
-	assign("ggroupboutonsbas",ggroupboutonsbas,envir = .GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir =.GlobalEnv)
 }

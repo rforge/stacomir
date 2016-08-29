@@ -7,10 +7,12 @@
 calls functions funstat and funtable to create migration overviews
 and generate csv and html output in the user data directory}
 \usage{
-\S4method{summary}{BilanMigrationMult}(object, ...)
+\S4method{summary}{BilanMigrationMult}(object, silent = FALSE, ...)
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigrationMult-class}}}
+
+\item{silent}{Should the program stay silent or display messages, default FALSE}
 
 \item{...}{Additional parameters (not used there)}
 }

@@ -50,6 +50,7 @@ bM_Arzal=choice_c(bM_Arzal,
 		stades=c("IND"),
 		datedebut="2015-01-01",
 		datefin="2015-12-31")
+bM_Arzal<-connect(bM_Arzal)
 bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
 bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")

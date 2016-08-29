@@ -261,7 +261,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				addHandlerDoubleclick(tbdestdc,handler=function(h,...) {
 							removedc()
 						})
-				gbutton("ok", containter = groupdc, handler = hDC)
+				gbutton("ok", container = groupdc, handler = hDC)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDC.7,arret=TRUE)
 			}

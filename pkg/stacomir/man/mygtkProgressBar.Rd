@@ -3,13 +3,13 @@
 \name{mygtkProgressBar}
 \alias{mygtkProgressBar}
 \title{Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
-This progress bar has a button to close. Use}
+This progress bar has a button to close.}
 \usage{
 mygtkProgressBar(title, progress_text, width = 400, height = 50,
   pulse = TRUE)
 }
 \arguments{
-\item{title}{THe title of the bar}
+\item{title}{The title of the bar}
 
 \item{progress_text}{The text to display for progression}
 
@@ -24,17 +24,23 @@ nothing but progress_bar and dialog gwidgets are assigned to .globalEnv
 }
 \description{
 Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
-This progress bar has a button to close. Use
+This progress bar has a button to close.
+}
+\note{
+The name of the progress bar is \code{progres}, it will be assigned in .GlobalEnv,
+it contains a progress bar widget named progress bar, also assigned in .GLobalEnv. See example for use.
+It seems that when sys.sleep is not used it is necessary to use RGtk2::gtkMainIterationDo(FALSE) for a regular display
 }
 \examples{
 \dontrun{
-mygtkProgressBar("Trial","progress text")
+mygtkProgressBar(title="Trial",progress_text="progress text")
 fraction_progressed=seq(0,1,length.out=50)
 for(i in fraction_progressed) {
      Sys.sleep(0.1)
+   progress_bar$setText(sprintf("\%d\%\% progression",round(100*i)))
     progress_bar$setFraction(i)
 }
-dispose(dialog)
+dispose(progres)
 }
 }
 \author{

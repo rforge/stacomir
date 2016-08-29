@@ -13,16 +13,16 @@
 #' @param taxon The species
 #' @param stade The stage
 #' @param dc The DC
+#' @param silent Message displayed or not
 #' @param ... other parameters passed from the plot method to the matplot function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
+fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silent,...){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
-	# to adapt to bilanMigrationMult, default line...
 	#browser() 
 	#cat("fungraph")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
-	if(length(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]))>1) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
+	if (!identical(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]),"effectif")) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	mois= months(time.sequence)
 	jour= strftime(as.POSIXlt(time.sequence),"%j")
@@ -37,7 +37,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	###################################
 	# Definition du layout
 	####################################
-	vec<-c(rep(1,15),rep(2,2),rep(3,2),rep(4,3))
+	vec<-c(rep(1,15),rep(2,2),rep(3,2),4,rep(5,6))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
 	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
@@ -46,7 +46,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
-	gr<-matplot(x,cbind(tableau$MESURE+tableau$CALCULE+tableau$EXPERT+tableau$PONCTUEL,
+	matplot(x,cbind(tableau$MESURE+tableau$CALCULE+tableau$EXPERT+tableau$PONCTUEL,
 					tableau$MESURE+tableau$CALCULE+tableau$EXPERT,
 					tableau$MESURE+tableau$CALCULE,
 					tableau$MESURE),
@@ -59,9 +59,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 			ylab=get("msg",envir=envir_stacomi)$fungraph.2,
 			xlab=get("msg",envir=envir_stacomi)$fungraph.3,
 			main=paste(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""),
-			cex.main=1,
-			...)
-	nothing<-print(gr)
+			cex.main=1)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
@@ -97,11 +95,12 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
-	
+	if (!silent){
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+	}
 	req@sql<-fn_sql_dis(per_dis_identifiant=bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=strftime(as.POSIXlt(time.sequence[min(x)]),format="%Y-%m-%d %H:%M:%S"),
 			dateFin=strftime(as.POSIXlt(time.sequence[max(x)]),format="%Y-%m-%d %H:%M:%S"))
@@ -321,11 +320,11 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 	}
 	
 	###################################         
-	# creation d'un graphique vide (4)
+	# creation d'un graphique vide (4=op)
 	###################################                 
 	
 	
-	graphics::par("mar"=c(2, 4, 0, 2)+ 0.1)  
+	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(time.sequence),
 			seq(0,1,length.out=nrow(tableau)),
 			xlim=c(debut,fin), 
@@ -348,36 +347,86 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,...){
 			border = NA, 
 			lwd = 1)
 	
-	#browser()
+	
 	###################################
 	# Graph mensuel 
 	####################################
 	# Pour les noms modifier get("msg",envir=envir_stacomi)$fungraph.7
-	X11(7,4)
-	stktab=cbind(utils::stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"time.sequence"=rep(time.sequence,4))
-	stktab<-funtraitementdate(stktab,
-			nom_coldt="time.sequence",
-			annee=FALSE,
-			mois=TRUE,
-			quinzaine=TRUE,
-			semaine=TRUE,
-			jour_an=TRUE,
-			jour_mois=FALSE,
-			heure=FALSE)
-	stktab$ind<-factor(stktab$ind, levels = c("MESURE","CALCULE","EXPERT","PONCTUEL"))
-	fillname<-get("msg",envir=envir_stacomi)$fungraph.7[2] #type
-	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
-	g<-ggplot(stktab, aes(x=mois,y=values,fill=ind))+
-			geom_bar(position="dodge", stat="identity")+
-			scale_fill_manual(name=fillname,values=c("MESURE"=mypalette[4],
-							"CALCULE"=mypalette[3],
-							"EXPERT"=mypalette[2],
-							"PONCTUEL"=mypalette[1]))+
-			xlab(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+
-			ylab(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers
-		nothing<-print(g)
+	graphics::par("mar"=c(4, 4, 1, 2) + 0.1)
+	tableau$mois=factor(months(tableau$debut_pas,abbreviate=TRUE),
+			levels=unique(months(tableau$debut_pas,abbreviate=TRUE)))
+
+	tableaum<-reshape2::melt(data=tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL","mois")],							
+							id.vars=c("mois"),
+							measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),
+							variable.name="type",
+							value.name="number")
+	levels(tableaum$type)<-get("msg",envir=envir_stacomi)$fungraph.5
+	superpose.polygon<-lattice::trellis.par.get("plot.polygon")
+	superpose.polygon$col=  c("black","deepskyblue","chartreuse2","indianred")
+	superpose.polygon$border=rep("transparent",6)
+	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
+	fontsize<-lattice::trellis.par.get("fontsize")
+	fontsize$text=10
+	lattice::trellis.par.set("fontsize",fontsize)
+	par.main.text<-lattice::trellis.par.get("par.main.text")
+	par.main.text$cex=1
+	par.main.text$font=1
+	lattice::trellis.par.set("par.main.text",par.main.text)
+	# lattice::show.settings()
+	
+	par.ylab.text<-lattice::trellis.par.get("par.ylab.text")
+	par.ylab.text$cex=0.8
+	lattice::trellis.par.set("par.ylab.text",par.ylab.text) 
+	par.xlab.text<-lattice::trellis.par.get("par.xlab.text")
+	par.xlab.text$cex=0.8
+	lattice::trellis.par.set("par.xlab.text",par.xlab.text)
+	
+	bar<-lattice::barchart(number/1000~mois,
+			groups=type,
+			xlab=get("msg",envir=envir_stacomi)$fungraph_civelle.14,
+			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.15,
+			#    main=list(label=paste("Donnees mensuelles")),
+			data=tableaum,
+			allow.multiple=FALSE,
+			strip=FALSE,
+			stack=TRUE,
+			key=lattice::simpleKey(text=levels(tableaum$type),
+					rectangles = TRUE, 
+					points=FALSE, 
+					space="right", 
+					cex=0.8),
+		 origin=0)
+	print(bar,position = c(0, 0, 1, .25),newpage = FALSE)
+	
+	
+#	
+#	
+#	X11(7,4)
+#	stktab=cbind(utils::stack(tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL")]),"time.sequence"=rep(time.sequence,4))
+#	stktab<-funtraitementdate(stktab,
+#			nom_coldt="time.sequence",
+#			annee=FALSE,
+#			mois=TRUE,
+#			quinzaine=TRUE,
+#			semaine=TRUE,
+#			jour_an=TRUE,
+#			jour_mois=FALSE,
+#			heure=FALSE)
+#	stktab$ind<-factor(stktab$ind, levels = c("MESURE","CALCULE","EXPERT","PONCTUEL"))
+#	fillname<-get("msg",envir=envir_stacomi)$fungraph.7[2] #type
+#	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
+#	g<-ggplot(stktab, aes(x=mois,y=values,fill=ind))+
+#			geom_bar(position="dodge", stat="identity")+
+#			scale_fill_manual(name=fillname,values=c("MESURE"=mypalette[4],
+#							"CALCULE"=mypalette[3],
+#							"EXPERT"=mypalette[2],
+#							"PONCTUEL"=mypalette[1]))+
+#			xlab(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+
+#			ylab(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers
+#	nothing<-print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
-return(invisible(NULL))
+	return(invisible(NULL))
 }
 
 

@@ -6,7 +6,7 @@ interface_BilanMigrationInterAnnuelle = function()
 {
 	quitte() # vidange de l'interface
 	bilanMigrationInterAnnuelle=new("BilanMigrationInterAnnuelle")
-	assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir=.GlobalEnv)
+	assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir=envir_stacomi)
 	funout(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.1)
 	bilanMigrationInterAnnuelle@anneeDebut=charge(bilanMigrationInterAnnuelle@anneeDebut)
 	bilanMigrationInterAnnuelle@anneeFin=charge(bilanMigrationInterAnnuelle@anneeFin)
@@ -39,7 +39,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	### premiere toobar
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist1 = list(
@@ -88,7 +88,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	#assign("graphes",graphes,envir=.GlobalEnv) 
+	#assign("graphes",graphes,envir=envir_stacomi) 
 	grDevices::X11()
 	
 # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses

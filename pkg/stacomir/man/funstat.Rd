@@ -4,7 +4,7 @@
 \alias{funstat}
 \title{Function to calculate statistics per month}
 \usage{
-funstat(tableau, time.sequence, taxon, stade, DC)
+funstat(tableau, time.sequence, taxon, stade, DC, silent)
 }
 \arguments{
 \item{tableau}{A table with the following columns : No.pas,debut_pas,fin_pas,
@@ -18,6 +18,8 @@ EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 \item{stade}{The Stage}
 
 \item{DC}{The counting device}
+
+\item{silent}{Message displayed or not}
 }
 \description{
 Function to calculate statistics per month

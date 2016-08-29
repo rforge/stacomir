@@ -5,24 +5,22 @@
 #' @param \dots additional arguments passed to the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 quitte=function(...){
-	if (exists("ggroupboutonsbas")) delete(ggroupboutons,ggroupboutonsbas)
-	if (exists("group")) {
+	if (exists("ggroupboutonsbas",envir=envir_stacomi)) delete(ggroupboutons,ggroupboutonsbas)
+     rm
+	if (exists("group",envir=envir_stacomi)) {
 		delete(ggroupboutons,group) 
 		rm(group,envir= .GlobalEnv)
 	}
-	if (exists("graphes")) {
-		delete(ggrouptotal1, graphes) 
-		rm(graphes,envir= .GlobalEnv)
-	}
+
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
-			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC")]
-			rm(list=miettes,envir=envir_stacomi)
+			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC","usrname","usrpwd")]
+			rm(list=miettes,envir=.GlobalEnv)
 		}      
 	}
-	if (length(ls(pattern="frame",envir=.GlobalEnv))!=0) {
-		rm(list=ls(pattern="frame",envir=.GlobalEnv),envir=.GlobalEnv)
+	if (length(ls(pattern="frame",envir=envir_stacomi))!=0) {
+		rm(list=ls(pattern="frame",envir=envir_stacomi),envir=envir_stacomi)
 	}
 	if (exists("g")) rm(g)
 }
@@ -197,8 +195,11 @@ vector_to_listsql<-function(vect)
 
 
 #' Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
-#' This progress bar has a button to close. Use 
-#' @param title THe title of the bar
+#' This progress bar has a button to close.
+#' @note The name of the progress bar is \code{progres}, it will be assigned in .GlobalEnv,
+#' it contains a progress bar widget named progress bar, also assigned in .GLobalEnv. See example for use.
+#' It seems that when sys.sleep is not used it is necessary to use RGtk2::gtkMainIterationDo(FALSE) for a regular display
+#' @param title The title of the bar
 #' @param progress_text The text to display for progression
 #' @param width Width of the progress bar
 #' @param height Height of the progress bar
@@ -208,34 +209,29 @@ vector_to_listsql<-function(vect)
 #' @author cedric.briand
 #' @examples 
 #' \dontrun{
-#' mygtkProgressBar("Trial","progress text")
+#' mygtkProgressBar(title="Trial",progress_text="progress text")
 #' fraction_progressed=seq(0,1,length.out=50)
 #' for(i in fraction_progressed) {
 #'      Sys.sleep(0.1)
+#'    progress_bar$setText(sprintf("%d%% progression",round(100*i)))
 #'     progress_bar$setFraction(i)
 #' }
-#' dispose(dialog)
+#'dispose(progres)
 #' }
-#' @export
 mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
-# the main window of the progress  bar
-	# title="titre"
-	# text="le texte"
-	dialog <- gtkDialog(title=title, NULL, NULL,
-			"gtk-close", GtkResponseType["none"],
+	.dialog <- RGtk2::gtkDialog(title=title, NULL, NULL,
+			"gtk-close", RGtk2::GtkResponseType["none"],
 			show = FALSE)
-	assign("dialog",dialog,envir=.Global_env)
+	assign("progres",.dialog,envir=envir_stacomi)
 	## Ensure that the dialog box is destroyed when the user responds.
-	gSignalConnect(dialog, "response", gtkWidgetDestroy)
-	
-	## Add the label, and show everything we've added to the dialog.
-	progress_bar <- gtkProgressBar()
+	RGtk2::gSignalConnect(.dialog, "response", RGtk2::gtkWidgetDestroy)	
+	progress_bar <- RGtk2::gtkProgressBar()
 	assign("progress_bar",progress_bar,.GlobalEnv)
-	gtkWidgetSetSizeRequest(progress_bar,width=width,height=height)
-	dialog[["vbox"]]$add(progress_bar)
+	RGtk2::gtkWidgetSetSizeRequest(progress_bar,width=width,height=height)
+	.dialog[["vbox"]]$add(progress_bar)
 	progress_bar$setText(progress_text)
-	if (pulse) gtkProgressBarPulse(progress_bar)
-	dialog$showAll()
+	if (pulse) RGtk2::gtkProgressBarPulse(progress_bar)
+	.dialog$showAll()
 	return(invisible(NULL))
 }
 

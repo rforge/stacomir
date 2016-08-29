@@ -61,23 +61,6 @@ setValidity("BilanMigrationMult",function(object)
 		}   
 )
 
-#' initialize method for BilanMigrationMult
-#' 
-#'  allows a more elaborate constuctor than new through use of charge methods
-#' of Referential objects in the class
-setMethod("initialize", "BilanMigrationMult", function(.Object, ...) {
-			# callNextMethod() calls the method first inherited method, ie the
-			# method that would have been called if the current method did not exist
-			# here it calls the default constructor of the class (initialize as it would
-			# have worked for new()
-			.Object <- callNextMethod()
-			.Object@taxons=charge(.Object@taxons)
-			.Object@stades=charge(.Object@stades)
-			.Object@dc=charge(.Object@dc)   
-			fonctionnementDC=new("BilanFonctionnementDC")
-			assign("fonctionnementDC",fonctionnementDC,envir = envir_stacomi)
-			.Object
-		})
 
 
 
@@ -146,20 +129,21 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 
 #' calcule method for BilanMigrationMult
 #' 
-#'  does the calculation once data are filled 
+#'  does the calculation once data are filled. It also performs conversion from weight to numbers
 #' in with the connect method
 #' @param object An object of class \code{\link{BilanMigrationMult-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
+#' @param silent Defautl FALSE, should messages be stopped
 #' @note The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
 #' 'devenir' i.e. the destination of the fishes.
-#' @return BilanMigrationMult with slots filled by user choice
+#' @return BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
 #' @export
-setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE){ 
+setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			
 			bilanMigrationMult<-object
 			bilanMigrationMult=connect(bilanMigrationMult)
-			cat(stringr::str_c("nrow=",nrow(bilanMigrationMult@data)))
+			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
 			
 			bilanMigrationMult@data$time.sequence=difftime(bilanMigrationMult@data$ope_date_fin,
 					bilanMigrationMult@data$ope_date_debut,
@@ -190,7 +174,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 						data$coe_date_debut<-as.Date(data$debut_pas)
 						data<-merge(data,coe,by="coe_date_debut")
 						data<-data[,-1] # removing coe_date_debut
-						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigrationMult@time.sequence)
+						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigrationMult@time.sequence,silent)
 					}
 					
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
@@ -202,7 +186,14 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					data<-fun_bilanMigrationMult(time.sequence = time.sequence,datasub=datasub,negative=negative)
 					data$taux_d_echappement=-1
 					data$coe_valeur_coefficient=NA
-					
+					contient_poids<-"poids"%in%datasub$type_de_quantite
+					if (contient_poids){
+						coe<-bilanMigrationMult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
+						data$coe_date_debut<-as.Date(data$debut_pas)
+						data<-merge(data,coe,by="coe_date_debut")
+						data<-data[,-1] # removing coe_date_debut
+						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigrationMult@time.sequence,silent)
+					}
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"sum"
 					lestableaux[[stringr::str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
@@ -212,8 +203,10 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			# TODO developper une methode pour sumneg 
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
-			funout(get("msg",envir_stacomi)$BilanMigrationMult.3)
-			funout(get("msg",envir_stacomi)$BilanMigrationMult.4)
+			if (!silent){
+				funout(get("msg",envir_stacomi)$BilanMigrationMult.3)
+				funout(get("msg",envir_stacomi)$BilanMigrationMult.4)
+			}
 			return(bilanMigrationMult)
 		})
 
@@ -302,11 +295,11 @@ hbilanMigrationMult_graph=function(h=null,...){
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	plot(x=bilanMigrationMult,type="standard")
+	plot(x=bilanMigrationMult,plot.type="standard")
 }
 
 
-#' Main plot method
+#' Plots of various type for BilanMigrationMult
 #' 
 #' \itemize{
 #' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
@@ -325,9 +318,9 @@ hbilanMigrationMult_graph=function(h=null,...){
 # getGeneric("plot")
 # showMethods("plot")
 # methods("plot")
-setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=function(x, y,plot.type="standard",...){ 
+setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=function(x, y,plot.type="standard",silent=FALSE,...){ 
 			#browser()
-			print("entering plot function")
+			#print("entering plot function")
 			#bilanMigrationMult<-bMM_Arzal
 			bilanMigrationMult<-x
 			lestaxons= bilanMigrationMult@taxons@data
@@ -335,9 +328,9 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)
 			#==========================type=1=============================
 			if (plot.type=="standard"){
-				print("plot type standard")
-				funout(get("msg",envir_stacomi)$BilanMigration.9)
-				#dcnum=2
+				if (!silent) print("plot type standard")
+				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)
+				#dcnum=1;taxonnum=1;stadenum=2
 				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				for (dcnum in 1:length(lesdc)){
 					for (taxonnum in 1:nrow(lestaxons)){
@@ -356,9 +349,12 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 							if (!is.null(data)){
 								if	(nrow(data)>0){
 									
-									funout(paste("dc=",dc,
-													"taxon"=taxon,
-													"stade"=stade))	
+									if (!silent) {
+										funout(paste("dc=",dc,
+														"taxon"=taxon,
+														"stade"=stade,"\n"))
+										funout("---------------------\n")
+									}
 									if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
 									data_without_hole<-merge(
 											data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
@@ -373,7 +369,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 									data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
 									if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
 											taxon=="Anguilla anguilla"&
-											stade=="civelle") {
+											(stade=="civelle"|stade=="Anguilla jaune")) {
 										
 										#----------------------------------
 										# bilan migration avec poids (civelles
@@ -385,20 +381,22 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 												taxon=taxon,
 												stade=stade,
 												dc=dc,
+												silent,
 												...)
 									}	else {
-									
+										
 										#----------------------------------
 										# bilan migration standard
 										#-----------------------------------------
 										grDevices::X11()
+										#silent=TRUE
 										fungraph(bilanMigration=bilanMigrationMult,
 												tableau=data_without_hole,
 												time.sequence=bilanMigrationMult@time.sequence,
 												taxon,
 												stade,
 												dc,
-												...)
+												silent)
 									}
 								} # end nrow(data)>0		
 								# ecriture du bilan journalier, ecrit aussi le bilan mensuel
@@ -459,57 +457,71 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				p<-ggplot(grdata_without_hole)+
 						geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
 						ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-						theme(plot.title=element_text(size=10,colour="blue"))+
+						theme(plot.title=element_text(size=10,colour="deepskyblue"))+
+						xlab("mois")+
+						scale_colour_manual(values=c("01"="#092360",
+										"02"="#1369A2",
+										"03"="#0099A9",
+										"04"="#009780",
+										"05"="#67B784",
+										"06"="#CBDF7C",
+										"07"="#FFE200",
+										"08"="#DB9815",
+										"09"="#E57B25",
+										"10"="#F0522D",
+										"11"="#912E0F",
+										"12"="#33004B"
+								))+
 						ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") )  
 				print(p)	
 			}
 #==========================type=3=============================
-            if (plot.type=="multiple"){
-			lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
-			lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
-			grdata<-data.frame()
-			for (i in 1:length(bilanMigrationMult@calcdata)){
-				data<-bilanMigrationMult@calcdata[[i]]$data
-				# extracting similar columns (not those calculated)
-				data<-data[,c(
-								"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
-								"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
-						)]
-				grdata<-rbind(grdata,data)
-			}
-			names(grdata)<-tolower(names(grdata))	
-			grdata<-funtraitementdate(grdata,
-					nom_coldt="debut_pas",
-					annee=FALSE,
-					mois=TRUE,
-					quinzaine=TRUE,
-					semaine=TRUE,
-					jour_an=TRUE,
-					jour_mois=FALSE,
-					heure=FALSE)
-			annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
-			dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
-			grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
-			grdata$DC<-as.factor(grdata$DC)
-			grdata$taxon<-as.factor(grdata$taxon)
-			if (length(unique(grdata$taxon))==1){
-				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
-						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC~.,scales="free_y")+
-						scale_fill_brewer(palette="Set2")
-			} else if  (length(unique(grdata$stade))==1){
-				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
-						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC~.,scales="free_y")+
-						scale_fill_brewer(palette="Set2")	
-			} else {
-				p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
-						geom_bar(position="stack", stat="identity")+
-						facet_grid(DC+taxon~.,scales="free_y")+
-						scale_fill_brewer(palette="Set2")		
-			}
-						
-			print(p)	
+			if (plot.type=="multiple"){
+				lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
+				lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
+				grdata<-data.frame()
+				for (i in 1:length(bilanMigrationMult@calcdata)){
+					data<-bilanMigrationMult@calcdata[[i]]$data
+					# extracting similar columns (not those calculated)
+					data<-data[,c(
+									"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+									"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+							)]
+					grdata<-rbind(grdata,data)
+				}
+				names(grdata)<-tolower(names(grdata))	
+				grdata<-funtraitementdate(grdata,
+						nom_coldt="debut_pas",
+						annee=FALSE,
+						mois=TRUE,
+						quinzaine=TRUE,
+						semaine=TRUE,
+						jour_an=TRUE,
+						jour_mois=FALSE,
+						heure=FALSE)
+				annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
+				dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
+				grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
+				grdata$DC<-as.factor(grdata$DC)
+				grdata$taxon<-as.factor(grdata$taxon)
+				if (length(unique(grdata$taxon))==1){
+					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+							geom_bar(position="stack", stat="identity")+
+							facet_grid(DC~.,scales="free_y")+
+							scale_fill_brewer(palette="Set2")
+				} else if  (length(unique(grdata$stade))==1){
+					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=taxon))+
+							geom_bar(position="stack", stat="identity")+
+							facet_grid(DC~.,scales="free_y")+
+							scale_fill_brewer(palette="Set2")	
+				} else {
+					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
+							geom_bar(position="stack", stat="identity")+
+							facet_grid(DC+taxon~.,scales="free_y")+
+							scale_fill_brewer(palette="Set2")		
+				}
+				
+				print(p)	
 			}
 #==========================end / type=3=============================			
 		})
@@ -525,7 +537,6 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 hbilanMigrationMultcalc=function(h=null,...){
 	bilanMigrationMult<-get("bilanMigrationMult",envir=envir_stacomi)
 	bilanMigrationMult<-charge(bilanMigrationMult)
-	bilanMigrationMult<-connect(bilanMigrationMult)
 	bilanMigrationMult<-calcule(bilanMigrationMult)
 }
 
@@ -587,10 +598,11 @@ hTableBilanMigrationMult=function(h=null,...) {
 #' calls functions funstat and funtable to create migration overviews
 #' and generate csv and html output in the user data directory
 #' @param object An object of class \code{\link{BilanMigrationMult-class}}
+#' @param silent Should the program stay silent or display messages, default FALSE
 #' @param ... Additional parameters (not used there)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,...){
+setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,silent=FALSE,...){
 			bilanMigrationMult<-object		
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
@@ -628,10 +640,10 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 								data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
 								
 								resum=funstat(tableau=data_without_hole,
-										time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC)
+										time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC,silent)
 								funtable(tableau=data_without_hole,
 										time.sequence=bilanMigrationMult@time.sequence,
-										taxon,stade,DC,resum)
+										taxon,stade,DC,resum,silent)
 								
 							}
 						}
@@ -878,10 +890,11 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' performs a query to collect the conversion coefficients
 #' @param tableau Table issued from BilanMigration
 #' @param time.sequence Time sequence from BilanMigration
+#' @param silent If silent=TRUE do not display messages
 #' @return tableau, the data frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fun_weight_conversion=function(tableau,time.sequence) { 
-	funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
+fun_weight_conversion=function(tableau,time.sequence,silent) { 
+	if (!silent) funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
 	nr<-table(tableau$type_de_quantite)[1]
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])

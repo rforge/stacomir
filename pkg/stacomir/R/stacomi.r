@@ -55,7 +55,7 @@ hBilanConditionEnv=function(h,...){
 	eval(interface_ConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
-hBilanLots=function(h,...){
+hBilan_carlot=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.10,wash=TRUE)
 	eval(interface_BilanLot(),envir = .GlobalEnv)
 }
@@ -279,6 +279,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	envir_stacomi <- new.env(parent = emptyenv())
 	assign("envir_stacomi",envir_stacomi,.GlobalEnv)
+	# trois variables passées à interface graphique via envir_stacomi :
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("pre_launch_test",pre_launch_test,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
@@ -372,29 +373,33 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$handler =hDF
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$icon="gWidgetsRGtk2-rarrow"
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$handler =hDC
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$icon = "gtk-media-record"
+	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$icon = "gWidgetsRGtk2-plot"
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$handler=hOPE
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$icon="gtk-cancel"#"gtk-go-forward"
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$handler=hDFDC
 	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$icon="gtk-cancel"
+	
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$handler=hBilanMigration
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gtk-dnd-multiple"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$handler=hBilanMigrationInterAnnuelle
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$icon="gWidgetsRGtk2-hist"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$handler=hBilan_carlot
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$handler=hBilanMigrationConditionEnv
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-plot1"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$handler=hBilanMigrationPar
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$handler=hBilanMigrationInterAnnuelle
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$handler=hBilanLots
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$handler=hpds
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-evaluate"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$handler=hTail
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-evaluate"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-curve"#"gWidgetsRGtk2-boxplot"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$handler=hBilanEspeces	
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-polar"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$handler=hpds
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-cloud"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$handler=hTail
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$handler=hSt
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$handler=htodo
@@ -403,9 +408,7 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
+		menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"
@@ -452,7 +455,7 @@ utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","g
 				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
 				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
 				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","refAnnee",
-				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind"))
+				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))
 # Progressbar
 utils::globalVariables(c("progres"))
 # environment

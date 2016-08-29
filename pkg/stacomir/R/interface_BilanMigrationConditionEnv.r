@@ -5,7 +5,7 @@
 interface_BilanMigrationConditionEnv = function()
 {
 	bilanMigrationConditionEnv=new("BilanMigrationConditionEnv")
-	assign("bilanMigrationConditionEnv",bilanMigrationConditionEnv,envir=.GlobalEnv)	
+	assign("bilanMigrationConditionEnv",bilanMigrationConditionEnv,envir=envir_stacomi)	
 	funout(get("msg",envir=envir_stacomi)$interface_BilanMigrationConditionEnv.2)
 	bilanMigrationConditionEnv@bilanConditionEnv@stationMesure=charge(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
 	bilanMigrationConditionEnv@bilanMigration@taxons=charge(bilanMigrationConditionEnv@bilanMigration@taxons)
@@ -13,7 +13,7 @@ interface_BilanMigrationConditionEnv = function()
 	bilanMigrationConditionEnv@bilanMigration@dc=charge(bilanMigrationConditionEnv@bilanMigration@dc)
 	quitte()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)
+	assign("group",group,envir=.GlobalEnv)
 	add(ggroupboutons,group)
 	
 	choice(bilanMigrationConditionEnv@bilanMigration@pasDeTemps)
@@ -31,10 +31,10 @@ interface_BilanMigrationConditionEnv = function()
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
 	enabled(toolbarlist[["Graph"]])<-FALSE
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
+assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)	
 	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	#assign("graphes",graphes,envir=.GlobalEnv)
+	#assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 }

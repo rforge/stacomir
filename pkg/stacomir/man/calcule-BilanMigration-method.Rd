@@ -8,15 +8,20 @@
 \S4method{calcule}{BilanMigration}(object)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigration-class}}}
+\item{object}{An object of class \code{\link{BilanMigrationMult-class}}}
+
+\item{negative}{a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
+different rows}
 }
 \value{
-BilanMigration with slots filled by user choice
+BilanMigrationMult with slots filled by user choice
 }
 \description{
-calcule method for BilanMigration
+does the calculation once data are filled 
+in with the connect method
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+\note{
+The class BilanMigrationMult does not handle  escapement rates.
+'devenir' i.e. the destination of the fishes.
 }
 

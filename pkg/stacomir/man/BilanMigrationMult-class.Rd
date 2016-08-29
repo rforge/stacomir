@@ -68,11 +68,12 @@ data("bMM_Arzal")
 # not shown there as the database and program might not be installed
 
 #bMM_Arzal<-connect(bMM_Arzal)
-str(bMM_Arzal@data)
+#str(bMM_Arzal@data)
 # calculations
-bMM_Arzal<-calcule(bMM_Arzal)
+bMM_Arzal<-calcule(bMM_Arzal,silent=TRUE)
 #Individual plot for all DC, taxon and stage where data present
-plot(bMM_Arzal,plot.type="standard")
+#Silent=TRUE to turn off messages
+plot(bMM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
 plot(bMM_Arzal,plot.type="step")
@@ -82,7 +83,7 @@ plot(bMM_Arzal,plot.type="step")
 # combined plot for ggplot2
 plot(bMM_Arzal,plot.type="multiple")
 # data will be written in the data directory specified in the stacomi/calcmig.csv file
-summary(bMM_Arzal)
+summary(bMM_Arzal,silent=TRUE)
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

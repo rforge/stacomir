@@ -68,7 +68,7 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 				funout(paste(object@label,"\n"))
 			}
 			frame_choice<-gframe(object@label)
-			assign("frame_choice",frame_choice,envir=.GlobalEnv)
+			assign("frame_choice",frame_choice,envir=envir_stacomi)
 			##=>selection de plusieurs caracteristiques
 			add(group,frame_choice)
 			list_libelle=fun_char_spe(object@listechoice)

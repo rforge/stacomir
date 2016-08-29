@@ -25,11 +25,12 @@ data("bM_Arzal")
 # not shown there as the database and program might not be installed
 
 #bM_Arzal<-connect(bM_Arzal)
-str(bM_Arzal@data)
+#str(bM_Arzal@data)
 # calculations
 bM_Arzal<-calcule(bM_Arzal)
-#Individual plot for all DC, taxon and stage where data present
-plot(bM_Arzal,plot.type="standard")
+#Individual plot for all DC (standard), taxon and stage where data present
+#silent argument to stop all messages
+plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
 plot(bM_Arzal,plot.type="step")

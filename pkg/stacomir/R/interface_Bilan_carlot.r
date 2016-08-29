@@ -3,10 +3,10 @@
 #' An interface that calls the object to build the user interface
 #' @note always has to be called within a group constructed and deleted using quitte()
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-interface_BilanLot = function()
+interface_Bilan_carlot = function()
 {  
     bilan_carlot=new("Bilan_carlot")
-    assign("bilan_carlot",bilan_carlot,envir = .GlobalEnv)
+    assign("bilan_carlot",bilan_carlot,envir = envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
     bilan_carlot@dc=charge(bilan_carlot@dc)
@@ -72,12 +72,12 @@ interface_BilanLot = function()
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
     gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
     
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
-    #assign("graphes",graphes,envir=.GlobalEnv) 
+    #assign("graphes",graphes,envir=envir_stacomi) 
 	grDevices::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }

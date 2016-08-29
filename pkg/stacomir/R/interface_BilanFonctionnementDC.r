@@ -6,7 +6,7 @@
 interface_BilanFonctionnementDC = function()
 {
     fonctionnementDC=new("BilanFonctionnementDC")
-    assign("fonctionnementDC",fonctionnementDC,envir=.GlobalEnv)
+    assign("fonctionnementDC",fonctionnementDC,envir=envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
     fonctionnementDC@dc=charge(fonctionnementDC@dc)
@@ -48,6 +48,6 @@ interface_BilanFonctionnementDC = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    #assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 }

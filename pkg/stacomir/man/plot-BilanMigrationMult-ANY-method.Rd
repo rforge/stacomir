@@ -5,7 +5,8 @@
 \alias{plot,BilanMigrationMult,ANY-method}
 \title{Main plot method}
 \usage{
-\S4method{plot}{BilanMigrationMult,ANY}(x, y, plot.type = "standard", ...)
+\S4method{plot}{BilanMigrationMult,ANY}(x, y, plot.type = "standard",
+  silent = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigrationMult}

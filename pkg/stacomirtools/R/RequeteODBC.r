@@ -85,8 +85,8 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			# The connection might already be opened, we will avoid to go through there !
 			if (is.null(object@connection)){ 				
 				if (length(object@baseODBC)!=3)  {
-					if (exists("baseODBC",envir=.GlobalEnv)) {
-						object@baseODBC<-get("baseODBC",envir=.GlobalEnv)  
+					if (exists("baseODBC",envir=envir_stacomi)) {
+						object@baseODBC<-get("baseODBC",envir=envir_stacomi)  
 					} else {
 						funout(msg1,arret=TRUE)
 					}

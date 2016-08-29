@@ -17,6 +17,8 @@ fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
 
 \item{dc}{The DC}
 
+\item{silent}{Message displayed or not}
+
 \item{...}{other parameters passed from the plot method to the matplot function}
 
 \item{table=tableau}{A data frame with the with the following columns : No.pas,debut_pas,fin_pas,

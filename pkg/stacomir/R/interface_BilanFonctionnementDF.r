@@ -4,7 +4,7 @@
 interface_BilanFonctionnementDF = function()
 {
     fonctionnementDF=new("BilanFonctionnementDF")
-    assign("fonctionnementDF",fonctionnementDF,envir=.GlobalEnv)    
+    assign("fonctionnementDF",fonctionnementDF,envir=envir_stacomi)    
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
     fonctionnementDF@df=charge(fonctionnementDF@df)    
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -42,6 +42,6 @@ interface_BilanFonctionnementDF = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    #assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 }

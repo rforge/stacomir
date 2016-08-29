@@ -67,7 +67,7 @@ setMethod("choice",signature=signature("RefCheckBox"),definition=function(object
 			}
 			
 			frame_check<-gframe(object@title)	
-			assign("frame_check",frame_check,envir=.GlobalEnv)
+			assign("frame_check",frame_check,envir=envir_stacomi)
 			##=>selection de plusieurs caracteristiques
 			add(group,frame_check)
 			the_choice=list()

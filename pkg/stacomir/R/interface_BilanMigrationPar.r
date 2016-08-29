@@ -6,10 +6,10 @@
 interface_BilanMigrationPar = function()
 {
     bilanMigrationPar=new("BilanMigrationPar")
-    assign("bilanMigrationPar",bilanMigrationPar,envir=.GlobalEnv)
+    assign("bilanMigrationPar",bilanMigrationPar,envir=envir_stacomi)
     
     fonctionnementDC=new("BilanFonctionnementDC") # appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
-    assign("fonctionnementDC",fonctionnementDC,envir=.GlobalEnv)
+    assign("fonctionnementDC",fonctionnementDC,envir=envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.1)
     bilanMigrationPar@taxons=charge(bilanMigrationPar@taxons)
@@ -33,7 +33,7 @@ interface_BilanMigrationPar = function()
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
-    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
     toolbarlist = list(
     Calc=gWidgets::gaction(handler = hbilanMigrationParcalc,icon = "new",label="calcul",action=bilanMigrationPar,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.3),
     Graph=gWidgets::gaction(handler = hbilanMigrationPargraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.4),
@@ -44,7 +44,7 @@ interface_BilanMigrationPar = function()
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    #assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 
 }

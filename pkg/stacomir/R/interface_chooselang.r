@@ -20,7 +20,7 @@ interface_chooselang = function()
 		interface_graphique()
 	}
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
 			annuler=gWidgets::gaction(handler= hassingnlang,icon = "close",label="quitter")

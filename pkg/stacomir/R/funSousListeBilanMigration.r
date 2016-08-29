@@ -35,14 +35,10 @@ funSousListeBilanMigration=function(bilanMigration) {
 	req=new("RequeteODBC")
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	req@open<-TRUE
-	progwin <- gtkWindow()
-	progwin$setTitle("Calcul des effectifs par pas de temps")
-	progress_bar <- gtkProgressBar()
-	gtkWidgetSetSizeRequest(progress_bar,600,100)
-	progwin$add(progress_bar)
-	progress_bar$setText(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+	mygtkProgressBar(title="Calcul des effectifs par pas de temps",
+			progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
 	##############################			
-	on.exit(dispose(progress_bar)) # fermeture de la barre de progres
+	on.exit(dispose(progres)) # fermeture de la barre de progres
 	on.exit(if(!is.null(req@connection)) odbcClose(req@connection))   # ne pas lancer en debug
 	##############################"
 	##debug           
@@ -53,8 +49,9 @@ funSousListeBilanMigration=function(bilanMigration) {
 	dateFin=strftime(as.POSIXlt(DateFin(bilanMigration@pasDeTemps)),format="%Y-%m-%d %H:%M:%S")
 	while (getnoPasCourant(bilanMigration@pasDeTemps) != -1) {
 		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbStep
-		progress_bar$setFraction(progres,zz)
-		gtkMainIterationDo(FALSE)
+		progress_bar$setFraction(zz)
+		progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
+		RGtk2::gtkMainIterationDo(FALSE)
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
 		if(finPas!=round(finPas,"day")) stop("problemes d'arrondi dans le calcul de la date, verifier la fonction funsouslistebilanmigration")
@@ -428,7 +425,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 	}     # end boucle while
 	
 #odbcClose(channel)
-	close(progres)
+	dispose(progres)
 #close(progres) maintenant lance avec on.exit pour eviter les affichages intempestifs en cas de bug
 	
 	return (tablecalcmig)

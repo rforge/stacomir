@@ -86,7 +86,7 @@ source("fungraph_env.r")
 source("funstat.r")
 source("funtable.r")
 source("interface_BilanMigrationInterAnnuelle.r")
-source("interface_Bilan_lot.r")
+source("interface_Bilan_carlot.r")
 source("interface_bilan_poids_moyen.r")
 source("interface_Bilan_taille.r")
 source("interface_BilanConditionEnv.r")
@@ -98,6 +98,8 @@ source("interface_BilanFonctionnementDF.r")
 source("interface_BilanMigrationMult.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
- #stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
- # pour aller chercher les donnees
- setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+data("msg")
+ stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+
+

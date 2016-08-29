@@ -12,9 +12,10 @@
 #' @param taxon the species
 #' @param stade the stage
 #' @param dc the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @param silent Message displayed or not
 #' @param ... additional parameters passed from the plot method to plot
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,...){
+fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,silent,...){
 # calcul des variables
 	# pour adapter aux bilanMigrationMult, ligne par defaut...
 	#cat("fungraph_civelle")
@@ -30,7 +31,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n"))
+	if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n"))
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
@@ -122,12 +123,13 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	t_operation_ope<-stacomirtools::connect(req)@query
 	# sortie de commentaires
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours","\n"))
-	funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n"))
+	if (!silent){
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n"))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours","\n"))
+		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n"))
+	}
 	
-
 	req@sql<-fn_sql_dis(per_dis_identifiant=
 					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
 			dateDebut=as.Date(time.sequence[min(index)]),
@@ -247,7 +249,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	}
 	
 	###################################         
-	# creation d'un graphique vide (3)
+	# creation d'un graphique vide (3=DC)
 	###################################                 
 	
 	
@@ -345,7 +347,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	}
 	
 	###################################         
-	# creation d'un graphique vide (4)
+	# creation d'un graphique vide (4=OP)
 	###################################                 
 	
 	
@@ -387,7 +389,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
 	superpose.polygon$col=   mypalette[c(10,8)]
-	superpose.polygon$border=FALSE
+	superpose.polygon$border=rep("transparent",6)
 	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
 	fontsize<-lattice::trellis.par.get("fontsize")
 	fontsize$text=10
@@ -416,8 +418,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
 					rectangles = TRUE, 
 					points=FALSE, 
-					x=0.70,
-					y=0.85,
+					space="right",
 					cex=0.8),
 			strip=FALSE,
 			stack=TRUE)

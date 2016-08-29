@@ -5,12 +5,14 @@
 \title{returns a table where weights and number are calculated from number and weights respectively
 performs a query to collect the conversion coefficients}
 \usage{
-fun_weight_conversion(tableau, time.sequence)
+fun_weight_conversion(tableau, time.sequence, silent)
 }
 \arguments{
 \item{tableau}{Table issued from BilanMigration}
 
 \item{time.sequence}{Time sequence from BilanMigration}
+
+\item{silent}{If silent=TRUE do not display messages}
 }
 \value{
 tableau, the data frame

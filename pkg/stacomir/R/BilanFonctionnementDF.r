@@ -129,20 +129,16 @@ funbarchartDF = function(h,...) {
 	############################
 	#progress bar
 	###########################
-	progwin <- gtkWindow()
-	progwin$setTitle(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4)
-	progress_bar <- gtkProgressBar()
-	gtkWidgetSetSizeRequest(progress_bar,600,100)
-	progwin$add(progress_bar)
-	progress_bar$setText(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
-
-	
-
+	mygtkProgressBar(
+			title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
+			progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+	# this function assigns
 	z=0 # compteur tableau t_periodefonctdispositif_per_mois
 	for(j in 1:nrow(t_periodefonctdispositif_per)){
 		#cat( j 
-		progress_bar$setFraction(progres,j/nrow(t_periodefonctdispositif_per)) 
-		gtkMainIterationDo(FALSE)
+		progress_bar$setFraction(j/nrow(t_periodefonctdispositif_per)) 
+		progress_bar$setText(sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per))))
+		RGtk2::gtkMainIterationDo(FALSE)
 		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
 		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
 		while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
@@ -195,7 +191,7 @@ funbarchartDF = function(h,...) {
 	}
 	assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
 	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.8)
-	close(progress_bar)
+	dispose(progres)
 }   
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class

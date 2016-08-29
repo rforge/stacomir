@@ -861,10 +861,10 @@ interface_Bilan_stades_pigm = function()
 	choice(bilan_stades_pigm@lmax)
 	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
-	assign("refCheckBox",bilan_stades_pigm@options,envir_stacomi) 
+	assign("refCheckBox",bilan_stades_pigm@options,.globalEnv) 
 	choice(bilan_stades_pigm@salinite)
 	# on assigne directement (sans forcement changer les options...)
-	assign("refTextBox",bilan_stades_pigm@salinite,envir_stacomi)
+	assign("refTextBox",bilan_stades_pigm@salinite,.globalEnv)
 	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
 	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilan_stades_pigm_date_debut",

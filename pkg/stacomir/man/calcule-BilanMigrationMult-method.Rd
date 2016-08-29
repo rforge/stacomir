@@ -5,13 +5,16 @@
 \alias{calcule,BilanMigrationMult-method}
 \title{calcule method for BilanMigrationMult}
 \usage{
-\S4method{calcule}{BilanMigrationMult}(object, negative = FALSE)
+\S4method{calcule}{BilanMigrationMult}(object, negative = FALSE,
+  silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigrationMult-class}}}
 
 \item{negative}{a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 different rows}
+
+\item{silent}{Defautl FALSE, should messages be stopped}
 }
 \value{
 BilanMigrationMult with slots filled by user choice

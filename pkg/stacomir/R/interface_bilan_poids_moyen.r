@@ -6,7 +6,7 @@ interface_BilanPoidsMoyen = function()
 {
     quitte()  # vidange de l'interface
 	bilan_poids_moyen=new("Bilan_poids_moyen")
-    assign("bilan_poids_moyen",bilan_poids_moyen,envir = .GlobalEnv)
+    assign("bilan_poids_moyen",bilan_poids_moyen,envir = envir_stacomi)
     bilan_poids_moyen@dc=charge(bilan_poids_moyen@dc)
     bilan_poids_moyen@anneedebut=charge(bilan_poids_moyen@anneedebut)
     bilan_poids_moyen@anneefin=charge(bilan_poids_moyen@anneefin)
@@ -27,7 +27,7 @@ interface_BilanPoidsMoyen = function()
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    #assign("graphes",graphes,envir=.GlobalEnv)
+    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     choice(bilan_poids_moyen@liste)

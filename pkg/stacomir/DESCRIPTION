@@ -69,7 +69,7 @@ Collate:
     'interface_BilanMigrationInterannuelle.r'
     'interface_BilanMigrationMult.r'
     'interface_BilanMigrationPar.r'
-    'interface_Bilan_lot.r'
+    'interface_Bilan_carlot.r'
     'interface_Bilan_taille.r'
     'interface_bilan_poids_moyen.r'
     'interface_chooselang.r'
