@@ -1,11 +1,14 @@
 #' fn_EcritBilanJournier writes the daily migration in the
 #' t_bilanmigrationjournalier_bjo table
 #' 
+#' Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
+#' the function fn_EcritBilanJournalier
 #' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @note the user is asked whether or not he wants to overwrite data, if no
 #' data are present in the database, the import is done anyway
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 fn_EcritBilanJournalier<-function(bilanMigration){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau
 	# je cherche les colonnes que je ne veux pas retenir

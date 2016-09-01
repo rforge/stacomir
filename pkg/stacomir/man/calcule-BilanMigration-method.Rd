@@ -16,7 +16,7 @@ different rows}
 \item{silent}{Boolean, if true, information messages are not displays, only warnings and errors}
 }
 \value{
-BilanMigration with slots filled by user choice
+BilanMigration with calcdata slot filled.
 }
 \description{
 does the calculation once data are filled,. It also performs conversion from weight to numbers

@@ -5,6 +5,7 @@
 #' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param resum data frame with summary per month
+#' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
 	t_bilanmigrationmensuel_bme=stacomirtools::killfactor(

@@ -13,7 +13,7 @@
 
 \item{y}{From the formals but missing}
 
-\item{plot.type}{One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+\item{plot.type}{One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 \code{multiple}}
 
 \item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}

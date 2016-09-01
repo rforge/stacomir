@@ -19,9 +19,9 @@ conditions in the same chart
 
 \item{\code{stades}}{An object of class \code{\link{RefStades-class}}}
 
-\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning}
+\item{\code{anneeDebut}}{Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning}
 
-\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
+\item{\code{anneeFin}}{Object of class \code{\link{RefAnnee-class}}
 refAnnee allows to choose last year of the Bilan}
 }}
 \section{Objects from the Class}{

@@ -10,6 +10,7 @@ Description: Graphical outputs and treatment for a database of fishway
     available in French English and Spanish.
 License: GPL (>= 2)
 Collate:
+    'BilanAnnuels.r'
     'utilitaires.r'
     'create_generic.r'
     'RefStationMesure.r'
@@ -35,7 +36,6 @@ Collate:
     'Refparqual.r'
     'Refparquan.r'
     'BilanMigrationPar.r'
-    'BilanAnnuels.r'
     'Bilan_carlot.r'
     'RefCoe.r'
     'Bilan_poids_moyen.r'

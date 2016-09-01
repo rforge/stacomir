@@ -4,10 +4,14 @@
 \alias{fungraph}
 \title{Function for BilanMigration graphes including numbers DF DC operations}
 \usage{
-fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
+fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc=NULL,silent,...)
 }
 \arguments{
 \item{bilanMigration}{An object of class \code{\linkS4class{BilanMigration}}}
+
+\item{tableau}{A data frame with the with the following columns : No.pas,debut_pas,fin_pas,
+ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
+EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 
 \item{time.sequence}{A vector POSIXt}
 
@@ -20,10 +24,6 @@ fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
 \item{silent}{Message displayed or not}
 
 \item{...}{other parameters passed from the plot method to the matplot function}
-
-\item{table=tableau}{A data frame with the with the following columns : No.pas,debut_pas,fin_pas,
-ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
-EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 }
 \description{
 This graph is for species other than glass eel

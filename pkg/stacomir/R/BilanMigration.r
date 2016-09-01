@@ -26,6 +26,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @example examples/02_BilanMigration/bilanMigration_Arzal.R
 #' @export 
 setClass(Class="BilanMigration",
 		representation=
@@ -254,7 +255,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			}
 		})
 
-#' Plots of various type for BilanMigration
+#' Plots of various type for BilanMigration, and performs writing to the database of daily values.
 #' 
 #' \itemize{
 #' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
@@ -262,9 +263,11 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 #' }
+#' @note When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
+#' these entries are necessary to run the Interannual Migration class.
 #' @param x An object of class BilanMigrationMult
 #' @param y From the formals but missing
-#' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
+#' @param plot.type One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -340,6 +343,10 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 									silent)
 						}
 					} # end nrow(data)>0	
+					###########################################""
+					# Writes the daily bilan in the database
+					#########################################
+					fn_EcritBilanJournalier(bilanMigration)
 				} # end is.null(data)
 				
 				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§

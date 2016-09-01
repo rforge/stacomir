@@ -1,6 +1,3 @@
-# Author: cedric.briand
-###############################################################################
-
 context("BilanMigrationMult")
 test_that("Test an instance of bilanMigrationMult",{
 			require(stacomiR)
