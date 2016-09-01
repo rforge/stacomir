@@ -5,23 +5,25 @@
 \alias{calcule,BilanMigration-method}
 \title{calcule method for BilanMigration}
 \usage{
-\S4method{calcule}{BilanMigration}(object)
+\S4method{calcule}{BilanMigration}(object, negative = FALSE, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigrationMult-class}}}
+\item{object}{An object of class \code{\link{BilanMigration-class}}}
 
 \item{negative}{a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 different rows}
+
+\item{silent}{Boolean, if true, information messages are not displays, only warnings and errors}
 }
 \value{
-BilanMigrationMult with slots filled by user choice
+BilanMigration with slots filled by user choice
 }
 \description{
-does the calculation once data are filled 
+does the calculation once data are filled,. It also performs conversion from weight to numbers
 in with the connect method
 }
 \note{
-The class BilanMigrationMult does not handle  escapement rates.
+The class BilanMigration does not handle escapement rates nor 
 'devenir' i.e. the destination of the fishes.
 }
 

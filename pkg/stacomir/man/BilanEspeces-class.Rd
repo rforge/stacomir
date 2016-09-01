@@ -23,7 +23,7 @@ year/week/month
 
 \item{\code{data}}{\code{data.frame}}
 
-\item{\code{liste}}{Object of class \code{\link{RefListe}} RefListe referential
+\item{\code{liste}}{Object of class \code{\link{RefListe-class}} RefListe referential
 class choose within a list}
 }}
 \section{Objects from the Class}{

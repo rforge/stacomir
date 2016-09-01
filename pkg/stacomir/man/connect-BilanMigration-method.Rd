@@ -7,6 +7,9 @@
 \usage{
 \S4method{connect}{BilanMigration}(object, ...)
 }
+\arguments{
+\item{object}{An object of class \link{BilanMigration-class}}
+}
 \value{
 BilanMigration with slot @data filled from the database
 }

@@ -10,6 +10,9 @@ funBilanMigrationAnnuel(bilanMigration)
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
 }
+\value{
+A dataframe with column effectif, comprising the sum of bilanMigration counts
+}
 \description{
 this functions performs the sum over the year attention this function does
 not count subsamples.

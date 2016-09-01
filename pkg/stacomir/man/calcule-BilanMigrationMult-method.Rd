@@ -17,10 +17,10 @@ different rows}
 \item{silent}{Defautl FALSE, should messages be stopped}
 }
 \value{
-BilanMigrationMult with slots filled by user choice
+BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
 }
 \description{
-does the calculation once data are filled 
+does the calculation once data are filled. It also performs conversion from weight to numbers
 in with the connect method
 }
 \note{

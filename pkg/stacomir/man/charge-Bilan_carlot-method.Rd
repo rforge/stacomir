@@ -8,12 +8,12 @@
 \S4method{charge}{Bilan_carlot}(object, h)
 }
 \arguments{
-\item{object}{An object of class \code{\link{Bilan_carlot}}}
+\item{object}{An object of class \link{Bilan_carlot-class}}
 
 \item{h}{a handler}
 }
 \value{
-Bilan_carlot with slots filled with user choice
+An object of class \link{Bilan_carlot-class} with slots filled with user choice
 
 An object of the class
 }

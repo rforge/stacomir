@@ -20,7 +20,7 @@ mygtkProgressBar(title, progress_text, width = 400, height = 50,
 \item{pulse}{Do you want the widget to pulse}
 }
 \value{
-nothing but progress_bar and dialog gwidgets are assigned to .globalEnv
+nothing but progress_bar and dialog gwidgets are assigned to .GlobalEnv
 }
 \description{
 Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
