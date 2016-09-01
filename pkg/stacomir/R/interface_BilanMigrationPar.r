@@ -33,7 +33,7 @@ interface_BilanMigrationPar = function()
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
-    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     toolbarlist = list(
     Calc=gWidgets::gaction(handler = hbilanMigrationParcalc,icon = "new",label="calcul",action=bilanMigrationPar,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.3),
     Graph=gWidgets::gaction(handler = hbilanMigrationPargraph,icon = "graph",label="graph",tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.4),

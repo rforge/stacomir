@@ -64,6 +64,14 @@ hbilanMigrationConditionEnvcalc=function(h,...){
 	# calcule(bilanMigrationConditionEnv)
 }
 #object<-bilanMigrationConditionEnv
+#' Performs the calculations of environment conditions attached to a migration monitoring station
+#' 
+
+
+#' @param object An object of class \code{\link{BilanMigrationEnv-class}}
+#' @param ... additional parameters
+#' @return \code{\link{BilanMigrationEnv-class}}
+#' @export
 setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition=function(object,...){ 
 			# le chargement de bilanMigration utilise la methode calcule de BilanMigration
 			# qui charge les objects et en plus fait un calcul dessus, e la fin cette methode assigne les objects

@@ -30,7 +30,7 @@ interface_ConditionEnv = function()
     
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
-    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     
     toolbarlist = list(
     #Calc=gWidgets::gaction(handler=hbilanConditionEnvcalc , action=bilanConditionEnv,icon = "new",label="calcul",tooltip="calcul des conditions environnementales entre deux dates"),

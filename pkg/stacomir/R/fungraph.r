@@ -3,9 +3,9 @@
 #' This graph is for species other than glass eel
 #' 
 #' 
-#' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc,...)
+#' @usage fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc=NULL,silent,...)
 #' @param bilanMigration An object of class \code{\linkS4class{BilanMigration}}
-#' @param table=tableau A data frame with the with the following columns : No.pas,debut_pas,fin_pas,              
+#' @param tableau A data frame with the with the following columns : No.pas,debut_pas,fin_pas,              
 #' ope_dic_identifiant,lot_tax_code,lot_std_code,type_de_quantite,MESURE,CALCULE,               
 #' EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient
 #' @note this function is intended to be called from the plot method in BilanMigrationMult and BilanMigration

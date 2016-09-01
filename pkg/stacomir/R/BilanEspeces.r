@@ -13,7 +13,7 @@
 #' @slot datedebut A \link[base]{-.POSIXt} value
 #' @slot datefin A \link[base]{-.POSIXt} value 
 #' @slot data \code{data.frame}
-#' @slot liste Object of class \code{\link{RefListe}} RefListe referential
+#' @slot liste Object of class \code{\link{RefListe-class}} RefListe referential
 #' class choose within a list
 
 #' @include RefDC.r

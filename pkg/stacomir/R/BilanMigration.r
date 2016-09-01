@@ -91,10 +91,10 @@ setMethod("connect",signature=signature("BilanMigration"),definition=function(ob
 		})
 #' command line interface for BilanMigration class
 #' @param object An object of class \link{BilanMigration-class}
-#' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c-RefDC-method}
+#' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
 #' @param taxons Either a species name in latin or the SANDRE code for species (ie 2038=Anguilla anguilla),
-#' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c-RefTaxon-method}
-#' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c-RefStades-method}
+#' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
+#' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c,RefStades-method}
 #' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades, and RefPasDeTempsJournalier and then 
@@ -158,7 +158,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			}
 			stopifnot(validObject(bilanMigration, test=TRUE))
 			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
-			return(bilanMigrationMult)
+			return(bilanMigration)
 		})
 
 
@@ -172,7 +172,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 #' @param silent Boolean, if true, information messages are not displays, only warnings and errors
 #' @note The class BilanMigration does not handle escapement rates nor 
 #' 'devenir' i.e. the destination of the fishes.
-#' @return BilanMigration with slots filled by user choice
+#' @return BilanMigration with calcdata slot filled.
 #' @export
 setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			#bilanMigration<-bM_Arzal
@@ -269,13 +269,6 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-
-#' handler hBilanMigrationgraph
-#' calls the fungraph for BilanMigration and allows the saving of daily and monthly counts in the database
-#' @note pb if other than daily value, the time steps have been constrained to daily values for this plot
-#' @param h a handler
-#' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(x, y,plot.type="standard",silent=FALSE,...){ 
 			#bilanMigration<-bM_Arzal
 			bilanMigration<-x
@@ -306,8 +299,8 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 						}
 						if (any(duplicated(data$No.pas))) stop("duplicated values in No.pas")
 						data_without_hole<-merge(
-								data.frame(No.pas=as.numeric(strftime(bilanMigrationMult@time.sequence,format="%j"))-1,
-										debut_pas=bilanMigrationMult@time.sequence),
+								data.frame(No.pas=as.numeric(strftime(bilanMigration@time.sequence,format="%j"))-1,
+										debut_pas=bilanMigration@time.sequence),
 								data,
 								by=c("No.pas","debut_pas"),
 								all.x=TRUE

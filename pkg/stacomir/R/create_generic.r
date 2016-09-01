@@ -4,19 +4,67 @@
 #liste_chemins=chargecsv()
 #baseODBC=liste_chemins[["baseODBC"]]
 #listes de connection e la base de donnee (programmation S4)
+
+#' Generic method for choice (using the gwidget graphical interface)
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("choice",def=function(object,...) standardGeneric("choice"))
+#' Generic method for multiple choice (using the gwidget graphical interface)
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("choicemult",def=function(object,...) standardGeneric("choicemult"))
-# load method to work outside the graphical interface
+#' Generic method for manual choice
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("choice_c",def=function(object,...) standardGeneric("choice_c"))
+#' Generic method to load referentials
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("charge",def=function(object,...) standardGeneric("charge"))
+#' Generic method to load referentials, with filters from the parent object in the database
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
+#' Generic method for plot
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))
+#' Generic method to load additional data
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("charge_complement",def=function(object,...) standardGeneric("charge_complement"))
+#' Generic method for calculations
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("calcule",def=function(object,...) standardGeneric("calcule"))
+#' Generic method to delete entires from the database
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("supprime",def=function(object,...) standardGeneric("supprime"))
+#' Generic method getvalue
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("getvalue",def=function(object,...) standardGeneric("getvalue"))
+#' Generic method getvalue
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("out",def=function(object,...) standardGeneric("out"))
+#' Generic method to create messages
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("createmessage",def=function(object,...) standardGeneric("createmessage"))
 # nouvel environnement
 

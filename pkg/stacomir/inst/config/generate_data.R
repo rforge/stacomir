@@ -35,7 +35,7 @@ devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for BilanMigrationMult
+# generates dataset for BilanMigration
 # from the vertical slot fishway located at the estuary of the Vilaine (Brittany)
 # Taxa Liza Ramada (Thinlip grey mullet) in 2015
 ##################################

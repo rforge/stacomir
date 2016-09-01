@@ -72,7 +72,7 @@ interface_Bilan_carlot = function()
     ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
     gWidgets::add(ggroupboutons,ggroupboutonsbas)
     gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-    assign("ggroupboutonsbas",ggroupboutonsbas, envr=.GlobalEnv)
+    assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
     
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)

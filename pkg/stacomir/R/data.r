@@ -52,13 +52,13 @@
 #' This data corresponds to the data collected at the vertical slot fishway
 #' in 2015, video recording of the thin lipped mullet Liza ramada migration
 #'
-#' @format An object of class bilanMigration with slots:
+#' @format An object of class bilanMigration with 8 slots:
 #' \describe{
-#'   \item{dc}{the \code{RefDC} object filled with data}
-#'   \item{taxons}{the \code{RefTaxon} object filled in with data corresponding to dc}
-#'   \item{stades}{the \code{RefStades} object filled in with data corresponding to dc, and taxon}
+#'   \item{dc}{the \code{RefDC} object with 4 slots filled with data corresponding to the iav postgres schema}
+#'   \item{taxons}{the \code{RefTaxon} the taxa selected}
+#'   \item{stades}{the \code{RefStades} the stage selected}
 #'   \item{pasDeTemps}{the \code{PasDeTempsJournalier} calculated for all 2015}
-#'   \item{data}{ A dataframe with 400 rows and 11 variables
+#'   \item{data}{ A dataframe with 10304 rows and 11 variables
 #' 			\describe{
 #'   			\item{ope_identifiant}{operation id}
 #'   			\item{lot_identifiant}{sample id}
@@ -72,8 +72,8 @@
 #'   			\item{lot_methode_obtention}{method of data collection, measured, calculated...} 
 #'   			}
 #'   }
-#'   \item{coef_conversion}{A data frame with 364 observations with daily coefficients to convert from weight to numbers}
-#'   \item{time.sequence}{A time sequence generated for the bilan, used internally by the object}
+#'   \item{coef_conversion}{A data frame with 0 observations : no quantity are reported for video recording of mullets, only numbers}
+#'   \item{time.sequence}{A time sequence generated for the bilan, used internally}
 #' }
 #' @keywords data
-"bMM_Arzal"
+"bM_Arzal"

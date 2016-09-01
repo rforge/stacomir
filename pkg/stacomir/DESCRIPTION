@@ -35,6 +35,7 @@ Collate:
     'Refparqual.r'
     'Refparquan.r'
     'BilanMigrationPar.r'
+    'BilanAnnuels.r'
     'Bilan_carlot.r'
     'RefCoe.r'
     'Bilan_poids_moyen.r'
@@ -104,4 +105,5 @@ Author: Cedric Briand [aut, cre],
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Suggests: testthat
+Suggests:
+    testthat

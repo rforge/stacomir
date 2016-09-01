@@ -204,7 +204,7 @@ vector_to_listsql<-function(vect)
 #' @param width Width of the progress bar
 #' @param height Height of the progress bar
 #' @param pulse Do you want the widget to pulse
-#' @return nothing but progress_bar and dialog gwidgets are assigned to .globalEnv
+#' @return nothing but progress_bar and dialog gwidgets are assigned to .GlobalEnv
 #' 
 #' @author cedric.briand
 #' @examples 

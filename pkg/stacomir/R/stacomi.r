@@ -57,7 +57,7 @@ hBilanConditionEnv=function(h,...){
 #' handler function used by the main interface
 hBilan_carlot=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.10,wash=TRUE)
-	eval(interface_BilanLot(),envir = .GlobalEnv)
+	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 hTail=function(h,...){
@@ -437,7 +437,7 @@ interface_graphique=function(){
 	
 	gWidgets::add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
-# Variables used in aes arguments generate a note as being assigned to .globalEnv, either use aes_string,
+# Variables used in aes arguments generate a note as being assigned to .GlobalEnv, either use aes_string,
 # or listing them below removes the warning in Rcheck. Discussion in stackoverflow about this, hadley wickham
 # considering this a hideous hack..
 utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effectifs",

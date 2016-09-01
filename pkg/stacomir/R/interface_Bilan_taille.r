@@ -1,6 +1,6 @@
 # Nom fichier :        interface_Bilan_taille.R    (interface)
 
-# see interface_BilanLot for doc
+# see interface_Bilancarlot for doc
 interface_BilanTaille = function()
 {
 	bilan_taille=new("Bilan_taille")

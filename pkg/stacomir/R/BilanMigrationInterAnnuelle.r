@@ -13,8 +13,8 @@
 #' @slot data Object of class \code{"data.frame"} data for bilan lot 
 #' @slot taxons An object of class \code{\link{RefTaxon-class}}
 #' @slot stades An object of class \code{\link{RefStades-class}}
-#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning
-#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
+#' @slot anneeDebut Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning
+#' @slot anneeFin Object of class \code{\link{RefAnnee-class}}
 #' refAnnee allows to choose last year of the Bilan
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
