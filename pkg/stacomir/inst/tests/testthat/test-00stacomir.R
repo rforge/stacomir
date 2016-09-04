@@ -76,7 +76,7 @@ context("Loading program")
 
 test_that("Test that working environment is created",{
 			require(stacomiR)
-			stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
+			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 			expect_true(exists("envir_stacomi"))
 			dispose(logw)
 			rm("envir_stacomi",envir =.GlobalEnv)
@@ -84,15 +84,15 @@ test_that("Test that working environment is created",{
 
 test_that("Test that gWidget loginwindow is loaded ",{
 			require(stacomiR)
-			stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
+			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 			expect_true(exists("logw"))
 			dispose(logw)
 			rm("envir_stacomi",envir =.GlobalEnv)
 })
 
-test_that("Test that gWidget gr_interface is loaded, without pre_launch_test, nor login window",{
+test_that("Test that gWidget gr_interface is loaded, without database_expected, nor login window",{
 			require(stacomiR)
-			stacomi(gr_interface=TRUE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
 			expect_true(exists("win"))
 			dispose(win)
 			rm("envir_stacomi",envir =.GlobalEnv)
@@ -100,7 +100,7 @@ test_that("Test that gWidget gr_interface is loaded, without pre_launch_test, no
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
 			require(stacomiR)
-			stacomi(gr_interface=TRUE,login_window=FALSE,pre_launch_test=TRUE)
+			stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=TRUE)
 			expect_true(exists("win"))
 			dispose(win)
 			rm("envir_stacomi",envir =.GlobalEnv)
@@ -127,7 +127,7 @@ test_that("Test that  messages without connection are loaded and of the same len
 			object<-createmessage(object,TRUE)	
 			msgbase<-get("msg",envir=envir_stacomi)
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			msg<-get("msg",envir=envir_stacomi)
 			# objects should have the same length but different languages
 			expect_identical(length(msg),length(msgbase))

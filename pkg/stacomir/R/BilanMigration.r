@@ -264,7 +264,8 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 #' }
 #' @note When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-#' these entries are necessary to run the Interannual Migration class.
+#' these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
+#' then no entry will be written to the database
 #' @param x An object of class BilanMigrationMult
 #' @param y From the formals but missing
 #' @param plot.type One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
@@ -346,7 +347,8 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 					###########################################""
 					# Writes the daily bilan in the database
 					#########################################
-					fn_EcritBilanJournalier(bilanMigration)
+					database_expected<-get("database_expected",envir=envir_stacomi)
+					if (database_expected) fn_EcritBilanJournalier(bilanMigration,silent)
 				} # end is.null(data)
 				
 				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§

@@ -355,7 +355,6 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	graphics::par("mar"=c(4, 4, 1, 2) + 0.1)
 	tableau$mois=factor(months(tableau$debut_pas,abbreviate=TRUE),
 			levels=unique(months(tableau$debut_pas,abbreviate=TRUE)))
-
 	tableaum<-reshape2::melt(data=tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL","mois")],							
 							id.vars=c("mois"),
 							measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),

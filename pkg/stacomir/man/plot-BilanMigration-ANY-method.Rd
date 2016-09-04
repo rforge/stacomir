@@ -3,7 +3,7 @@
 \docType{methods}
 \name{plot,BilanMigration,ANY-method}
 \alias{plot,BilanMigration,ANY-method}
-\title{Plots of various type for BilanMigration}
+\title{Plots of various type for BilanMigration, and performs writing to the database of daily values.}
 \usage{
 \S4method{plot}{BilanMigration,ANY}(x, y, plot.type = "standard",
   silent = FALSE, ...)
@@ -25,6 +25,10 @@
 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 }
+}
+\note{
+When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
+these entries are necessary to run the Interannual Migration class.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -45,7 +45,7 @@ it uses quantities other than numbers if necessary (only used for glass eel in t
 \examples{
 library(stacomiR)
 
-stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE) 
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ## launches the application in the command line
 ## here an example of loading
 ## not run as the program is possibly not installed
@@ -53,7 +53,7 @@ stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
 \dontrun{
 	stacomi(gr_interface=FALSE,
 			login_window=FALSE,
-			pre_launch_test=FALSE)	
+			database_expected=FALSE)	
 	bMM_Arzal=new("BilanMigrationMult")
 	bMM_Arzal=choice_c(bMM_Arzal,
 			dc=c(5,6,12),

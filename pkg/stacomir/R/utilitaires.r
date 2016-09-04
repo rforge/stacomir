@@ -219,7 +219,7 @@ vector_to_listsql<-function(vect)
 #'dispose(progres)
 #' }
 mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
-	.dialog <- RGtk2::gtkDialog(title=title, NULL, NULL,
+	.dialog <- gWidgetsRGtk2::gtkDialog(title=title, NULL, NULL,
 			"gtk-close", RGtk2::GtkResponseType["none"],
 			show = FALSE)
 	assign("progres",.dialog,envir=envir_stacomi)

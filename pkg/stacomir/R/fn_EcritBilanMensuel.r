@@ -1,6 +1,7 @@
 #' This writes monthly data in t_bilanmensuel_mens table
 #' 
-#' Launched by fun_EcritBilanJournalier
+#' @note This function is launched by fun_EcritBilanJournalier, the resum 
+#' dataset is created by the \link{funstat} function
 #' 
 #' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
@@ -8,14 +9,15 @@
 #' @export
 fn_EcritBilanMensuel<-function(bilanMigration,resum){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
+	# below not the most elegant way to do it but efficient
+	
 	t_bilanmigrationmensuel_bme=stacomirtools::killfactor(
 			cbind(bilanMigration@dc@dc_selectionne,
 					bilanMigration@taxons@data$tax_code,
 					bilanMigration@stades@data$std_code,
-					unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")),
-					rep(rownames(resum),12),
-					# stack re-ordonne les tab de donnees !
-					stack(resum,select=c(1:13)),  
+					unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")), # une valeur
+					rep(rownames(resum),(ncol(resum)-2)), # nb of month except columns bilan and label
+					stack(resum,select=c(2:(ncol(resum)-1))),# stack re-ordonne les tab de donnees !  
 					format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
 					substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 			)

@@ -9,8 +9,9 @@
 #' @param DC  The counting device
 #' @param silent Message displayed or not
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 funstat=function(tableau,time.sequence,taxon,stade,DC,silent){
-	funout(get("msg",envir=envir_stacomi)$funstat.1)
+	if (!silent) funout(get("msg",envir=envir_stacomi)$funstat.1)
 	mois=strftime(as.POSIXlt(time.sequence),"%m")
 	moislab=unique(mois)
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))

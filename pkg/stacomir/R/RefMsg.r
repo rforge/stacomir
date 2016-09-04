@@ -49,15 +49,15 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 
 #' createmessage method for RefMsg referential objects 
 #' @param ojbect An objet of class RefMsg
-#' @param pre_launch_test Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package
+#' @param database_expected Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, doublequotes are now escaped with an antislash (/"), those at the beginning and end are left as doublequotes, 
 #' the others are single quote when they are to be pasted within the text as code example. The remainder "c("a","b","c") are rebuilt into vectors by the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @keywords internal
-setMethod("createmessage",signature=signature("RefMsg"),definition=function(object,pre_launch_test) {
-			if (pre_launch_test){
+setMethod("createmessage",signature=signature("RefMsg"),definition=function(object,database_expected) {
+			if (database_expected){
 				#object=new("RefMsg")
 				object<-charge(object)
 				object<-charge_avec_filtre(object,lang=get("lang",envir=envir_stacomi))
@@ -114,7 +114,7 @@ setMethod("createmessage",signature=signature("RefMsg"),definition=function(obje
 				}
 				msg<-create_vector(msg)
 				assign("msg",msg,envir=envir_stacomi)
-			} else	{ # !pre_launch_test
+			} else	{ # !database_expected
 				utils::data("msg")
 				assign("msg",msg,envir=envir_stacomi)
 			}

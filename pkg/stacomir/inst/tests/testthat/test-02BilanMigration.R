@@ -1,7 +1,7 @@
 context("BilanMigration")
 test_that("Test an instance of bilanMigration",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
@@ -26,7 +26,7 @@ test_that("Test an instance of bilanMigration",{
 test_that("Test connect method",{
 			stacomi(gr_interface=FALSE,
 					login_window=FALSE,
-					pre_launch_test=FALSE)	
+					database_expected=FALSE)	
 			# overriding user schema
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)

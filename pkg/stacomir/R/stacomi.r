@@ -87,7 +87,7 @@ hBilanEspeces=function(h,...){
 
 
 #' Internal function, tests the connection and if it works loads the stacomi interface
-#' @note \code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{pre_launch_test}
+#' @note \code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{database_expected}
 #' 
 #' @param h A handler
 #' @param ... Other arguments
@@ -96,10 +96,10 @@ husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	# assigned when passing through stacomi
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
-	pre_launch_test<-get("pre_launch_test",envir_stacomi) # logical true or false
+	database_expected<-get("database_expected",envir_stacomi) # logical true or false
 	login_window<-get("login_window",envir_stacomi) # logical true or false
 	# test de la connection
-	if (login_window & gr_interface&pre_launch_test){	
+	if (login_window & gr_interface&database_expected){	
 			baseODBC[2]<-svalue(usrname)
 			baseODBC[3]<-svalue(usrpwd)
 			assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
@@ -112,7 +112,7 @@ husr=function(h,...){
 		# we dispose loginwindow
 	
 	
-	if (pre_launch_test){
+	if (database_expected){
 		con=new("ConnectionODBC")
 		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
@@ -129,7 +129,7 @@ husr=function(h,...){
 	#############################
 	# second test to check that the database is working well
 	############################
-	if (pre_launch_test){
+	if (database_expected){
 		if (test) { # il existe un lien ODBC mais qui pointe peut etre ailleurs
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -181,7 +181,7 @@ husr=function(h,...){
 					handler=hgmessage)
 		} # end else test (else == the test didn't pass, we have to change the name and password	
 	} else {
-		# here : pre_launch_test=FALSE
+		# here : database_expected=FALSE
 		# we don't want to check the connection at all...
 		if (gr_interface){
 			interface_graphique()
@@ -213,26 +213,27 @@ hX11=function(h,...){
 #' 			the program will skip the login window and use calcmig values for user (\code{uid}) and password(\code{pwd}) as a default.}
 #'      \item{tests for connection}{ Test for the existence of a calcmig.csv file, and then the existence of the file
 #' 			\code{usr.tr_taxon_tax} where usr is the username extracted from calcmig. These tests are only done if 
-#' 			\code{pre_launch_test=TRUE}. If the test don't pass, then the user is prompted for a "login window" even if argument
+#' 			\code{database_expected=TRUE}. If the test don't pass, then the user is prompted for a "login window" even if argument
 #' 			\code{login_window} was set to \code{FALSE} at launch.}
 #'       \item{graphical interface}{ When either, previous tests have been run successfully, or the value for
-#'          \code{pre_launch_test=FALSE} the program will launch. If \code{graphical_interface} is \code{TRUE}, the program will use
+#'          \code{database_expected=FALSE} the program will launch. If \code{graphical_interface} is \code{TRUE}, the program will use
 #'          a graphical interface \code{\link{interface_graphique}} to build the graphical interface, otherwise the program is expected to run
 #' 			through the command line.}
 #'  }
-#' When \code{pre_launch_test=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
+#' When \code{database_expected=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
 #'  And also messages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
 #' are only avalaible in english. 
 #' 
 #' @param gr_interface Boolean, if \code{TRUE} the program will launch the graphical interface
 #' @param login_window Boolean, if \code{TRUE} a login window will be displayed asking the user to specify
 #' user name.
-#' @param pre_launch_test Boolean, if \code{TRUE} pre launch tests will be run to test the connection validity
-#' @usage stacomi(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE)
+#' @param database_expected Boolean, if \code{TRUE} pre launch tests will be run to test the connection validity
+#' @usage stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 #' @import stringr
 #' @import RColorBrewer
 #' @import gWidgets
 #' @import gWidgetsRGtk2
+#' @import RGtk2
 #' @import ggplot2
 #' @import RPostgreSQL
 #' @import sqldf
@@ -240,6 +241,7 @@ hX11=function(h,...){
 #' @import stacomirtools
 #' @import RODBC
 #' @import Hmisc
+#' @import RGtk2
 #' @importFrom intervals Intervals
 #' @importFrom intervals closed<-
 #' @importFrom intervals interval_overlap
@@ -273,15 +275,15 @@ hX11=function(h,...){
 #' 	stacomi(login_window=FALSE)
 #' }  
 #' #launch stacomi without connection to the database
-#' stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+#' stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 #' @export
-stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
+stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	envir_stacomi <- new.env(parent = emptyenv())
 	assign("envir_stacomi",envir_stacomi,.GlobalEnv)
 	# trois variables passées à interface graphique via envir_stacomi :
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
-	assign("pre_launch_test",pre_launch_test,envir=envir_stacomi)
+	assign("database_expected",database_expected,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
    # the first messages are necessary for the first access to the database, they are in French
 	msg<-messages()
@@ -300,7 +302,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 	
 	refMsg=new("RefMsg")
-	createmessage(refMsg,pre_launch_test)
+	createmessage(refMsg,database_expected)
 	
 	msg=get("msg",envir=envir_stacomi)
 	#libraries()
@@ -311,7 +313,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,pre_launch_test=TRUE){
 			sqldf.RPostgreSQL.port = sqldf.options["sqldf.port"])
 	# loginWindow, will call the husr handler
 	# user login
-	if (gr_interface&login_window&pre_launch_test){
+	if (gr_interface&login_window&database_expected){
 		logw <- gWidgets::gwindow(msg$interface_graphique_log.1, 
 				name="log",
 				parent=c(0,0),

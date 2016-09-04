@@ -5,10 +5,10 @@
 \alias{createmessage,RefMsg-method}
 \title{createmessage method for RefMsg referential objects}
 \usage{
-\S4method{createmessage}{RefMsg}(object, pre_launch_test)
+\S4method{createmessage}{RefMsg}(object, database_expected)
 }
 \arguments{
-\item{pre_launch_test}{Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package}
+\item{database_expected}{Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package}
 
 \item{ojbect}{An objet of class RefMsg}
 }

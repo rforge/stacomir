@@ -1,7 +1,7 @@
 context("BilanMigrationMult")
 test_that("Test an instance of bilanMigrationMult",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
 			options(warn = 2)
 			bilanMigrationMult<-choice_c(bilanMigrationMult,
@@ -16,7 +16,7 @@ test_that("Test an instance of bilanMigrationMult",{
 ## This test check that the code above works with numeric and a different formating for date
 test_that("Test another instance of bilanMigrationMult",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
 			options(warn = 2)
 			bilanMigrationMult<-choice_c(bilanMigrationMult,
@@ -31,7 +31,7 @@ test_that("Test another instance of bilanMigrationMult",{
 test_that("Tests one instance with error (dc does not exist)",
 		{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
 			options(warn = 2)
 			expect_error(choice_c(bilanMigrationMult,
@@ -45,7 +45,7 @@ test_that("Tests one instance with error (dc does not exist)",
 test_that("Tests one instance with error (dc does not exist)",
 		{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
 			options(warn = 2)
 			expect_error(choice_c(bilanMigrationMult,

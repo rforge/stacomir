@@ -5,28 +5,40 @@
 #' the function fn_EcritBilanJournalier
 #' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
+#' @param silent : TRUE to avoid messages
 #' @note the user is asked whether or not he wants to overwrite data, if no
 #' data are present in the database, the import is done anyway
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#' \dontrun{
+#' stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
+#' data("bM_Arzal")
+#' bM_Arzal<-calcule(bM_Arzal)
+#' fn_EcritBilanJournalier(bilanMigration=bM_Arzal,silent=FALSE)
+#' }
 #' @export
-fn_EcritBilanJournalier<-function(bilanMigration){
+fn_EcritBilanJournalier<-function(bilanMigration,silent){
 	# voir essai_table_bilanJournalier.sql pour le format du tableau
 	# je cherche les colonnes que je ne veux pas retenir
-	data=bilanMigration@data	
-	jour_dans_lannee_non_nuls=strftime(bilanMigration@time.sequence,'%Y-%m-%d %H:%M:%S')[data$Effectif_total!=0]
+	if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
+	if (class(silent)!="logical") stop("the silent argument should be a logical")
+	dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
+	data=bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+	jour_dans_lannee_non_nuls=data$debut_pas
 	data=data[data$Effectif_total!=0,]
-	col_a_retirer=match(c("No.pas","type_de_quantite"),colnames(data))
+	col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
 	data=data[,-col_a_retirer]
-	data$"Taux_d_echappement"[data$Taux_d_echappement==-1]<-NA 
+	data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 
 	data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
-	peuventpaszero=match(c("Taux_d_echappement","coe_valeur_coefficient"),colnames(data))
+	peuventpaszero=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
 	data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
-	t_bilanmigrationjournalier_bjo=cbind(bilanMigration@dc@dc_selectionne,
+	t_bilanmigrationjournalier_bjo=cbind(
+			bilanMigration@dc@dc_selectionne,
 			bilanMigration@taxons@data$tax_code,
 			bilanMigration@stades@data$std_code,
-			unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")),
-			rep(jour_dans_lannee_non_nuls,ncol(data)),
-			utils::stack(data),  
+			unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")), # une valeur
+			rep(as.character(jour_dans_lannee_non_nuls),ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
+			utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
 			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
 	)
@@ -76,8 +88,8 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 		} # end for
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		# si l'utilisateur accepte de remplacer les valeurs
-		dispose(progres)
 		odbcClose(requete@connection)
+		gtkWidgetDestroy(progres)
 		# ecriture egalement du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
@@ -126,13 +138,13 @@ fn_EcritBilanJournalier<-function(bilanMigration){
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
 			requete<-stacomirtools::connect(requete)   
 		} # end for
-		dispose(progres)
 		RODBC::odbcClose(requete@connection)
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC)
+		tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+		resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent)
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	} # end else
 } # end function

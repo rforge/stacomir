@@ -1,6 +1,6 @@
 library(stacomiR)
 
-stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE) 
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ## launches the application in the command line
 ## here an example of loading
 ## not run as the program is possibly not installed
@@ -8,7 +8,7 @@ stacomi(gr_interface=FALSE,login_window=FALSE,pre_launch_test=FALSE)
 \dontrun{
 	stacomi(gr_interface=FALSE,
 			login_window=FALSE,
-			pre_launch_test=FALSE)	
+			database_expected=FALSE)	
 	bM_Arzal=new("BilanMigration")
 	bM_Arzal=choice_c(bM_Arzal,
 			dc=5,
@@ -30,6 +30,8 @@ data("bM_Arzal")
 bM_Arzal<-calcule(bM_Arzal)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
+# this will also write daily and monthly migration balance to the database,
+# but only if stacomi has been run with argument : database_expected=FALSE
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)

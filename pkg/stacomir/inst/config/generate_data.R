@@ -6,7 +6,7 @@
 source ("F:/workspace/stacomir/pkg/stacomir/inst/config/stacomi_manual_launch.r")
 assign("lang","English",envir=envir_stacomi)	
 refMsg=new("RefMsg")
-createmessage(refMsg,pre_launch_test=TRUE)
+createmessage(refMsg,database_expected=TRUE)
 msg=get("msg",envir=envir_stacomi)
 devtools::use_data(msg,internal=FALSE,overwrite=TRUE)
 
@@ -42,7 +42,7 @@ devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
 
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
-		pre_launch_test=FALSE)	
+		database_expected=FALSE)	
 bM_Arzal=new("BilanMigration")
 bM_Arzal=choice_c(bM_Arzal,
 		dc=5,

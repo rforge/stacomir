@@ -15,7 +15,7 @@ husr(h, ...)
 Internal function, tests the connection and if it works loads the stacomi interface
 }
 \note{
-\code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{pre_launch_test}
+\code{gr_interface} is copied by stacomi into envir_stacomi. Same for \code{database_expected}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
