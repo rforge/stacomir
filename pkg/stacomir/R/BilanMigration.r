@@ -357,7 +357,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			} else if (plot.type=="step"){
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)
-				DC=as.numeric(bilanMigration@dc@dc_selectionne)	
+				dc=as.numeric(bilanMigration@dc@dc_selectionne)	
 				if (bilanMigration@pasDeTemps@stepDuration==86400 & bilanMigration@pasDeTemps@stepDuration==86400) {
 					grdata<-bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 					grdata<-funtraitementdate(grdata,

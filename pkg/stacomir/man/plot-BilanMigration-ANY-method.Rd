@@ -28,7 +28,8 @@
 }
 \note{
 When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-these entries are necessary to run the Interannual Migration class.
+these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
+then no entry will be written to the database
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

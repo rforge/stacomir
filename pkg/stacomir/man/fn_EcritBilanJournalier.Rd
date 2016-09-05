@@ -5,10 +5,12 @@
 \title{fn_EcritBilanJournier writes the daily migration in the
 t_bilanmigrationjournalier_bjo table}
 \usage{
-fn_EcritBilanJournalier(bilanMigration)
+fn_EcritBilanJournalier(bilanMigration, silent)
 }
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
+
+\item{silent}{: TRUE to avoid messages}
 }
 \description{
 Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
@@ -17,6 +19,14 @@ the function fn_EcritBilanJournalier
 \note{
 the user is asked whether or not he wants to overwrite data, if no
 data are present in the database, the import is done anyway
+}
+\examples{
+\dontrun{
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
+data("bM_Arzal")
+bM_Arzal<-calcule(bM_Arzal)
+fn_EcritBilanJournalier(bilanMigration=bM_Arzal,silent=FALSE)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

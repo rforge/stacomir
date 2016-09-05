@@ -64,6 +64,8 @@ data("bM_Arzal")
 bM_Arzal<-calcule(bM_Arzal)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
+# this will also write daily and monthly migration balance to the database,
+# but only if stacomi has been run with argument : database_expected=FALSE
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)

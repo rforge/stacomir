@@ -12,6 +12,10 @@ fn_EcritBilanMensuel(bilanMigration, resum)
 \item{resum}{data frame with summary per month}
 }
 \description{
-Launched by fun_EcritBilanJournalier
+This writes monthly data in t_bilanmensuel_mens table
+}
+\note{
+This function is launched by fun_EcritBilanJournalier, the resum 
+dataset is created by the \link{funstat} function
 }
 
