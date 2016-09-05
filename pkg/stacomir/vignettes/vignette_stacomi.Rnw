@@ -1,4 +1,6 @@
 %\VignetteIndexEntry{StacomiR}
+% \VignetteDepends{xtable}
+
 \documentclass[article,nojss]{jss}
 \usepackage{Sweave}
 \usepackage[latin1]{inputenc} %encodage du fichier source
@@ -38,11 +40,11 @@
 options(width=80)
 require(stacomiR)
 require(xtable)
-stacomi(FALSE,FALSE,TRUE)
-setwd("F:/workspace/stacomir/pkg/stacomir/inst/doc")
+stacomi(FALSE,FALSE,FALSE)
+#setwd("F:/workspace/stacomir/pkg/stacomir/inst/doc")
 # répertoires de travail (chaines utilisées comme raccourcis plus loin)
-imgwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/images/"
-tabwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/tables/"
+#imgwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/images/"
+#tabwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/tables/"
 @
 
 \begin{document}
