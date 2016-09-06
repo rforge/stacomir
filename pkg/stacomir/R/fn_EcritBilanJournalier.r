@@ -86,9 +86,12 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 			requete<-stacomirtools::connect(requete) 
 			
 		} # end for
+		if (!silent){
 		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+		}
 		# si l'utilisateur accepte de remplacer les valeurs
 		odbcClose(requete@connection)
+		progres<-get("progres",envir=envir_stacomi)
 		gtkWidgetDestroy(progres)
 		# ecriture egalement du bilan mensuel
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
@@ -100,11 +103,14 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 	
 	if (nrow(bil@data)>0)
 	{ 
+		if (!silent){
 		choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
 						unique(bil@data$bjo_horodateexport),
 						get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
 				handler=hconfirm) # voulez vous le remplacer ?
-		
+		} else {
+			hconfirm(h=NULL)
+		}
 		
 	}
 	else  # sinon on ecrit les resultats quoiqu'il arrive
@@ -139,7 +145,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 			requete<-stacomirtools::connect(requete)   
 		} # end for
 		RODBC::odbcClose(requete@connection)
-		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	

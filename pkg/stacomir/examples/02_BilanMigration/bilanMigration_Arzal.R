@@ -36,10 +36,6 @@ plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
 plot(bM_Arzal,plot.type="step")
-#some plots are a mixture of french and english
-#changing the reference table names to english should shift all to english.
-#same for spanish.
-# combined plot for ggplot2
-plot(bM_Arzal,plot.type="multiple")
+
 # data will be written in the data directory specified in the stacomi/calcmig.csv file
 summary(bM_Arzal)
