@@ -1,5 +1,4 @@
 %\VignetteIndexEntry{StacomiR}
-% \VignetteDepends{xtable}
 
 \documentclass[article,nojss]{jss}
 \usepackage{Sweave}
@@ -38,9 +37,9 @@
 
 <<Preliminaries,echo=FALSE,results=hide>>=
 #options(width=80)
-#require(stacomiR)
-#require(xtable)
-#stacomi(FALSE,FALSE,FALSE)
+require(stacomiR)
+require(xtable)
+stacomi(FALSE,FALSE,FALSE)
 #setwd("F:/workspace/stacomir/pkg/stacomir/inst/doc")
 # répertoires de travail (chaines utilisées comme raccourcis plus loin)
 #imgwd<-"F:/workspace/stacomir/pkg/stacomir/inst/doc/images/"
