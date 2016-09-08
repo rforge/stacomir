@@ -8,6 +8,7 @@
 #' \code{new("RefDF", df_selectionne=integer(), ouvrage=integer(),
 #' data=data.frame())}.  
 #' 
+#' 
 #' @slot df_selectionne Object of class \code{"integer"} The identifier of the fishway
 #' @slot ouvrage Object of class \code{"integer"} The attached dam
 #' @slot data Object of class \code{"data.frame"} Data concerning the fishway
@@ -30,7 +31,24 @@
 #' @family Referential objects
 setClass(Class="RefDF",representation=
 				representation(df_selectionne="integer",ouvrage="integer",data="data.frame") )
-                               
+
+setValidity("RefDF",method=function(object){
+			if (length(object@df_selectionne)!=0){		
+				if (nrow(object@data)>0) {
+					concord<-object@df_selectionne%in%object@data$df					
+					if (any(!concord)){
+						return(paste("No data for DF",object@df_selectionne[!concord]))
+						
+					} else {
+						return(TRUE)
+					}
+				} else {
+					return("You tried to set a value for df_selectionne without initializing the data slot")
+				}
+			}  else return(TRUE)
+			
+		}   
+)
 #' Loading method for DF referential objects
 #' 
 #' @return An object of class RefDF
@@ -64,8 +82,8 @@ setMethod("charge",signature=signature("RefDF"),definition=function(object) {
 			return(object)
 		})
 
-#' Choice method for DF referential objects
-#' 
+#' Graphical method to choose a fishway through the interface
+#' @param object An object of class \link{RefDF-class}
 #' @note the choice method assigns an object of class refDF in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
@@ -103,4 +121,41 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 			} else {
 				funout(get("msg",envir=envir_stacomi)$RefDF.4,arret=TRUE)
 			}
+		})
+
+
+#' Command line interface to choose a fishway
+#' 
+#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' widget in the graphical interface) but from the command line.  The parameters for dF are transformed to integer as the RefDF only 
+#' takes integer in the df slots. 
+#' DF are third in hierarchy in the stacomi database Station>ouvrage>DF>DC>operation. This class is only used in the
+#' BilanFonctionnementDF class.
+#' @param object an object of class \link{RefDF-class}
+#' @param df a character vector of df chosen
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
+#' \dontrun{
+#' win=gwindow()
+#' group=ggroup(container=win,horizontal=FALSE)
+#' object=new("RefDC")
+#' object<-charge(object)
+#' objectBilan=new("BilanMigrationMult")
+#' choice_c(object=object,objectBilan=objectBilan,dc=1)
+#' }
+setMethod("choice_c",signature=signature("RefDF"),definition=function(object,df) {
+			if (class(df)=="numeric") {
+				df<-as.integer(df) 
+			} else if (class(df)=="character"){
+				df=as.integer(as.numeric(df))
+			}
+			if (any(is.na(df))) stop ("NA values df")
+			
+			
+			object@df_selectionne<-df
+			validObject(object) 		
+# the method validObject verifies that the df is in the data slot of RefDF			
+			
+				assign("refDF",object,envir=envir_stacomi)
+			return(object)
 		})

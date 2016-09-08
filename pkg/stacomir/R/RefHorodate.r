@@ -4,7 +4,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 validite_RefHorodate=function(object)
 {
-	rep1= class(object@dateDebut)[1]=="POSIXt"
+	rep1= class(object@horodate)[2]=="POSIXt"
 	
 	return(ifelse(rep1,TRUE,FALSE))
 }
@@ -54,50 +54,113 @@ setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=functio
 			return(object) 
 		})
 # retourne l'annee d'avant l'annee en cours
-setGeneric("getanneeprec",def=function(object,...) standardGeneric("getanneeprec"))
-setMethod("getanneeprec",signature=signature("RefHorodate"),definition=function(object,decal){
-			anneeprec=as.numeric(strftime(object@horodate,"%Y"))+decal
-			object@horodate<-strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d")
-			return (object)
-		})
 
 
-#' choice method for RefHorodate
-#' 
+
+
+
+
+#' Graphical interface
+#' @param object An object of class \link{RefHorodate-class}
+#' @param label Label for the gframe
+#' @param nomassing The name assigned in environment envir_stacomi
+#' @param funoutlabel, text displayed by the interface
+#' @param decale Default 0, number of years to shift forward or backward 
 #' @return Selects the date in the graphical interface
-#' 
-#' @author cedric.briand
-#' @docType methods
-setMethod("choice",signature=signature("RefHorodate"),definition=function(object,label="date",nomassign="horodate",funoutlabel="nous avons le choice dans la date\n",decal=0,affichecal=TRUE) {
+setMethod("choice",signature=signature("RefHorodate"),definition=function(object,label="date",
+				nomassign="horodate",
+				funoutlabel="nous avons le choix dans la date\n",
+				decal=0) {
 			hwinhor=function(h,...){
 				object=setRefHorodate(object,svalue(horodate))
-				if (affichecal){
-			    # bug dans horocal
-				#	svalue(horocal)<-as.character(strftime(object@horodate,"%Y-%m-%d"))
-				}
 				assign(nomassign,object,envir_stacomi)
 				funout(funoutlabel)
 				#print(object)
 				#dispose(winpa)
 			}
 			if (decal!=0){
-				object<-getanneeprec(object,decal)
+				# Returns the first horodate of a year shifted by decal
+				# @param horodate The horodate to shift (class POSIXt)
+				# @param decal number of year to shift
+				# @return A POSIXt
+				shiftyear<-function(horodate,decal){
+					anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
+					return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
+				}
+				object@horodate<-shiftyear(object@horodate,decal)
 			}
 			winhor=gframe(label,container=group,horizontal=!affichecal)
 			pg<-ggroup(horizontal=FALSE,container=winhor)
 			horodate<-gedit(getRefHorodate(object),container=pg,handler=hwinhor,width=20)
 			horodate2=as.character(strftime(object@horodate,"%Y-%m-%d"))
-			if (affichecal) {
-#				horocal<-gcalendar(horodate2,container=pg,handler=function(h,...){
-#							svalue(horodate)<-as.character(strftime(
-#											strptime(svalue(horocal),"%Y-%m-%d"),
-#											"%Y-%m-%d %H:%M:%S"))
-#						} ) 
-			}
 			gbutton("OK", container=winhor,handler=hwinhor,icon="execute")
 		})
 
-# showClass("PasDeTemps")
-# validObject( pasDeTemps)
-# showMethods("suivant")
+
+
+#' Command line
+#' @param object An object of class \link{RefHorodate-class}
+#' @param label Label for the gframe
+#' @param nomassing The name assigned in environment envir_stacomi
+#' @param funoutlabel, text displayed by the interface
+#' @param decale Default 0, number of years to shift forward or backward, the date will be set to the first day of the year
+#' @param affichecal Default TRUE, should the calendar be displayed
+#' @param horodate The horodate to set, formats "%d/%m/%Y %H:%M:%s", "%d/%m/%y %H:%M:%s", "%Y-%m-%d  %H:%M:%s"
+#' \dots are accepted
+#' @return An object of class \link{RefHorodate-class} with slot \emph{horodate} set
+setMethod("choice_c",signature=signature("RefHorodate"),definition=function(object,
+				nomassign="horodate",
+				funoutlabel="nous avons le choix dans la date\n",
+				decal=0,
+				horodate
+		) {
+			# parse the horohorodate
+			if (length(horodate)>1) stop("horodate should be a vector of length 1")
+			if (is.null(horodate)) stop("horodate should not be null")
+			if (class(horodate)=="character") {
+				if (grepl("/",horodate)){
+					.horodate=strptime(horodate, format="%d/%m/%Y %H:%M:%s")
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d/%m/%y %H:%M:%s")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d/%m/%y %H:%M")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d/%m/%Y %H:%M")				
+					}
+				} else if (grepl("-",horodate)){
+					.horodate=strptime(horodate, format="%Y-%m-%d  %H:%M:%s")
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d-%m-%Y  %H:%M:%s")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%Y-%m-%d  %H:%M")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d-%m-%Y  %H:%M")				
+					}
+				}
+		
+			} else if (class(horodate)=="Date"){
+				.horodate<-as.POSIXlt(horodate)
+			} else if (class(horodate)[2]=="POSIXt"){
+				.horodate=horodate
+			}
+			object@horodate=.horodate	
+			if (decal!=0){
+				# Returns the first horodate of a year shifted by decal
+				# @param horodate The horodate to shift (class POSIXt)
+				# @param decal number of year to shift
+				# @return A POSIXt
+				shiftyear<-function(horodate,decal){
+					anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
+					return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
+				}
+				object@horodate<-shiftyear(object@horodate,decal)
+			}
+			validObject(object)				
+			assign(nomassign,object,envir_stacomi)
+			funout(funoutlabel)	
+		})
 

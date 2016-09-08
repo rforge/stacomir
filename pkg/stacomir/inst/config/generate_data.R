@@ -59,3 +59,14 @@ bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_co
 bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
+
+
+
+#################################
+# generates dataset for BilanFonctionnementDF
+##################################
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bDF=new("BilanFonctionnementDF")
+bDF

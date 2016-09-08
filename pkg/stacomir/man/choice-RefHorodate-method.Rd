@@ -3,20 +3,27 @@
 \docType{methods}
 \name{choice,RefHorodate-method}
 \alias{choice,RefHorodate-method}
-\title{choice method for RefHorodate}
+\title{Graphical interface}
 \usage{
 \S4method{choice}{RefHorodate}(object, label = "date",
   nomassign = "horodate",
-  funoutlabel = "nous avons le choice dans la date\\n", decal = 0,
-  affichecal = TRUE)
+  funoutlabel = "nous avons le choix dans la date\\n", decal = 0)
+}
+\arguments{
+\item{object}{An object of class \link{RefHorodate-class}}
+
+\item{label}{Label for the gframe}
+
+\item{funoutlabel, }{text displayed by the interface}
+
+\item{nomassing}{The name assigned in environment envir_stacomi}
+
+\item{decale}{Default 0, number of years to shift forward or backward}
 }
 \value{
 Selects the date in the graphical interface
 }
 \description{
-choice method for RefHorodate
-}
-\author{
-cedric.briand
+Graphical interface
 }
 

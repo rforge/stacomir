@@ -25,21 +25,24 @@
 setClass(Class="BilanFonctionnementDF",
 		representation= representation(data="data.frame",
 				df="RefDF",
-				horodate="RefHorodate",
+				horodatedebut="RefHorodate",
+				horodatefin="RefHorodate",
 				requete="RequeteODBCwheredate"),
 		prototype=prototype(data=data.frame(),df=new("RefDF"),
-				horodate=new("RefHorodate"),
+				horodatedebut=new("RefHorodate"),
+				horodatefin=new("RefHorodate"),
 				requete=new("RequeteODBCwheredate"))
 )
 
 
 #' connect method for BilanFonctionnementDF
 #' 
+#' @param object An object of class \link{BilanFonctionnementDF-class}
 #' loads the working periods and type of arrest or disfunction of the DF
 #' @return  An object of class \code{BilanFonctionnementDF}
 #' 
 #' @author cedric.briand
-setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(object,h) {
+setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(object) {
 #  construit une requete ODBCwheredate
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			object@requete@select= paste("SELECT",
@@ -65,12 +68,22 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 
 #' charge method for BilanFonctionnementDF
 #' 
-#' used by the graphical interface to retreive the objects of Referential classes
+#' 
+#' used by the graphical interface to retrieve the objects of Referential classes
 #' assigned to envir_stacomi
-#' @return  An object of class \code{BilanFonctionnementDF}
+#' @note Fishways (DF) are of various nature, from very simple eel ladders fed by water discharged from the river,
+#' to more complex fishways with levels adjusted by the opening of various gates and regulators. 
+#' The objective of this class is to provide an assessment of the working status of a fishway throughout the year.
+#' A number of fishes ascending a fishway has meaning only if we know that the fishway is operational, and that the counting 
+#' orerated on the fishway has remained operational.
+#' In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
+#' The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
+#' the status of either the fishway or DC. 
+#' @param object An object of class \link{BilanFonctionnementDF-class}
+#' @return  An object of class \link{BilanFonctionnementDF-class}
 #' 
 #' @author cedric.briand
-setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object,h) {
+setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
 			if (exists("refDF",envir=envir_stacomi)) {
@@ -80,13 +93,13 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 			}     
 			
 			if (exists("fonctionnementDF_date_debut",envir=envir_stacomi)) {
-				object@requete@datedebut<-get("fonctionnementDF_date_debut",envir=envir_stacomi)@horodate
+				object@horodatedebut<-get("fonctionnementDF_date_debut",envir=envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.5,arret=TRUE)
 			}
 			
 			if (exists("fonctionnementDF_date_fin",envir=envir_stacomi)) {
-				object@requete@datefin<-get("fonctionnementDF_date_fin",envir=envir_stacomi)@horodate
+				object@horodatefin<-get("fonctionnementDF_date_fin",envir=envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
 			}			
@@ -94,6 +107,40 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 			
 			return(object)
 		})
+
+#' command line interface for BilanFonctionnementDF class
+#' 
+#' The choice_c method fills in the data slot for RefDC, and then 
+#' uses the choice_c methods of these object to "select" the data.
+#' @param object An object of class \link{RefDC-class}
+#' @param horodatedebut A POSIXt or Date or character to fix the date of beginning of the Bilan
+#' @param horodatefin A POSIXt or Date or character to fix the last date of the Bilan
+#' @return An object of class \link{RefDC-class} with slots filled
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=function(object,horodatedebut,horodatefin,...){
+		
+			# only taxa present in the bilanMigration are used
+			fonctionnementDF<-new("BilanFonctionnementDF")
+			assign("fonctionnementDF",fonctionnementDF,envir=envir_stacomi)    
+			funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
+			fonctionnementDF@df<-charge(fonctionnementDF@df)    
+			fonctionnementDF@df<-choice_c(fonctionnementDF@df)
+			# assigns the parameter (horodatedebut) of the method to the object using choice_c method for RefDF
+			fonctionnementDF@horodatedebut<-choice_c(fonctionnementDF@horodatedebut,
+					nomassign="fonctionnementDF_date_debut",
+					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+					decal=-2,
+					horodate=horodatedebut)
+			fonctionnementDF@horodatefin<-choice_c(fonctionnementDF@horodate,
+					nomassign="fonctionnementDF_date_fin",
+					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+					decal=-1,
+					horodate=horodatefin)
+			return(fonctionnementDF)
+		})
+
+
 
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
 #' 

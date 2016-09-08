@@ -5,14 +5,27 @@
 \alias{charge,BilanFonctionnementDF-method}
 \title{charge method for BilanFonctionnementDF}
 \usage{
-\S4method{charge}{BilanFonctionnementDF}(object, h)
+\S4method{charge}{BilanFonctionnementDF}(object)
+}
+\arguments{
+\item{object}{An object of class \link{BilanFonctionnementDF-class}}
 }
 \value{
-An object of class \code{BilanFonctionnementDF}
+An object of class \link{BilanFonctionnementDF-class}
 }
 \description{
-used by the graphical interface to retreive the objects of Referential classes
+used by the graphical interface to retrieve the objects of Referential classes
 assigned to envir_stacomi
+}
+\note{
+Fishways (DF) are of various nature, from very simple eel ladders fed by water discharged from the river,
+to more complex fishways with levels adjusted by the opening of various gates and regulators. 
+The objective of this class is to provide an assessment of the working status of a fishway throughout the year.
+A number of fishes ascending a fishway has meaning only if we know that the fishway is operational, and that the counting 
+orerated on the fishway has remained operational.
+In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
+The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
+the status of either the fishway or DC.
 }
 \author{
 cedric.briand

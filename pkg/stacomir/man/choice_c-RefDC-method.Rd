@@ -3,7 +3,7 @@
 \docType{methods}
 \name{choice_c,RefDC-method}
 \alias{choice_c,RefDC-method}
-\title{choice_c method for RefDC}
+\title{Command line interface to select a counting device}
 \usage{
 \S4method{choice_c}{RefDC}(object, dc)
 }
@@ -16,7 +16,7 @@
 the choice_c method is intented to have the same behaviour as choice (which creates a
 widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the RefDC only 
 takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
-The values passed to thchoice_cchargec method are then checked with the setValidty method.
+The values passed to the choice_c method are then checked with the setValidty method.
 Finally, if an objectBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
 }
 \examples{

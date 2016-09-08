@@ -3,12 +3,15 @@
 \docType{methods}
 \name{choice,RefDF-method}
 \alias{choice,RefDF-method}
-\title{Choice method for DF referential objects}
+\title{Graphical method to choose a fishway through the interface}
 \usage{
 \S4method{choice}{RefDF}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefDF-class}}
+}
 \description{
-Choice method for DF referential objects
+Graphical method to choose a fishway through the interface
 }
 \note{
 the choice method assigns an object of class refDF in the environment envir_stacomi

@@ -48,6 +48,8 @@ setValidity("RefDC",method=function(object){
 			
 		}   
 )
+
+
 #' Method to load the counting devices of the control station
 #' @return Object of class RefDC
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -82,7 +84,10 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 			object@data<-requete@query
 			return(object)
 		})
-#' choice method for RefDC
+
+
+
+#' Graphical method to choose a fishway through the interface
 #' 
 #' @note   The choice method has for arguments a report (bilan) object
 #'  (e.g) is called from a report Bilan(e.g Bilan_carlot).
@@ -269,12 +274,12 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 		})
 
 
-#' choice_c method for RefDC
+#' Command line interface to select a counting device
 #' 
 #' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the RefDC only 
 #' takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
-#' The values passed to thchoice_cchargec method are then checked with the setValidty method.
+#' The values passed to the choice_c method are then checked with the setValidty method.
 #' Finally, if an objectBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
 #' @param object an object of class RefDC
 #' @param dc a character vector of dc chosen
@@ -301,9 +306,8 @@ setMethod("choice_c",signature=signature("RefDC"),definition=function(object,dc)
 			validObject(object) 		
 # the method validObject verifies that the dc is in the data slot of RefDC			
 			
-			object@ouvrage= object@data$dif_ouv_identifiant[ object@data$dc%in% object@dc_selectionne]
-			object@station= as.character(object@data$sta_code[ object@data$dc%in% object@dc_selectionne])
-			object@ouvrage=object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
+			object@station<- as.character(object@data$sta_code[ object@data$dc%in% object@dc_selectionne])
+			object@ouvrage<-object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
 			assign("refDC",object,envir=envir_stacomi)
 			return(object)
 		})

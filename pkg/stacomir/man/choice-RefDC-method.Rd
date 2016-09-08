@@ -3,7 +3,7 @@
 \docType{methods}
 \name{choice,RefDC-method}
 \alias{choice,RefDC-method}
-\title{choice method for RefDC}
+\title{Graphical method to choose a fishway through the interface}
 \usage{
 \S4method{choice}{RefDC}(object, objectBilan = NULL, is.enabled = TRUE)
 }
@@ -14,7 +14,7 @@
 frame may cause some frame to be disabled. When created the frame is enabled.}
 }
 \description{
-choice method for RefDC
+Graphical method to choose a fishway through the interface
 }
 \note{
 The choice method has for arguments a report (bilan) object

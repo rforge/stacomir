@@ -1,4 +1,3 @@
-# Nom fichier :        interface_BilanFonctionnementDF.R    (classe)
 #' interface for BilanFonctionnementDF class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanFonctionnementDF = function()
@@ -14,12 +13,12 @@ interface_BilanFonctionnementDF = function()
    gWidgets::add(ggroupboutons,group)
     
     choice(fonctionnementDF@df)
-	choice(fonctionnementDF@horodate,
+	choice(fonctionnementDF@horodatedebut,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="fonctionnementDF_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-	choice(fonctionnementDF@horodate,
+	choice(fonctionnementDF@horodatefin,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="fonctionnementDF_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
@@ -39,9 +38,5 @@ interface_BilanFonctionnementDF = function()
     add(group, gmenu(toolbarlist))
     add(group,gbutton(text = "graph", handler = function(h,...){X11()})) 
     gWidgets::addSpring(group)
-    #graphes=ggraphics(width=600,height=400)
-    #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    #assign("graphes",graphes,envir=envir_stacomi)
 	grDevices::X11()
 }

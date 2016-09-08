@@ -5,13 +5,17 @@
 \alias{connect,BilanFonctionnementDF-method}
 \title{connect method for BilanFonctionnementDF}
 \usage{
-\S4method{connect}{BilanFonctionnementDF}(object, h)
+\S4method{connect}{BilanFonctionnementDF}(object)
+}
+\arguments{
+\item{object}{An object of class \link{BilanFonctionnementDF-class}
+loads the working periods and type of arrest or disfunction of the DF}
 }
 \value{
 An object of class \code{BilanFonctionnementDF}
 }
 \description{
-loads the working periods and type of arrest or disfunction of the DF
+connect method for BilanFonctionnementDF
 }
 \author{
 cedric.briand
