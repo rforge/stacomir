@@ -97,7 +97,8 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-		resum=funstat(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC )
+		tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+		resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent )
 		fn_EcritBilanMensuel(bilanMigration,resum)
 	}#end function hconfirm
 	
