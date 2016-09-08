@@ -1,5 +1,4 @@
 %\VignetteIndexEntry{StacomiR}
-
 \documentclass[article,nojss]{jss}
 \usepackage{Sweave}
 \usepackage[latin1]{inputenc} %encodage du fichier source
@@ -35,7 +34,7 @@
 }
 
 
-<<Preliminaries,echo=FALSE,results=hide>>=
+<<Preliminaries,echo=FALSE>>=
 #options(width=80)
 require(stacomiR)
 #require(xtable)
