@@ -70,6 +70,8 @@ setValidity("BilanMigrationPar",function(object)
 		}   )
 
 #' handler for bilanmigrationpar
+#' @param h handler
+#' @param ... additional parameters
 hbilanMigrationParcalc=function(h,...){
 	calcule(h$action)
 }
@@ -158,7 +160,8 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 		})
 #' le handler appelle la methode generique graphe sur l'object plot.type=1
 #' 
-#' @param h, passed by the handler
+#' @param h handler
+#' @param ... additional parameters
 hbilanMigrationPargraph = function(h,...) {
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -169,7 +172,8 @@ hbilanMigrationPargraph = function(h,...) {
 }
 #' le handler appelle la methode generique graphe sur l'object plot.type=2
 #' 
-#' @param h, passed by the handler
+#' @param h handler
+#' @param ... additional parameters
 hbilanMigrationPargraph2=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -181,7 +185,8 @@ hbilanMigrationPargraph2=function(h,...){
 #' This handler calls the generic method graphe on object plot.type 3
 #' 
 #' 
-#' @param h, passed by
+#' @param h handler
+#' @param ... additional parameters
 hbilanMigrationParstat=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)

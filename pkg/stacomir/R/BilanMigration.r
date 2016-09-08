@@ -83,7 +83,7 @@ hbilanMigrationcalc=function(h,...){
 #' @param object An object of class \link{BilanMigration-class}
 #' @return BilanMigration with slot @data filled from the database
 #' @export
-setMethod("connect",signature=signature("BilanMigration"),definition=function(object,...){ 
+setMethod("connect",signature=signature("BilanMigration"),definition=function(object){ 
 			bilanMigration<-object
 			bilanMigrationMult<-as(bilanMigration,"BilanMigrationMult")
 			bilanMigrationMult<-connect(bilanMigrationMult)

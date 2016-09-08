@@ -4,7 +4,6 @@
 #' 
 #' Representation of a fish phase
 #' 
-#' 
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefStades", data="data.frame")}.  \describe{
 #' \item{list("data")}{Object of class \code{"data.frame"} ~ The phases
@@ -24,6 +23,7 @@
 setClass(Class="RefStades",representation=representation(data="data.frame") )
 
 #' Loading method for RefStades referential objects
+#' @param object An object of class \link{RefStades-class}
 #' @return An S4 object of class RefStades
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -40,7 +40,11 @@ setMethod("charge",signature=signature("RefStades"),definition=function(object) 
 			return(object)
 		})
 #' Loading method for RefStades referential objects searching only those stages existing for a DC and a Taxon
-#' @return An S4 object of class RefStades
+#' @param object An object of class \link{RefStades-class}
+#' @param dc_selectionne The selected counting device
+#' @param taxon_selectionne The selected species
+
+#' @return An S4 object of class \link{RefStades-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -67,6 +71,9 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 			return(object)
 		})
 #' Choice method for RefStades referential objects
+#' @param object An object of class \link{RefStades-class}
+#' @param objectBilan An object Bilan which includes the \link{RefStades-class}, default NULL
+#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -129,6 +136,11 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 		})
 
 #' Multiple Choice method for RefStades referential objects
+#' 
+#' @param object An object of class \link{RefStades-class}
+#' @param objectBilan An object Bilan which includes the \link{RefStades-class}, default NULL
+#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
+
 #' @note the method tests if the load is called from within a "bilan" object, and loads par, parqual, or parquan objects accordingly
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -258,6 +270,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 #' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line. The values passed to the choice_c method
 #' for stades is the code.  Any numeric value will be discarded
+#' @param object An object of class \link{RefStades-class}
 #' @param stades the vector of stages chosen
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples

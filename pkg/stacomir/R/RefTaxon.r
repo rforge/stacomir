@@ -101,6 +101,9 @@ setMethod("choice",signature=signature("RefTaxon"),definition=function(object,ob
 
 #' Multiple Choice method for Reftaxon referential objects, the graphical interface is built to allow
 #' for multiple choices. See load for method in the command line.
+#' @param object An object of class \link{RefTaxon-class}
+#' @param objectBilan An object Bilan which includes the \link{RefTaxon-class}, default NULL
+#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{ 
