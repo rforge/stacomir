@@ -2,14 +2,3 @@ stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
 bDF=new("BilanFonctionnementDF")
-choice_c(fonctionnementDF@df,df=2)
-choice(fonctionnementDF@horodate,
-		label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
-		nomassign="fonctionnementDF_date_debut",
-		funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
-		decal=-2)
-choice(fonctionnementDF@horodate,
-		label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
-		nomassign="fonctionnementDF_date_fin",
-		funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
-		decal=-1)
