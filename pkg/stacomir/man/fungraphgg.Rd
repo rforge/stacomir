@@ -6,6 +6,11 @@
 \usage{
 fungraphgg(h, ...)
 }
+\arguments{
+\item{h}{handler}
+
+\item{...}{additional parameters}
+}
 \description{
 gglot function to draw graps of pigment stages
 }

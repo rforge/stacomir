@@ -5,7 +5,7 @@
 \alias{connect,BilanMigration-method}
 \title{connect method for BilanMigration}
 \usage{
-\S4method{connect}{BilanMigration}(object, ...)
+\S4method{connect}{BilanMigration}(object)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigration-class}}

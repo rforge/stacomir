@@ -6,6 +6,11 @@
 \usage{
 hbilanMigrationParcalc(h, ...)
 }
+\arguments{
+\item{h}{handler}
+
+\item{...}{Additional parameters}
+}
 \description{
 handler for bilanmigrationpar
 }

@@ -7,6 +7,11 @@
 \usage{
 \S4method{getvalue}{Refperiode}(object, id, ...)
 }
+\arguments{
+\item{object}{An object of class \link{Refperiode-class}}
+
+\item{id}{one of "jour", "semaine", "quinzaine", "mois"}
+}
 \value{
 "a character to be used in seq.POSIXt
 }

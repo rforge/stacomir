@@ -7,6 +7,13 @@
 \usage{
 \S4method{choice}{RefStades}(object, objectBilan = NULL, is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{RefStades-class}}
+
+\item{objectBilan}{An object Bilan which includes the \link{RefStades-class}, default NULL}
+
+\item{is.enabled}{Sets if the frame is enabled at launch, defaut TRUE}
+}
 \description{
 Choice method for RefStades referential objects
 }

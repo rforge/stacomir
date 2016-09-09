@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{RefStades}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefStades-class}}
+}
 \value{
 An S4 object of class RefStades
 }

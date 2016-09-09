@@ -9,6 +9,13 @@ for multiple choices. See load for method in the command line.}
 \S4method{choicemult}{RefTaxon}(object, objectBilan = NULL,
   is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{RefTaxon-class}}
+
+\item{objectBilan}{An object Bilan which includes the \link{RefTaxon-class}, default NULL}
+
+\item{is.enabled}{Sets if the frame is enabled at launch, defaut TRUE}
+}
 \description{
 Multiple Choice method for Reftaxon referential objects, the graphical interface is built to allow
 for multiple choices. See load for method in the command line.

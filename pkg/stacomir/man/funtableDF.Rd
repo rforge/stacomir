@@ -7,7 +7,9 @@
 funtableDF(h, ...)
 }
 \arguments{
-\item{h}{a handler}
+\item{h}{handler}
+
+\item{...}{additional parameters}
 }
 \description{
 FuntableDF create a table output for BilanFonctionnementDF class

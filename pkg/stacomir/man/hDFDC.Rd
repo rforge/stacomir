@@ -2,11 +2,16 @@
 % Please edit documentation in R/stacomi.r
 \name{hDFDC}
 \alias{hDFDC}
-\title{handler function used by the main interface}
+\title{handler function used by the main interface#'}
 \usage{
 hDFDC(h, ...)
 }
+\arguments{
+\item{h}{handler}
+
+\item{...}{additional parameters}
+}
 \description{
-handler function used by the main interface
+handler function used by the main interface#'
 }
 

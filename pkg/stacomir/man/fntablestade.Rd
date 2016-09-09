@@ -12,7 +12,7 @@ fntablestade(stades,choicepere="lotpere")
 \arguments{
 \item{stades}{a data frame containing stage values}
 
-\item{choicelotpere}{either "date" or "lot_pere" the first will group pigment stage by date, 
+\item{choicepere}{either "date" or "lot_pere" the first will group pigment stage by date, 
 the second will allow to keep separate lines when several samples have been collected a given day}
 }
 \value{

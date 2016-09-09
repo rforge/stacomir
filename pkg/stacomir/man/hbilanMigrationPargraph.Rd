@@ -7,7 +7,9 @@
 hbilanMigrationPargraph(h, ...)
 }
 \arguments{
-\item{h, }{passed by the handler}
+\item{h}{handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 le handler appelle la methode generique graphe sur l'object plot.type=1

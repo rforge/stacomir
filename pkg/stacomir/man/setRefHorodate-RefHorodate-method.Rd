@@ -7,6 +7,11 @@
 \usage{
 \S4method{setRefHorodate}{RefHorodate}(object, string)
 }
+\arguments{
+\item{object}{An object of class \link{RefHorodate-class}}
+
+\item{string}{A string representing an horodate in the format "\%Y-\%m-\%d \%H:\%M:\%S"}
+}
 \value{
 An Object of class "RefHorodate"
 }

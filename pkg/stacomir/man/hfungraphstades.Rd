@@ -6,6 +6,11 @@
 \usage{
 hfungraphstades(h, ...)
 }
+\arguments{
+\item{h}{handler}
+
+\item{...}{additional parameters}
+}
 \description{
 handler function for fungraphstades
 }

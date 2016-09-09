@@ -7,9 +7,11 @@
 plot(x, y, ...)
 }
 \arguments{
-\item{...}{Additional parms}
+\item{x}{passed by the generic}
 
-\item{object}{Object}
+\item{y}{passed by the generic}
+
+\item{...}{Additional parms}
 }
 \description{
 Generic method for plot

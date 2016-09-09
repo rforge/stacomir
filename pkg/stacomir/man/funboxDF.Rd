@@ -7,7 +7,9 @@
 funboxDF(h, ...)
 }
 \arguments{
-\item{h}{a handler}
+\item{h}{handler}
+
+\item{...}{additional parameters}
 }
 \description{
 FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class

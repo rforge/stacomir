@@ -2,20 +2,14 @@
 % Please edit documentation in R/BilanMigrationInterAnnuelle.r
 \name{fundat}
 \alias{fundat}
-\title{@title statistics per time period
-  function called for bilamMigrationInterannelle objects
-  renames columnns replaces nulls,  
-  and calculates reports with time period larger than day
-  @param timesplit "week"  "2 week" "month" as provided to seq.POSIXT
-  @return dat  a data frame with max mean min per time period
-statistics per time period}
+\title{statistics per time period}
 \usage{
 fundat(dat, timesplit = NULL)
 }
 \arguments{
 \item{dat}{a data frame}
 
-\item{timesplit}{"week" "2 week" "month" as provided to seq.POSIXT}
+\item{timesplit}{"week" "2 week" "month" as provided to seq.POSIXT, default NULL}
 }
 \value{
 a data frame with mean, max, and min calculated for each timesplit

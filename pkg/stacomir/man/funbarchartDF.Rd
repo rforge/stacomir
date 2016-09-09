@@ -7,7 +7,9 @@
 funbarchartDF(h, ...)
 }
 \arguments{
-\item{h}{a handler}
+\item{h}{handler}
+
+\item{...}{additional parameters}
 }
 \description{
 funbarchartDF creates a barchart for BilanFonctionnementDF class

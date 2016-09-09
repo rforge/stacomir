@@ -9,8 +9,9 @@ fun_bilanMigrationMult(time.sequence, datasub, negative = FALSE)
 \arguments{
 \item{time.sequence}{the time sequence to be filled in with new data}
 
-\item{datasub}{the initial dataset
-#' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations}
+\item{datasub}{the initial dataset}
+
+\item{negative}{"boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations}
 }
 \value{
 A data.frame with number summed over over the time.sequence. 

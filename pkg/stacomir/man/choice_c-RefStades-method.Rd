@@ -8,6 +8,8 @@
 \S4method{choice_c}{RefStades}(object, stades)
 }
 \arguments{
+\item{object}{An object of class \link{RefStades-class}}
+
 \item{stades}{the vector of stages chosen}
 }
 \description{

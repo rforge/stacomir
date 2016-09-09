@@ -4,10 +4,12 @@
 \alias{hbilanMigrationParstat}
 \title{This handler calls the generic method graphe on object plot.type 3}
 \usage{
-hbilanMigrationParstat(h, ...)
+hbilanMigrationParstat(h)
 }
 \arguments{
-\item{h, }{passed by}
+\item{h}{handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 This handler calls the generic method graphe on object plot.type 3

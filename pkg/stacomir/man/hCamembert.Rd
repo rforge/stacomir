@@ -8,16 +8,16 @@ draws a pie chart of species or a pie chart per period}
 hCamembert(h, ...)
 }
 \arguments{
-\item{h}{handler}
+\item{h}{Handler}
 
-\item{...}{other parameters passed to the function}
+\item{...}{Other parameters passed to the function}
 }
 \description{
 handler for pie chart
 draws a pie chart of species or a pie chart per period
 }
 \note{
-no need to re-run calcul if another list has been loaded, negative numbers are converted to positive
+no need to re-run calculation if another list has been loaded, negative numbers are converted to positive
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

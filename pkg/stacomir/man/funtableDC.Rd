@@ -7,7 +7,9 @@
 funtableDC(h, ...)
 }
 \arguments{
-\item{h}{a handler}
+\item{h}{Handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 FuntableDC create a table output for BilanFonctionnementDC class

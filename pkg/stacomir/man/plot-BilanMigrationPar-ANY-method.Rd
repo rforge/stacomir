@@ -10,7 +10,11 @@
 \arguments{
 \item{x}{An object of class BilanMigrationPar}
 
-\item{plot.type}{One of "barplot", "xyplot", "summary table"}
+\item{y}{not used there}
+
+\item{plot.type}{One of "barplot", "xyplot", "summary table}
+
+\item{...}{Additional parameters}
 }
 \description{
 plot method for BilanMigrationPar

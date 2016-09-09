@@ -6,6 +6,11 @@
 \usage{
 hBilanConditionEnv(h, ...)
 }
+\arguments{
+\item{h}{handler}
+
+\item{...}{additional parameters}
+}
 \description{
 handler function used by the main interface
 }

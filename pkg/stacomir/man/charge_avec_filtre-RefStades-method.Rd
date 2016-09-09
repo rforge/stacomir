@@ -8,8 +8,15 @@
 \S4method{charge_avec_filtre}{RefStades}(object, dc_selectionne,
   taxon_selectionne)
 }
+\arguments{
+\item{object}{An object of class \link{RefStades-class}}
+
+\item{dc_selectionne}{The selected counting device}
+
+\item{taxon_selectionne}{The selected species}
+}
 \value{
-An S4 object of class RefStades
+An S4 object of class \link{RefStades-class}
 }
 \description{
 Loading method for RefStades referential objects searching only those stages existing for a DC and a Taxon

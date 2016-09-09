@@ -9,9 +9,7 @@ funcalcbilan_stades_pigm(h, ...)
 \arguments{
 \item{h}{A handler}
 
-\item{additional}{arguments}
-
-\item{list()}{additional arguments}
+\item{...}{additional arguments}
 }
 \description{
 Function with handler which calls charge (and thus connect) and calculates
