@@ -20,6 +20,8 @@ setClass(Class="Refperiode",representation=
       )
 )
 #' Returns the POSIXt value of a given name
+#' @param object An object of class \link{Refperiode-class}
+#' @param id one of "jour", "semaine", "quinzaine", "mois"
 #' @return "a character to be used in seq.POSIXt
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

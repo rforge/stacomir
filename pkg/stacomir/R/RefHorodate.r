@@ -46,6 +46,8 @@ setGeneric("setRefHorodate",def=function(object,...) standardGeneric("setRefHoro
 
 
 #' Method to set the Horodate
+#' @param object An object of class \link{RefHorodate-class}
+#' @param string A string representing an horodate in the format "\%Y-\%m-\%d \%H:\%M:\%S"
 #' @return An Object of class "RefHorodate" 
 #' @author cedric.briand
 #' @docType methods
@@ -89,7 +91,7 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 				}
 				object@horodate<-shiftyear(object@horodate,decal)
 			}
-			winhor=gframe(label,container=group,horizontal=!affichecal)
+			winhor=gframe(label,container=group,horizontal=FALSE)
 			pg<-ggroup(horizontal=FALSE,container=winhor)
 			horodate<-gedit(getRefHorodate(object),container=pg,handler=hwinhor,width=20)
 			horodate2=as.character(strftime(object@horodate,"%Y-%m-%d"))

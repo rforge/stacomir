@@ -32,7 +32,8 @@ setGeneric("charge",def=function(object,...) standardGeneric("charge"))
 setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
 #' Generic method for plot
-#' @param object Object
+#' @param x passed by the generic
+#' @param y passed by the generic
 #' @param ... Additional parms
 #' @author cedric.briand
 setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))

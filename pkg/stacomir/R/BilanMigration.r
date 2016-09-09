@@ -270,6 +270,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @param y From the formals but missing
 #' @param plot.type One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
+#' @param silent Stops displaying the messages.
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

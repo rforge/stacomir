@@ -142,9 +142,9 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 
 #' handler for pie chart
 #' draws a pie chart of species or a pie chart per period
-#' @note no need to re-run calcul if another list has been loaded, negative numbers are converted to positive
-#' @param h handler
-#' @param ... other parameters passed to the function
+#' @note no need to re-run calculation if another list has been loaded, negative numbers are converted to positive
+#' @param h Handler
+#' @param ... Other parameters passed to the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 

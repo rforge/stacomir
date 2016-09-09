@@ -108,19 +108,11 @@ setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition
 			enabled(toolbarlist[["Graph"]])<-TRUE
 		})
 
-#######################################################################
-# handler du calcul BilanMigrationstat : traitements et sauvegardes
-# appelle les fonctions funstat et funtable pour faire le bilan des migrations
-# dans des fichiers csv
-#######################################################################
-hbilanMigrationstat = function(h,...) {
-}
 
-# graphiques (a affiner pb si autre chose que journalier)
-#######################################################################
-# handler du calcul hBilanMigrationgraph
-# appelle les fonctions fungraph pour faire le bilan des migrations
-#######################################################################
+
+#' plot combining one ore several qualitative parameters with the migration trend
+#'  @param h A handler
+#'  @param ... Additional parameters
 hbilanMigrationConditionEnvgraph = function(h,...) {   
 	
 	if (exists("bilanMigrationConditionEnv",envir_stacomi)) {

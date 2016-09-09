@@ -71,7 +71,7 @@ setValidity("BilanMigrationPar",function(object)
 
 #' handler for bilanmigrationpar
 #' @param h handler
-#' @param ... additional parameters
+#' @param ... Additional parameters
 hbilanMigrationParcalc=function(h,...){
 	calcule(h$action)
 }
@@ -161,7 +161,7 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 #' le handler appelle la methode generique graphe sur l'object plot.type=1
 #' 
 #' @param h handler
-#' @param ... additional parameters
+#' @param ... Additional parameters
 hbilanMigrationPargraph = function(h,...) {
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -173,7 +173,7 @@ hbilanMigrationPargraph = function(h,...) {
 #' le handler appelle la methode generique graphe sur l'object plot.type=2
 #' 
 #' @param h handler
-#' @param ... additional parameters
+#' @param ... Additional parameters
 hbilanMigrationPargraph2=function(h,...){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
@@ -186,8 +186,8 @@ hbilanMigrationPargraph2=function(h,...){
 #' 
 #' 
 #' @param h handler
-#' @param ... additional parameters
-hbilanMigrationParstat=function(h,...){
+#' @param ... Additional parameters
+hbilanMigrationParstat=function(h){
 	if (exists("bilanMigrationPar",envir_stacomi)) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="summary")
@@ -200,7 +200,9 @@ hbilanMigrationParstat=function(h,...){
 #' 
 #' 
 #' @param x An object of class BilanMigrationPar
-#' @param plot.type One of "barplot", "xyplot", "summary table"
+#' @param y not used there
+#' @param plot.type One of "barplot", "xyplot", "summary table
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=function(x,y,plot.type="barplot",...){ 
 			###########################

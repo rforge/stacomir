@@ -107,25 +107,32 @@ funout<-function(text,arret=FALSE,wash=FALSE,...){
 #' 	\code{uid}, \code{pwd} are identifier and password to connect to the database, they should
 #' correspond to your own schema in the database. \code{pgwd} is the path to the R
 #' source if you plan not to use the compiler but run manually using inst/config/stacomi_manual_launch.R for development.\cr
-#' 	\code{datawd}, is the the
+#' \code{datawd}, is the
 #' directory where you want to place the outputs, mostly tables, from the
 #' program, default to ~//CalcmigData lang, is either one of French, English or
 #' Spanish
 #' 	other fields correspond to sqldf options.
+#' @param database expected Are the program (stacomi directory) and database expected to be installed,
+#' this argument is necessary to pass tests on system where stacomi is not installed (e.g. R-forge)
 #' @note A version of the calcmig.csv is packaged in the config directory of the stacomiR library.
 #' 
 #' @return a list with the datawd place and the baseODBC vector
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @keywords internal
-chargecsv=function(){ 
+chargecsv=function(database_expected){ 
 	#library(XML)  # chargement du package XML
 	options(guiToolkit = "RGtk2")
 	# use of stringr package 
 	# by default the csv file is in C:/Program Files/stacomi/ and we don't want to change that
-	filecsv<-"C:/Program Files/stacomi/calcmig.csv"
 	# note this will only be tested once the program is packages otherwise the path is inst/config/calcmig.csv
 	filecsvR=file.path(.libPaths(),"stacomiR","config","calcmig.csv")
+	if (database_expected) {
+		filecsv<-"C:/Program Files/stacomi/calcmig.csv"
+	} else {
+		filecsv<-filecsvR
+	}
+
 	
 	test<-file.access(filecsv,0)==0
 	# if the file does not open, we will switch to the file located within the package

@@ -294,7 +294,8 @@ funboxDC = function(h,...) {
 
 
 #' FuntableDC create a table output for BilanFonctionnementDC class
-#' @param h a handler
+#' @param h Handler
+#' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtableDC = function(h,...) {
 	fonctionnementDC=charge(fonctionnementDC)

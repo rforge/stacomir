@@ -16,7 +16,7 @@ test_that("Test existence of csv file within package",{
 
 test_that("Test that ODBC link exists and has the right length",{
 			require(stacomiR)
-			result<-chargecsv();
+			result<-chargecsv(database_expected=TRUE);
 			expect_equal(length(result),4)
 			expect_equal(length(result$baseODBC),3)
 			expect_equal(length(result$sqldf),5)
@@ -29,7 +29,7 @@ test_that("Test that stacomirtools connects",{
 	require(stacomiR)
 	envir_stacomi <<- new.env(parent = emptyenv())
 	msg<-messages()
-	mylinks=chargecsv()
+	mylinks=chargecsv(database_expected=TRUE)
 	baseODBC=mylinks[["baseODBC"]]	
 	con=new("ConnectionODBC")	
 	con@baseODBC=baseODBC
@@ -44,7 +44,7 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())
 			msg<-messages()
-			mylinks=chargecsv()
+			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			requete=new("RequeteODBC")
 			requete@baseODBC<-baseODBC
@@ -59,7 +59,7 @@ test_that("Tests positive count for sch.t_operation_ope",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())
 			msg<-messages()
-			mylinks=chargecsv()
+			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			sch<-paste(baseODBC[2],".",sep="")
 			requete=new("RequeteODBC")
@@ -112,22 +112,25 @@ test_that("Test that messages are loaded from the database",
 		{
 			envir_stacomi <<- new.env(parent = emptyenv())
 			msg<-messages()
-			mylinks=chargecsv()
+			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			assign("baseODBC",baseODBC,envir=envir_stacomi)
 			object=new("RefMsg")
 			object<-charge(object)	
 			expect_true(nrow(object@messager)>0)
+			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("Test that  messages without connection are loaded and of the same length",
 		{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			assign("lang","English",envir=envir_stacomi)	
 			object=new("RefMsg")
 			object<-createmessage(object,TRUE)	
 			msgbase<-get("msg",envir=envir_stacomi)
-			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			
+			
 			msg<-get("msg",envir=envir_stacomi)
 			# objects should have the same length but different languages
 			expect_identical(length(msg),length(msgbase))

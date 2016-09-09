@@ -311,6 +311,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 #' @param y From the formals but missing
 #' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
+#' @param silent Stops most messages from being displayed
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -819,7 +820,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 #'  typically video recording whose period are instant events.
 #' @param time.sequence the time sequence to be filled in with new data
 #' @param datasub the initial dataset
-#' #' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
+#' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
 #' @return A data.frame with number summed over over the time.sequence. 
 #' The function returns the same output than \link{fun_bilanMigrationMult_Overlaps}
 #' but is intended to work faster

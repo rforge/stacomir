@@ -169,7 +169,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 #' as it it convenient to use elsewhere
 #' @usage fntablestade(stades,choicepere="lotpere")
 #' @param stades a data frame containing stage values
-#' @param choicelotpere either "date" or "lot_pere" the first will group pigment stage by date, 
+#' @param choicepere either "date" or "lot_pere" the first will group pigment stage by date, 
 #' the second will allow to keep separate lines when several samples have been collected a given day   
 #' @return a list with tablestades atable with numbers per stage for a given date or lotpere (sample), and date                                                                                                                
 #' @author Cedric Briand \\email{cedric.briand"at"eptb-vilaine.fr}                                                                                                                           
@@ -491,8 +491,7 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 #' 
 #' 
 #' @param h A handler
-#' @param additional arguments
-#' @param list() additional arguments
+#' @param ... additional arguments
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funcalcbilan_stades_pigm<-function(h,...){
 	bilan_stades_pigm<-charge(bilan_stades_pigm)
@@ -516,6 +515,8 @@ funcalcbilan_stades_pigm<-function(h,...){
 }
 
 #' handler function for fungraphstades
+#' @param h handler
+#' @param ... additional parameters
 hfungraphstades=function(h,...){
 	bilan_stades_pigm<-get("bilan_stades_pigm",envir_stacomi)
 	fungraphstades(
@@ -782,6 +783,8 @@ fungraphstades<-function(
 
 
 #' gglot function to draw graps of pigment stages
+#' @param h handler
+#' @param ... additional parameters
 fungraphgg=function(h,...){
 	g<-ggplot(bilan_stades_pigm@data) # recupere le data.frame vue_ope_lot qui a ete ecrit apres avoir
 	g<-g+geom_bar(aes(x="",y=lot_effectif,fill=val_libelle,width=1),stat='identity')+  # cette ecriture de geom_bar demande de bien mettre stat='identity', on peut alors passer e geom_bar un x et un y...

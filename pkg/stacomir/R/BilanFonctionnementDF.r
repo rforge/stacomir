@@ -145,7 +145,8 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
 #' 
 #' @note The program cuts periods which overlap between two month
-#' @param h a handler  
+#' @param h handler
+#' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funbarchartDF = function(h,...) {
@@ -242,7 +243,8 @@ funbarchartDF = function(h,...) {
 }   
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
-#' @param h a handler
+#' @param h handler
+#' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funboxDF = function(h,...) {
@@ -365,7 +367,8 @@ funboxDF = function(h,...) {
 	}
 }   
 #' FuntableDF create a table output for BilanFonctionnementDF class
-#' @param h a handler
+#' @param h handler
+#' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funtableDF = function(h,...) {

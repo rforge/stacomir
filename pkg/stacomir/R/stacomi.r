@@ -315,7 +315,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	assign("login_window",login_window,envir=envir_stacomi)
    # the first messages are necessary for the first access to the database, they are in French
 	msg<-messages()
-	mylinks=chargecsv()
+	mylinks=chargecsv(database_expected)
 	baseODBC=mylinks[["baseODBC"]]
 	datawd=mylinks[["datawd"]]
 	lang=mylinks[["lang"]]	

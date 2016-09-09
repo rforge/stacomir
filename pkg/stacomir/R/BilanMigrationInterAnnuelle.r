@@ -161,8 +161,9 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 			return(object)
 		}
 )
-# graphique de toutes les migrations interannuelles les unes sur les autres    
-# object = bilanMigrationInterAnnuelle = object
+#' Plot of all interannual from top to bottom
+#' @param h handler
+#' @param ... additional parameters
 hgraphBilanMigrationInterAnnuelle = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -196,7 +197,9 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 	}
 }
 
-# graphe affichant les migrations journalieres
+#'Plot of daily migrations
+#' @param h handler
+#' @param ... additional parameters
 hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -244,15 +247,6 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 	} # end if
 }  # end function 
 
-##########################################################################
-#'   @title statistics per time period
-#'   function called for bilamMigrationInterannelle objects
-#'   renames columnns replaces nulls,  
-#'   and calculates reports with time period larger than day
-#'   @param timesplit "week"  "2 week" "month" as provided to seq.POSIXT
-#'   @return dat  a data frame with max mean min per time period
-#####################################################################
-
 
 
 
@@ -265,7 +259,7 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 #' 
 #' 
 #' @param dat a data frame
-#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT
+#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
 #' @return a data frame with mean, max, and min calculated for each timesplit
 #' @seealso \code{\linkS4class{Bilan_poids_moyen}}
 fundat=function(dat,timesplit=NULL)
@@ -336,9 +330,11 @@ fundat=function(dat,timesplit=NULL)
 		funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.5,arret=TRUE)
 	}    # end else
 }
-########################################
-# fonction de creation des bilans cumules
-############################################
+
+#' Step plot with different years displayed on the same graph. One year
+#' can be highlighted against the others
+#' @param h handler
+#' @param ... additional parameters
 hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 { 
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)	
@@ -385,10 +381,11 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 
 
 
-########################################
-# Bilan migration comparant la migration hebdomadaire et la migration
-# interannuelle hebdomadaire. fonctionne pour mensuelle et quinzaine et hebdomadaire
-############################################
+#' Plot comparing the migration  to the migration  
+#' computed for all years available in the daily migration table.
+#' This function plots comparisions for periods of 1 week, 2 weeks, month
+#'  @param h A handler
+#'  @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" timesplit="semaine" timesplit="mois"
@@ -459,10 +456,11 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 }  # end function 
 
 
-########################################
-# Fonction similaire e la precedente mais pointrange et geom_bar
-# interannuelle hebdomadaire. fonctionne pour mensuelle et quizaine et hebdomadaire
-############################################
+
+#' Function displaying comparaison similar to \link{hgraphBilanMigrationInterAnnuelle4} but using pointrange and geom_bar
+#' This function plots comparisions for periods of 1 week, 2 weeks, month
+#'  @param h A handler
+#'  @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" # timesplit="mois"
@@ -523,8 +521,11 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 	} # end if
 }  # end function 
 
-# graphique des cumuls interannuels pour distinguer des tendances saisonnieres, les donnees sont calculees par 
-# quinzaine puis centrees reduites
+
+#' This function creates a cumulated area plot to highlight seasonal trends in migration. Data are calculated by
+#' 2 weeks period then centered and reduced
+#'  @param h A handler
+#'  @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -577,9 +578,9 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 		funout(get("msg",envir_stacomi)$BilanMigrationInterannuelle.5)
 	}
 }
-########################################
-# ecriture de fichiers dans le datawd
-############################################
+#'Writing of results in datawd
+#'  @param h A handler
+#'  @param ... Additional parameters
 htableBilanMigrationInterAnnuelle = function(h,...)
 {
 	# chargement des donnees
