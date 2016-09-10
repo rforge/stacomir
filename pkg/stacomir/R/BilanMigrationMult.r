@@ -675,7 +675,6 @@ houtBilanMigrationMult=function(h=null,...) {
 #' @param ... Additional parameters passed to print
 #' @return NULL
 #' @author cedric.briand
-#' @docType methods
 #' @export
 setMethod("print",signature=signature("BilanMigrationMult"),definition=function(x,...){ 
 			sortie1<-"bilanMigrationMult=new(bilanMigrationMult)\n"

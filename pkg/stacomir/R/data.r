@@ -77,3 +77,9 @@
 #' }
 #' @keywords data
 "bM_Arzal"
+
+
+#' dataframe containing the default connection arguments
+#' the program will use a file installed in c:/program files/stacomi but
+#' if not found will switch to the default
+"calcmig"

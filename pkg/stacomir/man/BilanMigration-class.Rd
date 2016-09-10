@@ -61,7 +61,7 @@ data("bM_Arzal")
 #bM_Arzal<-connect(bM_Arzal)
 #str(bM_Arzal@data)
 # calculations
-bM_Arzal<-calcule(bM_Arzal)
+bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
 # this will also write daily and monthly migration balance to the database,

@@ -43,7 +43,6 @@ setClass(Class="RefPoidsMoyenPeche",representation=
 #' @return An object of class \code{\linkS4class{RefPoidsMoyenPeche}}
 #' 
 #' @author cedric.briand
-#' @docType methods
 #' @export
 setMethod("charge",signature=signature("RefPoidsMoyenPeche"),definition=function(object){
 			baseODBCmortciv<-get("baseODBCmortciv",envir=envir_stacomi)

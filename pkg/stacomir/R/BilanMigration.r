@@ -255,6 +255,28 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			}
 		})
 
+#' Method to print the command line of the object
+#' @param x An object of class BilanMigrationMult
+#' @param ... Additional parameters passed to print
+#' @return NULL
+#' @author cedric.briand
+#' @export
+setMethod("print",signature=signature("BilanMigration"),definition=function(x,...){ 
+			sortie1<-"bilanMigration=new(bilanMigration)\n"
+			sortie2<-stringr::str_c("bilanMigration=choice_c(bilanMigration,",
+					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
+					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
+					"stades=c(",stringr::str_c(shQuote(x@stades@data$std_code),collapse=","),"),",			
+					"datedebut=",shQuote(strftime(x@pasDeTemps@dateDebut,format="%d/%m/%Y")),
+					",datefin=",shQuote(strftime(DateFin(x@pasDeTemps),format="%d/%m/%Y")),")")
+			# removing backslashes
+			funout(stringr::str_c(sortie1,sortie2),...)
+			return(invisible(NULL))
+		})
+
+
+
+
 #' Plots of various type for BilanMigration, and performs writing to the database of daily values.
 #' 
 #' \itemize{
@@ -353,7 +375,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 				} # end is.null(data)
 				
 				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-                #                 step plot
+				#                 step plot
 				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
 			} else if (plot.type=="step"){
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
@@ -393,7 +415,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 											"10"="#F0522D",
 											"11"="#912E0F",
 											"12"="#33004B"
-											))
+									))
 					print(p)	
 				} else {
 					funout(get("msg",envir_stacomi)$BilanMigration.8)

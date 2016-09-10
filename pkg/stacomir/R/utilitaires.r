@@ -126,30 +126,26 @@ chargecsv=function(database_expected){
 	# use of stringr package 
 	# by default the csv file is in C:/Program Files/stacomi/ and we don't want to change that
 	# note this will only be tested once the program is packages otherwise the path is inst/config/calcmig.csv
-	filecsvR=file.path(.libPaths(),"stacomiR","config","calcmig.csv")
+	
+	
 	if (database_expected) {
 		filecsv<-"C:/Program Files/stacomi/calcmig.csv"
-	} else {
-		filecsv<-filecsvR
-	}
-
-	
-	test<-file.access(filecsv,0)==0
-	# if the file does not open, we will switch to the file located within the package
-	if (test) {
-		doc<-utils::read.csv(filecsv,header=TRUE,sep=";")
-		# then we test using the file from the package in the config folder
-	} else {
-		test2<-file.access(filecsvR,0)==0
-		if (test2) {
-			doc<-utils::read.csv(filecsvR,header=TRUE,sep=";")
+		test<-file.access(filecsv,0)==0
+		if (test) {
+			calcmig<-utils::read.csv(filecsv,header=TRUE,sep=";")
+			# then we test using the file from the package in the config folder
 		} else {
-			stop("internal error, no access to the csv configuration file")
-		}		
+			# the access to csv file failed despite database_expected=true
+			# if the file does not open, we switch to the file located within the package
+			cat("C:/program files/calcmig.csv does not exist, switching to defaut package file")
+			data("calcmig")				
+		}
+	} else {
+		# no access to the database is expected, we are using the file in the data directory of the package
+		data("calcmig")
+		test<-FALSE
 	}
-	
-	
-	tableau_config = t(doc) # renvoit une liste
+	tableau_config = t(calcmig) # renvoit une liste
 	datawd=tableau_config["datawd",]
 	lang=tableau_config["lang",]
 #pgwd=tableau_config["pgwd",]

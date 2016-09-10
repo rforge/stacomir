@@ -3,14 +3,17 @@
 \docType{methods}
 \name{choicemult,PasDeTemps-method}
 \alias{choicemult,PasDeTemps-method}
-\title{choice method for PasdeTemps
-this method differs from choice as it is called within a notebook,
-it does not allow for multiple choice to be made}
+\title{Graphical interface for multiple choice method for PasdeTemps (used in BilanMigrationMult)}
 \usage{
 \S4method{choicemult}{PasDeTemps}(object)
 }
+\arguments{
+\item{object}{An object of class \link{PasDeTemps-class}}
+}
 \description{
-choice method for PasdeTemps
+Graphical interface for multiple choice method for PasdeTemps (used in BilanMigrationMult)
+}
+\note{
 this method differs from choice as it is called within a notebook,
 it does not allow for multiple choice to be made
 }

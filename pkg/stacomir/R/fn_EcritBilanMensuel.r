@@ -6,8 +6,9 @@
 #' 
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param resum data frame with summary per month
+#' @param silent Suppresses messages
 #' @export
-fn_EcritBilanMensuel<-function(bilanMigration,resum){
+fn_EcritBilanMensuel<-function(bilanMigration,resum,silent){
 	# voir essai_table_bilanmensuel.sql pour le format du tableau
 	# below not the most elegant way to do it but efficient
 	
@@ -36,6 +37,6 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum){
 		invisible(requete<-stacomirtools::connect(requete))   
 	} # end for
 	odbcClose(requete@connection)
-funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n"))	
+if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n"))
 } # end function
 

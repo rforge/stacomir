@@ -5,11 +5,13 @@
 \alias{choice_c,BilanFonctionnementDF-method}
 \title{command line interface for BilanFonctionnementDF class}
 \usage{
-\S4method{choice_c}{BilanFonctionnementDF}(object, horodatedebut, horodatefin,
-  ...)
+\S4method{choice_c}{BilanFonctionnementDF}(object, df, horodatedebut,
+  horodatefin, ...)
 }
 \arguments{
 \item{object}{An object of class \link{RefDC-class}}
+
+\item{df}{The df to set}
 
 \item{horodatedebut}{A POSIXt or Date or character to fix the date of beginning of the Bilan}
 

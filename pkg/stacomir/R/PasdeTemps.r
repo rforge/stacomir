@@ -38,10 +38,7 @@ rownames(LesPasDeTemps)=
 rm(UNE_SECONDE,UNE_MINUTE,DIX_MINUTES,QUINZE_MINUTES,TRENTE_MINUTES,UNE_HEURE,DOUZE_HEURES,
 		UN_JOUR,UNE_SEMAINE,DEUX_SEMAINES,UN_MOIS,TROIS_MOIS,SIX_MOIS,UN_AN,LabelPasDeTemps)
 
-################################################################
-# Declarations de classe
-################################################################
-#fonction pour valider les objects de classe Pas deTemps
+
 validite_PasDeTemps=function(object)
 {
   retValue=NULL
@@ -118,16 +115,7 @@ setClass(Class="PasDeTempsChar",representation=
 				stepDuration=as.character("1 jour"),
 				nbStep=as.numeric(1),
 				noPasCourant=as.integer(0) ))
-#pasDeTempsChar=new("PasDeTempsChar")
-# pasDeTempsChar@stepDuration= "1 jour"
-# pasDeTempsChar@nbStep=as.integer(10)
 
-
-################################################################
-# Conversion de classe
-################################################################
-
-#Conversion depuis la classe charactere  la classe numerique
 setAs("PasDeTempsChar","PasDeTemps",   # from to
 		function(from,to){
 			index=LesPasDeTemps[,"LabelPasDeTemps"]%in%from@stepDuration
@@ -138,15 +126,23 @@ setAs("PasDeTempsChar","PasDeTemps",   # from to
 					noPasCourant=from@noPasCourant)})
 # pasDeTemps=as(pasDeTempsChar,"PasDeTemps")
 
-################################################################
-# methodes standard
-################################################################
-# retourne le pas courant
+#' Generic method to get current time step
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("getnoPasCourant",def=function(object,...) standardGeneric("getnoPasCourant"))
+#' Gets the current time step of an object of class \link{PasDeTemps-class}
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return the current time step of the object
 setMethod("getnoPasCourant",signature=signature("PasDeTemps"),definition=function(object) object@noPasCourant)
 
-# retourne la date de fin
+#' Generic method for getting the final date
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("DateFin",def=function(object,...) standardGeneric("DateFin"))
+#' Gets the final horodate for an object of class \link{PasDeTemps-class}
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return DateFin, The final date corresponding to nbStep*time duration + initial date
+#' @export
 setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(object){
 			DateFin=object@dateDebut+ object@stepDuration*(object@nbStep)
 			# pour les pb de changement d'heure
@@ -154,11 +150,13 @@ setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(object
 			return(DateFin)
 		})
 
-#getnoPasCourant(EssaiPasdeTemps)
-
-
-#Retourne la date de debut correspondant au no de pas courant
+#' Generic method for getting the beginning date for current time step
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("currentDateDebut",def=function(object,...) standardGeneric("currentDateDebut"))
+#' Gets the starting date of a time step for an object of class \link{PasDeTemps-class}
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return CurrentDateDebut, The starting date for the current timestep
 setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=function(object){
 			CurrentDateDebut=object@dateDebut+ object@stepDuration*object@noPasCourant
 			# bug cht heure
@@ -168,22 +166,28 @@ setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=functi
 			return(CurrentDateDebut)
 		})
 
-# pasDeTemps@noPasCourant=as.integer(2)
-# currentDateDebut(pasDeTemps)
-
-# Retourne la date de fin correspondant au no de pas courant
+#' Generic method for getting the ending date for current time step
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("currentDateFin",def=function(object,...) standardGeneric("currentDateFin"))
+#' Gets the ending date of a time step for an object of class \link{PasDeTemps-class}
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return CurrentDateFin, The ending date for the current timestep
 setMethod("currentDateFin",signature=signature("PasDeTemps"),definition=function(object){
 			CurrentDateFin=object@dateDebut+ object@stepDuration*(object@noPasCourant+as.integer(1))
-			# bug cht heure 
 			if (object@stepDuration==86400) {
 				CurrentDateFin=Hmisc::round.POSIXt(CurrentDateFin,"days")
 			}
 			return(CurrentDateFin)
 		})
 
-#Avance au pas de temps suivant et retourne lengthno du nouveau pas de temps
+#' Generic method next
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("suivant",def=function(object,...) standardGeneric("suivant"))
+#' Gets the next time step 
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return An object of class \link{PasDeTemps-class} with current time step set
 setMethod("suivant",signature=signature("PasDeTemps"),definition=function(object){
 			object@noPasCourant =object@noPasCourant+as.integer(1)
 			if (currentDateFin(object)>DateFin(object)) {
@@ -191,37 +195,70 @@ setMethod("suivant",signature=signature("PasDeTemps"),definition=function(object
 			}
 			return (object)
 		})
-# retourne le libelle complet comme champ charactere
+
+#' Generic method the get starting date
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("getdateDebut",def=function(object,...) standardGeneric("getdateDebut"))
+#' Returns the starting date as character
+#' @param object An object of class \link{PasDeTemps-class}
+#' @param ... Additional parameters passed to the method
 setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(object){
 			return ( strftime(as.POSIXlt(object@dateDebut),format="%Y-%m-%d %H:%M:%S") )
 		})
 
-#Fixe la date de debut e partir d'un champ charactere de type "%Y-%m-%d %H:%M:%S" ou "%Y-%m-%d" (classe pas de temps journalier)
+
+#' Generic method to set the starting date
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("setdateDebut",def=function(object,...) standardGeneric("setdateDebut"))
+#' Sets starting date from a character
+#' 
+#' 
+#' @param object An object of class \link{PasDeTemps-class}
+#' @param string Character string of type"\%Y-\%m-\%d \%H:\%M:\%S" or "\%Y-\%m-\%d".
+#' this allows to use either horodate or date
+#' @return An object of class \link{PasDeTemps-class}
 setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(object,string){
 			object@dateDebut=if (!is.na(strptime(string,format="%Y-%m-%d %H:%M:%S"))) strptime(string,format="%Y-%m-%d %H:%M:%S") else
       strptime(string,format="%Y-%m-%d") 
 			return(object) 
 		})
-# object=setdateDebut(object,"2008-05-01 00:00:00")
-# getdateDebut(object)
 
+#' Generic method to get the string value of time step
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("getLibellesPas",def=function(object,...) standardGeneric("getLibellesPas"))
+
+
+
+#' Gets the string value of time step
+#' 
+#' @param object An object of class \link{PasDeTemps-class}
+#' @return A string corresponding to the value of current time step
 setMethod("getLibellesPas",signature=signature("PasDeTemps"),definition=function(object){
 			ret=paste(LesPasDeTemps$LabelPasDeTemps)
 			return (ret )
 		})
+
+#' Generic method to get the years 
+#' @param object An object
+#' @param ... Additional parameters passed to the method
 setGeneric("getAnnees",def=function(object,...) standardGeneric("getAnnees"))
+
+#' Gets the year or a vector of years corresponding to the timestep ("PasDeTemps") object
+#' @param object An object of class \link{PasDeTemps-class}
 setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(object){
 			 dateFin=DateFin(object)
 			 dateDebut=object@dateDebut
 			 seq=seq.POSIXt(from=dateDebut,to=dateFin,by="day")
-			 seq=seq[-length(seq)]# dans le bilan Migration la derniere valeur n'est pas prise en compte
+			 seq=seq[-length(seq)]
 			 annees=unique(strftime(seq,"%Y"))
   		return (as.numeric(annees))
 		})
-# pour test #object=new("PasDeTemps")    
+
+#' Method to select timesteps from the graphical interface
+#' @param object An object of class \link{PasDeTemps-class}
 setMethod("choice",signature=signature("PasDeTemps"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
@@ -230,18 +267,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 					object@nbStep<-nbStep
 					object@stepDuration<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object=setdateDebut(object,svalue(datedeb))
-					#object@nbStep<<-nbStep
-					#object@stepDuration<<-LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas]
-					assign("pasDeTemps",object,envir_stacomi)
-					#funout("Les pas de temps ont ete charges\n")
-					#print(object)
-					# pour l'instant pour une raison inexpliquee, je n'arrive pas e traduire
-					# object@nbStep dans l'environnement principal alors que  object@stepDuration
-					# est remplace dans object => ???????  je ne comprens pas....
-					# Je le remplace par un assign du meme object mais ce n'est pas propre car cela
-					# suppose que je ne peux avoir que lepas e passer e cette fonction
-					
-					#dispose(winpa)
+					assign("pasDeTemps",object,envir_stacomi)					
 				}
 				hchoicepas=function(h,...){
 					pas=svalue(choicepas)
@@ -249,15 +275,9 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 					object@stepDuration<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 					object@nbStep<-nbStep 
 					object=setdateDebut(object,svalue(datedeb))
-					#print(object@dateDebut)
-					
-					#assign("date",svalue(datedeb),envir = .GlobalEnv)     
 					add(datedefin,strftime(as.POSIXlt(DateFin(object)),format="%Y-%m-%d %H:%M:%S"),
 							font.attr=c(foreground.colors="red") )
 					hwinpa(h)
-				}
-				hchoicedatedebut=function(h,...){
-					# TODO a developper
 				}
 				winpa=gframe(get("msg",envir=envir_stacomi)$PasdeTemps.1,container=group,horizontal=FALSE)
 				pg<-ggroup(horizontal=FALSE,container=winpa)
@@ -282,8 +302,9 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 		})
 
 		
-#' choice method for PasdeTemps
-#' this method differs from choice as it is called within a notebook,
+#' Graphical interface for multiple choice method for PasdeTemps (used in BilanMigrationMult)
+#' @param object An object of class \link{PasDeTemps-class}
+#' @note this method differs from choice as it is called within a notebook,
 #' it does not allow for multiple choice to be made
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
@@ -339,7 +360,5 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 					} else funout(get("msg",envir=envir_stacomi)$PasdeTemps.3, arret=TRUE)
 				})
 		
-# showClass("PasDeTemps")
-# validObject( pasDeTemps)
-# showMethods("suivant")
+
 

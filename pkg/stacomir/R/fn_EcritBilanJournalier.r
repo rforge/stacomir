@@ -99,7 +99,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
 		tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
 		resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent )
-		fn_EcritBilanMensuel(bilanMigration,resum)
+		fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
 	}#end function hconfirm
 	
 	if (nrow(bil@data)>0)
@@ -152,6 +152,6 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 		DC=as.numeric(bilanMigration@dc@dc_selectionne)	
 		tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
 		resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent)
-		fn_EcritBilanMensuel(bilanMigration,resum)
+		fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
 	} # end else
 } # end function

@@ -149,13 +149,12 @@ setMethod("choice_c",signature=signature("RefDF"),definition=function(object,df)
 			} else if (class(df)=="character"){
 				df=as.integer(as.numeric(df))
 			}
-			if (any(is.na(df))) stop ("NA values df")
-			
-			
+			if (any(is.na(df))) stop ("NA values df")			
 			object@df_selectionne<-df
+			object@ouvrage= object@data$dif_ouv_identifiant[object@data$df%in%object@df_selectionne]
 			validObject(object) 		
 # the method validObject verifies that the df is in the data slot of RefDF			
 			
-				assign("refDF",object,envir=envir_stacomi)
+			assign("refDF",object,envir=envir_stacomi)
 			return(object)
 		})

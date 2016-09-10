@@ -4,12 +4,14 @@
 \alias{fn_EcritBilanMensuel}
 \title{This writes monthly data in t_bilanmensuel_mens table}
 \usage{
-fn_EcritBilanMensuel(bilanMigration, resum)
+fn_EcritBilanMensuel(bilanMigration, resum, silent)
 }
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
 
 \item{resum}{data frame with summary per month}
+
+\item{silent}{Suppresses messages}
 }
 \description{
 This writes monthly data in t_bilanmensuel_mens table

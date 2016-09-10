@@ -40,6 +40,7 @@ test_that("Tests one instance with error (dc does not exist)",
 							stades=c("AGG","AGJ","CIV"),
 							datedebut="2012-01-01",
 							datefin="31/12/2012"))
+			options(warn = 0)
 		})
 
 test_that("Tests one instance with error (dc does not exist)",
@@ -54,6 +55,7 @@ test_that("Tests one instance with error (dc does not exist)",
 							stades=c("AGG","AGJ","CIV"),
 							datedebut="2012-01-01",
 							datefin="31/12/2012"))
+			options(warn = 0)
 		})
 
 test_that("Test example 01_BilanMigrationMult",

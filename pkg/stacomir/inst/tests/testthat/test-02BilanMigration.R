@@ -1,5 +1,5 @@
 context("BilanMigration")
-test_that("Test an instance of bilanMigration",{
+test_that("Test an instance of BilanMigration",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav
@@ -71,7 +71,24 @@ test_that("Test writing an example to the database",
 			assign("sch","iav.",envir_stacomi)
 			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			data("bM_Arzal")
-			bM_Arzal<-calcule(bM_Arzal)
-			fn_EcritBilanJournalier(bilanMigration=bM_Arzal,silent=FALSE)
+			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
+			fn_EcritBilanJournalier(bilanMigration=bM_Arzal,silent=TRUE)
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+
+test_that("print method works",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			data("bM_Arzal")
+			print(bM_Arzal)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})

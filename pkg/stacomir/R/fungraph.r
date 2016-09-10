@@ -22,7 +22,6 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	#browser() 
 	#cat("fungraph")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
-	if (!identical(unique(tableau$type_de_quantite[!is.na(tableau$type_de_quantite)]),"effectif")) funout(get("msg",envir=envir_stacomi)$fungraph.1) 
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	mois= months(time.sequence)
 	jour= strftime(as.POSIXlt(time.sequence),"%j")
@@ -356,10 +355,10 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	tableau$mois=factor(months(tableau$debut_pas,abbreviate=TRUE),
 			levels=unique(months(tableau$debut_pas,abbreviate=TRUE)))
 	tableaum<-reshape2::melt(data=tableau[,c("MESURE","CALCULE","EXPERT","PONCTUEL","mois")],							
-							id.vars=c("mois"),
-							measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),
-							variable.name="type",
-							value.name="number")
+			id.vars=c("mois"),
+			measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),
+			variable.name="type",
+			value.name="number")
 	levels(tableaum$type)<-get("msg",envir=envir_stacomi)$fungraph.5
 	superpose.polygon<-lattice::trellis.par.get("plot.polygon")
 	superpose.polygon$col=  c("black","deepskyblue","chartreuse2","indianred")
@@ -395,7 +394,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					points=FALSE, 
 					space="right", 
 					cex=0.8),
-		 origin=0)
+			origin=0)
 	print(bar,position = c(0, 0, 1, .25),newpage = FALSE)
 	
 	

@@ -7,9 +7,11 @@ test_that("Test existence of csv file",{
 
 )
 
-test_that("Test existence of csv file within package",{
-			filecsv<-file.path(.libPaths(),"stacomiR","config","calcmig.csv");
-			expect_equivalent(file.access(filecsv,0),0)
+test_that("Test existence calcmig data within package",{
+			data("calcmig")
+			calcmig<-calcmig
+			expect_equal(length(calcmig),11)
+
 		}
 
 )
