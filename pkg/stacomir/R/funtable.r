@@ -28,11 +28,8 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	if (!silent) funout(paste("ecriture de",path1html,"\n"))
 	if( !is.null(resum) )
 	{
-		path2=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".csv",sep=""),fsep ="/")
-		# warning that it is appending column name to file
-		options(warn = 2)
-		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";",append=TRUE)
-		options(warn = 0)
+		path2=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
+		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";")
 		path2html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".html",sep=""),fsep ="/")
 		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2,"\n"))
 		funhtml(data=resum,

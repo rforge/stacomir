@@ -51,3 +51,11 @@ test_that("Test example 01_BilanMigrationMult",
 			if (test!=0) warnings("Package example dir not created ?") else
 				source(example_path)
 		})
+
+test_that("Test plot method standard",
+		{
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
+			data("bMM_Arzal")
+			bMM_Arzal<-calcule(bMM_Arzal,silent=TRUE)
+			plot(bMM_Arzal,plot.type="standard",silent=TRUE)
+		})

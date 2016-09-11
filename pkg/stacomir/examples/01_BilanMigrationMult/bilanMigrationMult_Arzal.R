@@ -28,10 +28,14 @@ data("bMM_Arzal")
 bMM_Arzal<-calcule(bMM_Arzal,silent=TRUE)
 #Individual plot for all DC, taxon and stage where data present
 #Silent=TRUE to turn off messages
+# not run because of multiple graphical devices
+\dontrun{
 plot(bMM_Arzal,plot.type="standard",silent=TRUE)
-
+}
 #cumulated migration at the station (all stages and DC grouped)
+
 plot(bMM_Arzal,plot.type="step")
+
 #some plots are a mixture of french and english
 #changing the reference table names to english should shift all to english.
 #same for spanish.

@@ -363,7 +363,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 							#----------------------------------
 							# bilan migration avec poids (civelles
 							#-----------------------------------------
-							grDevices::X11()
+							#grDevices::X11()
 							fungraph_civelle(bilanMigration=bilanMigration,
 									table=data_without_hole,
 									time.sequence=bilanMigration@time.sequence,
@@ -377,7 +377,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 							#----------------------------------
 							# bilan migration standard
 							#-----------------------------------------
-							grDevices::X11()
+							#grDevices::X11()
 							#silent=TRUE
 							fungraph(bilanMigration=bilanMigration,
 									tableau=data_without_hole,
