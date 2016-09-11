@@ -14,7 +14,7 @@
 An object of class \link{BilanMigration-class} with slots filled by user choice
 }
 \description{
-charge method for BilanMigration
+fills also the data slot by the connect method
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanMigration.r
 \name{hTableBilanMigration}
 \alias{hTableBilanMigration}
-\title{handler for summary function
+\title{handler for summary function, internal use
 calls functions funstat and funtable to build summary tables in html and
 csv files}
 \usage{
@@ -14,7 +14,7 @@ hTableBilanMigration(h, ...)
 \item{...}{Additional parameters}
 }
 \description{
-handler for summary function
+handler for summary function, internal use
 calls functions funstat and funtable to build summary tables in html and
 csv files
 }

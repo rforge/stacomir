@@ -52,11 +52,12 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 
 #' connect method for BilanMigrationInterannuelle class
 #' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @param silent Stops messages from being displayed if silent=TRUE, default FALSE
 #' @return bilanMigrationInterannuelle an instantianted object with values filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
-		definition=function(object)
+		definition=function(object,silent=FALSE)
 		{ 
 			# tableau contenant toutes les annees
 			les_annees = (object@anneeDebut@annee_selectionnee):(object@anneeFin@annee_selectionnee)
@@ -77,17 +78,19 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			index=unique(object@data$bjo_annee) %in% les_annees
 			
 			# s'il manque des donnees pour certaines annees selectionnnees" 
-			if (length(les_annees[!index]>0)) 
-			{
-				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.1,
-								paste(les_annees[!index],collapse=","),get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.2,"\n"))
-			} # end if    
-			
-			# si toutes les annees sont presentes
-			if (length(les_annees[index]>0)){
-				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.3,
-								paste(les_annees[index],collapse=","), "\n")) 
-			}  
+			if (!silent){
+				if (length(les_annees[!index]>0)) 
+				{
+					funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.1,
+									paste(les_annees[!index],collapse=","),get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.2,"\n"))
+				} # end if    
+				
+				# si toutes les annees sont presentes
+				if (length(les_annees[index]>0)){
+					funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationInterannuelle.3,
+									paste(les_annees[index],collapse=","), "\n")) 
+				}  
+			}
 			return(object)
 		}
 )
@@ -110,15 +113,17 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
-			requete<-stacomirtools::connect(requete)
+			invisible(capture_output(requete<-stacomirtools::connect(requete)))
+			
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationmensuel_bme ")
 			requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
-			requete<-stacomirtools::connect(requete)
+			invisible(capture_output(requete<-stacomirtools::connect(requete)))
+			
 			return(invisible(NULL))
 		}
-		
+
 )
 
 #' loading method for BilanMigrationInterannuelle class
@@ -303,7 +308,7 @@ fundat=function(dat,timesplit=NULL)
 			# si nul on remplace par jour pour generer le script en dessous
 			timesplit="jour"
 			jour2000=as.Date(Hmisc::trunc.POSIXt(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
-							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), digits='days'))
+									to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"), digits='days'))
 			for (j in unique(dat$annee)){
 				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutes avec zero
 				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]
@@ -347,7 +352,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	#################
 	# Calcul des cumsum
 	###################
-
+	
 	#dat$valeur[dat$valeur<0]<-0
 	for (an in unique(dat$annee)){
 		# an=as.character(unique(dat$annee)) ;an<-an[1]
@@ -358,7 +363,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 	dat$jour=as.Date(dat$jour)
 	dat$annee=as.factor(dat$annee)
 	# bug, enleve les annees avec seulement une ligne
-
+	
 	#################
 	# Graphique
 	###################
@@ -411,7 +416,7 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 	thechoice=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choice annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="") 
 	# here change 12/2012 the geom_crossbar now needs a factor, label change according to timesplit
-
+	
 	newdat[,timesplit]<-as.factor(newdat[,timesplit])
 	levels(newdat[,timesplit])<-newdat[,timesplit] # to have the factor in the right order from january to dec
 	if (length(thechoice)>0) { 
@@ -478,7 +483,7 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 		dat[,timesplit]<-strftime(dat[,timesplit],format="%W")
 	} 
 	dat[,timesplit]<-as.factor(dat[,timesplit])
-
+	
 	# dat=dat[dat$moyenne!=0,] # pour des raisons graphiques on ne garde pas les effectifs nuls generes par fundat
 	newdat=dat[match(unique(dat[,timesplit]),dat[,timesplit]),]
 	newdat=newdat[order(newdat[,"keeptimesplit"]),] # il peut y avoir des annees pour le calcul de range qui s'ajoutent 
@@ -486,7 +491,7 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 #	dat[,timesplit]<-gdata::reorder(dat[,timesplit], new.order=match(levels(dat[,timesplit]),newdat[,timesplit]))	
 #	levels(dat[,timesplit])<-newdat[,timesplit]	
 #	levels(newdat[,timesplit])<-newdat[,timesplit]	
-
+	
 	the_choice=select.list(choices=as.character(unique(dat$annee)),preselect=as.character(max(as.numeric(as.character(dat$annee)))),"choice annee",multiple=TRUE)
 	amplitude=paste(min(as.numeric(as.character(dat$annee))),"-",max(as.numeric(as.character(dat$annee))),sep="") 
 	

@@ -53,10 +53,6 @@ setValidity("BilanMigrationMult",function(object)
 			rep1=length(object@dc)>=1
 			rep2=length(object@taxons)>=1
 			rep3=length(object@stades)>=1
-			#	rep3=length(object@pasDeTemps)==1
-			#rep4=(object@pasDeTemps@nbStep==365) # contrainte : pendant 365j
-			#	rep5=as.numeric(strftime(object@pasDeTemps@dateDebut,'%d'))==1 # contrainte : depart = 1er janvier
-			#	rep6=as.numeric(strftime(object@pasDeTemps@dateDebut,'%m'))==1			
 			return(ifelse(rep1 & rep2 & rep3 , TRUE ,c(1:6)[!c(rep1, rep2, rep3)]))
 		}   
 )
@@ -66,7 +62,8 @@ setValidity("BilanMigrationMult",function(object)
 
 #' charge method for BilanMigrationMult
 #' 
-#' Used by the graphical interface to collect and test objects in the environment envir_stacomi
+#' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
+#' fills also the data slot by the connect method
 #' @return BilanMigrationMult with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
@@ -97,6 +94,9 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
 			}
+			bilanMigrationMult=connect(bilanMigrationMult)
+			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
+			
 			stopifnot(validObject(bilanMigrationMult, test=TRUE))
 			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			return(bilanMigrationMult)
@@ -129,8 +129,8 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 
 #' calcule method for BilanMigrationMult
 #' 
-#'  does the calculation once data are filled. It also performs conversion from weight to numbers
-#' in with the connect method
+#'  does the calculation once data are filled. 
+#'  
 #' @param object An object of class \code{\link{BilanMigrationMult-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
@@ -142,8 +142,6 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			
 			bilanMigrationMult<-object
-			bilanMigrationMult=connect(bilanMigrationMult)
-			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
 			
 			bilanMigrationMult@data$time.sequence=difftime(bilanMigrationMult@data$ope_date_fin,
 					bilanMigrationMult@data$ope_date_debut,
@@ -538,6 +536,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 hbilanMigrationMultcalc=function(h=null,...){
 	bilanMigrationMult<-get("bilanMigrationMult",envir=envir_stacomi)
 	bilanMigrationMult<-charge(bilanMigrationMult)
+	# charge loads the method connect
 	bilanMigrationMult<-calcule(bilanMigrationMult)
 }
 
@@ -583,7 +582,6 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigrationMult=function(h=null,...) {
-	funout("Tableau de sortie \n")
 	if (exists("bilanMigrationMult",envir_stacomi)) 
 	{
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
@@ -604,12 +602,14 @@ hTableBilanMigrationMult=function(h=null,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=function(object,silent=FALSE,...){
+			#bilanMigrationMult<-bMM_Arzal; silent<-FALSE
 			bilanMigrationMult<-object		
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
 			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-			funout(get("msg",envir_stacomi)$BilanMigration.9)
+			if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)
 			#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			#dcnum=2;taxonnum=1;stadenum=1
 			for (dcnum in 1:length(lesdc)){
 				for (taxonnum in 1:nrow(lestaxons)){
 					for (stadenum in 1:nrow(lesstades)){
@@ -642,6 +642,9 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 								
 								resum=funstat(tableau=data_without_hole,
 										time.sequence=bilanMigrationMult@time.sequence,taxon,stade,DC,silent)
+								# pb with posixt and xtable, removing posixt and setting date instead
+								data_without_hole$debut_pas<-as.Date(data_without_hole$debut_pas)
+								data_without_hole<-data_without_hole[,-match("fin_pas",colnames(data_without_hole))]
 								funtable(tableau=data_without_hole,
 										time.sequence=bilanMigrationMult@time.sequence,
 										taxon,stade,DC,resum,silent)

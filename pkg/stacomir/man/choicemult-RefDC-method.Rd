@@ -8,7 +8,7 @@
 \S4method{choicemult}{RefDC}(object, objectBilan = NULL, is.enabled = TRUE)
 }
 \arguments{
-\item{object}{An objet of class RefDC}
+\item{object}{An object of class RefDC}
 
 \item{objectBilan}{A bilan object}
 

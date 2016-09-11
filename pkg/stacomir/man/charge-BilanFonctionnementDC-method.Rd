@@ -5,12 +5,12 @@
 \alias{charge,BilanFonctionnementDC-method}
 \title{charge method for BilanFonctionnementDC}
 \usage{
-\S4method{charge}{BilanFonctionnementDC}(object, h)
+\S4method{charge}{BilanFonctionnementDC}(object)
 }
 \arguments{
-\item{h}{A handler passed from the graphical interface}
+\item{object}{An object of class \link{BilanFonctionnementDC-class}}
 
-\item{objet}{An object of class \link{BilanFonctionnementDC-class}}
+\item{h}{A handler passed from the graphical interface}
 }
 \value{
 An object of class \link{BilanFonctionnementDC-class}

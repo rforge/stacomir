@@ -11,7 +11,8 @@
 BilanMigrationMult with slots filled by user choice
 }
 \description{
-Used by the graphical interface to collect and test objects in the environment envir_stacomi
+Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
+fills also the data slot by the connect method
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

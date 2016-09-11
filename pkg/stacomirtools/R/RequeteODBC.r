@@ -133,4 +133,5 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 				print(object@etat)
 			}
 			return(object)
+			
 		})

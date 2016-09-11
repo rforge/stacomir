@@ -8,7 +8,7 @@
 \S4method{charge}{BilanConditionEnv}(object, h)
 }
 \arguments{
-\item{object}{An objet of class \link{BilanConditionEnv-class}}
+\item{object}{An object of class \link{BilanConditionEnv-class}}
 
 \item{h}{A handler}
 }

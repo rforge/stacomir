@@ -143,7 +143,7 @@ setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=func
 					}	
 				}
 					object@dateDebut<-as.POSIXlt(datedebut)
-					object@nbStep=as.numeric(difftime(datefin,datedebut,units="days"))
+					object@nbStep=as.numeric(difftime(datefin,datedebut,units="days")+1)
 					validObject(object) 			
 					return(object)
 				})

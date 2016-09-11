@@ -5,10 +5,10 @@
 \alias{connect,BilanFonctionnementDC-method}
 \title{connect method for BilanFonctionnementDC}
 \usage{
-\S4method{connect}{BilanFonctionnementDC}(object, h)
+\S4method{connect}{BilanFonctionnementDC}(object)
 }
 \arguments{
-\item{objet}{An object of class \link{BilanFonctionnementDC-class}}
+\item{object}{An object of class \link{BilanFonctionnementDC-class}}
 }
 \value{
 An object of class \link{BilanFonctionnementDC-class}

@@ -68,7 +68,7 @@ hbilanMigrationConditionEnvcalc=function(h,...){
 #' 
 
 
-#' @param object An object of class \code{\link{BilanMigrationEnv-class}}
+#' @param object An object of class \code{\link{BilanMigrationConditionEnv-class}}
 #' @param ... additional parameters
 #' @return \code{\link{BilanMigrationEnv-class}}
 #' @export

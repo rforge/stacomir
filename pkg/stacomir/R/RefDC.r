@@ -164,7 +164,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
 #' and fills it with the method \link{charge_avec_filtre,RefTaxon-method}
-#' @param object An objet of class RefDC
+#' @param object An object of class RefDC
 #' @param objectBilan A bilan object
 #' @param is.enabled A boolean indicating if the widget can be seleted at launch
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -26,6 +26,7 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 			Graph2=gWidgets::gaction(handler=hbilanMigrationgraph2, icon="graph2", label="grcum", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.4),
 			Stat=gWidgets::gaction(handler=hTableBilanMigration, icon="dataframe", label="stat", tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigration.5),  
 			write=gWidgets::gaction(handler=hbilanMigrationwrite, icon="gtk-harddisk", label="write", tooltip=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5),    
+			Out=gWidgets::gaction(handler=houtBilanMigration, icon="gtk-info", label="code", tooltip=get("msg",envir=envir_stacomi)$BilanMigrationMult.1),    
 			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter")
 	)    
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))

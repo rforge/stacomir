@@ -217,11 +217,11 @@ setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.5,arret=TRUE)
 			} else	if (class(taxons)=="character"){	
 				libellemanquants<-taxons[!taxons%in%object@data$tax_nom_latin]
-				if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(libellemanquants,collapse=", ")))
+				if (length(libellemanquants)>0) warning(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(libellemanquants,collapse=", ")))
 				object@data<-object@data[object@data$tax_nom_latin%in%taxons,]
 			} else if (class(taxons)=="numeric"){
 				codemanquants<-taxons[!taxons%in%object@data$tax_code]
-				if (length(codemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", ")))
+				if (length(codemanquants)>0) warning(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", ")))
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{

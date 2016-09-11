@@ -12,9 +12,10 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	tableau$debut_pas<-as.character(tableau$debut_pas)
 	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path1,"\n"))
+	if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path1,"\n"))
 	path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".html",sep=""),fsep ="/")
 	funhtml(data=tableau,
 			caption=paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),
@@ -28,7 +29,10 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	if( !is.null(resum) )
 	{
 		path2=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".csv",sep=""),fsep ="/")
+		# warning that it is appending column name to file
+		options(warn = 2)
 		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";",append=TRUE)
+		options(warn = 0)
 		path2html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".html",sep=""),fsep ="/")
 		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2,"\n"))
 		funhtml(data=resum,
@@ -40,9 +44,7 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 				digits=2
 		)
 		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2html,"\n"))       
-		rm(path1,path1html,path2,path2html)
 	}
-#	setwd(wd)
 }
 
 

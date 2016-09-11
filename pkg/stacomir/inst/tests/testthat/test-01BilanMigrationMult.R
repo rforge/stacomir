@@ -43,21 +43,6 @@ test_that("Tests one instance with error (dc does not exist)",
 			options(warn = 0)
 		})
 
-test_that("Tests one instance with error (dc does not exist)",
-		{
-			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
-			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = 2)
-			expect_error(choice_c(bilanMigrationMult,
-							dc=c(6,7000),
-							taxons=c("Anguilla anguilla","Salmo salar"),
-							stades=c("AGG","AGJ","CIV"),
-							datedebut="2012-01-01",
-							datefin="31/12/2012"))
-			options(warn = 0)
-		})
-
 test_that("Test example 01_BilanMigrationMult",
 		{
 			# check if built with examples (Rtools install --example

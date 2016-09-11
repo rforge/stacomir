@@ -89,6 +89,6 @@ test_that("print method works",
 			assign("sch","iav.",envir_stacomi)
 			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			data("bM_Arzal")
-			print(bM_Arzal)
+			expect_output(print(bM_Arzal), "bilanMigration=choice_c",info = NULL)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})

@@ -48,7 +48,7 @@ setMethod("charge_avec_filtre",signature=signature("RefMsg"),definition=function
 		})
 
 #' createmessage method for RefMsg referential objects 
-#' @param ojbect An objet of class RefMsg
+#' @param ojbect An object of class RefMsg
 #' @param database_expected Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package
 #' @return An S4 object of class RefMsg
 #' @note When coming from the database, doublequotes are now escaped with an antislash (/"), those at the beginning and end are left as doublequotes, 

@@ -40,11 +40,11 @@ setClass(Class="BilanFonctionnementDC",
 #' connect method for BilanFonctionnementDC
 #' 
 #' loads the working periods and type of arrest or disfunction of the DC
-#' @param objet An object of class \link{BilanFonctionnementDC-class}
+#' @param object An object of class \link{BilanFonctionnementDC-class}
 #' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
-setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
+setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object) {
 #  construit une requete ODBCwheredate
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			object@requete@select= sql<-paste("SELECT",
@@ -71,12 +71,12 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 #' 
 #' used by the graphical interface to retreive the objects of Referential classes
 #' assigned to envir_stacomi
-#' @param objet An object of class \link{BilanFonctionnementDC-class}
+#' @param object An object of class \link{BilanFonctionnementDC-class}
 #' @param h A handler passed from the graphical interface
 #' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
-setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,h) {
+setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
 			if (exists("refDC",envir_stacomi)) {

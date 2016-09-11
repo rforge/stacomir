@@ -45,7 +45,7 @@ setClass(Class="BilanConditionEnv",
 
 
 #' connect method for BilanConditionEnv class
-#' @param object An objet of class \link{BilanConditionEnv-class}
+#' @param object An object of class \link{BilanConditionEnv-class}
 #' @param h A handler
 #' @return an object of BilanConditionEnv class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -79,7 +79,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 )
 
 #' charge method for BilanCondtionEnv class
-#' @param object An objet of class \link{BilanConditionEnv-class}
+#' @param object An object of class \link{BilanConditionEnv-class}
 #' @param h A handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

@@ -55,11 +55,10 @@ setValidity("BilanMigration",function(object)
 			rep2=length(object@taxons)==1
 			rep3=length(object@stades)==1
 			rep3=length(object@pasDeTemps)==1
-			rep4=(object@pasDeTemps@nbStep==365) # contrainte : pendant 365j
+			rep4=(object@pasDeTemps@nbStep==365|object@pasDeTemps@nbStep==366) # constraint 365 to 366 days
 			rep5=as.numeric(strftime(object@pasDeTemps@dateDebut,'%d'))==1 # contrainte : depart = 1er janvier
 			rep6=as.numeric(strftime(object@pasDeTemps@dateDebut,'%m'))==1
-			rep7=length(calcdata)==1
-			return(ifelse(rep1 & rep2 & rep3 & rep4 & rep5 & rep6 & rep7, TRUE ,c(1:6)[!c(rep1, rep2, rep3, rep4, rep5, rep6, rep7)]))
+			return(ifelse(rep1 & rep2 & rep3 & rep4 & rep5 & rep6 , TRUE ,c(1:6)[!c(rep1, rep2, rep3, rep4, rep5, rep6)]))
 		}   
 )
 
@@ -72,7 +71,7 @@ setValidity("BilanMigration",function(object)
 hbilanMigrationcalc=function(h,...){
 	bilanMigration<-get("bilanMigration",envir=envir_stacomi)
 	bilanMigration<-charge(bilanMigration)
-	bilanMigration<-connect(bilanMigration)
+	# charge loads the method connect
 	bilanMigration<-calcule(bilanMigration)
 }
 
@@ -119,11 +118,15 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 			bilanMigration@stades<-charge_avec_filtre(object=bilanMigration@stades,bilanMigration@dc@dc_selectionne,bilanMigration@taxons@data$tax_code)	
 			bilanMigration@stades<-choice_c(bilanMigration@stades,stades)
 			bilanMigration@pasDeTemps<-choice_c(bilanMigration@pasDeTemps,datedebut,datefin)
+			bilanMigration<-connect(bilanMigration)
+			stopifnot(validObject(bilanMigration, test=TRUE))
 			assign("bilanMigration",bilanMigration,envir = envir_stacomi)
 			return(bilanMigration)
 		})
 
 #' charge method for BilanMigration
+#' 
+#' fills also the data slot by the connect method
 #' @param object An object of class \code{\link{BilanMigration-class}}
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -157,8 +160,10 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
 			}
+			bilanMigration=connect(bilanMigration)
+			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigration@data),"\n"))
 			stopifnot(validObject(bilanMigration, test=TRUE))
-			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
+			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			return(bilanMigration)
 		})
 
@@ -182,12 +187,11 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				funout(get("msg",envir_stacomi)$BilanMigration.2)
 			}
 			bilanMigration<-object
-			bilanMigration=connect(bilanMigration)
-			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigration@data),"\n"))
-			if (nrow(bilanMigration@data>0)){
-				bilanMigration@data$time.sequence=difftime(bilanMigration@data$ope_date_fin,
-						bilanMigration@data$ope_date_debut,
-						units="days")
+
+				if (nrow(bilanMigration@data>0)){
+#				bilanMigration@data$time.sequence=difftime(bilanMigration@data$ope_date_fin,
+#						bilanMigration@data$ope_date_debut,
+#						units="days")
 				debut=bilanMigration@pasDeTemps@dateDebut
 				fin=DateFin(bilanMigration@pasDeTemps)
 				time.sequence<-seq.POSIXt(from=debut,to=fin,
@@ -255,6 +259,23 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			}
 		})
 
+		
+		
+#' handler to print the command line
+#' @param h a handler
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+		houtBilanMigration=function(h=null,...) {
+			if (exists("refStades",envir_stacomi)) 	{
+				bilanMigration<-get("bilanMigration",envir_stacomi)
+				print(bilanMigration)
+			} 
+			else 
+			{      
+				funout(get("msg",envir_stacomi)$BilanMigrationMult.2,arret=TRUE)
+			}
+		}
+		
 #' Method to print the command line of the object
 #' @param x An object of class BilanMigrationMult
 #' @param ... Additional parameters passed to print
@@ -434,7 +455,7 @@ hbilanMigrationgraph = function(h,...) {
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	#funout(get("msg",envir_stacomi)$BilanMigration.9)
+	
 	plot(bilanMigration,plot.type="standard")
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	fn_EcritBilanJournalier(bilanMigration)
@@ -453,37 +474,45 @@ hbilanMigrationgraph2 = function(h,...) {
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	#funout(get("msg",envir_stacomi)$BilanMigration.9)
 	plot(bilanMigration,plot.type="step")
 }
 
-#' handler for summary function
+#' handler for summary function, internal use
 #' calls functions funstat and funtable to build summary tables in html and
 #' csv files
 #' @param h Handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigration=function(h,...) {
-	funout("Tableau de sortie \n")
-	if (exists("bilanMigration",envir_stacomi)) 
-	{
-		bilanMigration<-get("bilanMigration",envir_stacomi)
-	} 
-	else 
-	{      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+	hTableBilanMigrationMult=function(h=null,...) {
+		if (exists("bilanMigration",envir_stacomi)) 
+		{
+			bilanMigration<-get("bilanMigration",envir_stacomi)
+		} 
+		else 
+		{      
+			funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		}
+		summary(bilanMigration)
 	}
-	taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
-	stade= as.character(bilanMigration@stades@data$std_libelle)
-	DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
-	resum=funstat(tableau=bilanMigration@data,
-			bilanMigration@time.sequence,
-			taxon,
-			stade,
-			DC)
-	funtable(tableau=bilanMigration@data,time.sequence=bilanMigration@time.sequence,taxon,stade,DC,resum)
 }
+
+#' summary for bilanMigration 
+#' calls functions funstat and funtable to create migration overviews
+#' and generate csv and html output in the user data directory
+#' @param object An object of class \code{\link{BilanMigration-class}}
+#' @param silent Should the program stay silent or display messages, default FALSE
+#' @param ... Additional parameters (not used there)
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("summary",signature=signature(object="BilanMigration"),definition=function(object,silent=FALSE,...){
+			bilanMigrationMult<-as(object,"BilanMigrationMult")
+			summary(bilanMigrationMult,silent=silent)			
+		})
+
+
+
+
 
 #' handler hBilanMigrationwrite
 #' Allows the saving of daily and monthly counts in the database, this method is also called from hbilanMigrationgraph

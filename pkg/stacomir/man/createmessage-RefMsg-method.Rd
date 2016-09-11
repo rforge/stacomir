@@ -10,7 +10,7 @@
 \arguments{
 \item{database_expected}{Default to TRUE, if FALSE, no database connection is expected and the messages will be loaded from msg dataset within the package}
 
-\item{ojbect}{An objet of class RefMsg}
+\item{ojbect}{An object of class RefMsg}
 }
 \value{
 An S4 object of class RefMsg

@@ -8,7 +8,7 @@
 \S4method{calcule}{BilanMigrationConditionEnv}(object, ...)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigrationEnv-class}}}
+\item{object}{An object of class \code{\link{BilanMigrationConditionEnv-class}}}
 
 \item{...}{additional parameters}
 }

@@ -8,7 +8,7 @@ test_that("Test existence of csv file",{
 )
 
 test_that("Test existence calcmig data within package",{
-			data("calcmig")
+			data("calcmig",package = "stacomiR")
 			calcmig<-calcmig
 			expect_equal(length(calcmig),11)
 

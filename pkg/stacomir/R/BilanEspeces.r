@@ -242,7 +242,7 @@ hTableBilanEspeces=function(h,...) {
 			"mois"=as.data.frame(xtabs(lot_effectif~taxon_stades+mois,data=tableEspeces)),
 			"semaine"=as.data.frame(xtabs(lot_effectif~taxon_stades+semaine,data=tableEspeces)),
 			"aucun"=as.data.frame(xtabs(lot_effectif~taxon_stades,data=tableEspeces)))
-	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m nb de colonnes	funout(get("msg",envir_stacomi)$BilanMigration.9)  	
+	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m nb de colonnes	
 	path=file.path(normalizePath(path.expand(get("datawd",envir=envir_stacomi))),paste("tableEspece",now,".csv",sep=""),fsep ="\\")
 	write.table(sumEspeces,path,row.names=TRUE,col.names=TRUE,sep=";",append=FALSE)
 	funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path,"\n"))

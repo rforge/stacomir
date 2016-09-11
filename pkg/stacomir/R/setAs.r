@@ -21,5 +21,7 @@ setAs("BilanMigration","BilanMigrationMult",function(from){
 			bMM@pasDeTemps=from@pasDeTemps
 			bMM@coef_conversion=from@coef_conversion
 			bMM@data=from@data
+			bMM@time.sequence=from@time.sequence
+			bMM@calcdata=from@calcdata
 			return(bMM)
 		})

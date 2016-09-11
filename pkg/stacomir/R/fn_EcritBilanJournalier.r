@@ -48,15 +48,12 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 	# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
 	# les methodes de cette classe
 	bil=as(bilanMigration,"BilanMigrationInterAnnuelle")
-	bil=connect(bil)
+	bil=connect(bil,silent=silent)
 	
 	hconfirm=function(h,...){			
 		# suppression des donnees actuellement presentes dans la base
-		supprime(bil)			
-		requete=new("RequeteODBC")
-		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-		requete@silent=TRUE
-		requete@open=TRUE
+		# bilanjournalier et bilanmensuel
+		supprime(bil)		
 		# progress bar
 #  OLD CODE = problems to pass Rcheck
 #		progres<-utils::winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
@@ -67,9 +64,10 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 #				width = 400)
 		
 		mygtkProgressBar(title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
-		progress_text=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.4)
+				progress_text=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.4)
 		
-		for (i in 1:nrow(t_bilanmigrationjournalier_bjo)) {				
+		for (i in 1:nrow(t_bilanmigrationjournalier_bjo)) {		
+			
 			zz=i/nrow(t_bilanmigrationjournalier_bjo)
 			progress_bar$setFraction(zz)
 			progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
@@ -79,18 +77,23 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 #					zz,
 #					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 #					label=sprintf("%d%% progression",
-#							round(100*zz)))     
+#							round(100*zz)))  
+			# leaving requete@open outside the loop leads to problem ?
+			requete=new("RequeteODBC")
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@silent=TRUE
 			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			invisible(requete<-stacomirtools::connect(requete)) 
+			# to avoid printing character use of invisible (capture_output(
+		invisible(capture_output(stacomirtools::connect(requete)))
 			
 		} # end for
 		if (!silent){
-		funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+			funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		}
 		# si l'utilisateur accepte de remplacer les valeurs
-		odbcClose(requete@connection)
+		
 		progres<-get("progres",envir=envir_stacomi)
 		gtkWidgetDestroy(progres)
 		# ecriture egalement du bilan mensuel
@@ -105,10 +108,10 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 	if (nrow(bil@data)>0)
 	{ 
 		if (!silent){
-		choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
-						unique(bil@data$bjo_horodateexport),
-						get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
-				handler=hconfirm) # voulez vous le remplacer ?
+			choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+							unique(bil@data$bjo_horodateexport),
+							get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
+					handler=hconfirm) # voulez vous le remplacer ?
 		} else {
 			hconfirm(h=NULL)
 		}
@@ -116,13 +119,10 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 	}
 	else  # sinon on ecrit les resultats quoiqu'il arrive
 	{
-		requete=new("RequeteODBC")
-		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-		requete@silent=TRUE
-		requete@open=TRUE
+	
 		mygtkProgressBar(title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.3,
 				progress_text=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.4)
-
+		
 #		progres<-utils::winProgressBar(title = get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 #				label = "progression %",
 #				min = 0,
@@ -136,16 +136,18 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 #					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
 #					label=sprintf("%d%% progression",
 #							round(100*zz)))
-		progress_bar$setFraction(zz)
-		progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-		RGtk2::gtkMainIterationDo(FALSE)
+			progress_bar$setFraction(zz)
+			progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
+			RGtk2::gtkMainIterationDo(FALSE)
+			requete=new("RequeteODBC")
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@silent=TRUE
 			requete@sql=paste( "INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			invisible(requete<-stacomirtools::connect(requete))   
+			invisible(capture_output(stacomirtools::connect(requete)))
 		} # end for
-		RODBC::odbcClose(requete@connection)
 		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 		stade= as.character(bilanMigration@stades@data$std_libelle)

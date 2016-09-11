@@ -20,8 +20,7 @@ different rows}
 BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
 }
 \description{
-does the calculation once data are filled. It also performs conversion from weight to numbers
-in with the connect method
+does the calculation once data are filled.
 }
 \note{
 The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
