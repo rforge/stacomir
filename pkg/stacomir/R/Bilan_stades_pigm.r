@@ -456,10 +456,10 @@ fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VIA3= fnstade(par1=Vparm$pigment_stage[[4]],VB=FALSE,phicum=phicum,neg=FALSE,lmax=lmax)
 	VIA3c=cumsum(VIA3$y)/sum(VIA3$y)  # surface
 	if(graph){
-		grDevices::X11()
+		dev.new()
 		matplot(VB$x,cbind(VB$y,VIA0$y,VIA1$y,VIA2$y,VIA3$y))
 		
-		grDevices::X11()
+		dev.new()
 		matplot(VB$x,cbind(VBc,VIA0c,VIA1c,VIA2c,VIA3c))
 	}
 	#traitement a part de VB
@@ -905,7 +905,7 @@ interface_Bilan_stades_pigm = function()
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal       
 	#assign("graphes",graphes,envir=.GlobalEnv) 	
-	grDevices::X11()
+	dev.new()
 	# A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
 }
 

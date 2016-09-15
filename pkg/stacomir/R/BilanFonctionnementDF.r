@@ -120,22 +120,20 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=function(object,df,horodatedebut,horodatefin,...){
-			# fonctionnementDF<-BfDF
+			# fonctionnementDF<-BfDF;df=2;horodatedebut="2013-01-01";horodatefin="2013-12-31"
 			fonctionnementDF<-object
 			assign("fonctionnementDF",fonctionnementDF,envir=envir_stacomi)    
 			funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
 			fonctionnementDF@df<-charge(fonctionnementDF@df)    
 			fonctionnementDF@df<-choice_c(fonctionnementDF@df,df)
-			# assigns the parameter (horodatedebut) of the method to the object using choice_c method for RefDF
-			fonctionnementDF@horodatedebut<-choice_c(fonctionnementDF@horodatedebut,
+			# assigns the parameter (horodatedebut) of the method to the object using choice_c method for RefDC
+			fonctionnementDF@horodatedebut<-choice_c(object=fonctionnementDF@horodatedebut,
 					nomassign="fonctionnementDF_date_debut",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
-					decal=-2,
 					horodate=horodatedebut)
-			fonctionnementDF@horodatefin<-choice_c(fonctionnementDF@horodate,
+			fonctionnementDF@horodatefin<-choice_c(fonctionnementDF@horodatefin,
 					nomassign="fonctionnementDF_date_fin",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
-					decal=-1,
 					horodate=horodatefin)
 			return(fonctionnementDF)
 		})

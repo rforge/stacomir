@@ -138,11 +138,11 @@ chargecsv=function(database_expected){
 			# the access to csv file failed despite database_expected=true
 			# if the file does not open, we switch to the file located within the package
 			cat("C:/program files/calcmig.csv does not exist, switching to defaut package file")
-			data("calcmig")				
+			data("calcmig",envir=environment())				
 		}
 	} else {
 		# no access to the database is expected, we are using the file in the data directory of the package
-		data("calcmig")
+		data("calcmig",envir=environment())
 		test<-FALSE
 	}
 	tableau_config = t(calcmig) # renvoit une liste

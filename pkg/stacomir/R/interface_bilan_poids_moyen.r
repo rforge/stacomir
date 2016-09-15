@@ -28,7 +28,7 @@ interface_BilanPoidsMoyen = function()
     #graphes=ggraphics(width=600,height=400)
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     #assign("graphes",graphes,envir=envir_stacomi)
-	grDevices::X11()
+	dev.new()
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     choice(bilan_poids_moyen@liste)
     choice(bilan_poids_moyen@dc,objectBilan=NULL,is.enabled=TRUE)

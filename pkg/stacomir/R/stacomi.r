@@ -223,7 +223,7 @@ hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
 }
 hX11=function(h,...){
-	grDevices::X11()
+	dev.new()
 }
 
 
@@ -283,13 +283,15 @@ hX11=function(h,...){
 #' @importFrom utils select.list write.table data
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
+#' @importFrom grDevices dev.new
+#' @importFrom stats sd
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
 #' @importFrom lattice barchart trellis.par.get trellis.par.set simpleKey
 #' @importFrom grid gpar
 #' @importFrom graphics layout matplot mtext points polygon segments par axis text legend rect axis.Date
 #' @importFrom stats as.formula coef na.fail nls pbeta predict sd
-#' @importFrom grDevices X11 X11 gray rainbow
+#' @importFrom grDevices gray rainbow
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' 

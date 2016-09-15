@@ -36,5 +36,5 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	#graphes=ggraphics(width=600,height=400)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=envir_stacomi)
-	grDevices::X11()
+	dev.new()
 }

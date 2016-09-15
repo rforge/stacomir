@@ -13,16 +13,17 @@ interface_BilanFonctionnementDF = function()
    gWidgets::add(ggroupboutons,group)
     
     choice(fonctionnementDF@df)
+	# here decale =-1 or -2 will make the bilan for the year preceeding the current date
 	choice(fonctionnementDF@horodatedebut,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="fonctionnementDF_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
-			decal=-2)
+			decal=-1)
 	choice(fonctionnementDF@horodatefin,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="fonctionnementDF_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
-			decal=-1)
+			decal=-2)
 	
     aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          
     aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDF,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
@@ -38,5 +39,5 @@ interface_BilanFonctionnementDF = function()
     add(group, gmenu(toolbarlist))
     add(group,gbutton(text = "graph", handler = function(h,...){X11()})) 
     gWidgets::addSpring(group)
-	grDevices::X11()
+	dev.new()
 }

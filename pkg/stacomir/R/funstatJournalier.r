@@ -11,7 +11,7 @@ funstatJournalier=function(tableau,time.sequence,taxon,stade,DC){
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
 	somme=tapply(tableau$Effectif_total, mois, sum, na.rm=TRUE) # sums
 	moyennes_journalieres=tapply(tableau$Effectif_total, mois, mean, na.rm=TRUE) # means
-	ecarts_types=tapply(tableau$Effectif_total, mois, sd, na.rm=TRUE) # std. deviations
+	ecarts_types=tapply(tableau$Effectif_total, mois, stats::sd, na.rm=TRUE) # std. deviations
 	nombre=as.integer(tapply(tableau$Effectif_total, mois, function(x) sum(!is.na(x)))) # counts
 	resum=rbind(nombre,somme,moyennes_journalieres,ecarts_types)
 	
@@ -27,7 +27,7 @@ funstatJournalier=function(tableau,time.sequence,taxon,stade,DC){
 	resum=data.frame(resum)
 	resum["somme","bilan"]=round(sum(tableau$Effectif_total, na.rm=TRUE),2)
 	resum["moyennes_journalieres","bilan"]=round(mean(tableau$Effectif_total, na.rm=TRUE),2)
-	resum["ecarts_types","bilan"]=round(sd(tableau$Effectif_total, na.rm=TRUE),2)
+	resum["ecarts_types","bilan"]=round(stats::sd(tableau$Effectif_total, na.rm=TRUE),2)
 	if (taxon=="Anguilla anguilla"& stade=="civelle") 
 	{
 		resum["poids_depuis_effectif","bilan"]=round(sum(tableau$poids_depuis_effectif, na.rm=TRUE),2)

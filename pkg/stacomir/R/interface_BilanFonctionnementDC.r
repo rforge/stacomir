@@ -49,5 +49,5 @@ interface_BilanFonctionnementDC = function()
     #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
     # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
     #assign("graphes",graphes,envir=envir_stacomi)
-	grDevices::X11()
+	dev.new()
 }

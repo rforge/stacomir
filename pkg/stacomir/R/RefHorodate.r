@@ -104,17 +104,18 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 #' @param label Label for the gframe
 #' @param nomassing The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
-#' @param decale Default 0, number of years to shift forward or backward, the date will be set to the first day of the year
 #' @param affichecal Default TRUE, should the calendar be displayed
-#' @param horodate The horodate to set, formats "%d/%m/%Y %H:%M:%s", "%d/%m/%y %H:%M:%s", "%Y-%m-%d  %H:%M:%s"
+#' @param horodate The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
+#' can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
 #' \dots are accepted
 #' @return An object of class \link{RefHorodate-class} with slot \emph{horodate} set
 setMethod("choice_c",signature=signature("RefHorodate"),definition=function(object,
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
-				decal=0,
+				#decal=0,
 				horodate
 		) {
+			# horodate="2013-01-01"
 			# parse the horohorodate
 			if (length(horodate)>1) stop("horodate should be a vector of length 1")
 			if (is.null(horodate)) stop("horodate should not be null")
@@ -130,6 +131,12 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 					if (is.na(.horodate)){
 						.horodate=strptime(horodate, format="%d/%m/%Y %H:%M")				
 					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d/%m/%y")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d/%m/%Y")				
+					}
 				} else if (grepl("-",horodate)){
 					.horodate=strptime(horodate, format="%Y-%m-%d  %H:%M:%s")
 					if (is.na(.horodate)){
@@ -141,6 +148,12 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 					if (is.na(.horodate)){
 						.horodate=strptime(horodate, format="%d-%m-%Y  %H:%M")				
 					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%Y-%m-%d")				
+					}
+					if (is.na(.horodate)){
+						.horodate=strptime(horodate, format="%d-%m-%Y")				
+					}
 				}
 		
 			} else if (class(horodate)=="Date"){
@@ -148,20 +161,12 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 			} else if (class(horodate)[2]=="POSIXt"){
 				.horodate=horodate
 			}
+			if (is.na(.horodate)) stop("Formatting problem, the character vector you are trying to pass as horodate could not
+be parsed. Check example or documentation")
 			object@horodate=.horodate	
-			if (decal!=0){
-				# Returns the first horodate of a year shifted by decal
-				# @param horodate The horodate to shift (class POSIXt)
-				# @param decal number of year to shift
-				# @return A POSIXt
-				shiftyear<-function(horodate,decal){
-					anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
-					return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
-				}
-				object@horodate<-shiftyear(object@horodate,decal)
-			}
 			validObject(object)				
 			assign(nomassign,object,envir_stacomi)
 			funout(funoutlabel)	
+			return(object)
 		})
 

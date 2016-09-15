@@ -292,6 +292,6 @@ interface_BilanEspeces=function(){
 	#gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)
 	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	grDevices::X11()
+	dev.new()
 	assign("graphes",graphes,envir=.GlobalEnv) 
 }

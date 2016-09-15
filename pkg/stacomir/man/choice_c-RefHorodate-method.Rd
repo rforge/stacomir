@@ -6,21 +6,20 @@
 \title{Command line}
 \usage{
 \S4method{choice_c}{RefHorodate}(object, nomassign = "horodate",
-  funoutlabel = "nous avons le choix dans la date\\n", decal = 0, horodate)
+  funoutlabel = "nous avons le choix dans la date\\n", horodate)
 }
 \arguments{
 \item{object}{An object of class \link{RefHorodate-class}}
 
 \item{funoutlabel, }{text displayed by the interface}
 
-\item{horodate}{The horodate to set, formats "%d/%m/%Y %H:%M:%s", "%d/%m/%y %H:%M:%s", "%Y-%m-%d  %H:%M:%s"
+\item{horodate}{The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
+can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
 \dots are accepted}
 
 \item{label}{Label for the gframe}
 
 \item{nomassing}{The name assigned in environment envir_stacomi}
-
-\item{decale}{Default 0, number of years to shift forward or backward, the date will be set to the first day of the year}
 
 \item{affichecal}{Default TRUE, should the calendar be displayed}
 }

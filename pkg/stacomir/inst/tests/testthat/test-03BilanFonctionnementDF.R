@@ -11,18 +11,20 @@ test_that("Test an instance of BilanFonctionnementDF",{
 			assign("sch","iav.",envir_stacomi)
 			
 			BfDF<-new("BilanFonctionnementDF")
-			options(warn = 2)
 			BfDF<-choice_c(BfDF,
 					2,
 					horodatedebut="2013-01-01",
 					horodatefin="2013-12-31")
-			options(warn = 0)
-			# there should be data in 
 			expect_gt(nrow(BfDF@df@data),0,
 					label="There should be data loaded by the choice_c method in the data slot of 
 the RefDF slot,nrow(BfDF@df@data)")				
 			expect_s4_class(BfDF,
 					"BilanMigration")
-			rm("envir_stacomi",envir =.GlobalEnv)
+			expect_failure(BfDF<-choice_c(BfDF,
+					2,
+					horodatedebut="2013 01 011",
+					horodatefin="2013-12-31"))
+			
+			
 		})
 
