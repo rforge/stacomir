@@ -292,6 +292,7 @@ hX11=function(h,...){
 #' @importFrom graphics layout matplot mtext points polygon segments par axis text legend rect axis.Date
 #' @importFrom stats as.formula coef na.fail nls pbeta predict sd
 #' @importFrom grDevices gray rainbow
+#' @importFrom lubridate round_date
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' 

@@ -100,7 +100,8 @@ Imports:
     lattice,
     grDevices,
     Hmisc,
-    RGtk2
+    RGtk2,
+    lubridate
 Suggests:
 	xtable
 Author: Cedric Briand [aut, cre],

@@ -16,7 +16,7 @@ quitte=function(...){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
 			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC","usrname","usrpwd")]
-			rm(list=miettes,envir=.GlobalEnv)
+			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}
 	if (length(ls(pattern="frame",envir=envir_stacomi))!=0) {
@@ -221,6 +221,7 @@ vector_to_listsql<-function(vect)
 #' }
 #'dispose(progres)
 #' }
+#' @export
 mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
 	.dialog <- RGtk2::gtkDialog(title=title, NULL, NULL,
 			"gtk-close", RGtk2::GtkResponseType["none"],

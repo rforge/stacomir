@@ -131,7 +131,7 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("BilanMigration"),definition=function(object){ 
+setMethod("charge",signature=signature("BilanMigration"),definition=function(object,silent=FALSE){ 
 			bilanMigration<-object
 			#pour l'instant ne lancer que si les fenetre sont fermees
 			# funout("lancement updateplot \n")

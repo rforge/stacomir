@@ -27,11 +27,13 @@ setClass(Class="BilanFonctionnementDF",
 				df="RefDF",
 				horodatedebut="RefHorodate",
 				horodatefin="RefHorodate",
-				requete="RequeteODBCwheredate"),
+				requete="RequeteODBCwheredate",
+				calcdata="data.frame"),
 		prototype=prototype(data=data.frame(),df=new("RefDF"),
 				horodatedebut=new("RefHorodate"),
 				horodatefin=new("RefHorodate"),
-				requete=new("RequeteODBCwheredate"))
+				requete=new("RequeteODBCwheredate"),
+				calcdata=data.frame())
 )
 
 
@@ -39,10 +41,11 @@ setClass(Class="BilanFonctionnementDF",
 #' 
 #' @param object An object of class \link{BilanFonctionnementDF-class}
 #' loads the working periods and type of arrest or disfunction of the DF
+#' @param silent Boolean, TRUE removes messages.
 #' @return  An object of class \code{BilanFonctionnementDF}
 #' 
 #' @author cedric.briand
-setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(object) {
+setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=function(object,silent=FALSE) {
 #  construit une requete ODBCwheredate
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			object@requete@select= paste("SELECT",
@@ -58,10 +61,12 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 			object@requete@colonnedebut="per_date_debut"
 			object@requete@colonnefin="per_date_fin"
 			object@requete@order_by="ORDER BY per_date_debut"
+			object@requete@datedebut<-object@horodatedebut@horodate
+			object@requete@datefin<-object@horodatefin@horodate
 			object@requete@and=paste("AND per_dis_identifiant=",object@df@df_selectionne )
 #object@requete@where=#defini dans la methode ODBCwheredate
 			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
-			funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.1)
+			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.1)
 			return(object)
 		})
 
@@ -80,12 +85,12 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 #' The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
 #' the status of either the fishway or DC. 
 #' @param object An object of class \link{BilanFonctionnementDF-class}
+#' @param silent Keeps program silent
 #' @return  An object of class \link{BilanFonctionnementDF-class}
 #' 
 #' @author cedric.briand
-setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object) {
-#  construit une requete ODBCwheredate
-			# chargement des donnees dans l'environnement de la fonction
+setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object,silent=FALSE) {
+			# object<-BfDF
 			if (exists("refDF",envir=envir_stacomi)) {
 				object@df<-get("refDF",envir=envir_stacomi)
 			} else {
@@ -93,18 +98,17 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 			}     
 			
 			if (exists("fonctionnementDF_date_debut",envir=envir_stacomi)) {
-				object@horodatedebut<-get("fonctionnementDF_date_debut",envir=envir_stacomi)@horodate
+				object@horodatedebut@horodate<-get("fonctionnementDF_date_debut",envir=envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.5,arret=TRUE)
 			}
 			
 			if (exists("fonctionnementDF_date_fin",envir=envir_stacomi)) {
-				object@horodatefin<-get("fonctionnementDF_date_fin",envir=envir_stacomi)@horodate
+				object@horodatefin@horodate<-get("fonctionnementDF_date_fin",envir=envir_stacomi)@horodate
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
 			}			
-			object<-connect(object)
-			
+			object<-connect(object,silent)			
 			return(object)
 		})
 
@@ -138,6 +142,112 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 			return(fonctionnementDF)
 		})
 
+#' 
+#' 
+#' \itemize{
+#' 		\item{plot.type="barchart"}{}
+#' 		\item{plot.type="box"}{}
+#' 	}	
+#' }
+#' @note The program cuts periods which overlap between two month
+#' @param x An object of class \link{BilanFonctionnementDF-class}
+#' @param y From the formals but missing
+#' @param plot.type One of \code{barchart},\code{box}. Defaut to \code{barchart} showing a summary of the df operation per month, can also be \code{box}, 
+#' a plot with adjacent rectangles.
+#' @param silent Stops displaying the messages.
+#' @param title The title of the graph, if NULL a default title will be plotted with the number of the DF
+#' @retuns 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=function(x, y,plot.type="barchart",silent=FALSE,title=NULL){ 
+			#fonctionnementDF<-BfDF
+			if (plot.type=="barchart"){
+				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2)
+				t_periodefonctdispositif_per=fonctionnementDF@requete@query # on recupere le data.frame   
+				# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
+				tempsdebut<-t_periodefonctdispositif_per$per_date_debut
+				tempsfin<-t_periodefonctdispositif_per$per_date_fin
+				# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
+				tempsdebut[tempsdebut<fonctionnementDF@requete@datedebut]<-fonctionnementDF@requete@datedebut
+				# id pour fin
+				tempsfin[tempsfin>fonctionnementDF@requete@datefin]<-fonctionnementDF@requete@datefin
+				t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin)
+				# BUG 06/02/2009 11:51:49 si la date choisie n'est pas le debut du mois
+				seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
+				seqmois=as.POSIXlt(lubridate::round_date(seqmois,unit="month"))
+				#seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
+				############################
+				#progress bar
+				###########################
+				mygtkProgressBar(
+						title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
+						progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
+				# this function assigns
+				z=0 # compteur tableau t_periodefonctdispositif_per_mois
+				for(j in 1:nrow(t_periodefonctdispositif_per)){
+					#cat( j 
+					progress_bar$setFraction(j/nrow(t_periodefonctdispositif_per)) 
+					progress_bar$setText(sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per))))
+					RGtk2::gtkMainIterationDo(FALSE)
+					if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
+					lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
+					while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
+						
+						#if (z>0) stop("erreur")
+						z=z+1
+						t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
+						t_periodefonctdispositif_per_mois[j+z,"tempsdebut"]=as.POSIXct(lemoissuivant)
+						t_periodefonctdispositif_per_mois[j+z-1,"tempsfin"]=as.POSIXct(lemoissuivant)
+						lemoissuivant=seqmois[match(as.character(lemoissuivant),as.character(seqmois))+1] # on decale de 1 mois avant de rerentrer dans la boucle
+						if (is.na(lemoissuivant) ) break
+					}  
+					if (is.na(lemoissuivant)) break
+				}
+				t_periodefonctdispositif_per_mois$sumduree<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
+				t_periodefonctdispositif_per_mois$mois1= strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
+				t_periodefonctdispositif_per_mois$mois=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
+				t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
+				progress_bar$setText("All done.")
+				progress_bar$setFraction(1) 
+				if (is.null(title)) title<-paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne)
+				# graphic
+				t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois, 
+						old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
+						new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
+				#modification of the order
+				
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
+				g<- ggplot(t_periodefonctdispositif_per_mois,
+								aes(x=mois,y=duree,fill=libelle))+
+						facet_grid(annee~.)+
+						ggtitle(title)+
+						geom_bar(stat='identity')+
+						scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
+				
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
+				t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
+				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+
+						ggtitle(title)+
+						geom_bar(stat='identity',aes(fill=fonctionnement))+
+						scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
+				
+				if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {
+					print(g)
+					grDevices::dev.new () ;print(g1)
+				}else    {
+					vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+					grid::grid.newpage()
+					grid::pushViewport(grid::viewport(layout = grid::grid.layout(1,2,just="center")))
+					print(g, vp=vplayout(1,1))
+					print(g1, vp=vplayout(1,2))
+				}
+				assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
+				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.8)
+				gtkWidgetDestroy(progres)
+			} else if (plot.type=="box"){
+			}
+		})
 
 
 #' funbarchartDF creates a barchart for BilanFonctionnementDF class
@@ -148,96 +258,11 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funbarchartDF = function(h,...) {
-	# TEMP 2015
-	fonctionnementDF=charge(fonctionnementDF)
-	
+	fonctionnementDF=charge(fonctionnementDF)	
 	if( nrow(fonctionnementDF@requete@query)==0 ) {
-		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
-	}
-	
-	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)
-	t_periodefonctdispositif_per=fonctionnementDF@requete@query # on recupere le data.frame   
-	# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
-	#tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	#tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	tempsdebut<-t_periodefonctdispositif_per$per_date_debut
-	tempsfin<-t_periodefonctdispositif_per$per_date_fin
-	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
-	tempsdebut[tempsdebut<fonctionnementDF@requete@datedebut]<-fonctionnementDF@requete@datedebut
-	# id pour fin
-	tempsfin[tempsfin>fonctionnementDF@requete@datefin]<-fonctionnementDF@requete@datefin
-	t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin)
-	# BUG 06/02/2009 11:51:49 si la date choisie n'est pas le debut du mois
-	seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
-	seqmois=as.POSIXlt(round(seqmois,digits="months"))
-	#seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
-	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
-	############################
-	#progress bar
-	###########################
-	mygtkProgressBar(
-			title=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.4,
-			progress_text=get("msg",envir=envir_stacomi)$BilanFonctionnementDF.5)
-	# this function assigns
-	z=0 # compteur tableau t_periodefonctdispositif_per_mois
-	for(j in 1:nrow(t_periodefonctdispositif_per)){
-		#cat( j 
-		progress_bar$setFraction(j/nrow(t_periodefonctdispositif_per)) 
-		progress_bar$setText(sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per))))
-		RGtk2::gtkMainIterationDo(FALSE)
-		if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-		lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
-		while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
-			
-			#if (z>0) stop("erreur")
-			z=z+1
-			t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
-			t_periodefonctdispositif_per_mois[j+z,"tempsdebut"]=as.POSIXct(lemoissuivant)
-			t_periodefonctdispositif_per_mois[j+z-1,"tempsfin"]=as.POSIXct(lemoissuivant)
-			lemoissuivant=seqmois[match(as.character(lemoissuivant),as.character(seqmois))+1] # on decale de 1 mois avant de rerentrer dans la boucle
-			if (is.na(lemoissuivant) ) break
-		}  
-	}
-	t_periodefonctdispositif_per_mois$sumtime.sequence<-as.numeric(difftime(t_periodefonctdispositif_per_mois$tempsfin, t_periodefonctdispositif_per_mois$tempsdebut,units = "hours"))
-	t_periodefonctdispositif_per_mois$mois1= strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%b")
-	t_periodefonctdispositif_per_mois$mois=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%m")
-	t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
-	progress_bar$setText("All done.")
-	
-	
-# graphique 
-	t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois,  old_variable_name=c("sumtime.sequence","per_tar_code","per_etat_fonctionnement"),
-			new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
-#modif de l'ordre pour apparence graphique
-	
-	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
-	g<- ggplot(t_periodefonctdispositif_per_mois,
-			aes(x=mois,y=time.sequence,fill=libelle))+
-	facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
-	g<-g+geom_bar(stat='identity')+
-			scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
-	#modif de l'ordre pour apparence graphique
-	t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
-	t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
-	g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=time.sequence))+facet_grid(annee~.)+ggtitle(paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,fonctionnementDF@df@df_selectionne))
-	g1<-g1+
-			geom_bar(stat='identity',aes(fill=fonctionnement))+
-			scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
-	
-	if(length(unique(t_periodefonctdispositif_per_mois$annee))>1)  {
-		grDevices::X11(40,40); print(g)
-		grDevices::X11 (40,40) ;print(g1)
-	}else    {
-		X11(60,40)  
-		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid::grid.newpage()
-		grid::pushViewport(grid::viewport(layout = grid::grid.layout(1,2,just="center")))
-		print(g, vp=vplayout(1,1))
-		print(g1, vp=vplayout(1,2))
-	}
-	assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
-	funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.8)
-	dispose(progres)
+		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3, arret=TRUE)
+	}		
+	plot(fonctionnementDF,plot.type="barchart",silent=FALSE)
 }   
 
 #' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
