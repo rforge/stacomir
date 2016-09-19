@@ -101,7 +101,8 @@ Imports:
     grDevices,
     Hmisc,
     RGtk2,
-    lubridate
+    lubridate,
+    dplyr
 Suggests:
 	xtable
 Author: Cedric Briand [aut, cre],

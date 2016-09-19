@@ -6,7 +6,7 @@
 \title{command line interface for BilanFonctionnementDF class}
 \usage{
 \S4method{choice_c}{BilanFonctionnementDF}(object, df, horodatedebut,
-  horodatefin, ...)
+  horodatefin, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{RefDC-class}}
@@ -16,6 +16,8 @@
 \item{horodatedebut}{A POSIXt or Date or character to fix the date of beginning of the Bilan}
 
 \item{horodatefin}{A POSIXt or Date or character to fix the last date of the Bilan}
+
+\item{silent}{Should program be silent or display messages}
 }
 \value{
 An object of class \link{RefDC-class} with slots filled

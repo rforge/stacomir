@@ -88,8 +88,19 @@ devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanFonctionnementDF
 ##################################
+require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
-bDF=new("BilanFonctionnementDF")
-bDF
+bfDF=new("BilanFonctionnementDF")
+bfDF<-choice_c(bfDF,
+		1,
+		horodatedebut="2015-01-01",
+		horodatefin="2015-12-31",
+		silent=TRUE)
+Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
+bfDF<-charge(bfDF)
+#plot(bfDF,plot.type="1")
+#plot(bfDF,plot.type="2",title="A nice title")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(bfDF,internal=FALSE,overwrite=TRUE)

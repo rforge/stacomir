@@ -5,7 +5,7 @@
 \alias{charge,BilanMigration-method}
 \title{charge method for BilanMigration}
 \usage{
-\S4method{charge}{BilanMigration}(object)
+\S4method{charge}{BilanMigration}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigration-class}}}

@@ -270,6 +270,7 @@ hX11=function(h,...){
 #' @import RODBC
 #' @import Hmisc
 #' @import RGtk2
+#' @import dplyr
 #' @importFrom intervals Intervals
 #' @importFrom intervals closed<-
 #' @importFrom intervals interval_overlap
@@ -293,6 +294,8 @@ hX11=function(h,...){
 #' @importFrom stats as.formula coef na.fail nls pbeta predict sd
 #' @importFrom grDevices gray rainbow
 #' @importFrom lubridate round_date
+#' @importFrom lubridate floor_date
+#' @importFrom lubridate %m+%
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' 

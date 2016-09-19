@@ -6,7 +6,8 @@
 \title{Command line}
 \usage{
 \S4method{choice_c}{RefHorodate}(object, nomassign = "horodate",
-  funoutlabel = "nous avons le choix dans la date\\n", horodate)
+  funoutlabel = "nous avons le choix dans la date\\n", horodate,
+  silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{RefHorodate-class}}
@@ -16,6 +17,8 @@
 \item{horodate}{The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
 can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
 \dots are accepted}
+
+\item{silent}{Default FALSE, should messages be displayed}
 
 \item{label}{Label for the gframe}
 

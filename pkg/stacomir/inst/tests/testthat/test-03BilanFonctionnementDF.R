@@ -10,24 +10,24 @@ test_that("Test an instance of BilanFonctionnementDF",{
 			sch<-get("sch",envir=envir_stacomi) # "iav."
 			assign("sch","iav.",envir_stacomi)
 			
-			BfDF<-new("BilanFonctionnementDF")
-			BfDF<-choice_c(BfDF,
+			bfDF<-new("BilanFonctionnementDF")
+			bfDF<-choice_c(bfDF,
 					2,
 					horodatedebut="2013-01-01",
 					horodatefin="2013-12-31")
-			expect_gt(nrow(BfDF@df@data),0,
+			expect_gt(nrow(bfDF@df@data),0,
 					label="There should be data loaded by the choice_c method in the data slot of 
-the RefDF slot,nrow(BfDF@df@data)")				
-			expect_s4_class(BfDF,
+the RefDF slot,nrow(bfDF@df@data)")				
+			expect_s4_class(bfDF,
 					"BilanFonctionnementDF")
-			expect_failure(BfDF<-choice_c(BfDF,
+			expect_failure(BfDF<-choice_c(bfDF,
 					2,
 					horodatedebut="2013 01 011",
 					horodatefin="2013-12-31"))			
 			
 		})
 
-test_that("BilanFonctionnementDF plot method works",{
+test_that("BilanFonctionnementDF charge method works",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav
@@ -37,12 +37,24 @@ test_that("BilanFonctionnementDF plot method works",{
 			sch<-get("sch",envir=envir_stacomi) # "iav."
 			assign("sch","iav.",envir_stacomi)
 			
-			BfDF<-new("BilanFonctionnementDF")
-			BfDF<-choice_c(BfDF,
+			bfDF<-new("BilanFonctionnementDF")
+						bfDF<-choice_c(bfDF,
 					2,
 					horodatedebut="2013-01-01",
-					horodatefin="2013-12-31")
-			BfDF<-charge(BfDF,silent=TRUE)
-			
-			
+					horodatefin="2013-12-31",
+					silent=TRUE)
+			bfDF<-charge(bfDF,silent=TRUE)
+			expect_equals(nrow(bfDF@data),5)			
+		})
+
+
+test_that("BilanFonctionnementDF plot method works",{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			data(bfDF)
+			bfDF<-bfDF
+			plot(bfDF,plot.type="1",silent=TRUE)
+			plot(bfDF,plot.type="2",silent=TRUE,title="An example title")
+			plot(bfDF,plot.type="3",silent=TRUE,title="An example title")	
+			plot(bfDF,plot.type="4",silent=TRUE,title="An example title")	
 		})

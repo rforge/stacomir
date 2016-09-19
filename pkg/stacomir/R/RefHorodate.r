@@ -105,6 +105,7 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 #' @param nomassing The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
 #' @param affichecal Default TRUE, should the calendar be displayed
+#' @param silent Default FALSE, should messages be displayed
 #' @param horodate The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
 #' can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
 #' \dots are accepted
@@ -113,7 +114,8 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
 				#decal=0,
-				horodate
+				horodate,
+				silent=FALSE
 		) {
 			# horodate="2013-01-01"
 			# parse the horohorodate

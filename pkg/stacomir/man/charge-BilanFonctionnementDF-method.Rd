@@ -5,10 +5,12 @@
 \alias{charge,BilanFonctionnementDF-method}
 \title{charge method for BilanFonctionnementDF}
 \usage{
-\S4method{charge}{BilanFonctionnementDF}(object)
+\S4method{charge}{BilanFonctionnementDF}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanFonctionnementDF-class}}
+
+\item{silent}{Keeps program silent}
 }
 \value{
 An object of class \link{BilanFonctionnementDF-class}

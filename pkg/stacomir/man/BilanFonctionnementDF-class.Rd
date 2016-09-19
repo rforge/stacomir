@@ -6,11 +6,19 @@
 \title{Class "BilanFonctionnementDF" Report fishway work}
 \description{
 The DF (Dispositif de Franchissement) is a fishway. It may be automated and
-work only at certain times This report allows to see the detail of its work.
+be operated only during certain periods. This report allows to see the detail of its work.
+In the database four types of operation are set,  "1"=normal operation,
+"2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+"3"="Stopped for maintenance or other problem",
+"4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
+"5"="Not known")
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanFonctionnementDF")}.
+}
+\examples{
+examples/03_BilanFonctionnementDF/bilanFonctionnementDF_example.R
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

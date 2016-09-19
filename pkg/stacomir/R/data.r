@@ -83,3 +83,35 @@
 #' the program will use a file installed in c:/program files/stacomi but
 #' if not found will switch to the default
 "calcmig"
+
+
+#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' 
+#' This data corresponds to the data collected at the vertical slot fishway
+#' in 2015, the fishway is working daily with a cycle depending on tide.
+#'
+#' @format An object of class bilanFonctionnementDF with 5 slots:
+#' \describe{
+#' #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
+#' 			\describe{
+#'   			\item{per_dis_identifiant}{The number of the DF}
+#'   			\item{per_date_debut}{Starting time a POSIXct}
+#'   			\item{per_date_fin }{Ending time a POSIXct}
+#'   			\item{ope_dic_identifiant}{DF id}
+#'   			\item{per_commentaires }{A comment}
+#'   			\item{per_etat_fonctionnement}{Integer 1= working, 0 not working}
+#'   			\item{per_tar_code}{The type of operation ("1"=normal operation,
+#'              "2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+#'				"3"="Stopped for maintenance or other problem",
+#'              "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
+#'              "5"="Not known")}
+#' 				\item{libelle}{label corresponding to per_tar_code}
+#'            }
+#'        }	
+#'   \item{df}{the \code{RefDF} object with 3 slots filled with data corresponding to the iav postgres schema}
+#'   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
+#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} 
+#'   \item{requete}{A stacomiRtools RequeteODBCWhereDate object}
+#' }
+#' @keywords data
+"bfDF"
