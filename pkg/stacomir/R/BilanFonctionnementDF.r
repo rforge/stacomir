@@ -113,7 +113,8 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
 			}			
-			object<-connect(object,silent)			
+			object<-connect(object,silent)	
+			assign("fonctionnementDF",object,envir=envir_stacomi)  
 			return(object)
 		})
 
@@ -145,6 +146,7 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 					nomassign="fonctionnementDF_date_fin",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 					horodate=horodatefin,silent)
+			assign("fonctionnementDF",fonctionnementDF,envir=envir_stacomi)  
 			return(fonctionnementDF)
 		})
 
@@ -177,7 +179,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
 			if (plot.type=="1"|plot.type=="2"){
-				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2)
+				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)
 				t_periodefonctdispositif_per=fonctionnementDF@data # on recupere le data.frame   
 				# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 				tempsdebut<-t_periodefonctdispositif_per$per_date_debut
@@ -263,6 +265,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			} else if (plot.type=="3"){
 				#fonctionnementDF<-bfDF; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="3"
+				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)	
 				t_periodefonctdispositif_per=fonctionnementDF@data
 				graphdate<-function(vectordate){
 					vectordate<-as.POSIXct(vectordate)
@@ -380,47 +383,10 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				
 				#fonctionnementDF<-bfDF; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="4"
 				t_periodefonctdispositif_per=fonctionnementDF@data
-				time.sequence=seq.POSIXt(from=fonctionnementDF@requete@datedebut,to=fonctionnementDF@requete@datefin,by="day")
-				tt<-data.frame(per_date_debut=time.sequence)
-				# data<-t_periodefonctdispositif_per
-				horaires<-function(data){
-					data$Hdeb<-as.numeric(strftime(data$per_date_debut,"%H"))+as.numeric(strftime(data$per_date_debut,"%M"))/60
-					data$Hfin<-as.numeric(strftime(data$per_date_fin,"%H"))+round(as.numeric(strftime(data$per_date_fin,"%M"))/60,2)
-					data$Hfin[data$Hfin==0]<-24
-					indx<-data$Hfin==24&data$Hdeb==0
-					data[indx,"Hfin"]<-24.0
-					data[indx,"Hdeb"]<-23.5
-					data$xmin<-lubridate::floor_date(data$per_date_debut,unit="day") # pour les graphiques en rectangle
-					data$xmax<-data$xmin+lubridate::days(1)
-					return(data)
-				}
-				tpp<-horaires(t_periodefonctdispositif_per)
-				tpp$id=1:nrow(tpp)
-				# extract last line per day and round it to 24 h 
-				tpp_idmax<-tpp%>%dplyr::select(id,Hfin,xmin)%>%
-						dplyr::group_by(xmin)%>%filter(min_rank(desc(Hfin)) ==1)
-				tpp[tpp$id%in%tpp_idmax$id,"Hfin"]<-24
-				# same with Hdeb rounded to OO for the first date of the day
-				tpp_idmin<-tpp%>%dplyr::select(id,Hdeb,xmin)%>%
-						dplyr::group_by(xmin)%>%filter(min_rank(Hdeb) ==1)
-				tpp[tpp$id%in%tpp_idmin$id,"Hdeb"]<-0
-				# some days don't have value
-				tpp<-dplyr::full_join(tt,tpp,by="per_date_debut")
-				#  now we have some rows with NA
-				# those correspond to period covering more than one day
-				# we will extend data over those period using the first line without NA
-				for (i in 2: nrow(tpp)){
-					if (is.na(tpp$per_tar_code[i])){
-						# we replace all values except 1st column, (per_date_debut) which was used to join
-						# by the previous line
-			            tpp[i,c(2:ncol(tpp))]<-tpp[i-1,c(2:ncol(tpp))]
-						# but the period is full day ie 0:24
-						tpp[i,c("Hdeb","Hfin")]<-c(0,24)
-					}
-				}
+				tpp<-split_per_day(t_periodefonctdispositif_per,horodatedebut="per_date_debut",horodatefin="per_date_fin")
 				
 				g<-ggplot(tpp)+
-						geom_rect(aes(xmin=xmin,xmax=xmax,ymin=Hdeb,ymax=Hfin,col=factor(per_tar_code),fill=factor(per_tar_code)),alpha=0.8)+
+						geom_rect(aes(xmin=xmin,xmax=xmax,ymin=Hdeb,ymax=Hfin,col=factor(per_tar_code),fill=factor(per_tar_code)),alpha=0.5)+
 						scale_fill_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
 										labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+
 					   scale_colour_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
@@ -444,67 +410,156 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 		})
 
 
-#' funbarchartDF creates a barchart for BilanFonctionnementDF class
+#' Handler for barchart for BilanFonctionnementDF class from the graphical interface
 #' 
 #' @note The program cuts periods which overlap between two month
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funbarchartDF = function(h,...) {
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi)  
 	fonctionnementDF=charge(fonctionnementDF)	
-	if( nrow(fonctionnementDF@requete@query)==0 ) {
-		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3, arret=TRUE)
+	if( nrow(fonctionnementDF@data)==0 ) {
+		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
 	}		
 	plot(fonctionnementDF,plot.type=1,silent=FALSE)
-	dev.new()
-	plot(fonctionnementDF,plot.type=2,silent=FALSE)
 }   
 
-#' FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
+
+#' Handler for barchart for BilanFonctionnementDF class from the graphical interface
+#' 
+#' @note The program cuts periods which overlap between two month
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+funbarchart1DF = function(h,...) {
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi)  
+	fonctionnementDF=charge(fonctionnementDF)	
+	if( nrow(fonctionnementDF@data)==0 ) {
+		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
+	}		
+	plot(fonctionnementDF,plot.type=2,silent=FALSE)
+}   
+#' Internal use, rectangles to describe the DF work for BilanFonctionnementDF class, 
+#' graphical interface handler
+#' @param h handler
+#' @param ... additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDF = function(h,...) {
-	
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi) 
 	fonctionnementDF=charge(fonctionnementDF)
 	
-	if( nrow(fonctionnementDF@requete@query)==0 ) {
+	if( nrow(fonctionnementDF@data)==0 ) {
 		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
 	}
-	
+	plot(fonctionnementDF,plot.type=3,silent=FALSE)
 	
 }   
-#' FuntableDF create a table output for BilanFonctionnementDF class
+
+#' Handler fonction to plot calendar like graph, internal use
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
-funtableDF = function(h,...) {
+funchartDF = function(h,...) {
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi) 
 	fonctionnementDF=charge(fonctionnementDF)
 	
-	if( nrow(fonctionnementDF@requete@query)==0 ) {
+	if( nrow(fonctionnementDF@data)==0 ) {
 		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
 	}
+	plot(fonctionnementDF,plot.type=4,silent=FALSE)
 	
-	t_periodefonctdispositif_per=fonctionnementDF@requete@query # on recupere le data.frame
-	t_periodefonctdispositif_per$per_date_debut=as.character(t_periodefonctdispositif_per$per_date_debut)
-	t_periodefonctdispositif_per$per_date_fin=as.character(t_periodefonctdispositif_per$per_date_fin)
-	gdf(t_periodefonctdispositif_per, container=TRUE)
-	annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
-	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
-	write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-	funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1,"\n"))
-	path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
-	funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1html,get("msg",envir=envir_stacomi)$BilanFonctionnementDF.15))
-	funhtml(t_periodefonctdispositif_per,
-			caption=paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,sep=""),
-			top=TRUE,
-			outfile=path1html,
-			clipboard=FALSE,
-			append=FALSE,
-			digits=2
-	)
+}   
+
+#' Table output for BilanFonctionnementDF class
+#' @param h handler
+#' @param ... additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+funtableDF = function(h,...) {
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi) 
+	fonctionnementDF=charge(fonctionnementDF)
 	
+	if( nrow(fonctionnementDF@data)==0 ) {
+		funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.2, arret=TRUE)
+	}
+	summary(fonctionnementDF)
 }
+
+#' handler to print the command line
+#' @param h a handler
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+houtDF = function(h,...) {
+	fonctionnementDF<-get("fonctionnementDF",envir=envir_stacomi) 
+	fonctionnementDF<-charge(fonctionnementDF)
+	#the charge method will check that all objects necessary to build the formula
+	# are in envir_stacomi
+	print(fonctionnementDF)
+	
+}   
+
+#' Method to print the command line of the object
+#' @param x An object of class BilanFonctionnementDF
+#' @param ... Additional parameters passed to print
+#' @return NULL
+#' @author cedric.briand
+#' @export
+setMethod("print",signature=signature("BilanFonctionnementDF"),definition=function(x,...){ 
+			
+			sortie1<-"bilanFonctionnementDF=new('BilanFonctionnementDF')\n"
+			sortie2<-stringr::str_c("bilanFonctionnementDF=choice_c(bilanFonctionnementDF,",
+					"df=",x@df@df_selectionne,",",
+					"horodatedebut=",shQuote(as.character(x@horodatedebut@horodate)),",",
+					"horodatefin=",shQuote(as.character(x@horodatefin@horodate)),")")
+			# removing backslashes
+			funout(stringr::str_c(sortie1,sortie2),...)
+			return(invisible(NULL))
+		})
+
+
+#' summary for BilanFonctionnementDF, write csv and html output, and prints summary statistics
+#' @param object An object of class \code{\link{BilanFonctionnementDF-class}}
+#' @param silent Should the program stay silent or display messages, default FALSE
+#' @param ... Additional parameters (not used there)
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definition=function(object,silent=FALSE,...){
+			#fonctionnementDF<-bfDF;
+			t_periodefonctdispositif_per=fonctionnementDF@data # on recupere le data.frame
+			t_periodefonctdispositif_per$per_date_debut=as.character(t_periodefonctdispositif_per$per_date_debut)
+			t_periodefonctdispositif_per$per_date_fin=as.character(t_periodefonctdispositif_per$per_date_fin)
+			#gdf(t_periodefonctdispositif_per, container=TRUE)
+			annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
+			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
+			write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
+			if(!silent) funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1,"\n"))
+			path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
+			if(!silent) funout(paste(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1html,get("msg",envir=envir_stacomi)$BilanFonctionnementDF.15))
+			funhtml(t_periodefonctdispositif_per,
+					caption=paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,sep=""),
+					top=TRUE,
+					outfile=path1html,
+					clipboard=FALSE,
+					append=FALSE,
+					digits=2
+			)
+			t_periodefonctdispositif_per=fonctionnementDF@data
+			print(paste("summary statistics for DF=",fonctionnementDF@df@df_selectionne))
+			print(paste("df_code=",fonctionnementDF@df@data[fonctionnementDF@df@data$df==fonctionnementDF@df@df_selectionne,"df_code"]))
+			duree<-difftime(t_periodefonctdispositif_per$per_date_fin,t_periodefonctdispositif_per$per_date_debut,units="day")
+			sommes<-tapply(duree,t_periodefonctdispositif_per$per_tar_code,sum)
+			perc<-round(100*sommes/as.numeric(sum(duree)))
+			sommes<-round(sommes,2)
+			funout(get("msg",envir=envir_stacomi)$FonctionnementDF.12)
+			funout(paste(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11,
+							" :",
+							sommes,"(",perc,"%)",sep=""))
+			sommes<-tapply(duree,t_periodefonctdispositif_per$per_etat_fonctionnement,sum)
+			perc<-round(100*sommes/as.numeric(sum(duree)))
+			sommes<-round(sommes,2)
+			funout(get("msg",envir=envir_stacomi)$FonctionnementDF.13)
+			funout(paste(rev(get("msg",envir=envir_stacomi)$BilanFonctionnementDC.11),
+							" :",
+							sommes,"(",perc,"%)",sep=""))
+			
+		})		

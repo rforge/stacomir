@@ -15,8 +15,8 @@ test_that("Test that the parsing of many kind of dates works",
 							horodate="2013-01-01 00:00"),prints_text("^\\[1\\].+date.+"))	
 			expect_that(refHorodate<-choice_c(refHorodate,	
 							horodate="01-01-2013"),prints_text("^\\[1\\].+date.+"))				
-			refHorodate<-choice_c(refHorodate,	
-					horodate="2013/01/01 00:00:00")	
+			expect_error(refHorodate<-choice_c(refHorodate,	
+					horodate="2013/01/01 00:00:00"))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

@@ -240,3 +240,58 @@ mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
 }
 
 
+
+#' Create a dataframe suitable for charts per 24h and day
+#' 
+#' This functions takes a data frame with a column with starting time and another with ending time
+#' If the period extends over midnight, it will be split into new lines, starting and ending at midnight
+#' 
+#' @param data The dataframe
+#' @param horodatedebut The beginning time
+#' @param horodatefin The ending time
+#' @return A data frame with four new columns, Hmin (hour min), Hmax (hmax), xmin (day) and xmax (next day),
+#' and new rows
+#' @author cedric.briand
+#' @example
+#' datatemp<-structure(list(per_dis_identifiant = c(1L, 1L, 1L), per_date_debut = structure(c(1420056600, 
+#'								1420071000, 1420081200), class = c("POSIXct", "POSIXt"), tzone = ""), 
+#'				per_date_fin = structure(c(1420071000, 1420081200, 1421000000
+#'						), class = c("POSIXct", "POSIXt"), tzone = ""), per_commentaires = c("fonct calcul", 
+#'						"fonct calcul", "fonct calcul"), per_etat_fonctionnement = c(1L, 
+#'						0L, 0L), per_tar_code = 1:3, libelle = c("Fonc normal", "Arr ponctuel", 
+#'						"Arr maint")), .Names = c("per_dis_identifiant", "per_date_debut", 
+#'				"per_date_fin", "per_commentaires", "per_etat_fonctionnement", 
+#'				"per_tar_code", "libelle"), row.names = c(NA, 3L), class = "data.frame")
+#'newdf<-split_per_day(data=datatemp,horodatedebut="per_date_debut",horodatefin="per_date_fin")
+#' @export
+split_per_day<-function(data,horodatedebut,horodatefin){
+	if(!horodatedebut%in%colnames(data)) stop("horodatedebut not in column names for data")
+	if(!horodatefin%in%colnames(data)) stop("horodatefin not column names for data")	
+	data$Hdeb<-as.numeric(strftime(data[,horodatedebut],"%H"))+as.numeric(strftime(data[,horodatedebut],"%M"))/60
+	data$Hfin<-as.numeric(strftime(data[,horodatefin],"%H"))+round(as.numeric(strftime(data[,horodatefin],"%M"))/60,2)
+	data$xmin<-lubridate::floor_date(data[,horodatedebut],unit="day") # pour les graphiques en rectangle
+	data$xmax<-data$xmin+lubridate::days(1)
+	# number of times we pass to midnigth
+	# round is for when we switch hour
+	data$n0<-round(difftime(floor_date(data[,horodatefin],unit="day"),floor_date(data[,horodatedebut],unit="day"),units="days"))
+	# rows that will be duplicated
+	data$id=sequence(nrow(data))
+	data<-data[rep(sequence(nrow(data)),data$n0+1),]
+	data$newid<-sequence(nrow(data))
+	# within a group where dates overlap between two days
+	#the first will and all lines except the last be set 24 for Hfin
+	data1<-data%>%filter(n0>0)%>%group_by(id)%>%filter(min_rank(desc(newid)) !=1)%>%mutate("Hfin"=24)
+	#replacing rows in data
+	data[match(data1$newid,data$newid),]<-data1
+	# all except the first will be set 0 to Hdeb
+	data2<-data%>%filter(n0>0)%>%group_by(id)%>%filter(min_rank(newid) !=1)%>%mutate("Hdeb"=0)
+	#replacing rows in data
+	data[match(data2$newid,data$newid),]<-data2
+	# now get the sequence of days righly set by adding the number of days to xmin and xmax
+	data3<-data%>%filter(n0>0)%>%group_by(id)%>%mutate(xmin=xmin+ as.difftime(rank(newid)-1, unit="days"),
+			xmax=xmax+as.difftime(rank(newid)-1, unit="days"))
+	data[match(data3$newid,data$newid),]<-data3
+	data<-as.data.frame(data)	
+	return(data)
+}
+

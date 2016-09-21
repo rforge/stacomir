@@ -593,7 +593,7 @@ hTableBilanMigrationMult=function(h=null,...) {
 	summary(bilanMigrationMult)
 }
 
-#' summary for bilanMigrationMult 
+#' summary for BilanMigrationMult 
 #' calls functions funstat and funtable to create migration overviews
 #' and generate csv and html output in the user data directory
 #' @param object An object of class \code{\link{BilanMigrationMult-class}}
@@ -680,7 +680,7 @@ houtBilanMigrationMult=function(h=null,...) {
 #' @author cedric.briand
 #' @export
 setMethod("print",signature=signature("BilanMigrationMult"),definition=function(x,...){ 
-			sortie1<-"bilanMigrationMult=new(bilanMigrationMult)\n"
+			sortie1<-"bilanMigrationMult=new('bilanMigrationMult')\n"
 			sortie2<-stringr::str_c("bilanMigrationMult=choice_c(bilanMigrationMult,",
 					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",

@@ -14,7 +14,8 @@ test_that("Test an instance of BilanFonctionnementDF",{
 			bfDF<-choice_c(bfDF,
 					2,
 					horodatedebut="2013-01-01",
-					horodatefin="2013-12-31")
+					horodatefin="2013-12-31",
+					silent=TRUE)
 			expect_gt(nrow(bfDF@df@data),0,
 					label="There should be data loaded by the choice_c method in the data slot of 
 the RefDF slot,nrow(bfDF@df@data)")				
@@ -57,4 +58,22 @@ test_that("BilanFonctionnementDF plot method works",{
 			plot(bfDF,plot.type="2",silent=TRUE,title="An example title")
 			plot(bfDF,plot.type="3",silent=TRUE,title="An example title")	
 			plot(bfDF,plot.type="4",silent=TRUE,title="An example title")	
+		})
+
+
+test_that("BilanFonctionnementDF summary method works",{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			data(bfDF)
+			bfDF<-bfDF
+			expect_output(summary(bfDF))
+		})
+
+
+test_that("BilanFonctionnementDF print method works",{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			data(bfDF)
+			bfDF<-bfDF
+			expect_output(print(bfDF))
 		})
