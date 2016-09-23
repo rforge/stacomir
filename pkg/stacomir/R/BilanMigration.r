@@ -26,7 +26,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @example examples/02_BilanMigration/bilanMigration_Arzal.R
+#' @example inst/examples/bilanMigration_Arzal.R
 #' @export 
 setClass(Class="BilanMigration",
 		representation=
@@ -128,6 +128,7 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 #' 
 #' fills also the data slot by the connect method
 #' @param object An object of class \code{\link{BilanMigration-class}}
+#' @param silent Should the program be returning messages
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -325,9 +326,9 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			} else {      
 				funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 			}
-			#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+			################################################################
 			#                 standard plot
-			#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+			################################################################
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
 				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)				
@@ -394,9 +395,9 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 					if (database_expected) fn_EcritBilanJournalier(bilanMigration,silent)
 				} # end is.null(data)
 				
-				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+				################################################################
 				#                 step plot
-				#§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+				################################################################
 			} else if (plot.type=="step"){
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)

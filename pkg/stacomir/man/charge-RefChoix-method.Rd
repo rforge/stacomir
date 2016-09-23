@@ -12,6 +12,8 @@
 
 \item{vecteur}{A vector of name, see example code.}
 
+\item{label}{Labels for the choices}
+
 \item{selected}{An integer indicating which object is selected at launch}
 }
 \value{

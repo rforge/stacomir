@@ -72,7 +72,6 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 #' used by the graphical interface to retreive the objects of Referential classes
 #' assigned to envir_stacomi
 #' @param object An object of class \link{BilanFonctionnementDC-class}
-#' @param h A handler passed from the graphical interface
 #' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand

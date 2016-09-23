@@ -5,7 +5,12 @@
 \alias{charge,BilanMigrationMult-method}
 \title{charge method for BilanMigrationMult}
 \usage{
-\S4method{charge}{BilanMigrationMult}(object, ...)
+\S4method{charge}{BilanMigrationMult}(object, silent = FALSE)
+}
+\arguments{
+\item{object}{An object of class \link{BilanMigrationMult-class}}
+
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
 BilanMigrationMult with slots filled by user choice

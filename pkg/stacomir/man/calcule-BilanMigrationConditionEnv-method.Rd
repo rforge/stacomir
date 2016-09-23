@@ -13,7 +13,7 @@
 \item{...}{additional parameters}
 }
 \value{
-\code{\link{BilanMigrationEnv-class}}
+\code{\link{BilanMigrationConditionEnv-class}}
 }
 \description{
 Performs the calculations of environment conditions attached to a migration monitoring station

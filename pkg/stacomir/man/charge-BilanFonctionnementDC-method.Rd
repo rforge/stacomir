@@ -9,8 +9,6 @@
 }
 \arguments{
 \item{object}{An object of class \link{BilanFonctionnementDC-class}}
-
-\item{h}{A handler passed from the graphical interface}
 }
 \value{
 An object of class \link{BilanFonctionnementDC-class}

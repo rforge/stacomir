@@ -25,7 +25,7 @@
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
 #' @export
-#' @example examples/01_BilanMigrationMult/bilanMigrationMult_Arzal.R
+#' @example inst/examples/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="BilanMigrationMult",
 		representation=
@@ -64,9 +64,11 @@ setValidity("BilanMigrationMult",function(object)
 #' 
 #' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
 #' fills also the data slot by the connect method
+#' @param object An object of class \link{BilanMigrationMult-class}
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return BilanMigrationMult with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
+setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE){ 
 			bilanMigrationMult<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationMult@dc<-get("refDC",envir_stacomi)

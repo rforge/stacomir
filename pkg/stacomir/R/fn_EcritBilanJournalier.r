@@ -71,7 +71,6 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 			zz=i/nrow(t_bilanmigrationjournalier_bjo)
 			progress_bar$setFraction(zz)
 			progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-			# TODO verifier si nécessaire ci dessous
 			RGtk2::gtkMainIterationDo(FALSE)
 #			utils::setWinProgressBar(progres,
 #					zz,
@@ -86,7 +85,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
 			# to avoid printing character use of invisible (capture_output(
-		invisible(capture_output(stacomirtools::connect(requete)))
+		invisible(utils::capture.output(stacomirtools::connect(requete)))
 			
 		} # end for
 		if (!silent){
@@ -146,7 +145,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 					"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 					" VALUES " ,
 					"('",paste(t_bilanmigrationjournalier_bjo[i,],collapse="','"),"');",sep="")
-			invisible(capture_output(stacomirtools::connect(requete)))
+			invisible(utils::capture.output(stacomirtools::connect(requete)))
 		} # end for
 		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
 		taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)

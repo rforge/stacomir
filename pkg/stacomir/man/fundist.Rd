@@ -28,8 +28,9 @@ regular scale (phicum)
 \examples{
  \dontrun{
 Vparm<-list()
-# below param for briand et al.,2005 pigmentation function in glass eel
-Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
+#below param for briand et al.,2005 pigmentation function in glass eel
+#parameters for gamma functions describing changes from stage to stage
+Vparm$pigment_stage$p1<-0.267 
 Vparm$pigment_stage$p2<-0.835
 Vparm$pigment_stage$p3<-1.56
 Vparm$pigment_stage$p4<-3.682
@@ -43,8 +44,10 @@ Vparm$pigmentation$p8<-0.426
 fundist(Vparm,seq(0,10, length.out=10000),graph=FALSE,lmax=1)
 fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=1)
 fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=0)
-plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
-points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[2]]),col="firebrick") 
+plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),
+Vparm$pigment_stage[[1]]),col="pink")
+points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),
+Vparm$pigment_stage[[2]]),col="firebrick") 
 }
 }
 \seealso{

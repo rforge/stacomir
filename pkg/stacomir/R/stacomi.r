@@ -144,7 +144,7 @@ husr=function(h,...){
 		con=new("ConnectionODBC")
 		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
-		con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) #finally=odbcClose(con@connection)clause inutile car si ï¿½a plante la connection n'est pas ouverte
+		con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) 
 		test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
 		odbcCloseAll()
 	}
@@ -268,7 +268,6 @@ hX11=function(h,...){
 #' @import methods
 #' @import stacomirtools
 #' @import RODBC
-#' @import Hmisc
 #' @import RGtk2
 #' @import dplyr
 #' @importFrom intervals Intervals
@@ -296,7 +295,6 @@ hX11=function(h,...){
 #' @importFrom lubridate round_date
 #' @importFrom lubridate floor_date
 #' @importFrom lubridate %m+%
-#' @importFrom lubridate %d+%
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' 
@@ -316,7 +314,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	# first loading of connection and odbc info using chargexml()
 	envir_stacomi <- new.env(parent = emptyenv())
 	assign("envir_stacomi",envir_stacomi,.GlobalEnv)
-	# trois variables passées à interface graphique via envir_stacomi :
+	# trois variables passees a interface graphique via envir_stacomi :
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("database_expected",database_expected,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
@@ -452,8 +450,8 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$handler = hlang
 	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
 	gWidgets::add(win, gmenu(menubarlist))
-	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # celui ci empile les autres de haut en bas
-	# gsortie est au dessus de la fenêtre
+	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # this one stacks from bottom to up
+	# gsortie is above the window
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
 	
 	gWidgets::add(win,ggrouptotal)
@@ -485,7 +483,11 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
 				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
-				"taxon_stades","time.sequence","sum","variable"))
+				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code"))
+
+# variable used by dplyr
+utils::globalVariables(c("n0","newid","xmin","xmax"))
+
 
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",

@@ -43,7 +43,6 @@ interface_BilanFonctionnementDF = function()
 			Quit = aQuit)
 	
 	add(group, gmenu(toolbarlist))
-	add(group,gbutton(text = "graph", handler = function(h,...){X11()})) 
 	gWidgets::addSpring(group)
 	dev.new()
 }

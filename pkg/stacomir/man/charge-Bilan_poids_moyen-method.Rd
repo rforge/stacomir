@@ -5,10 +5,10 @@
 \alias{charge,Bilan_poids_moyen-method}
 \title{charge method for Bilan_poids_moyen class}
 \usage{
-\S4method{charge}{Bilan_poids_moyen}(object, h)
+\S4method{charge}{Bilan_poids_moyen}(object)
 }
 \arguments{
-\item{h}{a handler}
+\item{object}{An object of class \link{Bilan_poids_moyen-class}}
 }
 \value{
 Bilan_poids_moyen with slots filled with user choice

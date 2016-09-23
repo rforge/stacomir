@@ -100,11 +100,11 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 # Cette methode permet de verifier que les boites ont ete cliquees et va chercher les
 # objects qui sont colles dans l'environnement envir_stacomi de l'interface 
 #' charge method for Bilan_poids_moyen class
-#' @param h a handler 
+#' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @return Bilan_poids_moyen with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(object,h) {
+setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(object) {
 			if (exists("refliste",envir_stacomi)) {      
 				object@liste<-get("refliste",envir_stacomi)      
 			} else {      

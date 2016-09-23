@@ -18,7 +18,7 @@ In the database four types of operation are set,  "1"=normal operation,
 \code{new("BilanFonctionnementDF")}.
 }
 \examples{
-examples/03_BilanFonctionnementDF/bilanFonctionnementDF_example.R
+inst/examples/bilanFonctionnementDF_example.R
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/BilanFonctionnementDF.r
 \name{funboxDF}
 \alias{funboxDF}
-\title{FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class}
+\title{Internal use, rectangles to describe the DF work for BilanFonctionnementDF class, 
+graphical interface handler}
 \usage{
 funboxDF(h, ...)
 }
@@ -12,7 +13,8 @@ funboxDF(h, ...)
 \item{...}{additional parameters}
 }
 \description{
-FunboxDF draws rectangles to describe the DF work for BilanFonctionnementDF class
+Internal use, rectangles to describe the DF work for BilanFonctionnementDF class, 
+graphical interface handler
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

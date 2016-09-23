@@ -70,7 +70,7 @@ hbilanMigrationConditionEnvcalc=function(h,...){
 
 #' @param object An object of class \code{\link{BilanMigrationConditionEnv-class}}
 #' @param ... additional parameters
-#' @return \code{\link{BilanMigrationEnv-class}}
+#' @return \code{\link{BilanMigrationConditionEnv-class}}
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition=function(object,...){ 
 			# le chargement de bilanMigration utilise la methode calcule de BilanMigration

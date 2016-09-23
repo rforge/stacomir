@@ -36,7 +36,7 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum,silent){
 		requete@sql=paste("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanMigrationMensuel_bme (",			
 				"bme_dis_identifiant,bme_tax_code,bme_std_code,bme_annee,bme_labelquantite,bme_valeur,bme_mois,bme_horodateexport,bme_org_code)",
 				" VALUES ('",paste(t_bilanmigrationmensuel_bme[i,],collapse="','"),"');",sep="")
-		invisible(capture_output(stacomirtools::connect(requete)))
+		invisible(utils::capture.output(stacomirtools::connect(requete)))
 	} # end for
 if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n"))
 } # end function

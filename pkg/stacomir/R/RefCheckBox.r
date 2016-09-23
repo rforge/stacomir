@@ -28,7 +28,11 @@ setClass(Class="RefCheckBox",representation= representation(title="character",la
 		prototype=prototype(title="liste de choice",labels="choice",checked=FALSE))
 
 #' Loading method for ReCheckBox referential objects
-#' @return An S4 object of class RefCheckBox
+#' @param object An object of class \link{ReCheckBox-class}
+#' @param title Title of the frame
+#' @param labels Labels for checked
+#' @param checked Vector of boolean indicating if refCheckBox are checked
+#' @return An object of class \link{ReCheckBox-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{

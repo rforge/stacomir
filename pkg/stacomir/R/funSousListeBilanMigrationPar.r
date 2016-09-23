@@ -10,13 +10,6 @@
 # Notes de devt                     Dans les requetes recuperer valeurs quan ou valeur qual ou l'interrogation croisee (trois cas differents)
 #                      
 #**********************************************************************
-#*
-#* Modifications :
-
-# load(file="EXAMPLES/devt.Rdata")
-#@param  bilanMigrationPar
-#@return une liste de deux dataframe
-
 
 
 

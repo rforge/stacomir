@@ -53,7 +53,7 @@
 #' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
 #' 995-1009.
 #' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
-#' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
+#' \url{http://www.eptb-vilaine.fr/site/index.php/les-migrateurs/documents/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine}
 #' @examples
 #' #' showClass("Bilan_stades_pigm")
 #' @export 
@@ -351,7 +351,7 @@ funphi<-function(parm,datatempsal){
 #' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
 #' 995-1009.
 #' \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
-#' \url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
+#' \url{http://www.eptb-vilaine.fr/site/index.php/les-migrateurs/documents/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine}
 fnstade<-function(par1, par2=NULL,phicum,phidates,VB=FALSE,neg=TRUE,lmax=1){
 	if (neg){
 		phidates=as.numeric(as.POSIXct(strptime(phidates,format="%Y-%m-%d")))
@@ -426,8 +426,9 @@ fun50<-function(obj,objc){
 #' @examples
 #'  \dontrun{
 #' Vparm<-list()
-#' # below param for briand et al.,2005 pigmentation function in glass eel
-#' Vparm$pigment_stage$p1<-0.267 # parameters for gamma functions describing changes from stage to stage
+#' #below param for briand et al.,2005 pigmentation function in glass eel
+#' #parameters for gamma functions describing changes from stage to stage
+#' Vparm$pigment_stage$p1<-0.267 
 #' Vparm$pigment_stage$p2<-0.835
 #' Vparm$pigment_stage$p3<-1.56
 #' Vparm$pigment_stage$p4<-3.682
@@ -441,8 +442,10 @@ fun50<-function(obj,objc){
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=FALSE,lmax=1)
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=1)
 #' fundist(Vparm,seq(0,10, length.out=10000),graph=TRUE,lmax=0)
-#' plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[1]]),col="pink")
-#' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),Vparm$pigment_stage[[2]]),col="firebrick") 
+#' plot(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),
+#' Vparm$pigment_stage[[1]]),col="pink")
+#' points(seq(0,10, length.out=10000),pgamma(seq(0,10, length.out=10000),
+#' Vparm$pigment_stage[[2]]),col="firebrick") 
 #' }
 fundist=function(Vparm, phicum,graph=TRUE,lmax=1){
 	VB=fnstade(par1=Vparm$pigment_stage[[1]],VB=TRUE,phicum=phicum,neg=FALSE,lmax=lmax)
@@ -738,7 +741,7 @@ fungraphstades<-function(
 	}
 	if (graphstades)  {
 		# stades cumules calcul necessaire pour points et graphique time.sequences
-		# le graphique ne supporte pas plusieurs echantillons a la même date d'ou le choice
+		# le graphique ne supporte pas plusieurs echantillons a la meme date d'ou le choice
 		
 	graphics::par("mar"=c(2, 4, 3, 2)+ 0.1)
 		surface(dates,tablestades,couleur=grDevices::gray(5:1/6),ordre=c(1,2,3,4,5),

@@ -40,6 +40,7 @@ setClass(Class="RefCoe",representation=
 #' 
 #' 
 #' The slots datedebut and datefin have to be filled before using charge
+#' @param object An object of class \link{RefCoe-class}
 #' @return Object of class RefCoe
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

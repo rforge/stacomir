@@ -51,10 +51,10 @@ graphdate<-function(vectordate){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_char_spe<-function(text){
-	text=gsub("\u00e9","e",text) #é
-	text=gsub("\u00e8","e",text) #è
-	text=gsub("\u00ea","e",text) #ê
-	text=gsub("\u00e0","a",text) #à
+	text=gsub("\u00e9","e",text) 
+	text=gsub("\u00e8","e",text) 
+	text=gsub("\u00ea","e",text) 
+	text=gsub("\u00e0","a",text) 
 	return(text)}
 
 
@@ -252,17 +252,19 @@ mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
 #' @return A data frame with four new columns, Hmin (hour min), Hmax (hmax), xmin (day) and xmax (next day),
 #' and new rows
 #' @author cedric.briand
-#' @example
-#' datatemp<-structure(list(per_dis_identifiant = c(1L, 1L, 1L), per_date_debut = structure(c(1420056600, 
-#'								1420071000, 1420081200), class = c("POSIXct", "POSIXt"), tzone = ""), 
-#'				per_date_fin = structure(c(1420071000, 1420081200, 1421000000
-#'						), class = c("POSIXct", "POSIXt"), tzone = ""), per_commentaires = c("fonct calcul", 
-#'						"fonct calcul", "fonct calcul"), per_etat_fonctionnement = c(1L, 
-#'						0L, 0L), per_tar_code = 1:3, libelle = c("Fonc normal", "Arr ponctuel", 
-#'						"Arr maint")), .Names = c("per_dis_identifiant", "per_date_debut", 
-#'				"per_date_fin", "per_commentaires", "per_etat_fonctionnement", 
-#'				"per_tar_code", "libelle"), row.names = c(NA, 3L), class = "data.frame")
-#'newdf<-split_per_day(data=datatemp,horodatedebut="per_date_debut",horodatefin="per_date_fin")
+#' @examples
+#' datatemp<-structure(list(per_dis_identifiant = c(1L, 1L, 1L), 
+#' per_date_debut = structure(c(1420056600, 
+#'	1420071000, 1420081200), class = c("POSIXct", "POSIXt"), tzone = ""), 
+#'	per_date_fin = structure(c(1420071000, 1420081200, 1421000000
+#'	), class = c("POSIXct", "POSIXt"), tzone = ""), per_commentaires = c("fonct calcul", 
+#'	"fonct calcul", "fonct calcul"), per_etat_fonctionnement = c(1L, 
+#'	0L, 0L), per_tar_code = 1:3, libelle = c("Fonc normal", "Arr ponctuel", 
+#'	"Arr maint")), .Names = c("per_dis_identifiant", "per_date_debut", 
+#'	"per_date_fin", "per_commentaires", "per_etat_fonctionnement", 
+#'	"per_tar_code", "libelle"), row.names = c(NA, 3L), class = "data.frame")
+#'newdf<-split_per_day(data=datatemp,horodatedebut="per_date_debut",
+#' horodatefin="per_date_fin")
 #' @export
 split_per_day<-function(data,horodatedebut,horodatefin){
 	if(!horodatedebut%in%colnames(data)) stop("horodatedebut not in column names for data")
@@ -288,7 +290,7 @@ split_per_day<-function(data,horodatedebut,horodatefin){
 	#replacing rows in data
 	data[match(data2$newid,data$newid),]<-data2
 	# now get the sequence of days righly set by adding the number of days to xmin and xmax
-	data3<-data%>%filter(n0>0)%>%group_by(id)%>%mutate(xmin=xmin+ as.difftime(rank(newid)-1, unit="days"),
+	data3<-data%>%filter(n0>0)%>%group_by(id)%>%mutate(xmin=xmin+ as.difftime(rank(newid)-1, units="days"),
 			xmax=xmax+as.difftime(rank(newid)-1, unit="days"))
 	data[match(data3$newid,data$newid),]<-data3
 	data<-as.data.frame(data)	

@@ -25,7 +25,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @examples examples/03_BilanFonctionnementDF/bilanFonctionnementDF_example.R
+#' @examples inst/examples/bilanFonctionnementDF_example.R
 #' @export 
 setClass(Class="BilanFonctionnementDF",
 		representation= representation(data="data.frame",
@@ -281,7 +281,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
 				# creation d'un graphique vide
 				if (is.null(title)) title<-""
-				plot(   graphdate(time.sequence),
+				plot(graphdate(time.sequence),
 						seq(0,1,length.out=length(time.sequence)),
 						xlim=c(debut,fin), 
 						type= "n", 

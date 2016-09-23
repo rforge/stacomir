@@ -3,7 +3,7 @@
 \docType{methods}
 \name{summary,BilanMigrationMult-method}
 \alias{summary,BilanMigrationMult-method}
-\title{summary for bilanMigrationMult 
+\title{summary for BilanMigrationMult 
 calls functions funstat and funtable to create migration overviews
 and generate csv and html output in the user data directory}
 \usage{
@@ -17,7 +17,7 @@ and generate csv and html output in the user data directory}
 \item{...}{Additional parameters (not used there)}
 }
 \description{
-summary for bilanMigrationMult 
+summary for BilanMigrationMult 
 calls functions funstat and funtable to create migration overviews
 and generate csv and html output in the user data directory
 }

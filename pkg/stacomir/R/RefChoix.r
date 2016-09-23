@@ -35,6 +35,7 @@ setClass(Class="RefChoix",representation= representation(listechoice="character"
 #' @return An S4 object of class RefChoix
 #' @param object An object of class RefChoix
 #' @param vecteur A vector of name, see example code.
+#' @param label Labels for the choices
 #' @param selected An integer indicating which object is selected at launch
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

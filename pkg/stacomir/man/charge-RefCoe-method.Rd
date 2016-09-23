@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{RefCoe}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefCoe-class}}
+}
 \value{
 Object of class RefCoe
 }

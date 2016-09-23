@@ -74,7 +74,7 @@ stage-structured model to predict the effect of temperature and salinity on
 glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
 995-1009.
 \url{http://www3.interscience.wiley.com/journal/118686679/abstract}
-\url{http://www.eptb-vilaine.fr/site/index.php/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine.}
+\url{http://www.eptb-vilaine.fr/site/index.php/les-migrateurs/documents/publications-scientifiques/46-publications-migrateurs/60-dynamique-de-population-et-de-migration-des-civelles-en-estuaire-de-vilaine}
 }
 \seealso{
 Other Bilan Classes \code{\linkS4class{Bilan_carlot}}

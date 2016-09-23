@@ -196,15 +196,15 @@ test_that("All foreign keys are present",
 			baseODBC$uid=readline(prompt="Enter superuser name: ")
 			baseODBC$pwd=readline(prompt="Enter superuser password: ")	
 			req@baseODBC<-baseODBC
-			req@sql=paste("SELECT
-							distinct on (tc.constraint_name) tc.constraint_name, tc.table_name
+			req@sql=paste(stringr::str_c("SELECT
+							distinct on (tc.constraint_name) tc.constraint_name, tc.table_name							
 							FROM 
 							information_schema.table_constraints AS tc 
 							JOIN information_schema.key_column_usage AS kcu
 							ON tc.constraint_name = kcu.constraint_name
 							JOIN information_schema.constraint_column_usage AS ccu
 							ON ccu.constraint_name = tc.constraint_name
-							WHERE constraint_type = 'FOREIGN KEY';")
+							WHERE constraint_type = 'FOREIGN KEY' and  tc.constraint_schema='",gsub("\\.","",get("sch",envir=envir_stacomi)),"';"))
 			req<-stacomirtools::connect(req)
 			result<-req@query
 			fk<-structure(list(constraint_name = c("c_fk_act_lot_identifiant", 
@@ -223,25 +223,23 @@ test_that("All foreign keys are present",
 									"c_fk_lot_std_code", "c_fk_lot_tax_code", "c_fk_maa_mal_id", 
 									"c_fk_mac_valeurqualitatifdefaut", "c_fk_mae_mao_id", "c_fk_mae_stm_identifiant", 
 									"c_fk_mal_mas_id", "c_fk_mao_mas_id", "c_fk_mqe_loc_code", "c_fk_mqe_nmq_code", 
-									"c_fk_mqe_omq_reference", "c_fk_mqe_org_code", "c_fk_mrl_msr_id", 
-									"c_fk_omq_org_code", "c_fk_ope_dic_identifiant", "c_fk_ope_org_code", 
-									"c_fk_ouv_nov_code", "c_fk_ouv_org_code", "c_fk_ouv_sta_code", 
-									"c_fk_pco_imp_code", "c_fk_pco_loc_code", "c_fk_pco_lot_identifiant", 
-									"c_fk_pco_org_code", "c_fk_pco_pat_code", "c_fk_per_dis_identifiant", 
-									"c_fk_per_org_code", "c_fk_per_tar_code", "c_fk_prl_loc_code", 
-									"c_fk_prl_lot_identifiant", "c_fk_prl_org_code", "c_fk_prl_pre_nom", 
-									"c_fk_prl_typeprelevement", "c_fk_qal_par_code", "c_fk_qan_par_code", 
+									"c_fk_mqe_omq_reference", "c_fk_mqe_org_code", "c_fk_omq_org_code", 
+									"c_fk_ope_dic_identifiant", "c_fk_ope_org_code", "c_fk_ouv_nov_code", 
+									"c_fk_ouv_org_code", "c_fk_ouv_sta_code", "c_fk_pco_imp_code", 
+									"c_fk_pco_loc_code", "c_fk_pco_lot_identifiant", "c_fk_pco_org_code", 
+									"c_fk_pco_pat_code", "c_fk_per_dis_identifiant", "c_fk_per_org_code", 
+									"c_fk_per_tar_code", "c_fk_prl_loc_code", "c_fk_prl_lot_identifiant", 
+									"c_fk_prl_org_code", "c_fk_prl_pre_nom", "c_fk_prl_typeprelevement", 
 									"c_fk_sta_org_code", "c_fk_std_code", "c_fk_stm_org_code", "c_fk_stm_par_code", 
 									"c_fk_stm_sta_code", "c_fk_tav_dic_identifiant", "c_fk_tav_org_code", 
-									"c_fk_tax_ntx_code", "c_fk_tax_tax_tax_code", "c_fk_txe_ech_code", 
-									"c_fk_txe_org_code", "c_fk_txe_ouv_identifiant", "c_fk_txe_sta_code", 
+									"c_fk_txe_ech_code", "c_fk_txe_org_code", "c_fk_txe_sta_code", 
 									"c_fk_txe_std_code", "c_fk_txe_tax_code", "c_fk_txv_org_code", 
-									"c_fk_txv_std_code", "c_fk_txv_tax_code", "c_fk_val_qal_code"
-							), table_name = c("tj_actionmarquage_act", "tj_actionmarquage_act", 
-									"tj_actionmarquage_act", "t_bilanmigrationjournalier_bjo", "t_bilanmigrationjournalier_bjo", 
-									"t_bilanmigrationjournalier_bjo", "t_bilanmigrationmensuel_bme", 
-									"t_bilanmigrationmensuel_bme", "tj_caracteristiquelot_car", "tj_caracteristiquelot_car", 
-									"tj_caracteristiquelot_car", "tj_caracteristiquelot_car", "tj_coefficientconversion_coe", 
+									"c_fk_txv_std_code", "c_fk_txv_tax_code"), table_name = c("tj_actionmarquage_act", 
+									"tj_actionmarquage_act", "tj_actionmarquage_act", "t_bilanmigrationjournalier_bjo", 
+									"t_bilanmigrationjournalier_bjo", "t_bilanmigrationjournalier_bjo", 
+									"t_bilanmigrationmensuel_bme", "t_bilanmigrationmensuel_bme", 
+									"tj_caracteristiquelot_car", "tj_caracteristiquelot_car", "tj_caracteristiquelot_car", 
+									"tj_caracteristiquelot_car", "tj_coefficientconversion_coe", 
 									"tj_coefficientconversion_coe", "tj_coefficientconversion_coe", 
 									"tj_coefficientconversion_coe", "tj_dfesttype_dft", "tj_dfesttype_dft", 
 									"tj_dfesttype_dft", "t_dispositifcomptage_dic", "t_dispositifcomptage_dic", 
@@ -254,22 +252,19 @@ test_that("All foreign keys are present",
 									"ts_masqueordreaffichage_maa", "ts_masquecaracteristiquelot_mac", 
 									"ts_masqueconditionsenvironnementales_mae", "ts_masqueconditionsenvironnementales_mae", 
 									"ts_masquelot_mal", "ts_masqueope_mao", "t_marque_mqe", "t_marque_mqe", 
-									"t_marque_mqe", "t_marque_mqe", "ts_messagerlang_mrl", "t_operationmarquage_omq", 
-									"t_operation_ope", "t_operation_ope", "t_ouvrage_ouv", "t_ouvrage_ouv", 
-									"t_ouvrage_ouv", "tj_pathologieconstatee_pco", "tj_pathologieconstatee_pco", 
+									"t_marque_mqe", "t_marque_mqe", "t_operationmarquage_omq", "t_operation_ope", 
+									"t_operation_ope", "t_ouvrage_ouv", "t_ouvrage_ouv", "t_ouvrage_ouv", 
 									"tj_pathologieconstatee_pco", "tj_pathologieconstatee_pco", "tj_pathologieconstatee_pco", 
+									"tj_pathologieconstatee_pco", "tj_pathologieconstatee_pco", "t_periodefonctdispositif_per", 
 									"t_periodefonctdispositif_per", "t_periodefonctdispositif_per", 
-									"t_periodefonctdispositif_per", "tj_prelevementlot_prl", "tj_prelevementlot_prl", 
 									"tj_prelevementlot_prl", "tj_prelevementlot_prl", "tj_prelevementlot_prl", 
-									"tr_parametrequalitatif_qal", "tr_parametrequantitatif_qan", 
-									"t_station_sta", "ts_taxonvideo_txv", "tj_stationmesure_stm", 
-									"tj_stationmesure_stm", "tj_stationmesure_stm", "ts_taillevideo_tav", 
-									"ts_taillevideo_tav", "tr_taxon_tax", "tr_taxon_tax", "tj_tauxechappement_txe", 
+									"tj_prelevementlot_prl", "tj_prelevementlot_prl", "t_station_sta", 
+									"ts_taxonvideo_txv", "tj_stationmesure_stm", "tj_stationmesure_stm", 
+									"tj_stationmesure_stm", "ts_taillevideo_tav", "ts_taillevideo_tav", 
 									"tj_tauxechappement_txe", "tj_tauxechappement_txe", "tj_tauxechappement_txe", 
 									"tj_tauxechappement_txe", "tj_tauxechappement_txe", "ts_taxonvideo_txv", 
-									"ts_taxonvideo_txv", "ts_taxonvideo_txv", "tr_valeurparametrequalitatif_val"
-							)), .Names = c("constraint_name", "table_name"), row.names = c(NA, 
-							90L), class = "data.frame")
+									"ts_taxonvideo_txv", "ts_taxonvideo_txv")), .Names = c("constraint_name", 
+							"table_name"), row.names = c(NA, 83L), class = "data.frame")
 					check_exist_fk=fk$constraint_name%in%result$constraint_name
 					for (i in 1:nrow(fk)){
 						expect_true(check_exist_fk[i],label=paste("Missing foreign key :",fk$constraint_name,"table :",fk$table_name))

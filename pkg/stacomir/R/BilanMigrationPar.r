@@ -129,9 +129,6 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			
 			stopifnot(validObject(bilanMigrationPar, test=TRUE))
 			funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.1)
-			# save(bilanMigrationPar,file="EXAMPLES/devt.Rdata")
-			#undebug(funSousListeBilanMigrationPar)
-			# debug(funSousListeBilanMigrationPar)
 			if (bilanMigrationPar@parquan@data$par_nom=="aucune" & bilanMigrationPar@parqual@data$par_nom=="aucune") {
 				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.2,arret=TRUE)}
 			res<-funSousListeBilanMigrationPar(bilanMigrationPar=bilanMigrationPar)

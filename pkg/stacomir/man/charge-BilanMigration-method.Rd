@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigration-class}}}
+
+\item{silent}{Should the program be returning messages}
 }
 \value{
 An object of class \link{BilanMigration-class} with slots filled by user choice

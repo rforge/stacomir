@@ -7,8 +7,17 @@
 \usage{
 \S4method{charge}{RefCheckBox}(object, title, labels, checked)
 }
+\arguments{
+\item{object}{An object of class \link{ReCheckBox-class}}
+
+\item{title}{Title of the frame}
+
+\item{labels}{Labels for checked}
+
+\item{checked}{Vector of boolean indicating if refCheckBox are checked}
+}
 \value{
-An S4 object of class RefCheckBox
+An object of class \link{ReCheckBox-class}
 }
 \description{
 Loading method for ReCheckBox referential objects
