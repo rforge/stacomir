@@ -21,7 +21,7 @@
 #' @slot pasDeTemps An object of class \code{\link{PasDeTempsJournalier-class}}
 #' @slot data A data.frame containing raw data filled by the connect method
 #' @slot calcdata A "list" of calculated daily data, one per dc, filled in by the calcule method
-#' @slot coef_conversion A data.frame of daily weight to number conversion coefficients, filled in by the connect
+#' @slot coef_conversion A data frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
 #' @export
