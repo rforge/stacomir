@@ -25,7 +25,7 @@
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
 #' @export
-#' @example inst/examples/bilanMigrationMult_Arzal.R
+#' @example examples/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="BilanMigrationMult",
 		representation=
