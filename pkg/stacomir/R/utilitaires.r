@@ -15,7 +15,7 @@ quitte=function(...){
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
-			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC","usrname","usrpwd")]
+			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window")]
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}

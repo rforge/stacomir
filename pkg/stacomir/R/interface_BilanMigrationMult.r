@@ -4,7 +4,8 @@
 #' This function is called from a handler in the main graphical interface
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationMult=function(){
-	quitte()
+	quitte() # quitte must be the first in interface methods 
+	#(destroys everything in envir_stacomi except stuff required at to level)
 	objectBilan="bilanMigrationMult"
 	assign("objectBilan",objectBilan,envir=envir_stacomi)
 	bilanMigrationMult=new("BilanMigrationMult")

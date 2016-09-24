@@ -164,7 +164,6 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			bilanMigration=connect(bilanMigration)
 			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigration@data),"\n"))
 			stopifnot(validObject(bilanMigration, test=TRUE))
-			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			return(bilanMigration)
 		})
 
@@ -189,7 +188,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			}
 			bilanMigration<-object
 
-				if (nrow(bilanMigration@data>0)){
+				if (nrow(bilanMigration@data)>0){
 #				bilanMigration@data$time.sequence=difftime(bilanMigration@data$ope_date_fin,
 #						bilanMigration@data$ope_date_debut,
 #						units="days")
@@ -455,11 +454,8 @@ hbilanMigrationgraph = function(h,...) {
 	} else {      
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
-	
 	plot(bilanMigration,plot.type="standard")
-	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
-	fn_EcritBilanJournalier(bilanMigration)
-	
+		
 }
 
 #' handler for calcul hBilanMigrationgraph2
@@ -526,5 +522,5 @@ hbilanMigrationwrite = function(h,...) {
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
-	fn_EcritBilanJournalier(bilanMigration)
+	fn_EcritBilanJournalier(bilanMigration,silent=FALSE)
 }

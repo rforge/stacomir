@@ -1,6 +1,9 @@
 #' Interface for BilanMigration class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigration=function(){
+ 
+	quitte()
+	
 	bilanMigration=new("BilanMigration")
 	assign("bilanMigration",bilanMigration,envir = envir_stacomi)
 	fonctionnementDC=new("BilanFonctionnementDC")
@@ -9,8 +12,7 @@ interface_BilanMigration=function(){
 	funout(get("msg",envir=envir_stacomi)$interface_BilanMigration.1)
 	bilanMigration@taxons=charge(bilanMigration@taxons)
 	bilanMigration@stades=charge(bilanMigration@stades)
-	bilanMigration@dc=charge(bilanMigration@dc)   
-	quitte()
+	bilanMigration@dc=charge(bilanMigration@dc)  
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
 	add(ggroupboutons,group)
