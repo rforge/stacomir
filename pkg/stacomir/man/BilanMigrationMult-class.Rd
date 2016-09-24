@@ -24,7 +24,7 @@ This migration count can be built either by the graphical interface or from the 
 
 \item{\code{calcdata}}{A "list" of calculated daily data, one per dc, filled in by the calcule method}
 
-\item{\code{coef_conversion}}{A data.frame of daily weight to number conversion coefficients, filled in by the connect
+\item{\code{coef_conversion}}{A data frame of daily weight to number conversion coefficients, filled in by the connect
 method if any weight are found in the data slot.}
 
 \item{\code{time.sequence}}{A POSIXt time sequence}

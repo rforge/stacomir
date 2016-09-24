@@ -26,7 +26,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
-#' @example examples/bilanMigration_Arzal.R
+#' @example inst/examples/bilanMigration_Arzal.R
 #' @export 
 setClass(Class="BilanMigration",
 		representation=
