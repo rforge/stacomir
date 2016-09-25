@@ -101,8 +101,8 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationPar@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				# pour permettre le fonctionnement de Fonctionnement DC
-				assign("fonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-				assign("fonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
+				assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
+				assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)

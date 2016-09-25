@@ -17,9 +17,9 @@ class allows to draw graphics allowing an overview of the device operation
 
 \item{\code{dc}}{An object of class \code{RefDC-class}}
 
-\item{\code{horodate}}{An object of class \code{RefHorodate-class}}
+\item{\code{horodatedebut}}{An object of class \code{RefHorodate-class}}
 
-\item{\code{requete}}{An object of class \code{RequeteODBCwheredate-class}}
+\item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
 }}
 \section{Objects from the Class}{
  Objects can be created by calls of the form

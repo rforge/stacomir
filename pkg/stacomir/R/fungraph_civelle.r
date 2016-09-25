@@ -105,24 +105,10 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			x1=debut+3*(fin-debut)/8,y1=max(eff/1000,na.rm=TRUE)*1.125)
 	
 	
-	
-	###################################         
-	# Requete de la base
-	################################### 
-	req<-new("RequeteODBC")
-	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
-	req@sql=paste("SELECT * FROM  t_operation_ope ",
-			"WHERE ope_date_debut >= '",
-			as.Date(time.sequence[min(index)]),
-			" 00:00:00' ",
-			"AND ope_date_fin <= '" ,
-			as.Date(time.sequence[max(index)]),
-			" 00:00:00' ",
-			"AND ope_dic_identifiant=",dc,
-			"ORDER BY ope_date_debut; ",sep = "")
-	t_operation_ope<-stacomirtools::connect(req)@query
-	# sortie de commentaires
+	bilanOperation<-get("bilanOperation",envir=envir_stacomi)
+	t_operation_ope<-bilanOperation@data[bilanOperation@data$ope_dic_identifiant==dc,]
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
+	
 	if (!silent){
 		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
 		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n"))
@@ -130,17 +116,11 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n"))
 	}
 	
-	req@sql<-fn_sql_dis(per_dis_identifiant=
-					bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc],
-			dateDebut=as.Date(time.sequence[min(index)]),
-			dateFin=as.Date(time.sequence[max(index)]))
-	fonctionnementDF<-stacomirtools::connect(req)@query
-	
-	
-	req@sql<-fn_sql_dis(per_dis_identifiant=dc,
-			dateDebut=as.Date(time.sequence[min(index)]),
-			dateFin=as.Date(time.sequence[max(index)]))
-	fonctionnementDC<-stacomirtools::connect(req)@query
+	df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc==dc]
+	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
+	bilanFonctionnementDC<-get("bilanFonctionnementDC", envir=envir_stacomi)
+	bilanFonctionnementDF@data<-bilanFonctionnementDF@data[bilanFonctionnementDF@data$per_dis_identifiant==df,]
+	bilanFonctionnementDC@data<-bilanFonctionnementDC@data[bilanFonctionnementDC@data$per_dis_identifiant==dc,]
 	
 	
 	graphdate<-function(vectordate){
@@ -169,7 +149,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	# temps de fonctionnement du DF
 	###################################
 	
-	if (dim(fonctionnementDF)[1]==0 ) {
+	if (dim(bilanFonctionnementDF@data)[1]==0 ) {
 		
 		rect(   xleft=debut, 
 				ybottom=2.1,
@@ -198,32 +178,32 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		
 		# si il sort quelque chose
-		if (sum(fonctionnementDF$per_etat_fonctionnement==1)>0){    
-			rect(   xleft =graphdate(as.Date(fonctionnementDF$per_date_debut[
-											fonctionnementDF$per_etat_fonctionnement==1])), 
+		if (sum(bilanFonctionnementDF@data$per_etat_fonctionnement==1)>0){    
+			rect(   xleft =graphdate(as.Date(bilanFonctionnementDF@data$per_date_debut[
+											bilanFonctionnementDF@data$per_etat_fonctionnement==1])), 
 					ybottom=2.1,
-					xright=graphdate(as.Date(fonctionnementDF$per_date_fin[
-											fonctionnementDF$per_etat_fonctionnement==1])),
+					xright=graphdate(as.Date(bilanFonctionnementDF@data$per_date_fin[
+											bilanFonctionnementDF@data$per_etat_fonctionnement==1])),
 					ytop=3, 
 					col = mypalette[4],
 					border = NA, 
 					lwd = 1)       }
-		if (sum(fonctionnementDF$per_etat_fonctionnement==0)>0){              
-			rect(   xleft =graphdate(as.Date(fonctionnementDF$per_date_debut[
-											fonctionnementDF$per_etat_fonctionnement==0])), 
+		if (sum(bilanFonctionnementDF@data$per_etat_fonctionnement==0)>0){              
+			rect(   xleft =graphdate(as.Date(bilanFonctionnementDF@data$per_date_debut[
+											bilanFonctionnementDF@data$per_etat_fonctionnement==0])), 
 					ybottom=2.1,
-					xright=graphdate(as.Date(fonctionnementDF$per_date_fin[
-											fonctionnementDF$per_etat_fonctionnement==0])),
+					xright=graphdate(as.Date(bilanFonctionnementDF@data$per_date_fin[
+											bilanFonctionnementDF@data$per_etat_fonctionnement==0])),
 					ytop=3, 
 					col = mypalette[6],
 					border = NA, 
 					lwd = 1)  }
 		#creation d'une liste par categorie d'arret contenant vecteurs dates    
 		listeperiode<-
-				fn_table_per_dis(typeperiode=fonctionnementDF$per_tar_code,
-						tempsdebut= fonctionnementDF$per_date_debut,
-						tempsfin=fonctionnementDF$per_date_fin,
-						libelle=fonctionnementDF$libelle)
+				fn_table_per_dis(typeperiode=bilanFonctionnementDF@data$per_tar_code,
+						tempsdebut= bilanFonctionnementDF@data$per_date_debut,
+						tempsfin=bilanFonctionnementDF@data$per_date_fin,
+						libelle=bilanFonctionnementDF@data$libelle)
 		nomperiode<-vector()
 		for (j in 1 : length(listeperiode)){
 			#recuperation du vecteur de noms (dans l'ordre) e partir de la liste
@@ -269,7 +249,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	###################################                 
 	
 	
-	if (dim(fonctionnementDC)[1]==0 ) {
+	if (dim(bilanFonctionnementDC@data)[1]==0 ) {
 		
 		rect(      xleft=debut, 
 				ybottom=2.1,
@@ -297,32 +277,32 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 	} else {
 		
-		if (sum(fonctionnementDC$per_etat_fonctionnement==1)>0){ 
-			rect(   xleft =graphdate(as.Date(fonctionnementDC$per_date_debut[
-											fonctionnementDC$per_etat_fonctionnement==1])), 
+		if (sum(bilanFonctionnementDC@data$per_etat_fonctionnement==1)>0){ 
+			rect(   xleft =graphdate(as.Date(bilanFonctionnementDC@data$per_date_debut[
+											bilanFonctionnementDC@data$per_etat_fonctionnement==1])), 
 					ybottom=2.1,
-					xright=graphdate(as.Date(fonctionnementDC$per_date_fin[
-											fonctionnementDC$per_etat_fonctionnement==1])),
+					xright=graphdate(as.Date(bilanFonctionnementDC@data$per_date_fin[
+											bilanFonctionnementDC@data$per_etat_fonctionnement==1])),
 					ytop=3, 
 					col = mypalette[4],
 					border = NA, 
 					lwd = 1) }
-		if (sum(fonctionnementDC$per_etat_fonctionnement==0)>0)
+		if (sum(bilanFonctionnementDC@data$per_etat_fonctionnement==0)>0)
 		{ 
-			rect(   xleft =graphdate(as.Date(fonctionnementDC$per_date_debut[
-											fonctionnementDC$per_etat_fonctionnement==0])), 
+			rect(   xleft =graphdate(as.Date(bilanFonctionnementDC@data$per_date_debut[
+											bilanFonctionnementDC@data$per_etat_fonctionnement==0])), 
 					ybottom=2.1,
-					xright=graphdate(as.Date(fonctionnementDC$per_date_fin[
-											fonctionnementDC$per_etat_fonctionnement==0])),
+					xright=graphdate(as.Date(bilanFonctionnementDC@data$per_date_fin[
+											bilanFonctionnementDC@data$per_etat_fonctionnement==0])),
 					ytop=3, 
 					col = mypalette[6],
 					border = NA, 
 					lwd = 1) }
 		listeperiode<-
-				fn_table_per_dis(typeperiode=fonctionnementDC$per_tar_code,
-						tempsdebut= fonctionnementDC$per_date_debut,
-						tempsfin=fonctionnementDC$per_date_fin,
-						libelle=fonctionnementDC$libelle)
+				fn_table_per_dis(typeperiode=bilanFonctionnementDC@data$per_tar_code,
+						tempsdebut= bilanFonctionnementDC@data$per_date_debut,
+						tempsfin=bilanFonctionnementDC@data$per_date_fin,
+						libelle=bilanFonctionnementDC@data$libelle)
 		nomperiode<-vector()
 		
 		for (j in 1 : length(listeperiode)){

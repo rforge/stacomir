@@ -4,7 +4,7 @@
 \name{bfDF}
 \alias{bfDF}
 \title{An object of class \link{BilanFonctionnementDF-class} with data loaded}
-\format{An object of class bilanFonctionnementDF with 5 slots:
+\format{An object of class BilanFonctionnementDF with 5 slots:
 \describe{
 #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
 			\describe{

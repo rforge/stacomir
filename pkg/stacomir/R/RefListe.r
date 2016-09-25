@@ -59,7 +59,7 @@ setMethod("choice",signature=signature("RefListe"),definition=function(object,is
 					funout(paste(object@label,"\n"))
 				}
 				frame_list<<-gframe(object@label)
-				# TODO e modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
+				# TODO a modifier en assign() si je dois passer plusieurs listes puis les supprimer, il faudra alors detruire les listes par leur nom
 				add(group,frame_list)
 				list_libelle=fun_char_spe(object@listechoice)
 				choice=gdroplist(items=list_libelle,container=frame_list,handler=hlist)

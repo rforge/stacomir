@@ -8,8 +8,8 @@ interface_BilanMigrationPar = function()
     bilanMigrationPar=new("BilanMigrationPar")
     assign("bilanMigrationPar",bilanMigrationPar,envir=envir_stacomi)
     
-    fonctionnementDC=new("BilanFonctionnementDC") # appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
-    assign("fonctionnementDC",fonctionnementDC,envir=envir_stacomi)
+    bilanFonctionnementDC=new("BilanFonctionnementDC") # appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
+    assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_BilanMigrationPar.1)
     bilanMigrationPar@taxons=charge(bilanMigrationPar@taxons)

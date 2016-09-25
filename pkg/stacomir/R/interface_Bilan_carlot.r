@@ -41,7 +41,7 @@ interface_Bilan_carlot = function()
     #choice(bilan_carlot@taxons,is.enabled=FALSE)
     #choice(bilan_carlot@stades,is.enabled=FALSE)
     #choice(bilan_carlot@par,is.enabled=FALSE)
-    #toolbarlist$Calc$handler = connect(fonctionnementDC)
+    #toolbarlist$Calc$handler = connect(bilanFonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
 

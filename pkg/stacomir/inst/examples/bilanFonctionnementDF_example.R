@@ -10,16 +10,20 @@ stacomi(gr_interface=FALSE,
 			horodatedebut="2015-01-01",
 			horodatefin="2015-12-31",
 			silent=TRUE)
+	Sys.setenv(TZ='GMT')
 	# the times at Arzal are recorded continuously
 	# they are converted to date when a time appears while the hour is changing
 	# hence the following
-	Sys.setenv(TZ='GMT')
 	bfDF<-charge(bfDF)
+	bfDF<-connect(bfDF)
+}
+
+	data("bfDF")
 	plot(bfDF,plot.type="1")
 	plot(bfDF,plot.type="2",title="A nice title")
 	plot(bfDF,plot.type="3",title="A nice title")
 	plot(bfDF,plot.type="4")
-}
+
 
   
 	

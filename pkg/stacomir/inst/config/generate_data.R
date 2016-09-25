@@ -26,7 +26,8 @@ devtools::use_data(calcmig,internal=FALSE,overwrite=TRUE)
 # the message are in the default langage (english)
 # from iav three dc with eels
 ##################################
-source ("F:/workspace/stacomir/pkg/stacomir/inst/config/stacomi_manual_launch.r")
+require(stacomiR)
+stacomi(FALSE,FALSE,FALSE)
 assign("lang","English",envir=envir_stacomi)	
 refMsg=new("RefMsg")
 createmessage(refMsg,database_expected=TRUE)
@@ -45,7 +46,8 @@ bM_Arzal=choice_c(bM_Arzal,
 dc=c(5,6,12),
 taxons=c("Anguilla anguilla"),
 stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-bM_Arzal<-connect(bM_Arzal)
+bM_Arzal<-charge(bM_Arzal)
+bM_Arzal<-connect(bM_Arzal,silent=FALSE)
 # to avoid warnings at package checks
 bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
@@ -55,8 +57,12 @@ bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_co
 bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
-
-
+bilanOperation<-get("bilanOperation",envir=envir_stacomi)
+devtools::use_data(bilanOperation,internal=FALSE,overwrite=TRUE)
+bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
+devtools::use_data(bilanFonctionnementDF,internal=FALSE,overwrite=TRUE)
+bilanFonctionnementDC<-get("bilanFonctionnementDC",envir=envir_stacomi)
+devtools::use_data(bilanFonctionnementDC,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanMigration
 # from the vertical slot fishway located at the estuary of the Vilaine (Brittany)
@@ -100,6 +106,7 @@ bfDF<-choice_c(bfDF,
 		silent=TRUE)
 Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
 bfDF<-charge(bfDF)
+bfDF<-connect(bfDF)
 #plot(bfDF,plot.type="1")
 #plot(bfDF,plot.type="2",title="A nice title")
 setwd("F:/workspace/stacomir/pkg/stacomir")

@@ -291,6 +291,6 @@ setMethod("choice_c",signature=signature("RefStades"),definition=function(object
 			if (nrow(object@data)==0 )	{
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
 			}
-			assign("refStade",object,envir=envir_stacomi)
+			assign("refStades",object,envir=envir_stacomi)
 			return(object)
 		})

@@ -1,5 +1,4 @@
 require(testthat)
-test_dir("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat")
 getUsername <- function(){
 	name <- Sys.info()[["user"]]
 	return(name)
@@ -14,4 +13,4 @@ if(getUsername() == 'marion.legrand')
 }
 
 
-
+test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-01BilanMigrationMult.R")

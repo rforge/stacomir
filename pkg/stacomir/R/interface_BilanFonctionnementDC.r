@@ -5,30 +5,30 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanFonctionnementDC = function()
 {
-    fonctionnementDC=new("BilanFonctionnementDC")
-    assign("fonctionnementDC",fonctionnementDC,envir=envir_stacomi)
+    bilanFonctionnementDC=new("BilanFonctionnementDC")
+    assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
-    fonctionnementDC@dc=charge(fonctionnementDC@dc)
+    bilanFonctionnementDC@dc=charge(bilanFonctionnementDC@dc)
     
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
     quitte()
     assign("group",group,envir = .GlobalEnv)
     
    gWidgets::add(ggroupboutons,group)
-    choice(fonctionnementDC@dc)
-    choice(fonctionnementDC@horodate,
+    choice(bilanFonctionnementDC@dc)
+    choice(bilanFonctionnementDC@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
-			nomassign="fonctionnementDC_date_debut",
+			nomassign="bilanFonctionnementDC_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-    choice(fonctionnementDC@horodate,
+    choice(bilanFonctionnementDC@horodate,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
-			nomassign="fonctionnementDC_date_fin",
+			nomassign="bilanFonctionnementDC_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1)
     
-    #toolbarlist$Calc$handler = connect(fonctionnementDC)
+    #toolbarlist$Calc$handler = connect(bilanFonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
     

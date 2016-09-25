@@ -5,12 +5,20 @@
 \alias{connect,BilanMigrationMult-method}
 \title{connect method for BilanMigrationMult}
 \usage{
-\S4method{connect}{BilanMigrationMult}(object, ...)
+\S4method{connect}{BilanMigrationMult}(object, silent = FALSE, ...)
+}
+\arguments{
+\item{object}{An object of class BilanMigrationMult}
+
+\item{silent}{Boolean, if TRUE messages are not displayed}
 }
 \value{
-BilanMigrationMult with slot @data filled from the database
+An object of class \link{BilanMigrationMult-class} with slot @data filled from the database
 }
 \description{
-a single query collects data from the database
+this method loads data from the database for BilanMigration but also fills the table of conversion coefficient, if 
+the taxa is eel. It also calls connect method for \link{BilanFonctionnementDF-class}, 
+\link{BilanFonctionnementDC-class} and \link{BilanOperation-class} associated with the Bilan
+and used by the \link{fungraph} and \link{fungraph_civelle} functions.
 }
 

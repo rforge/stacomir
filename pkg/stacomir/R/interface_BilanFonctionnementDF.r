@@ -4,24 +4,24 @@ interface_BilanFonctionnementDF = function()
 {
 	quitte()
 	
-	fonctionnementDF=new("BilanFonctionnementDF")
-	assign("fonctionnementDF",fonctionnementDF,envir=envir_stacomi)    
+	bilanFonctionnementDF=new("BilanFonctionnementDF")
+	assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)    
 	funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
-	fonctionnementDF@df=charge(fonctionnementDF@df)    
+	bilanFonctionnementDF@df=charge(bilanFonctionnementDF@df)    
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir=.GlobalEnv)    
 	gWidgets::add(ggroupboutons,group)
 	
-	choice(fonctionnementDF@df)
+	choice(bilanFonctionnementDF@df)
 	# here decale =-1 or -2 will make the bilan for the year preceeding the current date
-	choice(fonctionnementDF@horodatedebut,
+	choice(bilanFonctionnementDF@horodatedebut,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
-			nomassign="fonctionnementDF_date_debut",
+			nomassign="bilanFonctionnementDF_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-	choice(fonctionnementDF@horodatefin,
+	choice(bilanFonctionnementDF@horodatefin,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
-			nomassign="fonctionnementDF_date_fin",
+			nomassign="bilanFonctionnementDF_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 			decal=-1)
 	

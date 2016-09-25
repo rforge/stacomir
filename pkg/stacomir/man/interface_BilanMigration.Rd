@@ -2,12 +2,14 @@
 % Please edit documentation in R/interface_BilanMigration.r
 \name{interface_BilanMigration}
 \alias{interface_BilanMigration}
-\title{Interface for BilanMigration class}
+\title{Interface for BilanMigration class, internal use, this function is called
+by a handler in the main graphical interface}
 \usage{
 interface_BilanMigration()
 }
 \description{
-Interface for BilanMigration class
+Interface for BilanMigration class, internal use, this function is called
+by a handler in the main graphical interface
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

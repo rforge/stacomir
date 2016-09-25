@@ -78,6 +78,30 @@
 #' @keywords data
 "bM_Arzal"
 
+#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different fishways
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanFonctionnementDF 
+#' @keywords data
+"bilanFonctionnementDF"
+
+
+#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different control devices
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanFonctionnementDC 
+#' @keywords data
+"bilanFonctionnementDC"
+
+#' An object of class \link{BilanOperation-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different control devices
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanOperation
+#' @keywords data
+"bilanOperation"
 
 #' dataframe containing the default connection arguments
 #' the program will use a file installed in c:/program files/stacomi but
@@ -90,7 +114,7 @@
 #' This data corresponds to the data collected at the vertical slot fishway
 #' in 2015, the fishway is working daily with a cycle depending on tide.
 #'
-#' @format An object of class bilanFonctionnementDF with 5 slots:
+#' @format An object of class BilanFonctionnementDF with 5 slots:
 #' \describe{
 #' #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
 #' 			\describe{
@@ -115,3 +139,6 @@
 #' }
 #' @keywords data
 "bfDF"
+
+
+

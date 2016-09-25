@@ -1,7 +1,4 @@
-# TODO: Add comment
-# 
-# Author: cedric.briand
-###############################################################################
+
 
 install.packages("roxygen2")
 install.packages("Rd2roxygen") # reverse documentation

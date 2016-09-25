@@ -79,10 +79,10 @@ setMethod("choice",signature=signature("RefTaxon"),definition=function(object,ob
 				htax=function(h,...){
 					taxons=svalue(choice)
 					object@data<-object@data[tax_libelle%in%taxons ,]
-					assign("refTaxons",object,envir_stacomi)
+					assign("refTaxon",object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$RefTaxon.1)
 					if (!is.null(objectBilan)) {
-						objectBilan@stades<<-charge_avec_filtre(object=objectBilan@stades,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code)
+						objectBilan@stades<<-charge_avec_filtre(object=objectBilan@stades,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code)
 						if (exists("frame_std")) delete(group,frame_std)
 						if (exists("frame_par")) delete(group,frame_par)
 						if (exists("frame_parquan")) delete(group,frame_parquan)

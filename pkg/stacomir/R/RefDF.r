@@ -2,8 +2,8 @@
 
 #' Class "RefDF"
 #' 
-#' Representation of a fishway, Contains description data of all fishways from
-#' the database along with the selected fishway(df) (integer)
+#' Representation of a fishway, contains description data of all fishways from
+#' the database along with the selected fishways (df) (integer)
 #' Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefDF", df_selectionne=integer(), ouvrage=integer(),
 #' data=data.frame())}.  
@@ -138,7 +138,7 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 #' \dontrun{
 #' win=gwindow()
 #' group=ggroup(container=win,horizontal=FALSE)
-#' object=new("RefDC")
+#' object=new("RefDF")
 #' object<-charge(object)
 #' objectBilan=new("BilanMigrationMult")
 #' choice_c(object=object,objectBilan=objectBilan,dc=1)

@@ -23,7 +23,7 @@ BilanFonctionnementDF class.
 \dontrun{
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
-object=new("RefDC")
+object=new("RefDF")
 object<-charge(object)
 objectBilan=new("BilanMigrationMult")
 choice_c(object=object,objectBilan=objectBilan,dc=1)

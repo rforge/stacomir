@@ -479,7 +479,7 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"..density..","Cumsum","Date","Effectif","Effectif_total",
 				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
 				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
-				"effectif_total","fonctionnement","fonctionnementDF","quantite_CALCULE",
+				"effectif_total","fonctionnement","bilanFonctionnementDF","quantite_CALCULE",
 				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
 				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",

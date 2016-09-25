@@ -36,6 +36,7 @@ Collate:
     'Refparqual.r'
     'Refparquan.r'
     'BilanMigrationPar.r'
+    'BilanOperation.r'
     'Bilan_carlot.r'
     'RefCoe.r'
     'Bilan_poids_moyen.r'
@@ -49,7 +50,6 @@ Collate:
     'data.r'
     'fn_EcritBilanJournalier.r'
     'fn_EcritBilanMensuel.r'
-    'fn_sql_dis.r'
     'fn_table_per_dis.r'
     'funBilanMigrationAnnuel.r'
     'funSousListeBilanMigration.r'
@@ -61,7 +61,6 @@ Collate:
     'funstatJournalier.r'
     'funtable.r'
     'funtraitement_poids.r'
-    'funtraitementdate.r'
     'interface_BilanConditionEnv.r'
     'interface_BilanFonctionnementDC.r'
     'interface_BilanFonctionnementDF.r'
@@ -104,11 +103,9 @@ Imports:
     lubridate,
     dplyr
 Suggests:
-	xtable
+    testthat
 Author: Cedric Briand [aut, cre],
     Marion Legrand [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Suggests:
-    testthat

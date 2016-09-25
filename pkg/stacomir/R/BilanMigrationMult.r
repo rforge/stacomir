@@ -72,11 +72,13 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			bilanMigrationMult<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationMult@dc<-get("refDC",envir_stacomi)
+				dc<-bilanMigrationMult@dc@dc_selectionne
+				df<-bilanMigrationMult@dc@data$df[bilanMigrationMult@dc@data$dc%in%dc]
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)	
 			}
-			if (exists("refTaxons",envir_stacomi)) {
-				bilanMigrationMult@taxons<-get("refTaxons",envir_stacomi)
+			if (exists("refTaxon",envir_stacomi)) {
+				bilanMigrationMult@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}
@@ -88,19 +90,43 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
-				# pour permettre le fonctionnement de Fonctionnement DC
-				assign("fonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-				assign("fonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
-			} else {
+				} else {
 				# todo addmsg
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
 			}
-			bilanMigrationMult=connect(bilanMigrationMult)
-			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
-			
+			#################################
+			# loading data for other classes associated with bilanMigrationMult
+			#################################
+			assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
+			assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
+			assign("bilanFonctionnementDF_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
+			assign("bilanFonctionnementDF_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
+			assign("bilanOperation_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
+			assign("bilanOperation_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
+					
+			bilanOperation<-get("bilanOperation",envir=envir_stacomi)
+			bilanOperation<-charge(bilanOperation) 
+			# charge will search for refDC (possible multiple choice), bilanOperation_date_debut
+			# and bilanOperation_date_fin in envir_stacomi
+			bilanFonctionnementDC<-get("bilanFonctionnementDC", envir=envir_stacomi)
+			# charge will search for refDC (possible multiple choice), bilanFonctionnementDC_date_debut
+			# and bilanFonctionnementDC_date_fin in envir_stacomi
+			bilanFonctionnementDC<-charge(bilanFonctionnementDC)
+			refDF=new("RefDF")
+			refDF<-charge(refDF)
+			refDF<-choice_c(refDF,df)
+			assign("refDF",refDF,envir=envir_stacomi)
+			bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
+			# charge will search for refDF (possible multiple choice), bilanFonctionnementDF_date_debut
+			# and bilanFonctionnementDF_date_fin in envir_stacomi
+			bilanFonctionnementDF<-charge(bilanFonctionnementDF)
+			# the object are assigned to the envir_stacomi for later use by the connect method
+			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)
+			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
+			assign("bilanOperation",bilanOperation,envir=envir_stacomi)
 			stopifnot(validObject(bilanMigrationMult, test=TRUE))
-			funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
+			# connect will load, coefficients, DF, DC, operations
 			return(bilanMigrationMult)
 		})
 
@@ -113,9 +139,12 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' @export
 setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
 			bilanMigrationMult<-object
-			fonctionnementDC=new("BilanFonctionnementDC")
-			# appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
-			assign("fonctionnementDC",fonctionnementDC,envir = envir_stacomi)
+			bilanFonctionnementDF=new("BilanFonctionnementDF")
+			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
+			bilanFonctionnementDC=new("BilanFonctionnementDC")
+			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir = envir_stacomi)
+			bilanOperation=new("BilanOperation")
+			assign("bilanOperation", bilanOperation, envir=envir_stacomi)
 			bilanMigrationMult@dc=charge(bilanMigrationMult@dc)
 			# loads and verifies the dc
 			bilanMigrationMult@dc<-choice_c(object=bilanMigrationMult@dc,dc)
@@ -126,6 +155,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 			bilanMigrationMult@stades<-choice_c(bilanMigrationMult@stades,stades)
 			bilanMigrationMult@pasDeTemps<-choice_c(bilanMigrationMult@pasDeTemps,datedebut,datefin)
 			assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
+			
 			return(bilanMigrationMult)
 		})
 
@@ -136,13 +166,13 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' @param object An object of class \code{\link{BilanMigrationMult-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
-#' @param silent Defautl FALSE, should messages be stopped
+#' @param silent Default FALSE, should messages be stopped
 #' @note The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
-			
+			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			bilanMigrationMult<-object
 			
 			bilanMigrationMult@data$time.sequence=difftime(bilanMigrationMult@data$ope_date_fin,
@@ -212,11 +242,15 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 
 #' connect method for BilanMigrationMult
 #' 
-#' 
-#' a single query collects data from the database
-#' @return BilanMigrationMult with slot @data filled from the database
+#' this method loads data from the database for BilanMigration but also fills the table of conversion coefficient, if 
+#' the taxa is eel. It also calls connect method for \link{BilanFonctionnementDF-class}, 
+#' \link{BilanFonctionnementDC-class} and \link{BilanOperation-class} associated with the Bilan
+#' and used by the \link{fungraph} and \link{fungraph_civelle} functions.
+#' @param object An object of class BilanMigrationMult
+#' @param silent Boolean, if TRUE messages are not displayed
+#' @return An object of class \link{BilanMigrationMult-class} with slot @data filled from the database
 #' @export
-setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,...){ 
+setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE,...){ 
 			# recuperation du BilanMigration
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
@@ -259,9 +293,10 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 					" AND lot_lot_identifiant IS NULL")
 			req<-stacomirtools::connect(req)
 			bilanMigrationMult@data=req@query	
-			
+			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
+			stopifnot(validObject(bilanMigrationMult, test=TRUE))
 			# recuperation des coefficients si il y a des civelles dans le bilan
-			if (2038%in%bilanMigrationMult@taxons@data$tax_code&'CIV'%in%bilanMigrationMult@stades@data$std_code){
+			if (2038%in%bilanMigrationMult@taxons@data$tax_code){
 				req=new("RequeteODBCwheredate")
 				req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 				req@select="select * from tj_coefficientconversion_coe"
@@ -275,10 +310,21 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 				bilanMigrationMult@coef_conversion<-req@query
 				
 			}
-			
-			return(bilanMigrationMult)
-			
-			
+			#######################""
+			# connect method for associated classes
+			#########################
+			bilanOperation<-get("bilanOperation",envir=envir_stacomi)
+			bilanFonctionnementDC<-get("bilanFonctionnementDC", envir=envir_stacomi)
+			bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
+			bilanOperation<-connect(bilanOperation,silent=silent)
+			bilanFonctionnementDC<-connect(bilanFonctionnementDC,silent=silent)
+			bilanFonctionnementDF<-connect(bilanFonctionnementDF,silent=silent)
+			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)
+			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
+			assign("bilanOperation",bilanOperation,envir=envir_stacomi)			
+						
+		
+			return(bilanMigrationMult)			
 		})				
 
 

@@ -21,7 +21,7 @@
 \item{decale}{Default 0, number of years to shift forward or backward}
 }
 \value{
-Selects the date in the graphical interface
+Selects the date in the graphical interface, and assigns an object of class POSIXt with name nomassign in envir_stacomi
 }
 \description{
 Graphical interface

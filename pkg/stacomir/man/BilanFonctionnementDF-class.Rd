@@ -13,6 +13,17 @@ In the database four types of operation are set,  "1"=normal operation,
 "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
 "5"="Not known")
 }
+\section{Slots}{
+
+\describe{
+\item{\code{data}}{A data frame}
+
+\item{\code{dc}}{An object of class \code{RefDC-class}}
+
+\item{\code{horodatedebut}}{An object of class \code{RefHorodate-class}}
+
+\item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
+}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanFonctionnementDF")}.
@@ -30,16 +41,20 @@ stacomi(gr_interface=FALSE,
 			horodatedebut="2015-01-01",
 			horodatefin="2015-12-31",
 			silent=TRUE)
+	Sys.setenv(TZ='GMT')
 	# the times at Arzal are recorded continuously
 	# they are converted to date when a time appears while the hour is changing
 	# hence the following
-	Sys.setenv(TZ='GMT')
 	bfDF<-charge(bfDF)
+	bfDF<-connect(bfDF)
+}
+
+	data("bfDF")
 	plot(bfDF,plot.type="1")
 	plot(bfDF,plot.type="2",title="A nice title")
 	plot(bfDF,plot.type="3",title="A nice title")
 	plot(bfDF,plot.type="4")
-}
+
 
   
 	

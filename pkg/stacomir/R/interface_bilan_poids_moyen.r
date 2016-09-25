@@ -51,7 +51,7 @@ interface_BilanPoidsMoyen = function()
     
     # TODO ajouter une fonction eval ou la liste du combo box est diminuee e l'aide d'un vecteur qu'on lui passe : les caracteristiques existant pour ce taxon et stade
     
-    #toolbarlist$Calc$handler = connect(fonctionnementDC)
+    #toolbarlist$Calc$handler = connect(bilanFonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
         

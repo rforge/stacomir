@@ -144,6 +144,7 @@ setMethod("choice_c",signature=signature("PasDeTempsJournalier"),definition=func
 				}
 					object@dateDebut<-as.POSIXlt(datedebut)
 					object@nbStep=as.numeric(difftime(datefin,datedebut,units="days")+1)
-					validObject(object) 			
+					validObject(object) 		
+					assign("pasDeTemps",object,envir_stacomi)
 					return(object)
 				})

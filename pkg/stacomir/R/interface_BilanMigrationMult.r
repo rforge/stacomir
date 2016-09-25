@@ -7,14 +7,22 @@ interface_BilanMigrationMult=function(){
 	quitte() # quitte must be the first in interface methods 
 	#(destroys everything in envir_stacomi except stuff required at to level)
 	objectBilan="bilanMigrationMult"
+	# the following name is created by the interface
+	# as I can't get the name from within the function (deparse(substitute(objectBilan)) does not return
+	# "bilanMigrationMult" see refDC choice_c method)
+	# so this will allow to assign "bilanMigrationMult" in envir_stacomi while using other class
+	# like refDC
 	assign("objectBilan",objectBilan,envir=envir_stacomi)
 	bilanMigrationMult=new("BilanMigrationMult")
 	assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
-	fonctionnementDC=new("BilanFonctionnementDC")
-	# appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
-	assign("fonctionnementDC",fonctionnementDC,envir = envir_stacomi)
-#TODO addmsg
-	#funout(get("msg",envir=envir_stacomi)$interface_BilanMigration.1)
+	bilanFonctionnementDC=new("BilanFonctionnementDC")
+	assign("bilanFonctionnementDC",bilanFonctionnementDC,envir = envir_stacomi)
+	bilanFonctionnementDF=new("BilanFonctionnementDF")
+	assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
+	bilanOperation=new("BilanOperation")
+	assign("bilanOperation", envir=envir_stacomi)
+	bilanMigration=new("BilanMigration")
+	assign("bilanMigration",bilanMigration,envir = envir_stacomi)
 	bilanMigrationMult@taxons=charge(bilanMigrationMult@taxons)
 	bilanMigrationMult@stades=charge(bilanMigrationMult@stades)
 	bilanMigrationMult@dc=charge(bilanMigrationMult@dc)   	
@@ -29,7 +37,7 @@ interface_BilanMigrationMult=function(){
 	choicemult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
 	svalue(notebook)<-1
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	# todo addmsg
 	# getStockIcons()

@@ -5,10 +5,12 @@
 \alias{connect,BilanFonctionnementDC-method}
 \title{connect method for BilanFonctionnementDC}
 \usage{
-\S4method{connect}{BilanFonctionnementDC}(object)
+\S4method{connect}{BilanFonctionnementDC}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanFonctionnementDC-class}}
+
+\item{silent}{Boolean, default FALSE, if TRUE messages are not displayed}
 }
 \value{
 An object of class \link{BilanFonctionnementDC-class}

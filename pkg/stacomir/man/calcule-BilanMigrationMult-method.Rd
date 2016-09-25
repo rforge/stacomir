@@ -14,7 +14,7 @@
 \item{negative}{a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 different rows}
 
-\item{silent}{Defautl FALSE, should messages be stopped}
+\item{silent}{Default FALSE, should messages be stopped}
 }
 \value{
 BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data

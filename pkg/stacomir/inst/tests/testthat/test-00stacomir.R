@@ -267,7 +267,7 @@ test_that("All foreign keys are present",
 							"table_name"), row.names = c(NA, 83L), class = "data.frame")
 					check_exist_fk=fk$constraint_name%in%result$constraint_name
 					for (i in 1:nrow(fk)){
-						expect_true(check_exist_fk[i],label=paste("Missing foreign key :",fk$constraint_name,"table :",fk$table_name))
+						expect_true(check_exist_fk[i],label=paste("Missing foreign key :",fk$constraint_name[i],"table :",fk$table_name[i]))
 					}
 					rm(list=ls(all=TRUE))	
 		})

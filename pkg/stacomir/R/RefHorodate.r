@@ -67,14 +67,14 @@ setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=functio
 #' @param nomassing The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
 #' @param decale Default 0, number of years to shift forward or backward 
-#' @return Selects the date in the graphical interface
+#' @return Selects the date in the graphical interface, and assigns an object of class POSIXt with name nomassign in envir_stacomi
 setMethod("choice",signature=signature("RefHorodate"),definition=function(object,label="date",
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
 				decal=0) {
 			hwinhor=function(h,...){
 				object=setRefHorodate(object,svalue(horodate))
-				assign(nomassign,object,envir_stacomi)
+				assign(nomassign,object@horodate,envir_stacomi)
 				funout(funoutlabel)
 				#print(object)
 				#dispose(winpa)
@@ -108,8 +108,9 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 #' @param silent Default FALSE, should messages be displayed
 #' @param horodate The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
 #' can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
-#' \dots are accepted
-#' @return An object of class \link{RefHorodate-class} with slot \emph{horodate} set
+#' \dots are accepted. The choice_c method assigns and
+#' @return An object of class \link{RefHorodate-class} with slot \emph{horodate} set,
+#'  and assigns an object of class POSIXt with name nomassign in envir_stacomi
 setMethod("choice_c",signature=signature("RefHorodate"),definition=function(object,
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
@@ -167,7 +168,7 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 be parsed. Check example or documentation")
 			object@horodate=.horodate	
 			validObject(object)				
-			assign(nomassign,object,envir_stacomi)
+			assign(nomassign,object@horodate,envir_stacomi)
 			funout(funoutlabel)	
 			return(object)
 		})

@@ -16,7 +16,7 @@
 
 \item{horodate}{The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
 can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y
-\dots are accepted}
+\dots are accepted. The choice_c method assigns and}
 
 \item{silent}{Default FALSE, should messages be displayed}
 
@@ -27,7 +27,8 @@ can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the da
 \item{affichecal}{Default TRUE, should the calendar be displayed}
 }
 \value{
-An object of class \link{RefHorodate-class} with slot \emph{horodate} set
+An object of class \link{RefHorodate-class} with slot \emph{horodate} set,
+ and assigns an object of class POSIXt with name nomassign in envir_stacomi
 }
 \description{
 Command line

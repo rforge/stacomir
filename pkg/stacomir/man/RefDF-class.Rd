@@ -5,8 +5,8 @@
 \alias{RefDF-class}
 \title{Class "RefDF"}
 \description{
-Representation of a fishway, Contains description data of all fishways from
-the database along with the selected fishway(df) (integer)
+Representation of a fishway, contains description data of all fishways from
+the database along with the selected fishways (df) (integer)
 Objects from the Class: Objects can be created by calls of the form
 \code{new("RefDF", df_selectionne=integer(), ouvrage=integer(),
 data=data.frame())}.

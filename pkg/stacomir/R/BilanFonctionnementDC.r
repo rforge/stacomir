@@ -6,8 +6,8 @@
 #' class allows to draw graphics allowing an overview of the device operation
 #' @slot data A data frame 
 #' @slot dc An object of class \code{RefDC-class}
-#' @slot horodate An object of class \code{RefHorodate-class}
-#' @slot requete An object of class \code{RequeteODBCwheredate-class}
+#' @slot horodatedebut An object of class \code{RefHorodate-class}
+#' @slot horodatefin An object of class \code{RefHorodate-class}
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanFonctionnementDC", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -26,12 +26,12 @@
 setClass(Class="BilanFonctionnementDC",
 		representation= representation(data="data.frame",
 				dc="RefDC",
-				horodate="RefHorodate",
-				requete="RequeteODBCwheredate"), 
+				horodatedebut="RefHorodate",
+				horodatefin="RefHorodate"), 
 		prototype=prototype(data=data.frame(),
 				dc=new("RefDC"),
-				horodate=new("RefHorodate"),
-				requete=new("RequeteODBCwheredate"))
+				horodatedebut=new("RefHorodate"),
+				horodatefin=new("RefHorodate"))
 )
 
 
@@ -41,13 +41,15 @@ setClass(Class="BilanFonctionnementDC",
 #' 
 #' loads the working periods and type of arrest or disfunction of the DC
 #' @param object An object of class \link{BilanFonctionnementDC-class}
+#' @param silent Boolean, default FALSE, if TRUE messages are not displayed
 #' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
-setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object) {
-#  construit une requete ODBCwheredate
-			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			object@requete@select= sql<-paste("SELECT",
+setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=function(object,silent=FALSE) {
+		#object<-bilanFonctionnementDC
+			req<-new("RequeteODBCwheredate")
+			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			req@select= sql<-paste("SELECT",
 					" per_dis_identifiant,",
 					" per_date_debut,",
 					" per_date_fin,",
@@ -57,13 +59,16 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" tar_libelle AS libelle",
 					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
-			object@requete@colonnedebut<-"per_date_debut"
-			object@requete@colonnefin<-"per_date_fin"
-			object@requete@order_by<-"ORDER BY per_date_debut"
-			object@requete@and<-paste("AND per_dis_identifiant=",object@dc@dc_selectionne )
-#object@requete@where=#defini dans la methode ODBCwheredate
-			object@requete<-stacomirtools::connect(object@requete) # appel de la methode connect de l'object ODBCWHEREDATE
-			funout(get("msg",envir_stacomi)$BilanFonctionnementDC.1)
+			req@colonnedebut<-"per_date_debut"
+			req@colonnefin<-"per_date_fin"
+			req@datedebut<-object@horodatedebut@horodate
+			req@datefin<-object@horodatefin@horodate
+			req@order_by<-"ORDER BY per_date_debut"
+			req@and<-paste("AND per_dis_identifiant in ",vector_to_listsql(object@dc@dc_selectionne))
+#req@where=#defini dans la methode ODBCwheredate
+			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
+			object@data<-req@query
+			if (!silent) funout(get("msg",envir_stacomi)$BilanFonctionnementDC.1)
 			return(object)
 		})
 
@@ -72,10 +77,11 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 #' used by the graphical interface to retreive the objects of Referential classes
 #' assigned to envir_stacomi
 #' @param object An object of class \link{BilanFonctionnementDC-class}
+#' @param silent Boolean, default FALSE, if TRUE messages are not displayed.
 #' @return  An object of class \link{BilanFonctionnementDC-class}
 #' 
 #' @author cedric.briand
-setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object) {
+setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=function(object,silent=FALSE) {
 #  construit une requete ODBCwheredate
 			# chargement des donnees dans l'environnement de la fonction
 			if (exists("refDC",envir_stacomi)) {
@@ -83,18 +89,17 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)				}     
 			
-			if (exists("fonctionnementDC_date_debut",envir_stacomi)) {
-				object@requete@datedebut<-get("fonctionnementDC_date_debut",envir_stacomi)@horodate
+			if (exists("bilanFonctionnementDC_date_debut",envir_stacomi)) {
+				object@horodatedebut@horodate<-get("bilanFonctionnementDC_date_debut",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)	
 			}
 			
-			if (exists("fonctionnementDC_date_fin",envir_stacomi)) {
-				object@requete@datefin<-get("fonctionnementDC_date_fin",envir_stacomi)@horodate
+			if (exists("bilanFonctionnementDC_date_fin",envir_stacomi)) {
+				object@horodatefin@horodate<-get("bilanFonctionnementDC_date_fin",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)	
 			}			
-			object<-connect(object)			
 			return(object)
 		})
 # Methode permettant l'affichage d'un graphique en lattice (barchart) du fonctionnement mensuel du dispositif
@@ -107,20 +112,20 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 #' 
 #' @author cedric.briand
 funbarchartDC = function(h,...) {
-	fonctionnementDC=charge(fonctionnementDC)
-	
-	if( nrow(fonctionnementDC@requete@query)==0 ) {
+	bilanFonctionnementDC=charge(bilanFonctionnementDC)
+	bilanFonctionnementDC=connect(bilanFonctionnementDC)
+	if( nrow(bilanFonctionnementDC@data)==0 ) {
 		funout(get("msg",envir_stacomi)$BilanFonctionnementDC.2, arret=TRUE)
 	}
 	
-	t_periodefonctdispositif_per<-fonctionnementDC@requete@query # on recupere le data.frame   
+	t_periodefonctdispositif_per<-bilanFonctionnementDC@data # on recupere le data.frame   
 	# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 	tempsdebut<-strptime(t_periodefonctdispositif_per$per_date_debut,"%Y-%m-%d %H:%M:%S", tz = "GMT")
 	tempsfin<-strptime(t_periodefonctdispositif_per$per_date_fin,"%Y-%m-%d %H:%M:%S", tz = "GMT")
-	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par requete@datedebut
-	tempsdebut[tempsdebut<fonctionnementDC@requete@datedebut]<-fonctionnementDC@requete@datedebut
+	# test la premiere horodate peut etre avant le choice de temps de debut, remplacer cette date par object@datedebut
+	tempsdebut[tempsdebut<bilanFonctionnementDC@horodatedebut@horodate]<-bilanFonctionnementDC@horodatedebut@horodate
 	# id pour fin
-	tempsfin[tempsfin>fonctionnementDC@requete@datefin]<-fonctionnementDC@requete@datefin
+	tempsfin[tempsfin>bilanFonctionnementDC@horodatefin@horodate]<-bilanFonctionnementDC@horodatefin@horodate
 	t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin) # rajoute les 2 colonnes tempsdebut et tempsfin
 	# BUG 06/02/2009 11:51:49 si la date choisie n'est pas le debut du mois
 	seqmois<-seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
@@ -159,7 +164,7 @@ funbarchartDC = function(h,...) {
 			stack=TRUE,
 			xlab=get("msg",envir_stacomi)$BilanFonctionnementDC.3,
 			ylab=get("msg",envir_stacomi)$BilanFonctionnementDC.4,
-			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,fonctionnementDC@dc@dc_selectionne), gp=grid::gpar(col="grey", fontsize=8)), 
+			main=list(label=paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,bilanFonctionnementDC@dc@dc_selectionne), gp=grid::gpar(col="grey", fontsize=8)), 
 			auto.key=list(rectangles=TRUE,space="bottom",
 					text=c(get("msg",envir_stacomi)$BilanFonctionnementDC.6,get("msg",envir_stacomi)$FonctionnementDC.7)),
 			scales= list(x=list(t_periodefonctdispositif_per_mois$mois),
@@ -176,13 +181,14 @@ funbarchartDC = function(h,...) {
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funboxDC = function(h,...) {  
-	fonctionnementDC=charge(fonctionnementDC)
+	bilanFonctionnementDC=charge(bilanFonctionnementDC)
+	bilanFonctionnementDC=connect(bilanFonctionnementDC)
 	
-	if( nrow(fonctionnementDC@requete@query)==0 ) {
+	if( nrow(bilanFonctionnementDC@data)==0 ) {
 		funout(get("msg",envir_stacomi)$BilanFonctionnementDC.2, arret=TRUE)
 	}  
-	t_periodefonctdispositif_per<-fonctionnementDC@requete@query # on recupere le data.frame
-	time.sequence<-seq.POSIXt(from=fonctionnementDC@requete@datedebut,to=fonctionnementDC@requete@datefin,by="day")
+	t_periodefonctdispositif_per<-bilanFonctionnementDC@data # on recupere le data.frame
+	time.sequence<-seq.POSIXt(from=bilanFonctionnementDC@horodatedebut@horodate,to=bilanFonctionnementDC@horodatedebut@horodate,by="day")
 	debut<-unclass(as.Date(time.sequence[1]))[[1]]
 	fin<-unclass(as.Date(time.sequence[length(time.sequence)]))[[1]]
 	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
@@ -297,24 +303,25 @@ funboxDC = function(h,...) {
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtableDC = function(h,...) {
-	fonctionnementDC=charge(fonctionnementDC)
+	bilanFonctionnementDC=charge(bilanFonctionnementDC)
+	bilanFonctionnementDC=connect(bilanFonctionnementDC)
 	
-	if( nrow(fonctionnementDC@requete@query)==0 ) {
+	if( nrow(bilanFonctionnementDC@data)==0 ) {
 		funout(get("msg",envir_stacomi)$BilanFonctionnementDC.2, arret=TRUE)
 	}
 	
-	t_periodefonctdispositif_per<-fonctionnementDC@requete@query # on recupere le data.frame
+	t_periodefonctdispositif_per<-bilanFonctionnementDC@data # on recupere le data.frame
 	t_periodefonctdispositif_per$per_date_debut<-as.character(t_periodefonctdispositif_per$per_date_debut)
 	t_periodefonctdispositif_per$per_date_fin<-as.character(t_periodefonctdispositif_per$per_date_fin)
 	gdf(t_periodefonctdispositif_per, container=TRUE)
 	annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
-	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
+	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
 	write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 	funout(paste(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1,"\n"))
-	path1html<-file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",fonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
+	path1html<-file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
 	funout(paste(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1html,get("msg",envir_stacomi)$BilanFonctionnementDC.15))
 	funhtml(t_periodefonctdispositif_per,
-			caption=paste("t_periodefonctdispositif_per_DF_",fonctionnementDF@df@df_selectionne,"_",annee,sep=""),
+			caption=paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,sep=""),
 			top=TRUE,
 			outfile=path1html,
 			clipboard=FALSE,
