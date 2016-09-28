@@ -20,7 +20,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	# pour adapter aux bilanMigrationMult, ligne par defaut...
 	#cat("fungraph_civelle")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
-	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	annee=paste(unique(strftime(as.POSIXlt(time.sequence),"%Y")),collapse=",")
 	mois= months(time.sequence)
 	jour= strftime(as.POSIXlt(time.sequence),"%j")
 	index=table$No.pas+1

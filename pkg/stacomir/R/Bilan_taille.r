@@ -137,8 +137,8 @@ setMethod("charge",signature=signature("Bilan_taille"),definition=function(objec
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.1,arret=TRUE)
 			} 
-			if (exists("refTaxons",envir_stacomi)) {
-				object@taxons<-get("refTaxons",envir_stacomi)
+			if (exists("refTaxon",envir_stacomi)) {
+				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
 				funout(get("msg",envir=envir_stacomi)$ref.2,arret=TRUE)
 				

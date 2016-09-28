@@ -87,8 +87,8 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
 			}
-			if (exists("refTaxons",envir_stacomi)) {
-				bilanMigrationPar@taxons<-get("refTaxons",envir_stacomi)
+			if (exists("refTaxon",envir_stacomi)) {
+				bilanMigrationPar@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}

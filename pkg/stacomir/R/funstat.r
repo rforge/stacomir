@@ -14,7 +14,7 @@ funstat=function(tableau,time.sequence,taxon,stade,DC,silent){
 	if (!silent) funout(get("msg",envir=envir_stacomi)$funstat.1)
 	mois=strftime(as.POSIXlt(time.sequence),"%m")
 	moislab=unique(mois)
-	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	annee=paste(unique(strftime(as.POSIXlt(time.sequence),"%Y")),collapse=",")
 	somme=tapply(tableau$Effectif_total, mois, sum, na.rm=TRUE) # sums
 	moyennes_journalieres=tapply(tableau$Effectif_total, mois, mean, na.rm=TRUE) # means
 	#ecarts_types=tapply(tableau$Effectif_total, mois, sd, na.rm=TRUE) # std. deviations

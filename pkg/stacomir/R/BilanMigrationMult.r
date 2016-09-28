@@ -294,7 +294,6 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req<-stacomirtools::connect(req)
 			bilanMigrationMult@data=req@query	
 			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigrationMult@data),"\n"))
-			stopifnot(validObject(bilanMigrationMult, test=TRUE))
 			# recuperation des coefficients si il y a des civelles dans le bilan
 			if (2038%in%bilanMigrationMult@taxons@data$tax_code){
 				req=new("RequeteODBCwheredate")
@@ -310,6 +309,8 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 				bilanMigrationMult@coef_conversion<-req@query
 				
 			}
+			stopifnot(validObject(bilanMigrationMult, test=TRUE))
+			
 			#######################""
 			# connect method for associated classes
 			#########################

@@ -16,7 +16,8 @@
 An object of class \link{BilanMigration-class} with slots filled by user choice
 }
 \description{
-fills also the data slot by the connect method
+this method creates additional classes in envir_stacomi for later use in plot (operations, 
+DF operation, DC operation.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

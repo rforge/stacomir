@@ -97,7 +97,7 @@ test_that("Test example 01_BilanMigrationMult",
 			# check if built with examples (Rtools install --example
 			example_path<-file.path(.libPaths(),"stacomiR","R-ex","BilanMigrationMult-class.R")
 			test<-file.access(example_path,0)
-			if (test!=0) warnings("Package example dir not created ?") else
+			if (test[1]!=0) warnings("Package example dir not created ?") else
 				source(example_path)
 		})
 

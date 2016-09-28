@@ -98,20 +98,20 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan             
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
-							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (exists("frame_par")) delete(group,frame_par)
 							choice(objectBilan@par,is.enabled=TRUE)
 						} 
 						#il y a bien un object parqual dans l'object Bilan						
 						if (class(try(objectBilan@parqual,silent=TRUE))!="try-error") {
-							objectBilan@parqual<<-charge_avec_filtre(object=objectBilan@parqual,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@parqual<<-charge_avec_filtre(object=objectBilan@parqual,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							
 							if (exists("frame_parqual")) delete(group,frame_parqual)
 							choice(objectBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
 						}
 #il y a bien un object parquan dans l'object Bilan
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
-							objectBilan@parquan<<-charge_avec_filtre(object=objectBilan@parquan,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@parquan<<-charge_avec_filtre(object=objectBilan@parquan,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (class(objectBilan)=="Bilan_taille" )
 							{
 								if (nrow(objectBilan@parquan@data)>0) {
@@ -178,7 +178,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
 							objectBilan@par<-charge_avec_filtre(object=objectBilan@par,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
-									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							choicemult(objectBilan@par,is.enabled=TRUE)
 						} 
@@ -186,7 +186,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						if (class(try(objectBilan@parqual,silent=TRUE))!="try-error") {
 							objectBilan@parqual<-charge_avec_filtre(object=objectBilan@parqual,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
-									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							choicemult(objectBilan@parqual,label=get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE)
 						}
@@ -194,7 +194,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
 							objectBilan@parquan<-charge_avec_filtre(object=objectBilan@parquan,
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
-									taxon_selectionne=get("refTaxons",envir_stacomi)@data$tax_code,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (class(objectBilan)=="Bilan_taille" )
 							{

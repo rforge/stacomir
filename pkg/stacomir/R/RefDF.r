@@ -144,6 +144,7 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 #' choice_c(object=object,objectBilan=objectBilan,dc=1)
 #' }
 setMethod("choice_c",signature=signature("RefDF"),definition=function(object,df) {
+			#object<-refDF
 			if (class(df)=="numeric") {
 				df<-as.integer(df) 
 			} else if (class(df)=="character"){

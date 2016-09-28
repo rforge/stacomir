@@ -81,12 +81,13 @@ hbilanMigrationcalc=function(h,...){
 #' 
 #' uses the BilanMigrationMult method
 #' @param object An object of class \link{BilanMigration-class}
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @return BilanMigration with slot @data filled from the database
 #' @export
-setMethod("connect",signature=signature("BilanMigration"),definition=function(object){ 
+setMethod("connect",signature=signature("BilanMigration"),definition=function(object,silent=FALSE){ 
 			bilanMigration<-object
 			bilanMigrationMult<-as(bilanMigration,"BilanMigrationMult")
-			bilanMigrationMult<-connect(bilanMigrationMult)
+			bilanMigrationMult<-connect(bilanMigrationMult,silent=silent)
 			bilanMigration@data<-bilanMigrationMult@data		
 			return(bilanMigration)
 		})
@@ -116,41 +117,13 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 			bilanMigration@stades<-charge_avec_filtre(object=bilanMigration@stades,bilanMigration@dc@dc_selectionne,bilanMigration@taxons@data$tax_code)	
 			bilanMigration@stades<-choice_c(bilanMigration@stades,stades)
 			bilanMigration@pasDeTemps<-choice_c(bilanMigration@pasDeTemps,datedebut,datefin)
-
-			#################################
-			# loading data for other classes associated with bilanMigrationMult
-			#################################
-			bilanFonctionnementDF=new("BilanFonctionnementDF")		
-			bilanFonctionnementDC=new("BilanFonctionnementDC")
-			bilanOperation=new("BilanOperation")
-			dc<-bilanMigration@dc@dc_selectionne
-			df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc]
-			refDF=new("RefDF")
-			refDF<-choice_c(refDF,df)
-			assign("refDF",refDF,envir=envir_stacomi)
-			assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-			assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
-			bilanFonctionnementDC<-charge(bilanFonctionnementDC)
-			
-			assign("bilanFonctionnementDF_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-			assign("bilanFonctionnementDF_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
-			bilanFonctionnementDF<-charge(bilanFonctionnementDF)
-			
-			ssign("bilanOperation_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-			assign("bilanOperation_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
-			bilanOperation<-charge(bilanOperation) 
-		
-			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)
-			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
-			assign("bilanOperation",bilanOperation,envir=envir_stacomi)		
-			stopifnot(validObject(bilanMigration, test=TRUE))
-			assign("bilanMigration",bilanMigration,envir = envir_stacomi)
 			return(bilanMigration)
 		})
 
 #' charge method for BilanMigration
 #' 
-#' fills also the data slot by the connect method
+#' this method creates additional classes in envir_stacomi for later use in plot (operations, 
+#' DF operation, DC operation.
 #' @param object An object of class \code{\link{BilanMigration-class}}
 #' @param silent Should the program be returning messages
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice
@@ -158,6 +131,7 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 #' @export
 setMethod("charge",signature=signature("BilanMigration"),definition=function(object,silent=FALSE){ 
 			bilanMigration<-object
+			#bilanMigration<-bM_Arzal
 			#pour l'instant ne lancer que si les fenetre sont fermees
 			# funout("lancement updateplot \n")
 			if (exists("refDC",envir_stacomi)) {
@@ -167,8 +141,8 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			} else {
 				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)	
 			}
-			if (exists("refTaxons",envir_stacomi)) {
-				bilanMigration@taxons<-get("refTaxons",envir_stacomi)
+			if (exists("refTaxon",envir_stacomi)) {
+				bilanMigration@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
 				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
 			}
@@ -185,12 +159,13 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
 			}
-			bilanMigration=connect(bilanMigration)
-			if (!silent) cat(stringr::str_c("data collected from the database nrow=",nrow(bilanMigration@data),"\n"))
-			stopifnot(validObject(bilanMigration, test=TRUE))
+
 			#################################
 			# loading data for other classes associated with bilanMigrationMult
 			#################################
+			bilanFonctionnementDF=new("BilanFonctionnementDF")		
+			bilanFonctionnementDC=new("BilanFonctionnementDC")
+			bilanOperation=new("BilanOperation")
 			assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
 			assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			assign("bilanFonctionnementDF_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
@@ -198,18 +173,18 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			assign("bilanOperation_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
 			assign("bilanOperation_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			
-			bilanOperation<-get("bilanOperation",envir=envir_stacomi)
 			bilanOperation<-charge(bilanOperation) 
 			# charge will search for refDC (possible multiple choice), bilanOperation_date_debut
 			# and bilanOperation_date_fin in envir_stacomi
-			bilanFonctionnementDC<-get("bilanFonctionnementDC", envir=envir_stacomi)
-			# charge will search for refDC (possible multiple choice), bilanFonctionnementDC_date_debut
+						# charge will search for refDC (possible multiple choice), bilanFonctionnementDC_date_debut
 			# and bilanFonctionnementDC_date_fin in envir_stacomi
 			bilanFonctionnementDC<-charge(bilanFonctionnementDC)
 			refDF=new("RefDF")
+			refDF<-charge(refDF)
 			refDF<-choice_c(refDF,df)
+		
 			assign("refDF",refDF,envir=envir_stacomi)
-			bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
+		
 			# charge will search for refDF (possible multiple choice), bilanFonctionnementDF_date_debut
 			# and bilanFonctionnementDF_date_fin in envir_stacomi
 			bilanFonctionnementDF<-charge(bilanFonctionnementDF)

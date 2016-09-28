@@ -11,7 +11,7 @@
 #' @param silent If TRUE, all messages turned off (except warnings and errors)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
-	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	annee=paste(unique(strftime(as.POSIXlt(time.sequence),"%Y")),collapse=",")
 	tableau$debut_pas<-as.character(tableau$debut_pas)
 	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")

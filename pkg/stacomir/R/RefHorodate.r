@@ -169,7 +169,7 @@ be parsed. Check example or documentation")
 			object@horodate=.horodate	
 			validObject(object)				
 			assign(nomassign,object@horodate,envir_stacomi)
-			funout(funoutlabel)	
+			if (!silent) funout(funoutlabel)	
 			return(object)
 		})
 

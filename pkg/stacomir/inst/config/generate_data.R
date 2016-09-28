@@ -41,22 +41,27 @@ devtools::use_data(msg,internal=FALSE,overwrite=TRUE)
 ##################################
 require(stacomiR)
 stacomi(FALSE,FALSE,FALSE)
-bM_Arzal=new("BilanMigrationMult")
-bM_Arzal=choice_c(bM_Arzal,
+bMM_Arzal=new("BilanMigrationMult")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("iav",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi) # "iav."
+assign("sch","iav.",envir_stacomi)
+bMM_Arzal=choice_c(bMM_Arzal,
 dc=c(5,6,12),
 taxons=c("Anguilla anguilla"),
 stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-bM_Arzal<-charge(bM_Arzal)
-bM_Arzal<-connect(bM_Arzal,silent=FALSE)
+bMM_Arzal<-charge(bMM_Arzal)
+bMM_Arzal<-connect(bMM_Arzal,silent=FALSE)
 # to avoid warnings at package checks
-bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"dif_localisation"]<-iconv(bM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+bMM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bMM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bMM_Arzal@dc@data[,"type_df"]<-iconv(bMM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
+bMM_Arzal@dc@data[,"type_dc"]<-iconv(bMM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bMM_Arzal@dc@data[,"dif_localisation"]<-iconv(bMM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bMM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bMM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bMM_Arzal@stades@data[,"std_libelle"]<-iconv(bMM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
+devtools::use_data(bMM_Arzal,internal=FALSE,overwrite=TRUE)
 bilanOperation<-get("bilanOperation",envir=envir_stacomi)
 devtools::use_data(bilanOperation,internal=FALSE,overwrite=TRUE)
 bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
@@ -73,12 +78,18 @@ stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)	
 bM_Arzal=new("BilanMigration")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("iav",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi) # "iav."
+assign("sch","iav.",envir_stacomi)
 bM_Arzal=choice_c(bM_Arzal,
 		dc=5,
 		taxons=c("Liza ramada"),
 		stades=c("IND"),
 		datedebut="2015-01-01",
 		datefin="2015-12-31")
+bM_Arzal<-charge(bM_Arzal)
 bM_Arzal<-connect(bM_Arzal)
 bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
@@ -88,7 +99,12 @@ bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_co
 bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
-
+bilanOperation_bM<-get("bilanOperation",envir=envir_stacomi)
+devtools::use_data(bilanOperation_bM,internal=FALSE,overwrite=TRUE)
+bilanFonctionnementDF_bM<-get("bilanFonctionnementDF",envir=envir_stacomi)
+devtools::use_data(bilanFonctionnementDF_bM,internal=FALSE,overwrite=TRUE)
+bilanFonctionnementDC_bM<-get("bilanFonctionnementDC",envir=envir_stacomi)
+devtools::use_data(bilanFonctionnementDC_bM,internal=FALSE,overwrite=TRUE)
 
 
 #################################

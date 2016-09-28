@@ -41,7 +41,9 @@ test_that("Test connect method",{
 					stades=c("IND"),
 					datedebut="2015-01-01",
 					datefin="2015-12-31")
-			bM_Arzal<-connect(bM_Arzal)
+			bM_Arzal<-charge(bM_Arzal,silent=TRUE)
+			bM_Arzal<-connect(bM_Arzal,silent=TRUE)
+			
 			expect_length(bM_Arzal@data,11)
 			rm("envir_stacomi",envir =.GlobalEnv)
 })
@@ -53,7 +55,7 @@ test_that("Test example 02_BilanMigration",
 			# be sure you have built Roxygen documentation before running
 			example_path<-file.path(.libPaths(),"stacomiR","R-ex","BilanMigration-class.R")
 			test<-file.access(example_path,0)
-			if (test!=0) warnings("Package example dir not created ?") else
+			if (test[1]!=0) warnings("Package example dir not created ?") else
 				source(example_path)
 		})
 
