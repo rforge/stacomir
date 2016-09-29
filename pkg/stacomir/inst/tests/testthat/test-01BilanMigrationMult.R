@@ -99,6 +99,7 @@ test_that("Test example 01_BilanMigrationMult",
 			test<-file.access(example_path,0)
 			if (test[1]!=0) warnings("Package example dir not created ?") else
 				source(example_path)
+			summary(bMM_Arzal,silent=TRUE)
 		})
 
 

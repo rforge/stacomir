@@ -80,7 +80,10 @@ plot(bM_Arzal,plot.type="standard",silent=TRUE)
 plot(bM_Arzal,plot.type="step")
 
 # data will be written in the data directory specified in the stacomi/calcmig.csv file
+
+\dontrun{
 summary(bM_Arzal,silent=TRUE)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -96,7 +96,9 @@ plot(bMM_Arzal,plot.type="step")
 # combined plot for ggplot2
 plot(bMM_Arzal,plot.type="multiple")
 # data will be written in the data directory specified in the stacomi/calcmig.csv file
+\dontrun{
 summary(bMM_Arzal,silent=TRUE)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
