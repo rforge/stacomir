@@ -28,6 +28,9 @@ setClass(Class="RefListe",representation= representation(listechoice="character"
 
 #' Loading method for Refliste referential objects
 #' @return An object of class RefListe
+#' @slot object An object of class \link{RefListe-class}
+#' @slot vecteur A character vector
+#' @slot label A label for Refliste
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{

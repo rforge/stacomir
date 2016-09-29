@@ -7,6 +7,13 @@
 \usage{
 \S4method{choice}{RefTaxon}(object, objectBilan = NULL, is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{RefTaxon-class}}
+
+\item{objectBilan}{An object Bilan which includes the \link{RefTaxon-class}, default NULL}
+
+\item{is.enabled}{Sets if the frame is enabled at launch, defaut TRUE}
+}
 \description{
 Choice method for Reftaxon referential objects with only one taxa selected
 }

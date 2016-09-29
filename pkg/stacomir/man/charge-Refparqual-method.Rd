@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{Refparqual}(object)
 }
+\arguments{
+\item{object}{An object of class \link{Refparqual-class}}
+}
 \value{
 An S4 object of class Refparqual
 }

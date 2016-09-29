@@ -18,7 +18,7 @@ In the database four types of operation are set,  "1"=normal operation,
 \describe{
 \item{\code{data}}{A data frame}
 
-\item{\code{dc}}{An object of class \code{RefDC-class}}
+\item{\code{df}}{An object of class \code{RefDF-class}}
 
 \item{\code{horodatedebut}}{An object of class \code{RefHorodate-class}}
 
@@ -50,10 +50,13 @@ stacomi(gr_interface=FALSE,
 }
 
 	data("bfDF")
+	plot(bfDF,plot.type="4")
+	# the following examples work but take a while to compute
+	\dontrun{
 	plot(bfDF,plot.type="1")
 	plot(bfDF,plot.type="2",title="A nice title")
-	plot(bfDF,plot.type="3",title="A nice title")
-	plot(bfDF,plot.type="4")
+	plot(bfDF,plot.type="3",title="A nice title")	
+	}
 
 
   

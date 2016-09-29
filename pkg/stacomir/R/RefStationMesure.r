@@ -33,6 +33,7 @@ setClass (Class="RefStationMesure",
 
 #' Loading method for RefStationMesure referential object
 #' @return An S4 object of class RefStationMesure
+#' @param object An object of class \link{RefStationMesure-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{

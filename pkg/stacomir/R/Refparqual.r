@@ -30,6 +30,7 @@
 setClass(Class="Refparqual",representation= representation(valqual="data.frame"),contains="Refpar")
 
 #' Loading method for Reparqual referential objects
+#' @param object An object of class \link{Refparqual-class}
 #' @return An S4 object of class Refparqual
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

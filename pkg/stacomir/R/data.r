@@ -81,7 +81,7 @@
 #' An object of class \link{BilanFonctionnementDF-class} with data loaded
 #' 
 #' This dataset corresponds to the data collected at three different fishways
-#' it is loaded along with \link{bM_Arzal}
+#' it is loaded along with \link{bMM_Arzal}
 #' @format An object of class BilanFonctionnementDF 
 #' @keywords data
 "bilanFonctionnementDF"
@@ -90,7 +90,7 @@
 #' An object of class \link{BilanFonctionnementDC-class} with data loaded
 #' 
 #' This dataset corresponds to the data collected at three different control devices
-#' it is loaded along with \link{bM_Arzal}
+#' it is loaded along with \link{bMM_Arzal}
 #' @format An object of class BilanFonctionnementDC 
 #' @keywords data
 "bilanFonctionnementDC"
@@ -98,7 +98,7 @@
 #' An object of class \link{BilanOperation-class} with data loaded
 #' 
 #' This dataset corresponds to the data collected at three different control devices
-#' it is loaded along with \link{bM_Arzal}
+#' it is loaded along with \link{bMM_Arzal}
 #' @format An object of class BilanOperation
 #' @keywords data
 "bilanOperation"
@@ -140,5 +140,28 @@
 #' @keywords data
 "bfDF"
 
+#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different fishways
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanFonctionnementDF 
+#' @keywords data
+"bilanFonctionnementDF_bM"
 
+
+#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different control devices
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanFonctionnementDC 
+#' @keywords data
+"bilanFonctionnementDC_bM"
+
+#' An object of class \link{BilanOperation-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at three different control devices
+#' it is loaded along with \link{bM_Arzal}
+#' @format An object of class BilanOperation
+#' @keywords data
+"bilanOperation_bM"
 

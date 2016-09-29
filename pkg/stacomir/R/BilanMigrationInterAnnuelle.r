@@ -113,7 +113,7 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
 			requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
-			invisible(capture_output(requete<-stacomirtools::connect(requete)))
+			invisible(utils::capture.output(requete<-stacomirtools::connect(requete)))
 			
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)

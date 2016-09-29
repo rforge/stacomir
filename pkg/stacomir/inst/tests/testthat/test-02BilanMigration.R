@@ -60,6 +60,24 @@ test_that("Test example 02_BilanMigration",
 		})
 
 
+test_that("Summary method works",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			data("bM_Arzal")
+			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
+			summary(bM_Arzal)
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+
 test_that("Test writing an example to the database",
 		{
 			stacomi(gr_interface=FALSE,

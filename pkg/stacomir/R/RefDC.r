@@ -51,6 +51,7 @@ setValidity("RefDC",method=function(object){
 
 
 #' Method to load the counting devices of the control station
+#' @slot object An object of class \link{RefDC-class}
 #' @return Object of class RefDC
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("RefDC"),definition=function(object) {

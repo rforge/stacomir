@@ -3,16 +3,25 @@
 \docType{methods}
 \name{charge_avec_filtre,Refpar-method}
 \alias{charge_avec_filtre,Refpar-method}
-\title{Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade}
+\title{Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxa, and a stage}
 \usage{
 \S4method{charge_avec_filtre}{Refpar}(object, dc_selectionne, taxon_selectionne,
   stade_selectionne)
+}
+\arguments{
+\item{object}{An object of class \link{Refpar-class}}
+
+\item{dc_selectionne}{A counting device selected for the bilan}
+
+\item{taxon_selectionne}{The taxa selected for the bilan}
+
+\item{stade_selectionne}{The stage selected for the bilan}
 }
 \value{
 An S4 object of class Refpar
 }
 \description{
-Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
+Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxa, and a stage
 }
 \examples{
 \dontrun{

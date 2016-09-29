@@ -45,7 +45,6 @@ Collate:
     'Bilan_stades_pigm.r'
     'Bilan_taille.r'
     'RefMsg.r'
-    'RefPoidsMoyenPeche.r'
     'Refperiode.r'
     'data.r'
     'fn_EcritBilanJournalier.r'

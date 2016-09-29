@@ -3,15 +3,20 @@
 \docType{methods}
 \name{charge_avec_filtre,RefTaxon-method}
 \alias{charge_avec_filtre,RefTaxon-method}
-\title{Loading method for RefTaxon referential objects searching only those stages existing for a DC and a Taxon}
+\title{Loading method for RefTaxon referential objects searching only taxa existing for a DC}
 \usage{
 \S4method{charge_avec_filtre}{RefTaxon}(object, dc_selectionne)
+}
+\arguments{
+\item{object}{An object of class \link{RefTaxon-class}}
+
+\item{dc_selectionne}{A counting device selected, only taxa attached to this dc are selected}
 }
 \value{
 An S4 object of class RefTaxon
 }
 \description{
-Loading method for RefTaxon referential objects searching only those stages existing for a DC and a Taxon
+Loading method for RefTaxon referential objects searching only taxa existing for a DC
 }
 \examples{
 \dontrun{

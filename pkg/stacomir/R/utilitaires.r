@@ -291,7 +291,7 @@ split_per_day<-function(data,horodatedebut,horodatefin){
 	data[match(data2$newid,data$newid),]<-data2
 	# now get the sequence of days righly set by adding the number of days to xmin and xmax
 	data3<-data%>%filter(n0>0)%>%group_by(id)%>%mutate(xmin=xmin+ as.difftime(rank(newid)-1, units="days"),
-			xmax=xmax+as.difftime(rank(newid)-1, unit="days"))
+			xmax=xmax+as.difftime(rank(newid)-1, units="days"))
 	data[match(data3$newid,data$newid),]<-data3
 	data<-as.data.frame(data)	
 	return(data)

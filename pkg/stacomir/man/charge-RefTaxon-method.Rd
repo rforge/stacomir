@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{RefTaxon}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefTaxon-class}}
+}
 \value{
 An S4 object of class RefTaxon
 }

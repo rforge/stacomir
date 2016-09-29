@@ -9,13 +9,24 @@
   label = "Choix d'une caracteristique de lot", nomassign = "refpar",
   frameassign = "frame_par", is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{Refpar-class}}
+
+\item{label}{The label that will be displayed in the message frame or as output text}
+
+\item{nomassign}{The assignment name in envir_stacomi}
+
+\item{frameassign}{The name of the frame used for assignement in .GlobalEnv}
+
+\item{is.enabled}{Default TRUE.}
+}
 \description{
 Choice method for Refpar referential objects
 }
 \note{
 the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
 
-this method choice is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
+this method choice is also on daughter classes Refparquan, hence the parameters, however it was redefined in refparqual
 
 to load the possible values of qualitative parameters
 }

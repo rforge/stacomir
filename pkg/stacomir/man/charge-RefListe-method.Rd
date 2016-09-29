@@ -13,6 +13,15 @@ An object of class RefListe
 \description{
 Loading method for Refliste referential objects
 }
+\section{Slots}{
+
+\describe{
+\item{\code{object}}{An object of class \link{RefListe-class}}
+
+\item{\code{vecteur}}{A character vector}
+
+\item{\code{label}}{A label for Refliste}
+}}
 \examples{
 \dontrun{
  object=new("RefListe")

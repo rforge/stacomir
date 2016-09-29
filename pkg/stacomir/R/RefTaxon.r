@@ -27,6 +27,7 @@ setClass(Class="RefTaxon",representation= representation(data="data.frame" ))
 #' 
 #' @return An S4 object of class RefTaxon
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefTaxon-class}
 #' @examples \dontrun{
 #'  object=new("RefTaxon")
 #'  charge(object)}
@@ -39,7 +40,9 @@ setMethod("charge",signature=signature("RefTaxon"),definition=function(object) {
 			return(object)
 		})
 
-#' Loading method for RefTaxon referential objects searching only those stages existing for a DC and a Taxon
+#' Loading method for RefTaxon referential objects searching only taxa existing for a DC
+#' @param object An object of class \link{RefTaxon-class}
+#' @param dc_selectionne A counting device selected, only taxa attached to this dc are selected
 #' @return An S4 object of class RefTaxon
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -65,6 +68,9 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 
 
 #' Choice method for Reftaxon referential objects with only one taxa selected
+#' @param object An object of class \link{RefTaxon-class}
+#' @param objectBilan An object Bilan which includes the \link{RefTaxon-class}, default NULL
+#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  \dontrun{
 #'  object=new("RefTaxon")
@@ -74,7 +80,11 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 #' bilanMigration<-new(BilanMigration)
 #' choice(object,objectBilan=bilanMigration)
 #' }
-setMethod("choice",signature=signature("RefTaxon"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+setMethod("choice",signature=signature("RefTaxon"),
+		definition=function(
+				object,
+				objectBilan=NULL,
+				is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				htax=function(h,...){
 					taxons=svalue(choice)

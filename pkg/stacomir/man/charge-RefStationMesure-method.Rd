@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{RefStationMesure}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefStationMesure-class}}
+}
 \value{
 An S4 object of class RefStationMesure
 }

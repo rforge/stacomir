@@ -7,6 +7,13 @@
 \usage{
 \S4method{charge}{RefTextBox}(object, title, label)
 }
+\arguments{
+\item{object}{An object of class \link{RefTextBox-class}}
+
+\item{title}{A title for the frame}
+
+\item{label}{A label for the TextBox}
+}
 \value{
 An S4 object of class RefTextBox
 }

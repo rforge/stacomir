@@ -12,7 +12,7 @@
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanFonctionnementDF")}.
 #' @slot data A data frame 
-#' @slot dc An object of class \code{RefDC-class}
+#' @slot df An object of class \code{RefDF-class}
 #' @slot horodatedebut An object of class \code{RefHorodate-class}
 #' @slot horodatefin An object of class \code{RefHorodate-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

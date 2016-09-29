@@ -28,6 +28,7 @@
 setClass(Class="Refpar",representation= representation(data="data.frame"))
 
 #' Loading method for Repar referential objects
+#' @param object An object of class \link{Refpar-class}
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -44,7 +45,11 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 			object@data<-requete@query
 			return(object)
 		})
-#' Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxon, and a stade
+#' Loading method for Repar referential objects searching only those parameters existing for a DC, a Taxa, and a stage
+#' @param object An object of class \link{Refpar-class}
+#' @param dc_selectionne A counting device selected for the bilan 
+#' @param taxon_selectionne The taxa selected for the bilan
+#' @param stade_selectionne The stage selected for the bilan
 #' @return An S4 object of class Refpar
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -52,7 +57,9 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 #'  object=new("Refpar")
 #' charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
 #' }
-setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(object,dc_selectionne,taxon_selectionne,stade_selectionne) {
+setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(object,dc_selectionne,
+				taxon_selectionne,
+				stade_selectionne) {
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=paste("SELECT DISTINCT ON (par_code) par_code, par_nom", 
@@ -71,8 +78,13 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 			return(object)
 		})
 #' Choice method for Refpar referential objects
+#' @param object An object of class \link{Refpar-class}
+#' @param label The label that will be displayed in the message frame or as output text
+#' @param nomassign The assignment name in envir_stacomi
+#' @param frameassign The name of the frame used for assignement in .GlobalEnv
+#' @param is.enabled Default TRUE.
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
-#' @note this method choice is also on sons objects Refparquan, hence the parameters,however it was redefined in refparqual
+#' @note this method choice is also on daughter classes Refparquan, hence the parameters, however it was redefined in refparqual
 #' @note to load the possible values of qualitative parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
@@ -83,7 +95,11 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #'  object<-charge(object)
 #'  choice(object)
 #' }
-setMethod("choice",signature=signature("Refpar"),definition=function(object,label="Choix d'une caracteristique de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+setMethod("choice",signature=signature("Refpar"),definition=function(object,
+				label="Choix d'une caracteristique de lot",
+				nomassign="refpar",
+				frameassign="frame_par",
+				is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choice)

@@ -7,6 +7,9 @@
 \usage{
 \S4method{charge}{Refparquan}(object)
 }
+\arguments{
+\item{object}{An object of class \link{Refparquan-class}}
+}
 \value{
 An S4 object of class Refparquan
 }

@@ -25,6 +25,7 @@
 setClass(Class="Refparquan",contains="Refpar")
 
 #' Loading method for Reparquan referential objects
+#' @param object An object of class \link{Refparquan-class}
 #' @return An S4 object of class Refparquan
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

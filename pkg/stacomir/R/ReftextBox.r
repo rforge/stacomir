@@ -8,6 +8,9 @@
 setClass(Class="RefTextBox",representation= representation(title="character",label="character"))
 
 #' Loading method for ReTextBox referential objects
+#' @param object An object of class \link{RefTextBox-class}
+#' @param title A title for the frame
+#' @param label A label for the TextBox
 #' @return An S4 object of class RefTextBox
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
