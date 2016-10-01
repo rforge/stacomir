@@ -74,7 +74,7 @@ test_that("Summary method works",
 			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			data("bM_Arzal")
 			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
-			summary(bM_Arzal)
+			summary(bM_Arzal,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

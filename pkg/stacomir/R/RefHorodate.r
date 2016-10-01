@@ -19,14 +19,6 @@ validite_RefHorodate=function(object)
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefHorodate", \dots{})}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
-#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
-#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
-#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
-#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
-#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
-#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
-#' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
 setClass(Class="RefHorodate",representation=
 				representation(horodate="POSIXt"),
@@ -157,6 +149,9 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 					if (is.na(.horodate)){
 						.horodate=strptime(horodate, format="%d-%m-%Y")				
 					}
+				} else {
+					stop("Formatting problem, the character vector you are trying to pass as horodate could not
+be parsed. Check example or documentation")
 				}
 		
 			} else if (class(horodate)=="Date"){

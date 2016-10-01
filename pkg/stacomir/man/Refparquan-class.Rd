@@ -19,15 +19,6 @@ parameters } }
 cedric.briand"at"eptb-vilaine.fr
 }
 \seealso{
-Other referential classes \code{\linkS4class{RefAnnee}}
-\code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
-\code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
-\code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
-\code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
-\code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
-\code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
-\code{\linkS4class{RefTaxon}}
-
 Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
@@ -35,7 +26,7 @@ Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
   \code{\link{RefStades-class}},
-  \code{\link{Refpar-class}},
+  \code{\link{RefTaxon-class}}, \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefChoix-method}},

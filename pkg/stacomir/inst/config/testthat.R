@@ -15,3 +15,4 @@ if(getUsername() == 'marion.legrand')
 
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-01BilanMigrationMult.R")
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-02BilanMigration.R")
+test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-03BilanFonctionnementDF.R")

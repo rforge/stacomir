@@ -21,10 +21,11 @@ test_that("Test an instance of BilanFonctionnementDF",{
 the RefDF slot,nrow(bfDF@df@data)")				
 			expect_s4_class(bfDF,
 					"BilanFonctionnementDF")
-			expect_failure(BfDF<-choice_c(bfDF,
+			expect_error(BfDF<-choice_c(bfDF,
 					2,
 					horodatedebut="2013 01 011",
-					horodatefin="2013-12-31"))			
+					horodatefin="2013-12-31",
+					silent=TRUE))			
 			
 		})
 
@@ -45,7 +46,8 @@ test_that("BilanFonctionnementDF charge method works",{
 					horodatefin="2013-12-31",
 					silent=TRUE)
 			bfDF<-charge(bfDF,silent=TRUE)
-			expect_equals(nrow(bfDF@data),5)			
+			bfDF<-connect(bfDF,silent=TRUE)
+			expect_equal(nrow(bfDF@data),5)			
 		})
 
 
@@ -66,7 +68,7 @@ test_that("BilanFonctionnementDF summary method works",{
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			data(bfDF)
 			bfDF<-bfDF
-			expect_output(summary(bfDF))
+			expect_output(summary(bfDF,silent=FALSE),"summary")
 		})
 
 

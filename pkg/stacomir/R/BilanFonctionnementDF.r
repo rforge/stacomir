@@ -134,7 +134,7 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=function(object,df,horodatedebut,horodatefin,silent=FALSE){
-			# bilanFonctionnementDF<-BfDF;df=2;horodatedebut="2013-01-01";horodatefin="2013-12-31"
+			# bilanFonctionnementDF<-bfDF;df=2;horodatedebut="2013-01-01";horodatefin="2013-12-31";silent=TRUE
 			bilanFonctionnementDF<-object
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)    
 			if (!silent) funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
@@ -144,11 +144,11 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 			bilanFonctionnementDF@horodatedebut<-choice_c(object=bilanFonctionnementDF@horodatedebut,
 					nomassign="bilanFonctionnementDF_date_debut",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
-					horodate=horodatedebut, silent)
+					horodate=horodatedebut, silent=silent)
 			bilanFonctionnementDF@horodatefin<-choice_c(bilanFonctionnementDF@horodatefin,
 					nomassign="bilanFonctionnementDF_date_fin",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
-					horodate=horodatefin,silent)
+					horodate=horodatefin,silent=silent)
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)  
 			return(bilanFonctionnementDF)
 		})
@@ -559,14 +559,14 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definiti
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_tar_code,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(get("msg",envir=envir_stacomi)$FonctionnementDF.12)
+			funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.12)
 			funout(paste(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11,
 							" :",
 							sommes,"(",perc,"%)",sep=""))
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_etat_fonctionnement,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(get("msg",envir=envir_stacomi)$FonctionnementDF.13)
+			funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.13)
 			funout(paste(rev(get("msg",envir=envir_stacomi)$BilanFonctionnementDC.11),
 							" :",
 							sommes,"(",perc,"%)",sep=""))

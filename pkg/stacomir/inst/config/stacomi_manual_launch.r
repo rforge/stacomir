@@ -53,7 +53,6 @@ source("RefListe.r") #liste de donnees pour un choice
 source("RefChoix.r")
 source("ReftextBox.r")
 source("RefCheckBox.r")
-source("RefPoidsMoyenPeche.r")
 source("RefStationMesure.r")
 source("Refperiode.r")
 source("RefHorodate.r")

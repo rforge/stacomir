@@ -33,7 +33,6 @@ Other referential classes
 \code{\linkS4class{Refpar}} 
 \code{\linkS4class{Refparqual}}
 \code{\linkS4class{Refparquan}} 
-\code{\linkS4class{RefPoidsMoyenPeche}}
 \code{\linkS4class{RefStades}} 
 \code{\linkS4class{RefStationMesure}}
 \code{\linkS4class{RefTaxon}}
@@ -44,7 +43,7 @@ Other Referential.objects: \code{\link{RefCheckBox-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
   \code{\link{RefStades-class}},
-  \code{\link{Refpar-class}},
+  \code{\link{RefTaxon-class}}, \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},
   \code{\link{Refperiode-class}},

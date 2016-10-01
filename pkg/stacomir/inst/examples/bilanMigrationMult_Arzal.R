@@ -14,7 +14,8 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			dc=c(5,6,12),
 			taxons=c("Anguilla anguilla"),
 			stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-	bMM_Arzal<-charge(bMM_Arzal) # launching charge will also load classes associated with the bilan
+	bMM_Arzal<-charge(bMM_Arzal) 
+	# launching charge will also load classes associated with the bilan
 	# e.g. BilanOperation, BilanFonctionnementDF, BilanFonctionnementDC
 	bMM_Arzal<-connect(bMM_Arzal)
 }
@@ -22,8 +23,8 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 
 data("bMM_Arzal")
 # The following re-create the object at the time of loading
-# All three classes were created by the charge and connect method of BilanMigrationMult
-# in the previous example
+# All three classes were created by the charge and connect 
+# method of BilanMigrationMult in the previous example
 data("bilanOperation")
 assign("bilanOperation",bilanOperation,envir=envir_stacomi)
 data("bilanFonctionnementDF")
@@ -50,7 +51,8 @@ plot(bMM_Arzal,plot.type="step")
 #same for spanish.
 # combined plot for ggplot2
 plot(bMM_Arzal,plot.type="multiple")
-# data will be written in the data directory specified in the stacomi/calcmig.csv file
+# data will be written in the data directory specified in 
+# the stacomi/calcmig.csv file
 \dontrun{
-summary(bMM_Arzal,silent=TRUE)
+	summary(bMM_Arzal,silent=TRUE)
 }

@@ -9,7 +9,7 @@ setClass(Class="RefMsg",representation= representation(messager="data.frame",mes
 #' 
 #' loads the common table ts_messager_msr
 #' @return An S4 object of class RefMsg
-#' @param object An object of class \link {RefMsg-class}
+#' @param object An object of class \link{RefMsg-class}
 #' @family Referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -29,7 +29,7 @@ setMethod("charge",signature=signature("RefMsg"),definition=function(object) {
 #' Loading method for RefMsg referential objects
 #' 
 #'  searching ref.ts_messagerlang_mrl for the lines corresponding to lang
-#' @param object An object of class \link{refMsg-class}
+#' @param object An object of class \link{RefMsg-class}
 #' @param lang A language, either "French" or "English" or "Spanish"
 #' @return An S4 object of class RefMsg
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -16,14 +16,6 @@
 #' parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
 #' parameters } }
 #' @author cedric.briand"at"eptb-vilaine.fr
-#' @seealso Other referential classes \code{\linkS4class{RefAnnee}}
-#' \code{\linkS4class{RefCheckBox}} \code{\linkS4class{RefChoix}}
-#' \code{\linkS4class{RefCoe}} \code{\linkS4class{RefDC}}
-#' \code{\linkS4class{RefDF}} \code{\linkS4class{RefListe}}
-#' \code{\linkS4class{Refpar}} \code{\linkS4class{Refparqual}}
-#' \code{\linkS4class{Refparquan}} \code{\linkS4class{RefPoidsMoyenPeche}}
-#' \code{\linkS4class{RefStades}} \code{\linkS4class{RefStationMesure}}
-#' \code{\linkS4class{RefTaxon}}
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @include Refpar.r
 #' @family Referential objects

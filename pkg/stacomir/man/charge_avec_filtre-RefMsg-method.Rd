@@ -8,7 +8,7 @@
 \S4method{charge_avec_filtre}{RefMsg}(object, lang)
 }
 \arguments{
-\item{object}{An object of class \link{refMsg-class}}
+\item{object}{An object of class \link{RefMsg-class}}
 
 \item{lang}{A language, either "French" or "English" or "Spanish"}
 }

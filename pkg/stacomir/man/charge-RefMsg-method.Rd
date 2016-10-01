@@ -8,7 +8,7 @@
 \S4method{charge}{RefMsg}(object)
 }
 \arguments{
-\item{object}{An object of class \link {RefMsg-class}}
+\item{object}{An object of class \link{RefMsg-class}}
 }
 \value{
 An S4 object of class RefMsg
@@ -33,7 +33,7 @@ Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefHorodate-class}},
   \code{\link{RefListe-class}},
   \code{\link{RefStades-class}},
-  \code{\link{Refpar-class}},
+  \code{\link{RefTaxon-class}}, \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},
   \code{\link{Refperiode-class}},

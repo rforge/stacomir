@@ -13,21 +13,6 @@
 #' @slot ouvrage Object of class \code{"integer"} The attached dam
 #' @slot data Object of class \code{"data.frame"} Data concerning the fishway
 #' @author cedric.briand"at"eptb-vilaine.fr
-#' @seealso Other referential classes 
-#' \code{\linkS4class{RefAnnee}}
-#' \code{\linkS4class{RefCheckBox}} 
-#' \code{\linkS4class{RefChoix}}
-#' \code{\linkS4class{RefCoe}} 
-#' \code{\linkS4class{RefDC}}
-#' \code{\linkS4class{RefDF}} 
-#' \code{\linkS4class{RefListe}}
-#' \code{\linkS4class{Refpar}} 
-#' \code{\linkS4class{Refparqual}}
-#' \code{\linkS4class{Refparquan}} 
-#' \code{\linkS4class{RefPoidsMoyenPeche}}
-#' \code{\linkS4class{RefStades}} 
-#' \code{\linkS4class{RefStationMesure}}
-#' \code{\linkS4class{RefTaxon}}
 #' @family Referential objects
 setClass(Class="RefDF",representation=
 				representation(df_selectionne="integer",ouvrage="integer",data="data.frame") )

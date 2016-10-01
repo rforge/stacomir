@@ -60,7 +60,8 @@ data("bM_Arzal")
 # use the following to get the raw data loaded by the connect method
 # not shown there as the database and program might not be installed
 
-# All three classes were created by the charge and connect method of BilanMigrationMult
+# All three classes were created by the charge and connect method 
+# of BilanMigrationMult
 # in the previous example
 data("bilanOperation_bM")
 assign("bilanOperation",bilanOperation_bM,envir=envir_stacomi)
@@ -79,7 +80,8 @@ plot(bM_Arzal,plot.type="standard",silent=TRUE)
 #cumulated migration at the station (all stages and DC grouped)
 plot(bM_Arzal,plot.type="step")
 
-# data will be written in the data directory specified in the stacomi/calcmig.csv file
+# data will be written in the data directory specified in the stacomi/calcmig.csv
+#file
 
 \dontrun{
 summary(bM_Arzal,silent=TRUE)

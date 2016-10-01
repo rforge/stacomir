@@ -33,7 +33,6 @@ validite_Annee=function(object)
 #' \code{\linkS4class{Refpar}} 
 #' \code{\linkS4class{Refparqual}}
 #' \code{\linkS4class{Refparquan}} 
-#' \code{\linkS4class{RefPoidsMoyenPeche}}
 #' \code{\linkS4class{RefStades}} 
 #' \code{\linkS4class{RefStationMesure}}
 #' \code{\linkS4class{RefTaxon}}
