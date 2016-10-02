@@ -21,7 +21,8 @@ stacomi(gr_interface=FALSE,
 	data("bfDC")
 	plot(bfDC,plot.type="1")
 	plot(bfDC,plot.type="2")
-	plot(bfDC,plot.type="3")
+	plot(bfDC,plot.type="3",main="trial title")
+	plot(bfDC,plot.type="4",main="trial title")
 # the following will write in the datawd folder
 
  summary(bfDC)

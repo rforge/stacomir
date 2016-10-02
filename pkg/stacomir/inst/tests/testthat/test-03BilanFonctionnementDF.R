@@ -57,9 +57,9 @@ test_that("BilanFonctionnementDF plot method works",{
 			data(bfDF)
 			bfDF<-bfDF
 			plot(bfDF,plot.type="1",silent=TRUE)
-			plot(bfDF,plot.type="2",silent=TRUE,title="An example title")
-			plot(bfDF,plot.type="3",silent=TRUE,title="An example title")	
-			plot(bfDF,plot.type="4",silent=TRUE,title="An example title")	
+			plot(bfDF,plot.type="2",silent=TRUE,main="An example title")
+			plot(bfDF,plot.type="3",silent=TRUE,main="An example title")	
+			plot(bfDF,plot.type="4",silent=TRUE,main="An example title")	
 		})
 
 

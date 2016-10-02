@@ -156,7 +156,7 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDC"),definition=fun
 #'  a summary of the df operation per month, can also be \code{box}, 
 #' a plot with adjacent rectangles.
 #' @param silent Stops displaying the messages.
-#' @param title The title of the graph, if NULL a default title will be plotted 
+#' @param main The title of the graph, if NULL a default title will be plotted 
 #' with the number of the DF
 #' @return Nothing but prints the different plots
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -166,11 +166,11 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 						y,
 						plot.type=1,
 						silent=FALSE,
-						title=NULL){ 
+						main=NULL){ 
 			#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			#           PLOT OF TYPE BARCHART (plot.type=1 (true/false) or plot.type=2)
 			#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-			#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="1"
+			#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="1"
 			bilanFonctionnementDC<-x
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
@@ -227,7 +227,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
 				progress_bar$setText("All done.")
 				progress_bar$setFraction(1) 
-				if (is.null(title)) title<-paste(get("msg",envir_stacomi)$BilanFonctionnementDC.12,bilanFonctionnementDC@dc@dc_selectionne)
+				if (is.null(main)) main<-paste(get("msg",envir_stacomi)$BilanFonctionnementDC.12,bilanFonctionnementDC@dc@dc_selectionne)
 				# graphic
 				t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois, 
 						old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
@@ -238,7 +238,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				g<- ggplot(t_periodefonctdispositif_per_mois,
 								aes(x=mois,y=duree,fill=libelle))+
 						facet_grid(annee~.)+
-						ggtitle(title)+
+						ggtitle(main)+
 						geom_bar(stat='identity')+
 						scale_fill_manual(values = c("#FF6700","#EE1874", "#9E0142","#76BEBE","#999999"))+
 						theme(
@@ -258,7 +258,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
 				t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
 				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+
-						ggtitle(title)+
+						ggtitle(main)+
 						geom_bar(stat='identity',aes(fill=fonctionnement))+
 						scale_fill_manual(values = c("#0F313A","#CEB99A")   ) +
 						theme(
@@ -287,7 +287,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				#           PLOT OF TYPE BOX (plot.type=3)
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			} else if (plot.type=="3"){
-				#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="3"
+				#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="3"
 				t_periodefonctdispositif_per=bilanFonctionnementDC@data
 				graphdate<-function(vectordate){
 					vectordate<-as.POSIXct(vectordate)
@@ -302,7 +302,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				#display.brewer.all()
 				mypalette1<-c("#1B9E77","#AE017E","orange", RColorBrewer::brewer.pal(12,"Paired"))
 				# creation d'un graphique vide
-				if (is.null(title)) title<-""
+				if (is.null(main)) main<-""
 				plot(graphdate(time.sequence),
 						seq(0,1,length.out=length(time.sequence)),
 						xlim=c(debut,fin), 
@@ -311,7 +311,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 						xaxt="n",
 						yaxt="n", 
 						ylab=get("msg",envir=envir_stacomi)$BilanFonctionnementDC.9,
-						main=title,
+						main=main,
 						#bty="n",
 						cex=0.8)
 				r <- round(range(time.sequence), "day")
@@ -404,9 +404,9 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				#           PLOT OF TYPE BOX (plot.type=4)
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			} else if (plot.type=="4"){
-				if (is.null(title)) title<-paste(get("msg",envir_stacomi)$BilanFonctionnementDC.7,bilanFonctionnementDC@df@df_selectionne)
+				if (is.null(main)) main<-paste(get("msg",envir_stacomi)$BilanFonctionnementDC.5,bilanFonctionnementDC@dc@dc_selectionne)
 				
-				#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="4"
+				#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="4"
 				t_periodefonctdispositif_per=bilanFonctionnementDC@data
 				tpp<-split_per_day(t_periodefonctdispositif_per,horodatedebut="per_date_debut",horodatefin="per_date_fin")
 				
@@ -416,6 +416,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 								labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+
 						#scale_colour_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
 						#		labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+		
+						ggtitle(main)+			
 						ylab("Heure")+theme(
 								plot.background = element_rect(fill ="black"),
 								panel.background = element_rect(fill="black"),

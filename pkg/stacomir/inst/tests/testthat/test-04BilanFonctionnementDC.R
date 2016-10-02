@@ -57,9 +57,9 @@ test_that("BilanFonctionnementDC plot method works",{
 			data(bfDC)
 			bfDC<-bfDC
 			plot(bfDC,plot.type="1",silent=TRUE)
-			plot(bfDC,plot.type="2",silent=TRUE,title="An example title")
-			plot(bfDC,plot.type="3",silent=TRUE,title="An example title")	
-			plot(bfDC,plot.type="4",silent=TRUE,title="An example title")	
+			plot(bfDC,plot.type="2",silent=TRUE,main="An example title")
+			plot(bfDC,plot.type="3",silent=TRUE,main="An example title")	
+			plot(bfDC,plot.type="4",silent=TRUE,main="An example title")	
 		})
 
 

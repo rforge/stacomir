@@ -57,7 +57,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 					" dif_ouv_identifiant,",
 					" ouv_libelle,",
 					" dif_code as DF_code,",
-					" dic_code ad DC_code",
+					" dic_code as DC_code,",
 					" dif_localisation,",
 					" dif_orientation,",
 					" tdf_libelle as type_DF,",
