@@ -229,18 +229,17 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				progress_bar$setFraction(1) 
 				if (is.null(main)) main<-paste(get("msg",envir_stacomi)$BilanFonctionnementDC.12,bilanFonctionnementDC@dc@dc_selectionne)
 				# graphic
-				t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois, 
-						old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
-						new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
-				#modification of the order
+					#modification of the order
 				
-				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_etat_fonctionnement, decreasing = TRUE),]
 				g<- ggplot(t_periodefonctdispositif_per_mois,
-								aes(x=mois,y=duree,fill=libelle))+
+								aes(x=mois,y=sumduree,fill=libelle))+
 						facet_grid(annee~.)+
 						ggtitle(main)+
+						ylab(get("msg",envir_stacomi)$BilanFonctionnementDF.6[1])+
+						xlab(get("msg",envir_stacomi)$BilanFonctionnementDC.3)+						
 						geom_bar(stat='identity')+
-						scale_fill_manual(values = c("#FF6700","#EE1874", "#9E0142","#76BEBE","#999999"))+
+						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[2],values = c("#FF6700","#EE1874", "#9E0142","#76BEBE","#999999"))+
 						theme(
 								plot.background = element_rect(fill ="white"),
 								panel.background = element_rect(fill="white"),
@@ -255,12 +254,15 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 								axis.text=element_text(colour="black")
 						)
 				
-				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
-				t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
-				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_etat_fonctionnement),]
+				t_periodefonctdispositif_per_mois$per_etat_fonctionnement=as.factor(t_periodefonctdispositif_per_mois$per_etat_fonctionnement)
+				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=sumduree))+
+						facet_grid(annee~.)+
 						ggtitle(main)+
-						geom_bar(stat='identity',aes(fill=fonctionnement))+
-						scale_fill_manual(values = c("#0F313A","#CEB99A")   ) +
+						ylab(get("msg",envir_stacomi)$BilanFonctionnementDF.6[1])+
+						xlab(get("msg",envir_stacomi)$BilanFonctionnementDC.3)+									
+						geom_bar(stat='identity',aes(fill=per_etat_fonctionnement))+
+						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[3],values = c("#0F313A","#CEB99A")   ) +
 						theme(
 								plot.background = element_rect(fill ="white"),
 								panel.background = element_rect(fill="white"),

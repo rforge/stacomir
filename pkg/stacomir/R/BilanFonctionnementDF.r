@@ -37,7 +37,7 @@ setClass(Class="BilanFonctionnementDF",
 				df="RefDF",
 				horodatedebut="RefHorodate",
 				horodatefin="RefHorodate"
-				),
+		),
 		prototype=prototype(data=data.frame(),df=new("RefDF"),
 				horodatedebut=new("RefHorodate"),
 				horodatefin=new("RefHorodate")				
@@ -178,7 +178,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 			#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			#           PLOT OF TYPE BARCHART (plot.type=1 (true/false) or plot.type=2)
 			#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-			#bilanFonctionnementDF<-bfDF; require(RGtk2); require(lubridate);require(ggplot2);title=NULL;silent=FALSE;plot.type="1"
+			#bilanFonctionnementDF<-bfDF; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="1"
 			bilanFonctionnementDF<-x
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
@@ -237,25 +237,27 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				progress_bar$setFraction(1) 
 				if (is.null(main)) main<-paste(get("msg",envir_stacomi)$BilanFonctionnementDF.7,bilanFonctionnementDF@df@df_selectionne)
 				# graphic
-				t_periodefonctdispositif_per_mois<-stacomirtools::chnames(t_periodefonctdispositif_per_mois, 
-						old_variable_name=c("sumduree","per_tar_code","per_etat_fonctionnement"),
-						new_variable_name=get("msg",envir_stacomi)$BilanFonctionnementDF.6)
-				#modification of the order
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_tar_code, decreasing = TRUE),]
 				
-				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$type_fonct., decreasing = TRUE),]
 				g<- ggplot(t_periodefonctdispositif_per_mois,
-								aes(x=mois,y=duree,fill=libelle))+
+								aes(x=mois,y=sumduree,fill=libelle))+
 						facet_grid(annee~.)+
+						ylab(get("msg",envir_stacomi)$BilanFonctionnementDF.6[1])+
+						xlab(get("msg",envir_stacomi)$BilanFonctionnementDC.3)+
 						ggtitle(main)+
 						geom_bar(stat='identity')+
-						scale_fill_manual(values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
+						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[2],
+								values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
 				
-				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$fonctionnement),]
-				t_periodefonctdispositif_per_mois$fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$fonctionnement)
-				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=duree))+facet_grid(annee~.)+
+				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_etat_fonctionnement),]
+				t_periodefonctdispositif_per_mois$per_etat_fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$per_etat_fonctionnement)
+				
+				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=sumduree))+facet_grid(annee~.)+
+						ylab(get("msg",envir_stacomi)$BilanFonctionnementDF.6[1])+
+						xlab(get("msg",envir_stacomi)$BilanFonctionnementDC.3)+						
 						ggtitle(main)+
-						geom_bar(stat='identity',aes(fill=fonctionnement))+
-						scale_fill_manual(values = c("#E41A1C","#4DAF4A")) 
+						geom_bar(stat='identity',aes(fill=per_etat_fonctionnement))+
+						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[3],values = c("#E41A1C","#4DAF4A")) 
 				
 				if (plot.type=="1")
 					print(g)
@@ -393,9 +395,9 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				g<-ggplot(tpp)+
 						geom_rect(aes(xmin=xmin,xmax=xmax,ymin=Hdeb,ymax=Hfin,col=factor(per_tar_code),fill=factor(per_tar_code)),alpha=0.5)+
 						scale_fill_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
-										labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+
-					   scale_colour_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
-										labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+		
+								labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+
+						scale_colour_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
+								labels = get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11)+		
 						ylab("Heure")+theme(
 								plot.background = element_rect(fill ="black"),
 								panel.background = element_rect(fill="black"),
@@ -406,8 +408,8 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 								line = element_line(colour = "grey50"),
 								legend.key=element_rect(fill="black",colour="black"),
 								axis.text=element_text(colour="white")
-								)
-								
+						)
+				
 				print(g)
 				
 			}
