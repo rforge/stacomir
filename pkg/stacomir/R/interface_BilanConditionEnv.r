@@ -4,13 +4,14 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_ConditionEnv = function()
 {
-    bilanConditionEnv=new("BilanConditionEnv")
+	quitte()
+	bilanConditionEnv=new("BilanConditionEnv")
     funout(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.1)
     bilanConditionEnv@stationMesure=charge(bilanConditionEnv@stationMesure)
     assign("bilanConditionEnv",bilanConditionEnv,envir=envir_stacomi)
     
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-    quitte()
+
     assign("group",group,envir = .GlobalEnv)
    gWidgets::add(ggroupboutons,group)
     

@@ -3,14 +3,25 @@
 \docType{methods}
 \name{choice,Refparqual-method}
 \alias{choice,Refparqual-method}
-\title{Choix=Choice method for Refparqual referential objects}
+\title{Choice method for Refparqual referential objects, internal use}
 \usage{
 \S4method{choice}{Refparqual}(object,
   label = "Choix d'une caracteristique qualitative de lot",
   nomassign = "refpar", frameassign = "frame_par", is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{Refparqual-class}}
+
+\item{label}{The label to set in the frame}
+
+\item{nomassign}{The name used when assigning the object Refparqual to the \code{envir_stacomi} environment}
+
+\item{frameassign}{The name of the gframe assigned to the user environment}
+
+\item{is.enabled}{Is the frame enabled at launch.}
+}
 \description{
-Choix=Choice method for Refparqual referential objects
+Choice method for Refparqual referential objects, internal use
 }
 \note{
 the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi

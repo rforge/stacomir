@@ -67,4 +67,5 @@ Other Bilan Classes \code{\linkS4class{Bilan_carlot}},
 \concept{
 Bilan Object
 }
+\keyword{classes}
 

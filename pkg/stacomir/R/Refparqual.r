@@ -1,7 +1,3 @@
-# Nom fichier :        RefParqual   (classe)
-# Projet :             controle migrateur
-# Date de creation :   22/03/2009 21:14:14
-
 #' Class "Refparqual"
 #' 
 #' Class enabling to load the list of qualitative parameters and to select one
@@ -42,7 +38,11 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(object)
 		})
 
 #' Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade
-#' @return An S4 object of class Refparqual
+#' @param object An object of class \link{Refparqual-class}
+#' @param dc_selectionne The dc set in the Bilan object
+#' @param taxon_selectionne The taxa set in the Bilan object
+#' @param stade_selectionne The stage set in the Bilan object
+#' @return An S4 object of class \link{Refparqual-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -73,9 +73,9 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 			return(object)
 		})
 
-#'  method charge_complement
-#' cette methode est appellee apres la selection de l'object (data ne contient plus qu'une seule ligne)
-#' et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
+#'  Loads an additional dataset
+#' this method is loaded to obtain the possible values of a qualitative parameter. Here data only contains one line
+#' @param object An object of class \link{Refparqual-class}
 #' @return An S4 object of class Refparqual with the valqual slot filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
@@ -101,11 +101,15 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 		})
 
 
-# la methode choice differe de celle de Refpar car elle integre la requete des valeurs possibles des parametres qualitatifs		
-#' Choix=Choice method for Refparqual referential objects
+#' Choice method for Refparqual referential objects, internal use
 #' @note the choice method assigns an object of class Refparqual named refparqual in the environment envir_stacomi
 #' this method rewrites the method from Refpar, as it integrates a request of the possible values of qualitative parameters, hence the parameters,however it was redefined in refparqual
 #' to load the possible values of qualitative parameters
+#' @param object An object of class \link{Refparqual-class}
+#' @param label The label to set in the frame
+#' @param nomassign The name used when assigning the object Refparqual to the \code{envir_stacomi} environment
+#' @param frameassign The name of the gframe assigned to the user environment
+#' @param is.enabled Is the frame enabled at launch.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -115,7 +119,11 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 #' object<-charge(object)
 #' choice(object)
 #' }
-setMethod("choice",signature=signature("Refparqual"),definition=function(object,label="Choix d'une caracteristique qualitative de lot",nomassign="refpar",frameassign="frame_par",is.enabled=TRUE) {
+setMethod("choice",signature=signature("Refparqual"),definition=function(object,
+				label="Choix d'une caracteristique qualitative de lot",
+				nomassign="refpar",
+				frameassign="frame_par",
+				is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choice)

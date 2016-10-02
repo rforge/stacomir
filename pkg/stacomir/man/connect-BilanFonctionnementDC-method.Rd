@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{An object of class \link{BilanFonctionnementDC-class}}
 
-\item{silent}{Boolean, default FALSE, if TRUE messages are not displayed}
+\item{silent}{boolean, default FALSE, if TRUE messages are not displayed}
 }
 \value{
 An object of class \link{BilanFonctionnementDC-class}

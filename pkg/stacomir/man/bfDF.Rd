@@ -4,7 +4,7 @@
 \name{bfDF}
 \alias{bfDF}
 \title{An object of class \link{BilanFonctionnementDF-class} with data loaded}
-\format{An object of class BilanFonctionnementDF with 5 slots:
+\format{An object of class BilanFonctionnementDF with 4 slots:
 \describe{
 #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
 			\describe{
@@ -15,7 +15,7 @@
   			\item{per_commentaires }{A comment}
   			\item{per_etat_fonctionnement}{Integer 1= working, 0 not working}
   			\item{per_tar_code}{The type of operation ("1"=normal operation,
-             "2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+             "2"=Device stopped in normal operation (ie lift ascending, high tide...),
 			"3"="Stopped for maintenance or other problem",
              "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
              "5"="Not known")}
@@ -24,8 +24,7 @@
        }	
   \item{df}{the \code{RefDF} object with 3 slots filled with data corresponding to the iav postgres schema}
   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
-  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} 
-  \item{requete}{A stacomiRtools RequeteODBCWhereDate object}
+  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
 }}
 \usage{
 bfDF

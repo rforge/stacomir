@@ -5,7 +5,10 @@
 \alias{connect,Bilan_poids_moyen-method}
 \title{connect method for Bilan_Poids_moyen}
 \usage{
-\S4method{connect}{Bilan_poids_moyen}(object, h)
+\S4method{connect}{Bilan_poids_moyen}(object)
+}
+\arguments{
+\item{object}{An object of class \link{Bilan_poids_moyen-class}}
 }
 \value{
 Bilan_Poids_Moyen request corresponding to user choices

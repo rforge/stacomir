@@ -41,6 +41,9 @@ setMethod("charge",
           }
 )
 #' Choice method for RefStationMesure referential object
+#' @param object An object of class \link{RefStationMesure-class}
+#' @param is.enabled A boolean parameter, if TRUE the frame is enabled when first displayed
+#' @param title The title of the frame, defaut to "Monitoring stations selection" 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -50,7 +53,9 @@ setMethod("charge",
 #' object<-charge(object)
 #' choice(object)
 #' }
-setMethod("choice",signature=signature("RefStationMesure"),definition=function(object,is.enabled=TRUE,title=get("msg",envir=envir_stacomi)$RefStationMesure.3) {
+setMethod("choice",signature=signature("RefStationMesure"),definition=function(object,
+				is.enabled=TRUE,
+				title=get("msg",envir=envir_stacomi)$RefStationMesure.3) {
 			if (nrow(object@data) > 0){
 				hSTM=function(h,...){
           stationMesure=svalue(choice,index=TRUE)

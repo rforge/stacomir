@@ -5,6 +5,8 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationPar = function()
 {
+	quitte()
+	
     bilanMigrationPar=new("BilanMigrationPar")
     assign("bilanMigrationPar",bilanMigrationPar,envir=envir_stacomi)
     
@@ -22,7 +24,7 @@ interface_BilanMigrationPar = function()
     # Interface Graphique 
     ##########################
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-    quitte()
+
     assign("group",group,envir = .GlobalEnv)
     
    gWidgets::add(ggroupboutons,group)

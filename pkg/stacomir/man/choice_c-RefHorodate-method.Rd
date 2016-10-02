@@ -12,6 +12,8 @@
 \arguments{
 \item{object}{An object of class \link{RefHorodate-class}}
 
+\item{nomassign}{The name assigned in environment envir_stacomi}
+
 \item{funoutlabel, }{text displayed by the interface}
 
 \item{horodate}{The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
@@ -19,12 +21,6 @@ can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the da
 \dots are accepted. The choice_c method assigns and}
 
 \item{silent}{Default FALSE, should messages be displayed}
-
-\item{label}{Label for the gframe}
-
-\item{nomassing}{The name assigned in environment envir_stacomi}
-
-\item{affichecal}{Default TRUE, should the calendar be displayed}
 }
 \value{
 An object of class \link{RefHorodate-class} with slot \emph{horodate} set,

@@ -27,6 +27,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @example inst/examples/bilanMigration_Arzal.R
 #' @export 
 setClass(Class="BilanMigration",
@@ -99,6 +100,7 @@ setMethod("connect",signature=signature("BilanMigration"),definition=function(ob
 #' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c,RefStades-method}
 #' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @return An object of class \link{BilanMigration-class}
 #' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades, and RefPasDeTempsJournalier and then 
 #' uses the choice_c methods of these object to select the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

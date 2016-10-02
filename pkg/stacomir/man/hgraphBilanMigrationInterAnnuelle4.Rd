@@ -4,17 +4,18 @@
 \alias{hgraphBilanMigrationInterAnnuelle4}
 \title{Plot comparing the migration  to the migration  
 computed for all years available in the daily migration table.
-This function plots comparisions for periods of 1 week, 2 weeks, month
- @param h A handler
- @param ... Additional parameters}
+This function plots comparisions for periods of 1 week, 2 weeks, month}
 \usage{
 hgraphBilanMigrationInterAnnuelle4(h, ...)
+}
+\arguments{
+\item{h}{A handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 Plot comparing the migration  to the migration  
 computed for all years available in the daily migration table.
 This function plots comparisions for periods of 1 week, 2 weeks, month
- @param h A handler
- @param ... Additional parameters
 }
 

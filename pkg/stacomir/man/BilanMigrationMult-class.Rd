@@ -105,4 +105,5 @@ plot(bMM_Arzal,plot.type="multiple")
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{classes}
 

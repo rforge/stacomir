@@ -75,7 +75,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 
 		progress_bar$setFraction(zz)
 		progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-		RGtk2::gtkMainIterationDo(FALSE)
+		#RGtk2::gtkMainIterationDo(FALSE)
 		#utils::setWinProgressBar(progres,zz,title="cumul val. quant. par pas de temps",label=sprintf("%d%% progression",round(100*zz)))                    
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigrationPar@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigrationPar@pasDeTemps))

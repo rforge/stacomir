@@ -2,15 +2,16 @@
 % Please edit documentation in R/BilanMigrationInterAnnuelle.r
 \name{htableBilanMigrationInterAnnuelle}
 \alias{htableBilanMigrationInterAnnuelle}
-\title{Writing of results in datawd
- @param h A handler
- @param ... Additional parameters}
+\title{Writing of results in datawd}
 \usage{
 htableBilanMigrationInterAnnuelle(h, ...)
 }
+\arguments{
+\item{h}{A handler}
+
+\item{...}{Additional parameters}
+}
 \description{
 Writing of results in datawd
- @param h A handler
- @param ... Additional parameters
 }
 

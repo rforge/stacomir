@@ -7,17 +7,15 @@
 \usage{
 \S4method{charge}{RefDF}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefDF-class}}
+}
 \value{
 An object of class RefDF
 }
 \description{
 Loading method for DF referential objects
 }
-\section{Slots}{
-
-\describe{
-\item{\code{object}}{An object of class \link{RefDF-class}}
-}}
 \examples{
 \dontrun{
  object=new("RefDF")

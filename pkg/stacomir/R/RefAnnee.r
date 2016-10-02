@@ -72,6 +72,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object){
 #' 
 #' Allows the selection of year and the assignment in environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefAnnee-class}
 #' @param nomassign The name to be asssigned in envir_stacomi
 #' @param funoutlabel The label that appears in funout
 #' @param titleFrame Title for the frame

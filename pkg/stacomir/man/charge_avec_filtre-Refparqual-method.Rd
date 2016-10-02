@@ -8,8 +8,17 @@
 \S4method{charge_avec_filtre}{Refparqual}(object, dc_selectionne,
   taxon_selectionne, stade_selectionne)
 }
+\arguments{
+\item{object}{An object of class \link{Refparqual-class}}
+
+\item{dc_selectionne}{The dc set in the Bilan object}
+
+\item{taxon_selectionne}{The taxa set in the Bilan object}
+
+\item{stade_selectionne}{The stage set in the Bilan object}
+}
 \value{
-An S4 object of class Refparqual
+An S4 object of class \link{Refparqual-class}
 }
 \description{
 Loading method for Reparqual referential objects searching only those parameters existing for a DC, a Taxon, and a stade

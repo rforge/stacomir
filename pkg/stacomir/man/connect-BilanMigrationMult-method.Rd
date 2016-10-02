@@ -5,10 +5,10 @@
 \alias{connect,BilanMigrationMult-method}
 \title{connect method for BilanMigrationMult}
 \usage{
-\S4method{connect}{BilanMigrationMult}(object, silent = FALSE, ...)
+\S4method{connect}{BilanMigrationMult}(object, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class BilanMigrationMult}
+\item{object}{An object of class \link{BilanMigrationMult-class}}
 
 \item{silent}{Boolean, if TRUE messages are not displayed}
 }

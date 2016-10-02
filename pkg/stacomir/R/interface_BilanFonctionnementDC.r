@@ -5,14 +5,15 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanFonctionnementDC = function()
 {
-    bilanFonctionnementDC=new("BilanFonctionnementDC")
+	quitte()
+	bilanFonctionnementDC=new("BilanFonctionnementDC")
     assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
     bilanFonctionnementDC@dc=charge(bilanFonctionnementDC@dc)
     
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-    quitte()
+
     assign("group",group,envir = .GlobalEnv)
     
    gWidgets::add(ggroupboutons,group)
@@ -33,21 +34,21 @@ interface_BilanFonctionnementDC = function()
     #getStockIcons(toolkit=guiToolkit())
     
     aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)         
-    aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
+	aBarchart1=gWidgets::gaction(label="barchart_fct",icon="barplot",handler=funbarchart1DC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          
+	
+	aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
     aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
     aQuit=gWidgets::gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
+	aOut=gWidgets::gaction(label="code",handler=houtDC, icon="gtk-info", tooltip=get("msg",envir=envir_stacomi)$BilanMigrationMult.1) 
     
-    toolbarlist <- list(
+	toolbarlist <- list(
     		barchart=aBarchart, 
+			barchart1=aBarchart1,
     		box= aBox,
     		table=aTable,
+			out=aOut,
     		Quit = aQuit)
     
     add(group, gmenu(toolbarlist))
     gWidgets::addSpring(group)
-    #graphes=ggraphics(width=600,height=400)
-    #add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-    # A cet endroit sinon ouvre plusieurs fenetres pour plusieurs choses
-    #assign("graphes",graphes,envir=envir_stacomi)
-	dev.new()
 }

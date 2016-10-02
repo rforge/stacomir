@@ -44,5 +44,4 @@ interface_BilanFonctionnementDF = function()
 	
 	add(group, gmenu(toolbarlist))
 	gWidgets::addSpring(group)
-	dev.new()
 }

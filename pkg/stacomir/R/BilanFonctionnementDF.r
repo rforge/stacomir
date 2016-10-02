@@ -29,6 +29,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @example inst/examples/bilanFonctionnementDF_example.R
 #' @export 
 setClass(Class="BilanFonctionnementDF",
@@ -123,14 +124,14 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 
 #' command line interface for BilanFonctionnementDF class
 #' 
-#' The choice_c method fills in the data slot for RefDC, and then 
+#' The choice_c method fills in the data slot for RefDF, and then 
 #' uses the choice_c methods of these object to "select" the data.
-#' @param object An object of class \link{RefDC-class}
+#' @param object An object of class \link{RefDF-class}
 #' @param df The df to set
 #' @param horodatedebut A POSIXt or Date or character to fix the date of beginning of the Bilan
 #' @param horodatefin A POSIXt or Date or character to fix the last date of the Bilan
 #' @param silent Should program be silent or display messages
-#' @return An object of class \link{RefDC-class} with slots filled
+#' @return An object of class \link{RefDF-class} with slots filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=function(object,df,horodatedebut,horodatefin,silent=FALSE){
@@ -181,8 +182,9 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 			bilanFonctionnementDF<-x
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
+			if (nrow(bilanFonctionnementDF@data)==0) 
+				funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3,arret=TRUE)
 			if (plot.type=="1"|plot.type=="2"){
-				if (!silent) funout(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.3)
 				t_periodefonctdispositif_per=bilanFonctionnementDF@data # on recupere le data.frame   
 				# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 				tempsdebut<-t_periodefonctdispositif_per$per_date_debut
@@ -212,7 +214,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 					#cat( j 
 					progress_bar$setFraction(j/nrow(t_periodefonctdispositif_per)) 
 					progress_bar$setText(sprintf("%d%% progression",round(100*j/nrow(t_periodefonctdispositif_per))))
-					RGtk2::gtkMainIterationDo(FALSE)
+					#RGtk2::gtkMainIterationDo(FALSE)
 					if (j>1) t_periodefonctdispositif_per_mois=rbind(t_periodefonctdispositif_per_mois, t_periodefonctdispositif_per[j,])
 					lemoissuivant=seqmois[seqmois>tempsdebut[j]][1] # le premier mois superieur a tempsdebut
 					while (tempsfin[j]>lemoissuivant){    # on est a cheval sur deux periodes    
@@ -534,6 +536,7 @@ setMethod("print",signature=signature("BilanFonctionnementDF"),definition=functi
 #' @export
 setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definition=function(object,silent=FALSE,...){
 			#bilanFonctionnementDF<-bfDF;
+			t_periodefonctdispositif_per<-object
 			t_periodefonctdispositif_per=bilanFonctionnementDF@data # on recupere le data.frame
 			t_periodefonctdispositif_per$per_date_debut=as.character(t_periodefonctdispositif_per$per_date_debut)
 			t_periodefonctdispositif_per$per_date_fin=as.character(t_periodefonctdispositif_per$per_date_fin)

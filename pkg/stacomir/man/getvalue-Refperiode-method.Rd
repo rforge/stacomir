@@ -5,7 +5,7 @@
 \alias{getvalue,Refperiode-method}
 \title{Returns the POSIXt value of a given name}
 \usage{
-\S4method{getvalue}{Refperiode}(object, id, ...)
+\S4method{getvalue}{Refperiode}(object, id)
 }
 \arguments{
 \item{object}{An object of class \link{Refperiode-class}}

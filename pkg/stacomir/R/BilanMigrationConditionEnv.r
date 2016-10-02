@@ -27,6 +27,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @export 
 setClass(Class="BilanMigrationConditionEnv",representation=
 				representation(
@@ -111,9 +112,9 @@ setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition
 
 
 #' plot combining one ore several qualitative parameters with the migration trend
-#'  @param h A handler
-#'  @param ... Additional parameters
-hbilanMigrationConditionEnvgraph = function(h,...) {   
+#' @param h A handler
+#' @param ... Additional parameters
+hbilanMigrationConditionEnvgraph = function(h,...){   
 	
 	if (exists("bilanMigrationConditionEnv",envir_stacomi)) {
 		bilanMigrationConditionEnv<-get("bilanMigrationConditionEnv",envir_stacomi)

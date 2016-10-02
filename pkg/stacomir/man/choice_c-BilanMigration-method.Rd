@@ -20,9 +20,12 @@ these should match the ref.tr_taxon_tax referential table in the stacomi databas
 
 \item{datedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
-\item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+\item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
+}
+\value{
+An object of class \link{BilanMigration-class}
 The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades, and RefPasDeTempsJournalier and then 
-uses the choice_c methods of these object to select the data.}
+uses the choice_c methods of these object to select the data.
 }
 \description{
 command line interface for BilanMigration class

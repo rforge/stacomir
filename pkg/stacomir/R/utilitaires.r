@@ -201,7 +201,6 @@ vector_to_listsql<-function(vect)
 #' This progress bar has a button to close.
 #' @note The name of the progress bar is \code{progres}, it will be assigned in .GlobalEnv,
 #' it contains a progress bar widget named progress bar, also assigned in .GLobalEnv. See example for use.
-#' It seems that when sys.sleep is not used it is necessary to use RGtk2::gtkMainIterationDo(FALSE) for a regular display
 #' @param title The title of the bar
 #' @param progress_text The text to display for progression
 #' @param width Width of the progress bar

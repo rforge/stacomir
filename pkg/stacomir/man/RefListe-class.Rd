@@ -4,16 +4,14 @@
 \name{RefListe-class}
 \alias{RefListe-class}
 \title{Class "RefListe"}
+\arguments{
+\item{liste}{choice="character" A vector of character to choose within a droplist}
+
+\item{label="character"}{the title of the box}
+}
 \description{
 Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 }
-\section{Slots}{
-
-\describe{
-\item{\code{liste}}{choice="character" A vector of character to choose within a droplist}
-
-\item{\code{label="character"}}{the title of the box}
-}}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefListe", listechoice, label)}.  \describe{

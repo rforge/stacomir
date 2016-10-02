@@ -36,7 +36,8 @@
 #' \code{\linkS4class{BilanMigrationConditionEnv}}, 
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
-#' @concept Bilan Object 
+#' @concept Bilan Object
+#' @keywords classes 
 #' @examples
 #' 
 #' showClass("Bilan_taille")
@@ -63,10 +64,9 @@ setClass(Class="Bilan_taille",
 
 #' connect method for class Bilan_taille
 #' @param object An object of class \code{\link{Bilan_taille-class}} 
-#' @param ... Additional parameters
-#' @return bilan_taille with requete field filled
+#' @return An object of class \code{\link{Bilan_taille-class}}  with requete field filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("connect",signature=signature("Bilan_taille"),definition=function(object,h) {
+setMethod("connect",signature=signature("Bilan_taille"),definition=function(object) {
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			if (object@parquan@data$par_nom=="aucune" & object@parqual@data$par_nom=="aucune") {

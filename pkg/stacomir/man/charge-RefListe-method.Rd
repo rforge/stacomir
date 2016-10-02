@@ -7,21 +7,19 @@
 \usage{
 \S4method{charge}{RefListe}(object, vecteur, label)
 }
+\arguments{
+\item{object}{An object of class \link{RefListe-class}}
+
+\item{vecteur}{A character vector}
+
+\item{label}{A label for Refliste}
+}
 \value{
 An object of class RefListe
 }
 \description{
 Loading method for Refliste referential objects
 }
-\section{Slots}{
-
-\describe{
-\item{\code{object}}{An object of class \link{RefListe-class}}
-
-\item{\code{vecteur}}{A character vector}
-
-\item{\code{label}}{A label for Refliste}
-}}
 \examples{
 \dontrun{
  object=new("RefListe")

@@ -5,8 +5,8 @@
 #' Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 #' 
 #' 
-#' @slot liste choice="character" A vector of character to choose within a droplist
-#' @slot label="character" the title of the box
+#' @param liste choice="character" A vector of character to choose within a droplist
+#' @param label="character" the title of the box
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefListe", listechoice, label)}.  \describe{
 #' \item{list("listechoice")}{Object of class \code{"character"}}\item{:}{Object
@@ -21,9 +21,9 @@ setClass(Class="RefListe",representation= representation(listechoice="character"
 
 #' Loading method for Refliste referential objects
 #' @return An object of class RefListe
-#' @slot object An object of class \link{RefListe-class}
-#' @slot vecteur A character vector
-#' @slot label A label for Refliste
+#' @param object An object of class \link{RefListe-class}
+#' @param vecteur A character vector
+#' @param label A label for Refliste
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -36,6 +36,8 @@ setMethod("charge",signature=signature("RefListe"),definition=function(object,ve
 			return(object)
 		})
 #' Choice method for RefListe referential objects
+#' @param object An object of class \link{RefListe-class}
+#' @param is.enabled A boolean indicating whether the frame is enabled when first displayed, default to TRUE
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  

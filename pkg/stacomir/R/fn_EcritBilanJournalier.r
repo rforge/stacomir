@@ -71,7 +71,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 			zz=i/nrow(t_bilanmigrationjournalier_bjo)
 			progress_bar$setFraction(zz)
 			progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-			RGtk2::gtkMainIterationDo(FALSE)
+			#RGtk2::gtkMainIterationDo(FALSE)
 #			utils::setWinProgressBar(progres,
 #					zz,
 #					title=get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,
@@ -137,7 +137,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 #							round(100*zz)))
 			progress_bar$setFraction(zz)
 			progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-			RGtk2::gtkMainIterationDo(FALSE)
+			#RGtk2::gtkMainIterationDo(FALSE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@silent=TRUE

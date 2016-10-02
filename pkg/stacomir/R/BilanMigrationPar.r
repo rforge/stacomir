@@ -42,6 +42,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 setClass(Class="BilanMigrationPar",
 		representation=representation(parquan="Refparquan",
 				parqual="Refparqual",

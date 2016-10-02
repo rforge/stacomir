@@ -68,4 +68,5 @@ Other Bilan Class
 \concept{
 Bilan Object
 }
+\keyword{classes}
 

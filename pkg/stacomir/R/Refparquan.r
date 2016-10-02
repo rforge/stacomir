@@ -38,6 +38,10 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(object)
 
 
 #' Loading method for Reparquan referential objects searching only those parameters existing for a DC, a Taxon, and a stade
+#' @param object An object of class \link{Refparquan-class}
+#' @param dc_selectionne The dc set in the Bilan object
+#' @param taxon_selectionne The taxa set in the Bilan object
+#' @param stade_selectionne The stage set in the Bilan object
 #' @return An S4 object of class Refparqualn
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

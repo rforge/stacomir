@@ -28,6 +28,6 @@ setClass(Class="Refperiode",representation=
 #' \dontrun{
 #'  getvalue(new("Refperiode"),"quinzaine")
 #' }
-setMethod("getvalue",signature=signature("Refperiode"), definition=function(object,id,...)
+setMethod("getvalue",signature=signature("Refperiode"), definition=function(object,id)
   {return(as.character(object@data[object@data$id==id,"pgval"]))
   } ) 

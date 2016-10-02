@@ -6,7 +6,24 @@
 \title{command line interface for BilanMigrationMult class}
 \usage{
 \S4method{choice_c}{BilanMigrationMult}(object, dc, taxons, stades, datedebut,
-  datefin, ...)
+  datefin)
+}
+\arguments{
+\item{object}{An object of class \link{BilanMigration-class}}
+
+\item{dc}{A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}}
+
+\item{taxons}{Either a species name in latin or the SANDRE code for species (ie 2038=Anguilla anguilla),
+these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}}
+
+\item{stades}{A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c,RefStades-method}}
+
+\item{datedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
+
+\item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
+}
+\value{
+An object of class \link{BilanMigrationMult-class}
 }
 \description{
 The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades and then 

@@ -7,17 +7,15 @@
 \usage{
 \S4method{charge}{RefDC}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefDC-class}}
+}
 \value{
 Object of class RefDC
 }
 \description{
 Method to load the counting devices of the control station
 }
-\section{Slots}{
-
-\describe{
-\item{\code{object}}{An object of class \link{RefDC-class}}
-}}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

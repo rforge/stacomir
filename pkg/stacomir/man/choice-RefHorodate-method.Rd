@@ -14,11 +14,11 @@
 
 \item{label}{Label for the gframe}
 
+\item{nomassign}{The name assigned in environment envir_stacomi}
+
 \item{funoutlabel, }{text displayed by the interface}
 
-\item{nomassing}{The name assigned in environment envir_stacomi}
-
-\item{decale}{Default 0, number of years to shift forward or backward}
+\item{decal}{Default 0, number of years to shift forward or backward}
 }
 \value{
 Selects the date in the graphical interface, and assigns an object of class POSIXt with name nomassign in envir_stacomi

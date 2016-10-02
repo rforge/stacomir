@@ -91,4 +91,5 @@ Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{BilanMigrationPar}} 
 \code{\link{fnstade}}
 }
+\keyword{classes}
 

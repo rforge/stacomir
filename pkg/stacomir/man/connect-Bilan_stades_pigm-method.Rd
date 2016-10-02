@@ -5,10 +5,10 @@
 \alias{connect,Bilan_stades_pigm-method}
 \title{connect method for Bilan_stades_pigm}
 \usage{
-\S4method{connect}{Bilan_stades_pigm}(object, h)
+\S4method{connect}{Bilan_stades_pigm}(object)
 }
 \arguments{
-\item{h}{a handler}
+\item{object}{An object of class \link{Bilan_stades_pigm-class}}
 }
 \value{
 An object of class Bilan_stades_pigm

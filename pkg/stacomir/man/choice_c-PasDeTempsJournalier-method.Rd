@@ -8,9 +8,11 @@
 \S4method{choice_c}{PasDeTempsJournalier}(object, datedebut, datefin)
 }
 \arguments{
-\item{datedebut}{a character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object}
+\item{object}{An object of class \link{PasDeTempsJournalier-class}}
 
-\item{datefin}{a character of POSIXct object}
+\item{datedebut}{A character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object}
+
+\item{datefin}{A character}
 }
 \description{
 the choice_c method is intented to have the same behaviour as choice (which creates a

@@ -3,16 +3,17 @@
 \name{hgraphBilanMigrationInterAnnuelle7}
 \alias{hgraphBilanMigrationInterAnnuelle7}
 \title{This function creates a cumulated area plot to highlight seasonal trends in migration. Data are calculated by
-2 weeks period then centered and reduced
- @param h A handler
- @param ... Additional parameters}
+2 weeks period then centered and reduced}
 \usage{
 hgraphBilanMigrationInterAnnuelle7(h, ...)
+}
+\arguments{
+\item{h}{A handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 This function creates a cumulated area plot to highlight seasonal trends in migration. Data are calculated by
 2 weeks period then centered and reduced
- @param h A handler
- @param ... Additional parameters
 }
 

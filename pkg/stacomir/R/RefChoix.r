@@ -38,6 +38,7 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(object,ve
 #' 
 #' Used by the graphical interface.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefChoix-class}
 #' @examples 
 #' \dontrun{
 #'  object=new("RefChoix")

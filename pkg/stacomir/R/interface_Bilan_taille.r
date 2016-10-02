@@ -3,6 +3,7 @@
 # see interface_Bilancarlot for doc
 interface_BilanTaille = function()
 {
+	quitte() # vidange de l'interface
 	bilan_taille=new("Bilan_taille")
 	assign("bilan_taille",bilan_taille,envir=envir_stacomi)
 	#funout("chargement de la vue (vue_ope_lot) et choice du dc et des pas de temps\n")
@@ -10,7 +11,7 @@ interface_BilanTaille = function()
 	#bilan_taille@taxons=charge(bilan_taille@taxons)
 	#bilan_taille@stades=charge(bilan_taille@stades)
 	#bilan_taille@par=charge(bilan_taille@par)
-	quitte() # vidange de l'interface
+
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)

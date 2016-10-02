@@ -98,8 +98,9 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 #' 
 #' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  
-#' @param datedebut a character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object
-#' @param datefin a character of POSIXct object
+#' @param object An object of class \link{PasDeTempsJournalier-class}
+#' @param datedebut A character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object
+#' @param datefin A character 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' \dontrun{

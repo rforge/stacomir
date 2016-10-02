@@ -33,6 +33,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(object
 		})
 #' Choice method for ReCheckBox referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefCheckBox-class}
 #' @examples 
 #' \dontrun{
 #' object=new("RefCheckBox")

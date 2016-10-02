@@ -3,19 +3,20 @@
 \docType{methods}
 \name{charge_complement,Refparqual-method}
 \alias{charge_complement,Refparqual-method}
-\title{method charge_complement
-cette methode est appellee apres la selection de l'object (data ne contient plus qu'une seule ligne)
-et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif}
+\title{Loads an additional dataset
+this method is loaded to obtain the possible values of a qualitative parameter. Here data only contains one line}
 \usage{
 \S4method{charge_complement}{Refparqual}(object)
+}
+\arguments{
+\item{object}{An object of class \link{Refparqual-class}}
 }
 \value{
 An S4 object of class Refparqual with the valqual slot filled
 }
 \description{
-method charge_complement
-cette methode est appellee apres la selection de l'object (data ne contient plus qu'une seule ligne)
-et permet de lancer une requete pour obtenir un complement, ici les valeurs possibles d'un parametre qualitatif
+Loads an additional dataset
+this method is loaded to obtain the possible values of a qualitative parameter. Here data only contains one line
 }
 \examples{
 \dontrun{

@@ -3,16 +3,17 @@
 \name{hgraphBilanMigrationInterAnnuelle5}
 \alias{hgraphBilanMigrationInterAnnuelle5}
 \title{Function displaying comparaison similar to \link{hgraphBilanMigrationInterAnnuelle4} but using pointrange and geom_bar
-This function plots comparisions for periods of 1 week, 2 weeks, month
- @param h A handler
- @param ... Additional parameters}
+This function plots comparisions for periods of 1 week, 2 weeks, month}
 \usage{
 hgraphBilanMigrationInterAnnuelle5(h, ...)
+}
+\arguments{
+\item{h}{A handler}
+
+\item{...}{Additional parameters}
 }
 \description{
 Function displaying comparaison similar to \link{hgraphBilanMigrationInterAnnuelle4} but using pointrange and geom_bar
 This function plots comparisions for periods of 1 week, 2 weeks, month
- @param h A handler
- @param ... Additional parameters
 }
 

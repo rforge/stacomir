@@ -31,6 +31,7 @@
 #' 	\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
 #' 	\code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @export
 setClass(Class="BilanMigrationInterAnnuelle",representation=
 				representation(
@@ -389,8 +390,8 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 #' Plot comparing the migration  to the migration  
 #' computed for all years available in the daily migration table.
 #' This function plots comparisions for periods of 1 week, 2 weeks, month
-#'  @param h A handler
-#'  @param ... Additional parameters
+#' @param h A handler
+#' @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" timesplit="semaine" timesplit="mois"
@@ -464,8 +465,8 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 
 #' Function displaying comparaison similar to \link{hgraphBilanMigrationInterAnnuelle4} but using pointrange and geom_bar
 #' This function plots comparisions for periods of 1 week, 2 weeks, month
-#'  @param h A handler
-#'  @param ... Additional parameters
+#' @param h A handler
+#' @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" # timesplit="mois"
@@ -529,8 +530,8 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 
 #' This function creates a cumulated area plot to highlight seasonal trends in migration. Data are calculated by
 #' 2 weeks period then centered and reduced
-#'  @param h A handler
-#'  @param ... Additional parameters
+#' @param h A handler
+#' @param ... Additional parameters
 hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 {
 	bilanMigrationInterAnnuelle = charge(bilanMigrationInterAnnuelle)
@@ -584,8 +585,8 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 	}
 }
 #'Writing of results in datawd
-#'  @param h A handler
-#'  @param ... Additional parameters
+#' @param h A handler
+#' @param ... Additional parameters
 htableBilanMigrationInterAnnuelle = function(h,...)
 {
 	# chargement des donnees

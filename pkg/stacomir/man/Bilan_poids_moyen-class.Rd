@@ -59,6 +59,7 @@ Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{BilanMigrationPar}}
 }
 \concept{
-Bilan Object
+Bilan Object 
+ @keywords classes
 }
 

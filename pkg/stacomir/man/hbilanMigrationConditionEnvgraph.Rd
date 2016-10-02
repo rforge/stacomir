@@ -2,15 +2,16 @@
 % Please edit documentation in R/BilanMigrationConditionEnv.r
 \name{hbilanMigrationConditionEnvgraph}
 \alias{hbilanMigrationConditionEnvgraph}
-\title{plot combining one ore several qualitative parameters with the migration trend
- @param h A handler
- @param ... Additional parameters}
+\title{plot combining one ore several qualitative parameters with the migration trend}
 \usage{
 hbilanMigrationConditionEnvgraph(h, ...)
 }
+\arguments{
+\item{h}{A handler}
+
+\item{...}{Additional parameters}
+}
 \description{
 plot combining one ore several qualitative parameters with the migration trend
- @param h A handler
- @param ... Additional parameters
 }
 

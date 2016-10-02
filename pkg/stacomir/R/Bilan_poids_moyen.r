@@ -40,6 +40,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#'  @keywords classes
 #' @examples
 #'  \dontrun{
 #' showClass("Bilan_poids_moyen")
@@ -61,12 +62,13 @@ setClass(Class="Bilan_poids_moyen",
 				liste=new("RefListe")))#
 
 #' connect method for Bilan_Poids_moyen
+#' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @return Bilan_Poids_Moyen request corresponding to user choices
 #' @note dates for the request are from august to august (a glass eel season)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 # object<-bilan_poids_moyen
-setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(object,h) {
+setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function(object) {
 			#CHARGEMENT DU TABLEAU DES POIDS MOYENS
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)

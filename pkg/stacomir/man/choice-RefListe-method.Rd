@@ -7,6 +7,11 @@
 \usage{
 \S4method{choice}{RefListe}(object, is.enabled = TRUE)
 }
+\arguments{
+\item{object}{An object of class \link{RefListe-class}}
+
+\item{is.enabled}{A boolean indicating whether the frame is enabled when first displayed, default to TRUE}
+}
 \description{
 Choice method for RefListe referential objects
 }

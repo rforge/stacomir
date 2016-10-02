@@ -5,15 +5,13 @@
 \alias{connect,Bilan_taille-method}
 \title{connect method for class Bilan_taille}
 \usage{
-\S4method{connect}{Bilan_taille}(object, h)
+\S4method{connect}{Bilan_taille}(object)
 }
 \arguments{
 \item{object}{An object of class \code{\link{Bilan_taille-class}}}
-
-\item{...}{Additional parameters}
 }
 \value{
-bilan_taille with requete field filled
+An object of class \code{\link{Bilan_taille-class}}  with requete field filled
 }
 \description{
 connect method for class Bilan_taille

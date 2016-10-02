@@ -7,6 +7,9 @@
 \usage{
 \S4method{choice}{RefCheckBox}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefCheckBox-class}}
+}
 \description{
 Choice method for ReCheckBox referential objects
 }

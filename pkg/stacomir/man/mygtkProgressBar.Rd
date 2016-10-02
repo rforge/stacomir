@@ -29,7 +29,6 @@ This progress bar has a button to close.
 \note{
 The name of the progress bar is \code{progres}, it will be assigned in .GlobalEnv,
 it contains a progress bar widget named progress bar, also assigned in .GLobalEnv. See example for use.
-It seems that when sys.sleep is not used it is necessary to use RGtk2::gtkMainIterationDo(FALSE) for a regular display
 }
 \examples{
 \dontrun{

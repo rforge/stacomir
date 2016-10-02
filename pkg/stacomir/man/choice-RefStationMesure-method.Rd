@@ -8,6 +8,13 @@
 \S4method{choice}{RefStationMesure}(object, is.enabled = TRUE,
   title = get("msg", envir = envir_stacomi)$RefStationMesure.3)
 }
+\arguments{
+\item{object}{An object of class \link{RefStationMesure-class}}
+
+\item{is.enabled}{A boolean parameter, if TRUE the frame is enabled when first displayed}
+
+\item{title}{The title of the frame, defaut to "Monitoring stations selection"}
+}
 \description{
 Choice method for RefStationMesure referential object
 }

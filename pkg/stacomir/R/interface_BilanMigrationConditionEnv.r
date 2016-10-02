@@ -4,6 +4,8 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationConditionEnv = function()
 {
+	
+	quitte()
 	bilanMigrationConditionEnv=new("BilanMigrationConditionEnv")
 	assign("bilanMigrationConditionEnv",bilanMigrationConditionEnv,envir=envir_stacomi)	
 	funout(get("msg",envir=envir_stacomi)$interface_BilanMigrationConditionEnv.2)
@@ -11,7 +13,7 @@ interface_BilanMigrationConditionEnv = function()
 	bilanMigrationConditionEnv@bilanMigration@taxons=charge(bilanMigrationConditionEnv@bilanMigration@taxons)
 	bilanMigrationConditionEnv@bilanMigration@stades=charge(bilanMigrationConditionEnv@bilanMigration@stades)
 	bilanMigrationConditionEnv@bilanMigration@dc=charge(bilanMigrationConditionEnv@bilanMigration@dc)
-	quitte()
+
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir=.GlobalEnv)
 	add(ggroupboutons,group)

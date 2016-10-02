@@ -8,6 +8,8 @@
 \S4method{choice}{RefDC}(object, objectBilan = NULL, is.enabled = TRUE)
 }
 \arguments{
+\item{object}{An object of class \link{RefDC-class}}
+
 \item{objectBilan}{the objectBilan from which this frame was called}
 
 \item{is.enabled}{a boolean indicating whether the current frame will be enabled. Selecting a "parent"

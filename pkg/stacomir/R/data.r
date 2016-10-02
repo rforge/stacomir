@@ -114,7 +114,7 @@
 #' This data corresponds to the data collected at the vertical slot fishway
 #' in 2015, the fishway is working daily with a cycle depending on tide.
 #'
-#' @format An object of class BilanFonctionnementDF with 5 slots:
+#' @format An object of class BilanFonctionnementDF with 4 slots:
 #' \describe{
 #' #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
 #' 			\describe{
@@ -125,7 +125,7 @@
 #'   			\item{per_commentaires }{A comment}
 #'   			\item{per_etat_fonctionnement}{Integer 1= working, 0 not working}
 #'   			\item{per_tar_code}{The type of operation ("1"=normal operation,
-#'              "2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+#'              "2"=Device stopped in normal operation (ie lift ascending, high tide...),
 #'				"3"="Stopped for maintenance or other problem",
 #'              "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
 #'              "5"="Not known")}
@@ -134,11 +134,41 @@
 #'        }	
 #'   \item{df}{the \code{RefDF} object with 3 slots filled with data corresponding to the iav postgres schema}
 #'   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
-#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} 
-#'   \item{requete}{A stacomiRtools RequeteODBCWhereDate object}
+#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
 #' }
 #' @keywords data
 "bfDF"
+
+#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' 
+#' This data corresponds to the data collected at the vertical slot fishway camera
+#' from 2000 to 2015.
+#'
+#' @format An object of class BilanFonctionnementDC with 4 slots:
+#' \describe{
+#' #'   \item{data}{ A dataframe with 544 obs. of  7 variables
+#' 			\describe{
+#'   			\item{per_dis_identifiant}{The number of the DC}
+#'   			\item{per_date_debut}{Starting time a POSIXct}
+#'   			\item{per_date_fin }{Ending time a POSIXct}
+#'   			\item{ope_dic_identifiant}{DC id}
+#'   			\item{per_commentaires }{A comment}
+#'   			\item{per_etat_fonctionnement}{Integer 1= working, 0 not working}
+#'   			\item{per_tar_code}{The type of operation ("1"=normal operation,
+#'              "2"=Device stopped in normal operation (e.g. the trap is disactivated for the duration of the
+#' 				fish sorting and counting by operators),
+#'				"3"="Stopped for maintenance or other problem",
+#'              "4"="Works but not fully operational, i.e. the camera is not working properly because of high turbidity...",
+#'              "5"="Not known")}
+#' 				\item{libelle}{label corresponding to per_tar_code}
+#'            }
+#'        }	
+#'   \item{df}{the \code{RefDC} object with 3 slots filled with data corresponding to the iav postgres schema}
+#'   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
+#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
+#' }
+#' @keywords data
+"bfDC"
 
 #' An object of class \link{BilanFonctionnementDF-class} with data loaded
 #' 

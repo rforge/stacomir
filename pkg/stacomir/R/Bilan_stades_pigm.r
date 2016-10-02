@@ -48,6 +48,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}} 
 #' \code{\link{fnstade}}
+#' @keywords classes
 #' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
 #' stage-structured model to predict the effect of temperature and salinity on
 #' glass eel Anguilla anguilla pigmentation development. J Fish Biol, 67,
@@ -94,10 +95,10 @@ setClass(Class="Bilan_stades_pigm",
 #' 
 #' @note will try to get data for the temperature (refstation) only if retrocalcul is checked
 #'  by default it is not when lanching
+#' @param object An object of class \link{Bilan_stades_pigm-class}
 #' @return An object of class Bilan_stades_pigm
-#' @param h a handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(object,h) {
+setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function(object) {
 			# pour debug object<-new("Bilan_stades_pigm")
 			#  chargement du tableau des stades pigmentaires
 			requete=new("RequeteODBCwheredate")

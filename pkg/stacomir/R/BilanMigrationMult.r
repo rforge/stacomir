@@ -24,6 +24,7 @@
 #' @slot coef_conversion A data frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
+#' @keywords classes
 #' @export
 #' @example inst/examples/bilanMigrationMult_Arzal.R
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -135,9 +136,18 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' 
 #' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades and then 
 #' uses the choice_c methods of these object to "select" the data.
+#' @param object An object of class \link{BilanMigration-class}
+#' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
+#' @param taxons Either a species name in latin or the SANDRE code for species (ie 2038=Anguilla anguilla),
+#' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
+#' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c,RefStades-method}
+#' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
+#' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @return An object of class \link{BilanMigrationMult-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,dc,taxons,stades,datedebut,datefin,...){
+setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,
+				dc,taxons,stades,datedebut,datefin){
 			bilanMigrationMult<-object
 			bilanFonctionnementDF=new("BilanFonctionnementDF")
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
@@ -246,11 +256,11 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 #' the taxa is eel. It also calls connect method for \link{BilanFonctionnementDF-class}, 
 #' \link{BilanFonctionnementDC-class} and \link{BilanOperation-class} associated with the Bilan
 #' and used by the \link{fungraph} and \link{fungraph_civelle} functions.
-#' @param object An object of class BilanMigrationMult
+#' @param object An object of class \link{BilanMigrationMult-class}
 #' @param silent Boolean, if TRUE messages are not displayed
 #' @return An object of class \link{BilanMigrationMult-class} with slot @data filled from the database
 #' @export
-setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE,...){ 
+setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE){ 
 			# recuperation du BilanMigration
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult

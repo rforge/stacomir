@@ -56,11 +56,12 @@ setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=functio
 #' Graphical interface
 #' @param object An object of class \link{RefHorodate-class}
 #' @param label Label for the gframe
-#' @param nomassing The name assigned in environment envir_stacomi
+#' @param nomassign The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
-#' @param decale Default 0, number of years to shift forward or backward 
+#' @param decal Default 0, number of years to shift forward or backward 
 #' @return Selects the date in the graphical interface, and assigns an object of class POSIXt with name nomassign in envir_stacomi
-setMethod("choice",signature=signature("RefHorodate"),definition=function(object,label="date",
+setMethod("choice",signature=signature("RefHorodate"),definition=function(object,
+				label="date",
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
 				decal=0) {
@@ -93,10 +94,8 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 
 #' Command line
 #' @param object An object of class \link{RefHorodate-class}
-#' @param label Label for the gframe
-#' @param nomassing The name assigned in environment envir_stacomi
+#' @param nomassign The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
-#' @param affichecal Default TRUE, should the calendar be displayed
 #' @param silent Default FALSE, should messages be displayed
 #' @param horodate The horodate to set, formats "\%d/\%m/\%Y \%H:\%M:\%s", "\%d/\%m/\%y \%H:\%M:\%s", "\%Y-\%m-\%d  \%H:\%M:\%s" formats
 #' can also be passed with the date set to the minute \%d/\%m/\%Y \%H:\%M or the day  \%d/\%m/\%Y

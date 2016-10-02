@@ -8,6 +8,15 @@
 \S4method{charge_avec_filtre}{Refparquan}(object, dc_selectionne,
   taxon_selectionne, stade_selectionne)
 }
+\arguments{
+\item{object}{An object of class \link{Refparquan-class}}
+
+\item{dc_selectionne}{The dc set in the Bilan object}
+
+\item{taxon_selectionne}{The taxa set in the Bilan object}
+
+\item{stade_selectionne}{The stage set in the Bilan object}
+}
 \value{
 An S4 object of class Refparqualn
 }

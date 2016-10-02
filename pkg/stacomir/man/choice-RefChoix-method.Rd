@@ -7,6 +7,9 @@
 \usage{
 \S4method{choice}{RefChoix}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefChoix-class}}
+}
 \description{
 Used by the graphical interface.
 }

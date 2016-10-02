@@ -10,6 +10,8 @@
   titleFrame = get("msg", envir = envir_stacomi)$RefAnnee.1, preselect = 1)
 }
 \arguments{
+\item{object}{An object of class \link{RefAnnee-class}}
+
 \item{nomassign}{The name to be asssigned in envir_stacomi}
 
 \item{funoutlabel}{The label that appears in funout}

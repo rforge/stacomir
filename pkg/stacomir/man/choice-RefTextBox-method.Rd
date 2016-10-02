@@ -7,6 +7,9 @@
 \usage{
 \S4method{choice}{RefTextBox}(object)
 }
+\arguments{
+\item{object}{An object of class \link{RefTextBox-class}}
+}
 \description{
 Choice method for ReTextBox referential objects
 }

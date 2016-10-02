@@ -21,6 +21,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @examples
 #' \dontrun{
 #' showClass("Bilan_carlot")

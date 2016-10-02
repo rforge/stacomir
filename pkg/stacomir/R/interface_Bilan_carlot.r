@@ -5,7 +5,8 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_Bilan_carlot = function()
 {  
-    bilan_carlot=new("Bilan_carlot")
+	quitte() # vidange de l'interface
+	bilan_carlot=new("Bilan_carlot")
     assign("bilan_carlot",bilan_carlot,envir = envir_stacomi)
     
     funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
@@ -15,7 +16,7 @@ interface_Bilan_carlot = function()
     bilan_carlot@par=charge(bilan_carlot@par)    
      
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-    quitte() # vidange de l'interface
+
     assign("group",group,envir = .GlobalEnv)
    gWidgets::add(ggroupboutons,group)
     gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group)

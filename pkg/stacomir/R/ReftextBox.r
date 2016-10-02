@@ -29,6 +29,7 @@ setMethod("charge",signature=signature("RefTextBox"),definition=function(object,
 #' 
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefTextBox-class}
 #' @examples 
 #' \dontrun{
 #' object=new("RefTextBox")

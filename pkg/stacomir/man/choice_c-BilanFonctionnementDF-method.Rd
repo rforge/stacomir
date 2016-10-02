@@ -9,7 +9,7 @@
   horodatefin, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \link{RefDC-class}}
+\item{object}{An object of class \link{RefDF-class}}
 
 \item{df}{The df to set}
 
@@ -20,10 +20,10 @@
 \item{silent}{Should program be silent or display messages}
 }
 \value{
-An object of class \link{RefDC-class} with slots filled
+An object of class \link{RefDF-class} with slots filled
 }
 \description{
-The choice_c method fills in the data slot for RefDC, and then 
+The choice_c method fills in the data slot for RefDF, and then 
 uses the choice_c methods of these object to "select" the data.
 }
 \author{

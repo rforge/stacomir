@@ -43,7 +43,7 @@ setValidity("RefDC",method=function(object){
 
 
 #' Method to load the counting devices of the control station
-#' @slot object An object of class \link{RefDC-class}
+#' @param object An object of class \link{RefDC-class}
 #' @return Object of class RefDC
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("RefDC"),definition=function(object) {
@@ -57,6 +57,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 					" dif_ouv_identifiant,",
 					" ouv_libelle,",
 					" dif_code as DF_code,",
+					" dic_code ad DC_code",
 					" dif_localisation,",
 					" dif_orientation,",
 					" tdf_libelle as type_DF,",
@@ -87,6 +88,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 #'   By default,  the value of the objectbilan is null.
 #'   When it is not   the method calls daughter widgets (e.g. the dc widget will call species) 
 #' and fills it with the method \link{charge_avec_filtre,RefTaxon-method} 
+#' @param object An object of class \link{RefDC-class}
 #' @param objectBilan the objectBilan from which this frame was called
 #' @param is.enabled a boolean indicating whether the current frame will be enabled. Selecting a "parent"
 #' frame may cause some frame to be disabled. When created the frame is enabled.

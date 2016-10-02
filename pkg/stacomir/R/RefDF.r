@@ -9,9 +9,9 @@
 #' data=data.frame())}.  
 #' 
 
-#' @slot df_selectionne Object of class \code{"integer"} The identifier of the fishway
-#' @slot ouvrage Object of class \code{"integer"} The attached dam
-#' @slot data Object of class \code{"data.frame"} Data concerning the fishway
+#' @param df_selectionne Object of class \code{"integer"} The identifier of the fishway
+#' @param ouvrage Object of class \code{"integer"} The attached dam
+#' @param data Object of class \code{"data.frame"} Data concerning the fishway
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @family Referential objects
 setClass(Class="RefDF",representation=
@@ -35,7 +35,7 @@ setValidity("RefDF",method=function(object){
 		}   
 )
 #' Loading method for DF referential objects
-#' @slot object An object of class \link{RefDF-class}
+#' @param object An object of class \link{RefDF-class}
 #' @return An object of class RefDF
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 

@@ -20,6 +20,7 @@
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}}
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
+#' @keywords classes
 #' @export 
 setClass(Class="BilanOperation",
 		representation= representation(data="data.frame",

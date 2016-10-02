@@ -51,7 +51,7 @@ funSousListeBilanMigration=function(bilanMigration) {
 		zz=(getnoPasCourant(bilanMigration@pasDeTemps)+1)/bilanMigration@pasDeTemps@nbStep
 		progress_bar$setFraction(zz)
 		progress_bar$setText(sprintf("%d%% progression",round(100*zz)))
-		RGtk2::gtkMainIterationDo(FALSE)
+		#RGtk2::gtkMainIterationDo(FALSE)
 		debutPas = as.POSIXlt(currentDateDebut(bilanMigration@pasDeTemps))
 		finPas = as.POSIXlt(currentDateFin(bilanMigration@pasDeTemps))
 		if(finPas!=round(finPas,"day")) stop("problemes d'arrondi dans le calcul de la date, verifier la fonction funsouslistebilanmigration")
