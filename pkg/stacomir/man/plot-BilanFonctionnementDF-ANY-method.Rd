@@ -6,7 +6,7 @@
 \title{Different plots for BilanFonctionnementDF}
 \usage{
 \S4method{plot}{BilanFonctionnementDF,ANY}(x, y, plot.type = 1,
-  silent = FALSE, title = NULL)
+  silent = FALSE, main = NULL)
 }
 \arguments{
 \item{x}{An object of class \link{BilanFonctionnementDF-class}}
@@ -18,7 +18,7 @@ a plot with adjacent rectangles.}
 
 \item{silent}{Stops displaying the messages.}
 
-\item{title}{The title of the graph, if NULL a default title will be plotted with the number of the DF}
+\item{main}{The title of the graph, if NULL a default title will be plotted with the number of the DF}
 }
 \value{
 Nothing but prints the different plots

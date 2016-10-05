@@ -13,7 +13,7 @@
 \item{negative}{a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 different rows}
 
-\item{silent}{Boolean, if true, information messages are not displays, only warnings and errors}
+\item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 }
 \value{
 BilanMigration with calcdata slot filled.

@@ -473,8 +473,7 @@ interface_graphique=function(){
 	gWidgets::add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
 # Variables used in aes arguments generate a note as being assigned to .GlobalEnv, either use aes_string,
-# or listing them below removes the warning in Rcheck. Discussion in stackoverflow about this, hadley wickham
-# considering this a hideous hack..
+# or listing them below removes the warning in Rcheck. 
 utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effectifs",
 				"..density..","Cumsum","Date","Effectif","Effectif_total",
 				"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
@@ -483,7 +482,8 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
 				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
-				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code"))
+				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code",
+				"per_etat_fonctionnement","std_libelle","sumduree"))
 
 # variable used by dplyr
 utils::globalVariables(c("n0","newid","xmin","xmax"))

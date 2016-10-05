@@ -1,9 +1,3 @@
-# creation des fonctions generiques...
-
-# la clasee baseODBC n'a plus besoin d'un baseODBC par defaut
-#liste_chemins=chargecsv()
-#baseODBC=liste_chemins[["baseODBC"]]
-#listes de connection e la base de donnee (programmation S4)
 
 #' Generic method for choice (using the gwidget graphical interface)
 #' @param object Object

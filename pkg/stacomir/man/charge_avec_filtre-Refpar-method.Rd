@@ -26,7 +26,7 @@ Loading method for Repar referential objects searching only those parameters exi
 \examples{
 \dontrun{
  object=new("Refpar")
-charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
+charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne=c("AGJ","CIV")
 }
 }
 \author{

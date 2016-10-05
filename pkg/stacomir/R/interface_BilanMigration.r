@@ -13,7 +13,7 @@ interface_BilanMigration=function(){
 	bilanFonctionnementDF=new("BilanFonctionnementDF")
 	assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
 	bilanOperation=new("BilanOperation")
-	assign("bilanOperation", envir=envir_stacomi)
+	assign("bilanOperation",bilanOperation, envir=envir_stacomi)
 	bilanMigration=new("BilanMigration")
 	assign("bilanMigration",bilanMigration,envir = envir_stacomi)
 	# see bilanMigrationMult for explaination

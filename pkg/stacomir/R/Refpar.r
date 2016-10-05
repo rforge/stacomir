@@ -7,7 +7,8 @@
 #' 
 #' Class enabling to load the list of parameters and select one of them
 #' 
-#' 
+#' @slot data A data.frame
+#' @slot par_selectionne A character vector corresponding to par_code
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Refpar", data)}.  \describe{ \item{list("data")}{Object of class
 #' \code{"data.frame"} ~ All the parameters stored in the
@@ -17,8 +18,26 @@
 #' @keywords classes
 #' @slot data="data.frame" the list of parameters
 #' @family Referential objects
-setClass(Class="Refpar",representation= representation(data="data.frame"))
+setClass(Class="Refpar",representation= representation(data="data.frame",par_selectionne="character"))
 
+
+setValidity("Refpar",method=function(object){
+			if (length(object@par_selectionne)!=0){		
+				if (nrow(object@data)>0) {
+					concord<-object@par_selectionne%in%object@data$par_code					
+					if (any(!concord)){
+						return(paste("No data for par",object@par_selectionne[!concord]))
+						
+					} else {
+						return(TRUE)
+					}
+				} else {
+					return("You tried to set a value for par_selectionne without initializing the data slot")
+				}
+			}  else return(TRUE)
+			
+		}   
+)
 #' Loading method for Repar referential objects
 #' @param object An object of class \link{Refpar-class}
 #' @return An S4 object of class Refpar
@@ -47,7 +66,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 #' @examples 
 #' \dontrun{
 #'  object=new("Refpar")
-#' charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne="CIV")
+#' charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectionne=c("AGJ","CIV")
 #' }
 setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function(object,dc_selectionne,
 				taxon_selectionne,
@@ -61,8 +80,9 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 					" JOIN ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant",
 					" JOIN ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
 					" JOIN ref.tg_parametre_par on par_code=car_par_code",sep="")
-			requete@where=paste("where dis_identifiant=",dc_selectionne)
-			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
+			requete@where=paste("where dis_identifiant in ",vector_to_listsql(dc_selectionne))
+			requete@and=paste("and lot_tax_code in",vector_to_listsql(taxon_selectionne),
+					" and lot_std_code in ",vector_to_listsql(stade_selectionne),sep="")
 			requete@order_by="ORDER BY par_code"  
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
@@ -95,12 +115,13 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choice)
-					object@data<-object@data[car_libelle%in%carchoisi ,]
+					object@par_selectionne<-carchoisi
+					#object@data<-object@data[car_libelle%in%carchoisi ,]
 					assign(nomassign,object,envir_stacomi)
-				 funout(get("msg",envir=envir_stacomi)$Refpar.3)
+					funout(get("msg",envir=envir_stacomi)$Refpar.3)
 				}
 				#frame_par<<-gframe(label)
-        assign(frameassign,gframe(label,horizontal=FALSE),envir= .GlobalEnv)
+				assign(frameassign,gframe(label,horizontal=FALSE),envir= .GlobalEnv)
 				# pour pouvoir la supprimer ensuite
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
@@ -108,4 +129,37 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else funout(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
+		})
+
+
+#' Command line interface to select a parameter
+#' 
+#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' widget in the graphical interface) but from the command line. 
+#' If an objectBilan is passed as a parameter, the method will do a charge_avec_filtre to select only the taxa present in the counting devices
+#' @param object an object of class  \link{Refpar-class}
+#' @param par A character vector of par
+#' @param silent Default FALSE but not used there
+#' @return An object of class \link{Refpar-class}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("choice_c",signature=signature("Refpar"),definition=function(object,par,silent=FALSE) {
+			if (class(par)=="numeric") {
+				par<-as.character(par) 
+			}
+			if (any(is.na(par))) stop ("NA values par")			
+			object@par_selectionne<-par				
+			if (nrow(object@data)==0){
+				stop ("Internal error : tried to set a value for par_selectionne without initializing the data slot")
+			}
+			#validObject(object,test=FALSE) 
+			#here I don't want to generate an error if parm is not present
+			#so I'm not using the validObject which will throw and error
+			concord<-object@par_selectionne%in%object@data$par_code	
+			
+			if (any(!concord)){
+				warning(paste("No data for par",object@par_selectionne[!concord]))
+			}
+				
+			assign("refpar",object,envir=envir_stacomi)
+			return(object)
 		})

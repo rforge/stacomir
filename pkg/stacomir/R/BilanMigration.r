@@ -207,7 +207,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 #' @param object An object of class \code{\link{BilanMigration-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
-#' @param silent Boolean, if true, information messages are not displays, only warnings and errors
+#' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @note The class BilanMigration does not handle escapement rates nor 
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled.
@@ -315,7 +315,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @author cedric.briand
 #' @export
 setMethod("print",signature=signature("BilanMigration"),definition=function(x,...){ 
-			sortie1<-"bilanMigration=new(bilanMigration)\n"
+			sortie1<-"bilanMigration=new('bilanMigration')\n"
 			sortie2<-stringr::str_c("bilanMigration=choice_c(bilanMigration,",
 					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
@@ -351,7 +351,7 @@ setMethod("print",signature=signature("BilanMigration"),definition=function(x,..
 #' @export
 setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(x, y,plot.type="standard",silent=FALSE,...){ 
 			#bilanMigration<-bM_Arzal
-			bilanMigration<-x
+			#bilanMigration<-x
 			if (exists("bilanMigration",envir_stacomi)) {
 				bilanMigration<-get("bilanMigration",envir_stacomi)
 			} else {      

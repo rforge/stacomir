@@ -192,9 +192,12 @@ test_that("All foreign keys are present",
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			req<-new("RequeteODBC")
-			baseODBC<-get("baseODBC", envir=envir_stacomi)	
+			baseODBC<-get("baseODBC", envir=envir_stacomi)
+			options(warn=-1)
+			#warning : Coercing LHS to a list
 			baseODBC$uid=readline(prompt="Enter superuser name: ")
 			baseODBC$pwd=readline(prompt="Enter superuser password: ")	
+			options(warn=0)
 			req@baseODBC<-baseODBC
 			req@sql=paste(stringr::str_c("SELECT
 							distinct on (tc.constraint_name) tc.constraint_name, tc.table_name							

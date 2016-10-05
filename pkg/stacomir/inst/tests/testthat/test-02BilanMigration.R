@@ -10,7 +10,7 @@ test_that("Test an instance of BilanMigration",{
 			assign("sch","iav.",envir_stacomi)
 			
 			bilanMigration<-new("BilanMigration")
-			options(warn = 2)
+			options(warn = -1)
 			bilanMigration<-choice_c(bilanMigration,
 					dc=c(6),
 					taxons=c("Anguilla anguilla"),

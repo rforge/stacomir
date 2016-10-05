@@ -5,14 +5,12 @@
 \alias{connect,Bilan_carlot-method}
 \title{connect method for Bilan_carlot}
 \usage{
-\S4method{connect}{Bilan_carlot}(object, h, ...)
+\S4method{connect}{Bilan_carlot}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{Bilan_carlot-class}}
 
-\item{h}{a handler}
-
-\item{...}{additional parameters passed to the method}
+\item{silent}{Boolean if TRUE messages are not displayed}
 }
 \value{
 An object of class \link{Bilan_carlot-class}

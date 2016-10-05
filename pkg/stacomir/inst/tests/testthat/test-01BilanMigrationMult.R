@@ -3,7 +3,7 @@ test_that("Test an instance of bilanMigrationMult",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = 2)
+			options(warn = -1)
 			bilanMigrationMult<-choice_c(bilanMigrationMult,
 					dc=c(6,7),
 					taxons=c("Anguilla anguilla","Salmo salar"),
@@ -21,7 +21,7 @@ test_that("Test another instance of bilanMigrationMult",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = 2)
+			options(warn = -1)
 			bilanMigrationMult<-choice_c(bilanMigrationMult,
 					dc=c(6,7),
 					taxons=c(2038,2220),
@@ -38,7 +38,7 @@ test_that("Tests one instance with error (dc does not exist)",
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = 2)
+			options(warn = -1)
 			expect_error(choice_c(bilanMigrationMult,
 							dc=c(6,7000),
 							taxons=c("Anguilla anguilla","Salmo salar"),
@@ -55,7 +55,7 @@ test_that("Test charge method for bilanMigrationMult",
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = 2)
+			options(warn = -1)
 			bilanMigrationMult<-choice_c(bilanMigrationMult,
 					dc=c(6,7),
 					taxons=c(2038),
@@ -72,7 +72,7 @@ test_that("Test charge method for bilanMigrationMult",
 				require(stacomiR)
 				stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 				bilanMigrationMult<-new("BilanMigrationMult")
-				options(warn = 2)
+				options(warn = -1)
 				bilanMigrationMult<-choice_c(bilanMigrationMult,
 						dc=c(6,7),
 						taxons=c(2038),
@@ -98,7 +98,9 @@ test_that("Test example 01_BilanMigrationMult",
 			example_path<-file.path(.libPaths(),"stacomiR","R-ex","BilanMigrationMult-class.R")
 			test<-file.access(example_path,0)
 			if (test[1]!=0) warnings("Package example dir not created ?") else
+				options(warn = -1)
 				source(example_path)
+				options(warn = 0)
 			summary(bMM_Arzal,silent=TRUE)
 		})
 

@@ -195,3 +195,12 @@
 #' @keywords data
 "bilanOperation_bM"
 
+#' An object of class \link{Bilan_carlot-class} with data loaded
+#' 
+#' This dataset corresponds to the data collected at two different control devices
+#' at the Arzal control station (see example in \link{Bilan_carlot-class}), all body size 
+#' parameters (total size, size converted from pixel in video control) are used in example
+#' @format An object of class Bilan_carlot
+#' @keywords data
+"b_carlot"
+

@@ -183,6 +183,7 @@ devtools::use_data(bfDF,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanFonctionnementDC
 ##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -206,3 +207,41 @@ bfDC@data$per_commentaires<-iconv(bfDC@data$per_commentaires,from="latin1",to="U
 #plot(bfDC,plot.type="2",title="A nice title")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bfDC,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for Bilan_carlot
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+b_carlot<-new("Bilan_carlot")
+# the following will load data for size, 
+# parameters  1786 (total size) and C001 (size at video control)
+# are all size measures
+# dc 5 and 6 are fishways located on the Arzal dam
+# two stages are selected
+b_carlot<-choice_c(b_carlot,
+		dc=c(5,6),
+		taxons=c("Anguilla anguilla"),
+		stades=c("AGJ","CIV"),
+		par=c(1786,"C001"),
+		horodatedebut="2013-01-01",
+		horodatefin="2013-12-31",
+		silent=FALSE)
+# two warning produced, ignored if silent=TRUE
+b_carlot<-connect(b_carlot)
+b_carlot<-calcule(b_carlot)
+
+b_carlot@dc@data[,"ouv_libelle"]<-iconv(b_carlot@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+b_carlot@dc@data[,"dis_commentaires"]<-iconv(b_carlot@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+b_carlot@dc@data[,"type_df"]<-iconv(b_carlot@dc@data[,"type_df"],from="latin1",to="UTF8")
+b_carlot@dc@data[,"type_dc"]<-iconv(b_carlot@dc@data[,"type_dc"],from="latin1",to="UTF8")
+b_carlot@dc@data[,"dif_localisation"]<-iconv(b_carlot@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+b_carlot@data$dev_libelle<-iconv(b_carlot@data$dev_libelle,from="latin1",to="UTF8")
+b_carlot@data$std_libelle<-iconv(b_carlot@data$std_libelle,from="latin1",to="UTF8")
+b_carlot@data$val_libelle<-iconv(b_carlot@data$val_libelle,from="latin1",to="UTF8")
+b_carlot@data$par_nom<-iconv(b_carlot@data$par_nom,from="latin1",to="UTF8")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)

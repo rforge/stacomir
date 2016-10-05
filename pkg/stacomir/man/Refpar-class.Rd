@@ -10,6 +10,10 @@ Class enabling to load the list of parameters and select one of them
 \section{Slots}{
 
 \describe{
+\item{\code{data}}{A data.frame}
+
+\item{\code{par_selectionne}}{A character vector corresponding to par_code}
+
 \item{\code{data="data.frame"}}{the list of parameters}
 }}
 \section{Objects from the Class}{

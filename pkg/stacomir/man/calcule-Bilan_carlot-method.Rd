@@ -5,12 +5,12 @@
 \alias{calcule,Bilan_carlot-method}
 \title{Calcule method for Bilan_carlot}
 \usage{
-\S4method{calcule}{Bilan_carlot}(object, h)
+\S4method{calcule}{Bilan_carlot}(object, silent)
 }
 \arguments{
 \item{object}{An object of class \code{\link{Bilan_carlot-class}}}
 
-\item{h}{a handler}
+\item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 }
 \description{
 Calcule method for Bilan_carlot
