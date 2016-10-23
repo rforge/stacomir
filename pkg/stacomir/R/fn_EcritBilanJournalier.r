@@ -36,7 +36,7 @@ fn_EcritBilanJournalier<-function(bilanMigration,silent){
 			bilanMigration@dc@dc_selectionne,
 			bilanMigration@taxons@data$tax_code,
 			bilanMigration@stades@data$std_code,
-			unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y")), # une valeur
+			unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1], # une valeur
 			rep(as.character(jour_dans_lannee_non_nuls),ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
 			utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
 			format(Sys.time(), "%Y-%m-%d %H:%M:%S"),

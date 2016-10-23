@@ -35,19 +35,7 @@
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Bilan_stades_pigm", ...)}.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} 
-#' \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} 
-#' \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
-#' \code{\linkS4class{BilanMigrationPar}} 
-#' \code{\link{fnstade}}
+#' @family Bilan Objects
 #' @keywords classes
 #' @references BRIAND C., FATIN D., CICCOTTI E. and LAMBERT P., 2005. A
 #' stage-structured model to predict the effect of temperature and salinity on

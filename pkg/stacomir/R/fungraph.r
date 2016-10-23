@@ -22,7 +22,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	#browser() 
 	#cat("fungraph")
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
-	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))
+	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))[1]
 	mois= months(time.sequence)
 	jour= strftime(as.POSIXlt(time.sequence),"%j")
 	jmois=strftime(as.POSIXlt(time.sequence),"%d")

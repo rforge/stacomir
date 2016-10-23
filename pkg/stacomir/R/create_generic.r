@@ -50,6 +50,11 @@ setGeneric("supprime",def=function(object,...) standardGeneric("supprime"))
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
+setGeneric("write_database",def=function(object,...) standardGeneric("write_database"))
+#' Generic method getvalue
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("getvalue",def=function(object,...) standardGeneric("getvalue"))
 #' Generic method getvalue
 #' @param object Object

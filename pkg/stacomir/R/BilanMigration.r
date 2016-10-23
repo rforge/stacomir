@@ -16,17 +16,7 @@
 #' @note Method \code{plot(...,type="standard")} also calls a function that will write to the database if
 #' a connection to the database is expected.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}, 
-#' \code{\linkS4class{Bilan_poids_moyen}}, 
-#' \code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
-#' \code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
-#' \code{\linkS4class{BilanFonctionnementDC}}, 
-#' \code{\linkS4class{BilanFonctionnementDF}}, 
-#' \code{\linkS4class{BilanMigration}}, 
-#' \code{\linkS4class{BilanMigrationConditionEnv}}, 
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}, 
-#' \code{\linkS4class{BilanMigrationPar}}
-#' @concept Bilan Object 
+#' @family Bilan Objects
 #' @keywords classes
 #' @example inst/examples/bilanMigration_Arzal.R
 #' @export 
@@ -309,7 +299,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 		}
 		
 #' Method to print the command line of the object
-#' @param x An object of class BilanMigrationMult
+#' @param x An object of class BilanMigration
 #' @param ... Additional parameters passed to print
 #' @return NULL
 #' @author cedric.briand
@@ -338,10 +328,7 @@ setMethod("print",signature=signature("BilanMigration"),definition=function(x,..
 #' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 #' }
-#' @note When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-#' these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
-#' then no entry will be written to the database
-#' @param x An object of class BilanMigrationMult
+#' @param x An object of class BilanMigration
 #' @param y From the formals but missing
 #' @param plot.type One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
@@ -419,11 +406,6 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 									silent)
 						}
 					} # end nrow(data)>0	
-					###########################################""
-					# Writes the daily bilan in the database
-					#########################################
-					database_expected<-get("database_expected",envir=envir_stacomi)
-					if (database_expected) fn_EcritBilanJournalier(bilanMigration,silent)
 				} # end is.null(data)
 				
 				################################################################
@@ -446,12 +428,12 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 							heure=FALSE)
 					grdata$Cumsum=cumsum(grdata$Effectif_total)
 					# pour sauvegarder sous excel
-					annee=unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))
+					annee=unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1]
 					dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%bilanMigration@dc@dc_selectionne]) 
-					update_geom_defaults("step", aes(size = 3))
+					update_geom_defaults("line", aes(size = 2))
 					
 					p<-ggplot(grdata)+
-							geom_step(aes(x=debut_pas,y=Cumsum,colour=mois))+
+							geom_line(aes(x=debut_pas,y=Cumsum,colour=mois))+
 							ylab(get("msg",envir_stacomi)$BilanMigration.6)+
 							ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7," ",dis_commentaire,", ",taxon,", ",stade,", ",annee,sep="")) + 
 							theme(plot.title = element_text(size=10,colour="navy"))+
@@ -476,10 +458,15 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 				stop("unrecognised plot.type argument, plot.type should either be standard or step")
 			}
 		})
+		
 
-
-
-
+		
+#' handler for  hBilanMigrationgraph
+#' 
+#' Standard BilanMigration graph over time
+#' @param h handler
+#' @param ... additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -490,7 +477,7 @@ hbilanMigrationgraph = function(h,...) {
 		
 }
 
-#' handler for calcul hBilanMigrationgraph2
+#' handler for hBilanMigrationgraph2
 #' 
 #' Step plot over time
 #' @param h handler
@@ -512,7 +499,6 @@ hbilanMigrationgraph2 = function(h,...) {
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigration=function(h,...) {
-	hTableBilanMigrationMult=function(h=null,...) {
 		if (exists("bilanMigration",envir_stacomi)) 
 		{
 			bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -522,7 +508,7 @@ hTableBilanMigration=function(h,...) {
 			funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 		}
 		summary(bilanMigration)
-	}
+	
 }
 
 #' summary for bilanMigration 
@@ -543,7 +529,10 @@ setMethod("summary",signature=signature(object="BilanMigration"),definition=func
 
 
 #' handler hBilanMigrationwrite
-#' Allows the saving of daily and monthly counts in the database, this method is also called from hbilanMigrationgraph
+#' Allows the saving of daily and monthly counts in the database
+#' @note these entries are necessary to run the Interannual Migration class. 
+#' then no entry will be written to the database
+
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -554,5 +543,11 @@ hbilanMigrationwrite = function(h,...) {
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
-	fn_EcritBilanJournalier(bilanMigration,silent=FALSE)
+	database_expected<-get("database_expected",envir=envir_stacomi)
+	if (database_expected) {
+		fn_EcritBilanJournalier(bilanMigration,silent=TRUE)
+	}	else {
+		funout("no bilan written to database : database_expected argument=FALSE")
+	}
+	
 }

@@ -28,7 +28,6 @@ libraries()
 source("utilitaires.r") # contient  funout (pour ecrire dans la console) et filechoose
 source("messages.R")
 source("fn_table_per_dis.r") 
-source("fn_sql_dis.r")
 source("funtraitementdate.r")  
 #source("vector_to_listsql.r")
 source("funstatJournalier.r") 

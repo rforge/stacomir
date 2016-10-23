@@ -24,6 +24,7 @@
 #' @slot coef_conversion A data frame of daily weight to number conversion coefficients, filled in by the connect
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
+#' @family Bilan Objects
 #' @keywords classes
 #' @export
 #' @example inst/examples/bilanMigrationMult_Arzal.R
@@ -182,12 +183,11 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' @return BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
+			# bilanMigrationMult<-bMM_Arzal
 			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
 			bilanMigrationMult<-object
 			
-			bilanMigrationMult@data$time.sequence=difftime(bilanMigrationMult@data$ope_date_fin,
-					bilanMigrationMult@data$ope_date_debut,
-					units="days")
+
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
 			time.sequence<-seq.POSIXt(from=debut,to=fin,
@@ -223,16 +223,18 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					#----------------------
 					#bilan simple
 					#----------------------
-					data<-fun_bilanMigrationMult(time.sequence = time.sequence,datasub=datasub,negative=negative)
-					data$taux_d_echappement=-1
-					data$coe_valeur_coefficient=NA
+					mydata<-fun_bilanMigrationMult(time.sequence = time.sequence,datasub=datasub,negative=negative)
+					mydata$taux_d_echappement=-1
+					mydata$coe_valeur_coefficient=NA
 					contient_poids<-"poids"%in%datasub$type_de_quantite
 					if (contient_poids){
+						# a ce stade les données contenues dans coe_valeur_coefficient sont nulles on enlève la colonne avant le merge
+						mydata<-mydata[,-match("coe_valeur_coefficient",colnames(mydata))]
 						coe<-bilanMigrationMult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
-						data$coe_date_debut<-as.Date(data$debut_pas)
-						data<-merge(data,coe,by="coe_date_debut")
-						data<-data[,-1] # removing coe_date_debut
-						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigrationMult@time.sequence,silent)
+						mydata$coe_date_debut<-as.Date(mydata$debut_pas)
+						mydata2<-merge(mydata,coe,by="coe_date_debut")
+						mydata2<-mydata2[,-match("coe_date_debut",colnames(mydata2))] # removing coe_date_debut
+						data <-fun_weight_conversion(tableau=mydata2,time.sequence=bilanMigrationMult@time.sequence,silent)
 					}
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"sum"
@@ -596,6 +598,7 @@ hbilanMigrationMultcalc=function(h=null,...){
 	bilanMigrationMult<-get("bilanMigrationMult",envir=envir_stacomi)
 	bilanMigrationMult<-charge(bilanMigrationMult)
 	# charge loads the method connect
+	bilanMigrationMult<-connect(bilanMigrationMult)
 	bilanMigrationMult<-calcule(bilanMigrationMult)
 }
 

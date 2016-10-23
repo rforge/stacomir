@@ -394,7 +394,8 @@ interface_graphique=function(){
 		dir.create(path.expand(get("datawd",envir=envir_stacomi)))
 	}
 	
-	col.sortie=rep(c("pink","purple","red","orange","green","blue","cyan","magenta"),20) # couleurs pour le texte
+	col.sortie=rep(c("pink","purple","red","orange","green","blue","cyan","magenta"),20)  # couleurs pour le texte
+	# attention doivent être standard
 	assign("col.sortie",col.sortie,.GlobalEnv)
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)

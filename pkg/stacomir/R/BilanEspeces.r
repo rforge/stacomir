@@ -15,7 +15,6 @@
 #' @slot data \code{data.frame}
 #' @slot liste Object of class \code{\link{RefListe-class}} RefListe referential
 #' class choose within a list
-
 #' @include RefDC.r
 #' @include RefListe.r
 #' @section Objects from the Class: Objects can be created by calls of the form
@@ -32,7 +31,7 @@
 #' \code{\linkS4class{BilanMigrationConditionEnv}},
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}},
 #' \code{\linkS4class{BilanMigrationPar}}
-#' @concept Bilan Object 
+#' @family Bilan Objects
 #' @keywords classes
 #' @export 
 setClass(Class="BilanEspeces",

@@ -22,20 +22,6 @@ validite_Annee=function(object)
 #' \code{new("RefAnnee", data=data.frame(), annee_selectionnee=numeric())}.
 #' @slot data A \code{data.frame} with the list of possible years selected as numerics
 #' @slot annee_selectionnee A numeric vector
-#' @seealso Other referential classes 
-#' \code{\linkS4class{RefAnnee}}
-#' \code{\linkS4class{RefCheckBox}} 
-#' \code{\linkS4class{RefChoix}}
-#' \code{\linkS4class{RefCoe}}
-#' \code{\linkS4class{RefDC}}
-#' \code{\linkS4class{RefDF}} 
-#' \code{\linkS4class{RefListe}}
-#' \code{\linkS4class{Refpar}} 
-#' \code{\linkS4class{Refparqual}}
-#' \code{\linkS4class{Refparquan}} 
-#' \code{\linkS4class{RefStades}} 
-#' \code{\linkS4class{RefStationMesure}}
-#' \code{\linkS4class{RefTaxon}}
 #' @keywords classes
 #' @family Referential objects
 #' @author cedric.briand"at"eptb-vilaine.fr

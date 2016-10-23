@@ -16,17 +16,7 @@
 #' \code{"BilanConditionEnv"} The environmental overview}\item{:}{Object of
 #' class \code{"BilanConditionEnv"} The environmental overview} }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
-#' \code{\linkS4class{BilanMigrationPar}}
-#' @concept Bilan Object 
+#' @family Bilan Objects
 #' @keywords classes
 #' @export 
 setClass(Class="BilanMigrationConditionEnv",representation=

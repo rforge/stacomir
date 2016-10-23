@@ -12,7 +12,7 @@ test_that("Test that view lot_ope_car exists",{
 			expect_true(nrow(result)>0)
 		})
 
-test_that("Test an instance of Bilan_opecar loaded with choice_c",{
+test_that("Test an instance of Bilan_carlot loaded with choice_c",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav
@@ -40,7 +40,7 @@ test_that("Test an instance of Bilan_opecar loaded with choice_c",{
 		})
 
 
-test_that("Test methods in Bilan_opecar",{
+test_that("Test methods in Bilan_carlot",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav

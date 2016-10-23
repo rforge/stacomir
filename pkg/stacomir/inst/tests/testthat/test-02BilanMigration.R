@@ -112,3 +112,32 @@ test_that("print method works",
 			expect_output(print(bM_Arzal), "bilanMigration=choice_c",info = NULL)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
+
+
+
+test_that("test example for fd80",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("fd80",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","fd80.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			bM_EclusierVaux=new("BilanMigration")
+			bM_EclusierVaux=choice_c(bM_EclusierVaux,
+					dc=6,
+					taxons=c("Anguilla anguilla"),
+					stades=c("AGG"),
+					datedebut="2016-01-01",
+					datefin="2016-12-31")
+			bM_EclusierVaux<-charge(bM_EclusierVaux,silent=TRUE)
+			bM_EclusierVaux<-connect(bM_EclusierVaux,silent=TRUE)
+			bM_EclusierVaux<-calcule(bM_EclusierVaux)
+			plot(bM_EclusierVaux)
+			summary(bM_EclusierVaux)
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})

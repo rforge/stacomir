@@ -30,7 +30,7 @@ test_that("Test that the parsing of wrong character formats gets an error",
 			expect_error(refHorodate<-choice_c(refHorodate,	
 							horodate="2013 01 01"))	
 			options(warn = 2)
-			rm("envir_stacomi",envir =.GlobalEnv)
+			
 		})
 
 context("RefDF")

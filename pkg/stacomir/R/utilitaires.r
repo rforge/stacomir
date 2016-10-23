@@ -5,9 +5,16 @@
 #' @param \dots additional arguments passed to the function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 quitte=function(...){
-	if (exists("ggroupboutonsbas",envir=envir_stacomi)) delete(ggroupboutons,ggroupboutonsbas)
-     rm
-	if (exists("group",envir=envir_stacomi)) {
+	# all gWidgets object are assigned in .GlobalEnv, the other are in envir_stacomi
+	if (exists("ggroupboutonsbas",envir=.GlobalEnv)) 
+		# delete for something added with the add method
+		delete(ggroupboutons,ggroupboutonsbas)
+
+	if (exists("notebook",envir=envir_stacomi))
+		dispose(notebook)
+	
+
+	if (exists("group",envir=.GlobalEnv)) {
 		delete(ggroupboutons,group) 
 		rm(group,envir= .GlobalEnv)
 	}
@@ -19,8 +26,8 @@ quitte=function(...){
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}
-	if (length(ls(pattern="frame",envir=envir_stacomi))!=0) {
-		rm(list=ls(pattern="frame",envir=envir_stacomi),envir=envir_stacomi)
+	if (length(ls(pattern="frame",envir=.GlobalEnv))!=0) {
+		rm(list=ls(pattern="frame",envir=.GlobalEnv),envir=.GlobalEnv)
 	}
 	if (exists("g")) rm(g)
 }
