@@ -18,12 +18,12 @@ interface_BilanFonctionnementDC = function()
     
    gWidgets::add(ggroupboutons,group)
     choice(bilanFonctionnementDC@dc)
-    choice(bilanFonctionnementDC@horodate,
+    choice(bilanFonctionnementDC@horodatedebut,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
 			nomassign="bilanFonctionnementDC_date_debut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 			decal=-2)
-    choice(bilanFonctionnementDC@horodate,
+    choice(bilanFonctionnementDC@horodatefin,
 			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
 			nomassign="bilanFonctionnementDC_date_fin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
