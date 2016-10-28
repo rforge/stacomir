@@ -204,3 +204,12 @@
 #' @keywords data
 "b_carlot"
 
+#' An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded
+#' 
+#' The first eel trapping ladder in France was built by Antoine Legault and the team from Rennes
+#' in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 1984 it has been 
+#' operational at the same location and provides one of the longest series of eel migration. For this reason,
+#' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class 
+#' @format An object of class BilanMigrationInterAnnuelle-class with data slot loaded.
+#' @keywords data
+"bmi"

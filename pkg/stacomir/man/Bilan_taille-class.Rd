@@ -53,19 +53,16 @@ showClass("Bilan_taille")
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_carlot}}, 
-\code{\linkS4class{Bilan_poids_moyen}}, 
-\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
-\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
-\code{\linkS4class{BilanFonctionnementDC}}, 
-\code{\linkS4class{BilanFonctionnementDF}}, 
-\code{\linkS4class{BilanMigration}}, 
-\code{\linkS4class{BilanMigrationConditionEnv}}, 
-\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
-\code{\linkS4class{BilanMigrationPar}}
-}
-\concept{
-Bilan Object
+Other Bilan Objects: \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}},
+  \code{\link{Bilan_stades_pigm-class}}
 }
 \keyword{classes}
 

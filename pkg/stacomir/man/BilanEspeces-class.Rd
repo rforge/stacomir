@@ -45,9 +45,17 @@ Other Bilan Classes
 \code{\linkS4class{BilanMigrationConditionEnv}},
 \code{\linkS4class{BilanMigrationInterAnnuelle}},
 \code{\linkS4class{BilanMigrationPar}}
-}
-\concept{
-Bilan Object
+
+Other Bilan Objects: \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}},
+  \code{\link{Bilan_stades_pigm-class}},
+  \code{\link{Bilan_taille-class}}
 }
 \keyword{classes}
 

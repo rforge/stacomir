@@ -13,7 +13,7 @@
 \item{silent}{Stops messages from being displayed if silent=TRUE, default FALSE}
 }
 \value{
-bilanMigrationInterannuelle an instantianted object with values filled with user choice
+bilanMigrationInterAnnuelle an instantianted object with values filled with user choice
 }
 \description{
 connect method for BilanMigrationInterannuelle class

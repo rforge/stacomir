@@ -38,8 +38,6 @@ assign("bilanFonctionnementDC",bilanFonctionnementDC_bM,envir=envir_stacomi)
 bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
-# this will also write daily and monthly migration balance to the database,
-# but only if stacomi has been run with argument : database_expected=FALSE
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
@@ -49,5 +47,9 @@ plot(bM_Arzal,plot.type="step")
 #file
 
 \dontrun{
-summary(bM_Arzal,silent=TRUE)
+	summary(bM_Arzal,silent=TRUE)
+}
+
+\dontrun{
+	fn_EcritBilanJournalier(bM_Arzal,silent=TRUE)
 }

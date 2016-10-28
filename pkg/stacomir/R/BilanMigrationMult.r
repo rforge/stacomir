@@ -228,7 +228,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 					mydata$coe_valeur_coefficient=NA
 					contient_poids<-"poids"%in%datasub$type_de_quantite
 					if (contient_poids){
-						# a ce stade les données contenues dans coe_valeur_coefficient sont nulles on enlève la colonne avant le merge
+						# at this tage data for coe_valeur_coefficient are null, we remove the column before merging
 						mydata<-mydata[,-match("coe_valeur_coefficient",colnames(mydata))]
 						coe<-bilanMigrationMult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
 						mydata$coe_date_debut<-as.Date(mydata$debut_pas)

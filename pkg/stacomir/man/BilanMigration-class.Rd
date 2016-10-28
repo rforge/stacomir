@@ -73,8 +73,6 @@ assign("bilanFonctionnementDC",bilanFonctionnementDC_bM,envir=envir_stacomi)
 bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
-# this will also write daily and monthly migration balance to the database,
-# but only if stacomi has been run with argument : database_expected=FALSE
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
@@ -84,26 +82,27 @@ plot(bM_Arzal,plot.type="step")
 #file
 
 \dontrun{
-summary(bM_Arzal,silent=TRUE)
+	summary(bM_Arzal,silent=TRUE)
+}
+
+\dontrun{
+	fn_EcritBilanJournalier(bM_Arzal,silent=TRUE)
 }
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Class \code{\linkS4class{Bilan_carlot}}, 
-\code{\linkS4class{Bilan_poids_moyen}}, 
-\code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}}, 
-\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}}, 
-\code{\linkS4class{BilanFonctionnementDC}}, 
-\code{\linkS4class{BilanFonctionnementDF}}, 
-\code{\linkS4class{BilanMigration}}, 
-\code{\linkS4class{BilanMigrationConditionEnv}}, 
-\code{\linkS4class{BilanMigrationInterAnnuelle}}, 
-\code{\linkS4class{BilanMigrationPar}}
-}
-\concept{
-Bilan Object
+Other Bilan Objects: \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}},
+  \code{\link{Bilan_stades_pigm-class}},
+  \code{\link{Bilan_taille-class}}
 }
 \keyword{classes}
 

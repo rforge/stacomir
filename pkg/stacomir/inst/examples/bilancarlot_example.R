@@ -53,7 +53,8 @@ b_carlot@data$std_libelle[b_carlot@data$std_libelle=="civelle"]<-"Glass eel (ram
 if (requireNamespace("ggplot2", quietly = TRUE)){
 	g<-ggplot2::ggplot(b_carlot@data)+
 			ggplot2::geom_boxplot(ggplot2::aes(x=annee,
-							ymax =car_valeur_quantitatif,fill = std_libelle))+		
+							ymax =car_valeur_quantitatif,
+							fill = std_libelle))+		
 			ggplot2::xlab("size")+ggplot2::ylab("year")+
 			ggplot2::scale_fill_manual("stage & fishway",
 					values=c("Yellow eel (vert. slot fishway)"="blue",

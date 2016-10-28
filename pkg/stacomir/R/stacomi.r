@@ -395,7 +395,7 @@ interface_graphique=function(){
 	}
 	
 	col.sortie=rep(c("pink","purple","red","orange","green","blue","cyan","magenta"),20)  # couleurs pour le texte
-	# attention doivent être standard
+	# beware these must be standard colors usable by gWidgets
 	assign("col.sortie",col.sortie,.GlobalEnv)
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)

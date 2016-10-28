@@ -32,23 +32,54 @@ setClass(Class="RefAnnee",representation=
 
 #' Loading method for RefAnnee referential objects
 #' 
-#' Selects year avalaible in the t_operation_ope table
+#' Selects year avalaible either in the bjo table (if ObjetBilan==BilanMigrationInterannelle) or in the t_operation_ope table
 #' @param object An object of class RefAnnee
+#' @param objectBilan The object Bilan, default "Bilan_poids_moyen" other possible value BilanMigrationInterAnnuelle
 #' @return object An object of class RefAnnee with slot data filled with the selected value
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples   
 #' \dontrun{
 #' object=new("RefAnnee")
 #' charge(object)
-#'  validObject( annee)
+#'  validObject(annee)
 #' showMethods("charge")
 #' }
-setMethod("charge",signature=signature("RefAnnee"),definition=function(object){
+setMethod("charge",signature=signature("RefAnnee"),definition=function(object,objectBilan="Bilan_poids_moyen"){
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
-					get("sch",envir=envir_stacomi),
-					"t_operation_ope) as tabletemp",sep="")
+			if (objectBilan=="BilanMigrationInterAnnuelle") {
+				if (exists("refDC",envir_stacomi)) {
+					dc<-get("refDC",envir_stacomi)
+					and1<-paste(" AND bjo_dis_identifiant =",dc@dc_selectionne)
+				} else {
+					and1<-""
+				}
+				if (exists("refTaxon",envir_stacomi)) {
+					taxons<-get("refTaxon",envir_stacomi)
+					and2<-stringr::str_c(" AND bjo_tax_code ='",taxons@data$tax_code,"'")
+				} else {      
+					and2<-""
+				}
+				if (exists("refStades",envir_stacomi)){
+					stades<-get("refStades",envir_stacomi)
+					and3<-stringr::str_c(" AND bjo_std_code ='",stades@data$std_code,"'")
+				} else 
+				{
+					and3=""
+				}
+				requete@sql=paste("select  DISTINCT ON (bjo_annee) bjo_annee from ",
+						get("sch",envir=envir_stacomi),
+						"t_bilanmigrationjournalier_bjo where bjo_identifiant>0 ",
+						# I want and statements to not have to choose the order
+						# the where statement is always verified
+						and1,and2,and3, sep="")	
+			} else if (objectBilan=="Bilan_poids_moyen") {
+				requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
+						get("sch",envir=envir_stacomi),
+						"t_operation_ope) as tabletemp",sep="")
+			} else {
+				funout(paste("Not implemented for objectBilan =",objectBilan),arret=TRUE)
+			}
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
 			return(object)
@@ -93,4 +124,44 @@ setMethod("choice",
 			} else { 
 				funout(get("msg",envir=envir_stacomi)$RefAnnee.3,arret=TRUE)  
 			}
+		}) 
+
+
+#' choice method for RefAnnee referential from the command line
+#' 
+#' Allows the selection of year and the assignment in environment envir_stacomi
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefAnnee-class}
+#' @param annee The year to select, either as a character or as a numeric
+#' @param nomassign The name to be asssigned in envir_stacomi
+#' @param funoutlabel The label that appears in funout
+#' @param silent Stops messages from being displayed if silent=TRUE, default FALSE
+#' @examples  
+#' \dontrun{
+#' object=new("RefAnnee")
+#' object<-charge(object)
+#' win=gwindow(title="test refAnnee")
+#' group=ggroup(container=win,horizontal=FALSE)
+#' choice(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
+#' dispose(win)
+#' }
+setMethod("choice_c",
+		signature=signature("RefAnnee"),definition=function(object,
+				annee,
+				nomassign="refAnnee", 
+				funoutlabel=get("msg",envir=envir_stacomi)$RefAnnee.2,
+				silent=FALSE
+		){
+			if (length(annee)>1) stop("horodate should be a vector of length 1")
+			if (class (annee)=="character") annee<-as.numeric(annee)
+			# the charge method must be performed before
+			
+			if (! annee %in% object@data$bjo_annee) {
+				warning(stringr::str_c("year,",annee," not available in the database, available years",stringr::str_c(object@data$bjo_annee,collapse=",")))
+			} else {
+				object@annee_selectionnee<-annee
+			}
+			assign(nomassign,object,envir_stacomi)
+			if (! silent) funout(funoutlabel)  	
+			return(object)
 		}) 

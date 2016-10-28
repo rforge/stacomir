@@ -150,6 +150,7 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDC"),definition=fun
 #' with the number of the DF
 #' @return Nothing but prints the different plots
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases plot.BilanFonctionnementDC plot.bilanFonctionnementDC plot.bfDC
 #' @export
 setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				function(x, 

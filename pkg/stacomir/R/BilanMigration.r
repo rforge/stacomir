@@ -272,13 +272,14 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 					funout(get("msg",envir_stacomi)$BilanMigration.3)
 					funout(get("msg",envir_stacomi)$BilanMigration.4)
 				}
-				return(bilanMigration)
+				
 				
 				
 			} else {
 				# no fish...
 				funout(get("msg",envir_stacomi)$BilanMigration.10)
 			}
+			return(bilanMigration)
 		})
 
 		
@@ -320,7 +321,7 @@ setMethod("print",signature=signature("BilanMigration"),definition=function(x,..
 
 
 
-#' Plots of various type for BilanMigration, and performs writing to the database of daily values.
+#' Plots of various type for BilanMigration.
 #' 
 #' \itemize{
 #' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"

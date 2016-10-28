@@ -5,23 +5,25 @@
 \alias{charge,RefAnnee-method}
 \title{Loading method for RefAnnee referential objects}
 \usage{
-\S4method{charge}{RefAnnee}(object)
+\S4method{charge}{RefAnnee}(object, objectBilan = "Bilan_poids_moyen")
 }
 \arguments{
 \item{object}{An object of class RefAnnee}
+
+\item{objectBilan}{The object Bilan, default "Bilan_poids_moyen" other possible value BilanMigrationInterAnnuelle}
 }
 \value{
 object An object of class RefAnnee with slot data filled with the selected value
 }
 \description{
-Selects year avalaible in the t_operation_ope table
+Selects year avalaible either in the bjo table (if ObjetBilan==BilanMigrationInterannelle) or in the t_operation_ope table
 }
 \examples{
   
 \dontrun{
 object=new("RefAnnee")
 charge(object)
- validObject( annee)
+ validObject(annee)
 showMethods("charge")
 }
 }

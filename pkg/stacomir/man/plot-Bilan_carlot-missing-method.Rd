@@ -3,6 +3,9 @@
 \docType{methods}
 \name{plot,Bilan_carlot,missing-method}
 \alias{plot,Bilan_carlot,missing-method}
+\alias{plot.Bilan_carlot}
+\alias{plot.b_carlot}
+\alias{plot.bilan_carlot}
 \title{Plots of various type for BilanMigration, and performs writing to the database of daily values.}
 \usage{
 \S4method{plot}{Bilan_carlot,missing}(x, plot.type = "1", silent = FALSE)

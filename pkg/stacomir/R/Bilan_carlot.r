@@ -223,6 +223,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 #' @param silent Stops displaying the messages.
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases plot.Bilan_carlot plot.bilan_carlot plot.b_carlot
 #' @export
 setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=function(x, plot.type="1", silent=FALSE){ 
 			#bilan_carlot<-b_carlot;require(ggplot2);plot.type="1"

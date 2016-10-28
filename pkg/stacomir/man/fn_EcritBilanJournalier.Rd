@@ -5,12 +5,19 @@
 \title{fn_EcritBilanJournier writes the daily migration in the
 t_bilanmigrationjournalier_bjo table}
 \usage{
-fn_EcritBilanJournalier(bilanMigration, silent)
+fn_EcritBilanJournalier(bilanMigration, silent = FALSE,
+  dbname = "bd_contmig_nat", host = "localhost", port = 5432)
 }
 \arguments{
 \item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
 
 \item{silent}{: TRUE to avoid messages}
+
+\item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
+
+\item{host}{: the host for sqldf, defaults to "localhost"}
+
+\item{port}{: the port, defaults to 5432}
 }
 \description{
 Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
@@ -18,7 +25,8 @@ the function fn_EcritBilanJournalier
 }
 \note{
 the user is asked whether or not he wants to overwrite data, if no
-data are present in the database, the import is done anyway
+data are present in the database, the import is done anyway. The name of the database
+is not passed in odbc link, here defaults to "bd_contmig_nat"
 }
 \examples{
 \dontrun{

@@ -8,7 +8,7 @@
 \S4method{print}{BilanMigration}(x, ...)
 }
 \arguments{
-\item{x}{An object of class BilanMigrationMult}
+\item{x}{An object of class BilanMigration}
 
 \item{...}{Additional parameters passed to print}
 }

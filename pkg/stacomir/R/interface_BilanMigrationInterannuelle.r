@@ -45,8 +45,8 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	toolbarlist1 = list(
 			aGraph=gWidgets::gaction(label="all",icon="lines",handler=hgraphBilanMigrationInterAnnuelle,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
 			aGraph7=gWidgets::gaction(label="cum15",icon="curve",handler=hgraphBilanMigrationInterAnnuelle7,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
-			aGraph3=gWidgets::gaction(label="cum",icon="graph2",handler=hgraphBilanMigrationInterAnnuelle3,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.7),
-			aTable=gWidgets::gaction(label="table",icon="dataframe",handler=htableBilanMigrationInterAnnuelle,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.8),
+			aGraph3=gWidgets::gaction(label="step",icon="graph2",handler=hgraphBilanMigrationInterAnnuelle3,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.7),
+			aSummary=gWidgets::gaction(handler=hsummaryBilanMigrationInterannuelle, icon="dataframe", label="stat", tooltip="summary"),  
 			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9)
 	)
 	toolbarlist2=list(

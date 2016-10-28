@@ -89,7 +89,8 @@ b_carlot@data$std_libelle[b_carlot@data$std_libelle=="civelle"]<-"Glass eel (ram
 if (requireNamespace("ggplot2", quietly = TRUE)){
 	g<-ggplot2::ggplot(b_carlot@data)+
 			ggplot2::geom_boxplot(ggplot2::aes(x=annee,
-							ymax =car_valeur_quantitatif,fill = std_libelle))+		
+							ymax =car_valeur_quantitatif,
+							fill = std_libelle))+		
 			ggplot2::xlab("size")+ggplot2::ylab("year")+
 			ggplot2::scale_fill_manual("stage & fishway",
 					values=c("Yellow eel (vert. slot fishway)"="blue",
@@ -108,21 +109,16 @@ print(b_carlot)
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Class \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} 
-\code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} 
-\code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
-\code{\linkS4class{BilanMigrationPar}}
-}
-\concept{
-Bilan Object
+Other Bilan Objects: \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_poids_moyen-class}},
+  \code{\link{Bilan_stades_pigm-class}},
+  \code{\link{Bilan_taille-class}}
 }
 \keyword{classes}
 

@@ -161,6 +161,7 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 #' @param main The title of the graph, if NULL a default title will be plotted with the number of the DF
 #' @return Nothing but prints the different plots
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases plot.BilanFonctionnementDF plot.bilanFonctionnementDF plot.bfDF
 #' @export
 setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=function(x, y,plot.type=1,silent=FALSE,main=NULL){ 
 			#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

@@ -4,10 +4,12 @@
 \alias{fundat}
 \title{statistics per time period}
 \usage{
-fundat(dat, timesplit = NULL)
+fundat(dat, annee = NULL, timesplit = NULL)
 }
 \arguments{
 \item{dat}{a data frame}
+
+\item{annee}{The year to exclude from the historical series (it will be plotted against the historical series)}
 
 \item{timesplit}{"week" "2 week" "month" as provided to seq.POSIXT, default NULL}
 }

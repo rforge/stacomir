@@ -3,13 +3,13 @@
 \docType{methods}
 \name{plot,BilanMigration,ANY-method}
 \alias{plot,BilanMigration,ANY-method}
-\title{Plots of various type for BilanMigration, and performs writing to the database of daily values.}
+\title{Plots of various type for BilanMigration.}
 \usage{
 \S4method{plot}{BilanMigration,ANY}(x, y, plot.type = "standard",
   silent = FALSE, ...)
 }
 \arguments{
-\item{x}{An object of class BilanMigrationMult}
+\item{x}{An object of class BilanMigration}
 
 \item{y}{From the formals but missing}
 
@@ -27,11 +27,6 @@
 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 }
-}
-\note{
-When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
-then no entry will be written to the database
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -239,9 +239,50 @@ b_carlot@dc@data[,"dis_commentaires"]<-iconv(b_carlot@dc@data[,"dis_commentaires
 b_carlot@dc@data[,"type_df"]<-iconv(b_carlot@dc@data[,"type_df"],from="latin1",to="UTF8")
 b_carlot@dc@data[,"type_dc"]<-iconv(b_carlot@dc@data[,"type_dc"],from="latin1",to="UTF8")
 b_carlot@dc@data[,"dif_localisation"]<-iconv(b_carlot@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+b_carlot@par@data[,"par_nom"]<-iconv(b_carlot@par@data[,"par_nom"],from="latin1",to="UTF8")
 b_carlot@data$dev_libelle<-iconv(b_carlot@data$dev_libelle,from="latin1",to="UTF8")
 b_carlot@data$std_libelle<-iconv(b_carlot@data$std_libelle,from="latin1",to="UTF8")
 b_carlot@data$val_libelle<-iconv(b_carlot@data$val_libelle,from="latin1",to="UTF8")
 b_carlot@data$par_nom<-iconv(b_carlot@data$par_nom,from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for BilanMigrationInterAnnuelle
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+require(stacomiR)
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("pmp",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","pmp.",envir_stacomi)
+bmi<-new("BilanMigrationInterAnnuelle")
+
+bmi<-choice_c(bmi,
+		dc=16,
+		taxons=c("Anguilla anguilla"),
+		stades=c("AGJ"),
+		anneedebut=1984,
+		anneefin=2015,
+		silent=TRUE)
+bmi<-connect(bmi,silent=TRUE)	
+
+
+bmi@dc@data[,"ouv_libelle"]<-iconv(bmi@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bmi@dc@data[,"dis_commentaires"]<-iconv(bmi@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bmi@dc@data[,"type_df"]<-iconv(bmi@dc@data[,"type_df"],from="latin1",to="UTF8")
+bmi@dc@data[,"type_dc"]<-iconv(bmi@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bmi@dc@data[,"dif_localisation"]<-iconv(bmi@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(bmi,internal=FALSE,overwrite=TRUE)
+
+
+

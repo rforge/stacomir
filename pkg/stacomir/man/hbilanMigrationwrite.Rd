@@ -3,7 +3,7 @@
 \name{hbilanMigrationwrite}
 \alias{hbilanMigrationwrite}
 \title{handler hBilanMigrationwrite
-Allows the saving of daily and monthly counts in the database, this method is also called from hbilanMigrationgraph}
+Allows the saving of daily and monthly counts in the database}
 \usage{
 hbilanMigrationwrite(h, ...)
 }
@@ -14,7 +14,11 @@ hbilanMigrationwrite(h, ...)
 }
 \description{
 handler hBilanMigrationwrite
-Allows the saving of daily and monthly counts in the database, this method is also called from hbilanMigrationgraph
+Allows the saving of daily and monthly counts in the database
+}
+\note{
+these entries are necessary to run the Interannual Migration class. 
+then no entry will be written to the database
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

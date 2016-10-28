@@ -3,6 +3,9 @@
 \docType{methods}
 \name{plot,BilanFonctionnementDC,ANY-method}
 \alias{plot,BilanFonctionnementDC,ANY-method}
+\alias{plot.BilanFonctionnementDC}
+\alias{plot.bfDC}
+\alias{plot.bilanFonctionnementDC}
 \title{Different plots for BilanFonctionnementDC}
 \usage{
 \S4method{plot}{BilanFonctionnementDC,ANY}(x, y, plot.type = 1,
