@@ -4,7 +4,7 @@
 #' 
 #' Description of a control device.
 #' 
-#' 
+#' @include create_generic.r
 #' @slot dc_selectionne Object of class \code{"integer"}, The selected device
 #' @slot ouvrage Object of class \code{"integer"}, the attached dam
 #' @slot station Object of class \code{"character"}, the attached migration monitoring station, this is necessary to join the

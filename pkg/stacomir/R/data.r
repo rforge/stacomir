@@ -213,3 +213,17 @@
 #' @format An object of class BilanMigrationInterAnnuelle-class with data slot loaded.
 #' @keywords data
 "bmi"
+
+#' An object of class \link{BilaAnnuels-class} with data loaded
+#' 
+#' The dataset corresponds to the three fishways located on the Arzal dam, filled with annual data
+#' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
+#' @keywords data
+"bilA"
+
+#' Annual migration of salmon by migradour
+#' 
+#' The dataset corresponds to the fishways of the Adour for adult migrant salmons
+#' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
+#' @keywords data
+"bilAM"

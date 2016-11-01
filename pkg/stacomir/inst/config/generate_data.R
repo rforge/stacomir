@@ -283,6 +283,61 @@ bmi@dc@data[,"dif_localisation"]<-iconv(bmi@dc@data[,"dif_localisation"],from="l
 
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bmi,internal=FALSE,overwrite=TRUE)
+#################################
+# generates dataset for BilanAnnuels
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("iav",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","iav.",envir_stacomi)
+bilA<-new("BilanAnnuels")
+bilA<-choice_c(bilA,
+		dc=c(5,6,12),
+		taxons=c("Anguilla anguilla"),
+		stades=c("AGJ","AGG"),
+		anneedebut="1996",
+		anneefin="2015",
+		silent=FALSE)
+bilA<-connect(bilA)	
+bilA@dc@data[,"dis_commentaires"]<-iconv(bilA@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilA@dc@data[,"type_df"]<-iconv(bilA@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilA@dc@data[,"type_dc"]<-iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilA@dc@data[,"dif_localisation"]<-iconv(bilA@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilA@taxons@data[,"tax_nom_commun"]<-iconv(bilA@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bilA@stades@data[,"std_libelle"]<-iconv(bilA@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(bilA,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for BilanAnnuels : migradour
+##################################
 
 
-
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("migradour",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","migradour.",envir_stacomi)
+bilAM<-new("BilanAnnuels")
+bilAM<-choice_c(bilAM,
+		dc=c(22,33:40),
+		taxons=c("Salmo salar"),
+		stades=c(11),
+		anneedebut="1996",
+		anneefin="2015",
+		silent=FALSE)
+bilAM<-connect(bilAM)
+bilAM@dc@data[,"dis_commentaires"]<-iconv(bilAM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilAM@dc@data[,"type_df"]<-iconv(bilAM@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilAM@dc@data[,"type_dc"]<-iconv(bilAM@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilAM@dc@data[,"dif_localisation"]<-iconv(bilAM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilAM@taxons@data[,"tax_nom_commun"]<-iconv(bilAM@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bilAM@stades@data[,"std_libelle"]<-iconv(bilAM@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+setwd("F:/workspace/stacomir/pkg/stacomir")
+devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)

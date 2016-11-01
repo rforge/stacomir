@@ -73,6 +73,7 @@ setGeneric("createmessage",def=function(object,...) standardGeneric("createmessa
 
 
 
+
 #' Environment where most objects from the package are stored and then loaded
 #' by the charge method
 #' 

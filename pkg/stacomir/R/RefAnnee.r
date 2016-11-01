@@ -20,6 +20,7 @@ validite_Annee=function(object)
 #' Class used to select one or several years 
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("RefAnnee", data=data.frame(), annee_selectionnee=numeric())}.
+#' @include create_generic.r
 #' @slot data A \code{data.frame} with the list of possible years selected as numerics
 #' @slot annee_selectionnee A numeric vector
 #' @keywords classes
@@ -77,6 +78,33 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 				requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
 						get("sch",envir=envir_stacomi),
 						"t_operation_ope) as tabletemp",sep="")
+			} else if (objectBilan=="BilanAnnuels") {
+				if (exists("refDC",envir_stacomi)) {
+					dc<-get("refDC",envir_stacomi)
+					and1<-paste(" AND ope_dic_identifiant in ",vector_to_listsql(dc@dc_selectionne))
+				} else {
+					and1<-""
+				}
+				if (exists("refTaxon",envir_stacomi)) {
+					taxons<-get("refTaxon",envir_stacomi)
+					and2<-stringr::str_c(" AND lot_tax_code in ",vector_to_listsql(taxons@data$tax_code))
+				} else {      
+					and2<-""
+				}
+				if (exists("refStades",envir_stacomi)){
+					stades<-get("refStades",envir_stacomi)
+					and3<-stringr::str_c(" AND lot_std_code in ",vector_to_listsql(stades@data$std_code))
+				} else 
+				{
+					and3=""
+				}
+				requete@sql=paste("select  DISTINCT ON (year) year from (select date_part('year', ope_date_debut) as year from ",
+						get("sch",envir=envir_stacomi),
+						"t_operation_ope JOIN ",
+						get("sch",envir=envir_stacomi),
+						"t_lot_lot on lot_ope_identifiant=ope_identifiant",
+						" WHERE lot_lot_identifiant is null",
+						and1,and2,and3, ") as tabletemp", sep="")				
 			} else {
 				funout(paste("Not implemented for objectBilan =",objectBilan),arret=TRUE)
 			}
@@ -156,7 +184,7 @@ setMethod("choice_c",
 			if (class (annee)=="character") annee<-as.numeric(annee)
 			# the charge method must be performed before
 			
-			if (! annee %in% object@data$bjo_annee) {
+			if ( !annee %in% object@data$bjo_annee & !annee %in% object@data$year) {
 				warning(stringr::str_c("year,",annee," not available in the database, available years",stringr::str_c(object@data$bjo_annee,collapse=",")))
 			} else {
 				object@annee_selectionnee<-annee

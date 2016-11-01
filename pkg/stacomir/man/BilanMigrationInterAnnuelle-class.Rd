@@ -35,8 +35,6 @@ stacomi(gr_interface=FALSE,
 		database_expected=FALSE)
 # the following script will load the Arzal dataset if connected to iav schema
 \dontrun{
-	#create an instance of the class
-	bmi<-new("BilanMigrationInterAnnuelle")
 	# overriding user schema to point to Parc Marais Poitevin 
 	# (longest historical dataset available
     # in France for eel ...) this suppose you have access to the pmp schema...
@@ -133,7 +131,8 @@ if (requireNamespace("ggplot2", quietly = TRUE)&requireNamespace("viridis", quie
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Objects: \code{\link{BilanEspeces-class}},
+Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+  \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},
   \code{\link{BilanMigration-class}},

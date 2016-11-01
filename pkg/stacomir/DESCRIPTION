@@ -10,25 +10,25 @@ Description: Graphical outputs and treatment for a database of fishway
     available in French English and Spanish.
 License: GPL (>= 2)
 Collate:
+    'create_generic.r'
+    'RefAnnee.r'
+    'RefStades.r'
+    'RefTaxon.r'
+    'RefDC.r'
     'BilanAnnuels.r'
     'utilitaires.r'
-    'create_generic.r'
     'RefStationMesure.r'
     'RefHorodate.r'
     'BilanConditionEnv.r'
     'RefListe.r'
-    'RefDC.r'
     'BilanEspeces.r'
     'BilanFonctionnementDC.r'
     'RefDF.r'
     'BilanFonctionnementDF.r'
     'PasdeTemps.r'
     'PasDeTempsJournalier.r'
-    'RefStades.r'
-    'RefTaxon.r'
     'BilanMigration.r'
     'BilanMigrationConditionEnv.r'
-    'RefAnnee.r'
     'BilanMigrationInterAnnuelle.r'
     'BilanMigrationMult.r'
     'RefChoix.r'
@@ -50,8 +50,6 @@ Collate:
     'fn_EcritBilanJournalier.r'
     'fn_EcritBilanMensuel.r'
     'fn_table_per_dis.r'
-    'funBilanMigrationAnnuel.r'
-    'funSousListeBilanMigration.r'
     'funSousListeBilanMigrationPar.r'
     'fungraph.r'
     'fungraph_civelle.r'
@@ -60,6 +58,7 @@ Collate:
     'funstatJournalier.r'
     'funtable.r'
     'funtraitement_poids.r'
+    'interface_BilanAnnuels.r'
     'interface_BilanConditionEnv.r'
     'interface_BilanFonctionnementDC.r'
     'interface_BilanFonctionnementDF.r'
@@ -100,7 +99,8 @@ Imports:
     Hmisc,
     RGtk2,
     lubridate,
-    dplyr
+    dplyr,
+    xtable
 Suggests:
     testthat,
     viridis

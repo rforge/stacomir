@@ -101,8 +101,15 @@ hSt=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+hbilA=function(h,...){
+	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
+}
+#' handler function used by the main interface
+#' @param h handler
+#' @param ... additional parameters
 htodo=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.17,wash=TRUE)
+	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
@@ -270,6 +277,7 @@ hX11=function(h,...){
 #' @import RODBC
 #' @import RGtk2
 #' @import dplyr
+#' @import xtable
 #' @importFrom intervals Intervals
 #' @importFrom intervals closed<-
 #' @importFrom intervals interval_overlap
@@ -419,6 +427,8 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$icon="gWidgetsRGtk2-curve"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gtk-dnd-multiple"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=hbilA
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gWidgetsRGtk2-barplot"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$handler=hBilanMigrationInterAnnuelle
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$icon="gWidgetsRGtk2-hist"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$handler=hBilan_carlot
@@ -442,8 +452,7 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$icon="gtk-cancel"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=htodo
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gtk-cancel"
+
 		menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
 	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
 	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
@@ -484,7 +493,7 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
 				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code",
-				"per_etat_fonctionnement","std_libelle","sumduree"))
+				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon"))
 
 # variable used by dplyr
 utils::globalVariables(c("n0","newid","xmin","xmax"))

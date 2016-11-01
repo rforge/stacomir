@@ -38,6 +38,8 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 		)
 )
 
+
+
 #' connect method for BilanMigrationInterannuelle class
 #' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
 #' @param silent Stops messages from being displayed if silent=TRUE, default FALSE
