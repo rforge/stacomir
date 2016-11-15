@@ -4,12 +4,14 @@
 \name{bilAM}
 \alias{bilAM}
 \title{Annual migration of salmon by migradour}
-\format{An object of class \link{BilaAnnuels-class} with data slot loaded.}
+\format{An object of class \link{BilanAnnuels-class} with data slot loaded.}
 \usage{
 bilAM
 }
 \description{
-The dataset corresponds to the fishways of the Adour for adult migrant salmons
+The dataset corresponds to the fishways DC=33:40 of the Adour for adult migrant salmons
+from 1996 to 2005 (annual counts). It has been kinly provided as an example set by the Migradour
+association.
 }
 \keyword{data}
 

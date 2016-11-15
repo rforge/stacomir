@@ -7,14 +7,14 @@
 \alias{barplot.bilA}
 \title{barplot method for object \link{BilanAnnuels}}
 \usage{
-\S4method{barplot}{BilanAnnuels}(height, legend.tex = NULL...)
+\S4method{barplot}{BilanAnnuels}(height, legend.text = NULL, ...)
 }
 \arguments{
 \item{height}{An object of class BilanAnnuels}
 
-\item{legend.tex}{See barplot help}
-
 \item{...}{additional arguments passed to barplot}
+
+\item{legend.tex}{See barplot help}
 }
 \description{
 barplot method for object \link{BilanAnnuels}

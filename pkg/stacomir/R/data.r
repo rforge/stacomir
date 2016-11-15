@@ -209,7 +209,8 @@
 #' The first eel trapping ladder in France was built by Antoine Legault and the team from Rennes
 #' in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 1984 it has been 
 #' operational at the same location and provides one of the longest series of eel migration. For this reason,
-#' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class 
+#' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class. It has been
+#' kindly given by the parc du Marais Poitevin.
 #' @format An object of class BilanMigrationInterAnnuelle-class with data slot loaded.
 #' @keywords data
 "bmi"
@@ -223,7 +224,32 @@
 
 #' Annual migration of salmon by migradour
 #' 
-#' The dataset corresponds to the fishways of the Adour for adult migrant salmons
+#' The dataset corresponds to the fishways DC=33:40 of the Adour for adult migrant salmons
+#' from 1996 to 2005 (annual counts). It has been kinly provided as an example set by the Migradour
+#' association.
 #' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
 #' @keywords data
 "bilAM"
+
+
+#' Silver eel migration in the Somme
+#' 
+#' The dataset corresponds to the silver eel traps ("anguilleres) for 2015-2016.
+#' This dataset has been kindly provided by the Federation de Peche de la Somme,
+#' given the upstream location of the trap, all individuals are female
+#' 
+#' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
+#' @keywords data
+"bilanArg"
+
+#' Silvering index coefficients from Caroline Durif (2009) to predict silvering stage from morphological parameters
+#' Classification scores are calculated by multiplying the metrics 
+#' BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of the pectoral fin,
+#' with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the one achieving the 
+#' highest score
+#' @references Durif, C.M., Guibert, A., and Elie, P. 2009. 
+#' Morphological discrimination of the silvering stages of the European eel. 
+#' In American Fisheries Society Symposium. pp. 103–111.
+#'  \url{http://fishlarvae.org/common/SiteMedia/durif\%20et\%20al\%202009b.pdf}
+"coef_Durif"
+

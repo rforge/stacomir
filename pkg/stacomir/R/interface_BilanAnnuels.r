@@ -27,7 +27,7 @@ interface_BilanAnnuels = function()
 	size(notebook)<-c(400,300)
 	# pour preselectionner une date on lui fournit l'indice de la date dans le RefAnnee. indice = 11 pour 2005
 	
-	choice(bilA@anneedebut,
+	choice(bilanAnnuels@anneedebut,
 			nomassign="anneedebut",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3,
@@ -37,7 +37,7 @@ interface_BilanAnnuels = function()
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
 			preselect=which(bilA@anneefin@data==max(bilanAnnuels@anneefin@data)))
-	choicemult(bilA@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
+	choicemult(bilanAnnuels@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
 	svalue(notebook)<-1
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)

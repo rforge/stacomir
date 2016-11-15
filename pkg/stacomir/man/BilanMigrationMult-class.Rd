@@ -107,6 +107,7 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
 Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+  \code{\link{BilanArgentee-class}},
   \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},

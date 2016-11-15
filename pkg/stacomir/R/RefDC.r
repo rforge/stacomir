@@ -114,7 +114,8 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
 					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
-						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
+						# pas non plus d'appel pour les bilanArgentee dont les slots taxon, stade ,et par sont fixes
+						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))&class(objectBilan)!="BilanArgentee"){
 							objectBilan@taxons<<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",object,envir_stacomi)@dc_selectionne)
 							if (exists("frame_tax")) delete(group,frame_tax)
 							if (exists("frame_std")) delete(group,frame_std)

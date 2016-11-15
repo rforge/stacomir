@@ -98,17 +98,17 @@ setMethod("charge",signature=signature("Bilan_carlot"),definition=function(objec
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_carlot_date_debut",envir_stacomi)) {
-				object@horodatedebut<-get("bilan_carlot_date_debut",envir_stacomi)
+				object@horodatedebut@horodate<-get("bilan_carlot_date_debut",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_carlot_date_fin",envir_stacomi)) {
-				object@horodatefin<-get("bilan_carlot_date_fin",envir_stacomi)
+				object@horodatefin@horodate<-get("bilan_carlot_date_fin",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
 			}       
-			
+			assign("bilan_carlot",object,envir_stacomi)
 			return(object)
 		})
 
@@ -207,17 +207,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 
 
 #' Plots of various type for BilanMigration, and performs writing to the database of daily values.
-#' 
-#' \itemize{
-#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
-#' 			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
-#' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
-#' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
-#' }
-#' @note When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-#' these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
-#' then no entry will be written to the database
-#' @param x An object of class BilanMigrationMult
+#' @param x An object of class Bilan_carlot
 #' @param plot.type One of "1","violin plot". Defaut to \code{1} , can also be \code{2} boxplot or 
 #' \code{3} points. 
 #' @param silent Stops displaying the messages.
@@ -304,10 +294,11 @@ setMethod("print",signature=signature("Bilan_carlot"),definition=function(x,...)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fundensityBilan_carlot = function(h,...) {
+	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
 	bilan_carlot<-connect(bilan_carlot)
 	bilan_carlot<-calcule(bilan_carlot)
-	bilan_carlot<-plot(bilan_carlot,plot.type="1")
+	plot(bilan_carlot,plot.type="1")
 }
 
 #' Boxplots for ggplot2
@@ -318,10 +309,11 @@ fundensityBilan_carlot = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funboxplotBilan_carlot = function(h,...) {
+	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
 	bilan_carlot<-connect(bilan_carlot)
 	bilan_carlot<-calcule(bilan_carlot)	
-	bilan_carlot<-plot(bilan_carlot,plot.type="2")
+	plot(bilan_carlot,plot.type="2")
 }
 
 
@@ -333,9 +325,11 @@ funboxplotBilan_carlot = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funpointBilan_carlot = function(h,...) {
+	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
 	bilan_carlot<-connect(bilan_carlot)
 	bilan_carlot<-calcule(bilan_carlot)
+	plot(bilan_carlot,plot.type="3")
 }  
 
 #' table function
@@ -346,6 +340,7 @@ funpointBilan_carlot = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funtableBilan_carlot = function(h,...) {
+	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot=charge(bilan_carlot)
 	bilan_carlot<-connect(bilan_carlot)
 	vue_ope_lot=bilan_carlot@requete@query # on recupere le data.frame

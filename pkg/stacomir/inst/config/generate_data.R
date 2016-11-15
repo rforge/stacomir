@@ -34,7 +34,21 @@ createmessage(refMsg,database_expected=TRUE)
 msg=get("msg",envir=envir_stacomi)
 devtools::use_data(msg,internal=FALSE,overwrite=TRUE)
 
-
+#################################
+# generates a dataset with Durif coefficients
+# source Laurent Beaulaton
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+coef_Durif = matrix(NA, nrow=5, ncol=6)
+colnames(coef_Durif) = c("I", "FII", "FIII", "FIV", "FV", "MII")
+rownames(coef_Durif) = c("Constant", "BL", "W", "MD", "FL")
+coef_Durif[,1] = c(-61.276, 0.242, -0.108, 5.546, 0.614)
+coef_Durif[,2] = c(-87.995, 0.286, -0.125, 6.627, 0.838)
+coef_Durif[,3] = c(-109.014, 0.280, -0.127, 9.108, 1.182)
+coef_Durif[,4] = c(-113.556, 0.218, -0.103, 12.187, 1.230)
+coef_Durif[,5] = c(-128.204, 0.242, -0.136, 12.504, 1.821)
+coef_Durif[,6] = c(-84.672, 0.176, -0.116, 12.218, 1.295)
+devtools::use_data(coef_Durif,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanMigrationMult
 # from iav three dc with eels
@@ -324,9 +338,9 @@ baseODBC[c(2,3)]<-rep("migradour",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","migradour.",envir_stacomi)
-bilAM<-new("BilanAnnuels")
+bilanArg<-new("BilanAnnuels")
 bilAM<-choice_c(bilAM,
-		dc=c(22,33:40),
+		dc=c(33:40),
 		taxons=c("Salmo salar"),
 		stades=c(11),
 		anneedebut="1996",
@@ -341,3 +355,40 @@ bilAM@taxons@data[,"tax_nom_commun"]<-iconv(bilAM@taxons@data[,"tax_nom_commun"]
 bilAM@stades@data[,"std_libelle"]<-iconv(bilAM@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)
+
+
+
+#################################
+# generates dataset for BilanArgenture : fd80 the somme
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bilanArg<-new("BilanArgentee")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("fd80",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","fd80.",envir_stacomi)
+bilanArg<-choice_c(bilanArg,
+		dc=c(6),			
+		horodatedebut="2015-09-01",
+		horodatefin="2016-10-04",
+		silent=FALSE)
+# two warning produced, ignored if silent=TRUE
+bilanArg<-connect(bilanArg)
+bilanArg@dc@data[,"dis_commentaires"]<-iconv(bilanArg@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilanArg@dc@data[,"type_df"]<-iconv(bilanArg@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilanArg@dc@data[,"type_dc"]<-iconv(bilanArg@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilanArg@dc@data[,"dif_localisation"]<-iconv(bilanArg@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilanArg@taxons@data[,"tax_nom_commun"]<-iconv(bilanArg@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bilanArg@stades@data[,"std_libelle"]<-iconv(bilanArg@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+bilanArg@par@data[,"par_nom"]<-iconv(bilanArg@par@data[,"par_nom"],from="latin1",to="UTF8")
+bilanArg@data$dev_libelle<-iconv(bilanArg@data$dev_libelle,from="latin1",to="UTF8")
+bilanArg@data$std_libelle<-iconv(bilanArg@data$std_libelle,from="latin1",to="UTF8")
+bilanArg@data$val_libelle<-iconv(bilanArg@data$val_libelle,from="latin1",to="UTF8")
+bilanArg@data$par_nom<-iconv(bilanArg@data$par_nom,from="latin1",to="UTF8")
+
+devtools::use_data(bilanArg,internal=FALSE,overwrite=TRUE)

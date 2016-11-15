@@ -115,8 +115,8 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 			if (nrow(object@data) > 0){
 				hcar=function(h,...){
 					carchoisi=svalue(choice)
-					object@par_selectionne<-carchoisi
-					#object@data<-object@data[car_libelle%in%carchoisi ,]
+					object@par_selectionne<-object@data[car_libelle%in%carchoisi ,"par_code"]
+					#object@data<-object@data[car_libelle%in%carchoisi ,"par_code"]
 					assign(nomassign,object,envir_stacomi)
 					funout(get("msg",envir=envir_stacomi)$Refpar.3)
 				}

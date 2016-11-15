@@ -107,6 +107,12 @@ hbilA=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+hsilver=function(h,...){
+	eval(interface_BilanArgentee(),envir = .GlobalEnv)
+}
+#' handler function used by the main interface
+#' @param h handler
+#' @param ... additional parameters
 htodo=function(h,...){
 	funout(get("msg",envir_stacomi)$interface_graphique.17,wash=TRUE)
 	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
@@ -448,8 +454,8 @@ interface_graphique=function(){
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$handler=hSt
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$handler=htodo
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$icon="gtk-cancel"
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$handler=hsilver
+	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$icon="gWidgetsRGtk2-bubbles"
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$handler=htodo
 	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 
