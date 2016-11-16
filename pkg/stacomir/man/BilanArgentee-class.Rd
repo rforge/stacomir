@@ -94,11 +94,11 @@ b_carlot@data$std_libelle[b_carlot@data$std_libelle=="Anguille jaune"]<-"Yellow 
 b_carlot@data$std_libelle[b_carlot@data$std_libelle=="civelle"]<-"Glass eel (ramp)"
 # creating a boxplot with custom output : an example
 # again if you use require(ggplot2) the :: argument is not needed
-\dontrun{
+
 if (requireNamespace("ggplot2", quietly = TRUE)){
 	g<-ggplot2::ggplot(b_carlot@data)+
 			ggplot2::geom_boxplot(ggplot2::aes(x=annee,
-							ymax =car_valeur_quantitatif,
+							y =car_valeur_quantitatif,
 							fill = std_libelle))+		
 			ggplot2::xlab("size")+ggplot2::ylab("year")+
 			ggplot2::scale_fill_manual("stage & fishway",
@@ -108,7 +108,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)){
 			ggplot2::theme_bw()
 	print(g)
 }
-}
+
 # get a simple summary using Hmisc::describe
 summary(b_carlot)
 # get the command line to create the object using choice_c 
