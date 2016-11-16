@@ -12,11 +12,15 @@ the BilanArgentee class is used to calculate various statistics about the silver
 \describe{
 \item{\code{data}}{A data frame with data generated from the database}
 
-\item{\code{calcdata}}{A list of dc with processed data. Each dc contains three elements, 
-"quant" A matrix with quantitative data, one column per quantitative parm and one line per sample, 
-"qual" a matrix with qualitative parameters with one column per qualitative parm and one line per sample, this matrix also contains calculated durif stages, "other"
-A data frame with columns lot_identifiant,ope_identifiant,ope_dic_identifiant,ope_date_debut,ope_date_fin,dev_code (destination code of fish),
-dev_libelle (text for destination of fish) containing data pertaining to the sample and the control operation.}
+\item{\code{calcdata}}{A list of dc with processed data. Each dc contains a data frame with 
+\itemize{
+\item (1) qualitative data on body contrast (CONT), presence of punctuation on the lateral line (LINP)
+\item (2) quantitative data "BL" Body length,"W" weight,"Dv" vertical eye diameter,"Dh" horizontal eye diameter,"FL" pectoral fin length
+\item (3) calculated durif stages, Pankhurst's index 
+\item (4) other columns containing data pertaining to the sample and the control operation:  lot_identifiant,ope_identifiant,
+ope_dic_identifiant,ope_date_debut,ope_date_fin,dev_code (destination code of fish),
+dev_libelle (text for destination of fish)
+}}
 
 \item{\code{dc}}{Object of class \link{RefDC-class}: the control devices}
 
@@ -90,6 +94,7 @@ b_carlot@data$std_libelle[b_carlot@data$std_libelle=="Anguille jaune"]<-"Yellow 
 b_carlot@data$std_libelle[b_carlot@data$std_libelle=="civelle"]<-"Glass eel (ramp)"
 # creating a boxplot with custom output : an example
 # again if you use require(ggplot2) the :: argument is not needed
+\dontrun{
 if (requireNamespace("ggplot2", quietly = TRUE)){
 	g<-ggplot2::ggplot(b_carlot@data)+
 			ggplot2::geom_boxplot(ggplot2::aes(x=annee,
@@ -102,6 +107,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)){
 							"Glass eel (ramp)"="Cyan"))+
 			ggplot2::theme_bw()
 	print(g)
+}
 }
 # get a simple summary using Hmisc::describe
 summary(b_carlot)

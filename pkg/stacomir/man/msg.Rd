@@ -4,7 +4,7 @@
 \name{msg}
 \alias{msg}
 \title{Messages}
-\format{An object of class \code{list} of length 352.}
+\format{An object of class \code{list} of length 353.}
 \usage{
 msg
 }

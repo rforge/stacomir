@@ -9,8 +9,8 @@
 bilanArg
 }
 \description{
-The dataset corresponds to the silver eel traps ("anguillères) for 2015-2016.
-This dataset has been kindly provided by the Fédération de Pêche de la Somme,
+The dataset corresponds to the silver eel traps ("anguilleres) for 2015-2016.
+This dataset has been kindly provided by the Federation de Peche de la Somme,
 given the upstream location of the trap, all individuals are female
 }
 \keyword{data}

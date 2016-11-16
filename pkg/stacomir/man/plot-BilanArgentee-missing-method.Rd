@@ -6,7 +6,7 @@
 \alias{plot.BilanArgentee}
 \alias{plot.b_carlot}
 \alias{plot.bilanArg}
-\title{Plots of various type for BilanMigration, and performs writing to the database of daily values.}
+\title{Plots of various type for BilanArgentee}
 \usage{
 \S4method{plot}{BilanArgentee,missing}(x, plot.type = "1", silent = FALSE)
 }
