@@ -235,6 +235,8 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 						mydata2<-merge(mydata,coe,by="coe_date_debut")
 						mydata2<-mydata2[,-match("coe_date_debut",colnames(mydata2))] # removing coe_date_debut
 						data <-fun_weight_conversion(tableau=mydata2,time.sequence=bilanMigrationMult@time.sequence,silent)
+					} else {
+						data<-mydata
 					}
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"sum"
