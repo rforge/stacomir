@@ -566,7 +566,11 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
 				grdata$DC<-as.factor(grdata$DC)
 				grdata$taxon<-as.factor(grdata$taxon)
-				if (length(unique(grdata$taxon))==1){
+				if (length(unique(grdata$taxon))==1&length(unique(grdata$stade))==1){
+					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total),fill="black")+
+							geom_bar(position="stack", stat="identity")+
+							facet_grid(DC~.,scales="free_y")
+				} else if (length(unique(grdata$taxon))==1){
 					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total,fill=stade))+
 							geom_bar(position="stack", stat="identity")+
 							facet_grid(DC~.,scales="free_y")+
