@@ -20,9 +20,9 @@ with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the o
 highest score
 }
 \references{
-Durif, C.M., Guibert, A., and Elie, P. 2009. 
+Durif, C.M., Guibert, A., and Elie, P. 2009.
 Morphological discrimination of the silvering stages of the European eel. 
-In American Fisheries Society Symposium. pp. 103–111.
+In American Fisheries Society Symposium. pp. 103-111.
  \url{http://fishlarvae.org/common/SiteMedia/durif\%20et\%20al\%202009b.pdf}
 }
 \keyword{datasets}

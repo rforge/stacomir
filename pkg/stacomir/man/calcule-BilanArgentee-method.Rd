@@ -4,7 +4,7 @@
 \name{calcule,BilanArgentee-method}
 \alias{calcule,BilanArgentee-method}
 \title{Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index}
+( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.}
 \usage{
 \S4method{calcule}{BilanArgentee}(object, silent)
 }
@@ -15,7 +15,7 @@
 }
 \description{
 Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index
+( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

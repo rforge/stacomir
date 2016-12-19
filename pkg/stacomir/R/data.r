@@ -215,7 +215,7 @@
 #' @keywords data
 "bmi"
 
-#' An object of class \link{BilaAnnuels-class} with data loaded
+#' An object of class \link{BilanAnnuels-class} with data loaded
 #' 
 #' The dataset corresponds to the three fishways located on the Arzal dam, filled with annual data
 #' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
@@ -236,9 +236,9 @@
 #' 
 #' The dataset corresponds to the silver eel traps ("anguilleres) for 2015-2016.
 #' This dataset has been kindly provided by the Federation de Peche de la Somme,
-#' given the upstream location of the trap, all individuals are female
+#' given the upstream location of the trap, most individuals are female
 #' 
-#' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
+#' @format An object of class \link{BilanArgentee-class} with data slot loaded.
 #' @keywords data
 "bilanArg"
 
@@ -247,9 +247,9 @@
 #' BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of the pectoral fin,
 #' with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the one achieving the 
 #' highest score
-#' @references Durif, C.M., Guibert, A., and Elie, P. 2009. 
+#' @references Durif, C.M., Guibert, A., and Elie, P. 2009.
 #' Morphological discrimination of the silvering stages of the European eel. 
-#' In American Fisheries Society Symposium. pp. 103–111.
+#' In American Fisheries Society Symposium. pp. 103-111.
 #'  \url{http://fishlarvae.org/common/SiteMedia/durif\%20et\%20al\%202009b.pdf}
 "coef_Durif"
 

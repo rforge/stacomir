@@ -36,7 +36,7 @@ interface_BilanAnnuels = function()
 			nomassign="anneefin",
 			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
 			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
-			preselect=which(bilA@anneefin@data==max(bilanAnnuels@anneefin@data)))
+			preselect=which(bilanAnnuels@anneefin@data==max(bilanAnnuels@anneefin@data)))
 	choicemult(bilanAnnuels@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
 	svalue(notebook)<-1
 	

@@ -3,7 +3,8 @@ require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
-# the following script will load data from the two Anguillère monitored in the Sommes
+# the following script will load data from the two Anguillere monitored in the Somme
+
 \dontrun{
 	#create an instance of the class
 	bilanArg<-new("BilanArgentee")
@@ -24,5 +25,25 @@ stacomi(gr_interface=FALSE,
 data("bilanArg")
 # the calculation will fill the slot calcdata
 bilanArg<-calcule(bilanArg)
-# stages are in bilanArg@calcdata[["6"]][,"stage"] look at data structure using str(bilanArg@calcdata[["6"]])
+# stages are in bilanArg@calcdata[["6"]][,"stage"] 
+#look at data structure using str(bilanArg@calcdata[["6"]])
+
+# standard plot as drawn by Laurent Beaulaton (Analyse des données d'argenture acquises en France)
+# showing Durif's stage according to size and eye diameter
 plot(bilanArg, plot.type=1)
+
+# number per month or year and Durif's stage (year if number of dc >1)
+
+plot(bilanArg, plot.type=2)
+
+# plot showing fulton's coefficient, and size weight graphs
+# inspired from Acou et al., 2009 
+# Differential Production and Condition Indices of Premigrant
+# Eels in Two Small Atlantic Coastal Catchments
+# of France
+plot(bilanArg, plot.type=3)
+# get a list of summary data and print output to screen
+
+plot(bilanArg, plot.type=3)
+# print a summary statistic, and save the output in a list for later use
+stats<-summary(bilanArg)

@@ -12,7 +12,7 @@
 #' \itemize{
 #' \item (1) qualitative data on body contrast (CONT), presence of punctuation on the lateral line (LINP)
 #' \item (2) quantitative data "BL" Body length,"W" weight,"Dv" vertical eye diameter,"Dh" horizontal eye diameter,"FL" pectoral fin length
-#' \item (3) calculated durif stages, Pankhurst's index 
+#' \item (3) calculated durif stages, Pankhurst's index, Fulton's body weight coefficient K_ful
 #' \item (4) other columns containing data pertaining to the sample and the control operation:  lot_identifiant,ope_identifiant,
 #' ope_dic_identifiant,ope_date_debut,ope_date_fin,dev_code (destination code of fish),
 #' dev_libelle (text for destination of fish)
@@ -28,7 +28,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
-#' @example inst/examples/bilancarlot_example.R
+#' @example inst/examples/bilanArgentee_example.R
 #' @export 
 setClass(Class="BilanArgentee",
 		representation= representation(
@@ -118,14 +118,14 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 				funout(get("msg",envir_stacomi)$ref.4,arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
-			if (exists("bilanArg_date_debut",envir_stacomi)) {
-				object@horodatedebut<-get("bilanArg_date_debut",envir_stacomi)
+			if (exists("bilan_arg_date_debut",envir_stacomi)) {
+				object@horodatedebut@horodate<-get("bilan_arg_date_debut",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
 			}
 			# rem id
-			if (exists("bilanArg_date_fin",envir_stacomi)) {
-				object@horodatefin<-get("bilanArg_date_fin",envir_stacomi)
+			if (exists("bilan_arg_date_fin",envir_stacomi)) {
+				object@horodatefin@horodate<-get("bilan_arg_date_fin",envir_stacomi)
 			} else {
 				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
 			}       
@@ -178,7 +178,7 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
 					horodate=horodatedebut, 
 					silent=silent)
-			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
+			bilanArg@horodatefin<-choice_c(bilanArg@horodatefin,
 					nomassign="bilanArg_date_fin",
 					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
 					horodate=horodatefin,
@@ -186,8 +186,9 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 			validObject(bilanArg)
 			return(bilanArg)
 		})
+
 #' Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-#' ( one line per individual) and calculate Durif silvering index
+#' ( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
 #' 
 #' @param object An object of class \code{\link{BilanArgentee-class}} 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
@@ -200,7 +201,7 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 			}   
 			arg=bilanArg@data # on recupere le data.frame
 			
-				
+			
 			lesdc<-bilanArg@dc@dc_selectionne
 			parquant<-c("1786","A111","BBBB","CCCC","PECT")
 			parqual<-c("CONT","LINP")
@@ -224,7 +225,7 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 						value.var="car_valeur_quantitatif",
 						drop=TRUE)
 				
-			# this function will select the parameters one by one
+				# this function will select the parameters one by one
 				# test them for pattern against column name
 				# and return the column. So a data frame of quantitative or qualitative parm are returned
 				fn<-function(X,mat){
@@ -250,6 +251,8 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 				dd<-cbind(dd,as.data.frame(matquant2))
 				dd$MD<-rowMeans(dd[,c("Dv","Dh")],na.rm=TRUE)
 				dd$Pankhurst=100*(dd$MD/2)^2*pi/dd$BL
+				#K = 100 Wt /TL3 with Wt in g and TL in cm	(Cone 1989). (Acou, 2009)
+				dd$K_ful=100*dd$W/(dd$BL/10)^3
 				ddd<-cbind(other,dd)
 				bilanArg@calcdata[[as.character(dc)]]<-ddd			
 			}
@@ -260,29 +263,27 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 
 #' Plots of various type for BilanArgentee
 #' 
-#' \itemize{
-#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
-#' 			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
-#' 		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
-#' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
+#' @param x An object of class \link{BilanArgentee-class}
+#' @param plot.type Default "1"
+#'  \itemize{
+#' 		\item{plot.type="1"}{Lattice plot of Durif's stages according to Body Length and Eye Index (average of vertical and horizontal diameters). 
+#' If several DC are provided then a comparison of data per dc is provided}
+#' 		\item{plot.type="2"}{Lattice plot giving a comparison of Durif's stage proportion over time, if several DC are provided an annual comparison 
+#' is proposed, if only one DC is provided then the migration is split into month.}
+#' 		\item{plot.type="3"}{ Series of graphs showing  mean Fulton's coefficient, Pankhurst eye index,	along
+#' with a size weight analysis and regression using robust regression (rlm more robust to the presence of outliers)}
+#' 			\item{plot.type="4"}{ Lattice cloud plot of Pankurst~ Body Length ~ weight)}
 #' }
-#' @note When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-#' these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
-#' then no entry will be written to the database
-#' @param x An object of class BilanMigrationMult
-#' @param plot.type One of "1","violin plot". Defaut to \code{1} , can also be \code{2} boxplot or 
-#' \code{3} points. 
 #' @param silent Stops displaying the messages.
-#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @aliases plot.BilanArgentee plot.bilanArg plot.b_carlot
+#' @aliases plot.BilanArgentee plot.bilanArg
 #' @export
 setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=function(x, plot.type="1", silent=FALSE){ 
 			#bilanArg<-b_carlot;require(ggplot2);plot.type="1"
 			#browser()
 			bilanArg<-x
 			plot.type<-as.character(plot.type)# to pass also characters
-			if (!plot.type%in%c("1","2","3")) stop('plot.type must be 1,2,3')
+			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
@@ -290,37 +291,39 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
-			blue_for_males<-adjustcolor("#008490", alpha.f = 0.8)
-
+			blue_for_males<-grDevices::adjustcolor("#008490", alpha.f = 0.8)
+			
 			datdc<-data.frame()
 			
-			#########################"
-			# plot.type
 			
-			if (plot.type==1){		
-				
-				for (i in 1:length(dat)){
-					datdc<-rbind(datdc,dat[[i]])	
-				}
-
-				#creating a shingle with some overlaps
-				datdc$Date = lattice::equal.count(datdc$ope_date_debut, number=4,
-						overlap=.1)
+			for (i in 1:length(dat)){
+				datdc<-rbind(datdc,dat[[i]])	
+			}
 			
+			
+			
+			# trellis.par.get()
+			datdc$stage<-factor(datdc$stage,levels=c("I","FII","FIII","FIV","FV","MII"))
+			datdc$ope_dic_identifiant<-as.factor(datdc$ope_dic_identifiant)
+			datdc$ouv<-NA
+			for (i in 1:length(bilanArg@dc@dc_selectionne)){
+				datdc$ouv[datdc$ope_dic_identifiant==bilanArg@dc@dc_selectionne[i]]<-
+						bilanArg@dc@data[bilanArg@dc@data$dc==bilanArg@dc@dc_selectionne[i],"ouv_libelle"]
+			}
+			
+			
+			
+			
+			#################################################
+			# plot.type =1 Eye, length category durif stages
+			#################################################
+			
+			if (plot.type=="1"){		
 				
-				# trellis.par.get()
-				datdc$stage<-factor(datdc$stage,levels=c("I","FII","FIII","FIV","FV","MII"))
-				datdc$ope_dic_identifiant<-as.factor(datdc$ope_dic_identifiant)
-				datdc$ouv<-NA
-				for (i in 1:length(bilanArg@dc@dc_selectionne)){
-					datdc$ouv[datdc$ope_dic_identifiant==bilanArg@dc@dc_selectionne[i]]<-
-							bilanArg@dc@data[bilanArg@dc@data$dc==bilanArg@dc@dc_selectionne[i],"ouv_libelle"]
-					}
-					
 				
 				my.settings <- list(
 						superpose.symbol=list(
-								col=c("#FBA338","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males), 
+								col=c("Lime green","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males), 
 								pch=c(3,4,8,15,16,17),
 								cex=c(1,1,1,1,1,1),
 								alpha=c(0.9,0.9,0.9,0.9,0.9,0.9)								
@@ -343,26 +346,251 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 						group=stage,			
 						type = c("p"),
 						par.settings = my.settings,
-						xlab="Taille (BL mm) ",
-						ylab=iconv("Diamètre moyen de l'oeil (MD mm) ","UTF8"),
+						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.3, # size (BL) mm
+						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.4, # "Mean eye diameter (MD mm)
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title="Stades (Durif et al. 2009)",
+						auto.key=list(title=get("msg",envir=envir_stacomi)$BilanArgentee.5, # Silvering stages (Durif et al. 2009)
 								cex.title=1.2,
 								space="top",
 								columns=6,
 								between.columns=1
 						)						
 				)
-				update(xy.plot, panel = function(...) {
-							lattice::panel.abline(h = c(6.5,8), v=c(300,450,500) , lty = "dotted", col = "light grey")
+				# draw lines in lattice
+				xy.plot<-update(xy.plot, panel = function(...) {
+							lattice::panel.abline(h = c(6.5,8), 
+									v=c(300,450,500) ,
+									lty = "dotted", 
+									col = "light grey")
 							lattice::panel.xyplot(...)
 						})
 				
+				return(xy.plot)
+				
+			}
+			######################################
+			# Migration according to stage, month and year
+			######################################
+			if (plot.type=="2"){	
+				datdc1<-dplyr::select(datdc,ouv,annee,mois,stage)
+				datdc1<-dplyr::group_by(datdc1,ouv,annee,mois,stage)
+				datdc1<-dplyr::summarize(datdc1,N=n())
+				datdc1<-as.data.frame(datdc1)
+				# show.settings()
+				my.settings <- list(
+						superpose.polygon=list(
+								col=c("Lime green","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males),								
+								alpha=c(0.9,0.9,0.9,0.9,0.9,0.9)								
+						),
+						superpose.line=list(
+								col=c("#FBA338","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males)
+						),
+						#colfn<-colorRampPalette(c("#1C4587", "#BBC7DB"),space = "Lab")
+						#colfn(7)
+						strip.background=list(col=c("#1B4586","#3E5894","#596DA2","#7282B0","#8A98BE","#A2AFCC","#BAC6DA")),
+						strip.border=list(col="black")
+				)
+				lattice::trellis.par.set(my.settings)
+				
+				# show.settings()
+				if (length(dat)>1){
+					form<-as.formula(N ~ annee|ouv)
+				} else {
+					form<-as.formula(N ~ mois|annee)
+				}
+				
+				bb<-lattice::barchart(form,data=datdc1,	
+						group=stage,		
+						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.6, # "Mois",
+						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.7,#"Effectif"
+						par.strip.text=list(col="white", font=2),
+						auto.key=list(title=get("msg",envir=envir_stacomi)$BilanArgentee.8,#"Effectif par stades",
+								cex.title=1.2,
+								space="top",
+								columns=6,
+								between.columns=0.5
+						)						
+				)	
+				return(bb)
+				
+			}
+			######################################
+			# Series of graphs showing proportion of stage, mean Fulton's coefficient, Pankhurst eye index,
+			# body weight, body size, sex ratio.
+			######################################
+			if (plot.type=="3"){
+				layout(matrix(c(1,2,3,4,4,5,6,6,7), 3, 3, byrow = TRUE), 
+						widths=c(3,3,1), heights=c(3,1,3))
+				# width 331 sets the last column relative width
+				# same for rows
+				par(mar=c(3,4.1,4.1,2.1))# ressetting to default
+				datdc<-chnames(datdc,"ope_dic_identifiant","dc")
+				lesdc<-unique(datdc$dc)
+				datdc$sex<-"F"
+				datdc$sex[datdc$BL<450]<-"M"
+				
+				#############
+				# Fulton
+				#############
+				moy<-tapply(datdc$K_ful,list(datdc$dc,datdc$sex),mean,na.rm=TRUE)
+				sd<- tapply(datdc$K_ful,list(datdc$dc,datdc$sex),sd,na.rm=TRUE) # sample standard deviation 
+				n<-tapply(datdc$K_ful,list(datdc$dc,datdc$sex),length)
+				SE = sd/sqrt(n)	
+				plotTop=max(moy+3*SE,na.rm=TRUE)
+				
+				
+				bp<-barplot(moy,
+						beside = TRUE, las = 1,
+						ylim = c(0, plotTop),
+						cex.names = 0.75,
+						main = "Fulton coefficient (+-2SE)",
+						ylab = "Fulton K",
+						xlab = "",
+						border = "black", axes = TRUE,
+				#legend.text = TRUE,
+				#args.legend = list(title = "DC", 
+				#		x = "topright",
+				#		cex = .7)
+				)
+				graphics::segments(bp, moy - SE * 2, bp,
+						moy + SE * 2, lwd = 2)
+				
+				graphics::arrows(bp, moy - SE * 2, bp,
+						moy + SE * 2, lwd = 2, angle = 90,
+						code = 3, length = 0.05)		
+				
+				
+				#############
+				# Pankhurst
+				#############
+				moy<-tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),mean,na.rm=TRUE)
+				sd<- tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),sd,na.rm=TRUE) # sample standard deviation 
+				n<-tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),length)
+				SE = sd/sqrt(n)	
+				plotTop=max(moy+3*SE,na.rm=TRUE)
+				
+				
+				bp<-barplot(moy,
+						beside = TRUE, las = 1,
+						ylim = c(0, plotTop),
+						cex.names = 0.75,
+						main = "Pankhurst (+-2SE)",
+						ylab = "Pankhurst eye index",
+						xlab = "",
+						border = "black", axes = TRUE,
+				#legend.text = TRUE,
+				#args.legend = list(title = "DC", 
+				#		x = "topright",
+				#		cex = .7)
+				)
+				segments(bp, moy - SE * 2, bp,
+						moy + SE * 2, lwd = 2)
+				
+				arrows(bp, moy - SE * 2, bp,
+						moy + SE * 2, lwd = 2, angle = 90,
+						code = 3, length = 0.05)		
+				
+				#############
+				# empty plot
+				#############		
+				op<-par(mar=c(1,1,1,1))
+				plot(1, type="n", axes=F, xlab="", ylab="")
+				legend("center",fill =grDevices::grey.colors(nrow(moy)),legend=unique(datdc$dc))
+				# grey.colors is the default color generation for barplot 
+				#############
+				# size hist 
+				#############
+				par(mar=c(1,4.1,1,1)) 
+				for (i in 1:length(lesdc)){
+					indexdc<-datdc$dc==lesdc[i]
+					histxn<-graphics::hist(datdc$BL[indexdc],breaks=seq(250,1000,by=50),plot=FALSE)$density
+					if (i==1) histx<-histxn else histx<-cbind(histx,histxn)
+					
+				}	
+				if (length(lesdc)>1) colnames(histx)<-lesdc
+				barplot(height=t(histx),space=0,beside=FALSE, las = 1,horiz=FALSE,legend.text = FALSE,axes=FALSE)	
+				#############
+				# empty plot
+				#############		
+				op<-par(mar=c(1,1,1,1))
+				plot(1, type="n", axes=F, xlab="", ylab="")
+				
+				#############
+				# size -weight
+				#############
+				par(mar=c(5.1,4.1,1,1)) # blur bottom left up right
+				plot(datdc$BL,datdc$W,type="n",
+						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.9,
+						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.10,
+						xlim=c(250,1000),ylim=c(0,2000))
+				abline(v=seq(250,1000,by=50), col = "lightgray",lty=2)
+				abline(h=seq(0,2000,by=100),col="lightgray",lty=2)
+				# some alpha blending to better see the points :
+				lescol<-ggplot2::alpha(grDevices::grey.colors(nrow(moy)),0.8)
+				for (i in 1:length(lesdc)){
+					indexdc<-datdc$dc==lesdc[i]
+					points(datdc$BL[indexdc],datdc$W[indexdc],pch=16,col=lescol[i],cex=0.8)
+					
+				}
+				######################"
+				# Size - weight model using robust regression
+				######################
+				subdatdc<-datdc[,c("BL","W")]
+				subdatdc$BL3<-(subdatdc$BL/1000)^3
+				# plot(subdatdc$W~subdatdc$BL3)
+				
+				rlmmodb<-MASS::rlm(W~0+BL3,data=subdatdc)
+				#summary(rlmmodb)
+				newdata<-data.frame("BL"=seq(250,1000,by=50),"BL3"=(seq(250,1000,by=50)/1000)^3)
+				pred<-predict(rlmmodb,newdata=newdata,se.fit=TRUE,type="response",interval="prediction")
+				newdata$predlm<-pred$fit[,1]
+				newdata$predlowIC<-pred$fit[,2]
+				newdata$predhighIC<-pred$fit[,3]
+				
+				points(newdata$BL,newdata$predlm,type="l")
+				points(newdata$BL,newdata$predlowIC,type="l",lty=2,col="grey50")
+				points(newdata$BL,newdata$predhighIC,type="l",lty=2,col="grey50")
+				
+				text(400,1500,stringr::str_c("W=",round(coefficients(rlmmodb),1)," BL^3"))
+				
+				#############
+				# weight hist rotate
+				#############
+				par(mar=c(5.1,1,1,1)) 
+				for (i in 1:length(lesdc)){
+					indexdc<-datdc$dc==lesdc[i]
+					histyn<-hist(datdc$W[indexdc],plot=FALSE,breaks=seq(0,2000,by=100))$density
+					if (i==1) histy<-histyn else histy<-cbind(histy,histyn)
+					
+				}		
+				if (length(lesdc)>1) colnames(histy)<-lesdc
+				barplot(height=t(histy),space=0,beside=FALSE, las = 1,horiz=TRUE,legend.text = FALSE,axes=FALSE)	
 				
 				
 			}
+			if (plot.type=="4"){
+				#creating a shingle with some overlaps
+				my.settings <- list(
+						superpose.polygon=list(
+								col=c("Lime green","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males),								
+								alpha=c(0.9,0.9,0.9,0.9,0.9,0.9)								
+						),
+						superpose.line=list(
+								col=c("#FBA338","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males)
+						),
+						#colfn<-colorRampPalette(c("#1C4587", "#BBC7DB"),space = "Lab")
+						#colfn(7)
+						strip.background=list(col=c("#1B4586","#3E5894","#596DA2","#7282B0","#8A98BE","#A2AFCC","#BAC6DA")),
+						strip.border=list(col="black")
+				)
+				lattice::trellis.par.set(my.settings)
+				
+				ccc<-lattice::cloud(Pankhurst ~ W * BL|ouv, data = datdc,group=stage,
+						screen = list(x = -90, y = 70), distance = .4, zoom = .6,strip = lattice::strip.custom(par.strip.text=list(col="white")))
+				return(ccc)
+			}
 			
-			return(invisible(NULL))
+			
 		})
 
 #' summary for BilanArgentee 
@@ -372,7 +600,54 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanArgentee"),definition=function(object,silent=FALSE,...){
-			Hmisc::describe(object@data)		
+			bilanArg<-object
+			if (exists("bilanArg",envir_stacomi)) {
+				bilanArg<-get("bilanArg",envir_stacomi)
+			} else {      
+				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+			}
+			dat<-bilanArg@calcdata
+			# cols are using viridis::inferno(6,alpha=0.9)
+			
+			printstat<-function(vec){
+				moy<-mean(vec,na.rm=TRUE)
+				sd<- sd(vec,na.rm=TRUE) # sample standard deviation 
+				n<-length(vec[!is.na(vec)])
+				SE = sd/sqrt(n)
+				print(noquote(stringr::str_c("mean=",round(moy,2),",SD=",round(sd,2),",N=",n,",SE=",round(SE,2))))
+				return(list("mean"=moy,"SD"=sd,"N"=n,"SE"=SE))
+			}
+			result<-list()
+			for (i in 1:length(dat)){
+				datdc<-	dat[[i]]
+				ouvrage<-
+						bilanArg@dc@data[bilanArg@dc@data$dc==bilanArg@dc@dc_selectionne[i],"ouv_libelle"]
+				dc<-as.character(unique(datdc$ope_dic_identifiant))
+				result[[dc]]<-list()
+				result[[dc]][["ouvrage"]]<-ouvrage
+				print(noquote(stringr::str_c("Statistics for dam : ",ouvrage)))
+				print(noquote("========================"))
+				print(noquote("Stages Durif"))
+				print(table(datdc$stage))
+				result[[dc]][["Stages"]]<-table(datdc$stage)
+				print(noquote("-----------------------"))
+				print(noquote("Pankhurst"))
+				print(noquote("-----------------------"))
+				result[[dc]][["Pankhurst"]]<-printstat(datdc$Pankhurst)		
+				print(noquote("-----------------------"))
+				print(noquote('Eye diameter (mm)'))		
+				print(noquote("-----------------------"))
+				result[[dc]][["MD"]]<-printstat(datdc$MD)				
+				print(noquote("-----------------------"))
+				print(noquote('Length (mm)'))	
+				print(noquote("-----------------------"))
+				result[[dc]][["BL"]]<-printstat(datdc$BL)	
+				print(noquote("-----------------------"))
+				print(noquote('Weight (g)'))	
+				print(noquote("-----------------------"))
+				result[[dc]][["W"]]<-printstat(datdc$W)	
+			}
+			return(result)		
 		})
 
 #' Method to print the command line of the object
@@ -397,47 +672,23 @@ setMethod("print",signature=signature("BilanArgentee"),definition=function(x,...
 		})
 
 
-#' fundensityBilanArgentee uses ggplot2 to draw density plots
+#' funplotBilanArgentee 
 #' 
 #' assigns an object g in envir_stacomi for eventual modification of the plot
-#' @param h A handler
+#' @param h A handler, with action 1,2,3 or 4 
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-fundensityBilanArgentee = function(h,...) {
+funplotBilanArgentee = function(h,...) {
+	bilanArg<-get(x="bilan_arg",envir=envir_stacomi)
 	bilanArg<-charge(bilanArg)
 	bilanArg<-connect(bilanArg)
 	bilanArg<-calcule(bilanArg)
-	bilanArg<-plot(bilanArg,plot.type="1")
+	#plot.type is determined by button in h$action
+	the_plot<-plot(bilanArg,plot.type=h$action)
+	print(the_plot)
 }
 
-#' Boxplots for ggplot2
-#' 
-#' assigns an object g in envir_stacomi for eventual modification of the plot
-#' @param h A handler passed by the graphical interface
-#' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
-funboxplotBilanArgentee = function(h,...) {
-	bilanArg<-charge(bilanArg)
-	bilanArg<-connect(bilanArg)
-	bilanArg<-calcule(bilanArg)	
-	bilanArg<-plot(bilanArg,plot.type="2")
-}
-
-
-#' Point graph from ggplot
-#' 
-#' assigns an object g in envir_stacomi for eventual modification of the plot
-#' @param h handler passed by the graphical interface
-#' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
-funpointBilanArgentee = function(h,...) {
-	bilanArg<-charge(bilanArg)
-	bilanArg<-connect(bilanArg)
-	bilanArg<-calcule(bilanArg)
-}  
 
 #' table function
 #' 
@@ -461,6 +712,8 @@ funtableBilanArgentee = function(h,...) {
 
 #' Function to calculate the stages from Durif
 #' 
+#' @param data A dataset with columns BL, W, Dv, Dh, FL corresponding to body length (mm),
+#' Weight (g), vertical eye diameter (mm), vertical eye diameter (mm), and pectoral fin length (mm)
 #' @author Laurent Beaulaton \email{laurent.beaulaton"at"onema.fr}
 #' @export
 f_stade_Durif = function(data){

@@ -3,7 +3,7 @@
 \docType{data}
 \name{bilA}
 \alias{bilA}
-\title{An object of class \link{BilaAnnuels-class} with data loaded}
+\title{An object of class \link{BilanAnnuels-class} with data loaded}
 \format{An object of class \link{BilanAnnuels-class} with data slot loaded.}
 \usage{
 bilA

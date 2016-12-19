@@ -268,9 +268,9 @@ setMethod("xtable",signature=signature("BilanAnnuels"),definition=function(x,
 		})
 
 
-#' barplot method for object \link{BilanAnnuels}		
+#' barplot method for object \link{BilanAnnuels-class}		
 #' @param height An object of class BilanAnnuels
-#' @param legend.tex See barplot help 
+#' @param legend.text See barplot help 
 #' @param ... additional arguments passed to barplot
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases barplot.BilanAnnuels barplot.bilA
@@ -325,7 +325,7 @@ setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(heigh
 					mat<-as.matrix(dat0[,2:ncol(dat0)])
 					mat[is.na(mat)]<-0
 					if (is.null(legend.text)) {
-						legend.text<-legend.text=dat0$lot_tax_code
+						legend.text<-dat0$lot_tax_code
 						barplot(mat,legend.text=legend.text,...)	
 					} else {
 						barplot(mat,...)
@@ -388,11 +388,11 @@ setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(heigh
 
 #' Plot method for BilanAnnuels
 #' 
-#' @param x An object of class \link{BilanAnnuels}
+#' @param x An object of class \link{BilanAnnuels-class}
 #' @param plot.type Default point
 #' @param silent Stops displaying the messages.
 #' \itemize{
-#' 		\item{plot.type="point": ggplot+geom_point}#' 		
+#' 		\item{plot.type="point": ggplot+geom_point}' 		
 #' }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanAnnuels plot.bilA

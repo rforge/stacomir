@@ -4,34 +4,29 @@
 \name{plot,BilanArgentee,missing-method}
 \alias{plot,BilanArgentee,missing-method}
 \alias{plot.BilanArgentee}
-\alias{plot.b_carlot}
 \alias{plot.bilanArg}
 \title{Plots of various type for BilanArgentee}
 \usage{
 \S4method{plot}{BilanArgentee,missing}(x, plot.type = "1", silent = FALSE)
 }
 \arguments{
-\item{x}{An object of class BilanMigrationMult}
+\item{x}{An object of class \link{BilanArgentee-class}}
 
-\item{plot.type}{One of "1","violin plot". Defaut to \code{1} , can also be \code{2} boxplot or 
-\code{3} points.}
+\item{plot.type}{Default "1"
+ \itemize{
+        \item{plot.type="1"}{Lattice plot of Durif's stages according to Body Length and Eye Index (average of vertical and horizontal diameters). 
+If several DC are provided then a comparison of data per dc is provided}
+        \item{plot.type="2"}{Lattice plot giving a comparison of Durif's stage proportion over time, if several DC are provided an annual comparison 
+is proposed, if only one DC is provided then the migration is split into month.}
+        \item{plot.type="3"}{ Series of graphs showing  mean Fulton's coefficient, Pankhurst eye index,    along
+with a size weight analysis and regression using robust regression (rlm more robust to the presence of outliers)}
+            \item{plot.type="4"}{ Lattice cloud plot of Pankurst~ Body Length ~ weight)}
+}}
 
 \item{silent}{Stops displaying the messages.}
-
-\item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
 }
 \description{
-\itemize{
-		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_civelle}} functions to plot as many "bilanmigration"
-			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
-		\item{plot.type="step"}{creates Cumulated graphs for BilanMigrationMult.  Data are summed per day for different dc taxa and stages}
-		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
-}
-}
-\note{
-When plotting the "standard" plot, the user will be prompted to "write" the daily migration and monthly migration in the database.
-these entries are necessary to run the Interannual Migration class. If the stacomi has been launched with database_expected=FALSE,
-then no entry will be written to the database
+Plots of various type for BilanArgentee
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

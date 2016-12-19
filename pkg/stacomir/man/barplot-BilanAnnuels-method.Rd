@@ -5,7 +5,7 @@
 \alias{barplot,BilanAnnuels-method}
 \alias{barplot.BilanAnnuels}
 \alias{barplot.bilA}
-\title{barplot method for object \link{BilanAnnuels}}
+\title{barplot method for object \link{BilanAnnuels_class}}
 \usage{
 \S4method{barplot}{BilanAnnuels}(height, legend.text = NULL, ...)
 }
@@ -17,7 +17,7 @@
 \item{legend.tex}{See barplot help}
 }
 \description{
-barplot method for object \link{BilanAnnuels}
+barplot method for object \link{BilanAnnuels_class}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

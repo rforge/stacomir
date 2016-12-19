@@ -4,14 +4,14 @@
 \name{bilanArg}
 \alias{bilanArg}
 \title{Silver eel migration in the Somme}
-\format{An object of class \link{BilanAnnuels-class} with data slot loaded.}
+\format{An object of class \link{BilanArgentee-class} with data slot loaded.}
 \usage{
 bilanArg
 }
 \description{
 The dataset corresponds to the silver eel traps ("anguilleres) for 2015-2016.
 This dataset has been kindly provided by the Federation de Peche de la Somme,
-given the upstream location of the trap, all individuals are female
+given the upstream location of the trap, most individuals are female
 }
 \keyword{data}
 

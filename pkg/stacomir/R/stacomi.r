@@ -303,9 +303,9 @@ hX11=function(h,...){
 #' @importFrom reshape2 melt
 #' @importFrom lattice barchart trellis.par.get trellis.par.set simpleKey
 #' @importFrom grid gpar
-#' @importFrom graphics layout matplot mtext points polygon segments par axis text legend rect axis.Date
-#' @importFrom stats as.formula coef na.fail nls pbeta predict sd
-#' @importFrom grDevices gray rainbow
+#' @importFrom graphics layout matplot mtext points polygon segments par axis text legend rect axis.Date abline arrows hist
+#' @importFrom stats as.formula coef na.fail nls pbeta predict sd coefficients
+#' @importFrom grDevices gray rainbow adjustcolor
 #' @importFrom lubridate round_date
 #' @importFrom lubridate floor_date
 #' @importFrom lubridate %m+%
@@ -496,15 +496,17 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
 				"effectif_total","fonctionnement","bilanFonctionnementDF","quantite_CALCULE",
 				"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
-				'val_libelle','lot_effectif','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
-				'taxon_stades,"jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
+				'val_libelle','lot_effectif','lot_identifiant','ope_dic_identifiant','ope_identifiant','dev_code',
+				'dev_libelle','ope_date_fin','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
+				'taxon_stades','jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
 				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code",
-				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon"))
+				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon","stage","ouv"))
 
 # variable used by dplyr
 utils::globalVariables(c("n0","newid","xmin","xmax"))
 
-
+# dataset used in the package
+utils::globalVariables(c("coef_Durif"))
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
 				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",

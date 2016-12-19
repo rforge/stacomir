@@ -319,6 +319,7 @@ bilA<-choice_c(bilA,
 		anneefin="2015",
 		silent=FALSE)
 bilA<-connect(bilA)	
+bilA@dc@data[,"ouv_libelle"]<-iconv(bilA@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilA@dc@data[,"dis_commentaires"]<-iconv(bilA@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bilA@dc@data[,"type_df"]<-iconv(bilA@dc@data[,"type_df"],from="latin1",to="UTF8")
 bilA@dc@data[,"type_dc"]<-iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8")
@@ -347,6 +348,7 @@ bilAM<-choice_c(bilAM,
 		anneefin="2015",
 		silent=FALSE)
 bilAM<-connect(bilAM)
+bilAM@dc@data[,"ouv_libelle"]<-iconv(bilAM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilAM@dc@data[,"dis_commentaires"]<-iconv(bilAM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bilAM@dc@data[,"type_df"]<-iconv(bilAM@dc@data[,"type_df"],from="latin1",to="UTF8")
 bilAM@dc@data[,"type_dc"]<-iconv(bilAM@dc@data[,"type_dc"],from="latin1",to="UTF8")
@@ -373,12 +375,13 @@ assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","fd80.",envir_stacomi)
 bilanArg<-choice_c(bilanArg,
-		dc=c(6),			
-		horodatedebut="2015-09-01",
+		dc=c(2,6),			
+		horodatedebut="2010-09-01",
 		horodatefin="2016-10-04",
 		silent=FALSE)
 # two warning produced, ignored if silent=TRUE
 bilanArg<-connect(bilanArg)
+bilanArg@dc@data[,"ouv_libelle"]<-iconv(bilanArg@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilanArg@dc@data[,"dis_commentaires"]<-iconv(bilanArg@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bilanArg@dc@data[,"type_df"]<-iconv(bilanArg@dc@data[,"type_df"],from="latin1",to="UTF8")
 bilanArg@dc@data[,"type_dc"]<-iconv(bilanArg@dc@data[,"type_dc"],from="latin1",to="UTF8")

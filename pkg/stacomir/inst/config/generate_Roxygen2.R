@@ -17,7 +17,7 @@ install.packages("Rd2roxygen") # reverse documentation
 #parse_and_save(stringr::str_c("F:/workspace/stacomir/branch0.5/stacomir/man/",files[i]),
 #		gsub(".rd","",stringr::str_c("F:/temp/",files[i])))
 #}
-##########################""
+##########################
 ## Building documentation
 #######################
 ##use either :
@@ -25,12 +25,13 @@ install.packages("Rd2roxygen") # reverse documentation
 #document("F:/workspace/stacomir/branch0.5/stacomir")
 ## or :
 ##vignette("roxygen2")
-#setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("F:/workspace/stacomir/pkg/stacomir")
 #data("bMM_Arzal")
 #data("bM_Arzal")
 #data("msg")
-#envir_stacomi <- new.env(parent = emptyenv())
+envir_stacomi <- new.env(parent = emptyenv())
 #
-
+require(stacomiR)
+stacomi(FALSE,FALSE,FALSE)
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
