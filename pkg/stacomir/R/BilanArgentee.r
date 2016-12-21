@@ -721,6 +721,7 @@ f_stade_Durif = function(data){
 	stopifnot(colnames(data)==c("BL","W","Dv","Dh","FL"))
 	data<-cbind(1,data[,c(1,2,5)],rowMeans(data[,c("Dv","Dh")],na.rm=TRUE))
 	colnames(data)<-c("Constant","BL","W","FL","MD")
+	data<-data[,c(1,2,3,5,4)]
 	indices<-data%*%coef_Durif
 	return(unlist(apply(indices,1,function(X)ifelse(is.na(X[1]),NA,names(which.max(X))))))
 }

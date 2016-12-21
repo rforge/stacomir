@@ -122,7 +122,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 #' @param anneedebut The starting the first year, passed as charcter or integer
 #' @param anneefin the finishing year
 #' @param silent Boolean, if TRUE, information messages are not displayed
-#' @return An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @return An object of class \link{BilanAnnuels-class}
 #' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

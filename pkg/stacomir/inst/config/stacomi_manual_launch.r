@@ -100,6 +100,6 @@ source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
 setwd("F:/workspace/stacomir/pkg/stacomir")
 data("msg")
- stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 
 
