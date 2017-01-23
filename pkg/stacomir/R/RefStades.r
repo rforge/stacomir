@@ -278,7 +278,7 @@ setMethod("choice_c",signature=signature("RefStades"),definition=function(object
 				funout(get("msg",envir=envir_stacomi)$RefStades.7,arret=TRUE)
 			}
 			libellemanquants<-stades[!stades%in%object@data$std_code]
-			if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefStades.8,stringr::str_c(libellemanquants,collapse=", ")))
+			if (length(libellemanquants)>0) funout(paste(get("msg",envir=envir_stacomi)$RefStades.1,stringr::str_c(libellemanquants,collapse=", ")))
 			object@data<-object@data[object@data$std_code%in%stades,]					
 			if (nrow(object@data)==0 )	{
 				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)

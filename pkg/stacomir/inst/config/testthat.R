@@ -19,3 +19,4 @@ test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-03BilanFo
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-04BilanFonctionnementDC.R")
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-05Bilan_carlot.R")
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-06Bilan_MigrationInterAnnuelle.R")
+test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-07BilanAgedemer.R")

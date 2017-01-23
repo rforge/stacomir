@@ -8,16 +8,17 @@
 Bilan_poids_moyen class The objective is to calculate mean weight of glass
 eel which are counted from weight measurements and to reintegrate weight to
 number coefficients
-#'
 }
 \section{Slots}{
 
 \describe{
-\item{\code{data}}{Object of class \code{"data.frame"} data for bilan lot}
+\item{\code{data}}{A \code{"data.frame"} data for bilan lot}
+
+\item{\code{calcdata}}{A list containing two processed data frames, data and coe}
 
 \item{\code{dc}}{Object of class \code{\link{RefDC-class}}, the counting device}
 
-\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning}
+\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose the year of beginning}
 
 \item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
 refAnnee allows to choose last year of the Bilan}

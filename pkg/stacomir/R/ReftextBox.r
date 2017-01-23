@@ -53,3 +53,13 @@ setMethod("choice",signature=signature("RefTextBox"),definition=function(object)
 			addhandlerchanged(choice,handler=hlist)
 		})
 
+#' Choice_c method for ReTextBox referential objects
+#' 
+#' 
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @param object An object of class \link{RefTextBox-class}
+#' @param value The value to set
+setMethod("choice_c",signature=signature("RefTextBox"),definition=function(object,value) {
+			object@label<-value
+			return(object)
+		})

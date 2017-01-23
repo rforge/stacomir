@@ -375,11 +375,11 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			allow.multiple=FALSE,
 			strip=FALSE,
 			stack=TRUE,
-			key=lattice::simpleKey(text=levels(tableaum$type),
-					rectangles = TRUE, 
-					points=FALSE, 
-					space="right", 
-					cex=0.8),
+#			key=lattice::simpleKey(text=levels(tableaum$type),
+#					rectangles = TRUE, 
+#					points=FALSE, 
+#					space="right", 
+#					cex=0.8),
 			origin=0)
 	print(bar,position = c(0, 0, 1, .25),newpage = FALSE)
 	

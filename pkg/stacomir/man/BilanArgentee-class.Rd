@@ -46,8 +46,8 @@ require(stacomiR)
 # launching stacomi without selecting the scheme or interface
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
-		database_expected=FALSE)
-# the following script will load data from the two Anguillère monitored in the Somme
+		database_expected=TRUE)
+# the following script will load data from the two Anguillere monitored in the Somme
 
 \dontrun{
 	#create an instance of the class
@@ -77,7 +77,6 @@ bilanArg<-calcule(bilanArg)
 plot(bilanArg, plot.type=1)
 
 # number per month or year and Durif's stage (year if number of dc >1)
-
 plot(bilanArg, plot.type=2)
 
 # plot showing fulton's coefficient, and size weight graphs
@@ -88,7 +87,7 @@ plot(bilanArg, plot.type=2)
 plot(bilanArg, plot.type=3)
 # get a list of summary data and print output to screen
 
-plot(bilanArg, plot.type=3)
+plot(bilanArg, plot.type=4)
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilanArg)
 }

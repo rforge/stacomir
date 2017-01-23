@@ -6,6 +6,10 @@
 \usage{
 f_stade_Durif(data)
 }
+\arguments{
+\item{data}{A dataset with columns BL, W, Dv, Dh, FL corresponding to body length (mm),
+Weight (g), vertical eye diameter (mm), vertical eye diameter (mm), and pectoral fin length (mm)}
+}
 \description{
 Function to calculate the stages from Durif
 }

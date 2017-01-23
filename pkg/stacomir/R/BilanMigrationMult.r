@@ -196,8 +196,8 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			lestableaux<-list()
 			for (dic in unique(bilanMigrationMult@data$ope_dic_identifiant))	{
 				datasub<-bilanMigrationMult@data[bilanMigrationMult@data$ope_dic_identifiant==dic,]
-				
-				if (any(datasub$time.sequence>(bilanMigrationMult@pasDeTemps@stepDuration/86400))){				
+				datasub$duree=difftime(datasub$ope_date_fin,datasub$ope_date_debut,units="days")
+				if (any(datasub$duree>(bilanMigrationMult@pasDeTemps@stepDuration/86400))){				
 					#----------------------
 					# bilans avec overlaps
 					#----------------------
@@ -966,7 +966,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fun_weight_conversion=function(tableau,time.sequence,silent) { 
 	if (!silent) funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
-	nr<-table(tableau$type_de_quantite)[1]
+	nr<-length(unique(tableau$debut_pas))
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
 	tableaueffectif= tableaueffectif[,c("No.pas", "lot_tax_code","lot_std_code","CALCULE","MESURE","EXPERT","PONCTUEL","Effectif_total")]       
@@ -993,8 +993,8 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 					"poids_PONCTUEL",
 					"Poids_total"
 			))
-	tableau=merge(tableaudesdeux,tableaueffectif,by=c("No.pas","lot_tax_code","lot_std_code"))
-	tableau=merge(tableau, matricepoids, all.x = TRUE,by=c("No.pas","lot_tax_code","lot_std_code"),
+	tableau=merge(tableaudesdeux,tableaueffectif,by=c("No.pas","lot_tax_code","lot_std_code"),all.x=TRUE,all.y=FALSE)
+	tableau=merge(tableau, matricepoids, all.x = TRUE,all.y=FALSE,by=c("No.pas","lot_tax_code","lot_std_code"),
 			sort = TRUE, suffixes=c(".e",".p"))
 	# je vire les NA
 	tableau[is.na(tableau)]=0

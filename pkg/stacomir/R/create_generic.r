@@ -30,12 +30,12 @@ setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge
 #' @param y passed by the generic
 #' @param ... Additional parms
 #' @author cedric.briand
-setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))
-#' Generic for prediction
-#' @param object Object
-#' @param ... Additional parms
-#' @author cedric.briand
-setGeneric("predict",def=function(object,...) standardGeneric("predict"))
+#setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))
+##' Generic for prediction
+##' @param object Object
+##' @param ... Additional parms
+##' @author cedric.briand
+setGeneric("model",def=function(object,...) standardGeneric("model"))
 #' Generic method to load additional data
 #' @param object Object
 #' @param ... Additional parms

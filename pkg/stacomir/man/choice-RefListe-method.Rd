@@ -24,7 +24,7 @@ the choice method assigns an object of class refList named refListe in the envir
  object=new("RefListe")
 win=gwindow()
 group=ggroup(container=win,horizontal=FALSE)
-object<-charge(object)
+object<-charge(object,vecteur=c("choice1","choice2"),label="please choose")
 choice(object)
 }
 }

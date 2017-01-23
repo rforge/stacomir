@@ -79,7 +79,8 @@ setMethod("connect",signature=signature("BilanMigration"),definition=function(ob
 			bilanMigration<-object
 			bilanMigrationMult<-as(bilanMigration,"BilanMigrationMult")
 			bilanMigrationMult<-connect(bilanMigrationMult,silent=silent)
-			bilanMigration@data<-bilanMigrationMult@data		
+			bilanMigration@data<-bilanMigrationMult@data
+			bilanMigration@coef_conversion<-bilanMigrationMult@coef_conversion
 			return(bilanMigration)
 		})
 #' command line interface for BilanMigration class
@@ -147,11 +148,11 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				# pour permettre le fonctionnement de Fonctionnement DC
-						} else {
+			} else {
 				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
 				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
 			}
-
+			
 			#################################
 			# loading data for other classes associated with bilanMigrationMult
 			#################################
@@ -168,15 +169,15 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			bilanOperation<-charge(bilanOperation) 
 			# charge will search for refDC (possible multiple choice), bilanOperation_date_debut
 			# and bilanOperation_date_fin in envir_stacomi
-						# charge will search for refDC (possible multiple choice), bilanFonctionnementDC_date_debut
+			# charge will search for refDC (possible multiple choice), bilanFonctionnementDC_date_debut
 			# and bilanFonctionnementDC_date_fin in envir_stacomi
 			bilanFonctionnementDC<-charge(bilanFonctionnementDC)
 			refDF=new("RefDF")
 			refDF<-charge(refDF)
 			refDF<-choice_c(refDF,df)
-		
+			
 			assign("refDF",refDF,envir=envir_stacomi)
-		
+			
 			# charge will search for refDF (possible multiple choice), bilanFonctionnementDF_date_debut
 			# and bilanFonctionnementDF_date_fin in envir_stacomi
 			bilanFonctionnementDF<-charge(bilanFonctionnementDF)
@@ -204,13 +205,14 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 #' @export
 setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			#bilanMigration<-bM_Arzal
-			#negative=FALSE
+			#bilanMigration<-bM_Arzal_civ
+			#negative=FALSE;silent=FALSE
 			if (!silent){
 				funout(get("msg",envir_stacomi)$BilanMigration.2)
 			}
 			bilanMigration<-object
-
-				if (nrow(bilanMigration@data)>0){
+			
+			if (nrow(bilanMigration@data)>0){
 #				bilanMigration@data$time.sequence=difftime(bilanMigration@data$ope_date_fin,
 #						bilanMigration@data$ope_date_debut,
 #						units="days")
@@ -223,7 +225,8 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				datasub<-bilanMigration@data	
 				dic<-unique(bilanMigration@data$ope_dic_identifiant)
 				stopifnot(length(dic)==1)
-				if (any(datasub$time.sequence>(bilanMigration@pasDeTemps@stepDuration/86400))){				
+				datasub$duree=difftime(datasub$ope_date_fin,datasub$ope_date_debut,units="days")
+				if (any(datasub$duree>(bilanMigration@pasDeTemps@stepDuration/86400))){				
 					#----------------------
 					# bilans avec overlaps
 					#----------------------
@@ -250,8 +253,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 					#bilan simple
 					#----------------------
 					data<-fun_bilanMigrationMult(time.sequence = time.sequence,datasub=datasub,negative=negative)
-					data$taux_d_echappement=-1
-					data$coe_valeur_coefficient=NA
+					data$taux_d_echappement=-1					
 					contient_poids<-"poids"%in%datasub$type_de_quantite
 					if (contient_poids){
 						coe<-bilanMigration@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
@@ -259,6 +261,8 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 						data<-merge(data,coe,by="coe_date_debut")
 						data<-data[,-1] # removing coe_date_debut
 						data <-fun_weight_conversion(tableau=data,time.sequence=bilanMigration@time.sequence,silent)
+					} else {
+						data$coe_valeur_coefficient=NA
 					}
 					lestableaux[[stringr::str_c("dc_",dic)]][["data"]]<-data
 					lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"sum"
@@ -282,23 +286,23 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			return(bilanMigration)
 		})
 
-		
-		
+
+
 #' handler to print the command line
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-		houtBilanMigration=function(h=null,...) {
-			if (exists("refStades",envir_stacomi)) 	{
-				bilanMigration<-get("bilanMigration",envir_stacomi)
-				print(bilanMigration)
-			} 
-			else 
-			{      
-				funout(get("msg",envir_stacomi)$BilanMigrationMult.2,arret=TRUE)
-			}
-		}
-		
+houtBilanMigration=function(h=null,...) {
+	if (exists("refStades",envir_stacomi)) 	{
+		bilanMigration<-get("bilanMigration",envir_stacomi)
+		print(bilanMigration)
+	} 
+	else 
+	{      
+		funout(get("msg",envir_stacomi)$BilanMigrationMult.2,arret=TRUE)
+	}
+}
+
 #' Method to print the command line of the object
 #' @param x An object of class BilanMigration
 #' @param ... Additional parameters passed to print
@@ -379,11 +383,11 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 						data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
 						if (bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
 								taxon=="Anguilla anguilla"&
-								(stade=="civelle"|stade=="Anguilla jaune")) {							
+								(stade=="civelle"|stade=="Anguille jaune")) {							
 							#----------------------------------
 							# bilan migration avec poids (civelles
 							#-----------------------------------------
-						
+							
 							fungraph_civelle(bilanMigration=bilanMigration,
 									table=data_without_hole,
 									time.sequence=bilanMigration@time.sequence,
@@ -459,9 +463,9 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 				stop("unrecognised plot.type argument, plot.type should either be standard or step")
 			}
 		})
-		
 
-		
+
+
 #' handler for  hBilanMigrationgraph
 #' 
 #' Standard BilanMigration graph over time
@@ -475,7 +479,7 @@ hbilanMigrationgraph = function(h,...) {
 		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="standard")
-		
+	
 }
 
 #' handler for hBilanMigrationgraph2
@@ -500,15 +504,15 @@ hbilanMigrationgraph2 = function(h,...) {
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hTableBilanMigration=function(h,...) {
-		if (exists("bilanMigration",envir_stacomi)) 
-		{
-			bilanMigration<-get("bilanMigration",envir_stacomi)
-		} 
-		else 
-		{      
-			funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
-		}
-		summary(bilanMigration)
+	if (exists("bilanMigration",envir_stacomi)) 
+	{
+		bilanMigration<-get("bilanMigration",envir_stacomi)
+	} 
+	else 
+	{      
+		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+	}
+	summary(bilanMigration)
 	
 }
 
@@ -546,9 +550,139 @@ hbilanMigrationwrite = function(h,...) {
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	database_expected<-get("database_expected",envir=envir_stacomi)
 	if (database_expected) {
-		fn_EcritBilanJournalier(bilanMigration,silent=TRUE)
+		write_database(bilanMigration,silent=TRUE)
 	}	else {
 		funout("no bilan written to database : database_expected argument=FALSE")
 	}
 	
 }
+#' Command line method to write the daily and monthly counts to the 
+#' t_bilanmigrationjournalier_bjo table
+#' 
+#' Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
+#' by this function.  
+#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
+#' @param silent : TRUE to avoid messages
+#' @param dbname : the name of the database, defaults to "bd_contmig_nat"
+#' @param host : the host for sqldf, defaults to "localhost"
+#' @param port : the port, defaults to 5432
+#' @note the user is asked whether or not he wants to overwrite data, if no
+#' data are present in the database, the import is done anyway. The name of the database
+#' is not passed in odbc link, here defaults to "bd_contmig_nat"
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#' \dontrun{
+#' stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
+#' data("bM_Arzal")
+#' bM_Arzal<-calcule(bM_Arzal)
+#' write_database(bilanMigration=bM_Arzal,silent=FALSE)
+#' }
+#' @export
+setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432){
+			# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
+			bilanMigration<-object
+			if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
+			if (class(silent)!="logical") stop("the silent argument should be a logical")
+			dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
+			data=bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+			data=data[data$Effectif_total!=0,]
+			jour_dans_lannee_non_nuls=data$debut_pas	
+			col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
+			data=data[,-col_a_retirer]
+			data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 
+			data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
+			peuventpaszero=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
+			data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
+			annee<-as.numeric(unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1])
+			aat_bilanmigrationjournalier_bjo=cbind(
+					bilanMigration@dc@dc_selectionne,
+					bilanMigration@taxons@data$tax_code,
+					bilanMigration@stades@data$std_code,
+					annee, # une valeur
+					rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
+					utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
+					Sys.time(),
+					substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+			)
+			aat_bilanmigrationjournalier_bjo= stacomirtools::killfactor(aat_bilanmigrationjournalier_bjo[!is.na(aat_bilanmigrationjournalier_bjo$values),])
+			colnames(aat_bilanmigrationjournalier_bjo)<-c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_valeur","bjo_labelquantite","bjo_horodateexport","bjo_org_code")
+			
+			#####
+			# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
+			# les methodes de cette classe
+			bil=as(bilanMigration,"BilanMigrationInterAnnuelle")
+			bil=connect(bil,silent=silent)
+			
+			hconfirm=function(h,...){			
+				# suppression des donnees actuellement presentes dans la base
+				# bilanjournalier et bilanmensuel
+				supprime(bil)			
+				baseODBC<-get("baseODBC",envir=envir_stacomi)
+				sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
+						"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
+						" SELECT * FROM  aat_bilanmigrationjournalier_bjo;")
+				invisible(utils::capture.output(
+								sqldf::sqldf(x=sql,
+										drv="PostgreSQL",
+										user=baseODBC["uid"],
+										dbname=dbname,				
+										password=baseODBC["pwd"],
+										host=host,
+										port=port)
+						))		
+				
+				
+				if (!silent){
+					funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n"))
+				}
+# si l'utilisateur accepte de remplacer les valeurs				
+#progres<-get("progres",envir=envir_stacomi)
+#gtkWidgetDestroy(progres)
+# ecriture egalement du bilan mensuel
+				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
+				stade= as.character(bilanMigration@stades@data$std_libelle)
+				DC=as.numeric(bilanMigration@dc@dc_selectionne)	
+				tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+				resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent )
+				fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
+			}#end function hconfirm
+			
+			if (nrow(bil@data)>0)
+			{ 
+				if (!silent){
+					choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+									unique(bil@data$bjo_horodateexport),
+									get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
+							handler=hconfirm) # voulez vous le remplacer ?
+				} else {
+					hconfirm(h=NULL)
+				}
+				
+			}
+			else  # sinon on ecrit les resultats quoiqu'il arrive
+			{
+				
+				baseODBC<-get("baseODBC",envir=envir_stacomi)
+				sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
+						"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
+						" SELECT * FROM  aat_bilanmigrationjournalier_bjo;")
+				invisible(utils::capture.output(
+								sqldf::sqldf(x=sql,
+										drv="PostgreSQL",
+										user=baseODBC["uid"],
+										dbname=dbname,				
+										password=baseODBC["pwd"],
+										host=host,
+										port=port)
+						))		
+#	
+				
+				if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
+				stade= as.character(bilanMigration@stades@data$std_libelle)
+				DC=as.numeric(bilanMigration@dc@dc_selectionne)	
+				tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
+				resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent)
+				fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
+			} # end else
+		})

@@ -48,7 +48,6 @@ Collate:
     'RefMsg.r'
     'Refperiode.r'
     'data.r'
-    'fn_EcritBilanJournalier.r'
     'fn_EcritBilanMensuel.r'
     'fn_table_per_dis.r'
     'funSousListeBilanMigrationPar.r'

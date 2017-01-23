@@ -5,19 +5,19 @@
 \alias{barplot,BilanAnnuels-method}
 \alias{barplot.BilanAnnuels}
 \alias{barplot.bilA}
-\title{barplot method for object \link{BilanAnnuels_class}}
+\title{barplot method for object \link{BilanAnnuels-class}}
 \usage{
 \S4method{barplot}{BilanAnnuels}(height, legend.text = NULL, ...)
 }
 \arguments{
 \item{height}{An object of class BilanAnnuels}
 
-\item{...}{additional arguments passed to barplot}
+\item{legend.text}{See barplot help}
 
-\item{legend.tex}{See barplot help}
+\item{...}{additional arguments passed to barplot}
 }
 \description{
-barplot method for object \link{BilanAnnuels_class}
+barplot method for object \link{BilanAnnuels-class}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

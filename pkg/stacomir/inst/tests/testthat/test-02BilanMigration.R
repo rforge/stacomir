@@ -92,7 +92,7 @@ test_that("Test writing an example to the database",
 			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			data("bM_Arzal")
 			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
-			fn_EcritBilanJournalier(bilanMigration=bM_Arzal,silent=TRUE)
+			write_database(bilanMigration=bM_Arzal,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
@@ -139,5 +139,35 @@ test_that("test example for fd80",
 			bM_EclusierVaux<-calcule(bM_EclusierVaux,silent=TRUE)
 			plot(bM_EclusierVaux,silent=TRUE)
 			summary(bM_EclusierVaux,silent=TRUE)
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+
+
+test_that("test example with glass eel",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			bM_Arzal_civ=new("BilanMigration")
+			bM_Arzal_civ=choice_c(bM_Arzal_civ,
+					dc=6,
+					taxons=c("Anguilla anguilla"),
+					stades=c("CIV"),
+					datedebut="2003-01-01",
+					datefin="2003-12-31")
+			bM_Arzal_civ<-charge(bM_Arzal_civ,silent=TRUE)
+			bM_Arzal_civ<-connect(bM_Arzal_civ,silent=TRUE)
+			bM_Arzal_civ<-calcule(bM_Arzal_civ,silent=TRUE)
+			plot(bM_Arzal_civ,silent=TRUE)
+			# some additional arguments passed to plot via ...
+			plot(bM_Arzal_civ,silent=TRUE,bty="n")
+			summary(bM_Arzal_civ,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})

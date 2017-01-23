@@ -89,7 +89,7 @@ plot(bM_Arzal,plot.type="step")
 }
 # this will write the daily bilan for later in in the bilannMigrationInterannuelle-class
 \dontrun{
-	fn_EcritBilanJournalier(bM_Arzal,silent=TRUE)
+	write_database(bM_Arzal,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432)
 }
 }
 \author{

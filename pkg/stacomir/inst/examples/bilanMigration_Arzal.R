@@ -42,7 +42,6 @@ bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
-
 #cumulated migration at the station (all stages and DC grouped)
 plot(bM_Arzal,plot.type="step")
 
@@ -54,5 +53,5 @@ plot(bM_Arzal,plot.type="step")
 }
 # this will write the daily bilan for later in in the bilannMigrationInterannuelle-class
 \dontrun{
-	fn_EcritBilanJournalier(bM_Arzal,silent=TRUE)
+	write_database(bM_Arzal,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432)
 }

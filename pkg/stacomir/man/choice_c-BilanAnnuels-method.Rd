@@ -25,7 +25,7 @@ it should match the ref.tr_taxon_tax referential table in the stacomi database, 
 \item{silent}{Boolean, if TRUE, information messages are not displayed}
 }
 \value{
-An object of class \link{BilanMigrationInterAnnuelle-class}
+An object of class \link{BilanAnnuels-class}
 The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
 }
 \description{

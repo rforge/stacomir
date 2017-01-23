@@ -115,7 +115,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 					if (!is.null(objectBilan)) {
 						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
 						# pas non plus d'appel pour les bilanArgentee dont les slots taxon, stade ,et par sont fixes
-						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))&class(objectBilan)!="BilanArgentee"){
+						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))&class(objectBilan)!="BilanArgentee"&class(objectBilan)!="BilanAgedemer"){
 							objectBilan@taxons<<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",object,envir_stacomi)@dc_selectionne)
 							if (exists("frame_tax")) delete(group,frame_tax)
 							if (exists("frame_std")) delete(group,frame_std)

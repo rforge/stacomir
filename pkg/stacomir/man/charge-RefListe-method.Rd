@@ -5,12 +5,12 @@
 \alias{charge,RefListe-method}
 \title{Loading method for Refliste referential objects}
 \usage{
-\S4method{charge}{RefListe}(object, vecteur, label)
+\S4method{charge}{RefListe}(object, listechoice, label)
 }
 \arguments{
 \item{object}{An object of class \link{RefListe-class}}
 
-\item{vecteur}{A character vector}
+\item{listechoice}{A character vector setting the possible values in which the user can select}
 
 \item{label}{A label for Refliste}
 }

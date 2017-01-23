@@ -395,3 +395,64 @@ bilanArg@data$val_libelle<-iconv(bilanArg@data$val_libelle,from="latin1",to="UTF
 bilanArg@data$par_nom<-iconv(bilanArg@data$par_nom,from="latin1",to="UTF8")
 
 devtools::use_data(bilanArg,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for BilanPoidsMoyen : iav
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bilPM<-new("Bilan_poids_moyen")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("iav",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","iav.",envir_stacomi)
+bilPM@liste<-charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label="")
+bilPM<-choice_c(bilPM,
+		dc=c(6),			
+		anneedebut="2009",
+		anneefin="2016",
+		selectedvalue=">1",
+		silent=FALSE)
+bilPM<-connect(bilPM)	
+bilPM@dc@data[,"ouv_libelle"]<-iconv(bilPM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bilPM@dc@data[,"dis_commentaires"]<-iconv(bilPM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilPM@dc@data[,"type_df"]<-iconv(bilPM@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilPM@dc@data[,"type_dc"]<-iconv(bilPM@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilPM@dc@data[,"dif_localisation"]<-iconv(bilPM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(bilPM,internal=FALSE,overwrite=TRUE)
+
+
+#################################
+# generates dataset for BilanAgedemer bilan_adm
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bilan_adm<-new("BilanAgedemer")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("logrami",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","logrami.",envir_stacomi)
+
+bilan_adm<-choice_c(bilan_adm,
+		dc=c(107,108,101),			
+		horodatedebut="2012-01-01",
+		horodatefin="2012-12-31",
+		limit1hm=675,
+		limit2hm=875,
+		silent=FALSE)
+bilan_adm<-connect(bilan_adm)
+bilan_adm@dc@data[,"ouv_libelle"]<-iconv(bilan_adm@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bilan_adm@dc@data[,"dis_commentaires"]<-iconv(bilan_adm@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilan_adm@dc@data[,"type_df"]<-iconv(bilan_adm@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilan_adm@dc@data[,"type_dc"]<-iconv(bilan_adm@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilan_adm@dc@data[,"dif_localisation"]<-iconv(bilan_adm@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilan_adm@data[,"car_valeur_quantitatif"]<-bilan_adm@data[,"car_valeur_quantitatif"]*10
+devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)

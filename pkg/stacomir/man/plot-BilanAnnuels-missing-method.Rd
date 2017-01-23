@@ -11,13 +11,13 @@
   silent = FALSE)
 }
 \arguments{
-\item{x}{An object of class \link{BilanAnnuels}}
+\item{x}{An object of class \link{BilanAnnuels-class}}
 
 \item{plot.type}{Default point}
 
 \item{silent}{Stops displaying the messages.
 \itemize{
-        \item{plot.type="point": ggplot+geom_point}#'         
+        \item{plot.type="point": ggplot+geom_point}'         
 }}
 }
 \description{

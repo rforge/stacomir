@@ -11,7 +11,9 @@
 \item{object}{An object of class \link{Bilan_poids_moyen-class}}
 }
 \value{
-Bilan_Poids_Moyen request corresponding to user choices
+Bilan_Poids_Moyen request corresponding to user choices, mean weight
+ w is calculated as car_valeur_quantitatif/lot_effectif. These coefficients are stored in the database,
+and the connect method loads them from the table using the \link{RefCoe-class}
 }
 \description{
 connect method for Bilan_Poids_moyen

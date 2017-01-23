@@ -60,7 +60,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	r <- as.Date(round(range(time.sequence), "day"))
 	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	
-	points(as.Date(time.sequence),eff.p/1000,
+	points(as.Date(time.sequence,"Europe/Paris"),eff.p/1000,
 			type="h",
 			lty=1,
 			col=mypalette[10])
@@ -395,11 +395,11 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
-					rectangles = TRUE, 
-					points=FALSE, 
-					space="right",
-					cex=0.8),
+#			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
+#					rectangles = TRUE, 
+#					points=FALSE, 
+#					space="right",
+#					cex=0.8),
 			strip=FALSE,
 			stack=TRUE)
 	print(bar,position = c(0, 0, 1, .25),newpage = FALSE)
