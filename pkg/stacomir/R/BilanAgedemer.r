@@ -217,7 +217,6 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("erreur interne")
 			# if no value, a dummy value of 2m
 			if (is.na(as.numeric(bilan_adm@limit2hm@label))) bilan_adm@limit2hm@label<-2000
-			adm$agedemer<-NA
 			lescoupes<-c(0,as.numeric(bilan_adm@limit1hm@label),as.numeric(bilan_adm@limit2hm@label),2001)
 			adm$age<-cut(x=adm$car_valeur_quantitatif,breaks=lescoupes,labels=FALSE)
 			bilan_adm@calcdata[["data"]]<-adm
@@ -310,46 +309,28 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 			} else {      
 				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
 			}
-			dat<-bilan_adm@calcdata
-			# cols are using viridis::inferno(6,alpha=0.9)
-			
-			printstat<-function(vec){
-				moy<-mean(vec,na.rm=TRUE)
-				sd<- sd(vec,na.rm=TRUE) # sample standard deviation 
-				n<-length(vec[!is.na(vec)])
-				SE = sd/sqrt(n)
-				print(noquote(stringr::str_c("mean=",round(moy,2),",SD=",round(sd,2),",N=",n,",SE=",round(SE,2))))
-				return(list("mean"=moy,"SD"=sd,"N"=n,"SE"=SE))
-			}
+			dat<-bilan_adm@calcdata[["data"]]		
+			ndc=unique(dat$ope_dic_identifiant)
 			result<-list()
-			for (i in 1:length(dat)){
-				datdc<-	dat[[i]]
+			for (i in 1:length(ndc)){
+				datdc<-	dat[dat$ope_dic_identifiant==ndc[i],]
+				dc_code<-bilan_adm@dc@data$dc_code[bilan_adm@dc@data$dc==ndc[i]]
 				ouvrage<-
-						bilan_adm@dc@data[bilan_adm@dc@data$dc==bilan_adm@dc@dc_selectionne[i],"ouv_libelle"]
+						gsub("[\r\n]", "", bilan_adm@dc@data[bilan_adm@dc@data$dc==bilan_adm@dc@dc_selectionne[i],"ouv_libelle"])
 				dc<-as.character(unique(datdc$ope_dic_identifiant))
 				result[[dc]]<-list()
 				result[[dc]][["ouvrage"]]<-ouvrage
-				print(noquote(stringr::str_c("Statistics for dam : ",ouvrage)))
+				print(noquote(stringr::str_c("Age tatistics for dam : ",ouvrage," CD=",dc_code)))
 				print(noquote("========================"))
-				print(noquote("Stages Durif"))
-				print(table(datdc$stage))
-				result[[dc]][["Stages"]]<-table(datdc$stage)
-				print(noquote("-----------------------"))
-				print(noquote("Pankhurst"))
-				print(noquote("-----------------------"))
-				result[[dc]][["Pankhurst"]]<-printstat(datdc$Pankhurst)		
-				print(noquote("-----------------------"))
-				print(noquote('Eye diameter (mm)'))		
-				print(noquote("-----------------------"))
-				result[[dc]][["MD"]]<-printstat(datdc$MD)				
-				print(noquote("-----------------------"))
-				print(noquote('Length (mm)'))	
-				print(noquote("-----------------------"))
-				result[[dc]][["BL"]]<-printstat(datdc$BL)	
-				print(noquote("-----------------------"))
-				print(noquote('Weight (g)'))	
-				print(noquote("-----------------------"))
-				result[[dc]][["W"]]<-printstat(datdc$W)	
+				print(table(datdc$age))		
+				result[[dc]][["age"]]<-table(datdc$age)
+				
+			}
+			if (length(ndc)>1){
+				print(noquote(stringr::str_c("Age tatistics total")))
+				print(noquote("========================"))
+				print(table(dat$age))		
+				
 			}
 			return(result)		
 		})
