@@ -77,7 +77,6 @@ bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 #Individual plot for all DC (standard), taxon and stage where data present
 #silent argument to stop all messages
 plot(bM_Arzal,plot.type="standard",silent=TRUE)
-
 #cumulated migration at the station (all stages and DC grouped)
 plot(bM_Arzal,plot.type="step")
 
@@ -96,7 +95,8 @@ plot(bM_Arzal,plot.type="step")
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDC-class}},

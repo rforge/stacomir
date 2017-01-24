@@ -46,7 +46,8 @@ Other Bilan Classes
 \code{\linkS4class{BilanMigrationInterAnnuelle}},
 \code{\linkS4class{BilanMigrationPar}}
 
-Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},

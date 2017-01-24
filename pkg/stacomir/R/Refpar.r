@@ -6,7 +6,7 @@
 #' Class "Refpar"
 #' 
 #' Class enabling to load the list of parameters and select one of them
-#' 
+#' @include create_generic.r
 #' @slot data A data.frame
 #' @slot par_selectionne A character vector corresponding to par_code
 #' @section Objects from the Class: Objects can be created by calls of the form

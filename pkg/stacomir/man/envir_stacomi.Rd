@@ -10,8 +10,13 @@ by the charge method}
 envir_stacomi
 
 envir_stacomi
+
+envir_stacomi
 }
 \description{
+envir_stacomi \code{envir_stacomi <- new.env(parent = baseenv())} is the
+environment where most object created by the interface are stored
+
 envir_stacomi \code{envir_stacomi <- new.env(parent = baseenv())} is the
 environment where most object created by the interface are stored
 
@@ -19,6 +24,8 @@ This is where the graphical interface stores its objects
 try \code{ls(envir=envir_stacomi)}
 }
 \author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \keyword{datasets}

@@ -5,16 +5,26 @@
 \title{Generic method getvalue}
 \usage{
 out(object, ...)
+
+out(object, ...)
 }
 \arguments{
+\item{object}{Object}
+
+\item{...}{Additional parms}
+
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method getvalue
+
+Generic method getvalue
 }
 \author{
+cedric.briand
+
 cedric.briand
 }
 

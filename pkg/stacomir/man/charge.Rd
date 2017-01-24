@@ -5,16 +5,26 @@
 \title{Generic method to load referentials}
 \usage{
 charge(object, ...)
+
+charge(object, ...)
 }
 \arguments{
+\item{object}{Object}
+
+\item{...}{Additional parms}
+
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method to load referentials
+
+Generic method to load referentials
 }
 \author{
+cedric.briand
+
 cedric.briand
 }
 

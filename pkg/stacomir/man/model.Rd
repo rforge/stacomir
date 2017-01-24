@@ -2,19 +2,47 @@
 % Please edit documentation in R/create_generic.r
 \name{model}
 \alias{model}
-\title{Generic for prediction}
+\title{Generic method for plot}
 \usage{
+model(object, ...)
+
 model(object, ...)
 }
 \arguments{
 \item{object}{Object}
 
 \item{...}{Additional parms}
+
+\item{x}{passed by the generic}
+
+\item{y}{passed by the generic}
+
+\item{...}{Additional parms}
+
+\item{x}{passed by the generic}
+
+\item{y}{passed by the generic}
+
+\item{...}{Additional parms}
+
+\item{object}{Object}
+
+\item{...}{Additional parms}
 }
 \description{
-Generic for prediction
+Generic method for plot
+
+Generic method for plot
 }
 \author{
+cedric.briand
+Generic for prediction
+
+cedric.briand
+
+cedric.briand
+Generic for prediction
+
 cedric.briand
 }
 

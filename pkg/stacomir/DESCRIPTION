@@ -1,6 +1,6 @@
 Package: stacomiR
 Version: 0.5.0
-Date: 2016-12-18
+Date: 2017-01-24
 Title: Fish Migration Monitoring (stacomiR)
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"))
@@ -11,13 +11,15 @@ Description: Graphical outputs and treatment for a database of fishway
 License: GPL (>= 2)
 Collate:
     'create_generic.r'
-    'RefAnnee.r'
+    'Refpar.r'
+    'RefHorodate.r'
     'RefStades.r'
     'RefTaxon.r'
     'RefDC.r'
+    'ReftextBox.r'
+    'BilanAgedemer.r'
+    'RefAnnee.r'
     'BilanAnnuels.r'
-    'Refpar.r'
-    'RefHorodate.r'
     'BilanArgentee.r'
     'utilitaires.r'
     'RefStationMesure.r'
@@ -41,7 +43,6 @@ Collate:
     'Bilan_carlot.r'
     'RefCoe.r'
     'Bilan_poids_moyen.r'
-    'ReftextBox.r'
     'RefCheckBox.r'
     'Bilan_stades_pigm.r'
     'Bilan_taille.r'
@@ -58,6 +59,7 @@ Collate:
     'funstatJournalier.r'
     'funtable.r'
     'funtraitement_poids.r'
+    'interface_BilanAgedemer.r'
     'interface_BilanAnnuels.r'
     'interface_BilanArgentee.r'
     'interface_BilanConditionEnv.r'
@@ -101,7 +103,8 @@ Imports:
     RGtk2,
     lubridate,
     dplyr,
-    xtable
+    xtable,
+    mgcv
 Suggests:
     testthat,
     viridis

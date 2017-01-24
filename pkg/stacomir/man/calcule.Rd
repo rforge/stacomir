@@ -5,16 +5,26 @@
 \title{Generic method for calculations}
 \usage{
 calcule(object, ...)
+
+calcule(object, ...)
 }
 \arguments{
+\item{object}{Object}
+
+\item{...}{Additional parms}
+
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method for calculations
+
+Generic method for calculations
 }
 \author{
+cedric.briand
+
 cedric.briand
 }
 

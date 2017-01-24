@@ -1,21 +1,21 @@
 #' Class "BilanAgedemer"
 #' 
-#' the BilanAgedemer class is used to calculate various statistics about the silver eel run
+#' the BilanAgedemer class is used to dispatch adult salmons to age class according
+#' their size and to basin dependent limits set by the user. Once checked with graphs and summary
+#' statistics, the results are to be written to the database.
+#' @include create_generic.r
+#' @include ReftextBox.r
 #' @include RefDC.r
 #' @include RefTaxon.r
 #' @include RefStades.r
 #' @include RefHorodate.r
 #' @include Refpar.r
-#' @note This class is displayed by interface_bilan_admentee
+#' @note This class is displayed by interface_bilan_agedemer
 #' @slot data A data frame with data generated from the database
-#' @slot calcdata A list of dc with processed data. Each dc contains a data frame with 
+#' @slot calcdata A list of dc with processed data. This lists consists of two elements
 #' \itemize{
-#' \item (1) qualitative data on body contrast (CONT), presence of punctuation on the lateral line (LINP)
-#' \item (2) quantitative data "BL" Body length,"W" weight,"Dv" vertical eye diameter,"Dh" horizontal eye diameter,"FL" pectoral fin length
-#' \item (3) calculated durif stages, Pankhurst's index, Fulton's body weight coefficient K_ful
-#' \item (4) other columns containing data pertaining to the sample and the control operation:  lot_identifiant,ope_identifiant,
-#' ope_dic_identifiant,ope_date_debut,ope_date_fin,dev_code (destination code of fish),
-#' dev_libelle (text for destination of fish)
+#' \item (1) data A dataset with age set to be used by the plot and summary methods
+#' \item (2) tj_caracteristitiquelot_car A dataset to import into the database
 #' }
 #' @slot dc Object of class \link{RefDC-class}: the control devices
 #' @slot taxons Object of class \link{RefTaxon-class}: the speciess
@@ -23,12 +23,14 @@
 #' @slot par Object of class \link{Refpar-class}: the parameters used
 #' @slot horodatedebut An object of class \code{RefHorodate-class}
 #' @slot horodatefin An object of class \code{RefHorodate-class}
+#' @slot limit1hm The size limit, in mm between 1 sea winter fishes and 2 sea winter fishes
+#' @slot limit2hm The size limit, in mm between 3 sea winter fishes and 3 sea winter fishes
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanAgedemer", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
-#' @example inst/examples/bilan_admentee_example.R
+#' @example inst/examples/bilanAgedemer_example.R
 #' @export 
 setClass(Class="BilanAgedemer",
 		representation= representation(
@@ -274,14 +276,13 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 						ylab("Effectif")
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				funout("L'objet graphique est écrit dans l'environnement stacomi, tappez p<-get('p',envir=envir_stacomi))")
+				funout("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi))")
 				
 			}
 			######################################
 			# Migration according to stage, month and year
 			######################################
-			if (plot.type=="2"){	
-				
+			if (plot.type=="2"){					
 				p<-ggplot(dat)+geom_histogram(aes(x=car_valeur_quantitatif,fill=factor(age)),alpha=0.8)+
 						geom_vline(xintercept=les_coupes,lty=2,lwd=1)+
 						theme_minimal()+
@@ -292,186 +293,8 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 				print(p)
 				assign("p",p,envir=envir_stacomi)
 				funout("L'objet graphique est écrit dans l'environnement stacomi, tappez p<-get('p',envir=envir_stacomi))")
-				
-				
 			}
-			######################################
-			# Series of graphs showing proportion of stage, mean Fulton's coefficient, Pankhurst eye index,
-			# body weight, body size, sex ratio.
-			######################################
-			if (plot.type=="3"){
-				layout(matrix(c(1,2,3,4,4,5,6,6,7), 3, 3, byrow = TRUE), 
-						widths=c(3,3,1), heights=c(3,1,3))
-				# width 331 sets the last column relative width
-				# same for rows
-				par(mar=c(3,4.1,4.1,2.1))# ressetting to default
-				datdc<-chnames(datdc,"ope_dic_identifiant","dc")
-				lesdc<-unique(datdc$dc)
-				datdc$sex<-"F"
-				datdc$sex[datdc$BL<450]<-"M"
-				
-				#############
-				# Fulton
-				#############
-				moy<-tapply(datdc$K_ful,list(datdc$dc,datdc$sex),mean,na.rm=TRUE)
-				sd<- tapply(datdc$K_ful,list(datdc$dc,datdc$sex),sd,na.rm=TRUE) # sample standard deviation 
-				n<-tapply(datdc$K_ful,list(datdc$dc,datdc$sex),length)
-				SE = sd/sqrt(n)	
-				plotTop=max(moy+3*SE,na.rm=TRUE)
-				
-				
-				bp<-barplot(moy,
-						beside = TRUE, las = 1,
-						ylim = c(0, plotTop),
-						cex.names = 0.75,
-						main = "Fulton coefficient (+-2SE)",
-						ylab = "Fulton K",
-						xlab = "",
-						border = "black", axes = TRUE,
-				#legend.text = TRUE,
-				#adms.legend = list(title = "DC", 
-				#		x = "topright",
-				#		cex = .7)
-				)
-				graphics::segments(bp, moy - SE * 2, bp,
-						moy + SE * 2, lwd = 2)
-				
-				graphics::arrows(bp, moy - SE * 2, bp,
-						moy + SE * 2, lwd = 2, angle = 90,
-						code = 3, length = 0.05)		
-				
-				
-				#############
-				# Pankhurst
-				#############
-				moy<-tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),mean,na.rm=TRUE)
-				sd<- tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),sd,na.rm=TRUE) # sample standard deviation 
-				n<-tapply(datdc$Pankhurst,list(datdc$dc,datdc$sex),length)
-				SE = sd/sqrt(n)	
-				plotTop=max(moy+3*SE,na.rm=TRUE)
-				
-				
-				bp<-barplot(moy,
-						beside = TRUE, las = 1,
-						ylim = c(0, plotTop),
-						cex.names = 0.75,
-						main = "Pankhurst (+-2SE)",
-						ylab = "Pankhurst eye index",
-						xlab = "",
-						border = "black", axes = TRUE,
-				#legend.text = TRUE,
-				#adms.legend = list(title = "DC", 
-				#		x = "topright",
-				#		cex = .7)
-				)
-				segments(bp, moy - SE * 2, bp,
-						moy + SE * 2, lwd = 2)
-				
-				arrows(bp, moy - SE * 2, bp,
-						moy + SE * 2, lwd = 2, angle = 90,
-						code = 3, length = 0.05)		
-				
-				#############
-				# empty plot
-				#############		
-				op<-par(mar=c(1,1,1,1))
-				plot(1, type="n", axes=F, xlab="", ylab="")
-				legend("center",fill =grDevices::grey.colors(nrow(moy)),legend=unique(datdc$dc))
-				# grey.colors is the default color generation for barplot 
-				#############
-				# size hist 
-				#############
-				par(mar=c(1,4.1,1,1)) 
-				for (i in 1:length(lesdc)){
-					indexdc<-datdc$dc==lesdc[i]
-					histxn<-graphics::hist(datdc$BL[indexdc],breaks=seq(250,1000,by=50),plot=FALSE)$density
-					if (i==1) histx<-histxn else histx<-cbind(histx,histxn)
 					
-				}	
-				if (length(lesdc)>1) colnames(histx)<-lesdc
-				barplot(height=t(histx),space=0,beside=FALSE, las = 1,horiz=FALSE,legend.text = FALSE,axes=FALSE)	
-				#############
-				# empty plot
-				#############		
-				op<-par(mar=c(1,1,1,1))
-				plot(1, type="n", axes=F, xlab="", ylab="")
-				
-				#############
-				# size -weight
-				#############
-				par(mar=c(5.1,4.1,1,1)) # blur bottom left up right
-				plot(datdc$BL,datdc$W,type="n",
-						xlab=get("msg",envir=envir_stacomi)$BilanAgedemer.9,
-						ylab=get("msg",envir=envir_stacomi)$BilanAgedemer.10,
-						xlim=c(250,1000),ylim=c(0,2000))
-				abline(v=seq(250,1000,by=50), col = "lightgray",lty=2)
-				abline(h=seq(0,2000,by=100),col="lightgray",lty=2)
-				# some alpha blending to better see the points :
-				lescol<-ggplot2::alpha(grDevices::grey.colors(nrow(moy)),0.8)
-				for (i in 1:length(lesdc)){
-					indexdc<-datdc$dc==lesdc[i]
-					points(datdc$BL[indexdc],datdc$W[indexdc],pch=16,col=lescol[i],cex=0.8)
-					
-				}
-				######################"
-				# Size - weight model using robust regression
-				######################
-				subdatdc<-datdc[,c("BL","W")]
-				subdatdc$BL3<-(subdatdc$BL/1000)^3
-				# plot(subdatdc$W~subdatdc$BL3)
-				
-				rlmmodb<-MASS::rlm(W~0+BL3,data=subdatdc)
-				#summary(rlmmodb)
-				newdata<-data.frame("BL"=seq(250,1000,by=50),"BL3"=(seq(250,1000,by=50)/1000)^3)
-				pred<-predict(rlmmodb,newdata=newdata,se.fit=TRUE,type="response",interval="prediction")
-				newdata$predlm<-pred$fit[,1]
-				newdata$predlowIC<-pred$fit[,2]
-				newdata$predhighIC<-pred$fit[,3]
-				
-				points(newdata$BL,newdata$predlm,type="l")
-				points(newdata$BL,newdata$predlowIC,type="l",lty=2,col="grey50")
-				points(newdata$BL,newdata$predhighIC,type="l",lty=2,col="grey50")
-				
-				text(400,1500,stringr::str_c("W=",round(coefficients(rlmmodb),1)," BL^3"))
-				
-				#############
-				# weight hist rotate
-				#############
-				par(mar=c(5.1,1,1,1)) 
-				for (i in 1:length(lesdc)){
-					indexdc<-datdc$dc==lesdc[i]
-					histyn<-hist(datdc$W[indexdc],plot=FALSE,breaks=seq(0,2000,by=100))$density
-					if (i==1) histy<-histyn else histy<-cbind(histy,histyn)
-					
-				}		
-				if (length(lesdc)>1) colnames(histy)<-lesdc
-				barplot(height=t(histy),space=0,beside=FALSE, las = 1,horiz=TRUE,legend.text = FALSE,axes=FALSE)	
-				
-				
-			}
-			if (plot.type=="4"){
-				#creating a shingle with some overlaps
-				my.settings <- list(
-						superpose.polygon=list(
-								col=c("Lime green","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males),								
-								alpha=c(0.9,0.9,0.9,0.9,0.9,0.9)								
-						),
-						superpose.line=list(
-								col=c("#FBA338","#420A68E6","#932667E6","#DD513AE6","#FCA50AE6",blue_for_males)
-						),
-						#colfn<-colorRampPalette(c("#1C4587", "#BBC7DB"),space = "Lab")
-						#colfn(7)
-						strip.background=list(col=c("#1B4586","#3E5894","#596DA2","#7282B0","#8A98BE","#A2AFCC","#BAC6DA")),
-						strip.border=list(col="black")
-				)
-				lattice::trellis.par.set(my.settings)
-				
-				ccc<-lattice::cloud(Pankhurst ~ W * BL|ouv, data = datdc,group=stage,
-						screen = list(x = -90, y = 70), distance = .4, zoom = .6,strip = lattice::strip.custom(par.strip.text=list(col="white")))
-				return(ccc)
-			}
-			
-			
 		})
 
 #' summary for BilanAgedemer 

@@ -131,7 +131,8 @@ if (requireNamespace("ggplot2", quietly = TRUE)&requireNamespace("viridis", quie
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDC-class}},

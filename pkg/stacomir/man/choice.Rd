@@ -5,16 +5,26 @@
 \title{Generic method for choice (using the gwidget graphical interface)}
 \usage{
 choice(object, ...)
+
+choice(object, ...)
 }
 \arguments{
+\item{object}{Object}
+
+\item{...}{Additional parms}
+
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method for choice (using the gwidget graphical interface)
+
+Generic method for choice (using the gwidget graphical interface)
 }
 \author{
+cedric.briand
+
 cedric.briand
 }
 

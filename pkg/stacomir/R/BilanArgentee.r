@@ -1,6 +1,7 @@
 #' Class "BilanArgentee"
 #' 
 #' the BilanArgentee class is used to calculate various statistics about the silver eel run
+#' @include create_generic.r
 #' @include RefDC.r
 #' @include RefTaxon.r
 #' @include RefStades.r
