@@ -60,7 +60,7 @@ setMethod("connect",signature=signature("Bilan_carlot"),definition=function(obje
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(get("msg",envir_stacomi)$Bilan_carlot.1)
+			if (!silent) funout(gettext("Sample characteristics have been loaded from the database\n"))
 			return(object)
 		})
 
@@ -79,34 +79,34 @@ setMethod("charge",signature=signature("Bilan_carlot"),definition=function(objec
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",arret=TRUE))
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",arret=TRUE))
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",arret=TRUE))
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.4,arret=TRUE)
+				funout(gettext("You need to choose a parameter, clic on validate\n",arret=TRUE))
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_carlot_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_carlot_date_debut",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",arret=TRUE))
 			}
 			# rem id
 			if (exists("bilan_carlot_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_carlot_date_fin",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",arret=TRUE))
 			}       
 			assign("bilan_carlot",object,envir_stacomi)
 			return(object)
@@ -171,7 +171,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 			#bilan_carlot<-b_carlot
 			bilan_carlot<-object
 			if(nrow(bilan_carlot@data)==0) {
-				funout(get("msg",envir_stacomi)$Bilan_carlot.2, arret=TRUE)
+				funout(gettext("No information for these samples during the selected period\n", arret=TRUE))
 			}   
 			vue_ope_lot=bilan_carlot@data # on recupere le data.frame
 			nom_variable=bilan_carlot@par@data$par_nom[bilan_carlot@par@data$par_code%in%bilan_carlot@par@par_selectionne]
@@ -201,7 +201,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 			#vue_ope_lot=vue_ope_lot[,c("ope","lot","dic","lot_pere","date","effectif","quantite","tax","std","dev","par","meth","val","val_quant","val_libelle", "annee","mois","quinzaine","semaine","jour")]
 			bilan_carlot@data<-vue_ope_lot
 			assign("bilan_carlot",bilan_carlot,envir_stacomi)#assign("bilan_carlot",vue_ope_lot,envir_stacomi)
-			funout(get("msg",envir_stacomi)$Bilan_carlot.3)
+			funout(gettext("To obtain the table, type : bilan_lot=get('bilan_lot',envir_stacomi)\n"))
 			return(bilan_carlot)
 		})
 
@@ -224,7 +224,7 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 			if (exists("bilan_carlot",envir_stacomi)) {
 				bilan_carlot<-get("bilan_carlot",envir_stacomi)
 			} else {      
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",arret=TRUE))
 			}
 			if (plot.type==1){		
 				g<-ggplot(bilan_carlot@data,aes(x=car_valeur_quantitatif))
@@ -235,21 +235,21 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 						coord_flip()
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(get("msg",envir_stacomi)$Bilan_carlot.4)				
+				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\"n"))				
 			} else if (plot.type==2){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_boxplot(aes(x=mois,y=car_valeur_quantitatif,fill=std_libelle))+
 						facet_grid(annee ~ .)				
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(get("msg",envir_stacomi)$Bilan_carlot.4)
+				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\n"))
 				
 			}else if (plot.type==3){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif))
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(get("msg",envir_stacomi)$Bilan_carlot.4)
+				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\n"))
 			}
 			return(invisible(NULL))
 		})
@@ -345,7 +345,7 @@ funtableBilan_carlot = function(h,...) {
 	bilan_carlot<-connect(bilan_carlot)
 	vue_ope_lot=bilan_carlot@requete@query # on recupere le data.frame
 	assign("bilan_carlot",bilan_carlot,envir_stacomi)#assign("bilan_carlot",vue_ope_lot,envir_stacomi)
-	funout(get("msg",envir_stacomi)$Bilan_carlot.3)
+	funout(gettext("To obtain the table, type : bilan_lot=get('bilan_lot',envir_stacomi)\n"))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   
