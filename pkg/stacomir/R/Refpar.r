@@ -52,7 +52,7 @@ setMethod("charge",signature=signature("Refpar"),definition=function(object) {
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("SELECT par_code, par_nom  from ref.tg_parametre_par")
 			requete<-stacomirtools::connect(requete)
-			funout(get("msg",envir=envir_stacomi)$Refpar.1)
+			funout(gettext(get("msg",envir=envir_stacomi)$Refpar.1))
 			object@data<-requete@query
 			return(object)
 		})
@@ -86,7 +86,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 			requete@order_by="ORDER BY par_code"  
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
-			if (nrow(object@data)==0) funout(get("msg",envir=envir_stacomi)$Refpar.2,arret=TRUE)
+			if (nrow(object@data)==0) funout(gettext(get("msg",envir=envir_stacomi)$Refpar.2),arret=TRUE)
 			return(object)
 		})
 #' Choice method for Refpar referential objects
@@ -118,7 +118,7 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 					object@par_selectionne<-object@data[car_libelle%in%carchoisi ,"par_code"]
 					#object@data<-object@data[car_libelle%in%carchoisi ,"par_code"]
 					assign(nomassign,object,envir_stacomi)
-					funout(get("msg",envir=envir_stacomi)$Refpar.3)
+					funout(gettext(get("msg",envir=envir_stacomi)$Refpar.3))
 				}
 				#frame_par<<-gframe(label)
 				assign(frameassign,gframe(label,horizontal=FALSE),envir= .GlobalEnv)
@@ -128,7 +128,7 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-			} else funout(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
+			} else funout(gettext(get("msg",envir=envir_stacomi)$Refpar.4),arret=TRUE)
 		})
 
 

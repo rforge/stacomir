@@ -9,7 +9,7 @@ interface_BilanFonctionnementDC = function()
 	bilanFonctionnementDC=new("BilanFonctionnementDC")
     assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
     
-    funout(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1)
+    funout(gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.1))
     bilanFonctionnementDC@dc=charge(bilanFonctionnementDC@dc)
     
     group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -19,27 +19,27 @@ interface_BilanFonctionnementDC = function()
    gWidgets::add(ggroupboutons,group)
     choice(bilanFonctionnementDC@dc)
     choice(bilanFonctionnementDC@horodatedebut,
-			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilanFonctionnementDC_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2)
     choice(bilanFonctionnementDC@horodatefin,
-			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilanFonctionnementDC_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)
     
     #toolbarlist$Calc$handler = connect(bilanFonctionnementDC)
     #toolbarlist$Calc$icon = "dataframe"
     #getStockIcons(toolkit=guiToolkit())
     
-    aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)         
-	aBarchart1=gWidgets::gaction(label="barchart_fct",icon="barplot",handler=funbarchart1DC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          
+    aBarchart=gWidgets::gaction(label="barchart",icon="barplot",handler=funbarchartDC,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)         )
+	aBarchart1=gWidgets::gaction(label="barchart_fct",icon="barplot",handler=funbarchart1DC,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.2)          )
 	
-	aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3)
-    aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableDC,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4)
-    aQuit=gWidgets::gaction(label="Quitter",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5)
-	aOut=gWidgets::gaction(label="code",handler=houtDC, icon="gtk-info", tooltip=get("msg",envir=envir_stacomi)$BilanMigrationMult.1) 
+	aBox=gWidgets::gaction(label="boites",icon="graph2",handler=funboxDC,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.3))
+    aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableDC,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.4))
+    aQuit=gWidgets::gaction(label="Quitter",icon="close", handler=quitte,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanFonctionnementDC.5))
+	aOut=gWidgets::gaction(label="code",handler=houtDC, icon="gtk-info", tooltip=gettext(get("msg",envir=envir_stacomi)$BilanMigrationMult.1) )
     
 	toolbarlist <- list(
     		barchart=aBarchart, 

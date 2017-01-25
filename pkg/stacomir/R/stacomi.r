@@ -4,14 +4,14 @@
 #' @param h A handler
 #' @param ... Other parameters
 hDF=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE))
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hDC=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.2,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.2,wash=TRUE))
 	eval(interface_BilanFonctionnementDC(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -19,69 +19,69 @@ hDC=function(h,...){
 #' @param ... additional parameters
 hOPE=function(h,...){
 	# TODO a developper
-	funout(text=get("msg",envir_stacomi)$interface_graphique.3,wash=TRUE)
+	funout(text=gettext(get("msg",envir_stacomi)$interface_graphique.3,wash=TRUE))
 }
 #' handler function used by the main interface#' 
 #' @param h handler
 #' @param ... additional parameters
 hDFDC=function(h,...){
 	# TODO developper cette fonction
-	funout(get("msg",envir_stacomi)$interface_graphique.4,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.4,wash=TRUE))
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigration=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.5,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.5,wash=TRUE))
 	eval(interface_BilanMigration(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationMult=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE))
 	eval(interface_BilanMigrationMult(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationInterAnnuelle=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.6,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.6,wash=TRUE))
 	eval(interface_BilanMigrationInterAnnuelle(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationConditionEnv=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.7,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.7,wash=TRUE))
 	eval(interface_BilanMigrationConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationPar=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.8,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.8,wash=TRUE))
 	eval(interface_BilanMigrationPar(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanConditionEnv=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.9,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.9,wash=TRUE))
 	eval(interface_ConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilan_carlot=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.10,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.10,wash=TRUE))
 	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hTail=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.11,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.11,wash=TRUE))
 	eval(interface_BilanTaille(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -89,13 +89,13 @@ hTail=function(h,...){
 #' @param ... additional parameters
 hpds=function(h,...){
 	eval(interface_BilanPoidsMoyen(),envir = .GlobalEnv)
-	funout(get("msg",envir_stacomi)$interface_graphique.12,wash=TRUE) 
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.12,wash=TRUE)) 
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hSt=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.13,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.13,wash=TRUE))
 	eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -114,14 +114,14 @@ hsilver=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 htodo=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.17,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.17,wash=TRUE))
 	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanEspeces=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.19,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.19,wash=TRUE))
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
 
@@ -157,8 +157,8 @@ husr=function(h,...){
 		con=new("ConnectionODBC")
 		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
-		con=tryCatch(eval(e),error=get("msg",envir=envir_stacomi)$interface_graphique_log.7) 
-		test<-con@etat==get("msg",envir=envir_stacomi)$ConnectionODBC.6
+		con=tryCatch(eval(e),error=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.7) )
+		test<-con@etat==gettext(get("msg",envir=envir_stacomi)$ConnectionODBC.6)
 		odbcCloseAll()
 	}
 	# if the test is OK launches the stacomi interface
@@ -179,20 +179,20 @@ husr=function(h,...){
 			if (nrow(requete@query)==0){
 				# the odbc link does not work and might be pointing to a wrong schema
 				# this time the argument login_window will be ignored
-				gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.8,
+				gWidgets::gmessage(message=paste(gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.8),
 								"\n",
-								get("msg",envir=envir_stacomi)$interface_graphique_log.9,
+								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.9),
 								" :",
 								baseODBC[1],
 								"\n",
-								get("msg",envir=envir_stacomi)$interface_graphique_log.2,
+								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.2),
 								" :",
 								baseODBC[2],
 								"\n",
-								get("msg",envir=envir_stacomi)$interface_graphique_log.3,
+								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.3),
 								" :",
 								baseODBC[3]),						
-						title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
+						title=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.5),
 						icon = "error",
 						handler=hgmessage)		
 			} else {
@@ -204,20 +204,20 @@ husr=function(h,...){
 		} else {
 			# the test has failed and the user will be prompted to another login window
 			# this time the argument loginwindow will be ignored
-			gWidgets::gmessage(message=paste(get("msg",envir=envir_stacomi)$interface_graphique_log.6,
+			gWidgets::gmessage(message=paste(gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.6),
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique_log.9,
+							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.9),
 							" :",
 							baseODBC[1],
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique_log.2,
+							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.2),
 							" :",
 							baseODBC[2],
 							"\n",
-							get("msg",envir=envir_stacomi)$interface_graphique_log.3,
+							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.3),
 							" :",
 							baseODBC[3]),						
-					title=get("msg",envir=envir_stacomi)$interface_graphique_log.5,
+					title=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.5),
 					icon = "error",
 					handler=hgmessage)
 		} # end else test (else == the test didn't pass, we have to change the name and password	
@@ -230,7 +230,7 @@ husr=function(h,...){
 	}
 }
 hhelp=function(h,...){
-	funout(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE)
+	funout(gettext(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE))
 }
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)

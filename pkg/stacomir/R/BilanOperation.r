@@ -58,7 +58,7 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
 			object@data<-req@query
 	
-			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanOperation.1)
+			if (!silent) funout(gettext(get("msg",envir=envir_stacomi)$BilanOperation.1))
 			return(object)
 		})
 
@@ -78,19 +78,19 @@ setMethod("charge",signature=signature("BilanOperation"),definition=function(obj
 			if (exists("refDC",envir=envir_stacomi)) {
 				object@dc<-get("refDC",envir=envir_stacomi)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$ref.1),arret=TRUE)
 			}     
 			
 			if (exists("bilanOperation_date_debut",envir=envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilanOperation_date_debut",envir=envir_stacomi)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$ref.5,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$ref.5),arret=TRUE)
 			}
 			
 			if (exists("bilanOperation_date_fin",envir=envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilanOperation_date_fin",envir=envir_stacomi)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$ref.6,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$ref.6),arret=TRUE)
 			}			
 			assign("bilanOperation",object,envir=envir_stacomi)  
 			return(object)

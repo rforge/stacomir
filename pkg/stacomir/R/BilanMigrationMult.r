@@ -77,25 +77,25 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 				dc<-bilanMigrationMult@dc@dc_selectionne
 				df<-bilanMigrationMult@dc@data$df[bilanMigrationMult@dc@data$dc%in%dc]
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)	
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)	
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationMult@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationMult@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				} else {
 				# todo addmsg
-				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
-				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE))
+				warning(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1))
 			}
 			#################################
 			# loading data for other classes associated with bilanMigrationMult
@@ -184,7 +184,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			# bilanMigrationMult<-bMM_Arzal
-			if (!silent) funout(get("msg",envir=envir_stacomi)$BilanMigration.2)
+			if (!silent) funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.2))
 			bilanMigrationMult<-object
 			
 
@@ -248,8 +248,8 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			if (!silent){
-				funout(get("msg",envir_stacomi)$BilanMigrationMult.3)
-				funout(get("msg",envir_stacomi)$BilanMigrationMult.4)
+				funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.3))
+				funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.4))
 			}
 			return(bilanMigrationMult)
 		})
@@ -354,7 +354,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	plot(x=bilanMigrationMult,plot.type="standard")
 }
@@ -391,7 +391,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 			#==========================type=1=============================
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))
 				#dcnum=1;taxonnum=1;stadenum=2
 				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				for (dcnum in 1:length(lesdc)){
@@ -518,7 +518,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				
 				p<-ggplot(grdata_without_hole)+
 						geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
-						ylab(get("msg",envir_stacomi)$BilanMigration.6)+
+						ylab(gettext(get("msg",envir_stacomi)$BilanMigration.6))+
 						theme(plot.title=element_text(size=10,colour="deepskyblue"))+
 						xlab("mois")+
 						scale_colour_manual(values=c("01"="#092360",
@@ -534,7 +534,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 										"11"="#912E0F",
 										"12"="#33004B"
 								))+
-						ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") )  
+						ggtitle(paste(gettext(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") ))  
 				print(p)	
 			}
 #==========================type=3=============================
@@ -618,7 +618,7 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="step")
 }
@@ -634,7 +634,7 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="multiple")
 }
@@ -656,7 +656,7 @@ hTableBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	summary(bilanMigrationMult)
 }
@@ -675,7 +675,7 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
 			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-			if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)
+			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))
 			#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			#dcnum=2;taxonnum=1;stadenum=1
 			for (dcnum in 1:length(lesdc)){
@@ -737,7 +737,7 @@ houtBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(get("msg",envir_stacomi)$BilanMigrationMult.2,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.2),arret=TRUE)
 	}
 }
 
@@ -965,7 +965,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' @return tableau, the data frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fun_weight_conversion=function(tableau,time.sequence,silent) { 
-	if (!silent) funout(paste("dc=",unique(tableau$ope_dic_identifiant),get("msg",envir=envir_stacomi)$funtraitement_poids.1))
+	if (!silent) funout(paste("dc=",unique(tableau$ope_dic_identifiant),gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.1)))
 	nr<-length(unique(tableau$debut_pas))
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
@@ -975,7 +975,7 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 	# Conversion des  poids en effectifs
 	tableauconvert=tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")]
 	tableauconvert=tableauconvert*tableaupoids$coe_valeur_coefficient       # les coeff sont du type 2.54 et non 0.3
-	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(get("msg",envir=envir_stacomi)$funtraitement_poids.2)
+	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.2))
 	# creation d'une tableau (matricepoids) a 5 colonnes comprenant les effectifs convertis
 	matricepoids=cbind(tableaupoids[,c("No.pas", "lot_tax_code","lot_std_code")],tableauconvert,tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")])
 	dimnames(matricepoids)=list(1:length(tableaupoids[,1]),c(

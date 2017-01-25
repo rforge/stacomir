@@ -43,31 +43,31 @@ setMethod("charge",signature=signature("BilanAnnuels"),
 			if (exists("refDC",envir_stacomi)) {
 				bilA@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilA@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilA@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("anneedebut",envir_stacomi)) {
 				bilA@anneedebut<-get("anneedebut",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.10,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.10),arret=TRUE)
 			}  	
 			if (exists("anneefin",envir_stacomi)) {
 				bilA@anneefin<-get("anneefin",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.11,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.11),arret=TRUE)
 			}
 			assign("bilanAnnuels",bilA,envir_stacomi)
-			funout(get("msg",envir_stacomi)$BilanAnnuels.1)
+			funout(gettext(get("msg",envir_stacomi)$BilanAnnuels.1))
 			return(bilA)
 			
 			
@@ -420,7 +420,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 					} else if (length(lestax)==1 & length(lesstd)==1){
 						
@@ -429,7 +429,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 					} else if (length(lestax)==1 & length(lesdic)==1){
 						
@@ -438,7 +438,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 					} else if (length(lesdic)==1 & length(lesstd)==1){
 						
@@ -447,7 +447,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 						
 					} else if (length(lestax)==1){
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 					} else if (length(lesstd)==1){
 						
@@ -466,7 +466,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
 						
 					} else if (length(lesdic)==1){
 						
@@ -475,7 +475,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)							
+						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))							
 						
 					} else {
 						if (length(lesdic)<3){
@@ -493,7 +493,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 							print(g)	
 							
 							assign("g",g,envir_stacomi)
-							if (!silent) funout(get("msg",envir_stacomi)$BilanMigrationPar.6)	
+							if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))	
 						}
 					}
 				}

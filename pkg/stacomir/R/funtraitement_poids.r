@@ -7,14 +7,14 @@
 #' @export
 funtraitement_poids=function(tableau,time.sequence) { 
 	index=tableau$No.pas+1
-	funout(get("msg",envir=envir_stacomi)$funtraitement_poids.1)
+	funout(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.1))
 	
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
 	# Conversion des  poids en effectifs
 	tableauconvert=tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")]
 	tableauconvert=tableauconvert*tableaupoids$coe_valeur_coefficient       # les coeff sont du type 2.54 et non 0.3
-	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(get("msg",envir=envir_stacomi)$funtraitement_poids.2)
+	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.2))
 	# creation d'une tableau (matricepoids) a 5 colonnes comprenant les effectifs convertis
 	matricepoids=cbind(tableaupoids[,1],tableauconvert,tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")],tableaupoids$coe_valeur_coefficient)
 	dimnames(matricepoids)=list(1:length(tableaupoids[,1]),c(
@@ -57,8 +57,8 @@ funtraitement_poids=function(tableau,time.sequence) {
 	#annees bissextiles and missing data
 	if (length(coe$coe_valeur_coefficient)<length(tableau$Effectif_total.e)){
 		if (sum(tableaupoids$coe_valeur_coefficient)>0){			
-		funout(get("msg",envir=envir_stacomi)$funtraitement_poids.3)#there are some coefficient but they are incomplete
-		warnings(get("msg",envir=envir_stacomi)$funtraitement_poids.3)
+		funout(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.3)) #there are some coefficient but they are incomplete
+		warnings(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.3))
 		}
 		mtch<-match(as.character(coe$coe_date_debut),as.character(as.Date(round(time.sequence,"day"))))
 		tableau$poids_depuis_effectifs<-0  

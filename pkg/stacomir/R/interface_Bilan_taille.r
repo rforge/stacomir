@@ -15,7 +15,7 @@ interface_BilanTaille = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_taille.1,container=group)
+	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_taille.1,container=group))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
@@ -23,23 +23,23 @@ interface_BilanTaille = function()
 	
 	
 	choice(bilan_taille@horodate,
-			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_taille_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2,
 			affichecal=FALSE)
 	choice(bilan_taille@horodate,
-			label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilan_taille_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1,
 			affichecal=FALSE)
 	
 	choice(bilan_taille@dc,objectBilan=bilan_taille,is.enabled=TRUE)
-	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
-	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.8)
-	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
-	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_taille.2)
+	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7))
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.8))
+	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
+	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_taille.2))
 	toolbarlist <- list(
 			#	barchart=aBarchart, 
 			Calc=aCalc,

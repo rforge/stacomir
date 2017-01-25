@@ -7,7 +7,7 @@ interface_BilanArgentee = function()
 	bilan_arg=new("BilanArgentee")
 	assign("bilan_arg",bilan_arg,envir = envir_stacomi)
 	
-	funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
+	funout(gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1))
 	bilan_arg@dc=charge(bilan_arg@dc)
 	bilan_arg@taxons=charge(bilan_arg@taxons)
 	bilan_arg@stades=charge(bilan_arg@stades)
@@ -17,20 +17,20 @@ interface_BilanArgentee = function()
 	
 	assign("group",group,envir = .GlobalEnv)
 	gWidgets::add(ggroupboutons,group)
-	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group)
+	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_arg@horodatedebut,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_arg@horodatedebut,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_arg_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2)
-	choice(bilan_arg@horodatefin,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_arg@horodatefin,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilan_arg_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)	
 	bilan_arg@dc<-choice(bilan_arg@dc,objectBilan=bilan_arg,is.enabled=TRUE)
 	
@@ -39,7 +39,7 @@ interface_BilanArgentee = function()
 	choice_c(bilan_arg@taxons,2038)
 	choice_c(bilan_arg@stades,'AGG')
 	choice_c(bilan_arg@par,c('1786','CCCC','BBBB','CONT','LINP','A111','PECT'))
-	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion
+	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion)
 	aplot1=gWidgets::gaction(label="plot-1",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanArgentee,
@@ -62,7 +62,7 @@ interface_BilanArgentee = function()
 			action="4",
 			tooltip="4")
 	asummary=gWidgets::gaction(label="summary",icon="dataframe",handler=funtableBilanArgentee,tooltip="summary")
-	aquit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aquit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
 	
 	toolbarlist <- list(    
 			plot1= aplot1,

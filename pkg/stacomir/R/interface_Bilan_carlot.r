@@ -7,7 +7,7 @@ interface_Bilan_carlot = function()
 	bilan_carlot=new("Bilan_carlot")
 	assign("bilan_carlot",bilan_carlot,envir = envir_stacomi)
 	
-	funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
+	funout(gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1))
 	bilan_carlot@dc=charge(bilan_carlot@dc)
 	bilan_carlot@taxons=charge(bilan_carlot@taxons)
 	bilan_carlot@stades=charge(bilan_carlot@stades)
@@ -17,20 +17,20 @@ interface_Bilan_carlot = function()
 	
 	assign("group",group,envir = .GlobalEnv)
 	gWidgets::add(ggroupboutons,group)
-	gl=glabel(text=get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group)
+	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.2,container=group))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_carlot@horodatedebut,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_carlot@horodatedebut,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_carlot_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2)
-	choice(bilan_carlot@horodatefin,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_carlot@horodatefin,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilan_carlot_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)
 	
 	choice(bilan_carlot@dc,objectBilan=bilan_carlot,is.enabled=TRUE)
@@ -42,23 +42,23 @@ interface_Bilan_carlot = function()
 	#toolbarlist$Calc$icon = "dataframe"
 	#getStockIcons(toolkit=guiToolkit())
 	
-	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion
-	aPoint=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7,
+	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion)
+	aPoint=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7),
 			icon="gWidgetsRGtk2-cloud",
 			handler=funpointBilan_carlot,
-			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.7)
-	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.11 => density
-	aDensity=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11,
+			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7))
+	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.11 => density)
+	aDensity=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.11),
 			icon="gWidgetsRGtk2-density",
 			handler=fundensityBilan_carlot,
-			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.11)
-	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.10 => boxplot
-	aBoxplot=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10,
+			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.11))
+	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.10 => boxplot)
+	aBoxplot=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.10),
 			icon="gWidgetsRGtk2-boxplot",
 			handler=funboxplotBilan_carlot,
-			tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.10)
-	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_carlot,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_carlot.8)
-	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.10))
+	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_carlot,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_carlot.8))
+	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
 	
 	toolbarlist <- list(    
 			plot=aPoint,

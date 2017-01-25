@@ -134,8 +134,8 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 
-				funoutlabel=get("msg",envir=envir_stacomi)$RefAnnee.2,
-				titleFrame=get("msg",envir=envir_stacomi)$RefAnnee.1, 
+				funoutlabel=gettext(get("msg",envir=envir_stacomi)$RefAnnee.2),
+				titleFrame=gettext(get("msg",envir=envir_stacomi)$RefAnnee.1), 
 				preselect=1){
 			if (nrow(object@data) > 0){      
 				hannee=function(h,...){      
@@ -150,7 +150,7 @@ setMethod("choice",
 				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
 				gbutton("OK", container=frame_annee,handler=hannee)  
 			} else { 
-				funout(get("msg",envir=envir_stacomi)$RefAnnee.3,arret=TRUE)  
+				funout(gettext(get("msg",envir=envir_stacomi)$RefAnnee.3),arret=TRUE)  
 			}
 		}) 
 
@@ -177,7 +177,7 @@ setMethod("choice_c",
 		signature=signature("RefAnnee"),definition=function(object,
 				annee,
 				nomassign="refAnnee", 
-				funoutlabel=get("msg",envir=envir_stacomi)$RefAnnee.2,
+				funoutlabel=gettext(get("msg",envir=envir_stacomi)$RefAnnee.2),
 				silent=FALSE
 		){
 			if (length(annee)>1) stop("horodate should be a vector of length 1")

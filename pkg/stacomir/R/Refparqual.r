@@ -88,7 +88,7 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #'  charge_complement(object)
 #' }		
 setMethod("charge_complement",signature=signature("Refparqual"),definition=function(object) {
-			if (nrow(object@data)!=1) funout(paste(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data)),arret=TRUE)
+			if (nrow(object@data)!=1) funout(paste(gettext(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data))),arret=TRUE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
@@ -130,12 +130,12 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 					object@data<-object@data[car_libelle%in%carchoisi ,]
 					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)
-					funout(get("msg",envir=envir_stacomi)$Refpar.3)
+					funout(gettext(get("msg",envir=envir_stacomi)$Refpar.3))
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-			} else stop(get("msg",envir=envir_stacomi)$Refpar.4,arret=TRUE)
+			} else stop(gettext(get("msg",envir=envir_stacomi)$Refpar.4),arret=TRUE)
 		})

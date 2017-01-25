@@ -78,7 +78,7 @@ setMethod("choice",signature=signature("RefTaxon"),
 					taxons=svalue(choice)
 					object@data<-object@data[tax_libelle%in%taxons ,]
 					assign("refTaxon",object,envir_stacomi)
-					funout(get("msg",envir=envir_stacomi)$RefTaxon.1)
+					funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.1))
 					if (!is.null(objectBilan)) {
 						objectBilan@stades<<-charge_avec_filtre(object=objectBilan@stades,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code)
 						if (exists("frame_std")) delete(group,frame_std)
@@ -88,13 +88,13 @@ setMethod("choice",signature=signature("RefTaxon"),
 						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 				}
-				frame_tax<<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2)
+				frame_tax<<-gframe(gettext(get("msg",envir=envir_stacomi)$RefTaxon.2))
 				add(group,frame_tax)
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				choice=gdroplist(tax_libelle,container=frame_tax,handler=htax)
 				enabled(frame_tax)<-is.enabled
 				gbutton("OK", container=frame_tax,handler=htax)
-			} else funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
+			} else funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.3),arret=TRUE)
 		})
 
 #' Multiple Choice method for Reftaxon referential objects, the graphical interface is built to allow
@@ -118,7 +118,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 					taxons=tbdesttaxon[,][tbdesttaxon[,]!=""]
 					object@data<-object@data[tax_libelle%in%taxons ,]
 					assign("refTaxon",object,envir_stacomi)
-					funout(get("msg",envir=envir_stacomi)$RefTaxon.4)
+					funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.4))
 					if (!is.null(objectBilan)) {
 						objectBilan@taxons<-object
 						objectBilan@stades<-charge_avec_filtre(object=objectBilan@stades,
@@ -147,7 +147,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				grouptaxon<-ggroup() 
 				assign("grouptaxon",grouptaxon,.GlobalEnv)
 				add(notebook,grouptaxon,label="taxon")
-				frametaxonsource<-gframe(get("msg",envir=envir_stacomi)$RefTaxon.2,container=grouptaxon)
+				frametaxonsource<-gframe(gettext(get("msg",envir=envir_stacomi)$RefTaxon.2,container=grouptaxon))
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
 				size(tbsourcetaxon)<-c(160,300) # les dimensions sont testees a la main 
 				# pour s'ajuster aux dimensions du notebook (largeur 400)
@@ -190,7 +190,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 						})
 				gbutton("ok", container = grouptaxon, handler = htax)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.3),arret=TRUE)
 			}
 		})
 
@@ -212,18 +212,18 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 #' }
 setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,taxons) {
 			if (is.null(taxons)) {
-				funout(get("msg",envir=envir_stacomi)$RefTaxon.5,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.5),arret=TRUE)
 			} else	if (class(taxons)=="character"){	
 				libellemanquants<-taxons[!taxons%in%object@data$tax_nom_latin]
-				if (length(libellemanquants)>0) warning(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(libellemanquants,collapse=", ")))
+				if (length(libellemanquants)>0) warning(paste(gettext(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(libellemanquants,collapse=", "))))
 				object@data<-object@data[object@data$tax_nom_latin%in%taxons,]
 			} else if (class(taxons)=="numeric"){
 				codemanquants<-taxons[!taxons%in%object@data$tax_code]
-				if (length(codemanquants)>0) warning(paste(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", ")))
+				if (length(codemanquants)>0) warning(paste(gettext(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", "))))
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{
-				funout(get("msg",envir=envir_stacomi)$RefTaxon.3,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.3),arret=TRUE)
 			}
 			assign("refTaxon",object,envir=envir_stacomi)
 			return(object)

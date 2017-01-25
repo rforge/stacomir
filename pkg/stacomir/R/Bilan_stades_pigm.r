@@ -102,7 +102,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
 			requete<-stacomirtools::connect(requete) # appel de la methode stacomirtools::connect de l'object ODBCWHEREDATE
-			funout(get("msg",envir_stacomi)$Bilan_stades_pigm.1)
+			funout(gettext(get("msg",envir_stacomi)$Bilan_stades_pigm.1))
 			object@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
@@ -139,7 +139,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 				requete<-stacomirtools::connect(requete)
-				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1))
 				if (nrow (requete@query)>0)	{
 					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
 					object@datatempsal<-stacomirtools::killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
@@ -218,18 +218,18 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
 			} 	
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_stades_pigm_date_debut",envir_stacomi)) {
 				object@datedebut<-get("bilan_stades_pigm_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)
 			}
 			if (exists("bilan_stades_pigm_date_fin",envir_stacomi)) {
 				object@datefin<-get("bilan_stades_pigm_date_fin",envir_stacomi)@horodate
 			} else {
-				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)
 			}         
 			if (exists("refCheckBox",envir_stacomi)) {
 				object@options<-get("refCheckBox",envir_stacomi)
@@ -252,7 +252,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 				if (exists("refStationMesure",envir_stacomi)) {
 					object@stationMesure<-get("refStationMesure",envir_stacomi)
 				} else {
-					funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
+					funout(gettext(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2),arret=TRUE)
 				}
 			}
 			object<-connect(object)			
@@ -492,13 +492,13 @@ funcalcbilan_stades_pigm<-function(h,...){
 	}
 	funout("Chargement des donnees dans la base ")
 	dates<-bilan_stades_pigm@dates
-	bilan_stades_pigm@labelgraphstades<-paste(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.4,
+	bilan_stades_pigm@labelgraphstades<-paste(gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.4),
 			if(strftime(as.POSIXlt(dates[1]),"%Y")==
 							strftime(as.POSIXlt(dates[length(dates)]),"%Y")) {
 						strftime(as.POSIXlt(dates[1]),"%Y")} else { paste(
 								strftime(as.POSIXlt(dates[1]),"%Y"),"-",
 								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))},
-			get("msg",envir=envir_stacomi)$Bilan_stades_pigm.5)
+			gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.5))
 	bilan_stades_pigm@labelretro="dates d'arrivees en estuaires"
 	enabled(toolbarlist[["SetTitle"]])<-TRUE
 	enabled(toolbarlist[["Graph"]])<-TRUE
@@ -823,7 +823,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 	titre4 <- gWidgets::gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
 	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
-	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle))
+	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle)))
 	toolbarlist <- list(
 			OK=aOK, 
 			Quit = aQuit)
@@ -841,7 +841,7 @@ interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
 	assign("bilan_stades_pigm",bilan_stades_pigm,envir = envir_stacomi)
-	funout(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.2)
+	funout(gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.2))
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
 	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
@@ -852,7 +852,7 @@ interface_Bilan_stades_pigm = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group)
+	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group))
 	choice(bilan_stades_pigm@lmax)
 	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
@@ -861,23 +861,23 @@ interface_Bilan_stades_pigm = function()
 	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,.GlobalEnv)
 	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
-	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_stades_pigm@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_stades_pigm_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2,
 			affichecal=FALSE)
-	choice(bilan_stades_pigm@horodate,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_stades_pigm@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilan_stades_pigm_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1,
 			affichecal=FALSE)
 	choice(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
-	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6)
+	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6))
 	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 

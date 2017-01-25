@@ -69,7 +69,7 @@ setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition
 			# dans l'environnement stacomi et c'est le qu'il faut aller les chercher
 			# pour eviter de lancer les calculs et d'avoir la demande de stations e la fin du bilan migration...
 			if (!exists("refStationMesure",envir_stacomi)) {
-				funout(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2,arret=TRUE)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2),arret=TRUE)
 			}    
 			calcule(object@bilanMigration)
 			object@bilanMigration=get("bilanMigration",envir=envir_stacomi)
@@ -94,7 +94,7 @@ setMethod("calcule",signature=signature("BilanMigrationConditionEnv"),definition
 			object@bilanConditionEnv=charge(object@bilanConditionEnv) # le ea marche
 			# les objects sont maintenant charges et calcules, j'assigne BilanConditionEnv qui les contient
 			# dans l'environnement envir_stacomi
-			funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.1)
+			funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.1))
 			assign("bilanMigrationConditionEnv",object,envir=envir_stacomi)
 			enabled(toolbarlist[["Graph"]])<-TRUE
 		})
@@ -109,7 +109,7 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 	if (exists("bilanMigrationConditionEnv",envir_stacomi)) {
 		bilanMigrationConditionEnv<-get("bilanMigrationConditionEnv",envir_stacomi)
 	} else {
-		funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.2,arret=TRUE)
+		funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.2),arret=TRUE)
 	} # end ifelse
 	
 	# dans le bilanMigration, la time.sequence est une sequence (pour l'instant bilanMigration seulement au format journalier)
@@ -121,7 +121,7 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 	tableau$time.sequencechar<-as.character(tableau$time.sequence)
 	tableauCE<-bilanMigrationConditionEnv@bilanConditionEnv@data  # tableau conditions environnementales
 	if (nrow(tableauCE)==0) {
-		funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.3,arret=TRUE)
+		funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.3),arret=TRUE)
 	}
 	
 	stations<-bilanMigrationConditionEnv@bilanConditionEnv@stationMesure@data
@@ -138,18 +138,18 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 	tableauCE$env_date_debutchar=as.character(as.Date(tableauCE$env_date_debut))  
 	
 	if (nrow(stations)==0) { 
-		funout(funout(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.4))
+		funout(funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.4)))
 		#assign(x="bilanCondition",bilanMigrationConditionEnv@bilanMigration,envir=envir_stacomi)
 		hbilanMigrationgraph(h)   # lancement de la fonction normale
 	}  else { 
 		for (sta in as.character(stations$stm_libelle)){
 			tableauCEst<-tableauCE[tableauCE$stm_libelle==sta,] #tableau CE d'une station
 			if (length(unique(tableauCEst$env_date_debutchar))!=length(tableauCEst$env_date_debutchar)) {
-				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.7,
+				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.7),
 								sta,
-								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.8,
+								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.8),
 								paste(unique(tableauCEst$env_date_debutchar[duplicated(tableauCEst$env_date_debutchar)]),sep=""),
-								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.9),arret=FALSE)
+								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.9),arret=FALSE))
 				tableauCEst<-tableauCEst[induk(tableauCEst$env_date_debutchar),]
 			}
 			
@@ -172,9 +172,9 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 			# le merge ci dessous est l'equivalent d'une jointure gauche (LEFT JOIN)
 			tableau<-merge(tableau,tableauCEst,by.x = "time.sequencechar", by.y = "env_date_debutchar",  all.x = TRUE)
 			# les donnees sont normalement collees dans le tableau dans une nouvelle colonne et aux dates correspondantes
-			if (length(time.sequence)!=nrow(tableau)) funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5,
+			if (length(time.sequence)!=nrow(tableau)) funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5),
 								nrow(tableau),
-								get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6,
+								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6),
 								length(time.sequence),
 								")\n"),arret=TRUE)
 			#si la jointure e rajoute des lignes ea craint je ne sais pas comment se fera le traitement

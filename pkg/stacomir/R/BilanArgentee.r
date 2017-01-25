@@ -82,7 +82,7 @@ setMethod("connect",signature=signature("BilanArgentee"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(get("msg",envir_stacomi)$BilanArgentee.1)
+			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanArgentee.1))
 			return(object)
 		})
 
@@ -101,34 +101,34 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.4,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.4),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_arg_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_arg_date_debut",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_arg_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_arg_date_fin",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)
 			}       
 			
 			return(object)
@@ -176,12 +176,12 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 			bilanArg@par<-choice_c(bilanArg@par,par,silent=silent)
 			bilanArg@horodatedebut<-choice_c(object=bilanArg@horodatedebut,
 					nomassign="bilanArg_date_debut",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilanArg@horodatefin<-choice_c(bilanArg@horodatefin,
 					nomassign="bilanArg_date_fin",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 					horodate=horodatefin,
 					silent=silent)
 			validObject(bilanArg)
@@ -198,7 +198,7 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 			#bilanArg<-b_carlot
 			bilanArg<-object
 			if(nrow(bilanArg@data)==0) {
-				funout(get("msg",envir_stacomi)$BilanArgentee.2, arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$BilanArgentee.2, arret=TRUE))
 			}   
 			arg=bilanArg@data # on recupere le data.frame
 			
@@ -288,7 +288,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -347,10 +347,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 						group=stage,			
 						type = c("p"),
 						par.settings = my.settings,
-						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.3, # size (BL) mm
-						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.4, # "Mean eye diameter (MD mm)
+						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.3), # size (BL) mm)
+						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.4), # "Mean eye diameter (MD mm))
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=get("msg",envir=envir_stacomi)$BilanArgentee.5, # Silvering stages (Durif et al. 2009)
+						auto.key=list(title=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.5), # Silvering stages (Durif et al. 2009))
 								cex.title=1.2,
 								space="top",
 								columns=6,
@@ -402,10 +402,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				
 				bb<-lattice::barchart(form,data=datdc1,	
 						group=stage,		
-						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.6, # "Mois",
-						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.7,#"Effectif"
+						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.6), # "Mois"),
+						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.7),#"Effectif")
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=get("msg",envir=envir_stacomi)$BilanArgentee.8,#"Effectif par stades",
+						auto.key=list(title=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.8),#"Effectif par stades"),
 								cex.title=1.2,
 								space="top",
 								columns=6,
@@ -521,8 +521,8 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				#############
 				par(mar=c(5.1,4.1,1,1)) # blur bottom left up right
 				plot(datdc$BL,datdc$W,type="n",
-						xlab=get("msg",envir=envir_stacomi)$BilanArgentee.9,
-						ylab=get("msg",envir=envir_stacomi)$BilanArgentee.10,
+						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.9),
+						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.10),
 						xlim=c(250,1000),ylim=c(0,2000))
 				abline(v=seq(250,1000,by=50), col = "lightgray",lty=2)
 				abline(h=seq(0,2000,by=100),col="lightgray",lty=2)
@@ -605,7 +605,7 @@ setMethod("summary",signature=signature(object="BilanArgentee"),definition=funct
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -703,7 +703,7 @@ funtableBilanArgentee = function(h,...) {
 	bilanArg<-connect(bilanArg)
 	vue_ope_lot=bilanArg@requete@query # on recupere le data.frame
 	assign("bilanArg",bilanArg,envir_stacomi)#assign("bilanArg",vue_ope_lot,envir_stacomi)
-	funout(get("msg",envir_stacomi)$BilanArgentee.3)
+	funout(gettext(get("msg",envir_stacomi)$BilanArgentee.3))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

@@ -40,9 +40,9 @@ fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 		} #end if
 	}  # end for
 	tableau$yqualitatif=(10^(maxeff))/2
-	name=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,", ",paste(lab_les_stations,collapse=", "),sep="")
+	name=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_env.1,", ",paste(lab_les_stations,collapse=", "),sep=""))
 	g<-ggplot(tableau, aes(x=time.sequence,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
-			scale_y_continuous(name=name)+labs(title=paste(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee ))
+			scale_y_continuous(name=name)+labs(title=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee )))
 	for (i in 1:nrow(stations)){
 		if (stations$stm_typevar[i]=="quantitatif") {
 			if (all(!is.na(tableau[,stations$stm_libelle[i]]))){
@@ -61,6 +61,6 @@ fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 		} else stop("erreur interne")
 	} # end for
 	assign("g",g,envir_stacomi)
-	funout(get("msg",envir=envir_stacomi)$fungraph_env.2)
+	funout(gettext(get("msg",envir=envir_stacomi)$fungraph_env.2))
 	print(g)
 }

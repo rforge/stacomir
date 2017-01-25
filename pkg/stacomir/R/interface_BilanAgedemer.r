@@ -7,7 +7,7 @@ interface_BilanAgedemer = function()
 	bilan_adm=new("BilanAgedemer")
 	assign("bilan_adm",bilan_adm,envir = envir_stacomi)
 	
-	funout(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1)
+	funout(gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1))
 	bilan_adm@dc=charge(bilan_adm@dc)
 	bilan_adm@taxons=charge(bilan_adm@taxons)
 	bilan_adm@stades=charge(bilan_adm@stades)
@@ -24,13 +24,13 @@ interface_BilanAgedemer = function()
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_adm@horodatedebut,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.3,
+	choice(bilan_adm@horodatedebut,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_adm_date_debut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 			decal=-2)
-	choice(bilan_adm@horodatefin,label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.4,
+	choice(bilan_adm@horodatefin,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
 			nomassign="bilan_adm_date_fin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)	
 	bilan_adm@dc<-choice(bilan_adm@dc,objectBilan=bilan_adm,is.enabled=TRUE)
 	bilan_adm@limit1hm<-charge(bilan_adm@limit1hm,title="Limit s1 for 1sw (L(1sw)<=s1), click to edit",label="0")
@@ -43,7 +43,7 @@ interface_BilanAgedemer = function()
 	choice_c(bilan_adm@taxons,2220)
 	choice_c(bilan_adm@stades,c('5','11','BEC','BER','IND'))
 	choice_c(bilan_adm@par,c('1786','1785','C001'))
-	#get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion
+	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion)
 	aplot1=gWidgets::gaction(label="plot-1",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanAgedemer,
@@ -66,7 +66,7 @@ interface_BilanAgedemer = function()
 			action="4",
 			tooltip="4")
 	asummary=gWidgets::gaction(label="summary",icon="dataframe",handler=funtableBilanAgedemer,tooltip="summary")
-	aquit=gWidgets::gaction(label=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9)
+	aquit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
 	
 	toolbarlist <- list(    
 			plot1= aplot1,

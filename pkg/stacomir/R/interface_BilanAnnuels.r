@@ -29,13 +29,13 @@ interface_BilanAnnuels = function()
 	
 	choice(bilanAnnuels@anneedebut,
 			nomassign="anneedebut",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2,
-			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2),
+			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3),
 			preselect=which(bilanAnnuels@anneedebut@data==min(bilanAnnuels@anneedebut@data)))
 	choice(bilanAnnuels@anneefin,
 			nomassign="anneefin",
-			funoutlabel=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4,
-			titleFrame=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5,
+			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4),
+			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5),
 			preselect=which(bilanAnnuels@anneefin@data==max(bilanAnnuels@anneefin@data)))
 	choicemult(bilanAnnuels@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
 	svalue(notebook)<-1
@@ -45,10 +45,10 @@ interface_BilanAnnuels = function()
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist = list(
-			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
-			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6),
+			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
+			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
 		    aTable=gWidgets::gaction(handler=hxtableBilanAnnuels, icon="dataframe", label="xtable", tooltip="xtable"),  
-			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9)
+			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9))
 	)
 	
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))

@@ -55,9 +55,9 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			lty=1,
 			xaxt="n",
 			bty="l",
-			ylab=get("msg",envir=envir_stacomi)$fungraph.2,
-			xlab=get("msg",envir=envir_stacomi)$fungraph.3,
-			main=paste(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""),
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph.2),
+			xlab=gettext(get("msg",envir=envir_stacomi)$fungraph.3),
+			main=paste(gettext(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep="")),
 			cex.main=1)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
@@ -67,7 +67,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	} else {
 		axis(side=1)
 	}  	
-	mtext(text=paste(get("msg",envir=envir_stacomi)$fungraph.6,
+	mtext(text=paste(gettext(get("msg",envir=envir_stacomi)$fungraph.6),
 					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE))),
 			side=3,
 			col=RColorBrewer::brewer.pal(5,"Paired")[5],
@@ -75,7 +75,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	legend(x=0,
 			y=max(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),
-			legend= get("msg",envir=envir_stacomi)$fungraph.5,
+			legend= gettext(get("msg",envir=envir_stacomi)$fungraph.5),
 			pch=c(16),
 			col=rev(c(mypalette[1:4])))
 	bilanOperation<-get("bilanOperation",envir=envir_stacomi)
@@ -83,10 +83,10 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n")))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
 	}
 	
 
@@ -119,7 +119,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.11,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.11),
 			bty="n",
 			cex=1.2)
 	
@@ -144,7 +144,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= get("msg",envir=envir_stacomi)$fungraph_civelle.9,
+				legend= gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				horiz=TRUE,
@@ -198,7 +198,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode),
+				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -218,7 +218,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.12,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.12),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -244,7 +244,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend= c(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
+				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9)),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,
@@ -296,7 +296,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode),
+				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -317,7 +317,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.13,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.13),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -336,7 +336,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	###################################
 	# Graph mensuel 
 	####################################
-	# Pour les noms modifier get("msg",envir=envir_stacomi)$fungraph.7
+	# Pour les noms modifier gettext(get("msg",envir=envir_stacomi)$fungraph.7)
 	graphics::par("mar"=c(4, 4, 1, 2) + 0.1)
 	tableau$mois=factor(months(tableau$debut_pas,abbreviate=TRUE),
 			levels=unique(months(tableau$debut_pas,abbreviate=TRUE)))
@@ -345,7 +345,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),
 			variable.name="type",
 			value.name="number")
-	levels(tableaum$type)<-get("msg",envir=envir_stacomi)$fungraph.5
+	levels(tableaum$type)<-gettext(get("msg",envir=envir_stacomi)$fungraph.5)
 	superpose.polygon<-lattice::trellis.par.get("plot.polygon")
 	superpose.polygon$col=  c("black","deepskyblue","chartreuse2","indianred")
 	superpose.polygon$border=rep("transparent",6)
@@ -368,8 +368,8 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	bar<-lattice::barchart(number/1000~mois,
 			groups=type,
-			xlab=get("msg",envir=envir_stacomi)$fungraph_civelle.14,
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.15,
+			xlab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.14),
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.15),
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tableaum,
 			allow.multiple=FALSE,
@@ -398,7 +398,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 #			jour_mois=FALSE,
 #			heure=FALSE)
 #	stktab$ind<-factor(stktab$ind, levels = c("MESURE","CALCULE","EXPERT","PONCTUEL"))
-#	fillname<-get("msg",envir=envir_stacomi)$fungraph.7[2] #type
+#	fillname<-gettext(get("msg",envir=envir_stacomi)$fungraph.7[2] #type)
 #	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
 #	g<-ggplot(stktab, aes(x=mois,y=values,fill=ind))+
 #			geom_bar(position="dodge", stat="identity")+
@@ -406,8 +406,8 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 #							"CALCULE"=mypalette[3],
 #							"EXPERT"=mypalette[2],
 #							"PONCTUEL"=mypalette[1]))+
-#			xlab(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+
-#			ylab(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers
+#			xlab(gettext(get("msg",envir=envir_stacomi)$fungraph.7[4])+ # mois or month+)
+#			ylab(gettext(get("msg",envir=envir_stacomi)$fungraph.7[1]) # Nombre ou Numbers)
 #	nothing<-print(g)
 	# pour l'instant je ne peux pas combiner avec les autres => deux graphes
 	return(invisible(NULL))

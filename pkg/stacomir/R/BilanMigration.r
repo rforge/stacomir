@@ -132,25 +132,25 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 				dc<-bilanMigration@dc@dc_selectionne
 				df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc]
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)	
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)	
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigration@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigration@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				# pour permettre le fonctionnement de Fonctionnement DC
 			} else {
-				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
-				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE))
+				warning(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1))
 			}
 			
 			#################################
@@ -208,7 +208,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			#bilanMigration<-bM_Arzal_civ
 			#negative=FALSE;silent=FALSE
 			if (!silent){
-				funout(get("msg",envir_stacomi)$BilanMigration.2)
+				funout(gettext(get("msg",envir_stacomi)$BilanMigration.2))
 			}
 			bilanMigration<-object
 			
@@ -273,15 +273,15 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				bilanMigration@calcdata<-lestableaux
 				assign("bilanMigration",bilanMigration,envir_stacomi)
 				if (!silent){
-					funout(get("msg",envir_stacomi)$BilanMigration.3)
-					funout(get("msg",envir_stacomi)$BilanMigration.4)
+					funout(gettext(get("msg",envir_stacomi)$BilanMigration.3))
+					funout(gettext(get("msg",envir_stacomi)$BilanMigration.4))
 				}
 				
 				
 				
 			} else {
 				# no fish...
-				funout(get("msg",envir_stacomi)$BilanMigration.10)
+				funout(gettext(get("msg",envir_stacomi)$BilanMigration.10))
 			}
 			return(bilanMigration)
 		})
@@ -299,7 +299,7 @@ houtBilanMigration=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(get("msg",envir_stacomi)$BilanMigrationMult.2,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.2),arret=TRUE)
 	}
 }
 
@@ -347,14 +347,14 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			if (exists("bilanMigration",envir_stacomi)) {
 				bilanMigration<-get("bilanMigration",envir_stacomi)
 			} else {      
-				funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 			}
 			################################################################
 			#                 standard plot
 			################################################################
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.9)				
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))				
 				taxon=bilanMigration@taxons@data[1,"tax_nom_latin"]
 				stade=bilanMigration@stades@data[1,"std_libelle"]
 				dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
@@ -439,8 +439,8 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 					
 					p<-ggplot(grdata)+
 							geom_line(aes(x=debut_pas,y=Cumsum,colour=mois))+
-							ylab(get("msg",envir_stacomi)$BilanMigration.6)+
-							ggtitle(paste(get("msg",envir_stacomi)$BilanMigration.7," ",dis_commentaire,", ",taxon,", ",stade,", ",annee,sep="")) + 
+							ylab(gettext(get("msg",envir_stacomi)$BilanMigration.6))+
+							ggtitle(paste(gettext(get("msg",envir_stacomi)$BilanMigration.7," ",dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))) + 
 							theme(plot.title = element_text(size=10,colour="navy"))+
 							scale_colour_manual(values=c("01"="#092360",
 											"02"="#1369A2",
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 									))
 					print(p)	
 				} else {
-					funout(get("msg",envir_stacomi)$BilanMigration.8)
+					funout(gettext(get("msg",envir_stacomi)$BilanMigration.8))
 				}
 			} else {
 				stop("unrecognised plot.type argument, plot.type should either be standard or step")
@@ -476,7 +476,7 @@ hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="standard")
 	
@@ -492,7 +492,7 @@ hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="step")
 }
@@ -510,7 +510,7 @@ hTableBilanMigration=function(h,...) {
 	} 
 	else 
 	{      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	summary(bilanMigration)
 	
@@ -545,7 +545,7 @@ hbilanMigrationwrite = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 	}
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	database_expected<-get("database_expected",envir=envir_stacomi)
@@ -633,7 +633,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 				
 				
 				if (!silent){
-					funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n"))
+					funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n")))
 				}
 # si l'utilisateur accepte de remplacer les valeurs				
 #progres<-get("progres",envir=envir_stacomi)
@@ -650,9 +650,9 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			if (nrow(bil@data)>0)
 			{ 
 				if (!silent){
-					choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+					choice<-gWidgets::gconfirm(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1), # Un bilan a deja ete ecrit dans la base)
 									unique(bil@data$bjo_horodateexport),
-									get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
+									gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2)),
 							handler=hconfirm) # voulez vous le remplacer ?
 				} else {
 					hconfirm(h=NULL)
@@ -677,7 +677,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 						))		
 #	
 				
-				if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+				if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n")))
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)
 				DC=as.numeric(bilanMigration@dc@dc_selectionne)	

@@ -79,34 +79,34 @@ setMethod("charge",signature=signature("Bilan_carlot"),definition=function(objec
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n",arret=TRUE))
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a taxa, clic on validate\n",arret=TRUE))
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a stage, clic on validate\n",arret=TRUE))
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a parameter, clic on validate\n",arret=TRUE))
+				funout(gettext("You need to choose a parameter, clic on validate\n"),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_carlot_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_carlot_date_debut",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting date\n",arret=TRUE))
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_carlot_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_carlot_date_fin",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending date\n",arret=TRUE))
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
 			}       
 			assign("bilan_carlot",object,envir_stacomi)
 			return(object)
@@ -152,12 +152,12 @@ setMethod("choice_c",signature=signature("Bilan_carlot"),definition=function(obj
 			bilan_carlot@par<-choice_c(bilan_carlot@par,par,silent=silent)
 			bilan_carlot@horodatedebut<-choice_c(object=bilan_carlot@horodatedebut,
 					nomassign="bilan_carlot_date_debut",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+					funoutlabel=gettext("Beginning date has been chosen\n"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
 					nomassign="bilan_carlot_date_fin",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+					funoutlabel=gettext("Ending date has been chosen\n"),
 					horodate=horodatefin,
 					silent=silent)
 			return(bilan_carlot)
@@ -224,7 +224,7 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 			if (exists("bilan_carlot",envir_stacomi)) {
 				bilan_carlot<-get("bilan_carlot",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",arret=TRUE))
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			if (plot.type==1){		
 				g<-ggplot(bilan_carlot@data,aes(x=car_valeur_quantitatif))

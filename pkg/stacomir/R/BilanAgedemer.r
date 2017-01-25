@@ -87,7 +87,7 @@ setMethod("connect",signature=signature("BilanAgedemer"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(get("msg",envir_stacomi)$BilanAgedemer.1)
+			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanAgedemer.1))
 			return(object)
 		})
 
@@ -106,34 +106,34 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.4,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.4),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_adm_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_adm_date_debut",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.5,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_adm_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_adm_date_fin",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.6,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)
 			}       
 			
 			return(object)
@@ -187,12 +187,12 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			bilan_adm@par<-choice_c(bilan_adm@par,par,silent=silent)
 			bilan_adm@horodatedebut<-choice_c(object=bilan_adm@horodatedebut,
 					nomassign="bilan_adm_date_debut",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.5,
+					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilan_adm@horodatefin<-choice_c(bilan_adm@horodatefin,
 					nomassign="bilan_adm_date_fin",
-					funoutlabel=get("msg",envir=envir_stacomi)$interface_Bilan_lot.6,
+					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 					horodate=horodatefin,
 					silent=silent)
 			bilan_adm@limit1hm<-choice_c(bilan_adm@limit1hm,as.character(limit1hm))
@@ -253,7 +253,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -307,7 +307,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(get("msg",envir_stacomi)$BilanMigration.5,arret=TRUE)
+				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]		
 			ndc=unique(dat$ope_dic_identifiant)
@@ -320,14 +320,14 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 				dc<-as.character(unique(datdc$ope_dic_identifiant))
 				result[[dc]]<-list()
 				result[[dc]][["ouvrage"]]<-ouvrage
-				print(noquote(stringr::str_c("Age tatistics for dam : ",ouvrage," CD=",dc_code)))
+				print(noquote(stringr::str_c("Age Statistics for dam : ",ouvrage," CD=",dc_code)))
 				print(noquote("========================"))
 				print(table(datdc$age))		
 				result[[dc]][["age"]]<-table(datdc$age)
 				
 			}
 			if (length(ndc)>1){
-				print(noquote(stringr::str_c("Age tatistics total")))
+				print(noquote(stringr::str_c("Age Statistics total")))
 				print(noquote("========================"))
 				print(table(dat$age))		
 				
@@ -412,7 +412,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 						
 						
 						if (!silent){
-							funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n"))
+							funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n")))
 						}
 # si l'utilisateur accepte de remplacer les valeurs				
 #progres<-get("progres",envir=envir_stacomi)
@@ -429,9 +429,9 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 					if (nrow(bil@data)>0)
 					{ 
 						if (!silent){
-							choice<-gWidgets::gconfirm(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1, # Un bilan a deja ete ecrit dans la base
+							choice<-gWidgets::gconfirm(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1), # Un bilan a deja ete ecrit dans la base)
 											unique(bil@data$bjo_horodateexport),
-											get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2),
+											gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2)),
 									handler=hconfirm) # voulez vous le remplacer ?
 						} else {
 							hconfirm(h=NULL)
@@ -456,7 +456,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 								))		
 #	
 						
-						if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n"))
+						if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n")))
 						taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 						stade= as.character(bilanMigration@stades@data$std_libelle)
 						DC=as.numeric(bilanMigration@dc@dc_selectionne)	
@@ -518,7 +518,7 @@ funtableBilanAgedemer = function(h,...) {
 	bilan_adm<-connect(bilan_adm)
 	vue_ope_lot=bilan_adm@requete@query # on recupere le data.frame
 	assign("bilan_adm",bilan_adm,envir_stacomi)#assign("bilan_adm",vue_ope_lot,envir_stacomi)
-	funout(get("msg",envir_stacomi)$BilanAgedemer.3)
+	funout(gettext(get("msg",envir_stacomi)$BilanAgedemer.3))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

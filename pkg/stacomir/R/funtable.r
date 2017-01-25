@@ -15,7 +15,7 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	tableau$debut_pas<-as.character(tableau$debut_pas)
 	path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-	if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path1,"\n"))
+	if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path1,"\n")))
 	path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".html",sep=""),fsep ="/")
 	funhtml(data=tableau,
 			caption=paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),
@@ -25,13 +25,13 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 			append=FALSE,
 			digits=2
 	)
-	if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path1html,"\n"))
+	if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path1html,"\n")))
 	if( !is.null(resum) )
 	{
 		path2=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
 		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";")
 		path2html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".html",sep=""),fsep ="/")
-		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2,"\n"))
+		if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path2,"\n")))
 		funhtml(data=resum,
 				caption=paste("Sommes mensuelles",annee),
 				top=TRUE,
@@ -40,7 +40,7 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 				append=TRUE,
 				digits=2
 		)
-		if (!silent) funout(paste(get("msg",envir=envir_stacomi)$funtable.1,path2html,"\n"))       
+		if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path2html,"\n"))       )
 	}
 }
 

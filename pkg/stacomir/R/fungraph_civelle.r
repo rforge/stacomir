@@ -31,7 +31,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
-	if (!silent) funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n"))
+	if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n")))
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
@@ -50,11 +50,11 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2 ,
 			lty=1,
 			xaxt="n",
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.2,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.2),
 			#xlab="date",
 			cex.main=1,
 			font.main=1,
-			main=paste(get("msg",envir=envir_stacomi)$fungraph_civelle.3, dis_commentaire,",", 
+			main=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle), dis_commentaire,",", 
 					taxon,",", stade,",", annee ),...)
 	#print(plot,position = c(0, .3, 1, .9), more = TRUE)
 	r <- as.Date(round(range(time.sequence), "day"))
@@ -67,7 +67,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	legend(x="topright",
 			inset=0.01,
-			legend= get("msg",envir=envir_stacomi)$fungraph_civelle.4,
+			legend= gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.4),
 			pch=c(16,16),
 			col=mypalette[c(10,8)])
 	
@@ -110,10 +110,10 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n"))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n"))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours","\n"))
-		funout(paste(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n"))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n")))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n")))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours","\n")))
+		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n")))
 	}
 	
 	df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc==dc]
@@ -141,7 +141,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.11,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.11),
 			bty="n",
 			cex=1.2)
 	
@@ -166,7 +166,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= get("msg",envir=envir_stacomi)$fungraph_civelle.9,
+				legend= gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				horiz=TRUE,
@@ -220,7 +220,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode),
+				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -241,7 +241,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.12,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.12),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -267,7 +267,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend=get("msg",envir=envir_stacomi)$fungraph_civelle.9,
+				legend=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,
@@ -318,7 +318,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode),
+				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -339,7 +339,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.13,
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.13),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -390,12 +390,12 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	bar<-lattice::barchart(eff/1000~as.factor(mois),
 			groups=as.factor(type),
-			xlab=get("msg",envir=envir_stacomi)$fungraph_civelle.14,
-			ylab=get("msg",envir=envir_stacomi)$fungraph_civelle.15,
+			xlab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.14),
+			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.15),
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-#			key=lattice::simpleKey(text=get("msg",envir=envir_stacomi)$fungraph_civelle.16,
+#			key=lattice::simpleKey(text=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.16),
 #					rectangles = TRUE, 
 #					points=FALSE, 
 #					space="right",

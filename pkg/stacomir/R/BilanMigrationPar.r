@@ -86,18 +86,18 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationPar@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(get("msg",envir_stacomi)$ref.1,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationPar@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(get("msg",envir_stacomi)$ref.2,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationPar@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.3,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationPar@pasDeTemps<-get("pasDeTemps",envir_stacomi)
@@ -105,8 +105,8 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 				assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
 				assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			} else {
-				funout(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE)
-				warning(get("msg",envir=envir_stacomi)$BilanMigration.1)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE))
+				warning(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1))
 			}
 			if (exists("refchoice",envir_stacomi)){
 				bilanMigrationPar@echantillon<-get("refchoice",envir_stacomi)
@@ -119,19 +119,19 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 				bilanMigrationPar@parquan<-get("refparquan",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.7,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.7),arret=TRUE)
 			}
 			if (exists("refparqual",envir_stacomi)){
 				bilanMigrationPar@parqual<-get("refparqual",envir_stacomi)
 			} else 
 			{
-				funout(get("msg",envir_stacomi)$ref.8,arret=TRUE)
+				funout(gettext(get("msg",envir_stacomi)$ref.8),arret=TRUE)
 			}
 			
 			stopifnot(validObject(bilanMigrationPar, test=TRUE))
-			funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.1)
+			funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.1))
 			if (bilanMigrationPar@parquan@data$par_nom=="aucune" & bilanMigrationPar@parqual@data$par_nom=="aucune") {
-				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.2,arret=TRUE)}
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.2),arret=TRUE)}
 			res<-funSousListeBilanMigrationPar(bilanMigrationPar=bilanMigrationPar)
 			if (exists("progres")) close(progres)
 			data<-res[[1]]
@@ -147,9 +147,9 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			
 			if (bilanMigrationPar@taxons@data$tax_nom_commun=="Anguilla anguilla"& bilanMigrationPar@stades@data$std_libelle=="civelle") 
 			{
-				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.3)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.3))
 			}
-			funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.4)
+			funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.4))
 			bilanMigrationPar@data<-data 
 			assign("bilanMigrationPar",bilanMigrationPar,envir_stacomi)
 			assign("data",data,envir_stacomi)
@@ -165,7 +165,7 @@ hbilanMigrationPargraph = function(h,...) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="barplot")
 	} else {      
-		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)
+		funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.5),arret=TRUE)
 	}
 }
 #' le handler appelle la methode generique graphe sur l'object plot.type=2
@@ -177,7 +177,7 @@ hbilanMigrationPargraph2=function(h,...){
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="xyplot")
 	} else {      
-		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)
+		funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.5),arret=TRUE)
 	}
 }
 #' This handler calls the generic method graphe on object plot.type 3
@@ -190,7 +190,7 @@ hbilanMigrationParstat=function(h){
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="summary")
 	} else {      
-		funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)		
+		funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.5,arret=TRUE)		)
 	}
 }
 
@@ -232,7 +232,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-g+geom_bar(aes(x=mois,y=sum,fill=variable),stat='identity',
 						stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.6))
 				print(g)
 			} #end plot.type = "barplot"
 			if (plot.type=="xyplot") { 
@@ -240,7 +240,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-ggplot(mb)
 				g<-g+geom_point(aes(x=Date,y=sum,col=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(get("msg",envir=envir_stacomi)$BilanMigrationPar.6)
+				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.6))
 				print(g)
 			} #end plot.type="xyplot"
 			#TODO create summary method
@@ -253,10 +253,10 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				annee=unique(strftime(as.POSIXlt(bilanMigrationPar@time.sequence),"%Y"))
 				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")) 
+				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")) )
 				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(bilanMigrationPar@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(paste(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n"))
+				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")))
 			} # end plot.type summary 
 		})
 
