@@ -1,0 +1,414 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: stacomiR 0.5.0\n"
+"POT-Creation-Date: 2017-01-26 22:16+0100\n"
+"PO-Revision-Date: 2017-01-26 22:26+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+
+msgid "msg"
+msgstr ""
+
+msgid "erreur interne"
+msgstr ""
+
+msgid "plot.type must be 1,2,3 or 4"
+msgstr "plot.type doit être 1,2,3 ou 4"
+
+msgid "the bilanMigration should be of class BilanMigration"
+msgstr "bilanMigration doit appartenir à la classe BilanMigration"
+
+msgid "the silent argument should be a logical"
+msgstr "l’argument silent doit être booleen"
+
+msgid "dc_name argument should have length"
+msgstr "l'argument dc_name doit avoir une longueur"
+
+msgid "tax_name argument should have length"
+msgstr "l'argument tax_name doit avoir une longueur"
+
+msgid "std_name argument should have length"
+msgstr "l'argument std_name doit avoir une longueur"
+
+msgid "bubbles"
+msgstr "bulles"
+
+msgid "pie"
+msgstr "camembert"
+
+msgid "graph"
+msgstr "graphique"
+
+msgid "#FF6700"
+msgstr ""
+
+msgid "#EE1874"
+msgstr ""
+
+msgid "#9E0142"
+msgstr ""
+
+msgid "#76BEBE"
+msgstr ""
+
+msgid "#999999"
+msgstr ""
+
+msgid "#0F313A"
+msgstr ""
+
+msgid "#CEB99A"
+msgstr ""
+
+msgid "#E41A1C"
+msgstr ""
+
+msgid "#4DAF4A"
+msgstr ""
+
+msgid "duplicated values in No.pas"
+msgstr "No.pas contient des doublons"
+
+msgid ","
+msgstr ""
+
+msgid ""
+"unrecognised plot.type argument, plot.type should either be standard or step"
+msgstr "argument plot.type non reconnu, plot.type doit être standard ou step"
+
+msgid "timesplit should be one of :"
+msgstr "le pas de temps doit être choisi parmi :"
+
+msgid "month"
+msgstr "mois"
+
+msgid "mois"
+msgstr ""
+
+msgid "week"
+msgstr "semaine"
+
+msgid "semaine"
+msgstr ""
+
+msgid "quinzaine"
+msgstr ""
+
+msgid "2 weeks"
+msgstr ""
+
+msgid "i="
+msgstr ""
+
+msgid "plot.type argument invalid"
+msgstr "argument plot.type non valide"
+
+msgid "dc="
+msgstr ""
+
+msgid ", tax="
+msgstr ""
+
+msgid ", srd="
+msgstr ""
+
+msgid "normalement ce cas est impossible"
+msgstr ""
+
+msgid "Sample characteristics have been loaded from the database"
+msgstr "Les caractéristiques du lot ont été chargé depuis la base de données"
+
+msgid "You need to choose a counting device, clic on validate"
+msgstr "Vous devez choisir un dispositif de comptage, cliquez sur valider"
+
+msgid "You need to choose a taxa, clic on validate"
+msgstr "Vous devez choisir un taxon, cliquez sur valider"
+
+msgid "You need to choose a stage, clic on validate"
+msgstr "Vous devez choisir un stade de développement, cliquez sur valider"
+
+msgid "You need to choose a parameter, clic on validate"
+msgstr "Vous devez choisir un paramètre, cliquez sur valider"
+
+msgid "You need to choose the starting date"
+msgstr "Vous devez choisir une date de début"
+
+msgid "You need to choose the ending date"
+msgstr "Vous devez choisir une date de fin"
+
+msgid "Beginning date has been chosen"
+msgstr "La date de debut a ete choisie"
+
+msgid "Ending date has been chosen"
+msgstr "La date de fin a ete choisie"
+
+msgid "No information for these samples during the selected period"
+msgstr "Pas d'informations sur ces lots pendant la période sélectionnée"
+
+msgid "To obtain the table, type : bilan_lot=get('bilan_lot',envir_stacomi)"
+msgstr ""
+"Pour obtenir la table, écrire :  bilan_lot=get('bilan_lot',envir_stacomi)"
+
+msgid "plot.type must be 1,2,3"
+msgstr "plot.type doit être 1,2 ou 3"
+
+msgid "You need to launch computation first, clic on calc"
+msgstr "Il faut d'abord lancer le calcul, cliquer sur calc"
+
+msgid ""
+"\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see "
+"http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help"
+"\"n"
+msgstr ""
+"Pour recuperer l'objet graphique, tapper : g<-get('g\",envir_stacomi), voir "
+"http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot"
+
+msgid ""
+"\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see "
+"http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help"
+msgstr ""
+"Pour recuperer l'objet graphique, tapper : g<-get('g\",envir_stacomi), voir "
+"http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot"
+
+msgid "The query to load the coefficients of conversion is finished"
+msgstr "La requete est effectuee pour charger les coefficients de conversion "
+
+msgid "%1.0f lines found for the conversion coefficients"
+msgstr ""
+
+msgid "You need to choose a size class"
+msgstr "Il faut choisir une classe de taille"
+
+msgid "You need to choose the starting year"
+msgstr "Il faut choisir l'annee de debut"
+
+msgid "You need to choose the ending year"
+msgstr "Il faut choisir l'annee de fin"
+
+msgid "selectedvalue must be of length one"
+msgstr "selectedvalue doit être de longueur 1"
+
+msgid "choice of number in sample (one, several,all)"
+msgstr ""
+
+msgid ""
+"To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',"
+"envir_stacomi)@data"
+msgstr ""
+"Pour recuperer le tableau, tapper : "
+"bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data"
+
+msgid "size is missing, lots"
+msgstr "effectif non renseigne, lots"
+
+msgid "ggplot object p assigned to envir_stacomi"
+msgstr "l'object ggplot p est enregistré dans envir_stacomi"
+
+msgid "wet weights"
+msgstr "poids humides"
+
+msgid "dry weights"
+msgstr "poids secs"
+
+msgid "wet and dry weights"
+msgstr "poids humides et secs"
+
+msgid "date"
+msgstr "date"
+
+msgid "mean weights"
+msgstr "poids moyens"
+
+msgid "Seasonal trend of %s, from %s to %s"
+msgstr "Tendances saisonnières de %s, de %s à %s"
+
+msgid "object p assigned to envir_stacomi"
+msgstr "l'object ggplot p est enregistré dans envir_stacomi"
+
+msgid "date should be in colnames(data)"
+msgstr "la date devrait être dans colnames(data)"
+
+msgid "date should be POSIXct"
+msgstr "la date devrait être POSIXct"
+
+msgid "gam model g1 assigned to envir_stacomi"
+msgstr ""
+
+msgid "One model per year, doy starts in november"
+msgstr ""
+
+msgid "gam model g2 assigned to envir_stacomi"
+msgstr ""
+
+msgid ""
+"Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} "
+"and in the present modelling\n"
+"\t\t\t\t\t\t\t\tof estuarine samples."
+msgstr ""
+
+msgid "summary_harmonic"
+msgstr ""
+
+msgid "summary coefficients written in %s"
+msgstr ""
+
+msgid "Table for predictions newcoe assigned to envir_stacomi"
+msgstr ""
+
+msgid "Table of data don assigned to envir_stacomi"
+msgstr ""
+
+msgid "Table of current coefficients coe assigned to envir_stacomi"
+msgstr ""
+
+msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
+msgstr ""
+
+msgid "data directory :%s"
+msgstr "Répertoire d'écriture des données :%s"
+
+msgid "Do you want to write data in the database ?"
+msgstr "Voulez vous ecrire les donnees dans la base ?"
+
+msgid "Attention!"
+msgstr ""
+
+msgid ""
+"Attention, you must fit a model before trying to write the predictions in "
+"the database"
+msgstr ""
+
+msgid "Pigmentation stages loading query completed"
+msgstr "La requete a été effectuée pour charger les stades pigmentaires"
+
+msgid "Environmental conditions loading query completed"
+msgstr ""
+"La requete est effectuee pour charger les conditions environnementales "
+
+msgid "You chose several stations"
+msgstr "Vous avez choisi plusieurs stations"
+
+msgid "no temperature data, you won't be able to retrocalculate arrival dates"
+msgstr ""
+"pas de données de températures, vous ne pourrez pas faire le rétrocalcul des "
+"dates d'arrivées"
+
+msgid "You need to choose a monitoring station, clic on validate"
+msgstr "Il faut choisir une station de mesure puis cliquer sur valider "
+
+msgid "Pigmentation stages"
+msgstr "Stades pigmentaires"
+
+msgid "and incoming dates in estuary"
+msgstr "et dates d'arrivees en estuaire"
+
+msgid "incoming dates in estuary"
+msgstr "dates d'arrivees en estuaire"
+
+msgid "le tableau des temperatures et salinites"
+msgstr ""
+
+msgid "ne remonte pas assez loin dans le temps"
+msgstr ""
+
+msgid ""
+"The graphic object is available in the main environment, write g<-get('g',"
+"envir=envir_stacomi)"
+msgstr ""
+
+msgid "close"
+msgstr "fermer"
+
+msgid "internal error length(LesPasDeTemps$LabelPasDeTemps) == 0"
+msgstr ""
+
+msgid "datedebut not parsed to datetime try format like '01/01/2017'"
+msgstr ""
+
+msgid "datefin not parsed to datetime try format like '01/01/2017'"
+msgstr ""
+
+msgid "horodate should be a vector of length 1"
+msgstr "l'horodate doit être de longueur 1"
+
+msgid "year,"
+msgstr "annee,"
+
+msgid "not available in the database, available years"
+msgstr ""
+
+msgid "les longeur de 'labels' et 'checked' sont differentes"
+msgstr ""
+
+msgid "NA values dc"
+msgstr "Valeurs NULL dc"
+
+msgid "NA values df"
+msgstr "Valeurs NULL df"
+
+msgid "horodate should not be null"
+msgstr "l'horodate ne doit pas être NULL"
+
+msgid ""
+"Formatting problem, the character vector you are trying to pass as horodate "
+"could not\n"
+"be parsed. Check example or documentation"
+msgstr ""
+"Problème de formatage, le vecteur de caractères que vous essayez de passer "
+"en horodate n'a pas\n"
+"être converti. Vérifier un exemple ou la documentation."
+
+msgid "valeurchoisie should be a vector of length 1"
+msgstr "valeurchoisie doit être de longueur 1"
+
+msgid "The selected valeur,"
+msgstr ""
+
+msgid "not in the list of possible values :"
+msgstr ""
+
+msgid ""
+"internal error, check messager and messagerlang length, they should match"
+msgstr ""
+
+msgid "refparqual"
+msgstr ""
+
+msgid "frame_parqual"
+msgstr ""
+
+msgid "refparquan"
+msgstr ""
+
+msgid "frame_parquan"
+msgstr ""
+
+msgid "NA values par"
+msgstr "Valeurs NULL par"
+
+msgid ""
+"Internal error : tried to set a value for par_selectionne without "
+"initializing the data slot"
+msgstr ""
+
+msgid "No data for par"
+msgstr "Pas de données pour par"
+
+msgid ""
+"il faut choisir au moins une caracteristique quantitative ou qualitative"
+msgstr ""
+
+msgid "jours"
+msgstr ""
+
+msgid "horodatedebut not in column names for data"
+msgstr ""
+
+msgid "horodatefin not column names for data"
+msgstr ""

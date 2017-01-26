@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-24 17:14\n"
+"POT-Creation-Date: 2017-01-26 22:15\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,10 +169,49 @@ msgstr ""
 msgid "%1.0f lines found for the conversion coefficients"
 msgstr ""
 
+msgid "You need to choose a size class"
+msgstr ""
+
+msgid "You need to choose the starting year"
+msgstr ""
+
+msgid "You need to choose the ending year"
+msgstr ""
+
 msgid "selectedvalue must be of length one"
 msgstr ""
 
 msgid "choice of number in sample (one, several,all)"
+msgstr ""
+
+msgid "To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data"
+msgstr ""
+
+msgid "size is missing, lots"
+msgstr ""
+
+msgid "ggplot object p assigned to envir_stacomi"
+msgstr ""
+
+msgid "wet weights"
+msgstr ""
+
+msgid "dry weights"
+msgstr ""
+
+msgid "wet and dry weights"
+msgstr ""
+
+msgid "date"
+msgstr ""
+
+msgid "mean weights"
+msgstr ""
+
+msgid "Seasonal trend of %s, from %s to %s"
+msgstr ""
+
+msgid "object p assigned to envir_stacomi"
 msgstr ""
 
 msgid "date should be in colnames(data)"
@@ -181,10 +220,79 @@ msgstr ""
 msgid "date should be POSIXct"
 msgstr ""
 
+msgid "gam model g1 assigned to envir_stacomi"
+msgstr ""
+
+msgid "One model per year, doy starts in november"
+msgstr ""
+
+msgid "gam model g2 assigned to envir_stacomi"
+msgstr ""
+
+msgid "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling\n\t\t\t\t\t\t\t\tof estuarine samples."
+msgstr ""
+
+msgid "summary_harmonic"
+msgstr ""
+
+msgid "summary coefficients written in %s"
+msgstr ""
+
+msgid "Table for predictions newcoe assigned to envir_stacomi"
+msgstr ""
+
+msgid "Table of data don assigned to envir_stacomi"
+msgstr ""
+
+msgid "Table of current coefficients coe assigned to envir_stacomi"
+msgstr ""
+
+msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
+msgstr ""
+
+msgid "data directory :%s"
+msgstr ""
+
+msgid "Do you want to write data in the database ?"
+msgstr ""
+
+msgid "Attention!"
+msgstr ""
+
+msgid "Attention, you must fit a model before trying to write the predictions in the database"
+msgstr ""
+
+msgid "Pigmentation stages loading query completed"
+msgstr ""
+
+msgid "Environmental conditions loading query completed"
+msgstr ""
+
+msgid "You chose several stations"
+msgstr ""
+
+msgid "no temperature data, you won't be able to retrocalculate arrival dates"
+msgstr ""
+
+msgid "You need to choose a monitoring station, clic on validate"
+msgstr ""
+
+msgid "Pigmentation stages"
+msgstr ""
+
+msgid "and incoming dates in estuary"
+msgstr ""
+
+msgid "incoming dates in estuary"
+msgstr ""
+
 msgid "le tableau des temperatures et salinites"
 msgstr ""
 
 msgid "ne remonte pas assez loin dans le temps"
+msgstr ""
+
+msgid "The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)"
 msgstr ""
 
 msgid "close"
