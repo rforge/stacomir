@@ -238,15 +238,15 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				p<-ggplot2::qplot(x=date,y=w,data=don) 
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				if (!silent) funout("ggplot object p assigned to envir_stacomi")
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
 				####################"
 				# standard plot
 				##################
 			} else if (plot.type==2){	
 				type_poids= switch (bilPM@liste@selectedvalue,
-						">1"=gettext("wet weights "),
-						"=1"=gettext("dry weights "),
-						"tous"=gettext("wet and dry weights "))  
+						">1"=gettext("wet weights"),
+						"=1"=gettext("dry weights"),
+						"tous"=gettext("wet and dry weights"))  
 				plot(x=don$date,y=don$w,
 						xlab=gettext("date"),
 						ylab=gettext("mean weights"),
@@ -265,7 +265,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				p<-ggplot2::qplot(x=date,y=w,data=don) 
 				print(p+aes(size=effectif))
 				assign("p",p,envir=envir_stacomi)
-				if (!silent) funout("object p assigned to envir_stacomi")
+				if (!silent) funout(gettext("object p assigned to envir_stacomi"))
 			}
 		})
 

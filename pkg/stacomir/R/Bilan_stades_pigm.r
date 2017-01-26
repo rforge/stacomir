@@ -102,7 +102,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
 			requete<-stacomirtools::connect(requete) # appel de la methode stacomirtools::connect de l'object ODBCWHEREDATE
-			funout(gettext(get("msg",envir_stacomi)$Bilan_stades_pigm.1))
+			funout(gettext("Pigmentation stages loading query completed"))
 			object@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
@@ -139,14 +139,14 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 				requete<-stacomirtools::connect(requete)
-				funout(gettext(get("msg",envir=envir_stacomi)$BilanCondtionEnv.1))
+				funout(gettext("Environmental conditions loading query completed"))
 				if (nrow (requete@query)>0)	{
-					if (unique(requete@query$env_stm_identifiant)>1) funout("vous avez choisi plusieurs stations", arret=TRUE)
+					if (unique(requete@query$env_stm_identifiant)>1) funout(gettext("You chose several stations"), arret=TRUE)
 					object@datatempsal<-stacomirtools::killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
 					object@datatempsal$salinite=as.numeric(object@salinite@label)
 					colnames(object@datatempsal)<-c("date","temperature","salinite")
 				} else {
-					funout("pas de donnees de temperature, vous ne pourrez pas faire de retrocalcul des dates d'arrivees")
+					funout(gettext("no temperature data, you won't be able to retrocalculate arrival dates"))
 				}
 			}
 			return(object)
@@ -218,18 +218,18 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate"),arret=TRUE)
 			} 	
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_stades_pigm_date_debut",envir_stacomi)) {
 				object@datedebut<-get("bilan_stades_pigm_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
 			}
 			if (exists("bilan_stades_pigm_date_fin",envir_stacomi)) {
 				object@datefin<-get("bilan_stades_pigm_date_fin",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
 			}         
 			if (exists("refCheckBox",envir_stacomi)) {
 				object@options<-get("refCheckBox",envir_stacomi)
@@ -252,7 +252,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 				if (exists("refStationMesure",envir_stacomi)) {
 					object@stationMesure<-get("refStationMesure",envir_stacomi)
 				} else {
-					funout(gettext(get("msg",envir=envir_stacomi)$BilanCondtionEnv.2),arret=TRUE)
+					funout(gettext("You need to choose a monitoring station, clic on validate\n"),arret=TRUE)
 				}
 			}
 			object<-connect(object)			
@@ -492,14 +492,14 @@ funcalcbilan_stades_pigm<-function(h,...){
 	}
 	funout("Chargement des donnees dans la base ")
 	dates<-bilan_stades_pigm@dates
-	bilan_stades_pigm@labelgraphstades<-paste(gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.4),
+	bilan_stades_pigm@labelgraphstades<-paste(gettext("Pigmentation stages"),
 			if(strftime(as.POSIXlt(dates[1]),"%Y")==
 							strftime(as.POSIXlt(dates[length(dates)]),"%Y")) {
 						strftime(as.POSIXlt(dates[1]),"%Y")} else { paste(
 								strftime(as.POSIXlt(dates[1]),"%Y"),"-",
 								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))},
-			gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.5))
-	bilan_stades_pigm@labelretro="dates d'arrivees en estuaires"
+			gettext("and incoming dates in estuary"))
+	bilan_stades_pigm@labelretro=gettext("incoming dates in estuary")
 	enabled(toolbarlist[["SetTitle"]])<-TRUE
 	enabled(toolbarlist[["Graph"]])<-TRUE
 	enabled(toolbarlist[["Graphgg"]])<-TRUE
@@ -787,7 +787,7 @@ fungraphgg=function(h,...){
 			ggtitle("Stades pigmentaires")+xlab("")+ylab("effectifs")
 	print(g)
 	assign("g",g,"envir_stacomi")
-	funout("l'object graphique est disponible dans l'environnement principal, tapper g<-get('g',envir=envir_stacomi)")
+	funout(gettext("The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)"))
 }
 
 
