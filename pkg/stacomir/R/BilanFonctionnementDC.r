@@ -118,7 +118,7 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDC"),definition=fun
 			# assigns the parameter (horodatedebut) of the method to the object using choice_c method for RefDC
 			bilanFonctionnementDC@horodatedebut<-choice_c(object=bilanFonctionnementDC@horodatedebut,
 					nomassign="bilanFonctionnementDC_date_debut",
-					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+					funoutlabel=gettext("Beginning date has been chosen\n"),
 					horodate=horodatedebut, silent=silent)
 			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
 					nomassign="bilanFonctionnementDC_date_fin",

@@ -17,10 +17,10 @@ interface_BilanFonctionnementDF = function()
 	choice(bilanFonctionnementDF@horodatedebut,
 			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilanFonctionnementDF_date_debut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2)
 	choice(bilanFonctionnementDF@horodatefin,
-			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
+			label=gettext("End of timestamp"),
 			nomassign="bilanFonctionnementDF_date_fin",
 			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)

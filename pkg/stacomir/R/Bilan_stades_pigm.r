@@ -120,7 +120,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tablestades=tablestades/effectifs
 				object@tablestades<-tablestades
 				object@dates<-dates
-			} else funout("pas de donnees de stades pigmentaires",arret=TRUE)
+			} else funout(gettext("No data for pigmentation stages"),arret=TRUE)
 			if (object@options@checked[2]){
 				# chargement du tableau des temperatures
 				requete@datedebut=as.POSIXlt(strptime(object@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
@@ -490,7 +490,7 @@ funcalcbilan_stades_pigm<-function(h,...){
 	if (nrow(bilan_stades_pigm@datatempsal)>0){
 		bilan_stades_pigm@phi<-funphi(parm=bilan_stades_pigm@Vparm$pigmentation,bilan_stades_pigm@datatempsal)
 	}
-	funout("Chargement des donnees dans la base ")
+	funout(gettext("Loading data from database"))
 	dates<-bilan_stades_pigm@dates
 	bilan_stades_pigm@labelgraphstades<-paste(gettext("Pigmentation stages"),
 			if(strftime(as.POSIXlt(dates[1]),"%Y")==
@@ -812,7 +812,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 			bilan_stades_pigm@labelgraphstades<-gsub("\n","",svalue(titre2))
 			bilan_stades_pigm@labelretro<-gsub("\n","",svalue(titre4))
 			assign("bilan_stades_pigm",bilan_stades_pigm,envir=envir_stacomi)		
-			funout("modification du titre \n")
+			funout(gettext("title edit \n"))
 		}
 		dispose(wintitle)
 	}
@@ -841,7 +841,7 @@ interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
 	assign("bilan_stades_pigm",bilan_stades_pigm,envir = envir_stacomi)
-	funout(gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.2))
+	funout(gettext("Summary of pigmentation stages\n"))
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
 	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
@@ -863,10 +863,10 @@ interface_Bilan_stades_pigm = function()
 	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
 	choice(bilan_stades_pigm@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_stades_pigm_date_debut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2,
 			affichecal=FALSE)
-	choice(bilan_stades_pigm@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
+	choice(bilan_stades_pigm@horodate,label=gettext("End of timestamp"),
 			nomassign="bilan_stades_pigm_date_fin",
 			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1,

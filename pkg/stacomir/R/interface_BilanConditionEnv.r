@@ -18,11 +18,11 @@ interface_ConditionEnv = function()
     # date de debut et de fin
     choice(bilanConditionEnv@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilanConditionEnv_date_debut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2,
 			affichecal=FALSE)
     choice(bilanConditionEnv@horodate,
-			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
+			label=gettext("End of timestamp"),
 			nomassign="bilanConditionEnv_date_fin",
 			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1,

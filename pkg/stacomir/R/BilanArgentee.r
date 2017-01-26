@@ -176,7 +176,7 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 			bilanArg@par<-choice_c(bilanArg@par,par,silent=silent)
 			bilanArg@horodatedebut<-choice_c(object=bilanArg@horodatedebut,
 					nomassign="bilanArg_date_debut",
-					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+					funoutlabel=gettext("Beginning date has been chosen\n"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilanArg@horodatefin<-choice_c(bilanArg@horodatefin,

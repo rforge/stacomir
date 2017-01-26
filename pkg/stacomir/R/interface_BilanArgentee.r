@@ -26,9 +26,9 @@ interface_BilanArgentee = function()
 	
 	choice(bilan_arg@horodatedebut,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
 			nomassign="bilan_arg_date_debut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2)
-	choice(bilan_arg@horodatefin,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.4),
+	choice(bilan_arg@horodatefin,label=gettext("End of timestamp"),
 			nomassign="bilan_arg_date_fin",
 			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
 			decal=-1)	

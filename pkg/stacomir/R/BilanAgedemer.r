@@ -187,7 +187,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			bilan_adm@par<-choice_c(bilan_adm@par,par,silent=silent)
 			bilan_adm@horodatedebut<-choice_c(object=bilan_adm@horodatedebut,
 					nomassign="bilan_adm_date_debut",
-					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.5),
+					funoutlabel=gettext("Beginning date has been chosen\n"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilan_adm@horodatefin<-choice_c(bilan_adm@horodatefin,
