@@ -79,7 +79,7 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout("You need to choose a counting device, clic on validate\n"),arret=TRUE)				}     
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)				}     
 			
 			if (exists("bilanFonctionnementDC_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilanFonctionnementDC_date_debut",envir_stacomi)
@@ -218,7 +218,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
 				progress_bar$setText("All done.")
 				progress_bar$setFraction(1) 
-				if (is.null(main)) main<-paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDC.12,bilanFonctionnementDC@dc@dc_selectionne))
+				if (is.null(main)) main<-gettextf("Operation of the counting device %s",bilanFonctionnementDC@dc@dc_selectionne)
 				# graphic
 					#modification of the order
 				
@@ -397,7 +397,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				#           PLOT OF TYPE BOX (plot.type=4)
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			} else if (plot.type=="4"){
-				if (is.null(main)) main<-paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDC.5,bilanFonctionnementDC@dc@dc_selectionne))
+				if (is.null(main)) main<-gettext("Working of the counting device",bilanFonctionnementDC@dc@dc_selectionne)
 				
 				#bilanFonctionnementDC<-bfDC; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="4"
 				t_periodefonctdispositif_per=bilanFonctionnementDC@data
@@ -554,31 +554,31 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDC"),definiti
 			annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
 			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
 			write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-			funout(paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1,"\n")))
+			funout(gettext("Writing of %s \n",path1))
 			path1html<-file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
-			funout(paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDC.14,path1html,get("msg",envir_stacomi)$BilanFonctionnementDC.15)))
+			funout(gettextf("Writing of %s this might take a while, please be patient …\n",path1html))
 			funhtml(t_periodefonctdispositif_per,
-					caption=paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,sep=""),
+					caption=gettextf("t_periodefonctdispositif_per_DC_%s_%s",bilanFonctionnementDC@dc@dc_selectionne,annee),
 					top=TRUE,
 					outfile=path1html,
 					clipboard=FALSE,
 					append=FALSE,
 					digits=2
 			)
-			print(paste("summary statistics for DC=",bilanFonctionnementDC@dc@dc_selectionne))
-			print(paste("dc_code=",bilanFonctionnementDC@dc@data[bilanFonctionnementDC@dc@data$dc==bilanFonctionnementDC@dc@dc_selectionne,"dc_code"]))
+			print(gettextf("summary statistics for CD=%s",bilanFonctionnementDC@dc@dc_selectionne))
+			print(gettextf("dc_code=%s",bilanFonctionnementDC@dc@data[bilanFonctionnementDC@dc@data$dc==bilanFonctionnementDC@dc@dc_selectionne,"dc_code"]))
 			duree<-difftime(t_periodefonctdispositif_per$per_date_fin,t_periodefonctdispositif_per$per_date_debut,units="day")
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_tar_code,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(gettext(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.12))
+			funout(gettext("Duration in days (operation type):"))
 			funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.11),
 							" :",
 							sommes,"(",perc,"%)",sep=""))
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_etat_fonctionnement,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(gettext(get("msg",envir=envir_stacomi)$BilanFonctionnementDF.13))
+			funout(gettext("Duration in days (operation):"))
 			funout(paste(rev(gettext(get("msg",envir=envir_stacomi)$BilanFonctionnementDC.11)),
 							" :",
 							sommes,"(",perc,"%)",sep=""))

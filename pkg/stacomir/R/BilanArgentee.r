@@ -111,7 +111,7 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
@@ -288,7 +288,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -605,7 +605,7 @@ setMethod("summary",signature=signature(object="BilanArgentee"),definition=funct
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)

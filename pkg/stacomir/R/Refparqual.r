@@ -32,7 +32,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(object)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
 			requete<-stacomirtools::connect(requete)
-			#funout("La requete est effectuee pour charger les parametres \n")
+			#funout(gettext("The query to load parameters is done \n"))
 			object@data<-requete@query
 			return(object)
 		})
@@ -88,14 +88,14 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #'  charge_complement(object)
 #' }		
 setMethod("charge_complement",signature=signature("Refparqual"),definition=function(object) {
-			if (nrow(object@data)!=1) funout(paste(gettext(get("msg",envir=envir_stacomi)$Refparqual.1,nrow(object@data))),arret=TRUE)
+			if (nrow(object@data)!=1) funout(gettextf("Internal error : there must have one line in Refparqual@data, or nbligne= %s",nrow(object@data)),arret=TRUE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
 					" WHERE val_qal_code='",object@data$par_code,
 					"' ORDER BY val_rang",sep="")
 			requete<-stacomirtools::connect(requete)
-			#funout("La requete est effectuee pour charger les parametres \n")
+			#funout(gettext("The query to load parameters is done \n"))
 			object@valqual<-requete@query
 			return(object)
 		})

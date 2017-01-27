@@ -131,7 +131,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 			if (exists("refliste",envir_stacomi)) {      
 				bilanEspeces@liste<-get("refliste",envir_stacomi)      
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$ref.9, arret=TRUE))             
+				funout(gettext("You need to choose a size class\n"), arret=TRUE)             
 			} 
 			bilanEspeces<-connect(bilanEspeces)
 			
@@ -245,7 +245,7 @@ hTableBilanEspeces=function(h,...) {
 	colnames(sumEspeces)[colnames(sumEspeces)=="Freq"]<-"Effectif" # pas forcement le m nb de colonnes	
 	path=file.path(normalizePath(path.expand(get("datawd",envir=envir_stacomi))),paste("tableEspece",now,".csv",sep=""),fsep ="\\")
 	write.table(sumEspeces,path,row.names=TRUE,col.names=TRUE,sep=";",append=FALSE)
-	funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path,"\n")))
+	funout(gettextf("writing of %s \n",path))
 }
 
 #' Interface for BilanEspece class

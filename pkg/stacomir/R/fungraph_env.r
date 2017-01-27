@@ -40,9 +40,9 @@ fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 		} #end if
 	}  # end for
 	tableau$yqualitatif=(10^(maxeff))/2
-	name=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_env.1,", ",paste(lab_les_stations,collapse=", "),sep=""))
+	name=gettextf("Number %s",paste(lab_les_stations,collapse=", "))
 	g<-ggplot(tableau, aes(x=time.sequence,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
-			scale_y_continuous(name=name)+labs(title=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_env.1,",", dis_commentaire,",",taxon,",", stade,",", annee )))
+			scale_y_continuous(name=name)+labs(title=gettextf("Number %s, %s, %s, %s",dis_commentaire,taxon,stade,annee))
 	for (i in 1:nrow(stations)){
 		if (stations$stm_typevar[i]=="quantitatif") {
 			if (all(!is.na(tableau[,stations$stm_libelle[i]]))){
@@ -58,9 +58,9 @@ fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 			if (stations$stm_par_code[i]=="AAAA")# phases lunaires
 				g<-g+geom_point(aes_string(x="time.sequence",y="yqualitatif",colour=paste("couleur",i,sep=""),shape=stations$stm_libelle[i]),data=stableau,size=3)+
 						scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
-		} else stop("erreur interne")
+		} else stop("internal error")
 	} # end for
 	assign("g",g,envir_stacomi)
-	funout(gettext(get("msg",envir=envir_stacomi)$fungraph_env.2))
+	funout(gettext("Writing of the graphical object in the environment envir_stacomi : write g=get(g,envir_stacomi)\n"))
 	print(g)
 }

@@ -194,7 +194,7 @@ setMethod("calcule",signature=signature("Bilan_poids_moyen"),definition=function
 							"duree","datemoy"),
 					c("lot","date","date_fin","effectif","poids","w","time.sequence","date"))
 			# correction de manques d'effectifs dans la base
-			if (sum(is.na(donnees$effectif))>0) warnings(paste(gettext("size is missing, lots", paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" "))))
+			if (sum(is.na(donnees$effectif))>0) warnings(gettextf("size is missing, lots %s",paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" ")))
 			bilPM@calcdata[["data"]]<-donnees[,c(8,6,4,1)]
 			bilPM@calcdata[["coe"]]<-coeff[order(coeff$date),c(10,9)]
 			assign("bilan_poids_moyen",bilPM,envir=envir_stacomi)
@@ -364,12 +364,12 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				
 				print(p)
 				assign("p", p,envir=envir_stacomi)	
-				if (!silent) funout("ggplot object p assigned to envir_stacomi")
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
 				
 				
 				#fm <- stats::nls(formula=w ~ a*cos(2*pi*(doy-T)/365)+b ,data=don,start=list(a=0.1,T=73,b=0.3))
 				#pred<-stats::predict(fm, newdata=newcoe)
-				#com=paste(gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.13),paste("a=",round(coef(fm),2)[1],"T=",round(coef(fm),2)[2],"b=",round(coef(fm),2)[3],collapse=""))
+				#com=gettextf("sinusoidal model, a.cos(2.pi.(jour-T)/365)+b a=%s t=%s b=%s",round(coef(fm),2)[1],round(coef(fm),2)[2],round(coef(fm),2)[3])
 				#plot(bilPM,plot.type=2)
 				#points(as.POSIXct(newcoe$date),pred, col="magenta")
 				#legend("topright",c("Obs.", "Coeff base","Mod"), col=c("black","cyan","magenta"),pch="o",cex = 0.8)
@@ -484,7 +484,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 hexp=function(h,...){
 	# export d'un tableau que l'on peut ecrire dans la base
 	gWidgets::gconfirm(gettext("Do you want to write data in the database ?"),
-			title=gettext("Attention!"),
+			title=gettext("Warning!"),
 			handler=hreg,action="export")
 	bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
 	write_database(bilPM)

@@ -145,11 +145,10 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 		for (sta in as.character(stations$stm_libelle)){
 			tableauCEst<-tableauCE[tableauCE$stm_libelle==sta,] #tableau CE d'une station
 			if (length(unique(tableauCEst$env_date_debutchar))!=length(tableauCEst$env_date_debutchar)) {
-				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.7),
+				funout(gettextf("Attention, on one station :%s there are several entries for the same day :%s only the first value will be incuded in the summary\n",
 								sta,
-								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.8),
-								paste(unique(tableauCEst$env_date_debutchar[duplicated(tableauCEst$env_date_debutchar)]),sep=""),
-								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.9),arret=FALSE))
+								paste(unique(tableauCEst$env_date_debutchar[duplicated(tableauCEst$env_date_debutchar)]),sep="")),
+							arret=FALSE)
 				tableauCEst<-tableauCEst[induk(tableauCEst$env_date_debutchar),]
 			}
 			
@@ -172,11 +171,10 @@ hbilanMigrationConditionEnvgraph = function(h,...){
 			# le merge ci dessous est l'equivalent d'une jointure gauche (LEFT JOIN)
 			tableau<-merge(tableau,tableauCEst,by.x = "time.sequencechar", by.y = "env_date_debutchar",  all.x = TRUE)
 			# les donnees sont normalement collees dans le tableau dans une nouvelle colonne et aux dates correspondantes
-			if (length(time.sequence)!=nrow(tableau)) funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.5),
+			if (length(time.sequence)!=nrow(tableau)) funout(gettextf("The number of lines of the environmental conditions table (%s) doesn't fit the duration of the migration summary  (%s)\n",
 								nrow(tableau),
-								gettext(get("msg",envir=envir_stacomi)$BilanMigrationConditionEnv.6),
-								length(time.sequence),
-								")\n"),arret=TRUE)
+								length(time.sequence)),
+								arret=TRUE)
 			#si la jointure e rajoute des lignes ea craint je ne sais pas comment se fera le traitement
 		} # end for
 		taxon= as.character(bilanMigrationConditionEnv@bilanMigration@taxons@data$tax_nom_latin)

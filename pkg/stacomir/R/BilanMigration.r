@@ -126,7 +126,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			bilanMigration<-object
 			#bilanMigration<-bM_Arzal
 			#pour l'instant ne lancer que si les fenetre sont fermees
-			# funout("lancement updateplot \n")
+			# funout(gettext("launching updateplot \n"))
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigration@dc<-get("refDC",envir_stacomi)
 				dc<-bilanMigration@dc@dc_selectionne
@@ -208,7 +208,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			#bilanMigration<-bM_Arzal_civ
 			#negative=FALSE;silent=FALSE
 			if (!silent){
-				funout(gettext(get("msg",envir_stacomi)$BilanMigration.2))
+				funout(gettext("Starting migration summary ... be patient\n"))
 			}
 			bilanMigration<-object
 			
@@ -273,15 +273,15 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				bilanMigration@calcdata<-lestableaux
 				assign("bilanMigration",bilanMigration,envir_stacomi)
 				if (!silent){
-					funout(gettext(get("msg",envir_stacomi)$BilanMigration.3))
-					funout(gettext(get("msg",envir_stacomi)$BilanMigration.4))
+					funout(gettext("\"Summary object is stocked into envir_stacomi environment : write bilanMigration=get(bilanMigration\",envir_stacomi)\"\n"))
+					funout(gettext("To access calculated data, type bilanMigration@calcdata\n"))
 				}
 				
 				
 				
 			} else {
 				# no fish...
-				funout(gettext(get("msg",envir_stacomi)$BilanMigration.10))
+				funout(gettext("There are no values for the taxa, stage and selected period\n"))
 			}
 			return(bilanMigration)
 		})
@@ -299,7 +299,7 @@ houtBilanMigration=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.2),arret=TRUE)
+		funout(gettext("Please select DC, taxa, and stages for a complete command\n"),arret=TRUE)
 	}
 }
 
@@ -347,7 +347,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			if (exists("bilanMigration",envir_stacomi)) {
 				bilanMigration<-get("bilanMigration",envir_stacomi)
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+				funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			################################################################
 			#                 standard plot
@@ -439,8 +439,8 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 					
 					p<-ggplot(grdata)+
 							geom_line(aes(x=debut_pas,y=Cumsum,colour=mois))+
-							ylab(gettext(get("msg",envir_stacomi)$BilanMigration.6))+
-							ggtitle(paste(gettext(get("msg",envir_stacomi)$BilanMigration.7," ",dis_commentaire,", ",taxon,", ",stade,", ",annee,sep=""))) + 
+							ylab(gettext("Cumulative migration"))+
+							ggtitle(gettextf("Cumulative count %s, %s, %s, %s",dis_commentaire,taxon,stade,annee)) + 
 							theme(plot.title = element_text(size=10,colour="navy"))+
 							scale_colour_manual(values=c("01"="#092360",
 											"02"="#1369A2",
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 									))
 					print(p)	
 				} else {
-					funout(gettext(get("msg",envir_stacomi)$BilanMigration.8))
+					funout(gettext("Warning, this function applies for annual summaries\n"))
 				}
 			} else {
 				stop("unrecognised plot.type argument, plot.type should either be standard or step")
@@ -476,7 +476,7 @@ hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="standard")
 	
@@ -492,7 +492,7 @@ hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="step")
 }
@@ -510,7 +510,7 @@ hTableBilanMigration=function(h,...) {
 	} 
 	else 
 	{      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	summary(bilanMigration)
 	
@@ -545,14 +545,14 @@ hbilanMigrationwrite = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	database_expected<-get("database_expected",envir=envir_stacomi)
 	if (database_expected) {
 		write_database(bilanMigration,silent=TRUE)
 	}	else {
-		funout("no bilan written to database : database_expected argument=FALSE")
+		funout(gettext("no bilan written to database : database_expected argument=FALSE"))
 	}
 	
 }
@@ -633,7 +633,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 				
 				
 				if (!silent){
-					funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n")))
+					funout(gettextf("Writing daily summary in the database %s \n",annee))
 				}
 # si l'utilisateur accepte de remplacer les valeurs				
 #progres<-get("progres",envir=envir_stacomi)
@@ -650,10 +650,8 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			if (nrow(bil@data)>0)
 			{ 
 				if (!silent){
-					choice<-gWidgets::gconfirm(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1), # Un bilan a deja ete ecrit dans la base)
-									unique(bil@data$bjo_horodateexport),
-									gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2)),
-							handler=hconfirm) # voulez vous le remplacer ?
+					choice<-gWidgets::gconfirm(gettextf("A summary has already been written in the database the :%s Overwrite ?",unique(bil@data$bjo_horodateexport)),
+							handler=hconfirm)
 				} else {
 					hconfirm(h=NULL)
 				}
@@ -677,7 +675,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 						))		
 #	
 				
-				if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n")))
+				if (!silent) funout(gettext("Writing daily summary in the database"))
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)
 				DC=as.numeric(bilanMigration@dc@dc_selectionne)	

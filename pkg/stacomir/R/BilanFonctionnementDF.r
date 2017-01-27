@@ -224,7 +224,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				t_periodefonctdispositif_per_mois$annee=strftime(as.POSIXlt(t_periodefonctdispositif_per_mois$tempsdebut),"%Y")
 				progress_bar$setText("All done.")
 				progress_bar$setFraction(1) 
-				if (is.null(main)) main<-paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDF.7,bilanFonctionnementDF@df@df_selectionne))
+				if (is.null(main)) main<-gettextf("Fishway operation %s",bilanFonctionnementDF@df@df_selectionne)
 				# graphic
 				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_tar_code, decreasing = TRUE),]
 				
@@ -375,7 +375,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				#           PLOT OF TYPE BOX (plot.type=4)
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			} else if (plot.type=="4"){
-				if (is.null(main)) main<-paste(gettext(get("msg",envir_stacomi)$BilanFonctionnementDF.7,bilanFonctionnementDF@df@df_selectionne))
+				if (is.null(main)) main<-gettextf("Fishway operation %s",bilanFonctionnementDF@df@df_selectionne)
 				
 				#bilanFonctionnementDF<-bfDF; require(RGtk2); require(lubridate);require(ggplot2);main=NULL;silent=FALSE;plot.type="4"
 				t_periodefonctdispositif_per=bilanFonctionnementDF@data
@@ -535,9 +535,9 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definiti
 			annee=paste(unique(strftime(as.POSIXlt(t_periodefonctdispositif_per$per_date_debut),"%Y")),collapse="+")
 			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,".csv",sep=""),fsep ="\\")
 			write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-			if(!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1,"\n")))
+			if(!silent) funout(gettextf("Writing of %s \n",path1))
 			path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
-			if(!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$FonctionnementDC.14,path1html,get("msg",envir=envir_stacomi)$BilanFonctionnementDF.15)))
+			if(!silent) funout(gettextf("Writing of %s this might take a while, please be patient …\n",path1html))
 			funhtml(t_periodefonctdispositif_per,
 					caption=paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,sep=""),
 					top=TRUE,

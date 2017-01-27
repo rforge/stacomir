@@ -38,6 +38,6 @@ fn_EcritBilanMensuel<-function(bilanMigration,resum,silent){
 				" VALUES ('",paste(t_bilanmigrationmensuel_bme[i,],collapse="','"),"');",sep="")
 		invisible(utils::capture.output(stacomirtools::connect(requete)))
 	} # end for
-if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanMensuel.1,"\n")))
+if (!silent) funout(gettext("Writing monthly summary in the database\n"))
 } # end function
 

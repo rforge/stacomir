@@ -248,8 +248,8 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			if (!silent){
-				funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.3))
-				funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.4))
+				funout(gettext("\"The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get('bilanMigrationMult',envir_stacomi)\\n\"\"\n"))
+				funout(gettext("Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n\n"))
 			}
 			return(bilanMigrationMult)
 		})
@@ -354,7 +354,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	plot(x=bilanMigrationMult,plot.type="standard")
 }
@@ -518,7 +518,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				
 				p<-ggplot(grdata_without_hole)+
 						geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
-						ylab(gettext(get("msg",envir_stacomi)$BilanMigration.6))+
+						ylab(gettext("Cumulative migration"))+
 						theme(plot.title=element_text(size=10,colour="deepskyblue"))+
 						xlab("mois")+
 						scale_colour_manual(values=c("01"="#092360",
@@ -534,7 +534,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 										"11"="#912E0F",
 										"12"="#33004B"
 								))+
-						ggtitle(paste(gettext(get("msg",envir_stacomi)$BilanMigration.7,"dc=",dis_commentaire,", tax=",lestaxons,", srd=",lesstades,", ",annee,sep="") ))  
+						ggtitle(gettextf("Cumulative count %s, %s, %s, %s",dis_commentaire,lestaxons,lesstades,annee))  
 				print(p)	
 			}
 #==========================type=3=============================
@@ -618,7 +618,7 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="step")
 }
@@ -634,7 +634,7 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="multiple")
 }
@@ -656,7 +656,7 @@ hTableBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	summary(bilanMigrationMult)
 }
@@ -737,7 +737,7 @@ houtBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext(get("msg",envir_stacomi)$BilanMigrationMult.2),arret=TRUE)
+		funout(gettext("Please select DC, taxa, and stages for a complete command\n"),arret=TRUE)
 	}
 }
 

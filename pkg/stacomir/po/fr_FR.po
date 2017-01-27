@@ -1,18 +1,48 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-26 22:16+0100\n"
-"PO-Revision-Date: 2017-01-26 22:26+0100\n"
+"POT-Creation-Date: 2017-01-27 10:27+0100\n"
+"PO-Revision-Date: 2017-01-27 10:27+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr_FR\n"
 
 msgid "msg"
+msgstr ""
+
+msgid "You need to choose a counting device, clic on validate"
+msgstr "Vous devez choisir un dispositif de comptage, cliquez sur valider"
+
+msgid "You need to choose a taxa, clic on validate"
+msgstr "Vous devez choisir un taxon, cliquez sur valider"
+
+msgid "You need to choose a stage, clic on validate"
+msgstr "Vous devez choisir un stade de développement, cliquez sur valider"
+
+msgid "You need to choose a parameter, clic on validate"
+msgstr "Vous devez choisir un paramètre, cliquez sur valider"
+
+msgid "You need to choose the starting date"
+msgstr "Vous devez choisir une date de début"
+
+msgid "You need to choose the ending date"
+msgstr "Vous devez choisir une date de fin"
+
+msgid "limit1hm should be numeric or integer"
+msgstr ""
+
+msgid "limit2hm should be numeric or integer"
+msgstr ""
+
+msgid "Beginning date has been chosen"
+msgstr "La date de debut a ete choisie"
+
+msgid "you are in deep shit"
 msgstr ""
 
 msgid "erreur interne"
@@ -21,11 +51,22 @@ msgstr ""
 msgid "plot.type must be 1,2,3 or 4"
 msgstr "plot.type doit être 1,2,3 ou 4"
 
+msgid ""
+"The graphical object is written is env_stacomi, type p<-get('p',"
+"envir=envir_stacomi)"
+msgstr ""
+
 msgid "the bilanMigration should be of class BilanMigration"
 msgstr "bilanMigration doit appartenir à la classe BilanMigration"
 
 msgid "the silent argument should be a logical"
 msgstr "l’argument silent doit être booleen"
+
+msgid "You need to choose the starting year"
+msgstr "Il faut choisir l'annee de debut"
+
+msgid "You need to choose the ending year"
+msgstr "Il faut choisir l'annee de fin"
 
 msgid "dc_name argument should have length"
 msgstr "l'argument dc_name doit avoir une longueur"
@@ -35,6 +76,15 @@ msgstr "l'argument tax_name doit avoir une longueur"
 
 msgid "std_name argument should have length"
 msgstr "l'argument std_name doit avoir une longueur"
+
+msgid "No data"
+msgstr ""
+
+msgid "You need to choose a size class"
+msgstr "Il faut choisir une classe de taille"
+
+msgid "End of timestamp"
+msgstr ""
 
 msgid "bubbles"
 msgstr "bulles"
@@ -82,6 +132,9 @@ msgid ""
 "unrecognised plot.type argument, plot.type should either be standard or step"
 msgstr "argument plot.type non reconnu, plot.type doit être standard ou step"
 
+msgid "no bilan written to database : database_expected argument=FALSE"
+msgstr ""
+
 msgid "timesplit should be one of :"
 msgstr "le pas de temps doit être choisi parmi :"
 
@@ -118,32 +171,17 @@ msgstr ""
 msgid ", srd="
 msgstr ""
 
+msgid "You need to choose a quantitative parameter"
+msgstr ""
+
+msgid "You need to choose a qualitative parameter"
+msgstr ""
+
 msgid "normalement ce cas est impossible"
 msgstr ""
 
 msgid "Sample characteristics have been loaded from the database"
 msgstr "Les caractéristiques du lot ont été chargé depuis la base de données"
-
-msgid "You need to choose a counting device, clic on validate"
-msgstr "Vous devez choisir un dispositif de comptage, cliquez sur valider"
-
-msgid "You need to choose a taxa, clic on validate"
-msgstr "Vous devez choisir un taxon, cliquez sur valider"
-
-msgid "You need to choose a stage, clic on validate"
-msgstr "Vous devez choisir un stade de développement, cliquez sur valider"
-
-msgid "You need to choose a parameter, clic on validate"
-msgstr "Vous devez choisir un paramètre, cliquez sur valider"
-
-msgid "You need to choose the starting date"
-msgstr "Vous devez choisir une date de début"
-
-msgid "You need to choose the ending date"
-msgstr "Vous devez choisir une date de fin"
-
-msgid "Beginning date has been chosen"
-msgstr "La date de debut a ete choisie"
 
 msgid "Ending date has been chosen"
 msgstr "La date de fin a ete choisie"
@@ -181,15 +219,6 @@ msgstr "La requete est effectuee pour charger les coefficients de conversion "
 
 msgid "%1.0f lines found for the conversion coefficients"
 msgstr ""
-
-msgid "You need to choose a size class"
-msgstr "Il faut choisir une classe de taille"
-
-msgid "You need to choose the starting year"
-msgstr "Il faut choisir l'annee de debut"
-
-msgid "You need to choose the ending year"
-msgstr "Il faut choisir l'annee de fin"
 
 msgid "selectedvalue must be of length one"
 msgstr "selectedvalue doit être de longueur 1"
@@ -287,6 +316,9 @@ msgstr ""
 msgid "Pigmentation stages loading query completed"
 msgstr "La requete a été effectuée pour charger les stades pigmentaires"
 
+msgid "No data for pigmentation stages"
+msgstr ""
+
 msgid "Environmental conditions loading query completed"
 msgstr ""
 "La requete est effectuee pour charger les conditions environnementales "
@@ -301,6 +333,9 @@ msgstr ""
 
 msgid "You need to choose a monitoring station, clic on validate"
 msgstr "Il faut choisir une station de mesure puis cliquer sur valider "
+
+msgid "Loading data from database"
+msgstr ""
 
 msgid "Pigmentation stages"
 msgstr "Stades pigmentaires"
@@ -322,8 +357,14 @@ msgid ""
 "envir=envir_stacomi)"
 msgstr ""
 
+msgid "title edit"
+msgstr ""
+
 msgid "close"
 msgstr "fermer"
+
+msgid "Summary of pigmentation stages"
+msgstr ""
 
 msgid "internal error length(LesPasDeTemps$LabelPasDeTemps) == 0"
 msgstr ""
@@ -332,6 +373,9 @@ msgid "datedebut not parsed to datetime try format like '01/01/2017'"
 msgstr ""
 
 msgid "datefin not parsed to datetime try format like '01/01/2017'"
+msgstr ""
+
+msgid "Timesteps loaded"
 msgstr ""
 
 msgid "horodate should be a vector of length 1"
@@ -405,6 +449,126 @@ msgid ""
 msgstr ""
 
 msgid "jours"
+msgstr ""
+
+msgid "Calculation of the operating fishway"
+msgstr ""
+
+msgid "Calculation of the operating counting device"
+msgstr ""
+
+msgid "Summary of the operations of a device ... to do"
+msgstr ""
+
+msgid "Summary between the operating fishway and the counting device â¦ to do"
+msgstr ""
+
+msgid "Migration summary (for a species and a stage)"
+msgstr ""
+
+msgid ""
+"For help, contact CÃ©dric Briand - 0033 29 99 08 844 - cedric."
+"briand@lavilaine.com"
+msgstr ""
+
+msgid "Summary of interannual migration"
+msgstr ""
+
+msgid "Summary of migration environnemental conditions"
+msgstr ""
+
+msgid "Summary of migration with parameters"
+msgstr ""
+
+msgid "Summary of the environnemental conditions"
+msgstr ""
+
+msgid "Summary of batch by calling the application vue lot ope"
+msgstr ""
+
+msgid "Lengths summary"
+msgstr ""
+
+msgid ""
+"Summary of average weight for the calculation of the relation between length "
+"and number."
+msgstr ""
+
+msgid "Calculation of the pigmentary stages"
+msgstr ""
+
+msgid "TODO to develop"
+msgstr ""
+
+msgid "Species summary of the counting device"
+msgstr ""
+
+msgid "Error when using the method connect of the ConnectionODBC class"
+msgstr ""
+
+msgid "Connection in progress"
+msgstr ""
+
+msgid ""
+"\"\"Problem during the test, the ODBC link works but doesn't point to the "
+"database 0.5, check the ODBC link\"\""
+msgstr ""
+
+msgid "ODBC link"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Error title of the frame"
+msgstr ""
+
+msgid "Problem when testing the ODBC connection"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Migratory treatment"
+msgstr ""
+
+msgid "Station"
+msgstr ""
+
+msgid "Fishway"
+msgstr ""
+
+msgid "Counting Device"
+msgstr ""
+
+msgid "Operation (TODO)"
+msgstr ""
+
+msgid "Fishway without counting device (TODO)"
+msgstr ""
+
+msgid "Summary"
+msgstr ""
+
+msgid "Migration"
+msgstr ""
+
+msgid "Multiple migrations"
+msgstr ""
+
+msgid "Yearly"
+msgstr ""
+
+msgid "Inter annual migration"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Output of the program"
 msgstr ""
 
 msgid "horodatedebut not in column names for data"

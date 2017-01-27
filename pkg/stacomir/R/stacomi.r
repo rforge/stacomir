@@ -4,14 +4,14 @@
 #' @param h A handler
 #' @param ... Other parameters
 hDF=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.1,wash=TRUE))
+	funout(gettext("Calculation of the operating fishway\n"),wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hDC=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.2,wash=TRUE))
+	funout(gettext("Calculation of the operating counting device\n"),wash=TRUE)
 	eval(interface_BilanFonctionnementDC(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -19,69 +19,69 @@ hDC=function(h,...){
 #' @param ... additional parameters
 hOPE=function(h,...){
 	# TODO a developper
-	funout(text=gettext(get("msg",envir_stacomi)$interface_graphique.3,wash=TRUE))
+	funout(text=gettext("Summary of the operations of a device ... to do\n"),wash=TRUE)
 }
 #' handler function used by the main interface#' 
 #' @param h handler
 #' @param ... additional parameters
 hDFDC=function(h,...){
 	# TODO developper cette fonction
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.4,wash=TRUE))
+	funout(gettext("Summary between the operating fishway and the counting device … to do\n"),wash=TRUE)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigration=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.5,wash=TRUE))
+	funout(gettext("Migration summary (for a species and a stage)\n"),wash=TRUE)
 	eval(interface_BilanMigration(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationMult=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE))
+	funout(gettext("For help, contact Cédric Briand - 0033 29 99 08 844 - cedric.briand@lavilaine.com\n"),wash=TRUE)
 	eval(interface_BilanMigrationMult(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationInterAnnuelle=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.6,wash=TRUE))
+	funout(gettext("Summary of interannual migration\n"),wash=TRUE)
 	eval(interface_BilanMigrationInterAnnuelle(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationConditionEnv=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.7,wash=TRUE))
+	funout(gettext("Summary of migration environnemental conditions\n"),wash=TRUE)
 	eval(interface_BilanMigrationConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationPar=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.8,wash=TRUE))
+	funout(gettext("Summary of migration with parameters\n"),wash=TRUE)
 	eval(interface_BilanMigrationPar(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanConditionEnv=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.9,wash=TRUE))
+	funout(gettext("Summary of the environnemental conditions\n"),wash=TRUE)
 	eval(interface_ConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilan_carlot=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.10,wash=TRUE))
+	funout(gettext("Summary of batch by calling the application vue lot ope\n"),wash=TRUE)
 	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hTail=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.11,wash=TRUE))
+	funout(gettext("Lengths summary\n"),wash=TRUE)
 	eval(interface_BilanTaille(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -89,13 +89,13 @@ hTail=function(h,...){
 #' @param ... additional parameters
 hpds=function(h,...){
 	eval(interface_BilanPoidsMoyen(),envir = .GlobalEnv)
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.12,wash=TRUE)) 
+	funout(gettext("Summary of average weight for the calculation of the relation between length and number.\n"),wash=TRUE) 
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hSt=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.13,wash=TRUE))
+	funout(gettext("Calculation of the pigmentary stages\n"),wash=TRUE)
 	eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -114,14 +114,14 @@ hsilver=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 htodo=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.17,wash=TRUE))
+	funout(gettext("TODO to develop"),wash=TRUE)
 	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanEspeces=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.19,wash=TRUE))
+	funout(gettext("Species summary of the counting device\n"),wash=TRUE)
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
 
@@ -157,8 +157,8 @@ husr=function(h,...){
 		con=new("ConnectionODBC")
 		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
-		con=tryCatch(eval(e),error=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.7) )
-		test<-con@etat==gettext(get("msg",envir=envir_stacomi)$ConnectionODBC.6)
+		con=tryCatch(eval(e),error=gettext("Error when using the method connect of the ConnectionODBC class") )
+		test<-con@etat==gettext("Connection in progress")
 		odbcCloseAll()
 	}
 	# if the test is OK launches the stacomi interface
@@ -179,20 +179,20 @@ husr=function(h,...){
 			if (nrow(requete@query)==0){
 				# the odbc link does not work and might be pointing to a wrong schema
 				# this time the argument login_window will be ignored
-				gWidgets::gmessage(message=paste(gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.8),
+				gWidgets::gmessage(message=paste(gettext("\"\"Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link\"\""),
 								"\n",
-								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.9),
+								gettext("ODBC link"),
 								" :",
 								baseODBC[1],
 								"\n",
-								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.2),
+								gettext("User"),
 								" :",
 								baseODBC[2],
 								"\n",
-								gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.3),
+								gettext("Password"),
 								" :",
 								baseODBC[3]),						
-						title=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.5),
+						title=gettext("Error title of the frame"),
 						icon = "error",
 						handler=hgmessage)		
 			} else {
@@ -204,20 +204,20 @@ husr=function(h,...){
 		} else {
 			# the test has failed and the user will be prompted to another login window
 			# this time the argument loginwindow will be ignored
-			gWidgets::gmessage(message=paste(gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.6),
+			gWidgets::gmessage(message=paste(gettext("Problem when testing the ODBC connection"),
 							"\n",
-							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.9),
+							gettext("ODBC link"),
 							" :",
 							baseODBC[1],
 							"\n",
-							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.2),
+							gettext("User"),
 							" :",
 							baseODBC[2],
 							"\n",
-							gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.3),
+							gettext("Password"),
 							" :",
 							baseODBC[3]),						
-					title=gettext(get("msg",envir=envir_stacomi)$interface_graphique_log.5),
+					title=gettext("Error title of the frame"),
 					icon = "error",
 					handler=hgmessage)
 		} # end else test (else == the test didn't pass, we have to change the name and password	
@@ -230,7 +230,7 @@ husr=function(h,...){
 	}
 }
 hhelp=function(h,...){
-	funout(gettext(get("msg",envir_stacomi)$interface_graphique.14,wash=TRUE))
+	funout(gettext("For help, contact Cédric Briand - 0033 29 99 08 844 - cedric.briand@lavilaine.com\n"),wash=TRUE)
 }
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
@@ -376,12 +376,12 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 				width = 10, 
 				container = logly)
 		assign("usrpwd",usrpwd,.GlobalEnv)
-		but=gWidgets::gbutton(text =  msg$interface_graphique_log.4,
+		but=gWidgets::gbutton(text =  gettext("Login"),
 				border=TRUE, 
 				handler = husr, 
 				container = logly)
-		logly[1,1]<-msg$interface_graphique_log.2
-		logly[2,1]<-msg$interface_graphique_log.3
+		logly[1,1]<-gettext("User")
+		logly[2,1]<-gettext("Password")
 		logly[1,2]<-usrname
 		logly[2,2]<-usrpwd
 		logly[3,2]<-but
@@ -415,57 +415,57 @@ interface_graphique=function(){
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)
 	
-	win <- gWidgets::gwindow(msg$interface_graphique.16, name="main",parent=c(0,0),width=100,height=100)
+	win <- gWidgets::gwindow(gettext("Migratory treatment"), name="main",parent=c(0,0),width=100,height=100)
 	assign("win",win,envir=.GlobalEnv)
 	
 	## Menubar is defined by a list
 	menubarlist = list()
 	
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$handler =hDF
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.1]]$icon="gWidgetsRGtk2-rarrow"
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$handler =hDC
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.2]]$icon = "gWidgetsRGtk2-plot"
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$handler=hOPE
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.3]]$icon="gtk-cancel"#"gtk-go-forward"
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$handler=hDFDC
-	menubarlist[[msg$interface_graphique_menu.1]][[msg$interface_graphique_menu.1.4]]$icon="gtk-cancel"
+	menubarlist[[gettext("Station")]][[gettext("Fishway")]]$handler =hDF
+	menubarlist[[gettext("Station")]][[gettext("Fishway")]]$icon="gWidgetsRGtk2-rarrow"
+	menubarlist[[gettext("Station")]][[gettext("Counting Device")]]$handler =hDC
+	menubarlist[[gettext("Station")]][[gettext("Counting Device")]]$icon = "gWidgetsRGtk2-plot"
+	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)")]]$handler=hOPE
+	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)")]]$icon="gtk-cancel"#"gtk-go-forward"
+	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)")]]$handler=hDFDC
+	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)")]]$icon="gtk-cancel"
 	
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$handler=hBilanMigration
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.1]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$handler=hBilanMigrationMult
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.14]]$icon="gtk-dnd-multiple"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$handler=hbilA
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.12]]$icon="gWidgetsRGtk2-barplot"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$handler=hBilanMigrationInterAnnuelle
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.5]]$icon="gWidgetsRGtk2-hist"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$handler=hBilan_carlot
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.6]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	menubarlist[[gettext("Summary")]][[gettext("Migration")]]$handler=hBilanMigration
+	menubarlist[[gettext("Summary")]][[gettext("Migration")]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations")]]$handler=hBilanMigrationMult
+	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations")]]$icon="gtk-dnd-multiple"
+	menubarlist[[gettext("Summary")]][[gettext("Yearly")]]$handler=hbilA
+	menubarlist[[gettext("Summary")]][[gettext("Yearly")]]$icon="gWidgetsRGtk2-barplot"
+	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$handler=hBilanMigrationInterAnnuelle
+	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$icon="gWidgetsRGtk2-hist"
+	menubarlist[[gettext("Summary")]][[gettext("")]]$handler=hBilan_carlot
+	menubarlist[[gettext("Summary")]][[gettext("")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
 	
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$handler=hBilanMigrationConditionEnv
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-plot1"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$handler=hBilanMigrationPar
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.4]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$handler=hBilanEspeces	
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-polar"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$handler=hpds
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-cloud"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$handler=hTail
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$handler=hSt
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$handler=hsilver
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.10]]$icon="gWidgetsRGtk2-bubbles"
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$handler=htodo
-	menubarlist[[msg$interface_graphique_menu.2]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.3]]$handler=hBilanMigrationConditionEnv
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-plot1"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.4]]$handler=hBilanMigrationPar
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.4]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.13]]$handler=hBilanEspeces	
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-polar"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.7]]$handler=hpds
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-cloud"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.8]]$handler=hTail
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.9]]$handler=hSt
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.10]]$handler=hsilver
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.10]]$icon="gWidgetsRGtk2-bubbles"
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.11]]$handler=htodo
+	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
 
-		menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hX11
-	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="newplot"
-	menubarlist[[msg$interface_graphique_menu.3]]$About$handler = hhelp
-	menubarlist[[msg$interface_graphique_menu.3]]$About$icon="dialog-info"
-	menubarlist[[msg$interface_graphique_menu.3]]$lang$handler = hlang
-	menubarlist[[msg$interface_graphique_menu.3]]$lang$icon="dialog-info"
+	menubarlist[[gettext("Help")]]$About$handler = hX11
+	menubarlist[[gettext("Help")]]$About$icon="newplot"
+	menubarlist[[gettext("Help")]]$About$handler = hhelp
+	menubarlist[[gettext("Help")]]$About$icon="dialog-info"
+	menubarlist[[gettext("Help")]]$lang$handler = hlang
+	menubarlist[[gettext("Help")]]$lang$icon="dialog-info"
 	gWidgets::add(win, gmenu(menubarlist))
 	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # this one stacks from bottom to up
 	# gsortie is above the window
@@ -473,7 +473,7 @@ interface_graphique=function(){
 	
 	gWidgets::add(win,ggrouptotal)
 	
-	gSortie=gWidgets::gtext(msg$interface_graphique.18,width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
+	gSortie=gWidgets::gtext(gettext("Output of the program\n"),width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
 	assign("gSortie",gSortie,envir=.GlobalEnv) 
 	
 	gWidgets::add(ggrouptotal,  gSortie,  expand=FALSE)

@@ -380,7 +380,7 @@ setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(heigh
 					}
 				}
 			}    else     {
-				funout("No data")
+				funout(gettext("No data"))
 			}				
 		})
 
@@ -499,7 +499,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 				}
 				
 			}    else     {
-				funout("No data")
+				funout(gettext("No data"))
 			}	
 		})
 

@@ -215,15 +215,15 @@ setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,
 				funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.5),arret=TRUE)
 			} else	if (class(taxons)=="character"){	
 				libellemanquants<-taxons[!taxons%in%object@data$tax_nom_latin]
-				if (length(libellemanquants)>0) warning(paste(gettext(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(libellemanquants,collapse=", "))))
+				if (length(libellemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(libellemanquants,collapse=", ")))
 				object@data<-object@data[object@data$tax_nom_latin%in%taxons,]
 			} else if (class(taxons)=="numeric"){
 				codemanquants<-taxons[!taxons%in%object@data$tax_code]
-				if (length(codemanquants)>0) warning(paste(gettext(get("msg",envir=envir_stacomi)$RefTaxon.6,stringr::str_c(codemanquants,collapse=", "))))
+				if (length(codemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(libellemanquants,collapse=", ")))
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{
-				funout(gettext(get("msg",envir=envir_stacomi)$RefTaxon.3),arret=TRUE)
+				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)
 			}
 			assign("refTaxon",object,envir=envir_stacomi)
 			return(object)

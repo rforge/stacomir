@@ -6,7 +6,7 @@ interface_BilanTaille = function()
 	quitte() # vidange de l'interface
 	bilan_taille=new("Bilan_taille")
 	assign("bilan_taille",bilan_taille,envir=envir_stacomi)
-	#funout("chargement de la vue (vue_ope_lot) et choice du dc et des pas de temps\n")
+	#funout(gettext("Loading of vue_ope_lot view, cd and timesteps choices\n"))
 	bilan_taille@dc=charge(bilan_taille@dc)
 	#bilan_taille@taxons=charge(bilan_taille@taxons)
 	#bilan_taille@stades=charge(bilan_taille@stades)

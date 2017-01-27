@@ -31,7 +31,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	eff[eff==0]<-NA #pour les besoins du graphe
 	eff.p[eff.p==0]<-NA
 	dis_commentaire=  as.character(bilanMigration@dc@data$dis_commentaires[bilanMigration@dc@data$dc%in%dc])
-	if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.1,dis_commentaire,"\n")))
+	if (!silent) funout(gettextf("Glass eels graph %s\n",dis_commentaire))
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
@@ -50,12 +50,11 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2 ,
 			lty=1,
 			xaxt="n",
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.2),
+			ylab=gettext("Number of glass eels (x1000)"),
 			#xlab="date",
 			cex.main=1,
 			font.main=1,
-			main=paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle), dis_commentaire,",", 
-					taxon,",", stade,",", annee ),...)
+			main=gettextf("Glass eels graph %s, %s, %s, %s,...",dis_commentaire,taxon,stade,annee))
 	#print(plot,position = c(0, .3, 1, .9), more = TRUE)
 	r <- as.Date(round(range(time.sequence), "day"))
 	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
@@ -67,7 +66,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	legend(x="topright",
 			inset=0.01,
-			legend= gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.4),
+			legend= gettext("weight of the daily number","daily number counted"),
 			pch=c(16,16),
 			col=mypalette[c(10,8)])
 	
@@ -110,10 +109,10 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n")))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),"jours","\n")))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),"jours","\n")))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),"jours","\n")))
+		funout(gettextf("number of operations =%s\n",nrow(t_operation_ope)))
+		funout(gettextf("average trapping time = %sdays\n",round(mean(as.numeric(dif)),2)))
+		funout(gettextf("maximum term = %sdays\n",round(max(as.numeric(dif)),2)))
+		funout(gettextf("minimum term = %sdays\n",round(min(as.numeric(dif)),2)))
 	}
 	
 	df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc==dc]

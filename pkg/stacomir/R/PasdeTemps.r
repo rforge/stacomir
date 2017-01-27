@@ -317,7 +317,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							object@stepDuration<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 							object=setdateDebut(object,svalue(datedeb))						
 							assign("pasDeTemps",object,envir_stacomi)
-							funout("Les pas de temps ont ete charges\n")
+							funout(gettext("Timesteps loaded\n"))
 							# charge le deuxieme onglet du notebook
 							svalue(notebook)<-2
 						}

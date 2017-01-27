@@ -492,13 +492,12 @@ funcalcbilan_stades_pigm<-function(h,...){
 	}
 	funout(gettext("Loading data from database"))
 	dates<-bilan_stades_pigm@dates
-	bilan_stades_pigm@labelgraphstades<-paste(gettext("Pigmentation stages"),
+	bilan_stades_pigm@labelgraphstades<-gettextf("Pigmentation stages %s and incoming dates in estuary",
 			if(strftime(as.POSIXlt(dates[1]),"%Y")==
 							strftime(as.POSIXlt(dates[length(dates)]),"%Y")) {
 						strftime(as.POSIXlt(dates[1]),"%Y")} else { paste(
 								strftime(as.POSIXlt(dates[1]),"%Y"),"-",
-								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))},
-			gettext("and incoming dates in estuary"))
+								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))})
 	bilan_stades_pigm@labelretro=gettext("incoming dates in estuary")
 	enabled(toolbarlist[["SetTitle"]])<-TRUE
 	enabled(toolbarlist[["Graph"]])<-TRUE

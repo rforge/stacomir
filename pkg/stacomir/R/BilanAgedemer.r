@@ -170,8 +170,8 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			# code for debug using example
 			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);
 			#taxons='2220';	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
-			if (!(is.numeric(limit1hm)|is.integer(limit1hm))) funout("limit1hm should be numeric or integer",arret=TRUE)
-			if (!(is.numeric(limit2hm)|is.integer(limit2hm))) funout("limit2hm should be numeric or integer",arret=TRUE)
+			if (!(is.numeric(limit1hm)|is.integer(limit1hm))) funout(gettext("limit1hm should be numeric or integer"),arret=TRUE)
+			if (!(is.numeric(limit2hm)|is.integer(limit2hm))) funout(gettext("limit2hm should be numeric or integer"),arret=TRUE)
 			
 			bilan_adm<-object
 			bilan_adm@dc=charge(bilan_adm@dc)
@@ -211,7 +211,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 			#bilan_adm<-b_carlot
 			bilan_adm<-object
 			if(nrow(bilan_adm@data)==0) {
-				funout("you are in deep shit", arret=TRUE)
+				funout(gettext("you are in deep shit"), arret=TRUE)
 			}   
 			adm=bilan_adm@data # on recupere le data.frame
 			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("erreur interne")
@@ -253,7 +253,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -275,7 +275,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 						ylab("Effectif")
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				funout("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi))")
+				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)"))
 				
 			}
 			######################################
@@ -291,7 +291,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 						facet_grid(ope_dic_identifiant~.)
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				funout("L'objet graphique est écrit dans l'environnement stacomi, tappez p<-get('p',envir=envir_stacomi))")
+				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)"))
 			}
 					
 		})
@@ -307,7 +307,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.5),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]		
 			ndc=unique(dat$ope_dic_identifiant)
@@ -412,7 +412,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 						
 						
 						if (!silent){
-							funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,annee,"\n")))
+							funout(gettextf("Writing daily summary in the database %s \n",annee))
 						}
 # si l'utilisateur accepte de remplacer les valeurs				
 #progres<-get("progres",envir=envir_stacomi)
@@ -429,10 +429,8 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 					if (nrow(bil@data)>0)
 					{ 
 						if (!silent){
-							choice<-gWidgets::gconfirm(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.1), # Un bilan a deja ete ecrit dans la base)
-											unique(bil@data$bjo_horodateexport),
-											gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.2)),
-									handler=hconfirm) # voulez vous le remplacer ?
+							choice<-gWidgets::gconfirm(gettextf("A summary has already been written in the database the %s : Overwrite ?",unique(bil@data$bjo_horodateexport))
+							                           ,handler=hconfirm) # voulez vous le remplacer ?
 						} else {
 							hconfirm(h=NULL)
 						}
@@ -456,7 +454,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 								))		
 #	
 						
-						if (!silent) funout(paste(gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5,"\n")))
+						if (!silent) funout(gettext("Writing daily summary in the database","\n"))
 						taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 						stade= as.character(bilanMigration@stades@data$std_libelle)
 						DC=as.numeric(bilanMigration@dc@dc_selectionne)	

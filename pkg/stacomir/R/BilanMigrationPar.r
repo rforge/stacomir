@@ -140,7 +140,7 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			bilanMigrationPar@valeurs_possibles<-res[[2]]   # definitions des niveaux de parametres qualitatifs rencontres.
 			# funout("\n")
 			#	assign("data",data,envir_stacomi)
-			#funout("la table bilan migration est stockee dans l'environnement envir_stacomi\n")
+			#funout(gettext("the migration summary table is stored in envir_stacomi\n"))
 			#data<-get("data",envir_stacomi)
 			# chargement des donnees suivant le format chargement_donnees1  
 			bilanMigrationPar@time.sequence=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@stepDuration)) # il peut y avoir des lignes repetees poids effectif
@@ -253,10 +253,10 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				annee=unique(strftime(as.POSIXlt(bilanMigrationPar@time.sequence),"%Y"))
 				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")) )
+				funout(gettextf("Writing of %s",path1))
 				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bilanMigrationPar@taxons@data$tax_nom_commun,"_",bilanMigrationPar@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
 				write.table(bilanMigrationPar@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(paste(gettext(get("msg",envir=envir_stacomi)$BilanMigrationPar.7,path1,"\n")))
+				funout(gettextf("Writing of %s",path1))
 			} # end plot.type summary 
 		})
 

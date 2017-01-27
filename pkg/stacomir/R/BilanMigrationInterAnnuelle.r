@@ -129,7 +129,7 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@taxons<-get("refTaxon",envir_stacomi)

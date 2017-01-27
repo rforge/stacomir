@@ -31,7 +31,7 @@ setMethod("charge",signature=signature("Refparquan"),definition=function(object)
 			requete@sql= "SELECT * FROM ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code"
 			requete<-stacomirtools::connect(requete)
-			#funout("La requete est effectuee pour charger les parametres \n")
+			#funout(gettext("The query to load parameters is done \n"))
 			object@data<-requete@query
 			return(object)
 		})

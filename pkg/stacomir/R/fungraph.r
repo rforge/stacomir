@@ -55,9 +55,9 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			lty=1,
 			xaxt="n",
 			bty="l",
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph.2),
-			xlab=gettext(get("msg",envir=envir_stacomi)$fungraph.3),
-			main=paste(gettext(get("msg",envir=envir_stacomi)$fungraph.4,dis_commentaire,", ",taxon,", ",stade,", ",annee,sep="")),
+			ylab=gettext("Number"),
+			xlab=gettext("Date"),
+			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee),
 			cex.main=1)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
@@ -67,7 +67,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	} else {
 		axis(side=1)
 	}  	
-	mtext(text=paste(gettext(get("msg",envir=envir_stacomi)$fungraph.6),
+	mtext(text=gettextf("Sum of numbers =%s",
 					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE))),
 			side=3,
 			col=RColorBrewer::brewer.pal(5,"Paired")[5],
@@ -75,7 +75,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	legend(x=0,
 			y=max(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),
-			legend= gettext(get("msg",envir=envir_stacomi)$fungraph.5),
+			legend=gettext("measured","calculated","expert","direct"),
 			pch=c(16),
 			col=rev(c(mypalette[1:4])))
 	bilanOperation<-get("bilanOperation",envir=envir_stacomi)
@@ -83,10 +83,10 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.5,nrow(t_operation_ope),"\n")))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.6,round(mean(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.7,round(max(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
-		funout(paste(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.8,round(min(as.numeric(dif)),2),get("msg",envir=envir_stacomi)$fungraph.8)))
+	  funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n"))
+		funout(gettextf("average trapping time = %s days\n",round(mean(as.numeric(dif)),2)))
+		funout(gettextf("maximum term = %s",round(max(as.numeric(dif)),2)))
+		funout(gettextf("minimum term = %s",round(min(as.numeric(dif)),2)))
 	}
 	
 

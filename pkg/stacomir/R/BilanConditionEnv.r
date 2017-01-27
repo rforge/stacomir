@@ -184,5 +184,5 @@ hbilanConditionEnvstat = function(h,...)
 	}
 	path=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("env_cond.csv",sep=""),fsep ="\\")
 	write.table(dat,path,sep=';',row.names=FALSE)
-	funout(paste(gettext(get("msg",envir=envir_stacomi)$funtable.1,path,"\n")))
+	funout(gettextf("writing of %s \n",path))
 }

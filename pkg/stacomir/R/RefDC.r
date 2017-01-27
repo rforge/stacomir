@@ -74,7 +74,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 					" WHERE  dft_rang=1",
 					" ORDER BY dis_identifiant;",sep="")
 			requete<-stacomirtools::connect(requete) 
-			#funout("La requete est effectuee pour charger les Dispositifs de comptage \n")
+			#funout(gettext("The query to load counting devices is done \n"))
 			object@data<-requete@query
 			return(object)
 		})
