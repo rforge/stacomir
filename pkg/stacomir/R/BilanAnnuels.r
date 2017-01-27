@@ -67,7 +67,7 @@ setMethod("charge",signature=signature("BilanAnnuels"),
 				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
 			}
 			assign("bilanAnnuels",bilA,envir_stacomi)
-			funout(gettext(get("msg",envir_stacomi)$BilanAnnuels.1))
+			funout(gettext("\"The object BilanAnnuels is stored in the stacomi environment, type bilA <-get(\"bilanAnnuels\",envir_stacomi)\"")
 			return(bilA)
 			
 			
@@ -420,7 +420,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					} else if (length(lestax)==1 & length(lesstd)==1){
 						
@@ -429,7 +429,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					} else if (length(lestax)==1 & length(lesdic)==1){
 						
@@ -438,7 +438,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					} else if (length(lesdic)==1 & length(lesstd)==1){
 						
@@ -447,7 +447,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 						
 					} else if (length(lestax)==1){
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					} else if (length(lesstd)==1){
 						
@@ -466,7 +466,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					} else if (length(lesdic)==1){
 						
@@ -475,7 +475,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))							
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))							
 						
 					} else {
 						if (length(lesdic)<3){
@@ -493,7 +493,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 							print(g)	
 							
 							assign("g",g,envir_stacomi)
-							if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigrationPar.6))	
+							if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))	
 						}
 					}
 				}

@@ -60,7 +60,7 @@ setMethod("connect",signature=signature("Bilan_taille"),definition=function(obje
 #  construit une requeteODBC (la requete est trop compliquee pour pouvoir utiliser ODBCwheredate)
 			object@requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			if (object@parquan@data$par_nom=="aucune" & object@parqual@data$par_nom=="aucune") {
-				funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.1),arret=TRUE)
+				funout(gettext("You need to choose at least one quantitative or qualitative feature\n"),arret=TRUE)
 			} else if (object@parquan@data$par_nom=="aucune") {
 				#caracteristique qualitative uniquement
 				sql=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual" ,
@@ -125,45 +125,45 @@ setMethod("charge",signature=signature("Bilan_taille"),definition=function(objec
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.1),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 				
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.3),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refparquan",envir_stacomi)){
 				object@parquan<-get("refparquan",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.7),arret=TRUE)
+				funout(gettext("You need to choose a quantitative parameter\n"),arret=TRUE)
 			}
 			if (exists("refparqual",envir_stacomi)){
 				object@parqual<-get("refparqual",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.8),arret=TRUE)
+				funout(gettext("You need to choose a qualitative parameter\n"),arret=TRUE)
 				
 			}         
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_taille_date_debut",envir_stacomi)) {
 				object@datedebut<-get("bilan_taille_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.5),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_taille_date_fin",envir_stacomi)) {
 				object@datefin<-get("bilan_taille_date_fin",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.6),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
 			} 
-			funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.2)        )
+			funout(gettext("Attention, this query might take a while, be patient ...\n")        )
 			object<-connect(object)
 			
 			return(object)
@@ -203,10 +203,10 @@ setMethod("calcule",signature=signature("Bilan_taille"),definition=function(obje
 					heure=FALSE)                         
 			bilan_taille@data <- vue
 			assign("bilan_taille",bilan_taille,envir_stacomi)#assign("bilan_lot",vue,envir_stacomi)
-			funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.3))
-			funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.4))
-			funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.5))
-			funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.6)	)
+			funout(gettext("To get the table, type : bilan_taille=get('bilan_taille',envir_stacomi)\n"))
+			funout(gettext("The query : requete=get('bilan_taille',envir_stacomi)@requete@sql \n"))
+			funout(gettext("The data : donnees_taille=get('bilan_taille',envir_stacomi)@data\n"))
+			funout(gettext("Data outcome from the query : don=get('bilan_taille',envir_stacomi)@requete@query\n"))
 			enabled(toolbarlist[["Grint"]])<-TRUE
 		})
 
@@ -216,7 +216,7 @@ setMethod("calcule",signature=signature("Bilan_taille"),definition=function(obje
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraphInteract_tail = function(h,...) {
 	if(!exists(x="bilan_taille",envir=envir_stacomi)) {
-		funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.7))
+		funout(gettext("You need to launch computation first, clic on calc\n"))
 	} 	else 
 	{
 		bilan_taille=get("bilan_taille",envir=envir_stacomi)
@@ -242,7 +242,7 @@ fungraphInteract_tail = function(h,...) {
 		bilan_taille=charge(bilan_taille)
 		vue=bilan_taille@requete@query # on recupere le data.frame
 		assign("bilan_taille",bilan_taille,envir_stacomi)#assign("bilan_lot",vue,envir_stacomi)
-		funout(gettext(get("msg",envir=envir_stacomi)$Bilan_taille.3))
+		funout(gettext("To get the table, type : bilan_taille=get('bilan_taille',envir_stacomi)\n"))
 		vue[is.na(vue)]<-""
 		vue$ope_date_debut=as.character(vue$ope_date_debut)
 		vue$ope_date_fin=as.character(vue$ope_date_fin)   

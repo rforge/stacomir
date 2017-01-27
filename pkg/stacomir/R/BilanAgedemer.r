@@ -87,7 +87,7 @@ setMethod("connect",signature=signature("BilanAgedemer"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanAgedemer.1))
+			if (!silent) funout(gettext("Data loaded"))
 			return(object)
 		})
 
@@ -192,7 +192,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 					silent=silent)
 			bilan_adm@horodatefin<-choice_c(bilan_adm@horodatefin,
 					nomassign="bilan_adm_date_fin",
-					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+					funoutlabel=gettext("Ending date has been chosen\n"),
 					horodate=horodatefin,
 					silent=silent)
 			bilan_adm@limit1hm<-choice_c(bilan_adm@limit1hm,as.character(limit1hm))
@@ -214,7 +214,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 				funout(gettext("you are in deep shit"), arret=TRUE)
 			}   
 			adm=bilan_adm@data # on recupere le data.frame
-			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("erreur interne")
+			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("internal error")
 			# if no value, a dummy value of 2m
 			if (is.na(as.numeric(bilan_adm@limit2hm@label))) bilan_adm@limit2hm@label<-2000
 			lescoupes<-c(0,as.numeric(bilan_adm@limit1hm@label),as.numeric(bilan_adm@limit2hm@label),2001)
@@ -516,7 +516,7 @@ funtableBilanAgedemer = function(h,...) {
 	bilan_adm<-connect(bilan_adm)
 	vue_ope_lot=bilan_adm@requete@query # on recupere le data.frame
 	assign("bilan_adm",bilan_adm,envir_stacomi)#assign("bilan_adm",vue_ope_lot,envir_stacomi)
-	funout(gettext(get("msg",envir_stacomi)$BilanAgedemer.3))
+	funout(gettext(get("msg",envir_stacomi)$BilanArgentee.3))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

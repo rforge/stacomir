@@ -822,7 +822,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 	titre4 <- gWidgets::gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
 	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
-	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=function(h,...) dispose(wintitle)))
+	aQuit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=function(h,...) dispose(wintitle)))
 	toolbarlist <- list(
 			OK=aOK, 
 			Quit = aQuit)
@@ -851,7 +851,7 @@ interface_Bilan_stades_pigm = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.3,container=group))
+	gl=glabel(text=gettext(toupper("Summary of pigmentation stages")),container=group)
 	choice(bilan_stades_pigm@lmax)
 	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
@@ -859,24 +859,24 @@ interface_Bilan_stades_pigm = function()
 	choice(bilan_stades_pigm@salinite)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,.GlobalEnv)
-	choice(bilan_stades_pigm@stationMesure,title="choice de la temperature")
-	choice(bilan_stades_pigm@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
+	choice(bilan_stades_pigm@stationMesure,title=gettext("temperature choice"))
+	choice(bilan_stades_pigm@horodate,label=gettext("Start of timestamp"),
 			nomassign="bilan_stades_pigm_date_debut",
 			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2,
 			affichecal=FALSE)
 	choice(bilan_stades_pigm@horodate,label=gettext("End of timestamp"),
 			nomassign="bilan_stades_pigm_date_fin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+			funoutlabel=gettext("Ending date has been chosen\n"),
 			decal=-1,
 			affichecal=FALSE)
 	choice(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
-	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext(get("msg",envir=envir_stacomi)$Bilan_stades_pigm.6))
+	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext("Title choice"))
 	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
+	aQuit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=quitte,tooltip="Exit"))
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 

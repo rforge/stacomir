@@ -21,32 +21,32 @@ interface_BilanPoidsMoyen = function()
     choice(bilPM@dc,objectBilan=NULL,is.enabled=TRUE)
     choice(bilPM@anneedebut,
 			nomassign="refAnneeDebut",
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3)) #annee debut
+			titleFrame=gettext("Beginning year")) #annee debut
     choice(bilPM@anneefin,
 			nomassign="refAnneeFin",
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5))#annee fin
-	aCalc=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2),
+			titleFrame=gettext("Ending year"))#annee fin
+	aCalc=gWidgets::gaction(label=gettext("load"),
 			icon="lines",
 			handler=hcalc,
-			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.2)) 
+			tooltip=gettext("load")) 
 	aTable=gWidgets::gaction(label="table",
 			icon="dataframe",
 			handler=funtableBilan_poids_moyen,
-			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.3))
+			tooltip=gettext("table"))
 	aQuit=gWidgets::gaction(
-			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4),
+			label=gettext("exit"),
 			icon="close", 
 			handler=quitte,
-			tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.4))
+			tooltip=gettext("exit"))
 	toolbarlist <- list(barchart=aCalc,table=aTable,Quit = aQuit)
 	add(group, gmenu(toolbarlist))
 	
 	### second toobar    
-	aGra=gWidgets::gaction(label=gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.18),action="1",icon="lines",handler=hplot)
-	aCoe=gWidgets::gaction(label=gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.19),icon="Coe",handler=hplot,action="2")
-	aSize=gWidgets::gaction(label=gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.20),action="3",icon="gWidgetsRGtk2-bubbles",handler=hplot)         
-	aReg=gWidgets::gaction(label=gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.21),icon="gWidgetsRGtk2-function1",handler=hreg,action="reg")
-	aExp=gWidgets::gaction(label=gettext(get("msg",envir_stacomi)$Bilan_poids_moyen.22),icon="gtk-harddisk",handler=hexp)    
+	aGra=gWidgets::gaction(label=gettext("Gra"),action="1",icon="lines",handler=hplot)
+	aCoe=gWidgets::gaction(label=gettext("Coe"),icon="Coe",handler=hplot,action="2")
+	aSize=gWidgets::gaction(label=gettext("Leng"),action="3",icon="gWidgetsRGtk2-bubbles",handler=hplot)         
+	aReg=gWidgets::gaction(label=gettext("Reg"),icon="gWidgetsRGtk2-function1",handler=hreg,action="reg")
+	aExp=gWidgets::gaction(label=gettext("export"),icon="gtk-harddisk",handler=hexp)    
 	toolbarlistgraph <- gmenu(list(gra=aGra,coe=aCoe,size=aSize))
 	assign("toolbarlistgraph",toolbarlistgraph,.GlobalEnv)
 	toolbarlistgraph1<-gmenu(list(reg=aReg,exp=aExp))

@@ -94,8 +94,8 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				} else {
 				# todo addmsg
-				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE))
-				warning(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1))
+				funout(gettext("Attention, no time step selected, compunting with default value\n"),arret=FALSE)
+				warning("Attention, no time step selected, compunting with default value\n")
 			}
 			#################################
 			# loading data for other classes associated with bilanMigrationMult
@@ -184,7 +184,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			# bilanMigrationMult<-bMM_Arzal
-			if (!silent) funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.2))
+			if (!silent) funout(gettext("Starting migration summary ... be patient\n"))
 			bilanMigrationMult<-object
 			
 
@@ -391,7 +391,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 			#==========================type=1=============================
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))
+				if (!silent) funout(gettext("Statistics about migration :\n"))
 				#dcnum=1;taxonnum=1;stadenum=2
 				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				for (dcnum in 1:length(lesdc)){
@@ -675,7 +675,7 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
 			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))
+			if (!silent) funout(gettext("Statistics about migration :\n"))
 			#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			#dcnum=2;taxonnum=1;stadenum=1
 			for (dcnum in 1:length(lesdc)){
@@ -965,7 +965,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' @return tableau, the data frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fun_weight_conversion=function(tableau,time.sequence,silent) { 
-	if (!silent) funout(paste("dc=",unique(tableau$ope_dic_identifiant),gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.1)))
+	if (!silent) funout(gettextf("dc=%s Conversion weight / number\n",unique(tableau$ope_dic_identifiant)))
 	nr<-length(unique(tableau$debut_pas))
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
@@ -975,7 +975,7 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 	# Conversion des  poids en effectifs
 	tableauconvert=tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")]
 	tableauconvert=tableauconvert*tableaupoids$coe_valeur_coefficient       # les coeff sont du type 2.54 et non 0.3
-	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext(get("msg",envir=envir_stacomi)$funtraitement_poids.2))
+	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext("Careful sum=0, you didn't enter the coefficient of conversion\n"))
 	# creation d'une tableau (matricepoids) a 5 colonnes comprenant les effectifs convertis
 	matricepoids=cbind(tableaupoids[,c("No.pas", "lot_tax_code","lot_std_code")],tableauconvert,tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")])
 	dimnames(matricepoids)=list(1:length(tableaupoids[,1]),c(

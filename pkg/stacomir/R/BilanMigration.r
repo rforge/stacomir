@@ -149,8 +149,8 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 				bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				# pour permettre le fonctionnement de Fonctionnement DC
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1,arret=FALSE))
-				warning(gettext(get("msg",envir=envir_stacomi)$BilanMigration.1))
+				funout(gettext("Attention, no time step selected, compunting with default value\n"),arret=FALSE)
+				warning(gettext("Attention, no time step selected, compunting with default value\n"))
 			}
 			
 			#################################
@@ -354,7 +354,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			################################################################
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanMigration.9))				
+				if (!silent) funout(gettext("Statistics about migration :\n"))				
 				taxon=bilanMigration@taxons@data[1,"tax_nom_latin"]
 				stade=bilanMigration@stades@data[1,"std_libelle"]
 				dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]

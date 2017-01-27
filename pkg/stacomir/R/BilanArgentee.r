@@ -82,7 +82,7 @@ setMethod("connect",signature=signature("BilanArgentee"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(gettext(get("msg",envir_stacomi)$BilanArgentee.1))
+			if (!silent) funout(gettext("Data loaded"))
 			return(object)
 		})
 
@@ -181,7 +181,7 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 					silent=silent)
 			bilanArg@horodatefin<-choice_c(bilanArg@horodatefin,
 					nomassign="bilanArg_date_fin",
-					funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+					funoutlabel=gettext("Ending date has been chosen\n"),
 					horodate=horodatefin,
 					silent=silent)
 			validObject(bilanArg)
@@ -198,7 +198,7 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 			#bilanArg<-b_carlot
 			bilanArg<-object
 			if(nrow(bilanArg@data)==0) {
-				funout(gettext(get("msg",envir_stacomi)$BilanArgentee.2, arret=TRUE))
+				funout(gettext("No data of silver or yellow eel on the selected period"), arret=TRUE)
 			}   
 			arg=bilanArg@data # on recupere le data.frame
 			
@@ -347,10 +347,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 						group=stage,			
 						type = c("p"),
 						par.settings = my.settings,
-						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.3), # size (BL) mm)
-						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.4), # "Mean eye diameter (MD mm))
+						xlab=gettext("size (BL mm)"),
+						ylab=gettext("Mean eye diameter (MD mm)"),
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.5), # Silvering stages (Durif et al. 2009))
+						auto.key=list(title=gettext("Silvering stages (Durif et al. 2009)"),
 								cex.title=1.2,
 								space="top",
 								columns=6,
@@ -402,10 +402,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				
 				bb<-lattice::barchart(form,data=datdc1,	
 						group=stage,		
-						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.6), # "Mois"),
-						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.7),#"Effectif")
+						xlab=gettext("Month"),
+						ylab=gettext("Number"),
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.8),#"Effectif par stades"),
+						auto.key=list(title=gettext("Number by pigmentation stage"),
 								cex.title=1.2,
 								space="top",
 								columns=6,

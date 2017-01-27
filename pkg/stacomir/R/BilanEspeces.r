@@ -85,7 +85,7 @@ setMethod("connect",signature=signature("BilanEspeces"),definition=function(obje
 					" AND lot_effectif IS NOT NULL",
 					sep="")
 			requete<-stacomirtools::connect(requete)	
-			if (requete@etat!="Requete reussie \n") funout(gettext(get("msg",envir=envir_stacomi)$BilanEspeces.3),arret=TRUE)
+			if (requete@etat!="Requete reussie \n") funout(gettext("Query failed for the view vue_ope_lot_car \n"),arret=TRUE)
 			bilanEspeces@data<-requete@query					
 			return(bilanEspeces)
 		})
@@ -109,7 +109,7 @@ hBilanEspecescalc=function(h,...){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(object){
-			funout(gettext(get("msg",envir_stacomi)$BilanEspeces.7))
+			funout(gettext("Checking objects and launching query\n")
 			bilanEspeces<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanEspeces@dc<-get("refDC",envir_stacomi)
@@ -120,13 +120,13 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 			if (exists("bilanEspeces_date_debut",envir_stacomi)) {
 				bilanEspeces@datedebut<-get("bilanEspeces_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.5),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilanEspeces_date_fin",envir_stacomi)) {
 				bilanEspeces@datefin<-get("bilanEspeces_date_fin",envir_stacomi)@horodate
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$ref.6),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
 			} 
 			if (exists("refliste",envir_stacomi)) {      
 				bilanEspeces@liste<-get("refliste",envir_stacomi)      
@@ -136,7 +136,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 			bilanEspeces<-connect(bilanEspeces)
 			
 			assign("bilanEspeces",bilanEspeces,envir_stacomi)
-			funout(gettext(get("msg",envir_stacomi)$BilanEspeces.1))
+			funout(gettext("Summary object is stocked into envir_stacomi environment : write bilanEspeces=get('bilanEspeces',envir_stacomi)\n"))
 		})
 
 
@@ -152,14 +152,14 @@ hCamembert = function(h,...) {
 	if (exists("bilanEspeces",envir_stacomi)) {
 		bilanEspeces<-get("bilanEspeces",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanEspeces.4),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	DC=as.numeric(bilanEspeces@dc@dc_selectionne)	
 	# update of refliste which does not need calcul button pushed
 	bilanEspeces@liste<-get("refliste",envir_stacomi)   
 	
 	tableEspeces=bilanEspeces@data
-	if (nrow(tableEspeces)==0) funout(gettext(get("msg",envir_stacomi)$BilanEspeces.5),arret=TRUE)
+	if (nrow(tableEspeces)==0) funout(gettext("No fish in the database for this period\n"),arret=TRUE)
 	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
 	# only keeping taxon stage for species with several stages
 	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
@@ -169,7 +169,7 @@ hCamembert = function(h,...) {
 	} else tableEspeces$taxon_stades<-tableEspeces$tax_nom_latin
 	# TODO ajouter les effectifs en fin de taxons_stades ???
 	nb=length(unique(tableEspeces$taxon_stade))
-	if (min(tableEspeces$lot_effectif)<0) {funout(gettext(get("msg",envir_stacomi)$BilanEspeces.6))
+	if (min(tableEspeces$lot_effectif)<0) {funout(gettext("Warning, some negative counts are transformed into positive ones\n"))
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
 	sumEspeces=switch(bilanEspeces@liste@listechoice,
@@ -217,14 +217,14 @@ hTableBilanEspeces=function(h,...) {
 	if (exists("bilanEspeces",envir_stacomi)) {
 		bilanEspeces<-get("bilanEspeces",envir_stacomi)
 	} else {      
-		funout(gettext(get("msg",envir_stacomi)$BilanEspeces.4),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
 	}
 	DC=as.numeric(bilanEspeces@dc@dc_selectionne)	
 	# update of refliste which does not need calcul button pushed
 	bilanEspeces@liste<-get("refliste",envir_stacomi)   
 	
 	tableEspeces=bilanEspeces@data
-	if (nrow(tableEspeces)==0) funout(gettext(get("msg",envir_stacomi)$BilanEspeces.5),arret=TRUE)
+	if (nrow(tableEspeces)==0) funout(gettext("No fish in the database for this period\n"),arret=TRUE)
 	tableEspeces$taxon_stades=paste(tableEspeces$tax_nom_latin,tableEspeces$std_libelle,sep="_")
 	nbstades=tapply(tableEspeces$tax_nom_latin,tableEspeces$taxon_stades,function(X)(length(unique(X))))
 	if (length(nbstades[nbstades>1])>0){
@@ -233,7 +233,7 @@ hTableBilanEspeces=function(h,...) {
 	} else tableEspeces$taxon_stades<-tableEspeces$tax_nom_latin
 	# TODO ajouter les effectifs en fin de taxons_stades ???
 	nb=length(unique(tableEspeces$taxon_stade))
-	if (min(tableEspeces$lot_effectif)<0) {funout(gettext(get("msg",envir_stacomi)$BilanEspeces.6))
+	if (min(tableEspeces$lot_effectif)<0) {funout(gettext("Warning, some negative counts are transformed into positive ones\n"))
 		tableEspeces$lot_effectif=abs(tableEspeces$lot_effectif)
 	}
 	now<-bilanEspeces@horodate@horodate
@@ -254,18 +254,18 @@ hTableBilanEspeces=function(h,...) {
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
 	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)
-	funout(gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.1))
+	funout(gettext("Summary of encountered species for the counting device\n"))
 	bilanEspeces@dc=charge(bilanEspeces@dc)   
 	bilanEspeces@liste=charge(object=bilanEspeces@liste,
 			vecteur=c("aucun","semaine","mois","annee"),
-			label=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.7))
+			label=gettext("Choice of cutting"))
 	quitte()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
-	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.2,container=group))
+	gl=glabel(text=gettext("Species summary"),container=group)
 	add(ggroupboutons,group)
 	choice(bilanEspeces@horodate,
-			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
+			label=gettext("Start of timestamp"),
 			nomassign="bilanEspeces_date_debut",
 			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2,
@@ -273,7 +273,7 @@ interface_BilanEspeces=function(){
 	choice(bilanEspeces@horodate,
 			label=gettext("End of timestamp"),
 			nomassign="bilanEspeces_date_fin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+			funoutlabel=gettext("Ending date has been chosen\n"),
 			decal=-1,
 			affichecal=FALSE)
 	choice(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
@@ -282,11 +282,11 @@ interface_BilanEspeces=function(){
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.3)),
-			Graph=gWidgets::gaction(label="pie",tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.4,icon="bubbles",handler=hCamembert,action="pie")),
-			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.5,action="graph")),
-			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.6)),    
-			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter")
+			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=gettext("Loading")),
+			Graph=gWidgets::gaction(label="pie",tooltip=gettext("Pie chart graphic"),icon="bubbles",handler=hCamembert,action="pie"),
+			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.5),action="graph"),
+			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=gettext("Summary tables in .csv and XML")),    
+			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("exit"))
 	)    
 	#gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	#gWidgets::addSpring(group)
