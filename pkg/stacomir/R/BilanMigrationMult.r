@@ -77,18 +77,18 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 				dc<-bilanMigrationMult@dc@dc_selectionne
 				df<-bilanMigrationMult@dc@data$df[bilanMigrationMult@dc@data$dc%in%dc]
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)	
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)	
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationMult@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationMult@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)

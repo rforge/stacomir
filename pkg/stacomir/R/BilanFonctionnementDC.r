@@ -79,18 +79,18 @@ setMethod("charge",signature=signature("BilanFonctionnementDC"),definition=funct
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)				}     
+				funout("You need to choose a counting device, clic on validate\n"),arret=TRUE)				}     
 			
 			if (exists("bilanFonctionnementDC_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilanFonctionnementDC_date_debut",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)	
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)	
 			}
 			
 			if (exists("bilanFonctionnementDC_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilanFonctionnementDC_date_fin",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)	
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)	
 			}			
 			return(object)
 		})

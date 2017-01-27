@@ -101,34 +101,34 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
+				funout("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.4),arret=TRUE)
+				funout(gettext("You need to choose a parameter, clic on validate\n"),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_arg_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_arg_date_debut",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.5),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_arg_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_arg_date_fin",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.6),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
 			}       
 			
 			return(object)

@@ -129,28 +129,28 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
+				funout("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationInterAnnuelle@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("anneeDebut",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@anneeDebut<-get("anneeDebut",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.10),arret=TRUE)
+				funout(gettext("You need to choose the starting year\n"),arret=TRUE)
 			}  	
 			if (exists("anneeFin",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@anneeFin<-get("anneeFin",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.11),arret=TRUE)
+				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
 			}
 			assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir_stacomi)
 			funout(gettext(get("msg",envir_stacomi)$BilanMigrationInterannuelle.11))

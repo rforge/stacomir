@@ -86,18 +86,18 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationPar@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationPar@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationPar@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationPar@pasDeTemps<-get("pasDeTemps",envir_stacomi)
@@ -119,13 +119,13 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 				bilanMigrationPar@parquan<-get("refparquan",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.7),arret=TRUE)
+				funout(gettext("You need to choose a quantitative parameter\n"),arret=TRUE)
 			}
 			if (exists("refparqual",envir_stacomi)){
 				bilanMigrationPar@parqual<-get("refparqual",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.8),arret=TRUE)
+				funout(gettext("You need to choose a qualitative parameter\n"),arret=TRUE)
 			}
 			
 			stopifnot(validObject(bilanMigrationPar, test=TRUE))

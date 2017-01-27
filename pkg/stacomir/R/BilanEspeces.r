@@ -114,7 +114,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 			if (exists("refDC",envir_stacomi)) {
 				bilanEspeces@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)	
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)	
 			}
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilanEspeces_date_debut",envir_stacomi)) {

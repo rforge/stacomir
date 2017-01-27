@@ -43,28 +43,28 @@ setMethod("charge",signature=signature("BilanAnnuels"),
 			if (exists("refDC",envir_stacomi)) {
 				bilA@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.1),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilA@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext(get("msg",envir_stacomi)$ref.2),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilA@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext(get("msg",envir_stacomi)$ref.3),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
 			}
 			if (exists("anneedebut",envir_stacomi)) {
 				bilA@anneedebut<-get("anneedebut",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.10),arret=TRUE)
+				funout(gettext("You need to choose the starting year\n"),arret=TRUE)
 			}  	
 			if (exists("anneefin",envir_stacomi)) {
 				bilA@anneefin<-get("anneefin",envir_stacomi)
 			} else {
-				funout(gettext(get("msg",envir_stacomi)$ref.11),arret=TRUE)
+				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
 			}
 			assign("bilanAnnuels",bilA,envir_stacomi)
 			funout(gettext(get("msg",envir_stacomi)$BilanAnnuels.1))
