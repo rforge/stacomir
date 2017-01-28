@@ -29,13 +29,13 @@ interface_BilanAnnuels = function()
 	
 	choice(bilanAnnuels@anneedebut,
 			nomassign="anneedebut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2),
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3),
+			funoutlabel=gettext("The year of beginning has been chosen\n"),
+			titleFrame=gettext("First year"),
 			preselect=which(bilanAnnuels@anneedebut@data==min(bilanAnnuels@anneedebut@data)))
 	choice(bilanAnnuels@anneefin,
 			nomassign="anneefin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4),
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5),
+			funoutlabel=gettext("The last year has been chosen\n"),
+			titleFrame=gettext("Last year"),
 			preselect=which(bilanAnnuels@anneefin@data==max(bilanAnnuels@anneefin@data)))
 	choicemult(bilanAnnuels@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
 	svalue(notebook)<-1
@@ -45,10 +45,10 @@ interface_BilanAnnuels = function()
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist = list(
-			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
-			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
+			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic")),
+			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic")),
 		    aTable=gWidgets::gaction(handler=hxtableBilanAnnuels, icon="dataframe", label="xtable", tooltip="xtable"),  
-			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9))
+			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext("Exit"))
 	)
 	
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))

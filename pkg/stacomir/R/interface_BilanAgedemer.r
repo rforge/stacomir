@@ -7,7 +7,7 @@ interface_BilanAgedemer = function()
 	bilan_adm=new("BilanAgedemer")
 	assign("bilan_adm",bilan_adm,envir = envir_stacomi)
 	
-	funout(gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.1))
+	funout(gettext("Loading view vue_ope_lot, and choice of counting device and time steps\n"))
 	bilan_adm@dc=charge(bilan_adm@dc)
 	bilan_adm@taxons=charge(bilan_adm@taxons)
 	bilan_adm@stades=charge(bilan_adm@stades)
@@ -24,13 +24,13 @@ interface_BilanAgedemer = function()
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_adm@horodatedebut,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
+	choice(bilan_adm@horodatedebut,label=gettext("Start"),
 			nomassign="bilan_adm_date_debut",
 			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2)
-	choice(bilan_adm@horodatefin,label=gettext("End of timestamp"),
+	choice(bilan_adm@horodatefin,label=gettext("End"),
 			nomassign="bilan_adm_date_fin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+			funoutlabel=gettext("Ending date has been chosen\n"),
 			decal=-1)	
 	bilan_adm@dc<-choice(bilan_adm@dc,objectBilan=bilan_adm,is.enabled=TRUE)
 	bilan_adm@limit1hm<-charge(bilan_adm@limit1hm,title="Limit s1 for 1sw (L(1sw)<=s1), click to edit",label="0")
@@ -64,8 +64,8 @@ interface_BilanAgedemer = function()
 			handler=funplotBilanAgedemer,
 			action="4",
 			tooltip="4")
-	asummary=gWidgets::gaction(label="summary",icon="dataframe",handler=funtableBilanAgedemer,tooltip="summary")
-	aquit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
+	asummary=gWidgets::gaction(label="Summary",icon="dataframe",handler=funtableBilanAgedemer,tooltip="Summary")
+	aquit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=quitte,tooltip="Exit"))
 	
 	toolbarlist <- list(    
 			plot1= aplot1,

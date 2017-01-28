@@ -8,12 +8,12 @@ interface_BilanPoidsMoyen = function()
     bilPM@dc=charge(bilPM@dc)
     bilPM@anneedebut=charge(bilPM@anneedebut)
     bilPM@anneefin=charge(bilPM@anneefin)
-    bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.5))
+    bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1",gettext("tous")),label=gettext("choice of number in sample (one, several, all"))
 	# choice of number type
     group <- gWidgets::ggroup(horizontal=FALSE)   # must always be named group
     assign("group",group,envir = .GlobalEnv)
    gWidgets::add(ggroupboutons,group)
-    gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_poids_moyen.1,container=group))
+    gl=glabel(text=gettext("Mean weight report"),container=group)
 
     ### first toobar    
     gWidgets::addSpring(group)

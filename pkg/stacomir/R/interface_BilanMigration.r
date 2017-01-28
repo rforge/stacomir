@@ -20,7 +20,7 @@ interface_BilanMigration=function(){
 	# this is used internally by refDC
 	objectBilan="bilanMigration"
 	assign("objectBilan",objectBilan,envir=envir_stacomi)
-	funout(gettext(get("msg",envir=envir_stacomi)$interface_BilanMigration.1))
+	funout(gettext("Loading of the lists for taxons, stages and counting devices\n"))
 	bilanMigration@taxons=charge(bilanMigration@taxons)
 	bilanMigration@stades=charge(bilanMigration@stades)
 	bilanMigration@dc=charge(bilanMigration@dc)  
@@ -33,12 +33,12 @@ interface_BilanMigration=function(){
 	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gWidgets::gaction(handler=hbilanMigrationcalc, action=bilanMigration, icon="new", label="calcul", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigration.2)),
-			Graph=gWidgets::gaction(handler=hbilanMigrationgraph, icon="graph", label="graph", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigration.3)),
-			Graph2=gWidgets::gaction(handler=hbilanMigrationgraph2, icon="graph2", label="grcum", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigration.4)),
-			Stat=gWidgets::gaction(handler=hTableBilanMigration, icon="dataframe", label="stat", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigration.5)),
-			write=gWidgets::gaction(handler=hbilanMigrationwrite, icon="gtk-harddisk", label="write", tooltip=gettext(get("msg",envir=envir_stacomi)$fn_EcritBilanJournalier.5)),
-			Out=gWidgets::gaction(handler=houtBilanMigration, icon="gtk-info", label="code", tooltip=gettext(get("msg",envir=envir_stacomi)$BilanMigrationMult.1)),
+			Calc=gWidgets::gaction(handler=hbilanMigrationcalc, action=bilanMigration, icon="new", label=gettext("calculate"), tooltip=gettext("Calculation of numbers by time step")),
+			Graph=gWidgets::gaction(handler=hbilanMigrationgraph, icon="graph", label=gettext("graph"), tooltip=gettext("Balance graphic")),
+			Graph2=gWidgets::gaction(handler=hbilanMigrationgraph2, icon="graph2", label=gettext("grcum"), tooltip=gettext("Cumulative graphic")),
+			Stat=gWidgets::gaction(handler=hTableBilanMigration, icon="dataframe", label=gettext("stat"), tooltip=gettext("Balance sheet in .csv")),
+			write=gWidgets::gaction(handler=hbilanMigrationwrite, icon="gtk-harddisk", label=gettext("write"), tooltip=gettext("Writing daily summary in the database")),
+			Out=gWidgets::gaction(handler=houtBilanMigration, icon="gtk-info", label=gettext("code"), tooltip=gettext("Code")),
 			annuler=gWidgets::gaction(handler= quitte,icon = "close",label="quitter")
 	)    
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))

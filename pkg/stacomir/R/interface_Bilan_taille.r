@@ -15,7 +15,7 @@ interface_BilanTaille = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_taille.1,container=group))
+	gl=glabel(text=gettext("Size report",container=group))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
@@ -23,23 +23,23 @@ interface_BilanTaille = function()
 	
 	
 	choice(bilan_taille@horodate,
-			label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
+			label=gettext("First timestamp"),
 			nomassign="bilan_taille_date_debut",
-			funoutlabel=gettext("Beginning date has been chosen\n"),
+			funoutlabel=gettext("The beginning date has been chosen\n"),
 			decal=-2,
 			affichecal=FALSE)
 	choice(bilan_taille@horodate,
-			label=gettext("End of timestamp"),
+			label=gettext("Last timestamp"),
 			nomassign="bilan_taille_date_fin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+			funoutlabel=gettext("The ending date has been chosen\n"),
 			decal=-1,
 			affichecal=FALSE)
 	
 	choice(bilan_taille@dc,objectBilan=bilan_taille,is.enabled=TRUE)
-	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7))
-	aTable=gWidgets::gaction(label="table",icon="dataframe",handler=funtableBilan_tail,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.8))
-	aQuit=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.9,icon="close", handler=quitte,tooltip=get("msg",envir=envir_stacomi)$interface_Bilan_lot.9))
-	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_taille.2))
+	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=gettext("dotplot"))
+	aTable=gWidgets::gaction(label=gettext("table"),icon="dataframe",handler=funtableBilan_tail,tooltip=gettext("Table"))
+	aQuit=gWidgets::gaction(label=gettext("Exit"),icon="close", handler=quitte,tooltip=gettext("Exit"))
+	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=gettext("crossed query length / qualitative feature"))
 	toolbarlist <- list(
 			#	barchart=aBarchart, 
 			Calc=aCalc,

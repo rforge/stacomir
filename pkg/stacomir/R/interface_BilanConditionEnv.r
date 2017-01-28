@@ -6,7 +6,7 @@ interface_ConditionEnv = function()
 {
 	quitte()
 	bilanConditionEnv=new("BilanConditionEnv")
-    funout(gettext(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.1))
+    funout(gettext("Loading of the monitoring stations\n"))
     bilanConditionEnv@stationMesure=charge(bilanConditionEnv@stationMesure)
     assign("bilanConditionEnv",bilanConditionEnv,envir=envir_stacomi)
     
@@ -16,15 +16,15 @@ interface_ConditionEnv = function()
    gWidgets::add(ggroupboutons,group)
     
     # date de debut et de fin
-    choice(bilanConditionEnv@horodate,label=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.3),
+    choice(bilanConditionEnv@horodate,label=gettext("Begginning"),
 			nomassign="bilanConditionEnv_date_debut",
 			funoutlabel=gettext("Beginning date has been chosen\n"),
 			decal=-2,
 			affichecal=FALSE)
     choice(bilanConditionEnv@horodate,
-			label=gettext("End of timestamp"),
+			label=gettext("End"),
 			nomassign="bilanConditionEnv_date_fin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.6),
+			funoutlabel=gettext("Ending date has been chosen\n"),
 			decal=-1,
 			affichecal=FALSE)
     choice(bilanConditionEnv@stationMesure)
@@ -35,9 +35,9 @@ interface_ConditionEnv = function()
     
     toolbarlist = list(
     #Calc=gWidgets::gaction(handler=hbilanConditionEnvcalc , action=bilanConditionEnv,icon = "new",label="calcul",tooltip="calcul des conditions environnementales entre deux dates"),
-    Graph=gWidgets::gaction(handler=hbilanConditionEnvgraph , icon = "graph",label="graph",tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.2)),
-    Stat =gWidgets::gaction(handler=hbilanConditionEnvstat , icon = "matrix",label="stat",tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.3)),
-    annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext(get("msg",envir=envir_stacomi)$interface_BilanConditionEnv.4)))
+    Graph=gWidgets::gaction(handler=hbilanConditionEnvgraph , icon = "graph",label="graph",tooltip=gettext("Summary graphic")),
+    Stat =gWidgets::gaction(handler=hbilanConditionEnvstat , icon = "matrix",label="stat",tooltip=gettext("Summary tables in .csv")),
+    annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("Exit")))
     gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
     gWidgets::addSpring(group)
     #graphes=ggraphics(width=600,height=400)
