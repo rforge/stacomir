@@ -516,7 +516,7 @@ funtableBilanAgedemer = function(h,...) {
 	bilan_adm<-connect(bilan_adm)
 	vue_ope_lot=bilan_adm@requete@query # on recupere le data.frame
 	assign("bilan_adm",bilan_adm,envir_stacomi)#assign("bilan_adm",vue_ope_lot,envir_stacomi)
-	funout(gettext(get("msg",envir_stacomi)$BilanArgentee.3))
+	funout(gettext("Size (BL mm)"))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

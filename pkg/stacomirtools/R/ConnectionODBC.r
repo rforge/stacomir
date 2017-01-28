@@ -51,7 +51,7 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 					object@baseODBC<-get("baseODBC",envir=envir_stacomi) 
 				} else {
 					if(exists("envir_stacomi")){# the program is called within stacomiR
-						funout(get("msg",envir_stacomi)$ConnectionODBC.1,arret=TRUE)
+						funout(gettext(get("msg",envir_stacomi)$ConnectionODBC.1),arret=TRUE)
 					} else	  {
 						stop("you need to define a vector baseODBC with the ODBC link, user and password")
 					}
@@ -79,7 +79,7 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 			# sends the result of a trycatch connection in the
 			#l'object (current connection), e.g. a character vector
 			connection_error<-if(exists("envir_stacomi")){
-						error=paste(get("msg",envir_stacomi)$ConnectionODBC.4,object@baseODBC[1])
+						error=paste(gettext(get("msg",envir_stacomi)$ConnectionODBC.4,object@baseODBC[1]))
 					} else {
 						error="impossible connection"
 					}
@@ -87,7 +87,7 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 			if (class(currentConnection)=="RODBC") {
 				if (!object@silent){
 					if(exists("envir_stacomi")){
-						print(get("msg",envir_stacomi)$ConnectionODBC.5)
+						print(gettext(get("msg",envir_stacomi)$ConnectionODBC.5))
 					} else {
 						print("connection successful")
 					}

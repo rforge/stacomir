@@ -31,12 +31,12 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
 			if (exists("envir_stacomi")){
 				if (exists("msg",envir_stacomi)){
-					msg1<-get("msg",envir=envir_stacomi)$RequeteODBC.1
-					msg2<-get("msg",envir=envir_stacomi)$RequeteODBC.2
-					msg3<-get("msg",envir=envir_stacomi)$RequeteODBC.3
-					msg4<-get("msg",envir=envir_stacomi)$RequeteODBC.4
-					msg5<-get("msg",envir=envir_stacomi)$RequeteODBC.5
-					msg6<-get("msg",envir=envir_stacomi)$RequeteODBC.6
+					msg1<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.1)
+					msg2<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.2)
+					msg3<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.3)
+					msg4<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.4)
+					msg5<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.5)
+					msg6<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.6)
 					verbose<-exists("showmerequest",envir=envir_stacomi)
 				} else {
 					# msg not changed loaded at the beginning

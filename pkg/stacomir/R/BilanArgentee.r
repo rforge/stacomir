@@ -521,8 +521,8 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				#############
 				par(mar=c(5.1,4.1,1,1)) # blur bottom left up right
 				plot(datdc$BL,datdc$W,type="n",
-						xlab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.9),
-						ylab=gettext(get("msg",envir=envir_stacomi)$BilanArgentee.10),
+						xlab=gettext("Size (mm)"),
+						ylab=gettext("Weight(g)"),
 						xlim=c(250,1000),ylim=c(0,2000))
 				abline(v=seq(250,1000,by=50), col = "lightgray",lty=2)
 				abline(h=seq(0,2000,by=100),col="lightgray",lty=2)
@@ -703,7 +703,7 @@ funtableBilanArgentee = function(h,...) {
 	bilanArg<-connect(bilanArg)
 	vue_ope_lot=bilanArg@requete@query # on recupere le data.frame
 	assign("bilanArg",bilanArg,envir_stacomi)#assign("bilanArg",vue_ope_lot,envir_stacomi)
-	funout(gettext(get("msg",envir_stacomi)$BilanArgentee.3))
+	funout(gettext("Size (BL mm)"))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

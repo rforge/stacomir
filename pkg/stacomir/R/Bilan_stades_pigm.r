@@ -876,7 +876,7 @@ interface_Bilan_stades_pigm = function()
 	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext("Title choice"))
 	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=quitte,tooltip="Exit"))
+	aQuit=gWidgets::gaction(label=gettext("Exit"),icon="close", handler=quitte,tooltip="Exit")
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 

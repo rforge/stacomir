@@ -140,7 +140,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.11),
+			ylab="Fishway",
 			bty="n",
 			cex=1.2)
 	
@@ -165,7 +165,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
+				legend= c(gettext("working"),gettext("stopped"),gettext("normal operation")),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				horiz=TRUE,

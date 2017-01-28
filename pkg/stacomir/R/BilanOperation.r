@@ -56,9 +56,8 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req@select<-paste("SELECT * FROM  ",get("sch",envir=envir_stacomi),"t_operation_ope ")		
 			req@and=paste("AND ope_dic_identifiant in",stringr::str_c("(",stringr::str_c(lesdc,collapse=","),")"))
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
-			object@data<-req@query
-	
-			if (!silent) funout(gettext(get("msg",envir=envir_stacomi)$BilanOperation.1))
+			object@data<-req@query	
+			if (!silent) funout(gettext("Loading data for operations"))
 			return(object)
 		})
 

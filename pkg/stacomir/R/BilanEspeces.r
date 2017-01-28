@@ -284,7 +284,7 @@ interface_BilanEspeces=function(){
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=gettext("Loading")),
 			Graph=gWidgets::gaction(label="pie",tooltip=gettext("Pie chart graphic"),icon="bubbles",handler=hCamembert,action="pie"),
-			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanEspeces.5),action="graph"),
+			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=gettext("barplot"),action="graph"),
 			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=gettext("Summary tables in .csv and XML")),    
 			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("exit"))
 	)    
