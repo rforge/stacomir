@@ -219,7 +219,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
+				legend= c(gettext("work"),gettext("stop"),nomperiode),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -240,7 +240,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.12),
+			ylab=gettext("CD"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -266,7 +266,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.9),
+				legend=c(gettext("working"),gettext("stopped"),gettext("normal operation")),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,
@@ -317,7 +317,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.10,nomperiode)),
+				legend= c("working","stopped",nomperiode),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -338,7 +338,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.13),
+			ylab=gettext("Op"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -389,12 +389,12 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	bar<-lattice::barchart(eff/1000~as.factor(mois),
 			groups=as.factor(type),
-			xlab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.14),
-			ylab=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.15),
+			xlab=gettext("Month"),
+			ylab=gettext("Number (x1000)"),
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-#			key=lattice::simpleKey(text=gettext(get("msg",envir=envir_stacomi)$fungraph_civelle.16),
+#			key=lattice::simpleKey(text=c(gettext("weight of monthly number"),gettext("monthly number counted")),
 #					rectangles = TRUE, 
 #					points=FALSE, 
 #					space="right",

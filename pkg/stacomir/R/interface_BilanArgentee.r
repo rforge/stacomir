@@ -39,7 +39,6 @@ interface_BilanArgentee = function()
 	choice_c(bilan_arg@taxons,2038)
 	choice_c(bilan_arg@stades,'AGG')
 	choice_c(bilan_arg@par,c('1786','CCCC','BBBB','CONT','LINP','A111','PECT'))
-	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion)
 	aplot1=gWidgets::gaction(label="plot-1",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanArgentee,

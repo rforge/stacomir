@@ -43,8 +43,7 @@ interface_BilanAgedemer = function()
 	choice_c(bilan_adm@taxons,2220)
 	choice_c(bilan_adm@stades,c('5','11','BEC','BER','IND'))
 	choice_c(bilan_adm@par,c('1786','1785','C001'))
-	#gettext(get("msg",envir=envir_stacomi)$interface_Bilan_lot.7 => dotplot ou graphe de dispersion)
-	aplot1=gWidgets::gaction(label="plot-1",
+		aplot1=gWidgets::gaction(label="plot-1",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanAgedemer,
 			action="1",
