@@ -182,7 +182,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			bilan_adm@taxons<-charge_avec_filtre(object=bilan_adm@taxons,bilan_adm@dc@dc_selectionne)			
 			bilan_adm@taxons<-choice_c(bilan_adm@taxons,taxons)
 			bilan_adm@stades<-charge_avec_filtre(object=bilan_adm@stades,bilan_adm@dc@dc_selectionne,bilan_adm@taxons@data$tax_code)	
-			bilan_adm@stades<-choice_c(bilan_adm@stades,stades)
+			bilan_adm@stades<-choice_c(bilan_adm@stades,stades,silent=silent)
 			bilan_adm@par<-charge_avec_filtre(object=bilan_adm@par,bilan_adm@dc@dc_selectionne,bilan_adm@taxons@data$tax_code,bilan_adm@stades@data$std_code)	
 			bilan_adm@par<-choice_c(bilan_adm@par,par,silent=silent)
 			bilan_adm@horodatedebut<-choice_c(object=bilan_adm@horodatedebut,

@@ -1,7 +1,7 @@
-context("Bilan_Agedemer")
+context("Bilan_Argentee")
 
 
-test_that("test creating an instance of BilanAgedemer with data loaded (logrami required)",{
+test_that("test creating an instance of BilanArgentee with data loaded (fd80 schema required)",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			# overriding user schema to point to iav

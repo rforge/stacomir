@@ -55,19 +55,19 @@ setMethod("charge",
 #' }
 setMethod("choice",signature=signature("RefStationMesure"),definition=function(object,
 				is.enabled=TRUE,
-				title=gettext(get("msg",envir=envir_stacomi)$RefStationMesure.3)) {
+				title=gettext("Monitoring stations selection")) {
 			if (nrow(object@data) > 0){
 				hSTM=function(h,...){
           stationMesure=svalue(choice,index=TRUE)
           if(length(stationMesure)==0)
           {
-             funout(gettext(get("msg",envir=envir_stacomi)$RefStationMesure.1),arret=TRUE)
+             funout(gettext("Select at least one value\n"),arret=TRUE)
           }
           else
           {
             object@data<-object@data[stationMesure,]
             assign("refStationMesure",object,envir_stacomi)
-  					funout(gettext(get("msg",envir=envir_stacomi)$RefStationMesure.2))
+  					funout(gettext("The monitoring stations have been selected\n"))
           }
 				}
 				frame_stationMesure<<-gexpandgroup(title)
@@ -77,5 +77,5 @@ setMethod("choice",signature=signature("RefStationMesure"),definition=function(o
 				enabled(frame_stationMesure)<-is.enabled
 				gbutton("OK", container=frame_stationMesure,handler=hSTM)
 			} 
-      else funout(gettext(get("msg",envir=envir_stacomi)$RefStationMesure.4),arret=TRUE)
+      else funout(gettext("Stop : no data for selected monitoring station (problem with the ODBC link ?)\n"),arret=TRUE)
 		})

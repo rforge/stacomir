@@ -244,7 +244,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend= c((gettext("working"),gettext("stopped"),gettext("normal operation")),
+				legend= c(gettext("working"),gettext("stopped"),gettext("normal operation")),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,

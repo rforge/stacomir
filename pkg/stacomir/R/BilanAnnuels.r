@@ -67,7 +67,7 @@ setMethod("charge",signature=signature("BilanAnnuels"),
 				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
 			}
 			assign("bilanAnnuels",bilA,envir_stacomi)
-			funout(gettext("\"The object BilanAnnuels is stored in the stacomi environment, type bilA <-get(\"bilanAnnuels\",envir_stacomi)\"")
+			funout(gettext("The object BilanAnnuels is stored in the stacomi environment, type bilA <-get('bilanAnnuels',envir_stacomi)"))
 			return(bilA)
 			
 			

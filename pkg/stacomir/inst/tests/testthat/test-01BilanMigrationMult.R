@@ -3,14 +3,14 @@ test_that("Test an instance of bilanMigrationMult",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = -1)
-			bilanMigrationMult<-choice_c(bilanMigrationMult,
+			#options(warn = -1)
+			bilanMigrationMult<-suppressWarnings(choice_c(bilanMigrationMult,
 					dc=c(6,7),
 					taxons=c("Anguilla anguilla","Salmo salar"),
 					stades=c("AGG","AGJ","CIV"),
 					datedebut="2012-01-01",
-					datefin="2012-12-31")
-			options(warn = 0)
+					datefin="2012-12-31"))
+			#options(warn = 0)
 			expect_s4_class(bilanMigrationMult,
 					"BilanMigrationMult")
 		rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
@@ -21,14 +21,14 @@ test_that("Test another instance of bilanMigrationMult",{
 			require(stacomiR)
 			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			bilanMigrationMult<-new("BilanMigrationMult")
-			options(warn = -1)
-			bilanMigrationMult<-choice_c(bilanMigrationMult,
+			#options(warn = -1)
+			bilanMigrationMult<-suppressWarnings(choice_c(bilanMigrationMult,
 					dc=c(6,7),
 					taxons=c(2038,2220),
 					stades=c("AGG","AGJ","CIV"),
 					datedebut="2012-01-01",
-					datefin="31/12/2012")
-			options(warn = 0)
+					datefin="31/12/2012"))
+			#options(warn = 0)
 			expect_s4_class(bilanMigrationMult,
 					"BilanMigrationMult")
 	rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)

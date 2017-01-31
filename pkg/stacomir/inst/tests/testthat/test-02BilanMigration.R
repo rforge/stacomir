@@ -92,7 +92,7 @@ test_that("Test writing an example to the database",
 			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			data("bM_Arzal")
 			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
-			write_database(bilanMigration=bM_Arzal,silent=TRUE)
+			write_database(object=bM_Arzal,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

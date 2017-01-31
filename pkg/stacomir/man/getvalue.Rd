@@ -5,26 +5,16 @@
 \title{Generic method getvalue}
 \usage{
 getvalue(object, ...)
-
-getvalue(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method getvalue
-
-Generic method getvalue
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

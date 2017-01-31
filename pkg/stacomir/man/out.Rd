@@ -2,29 +2,19 @@
 % Please edit documentation in R/create_generic.r
 \name{out}
 \alias{out}
-\title{Generic method getvalue}
+\title{Generic method to forward outputs}
 \usage{
-out(object, ...)
-
 out(object, ...)
 }
 \arguments{
 \item{object}{Object}
 
 \item{...}{Additional parms}
-
-\item{object}{Object}
-
-\item{...}{Additional parms}
 }
 \description{
-Generic method getvalue
-
-Generic method getvalue
+Generic method to forward outputs
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

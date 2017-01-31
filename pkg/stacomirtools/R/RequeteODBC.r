@@ -30,27 +30,18 @@ setClass(Class="RequeteODBC",
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(object) {     
 			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
 			if (exists("envir_stacomi")){
-				if (exists("msg",envir_stacomi)){
-					msg1<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.1)
-					msg2<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.2)
-					msg3<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.3)
-					msg4<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.4)
-					msg5<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.5)
-					msg6<-gettext(get("msg",envir=envir_stacomi)$RequeteODBC.6)
+			
+					msg1<-gettext("ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password")
+					msg2<-gettext("connection trial :")
+					msg3<-gettext("connection impossible")
+					msg4<-gettext("connection successfull")
+					msg5<-gettext("request trial")
+					msg6<-gettext("success")
 					verbose<-exists("showmerequest",envir=envir_stacomi)
-				} else {
-					# msg not changed loaded at the beginning
-					verbose<-exists("showmerequest",envir=envir_stacomi)
-					msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
-					msg2<-"connection trial :"
-					msg3<-"connection impossible"
-					msg4<-"connection successfull"
-					msg5<-"request trial"
-					msg6<-"success"
+								
 					funout<-function(text,arret=FALSE){
 						if(arret) stop(text) else print(text)
 						return(NULL)
-					}	
 					killfactor=function(df){
 						for (i in 1:ncol(df))
 						{

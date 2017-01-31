@@ -106,7 +106,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 						" WHERE lot_lot_identifiant is null",
 						and1,and2,and3, ") as tabletemp", sep="")				
 			} else {
-				funout(paste("Not implemented for objectBilan =",objectBilan),arret=TRUE)
+				funout(gettextf("Not implemented for objectBilan = %s",objectBilan),arret=TRUE)
 			}
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
@@ -134,8 +134,8 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 
-				funoutlabel=gettext(get("msg",envir=envir_stacomi)$RefAnnee.2),
-				titleFrame=gettext(get("msg",envir=envir_stacomi)$RefAnnee.1), 
+				funoutlabel=gettext("Year selected\n"),
+				titleFrame=gettext("Year choice"), 
 				preselect=1){
 			if (nrow(object@data) > 0){      
 				hannee=function(h,...){      
@@ -150,7 +150,7 @@ setMethod("choice",
 				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
 				gbutton("OK", container=frame_annee,handler=hannee)  
 			} else { 
-				funout(gettext(get("msg",envir=envir_stacomi)$RefAnnee.3),arret=TRUE)  
+				funout(gettext("Problem when loading data or no data in the database (ODBC link ?)"),arret=TRUE)  
 			}
 		}) 
 
@@ -177,7 +177,7 @@ setMethod("choice_c",
 		signature=signature("RefAnnee"),definition=function(object,
 				annee,
 				nomassign="refAnnee", 
-				funoutlabel=gettext(get("msg",envir=envir_stacomi)$RefAnnee.2),
+				funoutlabel=gettext("Year selected\n"),
 				silent=FALSE
 		){
 			if (length(annee)>1) stop("horodate should be a vector of length 1")

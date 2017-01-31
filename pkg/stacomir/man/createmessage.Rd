@@ -5,26 +5,16 @@
 \title{Generic method to create messages}
 \usage{
 createmessage(object, ...)
-
-createmessage(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method to create messages
-
-Generic method to create messages
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

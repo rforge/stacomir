@@ -59,7 +59,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 			requete@order_by="ORDER BY std_code"  
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
-			if (nrow(object@data)==0) funout(gettext(get("msg",envir=envir_stacomi)$RefStades.1),arret=TRUE)
+			if (nrow(object@data)==0) funout(gettext("No data for this counting device and this taxon\n"),arret=TRUE)
 			return(object)
 		})
 #' Choice method for RefStades referential objects
@@ -84,26 +84,37 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 					stades=svalue(choice)
 					object@data<-object@data[std_libelle%in%stades ,]
 					assign("refStades",object,envir_stacomi)
-					funout(gettext(get("msg",envir=envir_stacomi)$RefStades.2))
+					funout(gettext("Stage selected\n"))
 					if (!is.null(objectBilan)) {
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne premnant que les stades des taxon du dc par la methode charge_avec_filtre
 						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan             
 						if (class(try(objectBilan@par,silent=TRUE))!="try-error") {
-							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@par<<-charge_avec_filtre(object=objectBilan@par,
+									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
+									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (exists("frame_par")) delete(group,frame_par)
 							choice(objectBilan@par,is.enabled=TRUE)
 						} 
 						#il y a bien un object parqual dans l'object Bilan						
 						if (class(try(objectBilan@parqual,silent=TRUE))!="try-error") {
-							objectBilan@parqual<<-charge_avec_filtre(object=objectBilan@parqual,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@parqual<<-charge_avec_filtre(object=objectBilan@parqual,
+									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
+									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choice(objectBilan@parqual,label=gettext(get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE))
+							choice(objectBilan@parqual,label=gettext("Qualitative feature",
+											nomassign="refparqual",
+											frameassign="frame_parqual",is.enabled=TRUE))
 						}
 #il y a bien un object parquan dans l'object Bilan
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
-							objectBilan@parquan<<-charge_avec_filtre(object=objectBilan@parquan,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
+							objectBilan@parquan<<-charge_avec_filtre(object=objectBilan@parquan,
+									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
+									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							if (class(objectBilan)=="Bilan_taille" )
 							{
 								if (nrow(objectBilan@parquan@data)>0) {
@@ -113,18 +124,20 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 								}
 							}
 							if (exists("frame_parquan")) delete(group,frame_parquan)
-							choice(objectBilan@parquan,label=gettext(get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE))
+							choice(objectBilan@parquan,label=gettext("Quantitative feature"),
+									nomassign="refparquan",
+									frameassign="frame_parquan",is.enabled=TRUE)
 						}
 						
 					}
 				}
-				frame_std<<-gframe(gettext(get("msg",envir=envir_stacomi)$RefStades.6))
+				frame_std<<-gframe(gettext("Stage selection"))
 				add(group,frame_std)
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				choice=gcombobox(std_libelle,container=frame_std,handler=hstd)
 				enabled(frame_std)<-is.enabled
 				gbutton("OK", container=frame_std,handler=hstd)
-			} else funout(gettext(get("msg",envir=envir_stacomi)$RefStades.5),arret=TRUE)
+			} else funout(gettext("Stop internal error : load data to make a choice\n"),arret=TRUE)
 		})
 
 #' Multiple Choice method for RefStades referential objects
@@ -152,7 +165,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 					stades=tbdeststd[,][tbdeststd[,]!=""]
 					object@data<-object@data[std_libelle%in%stades ,]
 					assign("refStades",object,envir_stacomi)
-					funout(gettext(get("msg",envir=envir_stacomi)$RefStades.2))
+					funout(gettext("Stage selected\n"))
 					if (!is.null(objectBilan)) {
 						objectBilan@stades<-object
 						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
@@ -180,7 +193,9 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							choicemult(objectBilan@parqual,label=gettext(get("msg",envir=envir_stacomi)$RefStades.3,nomassign="refparqual",frameassign="frame_parqual",is.enabled=TRUE))
+							choicemult(objectBilan@parqual,label=gettext("Qualitative feature",
+											nomassign="refparqual",frameassign="frame_parqual",
+											is.enabled=TRUE))
 						}
 #il y a bien un object parquan dans l'object Bilan
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
@@ -196,7 +211,9 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 													is.na(objectBilan@parquan@data$par_code)|objectBilan@parquan@data$par_code=="C001",]     # aucune
 								}
 							}
-							choicemult(objectBilan@parquan,label=gettext(get("msg",envir=envir_stacomi)$RefStades.4,nomassign="refparquan",frameassign="frame_parquan",is.enabled=TRUE))
+							choicemult(objectBilan@parquan,label=gettext("Quantitative feature",
+											nomassign="refparquan",frameassign="frame_parquan",
+											is.enabled=TRUE))
 						}
 						if (svalue(notebook)<length(notebook)){
 							svalue(notebook)<-svalue(notebook)+1	
@@ -211,7 +228,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				groupstd<-ggroup() 
 				assign("goupstd",groupstd,envir=.GlobalEnv)
 				add(notebook,groupstd,label="stade")
-				framestdsource<-gframe(gettext(get("msg",envir=envir_stacomi)$RefStades.6,container=groupstd))
+				framestdsource<-gframe(gettext("Stage selection",container=groupstd))
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)
 				size(tbsourcestd)<-c(160,300) 
 				#TODO addmsg
@@ -253,7 +270,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						})
 				gbutton("ok", container = groupstd, handler = hstd)
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$RefDC.7),arret=TRUE)
+				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n"),arret=TRUE)
 			}
 		})
 
@@ -273,12 +290,12 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 #' choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
 #' }
 
-setMethod("choice_c",signature=signature("RefStades"),definition=function(object,stades) {
+setMethod("choice_c",signature=signature("RefStades"),definition=function(object,stades,silent=FALSE) {
 			if (is.null(stades)) {
-				funout(gettext(get("msg",envir=envir_stacomi)$RefStades.7),arret=TRUE)
+				funout(gettext("No value for argument stage\n"),arret=TRUE)
 			}
 			libellemanquants<-stades[!stades%in%object@data$std_code]
-			if (length(libellemanquants)>0) funout(gettextf("No data for this counting device and this taxon\n %s",stringr::str_c(libellemanquants,collapse=", ")))
+			if (length(libellemanquants)>0&!silent) funout(gettextf("No data for this counting device and this taxon\n %s",stringr::str_c(libellemanquants,collapse=", ")))
 			object@data<-object@data[object@data$std_code%in%stades,]					
 			if (nrow(object@data)==0 )	{
 				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)

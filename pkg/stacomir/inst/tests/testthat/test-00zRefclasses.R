@@ -29,7 +29,7 @@ test_that("Test that the parsing of wrong character formats gets an error",
 			options(warn = -1)
 			expect_error(refHorodate<-choice_c(refHorodate,	
 							horodate="2013 01 01"))	
-			options(warn = 2)
+			options(warn = 1)
 			
 		})
 
@@ -42,8 +42,6 @@ test_that("Test that RefDF choice_c method loads character, numeric, but not rub
 			refDF<-new("RefDF")
 			refDF<-charge(refDF)
 			expect_silent(refDF<-choice_c(refDF,	2))		
-			expect_silent(refDF<-choice_c(refDF,	"2"))	
-			options(warn = -1)
-			expect_error(refDF<-choice_c(refDF,	"semoule"))
-			options(warn = 2)
+			expect_silent(refDF<-choice_c(refDF,	"2"))			
+			expect_error(refDF<-suppressWarnings(choice_c(refDF,	"semoule")))
 					})

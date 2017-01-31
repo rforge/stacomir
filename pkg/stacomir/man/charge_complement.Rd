@@ -5,26 +5,16 @@
 \title{Generic method to load additional data}
 \usage{
 charge_complement(object, ...)
-
-charge_complement(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method to load additional data
-
-Generic method to load additional data
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

@@ -5,26 +5,16 @@
 \title{Generic method for manual choice}
 \usage{
 choice_c(object, ...)
-
-choice_c(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method for manual choice
-
-Generic method for manual choice
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

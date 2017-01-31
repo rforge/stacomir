@@ -84,6 +84,10 @@ plot(bilan_adm, plot.type=1)
 
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilan_adm)
+
+object=new("RefMsg")
+msgfr<-charge_avec_filtre(object,lang='French')
+str(msgfr)
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

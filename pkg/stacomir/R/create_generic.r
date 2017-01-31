@@ -25,11 +25,6 @@ setGeneric("charge",def=function(object,...) standardGeneric("charge"))
 #' @author cedric.briand
 setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
-#' Generic method for plot
-#' @param x passed by the generic
-#' @param y passed by the generic
-#' @param ... Additional parms
-#' @author cedric.briand
 #setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))
 ##' Generic for prediction
 ##' @param object Object
@@ -51,7 +46,7 @@ setGeneric("calcule",def=function(object,...) standardGeneric("calcule"))
 #' @param ... Additional parms
 #' @author cedric.briand
 setGeneric("supprime",def=function(object,...) standardGeneric("supprime"))
-#' Generic method getvalue
+#' Generic method write_database
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
@@ -61,7 +56,7 @@ setGeneric("write_database",def=function(object,...) standardGeneric("write_data
 #' @param ... Additional parms
 #' @author cedric.briand
 setGeneric("getvalue",def=function(object,...) standardGeneric("getvalue"))
-#' Generic method getvalue
+#' Generic method to forward outputs
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand

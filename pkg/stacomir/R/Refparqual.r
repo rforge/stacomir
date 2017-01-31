@@ -130,12 +130,12 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 					object@data<-object@data[car_libelle%in%carchoisi ,]
 					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)
-					funout(gettext(get("msg",envir=envir_stacomi)$Refpar.3))
+					funout(gettext("Feature has been selected\n"))
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-			} else stop(gettext(get("msg",envir=envir_stacomi)$Refpar.4),arret=TRUE)
+			} else stop(gettext("Internal error : unable to load any feature to make the choice\n"),arret=TRUE)
 		})

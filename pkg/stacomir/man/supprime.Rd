@@ -5,26 +5,16 @@
 \title{Generic method to delete entires from the database}
 \usage{
 supprime(object, ...)
-
-supprime(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method to delete entires from the database
-
-Generic method to delete entires from the database
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

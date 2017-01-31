@@ -6,8 +6,8 @@
 \title{choice method for RefAnnee referential}
 \usage{
 \S4method{choice}{RefAnnee}(object, nomassign = "refAnnee",
-  funoutlabel = get("msg", envir = envir_stacomi)$RefAnnee.2,
-  titleFrame = get("msg", envir = envir_stacomi)$RefAnnee.1, preselect = 1)
+  funoutlabel = gettext("Year selected\\n"),
+  titleFrame = gettext("Year choice"), preselect = 1)
 }
 \arguments{
 \item{object}{An object of class \link{RefAnnee-class}}

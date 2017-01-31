@@ -17,14 +17,14 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	write.table(tableau,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 	if (!silent) funout(gettextf("writing of %s\n",path1))
 	path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(DC,"_",taxon,"_",stade,"_",annee,".html",sep=""),fsep ="/")
-	funhtml(data=tableau,
+	suppressWarnings(funhtml(data=tableau,
 			caption=paste(DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),
 			top=TRUE,
 			outfile=path1html,
 			clipboard=FALSE,
 			append=FALSE,
 			digits=2
-	)
+	))
 	if (!silent) funout(gettextf("writing of %s\n",path1html))
 	if( !is.null(resum) )
 	{
@@ -32,14 +32,14 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";")
 		path2html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".html",sep=""),fsep ="/")
 		if (!silent) funout(gettextf("writing of %s\n",path2))
-		funhtml(data=resum,
+		suppressWarnings(funhtml(data=resum,
 				caption=paste("Sommes mensuelles",annee),
 				top=TRUE,
 				outfile=path2html,
 				clipboard=FALSE,
 				append=TRUE,
 				digits=2
-		)
+		))
 		if (!silent) funout(gettextf("writing of %s\n",path2html))
 	}
 }

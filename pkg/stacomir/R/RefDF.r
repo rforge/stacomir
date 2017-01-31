@@ -86,25 +86,25 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$df%in%object@df_selectionne]
 					#cat("passe par la")
 					assign("refDF",object,envir_stacomi)
-					funout(gettext(get("msg",envir=envir_stacomi)$RefDF.1))
+					funout(gettext("Fishway selected\n"))
 					#dispose(winst)
 				} 
 				# Handler d'affichage du tableau
 				hDFi=function(h,...){
-					w=gwindow(gettext(get("msg",envir=envir_stacomi)$RefDF.2,width=400))
+					w=gwindow(gettext("Fishways data"),width=400)
 					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,6,7)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
 					bg<-ggroup(container=wg)
 					addSpring(bg)
-					gbutton(gettext(get("msg",envir=envir_stacomi)$RefDC.4, container=bg, handler = function(h,...) dispose(w)))
+					gbutton(gettext("close"), container=bg, handler = function(h,...) dispose(w))
 				}
-				frameDF=gframe(gettext(get("msg",envir=envir_stacomi)$RefDF.3,container=group))
+				frameDF=gframe(gettext("Fishway choice"),container=group)
 				DF_identifiant=object@data$df
 				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
-				gbutton(gettext(get("msg",envir=envir_stacomi)$RefDC.6, container=frameDF,handler=hDFi))
+				gbutton(gettext("Table"), container=frameDF,handler=hDFi)
 				gbutton("OK", container=frameDF,handler=hDF)
 			} else {
-				funout(gettext(get("msg",envir=envir_stacomi)$RefDF.4),arret=TRUE)
+				funout(gettext("No fishway in the database (the query returns 0 entry)\n"),arret=TRUE)
 			}
 		})
 
@@ -133,7 +133,9 @@ setMethod("choice_c",signature=signature("RefDF"),definition=function(object,df)
 			if (class(df)=="numeric") {
 				df<-as.integer(df) 
 			} else if (class(df)=="character"){
+				options(warn = -1)
 				df=as.integer(as.numeric(df))
+				options(warn = 0)
 			}
 			if (any(is.na(df))) stop ("NA values df")			
 			object@df_selectionne<-df

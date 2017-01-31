@@ -158,7 +158,7 @@ husr=function(h,...){
 		con@baseODBC=get("baseODBC",envir=envir_stacomi)
 		e=expression(con<-connect(con))
 		con=tryCatch(eval(e),error=gettext("Error when using the method connect of the ConnectionODBC class") )
-		test<-con@etat==gettext("Connection in progress")
+		test<-con@etat=="Connection in progress"|con@etat=="Connexion en cours"
 		odbcCloseAll()
 	}
 	# if the test is OK launches the stacomi interface
@@ -438,8 +438,8 @@ interface_graphique=function(){
 	menubarlist[[gettext("Summary")]][[gettext("Yearly")]]$icon="gWidgetsRGtk2-barplot"
 	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$handler=hBilanMigrationInterAnnuelle
 	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$icon="gWidgetsRGtk2-hist"
-	menubarlist[[gettext("Summary")]][[gettext("")]]$handler=hBilan_carlot
-	menubarlist[[gettext("Summary")]][[gettext("")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics")]]$handler=hBilan_carlot
+	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
 	
 	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
 	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"

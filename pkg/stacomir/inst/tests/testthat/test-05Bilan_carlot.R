@@ -23,17 +23,17 @@ test_that("Test an instance of Bilan_carlot loaded with choice_c",{
 			assign("sch","iav.",envir_stacomi)
 			
 			b_carlot<-new("Bilan_carlot")
-			options(warn = -1)
-			b_carlot<-choice_c(b_carlot,
+			#options(warn = -1)
+			b_carlot<-suppressWarnings(choice_c(b_carlot,
 					dc=c(6),
 					taxons=c("Anguilla anguilla"),
 					stades=c("AGJ"),
 					par=c(1785,1786,1787,"C001"),
 					horodatedebut="2013-01-01",
 					horodatefin="2013-12-31",
-					silent=TRUE)
+					silent=TRUE))
 			# three warning produced, none shown due to silent=TRUE
-			options(warn = 0)
+			#options(warn = 0)
 			expect_s4_class(b_carlot,
 					"Bilan_carlot")
 			rm("envir_stacomi",envir =.GlobalEnv)
@@ -51,20 +51,20 @@ test_that("Test methods in Bilan_carlot",{
 			assign("sch","iav.",envir_stacomi)
 			
 			b_carlot<-new("Bilan_carlot")
-			options(warn = 2)
-			b_carlot<-choice_c(b_carlot,
+			#options(warn = 2)
+			b_carlot<-suppressWarnings(choice_c(b_carlot,
 					dc=c(5,6),
 					taxons=c("Anguilla anguilla"),
 					stades=c("AGJ","CIV"),
 					par=c(1785,1786,1787,"C001"),
 					horodatedebut="2013-01-01",
 					horodatefin="2013-12-31",
-					silent=TRUE)
-			# two warning produced
-			options(warn = 0)
+					silent=TRUE))
+			# two warning produced: No data for par 1785 No data for par 1787
+			#options(warn = 0)
 			b_carlot<-connect(b_carlot,silent=TRUE)
 			expect_true(nrow(b_carlot@data)>0,label="No data for b_carlot")
-			b_carlot<-calcule(b_carlot)
+			b_carlot<-calcule(b_carlot,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
 			
 		})

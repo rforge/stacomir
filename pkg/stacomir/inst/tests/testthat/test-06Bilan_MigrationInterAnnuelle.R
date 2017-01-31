@@ -52,7 +52,7 @@ test_that("Test methods in BilanMigrationInterAnnuelle",{
 					anneefin=2015,
 					silent=TRUE)
 			bmi<-connect(bmi,silent=TRUE)	
-			summary(bmi,silent=TRUE)
+			summary(object=bmi,silent=TRUE)
 			# two warning produced
 			rm("envir_stacomi",envir =.GlobalEnv)
 			
@@ -66,7 +66,7 @@ test_that("Test example bilanMigrationInterAnnuelle_example",
 			example_path<-file.path(.libPaths(),"stacomiR","R-ex","BilanMigrationInterAnnuelle-class.R")
 			test<-file.access(example_path,0)
 			if (test[1]!=0) warnings("Package example dir not created ?") else
-							source(example_path)
+				suppressWarnings(source(example_path))
 				
 		})
 

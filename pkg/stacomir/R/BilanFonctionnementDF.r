@@ -246,7 +246,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 						xlab(gettext("month"))+						
 						ggtitle(main)+
 						geom_bar(stat='identity',aes(fill=per_etat_fonctionnement))+
-						scale_fill_manual(gettext("operation",values = c("#E41A1C","#4DAF4A"))) 
+						scale_fill_manual(gettext("operation"),values = c("#E41A1C","#4DAF4A")) 
 				
 				if (plot.type=="1")
 					print(g)

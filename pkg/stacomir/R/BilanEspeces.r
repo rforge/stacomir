@@ -109,7 +109,7 @@ hBilanEspecescalc=function(h,...){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(object){
-			funout(gettext("Checking objects and launching query\n")
+			funout(gettext("Checking objects and launching query\n"))
 			bilanEspeces<-object
 			if (exists("refDC",envir_stacomi)) {
 				bilanEspeces@dc<-get("refDC",envir_stacomi)

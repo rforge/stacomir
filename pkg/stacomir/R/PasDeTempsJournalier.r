@@ -49,9 +49,9 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			rep1 = validite_PasDeTemps(object)
 			if (!is.logical(rep1)) retValue<-rep1
 			rep2 = (object@stepDuration==86400)
-			if (!rep2) retValue=paste(retValue,gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.1))
+			if (!rep2) retValue=paste(retValue,gettext("Time step duration should be daily"))
 			rep3 = length(getAnnees(object))==1
-			if (!rep3) retValue=paste(retValue,gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.2))
+			if (!rep3) retValue=paste(retValue,gettext("Time step can't include more than one year"))
 			return(ifelse( rep1 & rep2 & rep3 ,TRUE,retValue)   )
 		})	
 # pour test #object=new("PasDeTempsJournalier")
@@ -65,23 +65,23 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 					object=setdateDebut(object,as.POSIXlt(svalue(datedeb)))
 					svalue(datedefin)<-as.Date(DateFin(object))
 					assign("pasDeTemps",object,envir_stacomi)
-					funout(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.8))
+					funout(gettext("Time steps loaded\n"))
 					#dispose(winpa)
 				}
-				winpa=gframe(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.3,container=group,horizontal=FALSE))
+				winpa=gframe(gettext("Time steps choice (1 year duration)",container=group,horizontal=FALSE))
 				pg<-glayout(container=winpa)
-				pg[1,1]<-glabel(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.4))
+				pg[1,1]<-glabel(gettext("Start date"))
 				datedeb<-gedit(as.Date(getdateDebut(object)),handler=hwinpa,width=10)
 				pg[2,1]<-datedeb
-				pg[3,1]<-glabel(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.5))
+				pg[3,1]<-glabel(gettext("Time step"))
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
 				choicepas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
 				pg[4,1]<-choicepas 
 				enabled(choicepas)=FALSE
-				pg[3,2]<-glabel(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.6))
+				pg[3,2]<-glabel(gettext("Number of days"))
 				choicenbStep=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
 				pg[4,2]<-choicenbStep
-				pg[1,2]<-glabel(gettext(get("msg",envir=envir_stacomi)$PasdeTempsJournalier.7,container=pg))
+				pg[1,2]<-glabel(gettext("End date",container=pg))
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE
 				pg[2,2]<-datedefin			

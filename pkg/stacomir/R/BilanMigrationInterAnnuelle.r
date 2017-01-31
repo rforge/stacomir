@@ -256,7 +256,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 							scale_x_datetime(name="date")
 					print(g)
 					assign("g",g,envir=envir_stacomi)
-					funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="standard"){
 					dat=bilanMigrationInterAnnuelle@data
@@ -300,7 +300,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+theme_bw()+ theme(legend.key = element_blank())
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						funout(gettextf("Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
 						
 						
 					} # end if					
@@ -339,7 +339,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					tmp<-dat[as.numeric(as.character(dat$annee))==as.numeric(the_choice),]
 					g <- g+geom_step(aes(col=annee,size=total_annuel))
 					g <- g+geom_step(data=tmp,col="black",lty=2)
-					g<-g+labs(title=gettextf("%s %s, Cumulated numbers %s"bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,bilanMigrationInterAnnuelle@stades@data$std_libelle,amplitude))
+					g<-g+labs(title=gettextf("%s %s, Cumulated numbers %s",bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,bilanMigrationInterAnnuelle@stades@data$std_libelle,amplitude))
 					g<-g+scale_y_continuous(name=gettext("Annual migration percentage"))
 					g<-g+scale_x_date(name=gettext("date"),date_breaks="months", 
 							date_minor_breaks="weeks", 
@@ -348,7 +348,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					g<-g+scale_colour_hue(name=gettext("year"),l=70, c=150)# annee
 					print(g) 
 					assign("g",g,envir_stacomi)
-					funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))	
+					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))	
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="barchart"){	
 					dat=bilanMigrationInterAnnuelle@data
@@ -434,7 +434,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					
@@ -509,7 +509,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -557,10 +557,10 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g)
 						assign(paste("g",sep=""),g,envir_stacomi)
-						funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
 						
 					}    else     {
-						funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
+						if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
 					}
 					
 				} 	 else {
@@ -568,7 +568,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 				}
 				
 			}    else     {
-				funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
+				if (!silent) funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
 			}
 			
 		})			
@@ -730,9 +730,9 @@ fundat=function(dat,annee=NULL,timesplit=NULL)
 		}
 		# calcul des valeurs min et max et moyenne en fonction de la coupure (jour, semaine,quinzaine, mois)
 		
-		maxdat<-tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE)
-		mindat<-tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE)
-		meandat<-tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE)
+		maxdat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE))
+		mindat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE))
+		meandat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE))
 		datsummary<-data.frame("maxtab"=maxdat,"mintab"=mindat,"moyenne"=meandat)
 		datsummary<-datsummary[!is.infinite(datsummary$maxtab),]# the minimum and max of empty set are -Inf and Inf respectively
 		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
@@ -772,6 +772,7 @@ hsummaryBilanMigrationInterannuelle<-function(h,...){
 setMethod("summary",signature=signature(object="BilanMigrationInterAnnuelle"),definition=function(object,silent=FALSE,...){
 			# table generated with funtable
 			# TODO traitement des poids
+			#object<-bmi
 			dat=object@data
 			dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
 			dat<-stacomirtools::chnames(dat,c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur","bjo_horodateexport"),    c("DC","Taxon","Stade","Annee","Jour","Label_quantite","Nombre","Date d'export du bilan"))

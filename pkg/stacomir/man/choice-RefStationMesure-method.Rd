@@ -6,7 +6,7 @@
 \title{Choice method for RefStationMesure referential object}
 \usage{
 \S4method{choice}{RefStationMesure}(object, is.enabled = TRUE,
-  title = get("msg", envir = envir_stacomi)$RefStationMesure.3)
+  title = gettext("Monitoring stations selection"))
 }
 \arguments{
 \item{object}{An object of class \link{RefStationMesure-class}}

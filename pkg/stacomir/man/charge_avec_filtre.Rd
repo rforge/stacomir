@@ -5,26 +5,16 @@
 \title{Generic method to load referentials, with filters from the parent object in the database}
 \usage{
 charge_avec_filtre(object, ...)
-
-charge_avec_filtre(object, ...)
 }
 \arguments{
-\item{object}{Object}
-
-\item{...}{Additional parms}
-
 \item{object}{Object}
 
 \item{...}{Additional parms}
 }
 \description{
 Generic method to load referentials, with filters from the parent object in the database
-
-Generic method to load referentials, with filters from the parent object in the database
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

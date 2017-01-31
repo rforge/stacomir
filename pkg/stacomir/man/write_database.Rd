@@ -2,29 +2,19 @@
 % Please edit documentation in R/create_generic.r
 \name{write_database}
 \alias{write_database}
-\title{Generic method getvalue}
+\title{Generic method write_database}
 \usage{
-write_database(object, ...)
-
 write_database(object, ...)
 }
 \arguments{
 \item{object}{Object}
 
 \item{...}{Additional parms}
-
-\item{object}{Object}
-
-\item{...}{Additional parms}
 }
 \description{
-Generic method getvalue
-
-Generic method getvalue
+Generic method write_database
 }
 \author{
-cedric.briand
-
 cedric.briand
 }
 

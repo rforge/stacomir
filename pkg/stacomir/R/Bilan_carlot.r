@@ -167,7 +167,7 @@ setMethod("choice_c",signature=signature("Bilan_carlot"),definition=function(obj
 #' @param object An object of class \code{\link{Bilan_carlot-class}} 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(object,silent) {
+setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(object,silent=FALSE) {
 			#bilan_carlot<-b_carlot
 			bilan_carlot<-object
 			if(nrow(bilan_carlot@data)==0) {
@@ -201,7 +201,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 			#vue_ope_lot=vue_ope_lot[,c("ope","lot","dic","lot_pere","date","effectif","quantite","tax","std","dev","par","meth","val","val_quant","val_libelle", "annee","mois","quinzaine","semaine","jour")]
 			bilan_carlot@data<-vue_ope_lot
 			assign("bilan_carlot",bilan_carlot,envir_stacomi)#assign("bilan_carlot",vue_ope_lot,envir_stacomi)
-			funout(gettext("To obtain the table, type : bilan_lot=get('bilan_lot',envir_stacomi)\n"))
+			if (!silent) funout(gettext("To obtain the table, type : bilan_carlot=get('bilan_carlot',envir_stacomi)\n"))
 			return(bilan_carlot)
 		})
 

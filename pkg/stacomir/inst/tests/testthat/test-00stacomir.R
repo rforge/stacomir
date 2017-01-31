@@ -139,8 +139,8 @@ test_that("Test that  messages without connection are loaded and of the same len
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
-
-context("Database integrity")
+# pour schema get("sch",envir=envir_stacomi)
+context(stringr::str_c("Database integrity"))
 
 
 test_that("Test that tickets have been launched",
@@ -186,7 +186,7 @@ test_that("Test that tickets have been launched",
 				expect_true(check_exist_tickets[i],label=paste('Missing ticket :',tickets$main_ticket[i]))
 			}					
 		})
-
+# test on current schema
 test_that("All foreign keys are present",
 		{
 			require(stacomiR)
@@ -195,8 +195,8 @@ test_that("All foreign keys are present",
 			baseODBC<-get("baseODBC", envir=envir_stacomi)
 			options(warn=-1)
 			#warning : Coercing LHS to a list
-			baseODBC$uid=readline(prompt="Enter superuser name: ")
-			baseODBC$pwd=readline(prompt="Enter superuser password: ")	
+			baseODBC["uid"]=relax::readline(prompt="Enter superuser name: ")
+			baseODBC["pwd"]=relax::readline(prompt="Enter superuser password: ")	
 			options(warn=0)
 			req@baseODBC<-baseODBC
 			req@sql=paste(stringr::str_c("SELECT

@@ -230,7 +230,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 						ylab(gettext("duration"))+
 						xlab(gettext("month"))+						
 						geom_bar(stat='identity')+
-						scale_fill_manual(gettext("type_oper.",values = c("#FF6700","#EE1874", "#9E0142","#76BEBE","#999999")))+
+						scale_fill_manual(gettext("type_oper."),values = c("#FF6700","#EE1874", "#9E0142","#76BEBE","#999999"))+
 						theme(
 								plot.background = element_rect(fill ="white"),
 								panel.background = element_rect(fill="white"),
@@ -253,7 +253,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 						ylab(gettext("duration"))+
 						xlab(gettext("month"))+									
 						geom_bar(stat='identity',aes(fill=per_etat_fonctionnement))+
-						scale_fill_manual(gettext("operation",values = c("#0F313A","#CEB99A")   )) +
+						scale_fill_manual(gettext("operation"),values = c("#0F313A","#CEB99A"))+
 						theme(
 								plot.background = element_rect(fill ="white"),
 								panel.background = element_rect(fill="white"),

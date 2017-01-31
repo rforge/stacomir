@@ -6,8 +6,7 @@
 \title{choice method for RefAnnee referential from the command line}
 \usage{
 \S4method{choice_c}{RefAnnee}(object, annee, nomassign = "refAnnee",
-  funoutlabel = get("msg", envir = envir_stacomi)$RefAnnee.2,
-  silent = FALSE)
+  funoutlabel = gettext("Year selected\\n"), silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{RefAnnee-class}}

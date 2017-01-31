@@ -1,5 +1,3 @@
-# Nom fichier :        interface_BilanMigrationInterAnnuelle.R    (interface)
-
 #' interface for BilanMigrationInterannuelle class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanMigrationInterAnnuelle = function()
@@ -7,7 +5,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	quitte() # vidange de l'interface
 	bilanMigrationInterAnnuelle=new("BilanMigrationInterAnnuelle")
 	assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir=envir_stacomi)
-	funout(gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.1))
+	funout(gettext("Loading of the existing daily summaries\n"))
 	bilanMigrationInterAnnuelle@anneeDebut=charge(bilanMigrationInterAnnuelle@anneeDebut)
 	bilanMigrationInterAnnuelle@anneeFin=charge(bilanMigrationInterAnnuelle@anneeFin)
 	bilanMigrationInterAnnuelle@dc=charge(bilanMigrationInterAnnuelle@dc)
@@ -22,13 +20,13 @@ interface_BilanMigrationInterAnnuelle = function()
 	
 	choice(bilanMigrationInterAnnuelle@anneeDebut,
 			nomassign="anneeDebut",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.2),
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.3),
+			funoutlabel=gettext("The year of beginning has been chosen\n"),
+			titleFrame=gettext("Beginning year"),
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==min(bilanMigrationInterAnnuelle@anneeDebut@data)))
 	choice(bilanMigrationInterAnnuelle@anneeFin,
 			nomassign="anneeFin",
-			funoutlabel=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.4),
-			titleFrame=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.5),
+			funoutlabel=gettext("The last year has been chosen\n"),
+			titleFrame=gettext("Ending year"),
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==max(bilanMigrationInterAnnuelle@anneeFin@data)))
 	choice(bilanMigrationInterAnnuelle@dc,objectBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
 	
@@ -43,44 +41,59 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist1 = list(
-			aGraph=gWidgets::gaction(label="all",icon="lines",handler=hgraphBilanMigrationInterAnnuelle,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
-			aGraph7=gWidgets::gaction(label="cum15",icon="curve",handler=hgraphBilanMigrationInterAnnuelle7,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.6)),
-			aGraph3=gWidgets::gaction(label="step",icon="graph2",handler=hgraphBilanMigrationInterAnnuelle3,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.7)),
-			aSummary=gWidgets::gaction(handler=hsummaryBilanMigrationInterannuelle, icon="dataframe", label="stat", tooltip="summary"),  
-			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.9))
+			aGraph=gWidgets::gaction(label="all",
+					icon="lines",
+					handler=hgraphBilanMigrationInterAnnuelle,
+					tooltip=gettext("Migration of all the years in the same graphic")),
+			aGraph7=gWidgets::gaction(label="cum15",
+					icon="curve",
+					handler=hgraphBilanMigrationInterAnnuelle7,
+					tooltip=gettext("Migration of all the years in the same graphic, cumulated")),
+			aGraph3=gWidgets::gaction(label="step",
+					icon="graph2",
+					handler=hgraphBilanMigrationInterAnnuelle3,
+					tooltip=gettext("cumulated migrations %")),
+			aSummary=gWidgets::gaction(handler=hsummaryBilanMigrationInterannuelle,
+					icon="dataframe", 
+					label="stat",
+					tooltip="summary"),  
+			aQuit=gWidgets::gaction(label="fermer",
+					icon="close", 
+					handler=quitte,
+					tooltip=gettext("Exit"))
 	)
 	toolbarlist2=list(
-			aGraph2=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.10),
+			aGraph2=gWidgets::gaction(label=gettext("day"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle2,
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.11)),
-			aGraph4=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.12),
+					tooltip=gettext("Daily migration")),
+			aGraph4=gWidgets::gaction(label=gettext("week"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle4,
 					action="semaine",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.13)),
-			aGraph5=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.14),
+					tooltip=gettext("weekly migration")),
+			aGraph5=gWidgets::gaction(label=gettext("fortnight"),
 					icon="hist",
 					handler=hgraphBilanMigrationInterAnnuelle4,
 					action="quinzaine",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.15)),
-			aGraph6=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.16),
+					tooltip=gettext("Fortnight Migration")),
+			aGraph6=gWidgets::gaction(label=gettext("month"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle4,
 					action="mois",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.17)      )
+					tooltip=gettext("Monthly migration"))
 	)
 	toolbarlist3=list(
-			aGraph1=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.12),
+			aGraph1=gWidgets::gaction(label=gettext("week"),
 					icon="gWidgetsRGtk2-points",handler=hgraphBilanMigrationInterAnnuelle5,
 					action="semaine",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.13)),
-			aGraph2=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.14),
+					tooltip=gettext("weekly migration")),
+			aGraph2=gWidgets::gaction(label=gettext("fortnight"),
 					icon="gWidgetsRGtk2-points",
 					handler=hgraphBilanMigrationInterAnnuelle5,
 					action="quinzaine",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.15)),
-			aGraph3=gWidgets::gaction(label=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.16),
+					tooltip=gettext("Fortnight migration")),
+			aGraph3=gWidgets::gaction(label=gettext("month"),
 					icon="gWidgetsRGtk2-points",handler=hgraphBilanMigrationInterAnnuelle5,
 					action="mois",
-					tooltip=gettext(get("msg",envir=envir_stacomi)$interface_BilanMigrationInterannuelle.17)      )
+					tooltip=gettext("Monthly migration"))
 	)
 	add(ggroupboutonsbas, gtoolbar(toolbarlist1))
 	add(ggroupboutonsbas, gtoolbar(toolbarlist2)) 

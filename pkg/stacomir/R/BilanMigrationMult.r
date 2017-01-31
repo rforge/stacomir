@@ -966,7 +966,7 @@ fun_bilanMigrationMult <- function(time.sequence, datasub,negative=FALSE) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fun_weight_conversion=function(tableau,time.sequence,silent) { 
 	if (!silent) funout(gettextf("dc=%s Conversion weight / number\n",unique(tableau$ope_dic_identifiant)))
-	nr<-length(unique(tableau$debut_pas))
+	nr<-nrow(unique(tableau[,c("debut_pas","lot_tax_code","lot_std_code")]))
 	tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
 	tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
 	tableaueffectif= tableaueffectif[,c("No.pas", "lot_tax_code","lot_std_code","CALCULE","MESURE","EXPERT","PONCTUEL","Effectif_total")]       
