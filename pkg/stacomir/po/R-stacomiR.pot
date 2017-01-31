@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-30 16:54\n"
+"POT-Creation-Date: 2017-01-31 10:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,15 +301,6 @@ msgstr ""
 msgid "Fishway"
 msgstr ""
 
-msgid "Fonc"
-msgstr ""
-
-msgid "Arr"
-msgstr ""
-
-msgid "Fonc normal"
-msgstr ""
-
 msgid "Fishway operation"
 msgstr ""
 
@@ -328,7 +319,7 @@ msgstr ""
 msgid "Starting migration summary ... be patient"
 msgstr ""
 
-msgid "\"Summary object is stocked into envir_stacomi environment : write bilanMigration=get(bilanMigration\",envir_stacomi)\""
+msgid "Summary object is stocked into envir_stacomi environment : write bilanMigration=get('bilanMigration',envir_stacomi)"
 msgstr ""
 
 msgid "To access calculated data, type bilanMigration@calcdata"
@@ -436,7 +427,7 @@ msgstr ""
 msgid "Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
 msgstr ""
 
-msgid "\"The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get('bilanMigrationMult',envir_stacomi)\\n\"\""
+msgid "The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi)"
 msgstr ""
 
 msgid "Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n"
@@ -457,13 +448,13 @@ msgstr ""
 msgid "You need to choose at least one quantitative or qualitative attribute"
 msgstr ""
 
-msgid "\"Be careful, the processing doesnt take lot\"s quantities into account\""
+msgid "Be careful, the processing doesnt take lot\"s quantities into account"
 msgstr ""
 
-msgid "\"Writing data into envir_stacomi environment : write data=get(data\",envir_stacomi)\""
+msgid "Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi)"
 msgstr ""
 
-msgid "normalement ce cas est impossible"
+msgid "This shouldn't be possible"
 msgstr ""
 
 msgid "Loading data for operations"
@@ -598,10 +589,7 @@ msgstr ""
 msgid "incoming dates in estuary"
 msgstr ""
 
-msgid "le tableau des temperatures et salinites"
-msgstr ""
-
-msgid "ne remonte pas assez loin dans le temps"
+msgid "The temperature and salinity table doesn't go back enough in time"
 msgstr ""
 
 msgid "The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)"
@@ -872,9 +860,6 @@ msgid "Internal error : there must have one line in Refparqual@data, or nbligne=
 msgstr ""
 
 msgid "Writing monthly summary in the database"
-msgstr ""
-
-msgid "il faut choisir au moins une caracteristique quantitative ou qualitative"
 msgstr ""
 
 msgid "Date"
@@ -1267,7 +1252,7 @@ msgstr ""
 msgid "Error when using the method connect of the ConnectionODBC class"
 msgstr ""
 
-msgid "\"\"Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link\"\""
+msgid "Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link"
 msgstr ""
 
 msgid "ODBC link"
@@ -1316,6 +1301,9 @@ msgid "Yearly"
 msgstr ""
 
 msgid "Inter annual migration"
+msgstr ""
+
+msgid "Sample characteristics"
 msgstr ""
 
 msgid "Help"

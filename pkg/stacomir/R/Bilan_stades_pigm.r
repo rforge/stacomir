@@ -664,8 +664,7 @@ fungraphstades<-function(
 					tps[j,k]=phidates[length(phidates)] 
 					if (cherchenuls[j,k]!=0 ){
 						# teste si il a des stades dans la case selectionnee
-						warning(paste(strdates[j],colnames(tps)[k],"le tableau des temperatures et salinites",
-										"ne remonte pas assez loin dans le temps","\n"))
+						warning(paste(strdates[j],colnames(tps)[k],"The temperature and salinity table doesn't go back enough in time","\n"))
 					}
 				}
 			}

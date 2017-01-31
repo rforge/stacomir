@@ -268,7 +268,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 			echantillons=""      
 		} 
 		if (bilanMigrationPar@parquan@data$par_nom=="aucune" & bilanMigrationPar@parqual@data$par_nom=="aucune") {
-			stop("il faut choisir au moins une caracteristique quantitative ou qualitative")
+			stop("You need to choose at least one quantitative or qualitative attribute")
 		} else if (bilanMigrationPar@parquan@data$par_nom=="aucune") {
 			#caracteristique qualitative uniquement
 			req@sql=paste("SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif,",

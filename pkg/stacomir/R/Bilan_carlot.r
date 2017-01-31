@@ -235,21 +235,21 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 						coord_flip()
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\"n"))				
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n"))				
 			} else if (plot.type==2){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_boxplot(aes(x=mois,y=car_valeur_quantitatif,fill=std_libelle))+
 						facet_grid(annee ~ .)				
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\n"))
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n"))
 				
 			}else if (plot.type==3){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif))
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\n"))
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n"))
 			}
 			return(invisible(NULL))
 		})

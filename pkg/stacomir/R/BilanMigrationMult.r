@@ -248,7 +248,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			if (!silent){
-				funout(gettext("\"The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get('bilanMigrationMult',envir_stacomi)\\n\"\"\n"))
+				funout(gettext("The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi) \n"))
 				funout(gettext("Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n\n"))
 			}
 			return(bilanMigrationMult)

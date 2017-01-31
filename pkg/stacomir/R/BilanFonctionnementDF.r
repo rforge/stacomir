@@ -306,7 +306,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 							border = NA, 
 							lwd = 1)
 					legend(  x= "bottom",
-							legend= gettext("Fonc","Arr","Fonc normal"),
+							legend= gettext("Func.","Stop","Normal func."),
 							pch=c(16,16),
 							col=c(mypalette[4],mypalette[6],mypalette[1]),
 							#horiz=TRUE,

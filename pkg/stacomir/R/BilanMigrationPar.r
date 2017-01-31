@@ -147,9 +147,9 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			
 			if (bilanMigrationPar@taxons@data$tax_nom_commun=="Anguilla anguilla"& bilanMigrationPar@stades@data$std_libelle=="civelle") 
 			{
-				funout(gettext("\"Be careful, the processing doesnt take lot\"s quantities into account\"\n"))
+				funout(gettext("Be careful, the processing doesnt take lot\"s quantities into account \n"))
 			}
-			funout(gettext("\"Writing data into envir_stacomi environment : write data=get(data\",envir_stacomi)\"\n"))
+			funout(gettext("Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi) \n"))
 			bilanMigrationPar@data<-data 
 			assign("bilanMigrationPar",bilanMigrationPar,envir_stacomi)
 			assign("data",data,envir_stacomi)
@@ -219,7 +219,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				colnames(bilanMigrationPar@data)<-gsub("quantite",nmvarqan,colnames(bilanMigrationPar@data)) # je renomme la variable quant
 				mb=reshape2::melt(bilanMigrationPar@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bilanMigrationPar@data))) # valeurs quantitatives (il n'y a qu'une) 
 			} else if (bilanMigrationPar@parquan@data$par_nom=="aucune"&bilanMigrationPar@parqual@data$par_nom=="aucune"){
-				stop("normalement ce cas est impossible")
+				stop("This shouldn't be possible")
 				# ce cas est impossible
 			}
 			mb=stacomirtools::chnames(mb,"value","sum")
@@ -232,7 +232,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-g+geom_bar(aes(x=mois,y=sum,fill=variable),stat='identity',
 						stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n"))
 				print(g)
 			} #end plot.type = "barplot"
 			if (plot.type=="xyplot") { 
@@ -240,7 +240,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-ggplot(mb)
 				g<-g+geom_point(aes(x=Date,y=sum,col=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n"))
 				print(g)
 			} #end plot.type="xyplot"
 			#TODO create summary method

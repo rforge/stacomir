@@ -179,7 +179,7 @@ husr=function(h,...){
 			if (nrow(requete@query)==0){
 				# the odbc link does not work and might be pointing to a wrong schema
 				# this time the argument login_window will be ignored
-				gWidgets::gmessage(message=paste(gettext("\"\"Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link\"\""),
+				gWidgets::gmessage(message=paste(gettext("Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link"),
 								"\n",
 								gettext("ODBC link"),
 								" :",

@@ -273,7 +273,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				bilanMigration@calcdata<-lestableaux
 				assign("bilanMigration",bilanMigration,envir_stacomi)
 				if (!silent){
-					funout(gettext("\"Summary object is stocked into envir_stacomi environment : write bilanMigration=get(bilanMigration\",envir_stacomi)\"\n"))
+					funout(gettext("Summary object is stocked into envir_stacomi environment : write bilanMigration=get('bilanMigration',envir_stacomi) \n"))
 					funout(gettext("To access calculated data, type bilanMigration@calcdata\n"))
 				}
 				
