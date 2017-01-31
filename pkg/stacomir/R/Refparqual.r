@@ -32,7 +32,7 @@ setMethod("charge",signature=signature("Refparqual"),definition=function(object)
 			requete@sql= "select * from ref.tg_parametre_par
 					INNER JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text"
 			requete<-stacomirtools::connect(requete)
-			#funout(gettext("The query to load parameters is done \n"))
+			#funout(gettext("The query to load parameters is done \n",domain="R-stacomiR"))
 			object@data<-requete@query
 			return(object)
 		})
@@ -95,7 +95,7 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 					" WHERE val_qal_code='",object@data$par_code,
 					"' ORDER BY val_rang",sep="")
 			requete<-stacomirtools::connect(requete)
-			#funout(gettext("The query to load parameters is done \n"))
+			#funout(gettext("The query to load parameters is done \n",domain="R-stacomiR"))
 			object@valqual<-requete@query
 			return(object)
 		})
@@ -130,12 +130,12 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 					object@data<-object@data[car_libelle%in%carchoisi ,]
 					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)
-					funout(gettext("Feature has been selected\n"))
+					funout(gettext("Feature has been selected\n",domain="R-stacomiR"))
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
 				car_libelle=fun_char_spe(object@data$par_nom)
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-			} else stop(gettext("Internal error : unable to load any feature to make the choice\n"),arret=TRUE)
+			} else stop(gettext("Internal error : unable to load any feature to make the choice\n",domain="R-stacomiR"),arret=TRUE)
 		})

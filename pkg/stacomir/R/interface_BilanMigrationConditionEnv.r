@@ -5,7 +5,7 @@ interface_BilanMigrationConditionEnv = function()
 	quitte()
 	bilanMigrationConditionEnv=new("BilanMigrationConditionEnv")
 	assign("bilanMigrationConditionEnv",bilanMigrationConditionEnv,envir=envir_stacomi)	
-	funout(gettext("Loading of the lists for taxons, stages, counting devices and monitoring stations\n"))
+	funout(gettext("Loading of the lists for taxons, stages, counting devices and monitoring stations\n",domain="R-stacomiR"))
 	bilanMigrationConditionEnv@bilanConditionEnv@stationMesure=charge(bilanMigrationConditionEnv@bilanConditionEnv@stationMesure)
 	bilanMigrationConditionEnv@bilanMigration@taxons=charge(bilanMigrationConditionEnv@bilanMigration@taxons)
 	bilanMigrationConditionEnv@bilanMigration@stades=charge(bilanMigrationConditionEnv@bilanMigration@stades)
@@ -25,11 +25,11 @@ interface_BilanMigrationConditionEnv = function()
 			Calc=gWidgets::gaction(handler = hbilanMigrationConditionEnvcalc,action=bilanMigrationConditionEnv,
 					icon = "new",
 					label="calcul",
-					tooltip=gettext("Calculation of environnemental conditions by time step")),
+					tooltip=gettext("Calculation of environnemental conditions by time step",domain="R-stacomiR")),
 			Graph=gWidgets::gaction(handler = hbilanMigrationConditionEnvgraph,
 					icon = "graph",
 					label="graph",
-					tooltip=gettext("Balance graphic")),
+					tooltip=gettext("Balance graphic",domain="R-stacomiR")),
 			#Graph2=gWidgets::gaction(handler = hbilanMigrationConditionEnvgraph2,icon = "graph2",label="grcum",tooltip="graphe cumul"),
 			#Stat =gWidgets::gaction(handler= hbilanMigrationConditionEnvstat,icon = "matrix",label="stat",tooltip="tables bilan en .csv"),
 			annuler=gWidgets::gaction(handler= quitte,

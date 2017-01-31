@@ -4,14 +4,14 @@
 #' @param h A handler
 #' @param ... Other parameters
 hDF=function(h,...){
-	funout(gettext("Calculation of the operating fishway\n"),wash=TRUE)
+	funout(gettext("Calculation of the operating fishway\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hDC=function(h,...){
-	funout(gettext("Calculation of the operating counting device\n"),wash=TRUE)
+	funout(gettext("Calculation of the operating counting device\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanFonctionnementDC(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -19,69 +19,69 @@ hDC=function(h,...){
 #' @param ... additional parameters
 hOPE=function(h,...){
 	# TODO a developper
-	funout(text=gettext("Summary of the operations of a device ... to do\n"),wash=TRUE)
+	funout(text=gettext("Summary of the operations of a device ... to do\n",domain="R-stacomiR"),wash=TRUE)
 }
 #' handler function used by the main interface#' 
 #' @param h handler
 #' @param ... additional parameters
 hDFDC=function(h,...){
 	# TODO developper cette fonction
-	funout(gettext("Summary between the operating fishway and the counting device … to do\n"),wash=TRUE)
+	funout(gettext("Summary between the operating fishway and the counting device … to do\n",domain="R-stacomiR"),wash=TRUE)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigration=function(h,...){
-	funout(gettext("Migration summary (for a species and a stage)\n"),wash=TRUE)
+	funout(gettext("Migration summary (for a species and a stage)\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigration(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationMult=function(h,...){
-	funout(gettext("For help, contact Cédric Briand - 0033 29 99 08 844 - cedric.briand@lavilaine.com\n"),wash=TRUE)
+	funout(gettext("For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr, or mail stacomi@googlegroups.com.\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationMult(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationInterAnnuelle=function(h,...){
-	funout(gettext("Summary of interannual migration\n"),wash=TRUE)
+	funout(gettext("Summary of interannual migration\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationInterAnnuelle(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationConditionEnv=function(h,...){
-	funout(gettext("Summary of migration environnemental conditions\n"),wash=TRUE)
+	funout(gettext("Summary of migration environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationPar=function(h,...){
-	funout(gettext("Summary of migration with parameters\n"),wash=TRUE)
+	funout(gettext("Summary of migration with parameters\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationPar(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanConditionEnv=function(h,...){
-	funout(gettext("Summary of the environnemental conditions\n"),wash=TRUE)
+	funout(gettext("Summary of the environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_ConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilan_carlot=function(h,...){
-	funout(gettext("Summary of batch by calling the application vue lot ope\n"),wash=TRUE)
+	funout(gettext("Summary of batch by calling the application vue lot ope\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hTail=function(h,...){
-	funout(gettext("Lengths summary\n"),wash=TRUE)
+	funout(gettext("Lengths summary\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanTaille(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -89,13 +89,13 @@ hTail=function(h,...){
 #' @param ... additional parameters
 hpds=function(h,...){
 	eval(interface_BilanPoidsMoyen(),envir = .GlobalEnv)
-	funout(gettext("Summary of average weight for the calculation of the relation between length and number.\n"),wash=TRUE) 
+	funout(gettext("Summary of average weight for the calculation of the relation between length and number.\n",domain="R-stacomiR"),wash=TRUE) 
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hSt=function(h,...){
-	funout(gettext("Calculation of the pigmentary stages\n"),wash=TRUE)
+	funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -114,14 +114,14 @@ hsilver=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 htodo=function(h,...){
-	funout(gettext("TODO to develop"),wash=TRUE)
+	funout(gettext("TODO to develop",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanEspeces=function(h,...){
-	funout(gettext("Species summary of the counting device\n"),wash=TRUE)
+	funout(gettext("Species summary of the counting device\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
 
@@ -179,20 +179,20 @@ husr=function(h,...){
 			if (nrow(requete@query)==0){
 				# the odbc link does not work and might be pointing to a wrong schema
 				# this time the argument login_window will be ignored
-				gWidgets::gmessage(message=paste(gettext("Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link"),
+				gWidgets::gmessage(message=paste(gettext("Problem during the test, the ODBC link works but doesn't point to the database 0.5, check the ODBC link",domain="R-stacomiR"),
 								"\n",
-								gettext("ODBC link"),
+								gettext("ODBC link",domain="R-stacomiR"),
 								" :",
 								baseODBC[1],
 								"\n",
-								gettext("User"),
+								gettext("User",domain="R-stacomiR"),
 								" :",
 								baseODBC[2],
 								"\n",
-								gettext("Password"),
+								gettext("Password",domain="R-stacomiR"),
 								" :",
 								baseODBC[3]),						
-						title=gettext("Error title of the frame"),
+						title=gettext("Error title of the frame",domain="R-stacomiR"),
 						icon = "error",
 						handler=hgmessage)		
 			} else {
@@ -204,20 +204,20 @@ husr=function(h,...){
 		} else {
 			# the test has failed and the user will be prompted to another login window
 			# this time the argument loginwindow will be ignored
-			gWidgets::gmessage(message=paste(gettext("Problem when testing the ODBC connection"),
+			gWidgets::gmessage(message=paste(gettext("Problem when testing the ODBC connection",domain="R-stacomiR"),
 							"\n",
-							gettext("ODBC link"),
+							gettext("ODBC link",domain="R-stacomiR"),
 							" :",
 							baseODBC[1],
 							"\n",
-							gettext("User"),
+							gettext("User",domain="R-stacomiR"),
 							" :",
 							baseODBC[2],
 							"\n",
-							gettext("Password"),
+							gettext("Password",domain="R-stacomiR"),
 							" :",
 							baseODBC[3]),						
-					title=gettext("Error title of the frame"),
+					title=gettext("Error title of the frame",domain="R-stacomiR"),
 					icon = "error",
 					handler=hgmessage)
 		} # end else test (else == the test didn't pass, we have to change the name and password	
@@ -230,7 +230,7 @@ husr=function(h,...){
 	}
 }
 hhelp=function(h,...){
-	funout(gettext("For help, contact Cédric Briand - 0033 29 99 08 844 - cedric.briand@lavilaine.com\n"),wash=TRUE)
+	funout(gettext("For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr or stacomi@googlegroups.com.\n",domain="R-stacomiR"),wash=TRUE)
 }
 hlang=function(h,...){
 	eval(interface_chooselang(),envir = .GlobalEnv)
@@ -376,7 +376,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 				width = 10, 
 				container = logly)
 		assign("usrpwd",usrpwd,.GlobalEnv)
-		but=gWidgets::gbutton(text =  gettext("Login"),
+		but=gWidgets::gbutton(text =  gettext("Login",domain="R-stacomiR"),
 				border=TRUE, 
 				handler = husr, 
 				container = logly)
@@ -415,31 +415,31 @@ interface_graphique=function(){
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)
 	
-	win <- gWidgets::gwindow(gettext("Migratory treatment"), name="main",parent=c(0,0),width=100,height=100)
+	win <- gWidgets::gwindow(gettext("Migratory treatment"), name="main",parent=c(0,0,domain="R-stacomiR"),width=100,height=100)
 	assign("win",win,envir=.GlobalEnv)
 	
 	## Menubar is defined by a list
 	menubarlist = list()
 	
-	menubarlist[[gettext("Station")]][[gettext("Fishway")]]$handler =hDF
-	menubarlist[[gettext("Station")]][[gettext("Fishway")]]$icon="gWidgetsRGtk2-rarrow"
-	menubarlist[[gettext("Station")]][[gettext("Counting Device")]]$handler =hDC
-	menubarlist[[gettext("Station")]][[gettext("Counting Device")]]$icon = "gWidgetsRGtk2-plot"
-	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)")]]$handler=hOPE
-	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)")]]$icon="gtk-cancel"#"gtk-go-forward"
-	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)")]]$handler=hDFDC
-	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)")]]$icon="gtk-cancel"
+	menubarlist[[gettext("Station")]][[gettext("Fishway",domain="R-stacomiR")]]$handler =hDF
+	menubarlist[[gettext("Station")]][[gettext("Fishway",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-rarrow"
+	menubarlist[[gettext("Station")]][[gettext("Counting Device",domain="R-stacomiR")]]$handler =hDC
+	menubarlist[[gettext("Station")]][[gettext("Counting Device",domain="R-stacomiR")]]$icon = "gWidgetsRGtk2-plot"
+	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)",domain="R-stacomiR")]]$handler=hOPE
+	menubarlist[[gettext("Station")]][[gettext("Operation (TODO)",domain="R-stacomiR")]]$icon="gtk-cancel"#"gtk-go-forward"
+	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)",domain="R-stacomiR")]]$handler=hDFDC
+	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)",domain="R-stacomiR")]]$icon="gtk-cancel"
 	
-	menubarlist[[gettext("Summary")]][[gettext("Migration")]]$handler=hBilanMigration
-	menubarlist[[gettext("Summary")]][[gettext("Migration")]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations")]]$handler=hBilanMigrationMult
-	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations")]]$icon="gtk-dnd-multiple"
-	menubarlist[[gettext("Summary")]][[gettext("Yearly")]]$handler=hbilA
-	menubarlist[[gettext("Summary")]][[gettext("Yearly")]]$icon="gWidgetsRGtk2-barplot"
-	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$handler=hBilanMigrationInterAnnuelle
-	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration")]]$icon="gWidgetsRGtk2-hist"
-	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics")]]$handler=hBilan_carlot
-	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	menubarlist[[gettext("Summary")]][[gettext("Migration",domain="R-stacomiR")]]$handler=hBilanMigration
+	menubarlist[[gettext("Summary")]][[gettext("Migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$handler=hBilanMigrationMult
+	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$icon="gtk-dnd-multiple"
+	menubarlist[[gettext("Summary")]][[gettext("Yearly",domain="R-stacomiR")]]$handler=hbilA
+	menubarlist[[gettext("Summary")]][[gettext("Yearly",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-barplot"
+	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$handler=hBilanMigrationInterAnnuelle
+	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-hist"
+	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$handler=hBilan_carlot
+	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
 	
 	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
 	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
@@ -473,7 +473,7 @@ interface_graphique=function(){
 	
 	gWidgets::add(win,ggrouptotal)
 	
-	gSortie=gWidgets::gtext(gettext("Output of the program\n"),width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
+	gSortie=gWidgets::gtext(gettext("Output of the program\n",domain="R-stacomiR"),width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium",domain="R-stacomiR"))
 	assign("gSortie",gSortie,envir=.GlobalEnv) 
 	
 	gWidgets::add(ggrouptotal,  gSortie,  expand=FALSE)

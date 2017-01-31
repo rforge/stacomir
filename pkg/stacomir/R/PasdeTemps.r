@@ -279,9 +279,9 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							font.attr=c(foreground.colors="red") )
 					hwinpa(h)
 				}
-				winpa=gframe(gettext("Time steps choice"),container=group,horizontal=FALSE)
+				winpa=gframe(gettext("Time steps choice",domain="R-stacomiR"),container=group,horizontal=FALSE)
 				pg<-ggroup(horizontal=FALSE,container=winpa)
-				glabel(gettext("Starting date"),container=pg)
+				glabel(gettext("Starting date",domain="R-stacomiR"),container=pg)
 				datedeb<-gedit(getdateDebut(object),
 						container=pg,handler=hchoicepas,width=15)
 				datedebut2=as.character(strftime(object@dateDebut,"%Y-%m-%d"))
@@ -291,14 +291,14 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 											"%Y-%m-%d %H:%M:%S"))
 							hchoicepas(h)				
 						} )
-				glabel(gettext("Time steps choice"),container=winpa)
+				glabel(gettext("Time steps choice",domain="R-stacomiR"),container=winpa)
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
 				choicepas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoicepas) 
-				glabel(gettext("Number of time step choice"),container=winpa)
+				glabel(gettext("Number of time step choice",domain="R-stacomiR"),container=winpa)
 				choicenbStep=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoicepas,width=15)
-				datedefin<-gtext(gettext("End date"),height=50,container=winpa) # Date de fin
+				datedefin<-gtext(gettext("End date",domain="R-stacomiR"),height=50,container=winpa) # Date de fin
 				gbutton("OK", container=winpa,handler=hwinpa,icon="execute")
-			} else funout(gettext("Internal error : no entry in time steps table\n"), arret=TRUE)
+			} else funout(gettext("Internal error : no entry in time steps table\n",domain="R-stacomiR"), arret=TRUE)
 		})
 
 		
@@ -317,7 +317,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							object@stepDuration<<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 							object=setdateDebut(object,svalue(datedeb))						
 							assign("pasDeTemps",object,envir_stacomi)
-							funout(gettext("Timesteps loaded\n"))
+							funout(gettext("Timesteps loaded\n",domain="R-stacomiR"))
 							# charge le deuxieme onglet du notebook
 							svalue(notebook)<-2
 						}
@@ -339,7 +339,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 						}
 						groupdate<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
 						assign("groupdate",groupdate,envir=.GlobalEnv)
-						winpa=gframe(gettext("Time steps choice"),container=groupdate,horizontal=FALSE)
+						winpa=gframe(gettext("Time steps choice",domain="R-stacomiR"),container=groupdate,horizontal=FALSE)
 						pg<-ggroup(horizontal=FALSE,container=winpa)
 						glabel("Date de debut",container=pg)
 						datedeb<-gedit(getdateDebut(object),container=pg,handler=hchoicepas,width=15)
@@ -350,14 +350,14 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 													"%Y-%m-%d %H:%M:%S"))
 									hchoicepas(h)				
 								} )
-						glabel(gettext("Time steps choice"),container=winpa)
+						glabel(gettext("Time steps choice",domain="R-stacomiR"),container=winpa)
 						pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
 						choicepas=gdroplist(pas_libelle,selected = 8,container=winpa,handler=hchoicepas) 
-						glabel(gettext("Number of time steps choice"),container=winpa)
+						glabel(gettext("Number of time steps choice",domain="R-stacomiR"),container=winpa)
 						choicenbStep=gedit("365",container=winpa,coerce.with=as.numeric,handler=hchoicepas,width=15)
-						datedefin<-gtext(gettext("End date"),height=50,container=winpa) # Date de fin)
+						datedefin<-gtext(gettext("End date",domain="R-stacomiR"),height=50,container=winpa) # Date de fin)
 						gbutton("OK", container=winpa,handler=hwinpa,icon="execute")
-					} else funout(gettext("Internal error : no entry in time steps table\n"), arret=TRUE)
+					} else funout(gettext("Internal error : no entry in time steps table\n",domain="R-stacomiR"), arret=TRUE)
 				})
 		
 

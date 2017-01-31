@@ -29,13 +29,13 @@ interface_BilanAnnuels = function()
 	
 	choice(bilanAnnuels@anneedebut,
 			nomassign="anneedebut",
-			funoutlabel=gettext("The year of beginning has been chosen\n"),
-			titleFrame=gettext("First year"),
+			funoutlabel=gettext("The year of beginning has been chosen\n",domain="R-stacomiR"),
+			titleFrame=gettext("First year",domain="R-stacomiR"),
 			preselect=which(bilanAnnuels@anneedebut@data==min(bilanAnnuels@anneedebut@data)))
 	choice(bilanAnnuels@anneefin,
 			nomassign="anneefin",
-			funoutlabel=gettext("The last year has been chosen\n"),
-			titleFrame=gettext("Last year"),
+			funoutlabel=gettext("The last year has been chosen\n",domain="R-stacomiR"),
+			titleFrame=gettext("Last year",domain="R-stacomiR"),
 			preselect=which(bilanAnnuels@anneefin@data==max(bilanAnnuels@anneefin@data)))
 	choicemult(bilanAnnuels@dc,objectBilan=bilanAnnuels,is.enabled=TRUE)
 	svalue(notebook)<-1
@@ -45,10 +45,10 @@ interface_BilanAnnuels = function()
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist = list(
-			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic")),
-			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic")),
+			aGraph=gWidgets::gaction(label="barplot",icon="barplot",handler=hbarplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic",domain="R-stacomiR")),
+			aGraph2=gWidgets::gaction(label="plot",icon="plot",handler=hplotBilanAnnuels,tooltip=gettext("Migration of all the years in the same graphic",domain="R-stacomiR")),
 		    aTable=gWidgets::gaction(handler=hxtableBilanAnnuels, icon="dataframe", label="xtable", tooltip="xtable"),  
-			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext("Exit"))
+			aQuit=gWidgets::gaction(label="fermer",icon="close", handler=quitte,tooltip=gettext("Exit",domain="R-stacomiR"))
 	)
 	
 	add(ggroupboutonsbas, gtoolbar(toolbarlist))

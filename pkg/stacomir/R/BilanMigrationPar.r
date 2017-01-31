@@ -86,18 +86,18 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationPar@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationPar@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationPar@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationPar@pasDeTemps<-get("pasDeTemps",envir_stacomi)
@@ -105,7 +105,7 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 				assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
 				assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			} else {
-				funout(gettext("Attention, no time step selected, compunting with default value\n"),arret=FALSE)
+				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
 				warning("Attention, no time step selected, compunting with default value\n")
 			}
 			if (exists("refchoice",envir_stacomi)){
@@ -119,19 +119,19 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 				bilanMigrationPar@parquan<-get("refparquan",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a quantitative parameter\n"),arret=TRUE)
+				funout(gettext("You need to choose a quantitative parameter\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refparqual",envir_stacomi)){
 				bilanMigrationPar@parqual<-get("refparqual",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a qualitative parameter\n"),arret=TRUE)
+				funout(gettext("You need to choose a qualitative parameter\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			
 			stopifnot(validObject(bilanMigrationPar, test=TRUE))
-			funout(gettext("Attention, no time step selected, compunting with default value\n"))
+			funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"))
 			if (bilanMigrationPar@parquan@data$par_nom=="aucune" & bilanMigrationPar@parqual@data$par_nom=="aucune") {
-				funout(gettext("You need to choose at least one quantitative or qualitative attribute\n"),arret=TRUE)}
+				funout(gettext("You need to choose at least one quantitative or qualitative attribute\n",domain="R-stacomiR"),arret=TRUE)}
 			res<-funSousListeBilanMigrationPar(bilanMigrationPar=bilanMigrationPar)
 			if (exists("progres")) close(progres)
 			data<-res[[1]]
@@ -140,16 +140,16 @@ setMethod("calcule",signature=signature("BilanMigrationPar"),definition=function
 			bilanMigrationPar@valeurs_possibles<-res[[2]]   # definitions des niveaux de parametres qualitatifs rencontres.
 			# funout("\n")
 			#	assign("data",data,envir_stacomi)
-			#funout(gettext("the migration summary table is stored in envir_stacomi\n"))
+			#funout(gettext("the migration summary table is stored in envir_stacomi\n",domain="R-stacomiR"))
 			#data<-get("data",envir_stacomi)
 			# chargement des donnees suivant le format chargement_donnees1  
 			bilanMigrationPar@time.sequence=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bilanMigrationPar@pasDeTemps@stepDuration)) # il peut y avoir des lignes repetees poids effectif
 			
 			if (bilanMigrationPar@taxons@data$tax_nom_commun=="Anguilla anguilla"& bilanMigrationPar@stades@data$std_libelle=="civelle") 
 			{
-				funout(gettext("Be careful, the processing doesnt take lot\"s quantities into account \n"))
+				funout(gettext("Be careful, the processing doesnt take lot\"s quantities into account \n",domain="R-stacomiR"))
 			}
-			funout(gettext("Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi) \n"))
+			funout(gettext("Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi) \n",domain="R-stacomiR"))
 			bilanMigrationPar@data<-data 
 			assign("bilanMigrationPar",bilanMigrationPar,envir_stacomi)
 			assign("data",data,envir_stacomi)
@@ -165,7 +165,7 @@ hbilanMigrationPargraph = function(h,...) {
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="barplot")
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 }
 #' le handler appelle la methode generique graphe sur l'object plot.type=2
@@ -177,7 +177,7 @@ hbilanMigrationPargraph2=function(h,...){
 		bilanMigrationPar<-get("bilanMigrationPar",envir_stacomi)
 		plot(bilanMigrationPar,plot.type="xyplot")
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 }
 #' This handler calls the generic method graphe on object plot.type 3
@@ -232,7 +232,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-g+geom_bar(aes(x=mois,y=sum,fill=variable),stat='identity',
 						stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n"))
+				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type = "barplot"
 			if (plot.type=="xyplot") { 
@@ -240,7 +240,7 @@ setMethod("plot",signature=signature(x="BilanMigrationPar",y="ANY"),definition=f
 				g<-ggplot(mb)
 				g<-g+geom_point(aes(x=Date,y=sum,col=variable),stat='identity',stack=TRUE)
 				assign("g",g,envir_stacomi)
-				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n"))
+				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type="xyplot"
 			#TODO create summary method

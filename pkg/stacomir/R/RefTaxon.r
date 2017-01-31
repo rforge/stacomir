@@ -78,7 +78,7 @@ setMethod("choice",signature=signature("RefTaxon"),
 					taxons=svalue(choice)
 					object@data<-object@data[tax_libelle%in%taxons ,]
 					assign("refTaxon",object,envir_stacomi)
-					funout(gettext("Taxon selected\n"))
+					funout(gettext("Taxon selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
 						objectBilan@stades<<-charge_avec_filtre(object=objectBilan@stades,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code)
 						if (exists("frame_std")) delete(group,frame_std)
@@ -88,13 +88,13 @@ setMethod("choice",signature=signature("RefTaxon"),
 						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 				}
-				frame_tax<<-gframe(gettext("Taxon selection"))
+				frame_tax<<-gframe(gettext("Taxon selection",domain="R-stacomiR"))
 				add(group,frame_tax)
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				choice=gdroplist(tax_libelle,container=frame_tax,handler=htax)
 				enabled(frame_tax)<-is.enabled
 				gbutton("OK", container=frame_tax,handler=htax)
-			} else funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)
+			} else funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
 		})
 
 #' Multiple Choice method for Reftaxon referential objects, the graphical interface is built to allow
@@ -118,7 +118,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 					taxons=tbdesttaxon[,][tbdesttaxon[,]!=""]
 					object@data<-object@data[tax_libelle%in%taxons ,]
 					assign("refTaxon",object,envir_stacomi)
-					funout(gettext("The taxa(s) have been selected\n"))
+					funout(gettext("The taxa(s) have been selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
 						objectBilan@taxons<-object
 						objectBilan@stades<-charge_avec_filtre(object=objectBilan@stades,
@@ -147,7 +147,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				grouptaxon<-ggroup() 
 				assign("grouptaxon",grouptaxon,.GlobalEnv)
 				add(notebook,grouptaxon,label="taxon")
-				frametaxonsource<-gframe(gettext("Taxon selection",container=grouptaxon))
+				frametaxonsource<-gframe(gettext("Taxon selection",container=grouptaxon,domain="R-stacomiR"))
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
 				size(tbsourcetaxon)<-c(160,300) # les dimensions sont testees a la main 
 				# pour s'ajuster aux dimensions du notebook (largeur 400)
@@ -190,7 +190,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 						})
 				gbutton("ok", container = grouptaxon, handler = htax)
 			} else {
-				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)
+				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 		})
 
@@ -212,7 +212,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 #' }
 setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,taxons) {
 			if (is.null(taxons)) {
-				funout(gettext("No value for argument taxon\n"),arret=TRUE)
+				funout(gettext("No value for argument taxon\n",domain="R-stacomiR"),arret=TRUE)
 			} else	if (class(taxons)=="character"){	
 				libellemanquants<-taxons[!taxons%in%object@data$tax_nom_latin]
 				if (length(libellemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(libellemanquants,collapse=", ")))
@@ -223,7 +223,7 @@ setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{
-				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)
+				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			assign("refTaxon",object,envir=envir_stacomi)
 			return(object)

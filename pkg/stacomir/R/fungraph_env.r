@@ -61,6 +61,6 @@ fungraph_env=function(tableau,time.sequence,taxon,stade,stations){
 		} else stop("internal error")
 	} # end for
 	assign("g",g,envir_stacomi)
-	funout(gettext("Writing of the graphical object in the environment envir_stacomi : write g=get(g,envir_stacomi)\n"))
+	funout(gettext("Writing of the graphical object in the environment envir_stacomi : write g=get(g,envir_stacomi)\n",domain="R-stacomiR"))
 	print(g)
 }

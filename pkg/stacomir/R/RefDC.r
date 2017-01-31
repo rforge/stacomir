@@ -72,7 +72,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 					" WHERE  dft_rang=1",
 					" ORDER BY dis_identifiant;",sep="")
 			requete<-stacomirtools::connect(requete) 
-			#funout(gettext("The query to load counting devices is done \n"))
+			#funout(gettext("The query to load counting devices is done \n",domain="R-stacomiR"))
 			object@data<-requete@query
 			return(object)
 		})
@@ -106,7 +106,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
 					object@station=object@data$sta_code[object@data$dc%in%object@dc_selectionne]
 					assign("refDC",object,envir_stacomi)
-					funout(gettext("Counting device selected\n"))
+					funout(gettext("Counting device selected\n",domain="R-stacomiR"))
 					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
 					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
@@ -121,21 +121,21 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 							if (exists("frame_parquan")) delete(group,frame_parquan)
 							if (exists("frame_parqual")) delete(group,frame_parqual)
 							choice(objectBilan@taxons,objectBilan,is.enabled=TRUE)
-							funout(gettext("Select taxa for this counting device (for all periods)\n"))
+							funout(gettext("Select taxa for this counting device (for all periods)\n",domain="R-stacomiR"))
 						}
 					}
 					#dispose(winst)
 				} 
 				# Handler d'affichage du tableau
 				hDCi=function(h,...){
-					w=gwindow(gettext("Counting devices data",width=400))
+					w=gwindow(gettext("Counting devices data",width=400,domain="R-stacomiR"))
 					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,4,7,8,11,12)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
 					bg<-ggroup(container=wg)
 					addSpring(bg)
-					gbutton(gettext("close", container=bg, handler = function(h,...) dispose(w)))
+					gbutton(gettext("close",domain="R-stacomiR"), container=bg, handler = function(h,...) dispose(w))
 				}
-				frame_DC<<-gframe(gettext("Counting devices choice"))
+				frame_DC<<-gframe(gettext("Counting devices choice",domain="R-stacomiR"))
 				add(group,frame_DC)
 				DC_identifiant=object@data$dc
 				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
@@ -143,7 +143,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 				enabled(frame_DC)<-is.enabled
 				gbutton("OK", container=frame_DC,handler=hDC)
 			} else {
-				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n"),arret=TRUE)
+				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			return(object)
 		})
@@ -180,7 +180,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
 					object@station= as.character(object@data$sta_code[object@data$dc%in%object@dc_selectionne])
 					assign("refDC",object,envir_stacomi)
-					funout(gettext("Counting device selected\n"))
+					funout(gettext("Counting device selected\n",domain="R-stacomiR"))
 					# si il existe un object fils; supprimer
 					# referentiel fils, celui charge par la methode charge_avec_filtre
 					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
@@ -219,11 +219,11 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				#TODO addmsg
 				groupdc<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
 				assign("groupdc",groupdc,envir=.GlobalEnv)
-				frameDCsource<-gframe(gettext("Counting devices choice"),container=groupdc)
+				frameDCsource<-gframe(gettext("Counting devices choice",domain="R-stacomiR"),container=groupdc)
 				size(frameDCsource)<-c(250,300)
 				tbsourcedc  = gtable(DC,container=frameDCsource,expand = TRUE, fill = TRUE)
 				
-				frameDCdest<-gframe(gettext("drop here"),container=groupdc)
+				frameDCdest<-gframe(gettext("drop here",domain="R-stacomiR"),container=groupdc)
 				size(frameDCdest)<-c(60,300)
 				#addSpring(groupdc)
 				# need for a fixed size data.frame otherwise errors when adding new lines
@@ -262,7 +262,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 						})
 				gbutton("ok", container = groupdc, handler = hDC)
 			} else {
-				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n"),arret=TRUE)
+				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			return(object)
 		})

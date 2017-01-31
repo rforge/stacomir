@@ -102,7 +102,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 					" AND lot_std_code= 'CIV'",
 					" AND car_par_code='1791'",sep="")
 			requete<-stacomirtools::connect(requete) # appel de la methode stacomirtools::connect de l'object ODBCWHEREDATE
-			funout(gettext("Pigmentation stages loading query completed"))
+			funout(gettext("Pigmentation stages loading query completed",domain="R-stacomiR"))
 			object@data<-stacomirtools::killfactor(requete@query)
 			if (nrow (requete@query)>0)	{
 				
@@ -120,7 +120,7 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tablestades=tablestades/effectifs
 				object@tablestades<-tablestades
 				object@dates<-dates
-			} else funout(gettext("No data for pigmentation stages"),arret=TRUE)
+			} else funout(gettext("No data for pigmentation stages",domain="R-stacomiR"),arret=TRUE)
 			if (object@options@checked[2]){
 				# chargement du tableau des temperatures
 				requete@datedebut=as.POSIXlt(strptime(object@datedebut,format="%Y-%m-%d")-5184000) # 60 jours avant
@@ -139,14 +139,14 @@ setMethod("connect",signature=signature("Bilan_stades_pigm"),definition=function
 				tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 				requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 				requete<-stacomirtools::connect(requete)
-				funout(gettext("Environmental conditions loading query completed"))
+				funout(gettext("Environmental conditions loading query completed",domain="R-stacomiR"))
 				if (nrow (requete@query)>0)	{
-					if (unique(requete@query$env_stm_identifiant)>1) funout(gettext("You chose several stations"), arret=TRUE)
+					if (unique(requete@query$env_stm_identifiant)>1) funout(gettext("You chose several stations",domain="R-stacomiR"), arret=TRUE)
 					object@datatempsal<-stacomirtools::killfactor(requete@query)[,c("env_date_debut","env_valeur_quantitatif")]
 					object@datatempsal$salinite=as.numeric(object@salinite@label)
 					colnames(object@datatempsal)<-c("date","temperature","salinite")
 				} else {
-					funout(gettext("no temperature data, you won't be able to retrocalculate arrival dates"))
+					funout(gettext("no temperature data, you won't be able to retrocalculate arrival dates",domain="R-stacomiR"))
 				}
 			}
 			return(object)
@@ -218,18 +218,18 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate",domain="R-stacomiR"),arret=TRUE)
 			} 	
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_stades_pigm_date_debut",envir_stacomi)) {
 				object@datedebut<-get("bilan_stades_pigm_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("bilan_stades_pigm_date_fin",envir_stacomi)) {
 				object@datefin<-get("bilan_stades_pigm_date_fin",envir_stacomi)@horodate
 			} else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}         
 			if (exists("refCheckBox",envir_stacomi)) {
 				object@options<-get("refCheckBox",envir_stacomi)
@@ -252,7 +252,7 @@ setMethod("charge",signature=signature("Bilan_stades_pigm"),definition=function(
 				if (exists("refStationMesure",envir_stacomi)) {
 					object@stationMesure<-get("refStationMesure",envir_stacomi)
 				} else {
-					funout(gettext("You need to choose a monitoring station, clic on validate\n"),arret=TRUE)
+					funout(gettext("You need to choose a monitoring station, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 				}
 			}
 			object<-connect(object)			
@@ -490,7 +490,7 @@ funcalcbilan_stades_pigm<-function(h,...){
 	if (nrow(bilan_stades_pigm@datatempsal)>0){
 		bilan_stades_pigm@phi<-funphi(parm=bilan_stades_pigm@Vparm$pigmentation,bilan_stades_pigm@datatempsal)
 	}
-	funout(gettext("Loading data from database"))
+	funout(gettext("Loading data from database",domain="R-stacomiR"))
 	dates<-bilan_stades_pigm@dates
 	bilan_stades_pigm@labelgraphstades<-gettextf("Pigmentation stages %s and incoming dates in estuary",
 			if(strftime(as.POSIXlt(dates[1]),"%Y")==
@@ -785,7 +785,7 @@ fungraphgg=function(h,...){
 			ggtitle("Stades pigmentaires")+xlab("")+ylab("effectifs")
 	print(g)
 	assign("g",g,"envir_stacomi")
-	funout(gettext("The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)"))
+	funout(gettext("The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)",domain="R-stacomiR"))
 }
 
 
@@ -810,18 +810,18 @@ funtitle_bilan_stades_pigm=function(h,...){
 			bilan_stades_pigm@labelgraphstades<-gsub("\n","",svalue(titre2))
 			bilan_stades_pigm@labelretro<-gsub("\n","",svalue(titre4))
 			assign("bilan_stades_pigm",bilan_stades_pigm,envir=envir_stacomi)		
-			funout(gettext("title edit \n"))
+			funout(gettext("title edit \n",domain="R-stacomiR"))
 		}
 		dispose(wintitle)
 	}
 	group1<-gWidgets::ggroup(horizontal=FALSE,container=wintitle)
-	titre1 <- gWidgets::glabel( text= "Titre du graphique de stades pigmentaires (graphstades = TRUE)", editable=FALSE,container=group1)
+	titre1 <- gWidgets::glabel(text= gettext("Titre du graphique de stades pigmentaires (graphstades = TRUE)"), editable=FALSE,container=group1)
 	titre2 <- gWidgets::gtext( text= bilan_stades_pigm@labelgraphstades,font.attr= c(foreground.colors="blueblue"),height=40,container=group1)  
-	titre3 <- gWidgets::glabel( text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
-	titre4 <- gWidgets::gtext(  text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
+	titre3 <- gWidgets::glabel(text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
+	titre4 <- gWidgets::gtext(text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
 	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         
-	aQuit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=function(h,...) dispose(wintitle)))
+	aQuit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),icon="close", handler=function(h,...) dispose(wintitle))
 	toolbarlist <- list(
 			OK=aOK, 
 			Quit = aQuit)
@@ -839,7 +839,7 @@ interface_Bilan_stades_pigm = function()
 {  
 	bilan_stades_pigm=new("Bilan_stades_pigm")
 	assign("bilan_stades_pigm",bilan_stades_pigm,envir = envir_stacomi)
-	funout(gettext("Summary of pigmentation stages\n"))
+	funout(gettext("Summary of pigmentation stages\n",domain="R-stacomiR"))
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
 	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
@@ -850,7 +850,7 @@ interface_Bilan_stades_pigm = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=gettext(toupper("Summary of pigmentation stages")),container=group)
+	gl=glabel(text=toupper(gettext("Summary of pigmentation stages",domain="R-stacomiR")),container=group)
 	choice(bilan_stades_pigm@lmax)
 	choice(bilan_stades_pigm@options)
 	# on assigne directement (sans forcement changer les options...)
@@ -858,13 +858,13 @@ interface_Bilan_stades_pigm = function()
 	choice(bilan_stades_pigm@salinite)
 	# on assigne directement (sans forcement changer les options...)
 	assign("refTextBox",bilan_stades_pigm@salinite,.GlobalEnv)
-	choice(bilan_stades_pigm@stationMesure,title=gettext("temperature choice"))
-	choice(bilan_stades_pigm@horodate,label=gettext("Start of timestamp"),
+	choice(bilan_stades_pigm@stationMesure,title=gettext("temperature choice",domain="R-stacomiR"))
+	choice(bilan_stades_pigm@horodate,label=gettext("First timestamp",domain="R-stacomiR"),
 			nomassign="bilan_stades_pigm_date_debut",
-			funoutlabel=gettext("Beginning date has been chosen\n"),
+			funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2,
 			affichecal=FALSE)
-	choice(bilan_stades_pigm@horodate,label=gettext("End of timestamp"),
+	choice(bilan_stades_pigm@horodate,label=gettext("Last timestamp"),
 			nomassign="bilan_stades_pigm_date_fin",
 			funoutlabel=gettext("Ending date has been chosen\n"),
 			decal=-1,
@@ -872,10 +872,10 @@ interface_Bilan_stades_pigm = function()
 	choice(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
 	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
-	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext("Title choice"))
+	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext("Title choice",domain="R-stacomiR"))
 	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
-	aQuit=gWidgets::gaction(label=gettext("Exit"),icon="close", handler=quitte,tooltip="Exit")
+	aQuit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),icon="close", handler=quitte,tooltip="Exit")
 	
 	toolbarlist <- list(
 			Calcul=aCalcul, 

@@ -87,7 +87,7 @@ setMethod("connect",signature=signature("BilanAgedemer"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(gettext("Data loaded"))
+			if (!silent) funout(gettext("Data loaded",domain="R-stacomiR"))
 			return(object)
 		})
 
@@ -106,34 +106,34 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a parameter, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a parameter, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_adm_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_adm_date_debut",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_adm_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_adm_date_fin",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}       
 			
 			return(object)
@@ -170,8 +170,8 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			# code for debug using example
 			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);
 			#taxons='2220';	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
-			if (!(is.numeric(limit1hm)|is.integer(limit1hm))) funout(gettext("limit1hm should be numeric or integer"),arret=TRUE)
-			if (!(is.numeric(limit2hm)|is.integer(limit2hm))) funout(gettext("limit2hm should be numeric or integer"),arret=TRUE)
+			if (!(is.numeric(limit1hm)|is.integer(limit1hm))) funout(gettext("limit1hm should be numeric or integer",domain="R-stacomiR"),arret=TRUE)
+			if (!(is.numeric(limit2hm)|is.integer(limit2hm))) funout(gettext("limit2hm should be numeric or integer",domain="R-stacomiR"),arret=TRUE)
 			
 			bilan_adm<-object
 			bilan_adm@dc=charge(bilan_adm@dc)
@@ -187,12 +187,12 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			bilan_adm@par<-choice_c(bilan_adm@par,par,silent=silent)
 			bilan_adm@horodatedebut<-choice_c(object=bilan_adm@horodatedebut,
 					nomassign="bilan_adm_date_debut",
-					funoutlabel=gettext("Beginning date has been chosen\n"),
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilan_adm@horodatefin<-choice_c(bilan_adm@horodatefin,
 					nomassign="bilan_adm_date_fin",
-					funoutlabel=gettext("Ending date has been chosen\n"),
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
 			bilan_adm@limit1hm<-choice_c(bilan_adm@limit1hm,as.character(limit1hm))
@@ -211,7 +211,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 			#bilan_adm<-b_carlot
 			bilan_adm<-object
 			if(nrow(bilan_adm@data)==0) {
-				funout(gettext("you are in deep shit"), arret=TRUE)
+				funout(gettext("you are in deep shit",domain="R-stacomiR"), arret=TRUE)
 			}   
 			adm=bilan_adm@data # on recupere le data.frame
 			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("internal error")
@@ -253,7 +253,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -275,7 +275,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 						ylab("Effectif")
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)"))
+				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)",domain="R-stacomiR"))
 				
 			}
 			######################################
@@ -291,7 +291,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 						facet_grid(ope_dic_identifiant~.)
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)"))
+				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)",domain="R-stacomiR"))
 			}
 					
 		})
@@ -307,7 +307,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 			if (exists("bilan_adm",envir_stacomi)) {
 				bilan_adm<-get("bilan_adm",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			dat<-bilan_adm@calcdata[["data"]]		
 			ndc=unique(dat$ope_dic_identifiant)
@@ -454,7 +454,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 								))		
 #	
 						
-						if (!silent) funout(gettext("Writing daily summary in the database","\n"))
+						if (!silent) funout(gettext("Writing daily summary in the database","\n",domain="R-stacomiR"))
 						taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 						stade= as.character(bilanMigration@stades@data$std_libelle)
 						DC=as.numeric(bilanMigration@dc@dc_selectionne)	
@@ -516,7 +516,7 @@ funtableBilanAgedemer = function(h,...) {
 	bilan_adm<-connect(bilan_adm)
 	vue_ope_lot=bilan_adm@requete@query # on recupere le data.frame
 	assign("bilan_adm",bilan_adm,envir_stacomi)#assign("bilan_adm",vue_ope_lot,envir_stacomi)
-	funout(gettext("Size (BL mm)"))
+	funout(gettext("Size (BL mm)",domain="R-stacomiR"))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

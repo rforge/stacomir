@@ -43,31 +43,31 @@ setMethod("charge",signature=signature("BilanAnnuels"),
 			if (exists("refDC",envir_stacomi)) {
 				bilA@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilA@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilA@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("anneedebut",envir_stacomi)) {
 				bilA@anneedebut<-get("anneedebut",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting year\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting year\n",domain="R-stacomiR"),arret=TRUE)
 			}  	
 			if (exists("anneefin",envir_stacomi)) {
 				bilA@anneefin<-get("anneefin",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending year\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			assign("bilanAnnuels",bilA,envir_stacomi)
-			funout(gettext("The object BilanAnnuels is stored in the stacomi environment, type bilA <-get('bilanAnnuels',envir_stacomi)"))
+			funout(gettext("The object BilanAnnuels is stored in the stacomi environment, type bilA <-get('bilanAnnuels',envir_stacomi)",domain="R-stacomiR"))
 			return(bilA)
 			
 			
@@ -380,7 +380,7 @@ setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(heigh
 					}
 				}
 			}    else     {
-				funout(gettext("No data"))
+				funout(gettext("No data",domain="R-stacomiR"))
 			}				
 		})
 
@@ -420,7 +420,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					} else if (length(lestax)==1 & length(lesstd)==1){
 						
@@ -429,7 +429,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					} else if (length(lestax)==1 & length(lesdic)==1){
 						
@@ -438,7 +438,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					} else if (length(lesdic)==1 & length(lesstd)==1){
 						
@@ -447,7 +447,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 						
 					} else if (length(lestax)==1){
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					} else if (length(lesstd)==1){
 						
@@ -466,7 +466,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					} else if (length(lesdic)==1){
 						
@@ -475,7 +475,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))							
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))							
 						
 					} else {
 						if (length(lesdic)<3){
@@ -493,13 +493,13 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 							print(g)	
 							
 							assign("g",g,envir_stacomi)
-							if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))	
+							if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))	
 						}
 					}
 				}
 				
 			}    else     {
-				funout(gettext("No data"))
+				funout(gettext("No data",domain="R-stacomiR"))
 			}	
 		})
 

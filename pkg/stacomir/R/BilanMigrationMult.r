@@ -77,24 +77,24 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 				dc<-bilanMigrationMult@dc@dc_selectionne
 				df<-bilanMigrationMult@dc@data$df[bilanMigrationMult@dc@data$dc%in%dc]
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)	
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)	
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationMult@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationMult@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				} else {
 				# todo addmsg
-				funout(gettext("Attention, no time step selected, compunting with default value\n"),arret=FALSE)
+				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
 				warning("Attention, no time step selected, compunting with default value\n")
 			}
 			#################################
@@ -184,7 +184,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			# bilanMigrationMult<-bMM_Arzal
-			if (!silent) funout(gettext("Starting migration summary ... be patient\n"))
+			if (!silent) funout(gettext("Starting migration summary ... be patient\n",domain="R-stacomiR"))
 			bilanMigrationMult<-object
 			
 
@@ -248,8 +248,8 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			bilanMigrationMult@calcdata<-lestableaux
 			assign("bilanMigrationMult",bilanMigrationMult,envir_stacomi)
 			if (!silent){
-				funout(gettext("The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi) \n"))
-				funout(gettext("Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n\n"))
+				funout(gettext("The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi) \n",domain="R-stacomiR"))
+				funout(gettext("Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n\n",domain="R-stacomiR"))
 			}
 			return(bilanMigrationMult)
 		})
@@ -354,7 +354,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	plot(x=bilanMigrationMult,plot.type="standard")
 }
@@ -391,7 +391,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 			#==========================type=1=============================
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(gettext("Statistics about migration :\n"))
+				if (!silent) funout(gettext("Statistics about migration :\n",domain="R-stacomiR"))
 				#dcnum=1;taxonnum=1;stadenum=2
 				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				for (dcnum in 1:length(lesdc)){
@@ -518,7 +518,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				
 				p<-ggplot(grdata_without_hole)+
 						geom_step(aes(x=debut_pas,y=cumsum,colour=mois))+
-						ylab(gettext("Cumulative migration"))+
+						ylab(gettext("Cumulative migration",domain="R-stacomiR"))+
 						theme(plot.title=element_text(size=10,colour="deepskyblue"))+
 						xlab("mois")+
 						scale_colour_manual(values=c("01"="#092360",
@@ -618,7 +618,7 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="step")
 }
@@ -634,7 +634,7 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	plot(bilanMigrationMult,plot.type="multiple")
 }
@@ -656,7 +656,7 @@ hTableBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	summary(bilanMigrationMult)
 }
@@ -675,7 +675,7 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data
 			lesdc=as.numeric(bilanMigrationMult@dc@dc_selectionne)	
-			if (!silent) funout(gettext("Statistics about migration :\n"))
+			if (!silent) funout(gettext("Statistics about migration :\n",domain="R-stacomiR"))
 			#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
 			#dcnum=2;taxonnum=1;stadenum=1
 			for (dcnum in 1:length(lesdc)){
@@ -737,7 +737,7 @@ houtBilanMigrationMult=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext("Please select DC, taxa, and stages for a complete command\n"),arret=TRUE)
+		funout(gettext("Please select DC, taxa, and stages for a complete command\n",domain="R-stacomiR"),arret=TRUE)
 	}
 }
 
@@ -975,7 +975,7 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 	# Conversion des  poids en effectifs
 	tableauconvert=tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")]
 	tableauconvert=tableauconvert*tableaupoids$coe_valeur_coefficient       # les coeff sont du type 2.54 et non 0.3
-	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext("Careful sum=0, you didn't enter the coefficient of conversion\n"))
+	if (sum(tableaupoids$coe_valeur_coefficient)==0) funout(gettext("Careful sum=0, you didn't enter the coefficient of conversion\n",domain="R-stacomiR"))
 	# creation d'une tableau (matricepoids) a 5 colonnes comprenant les effectifs convertis
 	matricepoids=cbind(tableaupoids[,c("No.pas", "lot_tax_code","lot_std_code")],tableauconvert,tableaupoids[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total")])
 	dimnames(matricepoids)=list(1:length(tableaupoids[,1]),c(

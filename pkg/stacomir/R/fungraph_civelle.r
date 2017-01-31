@@ -50,7 +50,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2 ,
 			lty=1,
 			xaxt="n",
-			ylab=gettext("Number of glass eels (x1000)"),
+			ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR"),
 			#xlab="date",
 			cex.main=1,
 			font.main=1,
@@ -66,7 +66,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	legend(x="topright",
 			inset=0.01,
-			legend= gettext("weight of the daily number","daily number counted"),
+			legend= gettext("weight of the daily number","daily number counted",domain="R-stacomiR"),
 			pch=c(16,16),
 			col=mypalette[c(10,8)])
 	
@@ -165,7 +165,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= c(gettext("working"),gettext("stopped"),gettext("normal operation")),
+				legend= c(gettext("working","stopped","normal operation",domain="R-stacomiR")),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				horiz=TRUE,
@@ -219,7 +219,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("work"),gettext("stop"),nomperiode),
+				legend= c(gettext("work","stop",domain="R-stacomiR"),nomperiode),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -240,7 +240,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext("CD"),
+			ylab=gettext("CD",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -266,7 +266,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend=c(gettext("working"),gettext("stopped"),gettext("normal operation")),
+				legend=c(gettext("working"),gettext("stopped"),gettext("normal operation",domain="R-stacomiR")),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,
@@ -338,7 +338,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext("Op"),
+			ylab=gettext("Op",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -389,12 +389,12 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	bar<-lattice::barchart(eff/1000~as.factor(mois),
 			groups=as.factor(type),
-			xlab=gettext("Month"),
-			ylab=gettext("Number (x1000)"),
+			xlab=gettext("Month",domain="R-stacomiR"),
+			ylab=gettext("Number (x1000)",domain="R-stacomiR"),
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tablemens,
 			allow.multiple=FALSE,
-#			key=lattice::simpleKey(text=c(gettext("weight of monthly number"),gettext("monthly number counted")),
+#			key=lattice::simpleKey(text=c(gettext("weight of monthly number"),gettext("monthly number counted",domain="R-stacomiR")),
 #					rectangles = TRUE, 
 #					points=FALSE, 
 #					space="right",

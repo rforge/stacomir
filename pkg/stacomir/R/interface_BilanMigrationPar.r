@@ -10,15 +10,15 @@ interface_BilanMigrationPar = function()
 	bilanFonctionnementDC=new("BilanFonctionnementDC") # appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
 	assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
 	
-	funout(gettext("Loading of the lists for taxons, stages, counting devices, qualitative and quantitative parameters\n"))
+	funout(gettext("Loading of the lists for taxons, stages, counting devices, qualitative and quantitative parameters\n",domain="R-stacomiR"))
 	bilanMigrationPar@taxons=charge(bilanMigrationPar@taxons)
 	bilanMigrationPar@stades=charge(bilanMigrationPar@stades)
 	bilanMigrationPar@dc=charge(bilanMigrationPar@dc)
 	bilanMigrationPar@parquan=charge(bilanMigrationPar@parquan)
 	bilanMigrationPar@parqual=charge(bilanMigrationPar@parqual)
-	bilanMigrationPar@echantillon=charge(bilanMigrationPar@echantillon,vecteur=c(gettext("with"),gettext("without")),
-			label=gettext("Choice of batch type, inclusion of samples ?", 
-					selected=as.integer(1)))
+	bilanMigrationPar@echantillon=charge(bilanMigrationPar@echantillon,vecteur=gettext("with","without",domain="R-stacomiR"),
+			label=gettext("Choice of batch type, inclusion of samples ?",domain="R-stacomiR"), 
+					selected=as.integer(1))
 	#######################
 	# Interface Graphique 
 	##########################
@@ -40,22 +40,22 @@ interface_BilanMigrationPar = function()
 					icon = "new",
 					label=gettext("calculation"),
 					action=bilanMigrationPar,
-					tooltip=gettext("Calculation of numbers by time step")),
+					tooltip=gettext("Calculation of numbers by time step",domain="R-stacomiR")),
 			Graph=gWidgets::gaction(handler = hbilanMigrationPargraph,
 					icon = "graph",
 					label="graph",
-					tooltip=gettext("Monthly graphic")),
+					tooltip=gettext("Monthly graphic",domain="R-stacomiR")),
 			Graph2=gWidgets::gaction(handler = hbilanMigrationPargraph2,
 					icon = "graph2",
 					label="grjour",
-					tooltip=gettext("Daily graphic")),
+					tooltip=gettext("Daily graphic",domain="R-stacomiR")),
 			Stat =gWidgets::gaction(handler= hbilanMigrationParstat,
 					icon = "matrix",
 					label="stat",
-					tooltip=gettext("Summary in .csv")),
+					tooltip=gettext("Summary in .csv",domain="R-stacomiR")),
 			annuler=gWidgets::gaction(handler= quitte,
 					icon = "close",
-					label=gettext("Exit")))
+					label=gettext("Exit",domain="R-stacomiR")))
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	gWidgets::addSpring(group)
 	#graphes=ggraphics(width=600,height=400)

@@ -126,31 +126,31 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			bilanMigration<-object
 			#bilanMigration<-bM_Arzal
 			#pour l'instant ne lancer que si les fenetre sont fermees
-			# funout(gettext("launching updateplot \n"))
+			# funout(gettext("launching updateplot \n",domain="R-stacomiR"))
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigration@dc<-get("refDC",envir_stacomi)
 				dc<-bilanMigration@dc@dc_selectionne
 				df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc%in%dc]
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)	
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)	
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigration@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigration@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigration@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 				# pour permettre le fonctionnement de Fonctionnement DC
 			} else {
-				funout(gettext("Attention, no time step selected, compunting with default value\n"),arret=FALSE)
-				warning(gettext("Attention, no time step selected, compunting with default value\n"))
+				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
+				warning(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"))
 			}
 			
 			#################################
@@ -208,7 +208,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 			#bilanMigration<-bM_Arzal_civ
 			#negative=FALSE;silent=FALSE
 			if (!silent){
-				funout(gettext("Starting migration summary ... be patient\n"))
+				funout(gettext("Starting migration summary ... be patient\n",domain="R-stacomiR"))
 			}
 			bilanMigration<-object
 			
@@ -273,15 +273,15 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 				bilanMigration@calcdata<-lestableaux
 				assign("bilanMigration",bilanMigration,envir_stacomi)
 				if (!silent){
-					funout(gettext("Summary object is stocked into envir_stacomi environment : write bilanMigration=get('bilanMigration',envir_stacomi) \n"))
-					funout(gettext("To access calculated data, type bilanMigration@calcdata\n"))
+					funout(gettext("Summary object is stocked into envir_stacomi environment : write bilanMigration=get('bilanMigration',envir_stacomi) \n",domain="R-stacomiR"))
+					funout(gettext("To access calculated data, type bilanMigration@calcdata\n",domain="R-stacomiR"))
 				}
 				
 				
 				
 			} else {
 				# no fish...
-				funout(gettext("There are no values for the taxa, stage and selected period\n"))
+				funout(gettext("There are no values for the taxa, stage and selected period\n",domain="R-stacomiR"))
 			}
 			return(bilanMigration)
 		})
@@ -299,7 +299,7 @@ houtBilanMigration=function(h=null,...) {
 	} 
 	else 
 	{      
-		funout(gettext("Please select DC, taxa, and stages for a complete command\n"),arret=TRUE)
+		funout(gettext("Please select DC, taxa, and stages for a complete command\n",domain="R-stacomiR"),arret=TRUE)
 	}
 }
 
@@ -347,14 +347,14 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 			if (exists("bilanMigration",envir_stacomi)) {
 				bilanMigration<-get("bilanMigration",envir_stacomi)
 			} else {      
-				funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+				funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			################################################################
 			#                 standard plot
 			################################################################
 			if (plot.type=="standard"){
 				if (!silent) print("plot type standard")
-				if (!silent) funout(gettext("Statistics about migration :\n"))				
+				if (!silent) funout(gettext("Statistics about migration :\n",domain="R-stacomiR"))				
 				taxon=bilanMigration@taxons@data[1,"tax_nom_latin"]
 				stade=bilanMigration@stades@data[1,"std_libelle"]
 				dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
@@ -439,7 +439,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 					
 					p<-ggplot(grdata)+
 							geom_line(aes(x=debut_pas,y=Cumsum,colour=mois))+
-							ylab(gettext("Cumulative migration"))+
+							ylab(gettext("Cumulative migration",domain="R-stacomiR"))+
 							ggtitle(gettextf("Cumulative count %s, %s, %s, %s",dis_commentaire,taxon,stade,annee)) + 
 							theme(plot.title = element_text(size=10,colour="navy"))+
 							scale_colour_manual(values=c("01"="#092360",
@@ -457,7 +457,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 									))
 					print(p)	
 				} else {
-					funout(gettext("Warning, this function applies for annual summaries\n"))
+					funout(gettext("Warning, this function applies for annual summaries\n",domain="R-stacomiR"))
 				}
 			} else {
 				stop("unrecognised plot.type argument, plot.type should either be standard or step")
@@ -476,7 +476,7 @@ hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="standard")
 	
@@ -492,7 +492,7 @@ hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	plot(bilanMigration,plot.type="step")
 }
@@ -510,7 +510,7 @@ hTableBilanMigration=function(h,...) {
 	} 
 	else 
 	{      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	summary(bilanMigration)
 	
@@ -545,14 +545,14 @@ hbilanMigrationwrite = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
 	} else {      
-		funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	database_expected<-get("database_expected",envir=envir_stacomi)
 	if (database_expected) {
 		write_database(bilanMigration,silent=TRUE)
 	}	else {
-		funout(gettext("no bilan written to database : database_expected argument=FALSE"))
+		funout(gettext("no bilan written to database : database_expected argument=FALSE",domain="R-stacomiR"))
 	}
 	
 }
@@ -675,7 +675,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 						))		
 #	
 				
-				if (!silent) funout(gettext("Writing daily summary in the database"))
+				if (!silent) funout(gettext("Writing daily summary in the database",domain="R-stacomiR"))
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)
 				DC=as.numeric(bilanMigration@dc@dc_selectionne)	

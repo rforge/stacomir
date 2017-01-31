@@ -74,7 +74,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 			requete<-stacomirtools::connect(requete)			
 			object@data<-stacomirtools::killfactor(requete@query)
-			funout(gettext("Environmental conditions loading query completed\n"))
+			funout(gettext("Environmental conditions loading query completed\n",domain="R-stacomiR"))
 			return(object)
 		}
 )
@@ -89,19 +89,19 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 			if (exists("refStationMesure",envir_stacomi)) {
 				object@stationMesure<-get("refStationMesure",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a monitoring station, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a monitoring station, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}     
 			
 			if (exists("bilanConditionEnv_date_debut",envir_stacomi)) {
 				object@datedebut<-get("bilanConditionEnv_date_debut",envir_stacomi)@horodate
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			
 			if (exists("bilanConditionEnv_date_fin",envir_stacomi))  {
 				object@datefin<-get("bilanConditionEnv_date_fin",envir_stacomi)@horodate
 			}else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}      		
 			object<-connect(object)
 			return(object)
@@ -130,7 +130,7 @@ hbilanConditionEnvgraph = function(h,...)
 		lesGraphes=list()
 		if(length(unique(dat$env_stm_identifiant))!= nrow(bilanConditionEnv@stationMesure@data))
 		{
-			funout(gettext("Some monitoring stations lack associated values\n"))
+			funout(gettext("Some monitoring stations lack associated values\n",domain="R-stacomiR"))
 		}
 		
 		# pour toutes les stations de mesure selectionnees
@@ -163,7 +163,7 @@ hbilanConditionEnvgraph = function(h,...)
 	}
 	else
 	{
-		funout(gettext("No environmental conditions values for selected monitoring stations (BilanConditionEnv.r)\n"),arret=TRUE)
+		funout(gettext("No environmental conditions values for selected monitoring stations (BilanConditionEnv.r)\n",domain="R-stacomiR"),arret=TRUE)
 	}	
 	return (lesGraphes)
 }   
@@ -177,7 +177,7 @@ hbilanConditionEnvstat = function(h,...)
 	dat<-bilanConditionEnv@data
 	dat<-stacomirtools::chnames(dat,"env_stm_identifiant","stm_identifiant")
 	dat<-merge(dat,bilanConditionEnv@stationMesure@data,by="stm_identifiant")
-	funout(gettext("Statistics :\n"))
+	funout(gettext("Statistics :\n",domain="R-stacomiR"))
 	liste = tapply(dat$env_valeur_quantitatif,dat$stm_libelle,summary)
 	for (i in names(liste)){
 		funout(paste(" station",i,":\nMin  ; 1st Qu.;  Median  ;    Mean   ; 3rd Qu.  ;     Max   ;    Na's  ) = \n",paste(liste[[i]],collapse="   ;   "),"\n"))

@@ -82,7 +82,7 @@ setMethod("connect",signature=signature("BilanArgentee"),definition=function(obj
 					" AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (!silent) funout(gettext("Data loaded"))
+			if (!silent) funout(gettext("Data loaded",domain="R-stacomiR"))
 			return(object)
 		})
 
@@ -101,34 +101,34 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			} 
 			if (exists("refTaxon",envir_stacomi)) {
 				object@taxons<-get("refTaxon",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)) {
 				object@stades<-get("refStades",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refpar",envir_stacomi)) {
 				object@par<-get("refpar",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a parameter, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a parameter, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}		
 			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_arg_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_arg_date_debut",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			# rem id
 			if (exists("bilan_arg_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_arg_date_fin",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}       
 			
 			return(object)
@@ -176,12 +176,12 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 			bilanArg@par<-choice_c(bilanArg@par,par,silent=silent)
 			bilanArg@horodatedebut<-choice_c(object=bilanArg@horodatedebut,
 					nomassign="bilanArg_date_debut",
-					funoutlabel=gettext("Beginning date has been chosen\n"),
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilanArg@horodatefin<-choice_c(bilanArg@horodatefin,
 					nomassign="bilanArg_date_fin",
-					funoutlabel=gettext("Ending date has been chosen\n"),
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
 			validObject(bilanArg)
@@ -198,7 +198,7 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 			#bilanArg<-b_carlot
 			bilanArg<-object
 			if(nrow(bilanArg@data)==0) {
-				funout(gettext("No data of silver or yellow eel on the selected period"), arret=TRUE)
+				funout(gettext("No data of silver or yellow eel on the selected period",domain="R-stacomiR"), arret=TRUE)
 			}   
 			arg=bilanArg@data # on recupere le data.frame
 			
@@ -288,7 +288,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -347,10 +347,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 						group=stage,			
 						type = c("p"),
 						par.settings = my.settings,
-						xlab=gettext("size (BL mm)"),
-						ylab=gettext("Mean eye diameter (MD mm)"),
+						xlab=gettext("size (BL mm)",domain="R-stacomiR"),
+						ylab=gettext("Mean eye diameter (MD mm)",domain="R-stacomiR"),
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=gettext("Silvering stages (Durif et al. 2009)"),
+						auto.key=list(title=gettext("Silvering stages (Durif et al. 2009)",domain="R-stacomiR"),
 								cex.title=1.2,
 								space="top",
 								columns=6,
@@ -402,10 +402,10 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				
 				bb<-lattice::barchart(form,data=datdc1,	
 						group=stage,		
-						xlab=gettext("Month"),
-						ylab=gettext("Number"),
+						xlab=gettext("Month",domain="R-stacomiR"),
+						ylab=gettext("Number",domain="R-stacomiR"),
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=gettext("Number by pigmentation stage"),
+						auto.key=list(title=gettext("Number by pigmentation stage",domain="R-stacomiR"),
 								cex.title=1.2,
 								space="top",
 								columns=6,
@@ -521,8 +521,8 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				#############
 				par(mar=c(5.1,4.1,1,1)) # blur bottom left up right
 				plot(datdc$BL,datdc$W,type="n",
-						xlab=gettext("Size (mm)"),
-						ylab=gettext("Weight(g)"),
+						xlab=gettext("Size (mm)",domain="R-stacomiR"),
+						ylab=gettext("Weight(g)",domain="R-stacomiR"),
 						xlim=c(250,1000),ylim=c(0,2000))
 				abline(v=seq(250,1000,by=50), col = "lightgray",lty=2)
 				abline(h=seq(0,2000,by=100),col="lightgray",lty=2)
@@ -605,7 +605,7 @@ setMethod("summary",signature=signature(object="BilanArgentee"),definition=funct
 			if (exists("bilanArg",envir_stacomi)) {
 				bilanArg<-get("bilanArg",envir_stacomi)
 			} else {      
-				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n"),arret=TRUE)
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			dat<-bilanArg@calcdata
 			# cols are using viridis::inferno(6,alpha=0.9)
@@ -703,7 +703,7 @@ funtableBilanArgentee = function(h,...) {
 	bilanArg<-connect(bilanArg)
 	vue_ope_lot=bilanArg@requete@query # on recupere le data.frame
 	assign("bilanArg",bilanArg,envir_stacomi)#assign("bilanArg",vue_ope_lot,envir_stacomi)
-	funout(gettext("Size (BL mm)"))
+	funout(gettext("Size (BL mm)",domain="R-stacomiR"))
 	vue_ope_lot[is.na(vue_ope_lot)]<-""
 	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
 	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   

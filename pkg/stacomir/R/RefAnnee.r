@@ -134,8 +134,8 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 
-				funoutlabel=gettext("Year selected\n"),
-				titleFrame=gettext("Year choice"), 
+				funoutlabel=gettext("Year selected\n",domain="R-stacomiR"),
+				titleFrame=gettext("Year choice",domain="R-stacomiR"), 
 				preselect=1){
 			if (nrow(object@data) > 0){      
 				hannee=function(h,...){      
@@ -150,7 +150,7 @@ setMethod("choice",
 				choice=gdroplist(annees,container=frame_annee,handler=hannee,selected=preselect)    
 				gbutton("OK", container=frame_annee,handler=hannee)  
 			} else { 
-				funout(gettext("Problem when loading data or no data in the database (ODBC link ?)"),arret=TRUE)  
+				funout(gettext("Problem when loading data or no data in the database (ODBC link ?)",domain="R-stacomiR"),arret=TRUE)  
 			}
 		}) 
 
@@ -177,7 +177,7 @@ setMethod("choice_c",
 		signature=signature("RefAnnee"),definition=function(object,
 				annee,
 				nomassign="refAnnee", 
-				funoutlabel=gettext("Year selected\n"),
+				funoutlabel=gettext("Year selected\n",domain="R-stacomiR"),
 				silent=FALSE
 		){
 			if (length(annee)>1) stop("horodate should be a vector of length 1")

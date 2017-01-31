@@ -42,7 +42,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 #					width = 400),
 #			envir = .GlobalEnv)
 	mygtkProgressBar(title="cumul val. quant. par pas de temps",
-			progress_text=gettext("Progress %"))
+			progress_text=gettext("Progress %",domain="R-stacomiR"))
 
 	##############################			
 	on.exit(dispose(progres))

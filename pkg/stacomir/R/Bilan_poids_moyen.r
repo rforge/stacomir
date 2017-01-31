@@ -81,7 +81,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 			object@coe@datedebut=requete@datedebut
 			object@coe@datefin=requete@datefin
 			object@coe<-charge(object@coe)
-			funout(gettext("The query to load the coefficients of conversion is finished\n"))
+			funout(gettext("The query to load the coefficients of conversion is finished\n",domain="R-stacomiR"))
 			funout(gettextf("%1.0f lines found for the conversion coefficients\n",nrow(object@coe)))	
 			assign(x="bilan_poids_moyen",value=object,envir=envir_stacomi)
 			return(object)
@@ -97,22 +97,22 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 			if (exists("refliste",envir_stacomi)) {      
 				object@liste<-get("refliste",envir_stacomi)      
 			} else {      
-				funout(gettext("You need to choose a size class\n"), arret=TRUE)             
+				funout(gettext("You need to choose a size class\n",domain="R-stacomiR"),arret=TRUE)             
 			} 
 			if (exists("refDC",envir_stacomi)) {      
 				object@dc<-get("refDC",envir_stacomi)      
 			} else {      
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)          
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)          
 			}            
 			if (exists("refAnneeDebut",envir_stacomi)) {      
 				object@anneedebut<-get("refAnneeDebut",envir_stacomi)      
 			} else {      
-				funout(gettext("You need to choose the starting year\n"),arret=TRUE)             
+				funout(gettext("You need to choose the starting year\n",domain="R-stacomiR"),arret=TRUE)             
 			}
 			if (exists("refAnneeFin",envir_stacomi)) {      
 				object@anneefin<-get("refAnneeFin",envir_stacomi)      
 			} else {      
-				funout(gettext("You need to choose the ending year\n"),arret=TRUE)       
+				funout(gettext("You need to choose the ending year\n",domain="R-stacomiR"),arret=TRUE)       
 			}                    
 			assign("bilan_poids_moyen",object,envir=envir_stacomi)
 			return(object) 
@@ -158,7 +158,7 @@ setMethod("choice_c",signature=signature("Bilan_poids_moyen"),definition=functio
 					nomassign="anneeFin",
 					annee=anneefin, 
 					silent=silent)
-			bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label=gettext("choice of number in sample (one, several,all)"))# choix de la categorie d'effectif)
+			bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label=gettext("choice of number in sample (one, several,all)",domain="R-stacomiR"))# choix de la categorie d'effectif)
 			bilPM@liste<-choice_c(bilPM@liste,selectedvalue=selectedvalue)
 			assign("bilan_poids_moyen",bilPM,envir=envir_stacomi)
 			return(bilPM)
@@ -187,7 +187,7 @@ setMethod("calcule",signature=signature("Bilan_poids_moyen"),definition=function
 			coeff$w	<-1/coeff$coe_valeur_coefficient
 			coeff$date			<-as.POSIXct(coeff$coe_date_debut)
 			assign("bilan_poids_moyen",bilPM,envir_stacomi)
-			if (!silent) funout(gettext("To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data\n"))
+			if (!silent) funout(gettext("To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data\n",domain="R-stacomiR"))
 			# changement des noms
 			donnees<-stacomirtools::chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin",
 							"lot_effectif","poids","w",
@@ -238,18 +238,18 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				p<-ggplot2::qplot(x=date,y=w,data=don) 
 				print(p)
 				assign("p",p,envir=envir_stacomi)
-				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
 				####################"
 				# standard plot
 				##################
 			} else if (plot.type==2){	
 				type_poids= switch (bilPM@liste@selectedvalue,
-						">1"=gettext("wet weights"),
-						"=1"=gettext("dry weights"),
-						"tous"=gettext("wet and dry weights"))  
+						">1"=gettext("wet weights",domain="R-stacomiR"),
+						"=1"=gettext("dry weights",domain="R-stacomiR"),
+						"tous"=gettext("wet and dry weights",domain="R-stacomiR"))  
 				plot(x=don$date,y=don$w,
-						xlab=gettext("date"),
-						ylab=gettext("mean weights"),
+						xlab=gettext("date",domain="R-stacomiR"),
+						ylab=gettext("mean weights",domain="R-stacomiR"),
 						col="red",
 						main=gettextf("Seasonal trend of %s, from %s to %s",
 								type_poids,
@@ -265,7 +265,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				p<-ggplot2::qplot(x=date,y=w,data=don) 
 				print(p+aes(size=effectif))
 				assign("p",p,envir=envir_stacomi)
-				if (!silent) funout(gettext("object p assigned to envir_stacomi"))
+				if (!silent) funout(gettext("object p assigned to envir_stacomi",domain="R-stacomiR"))
 			}
 		})
 
@@ -364,7 +364,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				
 				print(p)
 				assign("p", p,envir=envir_stacomi)	
-				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
 				
 				
 				#fm <- stats::nls(formula=w ~ a*cos(2*pi*(doy-T)/365)+b ,data=don,start=list(a=0.1,T=73,b=0.3))
@@ -395,8 +395,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				print(p)
 				assign("p", p,envir=envir_stacomi)	
 				assign("g1",g1,envir=envir_stacomi)
-				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
-				if (!silent) funout(gettext("gam model g1 assigned to envir_stacomi"))
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
+				if (!silent) funout(gettext("gam model g1 assigned to envir_stacomi",domain="R-stacomiR"))
 				
 			} else 	if (model.type=="seasonal2"){
 				#########################################################
@@ -404,7 +404,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				#	ω is a constant that describes how the index variable relates to the full period (here, 2π/365=0.0172).
 				############################################################
 				g2 = mgcv::gam(w~cos(0.0172*doy)+sin(0.0172*doy)+s(time),data=don)
-				print(gettext("One model per year, doy starts in november"))
+				print(gettext("One model per year, doy starts in november",domain="R-stacomiR"))
 				summary(g2)
 				plot(g2,pages=1)
 				predata<-newcoe
@@ -423,8 +423,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				print(p)
 				assign("p", p,envir=envir_stacomi)	
 				assign("g2",g2,envir=envir_stacomi)
-				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi"))
-				if (!silent) funout(gettext("gam model g2 assigned to envir_stacomi"))
+				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
+				if (!silent) funout(gettext("gam model g2 assigned to envir_stacomi",domain="R-stacomiR"))
 				###################################################################
 				# comparison with Guérault and Désaunay (summary table in latex)
 				######################################################################
@@ -439,7 +439,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				xt_summary_harmonic<-xtable( summary_harmonic,
 						caption=gettext("Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling
 								of estuarine samples."),
-						label=gettext("summary_harmonic"),
+						label=gettext("summary_harmonic",domain="R-stacomiR"),
 						digits=c(0,0,3,3,0))
 				tabname<-stringr::str_c(get("datawd",envir=envir_stacomi),"/summary_harmonic.tex")
 				o<-print(xt_summary_harmonic, file = tabname, 
@@ -454,11 +454,11 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				funout(gettextf("summary coefficients written in %s",tabname))					
 			
 			} else if (model.type=="manual"){
-				if (!silent) funout(gettext("Table for predictions newcoe assigned to envir_stacomi"))
+				if (!silent) funout(gettext("Table for predictions newcoe assigned to envir_stacomi",domain="R-stacomiR"))
 				assign("newcoe",newcoe,envir=envir_stacomi)
-				if (!silent) funout(gettext("Table of data don assigned to envir_stacomi"))
+				if (!silent) funout(gettext("Table of data don assigned to envir_stacomi",domain="R-stacomiR"))
 				assign("don",don,envir=envir_stacomi)
-				if (!silent) funout(gettext("Table of current coefficients coe assigned to envir_stacomi"))
+				if (!silent) funout(gettext("Table of current coefficients coe assigned to envir_stacomi",domain="R-stacomiR"))
 				assign("coe",coe,envir=envir_stacomi)
 			}
 			import_coe=data.frame(
@@ -473,7 +473,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 			#attention ecrit dans C:/base....
 			utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
 			assign("import_coe",import_coe,envir=envir_stacomi)
-			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"))
+			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
 			funout(paste(gettextf("data directory :%s",fileout)))
 			bilPM@calcdata[["import_coe"]]<-import_coe
 			
@@ -483,8 +483,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 
 hexp=function(h,...){
 	# export d'un tableau que l'on peut ecrire dans la base
-	gWidgets::gconfirm(gettext("Do you want to write data in the database ?"),
-			title=gettext("Warning!"),
+	gWidgets::gconfirm(gettext("Do you want to write data in the database ?",domain="R-stacomiR"),
+			title=gettext("Warning!",domain="R-stacomiR"),
 			handler=hreg,action="export")
 	bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
 	write_database(bilPM)
@@ -497,7 +497,7 @@ funtableBilan_poids_moyen = function(h,...) {
 	bilPM=charge(bilPM)  
 	donnees=bilPM@data # on recupere le data.frame  
 	assign("bilan_poids_moyen",bilPM,envir_stacomi)
-	funout(gettext("To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data\n"))  
+	funout(gettext("To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data\n",domain="R-stacomiR"))  
 	donnees[is.na(donnees)]<-""  
 	donnees$ope_date_debut=as.character(donnees$ope_date_debut)  
 	donnees$ope_date_fin=as.character(donnees$ope_date_fin)   
@@ -513,7 +513,7 @@ funtableBilan_poids_moyen = function(h,...) {
 #' @export
 setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent,dbname="bd_contmig_nat",host="localhost",port=5432){
 			object<-bilPM
-			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database"),arret=TRUE)
+			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database",domain="R-stacomiR"),arret=TRUE)
 			import_coe<-bilPM@calcdata$import_coe
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe (",			

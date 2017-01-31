@@ -59,7 +59,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 			requete@order_by="ORDER BY std_code"  
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC
 			object@data<-requete@query
-			if (nrow(object@data)==0) funout(gettext("No data for this counting device and this taxon\n"),arret=TRUE)
+			if (nrow(object@data)==0) funout(gettext("No data for this counting device and this taxon\n",domain="R-stacomiR"),arret=TRUE)
 			return(object)
 		})
 #' Choice method for RefStades referential objects
@@ -84,7 +84,7 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 					stades=svalue(choice)
 					object@data<-object@data[std_libelle%in%stades ,]
 					assign("refStades",object,envir_stacomi)
-					funout(gettext("Stage selected\n"))
+					funout(gettext("Stage selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne premnant que les stades des taxon du dc par la methode charge_avec_filtre
 						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
@@ -124,20 +124,20 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 								}
 							}
 							if (exists("frame_parquan")) delete(group,frame_parquan)
-							choice(objectBilan@parquan,label=gettext("Quantitative feature"),
+							choice(objectBilan@parquan,label=gettext("Quantitative feature",domain="R-stacomiR"),
 									nomassign="refparquan",
 									frameassign="frame_parquan",is.enabled=TRUE)
 						}
 						
 					}
 				}
-				frame_std<<-gframe(gettext("Stage selection"))
+				frame_std<<-gframe(gettext("Stage selection",domain="R-stacomiR"))
 				add(group,frame_std)
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				choice=gcombobox(std_libelle,container=frame_std,handler=hstd)
 				enabled(frame_std)<-is.enabled
 				gbutton("OK", container=frame_std,handler=hstd)
-			} else funout(gettext("Stop internal error : load data to make a choice\n"),arret=TRUE)
+			} else funout(gettext("Stop internal error : load data to make a choice\n",domain="R-stacomiR"),arret=TRUE)
 		})
 
 #' Multiple Choice method for RefStades referential objects
@@ -165,7 +165,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 					stades=tbdeststd[,][tbdeststd[,]!=""]
 					object@data<-object@data[std_libelle%in%stades ,]
 					assign("refStades",object,envir_stacomi)
-					funout(gettext("Stage selected\n"))
+					funout(gettext("Stage selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
 						objectBilan@stades<-object
 						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
@@ -228,7 +228,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				groupstd<-ggroup() 
 				assign("goupstd",groupstd,envir=.GlobalEnv)
 				add(notebook,groupstd,label="stade")
-				framestdsource<-gframe(gettext("Stage selection",container=groupstd))
+				framestdsource<-gframe(gettext("Stage selection",container=groupstd,domain="R-stacomiR"))
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)
 				size(tbsourcestd)<-c(160,300) 
 				#TODO addmsg
@@ -270,7 +270,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						})
 				gbutton("ok", container = groupstd, handler = hstd)
 			} else {
-				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n"),arret=TRUE)
+				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 		})
 
@@ -292,13 +292,13 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 
 setMethod("choice_c",signature=signature("RefStades"),definition=function(object,stades,silent=FALSE) {
 			if (is.null(stades)) {
-				funout(gettext("No value for argument stage\n"),arret=TRUE)
+				funout(gettext("No value for argument stage\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			libellemanquants<-stades[!stades%in%object@data$std_code]
 			if (length(libellemanquants)>0&!silent) funout(gettextf("No data for this counting device and this taxon\n %s",stringr::str_c(libellemanquants,collapse=", ")))
 			object@data<-object@data[object@data$std_code%in%stades,]					
 			if (nrow(object@data)==0 )	{
-				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n"),arret=TRUE)
+				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			assign("refStades",object,envir=envir_stacomi)
 			return(object)

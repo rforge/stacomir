@@ -86,25 +86,25 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 					object@ouvrage= object@data$dif_ouv_identifiant[object@data$df%in%object@df_selectionne]
 					#cat("passe par la")
 					assign("refDF",object,envir_stacomi)
-					funout(gettext("Fishway selected\n"))
+					funout(gettext("Fishway selected\n",domain="R-stacomiR"))
 					#dispose(winst)
 				} 
 				# Handler d'affichage du tableau
 				hDFi=function(h,...){
-					w=gwindow(gettext("Fishways data"),width=400)
+					w=gwindow(gettext("Fishways data",domain="R-stacomiR"),width=400)
 					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,6,7)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
 					bg<-ggroup(container=wg)
 					addSpring(bg)
-					gbutton(gettext("close"), container=bg, handler = function(h,...) dispose(w))
+					gbutton(gettext("close",domain="R-stacomiR"), container=bg, handler = function(h,...) dispose(w))
 				}
-				frameDF=gframe(gettext("Fishway choice"),container=group)
+				frameDF=gframe(gettext("Fishway choice",domain="R-stacomiR"),container=group)
 				DF_identifiant=object@data$df
 				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
 				gbutton(gettext("Table"), container=frameDF,handler=hDFi)
 				gbutton("OK", container=frameDF,handler=hDF)
 			} else {
-				funout(gettext("No fishway in the database (the query returns 0 entry)\n"),arret=TRUE)
+				funout(gettext("No fishway in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 		})
 

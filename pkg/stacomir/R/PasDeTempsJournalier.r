@@ -49,9 +49,9 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			rep1 = validite_PasDeTemps(object)
 			if (!is.logical(rep1)) retValue<-rep1
 			rep2 = (object@stepDuration==86400)
-			if (!rep2) retValue=paste(retValue,gettext("Time step duration should be daily"))
+			if (!rep2) retValue=paste(retValue,gettext("Time step duration should be daily",domain="R-stacomiR"))
 			rep3 = length(getAnnees(object))==1
-			if (!rep3) retValue=paste(retValue,gettext("Time step can't include more than one year"))
+			if (!rep3) retValue=paste(retValue,gettext("Time step can't include more than one year",domain="R-stacomiR"))
 			return(ifelse( rep1 & rep2 & rep3 ,TRUE,retValue)   )
 		})	
 # pour test #object=new("PasDeTempsJournalier")
@@ -65,23 +65,23 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 					object=setdateDebut(object,as.POSIXlt(svalue(datedeb)))
 					svalue(datedefin)<-as.Date(DateFin(object))
 					assign("pasDeTemps",object,envir_stacomi)
-					funout(gettext("Time steps loaded\n"))
+					funout(gettext("Time steps loaded\n",domain="R-stacomiR"))
 					#dispose(winpa)
 				}
-				winpa=gframe(gettext("Time steps choice (1 year duration)",container=group,horizontal=FALSE))
+				winpa=gframe(gettext("Time steps choice (1 year duration)",container=group,horizontal=FALSE,domain="R-stacomiR"))
 				pg<-glayout(container=winpa)
-				pg[1,1]<-glabel(gettext("Start date"))
+				pg[1,1]<-glabel(gettext("Start date",domain="R-stacomiR"))
 				datedeb<-gedit(as.Date(getdateDebut(object)),handler=hwinpa,width=10)
 				pg[2,1]<-datedeb
-				pg[3,1]<-glabel(gettext("Time step"))
+				pg[3,1]<-glabel(gettext("Time step",domain="R-stacomiR"))
 				pas_libelle=fun_char_spe(LesPasDeTemps$LabelPasDeTemps)
 				choicepas=gdroplist(pas_libelle,selected = 8,handler=hwinpa)
 				pg[4,1]<-choicepas 
 				enabled(choicepas)=FALSE
-				pg[3,2]<-glabel(gettext("Number of days"))
+				pg[3,2]<-glabel(gettext("Number of days",domain="R-stacomiR"))
 				choicenbStep=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
 				pg[4,2]<-choicenbStep
-				pg[1,2]<-glabel(gettext("End date",container=pg))
+				pg[1,2]<-glabel(gettext("End date",container=pg,domain="R-stacomiR"))
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE
 				pg[2,2]<-datedefin			

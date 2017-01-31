@@ -55,8 +55,8 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			lty=1,
 			xaxt="n",
 			bty="l",
-			ylab=gettext("Number"),
-			xlab=gettext("Date"),
+			ylab=gettext("Number",domain="R-stacomiR"),
+			xlab=gettext("Date",domain="R-stacomiR"),
 			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee),
 			cex.main=1)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
@@ -75,7 +75,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	legend(x=0,
 			y=max(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),
-			legend=gettext("measured","calculated","expert","direct"),
+			legend=gettext("measured","calculated","expert","direct",domain="R-stacomiR"),
 			pch=c(16),
 			col=rev(c(mypalette[1:4])))
 	bilanOperation<-get("bilanOperation",envir=envir_stacomi)
@@ -83,7 +83,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-	  funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n"))
+	  funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n",domain="R-stacomiR"))
 		funout(gettextf("average trapping time = %s days\n",round(mean(as.numeric(dif)),2)))
 		funout(gettextf("maximum term = %s",round(max(as.numeric(dif)),2)))
 		funout(gettextf("minimum term = %s",round(min(as.numeric(dif)),2)))
@@ -119,7 +119,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext("Fishway"),
+			ylab=gettext("Fishway",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)
 	
@@ -144,7 +144,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= c(gettext("working"),gettext("stopped"),gettext("normal operation")),
+				legend= gettext("working","stopped","normal operation",domain="R-stacomiR"),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				horiz=TRUE,
@@ -198,7 +198,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("stop"),nomperiode),
+				legend= c(gettext("stop"),nomperiode,domain="R-stacomiR"),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -218,7 +218,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext("CD"),
+			ylab=gettext("CD",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -244,7 +244,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend= c(gettext("working"),gettext("stopped"),gettext("normal operation")),
+				legend= gettext("working","stopped","normal operation",domain="R-stacomiR"),
 				pch=c(16,16),
 				col=c(mypalette[4],mypalette[6],mypalette[1]),
 				#horiz=TRUE,
@@ -296,7 +296,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("stop"),nomperiode),
+				legend= c(gettext("stop",domain="R-stacomiR"),nomperiode),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",
@@ -317,7 +317,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab=gettext("Op"),
+			ylab=gettext("Op",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)             
 	###################################         
@@ -344,7 +344,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			measure.vars=c("MESURE","CALCULE","EXPERT","PONCTUEL"),
 			variable.name="type",
 			value.name="number")
-	levels(tableaum$type)<-c(gettext("measured"),gettext("calculated"),gettext("expert"),gettext("direct"))
+	levels(tableaum$type)<-gettext("measured","calculated","expert","direct",domain="R-stacomiR")
 	superpose.polygon<-lattice::trellis.par.get("plot.polygon")
 	superpose.polygon$col=  c("black","deepskyblue","chartreuse2","indianred")
 	superpose.polygon$border=rep("transparent",6)
@@ -367,8 +367,8 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	bar<-lattice::barchart(number/1000~mois,
 			groups=type,
-			xlab=gettext("Month"),
-			ylab=gettext("Number (x1000)"),
+			xlab=gettext("Month",domain="R-stacomiR"),
+			ylab=gettext("Number (x1000)",domain="R-stacomiR"),
 			#    main=list(label=paste("Donnees mensuelles")),
 			data=tableaum,
 			allow.multiple=FALSE,

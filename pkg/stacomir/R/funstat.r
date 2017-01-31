@@ -11,7 +11,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 funstat=function(tableau,time.sequence,taxon,stade,DC,silent){
-	if (!silent) funout(gettext("Calculation of the monthly balance sheet\n"))
+	if (!silent) funout(gettext("Calculation of the monthly balance sheet\n",domain="R-stacomiR"))
 	mois=strftime(as.POSIXlt(time.sequence),"%m")
 	moislab=unique(mois)
 	annee=paste(unique(strftime(as.POSIXlt(time.sequence),"%Y")),collapse=",")
@@ -43,7 +43,7 @@ funstat=function(tableau,time.sequence,taxon,stade,DC,silent){
 	# funout(paste(DC,taxon,stade,annee,"\n"))
 	#funout(paste("DC","code_taxon","code_stade","annee","\n"))
 	if(!silent) {
-		funout(gettext("Calculation of the monthly balance sheet\n"))
+		funout(gettext("Calculation of the monthly balance sheet\n",domain="R-stacomiR"))
 		print( resum["somme",])
 	}
 	return(resum)

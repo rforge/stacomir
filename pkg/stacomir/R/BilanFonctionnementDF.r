@@ -64,7 +64,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 #req@where=#defini dans la methode ODBCwheredate
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
 			object@data<-req@query
-			if (!silent) funout(gettext("Time steps of the fishway loaded\n"))
+			if (!silent) funout(gettext("Time steps of the fishway loaded\n",domain="R-stacomiR"))
 			return(object)
 		})
 
@@ -92,19 +92,19 @@ setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=funct
 			if (exists("refDF",envir=envir_stacomi)) {
 				object@df<-get("refDF",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a crossing device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a crossing device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}     
 			
 			if (exists("bilanFonctionnementDF_date_debut",envir=envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilanFonctionnementDF_date_debut",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			
 			if (exists("bilanFonctionnementDF_date_fin",envir=envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilanFonctionnementDF_date_fin",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}			
 			assign("bilanFonctionnementDF",object,envir=envir_stacomi)  
 			return(object)
@@ -126,17 +126,17 @@ setMethod("choice_c",signature=signature("BilanFonctionnementDF"),definition=fun
 			# bilanFonctionnementDF<-bfDF;df=2;horodatedebut="2013-01-01";horodatefin="2013-12-31";silent=TRUE
 			bilanFonctionnementDF<-object
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)    
-			if (!silent) funout(gettext("Loading of the list for fishways and choice of the time step\n"))
+			if (!silent) funout(gettext("Loading of the list for fishways and choice of the time step\n",domain="R-stacomiR"))
 			bilanFonctionnementDF@df<-charge(bilanFonctionnementDF@df)    
 			bilanFonctionnementDF@df<-choice_c(bilanFonctionnementDF@df,df)
 			# assigns the parameter (horodatedebut) of the method to the object using choice_c method for RefDC
 			bilanFonctionnementDF@horodatedebut<-choice_c(object=bilanFonctionnementDF@horodatedebut,
 					nomassign="bilanFonctionnementDF_date_debut",
-					funoutlabel=gettext("Beginning date has been chosen\n"),
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatedebut, silent=silent)
 			bilanFonctionnementDF@horodatefin<-choice_c(bilanFonctionnementDF@horodatefin,
 					nomassign="bilanFonctionnementDF_date_fin",
-					funoutlabel=gettext("Ending date has been chosen\n"),
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,silent=silent)
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)  
 			return(bilanFonctionnementDF)
@@ -172,7 +172,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
 			if (nrow(bilanFonctionnementDF@data)==0) 
-				funout(gettext("No data for this fishway\n"),arret=TRUE)
+				funout(gettext("No data for this fishway\n",domain="R-stacomiR"),arret=TRUE)
 			if (plot.type=="1"|plot.type=="2"){
 				t_periodefonctdispositif_per=bilanFonctionnementDF@data # on recupere le data.frame   
 				# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
@@ -195,8 +195,8 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				#progress bar
 				###########################
 				mygtkProgressBar(
-						title=gettext("computing ..."),
-						progress_text=gettext("Progress %"))
+						title=gettext("computing ...",domain="R-stacomiR"),
+						progress_text=gettext("Progress %",domain="R-stacomiR"))
 				# this function assigns
 				z=0 # compteur tableau t_periodefonctdispositif_per_mois
 				for(j in 1:nrow(t_periodefonctdispositif_per)){
@@ -231,8 +231,8 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				g<- ggplot(t_periodefonctdispositif_per_mois,
 								aes(x=mois,y=sumduree,fill=libelle))+
 						facet_grid(annee~.)+
-						ylab(gettext("duration"))+
-						xlab(gettext("month"))+
+						ylab(gettext("duration",domain="R-stacomiR"))+
+						xlab(gettext("month",domain="R-stacomiR"))+
 						ggtitle(main)+
 						geom_bar(stat='identity')+
 						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[2],
@@ -242,18 +242,18 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				t_periodefonctdispositif_per_mois$per_etat_fonctionnement=as.factor(	t_periodefonctdispositif_per_mois$per_etat_fonctionnement)
 				
 				g1<- ggplot(t_periodefonctdispositif_per_mois,aes(x=mois,y=sumduree))+facet_grid(annee~.)+
-						ylab(gettext("duration"))+
-						xlab(gettext("month"))+						
+						ylab(gettext("duration",domain="R-stacomiR"))+
+						xlab(gettext("month",domain="R-stacomiR"))+						
 						ggtitle(main)+
 						geom_bar(stat='identity',aes(fill=per_etat_fonctionnement))+
-						scale_fill_manual(gettext("operation"),values = c("#E41A1C","#4DAF4A")) 
+						scale_fill_manual(gettext("operation",domain="R-stacomiR"),values = c("#E41A1C","#4DAF4A")) 
 				
 				if (plot.type=="1")
 					print(g)
 				if (plot.type=="2")
 					print(g1)		
 				assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
-				if (!silent) funout(gettext("Writing the table into envir_stacomi environment : write periodeDF=get('periodeDF',envir_stacomi)\n"))
+				if (!silent) funout(gettext("Writing the table into envir_stacomi environment : write periodeDF=get('periodeDF',envir_stacomi)\n",domain="R-stacomiR"))
 				# the progress bar has been assigned in envir_stacomi, we destroy it
 				gtkWidgetDestroy(get("progres",envir=envir_stacomi))
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -284,7 +284,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 						xlab="",
 						xaxt="n",
 						yaxt="n", 
-						ylab=gettext("Fishway"),
+						ylab=gettext("Fishway",domain="R-stacomiR"),
 						main=main,
 						#bty="n",
 						cex=0.8)
@@ -306,7 +306,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 							border = NA, 
 							lwd = 1)
 					legend(  x= "bottom",
-							legend= gettext("Func.","Stop","Normal func."),
+							legend= gettext("Func.","Stop","Normal func.",domain="R-stacomiR"),
 							pch=c(16,16),
 							col=c(mypalette[4],mypalette[6],mypalette[1]),
 							#horiz=TRUE,
@@ -350,7 +350,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 					}
 					legend  (x= debut,
 							y=0.6,
-							legend= gettext("Func.","Stop"),
+							legend= gettext("Func.","Stop",domain="R-stacomiR"),
 							pch=c(15,15),
 							col=c(mypalette[4],mypalette[6]),
 							bty="n",
@@ -368,8 +368,8 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 							text.width=(fin-debut)/8,
 							cex=0.7
 					)
-					text(x=debut,y=0.95, label=gettext("Fishway operation"),font=4,pos=4)
-					text(x=debut,y=0.45, label=gettext("Shutdowns types for this fishway"), font=4,pos=4)
+					text(x=debut,y=0.95, label=gettext("Fishway operation",domain="R-stacomiR"),font=4,pos=4)
+					text(x=debut,y=0.45, label=gettext("Shutdowns types for this fishway",domain="R-stacomiR"), font=4,pos=4)
 				}
 				#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				#           PLOT OF TYPE BOX (plot.type=4)
@@ -384,9 +384,9 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				g<-ggplot(tpp)+
 						geom_rect(aes(xmin=xmin,xmax=xmax,ymin=Hdeb,ymax=Hfin,col=factor(per_tar_code),fill=factor(per_tar_code)),alpha=0.5)+
 						scale_fill_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
-								labels = gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown"))+
+								labels = gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown",domain="R-stacomiR"))+
 						scale_colour_manual("type",values=c("1"="#40CA2C","2"="#C8B22D","3"="#AB3B26","4"="#B46BED","5"="#B8B8B8"),
-								labels = gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown"))+		
+								labels = gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown",domain="R-stacomiR"))+		
 						ylab("Heure")+theme(
 								plot.background = element_rect(fill ="black"),
 								panel.background = element_rect(fill="black"),
@@ -417,7 +417,7 @@ funbarchartDF = function(h,...) {
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
 	}		
 	plot(bilanFonctionnementDF,plot.type=1,silent=FALSE)
 }   
@@ -434,7 +434,7 @@ funbarchart1DF = function(h,...) {
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
 	}		
 	plot(bilanFonctionnementDF,plot.type=2,silent=FALSE)
 }   
@@ -449,7 +449,7 @@ funboxDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	plot(bilanFonctionnementDF,plot.type=3,silent=FALSE)
 	
@@ -465,7 +465,7 @@ funchartDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	plot(bilanFonctionnementDF,plot.type=4,silent=FALSE)
 	
@@ -481,7 +481,7 @@ funtableDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	summary(bilanFonctionnementDF)
 }
@@ -553,15 +553,15 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definiti
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_tar_code,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(gettext("Duration in days (operation type):"))
-			funout(paste(gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown"),
+			funout(gettext("Duration in days (operation type):",domain="R-stacomiR"))
+			funout(paste(gettext("Normal oper.","Operational stop","Stop","Dysfunct.","Unknown",domain="R-stacomiR"),
 							" :",
 							sommes,"(",perc,"%)",sep=""))
 			sommes<-tapply(duree,t_periodefonctdispositif_per$per_etat_fonctionnement,sum)
 			perc<-round(100*sommes/as.numeric(sum(duree)))
 			sommes<-round(sommes,2)
-			funout(gettext("Duration in days (operation):"))
-			funout(paste(rev(gettext("Func.","Stop")),
+			funout(gettext("Duration in days (operation):",domain="R-stacomiR"))
+			funout(paste(rev(gettext("Func.","Stop",domain="R-stacomiR")),
 							" :",
 							sommes,"(",perc,"%)",sep=""))
 			

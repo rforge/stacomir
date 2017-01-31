@@ -7,7 +7,7 @@ interface_Bilan_carlot = function()
 	bilan_carlot=new("Bilan_carlot")
 	assign("bilan_carlot",bilan_carlot,envir = envir_stacomi)
 	
-	funout(gettext("Loading of the view vue_ope_lot, and choice of the counting device and of the time steps\n"))
+	funout(gettext("Loading of the view vue_ope_lot, and choice of the counting device and of the time steps\n",domain="R-stacomiR"))
 	bilan_carlot@dc=charge(bilan_carlot@dc)
 	bilan_carlot@taxons=charge(bilan_carlot@taxons)
 	bilan_carlot@stades=charge(bilan_carlot@stades)
@@ -17,20 +17,20 @@ interface_Bilan_carlot = function()
 	
 	assign("group",group,envir = .GlobalEnv)
 	gWidgets::add(ggroupboutons,group)
-	gl=glabel(text=gettext("Batch summary"),container=group)
+	gl=glabel(text=gettext("Batch summary",domain="R-stacomiR"),container=group)
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_carlot@horodatedebut,label=gettext("Fist timestamp"),
+	choice(bilan_carlot@horodatedebut,label=gettext("Fist timestamp",domain="R-stacomiR"),
 			nomassign="bilan_carlot_date_debut",
-			funoutlabel=gettext("The beginning date has been chosen\n"),
+			funoutlabel=gettext("The beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2)
-	choice(bilan_carlot@horodatefin,label=gettext("Last timestamp"),
+	choice(bilan_carlot@horodatefin,label=gettext("Last timestamp",domain="R-stacomiR"),
 			nomassign="bilan_carlot_date_fin",
-			funoutlabel=gettext("The ending date has been chosen"),
+			funoutlabel=gettext("The ending date has been chosen",domain="R-stacomiR"),
 			decal=-1)
 	
 	choice(bilan_carlot@dc,objectBilan=bilan_carlot,is.enabled=TRUE)
@@ -42,24 +42,24 @@ interface_Bilan_carlot = function()
 	#toolbarlist$Calc$icon = "dataframe"
 	#getStockIcons(toolkit=guiToolkit())
 	
-	aPoint=gWidgets::gaction(label=gettext("dotplot"),
+	aPoint=gWidgets::gaction(label=gettext("dotplot",domain="R-stacomiR"),
 			icon="gWidgetsRGtk2-cloud",
 			handler=funpointBilan_carlot,
-			tooltip=gettext("dotplot"))
+			tooltip=gettext("dotplot",domain="R-stacomiR"))
 
-	aDensity=gWidgets::gaction(label=gettext("density"),
+	aDensity=gWidgets::gaction(label=gettext("density",domain="R-stacomiR"),
 			icon="gWidgetsRGtk2-density",
 			handler=fundensityBilan_carlot,
-			tooltip=gettext("density"))
-	aBoxplot=gWidgets::gaction(label=gettext("boxplot"),
+			tooltip=gettext("density",domain="R-stacomiR"))
+	aBoxplot=gWidgets::gaction(label=gettext("boxplot",domain="R-stacomiR"),
 			icon="gWidgetsRGtk2-boxplot",
 			handler=funboxplotBilan_carlot,
-			tooltip=gettext("boxplot"))
-	aTable=gWidgets::gaction(label=gettext("table"),
+			tooltip=gettext("boxplot",domain="R-stacomiR"))
+	aTable=gWidgets::gaction(label=gettext("table",domain="R-stacomiR"),
 			icon="dataframe",
 			handler=funtableBilan_carlot,
-			tooltip=gettext("dataframe"))
-	aQuit=gWidgets::gaction(label=gettext("Exit"),
+			tooltip=gettext("dataframe",domain="R-stacomiR"))
+	aQuit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),
 			icon="close",
 			handler=quitte,tooltip="Exit")
 	

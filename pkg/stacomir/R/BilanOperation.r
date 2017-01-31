@@ -57,7 +57,7 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req@and=paste("AND ope_dic_identifiant in",stringr::str_c("(",stringr::str_c(lesdc,collapse=","),")"))
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
 			object@data<-req@query	
-			if (!silent) funout(gettext("Loading data for operations"))
+			if (!silent) funout(gettext("Loading data for operations",domain="R-stacomiR"))
 			return(object)
 		})
 
@@ -77,19 +77,19 @@ setMethod("charge",signature=signature("BilanOperation"),definition=function(obj
 			if (exists("refDC",envir=envir_stacomi)) {
 				object@dc<-get("refDC",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}     
 			
 			if (exists("bilanOperation_date_debut",envir=envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilanOperation_date_debut",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting date\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			
 			if (exists("bilanOperation_date_fin",envir=envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilanOperation_date_fin",envir=envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending date\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}			
 			assign("bilanOperation",object,envir=envir_stacomi)  
 			return(object)

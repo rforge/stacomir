@@ -7,7 +7,7 @@ interface_BilanArgentee = function()
 	bilan_arg=new("BilanArgentee")
 	assign("bilan_arg",bilan_arg,envir = envir_stacomi)
 	
-	funout(gettext("Loading view vue_ope_lot, and choice of counting device and time steps\n"))
+	funout(gettext("Loading view vue_ope_lot, and choice of counting device and time steps\n",domain="R-stacomiR"))
 	bilan_arg@dc=charge(bilan_arg@dc)
 	bilan_arg@taxons=charge(bilan_arg@taxons)
 	bilan_arg@stades=charge(bilan_arg@stades)
@@ -17,20 +17,20 @@ interface_BilanArgentee = function()
 	
 	assign("group",group,envir = .GlobalEnv)
 	gWidgets::add(ggroupboutons,group)
-	gl=glabel(text=gettext("Silver eel summary",container=group))
+	gl=glabel(text=gettext("Silver eel summary",container=group,domain="R-stacomiR"))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
 	# appeller la methode choice pour l'affichage du fils si il existe
 	
 	
-	choice(bilan_arg@horodatedebut,label=gettext("First date"),
+	choice(bilan_arg@horodatedebut,label=gettext("First date",domain="R-stacomiR"),
 			nomassign="bilan_arg_date_debut",
-			funoutlabel=gettext("The beginning date has been chosen\n"),
+			funoutlabel=gettext("The beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2)
-	choice(bilan_arg@horodatefin,label=gettext("Last date"),
+	choice(bilan_arg@horodatefin,label=gettext("Last date",domain="R-stacomiR"),
 			nomassign="bilan_arg_date_fin",
-			funoutlabel=gettext("Ending date has been chosen\n"),
+			funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 			decal=-1)	
 	bilan_arg@dc<-choice(bilan_arg@dc,objectBilan=bilan_arg,is.enabled=TRUE)
 	
@@ -60,8 +60,8 @@ interface_BilanArgentee = function()
 			handler=funplotBilanArgentee,
 			action="4",
 			tooltip="4")
-	asummary=gWidgets::gaction(label=gettext("summary"),icon="dataframe",handler=funtableBilanArgentee,tooltip=gettext("summary"))
-	aquit=gWidgets::gaction(label=gettext("Exit"),icon="close", handler=quitte,tooltip=gettext("Exit"))
+	asummary=gWidgets::gaction(label=gettext("summary",domain="R-stacomiR"),icon="dataframe",handler=funtableBilanArgentee,tooltip=gettext("summary",domain="R-stacomiR"))
+	aquit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),icon="close", handler=quitte,tooltip=gettext("Exit",domain="R-stacomiR"))
 	
 	toolbarlist <- list(    
 			plot1= aplot1,

@@ -71,13 +71,13 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			if (!silent){
 				if (length(les_annees[!index]>0)) 
 				{
-					funout(paste(gettext("Attention, there is no migration summary for this year\n"),
-									paste(les_annees[!index],collapse=","),gettext(", this taxon and this stage (BilanMigrationInterAnnuelle.r)"),"\n"))
+					funout(paste(gettext("Attention, there is no migration summary for this year\n",domain="R-stacomiR"),
+									paste(les_annees[!index],collapse=","),gettext(", this taxon and this stage (BilanMigrationInterAnnuelle.r)\n",domain="R-stacomiR")))
 				} # end if    
 				
 				# si toutes les annees sont presentes
 				if (length(les_annees[index]>0)){
-					funout(paste(gettext("Annual migrations query completed"),
+					funout(paste(gettext("Annual migrations query completed",domain="R-stacomiR"),
 									paste(les_annees[index],collapse=","), "\n")) 
 				}  
 			}
@@ -129,31 +129,31 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 			if (exists("refDC",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@dc<-get("refDC",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refTaxon",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@taxons<-get("refTaxon",envir_stacomi)
 			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("refStades",envir_stacomi)){
 				bilanMigrationInterAnnuelle@stades<-get("refStades",envir_stacomi)
 			} else 
 			{
-				funout(gettext("You need to choose a stage, clic on validate\n"),arret=TRUE)
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			if (exists("anneeDebut",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@anneeDebut<-get("anneeDebut",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the starting year\n"),arret=TRUE)
+				funout(gettext("You need to choose the starting year\n",domain="R-stacomiR"),arret=TRUE)
 			}  	
 			if (exists("anneeFin",envir_stacomi)) {
 				bilanMigrationInterAnnuelle@anneeFin<-get("anneeFin",envir_stacomi)
 			} else {
-				funout(gettext("You need to choose the ending year\n"),arret=TRUE)
+				funout(gettext("You need to choose the ending year\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir_stacomi)
-			funout(gettext("Writing bilanMigrationInterannuelle in the environment envir_stacomi : write bmi=get('bilanMigrationInterannuelle',envir_stacomi) "))
+			funout(gettext("Writing bilanMigrationInterannuelle in the environment envir_stacomi : write bmi=get('bilanMigrationInterannuelle',envir_stacomi) ",domain="R-stacomiR"))
 			return(bilanMigrationInterAnnuelle)
 		}
 )
@@ -256,7 +256,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 							scale_x_datetime(name="date")
 					print(g)
 					assign("g",g,envir=envir_stacomi)
-					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="standard"){
 					dat=bilanMigrationInterAnnuelle@data
@@ -340,15 +340,15 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					g <- g+geom_step(aes(col=annee,size=total_annuel))
 					g <- g+geom_step(data=tmp,col="black",lty=2)
 					g<-g+labs(title=gettextf("%s %s, Cumulated numbers %s",bilanMigrationInterAnnuelle@taxons@data$tax_nom_latin,bilanMigrationInterAnnuelle@stades@data$std_libelle,amplitude))
-					g<-g+scale_y_continuous(name=gettext("Annual migration percentage"))
-					g<-g+scale_x_date(name=gettext("date"),date_breaks="months", 
+					g<-g+scale_y_continuous(name=gettext("Annual migration percentage",domain="R-stacomiR"))
+					g<-g+scale_x_date(name=gettext("date",domain="R-stacomiR"),date_breaks="months", 
 							date_minor_breaks="weeks", 
 							date_labels="%b",
 							limits=range(dat[dat$valeur>0&dat$cumsum!=1,"jour"]))# date 
-					g<-g+scale_colour_hue(name=gettext("year"),l=70, c=150)# annee
+					g<-g+scale_colour_hue(name=gettext("year",domain="R-stacomiR"),l=70, c=150)# annee
 					print(g) 
 					assign("g",g,envir_stacomi)
-					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))	
+					if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))	
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="barchart"){	
 					dat=bilanMigrationInterAnnuelle@data
@@ -557,10 +557,10 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g)
 						assign(paste("g",sep=""),g,envir_stacomi)
-						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n"))
+						if (!silent) funout(gettext("\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\"\n",domain="R-stacomiR"))
 						
 					}    else     {
-						if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
+						if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"))
 					}
 					
 				} 	 else {
@@ -568,7 +568,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 				}
 				
 			}    else     {
-				if (!silent) funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"))
+				if (!silent) funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"))
 			}
 			
 		})			
@@ -745,7 +745,7 @@ fundat=function(dat,annee=NULL,timesplit=NULL)
 		return(dat)
 	
 	} else   {  # arret avec erreur
-		funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"),arret=TRUE)
+		funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"),arret=TRUE)
 	}    # end else
 }
 

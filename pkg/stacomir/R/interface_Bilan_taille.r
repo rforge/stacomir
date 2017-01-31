@@ -6,7 +6,7 @@ interface_BilanTaille = function()
 	quitte() # vidange de l'interface
 	bilan_taille=new("Bilan_taille")
 	assign("bilan_taille",bilan_taille,envir=envir_stacomi)
-	#funout(gettext("Loading of vue_ope_lot view, cd and timesteps choices\n"))
+	#funout(gettext("Loading of vue_ope_lot view, cd and timesteps choices\n",domain="R-stacomiR"))
 	bilan_taille@dc=charge(bilan_taille@dc)
 	#bilan_taille@taxons=charge(bilan_taille@taxons)
 	#bilan_taille@stades=charge(bilan_taille@stades)
@@ -15,7 +15,7 @@ interface_BilanTaille = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=gettext("Size report",container=group))
+	gl=glabel(text=gettext("Size report",container=group,domain="R-stacomiR"))
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)
@@ -23,23 +23,23 @@ interface_BilanTaille = function()
 	
 	
 	choice(bilan_taille@horodate,
-			label=gettext("First timestamp"),
+			label=gettext("First timestamp",domain="R-stacomiR"),
 			nomassign="bilan_taille_date_debut",
-			funoutlabel=gettext("The beginning date has been chosen\n"),
+			funoutlabel=gettext("The beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2,
 			affichecal=FALSE)
 	choice(bilan_taille@horodate,
-			label=gettext("Last timestamp"),
+			label=gettext("Last timestamp",domain="R-stacomiR"),
 			nomassign="bilan_taille_date_fin",
-			funoutlabel=gettext("The ending date has been chosen\n"),
+			funoutlabel=gettext("The ending date has been chosen\n",domain="R-stacomiR"),
 			decal=-1,
 			affichecal=FALSE)
 	
 	choice(bilan_taille@dc,objectBilan=bilan_taille,is.enabled=TRUE)
-	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=gettext("dotplot"))
-	aTable=gWidgets::gaction(label=gettext("table"),icon="dataframe",handler=funtableBilan_tail,tooltip=gettext("Table"))
-	aQuit=gWidgets::gaction(label=gettext("Exit"),icon="close", handler=quitte,tooltip=gettext("Exit"))
-	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=gettext("crossed query length / qualitative feature"))
+	aGrint=gWidgets::gaction(label="ggplot",icon="gWidgetsRGtk2-bubbles",handler=fungraphInteract_tail,tooltip=gettext("dotplot",domain="R-stacomiR"))
+	aTable=gWidgets::gaction(label=gettext("table",domain="R-stacomiR"),icon="dataframe",handler=funtableBilan_tail,tooltip=gettext("Table",domain="R-stacomiR"))
+	aQuit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),icon="close", handler=quitte,tooltip=gettext("Exit",domain="R-stacomiR"))
+	aCalc=gWidgets::gaction(handler=hcalculeBilanTaille,action=bilan_taille,icon = "new",label="calcul",tooltip=gettext("crossed query length / qualitative feature",domain="R-stacomiR"))
 	toolbarlist <- list(
 			#	barchart=aBarchart, 
 			Calc=aCalc,

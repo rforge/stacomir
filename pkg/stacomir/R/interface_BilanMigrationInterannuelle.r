@@ -5,7 +5,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	quitte() # vidange de l'interface
 	bilanMigrationInterAnnuelle=new("BilanMigrationInterAnnuelle")
 	assign("bilanMigrationInterAnnuelle",bilanMigrationInterAnnuelle,envir=envir_stacomi)
-	funout(gettext("Loading of the existing daily summaries\n"))
+	funout(gettext("Loading of the existing daily summaries\n",domain="R-stacomiR"))
 	bilanMigrationInterAnnuelle@anneeDebut=charge(bilanMigrationInterAnnuelle@anneeDebut)
 	bilanMigrationInterAnnuelle@anneeFin=charge(bilanMigrationInterAnnuelle@anneeFin)
 	bilanMigrationInterAnnuelle@dc=charge(bilanMigrationInterAnnuelle@dc)
@@ -20,13 +20,13 @@ interface_BilanMigrationInterAnnuelle = function()
 	
 	choice(bilanMigrationInterAnnuelle@anneeDebut,
 			nomassign="anneeDebut",
-			funoutlabel=gettext("The year of beginning has been chosen\n"),
-			titleFrame=gettext("Beginning year"),
+			funoutlabel=gettext("The year of beginning has been chosen\n",domain="R-stacomiR"),
+			titleFrame=gettext("Beginning year",domain="R-stacomiR"),
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==min(bilanMigrationInterAnnuelle@anneeDebut@data)))
 	choice(bilanMigrationInterAnnuelle@anneeFin,
 			nomassign="anneeFin",
-			funoutlabel=gettext("The last year has been chosen\n"),
-			titleFrame=gettext("Ending year"),
+			funoutlabel=gettext("The last year has been chosen\n",domain="R-stacomiR"),
+			titleFrame=gettext("Ending year",domain="R-stacomiR"),
 			preselect=which(bilanMigrationInterAnnuelle@anneeDebut@data==max(bilanMigrationInterAnnuelle@anneeFin@data)))
 	choice(bilanMigrationInterAnnuelle@dc,objectBilan=bilanMigrationInterAnnuelle,is.enabled=TRUE)
 	
@@ -44,15 +44,15 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 			aGraph=gWidgets::gaction(label="all",
 					icon="lines",
 					handler=hgraphBilanMigrationInterAnnuelle,
-					tooltip=gettext("Migration of all the years in the same graphic")),
+					tooltip=gettext("Migration of all the years in the same graphic",domain="R-stacomiR")),
 			aGraph7=gWidgets::gaction(label="cum15",
 					icon="curve",
 					handler=hgraphBilanMigrationInterAnnuelle7,
-					tooltip=gettext("Migration of all the years in the same graphic, cumulated")),
+					tooltip=gettext("Migration of all the years in the same graphic, cumulated",domain="R-stacomiR")),
 			aGraph3=gWidgets::gaction(label="step",
 					icon="graph2",
 					handler=hgraphBilanMigrationInterAnnuelle3,
-					tooltip=gettext("cumulated migrations %")),
+					tooltip=gettext("cumulated migrations %",domain="R-stacomiR")),
 			aSummary=gWidgets::gaction(handler=hsummaryBilanMigrationInterannuelle,
 					icon="dataframe", 
 					label="stat",
@@ -60,40 +60,40 @@ assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 			aQuit=gWidgets::gaction(label="fermer",
 					icon="close", 
 					handler=quitte,
-					tooltip=gettext("Exit"))
+					tooltip=gettext("Exit",domain="R-stacomiR"))
 	)
 	toolbarlist2=list(
-			aGraph2=gWidgets::gaction(label=gettext("day"),
+			aGraph2=gWidgets::gaction(label=gettext("day",domain="R-stacomiR"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle2,
-					tooltip=gettext("Daily migration")),
-			aGraph4=gWidgets::gaction(label=gettext("week"),
+					tooltip=gettext("Daily migration",domain="R-stacomiR")),
+			aGraph4=gWidgets::gaction(label=gettext("week",domain="R-stacomiR"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle4,
 					action="semaine",
-					tooltip=gettext("weekly migration")),
-			aGraph5=gWidgets::gaction(label=gettext("fortnight"),
+					tooltip=gettext("weekly migration",domain="R-stacomiR")),
+			aGraph5=gWidgets::gaction(label=gettext("fortnight",domain="R-stacomiR"),
 					icon="hist",
 					handler=hgraphBilanMigrationInterAnnuelle4,
 					action="quinzaine",
-					tooltip=gettext("Fortnight Migration")),
-			aGraph6=gWidgets::gaction(label=gettext("month"),
+					tooltip=gettext("Fortnight Migration",domain="R-stacomiR")),
+			aGraph6=gWidgets::gaction(label=gettext("month",domain="R-stacomiR"),
 					icon="hist",handler=hgraphBilanMigrationInterAnnuelle4,
 					action="mois",
-					tooltip=gettext("Monthly migration"))
+					tooltip=gettext("Monthly migration",domain="R-stacomiR"))
 	)
 	toolbarlist3=list(
-			aGraph1=gWidgets::gaction(label=gettext("week"),
+			aGraph1=gWidgets::gaction(label=gettext("week",domain="R-stacomiR"),
 					icon="gWidgetsRGtk2-points",handler=hgraphBilanMigrationInterAnnuelle5,
 					action="semaine",
-					tooltip=gettext("weekly migration")),
-			aGraph2=gWidgets::gaction(label=gettext("fortnight"),
+					tooltip=gettext("weekly migration",domain="R-stacomiR")),
+			aGraph2=gWidgets::gaction(label=gettext("fortnight",domain="R-stacomiR"),
 					icon="gWidgetsRGtk2-points",
 					handler=hgraphBilanMigrationInterAnnuelle5,
 					action="quinzaine",
-					tooltip=gettext("Fortnight migration")),
-			aGraph3=gWidgets::gaction(label=gettext("month"),
+					tooltip=gettext("Fortnight migration",domain="R-stacomiR")),
+			aGraph3=gWidgets::gaction(label=gettext("month",domain="R-stacomiR"),
 					icon="gWidgetsRGtk2-points",handler=hgraphBilanMigrationInterAnnuelle5,
 					action="mois",
-					tooltip=gettext("Monthly migration"))
+					tooltip=gettext("Monthly migration",domain="R-stacomiR"))
 	)
 	add(ggroupboutonsbas, gtoolbar(toolbarlist1))
 	add(ggroupboutonsbas, gtoolbar(toolbarlist2)) 
