@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 10:13\n"
+"POT-Creation-Date: 2017-01-31 10:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -457,6 +457,9 @@ msgstr ""
 msgid "This shouldn't be possible"
 msgstr ""
 
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
+msgstr ""
+
 msgid "Loading data for operations"
 msgstr ""
 
@@ -472,10 +475,7 @@ msgstr ""
 msgid "plot.type must be 1,2,3"
 msgstr ""
 
-msgid "\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help\"n"
-msgstr ""
-
-msgid "\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help"
+msgid "To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help"
 msgstr ""
 
 msgid "To obtain the table, type : bilan_lot=get('bilan_lot',envir_stacomi)"
