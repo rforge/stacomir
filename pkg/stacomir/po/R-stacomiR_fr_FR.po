@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 11:00+0100\n"
-"PO-Revision-Date: 2017-01-31 11:33+0100\n"
+"POT-Creation-Date: 2017-01-31 17:33+0100\n"
+"PO-Revision-Date: 2017-01-31 17:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -268,10 +268,10 @@ msgid "Normal oper."
 msgstr "Fonct. normal"
 
 msgid "Operational stop"
-msgstr ""
+msgstr "Arrêt de fonctionnement"
 
 msgid "Dysfunct."
-msgstr ""
+msgstr "Dysfonct."
 
 msgid "Unknown"
 msgstr "Inconnu"
@@ -648,12 +648,17 @@ msgstr "Les coefficients du bilan ont été écrit dans %s"
 
 msgid "Table for predictions newcoe assigned to envir_stacomi"
 msgstr ""
+"Le tableau pour les prédictions newcoe est attribué à l'environnement "
+"envir_stacomi"
 
 msgid "Table of data don assigned to envir_stacomi"
 msgstr ""
+"Le tableau des données don est attribué à l'environnement envir_stacomi"
 
 msgid "Table of current coefficients coe assigned to envir_stacomi"
 msgstr ""
+"Le tableau des prédictions newcoe est attribué à l'environnement "
+"envir_stacomi"
 
 msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
 msgstr ""
@@ -713,17 +718,23 @@ msgstr ""
 msgid "title edit"
 msgstr "Modification du titre"
 
+msgid "Titre du graphique de stades pigmentaires (graphstades = TRUE)"
+msgstr ""
+
 msgid "Exit"
 msgstr "Quitter"
-
-msgid "close"
-msgstr "fermer"
 
 msgid "Summary of pigmentation stages"
 msgstr "Bilan des stades pigmentaires"
 
 msgid "temperature choice"
 msgstr "Choix de la température"
+
+msgid "First timestamp"
+msgstr "Première horodate"
+
+msgid "Last timestamp"
+msgstr "Dernière horodate"
 
 msgid "Title choice"
 msgstr "Choix du titre"
@@ -781,7 +792,7 @@ msgid "End date"
 msgstr "Date de fin"
 
 msgid "internal error length(LesPasDeTemps$LabelPasDeTemps) == 0"
-msgstr ""
+msgstr "Erreur interne length(LesPasDeTemps$LabelPasDeTemps) == 0"
 
 msgid "datedebut not parsed to datetime try format like '01/01/2017'"
 msgstr ""
@@ -810,7 +821,7 @@ msgid "Number of time steps choice"
 msgstr "Choix du nombre de pas de temps"
 
 msgid "Not implemented for objectBilan = %s"
-msgstr ""
+msgstr "Non éxécuté pour objectBilan = %s"
 
 msgid "Year selected"
 msgstr "Année choisie"
@@ -846,6 +857,9 @@ msgstr "Sélection des taxons du DC (pour l'instant sur toutes les périodes) "
 
 msgid "Counting devices data"
 msgstr "Données sur les dispositifs de comptage"
+
+msgid "close"
+msgstr "fermer"
 
 msgid "Counting devices choice"
 msgstr "Choix des dispositifs de Comptage"
@@ -904,6 +918,8 @@ msgstr "n'est pas dans la liste des valeurs possibles :"
 msgid ""
 "internal error, check messager and messagerlang length, they should match"
 msgstr ""
+"Erreur interne, vérifier les dimensions de messager et messagerlang, ils "
+"doivent correspondre"
 
 msgid "No data for this counting device and this taxon"
 msgstr "Pas de données pour ce DC, et ce taxon "
@@ -991,7 +1007,7 @@ msgid "Feature has been selected"
 msgstr "La caractéristique a été sélectionnée "
 
 msgid "Internal error : unable to load any feature to make the choice"
-msgstr ""
+msgstr "Erreur interne : impossible de charger une caractéristique à choisir"
 
 msgid "NA values par"
 msgstr "Valeurs NULL par"
@@ -1000,6 +1016,8 @@ msgid ""
 "Internal error : tried to set a value for par_selectionne without "
 "initializing the data slot"
 msgstr ""
+"Erreur interne : il faut initialiser le slot data avant de fixer une valeur "
+"pour par_selectionne"
 
 msgid "No data for par"
 msgstr "Pas de données pour par"
@@ -1233,6 +1251,9 @@ msgstr ""
 msgid "write"
 msgstr "écrire"
 
+msgid "quit"
+msgstr ""
+
 msgid ""
 "Loading of the lists for taxons, stages, counting devices and monitoring "
 "stations"
@@ -1319,9 +1340,6 @@ msgstr "Bilan groupé"
 msgid "Fist timestamp"
 msgstr "horodate de debut"
 
-msgid "Last timestamp"
-msgstr "Dernière horodate"
-
 msgid "dotplot"
 msgstr ""
 
@@ -1337,14 +1355,11 @@ msgstr ""
 msgid "Size report"
 msgstr "Bilan des tailles"
 
-msgid "First timestamp"
-msgstr "Première horodate"
-
 msgid "crossed query length / qualitative feature"
 msgstr "requête croisée taille/ caract. qualitative"
 
-msgid "tous"
-msgstr "Tous"
+msgid "all"
+msgstr "tous"
 
 msgid "choice of number in sample (one, several, all"
 msgstr "Choix de la catégorie d'effectif (un, plusieurs, tous)"
@@ -1370,6 +1385,9 @@ msgstr ""
 msgid "export"
 msgstr "exporter"
 
+msgid "choose language"
+msgstr "Choisir la langue"
+
 msgid "Calculation of the operating fishway"
 msgstr "Calculs du fonctionnement du dispositif de franchissement"
 
@@ -1386,11 +1404,11 @@ msgid "Migration summary (for a species and a stage)"
 msgstr "Bilan migration (par espèce et stade)"
 
 msgid ""
-"For help, contact CÃ©dric Briand - 0033 29 99 08 844 - cedric."
-"briand@lavilaine.com"
+"For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-"
+"vilaine.fr, or mail stacomi@googlegroups.com."
 msgstr ""
-"Pour de l'aide Cédric Briand - 02 99 90 88 44 - cedric.briand@eptb-vilaine."
-"fr - https://groups.google.com/forum/?hl=fr#!forum/stacomi"
+"Pour de l'aide, contacter Cédric Briand - 02 99 90 88 44 - cedric."
+"briand@eptb-vilaine.fr or stacomi@googlegroups.com"
 
 msgid "Summary of interannual migration"
 msgstr "Bilan migration interannuelle"
@@ -1450,6 +1468,13 @@ msgstr "Erreur du titre du cadre"
 msgid "Problem when testing the ODBC connection"
 msgstr "Problème lors du test de la connexion ODBC"
 
+msgid ""
+"For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-"
+"vilaine.fr or stacomi@googlegroups.com."
+msgstr ""
+"Pour de l'aide, contacter Cédric Briand - 02 99 90 88 44 - cedric."
+"briand@eptb-vilaine.fr or stacomi@googlegroups.com"
+
 msgid "Login"
 msgstr "Connexion"
 
@@ -1503,6 +1528,16 @@ msgid "%d operation \n"
 msgid_plural "%d operations \n"
 msgstr[0] "opération\n"
 msgstr[1] "opérations\n"
+
+#~ msgid "tous"
+#~ msgstr "Tous"
+
+#~ msgid ""
+#~ "For help, contact CÃ©dric Briand - 0033 29 99 08 844 - cedric."
+#~ "briand@lavilaine.com"
+#~ msgstr ""
+#~ "Pour de l'aide Cédric Briand - 02 99 90 88 44 - cedric.briand@eptb-"
+#~ "vilaine.fr - https://groups.google.com/forum/?hl=fr#!forum/stacomi"
 
 #~ msgid ""
 #~ "\"To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), "

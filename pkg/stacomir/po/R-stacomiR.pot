@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 10:58\n"
+"POT-Creation-Date: 2017-01-31 17:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -598,16 +598,22 @@ msgstr ""
 msgid "title edit"
 msgstr ""
 
-msgid "Exit"
+msgid "Titre du graphique de stades pigmentaires (graphstades = TRUE)"
 msgstr ""
 
-msgid "close"
+msgid "Exit"
 msgstr ""
 
 msgid "Summary of pigmentation stages"
 msgstr ""
 
 msgid "temperature choice"
+msgstr ""
+
+msgid "First timestamp"
+msgstr ""
+
+msgid "Last timestamp"
 msgstr ""
 
 msgid "Title choice"
@@ -719,6 +725,9 @@ msgid "Select taxa for this counting device (for all periods)"
 msgstr ""
 
 msgid "Counting devices data"
+msgstr ""
+
+msgid "close"
 msgstr ""
 
 msgid "Counting devices choice"
@@ -1072,6 +1081,9 @@ msgstr ""
 msgid "write"
 msgstr ""
 
+msgid "quit"
+msgstr ""
+
 msgid "Loading of the lists for taxons, stages, counting devices and monitoring stations"
 msgstr ""
 
@@ -1150,9 +1162,6 @@ msgstr ""
 msgid "Fist timestamp"
 msgstr ""
 
-msgid "Last timestamp"
-msgstr ""
-
 msgid "dotplot"
 msgstr ""
 
@@ -1168,13 +1177,10 @@ msgstr ""
 msgid "Size report"
 msgstr ""
 
-msgid "First timestamp"
-msgstr ""
-
 msgid "crossed query length / qualitative feature"
 msgstr ""
 
-msgid "tous"
+msgid "all"
 msgstr ""
 
 msgid "choice of number in sample (one, several, all"
@@ -1201,6 +1207,9 @@ msgstr ""
 msgid "export"
 msgstr ""
 
+msgid "choose language"
+msgstr ""
+
 msgid "Calculation of the operating fishway"
 msgstr ""
 
@@ -1216,7 +1225,7 @@ msgstr ""
 msgid "Migration summary (for a species and a stage)"
 msgstr ""
 
-msgid "For help, contact Cédric Briand - 0033 29 99 08 844 - cedric.briand@lavilaine.com"
+msgid "For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr, or mail stacomi@googlegroups.com."
 msgstr ""
 
 msgid "Summary of interannual migration"
@@ -1268,6 +1277,9 @@ msgid "Error title of the frame"
 msgstr ""
 
 msgid "Problem when testing the ODBC connection"
+msgstr ""
+
+msgid "For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr or stacomi@googlegroups.com."
 msgstr ""
 
 msgid "Login"
