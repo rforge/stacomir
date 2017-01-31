@@ -497,8 +497,8 @@ funcalcbilan_stades_pigm<-function(h,...){
 							strftime(as.POSIXlt(dates[length(dates)]),"%Y")) {
 						strftime(as.POSIXlt(dates[1]),"%Y")} else { paste(
 								strftime(as.POSIXlt(dates[1]),"%Y"),"-",
-								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))})
-	bilan_stades_pigm@labelretro=gettext("incoming dates in estuary")
+								strftime(as.POSIXlt(dates[length(dates)]),"%Y"))},domain="R-stacomiR")
+	bilan_stades_pigm@labelretro=gettext("incoming dates in estuary",domain="R-stacomiR")
 	enabled(toolbarlist[["SetTitle"]])<-TRUE
 	enabled(toolbarlist[["Graph"]])<-TRUE
 	enabled(toolbarlist[["Graphgg"]])<-TRUE
@@ -817,7 +817,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 	group1<-gWidgets::ggroup(horizontal=FALSE,container=wintitle)
 	titre1 <- gWidgets::glabel(text= gettext("Pigmentary sages graph title (graphstades = TRUE)",domain="R-stacomiR"), editable=FALSE,container=group1)
 	titre2 <- gWidgets::gtext( text= bilan_stades_pigm@labelgraphstades,font.attr= c(foreground.colors="blueblue"),height=40,container=group1)  
-	titre3 <- gWidgets::glabel(text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
+	titre3 <- gWidgets::glabel(text= gettext("Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)",domain="R-stacomiR"), editable=FALSE,container=group1) 
 	titre4 <- gWidgets::gtext(text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
 	
 	aOK=gWidgets::gaction(label="OK",icon="gtk-ok",handler=hgettext)         

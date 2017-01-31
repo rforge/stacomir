@@ -101,7 +101,7 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 				frameDF=gframe(gettext("Fishway choice",domain="R-stacomiR"),container=group)
 				DF_identifiant=object@data$df
 				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)
-				gbutton(gettext("Table"), container=frameDF,handler=hDFi)
+				gbutton(gettext("Table",domain="R-stacomiR"), container=frameDF,handler=hDFi)
 				gbutton("OK", container=frameDF,handler=hDF)
 			} else {
 				funout(gettext("No fishway in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)

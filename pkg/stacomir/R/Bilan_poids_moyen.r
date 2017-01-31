@@ -82,7 +82,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 			object@coe@datefin=requete@datefin
 			object@coe<-charge(object@coe)
 			funout(gettext("The query to load the coefficients of conversion is finished\n",domain="R-stacomiR"))
-			funout(gettextf("%1.0f lines found for the conversion coefficients\n",nrow(object@coe)))	
+			funout(gettextf("%1.0f lines found for the conversion coefficients\n",nrow(object@coe),domain="R-stacomiR"))	
 			assign(x="bilan_poids_moyen",value=object,envir=envir_stacomi)
 			return(object)
 		})
@@ -194,7 +194,7 @@ setMethod("calcule",signature=signature("Bilan_poids_moyen"),definition=function
 							"duree","datemoy"),
 					c("lot","date","date_fin","effectif","poids","w","time.sequence","date"))
 			# correction de manques d'effectifs dans la base
-			if (sum(is.na(donnees$effectif))>0) warnings(gettextf("size is missing, lots %s",paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" ")))
+			if (sum(is.na(donnees$effectif))>0) warnings(gettextf("size is missing, lots %s",paste(unique(donnees$lot[is.na(donnees$effectif)]),collapse=" "),domain="R-stacomiR"))
 			bilPM@calcdata[["data"]]<-donnees[,c(8,6,4,1)]
 			bilPM@calcdata[["coe"]]<-coeff[order(coeff$date),c(10,9)]
 			assign("bilan_poids_moyen",bilPM,envir=envir_stacomi)
@@ -254,7 +254,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 						main=gettextf("Seasonal trend of %s, from %s to %s",
 								type_poids,
 								bilPM@anneedebut@annee_selectionnee,
-								bilPM@anneefin@annee_selectionnee))
+								bilPM@anneefin@annee_selectionnee,domain="R-stacomiR"))
 				points(coe$date,coe$w,type="l",col="black",lty=2)
 				#legend("topright",c("Obs.", "Coeff base"), col=c("black","cyan"),pch="o",cex = 0.8)
 				
@@ -438,7 +438,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				colnames(summary_harmonic)=c("source","$\\gamma$","$s_0(cm)$","$\\phi$")
 				xt_summary_harmonic<-xtable( summary_harmonic,
 						caption=gettext("Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling
-								of estuarine samples."),
+								of estuarine samples.",domain="R-stacomiR"),
 						label=gettext("summary_harmonic",domain="R-stacomiR"),
 						digits=c(0,0,3,3,0))
 				tabname<-stringr::str_c(get("datawd",envir=envir_stacomi),"/summary_harmonic.tex")
@@ -474,7 +474,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 			utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
 			assign("import_coe",import_coe,envir=envir_stacomi)
 			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
-			funout(paste(gettextf("data directory :%s",fileout)))
+			funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
 			bilPM@calcdata[["import_coe"]]<-import_coe
 			
 			

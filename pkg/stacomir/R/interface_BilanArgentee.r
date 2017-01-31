@@ -17,7 +17,7 @@ interface_BilanArgentee = function()
 	
 	assign("group",group,envir = .GlobalEnv)
 	gWidgets::add(ggroupboutons,group)
-	gl=glabel(text=gettext("Silver eel summary",container=group,domain="R-stacomiR"))
+	gl=glabel(text=gettext("Silver eel summary",domain="R-stacomiR"),container=group)
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)

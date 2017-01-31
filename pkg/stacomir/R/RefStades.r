@@ -268,7 +268,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				addHandlerDoubleclick(tbdeststd,handler=function(h,...) {
 							removestd()
 						})
-				gbutton("ok", container = groupstd, handler = hstd)
+				gbutton("OK", container = groupstd, handler = hstd)
 			} else {
 				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}

@@ -15,7 +15,7 @@ interface_BilanTaille = function()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)
 	add(ggroupboutons,group)
-	gl=glabel(text=gettext("Size report",container=group,domain="R-stacomiR"))
+	gl=glabel(text=gettext("Size report",domain="R-stacomiR"),container=group)
 	# dans l'ordre 
 	# dans le handler, modifier le contenu de l'object fils si il existe
 	# supprimer les widgets fils si ils existent (appel de la methode delete)

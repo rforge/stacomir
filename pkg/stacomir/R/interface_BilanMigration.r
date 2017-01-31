@@ -28,18 +28,18 @@ interface_BilanMigration=function(){
 	assign("group",group,envir = .GlobalEnv)  
 	add(ggroupboutons,group)
 	choice(bilanMigration@pasDeTemps)
-	choice(bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)	
+	choice(object=bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
-			Calc=gWidgets::gaction(handler=hbilanMigrationcalc, action=bilanMigration, icon="new", label=gettext("calculate",,domain="R-stacomiR"), tooltip=gettext("Calculation of numbers by time step",domain="R-stacomiR")),
+			Calc=gWidgets::gaction(handler=hbilanMigrationcalc, action=bilanMigration, icon="new", label=gettext("calculate",domain="R-stacomiR"), tooltip=gettext("Calculation of numbers by time step",domain="R-stacomiR")),
 			Graph=gWidgets::gaction(handler=hbilanMigrationgraph, icon="graph", label=gettext("graph",domain="R-stacomiR"), tooltip=gettext("Balance graphic",domain="R-stacomiR")),
 			Graph2=gWidgets::gaction(handler=hbilanMigrationgraph2, icon="graph2", label=gettext("grcum",domain="R-stacomiR"), tooltip=gettext("Cumulative graphic",domain="R-stacomiR")),
 			Stat=gWidgets::gaction(handler=hTableBilanMigration, icon="dataframe", label=gettext("stat",domain="R-stacomiR"), tooltip=gettext("Balance sheet in .csv",domain="R-stacomiR")),
 			write=gWidgets::gaction(handler=hbilanMigrationwrite, icon="gtk-harddisk", label=gettext("write",domain="R-stacomiR"), tooltip=gettext("Writing daily summary in the database",domain="R-stacomiR")),
 			Out=gWidgets::gaction(handler=houtBilanMigration, icon="gtk-info", label=gettext("code",domain="R-stacomiR"), tooltip=gettext("Code",domain="R-stacomiR")),
-			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("quit"),domain="R-stacomiR")
+			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("quit",domain="R-stacomiR"))
 	)    
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	gWidgets::addSpring(group)

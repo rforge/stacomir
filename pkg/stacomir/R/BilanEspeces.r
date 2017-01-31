@@ -283,7 +283,7 @@ interface_BilanEspeces=function(){
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=gettext("Loading",domain="R-stacomiR")),
-			Graph=gWidgets::gaction(label="pie",tooltip=gettext("Pie chart graphic",,domain="R-stacomiR"),icon="bubbles",handler=hCamembert,action="pie"),
+			Graph=gWidgets::gaction(label="pie",tooltip=gettext("Pie chart graphic",domain="R-stacomiR"),icon="bubbles",handler=hCamembert,action="pie"),
 			Graph2=gWidgets::gaction(handler=hCamembert, icon="barplot", label="histo", tooltip=gettext("barplot",domain="R-stacomiR"),action="graph"),
 			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=gettext("Summary tables in .csv and XML",domain="R-stacomiR")),    
 			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("exit",domain="R-stacomiR"))

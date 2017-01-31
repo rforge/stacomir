@@ -128,7 +128,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 				} 
 				# Handler d'affichage du tableau
 				hDCi=function(h,...){
-					w=gwindow(gettext("Counting devices data",width=400,domain="R-stacomiR"))
+					w=gwindow(gettext("Counting devices data",domain="R-stacomiR",width=400))
 					wg=ggroup(horizontal=FALSE,container=w)
 					tab=gtable(object@data[,c(1,4,7,8,11,12)],chosencol=1,multiple=FALSE,expand=TRUE, container=wg)
 					bg<-ggroup(container=wg)
@@ -139,7 +139,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 				add(group,frame_DC)
 				DC_identifiant=object@data$dc
 				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
-				gbutton(gettext("Table", container=frame_DC,handler=hDCi) )
+				gbutton(gettext("Table",domain="R-stacomiR"), container=frame_DC,handler=hDCi) 
 				enabled(frame_DC)<-is.enabled
 				gbutton("OK", container=frame_DC,handler=hDC)
 			} else {
@@ -202,7 +202,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 									dispose(notebook) ## dispose current tab
 								}}
 							choicemult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
-							funout(gettext("Select taxa for this counting device (for all periods)\n")	)
+							funout(gettext("Select taxa for this counting device (for all periods)\n",domain="R-stacomiR"))
 						}
 					}
 					# changing tab of notebook to next tab
@@ -260,7 +260,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				addHandlerDoubleclick(tbdestdc,handler=function(h,...) {
 							removedc()
 						})
-				gbutton("ok", container = groupdc, handler = hDC)
+				gbutton("OK", container = groupdc, handler = hDC)
 			} else {
 				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}

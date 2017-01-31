@@ -188,7 +188,7 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				addHandlerDoubleclick(tbdesttaxon,handler=function(h,...) {
 							removetaxon()
 						})
-				gbutton("ok", container = grouptaxon, handler = htax)
+				gbutton("OK", container = grouptaxon, handler = htax)
 			} else {
 				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
 			}
