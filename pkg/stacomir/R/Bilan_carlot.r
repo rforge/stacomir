@@ -152,12 +152,12 @@ setMethod("choice_c",signature=signature("Bilan_carlot"),definition=function(obj
 			bilan_carlot@par<-choice_c(bilan_carlot@par,par,silent=silent)
 			bilan_carlot@horodatedebut<-choice_c(object=bilan_carlot@horodatedebut,
 					nomassign="bilan_carlot_date_debut",
-					funoutlabel=gettext("Beginning date has been chosen\n"),
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatedebut, 
 					silent=silent)
 			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
 					nomassign="bilan_carlot_date_fin",
-					funoutlabel=gettext("Ending date has been chosen\n"),
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
 			return(bilan_carlot)

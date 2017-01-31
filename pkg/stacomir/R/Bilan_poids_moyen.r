@@ -451,7 +451,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 						width="0.6\\textwidth",
 						sanitize.colnames.function=function(x){x})
 				
-				funout(gettextf("summary coefficients written in %s",tabname))					
+				funout(gettextf("summary coefficients written in %s",tabname,domain="R-stacomiR"))					
 			
 			} else if (model.type=="manual"){
 				if (!silent) funout(gettext("Table for predictions newcoe assigned to envir_stacomi",domain="R-stacomiR"))
