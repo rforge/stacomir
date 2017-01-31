@@ -420,11 +420,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					} else if (length(lestax)==1 & length(lesstd)==1){
 						
@@ -433,11 +429,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					} else if (length(lestax)==1 & length(lesdic)==1){
 						
@@ -446,11 +438,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					} else if (length(lesdic)==1 & length(lesstd)==1){
 						
@@ -459,11 +447,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 						
 					} else if (length(lestax)==1){
@@ -473,11 +457,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					} else if (length(lesstd)==1){
 						
@@ -486,11 +466,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					} else if (length(lesdic)==1){
 						
@@ -499,11 +475,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))							
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))							
->>>>>>> .r265
 						
 					} else {
 						if (length(lesdic)<3){
@@ -521,11 +493,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 							print(g)	
 							
 							assign("g",g,envir_stacomi)
-<<<<<<< .mine
 							if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))	
-=======
-							if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))	
->>>>>>> .r265
 						}
 					}
 				}

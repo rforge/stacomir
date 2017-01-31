@@ -256,11 +256,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 							scale_x_datetime(name="date")
 					print(g)
 					assign("g",g,envir=envir_stacomi)
-<<<<<<< .mine
 					if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-					if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="standard"){
 					dat=bilanMigrationInterAnnuelle@data
@@ -352,11 +348,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					g<-g+scale_colour_hue(name=gettext("year",domain="R-stacomiR"),l=70, c=150)# annee
 					print(g) 
 					assign("g",g,envir_stacomi)
-<<<<<<< .mine
 					if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))	
-=======
-					if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))	
->>>>>>> .r265
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				} else if (plot.type=="barchart"){	
 					dat=bilanMigrationInterAnnuelle@data
@@ -442,7 +434,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						if (!silent) funout(gettextf("Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					
@@ -517,7 +509,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						if (!silent) funout(gettextf("writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -565,11 +557,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g)
 						assign(paste("g",sep=""),g,envir_stacomi)
-<<<<<<< .mine
 						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-=======
-						if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
->>>>>>> .r265
 						
 					}    else     {
 						if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"))

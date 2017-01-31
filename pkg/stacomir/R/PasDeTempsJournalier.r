@@ -68,7 +68,7 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 					funout(gettext("Time steps loaded\n",domain="R-stacomiR"))
 					#dispose(winpa)
 				}
-				winpa=gframe(gettext("Time steps choice (1 year duration)",container=group,horizontal=FALSE,domain="R-stacomiR"))
+				winpa=gframe(gettext("Time steps choice (1 year duration)",domain="R-stacomiR"),container=group,horizontal=FALSE)
 				pg<-glayout(container=winpa)
 				pg[1,1]<-glabel(gettext("Start date",domain="R-stacomiR"))
 				datedeb<-gedit(as.Date(getdateDebut(object)),handler=hwinpa,width=10)
@@ -81,7 +81,7 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 				pg[3,2]<-glabel(gettext("Number of days",domain="R-stacomiR"))
 				choicenbStep=gedit("365",coerce.with=as.numeric,handler=hwinpa,width=5)
 				pg[4,2]<-choicenbStep
-				pg[1,2]<-glabel(gettext("End date",container=pg,domain="R-stacomiR"))
+				pg[1,2]<-glabel(gettext("End date",domain="R-stacomiR"),container=pg)
 				datedefin<-gedit("...",width=10) # heigth=30
 				enabled(datedefin)<-FALSE
 				pg[2,2]<-datedefin			
