@@ -147,12 +147,12 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				grouptaxon<-ggroup() 
 				assign("grouptaxon",grouptaxon,.GlobalEnv)
 				add(notebook,grouptaxon,label="taxon")
-				frametaxonsource<-gframe(gettext("Taxon selection",container=grouptaxon,domain="R-stacomiR"))
+				frametaxonsource<-gframe(gettext("Taxon selection",domain="R-stacomiR"),container=grouptaxon)
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
 				size(tbsourcetaxon)<-c(160,300) # les dimensions sont testees a la main 
 				# pour s'ajuster aux dimensions du notebook (largeur 400)
 				#TODO addmsg
-				frametaxondest<-gframe("deposez ici",container=grouptaxon)
+				frametaxondest<-gframe(gettext("drop here",domain="R-stacomiR"),container=grouptaxon)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",8))
 				xx$choice<-as.character(xx$choice)
@@ -215,11 +215,11 @@ setMethod("choice_c",signature=signature("RefTaxon"),definition=function(object,
 				funout(gettext("No value for argument taxon\n",domain="R-stacomiR"),arret=TRUE)
 			} else	if (class(taxons)=="character"){	
 				libellemanquants<-taxons[!taxons%in%object@data$tax_nom_latin]
-				if (length(libellemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(libellemanquants,collapse=", ")))
+				if (length(libellemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(libellemanquants,collapse=", "),domain="R-stacomiR"))
 				object@data<-object@data[object@data$tax_nom_latin%in%taxons,]
 			} else if (class(taxons)=="numeric"){
 				codemanquants<-taxons[!taxons%in%object@data$tax_code]
-				if (length(codemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(codemanquants,collapse=", ")))
+				if (length(codemanquants)>0) warning(gettextf("Taxa not present :\n %s",stringr::str_c(codemanquants,collapse=", "),domain="R-stacomiR"))
 				object@data<-object@data[object@data$tax_code%in%taxons,]
 			}
 			if (nrow(object@data)==0 )	{

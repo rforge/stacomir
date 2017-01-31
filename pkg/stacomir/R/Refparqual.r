@@ -120,7 +120,7 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 #' choice(object)
 #' }
 setMethod("choice",signature=signature("Refparqual"),definition=function(object,
-				label="Choix d'une caracteristique qualitative de lot",
+				label=gettext("Choice of a sample characteristic",domain="R-stacomiR"),
 				nomassign="refpar",
 				frameassign="frame_par",
 				is.enabled=TRUE) {

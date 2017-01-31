@@ -157,7 +157,7 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 			concord<-object@par_selectionne%in%object@data$par_code	
 			
 			if (any(!concord)){
-				warning(paste("No data for par",object@par_selectionne[!concord]))
+				warning(paste(gettextf("No data for par %s",object@par_selectionne[!concord],domain="R-stacomiR")))
 			}
 				
 			assign("refpar",object,envir=envir_stacomi)

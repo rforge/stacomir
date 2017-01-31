@@ -105,9 +105,9 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							
 							if (exists("frame_parqual")) delete(group,frame_parqual)
-							choice(objectBilan@parqual,label=gettext("Qualitative feature",
+							choice(objectBilan@parqual,label=gettext("Qualitative feature",domain="R-stacomiR"),
 											nomassign="refparqual",
-											frameassign="frame_parqual",is.enabled=TRUE))
+											frameassign="frame_parqual",is.enabled=TRUE)
 						}
 #il y a bien un object parquan dans l'object Bilan
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
@@ -193,9 +193,9 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							choicemult(objectBilan@parqual,label=gettext("Qualitative feature",
+							choicemult(objectBilan@parqual,label=gettext("Qualitative feature",domain="R-stacomiR"),
 											nomassign="refparqual",frameassign="frame_parqual",
-											is.enabled=TRUE))
+											)
 						}
 #il y a bien un object parquan dans l'object Bilan
 						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
@@ -211,9 +211,9 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 													is.na(objectBilan@parquan@data$par_code)|objectBilan@parquan@data$par_code=="C001",]     # aucune
 								}
 							}
-							choicemult(objectBilan@parquan,label=gettext("Quantitative feature",
+							choicemult(objectBilan@parquan,label=gettext("Quantitative feature",domain="R-stacomiR"),
 											nomassign="refparquan",frameassign="frame_parquan",
-											is.enabled=TRUE))
+											is.enabled=TRUE)
 						}
 						if (svalue(notebook)<length(notebook)){
 							svalue(notebook)<-svalue(notebook)+1	
@@ -228,11 +228,11 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				groupstd<-ggroup() 
 				assign("goupstd",groupstd,envir=.GlobalEnv)
 				add(notebook,groupstd,label="stade")
-				framestdsource<-gframe(gettext("Stage selection",container=groupstd,domain="R-stacomiR"))
+				framestdsource<-gframe(gettext("Stage selection",domain="R-stacomiR"),container=groupstd)
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)
 				size(tbsourcestd)<-c(160,300) 
 				#TODO addmsg
-				framestddest<-gframe("deposez ici",container=groupstd)
+				framestddest<-gframe(gettext("drop here",domain="R-stacomiR"),container=groupstd)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",8))
 				xx$choice<-as.character(xx$choice)
@@ -295,7 +295,7 @@ setMethod("choice_c",signature=signature("RefStades"),definition=function(object
 				funout(gettext("No value for argument stage\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			libellemanquants<-stades[!stades%in%object@data$std_code]
-			if (length(libellemanquants)>0&!silent) funout(gettextf("No data for this counting device and this taxon\n %s",stringr::str_c(libellemanquants,collapse=", ")))
+			if (length(libellemanquants)>0&!silent) funout(gettextf("No data for this counting device and this taxon\n %s",stringr::str_c(libellemanquants,collapse=", "),domain="R-stacomiR"))
 			object@data<-object@data[object@data$std_code%in%stades,]					
 			if (nrow(object@data)==0 )	{
 				funout(gettext("Stop there is no line in the taxons table (problem with the ODBC link ?)\n",domain="R-stacomiR"),arret=TRUE)
