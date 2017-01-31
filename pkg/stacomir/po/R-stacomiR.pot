@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 17:33\n"
+"POT-Creation-Date: 2017-01-31 18:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "No data"
 msgstr ""
 
-msgid "\"Writing the graphical object into envir_stacomi environment : write g=get(g\",envir_stacomi)\""
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
 msgstr ""
 
 msgid "No data of silver or yellow eel on the selected period"
@@ -415,7 +415,10 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-msgid "\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s"
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with \" i=%s"
+msgstr ""
+
+msgid "writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s"
 msgstr ""
 
 msgid "Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
@@ -455,9 +458,6 @@ msgid "Writing data into envir_stacomi environment : write data=get(\"data\",env
 msgstr ""
 
 msgid "This shouldn't be possible"
-msgstr ""
-
-msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
 msgstr ""
 
 msgid "Loading data for operations"
@@ -598,13 +598,19 @@ msgstr ""
 msgid "title edit"
 msgstr ""
 
-msgid "Titre du graphique de stades pigmentaires (graphstades = TRUE)"
+msgid "Pigmentary sages graph title (graphstades = TRUE)"
 msgstr ""
 
 msgid "Exit"
 msgstr ""
 
 msgid "Summary of pigmentation stages"
+msgstr ""
+
+msgid "distributions width choice"
+msgstr ""
+
+msgid "Mean salinity value, click to edit"
 msgstr ""
 
 msgid "temperature choice"
@@ -614,6 +620,9 @@ msgid "First timestamp"
 msgstr ""
 
 msgid "Last timestamp"
+msgstr ""
+
+msgid "Data loading"
 msgstr ""
 
 msgid "Title choice"
@@ -1316,6 +1325,33 @@ msgid "Inter annual migration"
 msgstr ""
 
 msgid "Sample characteristics"
+msgstr ""
+
+msgid "Environnemental conditions"
+msgstr ""
+
+msgid "Migration. ~Environnemental conditions"
+msgstr ""
+
+msgid "Migration / quant. param. / qual. param."
+msgstr ""
+
+msgid "Species"
+msgstr ""
+
+msgid "Average weight glass eel"
+msgstr ""
+
+msgid "Lenghts"
+msgstr ""
+
+msgid "Pigmentary stages"
+msgstr ""
+
+msgid "Silver eel"
+msgstr ""
+
+msgid "Treatment size - age salmonids"
 msgstr ""
 
 msgid "Help"

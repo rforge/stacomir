@@ -415,7 +415,7 @@ interface_graphique=function(){
 	nbligne=0
 	assign("nbligne",nbligne,.GlobalEnv)
 	
-	win <- gWidgets::gwindow(gettext("Migratory treatment"), name="main",parent=c(0,0,domain="R-stacomiR"),width=100,height=100)
+	win <- gWidgets::gwindow(gettext("Migratory treatment",domain="R-stacomiR"), name="main",parent=c(0,0),width=100,height=100)
 	assign("win",win,envir=.GlobalEnv)
 	
 	## Menubar is defined by a list
@@ -430,42 +430,42 @@ interface_graphique=function(){
 	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)",domain="R-stacomiR")]]$handler=hDFDC
 	menubarlist[[gettext("Station")]][[gettext("Fishway without counting device (TODO)",domain="R-stacomiR")]]$icon="gtk-cancel"
 	
-	menubarlist[[gettext("Summary")]][[gettext("Migration",domain="R-stacomiR")]]$handler=hBilanMigration
-	menubarlist[[gettext("Summary")]][[gettext("Migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$handler=hBilanMigrationMult
-	menubarlist[[gettext("Summary")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$icon="gtk-dnd-multiple"
-	menubarlist[[gettext("Summary")]][[gettext("Yearly",domain="R-stacomiR")]]$handler=hbilA
-	menubarlist[[gettext("Summary")]][[gettext("Yearly",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-barplot"
-	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$handler=hBilanMigrationInterAnnuelle
-	menubarlist[[gettext("Summary")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-hist"
-	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$handler=hBilan_carlot
-	menubarlist[[gettext("Summary")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration",domain="R-stacomiR")]]$handler=hBilanMigration
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$handler=hBilanMigrationMult
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Multiple migrations",domain="R-stacomiR")]]$icon="gtk-dnd-multiple"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Yearly",domain="R-stacomiR")]]$handler=hbilA
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Yearly",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-barplot"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$handler=hBilanMigrationInterAnnuelle
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Inter annual migration",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-hist"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$handler=hBilan_carlot
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Sample characteristics",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-newplot"#"gWidgetsRGtk2-logical"
 	
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$handler=hBilanConditionEnv
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.2]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.3]]$handler=hBilanMigrationConditionEnv
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.3]]$icon="gWidgetsRGtk2-plot1"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.4]]$handler=hBilanMigrationPar
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.4]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.13]]$handler=hBilanEspeces	
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.13]]$icon="gWidgetsRGtk2-polar"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.7]]$handler=hpds
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.7]]$icon="gWidgetsRGtk2-cloud"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.8]]$handler=hTail
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.8]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.9]]$handler=hSt
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.9]]$icon="gWidgetsRGtk2-contour"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.10]]$handler=hsilver
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.10]]$icon="gWidgetsRGtk2-bubbles"
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.11]]$handler=htodo
-	menubarlist[[gettext("Summary")]][[msg$interface_graphique_menu.2.11]]$icon="gtk-cancel"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Environnemental conditions",domain="R-stacomiR")]]$handler=hBilanConditionEnv
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Environnemental conditions",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration. ~Environnemental conditions",domain="R-stacomiR")]]$handler=hBilanMigrationConditionEnv
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration. ~Environnemental conditions",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-plot1"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration / quant. param. / qual. param.",domain="R-stacomiR")]]$handler=hBilanMigrationPar
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration / quant. param. / qual. param.",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Species",domain="R-stacomiR")]]$handler=hBilanEspeces	
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Species",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-polar"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Average weight glass eel",domain="R-stacomiR")]]$handler=hpds
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Average weight glass eel",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-cloud"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Lenghts",domain="R-stacomiR")]]$handler=hTail
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Lenghts",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Pigmentary stages",domain="R-stacomiR")]]$handler=hSt
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Pigmentary stages",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-contour"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Silver eel",domain="R-stacomiR")]]$handler=hsilver
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Silver eel",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-bubbles"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$handler=htodo
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$icon="gtk-cancel"
 
-	menubarlist[[gettext("Help")]]$About$handler = hX11
-	menubarlist[[gettext("Help")]]$About$icon="newplot"
-	menubarlist[[gettext("Help")]]$About$handler = hhelp
-	menubarlist[[gettext("Help")]]$About$icon="dialog-info"
-	menubarlist[[gettext("Help")]]$lang$handler = hlang
-	menubarlist[[gettext("Help")]]$lang$icon="dialog-info"
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$handler = hX11
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$icon="newplot"
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$handler = hhelp
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$icon="dialog-info"
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$handler = hlang
+	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$icon="dialog-info"
 	gWidgets::add(win, gmenu(menubarlist))
 	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # this one stacks from bottom to up
 	# gsortie is above the window

@@ -815,7 +815,7 @@ funtitle_bilan_stades_pigm=function(h,...){
 		dispose(wintitle)
 	}
 	group1<-gWidgets::ggroup(horizontal=FALSE,container=wintitle)
-	titre1 <- gWidgets::glabel(text= gettext("Titre du graphique de stades pigmentaires (graphstades = TRUE)"), editable=FALSE,container=group1)
+	titre1 <- gWidgets::glabel(text= gettext("Pigmentary sages graph title (graphstades = TRUE)",domain="R-stacomiR"), editable=FALSE,container=group1)
 	titre2 <- gWidgets::gtext( text= bilan_stades_pigm@labelgraphstades,font.attr= c(foreground.colors="blueblue"),height=40,container=group1)  
 	titre3 <- gWidgets::glabel(text= "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)", editable=FALSE,container=group1) 
 	titre4 <- gWidgets::gtext(text= bilan_stades_pigm@labelretro, editable=TRUE,height=40,container=group1) 
@@ -842,9 +842,9 @@ interface_Bilan_stades_pigm = function()
 	funout(gettext("Summary of pigmentation stages\n",domain="R-stacomiR"))
 	bilan_stades_pigm@dc=charge(bilan_stades_pigm@dc)
 	bilan_stades_pigm@stationMesure=charge(bilan_stades_pigm@stationMesure)
-	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label="choice de la largeur des distributions",selected=as.integer(2))
+	bilan_stades_pigm@lmax<-charge(bilan_stades_pigm@lmax,vecteur=c("0.6","0.8","1","1.2"),label=gettext("distributions width choice",domain="R-stacomiR"),selected=as.integer(2))
 	bilan_stades_pigm@options<-charge(bilan_stades_pigm@options,title="options du graphique",labels=c("graphstades","retrocalcul","points","nb"),checked=c(TRUE,FALSE,TRUE,TRUE))
-	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= "Valeur de la salinite moyenne, cliquer pour editer",label="15")
+	bilan_stades_pigm@salinite<-charge(bilan_stades_pigm@salinite,title= gettext("Mean salinity value, click to edit",domain="R-stacomiR"),label="15")
 	
 	quitte() # vidange de l'interface
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
@@ -864,14 +864,14 @@ interface_Bilan_stades_pigm = function()
 			funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2,
 			affichecal=FALSE)
-	choice(bilan_stades_pigm@horodate,label=gettext("Last timestamp"),
+	choice(bilan_stades_pigm@horodate,label=gettext("Last timestamp",domain="R-stacomiR"),
 			nomassign="bilan_stades_pigm_date_fin",
-			funoutlabel=gettext("Ending date has been chosen\n"),
+			funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 			decal=-1,
 			affichecal=FALSE)
 	choice(bilan_stades_pigm@dc,objectBilan=bilan_stades_pigm,is.enabled=TRUE)
 	#getStockIcons(toolkit=guiToolkit())
-	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip="Chargement des donnees")         
+	aCalcul=gWidgets::gaction(label="calcul",icon="gtk-execute",handler=funcalcbilan_stades_pigm,tooltip=gettext("Data loading",domain="R-stacomiR"))         
 	aSetTitle=gWidgets::gaction(label="title",icon="rename",handler=funtitle_bilan_stades_pigm,tooltip=gettext("Title choice",domain="R-stacomiR"))
 	aGraph=gWidgets::gaction(label="graph",icon="gWidgetsRGtk2-contour",handler=hfungraphstades,tooltip="Graphique Principal")
 	aGraphgg=gWidgets::gaction(label="graphgg",icon="gWidgetsRGtk2-bubbles",handler=fungraphgg,tooltip="Graphique supplementaire avec ggplot")
