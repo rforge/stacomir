@@ -171,7 +171,7 @@ setMethod("choice_c",signature=signature("Bilan_poids_moyen"),definition=functio
 #' @param h handler
 #' @param \dots additional arguments passed to the function
 hcalc = function(h,...) {
-	bilPM<-get("bilPM",envir=envir_stacomi)
+	bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
 	bilPM<-charge(bilPM)
 	bilPM<-connect(bilPM)
 	bilPM<-calcule(bilPM)
@@ -494,6 +494,7 @@ hexp=function(h,...){
 
 #
 funtableBilan_poids_moyen = function(h,...) {
+	bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
 	bilPM=charge(bilPM)  
 	donnees=bilPM@data # on recupere le data.frame  
 	assign("bilan_poids_moyen",bilPM,envir_stacomi)

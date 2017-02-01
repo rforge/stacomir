@@ -195,7 +195,6 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("BilanArgentee"),definition=function(object,silent) {
-			#bilanArg<-b_carlot
 			bilanArg<-object
 			if(nrow(bilanArg@data)==0) {
 				funout(gettext("No data of silver or yellow eel on the selected period",domain="R-stacomiR"), arret=TRUE)
@@ -240,7 +239,17 @@ setMethod("calcule",signature=signature("BilanArgentee"),definition=function(obj
 				# now matquant2 only contain the correct columns
 				# matqual has two column for a single qualitative variable, which is wrong
 				# we will merge them
+				
+				# however there is a bug if only one value is present
+				# depending on the data structure there might a bug
+				# when there is only one dimension (ie on instance of factor where there should be two)
+				for (z in 1:length(matqual2)){		
+					if (is.null(dim(matqual2[[z]])[2])) matqual2[[z]]<-cbind(matqual2[[z]],NA)
+				}
 				matqual3<-matrix(NA,nrow=nrow(matqual2[[1]]),ncol=length(parqual))
+				# below if the data in  the first column is NA we choose the second
+				# which migh also be NA in which case the result becomes a NA
+				
 				for (j in 1:length(parqual)){
 					theparqual=parqual[j]
 					matqual3[,j]<-apply(matqual2[[theparqual]],1,function(X) ifelse(is.na(X[1]),X[2],X[1]))
