@@ -57,7 +57,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			bty="l",
 			ylab=gettext("Number",domain="R-stacomiR"),
 			xlab=gettext("Date",domain="R-stacomiR"),
-			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee),
+			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR"),
 			cex.main=1)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
@@ -68,7 +68,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		axis(side=1)
 	}  	
 	mtext(text=gettextf("Sum of numbers =%s",
-					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE))),
+					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),domain="R-stacomiR")),
 			side=3,
 			col=RColorBrewer::brewer.pal(5,"Paired")[5],
 			cex=0.8)
@@ -84,9 +84,9 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	
 	if (!silent){
 	  funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n",domain="R-stacomiR"))
-		funout(gettextf("average trapping time = %s days\n",round(mean(as.numeric(dif)),2)))
-		funout(gettextf("maximum term = %s",round(max(as.numeric(dif)),2)))
-		funout(gettextf("minimum term = %s",round(min(as.numeric(dif)),2)))
+		funout(gettextf("average trapping time = %s days\n",round(mean(as.numeric(dif)),2),domain="R-stacomiR"))
+		funout(gettextf("maximum term = %s",round(max(as.numeric(dif)),2),domain="R-stacomiR"))
+		funout(gettextf("minimum term = %s",round(min(as.numeric(dif)),2),domain="R-stacomiR"))
 	}
 	
 
@@ -198,7 +198,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("stop"),nomperiode,domain="R-stacomiR"),
+				legend= c(gettext("stop",domain="R-stacomiR"),nomperiode),
 				pch=c(15,15),
 				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
 				bty="n",

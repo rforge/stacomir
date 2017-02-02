@@ -51,7 +51,7 @@ setMethod("charge",signature=signature("RefListe"),definition=function(object,li
 setMethod("choice",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
 			hlist=function(h,...){
 				valeurchoisie=svalue(choice)
-				object@listechoice<-object@listechoice[list_libelle%in%valeurchoisie]
+				object@selectedvalue<-object@listechoice[list_libelle%in%valeurchoisie]
 				assign("refliste",object,envir_stacomi)
 				funout(paste(object@label,"\n"))
 			}

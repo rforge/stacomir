@@ -175,18 +175,20 @@ hcalc = function(h,...) {
 	bilPM<-charge(bilPM)
 	bilPM<-connect(bilPM)
 	bilPM<-calcule(bilPM)
+
 }
+
 
 #' Calcule method for Bilan_poids_moyen
 #' @param object An object of class \code{\link{Bilan_poids_moyen-class}}
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE) {
+			bilPM<-object
 			donnees				<-bilPM@data 
 			coeff				<-bilPM@coe@data
 			coeff$w	<-1/coeff$coe_valeur_coefficient
 			coeff$date			<-as.POSIXct(coeff$coe_date_debut)
-			assign("bilan_poids_moyen",bilPM,envir_stacomi)
 			if (!silent) funout(gettext("To obtain the table, type : bilan_poids_moyen=get('bilan_poids_moyen',envir_stacomi)@data\n",domain="R-stacomiR"))
 			# changement des noms
 			donnees<-stacomirtools::chnames(donnees,c("lot_identifiant","ope_date_debut","ope_date_fin",
@@ -228,6 +230,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				plot.type="point",
 				silent=FALSE)	{
 			#plot.type="1";silent=FALSE
+			#bilPM=get('bilan_poids_moyen',envir_stacomi)
 			bilPM<-x			
 			don<-bilPM@calcdata$data
 			coe<-bilPM@calcdata$coe
@@ -243,6 +246,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				# standard plot
 				##################
 			} else if (plot.type==2){	
+				if (length(bilPM@liste@selectedvalue)==0) stop("Internal error, the value has not been selected before launching plot")
 				type_poids= switch (bilPM@liste@selectedvalue,
 						">1"=gettext("wet weights",domain="R-stacomiR"),
 						"=1"=gettext("dry weights",domain="R-stacomiR"),
@@ -254,7 +258,9 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 						main=gettextf("Seasonal trend of %s, from %s to %s",
 								type_poids,
 								bilPM@anneedebut@annee_selectionnee,
-								bilPM@anneefin@annee_selectionnee,domain="R-stacomiR"))
+								bilPM@anneefin@annee_selectionnee,domain="R-stacomiR"),
+						sub="Trend of wet weights")
+				coe<-coe[order(coe$date),]
 				points(coe$date,coe$w,type="l",col="black",lty=2)
 				#legend("topright",c("Obs.", "Coeff base"), col=c("black","cyan"),pch="o",cex = 0.8)
 				
@@ -268,6 +274,16 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				if (!silent) funout(gettext("object p assigned to envir_stacomi",domain="R-stacomiR"))
 			}
 		})
+		
+		
+#' Internal handler for reg, class \code{\link{Bilan_poids_moyen-class}}. 
+#' @param h handler
+#' @param \dots additional arguments passed to the function
+		hreg = function(h,...) {			
+			bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
+			model(bilPM,model.type=h$action)			
+		}
+		
 
 #' model method for Bilan_poids_moyen' 
 #' this method uses samples collected over the season to model the variation in weight of
@@ -306,16 +322,14 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 			don<-bilPM@calcdata$data
 			coe<-bilPM@calcdata$coe
 			seq=seq(as.Date(bilPM@coe@datedebut),as.Date(bilPM@coe@datefin),by="day")
-			origine<-as.POSIXct(trunc(min(don$date),"day"))
-			
+			origine<-as.POSIXct(trunc(min(don$date),"day"))			
 			# season starting in november
 			fndate<-function(data){
 				if (!"date"%in%colnames(data)) stop ("date should be in colnames(data)")
 				if (!class(data$date)[1]=="POSIXct") stop("date should be POSIXct")
 				data$year<-lubridate::year(data$date)
 				data$yday=lubridate::yday(data$date)
-				data$doy=data$yday-305 # year begins in november
-				
+				data$doy=data$yday-305 # year begins in november				
 				data$season<-stringr::str_c(lubridate::year(data$date)-1,"-",lubridate::year(data$date)) # year-1-year
 				data$season[data$doy>0]<-stringr::str_c(lubridate::year(data$date),"-",lubridate::year(data$date)+1)[data$doy>0] # for november and december it's year - year+1
 				data$yearbis<-data$year # same as season but with a numeric
@@ -475,9 +489,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 			assign("import_coe",import_coe,envir=envir_stacomi)
 			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
 			funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
-			bilPM@calcdata[["import_coe"]]<-import_coe
-			
-			
+			bilPM@calcdata[["import_coe"]]<-import_coe			
 		})
 
 
