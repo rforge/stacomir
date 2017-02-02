@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 18:07\n"
+"Project-Id-Version: stacomiR 0.5.1\n"
+"POT-Creation-Date: 2017-02-02 12:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "No data"
 msgstr ""
 
-msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
+msgid "Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)"
 msgstr ""
 
 msgid "No data of silver or yellow eel on the selected period"
@@ -415,10 +415,7 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with \" i=%s"
-msgstr ""
-
-msgid "writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s"
+msgid "\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s"
 msgstr ""
 
 msgid "Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
@@ -458,6 +455,9 @@ msgid "Writing data into envir_stacomi environment : write data=get(\"data\",env
 msgstr ""
 
 msgid "This shouldn't be possible"
+msgstr ""
+
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
 msgstr ""
 
 msgid "Loading data for operations"
@@ -500,6 +500,9 @@ msgid "size is missing, lots %s"
 msgstr ""
 
 msgid "ggplot object p assigned to envir_stacomi"
+msgstr ""
+
+msgid "Internal error, the value has not been selected before launching plot"
 msgstr ""
 
 msgid "wet weights"
@@ -601,6 +604,9 @@ msgstr ""
 msgid "Pigmentary sages graph title (graphstades = TRUE)"
 msgstr ""
 
+msgid "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
@@ -700,6 +706,9 @@ msgstr ""
 msgid "Number of time steps choice"
 msgstr ""
 
+msgid "Ending date"
+msgstr ""
+
 msgid "Not implemented for objectBilan = %s"
 msgstr ""
 
@@ -796,12 +805,6 @@ msgstr ""
 msgid "Qualitative feature"
 msgstr ""
 
-msgid "refparqual"
-msgstr ""
-
-msgid "frame_parqual"
-msgstr ""
-
 msgid "Quantitative feature"
 msgstr ""
 
@@ -809,12 +812,6 @@ msgid "Stage selection"
 msgstr ""
 
 msgid "Stop internal error : load data to make a choice"
-msgstr ""
-
-msgid "refparquan"
-msgstr ""
-
-msgid "frame_parquan"
 msgstr ""
 
 msgid "No value for argument stage"
@@ -871,10 +868,13 @@ msgstr ""
 msgid "Internal error : tried to set a value for par_selectionne without initializing the data slot"
 msgstr ""
 
-msgid "No data for par"
+msgid "No data for par %s"
 msgstr ""
 
 msgid "Internal error : there must have one line in Refparqual@data, or nbligne= %s"
+msgstr ""
+
+msgid "Choice of a sample characteristic"
 msgstr ""
 
 msgid "Writing monthly summary in the database"
@@ -1192,7 +1192,7 @@ msgstr ""
 msgid "all"
 msgstr ""
 
-msgid "choice of number in sample (one, several, all"
+msgid "choice of number in sample (one, several, both)"
 msgstr ""
 
 msgid "Mean weight report"
@@ -1204,13 +1204,37 @@ msgstr ""
 msgid "Gra"
 msgstr ""
 
+msgid "plot.type='1', plot of mean weight of glass eel against the mean date of operation"
+msgstr ""
+
 msgid "Coe"
+msgstr ""
+
+msgid "plot.type=2, standard plot of current coefficent"
 msgstr ""
 
 msgid "Leng"
 msgstr ""
 
-msgid "Reg"
+msgid "plot.type=3, same as 1 but size of the bubble according to number"
+msgstr ""
+
+msgid "seasonal"
+msgstr ""
+
+msgid "model.type='seasonal', sine wave curve for a cyclic variation fitted with nls"
+msgstr ""
+
+msgid "seasonal1"
+msgstr ""
+
+msgid "model.type='seasonal1', long term variation along with seasonal variation fitted with gam"
+msgstr ""
+
+msgid "seasonal2"
+msgstr ""
+
+msgid "model.type='seasonal2', long term variation + seasonal component fitted with sine curve"
 msgstr ""
 
 msgid "export"

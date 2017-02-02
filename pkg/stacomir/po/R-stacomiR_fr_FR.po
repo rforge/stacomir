@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-01-31 18:07+0100\n"
-"PO-Revision-Date: 2017-02-02 09:42+0100\n"
+"POT-Creation-Date: 2017-02-02 12:54+0100\n"
+"PO-Revision-Date: 2017-02-02 13:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -108,11 +108,11 @@ msgid "No data"
 msgstr "Pas de données"
 
 msgid ""
-"Writing the graphical object into envir_stacomi environment : write g=get(\"g"
-"\",envir_stacomi)"
+"Writing the graphical object into envir_stacomi environment : write "
+"g=get('g',envir_stacomi)"
 msgstr ""
-"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
-"g=get('g',envir_stacomi) "
+"Ecriture du graphique dans l'environnement envir_stacomi: écrire g=get('g',"
+"envir_stacomi) pour le récupérer"
 
 msgid "No data of silver or yellow eel on the selected period"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Pie chart graphic"
 msgstr "Graphe en camembert"
 
 msgid "barplot"
-msgstr ""
+msgstr "barplot"
 
 msgid "Summary tables in .csv and XML"
 msgstr "Tables bilan en .csv et XML"
@@ -242,7 +242,7 @@ msgid "month"
 msgstr "mois"
 
 msgid "type_oper."
-msgstr ""
+msgstr "type_oper."
 
 msgid "operation"
 msgstr "opération"
@@ -476,18 +476,9 @@ msgid "year"
 msgstr "année"
 
 msgid ""
-"Writing the graphical object into envir_stacomi environment : write "
-"g=get(\"gi\",envir_stacomi) with \" i=%s"
+"\"Writing the graphical object into envir_stacomi environment : write "
+"g=get(gi\",envir_stacomi) with \" i=%s"
 msgstr ""
-"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
-"g=get('gi',envir_stacomi) avec i=%s"
-
-msgid ""
-"writing the graphical object into envir_stacomi environment : write "
-"g=get(\"gi\",envir_stacomi) with i=%s"
-msgstr ""
-"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
-"g=get('gi',envir_stacomi) avec i=%s"
 
 msgid ""
 "Warning : you have to complete a migration summary for at least one of the "
@@ -550,6 +541,13 @@ msgstr ""
 msgid "This shouldn't be possible"
 msgstr "Normalement c'est impossible"
 
+msgid ""
+"Writing the graphical object into envir_stacomi environment : write g=get(\"g"
+"\",envir_stacomi)"
+msgstr ""
+"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+"g=get('g',envir_stacomi) "
+
 msgid "Loading data for operations"
 msgstr "Chargement des données des opérations:"
 
@@ -583,7 +581,7 @@ msgid "The query to load the coefficients of conversion is finished"
 msgstr "La requete est effectuee pour charger les coefficients de conversion "
 
 msgid "%1.0f lines found for the conversion coefficients"
-msgstr ""
+msgstr "%1.0f lignes trouvées pour le coefficient de conversion"
 
 msgid "selectedvalue must be of length one"
 msgstr "selectedvalue doit être de longueur 1"
@@ -603,6 +601,11 @@ msgstr "effectif non renseigne, lots %s"
 
 msgid "ggplot object p assigned to envir_stacomi"
 msgstr "l'object ggplot p est enregistré dans envir_stacomi"
+
+msgid "Internal error, the value has not been selected before launching plot"
+msgstr ""
+"Erreur interne, la valeur n'a pas été sélectionnée avant de lancer le "
+"graphique"
 
 msgid "wet weights"
 msgstr "poids humides"
@@ -646,7 +649,7 @@ msgstr ""
 "dans ce modèle des lots estuariens."
 
 msgid "summary_harmonic"
-msgstr ""
+msgstr "resumé_cyclique"
 
 msgid "summary coefficients written in %s"
 msgstr "Les coefficients du bilan ont été écrit dans %s"
@@ -725,6 +728,11 @@ msgstr "Modification du titre"
 
 msgid "Pigmentary sages graph title (graphstades = TRUE)"
 msgstr "Titre du graphe des stades pigmentaires (graphstades = TRUE)"
+
+msgid ""
+"Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
+msgstr ""
+"Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
 
 msgid "Exit"
 msgstr "Quitter"
@@ -833,6 +841,9 @@ msgstr "Les pas de temps ont été chargés"
 
 msgid "Number of time steps choice"
 msgstr "Choix du nombre de pas de temps"
+
+msgid "Ending date"
+msgstr ""
 
 msgid "Not implemented for objectBilan = %s"
 msgstr "Non éxécuté pour objectBilan = %s"
@@ -944,12 +955,6 @@ msgstr "Le stade a été sélectionné "
 msgid "Qualitative feature"
 msgstr "Caractéristique qualitative"
 
-msgid "refparqual"
-msgstr ""
-
-msgid "frame_parqual"
-msgstr ""
-
 msgid "Quantitative feature"
 msgstr "Caractéristique quantitative"
 
@@ -958,12 +963,6 @@ msgstr "Choix du Stade"
 
 msgid "Stop internal error : load data to make a choice"
 msgstr "Stop erreur interne : charger les données pour faire le choix "
-
-msgid "refparquan"
-msgstr ""
-
-msgid "frame_parquan"
-msgstr ""
 
 msgid "No value for argument stage"
 msgstr "Pas de valeur pour l'argument stades"
@@ -1033,14 +1032,17 @@ msgstr ""
 "Erreur interne : il faut initialiser le slot data avant de fixer une valeur "
 "pour par_selectionne"
 
-msgid "No data for par"
-msgstr "Pas de données pour par"
+msgid "No data for par %s"
+msgstr "Pas de données pour par %s"
 
 msgid ""
 "Internal error : there must have one line in Refparqual@data, or nbligne= %s"
 msgstr ""
 "Erreur interne : il devrait y avoir une ligne dans Refparqual@data, or "
 "nbligne= %s"
+
+msgid "Choice of a sample characteristic"
+msgstr "Choix d'une caractéristique de lot"
 
 msgid "Writing monthly summary in the database"
 msgstr "Ecriture du bilan mensuel dans la base"
@@ -1064,7 +1066,7 @@ msgid "expert"
 msgstr "expert"
 
 msgid "direct"
-msgstr ""
+msgstr "ponctuel"
 
 msgid "average trapping time = %s days"
 msgstr "durée moyenne du piégeage =  %s jours"
@@ -1076,7 +1078,7 @@ msgid "minimum term = %s"
 msgstr "durée min= %s"
 
 msgid "working"
-msgstr ""
+msgstr "Fonct."
 
 msgid "stopped"
 msgstr "Arrêté"
@@ -1091,7 +1093,7 @@ msgid "CD"
 msgstr "DC"
 
 msgid "Op"
-msgstr ""
+msgstr "Op"
 
 msgid "Number (x1000)"
 msgstr "Effectif (x1000)"
@@ -1124,7 +1126,7 @@ msgid "minimum term = %sdays"
 msgstr "durée min= %s jours"
 
 msgid "work"
-msgstr ""
+msgstr "Fonct."
 
 msgid "Number %s"
 msgstr "Effectif %s"
@@ -1185,13 +1187,13 @@ msgid "Silver eel summary"
 msgstr "Bilan anguilles argentées"
 
 msgid "First date"
-msgstr "Première année"
+msgstr "Début"
 
 msgid "The beginning date has been chosen"
 msgstr "La date de début a été choisie"
 
 msgid "Last date"
-msgstr "Dernière date"
+msgstr "Fin"
 
 msgid "summary"
 msgstr "bilan"
@@ -1257,7 +1259,7 @@ msgid "Cumulative graphic"
 msgstr "Graphe cumul"
 
 msgid "stat"
-msgstr ""
+msgstr "stat"
 
 msgid "Balance sheet in .csv"
 msgstr "Tables bilan en .csv"
@@ -1266,7 +1268,7 @@ msgid "write"
 msgstr "écrire"
 
 msgid "quit"
-msgstr ""
+msgstr "quitte"
 
 msgid ""
 "Loading of the lists for taxons, stages, counting devices and monitoring "
@@ -1313,7 +1315,7 @@ msgid "Fortnight migration"
 msgstr "Migration par quinzaine"
 
 msgid "gr(all)"
-msgstr ""
+msgstr "gr(tous)"
 
 msgid ""
 "Loading of the lists for taxons, stages, counting devices, qualitative and "
@@ -1361,10 +1363,10 @@ msgid "density"
 msgstr "densité"
 
 msgid "boxplot"
-msgstr ""
+msgstr "boxplot"
 
 msgid "dataframe"
-msgstr ""
+msgstr "dataframe"
 
 msgid "Size report"
 msgstr "Bilan des tailles"
@@ -1375,8 +1377,8 @@ msgstr "requête croisée taille/ caract. qualitative"
 msgid "all"
 msgstr "tous"
 
-msgid "choice of number in sample (one, several, all"
-msgstr "Choix de la catégorie d'effectif (un, plusieurs, tous)"
+msgid "choice of number in sample (one, several, both)"
+msgstr "choix de l'effectif de l'échantillon (un, plusieurs, tous) "
 
 msgid "Mean weight report"
 msgstr "Bilan des poids moyens"
@@ -1387,14 +1389,55 @@ msgstr "charger"
 msgid "Gra"
 msgstr "Gra"
 
-msgid "Coe"
+msgid ""
+"plot.type='1', plot of mean weight of glass eel against the mean date of "
+"operation"
 msgstr ""
+"plot.type='1', graphique des poids moyen par rapport à la date moyenne de "
+"l'opération"
+
+msgid "Coe"
+msgstr "Coe"
+
+msgid "plot.type=2, standard plot of current coefficent"
+msgstr "plot.type=2, graphique standard avec coefficient actuels en base"
 
 msgid "Leng"
 msgstr "Tail"
 
-msgid "Reg"
+msgid "plot.type=3, same as 1 but size of the bubble according to number"
 msgstr ""
+"plot.type=3, pareil que 1 mais la taille de la bulle dépend de l'effectif de "
+"l'échantillon"
+
+msgid "seasonal"
+msgstr "saisonnier"
+
+msgid ""
+"model.type='seasonal', sine wave curve for a cyclic variation fitted with nls"
+msgstr ""
+"model.type='seasonal', courbe sinusoïde  pour une variation cyclique, "
+"calibration non linéaire par nls"
+
+msgid "seasonal1"
+msgstr "seasonal1"
+
+msgid ""
+"model.type='seasonal1', long term variation along with seasonal variation "
+"fitted with gam"
+msgstr ""
+"model.type='seasonal1', variation de long terme et variation saisonnière "
+"calée par des gam"
+
+msgid "seasonal2"
+msgstr "seasonal2"
+
+msgid ""
+"model.type='seasonal2', long term variation + seasonal component fitted with "
+"sine curve"
+msgstr ""
+"model.type='seasonal2', variation de long terme + variation saisonnière "
+"ajustée à l'aide d'une sinusoïde"
 
 msgid "export"
 msgstr "exporter"
@@ -1569,6 +1612,26 @@ msgid "%d operation \n"
 msgid_plural "%d operations \n"
 msgstr[0] "opération\n"
 msgstr[1] "opérations\n"
+
+#~ msgid ""
+#~ "Writing the graphical object into envir_stacomi environment : write "
+#~ "g=get(\"gi\",envir_stacomi) with \" i=%s"
+#~ msgstr ""
+#~ "Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+#~ "g=get('gi',envir_stacomi) avec i=%s"
+
+#~ msgid ""
+#~ "writing the graphical object into envir_stacomi environment : write "
+#~ "g=get(\"gi\",envir_stacomi) with i=%s"
+#~ msgstr ""
+#~ "Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+#~ "g=get('gi',envir_stacomi) avec i=%s"
+
+#~ msgid "No data for par"
+#~ msgstr "Pas de données pour par"
+
+#~ msgid "choice of number in sample (one, several, all"
+#~ msgstr "Choix de la catégorie d'effectif (un, plusieurs, tous)"
 
 #~ msgid "tous"
 #~ msgstr "Tous"
