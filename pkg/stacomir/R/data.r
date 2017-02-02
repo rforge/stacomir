@@ -243,6 +243,7 @@
 "bilanArg"
 
 #' Silvering index coefficients from Caroline Durif (2009) to predict silvering stage from morphological parameters
+#' 
 #' Classification scores are calculated by multiplying the metrics 
 #' BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of the pectoral fin,
 #' with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the one achieving the 
@@ -253,7 +254,9 @@
 #'  \url{http://fishlarvae.org/common/SiteMedia/durif\%20et\%20al\%202009b.pdf}
 "coef_Durif"
 
-#' Wet weight of glass eel from the trapping ladder. The years selected are 2009 to 2012,
+#' Wet weight of glass eel from the trapping ladder. 
+#' 
+#' The years selected are 2009 to 2012,
 #' the query used in the \link{Bilan_poids_moyen-class} loads from 2008-08-01 to 2012-08-01
 #' Glass eel are too numerous to be counted. They are weighted and in the stacomi database,
 #' a table with daily coefficients (in  N glass eel/g) to transform weight into number.

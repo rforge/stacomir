@@ -3,17 +3,12 @@
 \docType{data}
 \name{coef_Durif}
 \alias{coef_Durif}
-\title{Silvering index coefficients from Caroline Durif (2009) to predict silvering stage from morphological parameters
-Classification scores are calculated by multiplying the metrics 
-BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of the pectoral fin,
-with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the one achieving the 
-highest score}
+\title{Silvering index coefficients from Caroline Durif (2009) to predict silvering stage from morphological parameters}
 \format{An object of class \code{matrix} with 5 rows and 6 columns.}
 \usage{
 coef_Durif
 }
 \description{
-Silvering index coefficients from Caroline Durif (2009) to predict silvering stage from morphological parameters
 Classification scores are calculated by multiplying the metrics 
 BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of the pectoral fin,
 with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The stage chosen is the one achieving the 

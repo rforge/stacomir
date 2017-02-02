@@ -2,7 +2,7 @@ require(stacomiR)
 # launching stacomi without selecting the scheme or interface
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
-		database_expected=TRUE)
+		database_expected=FALSE)
 # the following script will load data from the two Anguillere monitored in the Somme
 
 \dontrun{
@@ -31,14 +31,8 @@ bilan_adm<-calcule(bilan_adm)
 # stages are in bilan_adm@calcdata[["6"]][,"stage"] 
 #look at data structure using str(bilan_adm@calcdata[["6"]])
 
-# standard plot as drawn by Laurent Beaulaton (Analyse des données d'argenture acquises en France)
-# showing Durif's stage according to size and eye diameter
+# plot data to confirm the split by limits is correct
 plot(bilan_adm, plot.type=1)
-
 
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilan_adm)
-
-object=new("RefMsg")
-msgfr<-charge_avec_filtre(object,lang='French')
-str(msgfr)

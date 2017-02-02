@@ -6,7 +6,7 @@
 \title{Choice method for Refparqual referential objects, internal use}
 \usage{
 \S4method{choice}{Refparqual}(object,
-  label = "Choix d'une caracteristique qualitative de lot",
+  label = gettext("Choice of a sample characteristic", domain = "R-stacomiR"),
   nomassign = "refpar", frameassign = "frame_par", is.enabled = TRUE)
 }
 \arguments{

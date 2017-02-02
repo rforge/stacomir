@@ -364,7 +364,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				}
 				print(result)
 				p<-ggplot(don)+ geom_jitter(aes(x=doy,y=w),col="aquamarine4")+facet_wrap(~season )+
-						geom_line(aes(x=doy,y=pred_weight),data=predatafull)+
+						geom_line(aes(x=doy,y=pred_weight),data=predata)+
 						#geom_line(aes(x=doy,y=pred_weight),color="green",size=1,data=predatafull[predatafull$doy==50,])+
 						theme_minimal()+
 						theme(panel.border = element_blank(),
@@ -536,8 +536,9 @@ funtableBilan_poids_moyen = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent,dbname="bd_contmig_nat",host="localhost",port=5432){
-			object<-bilPM
+			bilPM<-object
 			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database",domain="R-stacomiR"),arret=TRUE)
+			supprime(bilPM,tax=2038,std="CIV")
 			import_coe<-bilPM@calcdata$import_coe
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe (",			
@@ -554,3 +555,6 @@ setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=f
 									port=port)
 					))		
 		})
+
+
+

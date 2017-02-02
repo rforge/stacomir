@@ -5,7 +5,7 @@
 \alias{choice_c,RefStades-method}
 \title{choice_c method for RefStades}
 \usage{
-\S4method{choice_c}{RefStades}(object, stades)
+\S4method{choice_c}{RefStades}(object, stades, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{RefStades-class}}
