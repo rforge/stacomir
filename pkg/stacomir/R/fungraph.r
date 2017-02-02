@@ -67,8 +67,8 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	} else {
 		axis(side=1)
 	}  	
-	mtext(text=gettextf("Sum of numbers =%s",
-					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),domain="R-stacomiR")),
+	mtext(text=gettextf("Sum of numbers =%s",domain="R-stacomiR"),
+					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE)),
 			side=3,
 			col=RColorBrewer::brewer.pal(5,"Paired")[5],
 			cex=0.8)

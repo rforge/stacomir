@@ -310,7 +310,7 @@ houtBilanMigration=function(h=null,...) {
 #' @author cedric.briand
 #' @export
 setMethod("print",signature=signature("BilanMigration"),definition=function(x,...){ 
-			sortie1<-"bilanMigration=new('bilanMigration')\n"
+			sortie1<-"bilanMigration=new('BilanMigration');"
 			sortie2<-stringr::str_c("bilanMigration=choice_c(bilanMigration,",
 					"dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 					"taxons=c(",stringr::str_c(shQuote(x@taxons@data$tax_nom_latin),collapse=","),"),",
