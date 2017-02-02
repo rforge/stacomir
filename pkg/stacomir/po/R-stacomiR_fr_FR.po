@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
 "POT-Creation-Date: 2017-01-31 18:07+0100\n"
-"PO-Revision-Date: 2017-01-31 18:09+0100\n"
+"PO-Revision-Date: 2017-02-02 09:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -321,7 +321,7 @@ msgid "Progress %"
 msgstr "Progression %"
 
 msgid "Fishway operation %s"
-msgstr "Fonctionnement DF %s"
+msgstr "Fonctionnement des DF %s"
 
 msgid ""
 "Writing the table into envir_stacomi environment : write "
@@ -331,10 +331,10 @@ msgstr ""
 "periodeDF=get('periodeDF',envir_stacomi) "
 
 msgid "Fishway"
-msgstr "Dispositif de franchissement"
+msgstr "DF"
 
 msgid "Fishway operation"
-msgstr "Fonctionnement des dispositifs de comptage"
+msgstr "Fonctionnement des DC"
 
 msgid "Shutdowns types for this fishway"
 msgstr "Types d'arrêts du DF"
@@ -893,13 +893,13 @@ msgid "NA values dc"
 msgstr "Valeurs NULL dc"
 
 msgid "Fishway selected"
-msgstr "Dispositif de franchissement sélectionné"
+msgstr "DF sélectionné"
 
 msgid "Fishways data"
-msgstr "Données des dispositifs de comptage"
+msgstr "Données des DF"
 
 msgid "Fishway choice"
-msgstr "Choix du dispositif de franchissement"
+msgstr "Choix du DF"
 
 msgid "No fishway in the database (the query returns 0 entry)"
 msgstr ""
@@ -1505,7 +1505,7 @@ msgid "Operation (TODO)"
 msgstr "Opération (TODO)"
 
 msgid "Fishway without counting device (TODO)"
-msgstr "Dispositif de franchissement sans dispositif de comptage (TODO)"
+msgstr "DF sans DC (TODO)"
 
 msgid "Summary"
 msgstr "Bilan"
