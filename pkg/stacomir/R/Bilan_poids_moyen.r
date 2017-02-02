@@ -23,11 +23,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
-#' @examples
-#'  \dontrun{
-#' showClass("Bilan_poids_moyen")
-#' object=new("Bilan_poids_moyen")
-#' }
+#' @example inst/examples/bilan_poids_moyen_example.R
 #' @export 
 setClass(Class="Bilan_poids_moyen",        
 		representation= representation(data="data.frame",
@@ -318,6 +314,7 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(object, 
 				model.type="seasonal",
 				silent=FALSE){
+			#bilPM=get('bilan_poids_moyen',envir_stacomi);silent=TRUE;require(ggplot2)
 			bilPM<-object
 			don<-bilPM@calcdata$data
 			coe<-bilPM@calcdata$coe
@@ -359,11 +356,11 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					# what is the size in december ? I'm just using the formula from Guerault and Desaunay
 					#result[result$season==seas,"pred_weight"]<-coef(g0)["a"]*cos(2*pi*(50-T)/365)+coef(g0)["b"]
 					# dataframe  for prediction, I will bind them to get a final dataframe (predatafull) for the graph below
-					predata<-newcoe[newcoe$season==seas,]
-					predata$pred_weight<-predict(g0, newdata=predata)
+					predatay<-newcoe[newcoe$season==seas,]
+					predatay$pred_weight<-predict(g0, newdata=predatay)
 					if (seas==unique(don$season)[1]){
-						predatafull<-predata
-					} else predatafull<-rbind(predatafull,predata)
+						predata<-predatay
+					} else predata<-rbind(predata,predatay)
 				}
 				print(result)
 				p<-ggplot(don)+ geom_jitter(aes(x=doy,y=w),col="aquamarine4")+facet_wrap(~season )+
@@ -387,7 +384,15 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				#plot(bilPM,plot.type=2)
 				#points(as.POSIXct(newcoe$date),pred, col="magenta")
 				#legend("topright",c("Obs.", "Coeff base","Mod"), col=c("black","cyan","magenta"),pch="o",cex = 0.8)
-				#mtext(com,side=3,line=0.5)   	
+				#mtext(com,side=3,line=0.5) 
+				result
+                result_to_text<-stringr::str_c(sapply(t(result[,c(1,3,4,5)]),as.character),collapse=" ")
+						
+				# setting text for comment (lines inserted into the database)
+				com=stringr::str_c("w ~ a*cos(2*pi*(doy-T)/365)+b with a period T.",
+						" The julian time d0 used is this model is set at zero 1st of November doy = d + d0; d0 = 305.",
+						" Coefficients for the model (one line per season): season, a, T, b =",
+				result_to_text)
 			} else if (model.type=="seasonal1"){
 				g1 = mgcv::gam(w~s(yday,bs="cc")+s(time),data=don, knots = list(yday = c(1, 365)))
 				# the knots=list(yday=c(1,365) is necessary for a smooth construction of the model
@@ -411,7 +416,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				assign("g1",g1,envir=envir_stacomi)
 				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
 				if (!silent) funout(gettext("gam model g1 assigned to envir_stacomi",domain="R-stacomiR"))
-				
+				com="model seasonal1 = gam(w~s(yday,bs='cc')+s(time), knots = list(yday = c(1, 365)))"
 			} else 	if (model.type=="seasonal2"){
 				#########################################################
 				# seasonal effects with a continuous sine-cosine wave,.  The formula for this is ‘sin(ωvt) + cos(ωvt)’, where vt is the time index variable 
@@ -422,7 +427,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				summary(g2)
 				plot(g2,pages=1)
 				predata<-newcoe
-				pred<-predict(g1, newdata=predata,se.fit=TRUE)
+				pred<-predict(g2, newdata=predata,se.fit=TRUE)
 				predata$pred_weight<-pred$fit
 				predata$pred_weight_lwr<-pred$fit-1.96*pred$se.fit
 				predata$pred_weight_upr<-pred$fit+1.96*pred$se.fit	
@@ -439,6 +444,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				assign("g2",g2,envir=envir_stacomi)
 				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
 				if (!silent) funout(gettext("gam model g2 assigned to envir_stacomi",domain="R-stacomiR"))
+					
 				###################################################################
 				# comparison with Guérault and Désaunay (summary table in latex)
 				######################################################################
@@ -466,7 +472,10 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 						sanitize.colnames.function=function(x){x})
 				
 				funout(gettextf("summary coefficients written in %s",tabname,domain="R-stacomiR"))					
-			
+				com=stringr::str_c("model seasonal2 = gam(w~cos(0.0172*doy)+sin(0.0172*doy)+s(time), knots = list(yday = c(1, 365))),Desaunay's gamma=",
+						round(gamma,3),", phi=",phi,", s0=",round(s0,3))
+				
+				
 			} else if (model.type=="manual"){
 				if (!silent) funout(gettext("Table for predictions newcoe assigned to envir_stacomi",domain="R-stacomiR"))
 				assign("newcoe",newcoe,envir=envir_stacomi)
@@ -475,13 +484,15 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				if (!silent) funout(gettext("Table of current coefficients coe assigned to envir_stacomi",domain="R-stacomiR"))
 				assign("coe",coe,envir=envir_stacomi)
 			}
+			
+		
 			import_coe=data.frame(
 					"coe_tax_code"='2038',
 					"coe_std_code"='CIV',
 					"coe_qte_code"=1,
-					"coe_date_debut"=seq[-length(seq)],
-					"coe_date_fin"=seq[-1],
-					"coe_valeur_coefficient"=1/pred[-length(seq)],
+					"coe_date_debut"=round(predata$date,units="days"),
+					"coe_date_fin"=round(predata$date,units="days")+as.difftime(1,units="days"),
+					"coe_valeur_coefficient"=1/predata$pred_weight,
 					"coe_commentaires"=com)
 			fileout= paste("C:/base/","import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
 			#attention ecrit dans C:/base....
