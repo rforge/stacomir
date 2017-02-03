@@ -226,8 +226,16 @@ setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definitio
 			for (i in 1:length(dic)){
 				#i=1
 				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i],]
-				
-			}
+				datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
+				wtd.mean(as.numeric(datadic$jour_365),
+				         weights=datadic$bjo_valeur)
+				fnquant<-function(data){
+				  wtd.quantile(as.numeric(data$jour_365),
+				             weights=data$bjo_valeur,
+				             probs=c(0, .05, .5, .95, 1))
+				}
+
+				}
 			bilanMigrationInterAnnuelle@calcdata<-""
 			return(bilanMigrationInterAnnuelle)
 		})			
