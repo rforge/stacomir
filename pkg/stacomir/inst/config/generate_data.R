@@ -456,3 +456,34 @@ bilan_adm@dc@data[,"type_dc"]<-iconv(bilan_adm@dc@data[,"type_dc"],from="latin1"
 bilan_adm@dc@data[,"dif_localisation"]<-iconv(bilan_adm@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bilan_adm@data[,"car_valeur_quantitatif"]<-bilan_adm@data[,"car_valeur_quantitatif"]*10
 devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
+
+
+#################################
+# generates dataset for BilanMigrationInterannuelle with two dc
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bmi_vichy<-new("BilanMigrationInterAnnuelle")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("logrami",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","logrami.",envir_stacomi)
+
+bmi_vichy<-choice_c(bmi_vichy,
+		dc=c(107,108),			
+		taxons=c("Salmo salar"),
+		stades=c("5"),
+		anneedebut="1997",
+		anneefin="2012",
+		silent=FALSE)
+bmi_vichy<-connect(bmi_vichy)
+bmi_vichy@dc@data[,"ouv_libelle"]<-iconv(bmi_vichy@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bmi_vichy@dc@data[,"dis_commentaires"]<-iconv(bmi_vichy@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bmi_vichy@dc@data[,"type_df"]<-iconv(bmi_vichy@dc@data[,"type_df"],from="latin1",to="UTF8")
+bmi_vichy@dc@data[,"type_dc"]<-iconv(bmi_vichy@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bmi_vichy@dc@data[,"dif_localisation"]<-iconv(bmi_vichy@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(bmi_vichy,internal=FALSE,overwrite=TRUE)

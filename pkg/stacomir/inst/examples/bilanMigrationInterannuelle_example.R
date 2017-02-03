@@ -95,4 +95,6 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 				ggplot2::ggtitle("Cumulated migration step plot at les Enfrenaux eel trap")
 		
 	}
-}		
+}	
+data("bmi_vichy")
+bmi_vichy<-calcule(bmi_vichy)

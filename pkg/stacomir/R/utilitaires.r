@@ -326,6 +326,7 @@ funtraitementdate=function(data, # tableau de donnees e importer
 		mois=TRUE,
 		quinzaine=FALSE,
 		semaine=TRUE,
+		semaine_std=FALSE,
 		jour_an=FALSE,
 		jour_mois=TRUE,
 		heure=FALSE                           
@@ -344,5 +345,6 @@ funtraitementdate=function(data, # tableau de donnees e importer
 	# %d :  Day of the month as decimal number (01e31).
 	if (heure)data$jour_mois=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%H"))  
 	#%H     Hours as decimal number (00e23).    
+	if (semaine_std) data$semaine_std=lubridate::isoweek(as.POSIXlt(data[,nom_coldt]))
 	return(data)
 }      

@@ -309,6 +309,8 @@ hX11=function(h,...){
 #' @importFrom lubridate round_date
 #' @importFrom lubridate floor_date
 #' @importFrom lubridate %m+%
+#' @importFrom lubridate isoweek
+#' @importFrom Hmisc wtd.quantile 
 #' @importFrom mgcv gam
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples

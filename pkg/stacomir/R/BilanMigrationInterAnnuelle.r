@@ -36,7 +36,7 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 				data=data.frame(),
 				anneeDebut=new("RefAnnee"),
 				anneeFin=new("RefAnnee"),
-				calcdata="list"				
+				calcdata=list()				
 		)
 )
 
@@ -218,36 +218,37 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled.
 #' @export
-setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definition=function(object,silent=FALSE){ 
-			#bilanMigrationInterAnnuelle<-bmi;silent=FALSE
+setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definition=function(object,silent=FALSE,timesplit="mois"){ 
+			#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE
 			#require(dplyr)
-			bilanMigrationInterAnnuelle<-object
-			calcdata<-list()
-			dic<-bilanMigrationInterAnnuelle@dc@dc_selectionne
-			for (i in 1:length(dic)){
-				#i=1
-				station=bilanMigrationInterAnnuelle@dc@station[i]
-				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i]&bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
-				datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
-				
-				Hmisc::wtd.mean(as.numeric(datadic$jour_365),
-						weights=datadic$bjo_valeur)
-				
-				fnquant<-function(data, probs=c(0, .05, .5, .95, 1)){
-					res<-Hmisc::wtd.quantile(x=as.numeric(data$jour_365),
-							weights=data$bjo_valeur,
-							probs=probs)
-					return(res)
-				}
-				fnquant(datadic)
-				dat<-dplyr::select(datadic,bjo_annee,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
-						group_by(bjo_annee,bjo_tax_code,bjo_std_code)
-				dat2<-dat%>% do(res=fnquant(data= .,probs=c(0, .05, .5, .95, 1)))
-				dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],Q50=res[[3]])
-				dat3$station<-station
-				dat3$dc<-dic
-				bilanMigrationInterAnnuelle@calcdata[[dic]]<-dat3				
+			if (!timesplit%in%c("month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
+						stringr::str_c("timesplit should be one of :","month","mois","week","semaine","month","mois","quinzaine","2 weeks"))
+			# back to french labels for consistency with fundat code
+			timesplit<-switch(timesplit,"week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
+			
+			bilanMigrationInterAnnuelle<-object	
+			station<-bilanMigrationInterAnnuelle@dc@station
+			if(length(unique(bilanMigrationInterAnnuelle@dc@station))!=1) stop("You have more than one station in the Bilan, the dc from the Bilan should belong to the same station")
+			datadic<-bilanMigrationInterAnnuelle@data[
+					bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
+			datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
+			
+			fnquant<-function(data, probs=c(0, .05, .5, .95, 1)){
+				res<-Hmisc::wtd.quantile(x=as.numeric(data$jour_365),
+						weights=data$bjo_valeur,
+						probs=probs)
+				return(res)
 			}
+			fnquant(datadic)
+			dat<-dplyr::select(datadic,bjo_annee,bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
+					dplyr::group_by(bjo_annee,bjo_tax_code,bjo_std_code)
+			dat2<-dat%>% do(res=fnquant(data= .,probs=c(0, .05, .5, .95, 1)))
+			dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],
+					Q50=res[[3]],Q95=res[[4]],Q100=res[[5]])
+			
+			dat3$d90<-dat3$Q95-dat3$Q5
+			dat3$station<-unique(station)			
+			bilanMigrationInterAnnuelle@calcdata<-dat3				
 			return(bilanMigrationInterAnnuelle)
 		})			
 
@@ -267,6 +268,7 @@ setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definitio
 #' 		\item{plot.type="barchart": comparison of daily migration of one year against periodic migration for the other years available in the chronicle,
 #' 									different periods can be chosen with argument timesplit}
 #' 		\item{plot.type="pointrange": Pointrange graphs, different periods can be chosen with argument timesplit}
+#'      \item{plot.type="seasonal": plot to display summary statistics about the migration period}
 #' }
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanMigrationInterAnnuelle plot.bilanMigrationInterAnnuelle plot.bmi
@@ -607,7 +609,12 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"))
 					}
 					
-				} 	 else {
+				} else if (plot.type=="seasonal"){
+					if (!silent& nrow(bilanmigrationinterannuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
+					
+				}
+				
+				else { # end if
 					stop ("plot.type argument invalid")
 				}
 				
