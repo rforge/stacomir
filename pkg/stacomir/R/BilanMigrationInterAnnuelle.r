@@ -193,7 +193,7 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 			bilanMigrationInterAnnuelle@stades<-charge_avec_filtre(object=bilanMigrationInterAnnuelle@stades,bilanMigrationInterAnnuelle@dc@dc_selectionne,bilanMigrationInterAnnuelle@taxons@data$tax_code)	
 			bilanMigrationInterAnnuelle@stades<-choice_c(bilanMigrationInterAnnuelle@stades,stades)
 			
-		    bilanMigrationInterAnnuelle@anneeDebut<-charge(object=bilanMigrationInterAnnuelle@anneeDebut,
+			bilanMigrationInterAnnuelle@anneeDebut<-charge(object=bilanMigrationInterAnnuelle@anneeDebut,
 					objectBilan="BilanMigrationInterAnnuelle")
 			bilanMigrationInterAnnuelle@anneeDebut<-choice_c(object=bilanMigrationInterAnnuelle@anneeDebut,
 					nomassign="anneeDebut",
@@ -219,29 +219,35 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 #' @return BilanMigration with calcdata slot filled.
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definition=function(object,silent=FALSE){ 
-		#bilanMigrationInterAnnuelle<-bmi;silent=FALSE
-		#require(dplyr)
+			#bilanMigrationInterAnnuelle<-bmi;silent=FALSE
+			#require(dplyr)
 			bilanMigrationInterAnnuelle<-object
 			calcdata<-list()
 			dic<-bilanMigrationInterAnnuelle@dc@dc_selectionne
 			for (i in 1:length(dic)){
 				#i=1
+				station=bilanMigrationInterAnnuelle@dc@station[i]
 				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i]&bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
 				datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
-				Hmisc::wtd.mean(as.numeric(datadic$jour_365),
-				         weights=datadic$bjo_valeur)
-				 c(0, .05, .5, .95, 1)
-				fnquant<-function(value, probs){
-					Hmisc::wtd.quantile(as.numeric(data$jour_365),
-				             weights=value,
-				             probs=probs)
-				}
-				dplyr::select(datadic,bjo_annee,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
-						group_by(bjo_annee,bjo_tax_code,bjo_std_code)%>%
-						summarize(q0=fnquant(value=bjo_valeur,probs=0))
 				
+				Hmisc::wtd.mean(as.numeric(datadic$jour_365),
+						weights=datadic$bjo_valeur)
+				
+				fnquant<-function(data, probs=c(0, .05, .5, .95, 1)){
+					res<-Hmisc::wtd.quantile(x=as.numeric(data$jour_365),
+							weights=data$bjo_valeur,
+							probs=probs)
+					return(res)
 				}
-			bilanMigrationInterAnnuelle@calcdata<-""
+				fnquant(datadic)
+				dat<-dplyr::select(datadic,bjo_annee,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
+						group_by(bjo_annee,bjo_tax_code,bjo_std_code)
+				dat2<-dat%>% do(res=fnquant(data= .,probs=c(0, .05, .5, .95, 1)))
+				dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],Q50=res[[3]])
+				dat3$station<-station
+				dat3$dc<-dic
+				bilanMigrationInterAnnuelle@calcdata[[dic]]<-dat3				
+			}
 			return(bilanMigrationInterAnnuelle)
 		})			
 
@@ -412,7 +418,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						# we only keep one per week
 						newdat=dat[match(unique(dat[,timesplit]),dat[,timesplit]),]
 						newdat=newdat[order(newdat[,"keeptimesplit"]),] # pour avoir les range sur l'ensemble des valeurs dispo et pas seult l'annee en cours
-							# here change 12/2012 the geom_crossbar now needs a factor, label change according to timesplit
+						# here change 12/2012 the geom_crossbar now needs a factor, label change according to timesplit
 						newdat[,timesplit]<-as.factor(newdat[,timesplit])
 						levels(newdat[,timesplit])<-newdat[,timesplit] # to have the factor in the right order from january to dec
 						return(newdat)
@@ -781,7 +787,7 @@ fundat=function(dat,annee=NULL,timesplit=NULL)
 		dat<-dat[order(dat$annee,dat[,timesplit]),]
 		# renvoit la premiere occurence qui correspond, pour n'importe quel jour min, max et moyenne sont OK
 		return(dat)
-	
+		
 	} else   {  # arret avec erreur
 		funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"),arret=TRUE)
 	}    # end else
