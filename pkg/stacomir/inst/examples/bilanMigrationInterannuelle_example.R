@@ -110,3 +110,46 @@ plot(bmi_vichy,plot.type="seasonal",timesplit="semaine")
 plot(bmi_vichy,plot.type="seasonal",timesplit="mois")
 plot(bmi_vichy,plot.type="seasonal",timesplit="jour")
 
+
+\dontrun{
+	# A test with lampreys in the Descarte DF (Vienne)
+	baseODBC<-get("baseODBC",envir=envir_stacomi)
+	baseODBC[c(2,3)]<-rep("logrami",2)
+	assign("baseODBC",baseODBC,envir_stacomi)
+	sch<-get("sch",envir=envir_stacomi)
+	assign("sch","logrami.",envir_stacomi)
+	bmi_des<-new("BilanMigrationInterAnnuelle") #descartes
+	bmi_des<-choice_c(bmi_des,
+			dc=c(23),
+			taxons=c("Petromyzon marinus"),
+			stades=c("5"),
+			anneedebut="2007",
+			anneefin="2014",
+			silent=FALSE)
+	bmi_des<-connect(bmi_des)	
+	bmi_des<-calcule(bmi_des,timesplit="semaine")
+	plot(bmi_des,plot.type="seasonal",timesplit="semaine")
+	plot(bmi_des,plot.type="seasonal",timesplit="jour")
+}	
+
+\dontrun{
+	# A test with lampreys in the Descarte DF (Vienne)
+	baseODBC<-get("baseODBC",envir=envir_stacomi)
+	baseODBC[c(2,3)]<-rep("iav",2)
+	assign("baseODBC",baseODBC,envir_stacomi)
+	sch<-get("sch",envir=envir_stacomi)
+	assign("sch","iav.",envir_stacomi)
+	bmi_arz<-new("BilanMigrationInterAnnuelle") 
+	bmi_arz<-choice_c(bmi_arz,
+			dc=c(6),
+			taxons=c("Anguilla anguilla"),
+			stades=c("CIV"),
+			anneedebut="1996",
+			anneefin="2015",
+			silent=FALSE)
+	bmi_arz<-connect(bmi_arz)	
+	bmi_arz<-calcule(bmi_arz,timesplit="semaine")
+	plot(bmi_arz,plot.type="seasonal",timesplit="semaine")
+	plot(bmi_arz,plot.type="seasonal",timesplit="jour")
+}	
+

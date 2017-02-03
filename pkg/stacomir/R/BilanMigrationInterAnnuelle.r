@@ -228,28 +228,44 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 			timesplit<-switch(timesplit,"day"="jour_365","jour"="jour_365","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
 			# there should be just one station, this will be tested
 			station<-bilanMigrationInterAnnuelle@dc@station
+			taxon<-bilanMigrationInterAnnuelle@taxons@data$tax_code
+			stade<-bilanMigrationInterAnnuelle@stades@data$std_code
 			if(length(unique(bilanMigrationInterAnnuelle@dc@station))!=1) stop("You have more than one station in the Bilan, the dc from the Bilan should belong to the same station")
 			datadic<-bilanMigrationInterAnnuelle@data[
 					bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
 			datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
-			
+			datadic<-killfactor(datadic)
+			# here this code avoids the following problem :Error: (list) object cannot be coerced to type 'double'
+			# data is subsetted for columns not containing bjo, and apply is run on each of the column
+			datadic[,colnames(datadic)[!grepl("bjo_",colnames(datadic))]]<-apply(X=datadic[,colnames(datadic)[!grepl("bjo_",colnames(datadic))]],MARGIN=2,FUN=function(X) as.numeric(X))
 			fnquant<-function(data, timesplit="jour_365",probs=c(0, .05, .5, .95, 1)){
-				res<-Hmisc::wtd.quantile(x=as.numeric(unlist(data[,timesplit])),
-						weights=data$bjo_valeur,
+				res<-Hmisc::wtd.quantile(x=data[,timesplit],
+						weights=abs(data$bjo_valeur),
 						probs=probs)
 				return(res)
 			}
-			#fnquant(data=datadic,timesplit="semaine")
-			fnquant(datadic)
-			
-			dat<-dplyr::select_(datadic,"bjo_annee","bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_valeur",timesplit)%>%
-					dplyr::group_by_("bjo_annee","bjo_tax_code","bjo_std_code")
-			dat2<-dat%>% do(res=fnquant(data=.,timesplit=timesplit,probs=c(0, .05, .5, .95, 1)))
-			dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],
-					Q50=res[[3]],Q95=res[[4]],Q100=res[[5]])			
-			dat3$d90<-dat3$Q95-dat3$Q5
-			dat3$station<-unique(station)			
-			bilanMigrationInterAnnuelle@calcdata<-dat3				
+			fnquant(datadic[datadic$bjo_annee==2012,],"mois")
+			# for some reasons this code does not work : Error in x + weights : non-numeric argument to binary operator
+#			dat<-dplyr::select_(datadic,"bjo_annee","bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_valeur",timesplit)%>%
+#					dplyr::group_by_("bjo_annee","bjo_tax_code","bjo_std_code")			
+#			dat2<-dat%>% do(res=fnquant(data=.,timesplit=timesplit,probs=c(0, .05, .5, .95, 1)))
+#			dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],
+#					Q50=res[[3]],Q95=res[[4]],Q100=res[[5]])	
+			# this simple code will do :
+			dat<-list()
+			for (i in unique(datadic$bjo_annee)){
+				dat[[i]]<-fnquant(data=datadic[datadic$bjo_annee==i,],timesplit=timesplit)
+			}
+			dat<-as.data.frame(matrix(unlist(dat),ncol=5,byrow=TRUE))
+			colnames(dat)<-c("Q0","Q5","Q50","Q95","Q100")
+			dat$d90<-dat$Q95-dat$Q5
+			dat$year=unique(datadic$bjo_annee)
+			dat$taxon=taxon
+			dat$stade=stade
+			dat$station=unique(station)	
+			dat$timesplit=timesplit
+			dat<-dat[,c("year","station","taxon","stade","Q0","Q5","Q50","Q95","Q100","d90","timesplit")]							
+			bilanMigrationInterAnnuelle@calcdata<-dat				
 			return(bilanMigrationInterAnnuelle)
 		})			
 
@@ -611,27 +627,30 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					}
 					
 				} else if (plot.type=="seasonal"){
+					if (! silent) funout("Seasonal graph to show the phenology of migration")
 					#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="semaine";require(ggplot2)
-					if (!silent& nrow(bilanMigrationInterAnnuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
 					bilanMigrationInterAnnuelle<-calcule(bilanMigrationInterAnnuelle,timesplit=timesplit)
+					#if (!silent& nrow(bilanMigrationInterAnnuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
 					dat3<-bilanMigrationInterAnnuelle@calcdata
 					datadic<-bilanMigrationInterAnnuelle@data
 					datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
 					datadic<-chnames(datadic,"jour_365","jour")
 					datadic<-killfactor(datadic)
-					datadic[,timesplit]<-as.numeric(datadic[,timesplit])
-				
-					ggplot(data=dat3)+
-							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=bjo_annee-0.5,ymax=bjo_annee+0.5),fill="grey90")+
+					datadic[,timesplit]<-as.numeric(datadic[,timesplit])				
+					g<-ggplot(data=dat3)+
+							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=year-0.5,ymax=year+0.5),fill="grey90")+
 							geom_tile(aes_string(x=timesplit,y="bjo_annee", fill = "bjo_valeur"),color=ifelse(timesplit=="jour","transparent","grey80"),data=datadic)+ 
 							scale_fill_distiller(palette = "Spectral", name="Effectif")+
-							geom_path(aes(x=Q50,y=bjo_annee),col="black",lty=2)+
-							geom_point(aes(x=Q50,y=bjo_annee),col="black",size=2)+
-							geom_errorbarh(aes(x=Q50,y=bjo_annee,xmin = Q5,xmax = Q95), height=0)+
-							ylab("Year")+
-							xlab(timesplit)+
+							geom_path(aes(x=Q50,y=year),col="black",lty=2)+
+							geom_point(aes(x=Q50,y=year),col="black",size=2)+
+							geom_errorbarh(aes(x=Q50,y=year,xmin = Q5,xmax = Q95), height=0)+
+							ylab(Hmisc::capitalize(gettext("year",domain="R-stacomiR")))+
+							xlab(Hmisc::capitalize(timesplit))+
 							theme_bw()
-			
+					print(g)
+					assign("g",g,envir=envir_stacomi)
+					if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
+					
 				}
 				
 				else { # end if
