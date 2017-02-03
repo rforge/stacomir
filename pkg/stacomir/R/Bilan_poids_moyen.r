@@ -490,8 +490,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					"coe_tax_code"='2038',
 					"coe_std_code"='CIV',
 					"coe_qte_code"=1,
-					"coe_date_debut"=round(predata$date,units="days"),
-					"coe_date_fin"=round(predata$date,units="days")+as.difftime(1,units="days"),
+					"coe_date_debut"=Hmisc::round.POSIXt(predata$date,units="days"),
+					"coe_date_fin"=Hmisc::round.POSIXt(predata$date,units="days")+as.difftime(1,units="days"),
 					"coe_valeur_coefficient"=1/predata$pred_weight,
 					"coe_commentaires"=com)
 			fileout= paste("C:/base/","import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
@@ -530,15 +530,20 @@ funtableBilan_poids_moyen = function(h,...) {
 }   
 
 #' Function to write data to the stacomi database for \link{Bilan_poids_moyen-class}
+#' 
+#' Data will be written in tj_coefficientconversion_coe table, if the class retrieves some data
+#' from the database, those will be deleted first.
 #' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{Bilan_poids_moyen-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent,dbname="bd_contmig_nat",host="localhost",port=5432){
+setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE,dbname="bd_contmig_nat",host="localhost",port=5432){
+			#silent=FALSE;dbname="bd_contmig_nat";host="localhost";port=5432
 			bilPM<-object
 			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database",domain="R-stacomiR"),arret=TRUE)
-			supprime(bilPM,tax=2038,std="CIV")
+			# first delete existing data from the database
+			supprime(bilPM@coe,tax=2038,std="CIV")
 			import_coe<-bilPM@calcdata$import_coe
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe (",			
