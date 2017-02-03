@@ -27,14 +27,16 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 						stades="RefStades",
 						data="data.frame",
 						anneeDebut="RefAnnee",
-						anneeFin="RefAnnee"
+						anneeFin="RefAnnee",
+						calcdata="list"
 				),
 		prototype=prototype(dc=new("RefDC"),
 				taxons=new("RefTaxon"),
 				stades=new("RefStades"),
 				data=data.frame(),
 				anneeDebut=new("RefAnnee"),
-				anneeFin=new("RefAnnee")
+				anneeFin=new("RefAnnee"),
+				calcdata="list"				
 		)
 )
 
@@ -206,6 +208,29 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 			return(bilanMigrationInterAnnuelle)
 		})
 
+
+#' calcule method for BilanMigrationInterannuelle
+#' 
+#' @param object An object of class \code{\link{BilanMigrationInterannuelle-class}}
+#' @param 
+#' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
+#' @note The class BilanMigration does not handle escapement rates nor 
+#' 'devenir' i.e. the destination of the fishes.
+#' @return BilanMigration with calcdata slot filled.
+#' @export
+setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definition=function(object,silent=FALSE){ 
+		#bilanMigrationInterAnnuelle<-bmi;silent=FALSE
+			bilanMigrationInterAnnuelle<-object
+			calcdata<-list()
+			dic<-bilanMigrationInterAnnuelle@dc@dc_selectionne
+			for (i in 1:length(dic)){
+				#i=1
+				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i],]
+				
+			}
+			bilanMigrationInterAnnuelle@calcdata<-""
+			return(bilanMigrationInterAnnuelle)
+		})			
 
 #' Plot method for BilanMigrationInterannuelle
 #' 
