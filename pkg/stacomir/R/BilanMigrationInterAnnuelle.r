@@ -220,21 +220,26 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationInterannuelle"),definition=function(object,silent=FALSE){ 
 		#bilanMigrationInterAnnuelle<-bmi;silent=FALSE
+		#require(dplyr)
 			bilanMigrationInterAnnuelle<-object
 			calcdata<-list()
 			dic<-bilanMigrationInterAnnuelle@dc@dc_selectionne
 			for (i in 1:length(dic)){
 				#i=1
-				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i],]
+				datadic<-bilanMigrationInterAnnuelle@data[bilanMigrationInterAnnuelle@data$bjo_dis_identifiant==dic[i]&bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
 				datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
-				wtd.mean(as.numeric(datadic$jour_365),
+				Hmisc::wtd.mean(as.numeric(datadic$jour_365),
 				         weights=datadic$bjo_valeur)
-				fnquant<-function(data){
-				  wtd.quantile(as.numeric(data$jour_365),
-				             weights=data$bjo_valeur,
-				             probs=c(0, .05, .5, .95, 1))
+				 c(0, .05, .5, .95, 1)
+				fnquant<-function(value, probs){
+					Hmisc::wtd.quantile(as.numeric(data$jour_365),
+				             weights=value,
+				             probs=probs)
 				}
-
+				dplyr::select(datadic,bjo_annee,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
+						group_by(bjo_annee,bjo_tax_code,bjo_std_code)%>%
+						summarize(q0=fnquant(value=bjo_valeur,probs=0))
+				
 				}
 			bilanMigrationInterAnnuelle@calcdata<-""
 			return(bilanMigrationInterAnnuelle)
