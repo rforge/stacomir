@@ -97,4 +97,16 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 	}
 }	
 data("bmi_vichy")
-bmi_vichy<-calcule(bmi_vichy)
+bmi_vichy<-calcule(bmi_vichy,timesplit="jour")
+#bmi_vichy@calcdata
+
+bmi_vichy<-calcule(bmi_vichy,timesplit="semaine")
+#bmi_vichy@calcdata
+
+bmi_vichy<-calcule(bmi_vichy,timesplit="jour_365")
+#bmi_vichy@calcdata
+
+plot(bmi_vichy,plot.type="seasonal",timesplit="semaine")
+plot(bmi_vichy,plot.type="seasonal",timesplit="mois")
+plot(bmi_vichy,plot.type="seasonal",timesplit="jour")
+

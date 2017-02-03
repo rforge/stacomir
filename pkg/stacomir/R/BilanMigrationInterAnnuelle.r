@@ -219,33 +219,34 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 #' @return BilanMigration with calcdata slot filled.
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definition=function(object,silent=FALSE,timesplit="mois"){ 
-			#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE
-			#require(dplyr)
-			if (!timesplit%in%c("month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
-						stringr::str_c("timesplit should be one of :","month","mois","week","semaine","month","mois","quinzaine","2 weeks"))
-			# back to french labels for consistency with fundat code
-			timesplit<-switch(timesplit,"week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
-			
 			bilanMigrationInterAnnuelle<-object	
+			#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="mois"
+			#require(dplyr)
+			if (!timesplit%in%c("jour","day","month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
+						stringr::str_c("timesplit should be one of :","jour ","day ","month ","mois ","week ","semaine ","month ","mois ","quinzaine ","2 weeks "))
+			# back to french labels for consistency with fundat code
+			timesplit<-switch(timesplit,"day"="jour_365","jour"="jour_365","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
+			# there should be just one station, this will be tested
 			station<-bilanMigrationInterAnnuelle@dc@station
 			if(length(unique(bilanMigrationInterAnnuelle@dc@station))!=1) stop("You have more than one station in the Bilan, the dc from the Bilan should belong to the same station")
 			datadic<-bilanMigrationInterAnnuelle@data[
 					bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
 			datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
 			
-			fnquant<-function(data, probs=c(0, .05, .5, .95, 1)){
-				res<-Hmisc::wtd.quantile(x=as.numeric(data$jour_365),
+			fnquant<-function(data, timesplit="jour_365",probs=c(0, .05, .5, .95, 1)){
+				res<-Hmisc::wtd.quantile(x=as.numeric(unlist(data[,timesplit])),
 						weights=data$bjo_valeur,
 						probs=probs)
 				return(res)
 			}
+			#fnquant(data=datadic,timesplit="semaine")
 			fnquant(datadic)
-			dat<-dplyr::select(datadic,bjo_annee,bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_valeur,jour_365)%>%
-					dplyr::group_by(bjo_annee,bjo_tax_code,bjo_std_code)
-			dat2<-dat%>% do(res=fnquant(data= .,probs=c(0, .05, .5, .95, 1)))
-			dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],
-					Q50=res[[3]],Q95=res[[4]],Q100=res[[5]])
 			
+			dat<-dplyr::select_(datadic,"bjo_annee","bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_valeur",timesplit)%>%
+					dplyr::group_by_("bjo_annee","bjo_tax_code","bjo_std_code")
+			dat2<-dat%>% do(res=fnquant(data=.,timesplit=timesplit,probs=c(0, .05, .5, .95, 1)))
+			dat3<-dat2%>%summarize(bjo_annee,bjo_tax_code,bjo_std_code,Q0=res[[1]],Q5=res[[2]],
+					Q50=res[[3]],Q95=res[[4]],Q100=res[[5]])			
 			dat3$d90<-dat3$Q95-dat3$Q5
 			dat3$station<-unique(station)			
 			bilanMigrationInterAnnuelle@calcdata<-dat3				
@@ -277,10 +278,10 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),definition=function(x, plot.type="standard",timesplit="mois",silent=FALSE){ 
 			#bilanMigrationInterAnnuelle<-bmi
 			bilanMigrationInterAnnuelle<-x
-			if (!timesplit%in%c("month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
-						stringr::str_c("timesplit should be one of :","month","mois","week","semaine","month","mois","quinzaine","2 weeks"))
+			if (!timesplit%in%c("jour","day","month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
+						stringr::str_c("timesplit should be one of :","jour ","day ","month ","mois ","week ","semaine ","month ","mois ","quinzaine ","2 weeks "))
 			# back to french labels for consistency with fundat code
-			timesplit<-switch(timesplit,"week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
+			timesplit<-switch(timesplit,"day"="jour","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
 			# plot.type="line";require(ggplot2)
 			if(nrow(bilanMigrationInterAnnuelle@data)>0){
 				if (plot.type=="line"){
@@ -610,8 +611,27 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					}
 					
 				} else if (plot.type=="seasonal"){
-					if (!silent& nrow(bilanmigrationinterannuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
-					
+					#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="semaine";require(ggplot2)
+					if (!silent& nrow(bilanMigrationInterAnnuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
+					bilanMigrationInterAnnuelle<-calcule(bilanMigrationInterAnnuelle,timesplit=timesplit)
+					dat3<-bilanMigrationInterAnnuelle@calcdata
+					datadic<-bilanMigrationInterAnnuelle@data
+					datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
+					datadic<-chnames(datadic,"jour_365","jour")
+					datadic<-killfactor(datadic)
+					datadic[,timesplit]<-as.numeric(datadic[,timesplit])
+				
+					ggplot(data=dat3)+
+							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=bjo_annee-0.5,ymax=bjo_annee+0.5),fill="grey90")+
+							geom_tile(aes_string(x=timesplit,y="bjo_annee", fill = "bjo_valeur"),color=ifelse(timesplit=="jour","transparent","grey80"),data=datadic)+ 
+							scale_fill_distiller(palette = "Spectral", name="Effectif")+
+							geom_path(aes(x=Q50,y=bjo_annee),col="black",lty=2)+
+							geom_point(aes(x=Q50,y=bjo_annee),col="black",size=2)+
+							geom_errorbarh(aes(x=Q50,y=bjo_annee,xmin = Q5,xmax = Q95), height=0)+
+							ylab("Year")+
+							xlab(timesplit)+
+							theme_bw()
+			
 				}
 				
 				else { # end if
