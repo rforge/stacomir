@@ -286,6 +286,8 @@ bmi<-choice_c(bmi,
 		anneedebut=1984,
 		anneefin=2015,
 		silent=TRUE)
+# this will just test that the object is valid... not really a necessary step for this class
+bmi<-charge(bmi,silent=TRUE)
 bmi<-connect(bmi,silent=TRUE)	
 
 
@@ -480,6 +482,7 @@ bmi_vichy<-choice_c(bmi_vichy,
 		anneedebut="1997",
 		anneefin="2012",
 		silent=FALSE)
+bmi_vichy<-charge(bmi_vichy)
 bmi_vichy<-connect(bmi_vichy)
 bmi_vichy@dc@data[,"ouv_libelle"]<-iconv(bmi_vichy@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bmi_vichy@dc@data[,"dis_commentaires"]<-iconv(bmi_vichy@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")

@@ -184,9 +184,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 			# the object are assigned to the envir_stacomi for later use by the connect method
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)
 			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
-			assign("bilanOperation",bilanOperation,envir=envir_stacomi)		
-			
-			
+			assign("bilanOperation",bilanOperation,envir=envir_stacomi)					
 			return(bilanMigration)
 		})
 
@@ -566,6 +564,8 @@ hbilanMigrationwrite = function(h,...) {
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @param host : the host for sqldf, defaults to "localhost"
 #' @param port : the port, defaults to 5432
+#' @param check_for_bjo : do you want to check if data are already present in the bjo table, and delete them,
+#' this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops
 #' @note the user is asked whether or not he wants to overwrite data, if no
 #' data are present in the database, the import is done anyway. The name of the database
 #' is not passed in odbc link, here defaults to "bd_contmig_nat"
@@ -578,7 +578,7 @@ hbilanMigrationwrite = function(h,...) {
 #' write_database(bilanMigration=bM_Arzal,silent=FALSE)
 #' }
 #' @export
-setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432){
+setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432,check_for_bjo=TRUE){
 			# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
 			bilanMigration<-object
 			if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
@@ -611,12 +611,16 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
 			# les methodes de cette classe
 			bil=as(bilanMigration,"BilanMigrationInterAnnuelle")
-			bil=connect(bil,silent=silent)
+			# the argument check_for_bjo ensures that we don't re-run the connect method
+			# in loop when the write_database is called from within the bilanMigrationInterAnnuelle connect method
+			# check = FALSE tells the method not to check for missing data (we don't want that check when the
+			# write database is called from the bilanMigration class
+			if (check_for_bjo) bil=connect(bil,silent=silent,check=FALSE)
 			
 			hconfirm=function(h,...){			
 				# suppression des donnees actuellement presentes dans la base
 				# bilanjournalier et bilanmensuel
-				supprime(bil)			
+				if (check_for_bjo) supprime(bil)			
 				baseODBC<-get("baseODBC",envir=envir_stacomi)
 				sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 						"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",

@@ -155,8 +155,9 @@ setMethod("choice",
 		}) 
 
 
-#' choice method for RefAnnee referential from the command line
+#' choice_c method for RefAnnee referential from the command line
 #' 
+#' The choice_c method will issue a warning if the year is not present in the database
 #' Allows the selection of year and the assignment in environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @param object An object of class \link{RefAnnee-class}
@@ -183,12 +184,15 @@ setMethod("choice_c",
 			if (length(annee)>1) stop("horodate should be a vector of length 1")
 			if (class (annee)=="character") annee<-as.numeric(annee)
 			# the charge method must be performed before
-			
-			if ( !annee %in% object@data$bjo_annee & !annee %in% object@data$year) {
-				warning(stringr::str_c("year,",annee," not available in the database, available years",stringr::str_c(object@data$bjo_annee,collapse=",")))
-			} else {
-				object@annee_selectionnee<-annee
+			gettext("no year",domain="R-stacomiR")
+			if ( !annee %in% object@data[,1] ) {
+				
+				warning(stringr::str_c("Attention, year ",annee," is not available in the database, available years :",
+								ifelse(length(object@data$bjo_annee)==0,gettext(" none, were you lazy?",domain="R-stacomiR"),
+								stringr::str_c(object@data$bjo_annee,collapse=","))))
 			}
+				object@annee_selectionnee<-annee
+			
 			assign(nomassign,object,envir_stacomi)
 			if (! silent) funout(funoutlabel)  	
 			return(object)

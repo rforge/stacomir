@@ -277,7 +277,7 @@ setMethod("xtable",signature=signature("BilanAnnuels"),definition=function(x,
 #' @seealso \link{BilanAnnuels-class} for examples
 #' @export
 setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(height,legend.text=NULL,...){ 
-			#bilanMigrationInterAnnuelle<-bmi
+			
 			bilA<-height
 			# require(ggplot2)
 			if(nrow(bilA@data)>0){
@@ -453,7 +453,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 					} else if (length(lestax)==1){
 						
 						g<-ggplot(dat,aes(x=annee,y=effectif))+geom_point(aes(col=dc,shape=stade))+
-								geom_line(aes(col=dc,shape=stade))+
+								geom_line(aes(col=dc,linetype=stade))+
 								theme_bw() 
 						print(g)
 						assign("g",g,envir_stacomi)

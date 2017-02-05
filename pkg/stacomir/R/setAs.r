@@ -25,3 +25,13 @@ setAs("BilanMigration","BilanMigrationMult",function(from){
 			bMM@calcdata=from@calcdata
 			return(bMM)
 		})
+
+setAs("BilanMigrationInterAnnuelle","BilanAnnuels",function(from){
+			bilA=new("BilanAnnuels")
+			bilA@dc=from@dc
+			bilA@taxons=from@taxons
+			bilA@stades=from@stades
+			bilA@anneedebut=from@anneeDebut
+			bilA@anneefin=from@anneeFin
+			return(bilA)
+		})

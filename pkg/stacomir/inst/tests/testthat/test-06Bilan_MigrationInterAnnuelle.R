@@ -70,5 +70,50 @@ test_that("Test example bilanMigrationInterAnnuelle_example",
 				
 		})
 
+test_that("Test that loading two taxa will fail",
+		{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			# overriding user schema to point to iav
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			bmi<-new("BilanMigrationInterAnnuelle")
+			# the following will load data for size, 
+			# parameters 1786 (total size) C001 (size at video control)
+			# dc 5 and 6 are fishways located on the Arzal dam
+			# two stages are selected
+			bmi<-suppressWarnings(choice_c(bmi,
+					dc=5,
+					taxons=c("Anguilla anguilla","Petromyzon marinus"),
+					stades=c("AGJ"),
+					anneedebut="1996",
+					anneefin=2015,
+					silent=TRUE))
+	     expect_error(charge(bmi))
+			
+		})
 
 
+test_that("Test that bilanMigrationInterannuelle loads missing data with correct warning",
+		{
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("logrami",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","logrami.",envir_stacomi)
+
+bmi_cha<-new("BilanMigrationInterAnnuelle") #châtelrault
+bmi_cha<-suppressWarnings(choice_c(bmi_cha,
+		dc=c(21),
+		taxons=c("Salmo salar"),
+		stades=c("5"),
+		anneedebut="2004",
+		anneefin="2014",
+		silent=TRUE))
+bmi_cha<-charge(bmi_cha,silent=TRUE)
+bmi_cha<-connect(bmi_cha)
+
+})
