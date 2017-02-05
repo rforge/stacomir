@@ -111,9 +111,12 @@ bmi_cha<-suppressWarnings(choice_c(bmi_cha,
 		taxons=c("Salmo salar"),
 		stades=c("5"),
 		anneedebut="2004",
-		anneefin="2014",
+		anneefin="2006",
 		silent=TRUE))
+
 bmi_cha<-charge(bmi_cha,silent=TRUE)
+# deleting all data to ensure everything is loaded
+supprime(bmi_cha)
 bmi_cha<-connect(bmi_cha)
 
 })
