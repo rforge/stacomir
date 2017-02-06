@@ -72,6 +72,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 		{ 
 			# object<-bmi 
 			# object<-bmi_cha
+			# object<-bmi_des
 			#---------------------------------------------------------------------------------------
 			# this function will be run several times if missing data or mismatching data are found
 			# later in the script (hence the encapsulation)
@@ -217,7 +218,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			# Final check for data
 			# index of data already present in the database
 			#-------------------------------------------------------------------------------------
-           les_annees=objet@anneeDebut@annee_selectionnee:objet@anneeFin@annee_selectionnee
+			les_annees=object@anneeDebut@annee_selectionnee:object@anneeFin@annee_selectionnee
 			index=unique(object@data$bjo_annee) %in% les_annees
 			# s'il manque des donnees pour certaines annees selectionnnees" 
 			if (!silent){
@@ -421,10 +422,97 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 			dat<-dat[,c("year","station","taxon","stade","Q0","Q5","Q50","Q95","Q100","d90","timesplit")]							
 			bilanMigrationInterAnnuelle@calcdata<-dat				
 			return(bilanMigrationInterAnnuelle)
-		})			
+		})	
+
+#' statistics per time period
+#' 
+#' function called for bilamMigrationInterannelle objects renames columns
+#' replaces nulls, and calculates reports with time period larger than day
+#' 
+#' @param dat a data frame
+#' @param annee The year to exclude from the historical series (it will be plotted against the historical series)
+#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
+#' @return a data frame with mean, max, and min calculated for each timesplit
+#' @export
+#' @seealso \code{\linkS4class{Bilan_poids_moyen}}
+fundat=function(dat,annee=NULL,timesplit=NULL)
+{
+	
+	if(nrow(dat)>0)
+	{
+		# ci dessous les calculs s'appliquent bien aux jours
+		# remplacement des valeurs manquantes par des zeros par creation d'une sequence journaliere
+		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
+		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
+		dat=dat[,c("annee","jour","valeur")] 
+		if (!is.null(annee)){
+			dat<-dat[dat$annee!=annee,]
+		}
+		dat$jour=trunc.POSIXt(dat$jour, digits='days')
+		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
+		
+		
+		# ci dessous calcul des sommes par semaine mois... Comme trunk.POSIXt ou floor ne prend pas 
+		# la valeur week on est oblige de faire avec seq.POSIXt et calculer avec une boucle !
+		if (!is.null(timesplit)){
+			seq_timesplit= seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
+					to=strptime("2000-12-31",format='%Y-%m-%d'),
+					by=getvalue(new("Refperiode"),timesplit))
+			seq_timesplit<-as.Date(trunc(seq_timesplit, digits='days'))
+			# utilise la classe Refperiode pour avoir la correspondance entre le nom francais et la variable utilisee par seq.POSIXt
+			#datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
+			#colnames(datc)<-c(timesplit,"annee")
+			# calcul des sommes par annee et par periode
+			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numerique
+			# ci dessous on remplace une double boucle par un truc plus rapide
+			for (j in 1:(length(seq_timesplit)-1)){
+				dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
+			}
+			dat[dat$jour>=seq_timesplit[length(seq_timesplit)],timesplit]<-seq_timesplit[length(seq_timesplit)]
+			dat[,"interv"]<-paste(dat[,"annee"],dat[,timesplit]) # on veut les valeurs uniques par annee et timesplit
+			res<-tapply(dat$valeur,dat[,"interv"],sum,na.rm=TRUE)
+			datc<-data.frame("annee"=substr(names(res),1,4),timesplit=substr(names(res),5,15),"valeur"=as.numeric(res))
+			colnames(datc)[2]<-timesplit
+			dat<-datc 
+			rm(datc)
+		} else {
+			# si nul on remplace par jour pour generer le script en dessous
+			timesplit="jour"
+			jour2000=as.Date(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
+							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"))
+			for (j in unique(dat$annee)){
+				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutes avec zero
+				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]
+				dat0=data.frame("jour"=jour2000restant,"annee"=j, "valeur"=NA)
+				dat=rbind(dat,dat0)
+			} # end for
+		}
+		# calcul des valeurs min et max et moyenne en fonction de la coupure (jour, semaine,quinzaine, mois)
+		
+		maxdat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE))
+		mindat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE))
+		meandat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE))
+		datsummary<-data.frame("maxtab"=maxdat,"mintab"=mindat,"moyenne"=meandat)
+		datsummary<-datsummary[!is.infinite(datsummary$maxtab),]# the minimum and max of empty set are -Inf and Inf respectively
+		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
+		dat[,timesplit]<-as.character(dat[,timesplit])
+		dat<-merge(dat,datsummary,by=timesplit)
+		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est necessaire pour les ggplot
+		rm(maxdat,mindat,meandat)
+		dat<-dat[order(dat$annee,dat[,timesplit]),]
+		# renvoit la premiere occurence qui correspond, pour n'importe quel jour min, max et moyenne sont OK
+		return(dat)
+		
+	} else   {  # arret avec erreur
+		funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"),arret=TRUE)
+	}    # end else
+}	
 
 #' Plot method for BilanMigrationInterannuelle
 #' 
+#' Several of these plots are scaled against the same year, ie the comparison is based on
+#' year 2000, meaning that day 1 would correspond to the first date of 2000,  which is also a
+#' saturday, the last day of the week.
 #' @param x An object of class BilanMigrationInterannuelle
 #' @param plot.type Default standard
 #' @param timesplit Used for plot.type barchart or dotplot, Default mois (month) other possible values are semaine (week), quinzaine (2 weeks),
@@ -790,16 +878,44 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
 					datadic<-chnames(datadic,"jour_365","jour")
 					datadic<-killfactor(datadic)
-					datadic[,timesplit]<-as.numeric(datadic[,timesplit])				
-					g<-ggplot(data=dat3)+
-							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=year-0.5,ymax=year+0.5),fill="grey90")+
-							geom_tile(aes_string(x=timesplit,y="bjo_annee", fill = "bjo_valeur"),color=ifelse(timesplit=="jour","transparent","grey80"),data=datadic)+ 
+					#datadic[,timesplit]<-as.numeric(datadic[,timesplit])
+					# to get nicer graphs we don't use a "numeric but transform our data into dates
+					# this function takes a vector of column as argument (col), a timesplit argument
+					# and a year. So far it does not handle quinzaine so will issue an error if quinzaine is selected
+					dat3[,c("Q0","Q5","Q50","Q95","Q100","d90")]<-round(dat3[,c("Q0","Q5","Q50","Q95","Q100","d90")])
+					fn_getbacktodate<-function(dat,col,timesplit_,year=2000){						
+						for (i in 1:length(col)){
+							dat[,col[i]]<-switch(timesplit_, "jour"={
+										as.Date(paste(year,"-",dat[,col[i]],sep=""),"%Y-%j")
+									},"semaine"={
+										as.Date(paste(year,"-",dat[,col[i]],"-",6,sep=""),"%Y-%U-%w")
+									},"mois"={
+										as.Date(paste(year,"-",dat[,col[i]],"-",1,sep=""),"%Y-%m")
+									},stop(stringr::str_c("Internal error, timesplit ",timesplit_," not working for seasonal plot"))									
+							)
+						}
+						return(dat)
+					}
+					datadic<-fn_getbacktodate(dat=datadic,
+							col=timesplit,
+							timesplit_=timesplit)
+					dat3<-fn_getbacktodate(dat=dat3,
+							col=c("Q0","Q5","Q50","Q95","Q100","d90"),
+							timesplit_=timesplit)
+					
+					
+					g<-ggplot(data=datadic)+
+							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=year-0.5,ymax=year+0.5),fill="grey90",data=dat3)+
+							geom_tile(aes_string(x=timesplit,y="bjo_annee", fill = "bjo_valeur"),color=ifelse(timesplit=="jour","transparent","grey80"))+ 
 							scale_fill_distiller(palette = "Spectral", name="Effectif")+
-							geom_path(aes(x=Q50,y=year),col="black",lty=2)+
-							geom_point(aes(x=Q50,y=year),col="black",size=2)+
-							geom_errorbarh(aes(x=Q50,y=year,xmin = Q5,xmax = Q95), height=0)+
+							geom_path(aes(x=Q50,y=year),col="black",lty=2,data=dat3)+
+							geom_point(aes(x=Q50,y=year),col="black",size=2,data=dat3)+
+							geom_errorbarh(aes(x=Q50,y=year,xmin = Q5,xmax = Q95), height=0,data=dat3)+
 							ylab(Hmisc::capitalize(gettext("year",domain="R-stacomiR")))+
 							xlab(Hmisc::capitalize(timesplit))+
+							scale_x_date(name=timesplit,date_breaks="month",
+									date_minor_breaks=getvalue(new("Refperiode"),timesplit),
+									date_labels="%b")+
 							theme_bw()
 					print(g)
 					assign("g",g,envir=envir_stacomi)
@@ -909,89 +1025,6 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 }
 
 
-#' statistics per time period
-#' 
-#' function called for bilamMigrationInterannelle objects renames columns
-#' replaces nulls, and calculates reports with time period larger than day
-#' 
-#' @param dat a data frame
-#' @param annee The year to exclude from the historical series (it will be plotted against the historical series)
-#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
-#' @return a data frame with mean, max, and min calculated for each timesplit
-#' @export
-#' @seealso \code{\linkS4class{Bilan_poids_moyen}}
-fundat=function(dat,annee=NULL,timesplit=NULL)
-{
-	
-	if(nrow(dat)>0)
-	{
-		# ci dessous les calculs s'appliquent bien aux jours
-		# remplacement des valeurs manquantes par des zeros par creation d'une sequence journaliere
-		dat<-dat[dat$bjo_labelquantite=="Effectif_total",]
-		dat<-stacomirtools::chnames(dat,c("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur"),    c("annee","jour","labelquantite","valeur"))
-		dat=dat[,c("annee","jour","valeur")] 
-		if (!is.null(annee)){
-			dat<-dat[dat$annee!=annee,]
-		}
-		dat$jour=trunc.POSIXt(dat$jour, digits='days')
-		dat$jour = as.Date(strptime(strftime(dat$jour,'2000-%m-%d'),'%Y-%m-%d')) 
-		
-		
-		# ci dessous calcul des sommes par semaine mois... Comme trunk.POSIXt ou floor ne prend pas 
-		# la valeur week on est oblige de faire avec seq.POSIXt et calculer avec une boucle !
-		if (!is.null(timesplit)){
-			seq_timesplit= seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
-					to=strptime("2000-12-31",format='%Y-%m-%d'),
-					by=getvalue(new("Refperiode"),timesplit))
-			seq_timesplit<-as.Date(trunc(seq_timesplit, digits='days'))
-			# utilise la classe Refperiode pour avoir la correspondance entre le nom francais et la variable utilisee par seq.POSIXt
-			#datc=data.frame(rep(seq_timesplit,length(unique(dat$annee))),sort(rep(unique(dat$annee),length(seq_timesplit))))  # dataframe pour cumuls par periodes
-			#colnames(datc)<-c(timesplit,"annee")
-			# calcul des sommes par annee et par periode
-			dat[,timesplit]<-dat$jour # pour avoir le format sinon renvoit un numerique
-			# ci dessous on remplace une double boucle par un truc plus rapide
-			for (j in 1:(length(seq_timesplit)-1)){
-				dat[dat$jour>=seq_timesplit[j]&dat$jour<seq_timesplit[j+1],timesplit]<-seq_timesplit[j]
-			}
-			dat[dat$jour>=seq_timesplit[length(seq_timesplit)],timesplit]<-seq_timesplit[length(seq_timesplit)]
-			dat[,"interv"]<-paste(dat[,"annee"],dat[,timesplit]) # on veut les valeurs uniques par annee et timesplit
-			res<-tapply(dat$valeur,dat[,"interv"],sum,na.rm=TRUE)
-			datc<-data.frame("annee"=substr(names(res),1,4),timesplit=substr(names(res),5,15),"valeur"=as.numeric(res))
-			colnames(datc)[2]<-timesplit
-			dat<-datc 
-			rm(datc)
-		} else {
-			# si nul on remplace par jour pour generer le script en dessous
-			timesplit="jour"
-			jour2000=as.Date(seq.POSIXt(from=strptime("2000-01-01",format='%Y-%m-%d'),
-							to=strptime("2000-12-31",format='%Y-%m-%d'), by="day"))
-			for (j in unique(dat$annee)){
-				# les jours qui n'ont pas de bilan journalier pour ce jour sont rajoutes avec zero
-				jour2000restant<-jour2000[!jour2000 %in% dat[dat$annee==j,"jour"]]
-				dat0=data.frame("jour"=jour2000restant,"annee"=j, "valeur"=NA)
-				dat=rbind(dat,dat0)
-			} # end for
-		}
-		# calcul des valeurs min et max et moyenne en fonction de la coupure (jour, semaine,quinzaine, mois)
-		
-		maxdat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE))
-		mindat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE))
-		meandat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE))
-		datsummary<-data.frame("maxtab"=maxdat,"mintab"=mindat,"moyenne"=meandat)
-		datsummary<-datsummary[!is.infinite(datsummary$maxtab),]# the minimum and max of empty set are -Inf and Inf respectively
-		datsummary[,timesplit]<-names(maxdat)[!is.infinite(maxdat)]
-		dat[,timesplit]<-as.character(dat[,timesplit])
-		dat<-merge(dat,datsummary,by=timesplit)
-		dat[,timesplit]<-as.POSIXct(strptime(dat[,timesplit],format='%Y-%m-%d')) # le format Posixct est necessaire pour les ggplot
-		rm(maxdat,mindat,meandat)
-		dat<-dat[order(dat$annee,dat[,timesplit]),]
-		# renvoit la premiere occurence qui correspond, pour n'importe quel jour min, max et moyenne sont OK
-		return(dat)
-		
-	} else   {  # arret avec erreur
-		funout(gettext("Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"),arret=TRUE)
-	}    # end else
-}
 
 #'Summary handler internal method
 #' @param h A handler
