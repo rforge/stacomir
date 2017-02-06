@@ -132,6 +132,7 @@ plot(bmi_vichy,plot.type="seasonal",timesplit="jour")
 	bmi_des<-calcule(bmi_des,timesplit="semaine")
 	plot(bmi_des,plot.type="seasonal",timesplit="semaine")
 	plot(bmi_des,plot.type="seasonal",timesplit="jour")
+	plot(bmi_des,plot.type="seasonal",timesplit="mois")
 }	
 
 

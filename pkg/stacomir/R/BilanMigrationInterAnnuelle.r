@@ -101,6 +101,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 				#----------------------------------------------------------------------
 				# MAIN LOOP, there can be several dic
 				#----------------------------------------------------------------------
+				dic<-object@dc@dc_selectionne
 				for (i in 1:length(dic)){
 					#i=1
 					############################################
@@ -216,6 +217,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			# Final check for data
 			# index of data already present in the database
 			#-------------------------------------------------------------------------------------
+           les_annees=objet@anneeDebut@annee_selectionnee:objet@anneeFin@annee_selectionnee
 			index=unique(object@data$bjo_annee) %in% les_annees
 			# s'il manque des donnees pour certaines annees selectionnnees" 
 			if (!silent){
