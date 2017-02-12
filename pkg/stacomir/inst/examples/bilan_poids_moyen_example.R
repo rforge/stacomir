@@ -2,7 +2,7 @@ require(stacomiR)
 # launching stacomi without selecting the scheme or interface
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
-		database_expected=TRUE)
+		database_expected=FALSE)
 # the following script will load data from the two Anguillere monitored in the Somme
 
 \dontrun{
