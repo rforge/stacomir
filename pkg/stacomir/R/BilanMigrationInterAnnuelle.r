@@ -73,6 +73,8 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 			# object<-bmi 
 			# object<-bmi_cha
 			# object<-bmi_des
+			# object<-bmi_vichy
+			# require(dplyr); require(ggplot2)
 			#---------------------------------------------------------------------------------------
 			# this function will be run several times if missing data or mismatching data are found
 			# later in the script (hence the encapsulation)
@@ -84,7 +86,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 				dic= object@dc@dc_selectionne
 				requete=new("RequeteODBCwhere")
 				requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-				requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
+				requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant in",vector_to_listsql(dic),sep="")
 				requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
 				requete@order_by=" ORDER BY bjo_jour "
 				requete<-stacomirtools::connect(requete)
@@ -133,6 +135,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 					if (any(is.na(compared_numbers$effectif_bjo))){
 						index_missing_years<-which(is.na(compared_numbers$effectif_bjo))
 						missing_years<-compared_numbers$annee[index_missing_years]
+						if (! silent & length(dic)>1) funout(gettextf("DC with missing values : %s ",dic[i],domain="R-StacomiR"))
 						if (! silent) funout(gettextf("Years with no value : %s ",stringr::str_c(missing_years,collapse="; "),domain="R-StacomiR"))
 						if (! silent) funout(gettextf("Some years are missing in the t_bilanjournalier_bjo table, loading them now !",domain="R-StacomiR"))
 						
@@ -142,7 +145,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 							bM=new("BilanMigration")
 							funout(gettextf("Running Bilanmigraton for year %s",Y,domain="R-StacomiR"))
 							bM=choice_c(bM,
-									dc=dic,
+									dc=dic[i],
 									taxons=object@taxons@data$tax_nom_latin,
 									stades=object@stades@data$std_code,
 									datedebut=stringr::str_c(Y,"-01-01"),
@@ -182,9 +185,10 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 						reload_years_with_error=function(h,...){	
 							bM=new("BilanMigration")
 							for (Y in differing_years){
+								# Y=differing_years[1]
 								funout(gettextf("Running Bilanmigraton to correct data for year %s",Y))
 								bM=choice_c(bM,
-										dc=dic,
+										dc=dic[i],
 										taxons=object@taxons@data$tax_nom_latin,
 										stades=object@stades@data$std_code,
 										datedebut=stringr::str_c(Y,"-01-01"),
@@ -386,6 +390,8 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 			taxon<-bilanMigrationInterAnnuelle@taxons@data$tax_code
 			stade<-bilanMigrationInterAnnuelle@stades@data$std_code
 			if(length(unique(bilanMigrationInterAnnuelle@dc@station))!=1) stop("You have more than one station in the Bilan, the dc from the Bilan should belong to the same station")
+			if(nrow(bilanMigrationInterAnnuelle@data)==0) stop("No rows in bilanMigrationInterannuelle@data, nothing to run calculations on")
+			
 			datadic<-bilanMigrationInterAnnuelle@data[
 					bilanMigrationInterAnnuelle@data$bjo_labelquantite=="Effectif_total",]
 			datadic<-funtraitementdate(datadic, nom_coldt = "bjo_jour", jour_an = TRUE, quinzaine = TRUE)
@@ -870,7 +876,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					
 				} else if (plot.type=="seasonal"){
 					if (! silent) funout("Seasonal graph to show the phenology of migration")
-					#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="semaine";require(ggplot2)
+					#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="mois";require(ggplot2)
 					bilanMigrationInterAnnuelle<-calcule(bilanMigrationInterAnnuelle,timesplit=timesplit)
 					#if (!silent& nrow(bilanMigrationInterAnnuelle@calcdata)==0) stop("You should run calculation before plotting seasonal data")
 					dat3<-bilanMigrationInterAnnuelle@calcdata
@@ -890,7 +896,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 									},"semaine"={
 										as.Date(paste(year,"-",dat[,col[i]],"-",6,sep=""),"%Y-%U-%w")
 									},"mois"={
-										as.Date(paste(year,"-",dat[,col[i]],"-",1,sep=""),"%Y-%m")
+										as.Date(paste(year,"-",dat[,col[i]],"-",1,sep=""),"%Y-%m-%d")
 									},stop(stringr::str_c("Internal error, timesplit ",timesplit_," not working for seasonal plot"))									
 							)
 						}
