@@ -26,7 +26,7 @@ hOPE=function(h,...){
 #' @param ... additional parameters
 hDFDC=function(h,...){
 	# TODO developper cette fonction
-	funout(gettext("Summary between the operating fishway and the counting device … to do\n",domain="R-stacomiR"),wash=TRUE)
+	funout(gettext("Summary between the operating fishway and the counting device ... to do\n",domain="R-stacomiR"),wash=TRUE)
 }
 #' handler function used by the main interface
 #' @param h handler

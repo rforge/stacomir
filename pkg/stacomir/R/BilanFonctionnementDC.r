@@ -556,7 +556,7 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDC"),definiti
 			write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 			funout(gettext("Writing of %s \n",path1,domain="R-stacomiR"))
 			path1html<-file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DC_",bilanFonctionnementDC@dc@dc_selectionne,"_",annee,".html",sep=""),fsep ="\\")
-			funout(gettextf("Writing of %s this might take a while, please be patient …\n",path1html))
+			funout(gettextf("Writing of %s this might take a while, please be patient ...\n",path1html))
 			funhtml(t_periodefonctdispositif_per,
 					caption=gettextf("t_periodefonctdispositif_per_DC_%s_%s",bilanFonctionnementDC@dc@dc_selectionne,annee),
 					top=TRUE,

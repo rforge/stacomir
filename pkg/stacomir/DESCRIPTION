@@ -110,7 +110,7 @@ Suggests:
     testthat,
     viridis
 Author: Cedric Briand [aut, cre],
-    Marion Legrand [aut]
+    Marion Legrand [aut],
     Timothee Besse [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 RoxygenNote: 5.0.1

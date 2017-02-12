@@ -537,7 +537,7 @@ setMethod("summary",signature=signature(object="BilanFonctionnementDF"),definiti
 			write.table(t_periodefonctdispositif_per,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
 			if(!silent) funout(gettextf("Writing of %s \n",path1))
 			path1html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,".html",sep=""),fsep ="\\")
-			if(!silent) funout(gettextf("Writing of %s this might take a while, please be patient …\n",path1html))
+			if(!silent) funout(gettextf("Writing of %s this might take a while, please be patient ...\n",path1html))
 			funhtml(t_periodefonctdispositif_per,
 					caption=paste("t_periodefonctdispositif_per_DF_",bilanFonctionnementDF@df@df_selectionne,"_",annee,sep=""),
 					top=TRUE,

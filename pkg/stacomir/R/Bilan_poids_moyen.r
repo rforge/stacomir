@@ -299,9 +299,9 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 #' 			This model was considered as the best to model size variations by Diaz & Briand in prep. but using a large set of values
 #' 			over years.}
 #' 		\item{model.type="seasonal2". The seasonal trend in the previous model is now modelled with a sine
-#' 			curve similar to the sine curve used in seasonal.  The formula for this is ‘sin(ωvt) + cos(ωvt)’, 
-#'			where vt is the time index variable ω is a constant that describes how the index variable relates to the full period
-#' 			(here, 2π/365=0.0172). the model is written as following w~cos(0.0172*doy)+sin(0.0172*doy)+s(time).}
+#' 			curve similar to the sine curve used in seasonal.  The formula for this is \eqn{sin(\omega vt) + cos(\omega vt)}{{sin(omega vt) + cos(omega vt)}, 
+#'			where vt is the time index variable \eqn{\omega}{omega} is a constant that describes how the index variable relates to the full period
+#' 			(here, \eqn{2\pi/365=0.0172}{2pi/365=0.0172}). The model is written as following w~cos(0.0172*doy)+sin(0.0172*doy)+s(time).}
 #' 		\item{model.type="manual", The dataset don (the raw data), coe (the coefficients already present in the
 #' 			database, and newcoe the dataset to make the predictions from, are written to the environment envir_stacomi. 
 #' 			please see example for further description on how to fit your own model, build the table of coefficients,
@@ -419,8 +419,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				com="model seasonal1 = gam(w~s(yday,bs='cc')+s(time), knots = list(yday = c(1, 365)))"
 			} else 	if (model.type=="seasonal2"){
 				#########################################################
-				# seasonal effects with a continuous sine-cosine wave,.  The formula for this is ‘sin(ωvt) + cos(ωvt)’, where vt is the time index variable 
-				#	ω is a constant that describes how the index variable relates to the full period (here, 2π/365=0.0172).
+				# seasonal effects with a continuous sine-cosine wave,.  The formula for this is ‘sin(omegavt) + cos(omegavt)’, where vt is the time index variable 
+				#	omega is a constant that describes how the index variable relates to the full period (here, 2pi/365=0.0172).
 				############################################################
 				g2 = mgcv::gam(w~cos(0.0172*doy)+sin(0.0172*doy)+s(time),data=don)
 				print(gettext("One model per year, doy starts in november",domain="R-stacomiR"))
@@ -446,7 +446,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				if (!silent) funout(gettext("gam model g2 assigned to envir_stacomi",domain="R-stacomiR"))
 					
 				###################################################################
-				# comparison with Guérault and Désaunay (summary table in latex)
+				# comparison with Guerault and Desaunay (summary table in latex)
 				######################################################################
 				gamma=as.numeric(sqrt(g2$coefficients["cos(0.0172 * doy)"]^2+g2$coefficients["sin(0.0172 * doy)"]^2)) #0.386
 				#compared with 0.111
