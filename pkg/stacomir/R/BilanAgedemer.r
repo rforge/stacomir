@@ -524,19 +524,3 @@ funtableBilanAgedemer = function(h,...) {
 }
 
 
-#' Function to calculate the stages from Durif
-#' 
-#' @param data A dataset with columns BL, W, Dv, Dh, FL corresponding to body length (mm),
-#' Weight (g), vertical eye diameter (mm), vertical eye diameter (mm), and pectoral fin length (mm)
-#' @author Laurent Beaulaton \email{laurent.beaulaton"at"onema.fr}
-#' @export
-f_stade_Durif = function(data){
-	data(coef_Durif)
-	stopifnot(colnames(data)==c("BL","W","Dv","Dh","FL"))
-	data<-cbind(1,data[,c(1,2,5)],rowMeans(data[,c("Dv","Dh")],na.rm=TRUE))
-	colnames(data)<-c("Constant","BL","W","FL","MD")
-	data<-data[,c(1,2,3,5,4)]
-	indices<-data%*%coef_Durif
-	return(unlist(apply(indices,1,function(X)ifelse(is.na(X[1]),NA,names(which.max(X))))))
-}
-

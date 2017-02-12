@@ -727,7 +727,8 @@ funtableBilanArgentee = function(h,...) {
 #' @author Laurent Beaulaton \email{laurent.beaulaton"at"onema.fr}
 #' @export
 f_stade_Durif = function(data){
-	data(coef_Durif)
+	# see section Good Practise in ? data
+	data(coef_Durif,envir = environment())
 	stopifnot(colnames(data)==c("BL","W","Dv","Dh","FL"))
 	data<-cbind(1,data[,c(1,2,5)],rowMeans(data[,c("Dv","Dh")],na.rm=TRUE))
 	colnames(data)<-c("Constant","BL","W","FL","MD")

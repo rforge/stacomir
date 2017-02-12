@@ -41,7 +41,7 @@ interface_BilanFonctionnementDC = function()
 			icon="barplot",
 			handler=funbarchart1DC,
 			tooltip=gettext("Another monthly graph",domain="R-stacomiR"))	
-	aBox=gWidgets::gaction(label=getext("box"),
+	aBox=gWidgets::gaction(label=gettext("box"),
 			icon="graph2",
 			handler=funboxDC,
 			tooltip=gettext("Boxplot",domain="R-stacomiR"))
@@ -53,7 +53,7 @@ interface_BilanFonctionnementDC = function()
 			icon="close", 
 			handler=quitte,
 			tooltip=gettext("Exit",domain="R-stacomiR"))
-	aOut=gWidgets::gaction(label=gettex("code"),
+	aOut=gWidgets::gaction(label=gettext("code"),
 			handler=houtDC, 
 			icon="gtk-info",
 			tooltip=gettext("code",domain="R-stacomiR"))    

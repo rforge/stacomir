@@ -419,7 +419,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				com="model seasonal1 = gam(w~s(yday,bs='cc')+s(time), knots = list(yday = c(1, 365)))"
 			} else 	if (model.type=="seasonal2"){
 				#########################################################
-				# seasonal effects with a continuous sine-cosine wave,.  The formula for this is ‘sin(omegavt) + cos(omegavt)’, where vt is the time index variable 
+				# seasonal effects with a continuous sine-cosine wave,.  The formula for this is 'sin(omegavt) + cos(omegavt)', where vt is the time index variable 
 				#	omega is a constant that describes how the index variable relates to the full period (here, 2pi/365=0.0172).
 				############################################################
 				g2 = mgcv::gam(w~cos(0.0172*doy)+sin(0.0172*doy)+s(time),data=don)
@@ -490,8 +490,8 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					"coe_tax_code"='2038',
 					"coe_std_code"='CIV',
 					"coe_qte_code"=1,
-					"coe_date_debut"=Hmisc::round.POSIXt(predata$date,units="days"),
-					"coe_date_fin"=Hmisc::round.POSIXt(predata$date,units="days")+as.difftime(1,units="days"),
+					"coe_date_debut"=Hmisc::round.POSIXt(predata$date,digits="days"),
+					"coe_date_fin"=Hmisc::round.POSIXt(predata$date,digits="days")+as.difftime(1,units="days"),
 					"coe_valeur_coefficient"=1/predata$pred_weight,
 					"coe_commentaires"=com)
 			fileout= paste("C:/base/","import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")

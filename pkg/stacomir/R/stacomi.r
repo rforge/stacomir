@@ -297,6 +297,7 @@ hX11=function(h,...){
 #' @importFrom utils select.list write.table data
 #' @importFrom stats ftable
 #' @importFrom stats xtabs
+#' @importFrom stats AIC
 #' @importFrom grDevices dev.new
 #' @importFrom stats sd
 #' @importFrom reshape2 dcast
@@ -504,7 +505,9 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				'dev_libelle','ope_date_fin','bilan_stades_pigm','ope_date_debut','p','g','poids_moyen',
 				'taxon_stades','jour',"valeur","mintab","maxtab","moyenne","jour","total_annuel",
 				"taxon_stades","time.sequence","sum","variable","duree","Hdeb","Hfin","per_tar_code",
-				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon","stage","ouv"))
+				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon","stage","ouv",
+				"Q0","Q100","Q5","Q50","Q95","age","bjo_annee","bjo_labelquantite","bjo_valeur","doy",
+				"pred_weight","pred_weight_lwr","pred_weight_upr","total","w","year"))
 
 # variable used by dplyr
 utils::globalVariables(c("n0","newid","xmin","xmax"))

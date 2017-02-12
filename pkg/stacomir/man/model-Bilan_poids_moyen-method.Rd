@@ -13,29 +13,6 @@ model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FA
 }
 \arguments{
 \item{object}{An object of class \link{Bilan_pois_moyen-class}}
-
-\item{model.type}{default "seasonal", "seasonal1","seasonal2","manual". 
-\itemize{
-        \item{model.type="seasonal". The simplest model uses a seasonal variation, it is
-                fitted with a sine wave curve allowing a cyclic variation 
-                w ~ a*cos(2*pi*(doy-T)/365)+b with a period T. The julian time d0 used is this model is set
-                at zero 1st of November d = d + d0; d0 = 305.}
-        \item{model.type="seasonal1". A time component is introduced in the model, which allows
-            for a long term variation along with the seasonal variation. This long term variation is
-            is fitted with a gam, the time variable is set at zero at the beginning of the first day of observed values.
-            The seasonal variation is modeled on the same modified julian time as model.type="seasonal"
-            but here we use a cyclic cubic spline cc, which allows to return at the value of d0=0 at d=365.
-            This model was considered as the best to model size variations by Diaz & Briand in prep. but using a large set of values
-            over years.}
-        \item{model.type="seasonal2". The seasonal trend in the previous model is now modelled with a sine
-            curve similar to the sine curve used in seasonal.  The formula for this is ‘sin(ωvt) + cos(ωvt)’, 
-        where vt is the time index variable ω is a constant that describes how the index variable relates to the full period
-            (here, 2π/365=0.0172). the model is written as following w~cos(0.0172*doy)+sin(0.0172*doy)+s(time).}
-        \item{model.type="manual", The dataset don (the raw data), coe (the coefficients already present in the
-            database, and newcoe the dataset to make the predictions from, are written to the environment envir_stacomi. 
-            please see example for further description on how to fit your own model, build the table of coefficients,
-            and write it to the database.}
-}}
 }
 \description{
 model method for Bilan_poids_moyen' 
