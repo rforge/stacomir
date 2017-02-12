@@ -5,8 +5,8 @@
 \title{This function extracts temporal characteristics from a dataframe}
 \usage{
 funtraitementdate(data, nom_coldt, annee = TRUE, mois = TRUE,
-  quinzaine = FALSE, semaine = TRUE, jour_an = FALSE, jour_mois = TRUE,
-  heure = FALSE)
+  quinzaine = FALSE, semaine = TRUE, semaine_std = FALSE,
+  jour_an = FALSE, jour_mois = TRUE, heure = FALSE)
 }
 \arguments{
 \item{data}{a data frame containing a Date or POSIXt column}

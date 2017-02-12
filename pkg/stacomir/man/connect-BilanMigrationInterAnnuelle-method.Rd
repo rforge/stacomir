@@ -5,18 +5,29 @@
 \alias{connect,BilanMigrationInterAnnuelle-method}
 \title{connect method for BilanMigrationInterannuelle class}
 \usage{
-\S4method{connect}{BilanMigrationInterAnnuelle}(object, silent = FALSE)
+\S4method{connect}{BilanMigrationInterAnnuelle}(object, silent = FALSE,
+  check = TRUE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigrationInterAnnuelle-class}}
 
 \item{silent}{Stops messages from being displayed if silent=TRUE, default FALSE}
+
+\item{check}{Checks that data are corresponding between BilanAnnuels and BilanMigration}
 }
 \value{
 bilanMigrationInterAnnuelle an instantianted object with values filled with user choice
 }
 \description{
-connect method for BilanMigrationInterannuelle class
+This method will check if the data in the t_bilanjournalier_bjo table has no missing data,
+if missing the program will load missing data. As a second step,
+the program will check if the numbers in the table  t_bilanjournalier_bjo differ from those in the database,
+and propose to re-run the bilanmigration (which has a write_database methode to write daily bilans) for those years.
+}
+\note{
+We expect different results between daily bilans from the t_bilanjournalier_bjo table and the annual sums
+from bilanAnnuels for glass eels as those may have been weighted and not only counted. The t_bilanjournalier_bjo table used by BilanMigrationInterAnnuelle
+contains the sum of glass eel numbers converted from weights and those directly counted. The bilanAnnuels does not.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

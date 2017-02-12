@@ -3,7 +3,7 @@
 \docType{methods}
 \name{choice_c,RefAnnee-method}
 \alias{choice_c,RefAnnee-method}
-\title{choice method for RefAnnee referential from the command line}
+\title{choice_c method for RefAnnee referential from the command line}
 \usage{
 \S4method{choice_c}{RefAnnee}(object, annee, nomassign = "refAnnee",
   funoutlabel = gettext("Year selected\\n", domain = "R-stacomiR"),
@@ -21,6 +21,7 @@
 \item{silent}{Stops messages from being displayed if silent=TRUE, default FALSE}
 }
 \description{
+The choice_c method will issue a warning if the year is not present in the database
 Allows the selection of year and the assignment in environment envir_stacomi
 }
 \examples{

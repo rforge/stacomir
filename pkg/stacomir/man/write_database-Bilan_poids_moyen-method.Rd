@@ -5,7 +5,7 @@
 \alias{write_database,Bilan_poids_moyen-method}
 \title{Function to write data to the stacomi database for \link{Bilan_poids_moyen-class}}
 \usage{
-\S4method{write_database}{Bilan_poids_moyen}(object, silent,
+\S4method{write_database}{Bilan_poids_moyen}(object, silent = FALSE,
   dbname = "bd_contmig_nat", host = "localhost", port = 5432)
 }
 \arguments{
@@ -17,7 +17,8 @@
 An object of class \link{Bilan_poids_moyen-class}
 }
 \description{
-Function to write data to the stacomi database for \link{Bilan_poids_moyen-class}
+Data will be written in tj_coefficientconversion_coe table, if the class retrieves some data
+from the database, those will be deleted first.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

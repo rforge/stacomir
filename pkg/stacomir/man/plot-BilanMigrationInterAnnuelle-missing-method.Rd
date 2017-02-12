@@ -29,10 +29,13 @@ latest if silent=TRUE, or it can be selected in the droplist. It is highlighted 
         \item{plot.type="barchart": comparison of daily migration of one year against periodic migration for the other years available in the chronicle,
                                     different periods can be chosen with argument timesplit}
         \item{plot.type="pointrange": Pointrange graphs, different periods can be chosen with argument timesplit}
+     \item{plot.type="seasonal": plot to display summary statistics about the migration period}
 }}
 }
 \description{
-Plot method for BilanMigrationInterannuelle
+Several of these plots are scaled against the same year, ie the comparison is based on
+year 2000, meaning that day 1 would correspond to the first date of 2000,  which is also a
+saturday, the last day of the week.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

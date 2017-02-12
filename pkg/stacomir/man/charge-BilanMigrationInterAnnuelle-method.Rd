@@ -5,7 +5,7 @@
 \alias{charge,BilanMigrationInterAnnuelle-method}
 \title{loading method for BilanMigrationInterannuelle class}
 \usage{
-\S4method{charge}{BilanMigrationInterAnnuelle}(object, silent)
+\S4method{charge}{BilanMigrationInterAnnuelle}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigrationInterAnnuelle-class}}
