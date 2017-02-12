@@ -117,11 +117,11 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 						# data from bilanMigrationInterannuel
 						data2<-object@data[object@data$bjo_dis_identifiant==dic[i],]
 						data21<-dplyr::select(data2,bjo_annee,bjo_valeur,bjo_labelquantite)
-						data22<-group_by(data21,bjo_annee,bjo_labelquantite)
-						data23<-summarize(data22,total=sum(bjo_valeur))
-						data24<-filter(ungroup(data23),bjo_labelquantite=="Effectif_total")
-						data24<-select(data24,bjo_annee,total)
-						data24<-rename(data24,annee=bjo_annee,effectif_bjo=total)
+						data22<-dplyr::group_by(data21,bjo_annee,bjo_labelquantite)
+						data23<-dplyr::summarize(data22,total=sum(bjo_valeur))
+						data24<-dplyr::filter(ungroup(data23),bjo_labelquantite=="Effectif_total")
+						data24<-dplyr::select(data24,bjo_annee,total)
+						data24<-dplyr::rename(data24,annee=bjo_annee,effectif_bjo=total)
 						data124<-merge(data1,data24,all.x=TRUE,all.y=TRUE,by="annee")
 						return(data124)
 					}
