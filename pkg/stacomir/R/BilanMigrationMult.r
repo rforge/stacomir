@@ -25,6 +25,7 @@
 #' method if any weight are found in the data slot.
 #' @slot time.sequence A POSIXt time sequence
 #' @family Bilan Objects
+#' @aliases BilanMigrationMult bilanMigrationMult
 #' @keywords classes
 #' @export
 #' @example inst/examples/bilanMigrationMult_Arzal.R

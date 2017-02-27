@@ -2,7 +2,9 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \docType{class}
 \name{BilanMigrationMult-class}
+\alias{BilanMigrationMult}
 \alias{BilanMigrationMult-class}
+\alias{bilanMigrationMult}
 \title{Migration reports for multiple DC / species / stages}
 \description{
 Migration counts for several Fish counting devices (DC), several taxa and several stages.

@@ -2,7 +2,9 @@
 % Please edit documentation in R/BilanMigration.r
 \docType{class}
 \name{BilanMigration-class}
+\alias{BilanMigration}
 \alias{BilanMigration-class}
+\alias{bilanMigration}
 \title{Migration report for one DC, one species and one stage}
 \description{
 Migration report for one DC, one species and one stage

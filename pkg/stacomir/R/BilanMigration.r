@@ -18,6 +18,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
+#' @aliases BilanMigration bilanMigration
 #' @example inst/examples/bilanMigration_Arzal.R
 #' @export 
 setClass(Class="BilanMigration",
@@ -580,6 +581,7 @@ hbilanMigrationwrite = function(h,...) {
 #' @export
 setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432,check_for_bjo=TRUE){
 			# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
+			# object=bM
 			bilanMigration<-object
 			if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
 			if (class(silent)!="logical") stop("the silent argument should be a logical")
@@ -590,7 +592,11 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
 			data=data[,-col_a_retirer]
 			data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 
+			# bug 27/02/2017 for some reasons crashes with arzal and coef_valeur_coefficient
+			# and didn't crash for logrami or smatah
+			if (!is.null(data$coe_valeur_coefficient)){
 			data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
+		    }else {data$coe_valeur_coefficient<-NA}
 			peuventpaszero=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
 			data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
 			annee<-as.numeric(unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1])
