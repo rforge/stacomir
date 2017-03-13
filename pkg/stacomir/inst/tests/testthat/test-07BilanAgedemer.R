@@ -3,7 +3,7 @@ context("Bilan_Agedemer")
 
 test_that("test creating an instance of BilanAgedemer with data loaded (logrami required)",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			bilan_adm<-new("BilanAgedemer")
 			baseODBC<-get("baseODBC",envir=envir_stacomi)

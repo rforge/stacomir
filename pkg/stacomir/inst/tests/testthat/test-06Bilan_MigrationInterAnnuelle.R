@@ -3,7 +3,7 @@ context("Bilan_MigrationInterAnnuelle")
 
 test_that("Test an instance of Bilan_MigrationInterAnnuelle loaded with choice_c",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
@@ -30,9 +30,9 @@ test_that("Test an instance of Bilan_MigrationInterAnnuelle loaded with choice_c
 		})
 
 
-test_that("Test methods in BilanMigrationInterAnnuelle",{
+test_that("Test method summary in BilanMigrationInterAnnuelle",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
@@ -73,7 +73,7 @@ test_that("Test example bilanMigrationInterAnnuelle_example",
 test_that("Test that loading two taxa will fail",
 		{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
@@ -100,7 +100,7 @@ test_that("Test that loading two taxa will fail",
 test_that("Test that bilanMigrationInterannuelle loads missing data with correct warning",
 		{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("logrami",2)

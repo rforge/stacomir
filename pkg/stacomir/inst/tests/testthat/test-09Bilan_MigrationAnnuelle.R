@@ -3,7 +3,7 @@ context("Bilan_MigrationAnnuelle")
 
 test_that("Test an instance of BilanAnnuels loaded with choice_c",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
@@ -26,7 +26,7 @@ test_that("Test an instance of BilanAnnuels loaded with choice_c",{
 
 test_that("Test methods in BilanAnnuels",{
 			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 			# overriding user schema to point to iav
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			baseODBC[c(2,3)]<-rep("iav",2)
