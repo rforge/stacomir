@@ -273,7 +273,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req=new("RequeteODBCwheredate")
 			req@baseODBC<-get("baseODBC", envir=envir_stacomi)			
 			req@colonnedebut<-"ope_date_debut"
-			req@colonnefin<-"ope_date_fin"
+			req@colonnefin<-"ope_date_debut"
 			req@datedebut=as.POSIXlt(bilanMigrationMult@pasDeTemps@dateDebut)
 			req@datefin=as.POSIXlt(DateFin(bilanMigrationMult@pasDeTemps))
 			dc = vector_to_listsql(bilanMigrationMult@dc@dc_selectionne)

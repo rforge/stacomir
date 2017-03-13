@@ -49,7 +49,7 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			lesdc<-object@dc@dc_selectionne			
 			req@colonnedebut="ope_date_debut"
-			req@colonnefin="ope_date_fin"
+			req@colonnefin="ope_date_debut"
 			req@order_by="ORDER BY ope_dic_identifiant, ope_date_debut"
 			req@datedebut<-object@horodatedebut@horodate
 			req@datefin<-object@horodatefin@horodate

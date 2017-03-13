@@ -186,7 +186,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 							bM=new("BilanMigration")
 							for (Y in differing_years){
 								# Y=differing_years[1]
-								funout(gettextf("Running Bilanmigraton to correct data for year %s",Y))
+								funout(gettextf("Running Bilanmigration to correct data for year %s",Y))
 								bM=choice_c(bM,
 										dc=dic[i],
 										taxons=object@taxons@data$tax_nom_latin,

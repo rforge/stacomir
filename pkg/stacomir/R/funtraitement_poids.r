@@ -48,7 +48,7 @@ funtraitement_poids=function(tableau,time.sequence) {
 	req@datedebut<-as.POSIXlt(time.sequence[min(index)])
 	req@datefin<-as.POSIXlt(time.sequence[max(index)])
 	req@colonnedebut<-"coe_date_debut"
-	req@colonnefin<-"coe_date_fin"
+	req@colonnefin<-"coe_date_debut"
 	req@and<-c("and coe_tax_code='2038'","and coe_std_code='CIV'")
 	req@order_by<-"order by coe_date_debut"
 	req<-stacomirtools::connect(req)

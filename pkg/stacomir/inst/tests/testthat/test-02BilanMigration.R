@@ -117,7 +117,7 @@ test_that("Test that different sums are the same, for BilanMigration, BilanMigra
 			# using setAs to transform the bilanMigration into BilanMigrationInterAnnuelle
 			bili=as(bM_Arzal,"BilanMigrationInterAnnuelle")			
 			bila=as(bili,"BilanAnnuels")
-			bila<-connect(bila)
+			bila<-connect(bila,silent=TRUE)
 			# we test that the BilanAnnuel has the same number as
 			# BilanMigration
 			expect_equal(
@@ -127,7 +127,7 @@ test_that("Test that different sums are the same, for BilanMigration, BilanMigra
 number in the BilanAnnuel class"
 					)
 		
-			bili<-connect(bili,check=TRUE)
+			bili<-connect(bili,check=TRUE,silent=TRUE)
 			expect_equal(
 			sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),	
 			sum(bili@data$bjo_valeur[bili@data$bjo_labelquantite=="Effectif_total"]),			

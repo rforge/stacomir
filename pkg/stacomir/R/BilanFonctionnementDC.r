@@ -52,7 +52,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDC"),definition=func
 					" FROM  ",get("sch",envir=envir_stacomi),"t_periodefonctdispositif_per per",
 					" INNER JOIN ref.tr_typearretdisp_tar tar ON tar.tar_code=per.per_tar_code",sep="")
 			req@colonnedebut<-"per_date_debut"
-			req@colonnefin<-"per_date_fin"
+			req@colonnefin<-"per_date_debut"
 			req@datedebut<-object@horodatedebut@horodate
 			req@datefin<-object@horodatefin@horodate
 			req@order_by<-"ORDER BY per_date_debut"
