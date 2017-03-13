@@ -494,13 +494,15 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					"coe_date_fin"=Hmisc::round.POSIXt(predata$date,digits="days")+as.difftime(1,units="days"),
 					"coe_valeur_coefficient"=1/predata$pred_weight,
 					"coe_commentaires"=com)
-			fileout= paste("C:/base/","import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
-			#attention ecrit dans C:/base....
+			# will write only if the database is present
+			if (get("database_expected",envir_stacomi)){
+			fileout= paste(get("datawd",envir=envir_stacomi),"import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
 			utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
+			funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
+			}
 			assign("import_coe",import_coe,envir=envir_stacomi)
 			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
-			funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
-			bilPM@calcdata[["import_coe"]]<-import_coe			
+					bilPM@calcdata[["import_coe"]]<-import_coe			
 		})
 
 
