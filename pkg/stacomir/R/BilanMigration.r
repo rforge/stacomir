@@ -563,8 +563,6 @@ hbilanMigrationwrite = function(h,...) {
 #' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
 #' @param silent : TRUE to avoid messages
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
-#' @param host : the host for sqldf, defaults to "localhost"
-#' @param port : the port, defaults to 5432
 #' @param check_for_bjo : do you want to check if data are already present in the bjo table, and delete them,
 #' this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops
 #' @note the user is asked whether or not he wants to overwrite data, if no
@@ -579,9 +577,13 @@ hbilanMigrationwrite = function(h,...) {
 #' write_database(bilanMigration=bM_Arzal,silent=FALSE)
 #' }
 #' @export
-setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432,check_for_bjo=TRUE){
+setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",check_for_bjo=TRUE){
 			# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
 			# object=bM
+			#host : the host for sqldf, defaults to "localhost"
+			 #port : the port, defaults to 5432
+			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
+			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
 			bilanMigration<-object
 			if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
 			if (class(silent)!="logical") stop("the silent argument should be a logical")
