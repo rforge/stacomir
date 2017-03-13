@@ -96,6 +96,47 @@ test_that("Test writing an example to the database",
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
+test_that("Test that different sums are the same, for BilanMigration, BilanMigrationInterAnnuelle, BilanAnnuels",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			data("bM_Arzal")
+			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
+			expect_equal(
+			sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),
+			sum(bM_Arzal@data[bM_Arzal@data$ope_dic_identifiant==5,"value"]))
+			write_database(object=bM_Arzal,silent=TRUE)
+			# using setAs to transform the bilanMigration into BilanMigrationInterAnnuelle
+			bili=as(bM_Arzal,"BilanMigrationInterAnnuelle")			
+			bila=as(bili,"BilanAnnuels")
+			bila<-connect(bila)
+			# we test that the BilanAnnuel has the same number as
+			# BilanMigration
+			expect_equal(
+					sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),
+					bila@data$effectif,
+					label="The sum of number in the BilanMigration are different to the
+number in the BilanAnnuel class"
+					)
+		
+			bili<-connect(bili,check=TRUE)
+			expect_equal(
+			sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),	
+			sum(bili@data$bjo_valeur[bili@data$bjo_labelquantite=="Effectif_total"]),			
+			label="The sum of number in the BilanMigration are different to the
+					number in the BilanMigrationInterAnnuelle")
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+
+
 test_that("print method works",
 		{
 			stacomi(gr_interface=FALSE,

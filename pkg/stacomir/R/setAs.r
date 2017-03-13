@@ -13,6 +13,17 @@ setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from){
 })
 
 
+setAs("BilanMigrationInterAnnuelle","BilanMigrationMult",function(from){
+			bilanMigrationMult=new("BilanMigrationMult")
+			bilanMigrationMult@dc=from@dc
+			bilanMigrationMult@taxons=from@taxons
+			bilanMigrationMult@stades=from@stades
+			bilanMigrationMult@pasDeTemps@dateDebut=strptime(stringr::str_c(from@anneeDebut@annee_selectionnee,"-01-01"),format="%Y-%m-%d")
+			bilanMigrationMult@pasDeTemps@nbStep=364
+			return(bilanMigrationMult)
+		})
+
+
 setAs("BilanMigration","BilanMigrationMult",function(from){
 			bMM=new("BilanMigrationMult")
 			bMM@dc=from@dc

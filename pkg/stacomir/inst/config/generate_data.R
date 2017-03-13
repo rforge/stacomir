@@ -112,7 +112,7 @@ devtools::use_data(bilanFonctionnementDC,internal=FALSE,overwrite=TRUE)
 
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
-		database_expected=FALSE)	
+		database_expected=TRUE)	
 bM_Arzal=new("BilanMigration")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)

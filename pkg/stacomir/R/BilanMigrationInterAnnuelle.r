@@ -143,7 +143,7 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 						for (y in 1:length(missing_years)){
 							Y<-missing_years[y]
 							bM=new("BilanMigration")
-							funout(gettextf("Running Bilanmigraton for year %s",Y,domain="R-StacomiR"))
+							funout(gettextf("Running Bilanmigration for year %s",Y,domain="R-StacomiR"))
 							bM=choice_c(bM,
 									dc=dic[i],
 									taxons=object@taxons@data$tax_nom_latin,

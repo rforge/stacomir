@@ -123,3 +123,60 @@ test_that("Test that bilanMigrationInterannuelle loads missing data with correct
 			bmi_cha<-connect(bmi_cha)
 			
 		})
+
+test_that("Test that different sums are the same, for  BilanMigrationInterAnnuelle, BilanMigrationMult",
+		{
+			stacomi(gr_interface=FALSE,
+					login_window=FALSE,
+					database_expected=TRUE)	
+			# overriding user schema
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			bmi<-new("BilanMigrationInterAnnuelle")
+			# the following will load data for size, 
+			# parameters 1786 (total size) C001 (size at video control)
+			# dc 5 and 6 are fishways located on the Arzal dam
+			# two stages are selected
+			bmi<-choice_c(bmi,
+					dc=6,
+					taxons=c("Anguilla anguilla"),
+					stades=c("AGJ"),
+					anneedebut=1997,
+					anneefin=1997,
+					silent=TRUE)
+			bmi<-connect(bmi,silent=TRUE)	
+			bmM<-as(bmi,"BilanMigrationMult")
+			# we still need to load the associated classes properly
+			# so we need to launch the choice method.
+			bmM<-choice_c(bmM, 
+					dc=bmM@dc@dc_selectionne,
+					taxons=bmM@taxons@data$tax_code, 
+					stades=bmM@stades@data$std_code, 
+					datedebut=as.character(bmM@pasDeTemps@dateDebut),
+					datefin=as.character(as.POSIXlt(DateFin(bmM@pasDeTemps))))
+			bmM<-charge(bmM)
+			bmM<-connect(bmM)
+			
+			expect_equal(				
+					sum(bmM@data[bmM@data$ope_dic_identifiant==6,"value"]),
+					sum(bmi@data$bjo_valeur[bmi@data$bjo_labelquantite=="Effectif_total"])
+			)
+			######################
+			# Test for BilanAnnuel
+			#####################
+			bila=as(bmi,"BilanAnnuels")
+			bila<-connect(bila)
+			# we test that the BilanAnnuel has the same number as
+			# BilanMigration
+			expect_equal(
+					sum(bmM@data[bmM@data$ope_dic_identifiant==6,"value"]),
+					bila@data$effectif,
+					label="The sum of number in the BilanMigration are different to the
+							number in the BilanAnnuel class"
+			)		
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
