@@ -210,7 +210,8 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 						#==================================
 						
 						if (!silent){
-							choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_bilanjournalier_bjo table, this probably means that they have been changed after the last bilanmigration was run, do you want to load them again for calculation ?"),
+							choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_bilanjournalier_bjo table, this means that they have been changed after the last bilanmigration was run,  
+						do you want to load them again for calculation ?"),
 									handler=reload_years_with_error)
 						} else {
 							reload_years_with_error(h=NULL)
