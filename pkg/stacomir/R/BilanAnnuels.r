@@ -122,7 +122,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 			#If there are some operations whith year of date_debut different to the year of date_fin we need to find these operations
 			# and apply on it the overlaps function to separate fish that arrive during the first year from the all
 			#If we don't have operation on two years we apply the simple sum per year
-			if (diff@data$ope_dic_identifiant==diff@data$ope_dic_identifiant && diff@data$annee_debut!=diff@data$annee_fin){
+			if (diff@data$ope_dic_identifiant==diff@data$ope_dic_identifiant & diff@data$annee_debut!=diff@data$annee_fin){
 				reqdiffan=new("RequeteODBC")
 			    reqdiffan@baseODBC<-get("baseODBC", envir=envir_stacomi)
 				#Pour Marion
