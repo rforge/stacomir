@@ -267,6 +267,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 #' @export
 setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE){ 
 			# recuperation du BilanMigration
+			#bilanMigrationMult<-bmM
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug
@@ -274,8 +275,9 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req@baseODBC<-get("baseODBC", envir=envir_stacomi)			
 			req@colonnedebut<-"ope_date_debut"
 			req@colonnefin<-"ope_date_fin"
-			req@datedebut=as.Date(bilanMigrationMult@pasDeTemps@dateDebut)
-			req@datefin=as.Date(DateFin(bilanMigrationMult@pasDeTemps))
+			# we round the date to be consistent with daily values from the 
+			req@datedebut=as.POSIXlt(as.Date(bilanMigrationMult@pasDeTemps@dateDebut,tz=Sys.timezone()))
+			req@datefin=as.POSIXlt(as.Date(DateFin(bilanMigrationMult@pasDeTemps),tz=Sys.timezone()))
 			dc = vector_to_listsql(bilanMigrationMult@dc@dc_selectionne)
 			tax=vector_to_listsql(bilanMigrationMult@taxons@data$tax_code)
 			std=vector_to_listsql(bilanMigrationMult@stades@data$std_code)
