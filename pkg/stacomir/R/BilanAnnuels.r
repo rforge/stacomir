@@ -146,6 +146,8 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 			diffan<-new("BilanAnnuels")
 			diffan@data=reqdiffan@query
 			
+			# we apply the overlaps function
+			
 			# we select all the other operations (without difference of years)
 			reqssdiffan=new("RequeteODBC")
 			reqssdiffan@baseODBC<-get("baseODBC", envir=envir_stacomi)
@@ -170,6 +172,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 			ssdiffan@data=reqssdiffan@query
 			
 			# we merge the two dataset together
+			data<-merge(ssdiffan@data,diffan@data,all.x=TRUE,all.y=TRUE,by=c("ope_dic_identifiant","annee","lot_ope_identifiant"))
 		}
 		#If we have dc and years with no difference in the years of start and end for the same operation we calculate the "classical" sum by year
 		else {
