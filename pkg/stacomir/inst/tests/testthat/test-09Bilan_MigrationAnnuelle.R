@@ -1,4 +1,4 @@
-context("Bilan_MigrationAnnuelle")
+context("BilanAnnuels")
 
 
 test_that("Test an instance of BilanAnnuels loaded with choice_c",{

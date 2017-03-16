@@ -100,100 +100,75 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 			
 			reqdiff=new("RequeteODBC")
 			reqdiff@baseODBC<-get("baseODBC", envir=envir_stacomi)
-			#Pour Marion
-			sch<-get("sch",envir=envir_stacomi) # "iav."
-			assign("sch","iav.",envir_stacomi)
+			#For Marion
+			#sch<-get("sch",envir=envir_stacomi) # "iav."
+			#assign("sch","iav.",envir_stacomi)
 			
-			reqdiff@sql= paste("select ope_dic_identifiant, extract(year  from ope_date_debut) as annee_debut, extract(year  from ope_date_fin) as annee_fin 
+			reqdiff@sql= paste("select *, extract(year  from ope_date_debut) as annee_debut, extract(year  from ope_date_fin) as annee_fin 
 							FROM ",get("sch",envir=envir_stacomi),"t_operation_ope  join ", get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant 
-							where ope_dic_identifiant in('5','6','12') 
-									and extract(year from ope_date_debut)>=1996  
-									and	 extract(year from ope_date_fin)<=2015  
-									and ope_dic_identifiant in ('5','6','12') 
-									and lot_tax_code in ('2038') 
-									and lot_std_code in ('AGG','AGJ') 
-									and lot_lot_identifiant is null 
+							where ope_dic_identifiant in ",dc, 
+					" and extract(year from ope_date_debut)>=",anneedebut,
+					" and	 extract(year from ope_date_fin)<=", anneefin, 
+					" and ope_dic_identifiant in ", dc, 
+					" and lot_tax_code in ",tax,
+					" and lot_std_code in ",std,
+					" and lot_lot_identifiant is null 
 							order by ope_dic_identifiant, annee_debut,annee_fin; ",sep="")
 			reqdiff@sql<-stringr::str_replace_all(reqdiff@sql,"[\r\n\t]" , "")
 			reqdiff<-stacomirtools::connect(reqdiff)
-			diff<-new("BilanAnnuels")
-			diff@data=reqdiff@query	
-			
-			# If there are some operations whith year of date_debut different to the year of date_fin we need to find these operations
-			# and apply on it the overlaps function to separate fish that arrive during the first year from the all
+			detailed_data<-reqdiff@query
+			# If there are some operations with year of date_debut different to the year of date_fin we need to find these operations
+			# and apply on it the overlaps function to separate fish that arrive during the first year from the rest
 			#If we don't have operation on two years we apply the simple sum per year
-			if (diff@data$ope_dic_identifiant==diff@data$ope_dic_identifiant & diff@data$annee_debut!=diff@data$annee_fin){
-				reqdiffan=new("RequeteODBC")
-			    reqdiffan@baseODBC<-get("baseODBC", envir=envir_stacomi)
-				#Pour Marion
-				sch<-get("sch",envir=envir_stacomi) # "iav."
-				assign("sch","iav.",envir_stacomi)
+			annee_differentes<-detailed_data$annee_debut!=detailed_data$annee_fin
+			if (any(annee_differentes)){
+				data_to_cut<-detailed_data[annee_differentes,]	
+				data_not_to_cut<-detailed_data[!annee_differentes,]	
+				# vector of years of cut
+				round_years<-lubridate::floor_date(data_to_cut$ope_date_debut,"years")+lubridate::years(1)
+				end_of_the_year=difftime(round_years,data_to_cut$ope_date_debut,units="days")
+				beginning_of_the_year=difftime(data_to_cut$ope_date_fin,round_years,units="day")
+				operation_duration=difftime(data_to_cut$ope_date_fin,data_to_cut$ope_date_debut,units="day")
+				data_beginning_of_the_year<-data_to_cut
+				data_beginning_of_the_year$lot_effectif<-data_beginning_of_the_year$lot_effectif*
+						as.numeric(beginning_of_the_year)/as.numeric(operation_duration)
+				data_beginning_of_the_year$ope_date_debut<-round_years
+				data_beginning_of_the_year$annee_debut<-lubridate::year(round_years)
+				data_end_of_the_year<-data_to_cut
+				data_end_of_the_year$lot_effectif<-data_end_of_the_year$lot_effectif*
+						as.numeric(end_of_the_year)/as.numeric(operation_duration)
+				data_end_of_the_year$ope_date_fin<-round_years
+				final_data<-rbind(data_not_to_cut,data_beginning_of_the_year,data_end_of_the_year)
+				sqldf(" select sum(lot_effectif) as effectif, annee_debut as annee, 
+							ope_dic_identifiant,
+							lot_tax_code, 
+							lot_std_code  
+							from 
+							final_data							
+							group by annee, ope_dic_identifiant, lot_tax_code, lot_std_code 
+							order by ope_dic_identifiant, annee, lot_tax_code, lot_std_code; ")
+						
+			}
+			#If we have dc and years with no difference in the years of start and end for the same operation we calculate the "classical" sum by year
+			else {
 				
-				# we select operation with different years between the beginning and the end of the operation
-				reqdiffan@sql= paste("select *, extract(year  from ope_date_debut) as annee 
-								FROM  ",get("sch",envir=envir_stacomi),"t_operation_ope  join ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant 
-								where ope_dic_identifiant in('5','6','12') 
-										and extract(year from ope_date_debut)>=1996 
-										and	 extract(year from ope_date_fin)<=2015 
-										and ope_dic_identifiant in ('5','6','12') 
-										and lot_tax_code in ('2038') 
-										and lot_std_code in ('AGG','AGJ') 
-										and lot_lot_identifiant is null 
-										and extract(year from ope_date_debut)<>extract(year from ope_date_fin) 
-										order by ope_dic_identifiant,annee; ",sep="")
-			reqdiffan@sql<-stringr::str_replace_all(reqdiffan@sql,"[\r\n\t]" , "")
-			reqdiffan<-stacomirtools::connect(reqdiffan)
-			diffan<-new("BilanAnnuels")
-			diffan@data=reqdiffan@query
-			
-			# we apply the overlaps function
-			
-			# we select all the other operations (without difference of years)
-			reqssdiffan=new("RequeteODBC")
-			reqssdiffan@baseODBC<-get("baseODBC", envir=envir_stacomi)
-			#Pour Marion
-			sch<-get("sch",envir=envir_stacomi) # "iav."
-			assign("sch","iav.",envir_stacomi)
-			
-			reqssdiffan@sql= paste("select *, extract(year  from ope_date_debut) as annee 
-							FROM  ",get("sch",envir=envir_stacomi),"t_operation_ope  join ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant 
-							where ope_dic_identifiant in('5','6','12') 
-							and extract(year from ope_date_debut)>=1996 
-							and	 extract(year from ope_date_fin)<=2015 
-							and ope_dic_identifiant in ('5','6','12') 
-							and lot_tax_code in ('2038') 
-							and lot_std_code in ('AGG','AGJ') 
-							and lot_lot_identifiant is null 
-							and extract(year from ope_date_debut)=extract(year from ope_date_fin) 
-							order by ope_dic_identifiant,annee; ",sep="")
-			reqssdiffan@sql<-stringr::str_replace_all(reqssdiffan@sql,"[\r\n\t]" , "")
-			reqssdiffan<-stacomirtools::connect(reqssdiffan)
-			ssdiffan<-new("BilanAnnuels")
-			ssdiffan@data=reqssdiffan@query
-			
-			# we merge the two dataset together
-			data<-merge(ssdiffan@data,diffan@data,all.x=TRUE,all.y=TRUE,by=c("ope_dic_identifiant","annee","lot_ope_identifiant"))
-		}
-		#If we have dc and years with no difference in the years of start and end for the same operation we calculate the "classical" sum by year
-		else {
-			
-			
-			req@sql = paste(" select sum(lot_effectif) as effectif, annee, ope_dic_identifiant,lot_tax_code, lot_std_code  from 
-							(select *, extract(year  from ope_date_debut) as annee FROM ",get("sch",envir=envir_stacomi),"t_operation_ope ",
-					" join ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant where ope_dic_identifiant in",dc,
-					" and extract(year from ope_date_debut)>=", anneedebut,
-					" and extract(year from ope_date_fin)<=", anneefin,	
-					" and ope_dic_identifiant in ", dc,
-					" and lot_tax_code in ", tax,
-					" and lot_std_code in ",std,
-					" and lot_lot_identifiant is null) as tmp",
-					" group by annee, ope_dic_identifiant, lot_tax_code, lot_std_code ",
-					" order by ope_dic_identifiant, annee, lot_tax_code, lot_std_code; ",sep="" )
-			req@sql<-stringr::str_replace_all(req@sql,"[\r\n\t]" , "")
-			req<-stacomirtools::connect(req)
-			bilA@data=req@query			
-			return(bilA)
-		}
+				
+				req@sql = paste(" select sum(lot_effectif) as effectif, annee, ope_dic_identifiant,lot_tax_code, lot_std_code  from 
+								(select *, extract(year  from ope_date_debut) as annee FROM ",get("sch",envir=envir_stacomi),"t_operation_ope ",
+						" join ",get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant where ope_dic_identifiant in",dc,
+						" and extract(year from ope_date_debut)>=", anneedebut,
+						" and extract(year from ope_date_fin)<=", anneefin,	
+						" and ope_dic_identifiant in ", dc,
+						" and lot_tax_code in ", tax,
+						" and lot_std_code in ",std,
+						" and lot_lot_identifiant is null) as tmp",
+						" group by annee, ope_dic_identifiant, lot_tax_code, lot_std_code ",
+						" order by ope_dic_identifiant, annee, lot_tax_code, lot_std_code; ",sep="" )
+				req@sql<-stringr::str_replace_all(req@sql,"[\r\n\t]" , "")
+				req<-stacomirtools::connect(req)
+				bilA@data=req@query			
+				return(bilA)
+			}
 		})
 
 #' command line interface for \link{BilanAnnuels-class}
@@ -314,7 +289,7 @@ setMethod("xtable",signature=signature("BilanAnnuels"),definition=function(x,
 					les_valeurs_final<-stringr::str_c(" & ",stringr::str_c(les_valeurs_final,collapse=" & ")," & Total\\\\\n")
 				} else {
 					les_valeurs_final<-stringr::str_c(" & ",stringr::str_c(les_valeurs_final,collapse=" & ")," & \\\\\n")
-					}
+				}
 				return(les_valeurs_final)
 			}
 			les_dc<-unlist(lapply(stringr::str_split(coln,"_"),function(X)X[1]))

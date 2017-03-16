@@ -93,7 +93,7 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			}
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
-				} else {
+			} else {
 				# todo addmsg
 				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
 				warning("Attention, no time step selected, compunting with default value\n")
@@ -107,7 +107,7 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			assign("bilanFonctionnementDF_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			assign("bilanOperation_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
 			assign("bilanOperation_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
-					
+			
 			bilanOperation<-get("bilanOperation",envir=envir_stacomi)
 			bilanOperation<-charge(bilanOperation) 
 			# charge will search for refDC (possible multiple choice), bilanOperation_date_debut
@@ -188,7 +188,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 			if (!silent) funout(gettext("Starting migration summary ... be patient\n",domain="R-stacomiR"))
 			bilanMigrationMult<-object
 			
-
+			
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
 			time.sequence<-seq.POSIXt(from=debut,to=fin,
@@ -340,8 +340,8 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir=envir_stacomi)
 			assign("bilanFonctionnementDC",bilanFonctionnementDC,envir=envir_stacomi)
 			assign("bilanOperation",bilanOperation,envir=envir_stacomi)			
-						
-		
+			
+			
 			return(bilanMigrationMult)			
 		})				
 
@@ -812,22 +812,75 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 							time.sequence[vec[length(vec)]],
 							units="days")
 			)
-			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramene e 1
+			listei2[[i]]<-as.numeric(tps)/(as.numeric(sum(tps))) # on ramene a 1
 			stopifnot(all.equal(as.numeric(sum(listei2[[i]])),1))					
 		}
 	}
-	# df ["lot_identifiant","coef","ts.id"]
-	# lot_identifiant= identifiant du lot, coef = part du lot dans chaque id_seq (sequence de jours), "id_seq" numero du jour
-	# creating a table with lot_identifiant, sequence, and the coeff to apply
+	
+	# specific case of operations across two years
+	# In this case we want to split the operation and retain only the part corresponding to 
+	# the current year
+	#######################
+	#beginning of the year
+	########################
+	# initializing variable
+	overlapping_samples_between_year<-FALSE
+	imat3<-imat1[1,]	
+	listei3<-intervals::interval_overlap(imat2,imat3)
+	# vector of samples (lot) wich are overlapping between two years
+	lots_across<-names(listei3)[vapply(listei3,function(X)length(X)>0,NA)]
+	if (length(lots_across)>0){
+		overlapping_samples_between_year<-TRUE
+		for (i in 1:length(lots_across)){
+			the_lot<-lots_across[i]
+			duration_in_the_year<-as.numeric(difftime(
+							datasub[datasub$lot_identifiant==the_lot,"ope_date_fin"],
+							time.sequence[1],							
+							units="days"))
+			duration_of_the_sample<-as.numeric(difftime(datasub[datasub$lot_identifiant==the_lot,"ope_date_fin"],
+							datasub[datasub$lot_identifiant==the_lot,"ope_date_debut"],
+							units="days"))
+			listei2[[the_lot]]<-listei2[[the_lot]]*	(duration_in_the_year/duration_of_the_sample)					
+			
+		}
+	}
+	#######################	
+	#end of the year
+	#######################
+	imat3<-imat1[dim(imat1)[1],]	
+	listei3<-intervals::interval_overlap(imat2,imat3)
+# vector of samples (lot) wich are overlapping between two years
+# vector of samples (lot) wich are overlapping between two years
+	lots_across<-names(listei3)[vapply(listei3,function(X)length(X)>0,NA)]
+	if (length(lots_across)>0){
+		overlapping_samples_between_year<-TRUE
+		for (i in 1:length(lots_across)){
+			the_lot<-lots_across[i]
+			duration_in_the_year<-as.numeric(difftime(
+							time.sequence[length(time.sequence)]+lubridate::days(1),
+							datasub[datasub$lot_identifiant==the_lot,"ope_date_debut"],						
+							units="days"))
+			duration_of_the_sample<-as.numeric(difftime(datasub[datasub$lot_identifiant==the_lot,"ope_date_fin"],
+							datasub[datasub$lot_identifiant==the_lot,"ope_date_debut"],
+							units="days"))
+			listei2[[the_lot]]<-listei2[[the_lot]]*	(duration_in_the_year/duration_of_the_sample)					
+			
+		}
+	}
+
+
+# df ["lot_identifiant","coef","ts.id"]
+# lot_identifiant= identifiant du lot, coef = part du lot dans chaque id_seq (sequence de jours), "id_seq" numero du jour
+# creating a table with lot_identifiant, sequence, and the coeff to apply
 	df<-data.frame(lot_identifiant = rep(names(listei2), sapply(listei2, length)),
 			coef = unlist(listei2),ts_id=unlist(listei)	)
-	# dataframe corresponding to the whole time sequence
+# dataframe corresponding to the whole time sequence
 	df.ts=data.frame(debut_pas=time.sequence,
 			fin_pas=time.sequence+as.difftime(1,units="days"),
 			ts_id=as.numeric(strftime(time.sequence,format="%j")),stringsAsFactors =FALSE)
 	dfts<-merge(df.ts,df,by="ts_id")
 	datasub1<-merge(dfts,datasub,by="lot_identifiant")
-	# ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
+# ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
 	datasub1$value<-as.numeric(datasub1$value) # sinon arrondis e des entiers
 	if (negative){
 		datasub2<-sqldf::sqldf("SELECT  debut_pas,
@@ -869,6 +922,10 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 						GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
 						ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
 	}
+	# if some samples overlap between the current year and the year arround the current year,
+	# then the calculation will have hampered our numbers of a small amount
+	# and the following test is not expected to be TRUE.
+	if (!overlapping_samples_between_year)
 	stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
 	datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
 	if (!"MESURE"%in%colnames(datasub3)) 	datasub3$MESURE=0
@@ -879,7 +936,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	datasub3$CALCULE[is.na(datasub3$CALCULE)]<-0
 	datasub3$EXPERT[is.na(datasub3$EXPERT)]<-0
 	datasub3$PONCTUEL[is.na(datasub3$PONCTUEL)]<-0
-	# pour compatibilite
+# pour compatibilite
 	datasub3<-cbind(data.frame("No.pas"=as.numeric(strftime(datasub3$debut_pas,format="%j"))-1),datasub3)
 	datasub3$Effectif_total=rowSums(datasub3[,c("MESURE","CALCULE","EXPERT","PONCTUEL")])
 	return(datasub3)

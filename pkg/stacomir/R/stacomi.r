@@ -311,6 +311,7 @@ hX11=function(h,...){
 #' @importFrom lubridate floor_date
 #' @importFrom lubridate %m+%
 #' @importFrom lubridate isoweek
+#' @importFrom lubridate years
 #' @importFrom Hmisc wtd.quantile 
 #' @importFrom Hmisc capitalize 
 #' @importFrom mgcv gam
