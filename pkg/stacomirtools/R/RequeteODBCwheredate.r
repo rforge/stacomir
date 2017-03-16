@@ -28,8 +28,8 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 			requeteODBCwhere=new("RequeteODBCwhere")
 			requeteODBCwhere@where=paste("WHERE (",from@colonnedebut,
 					", ",from@colonnefin,
-					") overlaps (DATE '",
-					from@datedebut,"',DATE '",
+					") overlaps (timestamp without time zone '",
+					from@datedebut,"',timestamp without time zone '",
 					from@datefin,"') ")
 			requeteODBCwhere@and=paste(from@and,sep=" ") # concatenation du vecteur
 			requeteODBCwhere@select=from@select

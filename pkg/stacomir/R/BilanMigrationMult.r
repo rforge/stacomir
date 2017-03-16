@@ -276,8 +276,8 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			req@colonnedebut<-"ope_date_debut"
 			req@colonnefin<-"ope_date_fin"
 			# we round the date to be consistent with daily values from the 
-			req@datedebut=as.POSIXlt(as.Date(bilanMigrationMult@pasDeTemps@dateDebut,tz=Sys.timezone()))
-			req@datefin=as.POSIXlt(as.Date(DateFin(bilanMigrationMult@pasDeTemps),tz=Sys.timezone()))
+			req@datedebut=bilanMigrationMult@pasDeTemps@dateDebut
+			req@datefin=as.POSIXlt(DateFin(bilanMigrationMult@pasDeTemps)+as.difftime("23:59:59"))
 			dc = vector_to_listsql(bilanMigrationMult@dc@dc_selectionne)
 			tax=vector_to_listsql(bilanMigrationMult@taxons@data$tax_code)
 			std=vector_to_listsql(bilanMigrationMult@stades@data$std_code)
