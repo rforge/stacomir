@@ -1,3 +1,6 @@
+# todo interface modifier, refaire les commentaires, tester avec testthat les methodes writedatabase et supprime
+
+
 #' Class "BilanAgedemer"
 #' 
 #' the BilanAgedemer class is used to dispatch adult salmons to age class according
@@ -138,6 +141,7 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 			
 			return(object)
 			validObject(object)
+			assign("bilan_adm",object,envir_stacomi)
 		})
 
 
@@ -161,7 +165,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 				dc,
 				taxons=2220,
 				stades=c('5','11','BEC','BER','IND'),
-				par=c('1786','1785','C001'),
+				par=c('1786','1785','C001','A124'),
 				horodatedebut,
 				horodatefin,
 				limit1hm,
@@ -212,7 +216,9 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 			if(nrow(bilan_adm@data)==0) {
 				funout(gettext("you are in deep shit",domain="R-stacomiR"), arret=TRUE)
 			}   
-			adm=bilan_adm@data # on recupere le data.frame
+			adm=bilan_adm@data # we get the data.frame
+			# the age already present in the database don't interest us there
+			adm=adm[adm$car_par_code!='A124',]
 			if (is.na(as.numeric(bilan_adm@limit1hm@label))) stop("internal error")
 			# if no value, a dummy value of 2m
 			if (is.na(as.numeric(bilan_adm@limit2hm@label))) bilan_adm@limit2hm@label<-2000
@@ -249,15 +255,13 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			bilan_adm<-x
 			plot.type<-as.character(plot.type)# to pass also characters
 			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
-			if (exists("bilan_adm",envir_stacomi)) {
-				bilan_adm<-get("bilan_adm",envir_stacomi)
-			} else {      
+			if (nrow(bilan_adm@calcdata[["data"]])==0) {   
 				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
-			}
+			} 
 			dat<-bilan_adm@calcdata[["data"]]
 			# cols are using viridis::inferno(6,alpha=0.9)
 			les_coupes=as.numeric(c(bilan_adm@limit1hm@label,bilan_adm@limit2hm@label))
-		
+			
 			
 			#################################################
 			# plot.type =1 density plot
@@ -293,7 +297,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 				assign("p",p,envir=envir_stacomi)
 				funout(gettext("The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)",domain="R-stacomiR"))
 			}
-					
+			
 		})
 
 #' summary for BilanAgedemer 
@@ -304,12 +308,10 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 #' @export
 setMethod("summary",signature=signature(object="BilanAgedemer"),definition=function(object,silent=FALSE,...){
 			bilan_adm<-object
-			if (exists("bilan_adm",envir_stacomi)) {
-				bilan_adm<-get("bilan_adm",envir_stacomi)
-			} else {      
+			dat<-bilan_adm@calcdata[["data"]]	
+			if (nrow(dat)==0) {   
 				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			dat<-bilan_adm@calcdata[["data"]]		
+			} 
 			ndc=unique(dat$ope_dic_identifiant)
 			result<-list()
 			for (i in 1:length(ndc)){
@@ -357,133 +359,60 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 #' write_database(bilanMigration=bM_Arzal,silent=FALSE)
 #' }
 #' @export
-		setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
-					# dbname="bd_contmig_nat"
-					bilan_adm<-object
-					host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
-					port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
-					
-					if (class(bilan_adm)!="BilanAgedemer") stop("the bilan_adm should be of class BilanAgedemer")
-					if (class(silent)!="logical") stop("the silent argument should be a logical")
-					dc=as.numeric(bilan_adm@dc@dc_selectionne)[1]
-					if (bilan_adm@calcdata[[stringr::str_c("dc_",dc)]][["data"]]!=NULL){
-						#TO DO lancer méthode supprime
-					} else {
-					code_parametre_age=124	
-					code_methode_obtention="METHODE"
-					precision=1
-						bilanAgedemer_bam=cbind(
-								bilan_adm@calcdata$data$lot_identifiant, 
-								rep(code_parametre_age,nrow(bilan_adm@calcdata$data)),
-								rep(code_methode_obtention,nrow(bilan_adm@calcdata$data)),
-								NULL,
-								bilan_adm@calcdata$data$age,
-								rep(precision,nrow(bilan_adm@calcdata$data)),
-								NULL,
-								substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
-						)
-					}
-					data=bilan_adm@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
-					data=data[data$Effectif_total!=0,]
-					jour_dans_lannee_non_nuls=data$debut_pas	
-					col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
-					data=data[,-col_a_retirer]
-					data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 
-					data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
-					peuventpaszero=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
-					data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
-					annee<-as.numeric(unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1])
-					aat_bilanmigrationjournalier_bjo=cbind(
-							bilanMigration@dc@dc_selectionne,
-							bilanMigration@taxons@data$tax_code,
-							bilanMigration@stades@data$std_code,
-							annee, # une valeur
-							rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
-							utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
-							Sys.time(),
-							substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
-					)
-					aat_bilanmigrationjournalier_bjo= stacomirtools::killfactor(aat_bilanmigrationjournalier_bjo[!is.na(aat_bilanmigrationjournalier_bjo$values),])
-					colnames(aat_bilanmigrationjournalier_bjo)<-c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_valeur","bjo_labelquantite","bjo_horodateexport","bjo_org_code")
-					
-					#####
-					# Ci dessous conversion de la classe vers migration Interannuelle pour utiliser
-					# les methodes de cette classe
-					bil=as(bilanMigration,"BilanMigrationInterAnnuelle")
-					bil=connect(bil,silent=silent)
-					
-					hconfirm=function(h,...){			
-						# suppression des donnees actuellement presentes dans la base
-						# bilanjournalier et bilanmensuel
-						supprime(bil)			
-						baseODBC<-get("baseODBC",envir=envir_stacomi)
-						sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
-								"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
-								" SELECT * FROM  aat_bilanmigrationjournalier_bjo;")
-						invisible(utils::capture.output(
-										sqldf::sqldf(x=sql,
-												drv="PostgreSQL",
-												user=baseODBC["uid"],
-												dbname=dbname,				
-												password=baseODBC["pwd"],
-												host=host,
-												port=port)
-								))		
-						
-						
-						if (!silent){
-							funout(gettextf("Writing daily summary in the database %s \n",annee))
-						}
-# si l'utilisateur accepte de remplacer les valeurs				
-#progres<-get("progres",envir=envir_stacomi)
-#gtkWidgetDestroy(progres)
-# ecriture egalement du bilan mensuel
-						taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
-						stade= as.character(bilanMigration@stades@data$std_libelle)
-						DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-						tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
-						resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent )
-						fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
-					}#end function hconfirm
-					
-					if (nrow(bil@data)>0)
-					{ 
-						if (!silent){
-							choice<-gWidgets::gconfirm(gettextf("A summary has already been written in the database the %s : Overwrite ?",unique(bil@data$bjo_horodateexport))
-							                           ,handler=hconfirm) # voulez vous le remplacer ?
-						} else {
-							hconfirm(h=NULL)
-						}
-						
-					}
-					else  # sinon on ecrit les resultats quoiqu'il arrive
-					{
-						
-						baseODBC<-get("baseODBC",envir=envir_stacomi)
-						sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
-								"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
-								" SELECT * FROM  aat_bilanmigrationjournalier_bjo;")
-						invisible(utils::capture.output(
-										sqldf::sqldf(x=sql,
-												drv="PostgreSQL",
-												user=baseODBC["uid"],
-												dbname=dbname,				
-												password=baseODBC["pwd"],
-												host=host,
-												port=port)
-								))		
-#	
-						
-						if (!silent) funout(gettext("Writing daily summary in the database","\n",domain="R-stacomiR"))
-						taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
-						stade= as.character(bilanMigration@stades@data$std_libelle)
-						DC=as.numeric(bilanMigration@dc@dc_selectionne)	
-						tableau<-bilanMigration@calcdata[[stringr::str_c("dc_",DC)]][["data"]]
-						resum=funstat(tableau=tableau,time.sequence=tableau$debut_pas,taxon,stade,DC,silent=silent)
-						fn_EcritBilanMensuel(bilanMigration,resum,silent=silent)
-					} # end else
-				})		
-		
+setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
+			# dbname="bd_contmig_nat"
+			bilan_adm<-object
+			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
+			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
+			calcdata<-bilan_adm@calcdata[["data"]]	
+			data_in_base<-bilan_adm@data
+			if (nrow(calcdata)==0) {   
+				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
+			} 
+			if (class(bilan_adm)!="BilanAgedemer") stop("the bilan_adm should be of class BilanAgedemer")
+			if (class(silent)!="logical") stop("the silent argument should be a logical")
+			data_in_base<-data_in_base[data_in_base$car_par_code=='A124',]
+			if (nrow(data_in_base)>0){
+				supprime(bilan_adm,silent=silent)						
+			} 
+			#--------------
+			# creating the table to import
+			#--------------
+			code_parametre_age='A124'	
+			code_methode_obtention="CALCULE"
+			comment=gettextf("Age calculated from the size of fish compared to reference value %s for the limit between 1 sea winter and 2 sea winter fish, and %s for the limit between 2 sea winter fish and 3 sea winter fish",bilan_adm@limit1hm@label,bilan_adm@limit2hm@label)
+			bam=data.frame(
+					bilan_adm@calcdata$data$lot_identifiant, 
+					code_parametre_age,
+					code_methode_obtention,
+					as.integer(NA),
+					bilan_adm@calcdata$data$age,
+					as.integer(NA),
+					comment,
+					substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+			)
+			#--------------
+			# writing the table in the database
+			#--------------
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),
+					"tj_caracteristiquelot_car 	SELECT * FROM  bam;")
+			invisible(utils::capture.output(
+							sqldf::sqldf(x=sql,
+									drv="PostgreSQL",
+									user=baseODBC["uid"],
+									dbname=dbname,				
+									password=baseODBC["pwd"],
+									host=host,
+									port=port)
+					))		
+			
+			
+			if (!silent){
+				funout(gettextf("Writing  %s age values in the database \n",nrow(bam)))
+			}
+		})		
+
 #' Method to print the command line of the object
 #' @param x An object of class BilanAgedemer
 #' @param ... Additional parameters passed to print
@@ -534,13 +463,34 @@ funplotBilanAgedemer = function(h,...) {
 funtableBilanAgedemer = function(h,...) {
 	bilan_adm=charge(bilan_adm)
 	bilan_adm<-connect(bilan_adm)
-	vue_ope_lot=bilan_adm@requete@query # on recupere le data.frame
-	assign("bilan_adm",bilan_adm,envir_stacomi)#assign("bilan_adm",vue_ope_lot,envir_stacomi)
-	funout(gettext("Size (BL mm)",domain="R-stacomiR"))
-	vue_ope_lot[is.na(vue_ope_lot)]<-""
-	vue_ope_lot$ope_date_debut=as.character(vue_ope_lot$ope_date_debut)
-	vue_ope_lot$ope_date_fin=as.character(vue_ope_lot$ope_date_fin)   
-	gdf(vue_ope_lot, container=TRUE)
+	bilan_adm<-calcule(bilan_adm)
+	bilan_adm<-print(bilan_adm)
 }
 
 
+
+#' supprime method for BilanMigrationInterannuelle class
+#' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @return nothing
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("supprime",signature=signature("BilanAgedemer"),
+		definition=function(object)
+		{ 
+			bilan_adm<-object
+			data_in_base<-bilan_adm@data
+			data_in_base<-data_in_base[data_in_base$car_par_code=='A124',]
+			if (nrow(data_in_base)==0) funout(gettext("No data to remove"),arret=TRUE)
+		
+			requete=new("RequeteODBCwhere")
+			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
+			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car ")
+			requete@where=paste("WHERE car_lot_identifiant IN ",
+					vector_to_listsql(data_in_base$lot_identifiant),
+					" AND car_par_code='A124';",
+					sep="")
+			invisible(utils::capture.output(requete<-stacomirtools::connect(requete)))			
+			return(invisible(NULL))
+		}
+
+)
