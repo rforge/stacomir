@@ -108,7 +108,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 							FROM ",get("sch",envir=envir_stacomi),"t_operation_ope  join ", get("sch",envir=envir_stacomi),"t_lot_lot on lot_ope_identifiant=ope_identifiant 
 							where ope_dic_identifiant in ",dc, 
 					" and extract(year from ope_date_debut)>=",anneedebut,
-					" and	 extract(year from ope_date_fin)<=", anneefin, 
+					" and	 extract(year from ope_date_debut)<=", anneefin, 
 					" and ope_dic_identifiant in ", dc, 
 					" and lot_tax_code in ",tax,
 					" and lot_std_code in ",std,
@@ -139,7 +139,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 						as.numeric(end_of_the_year)/as.numeric(operation_duration)
 				data_end_of_the_year$ope_date_fin<-round_years
 				final_data<-rbind(data_not_to_cut,data_beginning_of_the_year,data_end_of_the_year)
-				sqldf(" select sum(lot_effectif) as effectif, annee_debut as annee, 
+				bilA@data<-sqldf(" select sum(lot_effectif) as effectif, annee_debut as annee, 
 							ope_dic_identifiant,
 							lot_tax_code, 
 							lot_std_code  
@@ -167,8 +167,9 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 				req@sql<-stringr::str_replace_all(req@sql,"[\r\n\t]" , "")
 				req<-stacomirtools::connect(req)
 				bilA@data=req@query			
-				return(bilA)
+				
 			}
+			return(bilA)
 		})
 
 #' command line interface for \link{BilanAnnuels-class}

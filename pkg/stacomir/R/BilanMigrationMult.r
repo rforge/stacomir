@@ -824,6 +824,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	#beginning of the year
 	########################
 	# initializing variable
+#browser()
 	overlapping_samples_between_year<-FALSE
 	imat3<-imat1[1,]	
 	listei3<-intervals::interval_overlap(imat2,imat3)
@@ -847,7 +848,9 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	#######################	
 	#end of the year
 	#######################
-	imat3<-imat1[dim(imat1)[1],]	
+	le<-length(time.sequence)
+	mat3<-as.data.frame(cbind(as.numeric(time.sequence[le]+as.difftime(1,units="days")),as.numeric(time.sequence[le]+as.difftime(2,units="days"))))
+	imat3<-intervals::Intervals(mat3)
 	listei3<-intervals::interval_overlap(imat2,imat3)
 # vector of samples (lot) wich are overlapping between two years
 # vector of samples (lot) wich are overlapping between two years

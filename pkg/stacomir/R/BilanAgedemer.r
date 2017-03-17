@@ -201,8 +201,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			return(bilan_adm)
 		})
 
-#' Calcule method for BilanAgedemer, this method will pass the data from long to wide format 
-#' ( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
+#' Calcule method for BilanAgedemer, this method will split the data according to cut
 #' 
 #' @param object An object of class \code{\link{BilanAgedemer-class}} 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
@@ -266,9 +265,9 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			
 			if (plot.type=="1"){		
 				
-				p<-ggplot(dat)+geom_histogram(aes(x=car_valeur_quantitatif,fill=factor(age)),alpha=0.8)+
+				p<-ggplot(dat)+geom_histogram(aes(x=car_valeur_quantitatif,fill=factor(age)),binwidth=10,alpha=0.8)+
 						geom_vline(xintercept=les_coupes,lty=2,lwd=1)+
-						annotate("text",x=les_coupes,y=0,label=les_coupes,vjust=1)+
+						annotate("text",x=les_coupes,y=0,label=les_coupes,vjust=1,hjust=-0.2)+
 						theme_minimal()+
 						scale_fill_manual("Age",values=c("1"="#379ec6","2"="#173957","3"="#b09953"))+
 						xlab("Size in mm")+
@@ -281,8 +280,9 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			######################################
 			# Migration according to stage, month and year
 			######################################
+			# todo see of anotation is possible
 			if (plot.type=="2"){					
-				p<-ggplot(dat)+geom_histogram(aes(x=car_valeur_quantitatif,fill=factor(age)),alpha=0.8)+
+				p<-ggplot(dat)+geom_histogram(aes(x=car_valeur_quantitatif,fill=factor(age)),binwidth=10,alpha=0.8)+
 						geom_vline(xintercept=les_coupes,lty=2,lwd=1)+
 						theme_minimal()+
 						scale_fill_manual("Age",values=c("1"="#379ec6","2"="#173957","3"="#b09953"))+
@@ -357,10 +357,13 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 #' write_database(bilanMigration=bM_Arzal,silent=FALSE)
 #' }
 #' @export
-		setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",host="localhost",port=5432){
-					# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
-					bilanMigration<-object
-					if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
+		setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
+					# dbname="bd_contmig_nat"
+					bilan_adm<-object
+					host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
+					port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
+					
+					if (class(bilan_adm)!="BilanAgedemer") stop("the bilanMigration should be of class BilanMigration")
 					if (class(silent)!="logical") stop("the silent argument should be a logical")
 					dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
 					data=bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["data"]]

@@ -54,6 +54,36 @@ test_that("Test an instance of BilanMigration, check that operations accross two
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
+test_that("Test another instance of BilanMigration, check that operations accross two years are split correcly",{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+			# overriding user schema to point to iav
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			
+			bilanMigration<-new("BilanMigration")
+			options(warn = -1)
+			bilanMigration<-choice_c(bilanMigration,
+					dc=c(6),
+					taxons=c("Anguilla anguilla"),
+					stades=c("AGJ"),
+					datedebut="2015-01-01",
+					datefin="2015-12-31")
+			options(warn = 0)
+			bilanMigration<-charge(bilanMigration,silent=TRUE)
+			bilanMigration<-connect(bilanMigration,silent=TRUE)
+			bilanMigration<-calcule(bilanMigration,silent=TRUE)
+			# before doing the split per year the sum was 8617
+			# now it is less, only one third of the 7 eel belong to 1997
+			# the rest are in 1998
+			expect_equal(round(sum(bilanMigration@calcdata[["dc_6"]][["data"]]$Effectif_total)),
+					26454)
+			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+
 test_that("Test connect method",{
 			stacomi(gr_interface=FALSE,
 					login_window=FALSE,

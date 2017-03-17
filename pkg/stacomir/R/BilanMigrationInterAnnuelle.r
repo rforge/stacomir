@@ -128,119 +128,126 @@ setMethod("connect",signature=signature("BilanMigrationInterAnnuelle"),
 					#==========================================
 					# table with 3 columns : annee; effectif; effectif_bjo
 					compared_numbers<-fn_check()
-					#-------------------------------------------------------------------------------------
-					# First test, if missing data, the program will propose to load the data by running bilanMigration
-					#-------------------------------------------------------------------------------------
-					# when data are missing, NA appear in the effectif_bjo column
-					if (any(is.na(compared_numbers$effectif_bjo))){
-						index_missing_years<-which(is.na(compared_numbers$effectif_bjo))
-						missing_years<-compared_numbers$annee[index_missing_years]
-						if (! silent & length(dic)>1) funout(gettextf("DC with missing values : %s ",dic[i],domain="R-StacomiR"))
-						if (! silent) funout(gettextf("Years with no value : %s ",stringr::str_c(missing_years,collapse="; "),domain="R-StacomiR"))
-						if (! silent) funout(gettextf("Some years are missing in the t_bilanjournalier_bjo table, loading them now !",domain="R-StacomiR"))
-						
-						
-						for (y in 1:length(missing_years)){
-							Y<-missing_years[y]
-							bM=new("BilanMigration")
-							funout(gettextf("Running Bilanmigration for year %s",Y,domain="R-StacomiR"))
-							bM=choice_c(bM,
-									dc=dic[i],
-									taxons=object@taxons@data$tax_nom_latin,
-									stades=object@stades@data$std_code,
-									datedebut=stringr::str_c(Y,"-01-01"),
-									datefin=stringr::str_c(Y,"-12-31"))
-							bM<-charge(bM,silent=silent)
-							bM<-connect(bM,silent=silent)
-							bM<-calcule(bM,silent=silent)
-							if (nrow(bM@data)>0 ){
-								# below the argument check_for_bjo is necessary
-								# as the write database method from bilanMigration 
-								# uses the connect method from BilanMigrationInterAnnuelle and the
-								# program runs in endless loops...
-								write_database(bM,silent=silent,check_for_bjo=FALSE)
-							}
-						} # end for loop to write new bilans
-						# reloading everything
-						object@data<-fn_connect()			
-						compared_numbers<-fn_check()		
-					} # end if any...
-					
-					#-------------------------------------------------------------------------------------
-					# Second test, for existing bilan with different numbers, again the data will be witten again
-					# if the previous test failed, and user confirmed that there was a problem
-					# the object@data and  compared_numbers are reloaded (see above)
-					# this test will only be run if the stage is not glass eel, for glass eels it does not make sense
-					# as some of the "effectif_total" in the bjo table correspond to weights not counts.
-					#-------------------------------------------------------------------------------------
-					
-					if (object@taxons@data$tax_code==2038 & object@stades@data$std_code=="CIV"){
-						if (! silent) funout(gettext("For glass eel it is not possible to check that data are up to date",domain="R-StacomiR"))
-						
-					} else if (!all(compared_numbers$effectif==compared_numbers$effectif_bjo)){
-						index_different_years<-which(compared_numbers$effectif!=compared_numbers$effectif_bjo)
-						differing_years<-compared_numbers$annee[index_different_years]
-						if (! silent) funout(gettextf("Years with values differing between t_bilanjournalier_bjo and bilanAnnuels : %s ",stringr::str_c(differing_years,collapse="; "),domain="R-StacomiR"))
-						#==================================
-						reload_years_with_error=function(h,...){	
-							bM=new("BilanMigration")
-							for (Y in differing_years){
-								# Y=differing_years[1]
-								funout(gettextf("Running Bilanmigration to correct data for year %s",Y))
-								bM=choice_c(bM,
-										dc=dic[i],
-										taxons=object@taxons@data$tax_nom_latin,
-										stades=object@stades@data$std_code,
-										datedebut=stringr::str_c(Y,"-01-01"),
-										datefin=stringr::str_c(Y,"-12-31"))
-								bM<-charge(bM,silent=silent)
-								bM<-connect(bM,silent=silent)
-								bM<-calcule(bM,silent=silent)
-								if (nrow(bM@data)>0 ){
-									# check for bjo will ensure that previous bilan are deleted
-									write_database(bM,silent=silent,check_for_bjo=TRUE)
-								}
-							} # end for loop to write new bilans
-							# the data are loaded again
-							object@data<-fn_connect()
-							# I need to assign the result one step up (in the environment of the connect function)
-							assign("object",object,envir=parent.frame(n=1))
-							
-						} # end h confirm function
-						#==================================
-						
-						if (!silent){
-							choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_bilanjournalier_bjo table, this means that they have been changed after the last bilanmigration was run,  
-						do you want to load them again for calculation ?"),
-									handler=reload_years_with_error)
-						} else {
-							reload_years_with_error(h=NULL)
-						}
-					} # secondary check
-				} # end for
-			} # end check
-			#-------------------------------------------------------------------------------------
-			# Final check for data
-			# index of data already present in the database
-			#-------------------------------------------------------------------------------------
-			les_annees=object@anneeDebut@annee_selectionnee:object@anneeFin@annee_selectionnee
-			index=unique(object@data$bjo_annee) %in% les_annees
-			# s'il manque des donnees pour certaines annees selectionnnees" 
-			if (!silent){
-				if (length(les_annees[!index])>0) 
-				{
-					funout(paste(gettext("Attention, there is no migration summary for this year\n",domain="R-stacomiR"),
-									paste(les_annees[!index],collapse=","),gettext(", this taxon and this stage (BilanMigrationInterAnnuelle.r)\n",domain="R-stacomiR")))
-				} # end if    
-				
-				# si toutes les annees sont presentes
-				if (length(les_annees[index])>0){
-					funout(paste(gettext("Annual migrations query completed",domain="R-stacomiR"),
-									paste(les_annees[index],collapse=","), "\n")) 
-				}  
-			}
-			return(object)
+					# as we have changed the bilanAnnuel to split data between years
+					# some unwanted data might step in outside the year range
+					# we correct for that
+					compared_numbers<- compared_numbers[
+							compared_numbers$annee>=object@anneeDebut@annee_selectionnee&
+									compared_numbers$annee<=object@anneeFin@annee_selectionnee,]
+
+#-------------------------------------------------------------------------------------
+# First test, if missing data, the program will propose to load the data by running bilanMigration
+#-------------------------------------------------------------------------------------
+# when data are missing, NA appear in the effectif_bjo column
+if (any(is.na(compared_numbers$effectif_bjo))){
+	index_missing_years<-which(is.na(compared_numbers$effectif_bjo))
+	missing_years<-compared_numbers$annee[index_missing_years]
+	if (! silent & length(dic)>1) funout(gettextf("DC with missing values : %s ",dic[i],domain="R-StacomiR"))
+	if (! silent) funout(gettextf("Years with no value : %s ",stringr::str_c(missing_years,collapse="; "),domain="R-StacomiR"))
+	if (! silent) funout(gettextf("Some years are missing in the t_bilanjournalier_bjo table, loading them now !",domain="R-StacomiR"))
+	
+	
+	for (y in 1:length(missing_years)){
+		Y<-missing_years[y]
+		bM=new("BilanMigration")
+		funout(gettextf("Running Bilanmigration for year %s",Y,domain="R-StacomiR"))
+		bM=choice_c(bM,
+				dc=dic[i],
+				taxons=object@taxons@data$tax_nom_latin,
+				stades=object@stades@data$std_code,
+				datedebut=stringr::str_c(Y,"-01-01"),
+				datefin=stringr::str_c(Y,"-12-31"))
+		bM<-charge(bM,silent=silent)
+		bM<-connect(bM,silent=silent)
+		bM<-calcule(bM,silent=silent)
+		if (nrow(bM@data)>0 ){
+			# below the argument check_for_bjo is necessary
+			# as the write database method from bilanMigration 
+			# uses the connect method from BilanMigrationInterAnnuelle and the
+			# program runs in endless loops...
+			write_database(bM,silent=silent,check_for_bjo=FALSE)
 		}
+	} # end for loop to write new bilans
+	# reloading everything
+	object@data<-fn_connect()			
+	compared_numbers<-fn_check()		
+} # end if any...
+
+#-------------------------------------------------------------------------------------
+# Second test, for existing bilan with different numbers, again the data will be witten again
+# if the previous test failed, and user confirmed that there was a problem
+# the object@data and  compared_numbers are reloaded (see above)
+# this test will only be run if the stage is not glass eel, for glass eels it does not make sense
+# as some of the "effectif_total" in the bjo table correspond to weights not counts.
+#-------------------------------------------------------------------------------------
+
+if (object@taxons@data$tax_code==2038 & object@stades@data$std_code=="CIV"){
+	if (! silent) funout(gettext("For glass eel it is not possible to check that data are up to date",domain="R-StacomiR"))
+	
+} else if (!all(compared_numbers$effectif==compared_numbers$effectif_bjo)){
+	index_different_years<-which(round(compared_numbers$effectif)!=round(compared_numbers$effectif_bjo))
+	differing_years<-compared_numbers$annee[index_different_years]
+	if (! silent) funout(gettextf("Years with values differing between t_bilanjournalier_bjo and bilanAnnuels : %s ",stringr::str_c(differing_years,collapse="; "),domain="R-StacomiR"))
+	#==================================
+	reload_years_with_error=function(h,...){	
+		bM=new("BilanMigration")
+		for (Y in differing_years){
+			# Y=differing_years[1]
+			funout(gettextf("Running Bilanmigration to correct data for year %s",Y))
+			bM=choice_c(bM,
+					dc=dic[i],
+					taxons=object@taxons@data$tax_nom_latin,
+					stades=object@stades@data$std_code,
+					datedebut=stringr::str_c(Y,"-01-01"),
+					datefin=stringr::str_c(Y,"-12-31"))
+			bM<-charge(bM,silent=silent)
+			bM<-connect(bM,silent=silent)
+			bM<-calcule(bM,silent=silent)
+			if (nrow(bM@data)>0 ){
+				# check for bjo will ensure that previous bilan are deleted
+				write_database(bM,silent=silent,check_for_bjo=TRUE)
+			}
+		} # end for loop to write new bilans
+		# the data are loaded again
+		object@data<-fn_connect()
+		# I need to assign the result one step up (in the environment of the connect function)
+		assign("object",object,envir=parent.frame(n=1))
+		
+	} # end h confirm function
+	#==================================
+	
+	if (!silent){
+		choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_bilanjournalier_bjo table, this means that they have been changed after the last bilanmigration was run,  
+								do you want to load them again for calculation ?"),
+				handler=reload_years_with_error)
+	} else {
+		reload_years_with_error(h=NULL)
+	}
+} # secondary check
+} # end for
+} # end check
+#-------------------------------------------------------------------------------------
+# Final check for data
+# index of data already present in the database
+#-------------------------------------------------------------------------------------
+les_annees=object@anneeDebut@annee_selectionnee:object@anneeFin@annee_selectionnee
+index=unique(object@data$bjo_annee) %in% les_annees
+# s'il manque des donnees pour certaines annees selectionnnees" 
+if (!silent){
+	if (length(les_annees[!index])>0) 
+	{
+		funout(paste(gettext("Attention, there is no migration summary for this year\n",domain="R-stacomiR"),
+						paste(les_annees[!index],collapse=","),gettext(", this taxon and this stage (BilanMigrationInterAnnuelle.r)\n",domain="R-stacomiR")))
+	} # end if    
+	
+	# si toutes les annees sont presentes
+	if (length(les_annees[index])>0){
+		funout(paste(gettext("Annual migrations query completed",domain="R-stacomiR"),
+						paste(les_annees[index],collapse=","), "\n")) 
+	}  
+}
+return(object)
+}
 )
 
 #' supprime method for BilanMigrationInterannuelle class

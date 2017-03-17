@@ -158,23 +158,24 @@ test_that("Test that different sums are the same, for  BilanMigrationInterAnnuel
 					stades=bmM@stades@data$std_code, 
 					datedebut=as.character(bmM@pasDeTemps@dateDebut),
 					datefin=as.character(as.POSIXlt(DateFin(bmM@pasDeTemps))))
-			bmM<-charge(bmM)
-			bmM<-connect(bmM)
+			bmM<-charge(bmM,silent=TRUE)
+			bmM<-connect(bmM,silent=TRUE)
+			bmM<-calcule(bmM,silent=TRUE)
 			
 			expect_equal(				
-					sum(bmM@data[bmM@data$ope_dic_identifiant==6,"value"]),
-					sum(bmi@data$bjo_valeur[bmi@data$bjo_labelquantite=="Effectif_total"])
+					round(sum(bmM@calcdata[["dc_6"]][["data"]]$Effectif_total)),
+					round(sum(bmi@data$bjo_valeur[bmi@data$bjo_labelquantite=="Effectif_total"]))
 			)
 			######################
 			# Test for BilanAnnuel
 			#####################
-			bila=as(bmi,"BilanAnnuels")
-			bila<-connect(bila)
+			bilA=as(bmi,"BilanAnnuels")
+			bilA<-connect(bilA)
 			# we test that the BilanAnnuel has the same number as
 			# BilanMigration
 			expect_equal(
-					sum(bmM@data[bmM@data$ope_dic_identifiant==6,"value"]),
-					bila@data$effectif,
+					round(sum(bmM@calcdata[["dc_6"]][["data"]]$Effectif_total)),
+					round(bilA@data$effectif[1]),
 					label="The sum of number in the BilanMigration are different to the
 							number in the BilanAnnuel class"
 			)		

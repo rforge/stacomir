@@ -52,7 +52,8 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req@colonnefin="ope_date_debut"
 			req@order_by="ORDER BY ope_dic_identifiant, ope_date_debut"
 			req@datedebut<-object@horodatedebut@horodate
-			req@datefin<-object@horodatefin@horodate
+			#below to be consistet with BIlanMigrationMult
+			req@datefin<-object@horodatefin@horodate+as.difftime("23:59:59")
 			req@select<-paste("SELECT * FROM  ",get("sch",envir=envir_stacomi),"t_operation_ope ")		
 			req@and=paste("AND ope_dic_identifiant in",stringr::str_c("(",stringr::str_c(lesdc,collapse=","),")"))
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE
