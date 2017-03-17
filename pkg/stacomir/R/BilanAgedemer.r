@@ -363,10 +363,27 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 					host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
 					port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
 					
-					if (class(bilan_adm)!="BilanAgedemer") stop("the bilanMigration should be of class BilanMigration")
+					if (class(bilan_adm)!="BilanAgedemer") stop("the bilan_adm should be of class BilanAgedemer")
 					if (class(silent)!="logical") stop("the silent argument should be a logical")
-					dc=as.numeric(bilanMigration@dc@dc_selectionne)[1]
-					data=bilanMigration@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+					dc=as.numeric(bilan_adm@dc@dc_selectionne)[1]
+					if (bilan_adm@calcdata[[stringr::str_c("dc_",dc)]][["data"]]!=NULL){
+						#TO DO lancer méthode supprime
+					} else {
+					code_parametre_age=124	
+					code_methode_obtention="METHODE"
+					precision=1
+						bilanAgedemer_bam=cbind(
+								bilan_adm@calcdata$data$lot_identifiant, 
+								rep(code_parametre_age,nrow(bilan_adm@calcdata$data)),
+								rep(code_methode_obtention,nrow(bilan_adm@calcdata$data)),
+								NULL,
+								bilan_adm@calcdata$data$age,
+								rep(precision,nrow(bilan_adm@calcdata$data)),
+								NULL,
+								substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+						)
+					}
+					data=bilan_adm@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 					data=data[data$Effectif_total!=0,]
 					jour_dans_lannee_non_nuls=data$debut_pas	
 					col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
