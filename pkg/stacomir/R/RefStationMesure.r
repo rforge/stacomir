@@ -89,20 +89,20 @@ setMethod("choice",signature=signature("RefStationMesure"),definition=function(o
 #' @param object an object of class RefStationMesure
 #' @param stationmesure a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("choice_c",signature=signature("RefStationMesure"),definition=function(object,stationmesure) {
-			if (class(stationmesure)!="character") {		
+setMethod("choice_c",signature=signature("RefStationMesure"),definition=function(object,stationMesure) {
+			if (class(stationMesure)!="character") {		
 				stop("the stationmesure should be of class character")
 			} 
 			if(length(stationMesure)==0){
 				stop("Select at least one value\n")
 			}
-			if (any(is.na(stationmesure))){
+			if (any(is.na(stationMesure))){
 				stop("NA values for stationmesure")
 			} 
 			# I can use the stm_libelle as there is a unique constraint in the table
-			libellemanquants<-stationmesure[!stationmesure%in%object@data$stm_libelle]
+			libellemanquants<-stationMesure[!stationMesure%in%object@data$stm_libelle]
 			if (length(libellemanquants)>0) warning(gettextf("stationmesure code not present :\n %s",stringr::str_c(libellemanquants,collapse=", "),domain="R-stacomiR"))
-			object@data<-object@data[object@data$stm_libelle%in%stationmesure,]		
+			object@data<-object@data[object@data$stm_libelle%in%stationMesure,]		
 			assign("refStationMesure",object,envir_stacomi)
 			return(object)
 		})
