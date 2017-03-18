@@ -16,12 +16,12 @@ interface_ConditionEnv = function()
    gWidgets::add(ggroupboutons,group)
     
     # date de debut et de fin
-    choice(bilanConditionEnv@horodate,label=gettext("Begginning",domain="R-stacomiR"),
+    choice(bilanConditionEnv@horodatedebut,label=gettext("Begginning",domain="R-stacomiR"),
 			nomassign="bilanConditionEnv_date_debut",
 			funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 			decal=-2,
 			affichecal=FALSE)
-    choice(bilanConditionEnv@horodate,
+    choice(bilanConditionEnv@horodatefin,
 			label=gettext("End",domain="R-stacomiR"),
 			nomassign="bilanConditionEnv_date_fin",
 			funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
