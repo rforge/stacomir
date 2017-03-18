@@ -18,17 +18,9 @@
 #' stationMesure=new("RefStationMesure"), data=data.frame(),
 #' requete=new("RequeteODBCwheredate"))}.
 #' @author cedric.briand"at"eptb-vilaine.fr
-#' @seealso Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-#' \code{\linkS4class{Bilan_poids_moyen}}
-#' \code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-#' \code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-#' \code{\linkS4class{BilanFonctionnementDC}}
-#' \code{\linkS4class{BilanFonctionnementDF}}
-#' \code{\linkS4class{BilanMigration}}
-#' \code{\linkS4class{BilanMigrationConditionEnv}}
-#' \code{\linkS4class{BilanMigrationInterAnnuelle}}
-#' \code{\linkS4class{BilanMigrationPar}}
-#' @concept Bilan Object 
+#' @family Bilan Objects
+#' @keywords classes
+#' @aliases BilanConditionEnv bilanConditionEnv
 #' @keywords classes
 #' @export 
 setClass(Class="BilanConditionEnv",
@@ -78,7 +70,36 @@ setMethod("connect",signature=signature("BilanConditionEnv"),
 			return(object)
 		}
 )
-
+#' command line interface for BilanConditionEnv class
+#' @param object An object of class \link{BilanConditionEnv-class}
+#' @param stationmesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
+#' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
+#' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed.
+#' @return An object of class \link{BilanConditionEnv-class}
+#' The choice_c method fills in the data slot for RefStationMesure and  and then 
+#' uses the choice_c methods of these object to select the data.
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+setMethod("choice_c",signature=signature("BilanConditionEnv"),definition=function(object,stationMesure,datedebut,datefin,silent=FALSE){
+			# code for debug using bM_Arzal example
+			#stationmesure=c("temp_gabion","coef_maree");datedebut="2008-01-01";datefin="2008-12-31";silent=FALSE
+			bil_CE<-object
+			bil_CE@stationMesure=charge(bil_CE@stationMesure)
+			# loads and verifies the stationmesure (selects the relevant lines in the table
+			bil_CE@stationMesure<-choice_c(object=bil_CE@stationMesure,stationMesure)
+			bil_CE@horodate<-choice_c(object=bil_CE@horodate,
+					nomassign="bilanConditionEnv_date_debut",
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
+					horodate=datedebut, 
+					silent=silent)
+			bil_CE@horodate<-choice_c(bil_CE@horodate,
+					nomassign="bilanConditionEnv_date_fin",
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
+					horodate=datefin,
+					silent=silent)
+			return(bil_CE)
+		})
 #' charge method for BilanCondtionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
 #' @param h A handler
