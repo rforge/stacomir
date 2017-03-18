@@ -1,3 +1,4 @@
+#TODO add link to example in Roxygen, develop plot and summary methods
 #' class BilanConditionEnv simple output of one or several environmental
 #' conditions...
 #' 
@@ -24,14 +25,15 @@
 #' @keywords classes
 #' @export 
 setClass(Class="BilanConditionEnv",
-		representation=representation(
-				horodate="RefHorodate",
+		representation=representation(			
 				stationMesure="RefStationMesure",
-				data="data.frame",
-				datedebut="POSIXt",
-				datefin="POSIXt"),
+				horodatedebut="RefHorodate",
+				horodatefin="RefHorodate",
+				data="data.frame"
+				),
 		prototype=prototype(
-				horodate=new("RefHorodate"),
+				horodatedebut=new("RefHorodate"),
+				horodatefin=new("RefHorodate"),
 				stationMesure=new("RefStationMesure"),
 				data=data.frame())
 )
@@ -39,17 +41,15 @@ setClass(Class="BilanConditionEnv",
 
 #' connect method for BilanConditionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
-#' @param h A handler
 #' @return an object of BilanConditionEnv class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("connect",signature=signature("BilanConditionEnv"),
-		definition=function(object,h) {
-			#  construit une requete ODBCwheredate
+setMethod("connect",signature=signature("BilanConditionEnv"),definition=function(object) {
+			#object<-bil_CE
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-			requete@datedebut=strptime(object@datedebut,format="%Y-%m-%d")
-			requete@datefin=strptime(object@datefin,format="%Y-%m-%d")
+			requete@datedebut=strptime(object@horodatedebut@horodate,format="%Y-%m-%d")
+			requete@datefin=strptime(object@horodatefin@horodate,format="%Y-%m-%d")
 			requete@colonnedebut="env_date_debut"
 			requete@colonnefin="env_date_fin"
 			requete@select=paste("SELECT", 
@@ -88,12 +88,12 @@ setMethod("choice_c",signature=signature("BilanConditionEnv"),definition=functio
 			bil_CE@stationMesure=charge(bil_CE@stationMesure)
 			# loads and verifies the stationmesure (selects the relevant lines in the table
 			bil_CE@stationMesure<-choice_c(object=bil_CE@stationMesure,stationMesure)
-			bil_CE@horodate<-choice_c(object=bil_CE@horodate,
+			bil_CE@horodatedebut<-choice_c(object=bil_CE@horodatedebut,
 					nomassign="bilanConditionEnv_date_debut",
 					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=datedebut, 
 					silent=silent)
-			bil_CE@horodate<-choice_c(bil_CE@horodate,
+			bil_CE@horodatefin<-choice_c(bil_CE@horodatefin,
 					nomassign="bilanConditionEnv_date_fin",
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=datefin,
@@ -114,13 +114,13 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 			}     
 			
 			if (exists("bilanConditionEnv_date_debut",envir_stacomi)) {
-				object@datedebut<-get("bilanConditionEnv_date_debut",envir_stacomi)@horodate
+				object@horodatedebut@horodate<-get("bilanConditionEnv_date_debut",envir_stacomi)
 			} else {
 				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
 			
 			if (exists("bilanConditionEnv_date_fin",envir_stacomi))  {
-				object@datefin<-get("bilanConditionEnv_date_fin",envir_stacomi)@horodate
+				object@horodatefin@horodate<-get("bilanConditionEnv_date_fin",envir_stacomi)
 			}else {
 				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}      		
@@ -129,7 +129,8 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 		})
 
 
-#' hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
+#' hbilanConditionEnvgraph function called by handler which displays a graphe 
+#' if environmental conditons are in the database during the selected period
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
