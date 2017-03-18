@@ -490,3 +490,21 @@ bmi_vichy@dc@data[,"type_df"]<-iconv(bmi_vichy@dc@data[,"type_df"],from="latin1"
 bmi_vichy@dc@data[,"type_dc"]<-iconv(bmi_vichy@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bmi_vichy@dc@data[,"dif_localisation"]<-iconv(bmi_vichy@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 devtools::use_data(bmi_vichy,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for bilanConditionEnv
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bil_CE<-new("BilanConditionEnv")
+bil_CE<-choice_c(bil_CE,
+		stationMesure=c("temp_gabion","coef_maree"),
+		datedebut="2008-01-01",
+		datefin="2008-12-31",
+		silent=FALSE)	
+bil_CE<-connect(bil_CE)
+bil_CE@stationMesure@data$stm_description<-iconv(bil_CE@stationMesure@data$stm_description,from="latin1",to="UTF8")
+devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
