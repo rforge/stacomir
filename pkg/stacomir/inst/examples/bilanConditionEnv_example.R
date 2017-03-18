@@ -10,13 +10,10 @@ stacomi(gr_interface=FALSE,
 			stationMesure=c("temp_gabion","coef_maree"),
 			datedebut="2008-01-01",
 			datefin="2008-12-31",
-			silent=FALSE)
-	
+			silent=FALSE)	
 	bil_CE<-connect(bil_CE)
 	
 }	
 
 data("bil_CE")
-bil_CE<-calcule(b_carlot,silent=TRUE)
-
-plot(bil_CE,plot.type="1",silent=TRUE)
+#plot(bil_CE,plot.type="1",silent=TRUE)
