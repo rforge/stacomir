@@ -218,7 +218,7 @@ if (object@taxons@data$tax_code==2038 & object@stades@data$std_code=="CIV"){
 	
 	if (!silent){
 		choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_bilanjournalier_bjo table, this means that they have been changed after the last bilanmigration was run,  
-								do you want to load them again for calculation ?"),
+								do you want to load them again for calculation ?",domain="R-StacomiR"),
 				handler=reload_years_with_error)
 	} else {
 		reload_years_with_error(h=NULL)
