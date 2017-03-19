@@ -1,9 +1,8 @@
-#TODO add link to example in Roxygen, develop plot and summary methods
 #' class BilanConditionEnv simple output of one or several environmental
 #' conditions...
 #' 
-#' Annual overview of environmental conditions. Enables to draw charts and
-#' write files.
+#' Annual overview of environmental conditions. Enables to draw some plot. Mostly used to build
+#' joined graphs for BilanMigration in class BilanMigrationConditionEnv
 #' 
 #' @include RefHorodate.r 
 #' @include RefStationMesure.r
@@ -23,6 +22,7 @@
 #' @keywords classes
 #' @aliases BilanConditionEnv bilanConditionEnv
 #' @keywords classes
+#' @example inst/examples/bilanConditionEnv_example.R
 #' @export 
 setClass(Class="BilanConditionEnv",
 		representation=representation(			

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-02-02 12:54+0100\n"
-"PO-Revision-Date: 2017-02-02 13:21+0100\n"
+"POT-Creation-Date: 2017-03-19 20:51+0100\n"
+"PO-Revision-Date: 2017-03-19 20:54+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -843,7 +843,7 @@ msgid "Number of time steps choice"
 msgstr "Choix du nombre de pas de temps"
 
 msgid "Ending date"
-msgstr ""
+msgstr "Date de fin"
 
 msgid "Not implemented for objectBilan = %s"
 msgstr "Non éxécuté pour objectBilan = %s"
@@ -869,7 +869,7 @@ msgid "not available in the database, available years"
 msgstr "inexistant dans la base de données, données disponibles "
 
 msgid ","
-msgstr ""
+msgstr ","
 
 msgid "les longeur de 'labels' et 'checked' sont differentes"
 msgstr "les longeur de 'labels' et 'checked' sont differentes"
