@@ -16,4 +16,4 @@ stacomi(gr_interface=FALSE,
 }	
 
 data("bil_CE")
-#plot(bil_CE,plot.type="1",silent=TRUE)
+plot(bil_CE,silent=TRUE)
