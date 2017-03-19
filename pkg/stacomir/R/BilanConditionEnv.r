@@ -30,7 +30,7 @@ setClass(Class="BilanConditionEnv",
 				horodatedebut="RefHorodate",
 				horodatefin="RefHorodate",
 				data="data.frame"
-				),
+		),
 		prototype=prototype(
 				horodatedebut=new("RefHorodate"),
 				horodatefin=new("RefHorodate"),
@@ -53,14 +53,14 @@ setMethod("connect",signature=signature("BilanConditionEnv"),definition=function
 			requete@colonnedebut="env_date_debut"
 			requete@colonnefin="env_date_fin"
 			requete@select=paste("SELECT", 
-							" env_date_debut,",
-							" env_date_fin,",
-							" env_methode_obtention,",
-							" val_libelle as env_val_identifiant,",
-							" env_valeur_quantitatif,",
-							" env_stm_identifiant",
-							" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
-							" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
+					" env_date_debut,",
+					" env_date_fin,",
+					" env_methode_obtention,",
+					" val_libelle as env_val_identifiant,",
+					" env_valeur_quantitatif,",
+					" env_stm_identifiant",
+					" FROM ",get("sch",envir=envir_stacomi),"tj_conditionenvironnementale_env",
+					" LEFT JOIN ref.tr_valeurparametrequalitatif_val on env_val_identifiant=val_identifiant",sep="")
 			requete@order_by<-"ORDER BY env_stm_identifiant, env_date_debut"			
 			tmp<-vector_to_listsql(object@stationMesure@data$stm_identifiant)
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
@@ -124,87 +124,68 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 			}else {
 				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
 			}      		
-			object<-connect(object)
 			return(object)
 		})
 
 
-#' hbilanConditionEnvgraph function called by handler which displays a graphe 
-#' if environmental conditons are in the database during the selected period
+#' hbilanConditionEnvgraph Internal method
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 hbilanConditionEnvgraph = function(h,...) 
-{
-	# chargement des conditions environnementales
+{	
+	bilanConditionEnv<-get("bilanConditionEnv",envir=envir_stacomi)
 	bilanConditionEnv=charge(bilanConditionEnv)
-	
-	# le dataframe contenant le res de la requete
-	dat<-bilanConditionEnv@data
-	
-	if(length(unique(dat$env_stm_identifiant))!=0)
-	{
-		# le layout pour l'affichage des graphiques
-		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
-		grid::grid.newpage()
-		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(unique(dat$env_stm_identifiant)),1,just="center")))
-		# la liste des graphes calcules
-		lesGraphes=list()
-		if(length(unique(dat$env_stm_identifiant))!= nrow(bilanConditionEnv@stationMesure@data))
-		{
-			funout(gettext("Some monitoring stations lack associated values\n",domain="R-stacomiR"))
-		}
-		
-		# pour toutes les stations de mesure selectionnees
-		for (i in 1:length(unique(dat$env_stm_identifiant)))
-		{
-			# l'identifiant de la station de mesure courante
-			stmidentifiant <- unique(dat$env_stm_identifiant)[i]
+	bilanConditionEnv=connect(bilanConditionEnv)
+	plot(bilanConditionEnv)
+}	
+#' Plot method for BilanConditionEnv
+#' @param x An object of class Bilan_carlot
+#' @param silent Stops displaying the messages.
+#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases plot.BilanConditionEnv plot.bilanConditionEnv plot.bilanconditionenv
+#' @export
+setMethod("plot", signature(x = "BilanConditionEnv", y = "missing"), definition=function(x,  silent=FALSE){ 
+			# le dataframe contenant le res de la requete
+			bil_CE<-x
+			dat<-bil_CE@data	
+			if(length(unique(dat$env_stm_identifiant))!=0){
+				# le layout pour l'affichage des graphiques
+				vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
+				grid::grid.newpage()
+				grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(unique(dat$env_stm_identifiant)),1,just="center")))
+				# la liste des graphes calcules
+				lesGraphes=list()
+				if(length(unique(dat$env_stm_identifiant))!= nrow(bil_CE@stationMesure@data))
+				{
+					funout(gettext("Some monitoring stations lack associated values (no environmental data)\n",domain="R-stacomiR"))
+				}
+				
+				# for all stationmesure selected
+				for (i in 1:length(unique(dat$env_stm_identifiant)))
+				{
+					# the identifier of the current station
+					stmidentifiant <- unique(dat$env_stm_identifiant)[i]
+					
+					# the line of bilanConditionEnv@stationMesure currently processed in the loop
+					stm <- bil_CE@stationMesure@data[bil_CE@stationMesure@data$stm_identifiant==stmidentifiant,]
+					
+					# all measures for the selected station
+					nameColonne <- as.character(stm$stm_libelle)
+					datstm <- stacomirtools::chnames(dat,"env_valeur_quantitatif", nameColonne) 
+					datstm <- datstm[datstm$env_stm_identifiant==stmidentifiant,]
+					
+					# creating the plot
+					g<-ggplot(datstm,aes_string(x="env_date_debut",y=nameColonne))  
+					g<-g+geom_line(aes_string(colour=nameColonne))+scale_y_continuous(stm$stm_libelle)+
+							scale_x_datetime(name="date")
+					
+					# printing plot on screen
+					print(g, vp=vplayout(i,1))
+				} 
+			} else {
+				funout(gettext("No environmental conditions values for selected monitoring stations (BilanConditionEnv.r)\n",domain="R-stacomiR"),arret=TRUE)
+			}	
 			
-			# la ligne de bilanConditionEnv@stationMesure en cours de traitement
-			stm <- bilanConditionEnv@stationMesure@data[bilanConditionEnv@stationMesure@data$stm_identifiant==stmidentifiant,]
-			
-			# toutes les mesures pour la station de mesure selectionnee
-			nameColonne <- as.character(stm$stm_libelle)
-			datstm <- stacomirtools::chnames(dat,"env_valeur_quantitatif", nameColonne) 
-			datstm <- datstm[datstm$env_stm_identifiant==stmidentifiant,]
-			
-			#AES<-structure(as.list(c("x"=as.name(datstm$env_date_debut),"y"=as.name(eval(nameColonne)))),class="uneval")
-			
-			# creation du graphe
-			g<-ggplot(datstm,aes_string(x="env_date_debut",y=nameColonne))  
-			g<-g+geom_line(aes_string(colour=nameColonne))+scale_y_continuous(stm$stm_libelle)+
-					scale_x_datetime(name="date")
-			
-			# affichage du graphe a  l'ecran
-			print(g, vp=vplayout(i,1))
-			
-			# ajout du graphe dans la liste      
-			lesGraphes[stm$stm_libelle] = g
-		} 
-	}
-	else
-	{
-		funout(gettext("No environmental conditions values for selected monitoring stations (BilanConditionEnv.r)\n",domain="R-stacomiR"),arret=TRUE)
-	}	
-	return (lesGraphes)
-}   
-
-
-hbilanConditionEnvstat = function(h,...) 
-{
-	bilanConditionEnv=charge(bilanConditionEnv)
-	
-	# le dataframe contenant le res de la requete
-	dat<-bilanConditionEnv@data
-	dat<-stacomirtools::chnames(dat,"env_stm_identifiant","stm_identifiant")
-	dat<-merge(dat,bilanConditionEnv@stationMesure@data,by="stm_identifiant")
-	funout(gettext("Statistics :\n",domain="R-stacomiR"))
-	liste = tapply(dat$env_valeur_quantitatif,dat$stm_libelle,summary)
-	for (i in names(liste)){
-		funout(paste(" station",i,":\nMin  ; 1st Qu.;  Median  ;    Mean   ; 3rd Qu.  ;     Max   ;    Na's  ) = \n",paste(liste[[i]],collapse="   ;   "),"\n"))
-	}
-	path=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("env_cond.csv",sep=""),fsep ="\\")
-	write.table(dat,path,sep=';',row.names=FALSE)
-	funout(gettextf("writing of %s \n",path))
-}
+		})   
