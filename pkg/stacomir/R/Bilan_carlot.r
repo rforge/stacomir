@@ -206,7 +206,7 @@ setMethod("calcule",signature=signature("Bilan_carlot"),definition=function(obje
 		})
 
 
-#' Plots of various type for BilanMigration, and performs writing to the database of daily values.
+#' Plots of various type for Bilancarlot
 #' @param x An object of class Bilan_carlot
 #' @param plot.type One of "1","violin plot". Defaut to \code{1} , can also be \code{2} boxplot or 
 #' \code{3} points. 
