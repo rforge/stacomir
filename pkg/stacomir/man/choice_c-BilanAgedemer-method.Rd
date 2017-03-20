@@ -7,7 +7,8 @@
 \usage{
 \S4method{choice_c}{BilanAgedemer}(object, dc, taxons = 2220,
   stades = c("5", "11", "BEC", "BER", "IND"), par = c("1786", "1785",
-  "C001"), horodatedebut, horodatefin, limit1hm, limit2hm, silent = FALSE)
+  "C001", "A124"), horodatedebut, horodatefin, limit1hm, limit2hm,
+  silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanAgedemer-class}}

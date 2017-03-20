@@ -8,7 +8,7 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 \dontrun{
 	stacomi(gr_interface=FALSE,
 			login_window=FALSE,
-			database_expected=FALSE)	
+			database_expected=TRUE)	
 	bM_Arzal=new("BilanMigration")
 	bM_Arzal=choice_c(bM_Arzal,
 			dc=5,

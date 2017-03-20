@@ -268,6 +268,7 @@ setMethod("calcule",signature=signature("BilanMigrationMult"),definition=functio
 setMethod("connect",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE){ 
 			# recuperation du BilanMigration
 			#bilanMigrationMult<-bmM
+			
 			bilanMigrationMult<-object
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug

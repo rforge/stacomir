@@ -7,17 +7,12 @@
 t_bilanmigrationjournalier_bjo table}
 \usage{
 \S4method{write_database}{BilanMigration}(object, silent = TRUE,
-  dbname = "bd_contmig_nat", host = "localhost", port = 5432,
-  check_for_bjo = TRUE)
+  dbname = "bd_contmig_nat", check_for_bjo = TRUE)
 }
 \arguments{
 \item{silent}{: TRUE to avoid messages}
 
 \item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
-
-\item{host}{: the host for sqldf, defaults to "localhost"}
-
-\item{port}{: the port, defaults to 5432}
 
 \item{check_for_bjo}{: do you want to check if data are already present in the bjo table, and delete them,
 this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops}

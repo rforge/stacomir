@@ -26,6 +26,7 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
+  \code{\link{BilanConditionEnv-class}},
   \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},
@@ -33,9 +34,7 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanMigrationInterAnnuelle-class}},
   \code{\link{BilanMigrationMult-class}},
   \code{\link{Bilan_carlot-class}},
-  \code{\link{Bilan_poids_moyen-class}},
-  \code{\link{Bilan_stades_pigm-class}},
-  \code{\link{Bilan_taille-class}}
+  \code{\link{Bilan_poids_moyen-class}}
 }
 \keyword{classes}
 

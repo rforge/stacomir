@@ -2,12 +2,14 @@
 % Please edit documentation in R/BilanConditionEnv.r
 \docType{class}
 \name{BilanConditionEnv-class}
+\alias{BilanConditionEnv}
 \alias{BilanConditionEnv-class}
+\alias{bilanConditionEnv}
 \title{class BilanConditionEnv simple output of one or several environmental
 conditions...}
 \description{
-Annual overview of environmental conditions. Enables to draw charts and
-write files.
+Annual overview of environmental conditions. Enables to draw some plot. Mostly used to build
+joined graphs for BilanMigration in class BilanMigrationConditionEnv
 }
 \section{Slots}{
 
@@ -28,23 +30,41 @@ write files.
 stationMesure=new("RefStationMesure"), data=data.frame(),
 requete=new("RequeteODBCwheredate"))}.
 }
+\examples{
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+\dontrun{
+	bil_CE<-new("BilanConditionEnv")
+	bil_CE<-choice_c(bil_CE,
+			stationMesure=c("temp_gabion","coef_maree"),
+			datedebut="2008-01-01",
+			datefin="2008-12-31",
+			silent=FALSE)	
+	bil_CE<-connect(bil_CE)
+	
+}	
+
+data("bil_CE")
+plot(bil_CE,silent=TRUE)
+}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }
 \seealso{
-Other Bilan Classes \code{\linkS4class{Bilan_carlot}}
-\code{\linkS4class{Bilan_poids_moyen}}
-\code{\linkS4class{Bilan_stades_pigm}} \code{\linkS4class{Bilan_taille}}
-\code{\linkS4class{BilanConditionEnv}} \code{\linkS4class{BilanEspeces}}
-\code{\linkS4class{BilanFonctionnementDC}}
-\code{\linkS4class{BilanFonctionnementDF}}
-\code{\linkS4class{BilanMigration}}
-\code{\linkS4class{BilanMigrationConditionEnv}}
-\code{\linkS4class{BilanMigrationInterAnnuelle}}
-\code{\linkS4class{BilanMigrationPar}}
-}
-\concept{
-Bilan Object
+Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
+  \code{\link{BilanArgentee-class}},
+  \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}}
 }
 \keyword{classes}
 

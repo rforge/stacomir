@@ -44,7 +44,7 @@ setClass(Class="BilanOperation",
 #' 
 #' @author cedric.briand
 setMethod("connect",signature=signature("BilanOperation"),definition=function(object,silent=FALSE) {
-			# object=bilanOperation
+			# object<-bilanOperation
 			req<-new("RequeteODBCwheredate")
 			req@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			lesdc<-object@dc@dc_selectionne			
@@ -53,7 +53,7 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 			req@order_by="ORDER BY ope_dic_identifiant, ope_date_debut"
 			req@datedebut<-object@horodatedebut@horodate
 			#below to be consistet with BIlanMigrationMult
-			req@datefin<-object@horodatefin@horodate+as.difftime("23:59:59")
+			req@datefin<-as.POSIXlt(object@horodatefin@horodate+as.difftime("23:59:59"))
 			req@select<-paste("SELECT * FROM  ",get("sch",envir=envir_stacomi),"t_operation_ope ")		
 			req@and=paste("AND ope_dic_identifiant in",stringr::str_c("(",stringr::str_c(lesdc,collapse=","),")"))
 			req<-stacomirtools::connect(req) # appel de la methode connect de l'object ODBCWHEREDATE

@@ -3,8 +3,7 @@
 \docType{methods}
 \name{calcule,BilanAgedemer-method}
 \alias{calcule,BilanAgedemer-method}
-\title{Calcule method for BilanAgedemer, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.}
+\title{Calcule method for BilanAgedemer, this method will split the data according to cut}
 \usage{
 \S4method{calcule}{BilanAgedemer}(object, silent)
 }
@@ -14,8 +13,7 @@
 \item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 }
 \description{
-Calcule method for BilanAgedemer, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
+Calcule method for BilanAgedemer, this method will split the data according to cut
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

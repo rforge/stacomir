@@ -6,7 +6,7 @@
 \alias{plot.Bilan_carlot}
 \alias{plot.b_carlot}
 \alias{plot.bilan_carlot}
-\title{Plots of various type for BilanMigration, and performs writing to the database of daily values.}
+\title{Plots of various type for Bilancarlot}
 \usage{
 \S4method{plot}{Bilan_carlot,missing}(x, plot.type = "1", silent = FALSE)
 }
@@ -21,7 +21,7 @@
 \item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
 }
 \description{
-Plots of various type for BilanMigration, and performs writing to the database of daily values.
+Plots of various type for Bilancarlot
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

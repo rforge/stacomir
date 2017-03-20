@@ -7,18 +7,18 @@
 t_bilanmigrationjournalier_bjo table}
 \usage{
 \S4method{write_database}{BilanAgedemer}(object, silent = TRUE,
-  dbname = "bd_contmig_nat", host = "localhost", port = 5432)
+  dbname = "bd_contmig_nat")
 }
 \arguments{
 \item{silent}{: TRUE to avoid messages}
 
 \item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
 
+\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
+
 \item{host}{: the host for sqldf, defaults to "localhost"}
 
 \item{port}{: the port, defaults to 5432}
-
-\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
 }
 \description{
 Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by

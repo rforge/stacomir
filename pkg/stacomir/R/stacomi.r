@@ -74,7 +74,7 @@ hBilanConditionEnv=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 hBilan_carlot=function(h,...){
-	funout(gettext("Summary of batch by calling the application vue lot ope\n",domain="R-stacomiR"),wash=TRUE)
+	funout(gettext("Summary of samples characteristics (size, weight...) by calling the view vue_lot_ope\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
@@ -95,8 +95,9 @@ hpds=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 hSt=function(h,...){
-	funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
+	funout(gettext("Not adapted yet to version 0.5",domain="R-stacomiR"))
+	#funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
+	#eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
@@ -113,18 +114,17 @@ hsilver=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
-htodo=function(h,...){
-	funout(gettext("TODO to develop",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
-}
-#' handler function used by the main interface
-#' @param h handler
-#' @param ... additional parameters
 hBilanEspeces=function(h,...){
 	funout(gettext("Species summary of the counting device\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanEspeces(),envir = .GlobalEnv)
 }
-
+#' handler function used by the main interface
+#' @param h handler
+#' @param ... additional parameters
+hbilanagedemer=function(h,...){
+	funout(gettext("Age calculation from size limit \n",domain="R-stacomiR"),wash=TRUE)
+	eval(interface_BilanAgedemer(),envir = .GlobalEnv)
+}
 
 
 #' Internal function, tests the connection and if it works loads the stacomi interface
@@ -457,13 +457,13 @@ interface_graphique=function(){
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Average weight glass eel",domain="R-stacomiR")]]$handler=hpds
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Average weight glass eel",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-cloud"
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Lenghts",domain="R-stacomiR")]]$handler=hTail
-	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Lenghts",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Lenghts",domain="R-stacomiR")]]$icon="gtk-cancel"#"gWidgetsRGtk2-scatterplot3d"#"gWidgetsRGtk2-boxplot"
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Pigmentary stages",domain="R-stacomiR")]]$handler=hSt
-	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Pigmentary stages",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-contour"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Pigmentary stages",domain="R-stacomiR")]]$icon="gtk-cancel"#"gWidgetsRGtk2-contour"
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Silver eel",domain="R-stacomiR")]]$handler=hsilver
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Silver eel",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-bubbles"
-	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$handler=htodo
-	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$icon="gtk-cancel"
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$handler=hbilanagedemer
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-hist"
 
 	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$handler = hX11
 	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$icon="newplot"
@@ -472,7 +472,7 @@ interface_graphique=function(){
 	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$handler = hlang
 	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$icon="dialog-info"
 	gWidgets::add(win, gmenu(menubarlist))
-	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)         # this one stacks from bottom to up
+	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)        
 	# gsortie is above the window
 	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
 	

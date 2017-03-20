@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanConditionEnv.r
 \name{hbilanConditionEnvgraph}
 \alias{hbilanConditionEnvgraph}
-\title{hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period}
+\title{hbilanConditionEnvgraph Internal method}
 \usage{
 hbilanConditionEnvgraph(h, ...)
 }
@@ -12,7 +12,7 @@ hbilanConditionEnvgraph(h, ...)
 \item{...}{Additional parameters}
 }
 \description{
-hbilanConditionEnvgraph function called by handler which displays a graphe if environmental conditons are in the database during the selected period
+hbilanConditionEnvgraph Internal method
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
