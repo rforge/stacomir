@@ -1,4 +1,4 @@
-#' An object of class bilanMigrationMult with data loaded
+#' Anguilla migration at the Arzal station (BilanMigrationMult-class)
 #' 
 #' This data corresponds to the data collected from three fishways
 #' and correspond to the migration station at Arzal in 2011 for all
@@ -47,7 +47,7 @@
 "envir_stacomi"
 
 
-#' An object of class bilanMigration with data loaded
+#' Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)
 #' 
 #' This data corresponds to the data collected at the vertical slot fishway
 #' in 2015, video recording of the thin lipped mullet Liza ramada migration
@@ -78,26 +78,28 @@
 #' @keywords data
 "bM_Arzal"
 
-#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' Fishway operation at the Arzal Dam (Vilaine France) (3 Fishways in 2011)
 #' 
 #' This dataset corresponds to the data collected at three different fishways
 #' it is loaded along with \link{bMM_Arzal}
-#' @format An object of class BilanFonctionnementDF 
+#' @format An object of class BilanFonctionnementDF  \link{BilanFonctionnementDF-class}
 #' @keywords data
 "bilanFonctionnementDF"
 
 
-#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' Counting device operation for three different counting device in Arzal (Vilaine, France)
 #' 
-#' This dataset corresponds to the data collected at three different control devices
+#' This dataset corresponds to the data collected at three different control devices.
+#' This object is of class \link{BilanFonctionnementDC-class} with data loaded
 #' it is loaded along with \link{bMM_Arzal}
 #' @format An object of class BilanFonctionnementDC 
 #' @keywords data
 "bilanFonctionnementDC"
 
-#' An object of class \link{BilanOperation-class} with data loaded
+#' Counting operations for three different counting device in Arzal (Vilaine, France)
 #' 
 #' This dataset corresponds to the data collected at three different control devices
+#' It is an object of class \link{BilanOperation-class} with data loaded.
 #' it is loaded along with \link{bMM_Arzal}
 #' @format An object of class BilanOperation
 #' @keywords data
@@ -109,10 +111,11 @@
 "calcmig"
 
 
-#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' Overview of the fishway operation at Arzal in (Vilaine France).
 #' 
 #' This data corresponds to the data collected at the vertical slot fishway
-#' in 2015, the fishway is working daily with a cycle depending on tide.
+#' in 2015, the fishway is working daily with a cycle depending on tide. This dataset
+#' is used to show an example of acdetailed output for an object of class \link{BilanFonctionnementDF-class} with data loaded
 #'
 #' @format An object of class BilanFonctionnementDF with 4 slots:
 #' \describe{
@@ -139,10 +142,11 @@
 #' @keywords data
 "bfDF"
 
-#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' Counting Device (DC) operation from 2000 to 2015 at the Arzal dam (Vilaine, France)
 #' 
 #' This data corresponds to the data collected at the vertical slot fishway camera
-#' from 2000 to 2015.
+#' from 2000 to 2015. It represents an object of class \link{BilanFonctionnementDC-class} 
+#' with data loaded
 #'
 #' @format An object of class BilanFonctionnementDC with 4 slots:
 #' \describe{
@@ -195,27 +199,28 @@
 #' @keywords data
 "bilanOperation_bM"
 
-#' An object of class \link{Bilan_carlot-class} with data loaded
+#' Size of yellow and glass eel at the Arzal dam (Vilaine, France) in the fishway and main eel trapping ladder.
 #' 
 #' This dataset corresponds to the data collected at two different control devices
 #' at the Arzal control station (see example in \link{Bilan_carlot-class}), all body size 
 #' parameters (total size, size converted from pixel in video control) are used in example
-#' @format An object of class Bilan_carlot
+#' @format An object of class \link{Bilan_carlot-class}
 #' @keywords data
 "b_carlot"
 
-#' An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded
+#' Daily glass eel and elver migration from 1984 to 2016 in the Sèvre Niortaise 
 #' 
 #' The first eel trapping ladder in France was built by Antoine Legault and the team from Rennes
 #' in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 1984 it has been 
 #' operational at the same location and provides one of the longest series of eel migration. For this reason,
 #' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class. It has been
 #' kindly given by the parc du Marais Poitevin.
-#' @format An object of class BilanMigrationInterAnnuelle-class with data slot loaded.
+#' @format An object of class \ref{BilanMigrationInterAnnuelle-class} with data loaded.
 #' @keywords data
 "bmi"
 
-#' An object of class \link{BilanAnnuels-class} with data loaded
+#' Annual migration of yellow and silver eel for three fishways / counting devices at the
+#' Arzal dam (data from 1995 to 2016)
 #' 
 #' The dataset corresponds to the three fishways located on the Arzal dam, filled with annual data
 #' @format An object of class \link{BilanAnnuels-class} with data slot loaded.
