@@ -171,7 +171,7 @@ hcalc = function(h,...) {
 	bilPM<-charge(bilPM)
 	bilPM<-connect(bilPM)
 	bilPM<-calcule(bilPM)
-
+	
 }
 
 
@@ -270,44 +270,46 @@ setMethod("plot",signature(x = "Bilan_poids_moyen", y = "missing"),definition=fu
 				if (!silent) funout(gettext("object p assigned to envir_stacomi",domain="R-stacomiR"))
 			}
 		})
-		
-		
+
+
 #' Internal handler for reg, class \code{\link{Bilan_poids_moyen-class}}. 
 #' @param h handler
 #' @param \dots additional arguments passed to the function
-		hreg = function(h,...) {			
-			bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
-			model(bilPM,model.type=h$action)			
-		}
-		
+hreg = function(h,...) {			
+	bilPM<-get("bilan_poids_moyen",envir=envir_stacomi)
+	model(bilPM,model.type=h$action)			
+}
+
 
 #' model method for Bilan_poids_moyen' 
 #' this method uses samples collected over the season to model the variation in weight of
 #' glass eel or yellow eels.
 #' @param object An object of class \link{Bilan_pois_moyen-class}
 #' @param model.type default "seasonal", "seasonal1","seasonal2","manual". 
+#' @usage model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FALSE)
+#' @details 
+#' Depending on model.type several models are produced
 #' \itemize{
-#' 		\item{model.type="seasonal". The simplest model uses a seasonal variation, it is
+#'\item{model.type="seasonal".}{ The simplest model uses a seasonal variation, it is
 #' 				fitted with a sine wave curve allowing a cyclic variation 
 #' 				w ~ a*cos(2*pi*(doy-T)/365)+b with a period T. The julian time d0 used is this model is set
 #' 				at zero 1st of November d = d + d0; d0 = 305.}
-#' 		\item{model.type="seasonal1". A time component is introduced in the model, which allows
+#'\item{model.type="seasonal1".}{ A time component is introduced in the model, which allows
 #' 			for a long term variation along with the seasonal variation. This long term variation is
 #' 			is fitted with a gam, the time variable is set at zero at the beginning of the first day of observed values.
 #' 			The seasonal variation is modeled on the same modified julian time as model.type="seasonal"
 #' 			but here we use a cyclic cubic spline cc, which allows to return at the value of d0=0 at d=365.
 #' 			This model was considered as the best to model size variations by Diaz & Briand in prep. but using a large set of values
 #' 			over years.}
-#' 		\item{model.type="seasonal2". The seasonal trend in the previous model is now modelled with a sine
-#' 			curve similar to the sine curve used in seasonal.  The formula for this is \eqn{sin(\omega vt) + cos(\omega vt)}{{sin(omega vt) + cos(omega vt)}, 
+#'\item{model.type="seasonal2".}{The seasonal trend in the previous model is now modelled with a sine
+#' 			curve similar to the sine curve used in seasonal.  The formula for this is \eqn{sin(\omega vt) + cos(\omega vt)}{sin(omega vt) + cos(omega vt)}, 
 #'			where vt is the time index variable \eqn{\omega}{omega} is a constant that describes how the index variable relates to the full period
-#' 			(here, \eqn{2\pi/365=0.0172}{2pi/365=0.0172}). The model is written as following w~cos(0.0172*doy)+sin(0.0172*doy)+s(time).}
-#' 		\item{model.type="manual", The dataset don (the raw data), coe (the coefficients already present in the
+#' 			(here, \eqn{2\pi/365=0.0172}{2pi/365=0.0172}). The model is written as following \eqn{w~cos(0.0172*doy)+sin(0.0172*doy)+s(time).}}
+#'\item{model.type="manual".}{ The dataset don (the raw data), coe (the coefficients already present in the
 #' 			database, and newcoe the dataset to make the predictions from, are written to the environment envir_stacomi. 
 #' 			please see example for further description on how to fit your own model, build the table of coefficients,
-#' 			and write it to the database.}
+#' 			and write it to the database.}	
 #' }
-#' @usage model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FALSE)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases model.Bilan_poids_moyen model.bilPM
 #' @export
@@ -325,8 +327,9 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				if (!"date"%in%colnames(data)) stop ("date should be in colnames(data)")
 				if (!class(data$date)[1]=="POSIXct") stop("date should be POSIXct")
 				data$year<-lubridate::year(data$date)
+				# lubridate::yday(lubridate::dmy(01082008))
 				data$yday=lubridate::yday(data$date)
-				data$doy=data$yday-305 # year begins in november				
+				data$doy=data$yday-214 # year begins in august to be consistent with the class 			
 				data$season<-stringr::str_c(lubridate::year(data$date)-1,"-",lubridate::year(data$date)) # year-1-year
 				data$season[data$doy>0]<-stringr::str_c(lubridate::year(data$date),"-",lubridate::year(data$date)+1)[data$doy>0] # for november and december it's year - year+1
 				data$yearbis<-data$year # same as season but with a numeric
@@ -363,13 +366,16 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					} else predata<-rbind(predata,predatay)
 				}
 				print(result)
+				assign("result",result,envir_stacomi)
+				if (!silent) funout(gettext("Model equations assigned to envir_stacomi (result)",domain="R-stacomiR"))
+				
 				p<-ggplot(don)+ geom_jitter(aes(x=doy,y=w),col="aquamarine4")+facet_wrap(~season )+
 						geom_line(aes(x=doy,y=pred_weight),data=predata)+
 						#geom_line(aes(x=doy,y=pred_weight),color="green",size=1,data=predatafull[predatafull$doy==50,])+
 						theme_minimal()+
 						theme(panel.border = element_blank(),
 								axis.line = element_line())+
-						xlab("Jour dans la saison, debut au 1er novembre")#,
+						xlab("Jour dans la saison, debut au 1er août")#,
 				#plot.background=element_rect(fill="darkseagreen"))#,
 				#panel.background = element_rect(fill = "grey90", colour = NA))
 				
@@ -385,14 +391,14 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				#points(as.POSIXct(newcoe$date),pred, col="magenta")
 				#legend("topright",c("Obs.", "Coeff base","Mod"), col=c("black","cyan","magenta"),pch="o",cex = 0.8)
 				#mtext(com,side=3,line=0.5) 
-				result
-                result_to_text<-stringr::str_c(sapply(t(result[,c(1,3,4,5)]),as.character),collapse=" ")
-						
+				
+				result_to_text<-stringr::str_c(sapply(t(result[,c(1,3,4,5)]),as.character),collapse=" ")
+				
 				# setting text for comment (lines inserted into the database)
 				com=stringr::str_c("w ~ a*cos(2*pi*(doy-T)/365)+b with a period T.",
 						" The julian time d0 used is this model is set at zero 1st of November doy = d + d0; d0 = 305.",
 						" Coefficients for the model (one line per season): season, a, T, b =",
-				result_to_text)
+						result_to_text)
 			} else if (model.type=="seasonal1"){
 				g1 = mgcv::gam(w~s(yday,bs="cc")+s(time),data=don, knots = list(yday = c(1, 365)))
 				# the knots=list(yday=c(1,365) is necessary for a smooth construction of the model
@@ -423,7 +429,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				#	omega is a constant that describes how the index variable relates to the full period (here, 2pi/365=0.0172).
 				############################################################
 				g2 = mgcv::gam(w~cos(0.0172*doy)+sin(0.0172*doy)+s(time),data=don)
-				print(gettext("One model per year, doy starts in november",domain="R-stacomiR"))
+				print(gettext("One model per year, doy starts in august",domain="R-stacomiR"))
 				summary(g2)
 				plot(g2,pages=1)
 				predata<-newcoe
@@ -444,7 +450,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				assign("g2",g2,envir=envir_stacomi)
 				if (!silent) funout(gettext("ggplot object p assigned to envir_stacomi",domain="R-stacomiR"))
 				if (!silent) funout(gettext("gam model g2 assigned to envir_stacomi",domain="R-stacomiR"))
-					
+				
 				###################################################################
 				# comparison with Guerault and Desaunay (summary table in latex)
 				######################################################################
@@ -458,7 +464,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				colnames(summary_harmonic)=c("source","$\\gamma$","$s_0(cm)$","$\\phi$")
 				xt_summary_harmonic<-xtable( summary_harmonic,
 						caption=gettext("Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling
-								of estuarine samples.",domain="R-stacomiR"),
+										of estuarine samples.",domain="R-stacomiR"),
 						label=gettext("summary_harmonic",domain="R-stacomiR"),
 						digits=c(0,0,3,3,0))
 				tabname<-stringr::str_c(get("datawd",envir=envir_stacomi),"/summary_harmonic.tex")
@@ -485,24 +491,26 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				assign("coe",coe,envir=envir_stacomi)
 			}
 			
-		
-			import_coe=data.frame(
-					"coe_tax_code"='2038',
-					"coe_std_code"='CIV',
-					"coe_qte_code"=1,
-					"coe_date_debut"=Hmisc::round.POSIXt(predata$date,digits="days"),
-					"coe_date_fin"=Hmisc::round.POSIXt(predata$date,digits="days")+as.difftime(1,units="days"),
-					"coe_valeur_coefficient"=1/predata$pred_weight,
-					"coe_commentaires"=com)
-			# will write only if the database is present
-			if (get("database_expected",envir_stacomi)){
-			fileout= paste(get("datawd",envir=envir_stacomi),"import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
-			utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
-			funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
+			if (model.type!="manual"){
+				import_coe=data.frame(
+						"coe_tax_code"='2038',
+						"coe_std_code"='CIV',
+						"coe_qte_code"=1,
+						"coe_date_debut"=Hmisc::round.POSIXt(predata$date,digits="days"),
+						"coe_date_fin"=Hmisc::round.POSIXt(predata$date,digits="days")+as.difftime(1,units="days"),
+						"coe_valeur_coefficient"=1/predata$pred_weight,
+						"coe_commentaires"=com)
+				# will write only if the database is present
+				if (get("database_expected",envir_stacomi)){
+					fileout= paste(get("datawd",envir=envir_stacomi),"import_coe",bilPM@anneedebut@annee_selectionnee,bilPM@anneefin@annee_selectionnee,".csv",sep="")
+					utils::write.table(import_coe,file=fileout, row.names = FALSE,sep=";")
+					funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
+				}
+				assign("import_coe",import_coe,envir=envir_stacomi)
+				funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
+				bilPM@calcdata[["import_coe"]]<-import_coe	
 			}
-			assign("import_coe",import_coe,envir=envir_stacomi)
-			funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
-					bilPM@calcdata[["import_coe"]]<-import_coe			
+			return(bilPM)
 		})
 
 
@@ -547,11 +555,13 @@ setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=f
 			# first delete existing data from the database
 			supprime(bilPM@coe,tax=2038,std="CIV")
 			import_coe<-bilPM@calcdata$import_coe
+			import_coe$coe_org_code<-toupper(gsub("\\.","",get("sch",envir_stacomi)))
 			baseODBC<-get("baseODBC",envir=envir_stacomi)
 			sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe (",			
 					"coe_tax_code,coe_std_code,coe_qte_code,coe_date_debut,coe_date_fin,coe_valeur_coefficient,
-							coe_commentaires)",
-					" SELECT * FROM import_coe;")
+							coe_commentaires,coe_org_code)",
+					" SELECT coe_tax_code,coe_std_code,coe_qte_code,coe_date_debut,coe_date_fin,coe_valeur_coefficient::real,
+							coe_commentaires,coe_org_code FROM import_coe;")
 			invisible(utils::capture.output(
 							sqldf::sqldf(x=sql,
 									drv="PostgreSQL",

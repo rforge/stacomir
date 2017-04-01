@@ -3,8 +3,8 @@
 \docType{data}
 \name{b_carlot}
 \alias{b_carlot}
-\title{An object of class \link{Bilan_carlot-class} with data loaded}
-\format{An object of class Bilan_carlot}
+\title{Size of yellow and glass eel at the Arzal dam (Vilaine, France) in the fishway and main eel trapping ladder.}
+\format{An object of class \link{Bilan_carlot-class}}
 \usage{
 b_carlot
 }

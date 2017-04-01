@@ -3,13 +3,14 @@
 \docType{data}
 \name{bilanFonctionnementDC}
 \alias{bilanFonctionnementDC}
-\title{An object of class \link{BilanFonctionnementDC-class} with data loaded}
+\title{Counting device operation for three different counting device in Arzal (Vilaine, France)}
 \format{An object of class BilanFonctionnementDC}
 \usage{
 bilanFonctionnementDC
 }
 \description{
-This dataset corresponds to the data collected at three different control devices
+This dataset corresponds to the data collected at three different control devices.
+This object is of class \link{BilanFonctionnementDC-class} with data loaded
 it is loaded along with \link{bMM_Arzal}
 }
 \keyword{data}

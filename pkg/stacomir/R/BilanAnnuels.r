@@ -483,7 +483,8 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 						
 					} else if (length(lestax)==1 & length(lesstd)==1){
 						
-						g<-ggplot(dat,aes(x=annee,y=effectif))+geom_point(aes(col=dc))+
+						g<-ggplot(dat,aes(x=annee,y=effectif))+
+								geom_point(aes(col=dc))+
 								geom_line(aes(col=dc))+
 								theme_bw() 
 						print(g)

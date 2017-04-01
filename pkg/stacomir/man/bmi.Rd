@@ -3,8 +3,8 @@
 \docType{data}
 \name{bmi}
 \alias{bmi}
-\title{An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded}
-\format{An object of class BilanMigrationInterAnnuelle-class with data slot loaded.}
+\title{Daily glass eel and elver migration from 1984 to 2016 in the Sèvre Niortaise}
+\format{An object of class \ref{BilanMigrationInterAnnuelle-class} with data loaded.}
 \usage{
 bmi
 }

@@ -3,7 +3,8 @@
 \docType{data}
 \name{bilA}
 \alias{bilA}
-\title{An object of class \link{BilanAnnuels-class} with data loaded}
+\title{Annual migration of yellow and silver eel for three fishways / counting devices at the
+Arzal dam (data from 1995 to 2016)}
 \format{An object of class \link{BilanAnnuels-class} with data slot loaded.}
 \usage{
 bilA

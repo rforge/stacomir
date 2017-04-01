@@ -3,7 +3,7 @@
 \docType{data}
 \name{bfDC}
 \alias{bfDC}
-\title{An object of class \link{BilanFonctionnementDC-class} with data loaded}
+\title{Counting Device (DC) operation from 2000 to 2015 at the Arzal dam (Vilaine, France)}
 \format{An object of class BilanFonctionnementDC with 4 slots:
 \describe{
 #'   \item{data}{ A dataframe with 544 obs. of  7 variables
@@ -32,7 +32,8 @@ bfDC
 }
 \description{
 This data corresponds to the data collected at the vertical slot fishway camera
-from 2000 to 2015.
+from 2000 to 2015. It represents an object of class \link{BilanFonctionnementDC-class} 
+with data loaded
 }
 \keyword{data}
 

@@ -42,8 +42,6 @@ require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
-# the following script will load data from the two Anguillere monitored in the Somme
-
 \dontrun{
 	#create an instance of the class
 	bilPM<-new("Bilan_poids_moyen")

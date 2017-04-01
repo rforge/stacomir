@@ -3,8 +3,8 @@
 \docType{data}
 \name{bilanFonctionnementDF}
 \alias{bilanFonctionnementDF}
-\title{An object of class \link{BilanFonctionnementDF-class} with data loaded}
-\format{An object of class BilanFonctionnementDF}
+\title{Fishway operation at the Arzal Dam (Vilaine France) (3 Fishways in 2011)}
+\format{An object of class BilanFonctionnementDF  \link{BilanFonctionnementDF-class}}
 \usage{
 bilanFonctionnementDF
 }

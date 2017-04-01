@@ -592,26 +592,41 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			data=data[data$Effectif_total!=0,]
 			jour_dans_lannee_non_nuls=data$debut_pas	
 			col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
+			col_a_retirer=col_a_retirer[!is.na(col_a_retirer)] # car dans le cas des civelles et poids
+			# les colonnes ne sont pas les mêmes
 			data=data[,-col_a_retirer]
+			# below again the taux_d_echappement not there if glass eel and weights
+			if (is.null(data$taux_d_echappement)) data$taux_d_echappement<-NA
 			data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 
-			# bug 27/02/2017 for some reasons crashes with arzal and coef_valeur_coefficient
-			# and didn't crash for logrami or smatah
 			if (!is.null(data$coe_valeur_coefficient)){
 			data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
 		    }else {data$coe_valeur_coefficient<-NA}
-			peuventpaszero=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
-			data[,-peuventpaszero][data[,-peuventpaszero]==0]<-NA
+			cannotbenull=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
+			data[,-cannotbenull][data[,-cannotbenull]==0]<-NA
 			annee<-as.numeric(unique(strftime(as.POSIXlt(bilanMigration@time.sequence),"%Y"))[1])
-			aat_bilanmigrationjournalier_bjo=cbind(
-					bilanMigration@dc@dc_selectionne,
-					bilanMigration@taxons@data$tax_code,
-					bilanMigration@stades@data$std_code,
-					annee, # une valeur
-					rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
-					utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
-					Sys.time(),
-					substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
-			)
+			if ("Poids_total"%in%colnames(data)){
+				aat_bilanmigrationjournalier_bjo=cbind(
+						bilanMigration@dc@dc_selectionne,
+						bilanMigration@taxons@data$tax_code,
+						bilanMigration@stades@data$std_code,
+						annee, # une valeur
+						rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","Effectif_total.p","Effectif_total.e","poids_depuis_effectifs","Poids_total","taux_d_echappement","coe_valeur_coefficient")])),
+						utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","Effectif_total.p","Effectif_total.e","poids_depuis_effectifs","Poids_total","taux_d_echappement","coe_valeur_coefficient")]),  
+						Sys.time(),
+						substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+				)	
+			} else{
+				aat_bilanmigrationjournalier_bjo=cbind(
+						bilanMigration@dc@dc_selectionne,
+						bilanMigration@taxons@data$tax_code,
+						bilanMigration@stades@data$std_code,
+						annee, # une valeur
+						rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
+						utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
+						Sys.time(),
+						substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+				)	
+			}
 			aat_bilanmigrationjournalier_bjo= stacomirtools::killfactor(aat_bilanmigrationjournalier_bjo[!is.na(aat_bilanmigrationjournalier_bjo$values),])
 			colnames(aat_bilanmigrationjournalier_bjo)<-c("bjo_dis_identifiant","bjo_tax_code","bjo_std_code","bjo_annee","bjo_jour","bjo_valeur","bjo_labelquantite","bjo_horodateexport","bjo_org_code")
 			

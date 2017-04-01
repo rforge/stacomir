@@ -3,7 +3,7 @@
 \docType{data}
 \name{bMM_Arzal}
 \alias{bMM_Arzal}
-\title{An object of class bilanMigrationMult with data loaded}
+\title{Anguilla migration at the Arzal station (BilanMigrationMult-class)}
 \format{An object of class bilanMigrationMult with slots:
 \describe{
   \item{dc}{the \code{RefDC} object filled with data}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{bfDF}
 \alias{bfDF}
-\title{An object of class \link{BilanFonctionnementDF-class} with data loaded}
+\title{Overview of the fishway operation at Arzal in (Vilaine France).}
 \format{An object of class BilanFonctionnementDF with 4 slots:
 \describe{
 #'   \item{data}{ A dataframe with 4261 obs. of  7 variables
@@ -31,7 +31,8 @@ bfDF
 }
 \description{
 This data corresponds to the data collected at the vertical slot fishway
-in 2015, the fishway is working daily with a cycle depending on tide.
+in 2015, the fishway is working daily with a cycle depending on tide. This dataset
+is used to show an example of acdetailed output for an object of class \link{BilanFonctionnementDF-class} with data loaded
 }
 \keyword{data}
 

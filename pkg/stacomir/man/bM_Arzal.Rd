@@ -3,7 +3,7 @@
 \docType{data}
 \name{bM_Arzal}
 \alias{bM_Arzal}
-\title{An object of class bilanMigration with data loaded}
+\title{Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)}
 \format{An object of class bilanMigration with 8 slots:
 \describe{
   \item{dc}{the \code{RefDC} object with 4 slots filled with data corresponding to the iav postgres schema}
