@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-03-19 20:51+0100\n"
-"PO-Revision-Date: 2017-03-19 20:54+0100\n"
+"POT-Creation-Date: 2017-04-01 15:01+0200\n"
+"PO-Revision-Date: 2017-04-01 15:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -64,23 +64,23 @@ msgstr ""
 "L'objet graphique est décrit dans envir_stacomi, écrire g<-get('g',"
 "envir=envir_stacomi)"
 
-msgid "the bilanMigration should be of class BilanMigration"
-msgstr "bilanMigration doit appartenir à la classe BilanMigration"
+msgid "the bilan_adm should be of class BilanAgedemer"
+msgstr ""
 
 msgid "the silent argument should be a logical"
 msgstr "l’argument silent doit être booleen"
 
-msgid "Writing daily summary in the database %s"
-msgstr "Ecriture du bilan journalier dans la base %s"
+msgid ""
+"Age calculated from the size of fish compared to reference value %s for the "
+"limit between 1 sea winter and 2 sea winter fish, and %s for the limit "
+"between 2 sea winter fish and 3 sea winter fish"
+msgstr ""
 
-msgid "A summary has already been written in the database the %s : Overwrite ?"
-msgstr "Un résumé a déjà été écrit dans la base de données le %s : Ecraser ?"
+msgid "Writing  %s age values in the database"
+msgstr ""
 
-msgid "Writing daily summary in the database"
-msgstr "Ecriture du bilan journalier dans la base"
-
-msgid "Size (BL mm)"
-msgstr "Taille (LT mm)"
+msgid "No data to remove"
+msgstr ""
 
 msgid "You need to choose the starting year"
 msgstr "Il faut choisir l'annee de debut"
@@ -142,6 +142,9 @@ msgstr "Taille (mm)"
 msgid "Weight(g)"
 msgstr "Poids(g)"
 
+msgid "Size (BL mm)"
+msgstr "Taille (LT mm)"
+
 msgid "Environmental conditions loading query completed"
 msgstr ""
 "La requete est effectuee pour charger les conditions environnementales "
@@ -149,8 +152,8 @@ msgstr ""
 msgid "You need to choose a monitoring station, clic on validate"
 msgstr "Il faut choisir une station de mesure puis cliquer sur valider "
 
-msgid "Some monitoring stations lack associated values"
-msgstr "Certaines stations de mesure n'ont pas de valeurs associées"
+msgid "Some monitoring stations lack associated values (no environmental data)"
+msgstr ""
 
 msgid ""
 "No environmental conditions values for selected monitoring stations "
@@ -158,12 +161,6 @@ msgid ""
 msgstr ""
 "Aucune valeur de conditions environnementales pour les stations de mesure "
 "sélectionnées (BilanConditionEnv.r)"
-
-msgid "Statistics :"
-msgstr "Statistiques :"
-
-msgid "writing of %s"
-msgstr "ecriture de %s"
 
 msgid "Query failed for the view vue_ope_lot_car"
 msgstr "Echec de la requête vers la vue vue_ope_lot_car "
@@ -186,6 +183,9 @@ msgstr "Il n'y a aucun poisson dans la base sur cette periode"
 
 msgid "Warning, some negative counts are transformed into positive ones"
 msgstr "Attention certains effectifs négatifs sont transformés en positifs"
+
+msgid "writing of %s"
+msgstr "ecriture de %s"
 
 msgid "Summary of encountered species for the counting device"
 msgstr "Bilan des espèces présentes sur le DC"
@@ -287,8 +287,8 @@ msgstr "Types d'arrêts du DC"
 msgid "Writing of %s"
 msgstr "Ecriture de %s"
 
-msgid "Writing of %s this might take a while, please be patient â¦"
-msgstr "Ecriture de %s cela peut prendre du temps, patience..."
+msgid "Writing of %s this might take a while, please be patient ..."
+msgstr ""
 
 msgid "t_periodefonctdispositif_per_DC_%s_%s"
 msgstr "t_periodefonctdispositif_per_DC_%s_%s"
@@ -395,8 +395,17 @@ msgid "no bilan written to database : database_expected argument=FALSE"
 msgstr ""
 "Aucun bilan écrit dans la base de données : database_expected argument=FALSE"
 
+msgid "the bilanMigration should be of class BilanMigration"
+msgstr "bilanMigration doit appartenir à la classe BilanMigration"
+
+msgid "Writing daily summary in the database %s"
+msgstr "Ecriture du bilan journalier dans la base %s"
+
 msgid "A summary has already been written in the database the :%s Overwrite ?"
 msgstr "Un résumé a déjà été écrit dans la base de données le %s : Ecraser ?"
+
+msgid "Writing daily summary in the database"
+msgstr "Ecriture du bilan journalier dans la base"
 
 msgid "Summary object is stocked into envir_stacomi environment"
 msgstr "L'objet Bilan est stocke dans l'environnement envir_stacomi"
@@ -422,6 +431,42 @@ msgstr ""
 "Le nombre de lignes dans le tableau des conditions environnementales (%s) ne "
 "correspond pas à la durée du bilan de migration (%s)"
 
+msgid "BilanMigrationInterannuelle can only take one taxa"
+msgstr ""
+
+msgid "BilanMigrationInterannuelle can only take one stage"
+msgstr ""
+
+msgid "DC with missing values : %s"
+msgstr ""
+
+msgid "Years with no value : %s"
+msgstr ""
+
+msgid ""
+"Some years are missing in the t_bilanjournalier_bjo table, loading them now !"
+msgstr ""
+
+msgid "Running Bilanmigration for year %s"
+msgstr ""
+
+msgid "For glass eel it is not possible to check that data are up to date"
+msgstr ""
+
+msgid ""
+"Years with values differing between t_bilanjournalier_bjo and bilanAnnuels : "
+"%s"
+msgstr ""
+
+msgid "Running Bilanmigration to correct data for year %s"
+msgstr ""
+
+msgid ""
+"Some data differ between t_bilanjournalier_bjo table, this means that they "
+"have been changed after the last bilanmigration was run,  \n"
+"\t\t\t\t\t\t\t\tdo you want to load them again for calculation ?"
+msgstr ""
+
 msgid "Attention, there is no migration summary for this year"
 msgstr "Attention il n'existe pas de bilan migration pour cette année "
 
@@ -441,6 +486,12 @@ msgstr ""
 msgid "timesplit should be one of :"
 msgstr "le pas de temps doit être choisi parmi :"
 
+msgid "jour"
+msgstr ""
+
+msgid "day"
+msgstr "jour"
+
 msgid "mois"
 msgstr ""
 
@@ -455,6 +506,22 @@ msgstr ""
 
 msgid "2 weeks"
 msgstr "2 semaines"
+
+msgid ""
+"You have more than one station in the Bilan, the dc from the Bilan should "
+"belong to the same station"
+msgstr ""
+
+msgid ""
+"No rows in bilanMigrationInterannuelle@data, nothing to run calculations on"
+msgstr ""
+
+msgid ""
+"Attention : you have to complete a migration summary for at least one of the "
+"selected year before launching a inter-annual summary"
+msgstr ""
+"ATTENTION : Veuillez effectuer un Bilan Migration pour au moins une des "
+"annees selectionnees avant de lancer un bilan interannuel"
 
 msgid ""
 "Writing the graphical object into envir_stacomi environment : write g=get(gi"
@@ -487,15 +554,14 @@ msgstr ""
 "ATTENTION : Veuillez effectuer un Bilan Migration pour au moins une des "
 "années sélectionnées avant de lancer un bilan interannuel"
 
+msgid "Internal error, timesplit"
+msgstr ""
+
+msgid "not working for seasonal plot"
+msgstr ""
+
 msgid "plot.type argument invalid"
 msgstr "argument plot.type non valide"
-
-msgid ""
-"Attention : you have to complete a migration summary for at least one of the "
-"selected year before launching a inter-annual summary"
-msgstr ""
-"ATTENTION : Veuillez effectuer un Bilan Migration pour au moins une des "
-"annees selectionnees avant de lancer un bilan interannuel"
 
 msgid ""
 "The summary object is stored in environment envir_stacomi, write "
@@ -668,12 +734,12 @@ msgstr ""
 "Le tableau des prédictions newcoe est attribué à l'environnement "
 "envir_stacomi"
 
+msgid "data directory :%s"
+msgstr "Répertoire d'écriture des données :%s"
+
 msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
 msgstr ""
 "Pour récupérer le tableau, taper : import_coe=get('import_coe',envir_stacomi)"
-
-msgid "data directory :%s"
-msgstr "Répertoire d'écriture des données :%s"
 
 msgid "Do you want to write data in the database ?"
 msgstr "Voulez vous ecrire les donnees dans la base ?"
@@ -862,17 +928,26 @@ msgstr ""
 msgid "horodate should be a vector of length 1"
 msgstr "l'horodate doit être de longueur 1"
 
-msgid "year,"
-msgstr "annee,"
+msgid "no year"
+msgstr ""
 
-msgid "not available in the database, available years"
-msgstr "inexistant dans la base de données, données disponibles "
+msgid "Attention, year"
+msgstr ""
+
+msgid "is not available in the database, available years :"
+msgstr ""
+
+msgid "none, were you lazy?"
+msgstr ""
 
 msgid ","
 msgstr ","
 
 msgid "les longeur de 'labels' et 'checked' sont differentes"
 msgstr "les longeur de 'labels' et 'checked' sont differentes"
+
+msgid "%s rows deleted from table tj_coefficientconversion_coe"
+msgstr ""
 
 msgid "Counting device selected"
 msgstr "Le DC a été sélectionné "
@@ -990,6 +1065,17 @@ msgstr "Les stations de mesure ont été sélectionnées "
 msgid ""
 "Stop : no data for selected monitoring station (problem with the ODBC link ?)"
 msgstr "Stop il n'y  a aucune donnée de station de mesure (pb lien ODBC ?) "
+
+msgid "the stationmesure should be of class character"
+msgstr ""
+
+msgid "NA values for stationmesure"
+msgstr ""
+
+msgid ""
+"stationmesure code not present :\n"
+" %s"
+msgstr ""
 
 msgid "Taxon selected"
 msgstr "Le taxon a été sélectionné "
@@ -1207,14 +1293,14 @@ msgstr "Démarrage"
 msgid "Summary graphic"
 msgstr "Graphe bilan"
 
-msgid "Summary tables in .csv"
-msgstr "tables bilan en .csv"
-
 msgid "Monthly graph"
 msgstr "Graphe mensuel"
 
 msgid "Another monthly graph"
 msgstr "Autre graphe mensuel"
+
+msgid "box"
+msgstr ""
 
 msgid "Boxplot"
 msgstr "Diagramme en boites"
@@ -1292,9 +1378,6 @@ msgstr "Migration de toutes les années dans le même graphique, cumulé"
 
 msgid "cumulated migrations %"
 msgstr "cumul migratoire en %"
-
-msgid "day"
-msgstr "jour"
 
 msgid "Daily migration"
 msgstr "Migration journalière"
@@ -1454,8 +1537,8 @@ msgstr "Calculs du fonctionnement du dispositif de comptage"
 msgid "Summary of the operations of a device ... to do"
 msgstr "Bilan des operations d'un dispositif ...a developper"
 
-msgid "Summary between the operating fishway and the counting device â¦ to do"
-msgstr "Bilan croises du fonctionnement du DF et du DC, à développer "
+msgid "Summary between the operating fishway and the counting device ... to do"
+msgstr ""
 
 msgid "Migration summary (for a species and a stage)"
 msgstr "Bilan migration (par espèce et stade)"
@@ -1612,6 +1695,33 @@ msgid "%d operation \n"
 msgid_plural "%d operations \n"
 msgstr[0] "opération\n"
 msgstr[1] "opérations\n"
+
+#~ msgid ""
+#~ "A summary has already been written in the database the %s : Overwrite ?"
+#~ msgstr ""
+#~ "Un résumé a déjà été écrit dans la base de données le %s : Ecraser ?"
+
+#~ msgid "Some monitoring stations lack associated values"
+#~ msgstr "Certaines stations de mesure n'ont pas de valeurs associées"
+
+#~ msgid "Statistics :"
+#~ msgstr "Statistiques :"
+
+#~ msgid "Writing of %s this might take a while, please be patient â¦"
+#~ msgstr "Ecriture de %s cela peut prendre du temps, patience..."
+
+#~ msgid "year,"
+#~ msgstr "annee,"
+
+#~ msgid "not available in the database, available years"
+#~ msgstr "inexistant dans la base de données, données disponibles "
+
+#~ msgid "Summary tables in .csv"
+#~ msgstr "tables bilan en .csv"
+
+#~ msgid ""
+#~ "Summary between the operating fishway and the counting device â¦ to do"
+#~ msgstr "Bilan croises du fonctionnement du DF et du DC, à développer "
 
 #~ msgid ""
 #~ "Writing the graphical object into envir_stacomi environment : write "

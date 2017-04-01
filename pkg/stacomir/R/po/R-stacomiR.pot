@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.1\n"
-"POT-Creation-Date: 2017-02-02 12:53\n"
+"POT-Creation-Date: 2017-03-19 20:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,22 +58,19 @@ msgstr ""
 msgid "The graphical object is written is env_stacomi, type p<-get('p',envir=envir_stacomi)"
 msgstr ""
 
-msgid "the bilanMigration should be of class BilanMigration"
+msgid "the bilan_adm should be of class BilanAgedemer"
 msgstr ""
 
 msgid "the silent argument should be a logical"
 msgstr ""
 
-msgid "Writing daily summary in the database %s"
+msgid "Age calculated from the size of fish compared to reference value %s for the limit between 1 sea winter and 2 sea winter fish, and %s for the limit between 2 sea winter fish and 3 sea winter fish"
 msgstr ""
 
-msgid "A summary has already been written in the database the %s : Overwrite ?"
+msgid "Writing  %s age values in the database"
 msgstr ""
 
-msgid "Writing daily summary in the database"
-msgstr ""
-
-msgid "Size (BL mm)"
+msgid "No data to remove"
 msgstr ""
 
 msgid "You need to choose the starting year"
@@ -127,22 +124,19 @@ msgstr ""
 msgid "Weight(g)"
 msgstr ""
 
+msgid "Size (BL mm)"
+msgstr ""
+
 msgid "Environmental conditions loading query completed"
 msgstr ""
 
 msgid "You need to choose a monitoring station, clic on validate"
 msgstr ""
 
-msgid "Some monitoring stations lack associated values"
+msgid "Some monitoring stations lack associated values (no environmental data)"
 msgstr ""
 
 msgid "No environmental conditions values for selected monitoring stations (BilanConditionEnv.r)"
-msgstr ""
-
-msgid "Statistics :"
-msgstr ""
-
-msgid "writing of %s"
 msgstr ""
 
 msgid "Query failed for the view vue_ope_lot_car"
@@ -161,6 +155,9 @@ msgid "No fish in the database for this period"
 msgstr ""
 
 msgid "Warning, some negative counts are transformed into positive ones"
+msgstr ""
+
+msgid "writing of %s"
 msgstr ""
 
 msgid "Summary of encountered species for the counting device"
@@ -259,7 +256,7 @@ msgstr ""
 msgid "Writing of %s"
 msgstr ""
 
-msgid "Writing of %s this might take a while, please be patient …"
+msgid "Writing of %s this might take a while, please be patient ..."
 msgstr ""
 
 msgid "t_periodefonctdispositif_per_DC_%s_%s"
@@ -352,7 +349,16 @@ msgstr ""
 msgid "no bilan written to database : database_expected argument=FALSE"
 msgstr ""
 
+msgid "the bilanMigration should be of class BilanMigration"
+msgstr ""
+
+msgid "Writing daily summary in the database %s"
+msgstr ""
+
 msgid "A summary has already been written in the database the :%s Overwrite ?"
+msgstr ""
+
+msgid "Writing daily summary in the database"
 msgstr ""
 
 msgid "Summary object is stocked into envir_stacomi environment"
@@ -370,6 +376,36 @@ msgstr ""
 msgid "The number of lines of the environmental conditions table (%s) doesn't fit the duration of the migration summary  (%s)"
 msgstr ""
 
+msgid "BilanMigrationInterannuelle can only take one taxa"
+msgstr ""
+
+msgid "BilanMigrationInterannuelle can only take one stage"
+msgstr ""
+
+msgid "DC with missing values : %s"
+msgstr ""
+
+msgid "Years with no value : %s"
+msgstr ""
+
+msgid "Some years are missing in the t_bilanjournalier_bjo table, loading them now !"
+msgstr ""
+
+msgid "Running Bilanmigration for year %s"
+msgstr ""
+
+msgid "For glass eel it is not possible to check that data are up to date"
+msgstr ""
+
+msgid "Years with values differing between t_bilanjournalier_bjo and bilanAnnuels : %s"
+msgstr ""
+
+msgid "Running Bilanmigration to correct data for year %s"
+msgstr ""
+
+msgid "Some data differ between t_bilanjournalier_bjo table, this means that they have been changed after the last bilanmigration was run,  \n\t\t\t\t\t\t\t\tdo you want to load them again for calculation ?"
+msgstr ""
+
 msgid "Attention, there is no migration summary for this year"
 msgstr ""
 
@@ -385,6 +421,12 @@ msgstr ""
 msgid "timesplit should be one of :"
 msgstr ""
 
+msgid "jour"
+msgstr ""
+
+msgid "day"
+msgstr ""
+
 msgid "mois"
 msgstr ""
 
@@ -398,6 +440,15 @@ msgid "quinzaine"
 msgstr ""
 
 msgid "2 weeks"
+msgstr ""
+
+msgid "You have more than one station in the Bilan, the dc from the Bilan should belong to the same station"
+msgstr ""
+
+msgid "No rows in bilanMigrationInterannuelle@data, nothing to run calculations on"
+msgstr ""
+
+msgid "Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
 msgstr ""
 
 msgid "Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with i=%s"
@@ -421,10 +472,13 @@ msgstr ""
 msgid "Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
 msgstr ""
 
-msgid "plot.type argument invalid"
+msgid "Internal error, timesplit"
 msgstr ""
 
-msgid "Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
+msgid "not working for seasonal plot"
+msgstr ""
+
+msgid "plot.type argument invalid"
 msgstr ""
 
 msgid "The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi)"
@@ -556,10 +610,10 @@ msgstr ""
 msgid "Table of current coefficients coe assigned to envir_stacomi"
 msgstr ""
 
-msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
+msgid "data directory :%s"
 msgstr ""
 
-msgid "data directory :%s"
+msgid "To obtain the table, type : import_coe=get(import_coe\",envir_stacomi"
 msgstr ""
 
 msgid "Do you want to write data in the database ?"
@@ -724,16 +778,25 @@ msgstr ""
 msgid "horodate should be a vector of length 1"
 msgstr ""
 
-msgid "year,"
+msgid "no year"
 msgstr ""
 
-msgid "not available in the database, available years"
+msgid "Attention, year"
+msgstr ""
+
+msgid "is not available in the database, available years :"
+msgstr ""
+
+msgid "none, were you lazy?"
 msgstr ""
 
 msgid ","
 msgstr ""
 
 msgid "les longeur de 'labels' et 'checked' sont differentes"
+msgstr ""
+
+msgid "%s rows deleted from table tj_coefficientconversion_coe"
 msgstr ""
 
 msgid "Counting device selected"
@@ -833,6 +896,15 @@ msgid "The monitoring stations have been selected"
 msgstr ""
 
 msgid "Stop : no data for selected monitoring station (problem with the ODBC link ?)"
+msgstr ""
+
+msgid "the stationmesure should be of class character"
+msgstr ""
+
+msgid "NA values for stationmesure"
+msgstr ""
+
+msgid "stationmesure code not present :\n %s"
 msgstr ""
 
 msgid "Taxon selected"
@@ -1030,13 +1102,13 @@ msgstr ""
 msgid "Summary graphic"
 msgstr ""
 
-msgid "Summary tables in .csv"
-msgstr ""
-
 msgid "Monthly graph"
 msgstr ""
 
 msgid "Another monthly graph"
+msgstr ""
+
+msgid "box"
 msgstr ""
 
 msgid "Boxplot"
@@ -1112,9 +1184,6 @@ msgid "Migration of all the years in the same graphic, cumulated"
 msgstr ""
 
 msgid "cumulated migrations %"
-msgstr ""
-
-msgid "day"
 msgstr ""
 
 msgid "Daily migration"
@@ -1252,7 +1321,7 @@ msgstr ""
 msgid "Summary of the operations of a device ... to do"
 msgstr ""
 
-msgid "Summary between the operating fishway and the counting device … to do"
+msgid "Summary between the operating fishway and the counting device ... to do"
 msgstr ""
 
 msgid "Migration summary (for a species and a stage)"
