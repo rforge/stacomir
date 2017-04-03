@@ -13,10 +13,6 @@
 #' @slot data \code{data.frame}
 #' @slot datedebut A \link[base]{-.POSIXt} value
 #' @slot datefin A \link[base]{-.POSIXt} value 
-#' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("BilanConditionEnv", horodate=new("Horodate"),
-#' stationMesure=new("RefStationMesure"), data=data.frame(),
-#' requete=new("RequeteODBCwheredate"))}.
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @family Bilan Objects
 #' @keywords classes
@@ -41,10 +37,11 @@ setClass(Class="BilanConditionEnv",
 
 #' connect method for BilanConditionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return an object of BilanConditionEnv class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("connect",signature=signature("BilanConditionEnv"),definition=function(object) {
+setMethod("connect",signature=signature("BilanConditionEnv"),definition=function(object,silent=FALSE) {
 			#object<-bil_CE
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
@@ -66,7 +63,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),definition=function
 			requete@and=paste(" AND env_stm_identifiant IN ",tmp )			
 			requete<-stacomirtools::connect(requete)			
 			object@data<-stacomirtools::killfactor(requete@query)
-			funout(gettext("Environmental conditions loading query completed\n",domain="R-stacomiR"))
+			if (!silent) funout(gettext("Environmental conditions loading query completed\n",domain="R-stacomiR"))
 			return(object)
 		}
 )
@@ -102,10 +99,10 @@ setMethod("choice_c",signature=signature("BilanConditionEnv"),definition=functio
 		})
 #' charge method for BilanCondtionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
-#' @param h A handler
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(object,h) {
+setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(object,silent) {
 			
 			if (exists("refStationMesure",envir_stacomi)) {
 				object@stationMesure<-get("refStationMesure",envir_stacomi)
@@ -140,9 +137,8 @@ hbilanConditionEnvgraph = function(h,...)
 	plot(bilanConditionEnv)
 }	
 #' Plot method for BilanConditionEnv
-#' @param x An object of class Bilan_carlot
-#' @param silent Stops displaying the messages.
-#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
+#' @param x An object of class \link{BilanConditionEnv-class}
+#' @param silent Stops displaying the messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanConditionEnv plot.bilanConditionEnv plot.bilanconditionenv
 #' @export

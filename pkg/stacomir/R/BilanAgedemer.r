@@ -34,6 +34,7 @@
 #' @family Bilan Objects
 #' @keywords classes
 #' @example inst/examples/bilanAgedemer_example.R
+#' @aliases BilanAgedemer bilA bilanagedemer bilanAgedeMer BilanAgeDeMer bilan_adm
 #' @export 
 setClass(Class="BilanAgedemer",
 		representation= representation(
@@ -210,6 +211,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 #' @param object An object of class \code{\link{BilanAgedemer-class}} 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
 setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(object,silent) {
 			#bilan_adm<-b_carlot
 			bilan_adm<-object
@@ -441,7 +443,6 @@ setMethod("print",signature=signature("BilanAgedemer"),definition=function(x,...
 #' @param h A handler, with action 1,2,3 or 4 
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funplotBilanAgedemer = function(h,...) {
 	bilan_adm<-get(x="bilan_adm",envir=envir_stacomi)
 	bilan_adm<-charge(bilan_adm)
@@ -459,7 +460,6 @@ funplotBilanAgedemer = function(h,...) {
 #' @param h hanlder passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
 funtableBilanAgedemer = function(h,...) {
 	bilan_adm=charge(bilan_adm)
 	bilan_adm<-connect(bilan_adm)

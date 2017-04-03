@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-04-01 15:01+0200\n"
-"PO-Revision-Date: 2017-04-01 15:02+0200\n"
+"POT-Creation-Date: 2017-04-03 15:22+0200\n"
+"PO-Revision-Date: 2017-04-03 15:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -511,6 +511,8 @@ msgid ""
 "You have more than one station in the Bilan, the dc from the Bilan should "
 "belong to the same station"
 msgstr ""
+"Vous avez plus qu'une station dans le Bilan, le DC du bilan doit appartenir "
+"à la même station de contrôle"
 
 msgid ""
 "No rows in bilanMigrationInterannuelle@data, nothing to run calculations on"
@@ -576,6 +578,16 @@ msgid ""
 msgstr ""
 "Les données brutes sont stockées dans bilanMigrationMult@data, les résultats "
 "sont stockés dans bilanMigrationMult@calcdata "
+
+msgid ""
+"The plot has been assigned to p in envir_stacomi,write p<-get('p',"
+"envir_stacomi) to retreive the object"
+msgstr ""
+
+msgid ""
+"The data for the plot have been assigned to envir_stacomi,write grdata<-"
+"get('grdata',envir_stacomi) to retreive the object"
+msgstr ""
 
 msgid "dc=%s Conversion weight / number"
 msgstr "dc=%s Conversion poids effectif "
@@ -697,11 +709,14 @@ msgstr "la date devrait être dans colnames(data)"
 msgid "date should be POSIXct"
 msgstr "la date devrait être POSIXct"
 
+msgid "Model equations assigned to envir_stacomi (result)"
+msgstr ""
+
 msgid "gam model g1 assigned to envir_stacomi"
 msgstr "le modèle gam g1 est attribué à envir_stacomi"
 
-msgid "One model per year, doy starts in november"
-msgstr "Un modèle par an, début en novembre"
+msgid "One model per year, doy starts in august"
+msgstr ""
 
 msgid "gam model g2 assigned to envir_stacomi"
 msgstr "le modèle gam g2 est attribué à envir_stacomi"
@@ -709,10 +724,8 @@ msgstr "le modèle gam g2 est attribué à envir_stacomi"
 msgid ""
 "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} "
 "and in the present modelling\n"
-"\t\t\t\t\t\t\t\tof estuarine samples."
+"\t\t\t\t\t\t\t\t\t\tof estuarine samples."
 msgstr ""
-"Comparaison des coefficients obtenus par \\citet{desaunay_seasonal_1997} et "
-"dans ce modèle des lots estuariens."
 
 msgid "summary_harmonic"
 msgstr "resumé_cyclique"
@@ -753,107 +766,6 @@ msgid ""
 msgstr ""
 "Attention, vous devez ajuster un modèle avant d'essayer d'écrire les "
 "prédictions dans la base de données"
-
-msgid "Pigmentation stages loading query completed"
-msgstr "La requete a été effectuée pour charger les stades pigmentaires"
-
-msgid "No data for pigmentation stages"
-msgstr "Pas de données de stades pigmentaires"
-
-msgid "You chose several stations"
-msgstr "Vous avez choisi plusieurs stations"
-
-msgid "no temperature data, you won't be able to retrocalculate arrival dates"
-msgstr ""
-"pas de données de températures, vous ne pourrez pas faire le rétrocalcul des "
-"dates d'arrivées"
-
-msgid "Loading data from database"
-msgstr "Chargement des données à partir de la base de données"
-
-msgid "Pigmentation stages %s and incoming dates in estuary"
-msgstr "Stades pigmentaires %s et dates d'arrivées à l'estuaire"
-
-msgid "incoming dates in estuary"
-msgstr "dates d'arrivees en estuaire"
-
-msgid "The temperature and salinity table doesn't go back enough in time"
-msgstr ""
-"Le tableau des températures et salinités ne remonte pas assez loin dans le "
-"temps"
-
-msgid ""
-"The graphic object is available in the main environment, write g<-get('g',"
-"envir=envir_stacomi)"
-msgstr ""
-"L'objet graphique est disponible dans l'environnement principal, écrire g<-"
-"get('g',envir=envir_stacomi)"
-
-msgid "title edit"
-msgstr "Modification du titre"
-
-msgid "Pigmentary sages graph title (graphstades = TRUE)"
-msgstr "Titre du graphe des stades pigmentaires (graphstades = TRUE)"
-
-msgid ""
-"Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
-msgstr ""
-"Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
-
-msgid "Exit"
-msgstr "Quitter"
-
-msgid "Summary of pigmentation stages"
-msgstr "Bilan des stades pigmentaires"
-
-msgid "distributions width choice"
-msgstr "Choix de la largeur des distributions"
-
-msgid "Mean salinity value, click to edit"
-msgstr "Valeur moyenne de salinité, cliquer pour modifier"
-
-msgid "temperature choice"
-msgstr "Choix de la température"
-
-msgid "First timestamp"
-msgstr "Première horodate"
-
-msgid "Last timestamp"
-msgstr "Dernière horodate"
-
-msgid "Data loading"
-msgstr "Chargement des données"
-
-msgid "Title choice"
-msgstr "Choix du titre"
-
-msgid "You need to choose at least one quantitative or qualitative feature"
-msgstr ""
-"Il faut choisir au moins une caracteristique quantitative ou qualitative"
-
-msgid "The query has been launched for Bilan_taille"
-msgstr "La requête est lancée pour Bilan_taille"
-
-msgid "Attention, this query might take a while, be patient ..."
-msgstr "Attention cette requête peut prendre du temps, soyez patient(e)..."
-
-msgid "To get the table, type : bilan_taille=get('bilan_taille',envir_stacomi)"
-msgstr ""
-"Pour recuperer le tableau, taper : bilan_taille=get('bilan_taille',"
-"envir_stacomi)"
-
-msgid "The query : requete=get('bilan_taille',envir_stacomi)@requete@sql"
-msgstr "La requête : requete=get('bilan_taille',envir_stacomi)@requete@sql "
-
-msgid "The data : donnees_taille=get('bilan_taille',envir_stacomi)@data"
-msgstr "Les données : donnees_taille=get('bilan_taille',envir_stacomi)@data"
-
-msgid ""
-"Data outcome from the query : don=get('bilan_taille',"
-"envir_stacomi)@requete@query"
-msgstr ""
-"Données directement issues de la requête : don=get('bilan_taille\","
-"envir_stacomi)@requete@query"
 
 msgid "Time step duration should be daily"
 msgstr "la duree du pas devrait etre journaliere"
@@ -1254,6 +1166,9 @@ msgstr "Début"
 msgid "End"
 msgstr "Fin"
 
+msgid "Exit"
+msgstr "Quitter"
+
 msgid "The year of beginning has been chosen"
 msgstr "L'année de début a été choisie"
 
@@ -1439,6 +1354,9 @@ msgstr "Bilan groupé"
 msgid "Fist timestamp"
 msgstr "horodate de debut"
 
+msgid "Last timestamp"
+msgstr "Dernière horodate"
+
 msgid "dotplot"
 msgstr "nuage de points"
 
@@ -1453,6 +1371,9 @@ msgstr "dataframe"
 
 msgid "Size report"
 msgstr "Bilan des tailles"
+
+msgid "First timestamp"
+msgstr "Première horodate"
 
 msgid "crossed query length / qualitative feature"
 msgstr "requête croisée taille/ caract. qualitative"
@@ -1562,8 +1483,10 @@ msgstr "Bilan migration avec paramètres"
 msgid "Summary of the environnemental conditions"
 msgstr "Bilan des conditions environnementales"
 
-msgid "Summary of batch by calling the application vue lot ope"
-msgstr "Bilan lots par appel de la vue vue_lot_ope"
+msgid ""
+"Summary of samples characteristics (size, weight...) by calling the view "
+"vue_lot_ope"
+msgstr ""
 
 msgid "Lengths summary"
 msgstr "Bilan des tailles"
@@ -1573,14 +1496,14 @@ msgid ""
 "and number."
 msgstr "Bilan des poids moyens en vue du calcul des relations poids effectif."
 
-msgid "Calculation of the pigmentary stages"
-msgstr "Calcul des stades pigmentaires "
-
-msgid "TODO to develop"
-msgstr "TODO à développer"
+msgid "Not adapted yet to version 0.5"
+msgstr ""
 
 msgid "Species summary of the counting device"
 msgstr "Bilan espèces pour le dispositif de comptage"
+
+msgid "Age calculation from size limit"
+msgstr ""
 
 msgid "Error when using the method connect of the ConnectionODBC class"
 msgstr ""
@@ -1695,6 +1618,120 @@ msgid "%d operation \n"
 msgid_plural "%d operations \n"
 msgstr[0] "opération\n"
 msgstr[1] "opérations\n"
+
+#~ msgid "One model per year, doy starts in november"
+#~ msgstr "Un modèle par an, début en novembre"
+
+#~ msgid ""
+#~ "Comparison of the coefficients obtained by "
+#~ "\\citet{desaunay_seasonal_1997} and in the present modelling\n"
+#~ "\t\t\t\t\t\t\t\tof estuarine samples."
+#~ msgstr ""
+#~ "Comparaison des coefficients obtenus par \\citet{desaunay_seasonal_1997} "
+#~ "et dans ce modèle des lots estuariens."
+
+#~ msgid "Pigmentation stages loading query completed"
+#~ msgstr "La requete a été effectuée pour charger les stades pigmentaires"
+
+#~ msgid "No data for pigmentation stages"
+#~ msgstr "Pas de données de stades pigmentaires"
+
+#~ msgid "You chose several stations"
+#~ msgstr "Vous avez choisi plusieurs stations"
+
+#~ msgid ""
+#~ "no temperature data, you won't be able to retrocalculate arrival dates"
+#~ msgstr ""
+#~ "pas de données de températures, vous ne pourrez pas faire le rétrocalcul "
+#~ "des dates d'arrivées"
+
+#~ msgid "Loading data from database"
+#~ msgstr "Chargement des données à partir de la base de données"
+
+#~ msgid "Pigmentation stages %s and incoming dates in estuary"
+#~ msgstr "Stades pigmentaires %s et dates d'arrivées à l'estuaire"
+
+#~ msgid "incoming dates in estuary"
+#~ msgstr "dates d'arrivees en estuaire"
+
+#~ msgid "The temperature and salinity table doesn't go back enough in time"
+#~ msgstr ""
+#~ "Le tableau des températures et salinités ne remonte pas assez loin dans "
+#~ "le temps"
+
+#~ msgid ""
+#~ "The graphic object is available in the main environment, write g<-get('g',"
+#~ "envir=envir_stacomi)"
+#~ msgstr ""
+#~ "L'objet graphique est disponible dans l'environnement principal, écrire "
+#~ "g<-get('g',envir=envir_stacomi)"
+
+#~ msgid "title edit"
+#~ msgstr "Modification du titre"
+
+#~ msgid "Pigmentary sages graph title (graphstades = TRUE)"
+#~ msgstr "Titre du graphe des stades pigmentaires (graphstades = TRUE)"
+
+#~ msgid ""
+#~ "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
+#~ msgstr ""
+#~ "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
+
+#~ msgid "Summary of pigmentation stages"
+#~ msgstr "Bilan des stades pigmentaires"
+
+#~ msgid "distributions width choice"
+#~ msgstr "Choix de la largeur des distributions"
+
+#~ msgid "Mean salinity value, click to edit"
+#~ msgstr "Valeur moyenne de salinité, cliquer pour modifier"
+
+#~ msgid "temperature choice"
+#~ msgstr "Choix de la température"
+
+#~ msgid "Data loading"
+#~ msgstr "Chargement des données"
+
+#~ msgid "Title choice"
+#~ msgstr "Choix du titre"
+
+#~ msgid "You need to choose at least one quantitative or qualitative feature"
+#~ msgstr ""
+#~ "Il faut choisir au moins une caracteristique quantitative ou qualitative"
+
+#~ msgid "The query has been launched for Bilan_taille"
+#~ msgstr "La requête est lancée pour Bilan_taille"
+
+#~ msgid "Attention, this query might take a while, be patient ..."
+#~ msgstr "Attention cette requête peut prendre du temps, soyez patient(e)..."
+
+#~ msgid ""
+#~ "To get the table, type : bilan_taille=get('bilan_taille',envir_stacomi)"
+#~ msgstr ""
+#~ "Pour recuperer le tableau, taper : bilan_taille=get('bilan_taille',"
+#~ "envir_stacomi)"
+
+#~ msgid "The query : requete=get('bilan_taille',envir_stacomi)@requete@sql"
+#~ msgstr "La requête : requete=get('bilan_taille',envir_stacomi)@requete@sql "
+
+#~ msgid "The data : donnees_taille=get('bilan_taille',envir_stacomi)@data"
+#~ msgstr "Les données : donnees_taille=get('bilan_taille',envir_stacomi)@data"
+
+#~ msgid ""
+#~ "Data outcome from the query : don=get('bilan_taille',"
+#~ "envir_stacomi)@requete@query"
+#~ msgstr ""
+#~ "Données directement issues de la requête : don=get('bilan_taille\","
+#~ "envir_stacomi)@requete@query"
+
+#~ msgid "Summary of batch by calling the application vue lot ope"
+#~ msgstr "Bilan lots par appel de la vue vue_lot_ope"
+
+#~ msgid "Calculation of the pigmentary stages"
+#~ msgstr "Calcul des stades pigmentaires "
+
+#~ msgid "TODO to develop"
+#~ msgstr "TODO à développer"
 
 #~ msgid ""
 #~ "A summary has already been written in the database the %s : Overwrite ?"

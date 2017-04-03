@@ -2,7 +2,13 @@
 % Please edit documentation in R/BilanAgedemer.r
 \docType{class}
 \name{BilanAgedemer-class}
+\alias{BilanAgeDeMer}
+\alias{BilanAgedemer}
 \alias{BilanAgedemer-class}
+\alias{bilA}
+\alias{bilanAgedeMer}
+\alias{bilan_adm}
+\alias{bilanagedemer}
 \title{Class "BilanAgedemer"}
 \description{
 the BilanAgedemer class is used to dispatch adult salmons to age class according

@@ -332,7 +332,7 @@ setMethod("xtable",signature=signature("BilanAnnuels"),definition=function(x,
 #' @param legend.text See barplot help 
 #' @param ... additional arguments passed to barplot
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @aliases barplot.BilanAnnuels barplot.bilA
+#' @aliases barplot.BilanAnnuels barplot.bilA barplot
 #' @seealso \link{BilanAnnuels-class} for examples
 #' @export
 setMethod("barplot",signature(height = "BilanAnnuels"),definition=function(height,legend.text=NULL,...){ 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.1\n"
-"POT-Creation-Date: 2017-03-19 20:49\n"
+"POT-Creation-Date: 2017-04-03 15:18\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -487,6 +487,12 @@ msgstr ""
 msgid "Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n"
 msgstr ""
 
+msgid "The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"
+msgstr ""
+
+msgid "The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"
+msgstr ""
+
 msgid "dc=%s Conversion weight / number"
 msgstr ""
 
@@ -583,16 +589,19 @@ msgstr ""
 msgid "date should be POSIXct"
 msgstr ""
 
+msgid "Model equations assigned to envir_stacomi (result)"
+msgstr ""
+
 msgid "gam model g1 assigned to envir_stacomi"
 msgstr ""
 
-msgid "One model per year, doy starts in november"
+msgid "One model per year, doy starts in august"
 msgstr ""
 
 msgid "gam model g2 assigned to envir_stacomi"
 msgstr ""
 
-msgid "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling\n\t\t\t\t\t\t\t\tof estuarine samples."
+msgid "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling\n\t\t\t\t\t\t\t\t\t\tof estuarine samples."
 msgstr ""
 
 msgid "summary_harmonic"
@@ -623,90 +632,6 @@ msgid "Warning!"
 msgstr ""
 
 msgid "Attention, you must fit a model before trying to write the predictions in the database"
-msgstr ""
-
-msgid "Pigmentation stages loading query completed"
-msgstr ""
-
-msgid "No data for pigmentation stages"
-msgstr ""
-
-msgid "You chose several stations"
-msgstr ""
-
-msgid "no temperature data, you won't be able to retrocalculate arrival dates"
-msgstr ""
-
-msgid "Loading data from database"
-msgstr ""
-
-msgid "Pigmentation stages %s and incoming dates in estuary"
-msgstr ""
-
-msgid "incoming dates in estuary"
-msgstr ""
-
-msgid "The temperature and salinity table doesn't go back enough in time"
-msgstr ""
-
-msgid "The graphic object is available in the main environment, write g<-get('g',envir=envir_stacomi)"
-msgstr ""
-
-msgid "title edit"
-msgstr ""
-
-msgid "Pigmentary sages graph title (graphstades = TRUE)"
-msgstr ""
-
-msgid "Titre du graphique de retrocalcul quand il est seul (graphstades = FALSE)"
-msgstr ""
-
-msgid "Exit"
-msgstr ""
-
-msgid "Summary of pigmentation stages"
-msgstr ""
-
-msgid "distributions width choice"
-msgstr ""
-
-msgid "Mean salinity value, click to edit"
-msgstr ""
-
-msgid "temperature choice"
-msgstr ""
-
-msgid "First timestamp"
-msgstr ""
-
-msgid "Last timestamp"
-msgstr ""
-
-msgid "Data loading"
-msgstr ""
-
-msgid "Title choice"
-msgstr ""
-
-msgid "You need to choose at least one quantitative or qualitative feature"
-msgstr ""
-
-msgid "The query has been launched for Bilan_taille"
-msgstr ""
-
-msgid "Attention, this query might take a while, be patient ..."
-msgstr ""
-
-msgid "To get the table, type : bilan_taille=get('bilan_taille',envir_stacomi)"
-msgstr ""
-
-msgid "The query : requete=get('bilan_taille',envir_stacomi)@requete@sql"
-msgstr ""
-
-msgid "The data : donnees_taille=get('bilan_taille',envir_stacomi)@data"
-msgstr ""
-
-msgid "Data outcome from the query : don=get('bilan_taille',envir_stacomi)@requete@query"
 msgstr ""
 
 msgid "Time step duration should be daily"
@@ -1063,6 +988,9 @@ msgstr ""
 msgid "End"
 msgstr ""
 
+msgid "Exit"
+msgstr ""
+
 msgid "The year of beginning has been chosen"
 msgstr ""
 
@@ -1240,6 +1168,9 @@ msgstr ""
 msgid "Fist timestamp"
 msgstr ""
 
+msgid "Last timestamp"
+msgstr ""
+
 msgid "dotplot"
 msgstr ""
 
@@ -1253,6 +1184,9 @@ msgid "dataframe"
 msgstr ""
 
 msgid "Size report"
+msgstr ""
+
+msgid "First timestamp"
 msgstr ""
 
 msgid "crossed query length / qualitative feature"
@@ -1342,7 +1276,7 @@ msgstr ""
 msgid "Summary of the environnemental conditions"
 msgstr ""
 
-msgid "Summary of batch by calling the application vue lot ope"
+msgid "Summary of samples characteristics (size, weight...) by calling the view vue_lot_ope"
 msgstr ""
 
 msgid "Lengths summary"
@@ -1351,13 +1285,13 @@ msgstr ""
 msgid "Summary of average weight for the calculation of the relation between length and number."
 msgstr ""
 
-msgid "Calculation of the pigmentary stages"
-msgstr ""
-
-msgid "TODO to develop"
+msgid "Not adapted yet to version 0.5"
 msgstr ""
 
 msgid "Species summary of the counting device"
+msgstr ""
+
+msgid "Age calculation from size limit"
 msgstr ""
 
 msgid "Error when using the method connect of the ConnectionODBC class"
