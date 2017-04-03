@@ -15,7 +15,7 @@
 
 \item{anneedebut}{The starting the first year, passed as charcter or integer}
 
-\item{anneefin}{the finishing year}
+\item{anneefin}{the finishing year, must be > anneedebut (minimum one year in august to the next in august)}
 
 \item{selectedvalue}{A character to select and object in the \link{RefListe-class}}
 

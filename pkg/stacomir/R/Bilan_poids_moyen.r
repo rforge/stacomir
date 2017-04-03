@@ -55,7 +55,7 @@ setMethod("connect",signature=signature("Bilan_poids_moyen"),definition=function
 			# loading mean weights
 			requete=new("RequeteODBCwheredate")
 			requete@baseODBC=get("baseODBC",envir=envir_stacomi)
-			requete@datedebut=strptime(paste(object@anneedebut@annee_selectionnee-1,"-08-01",sep=""),format="%Y-%m-%d")
+			requete@datedebut=strptime(paste(object@anneedebut@annee_selectionnee,"-08-01",sep=""),format="%Y-%m-%d")
 			requete@datefin=strptime(paste(object@anneefin@annee_selectionnee,"-08-01",sep=""),format="%Y-%m-%d")
 			requete@colonnedebut="ope_date_debut"
 			requete@colonnefin="ope_date_fin"
@@ -120,7 +120,7 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 #' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
 #' @param anneedebut The starting the first year, passed as charcter or integer
-#' @param anneefin the finishing year
+#' @param anneefin the finishing year, must be > anneedebut (minimum one year in august to the next in august)
 #' @param selectedvalue A character to select and object in the \link{RefListe-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{Bilan_poids_moyen-class}
@@ -138,6 +138,7 @@ setMethod("choice_c",signature=signature("Bilan_poids_moyen"),definition=functio
 			#dc=c(5,6);anneedebut="2015";anneefin="2016";selectedvalue=">1";silent=FALSE
 			if (length(selectedvalue)!=1) stop ("selectedvalue must be of length one")
 			bilPM<-object
+			stopifnot(anneefin>anneedebut)
 			bilPM@dc=charge(bilPM@dc)
 			# loads and verifies the dc
 			# this will set dc_selectionne slot
@@ -292,8 +293,8 @@ hreg = function(h,...) {
 #' \itemize{
 #'\item{model.type="seasonal".}{ The simplest model uses a seasonal variation, it is
 #' 				fitted with a sine wave curve allowing a cyclic variation 
-#' 				w ~ a*cos(2*pi*(doy-T)/365)+b with a period T. The julian time d0 used is this model is set
-#' 				at zero 1st of November d = d + d0; d0 = 305.}
+#' 				w ~ a*cos(2*pi*(d'-T)/365)+b with a period T. The modified day d' used is this model is set
+#' 				at 1 the 1st of august doy = d' + d0; d0 = 212, doy=julian days}
 #'\item{model.type="seasonal1".}{ A time component is introduced in the model, which allows
 #' 			for a long term variation along with the seasonal variation. This long term variation is
 #' 			is fitted with a gam, the time variable is set at zero at the beginning of the first day of observed values.
@@ -329,7 +330,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				data$year<-lubridate::year(data$date)
 				# lubridate::yday(lubridate::dmy(01082008))
 				data$yday=lubridate::yday(data$date)
-				data$doy=data$yday-214 # year begins in august to be consistent with the class 			
+				data$doy=data$yday-212 # year begins in august to be consistent with the class 			
 				data$season<-stringr::str_c(lubridate::year(data$date)-1,"-",lubridate::year(data$date)) # year-1-year
 				data$season[data$doy>0]<-stringr::str_c(lubridate::year(data$date),"-",lubridate::year(data$date)+1)[data$doy>0] # for november and december it's year - year+1
 				data$yearbis<-data$year # same as season but with a numeric
@@ -545,11 +546,14 @@ funtableBilan_poids_moyen = function(h,...) {
 #' from the database, those will be deleted first.
 #' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed
+#' @param dbname default "bd_contmig_nat"
 #' @return An object of class \link{Bilan_poids_moyen-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE,dbname="bd_contmig_nat",host="localhost",port=5432){
+setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE,dbname="bd_contmig_nat"){
 			#silent=FALSE;dbname="bd_contmig_nat";host="localhost";port=5432
+			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
+			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
 			bilPM<-object
 			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database",domain="R-stacomiR"),arret=TRUE)
 			# first delete existing data from the database

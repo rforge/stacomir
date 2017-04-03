@@ -42,9 +42,7 @@ setMethod("charge",signature=signature("RefCoe"),definition=function(object){
 			requete@datefin=object@datefin
 			requete@colonnedebut="coe_date_debut"
 			requete@colonnefin="coe_date_fin"
-			# the coefficients are only loaded for bilanMigration
-			# to be consistent with current programming, we need to add it as a timestamp
-			requete@datefin=as.POSIXlt(object@datefin+as.difftime("23:59:59"))		
+			requete@datefin=as.POSIXlt(object@datefin)		
 			requete@select=stringr::str_c("select * from ",
 					get("sch",envir=envir_stacomi),
 					"tj_coefficientconversion_coe")

@@ -384,7 +384,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 # getGeneric("plot")
 # showMethods("plot")
 # methods("plot")
-setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=function(x, y,plot.type="standard",silent=FALSE,...){ 
+setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=function(x, plot.type="standard",silent=FALSE,...){ 
 			#browser()
 			#print("entering plot function")
 			#bilanMigrationMult<-bMM_Arzal
@@ -540,6 +540,11 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 								))+
 						ggtitle(gettextf("Cumulative count %s, %s, %s, %s",dis_commentaire,lestaxons,lesstades,annee))  
 				print(p)	
+				assign("p",p,envir=envir_stacomi)
+				assign("grdata",grdata_without_hole,envir_stacomi)
+				funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
+				funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+				
 			}
 #==========================type=3=============================
 			if (plot.type=="multiple"){
@@ -592,7 +597,12 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "ANY"),definition=funct
 				}
 				
 				print(p)	
-			}
+				assign("p",p,envir=envir_stacomi)				
+				funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
+				assign("grdata",grdata,envir_stacomi)	
+				funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+				
+				}
 #==========================end / type=3=============================			
 		})
 

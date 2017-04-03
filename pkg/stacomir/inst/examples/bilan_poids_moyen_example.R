@@ -13,6 +13,8 @@ stacomi(gr_interface=FALSE,
 	assign("sch","iav.",envir_stacomi)
 	bilPM@liste<-charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label="")
 	# here I'm using weights when number are larger than 1 ie wet weight
+	# always choose a date from one year to the next eg 2010 to 2011
+	# as the dates are from august to august
 	bilPM<-choice_c(bilPM,
 			dc=c(6),			
 			anneedebut="2009",
