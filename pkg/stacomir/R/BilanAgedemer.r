@@ -138,7 +138,17 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 				object@horodatefin@horodate<-get("bilan_adm_date_fin",envir_stacomi)
 			} else {
 				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
-			}       
+			}   
+			if (exists("limit1hm",envir_stacomi)) {
+				object@limit1hm<-get("limit1hm",envir_stacomi)
+			} else {
+				funout(gettext("you need to choose a value for limit1hm",domain="R-stacomiR"),arret=TRUE)
+			} 
+			if (exists("limit2hm",envir_stacomi)) {
+				object@limit2hm<-get("limit2hm",envir_stacomi)
+			} else {
+				funout(gettext("you need to choose a value for limit2hm",domain="R-stacomiR"),arret=TRUE)
+			} 
 			
 			return(object)
 			validObject(object)
@@ -199,8 +209,8 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
-			bilan_adm@limit1hm<-choice_c(bilan_adm@limit1hm,as.character(limit1hm))
-			bilan_adm@limit2hm<-choice_c(bilan_adm@limit2hm,as.character(limit2hm))
+			bilan_adm@limit1hm<-choice_c(bilan_adm@limit1hm,as.character(limit1hm),"limit1hm")
+			bilan_adm@limit2hm<-choice_c(bilan_adm@limit2hm,as.character(limit2hm),"limit2hm")
 			validObject(bilan_adm)
 			return(bilan_adm)
 		})
@@ -254,7 +264,7 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 			#browser()
 			bilan_adm<-x
 			plot.type<-as.character(plot.type)# to pass also characters
-			if (!plot.type%in%c("1","2","3","4")) stop('plot.type must be 1,2,3 or 4')
+			if (!plot.type%in%c("1","2")) stop('plot.type must be 1,2')
 			if (nrow(bilan_adm@calcdata[["data"]])==0) {   
 				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			} 

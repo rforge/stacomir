@@ -32,46 +32,32 @@ interface_BilanAgedemer = function()
 			nomassign="bilan_adm_date_fin",
 			funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 			decal=-1)	
-	bilan_adm@dc<-choice(bilan_adm@dc,objectBilan=bilan_adm,is.enabled=TRUE)
+	bilan_adm@dc<-choice(bilan_adm@dc,objectBilan=NULL,is.enabled=TRUE)
 	bilan_adm@limit1hm<-charge(bilan_adm@limit1hm,title="Limit s1 for 1sw (L(1sw)<=s1), click to edit",label="0")
 	bilan_adm@limit2hm<-charge(bilan_adm@limit2hm,title="Limit s2 for 2sw (s1<L(2sw)<=s2) & L(3sw)>s2, click to edit",label="0")
 #  the choice method for RefDC will stop there and the other slots are filled with choicec
 	# we only want silver eels in this bilan, and parameters length, eye diameter, pectoral length, contrast...
 	
-	choice(bilan_adm@limit1hm)
-	choice(bilan_adm@limit2hm)
+	choice(bilan_adm@limit1hm,nomassign="limit1hm")
+	choice(bilan_adm@limit2hm,nomassign="limit2hm")
 	choice_c(bilan_adm@taxons,2220)
 	choice_c(bilan_adm@stades,c('5','11','BEC','BER','IND'))
 	choice_c(bilan_adm@par,c('1786','1785','C001','A124'))
-		aplot1=gWidgets::gaction(label="plot-1",
+	aplot1=gWidgets::gaction(label="plot-1",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanAgedemer,
 			action="1",
 			tooltip="1")
-
 	aplot2=gWidgets::gaction(label="plot-2",
 			icon="gWidgetsRGtk2-cloud",
 			handler=funplotBilanAgedemer,
 			action="2",
 			tooltip="2")
-	aplot3=gWidgets::gaction(label="plot-3",
-			icon="gWidgetsRGtk2-cloud",
-			handler=funplotBilanAgedemer,
-			action="3",
-			tooltip="3")
-	aplot4=gWidgets::gaction(label="plot-4",
-			icon="gWidgetsRGtk2-cloud",
-			handler=funplotBilanAgedemer,
-			action="4",
-			tooltip="4")
 	asummary=gWidgets::gaction(label="Summary",icon="dataframe",handler=funtableBilanAgedemer,tooltip="Summary")
-	aquit=gWidgets::gaction(label=gettext("Exit",icon="close", handler=quitte,tooltip="Exit",domain="R-stacomiR"))
-	
+	aquit=gWidgets::gaction(label=gettext("Exit",domain="R-stacomiR"),icon="close", handler=quitte,tooltip="Exit")
 	toolbarlist <- list(    
 			plot1= aplot1,
-			plot2= aplot2, 
-			plot3= aplot3,
-			plot4= aplot4,
+			plot2= aplot2,
 			summary= asummary,
 			quit = aquit)
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)

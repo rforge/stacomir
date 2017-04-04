@@ -7,22 +7,46 @@ interface_BilanMigrationMultConditionEnv = function()
 	assign("bmmCE",bmmCE,envir=envir_stacomi)	
 	funout(gettext("Loading of the lists for taxons, stages, counting devices and monitoring stations\n",domain="R-stacomiR"))
 	bmmCE@bilanConditionEnv@stationMesure=charge(bmmCE@bilanConditionEnv@stationMesure)
+	#(destroys everything in envir_stacomi except stuff required at to level)
+	objectBilan="bilanMigrationMult"
+	# the following name is created by the interface
+	# as I can't get the name from within the function (deparse(substitute(objectBilan)) does not return
+	# "bilanMigrationMult" see refDC choice_c method)
+	# so this will allow to assign "bilanMigrationMult" in envir_stacomi while using other class
+	# like refDC
+	assign("objectBilan",objectBilan,envir=envir_stacomi)
+	bmmCE@bilanMigrationMult=new("BilanMigrationMult")
+	assign("bilanMigrationMult",bmmCE@bilanMigrationMult,envir = envir_stacomi)
+	bilanFonctionnementDC=new("BilanFonctionnementDC")
+	assign("bilanFonctionnementDC",bilanFonctionnementDC,envir = envir_stacomi)
+	bilanFonctionnementDF=new("BilanFonctionnementDF")
+	assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
+	bilanOperation=new("BilanOperation")
+	assign("bilanOperation",bilanOperation, envir=envir_stacomi)
+	bilanMigration=new("BilanMigration")
+	assign("bilanMigration",bilanMigration,envir = envir_stacomi)
+	
+	
 	bmmCE@bilanMigrationMult@taxons=charge(bmmCE@bilanMigrationMult@taxons)
 	bmmCE@bilanMigrationMult@stades=charge(bmmCE@bilanMigrationMult@stades)
 	bmmCE@bilanMigrationMult@dc=charge(bmmCE@bilanMigrationMult@dc)
-
-	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir=.GlobalEnv)
+	group = ggroup(horizontal=TRUE)   # doit toujours s'appeller group
+	assign("group",group,envir = .GlobalEnv)  
+	choice(bmmCE@bilanConditionEnv@stationMesure)
+	notebook <- gnotebook(container=group)	
+	assign("notebook",notebook,envir=.GlobalEnv)
+	size(notebook)<-c(400,300)
 	add(ggroupboutons,group)
 	
-	choice(bmmCE@bilanMigrationMult@pasDeTemps)
-	choice(bmmCE@bilanConditionEnv@stationMesure)
-	choice(bmmCE@bilanMigrationMult@dc,objectBilan=bmmCE@bilanMigrationMult,is.enabled=TRUE)
-	
+	choicemult(bmmCE@bilanMigrationMult@pasDeTemps)
+	choicemult(bmmCE@bilanMigrationMult@dc,objectBilan=bmmCE@bilanMigrationMult,is.enabled=TRUE)
+	svalue(notebook)<-1
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
+	
 	toolbarlist = list(
-			Calc=gWidgets::gaction(handler = hbmmCEcalc,action=bmmCE,
+			Calc=gWidgets::gaction(handler = hbmmCEcalc,	
 					icon = "new",
 					label="calcul",
 					tooltip=gettext("Calculation of environnemental conditions by time step",domain="R-stacomiR")),
@@ -30,18 +54,13 @@ interface_BilanMigrationMultConditionEnv = function()
 					icon = "graph",
 					label="graph",
 					tooltip=gettext("Balance graphic",domain="R-stacomiR")),
-			#Graph2=gWidgets::gaction(handler = hbmmCEgraph2,icon = "graph2",label="grcum",tooltip="graphe cumul"),
-			#Stat =gWidgets::gaction(handler= hbmmCEstat,icon = "matrix",label="stat",tooltip="tables bilan en .csv"),
 			annuler=gWidgets::gaction(handler= quitte,
 					icon = "close",
 					label="quitter"))
 	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
 	enabled(toolbarlist[["Graph"]])<-FALSE
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)	
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)	
 	gWidgets::addSpring(group)
-	#graphes=ggraphics(width=600,height=400)
-	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	#assign("graphes",graphes,envir=envir_stacomi)
-	dev.new()
+	return(invisible(NULL))
 }

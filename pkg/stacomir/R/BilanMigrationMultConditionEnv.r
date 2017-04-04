@@ -50,6 +50,7 @@ setValidity("BilanMigrationMultConditionEnv",
 #' @export
 setMethod("connect",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent=FALSE) {
 			#object<-bmmCE
+			bmmCE<-object
 			bmmCE@bilanMigrationMult<-connect(bmmCE@bilanMigrationMult,silent=silent)
 			bmmCE@bilanConditionEnv<-connect(bmmCE@bilanConditionEnv,silent=silent)
 			return(bmmCE)
@@ -95,11 +96,26 @@ setMethod("charge",signature=signature("BilanMigrationMultConditionEnv"),definit
 			# silent=FALSE
 			bmmCE<-object
 			bmmCE@bilanMigrationMult<-charge(bmmCE@bilanMigrationMult,silent=silent)
+			# the values for date are not initiated by the interface
+			assign("bilanConditionEnv_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
+			assign("bilanConditionEnv_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
 			bmmCE@bilanConditionEnv<-charge(bmmCE@bilanConditionEnv,silent=silent)    		
 			return(bmmCE)
 		})
 
-
+#' Internal handler function
+#' @param h a handler
+#' @param ... Additional parameters
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+hbmmCEcalc=function(h=null,...){
+	bmmCE<-get("bmmCE",envir_stacomi)	
+	bmmCE<-charge(bmmCE)
+	bmmCE<-connect(bmmCE)
+	bmmCE<-calcule(bmmCE)
+	assign("bmmCE",bmmCE,envir_stacomi)
+	enabled(toolbarlist[["Graph"]])<-TRUE
+	return(invisible(NULL))	
+}
 
 #' Calculation for the BilanMigrationMultConditionEnv
 #' 
@@ -118,31 +134,38 @@ setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),defini
 
 #' internal method for graphical interface
 #' @param h A handler
-hbilanMigrationMultConditionEnvgraph = function(h){   
+hbmmCEgraph = function(h=null,...){   
 	bmmCE<-get("bmmCE",envir_stacomi)
-	bmmCE<-charge(bmmCE)
-	bmmCE<-connect(bmmCE)
-	bmmCE<-calcule(bmmCE)
 	bmmCE<-plot(bmmCE)
+	return(invisible(NULL))	
 }
 
 #' Plot method for BilanMigrationMultConditionEnv
-#' @param x An object of class Bilan_carlot
+#' @param x An object of class \link{BilanMigrationMultConditionEnv}
 #' @param silent Stops displaying the messages.
-#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
+#' @param color_station A named vector of station color (e.g. c("temp_gabion"="red","coef_maree"="blue","phases_lune"="green")) default null
+#' @param color_dc A named vector giving the color for each dc default null (e.g. c("5"="#4D4D4D","6"="#E6E6E6","12"="#AEAEAE"))
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanMigrationMultConditionEnv plot.bmmCE
 #' @export
-setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing"), definition=function(x,  silent=FALSE){ 
-			bmmCE<-object
-			plot(bmmCE@bilanMigrationMult,plot.type="multiple")
-			# on va chercher les données du graphique
+setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing"), definition=function(x,  color_station=NULL,color_dc=NULL, silent=FALSE){ 
+			#color_station=NULL;color_dc=NULL
+			# color_station<-c("temp_gabion"="red","coef_maree"="blue","phases_lune"="green")
+			# color_dc=c("5"="#4D4D4D","6"="#E6E6E6","12"="#AEAEAE")
+			bmmCE<-x
 			
-			time.sequence<-as.Date(as.POSIXlt(bmmCE@bilanMigrationMult@time.sequence))
-			tableau<-get("grdata",envir_stacomi)
-			tableau<-cbind("time.sequence"=time.sequence,tableau)
-			tableau$time.sequencechar<-as.character(tableau$time.sequence)
 			
+			grdata<-fun_aggreg_for_plot(bmmCE@bilanMigrationMult)
+			# we collect the dataset used to build the graph
+			
+			taxons= as.character(bmmCE@bilanMigrationMult@taxons@data$tax_nom_latin)
+			stades= as.character(bmmCE@bilanMigrationMult@stades@data$std_libelle)
+			dc<-unique(grdata$DC)
+			# pour avoir dans le graphique le dc_code des dc 
+			# ggplot passe les dc dans l'ordre dans lequel ils apparaissent dans le tableau
+			# et unique fait ça aussi .... OUIIIII
+			dc_code<-bmmCE@bilanMigrationMult@dc@data$dc_code[
+					match(dc,bmmCE@bilanMigrationMult@dc@data$dc)]
 			# tableau conditions environnementales
 			tableauCE<-bmmCE@bilanConditionEnv@data  
 			if (nrow(tableauCE)==0) {
@@ -150,114 +173,138 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			}
 			
 			stations<-bmmCE@bilanConditionEnv@stationMesure@data
+			#######################
+			# color scheme for station
+			#######################
+			if (is.null(color_station)) {
+				color_station=rep(RColorBrewer::brewer.pal(8,"Accent"),2)[1:nrow(stations)]
+				names(color_station)<-stations$stm_libelle
+			} else if (length(color_station)!=nrow(stations)){
+				funout(gettextf("The color_station argument should have length %s",nrow(stations)),arret=TRUE)
+			}
+			if (!all(names(color_station)%in%stations$stm_libelle)) {
+				stop (gettextf("The following name(s) %s do not match station name: %s",
+								names(color_station)[!names(color_station)%in%stations$stm_libelle],
+								paste(stations$stm_libelle, collapse=", ")))
+			}
 			
+			cs<-cbind(stm_libelle=names(color_station),"color"=color_station)
+			#######################
+			# color scheme for dc
+			#######################			
+			if (is.null(color_dc)) {
+				color_dc=grDevices::gray.colors(length(dc))
+				names(color_dc)<-dc
+			} else if (length(color_dc)!=length(dc)){
+				funout(gettextf("The color_dc argument should have length %s",length(dc)),arret=TRUE)
+			}
+			if (!all(names(color_dc)%in%dc)) 
+				stop (gettextf("The following name(s) %s do not match DC codes: %s",
+								names(color_dc)[!names(color_dc)%in%dc],
+								paste(dc, collapse=", ")))
+			cdc<-cbind("DC"=names(color_dc),"color"=color_dc)
+			
+			# we collect libelle from station
 			for (i in 1:length(unique(tableauCE$env_stm_identifiant))){
 				tableauCE[unique(tableauCE$env_stm_identifiant)[i]==tableauCE$env_stm_identifiant,"stm_libelle"]<-
 						stations[stations$stm_identifiant==unique(tableauCE$env_stm_identifiant)[i],"stm_libelle"]
 			}
-			tableauCE$env_date_debutchar=as.character(as.Date(tableauCE$env_date_debut))  
+			# the data can be in the POSIXct format, we need to round them
+			tableauCE$date<-as.POSIXct(round.POSIXt(tableauCE$env_date_debut,units="days"))
+			qualitative<-!is.na(tableauCE$env_val_identifiant)
+			tableauCEquan<-tableauCE[!qualitative,]
+			tableauCEqual<-tableauCE[qualitative,]
+			if (nrow(unique(cbind(tableauCE$date,tableauCE$stm_libelle)))!=	nrow(tableauCE)) {
+				funout(gettextf("Attention, on one station :%s there are several entries for the same day :%s we will calculate average for numeric
+										and use the first value for qualitative parameter",
+								sta,
+								paste(unique(tableauCEst$env_date_debut[duplicated(tableauCEst$env_date_debut)]),sep="")),
+						arret=FALSE)	
+				# for quantitative parameters we group by date and station and use the average to
+				# extract one value per day
+				tableauCEquan<-dplyr::select(tableauCEquan,date,stm_libelle,env_valeur_quantitatif)%>%
+						dplyr::group_by(date,stm_libelle)%>%						
+						dplyr::summarize(valeur=mean(env_valeur_quantitatif))%>%
+						dplyr::ungroup()
+				# for qualitative value, when there are several values for the same date
+				# we arbitrarily select the first
+				tableauCEqual<-dplyr::select(tableauCEqual,date,stm_libelle,env_val_identifiant)%>%
+						dplyr::group_by(date,stm_libelle)%>%						
+						dplyr::summarize(valeur=first(env_val_identifiant))%>%
+						dplyr::ungroup()
+			} else {
+				# we want the same format as above
+				tableauCEquan<-dplyr::select(tableauCEquan,date,stm_libelle,env_valeur_quantitatif)%>%
+						dplyr::rename(valeur=env_valeur_quantitatif)
+				tableauCEqual<-dplyr::select(tableauCEqual,date,stm_libelle,env_val_identifiant)%>%
+						dplyr::rename(valeur=env_val_identifiant)
+			}	
+			variables_quant<-unique(tableauCEquan$stm_libelle)
+			variables_qual<-unique(tableauCEqual$stm_libelle)
+			grdata<-funtraitementdate(grdata,
+					nom_coldt="debut_pas",
+					annee=FALSE,
+					mois=TRUE,
+					quinzaine=TRUE,
+					semaine=TRUE,
+					jour_an=TRUE,
+					jour_mois=FALSE,
+					heure=FALSE)	
 			
-			for (sta in as.character(stations$stm_libelle)){
-				tableauCEst<-tableauCE[tableauCE$stm_libelle==sta,] #tableau CE d'une station
-				if (length(unique(tableauCEst$env_date_debutchar))!=length(tableauCEst$env_date_debutchar)) {
-					funout(gettextf("Attention, on one station :%s there are several entries for the same day :%s only the first value will be incuded in the summary\n",
-									sta,
-									paste(unique(tableauCEst$env_date_debutchar[duplicated(tableauCEst$env_date_debutchar)]),sep="")),
-							arret=FALSE)
-					tableauCEst<-tableauCEst[induk(tableauCEst$env_date_debutchar),]
-				}
-				
-				if (is.na(tableauCEst$env_val_identifiant[1])){
-					#variable quantitative
-					tableauCEst<-tableauCEst[,c("env_date_debutchar","env_valeur_quantitatif")]
-					tableauCEst<-stacomirtools::chnames(tableauCEst,"env_valeur_quantitatif",sta)
-					stations[stations$stm_libelle==sta,"stm_typevar"]<-"quantitatif"
-					# je renomme la colonne e rentrer par le nom de la station
-				}   else {
-					# variable qualitative
-					tableauCEst<-tableauCEst[,c("env_date_debutchar","env_val_identifiant")]
-					tableauCEst$"env_val_identifiant"=as.factor(tableauCEst$"env_val_identifiant")
-					tableauCEst<-stacomirtools::chnames(tableauCEst,"env_val_identifiant",sta)
-					
-					stations[stations$stm_libelle==sta,"stm_typevar"]<-"qualitatif"			
-				} # end else
-				# le merge ci dessous est l'equivalent d'une jointure gauche (LEFT JOIN)
-				tableau<-merge(tableau,tableauCEst,by.x = "time.sequencechar", by.y = "env_date_debutchar",  all.x = TRUE)
-				# les donnees sont normalement collees dans le tableau dans une nouvelle colonne et aux dates correspondantes
-				if (length(time.sequence)!=nrow(tableau)) funout(gettextf("The number of lines of the environmental conditions table (%s) doesn't fit the duration of the migration summary  (%s)\n",
-									nrow(tableau),
-									length(time.sequence)),
-							arret=TRUE)
-				#si la jointure e rajoute des lignes ea craint je ne sais pas comment se fera le traitement
-			} # end for
-			taxon= as.character(bmmCE@bilanMigration@taxons@data$tax_nom_latin)
-			stade= as.character(bmmCE@bilanMigration@stades@data$std_libelle)
-
-				bilanMigrationConditionEnv@bilanMigration@dc<-get("refDC",envir_stacomi)
-				annee=strftime(as.POSIXlt(mean(time.sequence)),"%Y")
-				dis_commentaire=  as.character(bilanMigrationConditionEnv@bilanMigration@dc@data$dis_commentaires[bilanMigrationConditionEnv@bilanMigration@dc@data$dc%in%bilanMigrationConditionEnv@bilanMigration@dc@dc_selectionne]) # commentaires sur le DC
-				tableau<-funtraitementdate(tableau,
-						nom_coldt="time.sequence",
-						annee=FALSE,
-						mois=TRUE,
-						quinzaine=TRUE,
-						semaine=TRUE,
-						jour_an=TRUE,
-						jour_mois=FALSE,
-						heure=FALSE)	
-				couleurs=rep(RColorBrewer::brewer.pal(8,"Accent"),2)
-				maxeff=floor(log10(max(tableau$Effectif_total,na.rm=TRUE)))
-				lab_les_stations=stations$stm_libelle
-				for (i in 1:nrow(stations)){
-					tableau[,paste("couleur",i,sep="")]<-couleurs[i]
-					if (stations$stm_typevar[i]=="quantitatif") {
-						diff=maxeff-round(log10(max(tableau[,stations$stm_libelle[i]],na.rm=TRUE)))
-						
-						if (diff!=0 & !is.na(diff)){
-							tableau[,stations$stm_libelle[i]] = as.numeric(tableau[,stations$stm_libelle[i]])*10^diff    
-							lab_les_stations[i]=paste(stations$stm_libelle[i],".10^",diff,sep="")
-						} # end if
-					} #end if
-				}  # end for
-				tableau$yqualitatif=(10^(maxeff))/2
-				name=gettextf("Number %s",paste(lab_les_stations,collapse=", "))
-				g<-ggplot(tableau, aes(x=time.sequence,y=Effectif_total))+geom_bar(stat="identity",fill="grey50")+scale_x_date(name="Date")+
-						scale_y_continuous(name=name)+labs(title=gettextf("Number %s, %s, %s, %s",dis_commentaire,taxon,stade,annee))
-				for (i in 1:nrow(stations)){
-					if (stations$stm_typevar[i]=="quantitatif") {
-						if (all(!is.na(tableau[,stations$stm_libelle[i]]))){
-							g<-g+geom_line(aes_string(x="time.sequence",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=1)+
-									scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
-						} else {
-							g<-g+geom_point(aes_string(x="time.sequence",y=stations$stm_libelle[i],colour=paste("couleur",i,sep="")),size=2)+
-									scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
-						}
-					} else if (stations$stm_typevar[i]=="qualitatif") {
-						stableau=subset(tableau, !is.na(tableau[,stations$stm_libelle[i]]))
-						stableau[,stations$stm_libelle[i]]<- as.factor(as.character( stableau[,stations$stm_libelle[i]]))
-						if (stations$stm_par_code[i]=="AAAA")# phases lunaires
-							g<-g+geom_point(aes_string(x="time.sequence",y="yqualitatif",colour=paste("couleur",i,sep=""),shape=stations$stm_libelle[i]),data=stableau,size=3)+
-									scale_colour_identity(name="stations",breaks=couleurs[1:i],labels=stations$stm_libelle[1:i])
-					} else stop("internal error")
-				} # end for
-				assign("g",g,envir_stacomi)
-				funout(gettext("Writing of the graphical object in the environment envir_stacomi : write g=get(g,envir_stacomi)\n",domain="R-stacomiR"))
-				print(g)
+			# to rescale everything on the same graph
+			maxeff=floor(log10(max(grdata$effectif_total,na.rm=TRUE)))
 			
-	
-}# end function
+			for (i in 1:length(variables_quant)){
+				diff=maxeff-round(log10(max(tableauCEquan[tableauCEquan$stm_libelle==variables_quant[i],"valeur"],na.rm=TRUE)))
+				if (diff!=0 & !is.na(diff)){
+					tableauCEquan[tableauCEquan$stm_libelle==variables_quant[i],"valeur"] = as.numeric(tableauCEquan[tableauCEquan$stm_libelle==variables_quant[i],"valeur"])*10^diff    
+					variables_quant[i]=paste(variables_quant[i],".10^",diff,sep="")
+				} # end if
+			} #end for			
+			yqualitatif=(10^(maxeff))/2
+			
+			ylegend=gettextf("Number, %s, %s",paste(variables_quant,collapse=", "),
+					paste(variables_qual,collapse=", "))
+			
+			
+			
+			
+			
+			######################
+			# traitement des données pour grouper par dc (group_by dc)
+			# les stades et taxons seront aggrégés avec warning
+			#################################
+			if (length(unique(taxons))>1) warning(gettextf("you have %s taxa in the bilan, those will be aggregated",length(unique(taxons))))
+			if (length(unique(stades))>1) warning(gettextf("you have %s stages in the bilan, those will be aggregated",length(unique(stades))))		
+			plotdata<-dplyr::select(grdata,debut_pas,DC,effectif_total)%>%dplyr::rename(date=debut_pas)%>%
+					dplyr::group_by(date,DC)%>%dplyr::summarize(effectif=sum(effectif_total))%>%
+					dplyr::ungroup()
+			
+			# merging with colors
+			plotdata<-killfactor(merge(plotdata,cdc,by="DC"))
+			tableauCEquan<-killfactor(merge(tableauCEquan,cs,by="stm_libelle"))
+			tableauCEqual<-killfactor(merge(tableauCEqual,cs,by="stm_libelle"))
+			
+			g<-ggplot(plotdata)+
+					geom_bar(aes(x=date,y=effectif,fill =color),position="stack", stat="identity")+
+					ylab(ylegend)+
+					geom_line(aes(x=date,y=valeur,colour=color),data=tableauCEquan,size=1)+						
+					geom_point(aes(x=date,shape=valeur,
+									colour=color),
+							y=yqualitatif,data=tableauCEqual,size=3)+
+					scale_fill_identity(name=gettext("DC"),labels=dc_code,guide = "legend")+
+					scale_colour_identity(name=gettext("stations"),
+							labels=names(cs[,"color"]),
+							breaks=cs[,"color"],
+							guide = "legend")+
+					scale_shape(guide="legend",name=gettext("Qualitative parm"))+
+					theme_bw()	
+			print(g)
+			assign("g",g,envir_stacomi)
+			funout(gettext("the ggplot object has been assigned to envir_stacomi, type g<-get('g',envir_stacomi)"))
+			
+		})# end function
 
 
 
-#' handler du graphique BilanMigrationMultConditionEnv
-#' realise le calcul du bilan migration avec CE, l'ecrit dans l'environnement envir_stacomi
-#' traite eventuellement les quantites de lots (si c'est des civelles)
-#' @param h a handler
-#' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
-hbilanMigrationMultConditionEnvcalc=function(h,...){
-	calcule(h$action)
-	enabled(toolbarlist[["Graph"]])<-TRUE
-	# calcule(bilanMigrationMultConditionEnv)
-}
+

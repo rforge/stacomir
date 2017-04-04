@@ -52,9 +52,9 @@ hBilanMigrationInterAnnuelle=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
-hBilanMigrationConditionEnv=function(h,...){
+hBilanMigrationMultConditionEnv=function(h,...){
 	funout(gettext("Summary of migration environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigrationConditionEnv(),envir = .GlobalEnv)
+	eval(interface_BilanMigrationMultConditionEnv(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
@@ -299,6 +299,7 @@ hX11=function(h,...){
 #' @importFrom stats xtabs
 #' @importFrom stats AIC
 #' @importFrom grDevices dev.new
+#' @importFrom grDevices gray.colors
 #' @importFrom stats sd
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
@@ -448,7 +449,7 @@ interface_graphique=function(){
 	
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Environnemental conditions",domain="R-stacomiR")]]$handler=hBilanConditionEnv
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Environnemental conditions",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"
-	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration. ~Environnemental conditions",domain="R-stacomiR")]]$handler=hBilanMigrationConditionEnv
+	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration. ~Environnemental conditions",domain="R-stacomiR")]]$handler=hBilanMigrationMultConditionEnv
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration. ~Environnemental conditions",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-plot1"
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration / quant. param. / qual. param.",domain="R-stacomiR")]]$handler=hBilanMigrationPar
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Migration / quant. param. / qual. param.",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-curve"

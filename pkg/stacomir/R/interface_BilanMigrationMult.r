@@ -28,7 +28,6 @@ interface_BilanMigrationMult=function(){
 	bilanMigrationMult@dc=charge(bilanMigrationMult@dc)   	
 	group = ggroup(horizontal=TRUE)   # doit toujours s'appeller group
 	assign("group",group,envir = .GlobalEnv)  
-	# the notebook will contain all elements from 
 	notebook <- gnotebook(container=group)	
 	assign("notebook",notebook,envir=.GlobalEnv)
 	size(notebook)<-c(400,300)

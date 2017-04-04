@@ -548,33 +548,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 			}
 #==========================type=3=============================
 			if (plot.type=="multiple"){
-				lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")
-				lesstades=  paste(bilanMigrationMult@stades@data$std_code,collapse=",")
-				grdata<-data.frame()
-				for (i in 1:length(bilanMigrationMult@calcdata)){
-					data<-bilanMigrationMult@calcdata[[i]]$data
-					# extracting similar columns (not those calculated)
-					data<-data[,c(
-									"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
-									"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
-							)]
-					grdata<-rbind(grdata,data)
-				}
-				names(grdata)<-tolower(names(grdata))	
-				grdata<-funtraitementdate(grdata,
-						nom_coldt="debut_pas",
-						annee=FALSE,
-						mois=TRUE,
-						quinzaine=TRUE,
-						semaine=TRUE,
-						jour_an=TRUE,
-						jour_mois=FALSE,
-						heure=FALSE)
-				annee=unique(strftime(as.POSIXlt(bilanMigrationMult@time.sequence),"%Y"))
-				dis_commentaire=  paste(as.character(bilanMigrationMult@dc@dc_selectionne),collapse=",") 
-				grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
-				grdata$DC<-as.factor(grdata$DC)
-				grdata$taxon<-as.factor(grdata$taxon)
+				grdata<-fun_aggreg_for_plot(bilanMigrationMult)
 				if (length(unique(grdata$taxon))==1&length(unique(grdata$stade))==1){
 					p<-ggplot(grdata,aes(x=debut_pas,y=effectif_total),fill="black")+
 							geom_bar(position="stack", stat="identity")+
@@ -602,7 +576,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 				assign("grdata",grdata,envir_stacomi)	
 				funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
 				
-				}
+			}
 #==========================end / type=3=============================			
 		})
 
@@ -881,8 +855,8 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 			
 		}
 	}
-
-
+	
+	
 # df ["lot_identifiant","coef","ts.id"]
 # lot_identifiant= identifiant du lot, coef = part du lot dans chaque id_seq (sequence de jours), "id_seq" numero du jour
 # creating a table with lot_identifiant, sequence, and the coeff to apply
@@ -940,7 +914,7 @@ fun_bilanMigrationMult_Overlaps <- function(time.sequence, datasub,negative=FALS
 	# then the calculation will have hampered our numbers of a small amount
 	# and the following test is not expected to be TRUE.
 	if (!overlapping_samples_between_year)
-	stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
+		stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
 	datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")
 	if (!"MESURE"%in%colnames(datasub3)) 	datasub3$MESURE=0
 	if (!"CALCULE"%in%colnames(datasub3)) 	datasub3$CALCULE=0
@@ -1082,3 +1056,43 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 	stopifnot(nr==nrow(tableau))
 	return(tableau)
 }
+
+#' returns a table where all components within the list calcdata are aggregated
+#' and formatted for plot
+#' @param object An object of class \ref{BilanMigrationMult-class}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+fun_aggreg_for_plot<-function(object){
+	if (class(object)!="BilanMigrationMult") stop("This function must have for argument an object of class BilanMigrationMult")
+	lestaxons= paste(object@taxons@data$tax_nom_latin,collapse=",")
+	lesstades=  paste(object@stades@data$std_code,collapse=",")
+	grdata<-data.frame()
+	for (i in 1:length(object@calcdata)){
+		data<-object@calcdata[[i]]$data
+		# extracting similar columns (not those calculated)
+		data<-data[,c(
+						"No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code",
+						"MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total"
+				)]
+		grdata<-rbind(grdata,data)
+	}
+	names(grdata)<-tolower(names(grdata))	
+	grdata<-funtraitementdate(grdata,
+			nom_coldt="debut_pas",
+			annee=FALSE,
+			mois=TRUE,
+			quinzaine=TRUE,
+			semaine=TRUE,
+			jour_an=TRUE,
+			jour_mois=FALSE,
+			heure=FALSE)
+	annee=unique(strftime(as.POSIXlt(object@time.sequence),"%Y"))
+	dis_commentaire=  paste(as.character(object@dc@dc_selectionne),collapse=",") 
+	grdata<-stacomirtools::chnames(grdata,c("ope_dic_identifiant","lot_tax_code","lot_std_code"),c("DC","taxon","stade"))
+	grdata$DC<-as.factor(grdata$DC)
+	grdata$taxon<-as.factor(grdata$taxon)
+	return(grdata)	
+}
+
+
+

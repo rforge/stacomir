@@ -34,5 +34,8 @@ bilan_adm<-calcule(bilan_adm)
 # plot data to confirm the split by limits is correct
 plot(bilan_adm, plot.type=1)
 
+# plot data to confirm the split by limits is correct
+plot(bilan_adm, plot.type=2)
+
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilan_adm)
