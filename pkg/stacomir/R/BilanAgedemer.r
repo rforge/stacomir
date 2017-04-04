@@ -3,7 +3,7 @@
 
 #' Class "BilanAgedemer"
 #' 
-#' the BilanAgedemer class is used to dispatch adult salmons to age class according
+#' the BilanAgedemer class is used to dispatch adult salmons to age class according to
 #' their size and to basin dependent limits set by the user. Once checked with graphs and summary
 #' statistics, the results are to be written to the database.
 #' @include create_generic.r
@@ -21,13 +21,13 @@
 #' \item (2) tj_caracteristitiquelot_car A dataset to import into the database
 #' }
 #' @slot dc Object of class \link{RefDC-class}: the control devices
-#' @slot taxons Object of class \link{RefTaxon-class}: the speciess
+#' @slot taxons Object of class \link{RefTaxon-class}: the species
 #' @slot stades Object of class \link{RefStades-class} : the stages of the fish
 #' @slot par Object of class \link{Refpar-class}: the parameters used
 #' @slot horodatedebut An object of class \code{RefHorodate-class}
 #' @slot horodatefin An object of class \code{RefHorodate-class}
 #' @slot limit1hm The size limit, in mm between 1 sea winter fishes and 2 sea winter fishes
-#' @slot limit2hm The size limit, in mm between 3 sea winter fishes and 3 sea winter fishes
+#' @slot limit2hm The size limit, in mm between 2 sea winter fishes and 3 sea winter fishes
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanAgedemer", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -72,7 +72,7 @@ setValidity("BilanAgedemer",function(object)
 #' connect method for BilanAgedemer
 #' 
 #' @param object An object of class \link{BilanAgedemer-class}
-#' @param silent Boolean if TRUE messages are not displayed
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return An object of class \link{BilanAgedemer-class} 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -149,15 +149,14 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 #' command line interface for BilanAgedemer class
 #' @param object An object of class \link{BilanAgedemer-class}
 #' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
-#' @param taxons '2038=Anguilla anguilla',
+#' @param taxons '2220=Salmo salar',
 #' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
-#' @param stades 'AGG'
-#' @param par Parameters chosen for the Bilan are body size (1786), vertical eye diameter (BBBB), horizontal eye diameter (CCCC),
-#' body contrast (CONT), presence of punctuation on the lateral line (LINP), length of the pectoral fin (PECT)
+#' @param stades '5','11','BEC','BER','IND'
+#' @param par Parameters chosen for the Bilan are mesured body size (1786), mesured fork length (1785),video size (C001) and number of year at sea (A124)
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
-#' @param silent Boolean, if TRUE, information messages are not displayed
-#' @return An object of class \link{BilanMigration-class}
+#' @param silent Default FALSE, if TRUE the program should no display messages
+#' @return An object of class \link{BilanAgedemer-class}
 #' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class}, \link{Refpar-class} and two slots of \link{RefHorodate-class} and then 
 #' uses the choice_c methods of these object to select the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -209,7 +208,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 #' Calcule method for BilanAgedemer, this method will split the data according to cut
 #' 
 #' @param object An object of class \code{\link{BilanAgedemer-class}} 
-#' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(object,silent) {
@@ -239,8 +238,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 #' @param x An object of class \link{BilanAgedemer-class}
 #' @param plot.type Default "1"
 #'  \itemize{
-#' 		\item{plot.type="1"}{Lattice plot of Durif's stages according to Body Length and Eye Index (average of vertical and horizontal diameters). 
-#' If several DC are provided then a comparison of data per dc is provided}
+#' 		\item{plot.type="1"}{density plot}
 #' 		\item{plot.type="2"}{Lattice plot giving a comparison of Durif's stage proportion over time, if several DC are provided an annual comparison 
 #' is proposed, if only one DC is provided then the migration is split into month.}
 #' 		\item{plot.type="3"}{ Series of graphs showing  mean Fulton's coefficient, Pankhurst eye index,	along
@@ -252,7 +250,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 #' @aliases plot.BilanAgedemer plot.bilan_adm
 #' @export
 setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=function(x, plot.type="1", silent=FALSE){ 
-			#bilan_adm<-b_carlot;require(ggplot2);plot.type="1"
+			#require(ggplot2);plot.type="1"
 			#browser()
 			bilan_adm<-x
 			plot.type<-as.character(plot.type)# to pass also characters
