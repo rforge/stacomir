@@ -269,3 +269,7 @@
 #' when weighting them. Samples of 50 to 200 glass eel are weighted and then counted to provide an idea of
 #' the seasonal evolution of wet weight.
 "bilPM"
+
+#' Size structure of salmon in 2012 at vichy (left and right bank fishways)
+#' and Decize-Saint Léger des Vignes. Blabblablabla
+"bilan_adm"
