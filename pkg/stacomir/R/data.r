@@ -270,6 +270,76 @@
 #' the seasonal evolution of wet weight.
 "bilPM"
 
-#' Size structure of salmon in 2012 at vichy (left and right bank fishways)
-#' and Decize-Saint Léger des Vignes. Blabblablabla
+#' An object of class BilanMigrationInterAnnuelle with data loaded
+#' 
+#' This data corresponds to the data collected at the Vichy fishway
+#' between 1997 and 2012, video recording of the Salmo salar upstream migration.
+#' This dataset has been kindly provided by Loire Grands Migrateurs.
+#'
+#' @format An object of class \link{BilanMigrationInterAnnuelle-class} with 7 slots:
+#' \describe{
+#'   \item{dc}{the \code{RefDC} object with 4 slots filled with data corresponding to the iav postgres schema}
+#'   \item{taxons}{the \code{RefTaxon} the taxa selected}
+#'   \item{stades}{the \code{RefStades} the stage selected}
+#'   \item{anneeDebut}{the \code{PasDeTempsJournalier} calculated for all 2015}
+#'   \item{anneeFin}{the \code{PasDeTempsJournalier} calculated for all 2015}
+#'   \item{data}{ A dataframe with 7138 rows and 10 variables
+#' 			\describe{
+#'   			\item{bjo_identifiant}{sample id}
+#'   			\item{bjo_dis_identifiant}{dc id}
+#'   			\item{bjo_tax_code}{species id}
+#'   			\item{bjo_std_code}{stage id}
+#'   			\item{bjo_annee}{year}
+#'   			\item{bjo_jour}{date}
+#'   			\item{bjo_labelquantite}{method of data collection, measured, calculated...}
+#'   			\item{bjo_horodateexport}{date with special format for export}
+#'   			\item{bjo_org_code}{organisme provided the data}
+#'   			}
+#'   }
+#' }
+#' @keywords data
+"bmi_vichy"
+
+
+#' An object of class BilanAgedemer with data loaded
+#' 
+#' This data corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
+#' Léger des Vignes fishways (respectively on the Allier and Loire river) in 2012 on the size structure of Salmo salar.
+#' This dataset has been kindly provided by Loire Grands Migrateurs.
+#'
+#' @format An object of class \link{BilanAgedemer-class} with 8 slots:
+#' \describe{
+#'   \item{dc}{the \code{RefDC} : the control devices selected}
+#'   \item{taxons}{the \code{RefTaxon} : Salmo salar selected}
+#'   \item{stades}{the \code{RefStades} : the stages selected}
+#'   \item{par}{Object of class \link{Refpar-class}: the parameters used}
+#' 	 \item{horodatedebut}{object of class \code{RefHorodate-class} : the start date selected}
+#' 	 \item{horodatefin}{object of class \code{RefHorodate-class} : the end date selected} 
+#'   \item{limit1hm}{The size limit, in mm between 1 sea winter fishes and 2 sea winter fishes}
+#'   \item{limit2hm}{The size limit, in mm between 2 sea winter fishes and 3 sea winter fishes}
+#'   \item{data}{ A dataframe with 898  rows and 20 variables
+#' 			\describe{
+#'   			\item{ope_identifiant}{operation id}
+#'   			\item{lot_identifiant}{sample id}
+#'   			\item{ope_dic_identifiant}{dc id}
+#'   			\item{ope_date_debut}{start date}
+#'   			\item{ope_date_fin}{end date}
+#'   			\item{lot_effectif}{number of fishes}
+#'   			\item{lot_tax_code}{species id}
+#'   			\item{lot_std_code}{stages id}
+#'   			\item{tax_nom_latin}{species latin names}
+#'   			\item{std_libelle}{stages names} 
+#' 				\item{dev_code}{destination of the fishes id}
+#' 				\item{dev_libelle}{destination of the fishes names}
+#' 				\item{par_nom}{parameter name}
+#' 				\item{car_par_code}{parameter id}
+#' 				\item{car_methode_obtention}{method of data collection, measured, calculated...}
+#' 				\item{car_valeur_quantitatif}{the value of the parameter}
+#'   			}
+#'   }
+#'  
+#' }
+#' @keywords data
 "bilan_adm"
+
+
