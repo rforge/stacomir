@@ -105,7 +105,6 @@ setMethod("connect",signature=signature("BilanAgedemer"),definition=function(obj
 #' @return An object of class \link{BilanAgedemer-class} with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-#' @return An object of the class
 setMethod("charge",signature=signature("BilanAgedemer"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
@@ -220,6 +219,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 #' @param object An object of class \code{\link{BilanAgedemer-class}} 
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @return An object of class \link{BilanAgedemer-class}
 #' @export
 setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(object,silent) {
 			#bilan_adm<-b_carlot
@@ -248,14 +248,10 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 #' @param x An object of class \link{BilanAgedemer-class}
 #' @param plot.type Default "1"
 #'  \itemize{
-#' 		\item{plot.type="1"}{density plot}
-#' 		\item{plot.type="2"}{Lattice plot giving a comparison of Durif's stage proportion over time, if several DC are provided an annual comparison 
-#' is proposed, if only one DC is provided then the migration is split into month.}
-#' 		\item{plot.type="3"}{ Series of graphs showing  mean Fulton's coefficient, Pankhurst eye index,	along
-#' with a size weight analysis and regression using robust regression (rlm more robust to the presence of outliers)}
-#' 			\item{plot.type="4"}{ Lattice cloud plot of Pankurst~ Body Length ~ weight)}
+#' 		\item{plot.type="1"}{density plot by sea age}
+#' 		\item{plot.type="2"}{Density plot by sea age and dc}
 #' }
-#' @param silent Stops displaying the messages.
+#' @param silent Default FALSE, if TRUE the program should no display messages.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanAgedemer plot.bilan_adm
 #' @export
@@ -311,8 +307,8 @@ setMethod("plot", signature(x = "BilanAgedemer", y = "missing"), definition=func
 		})
 
 #' summary for BilanAgedemer 
-#' @param object An object of class \code{\link{BilanAgedemer-class}}
-#' @param silent Should the program stay silent or display messages, default FALSE
+#' @param object An object of class \link{BilanAgedemer-class}
+#' @param silent Default FALSE, if TRUE the program should no display messages.
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -347,26 +343,21 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 			return(result)		
 		})
 
-#' Command line method to write the daily and monthly counts to the 
-#' t_bilanmigrationjournalier_bjo table
+#' Command line method to write the caracteristic "sea age" (car_par_code='A124')
+#' into the tj_caracteristiquelot_car table in the user's scheme
 #' 
-#' Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
-#' by this function.  
-#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
-#' @param silent : TRUE to avoid messages
+#' The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
+#' defined by the user  
+#' @param object an object of class \link{BilanAgedemer-class}}
+#' @param silent : Default FALSE, if TRUE the program should no display messages.
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
-#' @param host : the host for sqldf, defaults to "localhost"
-#' @param port : the port, defaults to 5432
-#' @note the user is asked whether or not he wants to overwrite data, if no
-#' data are present in the database, the import is done anyway. The name of the database
-#' is not passed in odbc link, here defaults to "bd_contmig_nat"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
 #' stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
-#' data("bM_Arzal")
-#' bM_Arzal<-calcule(bM_Arzal)
-#' write_database(bilanMigration=bM_Arzal,silent=FALSE)
+#' data("bilan_adm")
+#' bilan_adm<-calcule(bilan_adm)
+#' write_database(bilanAgedemer=bilan_adm,silent=FALSE)
 #' }
 #' @export
 setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
@@ -478,7 +469,7 @@ funtableBilanAgedemer = function(h,...) {
 
 
 #' supprime method for BilanMigrationInterannuelle class
-#' @param object An object of class \link{BilanMigrationInterAnnuelle-class}
+#' @param object An object of class \link{BilanAgedemer-class}
 #' @return nothing
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
