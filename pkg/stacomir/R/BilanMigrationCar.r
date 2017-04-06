@@ -11,8 +11,8 @@
 #' @include Refparquan.r
 #' @include Refparqual.r
 #' @include RefChoix.r
-#' @note The program by default uses two parameter choice, checking box "none" will
-#' allow the program to ignore the parameter
+#' @note The main difference between this class and \link{Bilan_carlot} is that this class allows to
+#' select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanMigrationCar", ...)}.  they are loaded by the interface
 #' using interface_BilanMigrationCar function.
@@ -36,21 +36,27 @@
 setClass(Class="BilanMigrationCar",
 		representation=representation(
 				echantillon="RefChoix",
-				calcdata="list"),
+				calcdata="list",
+				parqual="Refparqual",
+				parquan="Refparquan"),
 		prototype=list(
+				data=list(),
 				echantillon=new("RefChoix"),
-				calcdata<-list()),
+				calcdata<-list(),
+				parqual=new("Refparqual"),
+				parquan=new("Refparquan")),
 		contains="Bilan_carlot")
 
 
 setValidity("BilanMigrationCar",function(object)
 		{
-			rep4=length(object@pasDeTemps)==1
-			if (!rep4) retValue="length(object@pasDeTemps) different de 1, plusieurs stades alors que la classe n'en comporte qu'un" 
-			rep5=length(object@parqual)==1|length(object@parquan)==1 #au moins un qualitatif ou un quantitatif
-			if (!rep5) retValue="length(object@parqual)==1|length(object@parquan)==1 non respecte"  
-			return(ifelse(rep4 & rep5,TRUE,retValue))
-		}   )
+			retValue=""
+			rep4<-length(object@taxons)==1
+			if (!rep4) retValue=gettext("This bilan should be for just one taxa")
+			rep5<-length(object@parqual)==1|length(object@parquan)==1 #au moins un qualitatif ou un quantitatif
+			if (!rep5) retValue=gettext("length(object@parqual)==1|length(object@parquan)==1 not TRUE")  
+			return(ifelse(rep4&rep5,TRUE,retValue))
+		} )
 
 
 #' command line interface for BilanMigrationCar class
@@ -73,13 +79,14 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 				dc,
 				taxons,
 				stades,
-				par,
+				parquan,
+				parqual,
 				horodatedebut,
 				horodatefin,
 				echantillon=TRUE,
 				silent=FALSE){
 			# code for debug using example
-			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);taxons=2220;	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
+			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);taxons=2220;	stades=c('5','11','BEC','BER','IND');parquan=c('1786','1785','C001','A124');parqual='COHO';silent=FALSE
 			bmC<-object
 			bmC@dc=charge(bmC@dc)
 			bmC@dc<-choice_c(object=bmC@dc,dc)
@@ -87,8 +94,17 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 			bmC@taxons<-choice_c(bmC@taxons,taxons)
 			bmC@stades<-charge_avec_filtre(object=bmC@stades,bmC@dc@dc_selectionne,bmC@taxons@data$tax_code)	
 			bmC@stades<-choice_c(bmC@stades,stades,silent=silent)
-			bmC@par<-charge_avec_filtre(object=bmC@par,bmC@dc@dc_selectionne,bmC@taxons@data$tax_code,bmC@stades@data$std_code)	
-			bmC@par<-choice_c(bmC@par,par,silent=silent)
+			bmC@parquan<-charge_avec_filtre(object=bmC@parquan,dc_selectionne=bmC@dc@dc_selectionne,
+					taxon_selectionne=bmC@taxons@data$tax_code,
+					stade_selectionne=bmC@stades@data$std_code)	
+			bmC@parquan<-choice_c(bmC@parquan,parquan,silent=silent)
+			# the method choice_c is written in refpar, and each time 
+			assign("refparquan",bmC@parquan,envir_stacomi)
+			bmC@parqual<-charge_avec_filtre(object=bmC@parqual,bmC@dc@dc_selectionne,bmC@taxons@data$tax_code,bmC@stades@data$std_code)	
+			bmC@parqual<-choice_c(bmC@parqual,parqual,silent=silent)
+			bmC@parqual<-charge_complement(bmC@parqual)
+			# the method choice_c is written in refpar, and each time 
+			assign("refparqual",bmC@parqual,envir_stacomi)
 			bmC@horodatedebut<-choice_c(object=bmC@horodatedebut,
 					nomassign="bmC_date_debut",
 					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
@@ -99,159 +115,11 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
-			bmC@echantillon<-choice_c(bmC@echantillon,
-
-			validObject(bmC)
-			
-
-			bilan_carlot@dc<-choice_c(object=bilan_carlot@dc,dc)
-			# only taxa present in the bilanMigration are used
-			bilan_carlot@taxons<-charge_avec_filtre(object=bilan_carlot@taxons,bilan_carlot@dc@dc_selectionne)			
-			bilan_carlot@taxons<-choice_c(bilan_carlot@taxons,taxons)
-			bilan_carlot@stades<-charge_avec_filtre(object=bilan_carlot@stades,bilan_carlot@dc@dc_selectionne,bilan_carlot@taxons@data$tax_code)	
-			bilan_carlot@stades<-choice_c(bilan_carlot@stades,stades)
-			bilan_carlot@par<-charge_avec_filtre(object=bilan_carlot@par,bilan_carlot@dc@dc_selectionne,bilan_carlot@taxons@data$tax_code,bilan_carlot@stades@data$std_code)	
-			bilan_carlot@par<-choice_c(bilan_carlot@par,par,silent=silent)
-			bilan_carlot@horodatedebut<-choice_c(object=bilan_carlot@horodatedebut,
-					nomassign="bilan_carlot_date_debut",
-					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
-					horodate=horodatedebut, 
-					silent=silent)
-			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
-					nomassign="bilan_carlot_date_fin",
-					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
-					horodate=horodatefin,
-					silent=silent)
+			bmC@echantillon<-charge(bmC@echantillon,vecteur=c(TRUE,FALSE),label="essai",selected=as.integer(1))
+			bmC@echantillon<-choice_c(bmC@echantillon,selectedvalue=echantillon)
+			validObject(bmC)	
 			return(bmC)
 		})
-
-setMethod("connect",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){
-	if (bilanMigrationPar@parquan@data$par_nom=="aucune" & bilanMigrationPar@parqual@data$par_nom=="aucune") {
-		stop("You need to choose at least one quantitative or qualitative attribute")
-	} else if (bilanMigrationPar@parquan@data$par_nom=="aucune") {
-		#caracteristique qualitative uniquement
-		req@sql=paste("SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif,",
-				" car_val_identifiant_tous as car_val_identifiant",
-				" FROM (SELECT *,", 
-				" CASE when car_val_identifiant is not null then car_val_identifiant",
-				" ELSE lot_pere_val_identifiant",
-				" END as car_val_identifiant_tous", 
-				" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
-				" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
-				echantillons,
-				" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
-				" AND lot_std_code = '",bilanMigrationPar@stades@data$std_code,"'" ,
-				" AND car_par_code = '",bilanMigrationPar@parqual@data$par_code,"'" ,
-				" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '" , debutPas , "', TIMESTAMP '" , finPas , "')" ,
-				" ) AS qan",
-				" GROUP BY qan.ope_date_debut, qan.ope_date_fin, qan.lot_methode_obtention, qan.car_val_identifiant_tous " ,
-				" ORDER BY qan.ope_date_debut",sep="")
-	} else if (bilanMigrationPar@parqual@data$par_nom=="aucune") {
-		# Caracteristique quantitative uniquement
-		req@sql=paste("SELECT ope_date_debut, ope_date_fin, lot_methode_obtention, SUM(lot_effectif) AS effectif, SUM(car_valeur_quantitatif) AS quantite",
-				" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan",    
-				" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
-				echantillons,
-				" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
-				" AND lot_std_code = '",bilanMigrationPar@stades@data$std_code,"'" ,
-				" AND car_par_code = '",bilanMigrationPar@parquan@data$par_code,"'" ,
-				" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '" , debutPas , "', TIMESTAMP '" , finPas , "')" ,
-				" GROUP BY ope_date_debut, ope_date_fin, lot_methode_obtention" ,
-				" ORDER BY ope_date_debut",sep="")
-	} else {
-		#les deux caracteristiques sont choisies, il faut faire un Bilancroise
-		# attention je choisis un left  join ea veut dire certaines caracteristiques quant n'ont pas de contrepartie quantitative     
-		req@sql=paste(
-				" SELECT ope_date_debut,",
-				" ope_date_fin,",  
-				" SUM(lot_effectif) AS effectif,", 
-				" SUM(car_valeur_quantitatif) AS quantite,",
-				" car_val_identifiant_tous as car_val_identifiant",
-				" FROM (",
-				" SELECT *,",
-				" CASE when car_val_identifiant is not null then car_val_identifiant",
-				" ELSE lot_pere_val_identifiant",
-				" END as car_val_identifiant_tous",
-				" FROM (",
-				" SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
-				" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
-				echantillons,
-				" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,
-				" AND lot_std_code = '",bilanMigrationPar@stades@data$std_code,"'" ,
-				" AND car_par_code = '",bilanMigrationPar@parquan@data$par_code,"'" ,
-				" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",debutPas,"',TIMESTAMP '",finPas,"') " ,
-				" ) AS qan",
-				" LEFT JOIN", 
-				" (SELECT lot_identifiant as lot_identifiant1,car_val_identifiant ",
-				"  FROM vue_ope_lot_ech_parqual ", 
-				" WHERE ope_dic_identifiant ='",bilanMigrationPar@dc@dc_selectionne,"'",
-				echantillons,
-				" AND lot_tax_code = '",bilanMigrationPar@taxons@data$tax_code,"'" ,     
-				" AND lot_std_code = '",bilanMigrationPar@stades@data$std_code,"'" ,
-				" AND car_par_code = '",bilanMigrationPar@parqual@data$par_code,"'" ,
-				" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '",debutPas,"',TIMESTAMP '",finPas,"') " ,
-				" )as qal ",
-				" ON qan.lot_identifiant=qal.lot_identifiant1",
-				" )as qanqal",
-				" GROUP BY  qanqal.ope_date_debut, qanqal.ope_date_fin, qanqal.car_val_identifiant_tous",
-				" ORDER BY qanqal.ope_date_debut",sep="")
-	}
-		
-	})# end else
-	
-	#cat(paste("Requete SQL : \n" , sql))
-	rs<-stacomirtools::connect(req)@query
-	#cat(nrow(rs))
-	if (nrow(rs)>0){
-		
-		debutOpe=as.POSIXlt(rs$ope_date_debut)
-		finOpe= as.POSIXlt(rs$ope_date_fin)
-		effectif=rs$effectif
-		quantite=rs$quantite
-		if (bilanMigrationPar@parqual@data$par_nom!="aucune") {
-			rs$car_val_identifiant[is.na(rs$car_val_identifiant)]<-"autre"
-		}
-		# creation des sommes effectif_MESURE ...
-		
-		# Si l'operation commence avant le pas de temps courant, et ne se termine pas apres, il faut conserver une seule partie de l'operation
-		# Si l'operation se termine apres la fin du pas mais ne debute pas avant, il faut conserver une seule partie de l'operation
-		# Si l'operation commence avant le pas de temps et se termine apres, on ne conserve qu'une partie de l'operation
-		# Cas ou l'operation est inferieure ou egale au pas de temps : pas de probleme, on compte l'operation complete
-		# ce qui revient e dire que pour ce qui concerne la time.sequence de l'operation effectif sur le pas de temps
-		# on prends le max du debut de ope et pas de temps (si l'ope commence avant on garde pas cette partie )
-		# et pour la fin on prend le min si l'ope se termine apres on garde pas... ouf
-		
-		debut<-debutOpe
-		fin<-finOpe
-		debut[debut<debutPas]<-debutPas
-		fin[fin>finPas]<-finPas
-		
-		# Repartition de l'effectif au prorata
-		effectif = effectif *  as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
-		quantite=  quantite *  as.double(difftime(time1=fin, time2=debut,units =  "secs"))/as.double(difftime(time1=finOpe,time2=debutOpe,units =  "secs")) 
-		if (bilanMigrationPar@parqual@data$par_nom!="aucune") { # il existe des caracteristiques qualitatives de lot			
-			# i=c(valeurs_qal,"tous")[2]
-			for (i in valeurs_qal){
-				assign(eval(paste("effectif_",i,sep="")),sum(effectif[rs$car_val_identifiant==i]))
-				assign(eval(paste("quantite_",i,sep="")),sum(quantite[rs$car_val_identifiant==i]))
-			}
-		} else {# pas de caracteristiques qualitatives de lot et pas de decoupage supplementaire
-			effectif<-sum(effectif)
-			quantite<-sum(quantite)
-		}
-	} else {
-		# dans le cas ou le resultat de la requete est vide pas de ligne je met 0
-		if (bilanMigrationPar@parqual@data$par_nom!="aucune") { # il existe des caracteristiques qualitatives de lot			
-			for (i in valeurs_qal){
-				assign(eval(paste("effectif_",i,sep="")),0)
-				assign(eval(paste("quantite_",i,sep="")),0)
-			}
-		} else {# pas de caracteristiques qualitatives de lot et pas de decoupage supplementaire
-			effectif<-0
-			quantite<-0
-		}
-		
-	}
 
 #' charge method for BilanMigrationCar
 #' 
@@ -261,118 +129,181 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("charge",signature=signature("BilanMigrationMult"),definition=function(object,silent=FALSE){ 
-			bmC<-object  
-			if (exists("refDC",envir_stacomi)) {
-				bmC@dc<-get("refDC",envir_stacomi)
+		setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
+					bmC<-object  
+					if (exists("refDC",envir_stacomi)) {
+						bmC@dc<-get("refDC",envir_stacomi)
+					} else {
+						funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+					}
+					if (exists("refTaxon",envir_stacomi)) {
+						bmC@taxons<-get("refTaxon",envir_stacomi)
+					} else {      
+						funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+					}
+					if (exists("refStades",envir_stacomi)){
+						bmC@stades<-get("refStades",envir_stacomi)
+					} else 
+					{
+						funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+					}
+					if (exists("bmC_date_debut",envir_stacomi)) {
+						bmC@horodatedebut@horodate<-get("bmC_date_debut",envir_stacomi)
+					} else {
+						funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
+					}
+					if (exists("bmC_date_fin",envir_stacomi)) {
+						bmC@horodatefin@horodate<-get("bmC_date_fin",envir_stacomi)
+					} else {
+						funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
+					}  
+					
+					if (exists("refchoice",envir_stacomi)){
+						bmC@echantillon<-get("refchoice",envir_stacomi)
+					} else 
+					{
+						bmC@echantillon@listechoice<-"avec"
+						bmC@echantillon@selected<-as.integer(1)
+					}
+					
+					if (!(exists("refparquan",envir_stacomi)|exists("refparqual",envir_stacomi))){
+						funout(gettext("You need to choose at least one parameter qualitative or quantitative\n",domain="R-stacomiR"),arret=TRUE)	
+					}
+					
+					if (exists("refparquan",envir_stacomi)){
+						bmC@parquan<-get("refparquan",envir_stacomi)
+					} 
+					if (exists("refparqual",envir_stacomi)){
+						bmC@parqual<-get("refparqual",envir_stacomi)
+					} 
+					
+					stopifnot(validObject(bmC, test=TRUE))
+					return(bmC)
+				})
+
+
+setMethod("connect",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){
+			bmC<-object
+			if (!bmC@echantillon@selectedvalue) {
+				echantillons=" AND lot_pere IS NULL"      
 			} else {
-				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			if (exists("refTaxon",envir_stacomi)) {
-				bmC@taxons<-get("refTaxon",envir_stacomi)
-			} else {      
-				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			if (exists("refStades",envir_stacomi)){
-				bmC@stades<-get("refStades",envir_stacomi)
-			} else 
-			{
-				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			if (exists("pasDeTemps",envir_stacomi)){
-				bmC@pasDeTemps<-get("pasDeTemps",envir_stacomi)
-				# pour permettre le fonctionnement de Fonctionnement DC
-				assign("bilanFonctionnementDC_date_debut",get("pasDeTemps",envir_stacomi)@"dateDebut",envir_stacomi)
-				assign("bilanFonctionnementDC_date_fin",as.POSIXlt(DateFin(get("pasDeTemps",envir_stacomi))),envir_stacomi)
+				echantillons=""      
+			} 
+			
+			
+			if (nrow(bmC@parquan@data)==0 & nrow(bmC@parqual@data)==0) {
+				stop("You need to choose at least one quantitative or qualitative attribute")
 			} else {
-				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
-				warning("Attention, no time step selected, compunting with default value\n")
-			}
-			if (exists("refchoice",envir_stacomi)){
-				bmC@echantillon<-get("refchoice",envir_stacomi)
-			} else 
-			{
-				bmC@echantillon@listechoice<-"avec"
-				bmC@echantillon@selected<-as.integer(1)
-			}
-			if (exists("refparquan",envir_stacomi)){
-				bmC@parquan<-get("refparquan",envir_stacomi)
-			} else 
-			{
-				funout(gettext("You need to choose a quantitative parameter\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			if (exists("refparqual",envir_stacomi)){
-				bmC@parqual<-get("refparqual",envir_stacomi)
-			} else 
-			{
-				funout(gettext("You need to choose a qualitative parameter\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			
-			stopifnot(validObject(bmC, test=TRUE))
-			funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"))
-			
+				if (nrow(bmC@parqual@data)!=0) {
+					#caracteristique qualitative 
+					req=new("RequeteODBC")
+					req@baseODBC<-get("baseODBC", envir=envir_stacomi)					
+					#this query will get characteristics from lot_pere when null
+					req@sql=paste("SELECT ",
+							" ope_date_debut,", 
+							" ope_date_fin,",  
+							" lot_methode_obtention,",
+							" lot_identifiant ,",
+							" lot_effectif,", 
+							" car_val_identifiant,", 
+							" ope_dic_identifiant,", 
+							" lot_tax_code,", 
+							" lot_std_code,",
+							" car_par_code",
+							" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parqual", 
+							" WHERE ope_dic_identifiant in ",vector_to_listsql(bmC@dc@dc_selectionne),
+							echantillons,
+							" AND lot_tax_code in ",vector_to_listsql(bmC@taxons@data$tax_code),
+							" AND lot_std_code in ",vector_to_listsql(bmC@stades@data$std_code),
+							" AND car_par_code in ",vector_to_listsql(bmC@parqual@data$par_code),
+							" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '" ,
+							bmC@horodatedebut@horodate ,
+							"', TIMESTAMP '" , bmC@horodatefin@horodate  , "')" 
+							,sep="")
+					bmC@data[["parqual"]]<-connect(req)@query
+				}# end if (parqual)
+				if (nrow(bmC@parquan@data)!=0) {
+					# Caracteristique quantitative
+					req=new("RequeteODBC")
+					req@baseODBC<-get("baseODBC", envir=envir_stacomi)					
+					# we round the date to be consistent with daily values from the 
+					req@sql=paste("SELECT ",
+							" ope_date_debut,", 
+							" ope_date_fin,",  
+							" lot_methode_obtention,",
+							" lot_identifiant ,",
+							" lot_effectif,", 	
+							" car_valeur_quantitatif,",
+							" ope_dic_identifiant,", 
+							" lot_tax_code,", 
+							" lot_std_code,",
+							" car_par_code",
+							" FROM ",get("sch",envir=envir_stacomi),"vue_ope_lot_ech_parquan", 
+							" WHERE ope_dic_identifiant in ",vector_to_listsql(bmC@dc@dc_selectionne),
+							echantillons,
+							" AND lot_tax_code in ",vector_to_listsql(bmC@taxons@data$tax_code),
+							" AND lot_std_code in ",vector_to_listsql(bmC@stades@data$std_code),
+							" AND car_par_code in ",vector_to_listsql(bmC@parquan@data$par_code),
+							" AND (ope_date_debut, ope_date_fin) OVERLAPS (TIMESTAMP '" ,
+							bmC@horodatedebut@horodate ,
+							"', TIMESTAMP '" , bmC@horodatefin@horodate  , "')" 
+							,sep="")
+					
+					bmC@data[["parquan"]]<-connect(req)@query				
+				}# end if (parquan)
+			}# end else		
+			return(bmC)
 		})
 		
+
 #' handler for bilanmigrationpar
 #' @param h handler
 #' @param ... Additional parameters
-		hbmCcalc=function(h,...){
-			calcule(h$action)
-		}			
+hbmCcalc=function(h,...){
+	calcule(h$action)
+}			
+#' Turns a quantitative parameter into qualitative
+#' @param object An object of class \link{Refparquan-class}
+#' @param par The code of a quantitative parameter
+#' @param ... Additional parms to the cut method \link[base]{cut}   
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition=function(object,par,silent=FALSE,...) {
+			bmC<-object
+			# par <-'A124'
 		
-		
+			if (class(par)!="character") stop("par should be a character")
+			if (nrow(bmC@data[["parquan"]])==0)  funout(gettext("No data for quantitative parameter, perhaps you forgot to run the calcule method"))
+			if (!par%in%bmC@parquan@par_selectionne) funout(gettextf("The parameter %s is not in the selected parameters",par),arret=TRUE)
+			if (!par%in%bmC@parquan@data$par_code) funout(gettextf("No data for this parameter, nothing to do",par),arret=TRUE)
+			tab<-bmC@data[["parquan"]]
+			lignes_du_par<-tab$car_par_code==par
+			tab<-tab[lignes_du_par,]
+			tab$car_valeur_quantitatif<-as.character(cut(tab$car_valeur_quantitatif,...))
+			#tab$car_valeur_quantitatif<-as.character(cut(tab$car_valeur_quantitatif,breaks=c(0,1.5,2.5,10),label=c("1","2","3")))
+			tab<-chnames(tab,"car_valeur_quantitatif","car_val_identifiant")
+			bmC@data[["parquan"]]<-bmC@data[["parquan"]][!lignes_du_par,]
+			bmC@data[["parqual"]]<-rbind(bmC@data[["parqual"]],tab)
+			if (!silent) funout(gettextf("%s lines have been converted from quantitative to qualitative parameters",nrow(tab)))
+			return(bmC)
+		})
+
 #' calcule methode
 #' 
 #' 
 #'@param object An object of class \code{\link{BilanMigrationCar-class}} 
-setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function(object){ 
+setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
 			bmC<-object
-		if (bmC@parquan@data$par_nom=="aucune" & bmC@parqual@data$par_nom=="aucune") {
-				funout(gettext("You need to choose at least one quantitative or qualitative attribute\n",domain="R-stacomiR"),arret=TRUE)}
-			res<-funSousListeBilanMigrationCar(bmC=bmC)
-			if (exists("progres")) close(progres)
-			data<-res[[1]]
-			data[,"debut_pas"]<-as.POSIXct(strptime(x=data[,"debut_pas"],format="%Y-%m-%d"))   # je repasse de caractere 
-			data[,"fin_pas"]<-as.POSIXct(strptime(data[,"fin_pas"],format="%Y-%m-%d"))
-			bmC@valeurs_possibles<-res[[2]]   # definitions des niveaux de parametres qualitatifs rencontres.
-			# funout("\n")
-			#	assign("data",data,envir_stacomi)
-			#funout(gettext("the migration summary table is stored in envir_stacomi\n",domain="R-stacomiR"))
-			#data<-get("data",envir_stacomi)
-			# chargement des donnees suivant le format chargement_donnees1  
-			bmC@time.sequence=seq.POSIXt(from=min(data$debut_pas),to=max(data$debut_pas),by=as.numeric(bmC@pasDeTemps@stepDuration)) # il peut y avoir des lignes repetees poids effectif
-			
-			if (bmC@taxons@data$tax_nom_commun=="Anguilla anguilla"& bmC@stades@data$std_libelle=="civelle") 
-			{
-				funout(gettext("Be careful, the processing doesnt take lot\"s quantities into account \n",domain="R-stacomiR"))
-			}
-			funout(gettext("Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi) \n",domain="R-stacomiR"))
-			bmC@data<-data 
-			###########################
-			bmC<-x # ne pas passer dessus en debug manuel
-			##########################
-			colnames(bmC@data)<-gsub("debut_pas","Date",colnames(bmC@data))
-			if (bmC@parqual@data$par_nom!="aucune"& bmC@parquan@data$par_nom!="aucune") {# il y a des qualites et des quantites de lots
-				nmvarqan=gsub(" ","_",bmC@parquan@data$par_nom) # nom variable quantitative
-				colnames(bmC@data)<-gsub("quantite",nmvarqan,colnames(bmC@data))
-				mb=reshape2::melt(bmC@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bmC@data)))
-				# ici je ne sors que les variables quantitatives pour les graphes ulterieurs (j'ignore les effectifs) 
-			} else if (bmC@parqual@data$par_nom!="aucune"){ # c'est que des caracteristiques qualitatives
-				mb=reshape2::melt(bmC@data,id.vars=c(1:4),measure.vars=grep("effectif",colnames(bmC@data)))  # effectifs en fonction des variables qualitatives, il n'y a qu'une seule colonne     
-			} else if (bmC@parquan@data$par_nom!="aucune"){ # c'est que des caracteristiques quantitatives
-				nmvarqan=gsub(" ","_",bmC@parquan@data$par_nom) # nom variable quantitative
-				colnames(bmC@data)<-gsub("quantite",nmvarqan,colnames(bmC@data)) # je renomme la variable quant
-				mb=reshape2::melt(bmC@data,id.vars=c(1:4),measure.vars=grep(nmvarqan,colnames(bmC@data))) # valeurs quantitatives (il n'y a qu'une) 
-			} else if (bmC@parquan@data$par_nom=="aucune"&bmC@parqual@data$par_nom=="aucune"){
-				stop("This shouldn't be possible")
-				# ce cas est impossible
-			}
-			mb=stacomirtools::chnames(mb,"value","sum")
-			mb=funtraitementdate(data=mb,nom_coldt="Date") 
-			assign("bmC",bmC,envir_stacomi)
-			assign("data",data,envir_stacomi)
-			# graphiques (a affiner pb si autre chose que journalier)
-			# pour sauvegarder sous excel
+			qual<-bmC@data[["parqual"]]
+			quan<-bmC@data[["parquan"]]
+			qual<-chnames(qual,"car_par_code","car_par_code_qual")
+			quan<-chnames(quan,"car_par_code","car_par_code_quan")
+			quaa<-merge(qual,quan,by=c("ope_dic_identifiant","lot_identifiant","ope_date_debut","ope_date_fin","lot_methode_obtention","lot_effectif","lot_tax_code","lot_std_code"),all.x=TRUE,all.y=TRUE)
+			quaa=funtraitementdate(data=quaa,nom_coldt="ope_date_debut") 
+			quaa<-quaa[order(quaa$ope_dic_identifiant,quaa$lot_tax_code,quaa$lot_std_code,quaa$ope_date_debut),]
+			bmC@calcdata<-quaa
+			if(!silent) funout(gettext("The calculated data are in slot calcdata"))
+ 			assign("bmC",bmC,envir_stacomi)	
+			return(bmC)
 		})
 #' le handler appelle la methode generique graphe sur l'object plot.type=1
 #' 
@@ -417,32 +348,35 @@ hbmCstat=function(h){
 #' 
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
-#' @param plot.type One of "barplot", "xyplot", "summary table
+#' @param plot.type One of "qual", "quant" "crossed"
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature(x="BilanMigrationCar",y="ANY"),definition=function(x,y,plot.type="barplot",...){ 
-		
+setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,plot.type="barplot",...){ 
+			bmC<-object
 			# transformation du tableau de donnees
-			
-			if (plot.type=="barplot") {
-				
-				g<-ggplot(mb)
-				g<-g+geom_bar(aes(x=mois,y=sum,fill=variable),stat='identity',
-						stack=TRUE)
+			bm
+			if (plot.type=="qual") {				
+				g<-ggplot(bmC@calcdata)
+				g<-g+geom_bar(aes(x=mois,y=lot_effectif,fill=car_val_identifiant),stat = "identity")
+				g<-g+xlab()
 				assign("g",g,envir_stacomi)
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
-			} #end plot.type = "barplot"
-			if (plot.type=="xyplot") { 
-				
-				g<-ggplot(mb)
-				g<-g+geom_point(aes(x=Date,y=sum,col=variable),stat='identity',stack=TRUE)
+			} #end plot.type = "qual"
+			if (plot.type=="quant") { 				
+				g<-ggplot(bmC@calcdata)
+				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=car_par_code_quan),stat='identity')
+				assign("g",g,envir_stacomi)
+				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
+				print(g)
+			} #end plot.type="quant"
+			if (plot.type=="crossed") { 				
+				g<-ggplot(bmC@calcdata)
+				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=car_val_identifiant),stat='identity')
 				assign("g",g,envir_stacomi)
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type="xyplot"
-			#TODO create summary method
-			
 		})
 
 
@@ -453,19 +387,19 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="ANY"),definition=f
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanMigrationCar"),definition=function(object,silent=FALSE,...){
-					
-		if (plot.type=="summary") {
-			table=round(tapply(mb$sum,list(mb$mois,mb$variable),sum),1)
-			table=as.data.frame(table)
-			table[,"total"]<-rowSums(table)
-			gdf(table, container=TRUE)
-			nomdc=bmC@dc@data$df_code[match(bmC@dc@dc_selectionne,bmC@dc@data$dc)]
-			annee=unique(strftime(as.POSIXlt(bmC@time.sequence),"%Y"))
-			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-			write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-			funout(gettextf("Writing of %s",path1))
-			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-			write.table(bmC@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-			funout(gettextf("Writing of %s",path1))
-		} # end plot.type summary 
-	})
+			
+			if (plot.type=="summary") {
+				table=round(tapply(mb$sum,list(mb$mois,mb$variable),sum),1)
+				table=as.data.frame(table)
+				table[,"total"]<-rowSums(table)
+				gdf(table, container=TRUE)
+				nomdc=bmC@dc@data$df_code[match(bmC@dc@dc_selectionne,bmC@dc@data$dc)]
+				annee=unique(strftime(as.POSIXlt(bmC@time.sequence),"%Y"))
+				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+				write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
+				funout(gettextf("Writing of %s",path1))
+				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+				write.table(bmC@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
+				funout(gettextf("Writing of %s",path1))
+			} # end plot.type summary 
+		})

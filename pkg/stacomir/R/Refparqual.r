@@ -63,13 +63,11 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 					" JOIN ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
 					" JOIN ref.tg_parametre_par on par_code=car_par_code",
 					" JOIN ref.tr_parametrequalitatif_qal ON tr_parametrequalitatif_qal.qal_par_code::text = tg_parametre_par.par_code::text",sep="")
-			requete@where=paste("where dis_identifiant=",dc_selectionne)
-			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
+			requete@where=paste("where dis_identifiant in ",vector_to_listsql(dc_selectionne))
+			requete@and=paste("and lot_tax_code in ",vector_to_listsql(taxon_selectionne)," and lot_std_code in ",vector_to_listsql(stade_selectionne),sep="")
 			requete@order_by="ORDER BY par_code"  
 			requete<-stacomirtools::connect(requete)
 			object@data<-requete@query
-			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
-			} else object@data=rbind(object@data,c(NA,"aucune"))
 			return(object)
 		})
 
@@ -88,12 +86,11 @@ setMethod("charge_avec_filtre",signature=signature("Refparqual"),definition=func
 #'  charge_complement(object)
 #' }		
 setMethod("charge_complement",signature=signature("Refparqual"),definition=function(object) {
-			if (nrow(object@data)!=1) funout(gettextf("Internal error : there must have one line in Refparqual@data, or nbligne= %s",nrow(object@data)),arret=TRUE)
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
-					" WHERE val_qal_code='",object@data$par_code,
-					"' ORDER BY val_rang",sep="")
+					" WHERE val_qal_code in ", vector_to_listsql(object@data$par_code),
+					" ORDER BY val_rang",sep="")
 			requete<-stacomirtools::connect(requete)
 			#funout(gettext("The query to load parameters is done \n",domain="R-stacomiR"))
 			object@valqual<-requete@query

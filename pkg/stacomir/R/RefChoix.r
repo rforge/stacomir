@@ -11,7 +11,12 @@
 #' @slot selected An \code{Integer}  the initial selected value (as an index), first=1 used in gradio
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @family Referential objects
-setClass(Class="RefChoix",representation= representation(listechoice="character",label="character",selected="integer"))
+setClass(Class="RefChoix",representation= representation(listechoice="ANY",
+				label="character",
+				selected="integer",
+				selectedvalue="ANY"),
+		prototype=list(
+		selectedvalue=vector()))
 
 #' Loading method for Rechoice referential objects
 #' 
@@ -31,6 +36,7 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(object,ve
 			object@listechoice=vecteur
 			object@label=label
 			object@selected=selected
+			object
 			return(object)
 		})
 #' Choice method for Rechoice referential objects

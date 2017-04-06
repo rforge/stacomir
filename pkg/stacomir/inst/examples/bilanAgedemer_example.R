@@ -37,3 +37,5 @@ plot(bilan_adm, plot.type=2)
 
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilan_adm)
+
+write_database(bilan_adm)

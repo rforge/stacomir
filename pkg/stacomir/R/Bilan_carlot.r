@@ -21,7 +21,7 @@
 #' @export 
 setClass(Class="Bilan_carlot",
 		representation= representation(
-				data="data.frame",
+				data="ANY",
 				dc="RefDC",
 				taxons="RefTaxon",
 				stades="RefStades",

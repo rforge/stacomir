@@ -66,8 +66,12 @@ setGeneric("out",def=function(object,...) standardGeneric("out"))
 #' @param ... Additional parms
 #' @author cedric.briand
 setGeneric("createmessage",def=function(object,...) standardGeneric("createmessage"))
+#' Generic method to transform quantitative par into a qualitative one
+#' @param object Object
+#' @param ... Additional parms 
+#' @author cedric.briand
+setGeneric("setasqualitative",def=function(object,...) standardGeneric("setasqualitative"))
 # nouvel environnement
-
 
 
 

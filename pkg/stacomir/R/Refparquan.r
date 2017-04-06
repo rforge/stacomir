@@ -63,12 +63,12 @@ setMethod("charge_avec_filtre",signature=signature("Refparquan"),definition=func
 					" JOIN ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car on car_lot_identifiant=lot_identifiant",
 					" JOIN ref.tg_parametre_par on par_code=car_par_code",
 					" JOIN ref.tr_parametrequantitatif_qan ON qan_par_code=par_code",sep="")
-			requete@where=paste("where dis_identifiant=",dc_selectionne)
-			requete@and=paste("and lot_tax_code='",taxon_selectionne,"' and lot_std_code='",stade_selectionne,"'",sep="")
+			requete@where=paste("where dis_identifiant in ",vector_to_listsql(dc_selectionne))
+			requete@and=paste("and lot_tax_code in ",vector_to_listsql(taxon_selectionne)," and lot_std_code in ",vector_to_listsql(stade_selectionne),"",sep="")
 			requete@order_by="ORDER BY par_code"  
 			requete<-stacomirtools::connect(requete) 
 			object@data<-requete@query
-			if (nrow(object@data)==0) {object@data=data.frame("par_code"=NA,"par_nom"="aucune")
-			} else object@data=rbind(object@data,c(NA,"aucune"))
 			return(object)
 		})
+
+
