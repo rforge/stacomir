@@ -21,6 +21,7 @@
 #' \code{\linkS4class{BilanMigrationPar}}
 #' @concept Bilan Object 
 #' @keywords classes
+#' @aliases BilanOperation bilanoperation bilanOperation 
 #' @export 
 setClass(Class="BilanOperation",
 		representation= representation(data="data.frame",
