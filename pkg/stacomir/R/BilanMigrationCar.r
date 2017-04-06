@@ -79,8 +79,8 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 				dc,
 				taxons,
 				stades,
-				parquan,
-				parqual,
+				parquan=NULL,
+				parqual=NULL,
 				horodatedebut,
 				horodatefin,
 				echantillon=TRUE,
@@ -97,12 +97,15 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 			bmC@parquan<-charge_avec_filtre(object=bmC@parquan,dc_selectionne=bmC@dc@dc_selectionne,
 					taxon_selectionne=bmC@taxons@data$tax_code,
 					stade_selectionne=bmC@stades@data$std_code)	
-			bmC@parquan<-choice_c(bmC@parquan,parquan,silent=silent)
+			if (!is.null(parquan))
+				bmC@parquan<-choice_c(bmC@parquan,parquan,silent=silent)
 			# the method choice_c is written in refpar, and each time 
 			assign("refparquan",bmC@parquan,envir_stacomi)
 			bmC@parqual<-charge_avec_filtre(object=bmC@parqual,bmC@dc@dc_selectionne,bmC@taxons@data$tax_code,bmC@stades@data$std_code)	
-			bmC@parqual<-choice_c(bmC@parqual,parqual,silent=silent)
-			bmC@parqual<-charge_complement(bmC@parqual)
+			if (!is.null(parqual)){
+				bmC@parqual<-choice_c(bmC@parqual,parqual,silent=silent)
+				bmC@parqual<-charge_complement(bmC@parqual)
+			}
 			# the method choice_c is written in refpar, and each time 
 			assign("refparqual",bmC@parqual,envir_stacomi)
 			bmC@horodatedebut<-choice_c(object=bmC@horodatedebut,
@@ -129,57 +132,57 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-		setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
-					bmC<-object  
-					if (exists("refDC",envir_stacomi)) {
-						bmC@dc<-get("refDC",envir_stacomi)
-					} else {
-						funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-					}
-					if (exists("refTaxon",envir_stacomi)) {
-						bmC@taxons<-get("refTaxon",envir_stacomi)
-					} else {      
-						funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-					}
-					if (exists("refStades",envir_stacomi)){
-						bmC@stades<-get("refStades",envir_stacomi)
-					} else 
-					{
-						funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
-					}
-					if (exists("bmC_date_debut",envir_stacomi)) {
-						bmC@horodatedebut@horodate<-get("bmC_date_debut",envir_stacomi)
-					} else {
-						funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
-					}
-					if (exists("bmC_date_fin",envir_stacomi)) {
-						bmC@horodatefin@horodate<-get("bmC_date_fin",envir_stacomi)
-					} else {
-						funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
-					}  
-					
-					if (exists("refchoice",envir_stacomi)){
-						bmC@echantillon<-get("refchoice",envir_stacomi)
-					} else 
-					{
-						bmC@echantillon@listechoice<-"avec"
-						bmC@echantillon@selected<-as.integer(1)
-					}
-					
-					if (!(exists("refparquan",envir_stacomi)|exists("refparqual",envir_stacomi))){
-						funout(gettext("You need to choose at least one parameter qualitative or quantitative\n",domain="R-stacomiR"),arret=TRUE)	
-					}
-					
-					if (exists("refparquan",envir_stacomi)){
-						bmC@parquan<-get("refparquan",envir_stacomi)
-					} 
-					if (exists("refparqual",envir_stacomi)){
-						bmC@parqual<-get("refparqual",envir_stacomi)
-					} 
-					
-					stopifnot(validObject(bmC, test=TRUE))
-					return(bmC)
-				})
+setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
+			bmC<-object  
+			if (exists("refDC",envir_stacomi)) {
+				bmC@dc<-get("refDC",envir_stacomi)
+			} else {
+				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+			}
+			if (exists("refTaxon",envir_stacomi)) {
+				bmC@taxons<-get("refTaxon",envir_stacomi)
+			} else {      
+				funout(gettext("You need to choose a taxa, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+			}
+			if (exists("refStades",envir_stacomi)){
+				bmC@stades<-get("refStades",envir_stacomi)
+			} else 
+			{
+				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
+			}
+			if (exists("bmC_date_debut",envir_stacomi)) {
+				bmC@horodatedebut@horodate<-get("bmC_date_debut",envir_stacomi)
+			} else {
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
+			}
+			if (exists("bmC_date_fin",envir_stacomi)) {
+				bmC@horodatefin@horodate<-get("bmC_date_fin",envir_stacomi)
+			} else {
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
+			}  
+			
+			if (exists("refchoice",envir_stacomi)){
+				bmC@echantillon<-get("refchoice",envir_stacomi)
+			} else 
+			{
+				bmC@echantillon@listechoice<-"avec"
+				bmC@echantillon@selected<-as.integer(1)
+			}
+			
+			if (!(exists("refparquan",envir_stacomi)|exists("refparqual",envir_stacomi))){
+				funout(gettext("You need to choose at least one parameter qualitative or quantitative\n",domain="R-stacomiR"),arret=TRUE)	
+			}
+			
+			if (exists("refparquan",envir_stacomi)){
+				bmC@parquan<-get("refparquan",envir_stacomi)
+			} 
+			if (exists("refparqual",envir_stacomi)){
+				bmC@parqual<-get("refparqual",envir_stacomi)
+			} 
+			
+			stopifnot(validObject(bmC, test=TRUE))
+			return(bmC)
+		})
 
 
 setMethod("connect",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){
@@ -254,7 +257,7 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 			}# end else		
 			return(bmC)
 		})
-		
+
 
 #' handler for bilanmigrationpar
 #' @param h handler
@@ -270,19 +273,32 @@ hbmCcalc=function(h,...){
 setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition=function(object,par,silent=FALSE,...) {
 			bmC<-object
 			# par <-'A124'
-		
+			#========= initial checks ================
 			if (class(par)!="character") stop("par should be a character")
 			if (nrow(bmC@data[["parquan"]])==0)  funout(gettext("No data for quantitative parameter, perhaps you forgot to run the calcule method"))
 			if (!par%in%bmC@parquan@par_selectionne) funout(gettextf("The parameter %s is not in the selected parameters",par),arret=TRUE)
 			if (!par%in%bmC@parquan@data$par_code) funout(gettextf("No data for this parameter, nothing to do",par),arret=TRUE)
+			#=============================================
 			tab<-bmC@data[["parquan"]]
 			lignes_du_par<-tab$car_par_code==par
 			tab<-tab[lignes_du_par,]
-			tab$car_valeur_quantitatif<-as.character(cut(tab$car_valeur_quantitatif,...))
-			#tab$car_valeur_quantitatif<-as.character(cut(tab$car_valeur_quantitatif,breaks=c(0,1.5,2.5,10),label=c("1","2","3")))
+			tab$car_valeur_quantitatif<-cut(tab$car_valeur_quantitatif,...)
+			#tab$car_valeur_quantitatif<-cut(tab$car_valeur_quantitatif,breaks=c(0,1.5,2.5,10),label=c("1","2","3"))
 			tab<-chnames(tab,"car_valeur_quantitatif","car_val_identifiant")
 			bmC@data[["parquan"]]<-bmC@data[["parquan"]][!lignes_du_par,]
 			bmC@data[["parqual"]]<-rbind(bmC@data[["parqual"]],tab)
+			# Adding the par to parqual
+			bmC@parqual@par_selectionne<-c(bmC@parqual@par_selectionne,par)
+			# removing from parquan
+			bmC@parquan@par_selectionne<-bmC@parquan@par_selectionne[-match(par,bmC@parquan@par_selectionne)]
+			# resetting the right values for valqual
+			bmC@parqual@valqual<-rbind(bmC@parqual@valqual,
+					data.frame(val_identifiant=levels(tab$car_val_identifiant),
+					val_qual_code=par,
+					val_rang=1:length(levels(tab$car_val_identifiant)),
+					val_libelle=NA))
+					
+			
 			if (!silent) funout(gettextf("%s lines have been converted from quantitative to qualitative parameters",nrow(tab)))
 			return(bmC)
 		})
@@ -302,7 +318,7 @@ setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function
 			quaa<-quaa[order(quaa$ope_dic_identifiant,quaa$lot_tax_code,quaa$lot_std_code,quaa$ope_date_debut),]
 			bmC@calcdata<-quaa
 			if(!silent) funout(gettext("The calculated data are in slot calcdata"))
- 			assign("bmC",bmC,envir_stacomi)	
+			assign("bmC",bmC,envir_stacomi)	
 			return(bmC)
 		})
 #' le handler appelle la methode generique graphe sur l'object plot.type=1
@@ -349,16 +365,49 @@ hbmCstat=function(h){
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
 #' @param plot.type One of "qual", "quant" "crossed"
+#' @param color A named vector for the colors of either parameters (if plot.type=quant) or levels for
+#' parameters (if plot.type=qual).
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,plot.type="barplot",...){ 
+setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="barplot",...){ 
 			bmC<-object
 			# transformation du tableau de donnees
-			bm
-			if (plot.type=="qual") {				
-				g<-ggplot(bmC@calcdata)
-				g<-g+geom_bar(aes(x=mois,y=lot_effectif,fill=car_val_identifiant),stat = "identity")
-				g<-g+xlab()
+			# color_parm<-c("age0"="red","age1"="blue","age2"="green")
+			
+			if (plot.type=="qual") {	
+				#######################
+				# setting colors
+				######################
+				parlevels<-bmC@parqual@valqual$val_identifiant
+				if (is.null(color_par)) {
+					color_par=RColorBrewer::brewer.pal(length(parlevels),"Dark2")
+					names(color_par)<-parlevels
+				} else if (length(color_par)!=length(parlevels)){
+					funout(gettextf("The color_par argument should have length %s",length(parlevels)),arret=TRUE)
+				}
+				if (!all(names(color_par)%in%parlevels)) {
+					stop (gettextf("The following name(s) %s do not match station name: %s",
+									names(color_par)[!names(color_par)%in%parlevels],
+									paste(parlevels, collapse=", ")))
+				}
+				# creating a data frame to pass to merge later (to get the color in the data frame)
+				cs<-data.frame(car_val_identifiant=names(color_par),color=color_par)
+				# problem with different order (set by color name) implying different order
+				# in the graph (ie by color not by car_val_identifiant
+				levels(cs$color)<-cs$color
+				calcdata<-bmC@calcdata
+				calcdata<-merge(calcdata,cs)
+				calcdata<-calcdata[order(calcdata$mois,calcdata$car_val_identifiant),]
+				g<-ggplot(calcdata)+
+						geom_bar(aes(x=mois,y=lot_effectif,fill=color),stat = "identity")+
+						xlab(gettext("Month"))+
+						ylab(gettext("Number"))+
+						scale_fill_identity(name=gettext("Classes"),
+								labels=cs[,"car_val_identifiant"],
+								breaks=cs[,"color"],
+								guide = "legend")+
+						theme_bw()
+				
 				assign("g",g,envir_stacomi)
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)

@@ -267,9 +267,6 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 					paste(variables_qual,collapse=", "))
 			
 			
-			
-			
-			
 			######################
 			# traitement des données pour grouper par dc (group_by dc)
 			# les stades et taxons seront aggrégés avec warning

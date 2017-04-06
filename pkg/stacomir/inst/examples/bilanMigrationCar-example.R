@@ -11,12 +11,13 @@ stacomi(gr_interface=FALSE,
 	assign("baseODBC",baseODBC,envir_stacomi)
 	sch<-get("sch",envir=envir_stacomi)
 	assign("sch","logrami.",envir_stacomi)
+	# here parqual is not in the list
+	# so this is equivalent to parqual=NULL
 	bmC<-choice_c(bmC,
 			dc=c(107,108,101),
 			taxons=c("Salmo salar"),
 			stades=c('5','11','BEC','BER','IND'),
 			parquan=c('A124','C001','1786','1785'),
-			parqual='COHO',
 			horodatedebut="2012-01-01",
 			horodatefin="2012-12-31",
 			silent=FALSE)
@@ -29,7 +30,7 @@ data("bmC")
 bmC<-setasqualitative(bmC,par='A124',breaks=c(0,1.5,2.5,10),label=c("age 1","age 2","age 3"))
 bmC<-calcule(bmC,silent=TRUE)
 # A "violin" plot
-plot(bmC,plot.type="1",silent=TRUE)
+plot(bmC,plot.type="quan",silent=TRUE)
 # get the plot from envir_stacomi to change labels for name
 # if you use require(ggplot2) the :: argument is not needed
 # e.g. write require(ggplot2);g<-get("g",envir=envir_stacomi)
