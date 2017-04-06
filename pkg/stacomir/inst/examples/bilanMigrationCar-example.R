@@ -6,7 +6,6 @@ stacomi(gr_interface=FALSE,
 
 \dontrun{
 	bmC<-new("BilanMigrationCar")
-	bilan_adm<-new("BilanAgedemer")
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	baseODBC[c(2,3)]<-rep("logrami",2)
 	assign("baseODBC",baseODBC,envir_stacomi)

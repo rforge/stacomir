@@ -182,7 +182,7 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 				silent=FALSE){
 			# code for debug using example
 			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);
-			#taxons='2220';	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
+			#taxons=2220;	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
 			if (!(is.numeric(limit1hm)|is.integer(limit1hm))) funout(gettext("limit1hm should be numeric or integer",domain="R-stacomiR"),arret=TRUE)
 			if (!(is.numeric(limit2hm)|is.integer(limit2hm))) funout(gettext("limit2hm should be numeric or integer",domain="R-stacomiR"),arret=TRUE)
 			

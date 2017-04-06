@@ -15,7 +15,6 @@ setClass(Class="RefChoix",representation= representation(listechoice="character"
 
 #' Loading method for Rechoice referential objects
 #' 
-#' 
 #' @family Referential objects
 #' @return An S4 object of class RefChoix
 #' @param object An object of class RefChoix
@@ -62,3 +61,29 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 			choice=gradio(items=list_libelle,selected=object@selected,horizontal=TRUE,container=frame_choice,handler=hlist)
 		})
 
+#' Choice_c method for Refchoix referential objects
+#' @param object An object of class \link{RefListe-class}
+#' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples  
+#' \dontrun{
+#' object=new("RefListe")
+#' object<-charge(object,vecteur=c("1","2"),label="please choose")
+#' object<-choice_c(object)
+#' }
+setMethod("choice_c",signature=signature("RefChoix"),definition=function(object,selectedvalue) {
+			
+			if (length(selectedvalue)>1) stop("valeurchoisie should be a vector of length 1")
+			if (class (selectedvalue)=="numeric") selectedvalue<-as.character(selectedvalue)
+			# the charge method must be performed before
+			
+			if ( !selectedvalue %in% object@listechoice ) {
+				stop(stringr::str_c("The selected valeur,",selectedvalue," not in the list of possible values :",
+								stringr::str_c(object@listechoice,collapse=",")))
+			} else {
+				object@selectedvalue<-selectedvalue
+			}
+			return(object)
+			
+			
+		})

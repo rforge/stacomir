@@ -34,18 +34,14 @@
 #' @concept Bilan Object 
 #' @keywords classes
 setClass(Class="BilanMigrationCar",
-		representation=representation(parquan="Refparquan",
-				parqual="Refparqual",
+		representation=representation(
 				echantillon="RefChoix",
-				valeurs_possibles="data.frame",
 				calcdata="list"),
-		prototype=prototype(parquan=new("Refparquan"),
-				parqual=new("Refparqual"),
+		prototype=list(
 				echantillon=new("RefChoix"),
-				valeurs_possibles=data.frame(),
 				calcdata<-list()),
-		contains="BilanMigrationMult")
-#object=bmC
+		contains="Bilan_carlot")
+
 
 setValidity("BilanMigrationCar",function(object)
 		{
@@ -66,6 +62,7 @@ setValidity("BilanMigrationCar",function(object)
 #' @param car Sample TODO
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @param echantillon Default TRUE, 
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return An object of class \link{BilanAgedemer-class}
 #' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class}, \link{Refpar-class} and two slots of \link{RefHorodate-class} and then 
@@ -74,21 +71,18 @@ setValidity("BilanMigrationCar",function(object)
 #' @export
 setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=function(object,
 				dc,
-				taxons=2220,
-				stades=c('5','11','BEC','BER','IND'),
-				par=c('1786','1785','C001','A124'),
+				taxons,
+				stades,
+				par,
 				horodatedebut,
 				horodatefin,
+				echantillon=TRUE,
 				silent=FALSE){
 			# code for debug using example
-			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);
-			#taxons='2220';	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
+			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);taxons=2220;	stades=c('5','11','BEC','BER','IND');par=c('1786','1785','C001');silent=FALSE
 			bmC<-object
 			bmC@dc=charge(bmC@dc)
-			# loads and verifies the dc
-			# this will set dc_selectionne slot
 			bmC@dc<-choice_c(object=bmC@dc,dc)
-			# only taxa present in the bilanMigration are used
 			bmC@taxons<-charge_avec_filtre(object=bmC@taxons,bmC@dc@dc_selectionne)			
 			bmC@taxons<-choice_c(bmC@taxons,taxons)
 			bmC@stades<-charge_avec_filtre(object=bmC@stades,bmC@dc@dc_selectionne,bmC@taxons@data$tax_code)	
@@ -105,9 +99,29 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
-			bmC@limit1hm<-choice_c(bmC@limit1hm,as.character(limit1hm),"limit1hm")
-			bmC@limit2hm<-choice_c(bmC@limit2hm,as.character(limit2hm),"limit2hm")
+			bmC@echantillon<-choice_c(bmC@echantillon,
+
 			validObject(bmC)
+			
+
+			bilan_carlot@dc<-choice_c(object=bilan_carlot@dc,dc)
+			# only taxa present in the bilanMigration are used
+			bilan_carlot@taxons<-charge_avec_filtre(object=bilan_carlot@taxons,bilan_carlot@dc@dc_selectionne)			
+			bilan_carlot@taxons<-choice_c(bilan_carlot@taxons,taxons)
+			bilan_carlot@stades<-charge_avec_filtre(object=bilan_carlot@stades,bilan_carlot@dc@dc_selectionne,bilan_carlot@taxons@data$tax_code)	
+			bilan_carlot@stades<-choice_c(bilan_carlot@stades,stades)
+			bilan_carlot@par<-charge_avec_filtre(object=bilan_carlot@par,bilan_carlot@dc@dc_selectionne,bilan_carlot@taxons@data$tax_code,bilan_carlot@stades@data$std_code)	
+			bilan_carlot@par<-choice_c(bilan_carlot@par,par,silent=silent)
+			bilan_carlot@horodatedebut<-choice_c(object=bilan_carlot@horodatedebut,
+					nomassign="bilan_carlot_date_debut",
+					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
+					horodate=horodatedebut, 
+					silent=silent)
+			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
+					nomassign="bilan_carlot_date_fin",
+					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
+					horodate=horodatefin,
+					silent=silent)
 			return(bmC)
 		})
 
