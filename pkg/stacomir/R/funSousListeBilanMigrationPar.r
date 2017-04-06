@@ -1,19 +1,3 @@
-# Nom fichier :        funSousListeBilanMigrationPar
-# Projet :             calcmig/prog/fonctions
-# Organisme :          IAV/CSP
-# Auteur :             Cedric Briand
-# Contact :            cedric.briand"at"eptb-vilaine.fr
-# Date de creation :   23/05/2006
-# Compatibilite :      R 2.8.0
-# Etat :               developpement
-# Description          Workhorse fonction pour le calcul des bilans migratoires adaptee au travail sur parametres qualitatifs et quantitatifs
-# Notes de devt                     Dans les requetes recuperer valeurs quan ou valeur qual ou l'interrogation croisee (trois cas differents)
-#                      
-#**********************************************************************
-
-
-
-
 
 #' funSousListeBilanMigrationPar
 #' 
