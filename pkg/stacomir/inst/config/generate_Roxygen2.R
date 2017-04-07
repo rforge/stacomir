@@ -20,9 +20,10 @@ install.packages("Rd2roxygen") # reverse documentation
 ##########################
 ## Building documentation
 #######################
+# devtools::install_version(package = 'roxygen2',version = '5.0.1', repos = c(CRAN = "https://cran.rstudio.com"))
 ##use either :
 #require(devtools)
-#document("F:/workspace/stacomir/branch0.5/stacomir")
+#document("F:/workspace/stacomir/pkg/stacomir")
 ## or :
 ##vignette("roxygen2")
 setwd("F:/workspace/stacomir/pkg/stacomir")
@@ -35,3 +36,5 @@ require(stacomiR)
 stacomi(FALSE,FALSE,FALSE)
 require(roxygen2)
 roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
+
+roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir",roclets=c("Bilan_carlot"))

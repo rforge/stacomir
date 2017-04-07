@@ -8,11 +8,10 @@
 #' @include RefStationMesure.r
 #' @include create_generic.r
 #' @include utilitaires.r
-#' @slot horodate \link{RefHorodate-class}
+#' @slot horodatedebut \link{RefHorodate-class}
+#' @slot horodatefin \link{RefHorodate-class}
 #' @slot stationMesure \link{RefStationMesure-class}
 #' @slot data \code{data.frame}
-#' @slot datedebut A \link[base]{-.POSIXt} value
-#' @slot datefin A \link[base]{-.POSIXt} value 
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @family Bilan Objects
 #' @keywords classes
@@ -142,7 +141,7 @@ hbilanConditionEnvgraph = function(h,...)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanConditionEnv plot.bilanConditionEnv plot.bilanconditionenv
 #' @export
-setMethod("plot", signature(x = "BilanConditionEnv", y = "missing"), definition=function(x,  silent=FALSE){ 
+setMethod("plot", signature(x = "BilanConditionEnv", y = "missing"), definition=function(x,silent=FALSE){ 
 			# le dataframe contenant le res de la requete
 			bil_CE<-x
 			dat<-bil_CE@data	

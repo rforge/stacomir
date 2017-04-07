@@ -11,6 +11,7 @@
 #' @include Refparquan.r
 #' @include Refparqual.r
 #' @include RefChoix.r
+#' @include Bilan_carlot.r
 #' @note The main difference between this class and \link{Bilan_carlot} is that this class allows to
 #' select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
 #' @section Objects from the Class: Objects can be created by calls of the form
@@ -370,7 +371,7 @@ hbmCstat=function(h){
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="barplot",...){ 
-			bmC<-object
+			bmC<-x
 			# transformation du tableau de donnees
 			# color_parm<-c("age 1"="red","age 2"="blue","age 3"="green")
 			# color_parm<-c("C001"="red")
@@ -443,19 +444,73 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("summary",signature=signature(object="BilanMigrationCar"),definition=function(object,silent=FALSE,...){
+			bmC<-object
+			bm<-bmC@calcdata
+			if (nrow(bm)==0) stop("No data in slot calcdata, did you forget to run the calcule method ?")
+			if (length(unique(bm$annee))==1){
+				table=round(tapply(bm$lot_effectif,list(bm$mois,bm$car_par_code_qual),sum),1)
+				table<-rbind(table,
+						colSums(table,na.rm=TRUE))
+				rownames(table)[nrow(table)]<-gettext("Sum")
+				if (!silent) print(table)
+				table<-as.data.frame(table)
+			} else 	{
+				table=round(tapply(bm$lot_effectif,list(bm$annee,bm$mois,bm$car_par_code_qual),sum),1)
+				if (!silent) print(table)
+			}
 			
-			if (plot.type=="summary") {
-				table=round(tapply(mb$sum,list(mb$mois,mb$variable),sum),1)
-				table=as.data.frame(table)
-				table[,"total"]<-rowSums(table)
-				gdf(table, container=TRUE)
-				nomdc=bmC@dc@data$df_code[match(bmC@dc@dc_selectionne,bmC@dc@data$dc)]
-				annee=unique(strftime(as.POSIXlt(bmC@time.sequence),"%Y"))
-				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-				write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(gettextf("Writing of %s",path1))
-				path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-				write.table(bmC@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-				funout(gettextf("Writing of %s",path1))
-			} # end plot.type summary 
+# TODO
+#			nomdc=bmC@dc@data$df_code[match(bmC@dc@dc_selectionne,bmC@dc@data$dc)]			
+#			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+#			write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
+#			if (!silent) funout(gettextf("Writing of %s",path1))
+#			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
+#			write.table(bmC@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
+#			if (!silent) funout(gettextf("Writing of %s",path1))
+			return(table)
 		})
+
+
+#' xtable funciton for \link{BilanMigrationCar-class}
+#' create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
+#' for later use by the print.xtable method.
+#' @param x, an object of class "BilanAnnuels"
+#' @param caption, see xtable
+#' @param label, see xtable
+#' @param align, see xtable, overidden if NULL
+#' @param digits default 0
+#' @param display see xtable
+#' @param auto see xtable
+#' @param dc_name A string indicating the names of the DC, in the order of  x@dc@dc_selectionne
+#' if not provided DC codes are used.
+#' @param tax_name A string indicating the names of the taxa, if not provided latin names are used
+#' @param std_name A string indicating the stages names, if not provided then std_libelle are used
+#' @export
+setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,...){
+			bmC<-x
+			dat=bmC@data
+			dc=stringr::str_c(bmC@dc@dc_selectionne,collapse=" ")
+			tax=stringr::str_c(bmC@taxons@data$tax_code,collapse=" ")
+			std=stringr::str_c(bmC@stades@data$std_code,collapse=" ")
+		
+			dat<-summary(bmC,silent=TRUE)
+			if (class(dat)=="data.frame"){	
+				xt<-xtable::xtable(dat,...)	
+				if (is.null(align)) {
+					align<-c("l",rep("r",ncol(dat)))
+					align(xt)<-align
+				}
+				if (is.null(display)) {
+					display=c("s",rep("f",ncol(dat)))
+					display(xt)<-display
+				}
+				if (is.null(caption)) {
+					caption=gettextf("Summary for dc %s, taxa %s, stage %s.",dc,tax,std)
+					caption(xt)<-caption
+				}		
+				return(xt)} else
+			{
+				#TODO tester et développer pour plusieurs années}
+			}
+		})
+

@@ -348,7 +348,7 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 #' 
 #' The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
 #' defined by the user  
-#' @param object an object of class \link{BilanAgedemer-class}}
+#' @param object an object of class \link{BilanAgedemer-class}
 #' @param silent : Default FALSE, if TRUE the program should no display messages.
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

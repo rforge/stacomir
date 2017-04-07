@@ -403,8 +403,6 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 #' Program launch, this function launches the GwidgetRgtk graphical
 #' interface to stacomi. To be able to run, some widgets (win, grouptotal, group...) 
 #' are assigned in the user environment \code{.GlobalEnv}. 
-#' 
-#' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_graphique=function(){
 	msg=get("msg",envir=envir_stacomi) # appel dans chaque sous fonction

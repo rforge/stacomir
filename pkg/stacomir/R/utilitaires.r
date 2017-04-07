@@ -372,7 +372,7 @@ funtraitementdate=function(data, # tableau de donnees e importer
 colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
 	if (is.null(color)) {
 		if (color_function=="brewer.pal") {
-		color=RColorBrewer::brewer.pal(length(vec),name=palette)
+		color=RColorBrewer::brewer.pal(length(vec),name=palette)[1:length(vec)]
 	} else if (color_function=="gray.colors"){
 		color=grDevices::gray.colors(length(vec))
 	}

@@ -304,7 +304,7 @@
 #' An object of class BilanAgedemer with data loaded
 #' 
 #' This data corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
-#' Léger des Vignes fishways (respectively on the Allier and Loire river) in 2012 on the size structure of Salmo salar.
+#' Leger des Vignes fishways (respectively on the Allier and Loire river) in 2012 on the size structure of Salmo salar.
 #' This dataset has been kindly provided by Loire Grands Migrateurs.
 #'
 #' @format An object of class \link{BilanAgedemer-class} with 8 slots:

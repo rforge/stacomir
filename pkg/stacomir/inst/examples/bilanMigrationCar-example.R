@@ -29,49 +29,10 @@ stacomi(gr_interface=FALSE,
 data("bmC")
 bmC<-setasqualitative(bmC,par='A124',breaks=c(0,1.5,2.5,10),label=c("age 1","age 2","age 3"))
 bmC<-calcule(bmC,silent=TRUE)
-# A "violin" plot
-plot(bmC,plot.type="quan",silent=TRUE)
-# get the plot from envir_stacomi to change labels for name
-# if you use require(ggplot2) the :: argument is not needed
-# e.g. write require(ggplot2);g<-get("g",envir=envir_stacomi)
-# g+xlab("size")+ylab("year")
-if (requireNamespace("ggplot2", quietly = TRUE)){
-	g<-get("g",envir=envir_stacomi)
-	g+ggplot2::xlab("size")+ggplot2::ylab("year")
-}
-# A boxplot per month
-plot(bmC,plot.type="2",silent=TRUE)
-# A xyplot
-plot(bmC,plot.type="3",silent=TRUE)
-#####################################
-# an example graph created manually from data
-#####################################
-# two variables one on DC, one on stage
-# passing dc information to the stage variable
-bmC@data$std_libelle[bmC@data$ope_dic_identifiant==5]<-"Yellow eel (vert. slot fishway)"
-bmC@data$std_libelle[bmC@data$std_libelle=="Anguille jaune"]<-"Yellow eel (ramp)"
-bmC@data$std_libelle[bmC@data$std_libelle=="civelle"]<-"Glass eel (ramp)"
-# creating a boxplot with custom output : an example
-# again if you use require(ggplot2) the :: argument is not needed
-
-if (requireNamespace("ggplot2", quietly = TRUE)){
-	g<-ggplot2::ggplot(bmC@data)+
-			ggplot2::geom_boxplot(ggplot2::aes(x=annee,
-							y =car_valeur_quantitatif,
-							fill = std_libelle))+		
-			ggplot2::xlab("size")+ggplot2::ylab("year")+
-			ggplot2::scale_fill_manual("stage & fishway",
-					values=c("Yellow eel (vert. slot fishway)"="blue",
-							"Yellow eel (ramp)"="turquoise3",
-							"Glass eel (ramp)"="Cyan"))+
-			ggplot2::theme_bw()
-	print(g)
-}
-
-# get a simple summary using Hmisc::describe
-\dontrun{
-summary(bmC)
-# get the command line to create the object using choice_c 
-# when the graphical interface has been used
-print(bmC)
-}
+plot(bmC,plot.type="quant",silent=TRUE)
+# one quantitative parameter found, manual choice of color
+plot(bmC,plot.type="quant",color_parm=c("C001"="red"),silent=TRUE)
+plot(bmC,plot.type="qual",silent=TRUE)
+plot(bmC,plot.type="crossed")
+plot(bmC,plot.type="crossed",color_parm=c("age 1"="#379ec6","age 2"="#173957","age 3"="#b09953"))
+xt<-xtable(bmC)

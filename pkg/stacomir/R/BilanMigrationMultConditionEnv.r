@@ -16,7 +16,6 @@
 #' @keywords classes
 #' @example inst/examples/bilanMigrationMultConditionEnv_example.R
 #' @export
-
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
@@ -161,6 +160,7 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			taxons= as.character(bmmCE@bilanMigrationMult@taxons@data$tax_nom_latin)
 			stades= as.character(bmmCE@bilanMigrationMult@stades@data$std_libelle)
 			dc<-unique(grdata$DC)
+			stations<-bmmCE@bilanConditionEnv@stationMesure@data
 			# pour avoir dans le graphique le dc_code des dc 
 			# ggplot passe les dc dans l'ordre dans lequel ils apparaissent dans le tableau
 			# et unique fait ça aussi .... OUIIIII
@@ -248,7 +248,7 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			#######################
 			# color scheme for station
 			#######################
-			stations<-bmmCE@bilanConditionEnv@stationMesure@data
+			
 			cs<-colortable(color=color_station,vec=stations$stm_libelle,palette="Accent")			
 			cs<-stacomirtools::chnames(cs,"name","stm_libelle")
 			#######################
@@ -272,7 +272,7 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 							y=yqualitatif,data=tableauCEqual,size=3)+
 					scale_fill_identity(name=gettext("DC"),labels=dc_code,guide = "legend")+
 					scale_colour_identity(name=gettext("stations"),
-							labels=names(cs[,"color"]),
+							labels=cs[,"stm_libelle"],
 							breaks=cs[,"color"],
 							guide = "legend")+
 					scale_shape(guide="legend",name=gettext("Qualitative parm"))+
