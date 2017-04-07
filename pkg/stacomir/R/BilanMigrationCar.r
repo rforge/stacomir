@@ -294,10 +294,10 @@ setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition
 			# resetting the right values for valqual
 			bmC@parqual@valqual<-rbind(bmC@parqual@valqual,
 					data.frame(val_identifiant=levels(tab$car_val_identifiant),
-					val_qual_code=par,
-					val_rang=1:length(levels(tab$car_val_identifiant)),
-					val_libelle=NA))
-					
+							val_qual_code=par,
+							val_rang=1:length(levels(tab$car_val_identifiant)),
+							val_libelle=NA))
+			
 			
 			if (!silent) funout(gettextf("%s lines have been converted from quantitative to qualitative parameters",nrow(tab)))
 			return(bmC)
@@ -372,34 +372,14 @@ hbmCstat=function(h){
 setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="barplot",...){ 
 			bmC<-object
 			# transformation du tableau de donnees
-			# color_parm<-c("age0"="red","age1"="blue","age2"="green")
-			
+			# color_parm<-c("age 1"="red","age 2"="blue","age 3"="green")
+			# color_parm<-c("C001"="red")
 			if (plot.type=="qual") {	
-				#######################
-				# setting colors
-				######################
-				parlevels<-bmC@parqual@valqual$val_identifiant
-				if (is.null(color_par)) {
-					color_par=RColorBrewer::brewer.pal(length(parlevels),"Dark2")
-					names(color_par)<-parlevels
-				} else if (length(color_par)!=length(parlevels)){
-					funout(gettextf("The color_par argument should have length %s",length(parlevels)),arret=TRUE)
-				}
-				if (!all(names(color_par)%in%parlevels)) {
-					stop (gettextf("The following name(s) %s do not match station name: %s",
-									names(color_par)[!names(color_par)%in%parlevels],
-									paste(parlevels, collapse=", ")))
-				}
-				# creating a data frame to pass to merge later (to get the color in the data frame)
-				cs<-data.frame(car_val_identifiant=names(color_par),color=color_par)
-				# problem with different order (set by color name) implying different order
-				# in the graph (ie by color not by car_val_identifiant
-				levels(cs$color)<-cs$color
-				bonordre<-match(levels(cs$color),cs$color)
-				cs$color = factor(cs$color,levels(cs$color)[bonordre])
+				parlevels<-bmC@parqual@valqual$val_identifiant				
+				cs<-colortable(color=color_parm,vec=parlevels,palette="Dark2")
+				cs<-stacomirtools::chnames(cs,"name","car_val_identifiant")
 				calcdata<-bmC@calcdata
 				calcdata<-merge(calcdata,cs)
-				calcdata<-calcdata[order(calcdata$mois,calcdata$car_val_identifiant),]
 				g<-ggplot(calcdata)+
 						geom_bar(aes(x=mois,y=lot_effectif,fill=color),stat = "identity")+
 						xlab(gettext("Month"))+
@@ -414,16 +394,41 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type = "qual"
-			if (plot.type=="quant") { 				
-				g<-ggplot(bmC@calcdata)
-				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=car_par_code_quan),stat='identity')
+			if (plot.type=="quant") { 
+				calcdata<-bmC@calcdata
+				the_parms<-unique(calcdata$car_par_code_quan)
+				cs<-colortable(color=color_parm,vec=the_parms,palette="Dark2")
+				cs<-stacomirtools::chnames(cs,"name","car_par_code_quan")
+				calcdata<-merge(calcdata,cs)
+				g<-ggplot(calcdata)+
+						geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=color),stat='identity')+
+						xlab(gettext("Month"))+
+						ylab(gettext("Number"))+
+						scale_colour_identity(name=gettext("Param"),
+								labels=cs[,"car_par_code_quan"],
+								breaks=cs[,"color"],
+								guide = "legend")+
+						theme_bw()
 				assign("g",g,envir_stacomi)
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type="quant"
-			if (plot.type=="crossed") { 				
-				g<-ggplot(bmC@calcdata)
-				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=car_val_identifiant),stat='identity')
+			if (plot.type=="crossed") { 
+				parlevels<-bmC@parqual@valqual$val_identifiant				
+				cs<-colortable(color=color_parm,vec=parlevels,palette="Dark2")
+				cs<-stacomirtools::chnames(cs,"name","car_val_identifiant")
+				calcdata<-bmC@calcdata
+				calcdata<-merge(calcdata,cs)
+				
+				g<-ggplot(calcdata)+
+						geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=color),stat='identity')+
+						xlab(gettext("Month"))+
+						ylab(gettext("Number"))+
+						scale_colour_identity(name=gettext("Param"),
+								labels=cs[,"car_val_identifiant"],
+								breaks=cs[,"color"],
+								guide = "legend")+
+						theme_bw()
 				assign("g",g,envir_stacomi)
 				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)

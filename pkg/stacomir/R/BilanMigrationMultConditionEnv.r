@@ -171,39 +171,7 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			if (nrow(tableauCE)==0) {
 				funout(gettext("You don't have any environmental conditions within the time period\n",domain="R-stacomiR"),arret=TRUE)
 			}
-			
-			stations<-bmmCE@bilanConditionEnv@stationMesure@data
-			#######################
-			# color scheme for station
-			#######################
-			if (is.null(color_station)) {
-				color_station=rep(RColorBrewer::brewer.pal(8,"Accent"),2)[1:nrow(stations)]
-				names(color_station)<-stations$stm_libelle
-			} else if (length(color_station)!=nrow(stations)){
-				funout(gettextf("The color_station argument should have length %s",nrow(stations)),arret=TRUE)
-			}
-			if (!all(names(color_station)%in%stations$stm_libelle)) {
-				stop (gettextf("The following name(s) %s do not match station name: %s",
-								names(color_station)[!names(color_station)%in%stations$stm_libelle],
-								paste(stations$stm_libelle, collapse=", ")))
-			}
-			
-			cs<-cbind(stm_libelle=names(color_station),"color"=color_station)
-			#######################
-			# color scheme for dc
-			#######################			
-			if (is.null(color_dc)) {
-				color_dc=grDevices::gray.colors(length(dc))
-				names(color_dc)<-dc
-			} else if (length(color_dc)!=length(dc)){
-				funout(gettextf("The color_dc argument should have length %s",length(dc)),arret=TRUE)
-			}
-			if (!all(names(color_dc)%in%dc)) 
-				stop (gettextf("The following name(s) %s do not match DC codes: %s",
-								names(color_dc)[!names(color_dc)%in%dc],
-								paste(dc, collapse=", ")))
-			cdc<-cbind("DC"=names(color_dc),"color"=color_dc)
-			
+					
 			# we collect libelle from station
 			for (i in 1:length(unique(tableauCE$env_stm_identifiant))){
 				tableauCE[unique(tableauCE$env_stm_identifiant)[i]==tableauCE$env_stm_identifiant,"stm_libelle"]<-
@@ -277,7 +245,20 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 					dplyr::group_by(date,DC)%>%dplyr::summarize(effectif=sum(effectif_total))%>%
 					dplyr::ungroup()
 			
-			# merging with colors
+			#######################
+			# color scheme for station
+			#######################
+			stations<-bmmCE@bilanConditionEnv@stationMesure@data
+			cs<-colortable(color=color_station,vec=stations$stm_libelle,palette="Accent")			
+			cs<-stacomirtools::chnames(cs,"name","stm_libelle")
+			#######################
+			# color scheme for dc
+			#######################		
+			cdc<-colortable(color=color_dc,vec=dc,color_function="gray.colors")			
+			cdc<-stacomirtools::chnames(cdc,"name","DC")
+			#######################
+			# merging with colors for manual scales
+			######################
 			plotdata<-killfactor(merge(plotdata,cdc,by="DC"))
 			tableauCEquan<-killfactor(merge(tableauCEquan,cs,by="stm_libelle"))
 			tableauCEqual<-killfactor(merge(tableauCEqual,cs,by="stm_libelle"))

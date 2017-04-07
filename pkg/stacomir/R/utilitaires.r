@@ -179,8 +179,9 @@ chargecsv=function(database_expected){
 #' @export
 vector_to_listsql<-function(vect)
 {
-	
-	# vect = un vecteur caractere
+	if (is.null(vect)) stop("The vector passed to vector_to_listsql should not be null")
+	if (any(is.na(vect))) stop("The vector passed to vector_to_listsql should not be NA")
+	if (length(vect)==0) stop("The vector passed to vector_to_listsql should not be of lenght zero")
 	if (length(vect)==1) 
 	{
 		listsql=paste("(","'",vect,"'",")",sep="")
@@ -347,4 +348,48 @@ funtraitementdate=function(data, # tableau de donnees e importer
 	#%H     Hours as decimal number (00e23).    
 	if (semaine_std) data$semaine_std=lubridate::isoweek(as.POSIXlt(data[,nom_coldt]))
 	return(data)
-}      
+}    
+
+
+#' Builds a table with colors to merge with a dataframe for later
+#' use in ggplot. An initial check will be done
+#' on the name of the color vector. A data frame is built. It contains a column color which is a factor.
+#' The factor order match the order of the vector (not the alphabetical order of the colors).
+
+#' 
+#' @param color Either null (default) or a named vector of colors, the
+#' names should correspond to the elements of namedvector. 
+#' @param  vec The vector to match the color with, if a named vector
+#' or color is supplied the names should match
+#' @param palette, the name of the RColorBrewer palette, defaults to "Set2", ignored for other
+#' color gradient functions and if a named vector of colors is provided
+#' @param color_function, the name of the function used to brew the colors, one for 
+#' "brewer.pal", "gray.colors", default to "brewer.pal, this argument is ignored if a
+#' named vector of color is passed.
+#' @return A dataframe with two columns, the vector and the color as a reordered factor
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export
+colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
+	if (is.null(color)) {
+		if (color_function=="brewer.pal") {
+		color=RColorBrewer::brewer.pal(length(vec),name=palette)
+	} else if (color_function=="gray.colors"){
+		color=grDevices::gray.colors(length(vec))
+	}
+		names(color)<-vec
+	} else if (length(color)!=length(vec)){
+		funout(gettextf("The color argument should have length %s",length(vec)),arret=TRUE)
+	}
+	if (!all(names(color)%in%vec)) {
+		stop (gettextf("The following name(s) %s do not match vector name: %s",
+						names(color)[!names(color)%in%vec],
+						paste(vec, collapse=", ")))
+	}
+	# creating a data frame to pass to merge later (to get the color in the data frame)
+	cs<-data.frame(name=names(color),color=color)
+	# problem with different order (set by color name) implying different order
+	# in the graph (ie by color not by car_val_identifiant
+	bonordre<-match(cs$color,levels(cs$color))
+	cs$color = factor(cs$color,levels(cs$color)[bonordre])
+	return(cs)
+}

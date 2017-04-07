@@ -270,6 +270,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			#bilanMigrationMult<-bmM
 			
 			bilanMigrationMult<-object
+			
 			# retrieve the argument of the function and passes it to bilanMigrationMult
 			# easier to debug
 			req=new("RequeteODBCwheredate")
@@ -279,8 +280,11 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 			# we round the date to be consistent with daily values from the 
 			req@datedebut=bilanMigrationMult@pasDeTemps@dateDebut
 			req@datefin=as.POSIXlt(DateFin(bilanMigrationMult@pasDeTemps)+as.difftime("23:59:59"))
+			if (length(bilanMigrationMult@dc@dc_selectionne)==0) stop("DC has length zero, are you connected to the right schema, do you use the right dc number ?")
 			dc = vector_to_listsql(bilanMigrationMult@dc@dc_selectionne)
+			if (length(bilanMigrationMult@taxons@data$tax_code)==0) stop("Taxa has length zero, are you connected to the right schema, do you use the right taxa ?")
 			tax=vector_to_listsql(bilanMigrationMult@taxons@data$tax_code)
+			if (length(bilanMigrationMult@stades@data$std_code)==0) stop("Stage has length zero, are you connected to the right schema, do you use the right stage ?")
 			std=vector_to_listsql(bilanMigrationMult@stades@data$std_code)
 			sch=get("sch",envir=envir_stacomi)
 			req@select = stringr::str_c("SELECT 
