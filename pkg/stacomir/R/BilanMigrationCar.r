@@ -395,6 +395,8 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 				# problem with different order (set by color name) implying different order
 				# in the graph (ie by color not by car_val_identifiant
 				levels(cs$color)<-cs$color
+				bonordre<-match(levels(cs$color),cs$color)
+				cs$color = factor(cs$color,levels(cs$color)[bonordre])
 				calcdata<-bmC@calcdata
 				calcdata<-merge(calcdata,cs)
 				calcdata<-calcdata[order(calcdata$mois,calcdata$car_val_identifiant),]
