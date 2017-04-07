@@ -33,4 +33,3 @@ eel have been counted through weight or numbers
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

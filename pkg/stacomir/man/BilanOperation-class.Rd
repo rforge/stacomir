@@ -3,6 +3,9 @@
 \docType{class}
 \name{BilanOperation-class}
 \alias{BilanOperation-class}
+\alias{BilanOperation}
+\alias{bilanoperation}
+\alias{bilanOperation}
 \title{Report on operations}
 \description{
 Operations are monitoring operations generated between two dates. In the case of video monitoring
@@ -12,9 +15,7 @@ or similar, they can be instantaneous
  Objects can be created by calls of the form
 \code{new("BilanOperation")}.
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
+
 \seealso{
 Other Bilan Class \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{Bilan_poids_moyen}}
@@ -29,8 +30,10 @@ Other Bilan Class \code{\linkS4class{Bilan_carlot}}
 \code{\linkS4class{BilanMigrationInterAnnuelle}}
 \code{\linkS4class{BilanMigrationPar}}
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \concept{
 Bilan Object
 }
 \keyword{classes}
-

@@ -21,10 +21,12 @@ class allows to draw graphics allowing an overview of the device operation
 
 \item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanFonctionnementDC", ...)}.
 }
+
 \examples{
 require(stacomiR)
 stacomi(gr_interface=FALSE,
@@ -61,9 +63,6 @@ stacomi(gr_interface=FALSE,
 	
 
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
@@ -72,11 +71,14 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanEspeces-class}},
   \code{\link{BilanFonctionnementDF-class}},
   \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationCar-class}},
   \code{\link{BilanMigrationInterAnnuelle-class}},
   \code{\link{BilanMigrationMult-class}},
+  \code{\link{BilanMigrationMultConditionEnv-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \keyword{classes}
-

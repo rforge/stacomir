@@ -14,4 +14,3 @@ hgraphBilanMigrationInterAnnuelle(h, ...)
 \description{
 Plot of all interannual from top to bottom
 }
-

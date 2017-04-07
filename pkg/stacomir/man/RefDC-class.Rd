@@ -19,14 +19,13 @@ table of escapments calculated at the station level.}
 
 \item{\code{data}}{Object of class \code{"data.frame"} data pertaining to the control device}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefDC", dc_selectionne=integer(), ouvrage=integer(),
 data=data.frame())}.
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -42,5 +41,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

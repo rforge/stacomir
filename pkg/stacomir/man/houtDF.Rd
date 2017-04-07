@@ -17,4 +17,3 @@ handler to print the command line
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

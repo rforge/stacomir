@@ -17,4 +17,3 @@ cumuls de migration au cours du temps
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

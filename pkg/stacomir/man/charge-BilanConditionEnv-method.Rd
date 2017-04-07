@@ -5,12 +5,12 @@
 \alias{charge,BilanConditionEnv-method}
 \title{charge method for BilanCondtionEnv class}
 \usage{
-\S4method{charge}{BilanConditionEnv}(object, h)
+\S4method{charge}{BilanConditionEnv}(object, silent)
 }
 \arguments{
 \item{object}{An object of class \link{BilanConditionEnv-class}}
 
-\item{h}{A handler}
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \description{
 charge method for BilanCondtionEnv class
@@ -18,4 +18,3 @@ charge method for BilanCondtionEnv class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

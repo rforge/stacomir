@@ -88,7 +88,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMultConditionEnv"),defin
 		})
 #' charge method for BilanMigrationMultConditionEnv class
 #' @param object An object of class \link{BilanMigrationMultConditionEnv-class}
-#' @inheritDotParams charge,BilanConditionEnv-method -object  
+#' @param silent Should the function remain silent (boolean)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("charge",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent) {

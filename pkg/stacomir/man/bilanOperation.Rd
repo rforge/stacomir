@@ -14,4 +14,3 @@ It is an object of class \link{BilanOperation-class} with data loaded.
 it is loaded along with \link{bMM_Arzal}
 }
 \keyword{data}
-

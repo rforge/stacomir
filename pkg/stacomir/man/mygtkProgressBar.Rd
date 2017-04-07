@@ -45,4 +45,3 @@ dispose(progres)
 \author{
 cedric.briand
 }
-

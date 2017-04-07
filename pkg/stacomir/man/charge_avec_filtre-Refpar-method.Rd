@@ -32,4 +32,3 @@ charge_avec_filtre(object,dc_selectionne=6,taxon_selectionne=2038,stade_selectio
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

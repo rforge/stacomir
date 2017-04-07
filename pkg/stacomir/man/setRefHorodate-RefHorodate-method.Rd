@@ -21,4 +21,3 @@ Method to set the Horodate
 \author{
 cedric.briand
 }
-

@@ -25,4 +25,3 @@ Function to calculate daily migration from migration monitoring whose length is 
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

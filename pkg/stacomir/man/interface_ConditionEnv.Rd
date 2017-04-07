@@ -12,4 +12,3 @@ Interface for class conditionEnv
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

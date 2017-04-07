@@ -10,7 +10,10 @@
 \arguments{
 \item{object}{An object of class \code{\link{BilanAgedemer-class}}}
 
-\item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
+}
+\value{
+An object of class \link{BilanAgedemer-class}
 }
 \description{
 Calcule method for BilanAgedemer, this method will split the data according to cut
@@ -18,4 +21,3 @@ Calcule method for BilanAgedemer, this method will split the data according to c
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

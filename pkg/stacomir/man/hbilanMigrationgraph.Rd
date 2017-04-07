@@ -17,4 +17,3 @@ Standard BilanMigration graph over time
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

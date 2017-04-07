@@ -14,4 +14,3 @@ hbarplotBilanAnnuels(h, ...)
 \description{
 Barplot handler
 }
-

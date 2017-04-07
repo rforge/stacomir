@@ -16,4 +16,3 @@ are assigned in the user environment \code{.GlobalEnv}.
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

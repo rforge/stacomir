@@ -3,6 +3,7 @@
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
+#' @export
 setGeneric("choice",def=function(object,...) standardGeneric("choice"))
 #' Generic method for multiple choice (using the gwidget graphical interface)
 #' @param object Object
@@ -26,10 +27,10 @@ setGeneric("charge",def=function(object,...) standardGeneric("charge"))
 setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
 #setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))
-##' Generic for prediction
-##' @param object Object
-##' @param ... Additional parms
-##' @author cedric.briand
+#' Generic for prediction
+#' @param object Object
+#' @param ... Additional parms
+#' @author cedric.briand
 setGeneric("model",def=function(object,...) standardGeneric("model"))
 #' Generic method to load additional data
 #' @param object Object
@@ -71,11 +72,6 @@ setGeneric("createmessage",def=function(object,...) standardGeneric("createmessa
 #' @param ... Additional parms 
 #' @author cedric.briand
 setGeneric("setasqualitative",def=function(object,...) standardGeneric("setasqualitative"))
-# nouvel environnement
-
-
-
-
 
 
 #' Environment where most objects from the package are stored and then loaded
@@ -83,7 +79,5 @@ setGeneric("setasqualitative",def=function(object,...) standardGeneric("setasqua
 #' 
 #' envir_stacomi \code{envir_stacomi <- new.env(parent = baseenv())} is the
 #' environment where most object created by the interface are stored
-#' 
-#' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 "envir_stacomi"

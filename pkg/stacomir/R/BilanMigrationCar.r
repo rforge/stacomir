@@ -27,13 +27,13 @@
 #' @slot pasDeTemps An object of class \link{PasDeTempsJournalier-class} inherited from \link{BilanMigration-class}
 #' @slot data A \code{data.frame} inherited from \link{BilanMigration-class}, stores the results
 #' @slot time.sequence An object of class "POSIXct" inherited from \link{BilanMigration-class}
-#' #' @family Bilan Objects
+#' @family Bilan Objects
 #' @aliases BilanMigrationMult bilanMigrationMult
 #' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
 #' @concept Bilan Object 
 #' @keywords classes
+#' @export
 setClass(Class="BilanMigrationCar",
 		representation=representation(
 				echantillon="RefChoix",
@@ -271,6 +271,7 @@ hbmCcalc=function(h,...){
 #' @param par The code of a quantitative parameter
 #' @param ... Additional parms to the cut method \link[base]{cut}   
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#'  @export
 setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition=function(object,par,silent=FALSE,...) {
 			bmC<-object
 			# par <-'A124'
@@ -365,12 +366,12 @@ hbmCstat=function(h){
 #' 
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
-#' @param plot.type One of "qual", "quant" "crossed"
+#' @param plot.type One of "qual", "quant" "crossed" default to qual
 #' @param color A named vector for the colors of either parameters (if plot.type=quant) or levels for
 #' parameters (if plot.type=qual).
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="barplot",...){ 
+setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",...){ 
 			bmC<-x
 			# transformation du tableau de donnees
 			# color_parm<-c("age 1"="red","age 2"="blue","age 3"="green")

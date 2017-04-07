@@ -26,4 +26,3 @@ does the calculation once data are filled.
 The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
 'devenir' i.e. the destination of the fishes.
 }
-

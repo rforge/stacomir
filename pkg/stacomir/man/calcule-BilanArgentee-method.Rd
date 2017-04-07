@@ -20,4 +20,3 @@ Calcule method for BilanArgentee, this method will pass the data from long to wi
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

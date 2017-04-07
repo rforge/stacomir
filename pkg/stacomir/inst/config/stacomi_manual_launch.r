@@ -1,6 +1,7 @@
 
 rm(list=ls(all=TRUE))
-
+envir_stacomi <- new.env(parent = emptyenv())
+assign("envir_stacomi",envir_stacomi,.GlobalEnv)
 
 ## lancement du programme proprement dit
 #  if (exists("group")) {rm(group)}

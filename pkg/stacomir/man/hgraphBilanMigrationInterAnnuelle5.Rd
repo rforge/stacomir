@@ -16,4 +16,3 @@ hgraphBilanMigrationInterAnnuelle5(h, ...)
 Function displaying comparaison similar to \link{hgraphBilanMigrationInterAnnuelle4} but using pointrange and geom_bar
 This function plots comparisions for periods of 1 week, 2 weeks, month
 }
-

@@ -15,4 +15,3 @@
 \description{
 Returns the starting date as character
 }
-

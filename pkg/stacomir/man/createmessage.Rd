@@ -17,4 +17,3 @@ Generic method to create messages
 \author{
 cedric.briand
 }
-

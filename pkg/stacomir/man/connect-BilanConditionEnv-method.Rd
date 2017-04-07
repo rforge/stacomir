@@ -5,10 +5,12 @@
 \alias{connect,BilanConditionEnv-method}
 \title{connect method for BilanConditionEnv class}
 \usage{
-\S4method{connect}{BilanConditionEnv}(object)
+\S4method{connect}{BilanConditionEnv}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanConditionEnv-class}}
+
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
 an object of BilanConditionEnv class
@@ -19,4 +21,3 @@ connect method for BilanConditionEnv class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

@@ -1063,7 +1063,7 @@ fun_weight_conversion=function(tableau,time.sequence,silent) {
 
 #' returns a table where all components within the list calcdata are aggregated
 #' and formatted for plot
-#' @param object An object of class \ref{BilanMigrationMult-class}
+#' @param object An object of class \link{BilanMigrationMult-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_aggreg_for_plot<-function(object){

@@ -34,4 +34,3 @@ command line interface for BilanMigrationInterAnnuelle class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

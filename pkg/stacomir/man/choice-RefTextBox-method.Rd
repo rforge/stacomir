@@ -5,10 +5,12 @@
 \alias{choice,RefTextBox-method}
 \title{Choice method for ReTextBox referential objects}
 \usage{
-\S4method{choice}{RefTextBox}(object)
+\S4method{choice}{RefTextBox}(object, nomassign = "refTextBox")
 }
 \arguments{
 \item{object}{An object of class \link{RefTextBox-class}}
+
+\item{nomassign}{The name with which the object will be assigned in envir_stacomi}
 }
 \description{
 Choice method for ReTextBox referential objects
@@ -26,4 +28,3 @@ dispose(win)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

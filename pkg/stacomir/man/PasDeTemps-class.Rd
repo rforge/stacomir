@@ -23,13 +23,13 @@ date }
 current step }\item{:}{Object of class \code{"integer"} Number of the
 current step } }
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 \code{\linkS4class{PasDeTempsJournalier}}
+}
+\author{
+cedric.briand"at"eptb-vilaine.fr
 }
 \concept{
 Bilan Object
 }
-

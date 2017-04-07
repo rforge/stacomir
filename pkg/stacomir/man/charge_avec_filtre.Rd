@@ -17,4 +17,3 @@ Generic method to load referentials, with filters from the parent object in the 
 \author{
 cedric.briand
 }
-

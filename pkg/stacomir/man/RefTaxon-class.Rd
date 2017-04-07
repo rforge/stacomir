@@ -13,13 +13,12 @@ integrated into refBilan objects.
 \describe{
 \item{\code{data}}{A \code{"data.frame"} of species available in the database}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefTaxon", ...)}.
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -35,4 +34,6 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
-
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}

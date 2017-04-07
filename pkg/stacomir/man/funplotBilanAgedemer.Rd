@@ -17,4 +17,3 @@ assigns an object g in envir_stacomi for eventual modification of the plot
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

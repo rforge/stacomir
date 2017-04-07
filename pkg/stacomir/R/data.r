@@ -39,14 +39,6 @@
 #' @keywords data
 "msg"
 
-#' Working environment for stacomiR created when launching stacomi()
-#' 
-#' This is where the graphical interface stores its objects
-#' try \code{ls(envir=envir_stacomi)}
-#' @keywords environment
-"envir_stacomi"
-
-
 #' Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)
 #' 
 #' This data corresponds to the data collected at the vertical slot fishway
@@ -109,7 +101,6 @@
 #' the program will use a file installed in c:/program files/stacomi but
 #' if not found will switch to the default
 "calcmig"
-
 
 #' Overview of the fishway operation at Arzal in (Vilaine France).
 #' 
@@ -212,10 +203,11 @@
 #' 
 #' The first eel trapping ladder in France was built by Antoine Legault and the team from Rennes
 #' in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 1984 it has been 
-#' operational at the same location and provides one of the longest series of eel migration. For this reason,
+#' operational at the same location and provides one of the longest series of eel migration. 
+#' For this reason,
 #' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class. It has been
 #' kindly given by the parc du Marais Poitevin.
-#' @format An object of class \ref{BilanMigrationInterAnnuelle-class} with data loaded.
+#' @format An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded.
 #' @keywords data
 "bmi"
 
@@ -343,3 +335,6 @@
 "bilan_adm"
 
 
+#' BLABLABLABLA
+#' @keywords data
+"bmC"

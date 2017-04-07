@@ -13,4 +13,3 @@
 \description{
 Gets the year or a vector of years corresponding to the timestep ("PasDeTemps") object
 }
-

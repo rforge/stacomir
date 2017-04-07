@@ -38,4 +38,3 @@ xtable funciton for \link{BilanAnnuels-class}
 create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
 for later use by the print.xtable method.
 }
-

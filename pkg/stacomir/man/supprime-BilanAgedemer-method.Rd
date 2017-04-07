@@ -8,7 +8,7 @@
 \S4method{supprime}{BilanAgedemer}(object)
 }
 \arguments{
-\item{object}{An object of class \link{BilanMigrationInterAnnuelle-class}}
+\item{object}{An object of class \link{BilanAgedemer-class}}
 }
 \value{
 nothing
@@ -19,4 +19,3 @@ supprime method for BilanMigrationInterannuelle class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

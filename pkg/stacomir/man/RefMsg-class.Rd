@@ -12,7 +12,7 @@ RefMsg referential class to load message according to the language chosen
 \describe{
 \item{\code{data}}{A data.frame}
 }}
+
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

@@ -16,4 +16,3 @@ CurrentDateDebut, The starting date for the current timestep
 \description{
 Gets the starting date of a time step for an object of class \link{PasDeTemps-class}
 }
-

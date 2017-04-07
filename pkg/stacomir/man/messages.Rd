@@ -19,4 +19,3 @@ numbers are wrong when used as msgs within a list
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

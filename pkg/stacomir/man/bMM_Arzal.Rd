@@ -37,4 +37,3 @@ and correspond to the migration station at Arzal in 2011 for all
 stages of eel (Anguilla anguilla)
 }
 \keyword{data}
-

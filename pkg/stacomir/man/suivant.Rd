@@ -14,4 +14,3 @@ suivant(object, ...)
 \description{
 Generic method next
 }
-

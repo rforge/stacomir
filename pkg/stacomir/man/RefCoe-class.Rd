@@ -18,6 +18,7 @@ as the year is already loaded in the different Bilan objects
 
 \item{\code{datefin}}{A "POSIXlt"}
 }}
+
 \note{
 Class loading coefficient of conversion between quantity (weights or
 volumes of glass eel) and numbers between a starting and finishing date
@@ -26,9 +27,7 @@ volumes of glass eel) and numbers between a starting and finishing date
  Objects can be created by calls of the form
 \code{new("RefCoe")}.
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -44,5 +43,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

@@ -31,6 +31,7 @@ class choose within a list, here the choice is wether subsamples or not. Subsamp
 in the stacomi database are samples with a non null value for parent sample. Migration
 counts are never made on subsamples but those can be integrated to calculate mean weights.}
 }}
+
 \note{
 We have also tools available to import glass eel measurement from
 experimental fishing in the estuary For the charge method dates for the
@@ -79,9 +80,6 @@ plot(bilPM, plot.type=3)
 model(bilPM,model.type="seasonal")
 model(bilPM,model.type="seasonal1")
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
@@ -91,10 +89,13 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},
   \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationCar-class}},
   \code{\link{BilanMigrationInterAnnuelle-class}},
   \code{\link{BilanMigrationMult-class}},
+  \code{\link{BilanMigrationMultConditionEnv-class}},
   \code{\link{Bilan_carlot-class}}
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \keyword{classes}
-

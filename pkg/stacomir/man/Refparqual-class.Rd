@@ -13,6 +13,7 @@ of them. It inherits from 'Refpar', uses its 'choice' method
 \describe{
 \item{\code{valqual="data.frame"}}{the list of qualitative parameters}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("Refparqual", ...)}.  \describe{ \item{list("valqual")}{Object of
@@ -22,9 +23,7 @@ of class \code{"data.frame"} Values of qualitatives parameters}
 parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
 parameters } }
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -39,4 +38,6 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
-
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}

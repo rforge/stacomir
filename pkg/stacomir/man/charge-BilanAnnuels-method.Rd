@@ -15,4 +15,3 @@
 \description{
 charge method for BilanAnnuels class
 }
-

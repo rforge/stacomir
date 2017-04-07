@@ -14,13 +14,12 @@ Class used to select one or several years
 
 \item{\code{annee_selectionnee}}{A numeric vector}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefAnnee", data=data.frame(), annee_selectionnee=numeric())}.
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
@@ -35,5 +34,7 @@ Other Referential objects: \code{\link{RefCheckBox-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

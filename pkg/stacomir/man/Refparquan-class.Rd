@@ -15,9 +15,7 @@ of them. It inherits from 'Refpar', uses its 'choice' method
 parameters }\item{:}{Object of class \code{"data.frame"} ~ Quantitative
 parameters } }
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -32,5 +30,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

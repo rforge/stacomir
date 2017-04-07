@@ -14,4 +14,3 @@ from 1996 to 2005 (annual counts). It has been kinly provided as an example set 
 association.
 }
 \keyword{data}
-

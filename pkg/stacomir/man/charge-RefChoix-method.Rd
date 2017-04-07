@@ -28,9 +28,6 @@ object=new("RefChoix")
 charge(object,vecteur=c("oui","non"),label="essai",selected=as.integer(1))
 }
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -45,4 +42,6 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefMsg-method}}
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}

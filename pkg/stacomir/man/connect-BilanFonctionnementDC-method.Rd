@@ -21,4 +21,3 @@ loads the working periods and type of arrest or disfunction of the DC
 \author{
 cedric.briand
 }
-

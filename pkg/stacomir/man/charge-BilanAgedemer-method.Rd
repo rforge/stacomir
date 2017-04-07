@@ -14,8 +14,6 @@
 }
 \value{
 An object of class \link{BilanAgedemer-class} with slots filled with user choice
-
-An object of the class
 }
 \description{
 this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
@@ -24,4 +22,3 @@ envir_stacomi
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

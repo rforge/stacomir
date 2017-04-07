@@ -17,4 +17,3 @@ Handler fonction to plot calendar like graph, internal use
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

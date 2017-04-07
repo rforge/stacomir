@@ -62,9 +62,9 @@ assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","iav.",envir_stacomi)
 bMM_Arzal=choice_c(bMM_Arzal,
-dc=c(5,6,12),
-taxons=c("Anguilla anguilla"),
-stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
+		dc=c(5,6,12),
+		taxons=c("Anguilla anguilla"),
+		stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
 bMM_Arzal<-charge(bMM_Arzal)
 bMM_Arzal<-connect(bMM_Arzal,silent=FALSE)
 # to avoid warnings at package checks
@@ -508,3 +508,36 @@ bil_CE<-choice_c(bil_CE,
 bil_CE<-connect(bil_CE)
 bil_CE@stationMesure@data$stm_description<-iconv(bil_CE@stationMesure@data$stm_description,from="latin1",to="UTF8")
 devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
+
+#################################
+# generates dataset for bilanMigrationCar
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+bmC<-new("BilanMigrationCar")
+baseODBC<-get("baseODBC",envir=envir_stacomi)
+baseODBC[c(2,3)]<-rep("logrami",2)
+assign("baseODBC",baseODBC,envir_stacomi)
+sch<-get("sch",envir=envir_stacomi)
+assign("sch","logrami.",envir_stacomi)
+# here parqual is not in the list
+# so this is equivalent to parqual=NULL
+bmC<-choice_c(bmC,
+		dc=c(107,108,101),
+		taxons=c("Salmo salar"),
+		stades=c('5','11','BEC','BER','IND'),
+		parquan=c('A124','C001','1786','1785'),
+		horodatedebut="2012-01-01",
+		horodatefin="2012-12-31",
+		silent=FALSE)
+# bmC<-charge(bmC) not necessary there
+bmC<-connect(bmC)
+bmC@dc@data[,"ouv_libelle"]<-iconv(bmC@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bmC@dc@data[,"dis_commentaires"]<-iconv(bmC@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bmC@dc@data[,"type_df"]<-iconv(bmC@dc@data[,"type_df"],from="latin1",to="UTF8")
+bmC@dc@data[,"type_dc"]<-iconv(bmC@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bmC@dc@data[,"dif_localisation"]<-iconv(bmC@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(bmC,internal=FALSE,overwrite=TRUE)

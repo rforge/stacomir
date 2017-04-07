@@ -8,9 +8,9 @@
 \S4method{summary}{BilanAgedemer}(object, silent = FALSE, ...)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanAgedemer-class}}}
+\item{object}{An object of class \link{BilanAgedemer-class}}
 
-\item{silent}{Should the program stay silent or display messages, default FALSE}
+\item{silent}{Default FALSE, if TRUE the program should no display messages.}
 
 \item{...}{Additional parameters}
 }
@@ -20,4 +20,3 @@ summary for BilanAgedemer
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

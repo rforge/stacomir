@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{An object of class \link{BilanAgedemer-class}}
 
-\item{silent}{Boolean if TRUE messages are not displayed}
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
 An object of class \link{BilanAgedemer-class}
@@ -21,4 +21,3 @@ connect method for BilanAgedemer
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

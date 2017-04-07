@@ -27,4 +27,3 @@ searching ref.ts_messagerlang_mrl for the lines corresponding to lang
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

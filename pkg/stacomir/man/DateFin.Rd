@@ -14,4 +14,3 @@ DateFin(object, ...)
 \description{
 Generic method for getting the final date
 }
-

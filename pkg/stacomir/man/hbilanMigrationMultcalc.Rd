@@ -14,10 +14,9 @@ hbilanMigrationMultcalc(h = null, ...)
 \description{
 internal use for graphical interface
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 BilanMigrationMult
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}

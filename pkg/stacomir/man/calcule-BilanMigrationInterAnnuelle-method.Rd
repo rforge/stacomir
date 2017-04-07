@@ -12,6 +12,8 @@
 \item{object}{An object of class \code{\link{BilanMigrationInterannuelle-class}}}
 
 \item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
+
+\item{timesplit}{One of "day","week","month","2 weeks", "jour","semaine","quinzaine","mois"}
 }
 \value{
 BilanMigration with calcdata slot filled.
@@ -23,4 +25,3 @@ calcule method for BilanMigrationInterannuelle
 The class BilanMigration does not handle escapement rates nor 
 'devenir' i.e. the destination of the fishes.
 }
-

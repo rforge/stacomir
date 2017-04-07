@@ -3,41 +3,23 @@
 \docType{methods}
 \name{write_database,BilanAgedemer-method}
 \alias{write_database,BilanAgedemer-method}
-\title{Command line method to write the daily and monthly counts to the 
-t_bilanmigrationjournalier_bjo table}
+\title{Command line method to write the caracteristic "sea age" (car_par_code='A124')
+into the tj_caracteristiquelot_car table in the user's scheme}
 \usage{
 \S4method{write_database}{BilanAgedemer}(object, silent = TRUE,
   dbname = "bd_contmig_nat")
 }
 \arguments{
-\item{silent}{: TRUE to avoid messages}
+\item{object}{an object of class \link{BilanAgedemer-class}}
+
+\item{silent}{: Default FALSE, if TRUE the program should no display messages.}
 
 \item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
-
-\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
-
-\item{host}{: the host for sqldf, defaults to "localhost"}
-
-\item{port}{: the port, defaults to 5432}
 }
 \description{
-Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
-by this function.
-}
-\note{
-the user is asked whether or not he wants to overwrite data, if no
-data are present in the database, the import is done anyway. The name of the database
-is not passed in odbc link, here defaults to "bd_contmig_nat"
-}
-\examples{
-\dontrun{
-stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
-data("bM_Arzal")
-bM_Arzal<-calcule(bM_Arzal)
-write_database(bilanMigration=bM_Arzal,silent=FALSE)
-}
+The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
+defined by the user
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

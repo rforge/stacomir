@@ -12,13 +12,12 @@ choice of date with method to show current and previous year
 \describe{
 \item{\code{horodate}}{a "POSIXt"}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefHorodate", \dots{})}.
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -33,4 +32,6 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}

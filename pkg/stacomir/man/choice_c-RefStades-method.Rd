@@ -28,4 +28,3 @@ choice_c(object=object,objectBilan=objectBilan,"Anguilla anguilla")
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

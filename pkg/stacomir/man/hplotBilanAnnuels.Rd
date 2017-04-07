@@ -14,4 +14,3 @@ hplotBilanAnnuels(h, ...)
 \description{
 plot handler
 }
-

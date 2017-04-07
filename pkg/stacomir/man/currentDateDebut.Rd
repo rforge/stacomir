@@ -14,4 +14,3 @@ currentDateDebut(object, ...)
 \description{
 Generic method for getting the beginning date for current time step
 }
-

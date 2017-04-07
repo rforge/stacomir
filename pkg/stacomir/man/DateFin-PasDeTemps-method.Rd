@@ -16,4 +16,3 @@ DateFin, The final date corresponding to nbStep*time duration + initial date
 \description{
 Gets the final horodate for an object of class \link{PasDeTemps-class}
 }
-

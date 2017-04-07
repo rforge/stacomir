@@ -2,8 +2,8 @@
 % Please edit documentation in R/BilanConditionEnv.r
 \docType{class}
 \name{BilanConditionEnv-class}
-\alias{BilanConditionEnv}
 \alias{BilanConditionEnv-class}
+\alias{BilanConditionEnv}
 \alias{bilanConditionEnv}
 \title{class BilanConditionEnv simple output of one or several environmental
 conditions...}
@@ -14,22 +14,15 @@ joined graphs for BilanMigration in class BilanMigrationConditionEnv
 \section{Slots}{
 
 \describe{
-\item{\code{horodate}}{\link{RefHorodate-class}}
+\item{\code{horodatedebut}}{\link{RefHorodate-class}}
+
+\item{\code{horodatefin}}{\link{RefHorodate-class}}
 
 \item{\code{stationMesure}}{\link{RefStationMesure-class}}
 
 \item{\code{data}}{\code{data.frame}}
-
-\item{\code{datedebut}}{A \link[base]{-.POSIXt} value}
-
-\item{\code{datefin}}{A \link[base]{-.POSIXt} value}
 }}
-\section{Objects from the Class}{
- Objects can be created by calls of the form
-\code{new("BilanConditionEnv", horodate=new("Horodate"),
-stationMesure=new("RefStationMesure"), data=data.frame(),
-requete=new("RequeteODBCwheredate"))}.
-}
+
 \examples{
 require(stacomiR)
 stacomi(gr_interface=FALSE,
@@ -49,9 +42,6 @@ stacomi(gr_interface=FALSE,
 data("bil_CE")
 plot(bil_CE,silent=TRUE)
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
 \seealso{
 Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
@@ -60,11 +50,14 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},
   \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationCar-class}},
   \code{\link{BilanMigrationInterAnnuelle-class}},
   \code{\link{BilanMigrationMult-class}},
+  \code{\link{BilanMigrationMultConditionEnv-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

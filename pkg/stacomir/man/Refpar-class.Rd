@@ -16,6 +16,7 @@ Class enabling to load the list of parameters and select one of them
 
 \item{\code{data="data.frame"}}{the list of parameters}
 }}
+
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("Refpar", data)}.  \describe{ \item{list("data")}{Object of class
@@ -23,9 +24,7 @@ Class enabling to load the list of parameters and select one of them
 database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
 stored in the database} }
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -41,5 +40,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \keyword{classes}
-

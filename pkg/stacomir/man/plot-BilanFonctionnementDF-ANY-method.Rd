@@ -4,8 +4,8 @@
 \name{plot,BilanFonctionnementDF,ANY-method}
 \alias{plot,BilanFonctionnementDF,ANY-method}
 \alias{plot.BilanFonctionnementDF}
-\alias{plot.bfDF}
 \alias{plot.bilanFonctionnementDF}
+\alias{plot.bfDF}
 \title{Different plots for BilanFonctionnementDF}
 \usage{
 \S4method{plot}{BilanFonctionnementDF,ANY}(x, y, plot.type = 1,
@@ -41,4 +41,3 @@ assigned to the \code{envir_stacomi} environment
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

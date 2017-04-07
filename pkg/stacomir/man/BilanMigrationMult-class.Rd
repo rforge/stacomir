@@ -2,8 +2,8 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \docType{class}
 \name{BilanMigrationMult-class}
-\alias{BilanMigrationMult}
 \alias{BilanMigrationMult-class}
+\alias{BilanMigrationMult}
 \alias{bilanMigrationMult}
 \title{Migration reports for multiple DC / species / stages}
 \description{
@@ -31,6 +31,7 @@ method if any weight are found in the data slot.}
 
 \item{\code{time.sequence}}{A POSIXt time sequence}
 }}
+
 \note{
 A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
 called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
@@ -104,9 +105,6 @@ plot(bMM_Arzal,plot.type="multiple")
 	summary(bMM_Arzal,silent=TRUE)
 }
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
@@ -116,10 +114,13 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanFonctionnementDC-class}},
   \code{\link{BilanFonctionnementDF-class}},
   \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationConditionEnv-class}},
+  \code{\link{BilanMigrationCar-class}},
   \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMultConditionEnv-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \keyword{classes}
-

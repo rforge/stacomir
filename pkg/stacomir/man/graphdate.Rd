@@ -18,4 +18,3 @@ function used for some lattice graphes with dates
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

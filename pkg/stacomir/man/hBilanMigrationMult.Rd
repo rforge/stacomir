@@ -14,4 +14,3 @@ hBilanMigrationMult(h, ...)
 \description{
 handler function used by the main interface
 }
-

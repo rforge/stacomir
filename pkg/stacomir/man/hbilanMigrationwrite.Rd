@@ -23,4 +23,3 @@ then no entry will be written to the database
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

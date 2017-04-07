@@ -20,4 +20,3 @@ summary for BilanFonctionnementDC, write csv and html output, and prints summary
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

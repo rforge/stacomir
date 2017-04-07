@@ -26,4 +26,3 @@ the others are single quote when they are to be pasted within the text as code e
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \keyword{internal}
-

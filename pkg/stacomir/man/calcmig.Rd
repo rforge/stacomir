@@ -16,4 +16,3 @@ the program will use a file installed in c:/program files/stacomi but
 if not found will switch to the default
 }
 \keyword{datasets}
-

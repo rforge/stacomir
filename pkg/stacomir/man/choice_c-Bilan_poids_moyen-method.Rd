@@ -32,4 +32,3 @@ command line interface for \link{Bilan_poids_moyen-class}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

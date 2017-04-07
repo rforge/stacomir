@@ -18,4 +18,3 @@ BilanMigration with slot @data filled from the database
 \description{
 uses the BilanMigrationMult method
 }
-

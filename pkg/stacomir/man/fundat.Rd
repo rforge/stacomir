@@ -23,4 +23,3 @@ replaces nulls, and calculates reports with time period larger than day
 \seealso{
 \code{\linkS4class{Bilan_poids_moyen}}
 }
-

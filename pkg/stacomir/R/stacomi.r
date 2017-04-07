@@ -333,9 +333,9 @@ hX11=function(h,...){
 #' @export
 stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	# first loading of connection and odbc info using chargexml()
+	# trois variables passees a interface graphique via envir_stacomi :
 	envir_stacomi <- new.env(parent = emptyenv())
 	assign("envir_stacomi",envir_stacomi,.GlobalEnv)
-	# trois variables passees a interface graphique via envir_stacomi :
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("database_expected",database_expected,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
@@ -527,3 +527,26 @@ utils::globalVariables(c("envir_stacomi"))
 # reoxygenize fails if data are not loaded
 #setwd("F:/workspace/stacomir/branch0.5/stacomir")
 #data("bMM_Arzal")
+#' Working environment for stacomiR created when launching stacomi()
+#' 
+#' This is where the graphical interface stores its objects
+#' try \code{ls(envir=envir_stacomi)}
+#' @keywords environment
+"envir_stacomi"
+
+## using dput
+#calcmig<-
+#		structure(list(lienODBC = structure(1L, .Label = "bd_contmig_nat", class = "factor"), 
+#						uid = structure(1L, .Label = "iav", class = "factor"), pwd = structure(1L, .Label = "iav", class = "factor"), 
+#						sqldf.uid = structure(1L, .Label = "test", class = "factor"), 
+#						sqldf.pwd = structure(1L, .Label = "test", class = "factor"), 
+#						sqldf.dbname = structure(1L, .Label = "test", class = "factor"), 
+#						sqldf.host = structure(1L, .Label = "localhost", class = "factor"), 
+#						sqldf.port = 5432L, pgwd = structure(1L, .Label = "F:/workspace/stacomir/pkg/stacomir/R/", class = "factor"), 
+#						datawd = structure(1L, .Label = "~/CalcmigData", class = "factor"), 
+#						lang = structure(1L, .Label = "French", class = "factor")), .Names = c("lienODBC", 
+#						"uid", "pwd", "sqldf.uid", "sqldf.pwd", "sqldf.dbname", "sqldf.host", 
+#						"sqldf.port", "pgwd", "datawd", "lang"), class = "data.frame", row.names = c(NA, 
+#						-1L))
+#envir_stacomi <- new.env(parent = emptyenv())
+#calcmig<-data.frame()

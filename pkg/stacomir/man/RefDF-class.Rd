@@ -18,9 +18,6 @@ Objects from the Class: Objects can be created by calls of the form
 \code{new("RefDF", df_selectionne=integer(), ouvrage=integer(),
 data=data.frame())}.
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
 \seealso{
 Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
@@ -36,4 +33,6 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}},
   \code{\link{charge,RefMsg-method}}
 }
-
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}

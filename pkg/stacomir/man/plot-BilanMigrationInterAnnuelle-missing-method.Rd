@@ -37,10 +37,9 @@ Several of these plots are scaled against the same year, ie the comparison is ba
 year 2000, meaning that day 1 would correspond to the first date of 2000,  which is also a
 saturday, the last day of the week.
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \seealso{
 \link{BilanMigrationInterAnnuelle-class} for examples
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}

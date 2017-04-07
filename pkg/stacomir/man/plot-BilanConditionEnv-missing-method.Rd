@@ -11,11 +11,9 @@
 \S4method{plot}{BilanConditionEnv,missing}(x, silent = FALSE)
 }
 \arguments{
-\item{x}{An object of class Bilan_carlot}
+\item{x}{An object of class \link{BilanConditionEnv-class}}
 
-\item{silent}{Stops displaying the messages.}
-
-\item{...}{Additional arguments, see \code{plot}, \code{plot.default} and \code{par}}
+\item{silent}{Stops displaying the messages}
 }
 \description{
 Plot method for BilanConditionEnv
@@ -23,4 +21,3 @@ Plot method for BilanConditionEnv
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-

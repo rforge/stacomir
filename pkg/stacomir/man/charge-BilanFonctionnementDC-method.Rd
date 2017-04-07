@@ -22,4 +22,3 @@ assigned to envir_stacomi
 \author{
 cedric.briand
 }
-

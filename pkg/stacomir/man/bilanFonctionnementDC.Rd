@@ -14,4 +14,3 @@ This object is of class \link{BilanFonctionnementDC-class} with data loaded
 it is loaded along with \link{bMM_Arzal}
 }
 \keyword{data}
-

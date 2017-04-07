@@ -379,8 +379,8 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 #' calcule method for BilanMigrationInterannuelle
 #' 
 #' @param object An object of class \code{\link{BilanMigrationInterannuelle-class}}
-#' @param 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
+#' @param timesplit One of "day","week","month","2 weeks", "jour","semaine","quinzaine","mois"
 #' @note The class BilanMigration does not handle escapement rates nor 
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled.
@@ -389,7 +389,7 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 			bilanMigrationInterAnnuelle<-object	
 			#bilanMigrationInterAnnuelle<-bmi_vichy;silent=FALSE;timesplit="mois"
 			#require(dplyr)
-			if (!timesplit%in%c("jour","day","month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
+			if (!timesplit%in%c("jour","day","month","mois","week","semaine","quinzaine","2 weeks")) stop (
 						stringr::str_c("timesplit should be one of :","jour ","day ","month ","mois ","week ","semaine ","month ","mois ","quinzaine ","2 weeks "))
 			# back to french labels for consistency with fundat code
 			timesplit<-switch(timesplit,"day"="jour_365","jour"="jour_365","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)

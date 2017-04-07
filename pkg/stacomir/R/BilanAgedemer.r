@@ -352,13 +352,6 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 #' @param silent : Default FALSE, if TRUE the program should no display messages.
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples 
-#' \dontrun{
-#' stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
-#' data("bilan_adm")
-#' bilan_adm<-calcule(bilan_adm)
-#' write_database(bilanAgedemer=bilan_adm,silent=FALSE)
-#' }
 #' @export
 setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
 			# dbname="bd_contmig_nat"
@@ -474,13 +467,14 @@ funtableBilanAgedemer = function(h,...) {
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("supprime",signature=signature("BilanAgedemer"),
-		definition=function(object)
+		definition=function(object,silent=FALSE)
 		{ 
 			bilan_adm<-object
 			data_in_base<-bilan_adm@data
 			data_in_base<-data_in_base[data_in_base$car_par_code=='A124',]
-			if (nrow(data_in_base)==0) funout(gettext("No data to remove"),arret=TRUE)
-		
+			if (nrow(data_in_base)==0) {
+				if (!silent) funout(gettext("No data to remove"),arret=TRUE)
+			}
 			requete=new("RequeteODBCwhere")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"tj_caracteristiquelot_car ")
