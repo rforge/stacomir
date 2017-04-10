@@ -6,12 +6,12 @@
 \title{plot method for BilanMigrationCar}
 \usage{
 \S4method{plot}{BilanMigrationCar,missing}(x, color_parm = NULL,
-  plot.type = "barplot", ...)
+  plot.type = "qual", ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigrationCar}
 
-\item{plot.type}{One of "qual", "quant" "crossed"}
+\item{plot.type}{One of "qual", "quant" "crossed" default to qual}
 
 \item{...}{Additional parameters}
 

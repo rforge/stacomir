@@ -23,8 +23,7 @@ install.packages("Rd2roxygen") # reverse documentation
 # devtools::install_version(package = 'roxygen2',version = '5.0.1', repos = c(CRAN = "https://cran.rstudio.com"))
 ##use either :
 require(devtools)
- envir_stacomi <- new.env(parent = emptyenv())
- data("calcmig")
+# uncomment lines in stacomi to run the program (calcmig and envir_stacomi necessary)
 document("F:/workspace/stacomir/pkg/stacomir")
 ## or :
 ##vignette("roxygen2")

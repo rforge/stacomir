@@ -22,3 +22,4 @@ test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-05Bilan_c
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-06Bilan_MigrationInterAnnuelle.R")
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-07BilanAgedemer.R")
 test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-08BilanArgentee.R")
+test_file("F:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-08BilanArgentee.R")

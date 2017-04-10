@@ -5,7 +5,7 @@
 \alias{supprime,BilanAgedemer-method}
 \title{supprime method for BilanMigrationInterannuelle class}
 \usage{
-\S4method{supprime}{BilanAgedemer}(object)
+\S4method{supprime}{BilanAgedemer}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanAgedemer-class}}

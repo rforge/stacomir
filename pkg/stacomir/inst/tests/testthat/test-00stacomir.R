@@ -37,7 +37,7 @@ test_that("Test that stacomirtools connects",{
 			con@baseODBC=baseODBC
 			con<-connect(con)
 			expect_is(connect(con),'ConnectionODBC')
-			expect_equal(con@etat,NULL)
+			expect_equal(con@etat,"Connection in progress")
 			odbcCloseAll()
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})

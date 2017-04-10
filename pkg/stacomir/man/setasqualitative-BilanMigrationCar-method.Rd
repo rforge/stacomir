@@ -20,4 +20,5 @@ Turns a quantitative parameter into qualitative
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+ @export
 }

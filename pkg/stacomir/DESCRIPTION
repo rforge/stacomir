@@ -1,6 +1,6 @@
 Package: stacomiR
 Version: 0.5.1
-Date: 2017-02-01
+Date: 2017-04-10
 Title: Fish Migration Monitoring (stacomiR)
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
@@ -8,7 +8,7 @@ Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.
 Description: Graphical outputs and treatment for a database of fishway
     monitoring. It is a part of the STACOMI open source project developed in France
     by the ONEMA institute to centralize data obtained by fishway monitoring.
-    Version 0.5.1 is available in French English and Spanish.
+    Version 0.5.1 is available in French English.
 License: GPL (>= 2)
 Collate:
     'create_generic.r'
@@ -71,7 +71,6 @@ Collate:
     'interface_Bilan_carlot.r'
     'interface_Bilan_taille.r'
     'interface_bilan_poids_moyen.r'
-    'interface_chooselang.r'
     'messages.r'
     'setAs.r'
     'stacomi.r'

@@ -161,9 +161,6 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			stades= as.character(bmmCE@bilanMigrationMult@stades@data$std_libelle)
 			dc<-unique(grdata$DC)
 			stations<-bmmCE@bilanConditionEnv@stationMesure@data
-			# pour avoir dans le graphique le dc_code des dc 
-			# ggplot passe les dc dans l'ordre dans lequel ils apparaissent dans le tableau
-			# et unique fait ça aussi .... OUIIIII
 			dc_code<-bmmCE@bilanMigrationMult@dc@data$dc_code[
 					match(dc,bmmCE@bilanMigrationMult@dc@data$dc)]
 			# tableau conditions environnementales
@@ -236,8 +233,8 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			
 			
 			######################
-			# traitement des données pour grouper par dc (group_by dc)
-			# les stades et taxons seront aggrégés avec warning
+			# treatment of data to group by dc
+			# if several taxa or stages are passed, they are aggregated with a warning
 			#################################
 			if (length(unique(taxons))>1) warning(gettextf("you have %s taxa in the bilan, those will be aggregated",length(unique(taxons))))
 			if (length(unique(stades))>1) warning(gettextf("you have %s stages in the bilan, those will be aggregated",length(unique(stades))))		

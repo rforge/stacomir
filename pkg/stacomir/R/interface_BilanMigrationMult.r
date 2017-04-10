@@ -38,8 +38,6 @@ interface_BilanMigrationMult=function(){
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
-	# todo addmsg
-	# getStockIcons()
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hbilanMigrationMultcalc,  icon="new", 
 					label="calcul", 

@@ -94,7 +94,6 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 			if (exists("pasDeTemps",envir_stacomi)){
 				bilanMigrationMult@pasDeTemps<-get("pasDeTemps",envir_stacomi)
 			} else {
-				# todo addmsg
 				funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
 				warning("Attention, no time step selected, compunting with default value\n")
 			}
@@ -546,8 +545,8 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 				print(p)	
 				assign("p",p,envir=envir_stacomi)
 				assign("grdata",grdata_without_hole,envir_stacomi)
-				funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
-				funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+				if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
+				if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
 				
 			}
 #==========================type=3=============================
@@ -576,9 +575,9 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 				
 				print(p)	
 				assign("p",p,envir=envir_stacomi)				
-				funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
+				if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
 				assign("grdata",grdata,envir_stacomi)	
-				funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+				if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
 				
 			}
 #==========================end / type=3=============================			

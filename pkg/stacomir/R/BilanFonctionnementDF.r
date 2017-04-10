@@ -235,7 +235,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 						xlab(gettext("month",domain="R-stacomiR"))+
 						ggtitle(main)+
 						geom_bar(stat='identity')+
-						scale_fill_manual(get("msg",envir_stacomi)$BilanFonctionnementDF.6[2],
+						scale_fill_manual(gettext("operation"),
 								values = c("#E41A1C","#E6AB02", "#9E0142","#1B9E77","#999999"))
 				
 				t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per_mois[order(t_periodefonctdispositif_per_mois$per_etat_fonctionnement),]

@@ -565,7 +565,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 					dat$jour = as.POSIXct(strptime(strftime(dat$jour,'2000-%m-%d %H:%M:%S'),format='%Y-%m-%d %H:%M:%S'),tz="GMT")
 					dat$annee=as.factor(dat$annee)					
 					dat=stacomirtools::killfactor(dat)					
-					titre=paste(get("msg",envir_stacomi)$BilanMigrationInterannuelle.4,
+					titre=paste(gettext("Migration for years "),
 							paste(min(dat$annee),max(dat$annee), collapse=":"),
 							", ",
 							bilanMigrationInterAnnuelle@dc@data$dis_commentaires[bilanMigrationInterAnnuelle@dc@data$dc==bilanMigrationInterAnnuelle@dc@dc_selectionne])

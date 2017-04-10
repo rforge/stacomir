@@ -229,15 +229,7 @@ husr=function(h,...){
 		}
 	}
 }
-hhelp=function(h,...){
-	funout(gettext("For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr or stacomi@googlegroups.com.\n",domain="R-stacomiR"),wash=TRUE)
-}
-hlang=function(h,...){
-	eval(interface_chooselang(),envir = .GlobalEnv)
-}
-hX11=function(h,...){
-	dev.new()
-}
+
 
 
 
@@ -344,10 +336,9 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	mylinks=chargecsv(database_expected)
 	baseODBC=mylinks[["baseODBC"]]
 	datawd=mylinks[["datawd"]]
-	lang=mylinks[["lang"]]	
+	lang=mylinks[["lang"]] # deprecated this option is set at the higher level in R	
 	sqldf.options=mylinks[["sqldf.options"]]	
 	# values assigned in the envir_stacomi
-	assign("lang",lang,envir=envir_stacomi)	
 	assign("datawd",datawd,envir=envir_stacomi)
 	assign("sqldf.options",sqldf.options,envir=envir_stacomi)
 	
@@ -464,12 +455,6 @@ interface_graphique=function(){
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$handler=hbilanagedemer
 	menubarlist[[gettext("Summary",domain="R-stacomiR")]][[gettext("Treatment size - age salmonids",domain="R-stacomiR")]]$icon="gWidgetsRGtk2-hist"
 
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$handler = hX11
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$icon="newplot"
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$handler = hhelp
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$About$icon="dialog-info"
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$handler = hlang
-	menubarlist[[gettext("Help",domain="R-stacomiR")]]$lang$icon="dialog-info"
 	gWidgets::add(win, gmenu(menubarlist))
 	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)        
 	# gsortie is above the window

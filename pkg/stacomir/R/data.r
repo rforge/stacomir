@@ -199,7 +199,7 @@
 #' @keywords data
 "b_carlot"
 
-#' Daily glass eel and elver migration from 1984 to 2016 in the Sèvre Niortaise 
+#' Daily glass eel and elver migration from 1984 to 2016 in the S \u0168 vre Niortaise 
 #' 
 #' The first eel trapping ladder in France was built by Antoine Legault and the team from Rennes
 #' in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 1984 it has been 

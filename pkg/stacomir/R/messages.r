@@ -22,15 +22,15 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 # exported for test_that
-messages=function(lang="French"){
+messages=function(){
 	msg=list()
 # RequeteODBC
-	msg$RequeteODBC.1<-"Error ODBC =>Define a vector baseODBC with the name of the ODBC link, user and password \n"
-	msg$RequeteODBC.2<-"Connection trial :"
-	msg$RequeteODBC.3<-"Connection failure :"
-	msg$RequeteODBC.4<-"Connection successful \n"
-	msg$RequeteODBC.5<-"Trying query \n"
-	msg$RequeteODBC.6<-"Query succeded \n"
+	msg$RequeteODBC.1<-gettext("Error ODBC =>Define a vector baseODBC with the name of the ODBC link, user and password")
+	msg$RequeteODBC.2<-gettext("Connection trial :")
+	msg$RequeteODBC.3<-gettext("Connection failure :")
+	msg$RequeteODBC.4<-gettext("Connection successful")
+	msg$RequeteODBC.5<-gettext("Trying query")
+	msg$RequeteODBC.6<-gettext("Query succeded")
 # RequeteODBCwhere
 # RequeteODBCwheredate
 

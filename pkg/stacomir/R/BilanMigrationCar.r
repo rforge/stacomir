@@ -130,7 +130,7 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 #' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
 #' fills also the data slot by the connect method
 #' @param object An object of class \link{BilanMigrationMult-class}
-#' @param silent Default FALSE, if TRUE the program should no display messages
+#' @param silent Default FALSE, if TRUE the program should not display messages
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
@@ -193,12 +193,13 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 			} else {
 				echantillons=""      
 			} 
-			
-			
-			if (nrow(bmC@parquan@data)==0 & nrow(bmC@parqual@data)==0) {
+			# data can be selected but not in the database or the inverse
+			parquan<-intersect(bmC@parquan@par_selectionne,bmC@parquan@data$par_code)
+			parqual<-intersect(bmC@parqual@par_selectionne,bmC@parqual@data$par_code)
+			if (length(parquan)==0 & length(parqual)==0) {
 				stop("You need to choose at least one quantitative or qualitative attribute")
 			} else {
-				if (nrow(bmC@parqual@data)!=0) {
+				if (length(parqual)!=0) {
 					#caracteristique qualitative 
 					req=new("RequeteODBC")
 					req@baseODBC<-get("baseODBC", envir=envir_stacomi)					
@@ -226,7 +227,7 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 							,sep="")
 					bmC@data[["parqual"]]<-connect(req)@query
 				}# end if (parqual)
-				if (nrow(bmC@parquan@data)!=0) {
+				if (length(parquan)!=0) {
 					# Caracteristique quantitative
 					req=new("RequeteODBC")
 					req@baseODBC<-get("baseODBC", envir=envir_stacomi)					
@@ -267,11 +268,13 @@ hbmCcalc=function(h,...){
 	calcule(h$action)
 }			
 #' Turns a quantitative parameter into qualitative
+#' 
 #' @param object An object of class \link{Refparquan-class}
 #' @param par The code of a quantitative parameter
+#' @param silent Default FALSE, if TRUE the program should not display messages
 #' @param ... Additional parms to the cut method \link[base]{cut}   
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#'  @export
+#' @export
 setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition=function(object,par,silent=FALSE,...) {
 			bmC<-object
 			# par <-'A124'
@@ -313,9 +316,18 @@ setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function
 			bmC<-object
 			qual<-bmC@data[["parqual"]]
 			quan<-bmC@data[["parquan"]]
-			qual<-chnames(qual,"car_par_code","car_par_code_qual")
-			quan<-chnames(quan,"car_par_code","car_par_code_quan")
+			if (is.null(qual)&is.null(quan)) stop("cannot perform calcule method, no data in either qualitative or quantitative parameters")
+			if (!is.null(qual)) qual<-chnames(qual,"car_par_code","car_par_code_qual")
+			if (!is.null(quan)) quan<-chnames(quan,"car_par_code","car_par_code_quan")
+			if (is.null(qual)) {
+				quaa<-quan
+				quaa$car_par_code_qual=NA
+			} else	if (is.null(quan)) {
+				quaa<-qual
+				quaa$car_par_code_quan=NA
+			} else {
 			quaa<-merge(qual,quan,by=c("ope_dic_identifiant","lot_identifiant","ope_date_debut","ope_date_fin","lot_methode_obtention","lot_effectif","lot_tax_code","lot_std_code"),all.x=TRUE,all.y=TRUE)
+			}
 			quaa=funtraitementdate(data=quaa,nom_coldt="ope_date_debut") 
 			quaa<-quaa[order(quaa$ope_dic_identifiant,quaa$lot_tax_code,quaa$lot_std_code,quaa$ope_date_debut),]
 			bmC@calcdata<-quaa
@@ -511,7 +523,7 @@ setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(
 				}		
 				return(xt)} else
 			{
-				#TODO tester et développer pour plusieurs années}
+				#TODO test and develop for several year}
 			}
 		})
 
