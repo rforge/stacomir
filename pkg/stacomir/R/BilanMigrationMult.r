@@ -380,6 +380,10 @@ hbilanMigrationMult_graph=function(h=null,...){
 #' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
 #' @param silent Stops most messages from being displayed
+#' @param color Default NULL, argument passed for the plot.type="standard" method. A vector of color in the following order, numbers, weight, working, stopped, 1...5 types of operation
+#' for the fishway, if null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
+#' @param color_ope Default NULL, argument passed for the plot.type="standard" method. A vector of color for the operations. Default to brewer.pal(4,"Paired")
+
 #' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -387,7 +391,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 # getGeneric("plot")
 # showMethods("plot")
 # methods("plot")
-setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=function(x, plot.type="standard",silent=FALSE,...){ 
+setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=function(x, plot.type="standard",color=NULL, color_ope=NULL,silent=FALSE,...){ 
 			#browser()
 			#print("entering plot function")
 			#bilanMigrationMult<-bMM_Arzal
@@ -450,7 +454,9 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 												taxon=taxon,
 												stade=stade,
 												dc=dc,
-												silent,
+												color=color,
+												color_ope=color_ope,
+												silent,												
 												...)
 									}	else {
 										
@@ -465,7 +471,10 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 												taxon,
 												stade,
 												dc,
-												silent)
+												color=color,
+												color_ope=color_ope,
+												silent,
+												...)
 									}
 								} # end nrow(data)>0		
 								# ecriture du bilan journalier, ecrit aussi le bilan mensuel

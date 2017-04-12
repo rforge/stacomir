@@ -5,20 +5,67 @@
 #' eel have been counted through weight or numbers
 #' 
 #' 
-#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}} or an
-#' #' object of class \code{\linkS4class{BilanMigrationMult}}
+#' @param bilanMigration an object of class \link{BilanMigration-class} or an
+#' object of class \link{BilanMigrationMult-class}
 #' @param table a data frame with the results
 #' @param time.sequence a vector POSIXt
 #' @param taxon the species
 #' @param stade the stage
-#' @param dc the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}
+#' @param dc the counting device, default to null, only necessary for \link{BilanMigrationMult-class}
 #' @param silent Message displayed or not
+#' @param color Default NULL, a vector of length 11 of color in the following order, numbers, weight, working, stopped, 1...5 types of operation,
+#' the 2 latest colors are not used but keeped for consistency with fungraph
+#' for the fishway, if null will be set to brewer.pal(12,"Paired")[c(4,6,1,2,3,5,7,8,10,11,12)]
+#' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
 #' @param ... additional parameters passed from the plot method to plot
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,silent,...){
-# calcul des variables
-	# pour adapter aux bilanMigrationMult, ligne par defaut...
-	#cat("fungraph_civelle")
+fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,silent,color=NULL,color_ope=NULL,...){
+	# color=null
+	# color calculation
+	if (is.null(color)) {
+		tp<-RColorBrewer::brewer.pal(12,"Paired")
+		mypalette=c(
+				"working"=tp[4], # green
+				"stopped"=tp[6], # red
+				"listeperiode1"=tp[1],
+				"listeperiode2"=tp[2],
+				"listeperiode3"=tp[3],
+				"listeperiode4"=tp[5],
+				"listeperiode5"=tp[7],
+				"eff"=tp[8], #orange
+				"weight"=tp[10], #purple 
+				"unused1"=tp[11],
+				"unused1"=tp[12]
+				)
+	} else {
+		if(length(color)!=11) stop("The length of color must be 11")
+		mypalette=c(
+				"working"=color[1], 
+				"stopped"=color[2], 
+				"listeperiode1"=color[3], 
+				"listeperiode2"=color[4], 
+				"listeperiode3"=color[5], 
+				"listeperiode4"=color[6], 
+				"listeperiode5"=color[7],
+				"eff"=color[8], 
+				"weight"=color[9],
+				"unused1"=color[10],
+				"unused2"=color[11]
+		)
+	}
+	
+	if (is.null(color_ope)) {
+		# check if "brew" is in the ... list
+		myargs <- list(...)
+		existbrew <- "brew" %in% names(myargs)
+		if (!existbrew){	
+			if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
+		} else {
+			brew<-myargs[["brew"]]
+		}
+		color_ope=RColorBrewer::brewer.pal(8,brew)
+	}
+	
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=paste(unique(strftime(as.POSIXlt(time.sequence),"%Y")),collapse=",")
 	mois= months(time.sequence)
@@ -39,12 +86,10 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	vec<-c(rep(1,15),rep(2,2),rep(3,2),4,rep(5,6))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
-	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	#par("bg"=grDevices::gray(0.8))
-	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
-	#mypalette<-grDevices::rainbow(20)
+	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)	
 	plot(as.Date(time.sequence,"Europe/Paris"),eff/1000,
-			col=mypalette[8],
+			col=mypalette["eff"],
 			type="h",
 			xlim=c(debut,fin),
 			ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2 ,
@@ -54,7 +99,8 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			#xlab="date",
 			cex.main=1,
 			font.main=1,
-			main=gettextf("Glass eels graph %s, %s, %s, %s,...",dis_commentaire,taxon,stade,annee))
+			main=gettextf("Glass eels graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR"),
+			...)
 	#print(plot,position = c(0, .3, 1, .9), more = TRUE)
 	r <- as.Date(round(range(time.sequence), "day"))
 	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
@@ -62,33 +108,35 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	points(as.Date(time.sequence,"Europe/Paris"),eff.p/1000,
 			type="h",
 			lty=1,
-			col=mypalette[10])
+			col=mypalette["weight"])
 	
 	legend(x="topright",
 			inset=0.01,
 			legend= gettext("weight of the daily number","daily number counted",domain="R-stacomiR"),
 			pch=c(16,16),
-			col=mypalette[c(10,8)])
-	
+			col=mypalette[c("weight","eff")])
+	######################################
+	# text labels for numbers and weights
+	######################################
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.15,
 			labels=paste(round(sum(table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
-			col=mypalette[8], 
+			col=mypalette["eff"], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8 ,
 			y=max(eff/1000,na.rm=TRUE)*1.15,
 			labels= paste("N=",round(sum(table$Effectif_total.e,na.rm=TRUE))),
-			col=mypalette[8], 
+			col=mypalette["eff"], 
 			adj=1)
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
 			labels=paste(round(sum(table$Poids_total,na.rm=TRUE)/1000,2)," kg"),
-			col=mypalette[10], 
+			col=mypalette["weight"], 
 			adj=1)
 	text(  x=debut+3*(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
 			labels= paste("N=",round(sum(eff.p,na.rm=TRUE))),
-			col=mypalette[10], 
+			col=mypalette["weight"], 
 			adj=1)
 	text(  x=debut+3+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.1,
@@ -109,10 +157,10 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-		funout(gettextf("number of operations =%s\n",nrow(t_operation_ope)))
-		funout(gettextf("average trapping time = %sdays\n",round(mean(as.numeric(dif)),2)))
-		funout(gettextf("maximum term = %sdays\n",round(max(as.numeric(dif)),2)))
-		funout(gettextf("minimum term = %sdays\n",round(min(as.numeric(dif)),2)))
+		funout(gettextf("number of operations =%s\n",nrow(t_operation_ope),domain="R-stacomiR"))
+		funout(gettextf("average trapping time = %sdays\n",round(mean(as.numeric(dif)),2),domain="R-stacomiR"))
+		funout(gettextf("maximum term = %sdays\n",round(max(as.numeric(dif)),2),domain="R-stacomiR"))
+		funout(gettextf("minimum term = %sdays\n",round(min(as.numeric(dif)),2),domain="R-stacomiR"))
 	}
 	
 	df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc==dc]
@@ -140,7 +188,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
-			ylab="Fishway",
+			ylab=gettext("Fishway",domain="R-stacomiR"),
 			bty="n",
 			cex=1.2)
 	
@@ -154,20 +202,20 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				ybottom=2.1,
 				xright=fin,
 				ytop=3, 
-				col = mypalette[4],
+				col = "grey",
 				border = NA, 
 				lwd = 1)    
 		rect(   xleft=debut, 
 				ybottom=1.1,
 				xright=fin,
 				ytop=2, 
-				col = mypalette[1],
+				col = "grey40",
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= c(gettext("working","stopped","normal operation",domain="R-stacomiR")),
+				legend= gettext("Unknown working","Unknow operation type",domain="R-stacomiR"),
 				pch=c(16,16),
-				col=c(mypalette[4],mypalette[6],mypalette[1]),
+				col=c(grey,grey40),
 				horiz=TRUE,
 				bty="n"
 		)
@@ -184,7 +232,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 					xright=graphdate(as.Date(bilanFonctionnementDF@data$per_date_fin[
 											bilanFonctionnementDF@data$per_etat_fonctionnement==1])),
 					ytop=3, 
-					col = mypalette[4],
+					col = mypalette["working"],
 					border = NA, 
 					lwd = 1)       }
 		if (sum(bilanFonctionnementDF@data$per_etat_fonctionnement==0)>0){              
@@ -194,7 +242,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 					xright=graphdate(as.Date(bilanFonctionnementDF@data$per_date_fin[
 											bilanFonctionnementDF@data$per_etat_fonctionnement==0])),
 					ytop=3, 
-					col = mypalette[6],
+					col = mypalette["stopped"],
 					border = NA, 
 					lwd = 1)  }
 		#creation d'une liste par categorie d'arret contenant vecteurs dates    
@@ -204,26 +252,29 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 						tempsfin=bilanFonctionnementDF@data$per_date_fin,
 						libelle=bilanFonctionnementDF@data$libelle)
 		nomperiode<-vector()
+		color_periodes<-vector() # a vector of colors, one per period type in listeperiode
 		for (j in 1 : length(listeperiode)){
 			#recuperation du vecteur de noms (dans l'ordre) e partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
-			#ecriture pour chaque type de periode                       
+			#ecriture pour chaque type de periode        
+			color_periode=stringr::str_c("listeperiode",j)			
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=1.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=2, 
-					col = mypalette[j],
+					col = mypalette[color_periode],
 					border = NA, 
-					lwd = 1) 
+					lwd = 1)
+			color_periodes<-c(color_periodes,color_periode)
 		}       
-		
+		# below the colors for operation are from 4 to 3+ntypeoperation
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("work","stop",domain="R-stacomiR"),nomperiode),
+				legend= gettext("working","stopped",nomperiode,domain="R-stacomiR"),
 				pch=c(15,15),
-				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
+				col=c(mypalette["working"],mypalette["stopped"],mypalette[color_periodes]),
 				bty="n",
-				ncol=7,
+				ncol=length(listeperiode)+2,
 				text.width=(fin-debut)/10)
 	}
 	
@@ -250,27 +301,27 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	if (dim(bilanFonctionnementDC@data)[1]==0 ) {
 		
-		rect(      xleft=debut, 
+		rect(xleft=debut, 
 				ybottom=2.1,
 				xright=fin,
 				ytop=3, 
-				col = mypalette[4],
+				col = "grey",
 				border = NA, 
 				lwd = 1)               
 		
-		rect(      xleft=debut, 
+		rect(xleft=debut, 
 				ybottom=1.1,
 				xright=fin,
 				ytop=2, 
-				col = mypalette[1],
+				col = "grey40",
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend=c(gettext("working"),gettext("stopped"),gettext("normal operation",domain="R-stacomiR")),
+				legend=gettext("Unknown working","Unknow operation type",domain="R-stacomiR"),
 				pch=c(16,16),
-				col=c(mypalette[4],mypalette[6],mypalette[1]),
-				#horiz=TRUE,
-				ncol=5,
+				col=c("grey","grey40"),
+				horiz=TRUE,
+				#ncol=5,
 				bty="n")
 		
 		
@@ -283,7 +334,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 					xright=graphdate(as.Date(bilanFonctionnementDC@data$per_date_fin[
 											bilanFonctionnementDC@data$per_etat_fonctionnement==1])),
 					ytop=3, 
-					col = mypalette[4],
+					col = mypalette["working"],
 					border = NA, 
 					lwd = 1) }
 		if (sum(bilanFonctionnementDC@data$per_etat_fonctionnement==0)>0)
@@ -294,7 +345,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 					xright=graphdate(as.Date(bilanFonctionnementDC@data$per_date_fin[
 											bilanFonctionnementDC@data$per_etat_fonctionnement==0])),
 					ytop=3, 
-					col = mypalette[6],
+					col = mypalette["stopped"],
 					border = NA, 
 					lwd = 1) }
 		listeperiode<-
@@ -303,25 +354,27 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 						tempsfin=bilanFonctionnementDC@data$per_date_fin,
 						libelle=bilanFonctionnementDC@data$libelle)
 		nomperiode<-vector()
-		
+		color_periodes<-vector()
 		for (j in 1 : length(listeperiode)){
-			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17)   
+			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
+			color_periode=stringr::str_c("listeperiode",j)
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=1.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=2, 
-					col = mypalette[j],
+					col = mypalette[color_periode],
 					border = NA, 
-					lwd = 1)        
+					lwd = 1)     
+			color_periodes<-c(color_periodes,color_periode)
 		}
 		
 		legend  (x= debut,
 				y=1.2,
 				legend= c("working","stopped",nomperiode),
 				pch=c(15,15),
-				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
+				col=c(mypalette["working"],mypalette["stopped"],mypalette[color_periodes]),
 				bty="n",
-				ncol=7,
+				ncol=length(listeperiode)+2,
 				text.width=(fin-debut)/10)
 	}
 	
@@ -348,7 +401,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			ybottom=0,
 			xright=graphdate(as.Date(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = RColorBrewer::brewer.pal(4,"Paired"),
+			col = color_ope,
 			border = NA, 
 			lwd = 1)
 	
@@ -367,7 +420,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	
 	
 	superpose.polygon<-lattice::trellis.par.get("superpose.polygon")
-	superpose.polygon$col=   mypalette[c(10,8)]
+	superpose.polygon$col=   mypalette[c("weight","eff")]
 	superpose.polygon$border=rep("transparent",6)
 	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
 	fontsize<-lattice::trellis.par.get("fontsize")

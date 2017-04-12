@@ -41,6 +41,20 @@ bMM_Arzal<-calcule(bMM_Arzal,silent=TRUE)
 # not run because of multiple graphical devices
 
 plot(bMM_Arzal,plot.type="standard",silent=TRUE)
+# colors in the following order (glass eel)
+# working, stopped, 1...5 types of operation,numbers, weight, 2 unused colors
+# for yellow eel and other taxa
+# stopped, 1...5 types of operation, ponctuel, expert, calcule,mesure,working,
+plot(bMM_Arzal,plot.type="standard",
+		color=c("#DEF76B","#B950B5","#9ABDDA","#781A74","#BF9D6E","#FFC26E","#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
+		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
+		silent=TRUE)
+
+# below we pass a palette instead of color_ope with argument "brew"
+plot(bMM_Arzal,plot.type="standard",
+		color=c("#DEF76B","#B62D2D","#9ABDDA","#781A74","#BF9D6E","#FFC26E","#A66F24","#012746","#6C3E00","black","black"),
+		brew="Blues",
+		silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
 

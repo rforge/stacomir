@@ -13,14 +13,65 @@
 #' @param taxon The species
 #' @param stade The stage
 #' @param dc The DC
+#' @param color Default NULL, a vector of color in the following order, working, stopped, 1...5 types of operation
+#' for the fishway or DC, numbers, weight. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
+#' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
+
 #' @param silent Message displayed or not
 #' @param ... other parameters passed from the plot method to the matplot function
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silent,...){
+fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silent,color=NULL,color_ope=NULL,...){
 #mat <- matrix(1:6,3,2)
 #layout(mat)
 	#browser() 
 	#cat("fungraph")
+	# color=null
+	# color calculation
+	
+	if (is.null(color)) {
+		tp<-RColorBrewer::brewer.pal(12,"Paired")
+		mypalette=c(
+				"working"=tp[4],
+				"stopped"=tp[6],
+				"listeperiode1"=tp[1],
+				"listeperiode2"=tp[2],
+				"listeperiode3"=tp[3],
+				"listeperiode4"=tp[5],
+				"listeperiode5"=tp[7],
+				"ponctuel"="indianred",
+				"expert"="chartreuse2",
+				"calcule"="deepskyblue",
+				"mesure"="black"
+		)
+	} else {
+		if(length(color)!=11) stop("The length of color must be 11")
+		mypalette=c(
+				"working"=		color[1], 
+				"stopped"=		color[2], 
+				"listeperiode1"=color[3], 
+				"listeperiode2"=color[4], 
+				"listeperiode3"=color[5], 
+				"listeperiode4"=color[6], 
+				"listeperiode5"=color[7],
+				"mesure"=		color[8],
+				"calcule"=		color[9],
+				"expert"=		color[10],
+				"ponctuel"=		color[11]
+		)
+	}
+	
+	if (is.null(color_ope)) {
+		# check if "brew" is in the ... list
+		myargs <- list(...)
+		existbrew <- "brew" %in% names(myargs)
+		if (!existbrew){	
+			if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
+		} else {
+			brew<-myargs[["brew"]]
+		}
+		color_ope=RColorBrewer::brewer.pal(8,brew)
+	}
+	
 	if (is.null(dc)) dc=bilanMigration@dc@dc_selectionne[1]
 	annee=unique(strftime(as.POSIXlt(time.sequence),"%Y"))[1]
 	mois= months(time.sequence)
@@ -39,7 +90,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	vec<-c(rep(1,15),rep(2,2),rep(3,2),4,rep(5,6))
 	mat <- matrix(vec,length(vec),1)
 	layout(mat)
-	mypalette<-rev(c("black","deepskyblue","chartreuse2","indianred"))
+	
 	#par("bg"=grDevices::gray(0.8))
 	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)
 	###################################
@@ -49,7 +100,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					tableau$MESURE+tableau$CALCULE+tableau$EXPERT,
 					tableau$MESURE+tableau$CALCULE,
 					tableau$MESURE),
-			col=mypalette[1:4],
+			col=mypalette[c("ponctuel","expert","calcule","mesure")],
 			type=c("h","h","h","h"),
 			pch=16,
 			lty=1,
@@ -58,7 +109,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			ylab=gettext("Number",domain="R-stacomiR"),
 			xlab=gettext("Date",domain="R-stacomiR"),
 			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR"),
-			cex.main=1)
+			cex.main=1,...)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
@@ -77,25 +128,25 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			y=max(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE),
 			legend=gettext("measured","calculated","expert","direct",domain="R-stacomiR"),
 			pch=c(16),
-			col=rev(c(mypalette[1:4])))
+			col=mypalette[c("mesure","calcule","expert","ponctuel")])
 	bilanOperation<-get("bilanOperation",envir=envir_stacomi)
 	t_operation_ope<-bilanOperation@data[bilanOperation@data$ope_dic_identifiant==dc,]
 	dif=difftime(t_operation_ope$ope_date_fin,t_operation_ope$ope_date_debut, units ="days")
 	
 	if (!silent){
-	  funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n",domain="R-stacomiR"))
+		funout(ngettext(nrow(t_operation_ope),"%d operation \n", "%d operations \n",domain="R-stacomiR"))
 		funout(gettextf("average trapping time = %s days\n",round(mean(as.numeric(dif)),2),domain="R-stacomiR"))
 		funout(gettextf("maximum term = %s",round(max(as.numeric(dif)),2),domain="R-stacomiR"))
 		funout(gettextf("minimum term = %s",round(min(as.numeric(dif)),2),domain="R-stacomiR"))
 	}
 	
-
+	
 	df<-bilanMigration@dc@data$df[bilanMigration@dc@data$dc==dc]
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
 	bilanFonctionnementDC<-get("bilanFonctionnementDC", envir=envir_stacomi)
 	bilanFonctionnementDF@data<-bilanFonctionnementDF@data[bilanFonctionnementDF@data$per_dis_identifiant==df,]
 	bilanFonctionnementDC@data<-bilanFonctionnementDC@data[bilanFonctionnementDC@data$per_dis_identifiant==dc,]
-
+	
 	
 	
 	graphdate<-function(vectordate){
@@ -110,7 +161,6 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	###################################         
 	# creation d'un graphique vide (2)
 	###################################
-	mypalette<-RColorBrewer::brewer.pal(12,"Paired")
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(time.sequence),
 			seq(0,3,length.out=nrow(tableau)),
@@ -133,20 +183,20 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				ybottom=2.1,
 				xright=fin,
 				ytop=3, 
-				col = mypalette[4],
+				col = "grey",
 				border = NA, 
 				lwd = 1)    
 		rect(   xleft=debut, 
 				ybottom=1.1,
 				xright=fin,
 				ytop=2, 
-				col = mypalette[1],
+				col = "grey40",
 				border = NA, 
 				lwd = 1)           
 		legend(  x= "bottom",
-				legend= gettext("working","stopped","normal operation",domain="R-stacomiR"),
+				legend= gettext("Unknown working","Unknow operation type",domain="R-stacomiR"),
 				pch=c(16,16),
-				col=c(mypalette[4],mypalette[6],mypalette[1]),
+				col=c("grey","grey40"),
 				horiz=TRUE,
 				bty="n"
 		)
@@ -162,7 +212,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					xright=graphdate(as.POSIXct(bilanFonctionnementDF@data$per_date_fin[
 											bilanFonctionnementDF@data$per_etat_fonctionnement==1])),
 					ytop=3, 
-					col = mypalette[4],
+					col = mypalette["working"],
 					border = NA, 
 					lwd = 1)       }
 		if (sum(bilanFonctionnementDF@data$per_etat_fonctionnement==0)>0){              
@@ -172,7 +222,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					xright=graphdate(as.POSIXct(bilanFonctionnementDF@data$per_date_fin[
 											bilanFonctionnementDF@data$per_etat_fonctionnement==0])),
 					ytop=3, 
-					col = mypalette[6],
+					col = mypalette["stopped"],
 					border = NA, 
 					lwd = 1)  }
 		#creation d'une liste par categorie d'arret contenant vecteurs dates    
@@ -183,24 +233,27 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 						libelle=bilanFonctionnementDF@data$libelle,
 						date=FALSE)
 		nomperiode<-vector()
+		color_periodes<-vector() # a vector of colors, one per period type in listeperiode
 		for (j in 1 : length(listeperiode)){
 			#recuperation du vecteur de noms (dans l'ordre) e partir de la liste
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17) 
-			#ecriture pour chaque type de periode                       
+			#ecriture pour chaque type de periode   
+			color_periode=stringr::str_c("listeperiode",j)		
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=1.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=2, 
-					col = mypalette[j],
+					col = mypalette[color_periode],
 					border = NA, 
 					lwd = 1) 
+			color_periodes<-c(color_periodes,color_periode)
 		}       
 		
 		legend  (x= debut,
 				y=1.2,
 				legend= c(gettext("stop",domain="R-stacomiR"),nomperiode),
 				pch=c(15,15),
-				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
+				col=c(mypalette["working"],mypalette["stopped"],mypalette[color_periodes]),
 				bty="n",
 				ncol=7,
 				text.width=(fin-debut)/10)
@@ -232,7 +285,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				ybottom=2.1,
 				xright=fin,
 				ytop=3, 
-				col = mypalette[4],
+				col = "grey",
 				border = NA, 
 				lwd = 1)               
 		
@@ -240,13 +293,13 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 				ybottom=1.1,
 				xright=fin,
 				ytop=2, 
-				col = mypalette[1],
+				col = "grey40",
 				border = NA, 
 				lwd = 1)
 		legend(  x= "bottom",
-				legend= gettext("working","stopped","normal operation",domain="R-stacomiR"),
+				legend= gettext("Unknown working","Unknow operation type",domain="R-stacomiR"),
 				pch=c(16,16),
-				col=c(mypalette[4],mypalette[6],mypalette[1]),
+				col=c("grey","grey40"),
 				#horiz=TRUE,
 				ncol=5,
 				bty="n")
@@ -261,7 +314,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					xright=graphdate(as.POSIXct(bilanFonctionnementDC@data$per_date_fin[
 											bilanFonctionnementDC@data$per_etat_fonctionnement==1])),
 					ytop=3, 
-					col = mypalette[4],
+					col = mypalette["working"],
 					border = NA, 
 					lwd = 1) }
 		if (sum(bilanFonctionnementDC@data$per_etat_fonctionnement==0)>0)
@@ -272,7 +325,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 					xright=graphdate(as.POSIXct(bilanFonctionnementDC@data$per_date_fin[
 											bilanFonctionnementDC@data$per_etat_fonctionnement==0])),
 					ytop=3, 
-					col = mypalette[6],
+					col = mypalette["stopped"],
 					border = NA, 
 					lwd = 1) }
 		listeperiode<-
@@ -282,25 +335,26 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 						libelle=bilanFonctionnementDC@data$libelle,
 						date=FALSE)
 		nomperiode<-vector()
-		
+		color_periodes<-vector()
 		for (j in 1 : length(listeperiode)){
 			nomperiode[j]<-substr(listeperiode[[j]]$nom,1,17)   
+			color_periode=stringr::str_c("listeperiode",j)
 			rect(   xleft=graphdate(listeperiode[[j]]$debut), 
 					ybottom=1.1,
 					xright=graphdate(listeperiode[[j]]$fin),
 					ytop=2, 
-					col = mypalette[j],
+					col = mypalette[color_periode],
 					border = NA, 
 					lwd = 1)        
 		}
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c(gettext("stop",domain="R-stacomiR"),nomperiode),
+				legend= gettext("working","stopped",nomperiode,domain="R-stacomiR"),
 				pch=c(15,15),
-				col=c(mypalette[4],mypalette[6],mypalette[1:length(listeperiode)]),
+				col=c(mypalette["working"],mypalette["stopped"],mypalette[color_periodes]),
 				bty="n",
-				ncol=7,
+				ncol=length(listeperiode)+2,
 				text.width=(fin-debut)/10)
 	}
 	
@@ -323,12 +377,12 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	###################################         
 	# operations
 	###################################  
-	if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
+	
 	rect(   xleft =graphdate(as.POSIXct(t_operation_ope$ope_date_debut)), 
 			ybottom=0,
 			xright=graphdate(as.POSIXct(t_operation_ope$ope_date_fin)),
 			ytop=1, 
-			col = RColorBrewer::brewer.pal(8,brew),
+			col = color_ope,
 			border = NA, 
 			lwd = 1)
 	
@@ -346,7 +400,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 			value.name="number")
 	levels(tableaum$type)<-gettext("measured","calculated","expert","direct",domain="R-stacomiR")
 	superpose.polygon<-lattice::trellis.par.get("plot.polygon")
-	superpose.polygon$col=  c("black","deepskyblue","chartreuse2","indianred")
+	superpose.polygon$col=  mypalette[c("mesure","calcule","expert","ponctuel")]
 	superpose.polygon$border=rep("transparent",6)
 	lattice::trellis.par.set("superpose.polygon",superpose.polygon)
 	fontsize<-lattice::trellis.par.get("fontsize")

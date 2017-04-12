@@ -351,7 +351,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	# loginWindow, will call the husr handler
 	# user login
 	if (gr_interface&login_window&database_expected){
-		logw <- gWidgets::gwindow(msg$interface_graphique_log.1, 
+		logw <- gWidgets::gwindow(gettext("Connection",domain="R-stacomiR"), 
 				name="log",
 				parent=c(0,0),
 				width=100,height=100)
@@ -369,8 +369,8 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 				border=TRUE, 
 				handler = husr, 
 				container = logly)
-		logly[1,1]<-gettext("User")
-		logly[2,1]<-gettext("Password")
+		logly[1,1]<-gettext("User",domain="R-stacomiR")
+		logly[2,1]<-gettext("Password",domain="R-stacomiR")
 		logly[1,2]<-usrname
 		logly[2,2]<-usrpwd
 		logly[3,2]<-but

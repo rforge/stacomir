@@ -23,12 +23,11 @@ setwd(pgwd)
 # pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
 source ("F:/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
-source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
+#source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
 
 libraries()
 
 source("utilitaires.r") # contient  funout (pour ecrire dans la console) et filechoose
-source("messages.R")
 source("fn_table_per_dis.r")  
 #source("vector_to_listsql.r")
 source("funstatJournalier.r") 
