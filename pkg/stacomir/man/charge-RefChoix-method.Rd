@@ -39,8 +39,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefTaxon-class}}, \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},
-  \code{\link{Refperiode-class}},
-  \code{\link{charge,RefMsg-method}}
+  \code{\link{Refperiode-class}}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

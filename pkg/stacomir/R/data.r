@@ -1,3 +1,12 @@
+#' Working environment for stacomiR created when launching stacomi()
+#' 
+#' This is where the graphical interface stores its objects
+#' try \code{ls(envir=envir_stacomi)}
+#' @keywords environment
+"envir_stacomi"
+
+
+
 #' Anguilla migration at the Arzal station (BilanMigrationMult-class)
 #' 
 #' This data corresponds to the data collected from three fishways
@@ -31,13 +40,6 @@
 #' @keywords data
 "bMM_Arzal"
 
-#' Messages
-#' 
-#' In english
-#'
-#' 
-#' @keywords data
-"msg"
 
 #' Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)
 #' 

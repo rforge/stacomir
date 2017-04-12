@@ -28,51 +28,26 @@ setClass(Class="RequeteODBC",
 #' odbcClose(object@connection)
 #' odbcCloseAll()
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(object) {     
-			# the function is intended to work with stacomiR package but will work outside hence the workanyway function
-			if (exists("envir_stacomi")){
+			msg1<-gettext("ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password")
+			msg2<-gettext("connection trial :")
+			msg3<-gettext("connection impossible")
+			msg4<-gettext("connection successfull")
+			msg5<-gettext("request trial")
+			msg6<-gettext("success")
+			verbose<-exists("showmerequest",envir=envir_stacomi)
 			
-					msg1<-gettext("ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password")
-					msg2<-gettext("connection trial :")
-					msg3<-gettext("connection impossible")
-					msg4<-gettext("connection successfull")
-					msg5<-gettext("request trial")
-					msg6<-gettext("success")
-					verbose<-exists("showmerequest",envir=envir_stacomi)
-								
-					funout<-function(text,arret=FALSE){
-						if(arret) stop(text) else print(text)
-						return(NULL)
-					killfactor=function(df){
-						for (i in 1:ncol(df))
-						{
-							if(is.factor(df[,i])) df[,i]=as.character(df[,i])
-						}
-						return(df)
-					}
-				}
-			} else {
-				# msg not changed loaded at the beginning
-				verbose<-FALSE # cannot exist in envir_stacomi as envir_stacomi does not exists
-				msg1<-"ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password"
-				msg2<-"connection trial :"
-				msg3<-"connection impossible"
-				msg4<-"connection successfull"
-				msg5<-"request trial"
-				msg6<-"success"
-				funout<-function(text,arret=FALSE){
-					if(arret) stop(text) else print(text)
-					return(NULL)
-				}	
-				killfactor=function(df){
-					for (i in 1:ncol(df))
-					{
-						if(is.factor(df[,i])) df[,i]=as.character(df[,i])
-					}
-					return(df)
-				}
+			funout<-function(text,arret=FALSE){
+				if(arret) stop(text) else print(text)
+				return(NULL)
 			}
-
-			
+			killfactor=function(df){
+				for (i in 1:ncol(df))
+				{
+					if(is.factor(df[,i])) df[,i]=as.character(df[,i])
+				}
+				return(df)
+			}
+				
 			# The connection might already be opened, we will avoid to go through there !
 			if (is.null(object@connection)){ 				
 				if (length(object@baseODBC)!=3)  {

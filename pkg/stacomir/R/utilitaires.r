@@ -22,7 +22,7 @@ quitte=function(...){
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
-			miettes=miettes[!miettes%in%c("msg","datawd","sch","lang","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window")]
+			miettes=miettes[!miettes%in%c("datawd","sch","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window")]
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}
@@ -116,8 +116,8 @@ funout<-function(text,arret=FALSE,wash=FALSE,...){
 #' source if you plan not to use the compiler but run manually using inst/config/stacomi_manual_launch.R for development.\cr
 #' \code{datawd}, is the
 #' directory where you want to place the outputs, mostly tables, from the
-#' program, default to ~//CalcmigData lang, is either one of French, English or
-#' Spanish
+#' program, default to ~//CalcmigData 
+#' \code{lang}, is either one of French, English or Spanish (deprecated)
 #' 	other fields correspond to sqldf options.
 #' @param database expected Are the program (stacomi directory) and database expected to be installed,
 #' this argument is necessary to pass tests on system where stacomi is not installed (e.g. R-forge)

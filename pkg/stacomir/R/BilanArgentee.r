@@ -414,7 +414,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 						xlab=gettext("Month",domain="R-stacomiR"),
 						ylab=gettext("Number",domain="R-stacomiR"),
 						par.strip.text=list(col="white", font=2),
-						auto.key=list(title=gettext("Number by pigmentation stage",domain="R-stacomiR"),
+						auto.key=list(title=gettext("Number by silvering stage",domain="R-stacomiR"),
 								cex.title=1.2,
 								space="top",
 								columns=6,

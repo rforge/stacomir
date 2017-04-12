@@ -33,8 +33,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refparquan-class}},
   \code{\link{Refperiode-class}},
-  \code{\link{charge,RefChoix-method}},
-  \code{\link{charge,RefMsg-method}}
+  \code{\link{charge,RefChoix-method}}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

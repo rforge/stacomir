@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{An object of class \link{BilanMigrationMult-class}}
 
-\item{silent}{Default FALSE, if TRUE the program should no display messages}
+\item{silent}{Default FALSE, if TRUE the program should not display messages}
 }
 \value{
 \link{BilanMigrationCar-class} with slots filled by user choice

@@ -27,8 +27,7 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{RefTaxon-class}}, \code{\link{Refpar-class}},
   \code{\link{Refparqual-class}},
   \code{\link{Refperiode-class}},
-  \code{\link{charge,RefChoix-method}},
-  \code{\link{charge,RefMsg-method}}
+  \code{\link{charge,RefChoix-method}}
 }
 \author{
 cedric.briand"at"eptb-vilaine.fr

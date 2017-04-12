@@ -36,8 +36,6 @@ The defaut behaviour of the program is to run through the following elements
 			through the command line.}
  }
 When \code{database_expected=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
- And also messages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
-are only avalaible in english.
 }
 \examples{
 

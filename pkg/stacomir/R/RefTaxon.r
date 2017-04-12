@@ -151,7 +151,6 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)
 				size(tbsourcetaxon)<-c(160,300) # les dimensions sont testees a la main 
 				# pour s'ajuster aux dimensions du notebook (largeur 400)
-				#TODO addmsg
 				frametaxondest<-gframe(gettext("drop here",domain="R-stacomiR"),container=grouptaxon)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",8))

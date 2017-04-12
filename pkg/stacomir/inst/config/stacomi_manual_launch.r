@@ -56,7 +56,6 @@ source("RefCheckBox.r")
 source("RefStationMesure.r")
 source("Refperiode.r")
 source("RefHorodate.r")
-source("RefMsg.r")
 source("BilanFonctionnementDC.r")
 source("BilanFonctionnementDF.r")
 source("BilanOperation.r")
@@ -104,7 +103,6 @@ source("interface_BilanAgedemer.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
 setwd("F:/workspace/stacomir/pkg/stacomir")
-data("msg")
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 
 

@@ -74,8 +74,8 @@ setMethod("supprime",signature=signature("RefCoe"),
 			requete@colonnedebut<-"coe_date_debut"
 			requete@colonnefin<-"coe_date_fin"
 			requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"tj_coefficientconversion_coe ")
-			requete@and=" and  coe_tax_code='2038' and coe_std_code='CIV' and coe_qte_code='1'"
-			invisible(utils::capture.output(requete<-stacomirtools::connect(requete)))
+			requete@and=str_c(" and  coe_tax_code='",tax,"' and coe_std_code='",std,"' and coe_qte_code='1'")
+			requete<-stacomirtools::connect(requete)
 			if (!silent) funout(gettextf("%s rows deleted from table tj_coefficientconversion_coe",nrow(object@data),domain="R-stacomiR"))
 			return(invisible(NULL))
 		})

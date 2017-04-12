@@ -254,8 +254,6 @@ husr=function(h,...){
 #' 			through the command line.}
 #'  }
 #' When \code{database_expected=FALSE} a connection to the database is not expected. Therefore test are run by calling examples object stored in Rdata.
-#'  And also messages are downloaded from the database in several languages. These are loaded from the data directory of the package instead, and
-#' are only avalaible in english. 
 #' 
 #' @param gr_interface Boolean, if \code{TRUE} the program will launch the graphical interface
 #' @param login_window Boolean, if \code{TRUE} a login window will be displayed asking the user to specify
@@ -331,8 +329,6 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	assign("gr_interface",gr_interface,envir=envir_stacomi)	
 	assign("database_expected",database_expected,envir=envir_stacomi)
 	assign("login_window",login_window,envir=envir_stacomi)
-   # the first messages are necessary for the first access to the database, they are in French
-	msg<-messages()
 	mylinks=chargecsv(database_expected)
 	baseODBC=mylinks[["baseODBC"]]
 	datawd=mylinks[["datawd"]]
@@ -346,10 +342,6 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 	
-	refMsg=new("RefMsg")
-	createmessage(refMsg,database_expected)
-	
-	msg=get("msg",envir=envir_stacomi)
 	#libraries()
 	options(sqldf.RPostgreSQL.user = sqldf.options["sqldf.uid"], 
 			sqldf.RPostgreSQL.password =sqldf.options["sqldf.pwd"],
@@ -396,7 +388,6 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 #' are assigned in the user environment \code{.GlobalEnv}. 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_graphique=function(){
-	msg=get("msg",envir=envir_stacomi) # appel dans chaque sous fonction
 	if (exists("graphes"))  rm(list=c("graphes"),envir=.GlobalEnv)
 	if (exists("ggroupboutonsbas"))  rm(list=c("ggroupboutonsbas"),envir=.GlobalEnv) 
 	if (exists("group"))  rm(list=c("group"),envir=.GlobalEnv)
@@ -511,15 +502,10 @@ utils::globalVariables(c("progres"))
 utils::globalVariables(c("envir_stacomi"))
 # reoxygenize fails if data are not loaded
 #setwd("F:/workspace/stacomir/branch0.5/stacomir")
-#data("bMM_Arzal")
-#' Working environment for stacomiR created when launching stacomi()
-#' 
-#' This is where the graphical interface stores its objects
-#' try \code{ls(envir=envir_stacomi)}
-#' @keywords environment
-"envir_stacomi"
 
-## using dput
+
+
+## THESE LINES MUST BE UNCOMMENTED IN ORDER TO MAKE THE DOCUMENT METHOD FROM DEVTOOL WORK
 #calcmig<-
 #		structure(list(lienODBC = structure(1L, .Label = "bd_contmig_nat", class = "factor"), 
 #						uid = structure(1L, .Label = "iav", class = "factor"), pwd = structure(1L, .Label = "iav", class = "factor"), 

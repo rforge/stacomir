@@ -30,7 +30,6 @@ context("Database connection")
 test_that("Test that stacomirtools connects",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())
-			msg<-messages()
 			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			con=new("ConnectionODBC")	
@@ -45,7 +44,6 @@ test_that("Test that stacomirtools connects",{
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())
-			msg<-messages()
 			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			requete=new("RequeteODBC")
@@ -60,7 +58,6 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 test_that("Tests positive count for sch.t_operation_ope",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())
-			msg<-messages()
 			mylinks=chargecsv(database_expected=TRUE)
 			baseODBC=mylinks[["baseODBC"]]	
 			sch<-paste(baseODBC[2],".",sep="")
@@ -108,36 +105,6 @@ test_that("gWidget gr_interface is loaded, with pre launch_test, but without log
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
-context("Messages")
-
-test_that("Test that messages are loaded from the database",
-		{
-			envir_stacomi <<- new.env(parent = emptyenv())
-			msg<-messages()
-			mylinks=chargecsv(database_expected=TRUE)
-			baseODBC=mylinks[["baseODBC"]]	
-			assign("baseODBC",baseODBC,envir=envir_stacomi)
-			object=new("RefMsg")
-			object<-charge(object)	
-			expect_true(nrow(object@messager)>0)
-			rm("envir_stacomi",envir =.GlobalEnv)
-		})
-
-test_that("Test that  messages without connection are loaded and of the same length",
-		{
-			require(stacomiR)
-			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
-			assign("lang","English",envir=envir_stacomi)	
-			object=new("RefMsg")
-			object<-createmessage(object,TRUE)	
-			msgbase<-get("msg",envir=envir_stacomi)
-			
-			
-			msg<-get("msg",envir=envir_stacomi)
-			# objects should have the same length but different languages
-			expect_identical(length(msg),length(msgbase))
-			rm("envir_stacomi",envir =.GlobalEnv)
-		})
 
 # pour schema get("sch",envir=envir_stacomi)
 context(stringr::str_c("Database integrity"))

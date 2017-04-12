@@ -13,6 +13,8 @@
 
 \item{par}{The code of a quantitative parameter}
 
+\item{silent}{Default FALSE, if TRUE the program should not display messages}
+
 \item{...}{Additional parms to the cut method \link[base]{cut}}
 }
 \description{
@@ -20,5 +22,4 @@ Turns a quantitative parameter into qualitative
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
- @export
 }

@@ -10,7 +10,7 @@ Description: Graphical outputs and treatment for a database of fishway
     by the ONEMA institute to centralize data obtained by fishway monitoring.
     Version 0.5.1 is available in French English.
 License: GPL (>= 2)
-Collate:
+Collate: 
     'create_generic.r'
     'Refpar.r'
     'RefHorodate.r'
@@ -45,7 +45,6 @@ Collate:
     'RefCoe.r'
     'Bilan_poids_moyen.r'
     'RefCheckBox.r'
-    'RefMsg.r'
     'Refperiode.r'
     'data.r'
     'fn_EcritBilanMensuel.r'
@@ -71,7 +70,6 @@ Collate:
     'interface_Bilan_carlot.r'
     'interface_Bilan_taille.r'
     'interface_bilan_poids_moyen.r'
-    'messages.r'
     'setAs.r'
     'stacomi.r'
 LazyLoad: yes

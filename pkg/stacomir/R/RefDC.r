@@ -216,7 +216,6 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				# group(ggroup)[nb(notebook)[groupdc(ggroup&tab)[[frameDCsource(gframe)[tbsourcedc(gtable)],frameDCdest(gframe)[tbdcdest(gtable)]],OKbutton]]
 				
 				DC=object@data[,c("dc","dis_commentaires","type_dc")]
-				#TODO addmsg
 				groupdc<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
 				assign("groupdc",groupdc,envir=.GlobalEnv)
 				frameDCsource<-gframe(gettext("Counting devices choice",domain="R-stacomiR"),container=groupdc)

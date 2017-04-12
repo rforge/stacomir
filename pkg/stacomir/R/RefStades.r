@@ -223,7 +223,6 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
-				#TODO addmsg
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				groupstd<-ggroup() 
 				assign("goupstd",groupstd,envir=.GlobalEnv)
@@ -231,7 +230,6 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				framestdsource<-gframe(gettext("Stage selection",domain="R-stacomiR"),container=groupstd)
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)
 				size(tbsourcestd)<-c(160,300) 
-				#TODO addmsg
 				framestddest<-gframe(gettext("drop here",domain="R-stacomiR"),container=groupstd)
 				# need for a fixed size data.frame otherwise errors when adding new lines
 				xx<-data.frame(choice=rep("",8))

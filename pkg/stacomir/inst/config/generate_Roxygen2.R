@@ -30,7 +30,6 @@ document("F:/workspace/stacomir/pkg/stacomir")
 setwd("F:/workspace/stacomir/pkg/stacomir")
 #data("bMM_Arzal")
 #data("bM_Arzal")
-#data("msg")
 envir_stacomi <- new.env(parent = emptyenv())
 #
 require(stacomiR)

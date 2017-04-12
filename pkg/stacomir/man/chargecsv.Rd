@@ -22,8 +22,8 @@ correspond to your own schema in the database. \code{pgwd} is the path to the R
 source if you plan not to use the compiler but run manually using inst/config/stacomi_manual_launch.R for development.\cr
 \code{datawd}, is the
 directory where you want to place the outputs, mostly tables, from the
-program, default to ~//CalcmigData lang, is either one of French, English or
-Spanish
+program, default to ~//CalcmigData 
+\code{lang}, is either one of French, English or Spanish (deprecated)
 	other fields correspond to sqldf options.
 }
 \note{
