@@ -14,11 +14,11 @@
 #' @param stade The stage
 #' @param dc The DC
 #' @param color Default NULL, a vector of color in the following order, working, stopped, 1...5 types of operation
-#' for the fishway or DC, numbers, weight. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
+#' for the fishway or DC, measured, calculated, expert, direct observation. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
 #' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
-
 #' @param silent Message displayed or not
-#' @param ... other parameters passed from the plot method to the matplot function
+#' @param ... additional parameters passed to matplot, main, ylab, ylim, lty, pch, bty, cex.main,
+#' it is currenly not a good idea to change xlim (numbers are wrong, the month plot covers all month, and legend placement is wrong
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silent,color=NULL,color_ope=NULL,...){
 #mat <- matrix(1:6,3,2)
@@ -27,6 +27,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	#cat("fungraph")
 	# color=null
 	# color calculation
+	
 	
 	if (is.null(color)) {
 		tp<-RColorBrewer::brewer.pal(12,"Paired")
@@ -61,14 +62,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	}
 	
 	if (is.null(color_ope)) {
-		# check if "brew" is in the ... list
-		myargs <- list(...)
-		existbrew <- "brew" %in% names(myargs)
-		if (!existbrew){	
-			if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
-		} else {
-			brew<-myargs[["brew"]]
-		}
+		if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
 		color_ope=RColorBrewer::brewer.pal(8,brew)
 	}
 	
@@ -96,20 +90,45 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	###################################
 	# Graph annuel couvrant sequence >0
 	####################################
-	matplot(x,cbind(tableau$MESURE+tableau$CALCULE+tableau$EXPERT+tableau$PONCTUEL,
+	dots<-list(...)
+	if (!"main"%in%names(dots)) main=gettextf("Glass eels graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR")
+	else main=dots[["main"]]
+	if (!"ylab"%in%names(dots)) ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR")
+	else ylab=dots[["ylab"]]
+	if (!"cex.main"%in%names(dots)) cex.main=1
+	else cex.main=dots[["cex.main"]]
+	if (!"font.main"%in%names(dots)) font.main=1
+	else font.main=dots[["font.main"]]
+	if (!"type"%in%names(dots)) type="h"
+	else type=dots[["type"]]
+	if (!"xlim"%in%names(dots)) xlim=c(debut,fin)
+	else xlim=c(debut,fin)#dots[["xlim"]] # currently this argument is ignored
+	if (!"ylim"%in%names(dots)) ylim=NULL
+	else ylim=dots[["ylim"]]
+	if (!"cex"%in%names(dots)) cex=1
+	else cex=dots[["cex"]]
+	if (!"lty"%in%names(dots)) lty=1
+	else lty=dots[["lty"]]
+	if (!"pch"%in%names(dots)) pch=16
+	else pch=dots[["pch"]]	
+	if (!"bty"%in%names(dots)) bty="l"
+	else bty=dots[["bty"]]
+	matplot(time.sequence,cbind(tableau$MESURE+tableau$CALCULE+tableau$EXPERT+tableau$PONCTUEL,
 					tableau$MESURE+tableau$CALCULE+tableau$EXPERT,
 					tableau$MESURE+tableau$CALCULE,
 					tableau$MESURE),
 			col=mypalette[c("ponctuel","expert","calcule","mesure")],
-			type=c("h","h","h","h"),
-			pch=16,
-			lty=1,
+			type=type,
+			pch=pch,
+			lty=lty,
 			xaxt="n",
-			bty="l",
-			ylab=gettext("Number",domain="R-stacomiR"),
-			xlab=gettext("Date",domain="R-stacomiR"),
-			main=gettextf("estimated number, %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR"),
-			cex.main=1,...)
+			bty=bty,
+			ylab=ylab,
+			xlab=NULL,
+			main=main,
+			xlim=c(debut,fin),
+			cex.main=cex.main,
+			font.main=font.main)
 	if(bilanMigration@pasDeTemps@stepDuration=="86400"){ # pas de temps journalier
 		index=as.vector(x[jmois==15])
 		axis(side=1,at=index,tick=TRUE,labels=mois)
@@ -121,7 +140,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	mtext(text=gettextf("Sum of numbers =%s",
 					round(sum(tableau$MESURE,tableau$CALCULE,tableau$EXPERT,tableau$PONCTUEL,na.rm=TRUE)),domain="R-stacomiR"),
 			side=3,
-			col=RColorBrewer::brewer.pal(5,"Paired")[5],
+			col=mypalette["expert"],
 			cex=0.8)
 	
 	legend(x=0,
@@ -164,14 +183,14 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(time.sequence),
 			seq(0,3,length.out=nrow(tableau)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("Fishway",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)
+			cex=cex+0.2)
 	
 	###################################         
 	# temps de fonctionnement du DF
@@ -266,14 +285,15 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(time.sequence),
 			seq(0,3,length.out=nrow(tableau)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("CD",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)             
+			cex=cex+0.2
+			)             
 	###################################         
 	# temps de fonctionnement du DC
 	###################################                 
@@ -366,14 +386,14 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.POSIXct(time.sequence),
 			seq(0,1,length.out=nrow(tableau)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("Op",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)             
+			cex=cex+0.2)             
 	###################################         
 	# operations
 	###################################  

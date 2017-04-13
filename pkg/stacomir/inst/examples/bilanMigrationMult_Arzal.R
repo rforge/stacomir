@@ -50,10 +50,16 @@ plot(bMM_Arzal,plot.type="standard",
 		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
 		silent=TRUE)
 
-# below we pass a palette instead of color_ope with argument "brew"
+# Other arguments can be passed to plot including xlim but the rendering might not
+# be that good
 plot(bMM_Arzal,plot.type="standard",
-		color=c("#DEF76B","#B62D2D","#9ABDDA","#781A74","#BF9D6E","#FFC26E","#A66F24","#012746","#6C3E00","black","black"),
-		brew="Blues",
+		color=color,
+		color_ope=color_ope,
+		main="Effectif civelles piège Gabion (rive gauche) en 2016",
+		cex.main=1.1,
+		lty=2,
+		type="b",
+		xlim=
 		silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)

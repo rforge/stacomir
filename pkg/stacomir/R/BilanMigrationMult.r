@@ -380,11 +380,10 @@ hbilanMigrationMult_graph=function(h=null,...){
 #' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
 #' @param silent Stops most messages from being displayed
-#' @param color Default NULL, argument passed for the plot.type="standard" method. A vector of color in the following order, numbers, weight, working, stopped, 1...5 types of operation
-#' for the fishway, if null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
+#' @param color Default NULL, argument passed for the plot.type="standard" method. A vector of color in the following order : (1) working, (2) stopped, (3:7) 1...5 types of operation,
+#' (8:11) numbers, weight, NULL, NULL (if glass eel), (8:11)  measured, calculated, expert, direct observation for other taxa. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
 #' @param color_ope Default NULL, argument passed for the plot.type="standard" method. A vector of color for the operations. Default to brewer.pal(4,"Paired")
-
-#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
+#' @param ... Additional arguments passed to matplot or plot if plot.type="standard", see ... in \link{fungraph_civelle} and \link{fungraph}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #method.skeleton("plot", "BilanMigrationMult") 
@@ -405,6 +404,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 				if (!silent) funout(gettext("Statistics about migration :\n",domain="R-stacomiR"))
 				#dcnum=1;taxonnum=1;stadenum=2
 				#&&&&&&&&&&&&&&&&&&&&&&&&&debut de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
+				compte<-0
 				for (dcnum in 1:length(lesdc)){
 					for (taxonnum in 1:nrow(lestaxons)){
 						for (stadenum in 1:nrow(lesstades)){
@@ -440,6 +440,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 									data_without_hole$MESURE[is.na(data_without_hole$MESURE)]<-0
 									data_without_hole$EXPERT[is.na(data_without_hole$EXPERT)]<-0
 									data_without_hole$PONCTUEL[is.na(data_without_hole$PONCTUEL)]<-0
+									compte=compte+1
 									if (bilanMigrationMult@calcdata[[stringr::str_c("dc_",dc)]][["contient_poids"]]&
 											taxon=="Anguilla anguilla"&
 											(stade=="civelle"|stade=="Anguilla jaune")) {
@@ -447,7 +448,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 										#----------------------------------
 										# bilan migration avec poids (civelles
 										#-----------------------------------------
-										dev.new()
+										if (compte!=1) dev.new()
 										fungraph_civelle(bilanMigration=bilanMigrationMult,
 												table=data_without_hole,
 												time.sequence=bilanMigrationMult@time.sequence,
@@ -463,7 +464,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 										#----------------------------------
 										# bilan migration standard
 										#-----------------------------------------
-										dev.new()
+										if (compte!=1) dev.new()
 										#silent=TRUE
 										fungraph(bilanMigration=bilanMigrationMult,
 												tableau=data_without_hole,
@@ -485,8 +486,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 					}
 				}
 				#&&&&&&&&&&&&&&&&&&&&&&&&&fin de boucle&&&&&&&&&&&&&&&&&&&&&&&&&&&
-			} 
-			
+			} 			
 #==========================type=2=============================
 			if (plot.type=="step"){
 				lestaxons= paste(bilanMigrationMult@taxons@data$tax_nom_latin,collapse=",")

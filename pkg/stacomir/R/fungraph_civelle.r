@@ -17,7 +17,8 @@
 #' the 2 latest colors are not used but keeped for consistency with fungraph
 #' for the fishway, if null will be set to brewer.pal(12,"Paired")[c(4,6,1,2,3,5,7,8,10,11,12)]
 #' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
-#' @param ... additional parameters passed from the plot method to plot
+#' @param ... additional parameters passed to plot, main, ylab, cex.main, font.main, type, xlim, ylim, lty, bty, pch
+#' it is not possible to change xlim
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null,silent,color=NULL,color_ope=NULL,...){
 	# color=null
@@ -36,7 +37,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 				"weight"=tp[10], #purple 
 				"unused1"=tp[11],
 				"unused1"=tp[12]
-				)
+		)
 	} else {
 		if(length(color)!=11) stop("The length of color must be 11")
 		mypalette=c(
@@ -54,15 +55,9 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		)
 	}
 	
+	
 	if (is.null(color_ope)) {
-		# check if "brew" is in the ... list
-		myargs <- list(...)
-		existbrew <- "brew" %in% names(myargs)
-		if (!existbrew){	
-			if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
-		} else {
-			brew<-myargs[["brew"]]
-		}
+		if(stacomirtools::is.odd(dc)) brew="Paired" else brew="Accent"
 		color_ope=RColorBrewer::brewer.pal(8,brew)
 	}
 	
@@ -88,26 +83,52 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	layout(mat)
 	#par("bg"=grDevices::gray(0.8))
 	graphics::par("mar"=c(3, 4, 3, 2) + 0.1)	
-	plot(as.Date(time.sequence,"Europe/Paris"),eff/1000,
+	dots<-list(...)
+	if (!"main"%in%names(dots)) main=gettextf("Glass eels graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR")
+	else main=dots[["main"]]
+	if (!"ylab"%in%names(dots)) ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR")
+	else ylab=dots[["ylab"]]
+	if (!"cex.main"%in%names(dots)) cex.main=1
+	else cex.main=dots[["cex.main"]]
+	if (!"font.main"%in%names(dots)) font.main=1
+	else font.main=dots[["font.main"]]
+	if (!"type"%in%names(dots)) type="h"
+	else type=dots[["type"]]
+	if (!"xlim"%in%names(dots)) xlim=c(debut,fin)
+	else xlim=dots[["xlim"]]
+	if (!"ylim"%in%names(dots)) ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2
+	else xlim=c(debut,fin)#dots[["xlim"]] # currently this argument is ignored
+	if (!"cex"%in%names(dots)) cex=1
+	else cex=dots[["cex"]]
+	if (!"lty"%in%names(dots)) lty=1
+	else lty=dots[["lty"]]
+	if (!"pch"%in%names(dots)) pch=16
+	else pch=dots[["pch"]]
+	if (!"bty"%in%names(dots)) bty="l"
+	else bty=dots[["bty"]]
+	plot(x=as.Date(time.sequence,"Europe/Paris"),
+			y=eff/1000,
 			col=mypalette["eff"],
-			type="h",
-			xlim=c(debut,fin),
-			ylim=c(0,max(eff/1000,na.rm=TRUE))*1.2 ,
-			lty=1,
+			type=type,
+			xlim=xlim,
+			ylim= ylim,
+			lty=lty,
 			xaxt="n",
-			ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR"),
+			ylab=ylab,
 			#xlab="date",
-			cex.main=1,
-			font.main=1,
-			main=gettextf("Glass eels graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR"),
-			...)
+			cex.main=cex.main,
+			font.main=font.main,
+			main=main,
+			cex=cex,
+			pch=pch,
+			bty=bty)
 	#print(plot,position = c(0, .3, 1, .9), more = TRUE)
 	r <- as.Date(round(range(time.sequence), "day"))
 	axis.Date(1, at=seq(r[1], r[2], by="weeks"),format="%d-%b")
 	
 	points(as.Date(time.sequence,"Europe/Paris"),eff.p/1000,
-			type="h",
-			lty=1,
+			type=type,
+			lty=lty,
 			col=mypalette["weight"])
 	
 	legend(x="topright",
@@ -122,32 +143,38 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 			y=max(eff/1000,na.rm=TRUE)*1.15,
 			labels=paste(round(sum(table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette["eff"], 
-			adj=1)
+			adj=1,
+			cex=cex)
 	text(  x=debut+3*(fin-debut)/8 ,
 			y=max(eff/1000,na.rm=TRUE)*1.15,
 			labels= paste("N=",round(sum(table$Effectif_total.e,na.rm=TRUE))),
 			col=mypalette["eff"], 
-			adj=1)
+			adj=1,
+			cex=cex)
 	text(  x=debut+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
 			labels=paste(round(sum(table$Poids_total,na.rm=TRUE)/1000,2)," kg"),
 			col=mypalette["weight"], 
-			adj=1)
+			adj=1,
+			cex=cex)
 	text(  x=debut+3*(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.2,
 			labels= paste("N=",round(sum(eff.p,na.rm=TRUE))),
 			col=mypalette["weight"], 
-			adj=1)
+			adj=1,
+			cex=cex)
 	text(  x=debut+3+(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.1,
 			labels=paste(round(sum(table$Poids_total,table$poids_depuis_effectifs,na.rm=TRUE)/1000,2)," kg"),
 			col="black", 
-			adj=1)
+			adj=1,
+			cex=cex)
 	text(  x=debut+3*(fin-debut)/8,
 			y=max(eff/1000,na.rm=TRUE)*1.1,
 			labels= paste("N=",round(sum(eff,na.rm=TRUE))),
 			col="black", 
-			adj=1)
+			adj=1,
+			cex=cex)
 	segments(x0=debut,y0=max(eff/1000,na.rm=TRUE)*1.125,
 			x1=debut+3*(fin-debut)/8,y1=max(eff/1000,na.rm=TRUE)*1.125)
 	
@@ -183,14 +210,14 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(time.sequence),
 			seq(0,3,length.out=length(eff)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("Fishway",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)
+			cex=cex+0.2)
 	
 	###################################         
 	# temps de fonctionnement du DF
@@ -286,14 +313,14 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(time.sequence),
 			seq(0,3,length.out=length(eff)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("CD",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)             
+			cex=cex+0.2)             
 	###################################         
 	# temps de fonctionnement du DC
 	###################################                 
@@ -370,7 +397,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		
 		legend  (x= debut,
 				y=1.2,
-				legend= c("working","stopped",nomperiode),
+				legend= gettext("working","stopped",nomperiode,domain="R-stacomiR"),
 				pch=c(15,15),
 				col=c(mypalette["working"],mypalette["stopped"],mypalette[color_periodes]),
 				bty="n",
@@ -386,14 +413,14 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	graphics::par("mar"=c(0, 4, 0, 2)+ 0.1)  
 	plot(   as.Date(time.sequence),
 			seq(0,1,length.out=length(eff)),
-			xlim=c(debut,fin), 
+			xlim=xlim, 
 			type= "n", 
 			xlab="",
 			xaxt="n",
 			yaxt="n", 
 			ylab=gettext("Op",domain="R-stacomiR"),
 			bty="n",
-			cex=1.2)             
+			cex=cex+0.2)             
 	###################################         
 	# operations
 	###################################  
@@ -427,16 +454,16 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 	fontsize$text=10
 	lattice::trellis.par.set("fontsize",fontsize)
 	par.main.text<-lattice::trellis.par.get("par.main.text")
-	par.main.text$cex=1
+	par.main.text$cex=cex
 	par.main.text$font=1
 	lattice::trellis.par.set("par.main.text",par.main.text)
 	
 	
 	par.ylab.text<-lattice::trellis.par.get("par.ylab.text")
-	par.ylab.text$cex=0.8
+	par.ylab.text$cex=cex-0.2
 	lattice::trellis.par.set("par.ylab.text",par.ylab.text) 
 	par.xlab.text<-lattice::trellis.par.get("par.xlab.text")
-	par.xlab.text$cex=0.8
+	par.xlab.text$cex=cex-0.2
 	lattice::trellis.par.set("par.xlab.text",par.xlab.text)
 	
 	
