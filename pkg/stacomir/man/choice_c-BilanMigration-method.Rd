@@ -3,6 +3,7 @@
 \docType{methods}
 \name{choice_c,BilanMigration-method}
 \alias{choice_c,BilanMigration-method}
+\alias{choice_c.bilanmigration}
 \title{command line interface for BilanMigration class}
 \usage{
 \S4method{choice_c}{BilanMigration}(object, dc, taxons, stades, datedebut,

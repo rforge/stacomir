@@ -3,6 +3,7 @@
 \docType{methods}
 \name{connect,BilanMigration-method}
 \alias{connect,BilanMigration-method}
+\alias{connect.bilanmigration}
 \title{connect method for BilanMigration}
 \usage{
 \S4method{connect}{BilanMigration}(object, silent = FALSE)

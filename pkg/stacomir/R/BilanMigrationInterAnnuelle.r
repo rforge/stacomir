@@ -150,7 +150,7 @@ if (any(is.na(compared_numbers$effectif_bjo))){
 	for (y in 1:length(missing_years)){
 		Y<-missing_years[y]
 		bM=new("BilanMigration")
-		funout(gettextf("Running Bilanmigration for year %s",Y,domain="R-StacomiR"))
+		if (!silent) funout(gettextf("Running Bilanmigration for year %s",Y,domain="R-StacomiR"))
 		bM=choice_c(bM,
 				dc=dic[i],
 				taxons=object@taxons@data$tax_nom_latin,

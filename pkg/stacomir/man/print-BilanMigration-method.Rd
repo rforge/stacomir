@@ -3,6 +3,7 @@
 \docType{methods}
 \name{print,BilanMigration-method}
 \alias{print,BilanMigration-method}
+\alias{print.bilanmigration}
 \title{Method to print the command line of the object}
 \usage{
 \S4method{print}{BilanMigration}(x, ...)

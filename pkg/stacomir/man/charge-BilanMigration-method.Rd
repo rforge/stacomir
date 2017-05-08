@@ -3,6 +3,7 @@
 \docType{methods}
 \name{charge,BilanMigration-method}
 \alias{charge,BilanMigration-method}
+\alias{charge.bilanmigration}
 \title{charge method for BilanMigration}
 \usage{
 \S4method{charge}{BilanMigration}(object, silent = FALSE)

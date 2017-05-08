@@ -120,7 +120,7 @@ test_that("Test that bilanMigrationInterannuelle loads missing data with correct
 			bmi_cha<-charge(bmi_cha,silent=TRUE)
 # deleting all data to ensure everything is loaded
 			supprime(bmi_cha)
-			bmi_cha<-connect(bmi_cha)
+			bmi_cha<-connect(bmi_cha,silent=TRUE)
 			
 		})
 
@@ -170,7 +170,7 @@ test_that("Test that different sums are the same, for  BilanMigrationInterAnnuel
 			# Test for BilanAnnuel
 			#####################
 			bilA=as(bmi,"BilanAnnuels")
-			bilA<-connect(bilA)
+			bilA<-connect(bilA,silent=TRUE)
 			# we test that the BilanAnnuel has the same number as
 			# BilanMigration
 			expect_equal(

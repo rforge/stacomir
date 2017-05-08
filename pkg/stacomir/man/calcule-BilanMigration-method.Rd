@@ -3,6 +3,7 @@
 \docType{methods}
 \name{calcule,BilanMigration-method}
 \alias{calcule,BilanMigration-method}
+\alias{calcule.bilanmigration}
 \title{calcule method for BilanMigration}
 \usage{
 \S4method{calcule}{BilanMigration}(object, negative = FALSE, silent = FALSE)

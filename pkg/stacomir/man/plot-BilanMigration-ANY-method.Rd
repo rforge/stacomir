@@ -3,10 +3,11 @@
 \docType{methods}
 \name{plot,BilanMigration,ANY-method}
 \alias{plot,BilanMigration,ANY-method}
+\alias{plot.bilanmigration}
 \title{Plots of various type for BilanMigration.}
 \usage{
 \S4method{plot}{BilanMigration,ANY}(x, y, plot.type = "standard",
-  silent = FALSE, ...)
+  color = NULL, color_ope = NULL, silent = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigration}
@@ -16,14 +17,14 @@
 \item{plot.type}{One of "standard","step". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 \code{multiple}}
 
-\item{silent}{Stops displaying the messages.}
-
-\item{...}{Additional arguments passed to matplot or plot if plot.type="standard", see ... in \link{fungraph_civelle} and \link{fungraph}}
-
 \item{color}{Default NULL, argument passed for the plot.type="standard" method. A vector of color in the following order : (1) working, (2) stopped, (3:7) 1...5 types of operation,
 (8:11) numbers, weight, NULL, NULL (if glass eel), (8:11)  measured, calculated, expert, direct observation for other taxa. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]}
 
 \item{color_ope}{Default NULL, argument passed for the plot.type="standard" method. A vector of color for the operations. Default to brewer.pal(4,"Paired")}
+
+\item{silent}{Stops displaying the messages.}
+
+\item{...}{Additional arguments passed to matplot or plot if plot.type="standard", see ... in \link{fungraph_civelle} and \link{fungraph}}
 }
 \description{
 \itemize{

@@ -22,7 +22,7 @@ stacomi(gr_interface=FALSE,
 			stades=c("AGJ"),
 			anneedebut="1990",
 			anneefin="2015",
-			silent=FALSE)
+			silent=TRUE)
 	bmi<-charge(bmi,silent=TRUE)
 	bmi<-connect(bmi,silent=TRUE)	
 }	
@@ -99,17 +99,17 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 }	
 data("bmi_vichy")
 # statistics for seaonal migration, daily values
-bmi_vichy<-calcule(bmi_vichy,timesplit="jour")
+bmi_vichy<-calcule(bmi_vichy,timesplit="jour",silent=TRUE)
 #bmi_vichy@calcdata #check this to see the results
 # statistics for seaonal migration, weekly values
-bmi_vichy<-calcule(bmi_vichy,timesplit="semaine")
+bmi_vichy<-calcule(bmi_vichy,timesplit="semaine",silent=TRUE)
 #bmi_vichy@calcdata
 
 
 # the plot method also runs calcule
-plot(bmi_vichy,plot.type="seasonal",timesplit="semaine")
-plot(bmi_vichy,plot.type="seasonal",timesplit="mois")
-plot(bmi_vichy,plot.type="seasonal",timesplit="jour")
+plot(bmi_vichy,plot.type="seasonal",timesplit="semaine",silent=TRUE)
+plot(bmi_vichy,plot.type="seasonal",timesplit="mois",silent=TRUE)
+plot(bmi_vichy,plot.type="seasonal",timesplit="jour",silent=TRUE)
 
 
 \dontrun{

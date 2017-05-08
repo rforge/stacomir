@@ -75,6 +75,7 @@ hbilanMigrationcalc=function(h,...){
 #' @param object An object of class \link{BilanMigration-class}
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @return BilanMigration with slot @data filled from the database
+#' @aliases connect.bilanmigration
 #' @export
 setMethod("connect",signature=signature("BilanMigration"),definition=function(object,silent=FALSE){ 
 			bilanMigration<-object
@@ -96,6 +97,7 @@ setMethod("connect",signature=signature("BilanMigration"),definition=function(ob
 #' The choice_c method fills in the data slot for RefDC, RefTaxon, RefStades, and RefPasDeTempsJournalier and then 
 #' uses the choice_c methods of these object to select the data.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases choice_c.bilanmigration
 #' @export
 setMethod("choice_c",signature=signature("BilanMigration"),definition=function(object,dc,taxons,stades,datedebut,datefin){
 			# code for debug using bM_Arzal example
@@ -122,6 +124,7 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 #' @param silent Should the program be returning messages
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases charge.bilanmigration
 #' @export
 setMethod("charge",signature=signature("BilanMigration"),definition=function(object,silent=FALSE){ 
 			bilanMigration<-object
@@ -201,6 +204,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 #' @note The class BilanMigration does not handle escapement rates nor 
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled.
+#' @aliases calcule.bilanmigration
 #' @export
 setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			#bilanMigration<-bM_Arzal
@@ -307,6 +311,7 @@ houtBilanMigration=function(h=null,...) {
 #' @param ... Additional parameters passed to print
 #' @return NULL
 #' @author cedric.briand
+#' @aliases print.bilanmigration
 #' @export
 setMethod("print",signature=signature("BilanMigration"),definition=function(x,...){ 
 			sortie1<-"bilanMigration=new('BilanMigration');"
@@ -342,8 +347,9 @@ setMethod("print",signature=signature("BilanMigration"),definition=function(x,..
 #' @param color_ope Default NULL, argument passed for the plot.type="standard" method. A vector of color for the operations. Default to brewer.pal(4,"Paired")
 #' @param ... Additional arguments passed to matplot or plot if plot.type="standard", see ... in \link{fungraph_civelle} and \link{fungraph}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases plot.bilanmigration
 #' @export
-setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(x, y,plot.type="standard",silent=FALSE,...){ 
+setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(x, y,plot.type="standard",color=NULL, color_ope=NULL,silent=FALSE,...){ 
 			#bilanMigration<-bM_Arzal
 			#bilanMigration<-x
 			if (exists("bilanMigration",envir_stacomi)) {
@@ -530,6 +536,7 @@ hTableBilanMigration=function(h,...) {
 #' @param silent Should the program stay silent or display messages, default FALSE
 #' @param ... Additional parameters (not used there)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases summary.bilanmigration
 #' @export
 setMethod("summary",signature=signature(object="BilanMigration"),definition=function(object,silent=FALSE,...){
 			bilanMigrationMult<-as(object,"BilanMigrationMult")

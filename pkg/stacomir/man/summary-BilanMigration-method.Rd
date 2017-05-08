@@ -3,6 +3,7 @@
 \docType{methods}
 \name{summary,BilanMigration-method}
 \alias{summary,BilanMigration-method}
+\alias{summary.bilanmigration}
 \title{summary for bilanMigration 
 calls functions funstat and funtable to create migration overviews
 and generate csv and html output in the user data directory}
