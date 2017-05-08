@@ -335,26 +335,38 @@ setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function
 			assign("bmC",bmC,envir_stacomi)	
 			return(bmC)
 		})
-#' le handler appelle la methode generique graphe sur l'object plot.type=1
+#' handler for plot
 #' 
 #' @param h handler
 #' @param ... Additional parameters
-hbmCgraph = function(h,...) {
+hbmCplotquan = function(h,...) {
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
-		plot(bmC,plot.type="barplot")
+		plot(bmC,plot.type="quan")
 	} else {      
 		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
 }
-#' le handler appelle la methode generique graphe sur l'object plot.type=2
+#' handler for plot
 #' 
 #' @param h handler
 #' @param ... Additional parameters
-hbmCgraph2=function(h,...){
+hbmCplotqual=function(h,...){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
-		plot(bmC,plot.type="xyplot")
+		plot(bmC,plot.type="qual")
+	} else {      
+		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
+	}
+}
+#' handler for plot
+#' 
+#' @param h handler
+#' @param ... Additional parameters
+hbmCplotcrossed=function(h,...){
+	if (exists("bmC",envir_stacomi)) {
+		bmC<-get("bmC",envir_stacomi)
+		plot(bmC,plot.type="crossed")
 	} else {      
 		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
@@ -385,6 +397,7 @@ hbmCstat=function(h){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",...){ 
 			bmC<-x
+			if (nrow(bmC@calcdata)==0) stop("no data in calcdata, have you forgotten to run calculations")
 			# transformation du tableau de donnees
 			# color_parm<-c("age 1"="red","age 2"="blue","age 3"="green")
 			# color_parm<-c("C001"="red")
@@ -461,45 +474,31 @@ setMethod("summary",signature=signature(object="BilanMigrationCar"),definition=f
 			bm<-bmC@calcdata
 			if (nrow(bm)==0) stop("No data in slot calcdata, did you forget to run the calcule method ?")
 			if (length(unique(bm$annee))==1){
-				table=round(tapply(bm$lot_effectif,list(bm$mois,bm$car_par_code_qual),sum),1)
+				table=round(tapply(bm$lot_effectif,list(bm$mois,bm$car_val_identifiant),sum),1)
 				table<-rbind(table,
 						colSums(table,na.rm=TRUE))
 				rownames(table)[nrow(table)]<-gettext("Sum")
 				if (!silent) print(table)
 				table<-as.data.frame(table)
 			} else 	{
-				table=round(tapply(bm$lot_effectif,list(bm$annee,bm$mois,bm$car_par_code_qual),sum),1)
-				if (!silent) print(table)
+				table=round(tapply(bm$lot_effectif,list(bm$annee,bm$mois,bm$car_val_identifiant),sum),1)
+				
+				if (!silent) print(ftable(table))
 			}
-			
-# TODO
-#			nomdc=bmC@dc@data$df_code[match(bmC@dc@dc_selectionne,bmC@dc@data$dc)]			
-#			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_mensuel_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-#			write.table(table,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-#			if (!silent) funout(gettextf("Writing of %s",path1))
-#			path1=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste(nmvarqan,"_journalier_",nomdc,"_",bmC@taxons@data$tax_nom_commun,"_",bmC@stades@data$std_libelle,"_",annee,".csv",sep=""),fsep ="\\")
-#			write.table(bmC@data,file=path1,row.names=FALSE,col.names=TRUE,sep=";")
-#			if (!silent) funout(gettextf("Writing of %s",path1))
 			return(table)
 		})
 
 
 #' xtable funciton for \link{BilanMigrationCar-class}
-#' create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
-#' for later use by the print.xtable method.
-#' @param x, an object of class "BilanAnnuels"
+#' create an xtable objet to be later used by the print.xtable method.
+#' @param x, an object of class "BilanMigrationCar"
 #' @param caption, see xtable
 #' @param label, see xtable
 #' @param align, see xtable, overidden if NULL
 #' @param digits default 0
 #' @param display see xtable
-#' @param auto see xtable
-#' @param dc_name A string indicating the names of the DC, in the order of  x@dc@dc_selectionne
-#' if not provided DC codes are used.
-#' @param tax_name A string indicating the names of the taxa, if not provided latin names are used
-#' @param std_name A string indicating the stages names, if not provided then std_libelle are used
 #' @export
-setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,...){
+setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,caption=NULL, label=NULL,align=NULL,...){
 			bmC<-x
 			dat=bmC@data
 			dc=stringr::str_c(bmC@dc@dc_selectionne,collapse=" ")
@@ -521,9 +520,23 @@ setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(
 					caption=gettextf("Summary for dc %s, taxa %s, stage %s.",dc,tax,std)
 					caption(xt)<-caption
 				}		
-				return(xt)} else
-			{
-				#TODO test and develop for several year}
+				return(xt)
+			} else {
+				# class is an array
+				xt<-xtable::xtable(MIfuns::ftable2data.frame(ftable(dat)),...)
+				if (is.null(align)) {
+					align<-c("l",rep("r",ncol(dat)))
+					align(xt)<-align
+				}
+				if (is.null(display)) {
+					display=c("s",rep("f",ncol(dat)))
+					display(xt)<-display
+				}
+				if (is.null(caption)) {
+					caption=gettextf("Summary for dc %s, taxa %s, stage %s.",dc,tax,std)
+					caption(xt)<-caption
+				}		
+				return(xt)
 			}
 		})
 

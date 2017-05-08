@@ -69,7 +69,6 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 
 #' Choice_c method for Refchoix referential objects
 #' @param object An object of class \link{RefListe-class}
-#' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -92,4 +91,28 @@ setMethod("choice_c",signature=signature("RefChoix"),definition=function(object,
 			return(object)
 			
 			
+		})
+
+#' Multiple Choice method for RefChoix referential objects, to put together with notebook widgets
+#' @param object An object of class \link{RefChoix-class}
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("choicemult",signature=signature("RefChoix"),definition=function(object,
+				selected_value
+		) {
+			hlist=function(h,...){
+				valeurchoisie=svalue(choice)
+				object@listechoice<-valeurchoisie
+				assign("refchoice",object,envir_stacomi)
+				funout(gettext("choice made",domain="R-stacomiR"))
+			}
+						
+			if (!exists("notebook")) notebook <- gnotebook(container=group) 
+			groupchoice<-ggroup(container=notebook, label=gettext("options",domain="R-stacomiR"),horizontal=FALSE) 
+			glabel(object@label,container=groupchoice)
+			list_libelle=fun_char_spe(object@listechoice)
+			choice=gradio(items=list_libelle,
+					selected=object@selected,
+					horizontal=FALSE,
+					container=groupchoice,
+					handler=hlist)		
 		})

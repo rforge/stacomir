@@ -306,6 +306,7 @@ husr=function(h,...){
 #' @importFrom Hmisc wtd.quantile 
 #' @importFrom Hmisc capitalize 
 #' @importFrom mgcv gam
+#' @importFrom MIfuns ftable2data.frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' 

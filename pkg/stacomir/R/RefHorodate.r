@@ -150,16 +150,16 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 					}
 				} else {
 					stop("Formatting problem, the character vector you are trying to pass as horodate could not
-be parsed. Check example or documentation")
+									be parsed. Check example or documentation")
 				}
-		
+				
 			} else if (class(horodate)=="Date"){
 				.horodate<-as.POSIXlt(horodate)
 			} else if (class(horodate)[2]=="POSIXt"){
 				.horodate=horodate
 			}
 			if (is.na(.horodate)) stop("Formatting problem, the character vector you are trying to pass as horodate could not
-be parsed. Check example or documentation")
+								be parsed. Check example or documentation")
 			object@horodate=.horodate	
 			validObject(object)				
 			assign(nomassign,object@horodate,envir_stacomi)
@@ -167,3 +167,28 @@ be parsed. Check example or documentation")
 			return(object)
 		})
 
+#' Multiple Choice method for RefHorodate referential objects, to put together with notebook widgets
+#' @param object An object of class \link{RefHorodate-class}
+#' @param label the name to write in the frame
+#' @param nomassign the name with which the frame will be assigned to envir_stacomi
+#' @param funoutlabel the sentence to write when the choice has been made
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("choicemult",signature=signature("RefHorodate"),definition=function(object,
+				label="date",
+				nomassign="horodate",
+				funoutlabel="nous avons le choix dans la date\n"
+				) {
+				hhoro=function(h,...){
+					object=setRefHorodate(object,svalue(horodate))
+					assign(nomassign,object@horodate,envir_stacomi)
+					funout(gettext("Horodate selected\n",domain="R-stacomiR"))				
+					# changing tab of notebook to next tab
+					if (svalue(notebook)<length(notebook)){
+						svalue(notebook)<-svalue(notebook)+1	
+					}
+				}				
+				if (!exists("notebook")) notebook <- gnotebook(container=group) 
+				grouphorodate<-ggroup(container=notebook, label=label,horizontal=FALSE) 
+				horodate<-gedit(getRefHorodate(object),container=grouphorodate,handler=hhoro,width=20)			
+				gbutton("OK", container=grouphorodate,handler=hhoro,icon="execute")			
+		})

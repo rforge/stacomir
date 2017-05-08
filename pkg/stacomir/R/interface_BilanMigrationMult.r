@@ -70,6 +70,6 @@ interface_BilanMigrationMult=function(){
 	#graphes=ggraphics(width=650,height=650)
 	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
 	#assign("graphes",graphes,envir=envir_stacomi) 
-	dev.new()
+
 }
 
