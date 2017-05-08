@@ -25,3 +25,4 @@ calcule method for BilanMigrationInterannuelle
 The class BilanMigration does not handle escapement rates nor 
 'devenir' i.e. the destination of the fishes.
 }
+

@@ -24,3 +24,4 @@ Loading method for RefTaxon referential objects
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

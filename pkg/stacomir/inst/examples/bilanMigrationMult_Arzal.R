@@ -50,27 +50,16 @@ plot(bMM_Arzal,plot.type="standard",
 		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
 		silent=TRUE)
 
-# Other arguments can be passed to plot including xlim but the rendering might not
-# be that good
-plot(bMM_Arzal,plot.type="standard",
-		color=color,
-		color_ope=color_ope,
-		main="Effectif civelles piège Gabion (rive gauche) en 2016",
-		cex.main=1.1,
-		lty=2,
-		type="b",
-		xlim=
-		silent=TRUE)
 
 #cumulated migration at the station (all stages and DC grouped)
 
-plot(bMM_Arzal,plot.type="step")
+plot(bMM_Arzal,plot.type="step",silent=TRUE)
 
 #some plots are a mixture of french and english
 #changing the reference table names to english should shift all to english.
 #same for spanish.
 # combined plot for ggplot2
-plot(bMM_Arzal,plot.type="multiple")
+plot(bMM_Arzal,plot.type="multiple"=silent=TRUE)
 # data will be written in the data directory specified in 
 # the stacomi/calcmig.csv file
 \dontrun{

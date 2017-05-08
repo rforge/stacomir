@@ -38,3 +38,4 @@ This function extracts temporal characteristics from a dataframe
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

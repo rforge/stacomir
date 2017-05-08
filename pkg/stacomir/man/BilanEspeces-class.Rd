@@ -26,12 +26,13 @@ year/week/month
 \item{\code{liste}}{Object of class \code{\link{RefListe-class}} RefListe referential
 class choose within a list}
 }}
-
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("BilanEspeces", ...)}.
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
 Other Bilan Classes 
 \code{\linkS4class{Bilan_carlot}},
@@ -45,7 +46,7 @@ Other Bilan Classes
 \code{\linkS4class{BilanMigrationInterAnnuelle}},
 \code{\linkS4class{BilanMigrationPar}}
 
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
@@ -59,7 +60,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

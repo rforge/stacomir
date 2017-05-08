@@ -19,3 +19,4 @@ An object of class \link{PasDeTemps-class}
 \description{
 Sets starting date from a character
 }
+

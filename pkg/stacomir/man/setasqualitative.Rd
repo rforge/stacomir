@@ -17,3 +17,4 @@ Generic method to transform quantitative par into a qualitative one
 \author{
 cedric.briand
 }
+

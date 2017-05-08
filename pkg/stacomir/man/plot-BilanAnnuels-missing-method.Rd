@@ -23,9 +23,10 @@
 \description{
 Plot method for BilanAnnuels
 }
-\seealso{
-\link{BilanMigrationInterAnnuelle-class} for examples
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\seealso{
+\link{BilanMigrationInterAnnuelle-class} for examples
+}
+

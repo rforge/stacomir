@@ -18,3 +18,4 @@ validite_Annee tests for validity within the class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

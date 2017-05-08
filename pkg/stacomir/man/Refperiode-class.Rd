@@ -12,7 +12,6 @@ Refperiode referential class to choose a period
 \describe{
 \item{\code{data="data.frame"}}{providing correspondance between period and their english names}
 }}
-
 \note{
 pgval are used by seq.POSIXT
 }
@@ -20,9 +19,8 @@ pgval are used by seq.POSIXT
  Objects can be created by calls of the form
 \code{new("Refperiode", ...)}.
 }
-
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
@@ -35,3 +33,4 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{charge,RefChoix-method}}
 }
 \keyword{classes}
+

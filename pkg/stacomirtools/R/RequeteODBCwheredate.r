@@ -28,9 +28,9 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 			requeteODBCwhere=new("RequeteODBCwhere")
 			requeteODBCwhere@where=paste("WHERE (",from@colonnedebut,
 					", ",from@colonnefin,
-					") overlaps (timestamp without time zone '",
-					from@datedebut,"',timestamp without time zone '",
-					from@datefin,"') ")
+					") overlaps ('",
+					from@datedebut,"'::timestamp without time zone, '",
+					from@datefin,"'::timestamp without time zone) ",sep="")
 			requeteODBCwhere@and=paste(from@and,sep=" ") # concatenation du vecteur
 			requeteODBCwhere@select=from@select
 			requeteODBCwhere@order_by=from@order_by
@@ -45,7 +45,7 @@ setAs("RequeteODBCwheredate","RequeteODBCwhere",function(from,to){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @expamples 
 #' object<-new("RequeteODBCwheredate")
-#' object@baseODBC<-baseODBC
+#' object@baseODBC<-get("baseODBC",envir=envir_stacomi)
 #' object@select<- "select * from t_operation_ope"
 #' object@datedebut=strptime("1996-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
 #' object@datefin=strptime("2000-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")

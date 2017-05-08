@@ -23,7 +23,6 @@ Class "BilanAnnuels"
 \item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
 RefAnnee allows to choose last year of the Bilan}
 }}
-
 \examples{
 require(stacomiR)
 # launching stacomi without selecting the scheme or interface
@@ -92,8 +91,11 @@ barplot(bilAM,
 }
 plot(bilAM)
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
   \code{\link{BilanEspeces-class}},
@@ -107,7 +109,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

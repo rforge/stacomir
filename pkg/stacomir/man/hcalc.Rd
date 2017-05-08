@@ -14,3 +14,4 @@ hcalc(h, ...)
 \description{
 Internal handler for calcule, class \code{\link{Bilan_poids_moyen-class}}.
 }
+

@@ -6,11 +6,11 @@
 draw the ggplot graph for month}
 \usage{
 fungraph_civelle(bilanMigration, table, time.sequence, taxon, stade,
-  dc = null, silent, ...)
+  dc = null, silent, color = NULL, color_ope = NULL, ...)
 }
 \arguments{
-\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}} or an
-#' object of class \code{\linkS4class{BilanMigrationMult}}}
+\item{bilanMigration}{an object of class \link{BilanMigration-class} or an
+object of class \link{BilanMigrationMult-class}}
 
 \item{table}{a data frame with the results}
 
@@ -20,11 +20,18 @@ fungraph_civelle(bilanMigration, table, time.sequence, taxon, stade,
 
 \item{stade}{the stage}
 
-\item{dc}{the counting device, default to null, only necessary for \code{\linkS4class{BilanMigrationMult}}}
+\item{dc}{the counting device, default to null, only necessary for \link{BilanMigrationMult-class}}
 
 \item{silent}{Message displayed or not}
 
-\item{...}{additional parameters passed from the plot method to plot}
+\item{color}{Default NULL, a vector of length 11 of color in the following order, numbers, weight, working, stopped, 1...5 types of operation,
+the 2 latest colors are not used but keeped for consistency with fungraph
+for the fishway, if null will be set to brewer.pal(12,"Paired")[c(4,6,1,2,3,5,7,8,10,11,12)]}
+
+\item{color_ope}{Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")}
+
+\item{...}{additional parameters passed to plot, main, ylab, cex.main, font.main, type, xlim, ylim, lty, bty, pch
+it is not possible to change xlim}
 }
 \description{
 This graph will also plot numbers and bars according to whether the glass
@@ -33,3 +40,4 @@ eel have been counted through weight or numbers
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

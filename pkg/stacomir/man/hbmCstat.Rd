@@ -14,3 +14,4 @@ hbmCstat(h)
 \description{
 This handler calls the generic method graphe on object plot.type 3
 }
+

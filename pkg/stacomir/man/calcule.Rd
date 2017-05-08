@@ -17,3 +17,4 @@ Generic method for calculations
 \author{
 cedric.briand
 }
+

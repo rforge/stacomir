@@ -13,13 +13,12 @@ Enables to load measure stations and to select one of them
 \item{\code{dataframe}}{Data concerning the
 measure station}
 }}
-
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefStationMesure", ...)}.
 }
-
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }
 \keyword{classes}
+

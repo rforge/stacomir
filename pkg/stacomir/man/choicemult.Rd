@@ -17,3 +17,4 @@ Generic method for multiple choice (using the gwidget graphical interface)
 \author{
 cedric.briand
 }
+

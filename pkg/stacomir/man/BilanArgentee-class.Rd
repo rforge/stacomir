@@ -34,7 +34,6 @@ dev_libelle (text for destination of fish)
 
 \item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
 }}
-
 \note{
 This class is displayed by interface_bilanArgentee
 }
@@ -42,7 +41,6 @@ This class is displayed by interface_bilanArgentee
  Objects can be created by calls of the form
 \code{new("BilanArgentee", ...)}
 }
-
 \examples{
 require(stacomiR)
 # launching stacomi without selecting the scheme or interface
@@ -93,8 +91,11 @@ plot(bilanArg, plot.type=4)
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilanArg)
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanConditionEnv-class}},
   \code{\link{BilanEspeces-class}},
@@ -108,7 +109,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

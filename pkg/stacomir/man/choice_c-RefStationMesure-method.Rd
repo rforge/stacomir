@@ -19,3 +19,4 @@ widget in the graphical interface) but from the command line.
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

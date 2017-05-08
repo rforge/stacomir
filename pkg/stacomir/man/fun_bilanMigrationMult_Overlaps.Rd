@@ -21,9 +21,10 @@ separate rows for quantities and numbers. Several columns are according to the t
 Function to calculate daily migration from migration monitoring whose length is more than one day,
 this calculation relies on the (false) assumption that migration is evenly spread over time.
 }
-\seealso{
-calcule,BilanMigrationMult-method
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\seealso{
+calcule,BilanMigrationMult-method
+}
+

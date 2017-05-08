@@ -23,7 +23,13 @@ EXPERT,PONCTUEL,Effectif_total,taux_d_echappement,coe_valeur_coefficient}
 
 \item{silent}{Message displayed or not}
 
-\item{...}{other parameters passed from the plot method to the matplot function}
+\item{color}{Default NULL, a vector of color in the following order, working, stopped, 1...5 types of operation
+for the fishway or DC, measured, calculated, expert, direct observation. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]}
+
+\item{color_ope}{Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")}
+
+\item{...}{additional parameters passed to matplot, main, ylab, ylim, lty, pch, bty, cex.main,
+it is currenly not a good idea to change xlim (numbers are wrong, the month plot covers all month, and legend placement is wrong}
 }
 \description{
 This graph is for species other than glass eel
@@ -34,3 +40,4 @@ this function is intended to be called from the plot method in BilanMigrationMul
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

@@ -16,14 +16,17 @@ referential class allows to choose for several parms with checkbox
 
 \item{\code{checked}}{A boolean vector}
 }}
-
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefCheckBox", ...)}.
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
   \code{\link{RefHorodate-class}},
@@ -35,8 +38,4 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefChoix-method}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}

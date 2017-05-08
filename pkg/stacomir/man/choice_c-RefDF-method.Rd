@@ -32,3 +32,4 @@ choice_c(object=object,objectBilan=objectBilan,dc=1)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

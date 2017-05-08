@@ -32,3 +32,4 @@ uses the choice_c methods of these object to "select" the data.
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

@@ -3,7 +3,7 @@
 \docType{data}
 \name{bmi}
 \alias{bmi}
-\title{Daily glass eel and elver migration from 1984 to 2016 in the S \u0168 vre Niortaise}
+\title{Daily glass eel and elver migration from 1984 to 2016 in the Sevre Niortaise}
 \format{An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded.}
 \usage{
 bmi
@@ -17,3 +17,4 @@ the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-cl
 kindly given by the parc du Marais Poitevin.
 }
 \keyword{data}
+

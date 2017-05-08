@@ -31,3 +31,4 @@ Plots of various type for BilanArgentee
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

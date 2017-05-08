@@ -4,8 +4,8 @@
 \name{plot,Bilan_carlot,missing-method}
 \alias{plot,Bilan_carlot,missing-method}
 \alias{plot.Bilan_carlot}
-\alias{plot.bilan_carlot}
 \alias{plot.b_carlot}
+\alias{plot.bilan_carlot}
 \title{Plots of various type for Bilancarlot}
 \usage{
 \S4method{plot}{Bilan_carlot,missing}(x, plot.type = "1", silent = FALSE)
@@ -26,3 +26,4 @@ Plots of various type for Bilancarlot
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

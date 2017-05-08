@@ -20,3 +20,4 @@ Internal function, tests the connection and if it works loads the stacomi interf
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

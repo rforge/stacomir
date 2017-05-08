@@ -11,16 +11,16 @@ Character to represent a PasDeTemps
  Objects can be created by calls of the form
 \code{new("PasDeTempsChar", \dots{})}
 }
-
 \examples{
 
 showClass("PasDeTempsChar")
 
 }
-\seealso{
-\code{\linkS4class{PasDeTemps}}
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }
+\seealso{
+\code{\linkS4class{PasDeTemps}}
+}
 \keyword{classes}
+

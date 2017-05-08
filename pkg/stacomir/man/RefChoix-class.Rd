@@ -17,15 +17,16 @@ radiobuttons
 
 \item{\code{selected}}{An \code{Integer}  the initial selected value (as an index), first=1 used in gradio}
 }}
-
 \section{Objects from the Class}{
  Objects can be created by calls of the form
 \code{new("RefChoix", listechoice=character() ,label=character()
 ,selected=integer())}.
 }
-
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefCoe-class}}, \code{\link{RefDC-class}},
   \code{\link{RefDF-class}},
@@ -38,6 +39,4 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefChoix-method}}
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
+

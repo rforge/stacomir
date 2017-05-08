@@ -22,3 +22,4 @@ connect method for BilanOperation
 \author{
 cedric.briand
 }
+

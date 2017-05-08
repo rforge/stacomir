@@ -16,3 +16,4 @@ hgraphBilanMigrationInterAnnuelle7(h, ...)
 This function creates a cumulated area plot to highlight seasonal trends in migration. Data are calculated by
 2 weeks period then centered and reduced
 }
+

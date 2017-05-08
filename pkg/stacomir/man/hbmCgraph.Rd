@@ -14,3 +14,4 @@ hbmCgraph(h, ...)
 \description{
 le handler appelle la methode generique graphe sur l'object plot.type=1
 }
+

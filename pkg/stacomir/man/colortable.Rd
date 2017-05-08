@@ -36,3 +36,4 @@ The factor order match the order of the vector (not the alphabetical order of th
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

@@ -2,10 +2,10 @@
 % Please edit documentation in R/BilanAnnuels.r
 \docType{methods}
 \name{barplot,BilanAnnuels-method}
+\alias{barplot}
 \alias{barplot,BilanAnnuels-method}
 \alias{barplot.BilanAnnuels}
 \alias{barplot.bilA}
-\alias{barplot}
 \title{barplot method for object \link{BilanAnnuels-class}}
 \usage{
 \S4method{barplot}{BilanAnnuels}(height, legend.text = NULL, ...)
@@ -20,9 +20,10 @@
 \description{
 barplot method for object \link{BilanAnnuels-class}
 }
-\seealso{
-\link{BilanAnnuels-class} for examples
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\seealso{
+\link{BilanAnnuels-class} for examples
+}
+

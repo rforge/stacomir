@@ -35,3 +35,4 @@ in 2015, the fishway is working daily with a cycle depending on tide. This datas
 is used to show an example of acdetailed output for an object of class \link{BilanFonctionnementDF-class} with data loaded
 }
 \keyword{data}
+

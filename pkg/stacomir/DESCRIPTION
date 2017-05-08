@@ -10,7 +10,7 @@ Description: Graphical outputs and treatment for a database of fishway
     by the ONEMA institute to centralize data obtained by fishway monitoring.
     Version 0.5.1 is available in French English.
 License: GPL (>= 2)
-Collate: 
+Collate:
     'create_generic.r'
     'Refpar.r'
     'RefHorodate.r'
@@ -107,5 +107,5 @@ Author: Cedric Briand [aut, cre],
     Marion Legrand [aut],
     Timothee Besse [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 NeedsCompilation: no

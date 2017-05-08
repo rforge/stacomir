@@ -21,3 +21,4 @@ the taxa is eel. It also calls connect method for \link{BilanFonctionnementDF-cl
 \link{BilanFonctionnementDC-class} and \link{BilanOperation-class} associated with the Bilan
 and used by the \link{fungraph} and \link{fungraph_civelle} functions.
 }
+

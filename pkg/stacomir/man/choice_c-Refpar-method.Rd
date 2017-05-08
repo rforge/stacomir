@@ -25,3 +25,4 @@ If an objectBilan is passed as a parameter, the method will do a charge_avec_fil
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

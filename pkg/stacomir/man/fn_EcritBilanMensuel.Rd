@@ -20,3 +20,4 @@ This writes monthly data in t_bilanmensuel_mens table
 This function is launched by fun_EcritBilanJournalier, the resum 
 dataset is created by the \link{funstat} function
 }
+

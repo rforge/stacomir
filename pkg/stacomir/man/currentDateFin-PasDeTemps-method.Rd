@@ -16,3 +16,4 @@ CurrentDateFin, The ending date for the current timestep
 \description{
 Gets the ending date of a time step for an object of class \link{PasDeTemps-class}
 }
+

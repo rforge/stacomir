@@ -2,8 +2,8 @@
 % Please edit documentation in R/BilanMigrationMultConditionEnv.r
 \docType{class}
 \name{BilanMigrationMultConditionEnv-class}
-\alias{BilanMigrationMultConditionEnv-class}
 \alias{BilanMigrationMultConditionEnv}
+\alias{BilanMigrationMultConditionEnv-class}
 \alias{bilanmigrationmultconditionenv}
 \alias{bmmCE}
 \title{Class "BilanMigrationMultConditionEnv"}
@@ -18,7 +18,6 @@ conditions in the same chart
 
 \item{\code{bilanConditionEnv}}{\link{BilanConditionEnv-class}}
 }}
-
 \examples{
 require(stacomiR)
 stacomi(gr_interface=FALSE,
@@ -47,38 +46,39 @@ plot(bmmCE,
  		color_dc=c("5"="yellow","6"="orange","12"="purple")
 )
 }
-\seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
-  \code{\link{BilanAnnuels-class}},
-  \code{\link{BilanArgentee-class}},
-  \code{\link{BilanConditionEnv-class}},
-  \code{\link{BilanEspeces-class}},
-  \code{\link{BilanFonctionnementDC-class}},
-  \code{\link{BilanFonctionnementDF-class}},
-  \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationCar-class}},
-  \code{\link{BilanMigrationInterAnnuelle-class}},
-  \code{\link{BilanMigrationMult-class}},
-  \code{\link{Bilan_carlot-class}},
-  \code{\link{Bilan_poids_moyen-class}}
-
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
-  \code{\link{BilanAnnuels-class}},
-  \code{\link{BilanArgentee-class}},
-  \code{\link{BilanConditionEnv-class}},
-  \code{\link{BilanEspeces-class}},
-  \code{\link{BilanFonctionnementDC-class}},
-  \code{\link{BilanFonctionnementDF-class}},
-  \code{\link{BilanMigration-class}},
-  \code{\link{BilanMigrationCar-class}},
-  \code{\link{BilanMigrationInterAnnuelle-class}},
-  \code{\link{BilanMigrationMult-class}},
-  \code{\link{Bilan_carlot-class}},
-  \code{\link{Bilan_poids_moyen-class}}
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr marion.legrand"at"logrami.fr
 
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\seealso{
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
+  \code{\link{BilanArgentee-class}},
+  \code{\link{BilanConditionEnv-class}},
+  \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationCar-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}}
+
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
+  \code{\link{BilanAnnuels-class}},
+  \code{\link{BilanArgentee-class}},
+  \code{\link{BilanConditionEnv-class}},
+  \code{\link{BilanEspeces-class}},
+  \code{\link{BilanFonctionnementDC-class}},
+  \code{\link{BilanFonctionnementDF-class}},
+  \code{\link{BilanMigration-class}},
+  \code{\link{BilanMigrationCar-class}},
+  \code{\link{BilanMigrationInterAnnuelle-class}},
+  \code{\link{BilanMigrationMult-class}},
+  \code{\link{Bilan_carlot-class}},
+  \code{\link{Bilan_poids_moyen-class}}
+}
 \keyword{classes}
+

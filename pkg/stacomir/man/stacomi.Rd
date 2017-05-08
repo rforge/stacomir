@@ -54,3 +54,4 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

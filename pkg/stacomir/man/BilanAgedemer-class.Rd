@@ -2,13 +2,13 @@
 % Please edit documentation in R/BilanAgedemer.r
 \docType{class}
 \name{BilanAgedemer-class}
-\alias{BilanAgedemer-class}
-\alias{BilanAgedemer}
-\alias{bilA}
-\alias{bilanagedemer}
-\alias{bilanAgedeMer}
 \alias{BilanAgeDeMer}
+\alias{BilanAgedemer}
+\alias{BilanAgedemer-class}
+\alias{bilA}
+\alias{bilanAgedeMer}
 \alias{bilan_adm}
+\alias{bilanagedemer}
 \title{Class "BilanAgedemer"}
 \description{
 the BilanAgedemer class is used to dispatch adult salmons to age class according to
@@ -42,7 +42,6 @@ statistics, the results are to be written to the database.
 
 \item{\code{limit2hm}}{The size limit, in mm between 2 sea winter fishes and 3 sea winter fishes}
 }}
-
 \note{
 This class is displayed by interface_bilan_agedemer
 }
@@ -50,7 +49,6 @@ This class is displayed by interface_bilan_agedemer
  Objects can be created by calls of the form
 \code{new("BilanAgedemer", ...)}
 }
-
 \examples{
 require(stacomiR)
 stacomi(gr_interface=FALSE,
@@ -96,8 +94,11 @@ stats<-summary(bilan_adm)
 write_database(bilan_adm)
 }
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAnnuels-class}},
+Other Bilan.Objects: \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
   \code{\link{BilanEspeces-class}},
@@ -111,7 +112,5 @@ Other Bilan Objects: \code{\link{BilanAnnuels-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

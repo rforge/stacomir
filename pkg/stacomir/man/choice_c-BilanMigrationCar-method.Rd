@@ -40,3 +40,4 @@ command line interface for BilanMigrationCar class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

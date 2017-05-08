@@ -26,7 +26,6 @@ it can be used to analyse size or sex
 
 \item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
 }}
-
 \note{
 This class is displayed by interface_bilan_carlot
 }
@@ -34,7 +33,6 @@ This class is displayed by interface_bilan_carlot
  Objects can be created by calls of the form
 \code{new("Bilan_carlot", ...)}
 }
-
 \examples{
 require(stacomiR)
 # launching stacomi without selecting the scheme or interface
@@ -111,8 +109,11 @@ summary(b_carlot)
 print(b_carlot)
 }
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
@@ -126,7 +127,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanMigrationMultConditionEnv-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

@@ -14,3 +14,4 @@ at the Arzal control station (see example in \link{Bilan_carlot-class}), all bod
 parameters (total size, size converted from pixel in video control) are used in example
 }
 \keyword{data}
+

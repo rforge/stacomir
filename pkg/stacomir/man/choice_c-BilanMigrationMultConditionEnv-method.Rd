@@ -30,3 +30,4 @@ command line interface for BilanConditionEnv class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

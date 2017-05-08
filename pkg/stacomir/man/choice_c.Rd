@@ -17,3 +17,4 @@ Generic method for manual choice
 \author{
 cedric.briand
 }
+

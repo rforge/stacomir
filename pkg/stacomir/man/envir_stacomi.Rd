@@ -3,10 +3,9 @@
 \docType{data}
 \name{envir_stacomi}
 \alias{envir_stacomi}
-\alias{envir_stacomi}
 \title{Environment where most objects from the package are stored and then loaded
 by the charge method}
-\format{An object of class \code{environment} of length 0.}
+\format{An object of class \code{environment} of length 7.}
 \usage{
 envir_stacomi
 
@@ -24,3 +23,4 @@ Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \keyword{datasets}
 \keyword{environment}
+

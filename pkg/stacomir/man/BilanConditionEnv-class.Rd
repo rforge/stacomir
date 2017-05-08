@@ -2,8 +2,8 @@
 % Please edit documentation in R/BilanConditionEnv.r
 \docType{class}
 \name{BilanConditionEnv-class}
-\alias{BilanConditionEnv-class}
 \alias{BilanConditionEnv}
+\alias{BilanConditionEnv-class}
 \alias{bilanConditionEnv}
 \title{class BilanConditionEnv simple output of one or several environmental
 conditions...}
@@ -22,7 +22,6 @@ joined graphs for BilanMigration in class BilanMigrationConditionEnv
 
 \item{\code{data}}{\code{data.frame}}
 }}
-
 \examples{
 require(stacomiR)
 stacomi(gr_interface=FALSE,
@@ -42,8 +41,11 @@ stacomi(gr_interface=FALSE,
 data("bil_CE")
 plot(bil_CE,silent=TRUE)
 }
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanEspeces-class}},
@@ -57,7 +59,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
 \keyword{classes}
+

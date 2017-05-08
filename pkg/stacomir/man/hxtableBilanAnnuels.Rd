@@ -14,3 +14,4 @@ hxtableBilanAnnuels(h, ...)
 \description{
 xtable handler
 }
+

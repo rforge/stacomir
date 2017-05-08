@@ -38,7 +38,6 @@ the operation is used to perform calculation.
 
 \item{\code{time.sequence}}{An object of class "POSIXct" inherited from \link{BilanMigration-class}}
 }}
-
 \note{
 The main difference between this class and \link{Bilan_carlot} is that this class allows to
 select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
@@ -50,9 +49,11 @@ program : default two parameter choice, checking box "aucun" will allow the prog
 \code{new("BilanMigrationCar", ...)}.  they are loaded by the interface
 using interface_BilanMigrationCar function.
 }
-
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
@@ -66,10 +67,8 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \concept{
 Bilan Object
 }
 \keyword{classes}
+

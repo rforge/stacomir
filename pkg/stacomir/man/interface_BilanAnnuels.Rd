@@ -12,3 +12,4 @@ interface for BilanAnnuels class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

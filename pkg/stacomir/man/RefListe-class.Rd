@@ -19,9 +19,11 @@ Enables to load a "RefChoix" object fom a list given by a "Bilan" object
 of class \code{"character"}} \item{list("label")}{Object of class
 \code{"character"}}\item{:}{Object of class \code{"character"}} }
 }
-
+\author{
+cedric.briand"at"eptb-vilaine.fr
+}
 \seealso{
-Other Referential objects: \code{\link{RefAnnee-class}},
+Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{RefCheckBox-class}},
   \code{\link{RefChoix-class}}, \code{\link{RefCoe-class}},
   \code{\link{RefDC-class}}, \code{\link{RefDF-class}},
@@ -33,7 +35,5 @@ Other Referential objects: \code{\link{RefAnnee-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefChoix-method}}
 }
-\author{
-cedric.briand"at"eptb-vilaine.fr
-}
 \keyword{classes}
+

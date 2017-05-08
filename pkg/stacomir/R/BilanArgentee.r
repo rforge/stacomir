@@ -513,7 +513,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				par(mar=c(1,4.1,1,1)) 
 				for (i in 1:length(lesdc)){
 					indexdc<-datdc$dc==lesdc[i]
-					histxn<-graphics::hist(datdc$BL[indexdc],breaks=seq(250,1000,by=50),plot=FALSE)$density
+					histxn<-graphics::hist(datdc$BL[indexdc],breaks=seq(250,1100,by=50),plot=FALSE)$density
 					if (i==1) histx<-histxn else histx<-cbind(histx,histxn)
 					
 				}	
@@ -569,7 +569,7 @@ setMethod("plot", signature(x = "BilanArgentee", y = "missing"), definition=func
 				par(mar=c(5.1,1,1,1)) 
 				for (i in 1:length(lesdc)){
 					indexdc<-datdc$dc==lesdc[i]
-					histyn<-hist(datdc$W[indexdc],plot=FALSE,breaks=seq(0,2000,by=100))$density
+					histyn<-hist(datdc$W[indexdc],plot=FALSE,breaks=seq(0,2500,by=100))$density
 					if (i==1) histy<-histyn else histy<-cbind(histy,histyn)
 					
 				}		

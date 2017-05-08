@@ -27,7 +27,6 @@ t_bilanjournalier_bjo table.
 \item{\code{anneeFin}}{Object of class \code{\link{RefAnnee-class}}
 refAnnee allows to choose last year of the Bilan}
 }}
-
 \examples{
 require(stacomiR)
 # launching stacomi without selecting the scheme or interface
@@ -169,8 +168,11 @@ plot(bmi_vichy,plot.type="seasonal",timesplit="jour")
 
 
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
@@ -184,7 +186,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+

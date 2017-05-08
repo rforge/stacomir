@@ -39,3 +39,4 @@ write_database(bilanMigration=bM_Arzal,silent=FALSE)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

@@ -14,3 +14,4 @@ hreg(h, ...)
 \description{
 Internal handler for reg, class \code{\link{Bilan_poids_moyen-class}}.
 }
+

@@ -21,3 +21,4 @@ traite eventuellement les quantites de lots (si c'est des civelles)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

@@ -15,3 +15,4 @@ always has to be called within a group constructed and deleted using quitte()
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

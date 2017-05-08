@@ -20,3 +20,4 @@ The program cuts periods which overlap between two month
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

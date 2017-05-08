@@ -20,3 +20,4 @@ Transforms a vector into a string called within an sql command e.g. c(A,B,C)
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+

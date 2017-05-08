@@ -20,3 +20,4 @@ Function to create a barchart (lattice) corresponding to the periods
 \author{
 cedric.briand
 }
+

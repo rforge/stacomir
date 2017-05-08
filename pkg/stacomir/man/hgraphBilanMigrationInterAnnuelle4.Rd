@@ -18,3 +18,4 @@ Plot comparing the migration  to the migration
 computed for all years available in the daily migration table.
 This function plots comparisions for periods of 1 week, 2 weeks, month
 }
+

@@ -2,8 +2,8 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \docType{class}
 \name{BilanMigrationMult-class}
-\alias{BilanMigrationMult-class}
 \alias{BilanMigrationMult}
+\alias{BilanMigrationMult-class}
 \alias{bilanMigrationMult}
 \title{Migration reports for multiple DC / species / stages}
 \description{
@@ -31,7 +31,6 @@ method if any weight are found in the data slot.}
 
 \item{\code{time.sequence}}{A POSIXt time sequence}
 }}
-
 \note{
 A Migration Bilan comes from a migration monitoring : the fishes are monitored in a section of river, this section is
 called a control station (station). Most often, there is a dam, one or several fishways (DF) which comprise one or several counting devices (DC).
@@ -89,24 +88,36 @@ bMM_Arzal<-calcule(bMM_Arzal,silent=TRUE)
 # not run because of multiple graphical devices
 
 plot(bMM_Arzal,plot.type="standard",silent=TRUE)
+# colors in the following order (glass eel)
+# working, stopped, 1...5 types of operation,numbers, weight, 2 unused colors
+# for yellow eel and other taxa
+# stopped, 1...5 types of operation, ponctuel, expert, calcule,mesure,working,
+plot(bMM_Arzal,plot.type="standard",
+		color=c("#DEF76B","#B950B5","#9ABDDA","#781A74","#BF9D6E","#FFC26E","#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
+		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
+		silent=TRUE)
+
 
 #cumulated migration at the station (all stages and DC grouped)
 
-plot(bMM_Arzal,plot.type="step")
+plot(bMM_Arzal,plot.type="step",silent=TRUE)
 
 #some plots are a mixture of french and english
 #changing the reference table names to english should shift all to english.
 #same for spanish.
 # combined plot for ggplot2
-plot(bMM_Arzal,plot.type="multiple")
+plot(bMM_Arzal,plot.type="multiple"=silent=TRUE)
 # data will be written in the data directory specified in 
 # the stacomi/calcmig.csv file
 \dontrun{
 	summary(bMM_Arzal,silent=TRUE)
 }
 }
+\author{
+Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+}
 \seealso{
-Other Bilan Objects: \code{\link{BilanAgedemer-class}},
+Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},
   \code{\link{BilanConditionEnv-class}},
@@ -120,7 +131,5 @@ Other Bilan Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{Bilan_carlot-class}},
   \code{\link{Bilan_poids_moyen-class}}
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
 \keyword{classes}
+
