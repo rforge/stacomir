@@ -16,7 +16,7 @@ interface_BilanMigrationPar = function()
 	bilanMigrationPar@dc=charge(bilanMigrationPar@dc)
 	bilanMigrationPar@parquan=charge(bilanMigrationPar@parquan)
 	bilanMigrationPar@parqual=charge(bilanMigrationPar@parqual)
-	#TODO transformer la valeur logique de échantillon en un refchoix correct (radiobutton)
+	#TODO transformer la valeur logique de echantillon en un refchoix correct (radiobutton)
 	bilanMigrationPar@echantillon=charge(bilanMigrationPar@echantillon,vecteur=gettext("with","without",domain="R-stacomiR"),
 			label=gettext("Choice of batch type, inclusion of samples ?",domain="R-stacomiR"), 
 					selected=as.integer(1))

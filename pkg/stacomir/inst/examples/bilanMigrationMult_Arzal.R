@@ -59,7 +59,7 @@ plot(bMM_Arzal,plot.type="step",silent=TRUE)
 #changing the reference table names to english should shift all to english.
 #same for spanish.
 # combined plot for ggplot2
-plot(bMM_Arzal,plot.type="multiple"=silent=TRUE)
+plot(bMM_Arzal,plot.type="multiple",silent=TRUE)
 # data will be written in the data directory specified in 
 # the stacomi/calcmig.csv file
 \dontrun{

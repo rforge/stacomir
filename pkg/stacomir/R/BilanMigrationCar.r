@@ -405,7 +405,7 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 						theme_bw()
 				
 				assign("g",g,envir_stacomi)
-				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
+				if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type = "qual"
 			if (plot.type=="quant") { 
@@ -424,7 +424,7 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 								guide = "legend")+
 						theme_bw()
 				assign("g",g,envir_stacomi)
-				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
+				if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type="quant"
 			if (plot.type=="crossed") { 
@@ -444,7 +444,7 @@ setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definiti
 								guide = "legend")+
 						theme_bw()
 				assign("g",g,envir_stacomi)
-				funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
+				if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi) \n",domain="R-stacomiR"))
 				print(g)
 			} #end plot.type="xyplot"
 		})

@@ -242,7 +242,7 @@ fungraph_civelle=function(bilanMigration,table,time.sequence,taxon,stade,dc=null
 		legend(  x= "bottom",
 				legend= gettext("Unknown working","Unknow operation type",domain="R-stacomiR"),
 				pch=c(16,16),
-				col=c(grey,grey40),
+				col=c("grey","grey40"),
 				horiz=TRUE,
 				bty="n"
 		)

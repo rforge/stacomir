@@ -376,7 +376,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 						theme_minimal()+
 						theme(panel.border = element_blank(),
 								axis.line = element_line())+
-						xlab("Jour dans la saison, debut au 1er août")#,
+						xlab("Jour dans la saison, debut au 1er aout")#,
 				#plot.background=element_rect(fill="darkseagreen"))#,
 				#panel.background = element_rect(fill = "grey90", colour = NA))
 				
