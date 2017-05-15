@@ -4,14 +4,13 @@
 \name{xtable,BilanMigrationCar-method}
 \alias{xtable,BilanMigrationCar-method}
 \title{xtable funciton for \link{BilanMigrationCar-class}
-create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
-for later use by the print.xtable method.}
+create an xtable objet to be later used by the print.xtable method.}
 \usage{
 \S4method{xtable}{BilanMigrationCar}(x, caption = NULL, label = NULL,
   align = NULL, digits = NULL, display = NULL, auto = FALSE, ...)
 }
 \arguments{
-\item{x, }{an object of class "BilanAnnuels"}
+\item{x, }{an object of class "BilanMigrationCar"}
 
 \item{caption, }{see xtable}
 
@@ -22,19 +21,9 @@ for later use by the print.xtable method.}
 \item{digits}{default 0}
 
 \item{display}{see xtable}
-
-\item{auto}{see xtable}
-
-\item{dc_name}{A string indicating the names of the DC, in the order of  x@dc@dc_selectionne
-if not provided DC codes are used.}
-
-\item{tax_name}{A string indicating the names of the taxa, if not provided latin names are used}
-
-\item{std_name}{A string indicating the stages names, if not provided then std_libelle are used}
 }
 \description{
 xtable funciton for \link{BilanMigrationCar-class}
-create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
-for later use by the print.xtable method.
+create an xtable objet to be later used by the print.xtable method.
 }
 

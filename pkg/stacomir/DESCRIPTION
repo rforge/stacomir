@@ -68,7 +68,6 @@ Collate:
     'interface_BilanMigrationMult.r'
     'interface_BilanMigrationMultConditionEnv.r'
     'interface_Bilan_carlot.r'
-    'interface_Bilan_taille.r'
     'interface_bilan_poids_moyen.r'
     'setAs.r'
     'stacomi.r'
@@ -99,7 +98,8 @@ Imports:
     lubridate,
     dplyr,
     xtable,
-    mgcv
+    mgcv,
+    MIfuns
 Suggests:
     testthat,
     viridis

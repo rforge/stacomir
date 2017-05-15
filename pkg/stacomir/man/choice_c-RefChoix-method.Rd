@@ -13,9 +13,6 @@
 \description{
 Choice_c method for Refchoix referential objects
 }
-\note{
-the choice method assigns an object of class refList named refListe in the environment envir_stacomi
-}
 \examples{
  
 \dontrun{
