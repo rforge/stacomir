@@ -98,8 +98,7 @@ Imports:
     lubridate,
     dplyr,
     xtable,
-    mgcv,
-    MIfuns
+    mgcv
 Suggests:
     testthat,
     viridis

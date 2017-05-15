@@ -522,8 +522,15 @@ setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(
 				}		
 				return(xt)
 			} else {
-				# class is an array
-				xt<-xtable::xtable(MIfuns::ftable2data.frame(ftable(dat)),...)
+				# this comes from MIfuns not avalaible on CRAN
+				ftable2data.frame<-function (x, ...) 
+				{
+					y <- format(x, quote = FALSE)
+					z <- data.frame(y[-1, ], stringsAsFactors = FALSE)
+					names(z) <- y[1, ]
+					z
+				}
+				xt<-xtable::xtable(ftable2data.frame(ftable(dat)),...)
 				if (is.null(align)) {
 					align<-c("l",rep("r",ncol(dat)))
 					align(xt)<-align
