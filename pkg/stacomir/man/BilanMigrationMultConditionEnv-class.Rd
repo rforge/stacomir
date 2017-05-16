@@ -35,12 +35,11 @@ stacomi(gr_interface=FALSE,
 			silent=FALSE)	
 	bmmCE<-charge(bmmCE)
 	bmmCE<-connect(bmmCE)
-	bmmCE<-calcule(bmmCE,silent=TRUE)
 	
 }	
 
 data("bmmCE")
-
+bmmCE<-calcule(bmmCE,silent=TRUE)
 plot(bmmCE,
 		color_station=c("temp_gabion"="red","coef_maree"="blue","phases_lune"="pink"),
  		color_dc=c("5"="yellow","6"="orange","12"="purple")

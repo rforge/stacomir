@@ -526,3 +526,32 @@ bmC@dc@data[,"type_df"]<-iconv(bmC@dc@data[,"type_df"],from="latin1",to="UTF8")
 bmC@dc@data[,"type_dc"]<-iconv(bmC@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bmC@dc@data[,"dif_localisation"]<-iconv(bmC@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 devtools::use_data(bmC,internal=FALSE,overwrite=TRUE)
+
+
+#################################
+# generates dataset for BilanMigrationMultConditionEnv
+##################################
+setwd("F:/workspace/stacomir/pkg/stacomir")
+require(stacomiR)
+stacomi(gr_interface=FALSE,
+		login_window=FALSE,
+		database_expected=FALSE)
+
+bmmCE<-new("BilanMigrationMultConditionEnv")
+bmmCE<-choice_c(bmmCE,
+		dc=c(5,6,12),
+		taxon=c("Anguilla anguilla"),
+		stade=c("AGJ","AGG","CIV"),
+		stationMesure=c("temp_gabion","coef_maree","phases_lune"),
+		datedebut="2008-01-01",
+		datefin="2008-12-31",
+		silent=FALSE)	
+bmmCE<-charge(bmmCE)
+bmmCE<-connect(bmmCE)
+
+bmmCE@bilanMigrationMult@dc@data[,"ouv_libelle"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bmmCE@bilanMigrationMult@dc@data[,"dis_commentaires"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bmmCE@bilanMigrationMult@dc@data[,"type_df"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_df"],from="latin1",to="UTF8")
+bmmCE@bilanMigrationMult@dc@data[,"type_dc"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(bmmCE,internal=FALSE,overwrite=TRUE)

@@ -37,8 +37,8 @@ stacomi(FALSE,FALSE,FALSE)
 require(roxygen2)
 
 #Pour Cédric
-#roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
+roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
 
 #Pour Marion 
-roxygen2::roxygenise("C:/Users/logrami/workspace/stacomir/pkg/stacomir");warnings()[1:10]
+#roxygen2::roxygenise("C:/Users/logrami/workspace/stacomir/pkg/stacomir");warnings()[1:10]
 
