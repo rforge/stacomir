@@ -129,7 +129,7 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 #' 
 #' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
 #' fills also the data slot by the connect method
-#' @param object An object of class \link{BilanMigrationMult-class}
+#' @param object An object of class \link{BilanMigrationCar-class}
 #' @param silent Default FALSE, if TRUE the program should not display messages
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -391,12 +391,12 @@ hbmCstat=function(h){
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
 #' @param plot.type One of "qual", "quant" "crossed" default to qual
-#' @param color_parm A named vector for the colors of either parameters (if plot.type=quant) or levels for
+#' @param color A named vector for the colors of either parameters (if plot.type=quant) or levels for
 #' parameters (if plot.type=qual).
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",...){ 
+setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",silent=FALSE,...){ 
 			bmC<-x
 			if (nrow(bmC@calcdata)==0) stop("no data in calcdata, have you forgotten to run calculations")
 			# transformation du tableau de donnees
