@@ -8,7 +8,7 @@ funSousListeBilanMigrationPar(bilanMigrationPar)
 }
 \arguments{
 \item{bilanMigrationPar}{an object of class
-\code{\linkS4class{BilanMigrationPar}}}
+\code{\linkS4class{BilanMigrationCar}}}
 }
 \description{
 see \code{funSousListeBilanMigration} This function is similar to

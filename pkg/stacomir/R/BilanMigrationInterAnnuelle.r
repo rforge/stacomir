@@ -14,6 +14,7 @@
 #' @slot anneeDebut Object of class \code{\link{RefAnnee-class}}. refAnnee allows to choose year of beginning
 #' @slot anneeFin Object of class \code{\link{RefAnnee-class}}
 #' refAnnee allows to choose last year of the Bilan
+#' @slot calcdata A "list" of calculated data, filled in by the calcule method
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects

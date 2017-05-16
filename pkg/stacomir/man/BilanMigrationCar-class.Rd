@@ -3,7 +3,7 @@
 \docType{class}
 \name{BilanMigrationCar-class}
 \alias{BilanMigrationCar-class}
-\alias{BilanMigrationMult}
+%\alias{BilanMigrationMult}
 \alias{bilanMigrationMult}
 \title{Migration report along with quantitative and
 qualitative characteristics}
@@ -39,7 +39,7 @@ the operation is used to perform calculation.
 \item{\code{time.sequence}}{An object of class "POSIXct" inherited from \link{BilanMigration-class}}
 }}
 \note{
-The main difference between this class and \link{Bilan_carlot} is that this class allows to
+The main difference between this class and \link{Bilan_carlot-class} is that this class allows to
 select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
 
 program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter

@@ -13,10 +13,10 @@
 #' @param taxon The species
 #' @param stade The stage
 #' @param dc The DC
+#' @param silent Message displayed or not
 #' @param color Default NULL, a vector of color in the following order, working, stopped, 1...5 types of operation
 #' for the fishway or DC, measured, calculated, expert, direct observation. If null will be set to brewer.pal(12,"Paired")[c(8,10,4,6,1,2,3,5,7)]
 #' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
-#' @param silent Message displayed or not
 #' @param ... additional parameters passed to matplot, main, ylab, ylim, lty, pch, bty, cex.main,
 #' it is currenly not a good idea to change xlim (numbers are wrong, the month plot covers all month, and legend placement is wrong
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -55,6 +55,9 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 			return(ifelse( rep1 & rep2 & rep3 ,TRUE,retValue)   )
 		})	
 # pour test #object=new("PasDeTempsJournalier")
+
+#' Method to select timesteps from the graphical interface
+#' @param object An object of class \link{PasDeTempsJournalier-class}
 setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){

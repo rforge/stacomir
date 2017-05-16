@@ -12,11 +12,12 @@
 #' @include Refparqual.r
 #' @include RefChoix.r
 #' @include Bilan_carlot.r
-#' @note The main difference between this class and \link{Bilan_carlot} is that this class allows to
+#' @note The main difference between this class and \link{Bilan_carlot-class} is that this class allows to
 #' select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanMigrationCar", ...)}.  they are loaded by the interface
 #' using interface_BilanMigrationCar function.
+#' @slot calcdata A "list" of calculated data, filled in by the calcule method
 #' @slot parquan An object of class \link{Refparquan-class}, quantitative parameter 
 #' @slot parqual An object of class \link{Refparqual-class}, quanlitative parameter
 #' @slot echantillon An object of class \link{RefChoix-class}, vector of choice
@@ -185,7 +186,14 @@ setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(
 			return(bmC)
 		})
 
-
+#' connect method for BilanMigrationCar
+#' 
+#' 
+#' uses the BilanMigrationMult method
+#' @param object An object of class \link{BilanMigrationCar-class}
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed
+#' @return BilanMigrationCar with slot @data filled from the database
+#' @export
 setMethod("connect",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){
 			bmC<-object
 			if (!bmC@echantillon@selectedvalue) {
