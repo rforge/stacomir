@@ -12,9 +12,11 @@ glass eel or yellow eels.}
 model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FALSE)
 }
 \arguments{
-\item{object}{An object of class \link{Bilan_poids_moyen-class}}
+\item{object}{An object of class \link{Bilan_pois_moyen-class}}
 
 \item{model.type}{default "seasonal", "seasonal1","seasonal2","manual".}
+
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \description{
 model method for Bilan_poids_moyen' 

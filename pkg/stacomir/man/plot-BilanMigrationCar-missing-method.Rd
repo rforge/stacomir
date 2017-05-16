@@ -6,12 +6,14 @@
 \title{plot method for BilanMigrationCar}
 \usage{
 \S4method{plot}{BilanMigrationCar,missing}(x, color_parm = NULL,
-  plot.type = "qual", ...)
+  plot.type = "qual", silent = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class BilanMigrationCar}
 
 \item{plot.type}{One of "qual", "quant" "crossed" default to qual}
+
+\item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 
 \item{...}{Additional parameters}
 

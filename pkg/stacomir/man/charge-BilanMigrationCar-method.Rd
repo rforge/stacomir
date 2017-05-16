@@ -8,7 +8,7 @@
 \S4method{charge}{BilanMigrationCar}(object, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \link{BilanMigrationMult-class}}
+\item{object}{An object of class \link{BilanMigrationCar-class}}
 
 \item{silent}{Default FALSE, if TRUE the program should not display messages}
 }

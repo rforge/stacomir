@@ -30,7 +30,7 @@
 #' @slot time.sequence An object of class "POSIXct" inherited from \link{BilanMigration-class}
 #' @family Bilan Objects
 #' @aliases BilanMigrationMult bilanMigrationMult
-#' @note program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
+#' @note program : default two parameter choice, checking box "none" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @concept Bilan Object 
 #' @keywords classes

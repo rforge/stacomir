@@ -3,7 +3,7 @@
 \docType{class}
 \name{BilanMigrationCar-class}
 \alias{BilanMigrationCar-class}
-%\alias{BilanMigrationMult}
+\alias{BilanMigrationMult}
 \alias{bilanMigrationMult}
 \title{Migration report along with quantitative and
 qualitative characteristics}
@@ -18,6 +18,8 @@ the operation is used to perform calculation.
 \section{Slots}{
 
 \describe{
+\item{\code{calcdata}}{A "list" of calculated data, filled in by the calcule method}
+
 \item{\code{parquan}}{An object of class \link{Refparquan-class}, quantitative parameter}
 
 \item{\code{parqual}}{An object of class \link{Refparqual-class}, quanlitative parameter}
@@ -42,7 +44,7 @@ the operation is used to perform calculation.
 The main difference between this class and \link{Bilan_carlot-class} is that this class allows to
 select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
 
-program : default two parameter choice, checking box "aucun" will allow the program to ignore the parameter
+program : default two parameter choice, checking box "none" will allow the program to ignore the parameter
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

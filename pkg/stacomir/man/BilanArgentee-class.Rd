@@ -72,7 +72,7 @@ bilanArg<-calcule(bilanArg)
 # stages are in bilanArg@calcdata[["6"]][,"stage"] 
 #look at data structure using str(bilanArg@calcdata[["6"]])
 
-# standard plot as drawn by Laurent Beaulaton (Analyse des donnees d'argenture acquises en France)
+# standard plot as drawn by Laurent Beaulaton (Analyse des données d'argenture acquises en France)
 # showing Durif's stage according to size and eye diameter
 plot(bilanArg, plot.type=1)
 

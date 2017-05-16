@@ -3,13 +3,33 @@
 \docType{data}
 \name{bmC}
 \alias{bmC}
-\title{BLABLABLABLA}
-\format{An object of class \code{BilanMigrationCar} of length 0.}
+\title{An object of class BilanMigrationCar with data loaded}
+\format{An object of class \link{BilanConditionEnv-class} with data slot loaded:
+\describe{
+  \item{calcdata}{slot to be filled with the calcule method}
+  \item{data}{ A list of 2 elements
+			\describe{
+  			\item{parqual}{values of all the qualitative parameters}
+  			\item{parquan}{values of all the quantitative parameters}
+  			}
+  }
+ \item{dc}{the \code{RefDC} : the control devices selected}
+ \item{taxons}{the \code{RefTaxon} : Salmo salar selected}
+ \item{stades}{the \code{RefStades} : the stages selected}
+ \item{par}{Object of class \link{Refpar-class}: the parameters used}
+ \item{horodatedebut}{object of class \code{RefHorodate-class} : the start date selected}
+ \item{horodatefin}{object of class \code{RefHorodate-class} : the end date selected}
+}}
 \usage{
 bmC
 }
 \description{
-BLABLABLABLA
+The dataset corresponds to the caracteristics (qualitative and quantitative) of salmo salar migrating
+at Decize (Loire river) and Vichy (Allier river) counting device in 2012.
+}
+\details{
+the dataset has been loaded as an example for the BilanMigrationCar-class. It has been
+kindly given by Loire Grands Migrateurs.
 }
 \keyword{data}
 

@@ -3,8 +3,23 @@
 \docType{data}
 \name{bil_CE}
 \alias{bil_CE}
-\title{Dayly temperature at Gabion station during the year 2008}
-\format{An object of class \link{BilanConditionEnv-class} with data slot loaded.}
+\title{An object of class BilanConditionEnv with data loaded}
+\format{An object of class \link{BilanConditionEnv-class} with data slot loaded:
+\describe{
+  \item{stationMesure}{the \code{RefStationMesure} object with 5 slots filled with data corresponding to the iav postgres schema}
+  \item{horodatedebut}{object of class \code{RefHorodate-class} : the start date selected}
+  \item{horodatefin}{object of class \code{RefHorodate-class} : the end date selected}
+  \item{data}{ A dataframe with 723 rows and 6 variables
+			\describe{
+  			\item{env_date_debut}{start date}
+  			\item{env_date_fin}{end date}
+  			\item{env_methode_obtention}{method of data collection, measured, calculated...}
+  			\item{env_val_identifiant}{the value of the parameter if qualitative}
+  			\item{env_valeur_quantitatif}{the value of the parameter if quantitative}
+  			\item{env_stm_identifiant}{station id}
+  			}
+  }
+}}
 \usage{
 bil_CE
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \docType{class}
 \name{BilanMigrationMult-class}
-%\alias{BilanMigrationMult}
+\alias{BilanMigrationMult}
 \alias{BilanMigrationMult-class}
 \alias{bilanMigrationMult}
 \title{Migration reports for multiple DC / species / stages}
@@ -93,8 +93,7 @@ plot(bMM_Arzal,plot.type="standard",silent=TRUE)
 # for yellow eel and other taxa
 # stopped, 1...5 types of operation, ponctuel, expert, calcule,mesure,working,
 plot(bMM_Arzal,plot.type="standard",
-		color=c("#DEF76B","#B950B5","#9ABDDA","#781A74","#BF9D6E","#FFC26E",
-				"#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
+		color=c("#DEF76B","#B950B5","#9ABDDA","#781A74","#BF9D6E","#FFC26E","#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
 		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
 		silent=TRUE)
 
