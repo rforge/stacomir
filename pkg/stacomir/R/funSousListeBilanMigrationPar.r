@@ -6,7 +6,7 @@
 #' 
 #' 
 #' @param bilanMigrationPar an object of class
-#' \code{\linkS4class{BilanMigrationPar}}
+#' \code{\linkS4class{BilanMigrationCar}}
 funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	
 	# *********************

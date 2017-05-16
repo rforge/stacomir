@@ -9,7 +9,7 @@
   timesplit = "mois")
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigrationInterannuelle-class}}}
+\item{object}{An object of class \code{\link{BilanMigrationInterAnnuelle-class}}}
 
 \item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 

@@ -391,8 +391,9 @@ hbmCstat=function(h){
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
 #' @param plot.type One of "qual", "quant" "crossed" default to qual
-#' @param color A named vector for the colors of either parameters (if plot.type=quant) or levels for
+#' @param color_parm A named vector for the colors of either parameters (if plot.type=quant) or levels for
 #' parameters (if plot.type=qual).
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",...){ 

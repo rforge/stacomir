@@ -23,7 +23,12 @@ setwd(pgwd)
 # pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
 source ("F:/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
+<<<<<<< .mine
+
+source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
+=======
 #source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
+>>>>>>> .r359
 
 libraries()
 

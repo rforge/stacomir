@@ -82,7 +82,7 @@ hBilan_carlot=function(h,...){
 #' @param ... additional parameters
 hTail=function(h,...){
 	funout(gettext("Lengths summary\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanTaille(),envir = .GlobalEnv)
+	#eval(interface_BilanTaille(),envir = .GlobalEnv)
 }
 #' handler function used by the main interface
 #' @param h handler
