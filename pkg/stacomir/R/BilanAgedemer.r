@@ -164,6 +164,8 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 #' @param par Parameters chosen for the Bilan are mesured body size (1786), mesured fork length (1785),video size (C001) and number of year at sea (A124)
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @param limit1hm Size limit of a salmon for an one sea winter fish
+#' @param limit2hm Size limit of a salmon for a two sea winter fish
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return An object of class \link{BilanAgedemer-class}
 #' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class}, \link{Refpar-class} and two slots of \link{RefHorodate-class} and then 
@@ -463,6 +465,7 @@ funtableBilanAgedemer = function(h,...) {
 
 #' supprime method for BilanMigrationInterannuelle class
 #' @param object An object of class \link{BilanAgedemer-class}
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return nothing
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

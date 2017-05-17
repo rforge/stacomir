@@ -67,7 +67,8 @@ setValidity("BilanMigrationCar",function(object)
 #' @param taxons '2220=Salmo salar',
 #' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
 #' @param stades TODO
-#' @param car Sample TODO
+#' @param parquan quantitative parameter
+#' @param parqual qualitative parameter
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' @param echantillon Default TRUE, 
@@ -318,8 +319,9 @@ setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition
 
 #' calcule methode
 #' 
-#' 
-#'@param object An object of class \code{\link{BilanMigrationCar-class}} 
+#' @param object An object of class \code{\link{BilanMigrationCar-class}} 
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed
+
 setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
 			bmC<-object
 			qual<-bmC@data[["parqual"]]
@@ -399,7 +401,7 @@ hbmCstat=function(h){
 #' @param x An object of class BilanMigrationCar
 #' @param y not used there
 #' @param plot.type One of "qual", "quant" "crossed" default to qual
-#' @param color A named vector for the colors of either parameters (if plot.type=quant) or levels for
+#' @param color_parm A named vector for the colors of either parameters (if plot.type=quant) or levels for
 #' parameters (if plot.type=qual).
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @param ... Additional parameters
@@ -504,8 +506,7 @@ setMethod("summary",signature=signature(object="BilanMigrationCar"),definition=f
 #' @param caption, see xtable
 #' @param label, see xtable
 #' @param align, see xtable, overidden if NULL
-#' @param digits default 0
-#' @param display see xtable
+#' @param ... Additional parameters
 #' @export
 setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,caption=NULL, label=NULL,align=NULL,...){
 			bmC<-x

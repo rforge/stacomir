@@ -68,7 +68,7 @@ setMethod("connect",signature=signature("BilanConditionEnv"),definition=function
 )
 #' command line interface for BilanConditionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
-#' @param stationmesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
+#' @param stationMesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
 #' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed.

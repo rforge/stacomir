@@ -55,6 +55,9 @@ setMethod("charge",signature=signature("RefCoe"),definition=function(object){
 
 #' supprime method for "RefCoe" class
 #' @param object An object of class \link{RefCoe-class}
+#' @param tax '2038=Anguilla anguilla'
+#' @param std 'CIV=civelle'
+#' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return nothing
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

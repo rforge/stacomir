@@ -44,6 +44,7 @@ setMethod("charge",
 #' @param object An object of class \link{RefStationMesure-class}
 #' @param is.enabled A boolean parameter, if TRUE the frame is enabled when first displayed
 #' @param title The title of the frame, defaut to "Monitoring stations selection" 
+#' @param stationMesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -87,7 +88,7 @@ setMethod("choice",signature=signature("RefStationMesure"),definition=function(o
 #' the choice_c method is intented to have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line. 
 #' @param object an object of class RefStationMesure
-#' @param stationmesure a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)
+#' @param stationMesure a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("choice_c",signature=signature("RefStationMesure"),definition=function(object,stationMesure) {
 			if (class(stationMesure)!="character") {		

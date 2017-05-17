@@ -575,7 +575,7 @@ hbilanMigrationwrite = function(h,...) {
 #' 
 #' Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by
 #' by this function.  
-#' @param bilanMigration an object of class \code{\linkS4class{BilanMigration}}
+#' @param object an object of class \code{\linkS4class{BilanMigration}}
 #' @param silent : TRUE to avoid messages
 #' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @param check_for_bjo : do you want to check if data are already present in the bjo table, and delete them,

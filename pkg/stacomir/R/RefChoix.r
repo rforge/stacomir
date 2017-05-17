@@ -69,6 +69,7 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 
 #' Choice_c method for Refchoix referential objects
 #' @param object An object of class \link{RefListe-class}
+#' @param selectedvalue TODO
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -95,6 +96,7 @@ setMethod("choice_c",signature=signature("RefChoix"),definition=function(object,
 
 #' Multiple Choice method for RefChoix referential objects, to put together with notebook widgets
 #' @param object An object of class \link{RefChoix-class}
+#' @param selected_value TODO
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("choicemult",signature=signature("RefChoix"),definition=function(object,
 				selected_value

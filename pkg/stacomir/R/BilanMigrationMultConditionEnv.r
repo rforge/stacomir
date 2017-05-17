@@ -57,7 +57,11 @@ setMethod("connect",signature=signature("BilanMigrationMultConditionEnv"),defini
 )
 #' command line interface for BilanConditionEnv class
 #' @param object An object of class \link{BilanConditionEnv-class}
-#' @param stationmesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
+#' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
+#' @param taxons '2038=Anguilla anguilla',
+#' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
+#' @param stades 'AGJ=Anguille jaune', 'AGG=Anguille argentee', 'CIV=civelle'
+#' @param stationMesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
 #' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed.
@@ -119,6 +123,7 @@ hbmmCEcalc=function(h=null,...){
 #' Calculation for the BilanMigrationMultConditionEnv
 #' 
 #' @param object An object of class \code{\link{BilanMigrationMultConditionEnv-class}}
+#' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @return \code{\link{BilanMigrationMultConditionEnv-class}}
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent){ 

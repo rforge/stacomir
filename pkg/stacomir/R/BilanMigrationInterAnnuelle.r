@@ -379,7 +379,7 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 
 #' calcule method for BilanMigrationInterannuelle
 #' 
-#' @param object An object of class \code{\link{BilanMigrationInterannuelle-class}}
+#' @param object An object of class \code{\link{BilanMigrationInterAnnuelle-class}}
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @param timesplit One of "day","week","month","2 weeks", "jour","semaine","quinzaine","mois"
 #' @note The class BilanMigration does not handle escapement rates nor 

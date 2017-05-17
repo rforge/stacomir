@@ -61,6 +61,7 @@ setMethod("choice",signature=signature("RefTextBox"),definition=function(object,
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @param object An object of class \link{RefTextBox-class}
 #' @param value The value to set
+#' @param nomassign  The name with which the object will be assigned in envir_stacomi
 setMethod("choice_c",signature=signature("RefTextBox"),definition=function(object,value,nomassign="refTextBox") {
 			object@label<-value
 			assign(nomassign,object,envir_stacomi)

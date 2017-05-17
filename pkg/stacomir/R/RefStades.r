@@ -279,6 +279,7 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 #' for stades is the code.  Any numeric value will be discarded
 #' @param object An object of class \link{RefStades-class}
 #' @param stades the vector of stages chosen
+#' @param silent Boolean, if TRUE, information messages are not displayed
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples
 #' \dontrun{

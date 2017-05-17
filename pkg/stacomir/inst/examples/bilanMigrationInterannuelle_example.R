@@ -42,7 +42,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 		requireNamespace("viridis", quietly = TRUE)){
 	g<-get("g",envir=envir_stacomi)	
 	g+ggplot2::scale_fill_manual(values=viridis::viridis(22))+
-			ggplot2::ggtitle(iconv("Saisonalité de la migration aux Enfrenaux","UTF8"))
+			ggplot2::ggtitle("Saisonnalite de la migration aux Enfrenaux")
 }
 # the standard plot is showing daily values
 plot(bmi,plot.type="standard",silent=TRUE)
@@ -90,7 +90,8 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 	plot(bmi,plot.type="pointrange",timesplit="mois",silent=TRUE)
 	
 	plot(bmi,plot.type="step",silent=TRUE)
-	if (requireNamespace("ggplot2", quietly = TRUE)&requireNamespace("viridis", quietly = TRUE)){
+	if (requireNamespace("ggplot2", quietly = TRUE)&
+			requireNamespace("viridis", quietly = TRUE)){
 		g<-get("g",envir=envir_stacomi)	+ ggplot2::theme_minimal()
 		g+viridis::scale_color_viridis(discrete=TRUE)+
 				ggplot2::ggtitle("Cumulated migration step plot at les Enfrenaux eel trap")

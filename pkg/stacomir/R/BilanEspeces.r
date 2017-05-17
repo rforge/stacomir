@@ -23,14 +23,13 @@
 #' @seealso Other Bilan Classes 
 #' \code{\linkS4class{Bilan_carlot}},
 #' \code{\linkS4class{Bilan_poids_moyen}},
-#' \code{\linkS4class{Bilan_stades_pigm}}, \code{\linkS4class{Bilan_taille}},
 #' \code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
 #' \code{\linkS4class{BilanFonctionnementDC}},
 #' \code{\linkS4class{BilanFonctionnementDF}},
 #' \code{\linkS4class{BilanMigration}},
-#' \code{\linkS4class{BilanMigrationConditionEnv}},
+#' \code{\linkS4class{BilanMigrationMultConditionEnv}},
 #' \code{\linkS4class{BilanMigrationInterAnnuelle}},
-#' \code{\linkS4class{BilanMigrationPar}}
+#' \code{\linkS4class{BilanMigrationCar}}
 #' @family Bilan Objects
 #' @keywords classes
 #' @export 
