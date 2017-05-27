@@ -484,7 +484,7 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 				"per_etat_fonctionnement","std_libelle","sumduree","dc","stade","taxon","stage","ouv",
 				"Q0","Q100","Q5","Q50","Q95","age","bjo_annee","bjo_labelquantite","bjo_valeur","doy",
 				"pred_weight","pred_weight_lwr","pred_weight_upr","total","w","year","sta","tableauCEst","stm_libelle",
-				"env_valeur_quantitatif","env_val_identifiant","DC"))
+				"env_valeur_quantitatif","env_val_identifiant","DC","color"))
 
 # variable used by dplyr
 utils::globalVariables(c("n0","newid","xmin","xmax"))

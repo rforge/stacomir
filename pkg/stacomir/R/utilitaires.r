@@ -366,7 +366,7 @@ funtraitementdate=function(data, # tableau de donnees e importer
 #' @param color_function, the name of the function used to brew the colors, one for 
 #' "brewer.pal", "gray.colors", default to "brewer.pal, this argument is ignored if a
 #' named vector of color is passed.
-#' @return A dataframe with two columns, the vector and the color as a reordered factor
+#' @return A dataframe with two columns, the vector (name) and the color (color) as a reordered factor
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
