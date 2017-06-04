@@ -6,19 +6,23 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 quitte=function(...){
 	# all gWidgets object are assigned in .GlobalEnv, the other are in envir_stacomi
-	if (exists("ggroupboutonsbas",envir=.GlobalEnv)) 
-		# delete for something added with the add method
-		delete(ggroupboutons,ggroupboutonsbas)
-
-	if (exists("notebook",envir=envir_stacomi))
-		dispose(notebook)
-	
-
-	if (exists("group",envir=.GlobalEnv)) {
-		delete(ggroupboutons,group) 
-		rm(group,envir= .GlobalEnv)
-	}
-
+	# note R3.4.0 calling below introduces a bug (cannot destroy external pointer)
+	# so we call dispose on any object which will destroy the top-level window
+	# and we call it again
+#	if (exists("ggroupboutonsbas",envir=.GlobalEnv)) 
+#		# delete for something added with the add method
+#		delete(ggroupboutons,ggroupboutonsbas)
+#		
+#
+#	if (exists("notebook",envir=envir_stacomi))
+#		dispose(notebook)
+#	
+#
+#	if (exists("group",envir=.GlobalEnv)) {
+#		delete(ggroupboutons,group) 
+#		rm(group,envir= .GlobalEnv)
+#	}
+	dispose(ggroupboutonsbas)
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
@@ -30,6 +34,7 @@ quitte=function(...){
 		rm(list=ls(pattern="frame",envir=.GlobalEnv),envir=.GlobalEnv)
 	}
 	if (exists("g")) rm(g)
+	interface_graphique()
 }
 
 #' function used for some lattice graphes with dates 
@@ -144,7 +149,7 @@ chargecsv=function(database_expected){
 		} else {
 			# the access to csv file failed despite database_expected=true
 			# if the file does not open, we switch to the file located within the package
-			cat("C:/program files/calcmig.csv does not exist, switching to defaut package file")
+			cat("C:/program files/stacomi/calcmig.csv does not exist, switching to defaut package file")
 			data("calcmig",envir=environment())				
 		}
 	} else {
