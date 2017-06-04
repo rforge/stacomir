@@ -176,7 +176,8 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 setMethod("choicemult",signature=signature("RefHorodate"),definition=function(object,
 				label="date",
 				nomassign="horodate",
-				funoutlabel="nous avons le choix dans la date\n"
+				funoutlabel="nous avons le choix dans la date\n",
+				decal=0
 				) {
 				hhoro=function(h,...){
 					object=setRefHorodate(object,svalue(horodate))
@@ -186,7 +187,18 @@ setMethod("choicemult",signature=signature("RefHorodate"),definition=function(ob
 					if (svalue(notebook)<length(notebook)){
 						svalue(notebook)<-svalue(notebook)+1	
 					}
-				}				
+				}
+				if (decal!=0){
+					# Returns the first horodate of a year shifted by decal
+					# @param horodate The horodate to shift (class POSIXt)
+					# @param decal number of year to shift
+					# @return A POSIXt
+					shiftyear<-function(horodate,decal){
+						anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
+						return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
+					}
+					object@horodate<-shiftyear(object@horodate,decal)
+				}
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 
 				grouphorodate<-ggroup(container=notebook, label=label,horizontal=FALSE) 
 				horodate<-gedit(getRefHorodate(object),container=grouphorodate,handler=hhoro,width=20)			
