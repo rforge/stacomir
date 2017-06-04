@@ -66,7 +66,7 @@ setMethod("choice",signature=signature("RefListe"),definition=function(object,is
 
 #' Choice_c method for RefListe referential objects
 #' @param object An object of class \link{RefListe-class}
-#' @param selectedvalue TODO
+#' @param selectedvalue the value selected in the combo
 #' @note the choice method assigns an object of class refList named refListe in the environment envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
