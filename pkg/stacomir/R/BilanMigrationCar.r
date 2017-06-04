@@ -43,7 +43,8 @@ setClass(Class="BilanMigrationCar",
 				parquan="Refparquan"),
 		prototype=list(
 				data=list(),
-				echantillon=new("RefChoix"),
+				echantillon=new("RefChoix","listechoice"=c(gettext(c("with","without"),domain="stacomiR")),
+						selectedvalue=gettext("with",domain="stacomiR")),
 				calcdata<-list(),
 				parqual=new("Refparqual"),
 				parquan=new("Refparquan")),
@@ -86,7 +87,7 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 				parqual=NULL,
 				horodatedebut,
 				horodatefin,
-				echantillon=TRUE,
+				echantillon=gettext("with",domain="R-stacomiR"),
 				silent=FALSE){
 			# code for debug using example
 			#horodatedebut="2012-01-01";horodatefin="2013-12-31";dc=c(107,108,101);taxons=2220;	stades=c('5','11','BEC','BER','IND');parquan=c('1786','1785','C001','A124');parqual='COHO';silent=FALSE
@@ -108,8 +109,7 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 			if (!is.null(parqual)){
 				bmC@parqual<-choice_c(bmC@parqual,parqual,silent=silent)
 				bmC@parqual<-charge_complement(bmC@parqual)
-			}
-			# the method choice_c is written in refpar, and each time 
+			}		
 			assign("refparqual",bmC@parqual,envir_stacomi)
 			bmC@horodatedebut<-choice_c(object=bmC@horodatedebut,
 					nomassign="bmC_date_debut",
@@ -121,7 +121,9 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
-			bmC@echantillon<-charge(bmC@echantillon,vecteur=c(TRUE,FALSE),label="essai",selected=as.integer(1))
+			bmC@echantillon<-charge(bmC@echantillon,vecteur=c(gettext("with",domain="R-stacomiR"),gettext("without",domain="R-stacomiR")),
+					label="essai",
+					selected=as.integer(1))
 			bmC@echantillon<-choice_c(bmC@echantillon,selectedvalue=echantillon)
 			validObject(bmC)	
 			return(bmC)
@@ -136,7 +138,18 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
-			bmC<-object  
+			bmC<-object 
+			if (exists("bmC_date_debut",envir_stacomi)) {
+				bmC@horodatedebut@horodate<-get("bmC_date_debut",envir_stacomi)
+			} else {
+				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
+			}
+			if (exists("bmC_date_fin",envir_stacomi)) {
+				bmC@horodatefin@horodate<-get("bmC_date_fin",envir_stacomi)
+			} else {
+				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
+			}  
+			
 			if (exists("refDC",envir_stacomi)) {
 				bmC@dc<-get("refDC",envir_stacomi)
 			} else {
@@ -153,17 +166,7 @@ setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(
 			{
 				funout(gettext("You need to choose a stage, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}
-			if (exists("bmC_date_debut",envir_stacomi)) {
-				bmC@horodatedebut@horodate<-get("bmC_date_debut",envir_stacomi)
-			} else {
-				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
-			}
-			if (exists("bmC_date_fin",envir_stacomi)) {
-				bmC@horodatefin@horodate<-get("bmC_date_fin",envir_stacomi)
-			} else {
-				funout(gettext("You need to choose the ending date\n",domain="R-stacomiR"),arret=TRUE)
-			}  
-			
+					
 			if (exists("refchoice",envir_stacomi)){
 				bmC@echantillon<-get("refchoice",envir_stacomi)
 			} else 
@@ -197,7 +200,7 @@ setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(
 #' @export
 setMethod("connect",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){
 			bmC<-object
-			if (!bmC@echantillon@selectedvalue) {
+			if (bmC@echantillon@selectedvalue==bmC@echantillon@listechoice[1]) {
 				echantillons=" AND lot_pere IS NULL"      
 			} else {
 				echantillons=""      
@@ -274,7 +277,8 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 #' @param h handler
 #' @param ... Additional parameters
 hbmCcalc=function(h,...){
-	bmC<-charge(h$action)
+	bmC<-get("bmC",envir=envir_stacomi)
+	bmC<-charge(bmC)
 	bmC<-connect(bmC)
 	bmC<-calcule(bmC)
 	# calcule will assign in envir_stacomi
@@ -355,7 +359,7 @@ setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function
 hbmCplotquan = function(h,...) {
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
-		plot(bmC,plot.type="quan")
+		plot(bmC,plot.type="quan",silent=FALSE)
 	} else {      
 		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
@@ -367,7 +371,7 @@ hbmCplotquan = function(h,...) {
 hbmCplotqual=function(h,...){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
-		plot(bmC,plot.type="qual")
+		plot(bmC,plot.type="qual",silent=FALSE)
 	} else {      
 		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}
@@ -379,7 +383,7 @@ hbmCplotqual=function(h,...){
 hbmCplotcrossed=function(h,...){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
-		plot(bmC,plot.type="crossed")
+		plot(bmC,plot.type="crossed",silent=FALSE)
 	} else {      
 		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 	}

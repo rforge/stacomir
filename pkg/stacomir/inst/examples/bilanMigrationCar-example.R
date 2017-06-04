@@ -20,6 +20,7 @@ stacomi(gr_interface=FALSE,
 			parquan=c('A124','C001','1786','1785'),
 			horodatedebut="2012-01-01",
 			horodatefin="2012-12-31",
+			#echantillon="with" use the translated value here, default with 
 			silent=FALSE)
 	# bmC<-charge(bmC) not necessary there
 	bmC<-connect(bmC)
@@ -55,6 +56,7 @@ bmC<-choice_c(bmC,
 		parquan=c('A124','C001','1786','1785'),
 		horodatedebut="2009-01-01",
 		horodatefin="2012-12-31",
+		#echantillon="with", # alternative "without"
 		silent=FALSE)
 # bmC<-charge(bmC) not necessary there
 bmC<-connect(bmC)

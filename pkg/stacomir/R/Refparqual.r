@@ -89,7 +89,7 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 			requete=new("RequeteODBC")
 			requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 			requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
-					" WHERE val_qal_code in ", vector_to_listsql(object@data$par_code),
+					" WHERE val_qal_code in ", vector_to_listsql(object@par_selectionne),
 					" ORDER BY val_rang",sep="")
 			requete<-stacomirtools::connect(requete)
 			#funout(gettext("The query to load parameters is done \n",domain="R-stacomiR"))
@@ -154,7 +154,7 @@ setMethod("choicemult",signature=signature("Refparqual"),definition=function(obj
 				hpar=function(h,...){
 					parm=tbdestpar[,][tbdestpar[,]!=""]
 					if (length(parm)>0){
-					object@data<-object@data[car_libelle%in%parm ,]
+					object@par_selectionne<-object@data[car_libelle%in%parm ,"par_code"]
 					# below the line that changes from the Refpar
 					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)

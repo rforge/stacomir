@@ -104,7 +104,7 @@ setMethod("choicemult",signature=signature("RefChoix"),definition=function(objec
 		) {
 			hlist=function(h,...){
 				valeurchoisie=svalue(choice)
-				object@listechoice<-valeurchoisie
+				object@selectedvalue<-valeurchoisie
 				assign("refchoice",object,envir_stacomi)
 				funout(gettext("choice made\n",domain="R-stacomiR"))
 				if (svalue(notebook)<length(notebook)){

@@ -187,7 +187,7 @@ setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 			if (nrow(object@data) > 0){
 				hpar=function(h,...){
 					parm=tbdestpar[,][tbdestpar[,]!=""]
-					object@data<-object@data[car_libelle%in%parm ,]
+					object@par_selectionne<-object@data[car_libelle%in%parm,"par_code"]
 					assign(nomassign,object,envir_stacomi)
 					funout(gettext("Parameter selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
