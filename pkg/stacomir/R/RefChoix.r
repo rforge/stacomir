@@ -65,11 +65,12 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 			add(group,frame_choice)
 			list_libelle=fun_char_spe(object@listechoice)
 			choice=gradio(items=list_libelle,selected=object@selected,horizontal=TRUE,container=frame_choice,handler=hlist)
+			gbutton("OK", container=frame_list,handler=hlist)
 		})
 
 #' Choice_c method for Refchoix referential objects
 #' @param object An object of class \link{RefListe-class}
-#' @param selectedvalue TODO
+#' @param selectedvalue the value selected in the combo
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{
@@ -96,7 +97,7 @@ setMethod("choice_c",signature=signature("RefChoix"),definition=function(object,
 
 #' Multiple Choice method for RefChoix referential objects, to put together with notebook widgets
 #' @param object An object of class \link{RefChoix-class}
-#' @param selected_value TODO
+#' @param selected_value the value selected in the combo
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("choicemult",signature=signature("RefChoix"),definition=function(object,
 				selected_value
@@ -117,4 +118,5 @@ setMethod("choicemult",signature=signature("RefChoix"),definition=function(objec
 					horizontal=FALSE,
 					container=groupchoice,
 					handler=hlist)		
+			gbutton("OK", container=groupchoice,handler=hlist)
 		})
