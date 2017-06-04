@@ -335,7 +335,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							hwinpa(h)
 						}
 						hchoicedatedebut=function(h,...){
-							# TODO a developper
+							# TODO to develop
 						}
 						groupdate<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
 						assign("groupdate",groupdate,envir=.GlobalEnv)
