@@ -3,7 +3,7 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 libraries=function() {
 necessary = c( 'RODBC','ggplot2','gWidgets','gWidgetsRGtk2',
-		'lattice','RColorBrewer','Rcmdr','xtable','scales','reshape2','grid','stringr','intervals','sqldf','RPostgreSQL')  # 'tcltk2','XML', 'Hmisc''svMisc''proto''R2HTML'
+		'lattice','RColorBrewer','xtable','scales','reshape2','grid','stringr','intervals','sqldf','RPostgreSQL')  # 'tcltk2','XML', 'Hmisc''svMisc''proto''R2HTML'
 if(!all(necessary %in% installed.packages()[, 'Package']))
 	install.packages(necessary[!necessary %in% installed.packages()[, 'Package']], dependencies = TRUE)
 #if (!'XML'%in%installed.packages()[, 'Package']) install.packages("XML", repos = "http://www.omegahat.org/R")

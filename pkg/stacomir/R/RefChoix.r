@@ -106,7 +106,10 @@ setMethod("choicemult",signature=signature("RefChoix"),definition=function(objec
 				valeurchoisie=svalue(choice)
 				object@listechoice<-valeurchoisie
 				assign("refchoice",object,envir_stacomi)
-				funout(gettext("choice made",domain="R-stacomiR"))
+				funout(gettext("choice made\n",domain="R-stacomiR"))
+				if (svalue(notebook)<length(notebook)){
+					svalue(notebook)<-svalue(notebook)+1	
+				}
 			}
 						
 			if (!exists("notebook")) notebook <- gnotebook(container=group) 

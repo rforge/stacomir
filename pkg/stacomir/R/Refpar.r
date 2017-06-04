@@ -165,11 +165,10 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 		})
 
 
-#' Multiple Choice method for RefPar referential objects
+#' Multiple Choice method for Refpar referential objects
 #' 
-#' @param object An object of class \link{RefPar-class}
-#' @param objectBilan An object Bilan which includes the \link{RefPar-class}, default NULL
-#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
+#' @param object An object of class \link{Refpar-class}
+#' @param objectBilan An object Bilan which includes the \link{Refpar-class}, default NULL
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -181,26 +180,30 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 #' objectBilan=bilan_taille # for other test
 #' choicemult(object,objectBilan=bilanMigrationCar)	
 #' }
-setMethod("choicemult",signature=signature("Refpar"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+setMethod("choicemult",signature=signature("Refpar"),definition=function(object,objectBilan=NULL,
+				label=gettext("Sample characteristic",domain="R-stacomiR"),
+				nomassign="refpar") {
 			
 			if (nrow(object@data) > 0){
 				hpar=function(h,...){
 					parm=tbdestpar[,][tbdestpar[,]!=""]
 					object@data<-object@data[car_libelle%in%parm ,]
-					assign("refPar",object,envir_stacomi)
+					assign(nomassign,object,envir_stacomi)
 					funout(gettext("Parameter selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
+						# the method can be used for parquan or par
+						# so I test whether the object contains a class parquan
+						if (class(try(objectBilan@parquan,silent=TRUE))!="try-error") {
+						objectBilan@parquan<-object
+						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+					} else {
 						objectBilan@parm<-object
 						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+					}
 						# suppresses all tab larger than current tab
-						currenttab<-svalue(notebook)
-						if (length(notebook)>currenttab){
-							for (i in length(notebook):(currenttab+1)){
-								svalue(notebook) <- i							
-								dispose(notebook) ## dispose current tab
-							}}
+						partab<-svalue(notebook)
 						if (svalue(notebook)<length(notebook)){
-							svalue(notebook)<-svalue(notebook)+1	
+							svalue(notebook)<-partab+1	
 						}
 					}
 				}
@@ -211,7 +214,7 @@ setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				grouppar<-ggroup() 
 				assign("gouppar",grouppar,envir=.GlobalEnv)
-				add(notebook,grouppar,label=gettext("Sample characteritic",domain="R-stacomiR"))
+				add(notebook,grouppar,label=label)
 				frameparsource<-gframe(gettext("Select here",domain="R-stacomiR"),container=grouppar)
 				tbsourcepar  = gtable(car_libelle,container=frameparsource,expand = TRUE, fill = TRUE)
 				size(tbsourcepar)<-c(160,300) 
@@ -253,6 +256,6 @@ setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 						})
 				gbutton("OK", container = grouppar, handler = hpar)
 			} else {
-				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
+				funout(gettext("Error : no parameters in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
 		})

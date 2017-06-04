@@ -176,41 +176,47 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 			if (nrow(object@data) > 0){
 				hDC=function(h,...){
 					#browser()
-					object@dc_selectionne<-as.integer(tbdestdc[,][tbdestdc[,]!=""])
-					object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
-					object@station= as.character(object@data$sta_code[object@data$dc%in%object@dc_selectionne])
-					assign("refDC",object,envir_stacomi)
-					funout(gettext("Counting device selected\n",domain="R-stacomiR"))
-					# si il existe un object fils; supprimer
-					# referentiel fils, celui charge par la methode charge_avec_filtre
-					# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
-					if (!is.null(objectBilan)) {
-						# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
-						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
-							
-							
-							objectBilan@dc<-object
-							objectBilan@taxons<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne)
-							# the name was created by the interface
-							# as I can't get the name from within the function (deparse(substitute(objectBilan does not return
-							# "bilanMigrationMult"
-							assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
-							# suppresses all tab larger than (dc)
-							currenttab<-svalue(notebook)
-							if (length(notebook)>currenttab){
-								for (i in length(notebook):(currenttab+1)){
-									svalue(notebook) <- i							
-									dispose(notebook) ## dispose current tab
-								}}
-							choicemult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
-							funout(gettext("Select taxa for this counting device (for all periods)\n",domain="R-stacomiR"))
+					dc_selectionne<-tbdestdc[,][tbdestdc[,]!=""]
+					object@dc_selectionne<-as.integer(dc_selectionne)
+					if (length(dc_selectionne)>0){
+						object@ouvrage= object@data$dif_ouv_identifiant[object@data$dc%in%object@dc_selectionne]
+						object@station= as.character(object@data$sta_code[object@data$dc%in%object@dc_selectionne])
+						assign("refDC",object,envir_stacomi)
+						funout(gettext("Counting device selected\n",domain="R-stacomiR"))
+						# si il existe un object fils; supprimer
+						# referentiel fils, celui charge par la methode charge_avec_filtre
+						# ici comme on fait appel e un autre object il faut appeller le conteneur qui contient l'object
+						if (!is.null(objectBilan)) {
+							# ci dessous pas d'appel de charge_avec_filtre pour les bilanEspeces (tous les taxons)
+							if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))){
+								
+								
+								objectBilan@dc<-object
+								objectBilan@taxons<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne)
+								# the name was created by the interface
+								# as I can't get the name from within the function (deparse(substitute(objectBilan does not return
+								# "bilanMigrationMult"
+								assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+								# suppresses all tab larger than (dc)
+								currenttab<-svalue(notebook)
+								if (length(notebook)>currenttab){
+									for (i in length(notebook):(currenttab+1)){
+										svalue(notebook) <- i							
+										dispose(notebook) ## dispose current tab
+									}}
+								choicemult(objectBilan@taxons,objectBilan,is.enabled=TRUE)
+								#funout(gettext("Select taxa for this counting device (for all periods)\n",domain="R-stacomiR"))
+							}
 						}
+						# changing tab of notebook to next tab
+						if (svalue(notebook)<length(notebook)){
+							svalue(notebook)<-svalue(notebook)+1	
+						}
+						#dispose(winst)
+					} else {
+						funout(gettext("Counting device not selected\n",domain="R-stacomiR"))
+						
 					}
-					# changing tab of notebook to next tab
-					if (svalue(notebook)<length(notebook)){
-						svalue(notebook)<-svalue(notebook)+1	
-					}
-					#dispose(winst)
 				} 
 				# Handler d'affichage du tableau
 				# below the widget structure [=> within (=> type

@@ -116,31 +116,35 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 			if (nrow(object@data) > 0){
 				htax=function(h,...){
 					taxons=tbdesttaxon[,][tbdesttaxon[,]!=""]
-					object@data<-object@data[tax_libelle%in%taxons ,]
-					assign("refTaxon",object,envir_stacomi)
-					funout(gettext("The taxa(s) have been selected\n",domain="R-stacomiR"))
-					if (!is.null(objectBilan)) {
-						objectBilan@taxons<-object
-						objectBilan@stades<-charge_avec_filtre(object=objectBilan@stades,
-								dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
-								taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code
-						)
-						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
-						# suppresses all tab larger than 3 (taxon)
-						# suppresses all tab larger than (dc)
-						currenttab<-svalue(notebook)
-						if (length(notebook)>currenttab){
-							for (i in length(notebook):(currenttab+1)){
-								svalue(notebook) <- i							
-								dispose(notebook) ## dispose current tab
-							}}
-						choicemult(objectBilan@stades,objectBilan,is.enabled=TRUE)						
-					}
-					# changing tab of notebook to next tab
-					if (svalue(notebook)<length(notebook)){
-						svalue(notebook)<-svalue(notebook)+1	
-					}
-				}				
+					if (length(taxons)>0){
+						object@data<-object@data[tax_libelle%in%taxons ,]
+						assign("refTaxon",object,envir_stacomi)
+						funout(gettext("Taxa selected\n",domain="R-stacomiR"))
+						if (!is.null(objectBilan)) {
+							objectBilan@taxons<-object
+							objectBilan@stades<-charge_avec_filtre(object=objectBilan@stades,
+									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
+									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code
+							)
+							assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+							# suppresses all tab larger than 3 (taxon)
+							# suppresses all tab larger than (dc)
+							currenttab<-svalue(notebook)
+							if (length(notebook)>currenttab){
+								for (i in length(notebook):(currenttab+1)){
+									svalue(notebook) <- i							
+									dispose(notebook) ## dispose current tab
+								}}
+							choicemult(objectBilan@stades,objectBilan,is.enabled=TRUE)						
+						}
+						# changing tab of notebook to next tab
+						if (svalue(notebook)<length(notebook)){
+							svalue(notebook)<-svalue(notebook)+1	
+						}
+					} else {
+						funout(gettext("No taxa selected\n",domain="R-stacomiR"))					
+					}				
+				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[grouptaxon(ggroup&tab)[[frametaxonsource(gframe)[tbsourcetaxon(gtable)],frametaxondest(gframe)[tbdtaxondest(gtable)]],OKbutton]]
 				if (!exists("notebook")) notebook <- gnotebook(container=group) 				

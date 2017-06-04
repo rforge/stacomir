@@ -22,7 +22,7 @@ quitte=function(...){
 #		delete(ggroupboutons,group) 
 #		rm(group,envir= .GlobalEnv)
 #	}
-	dispose(ggroupboutonsbas)
+	if (exists("win",envir=.GlobalEnv)) dispose(win)
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {

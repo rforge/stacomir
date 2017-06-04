@@ -34,18 +34,18 @@ interface_BilanMigrationPar = function()
 	assign("group",group,envir = .GlobalEnv)
 	notebook <- gnotebook(container=group)	
 	assign("notebook",notebook,envir=.GlobalEnv)
-	size(notebook)<-c(400,300)
-	gWidgets::add(ggroupboutons,group)	
+	size(notebook)<-c(400,400)
+		
 
-	choicemult(bilanMigrationCar@horodatedebut,label=gettext("from",domain="R-stacomiR"))
-	choicemult(bilanMigrationCar@horodatefin,label=gettext("to",domain="R-stacomiR"))
+	choicemult(bilanMigrationCar@horodatedebut,label=gettext("from",domain="R-stacomiR"),decal=-1)
+	choicemult(bilanMigrationCar@horodatefin,label=gettext("to",domain="R-stacomiR"),decal=0)
 	choicemult(bilanMigrationCar@echantillon)
 	choicemult(bilanMigrationCar@dc,objectBilan=bilanMigrationCar,is.enabled=TRUE)
-	# TODO regler la disparition des onglets de l'interface
-	# TODO VERIFIER LE CHARGEMENT DES ONGLETS SUIVANTS DANS L'INTERFACE (taxon, stade, refparquan, refparqual)
-	# Error in (function (classes, fdef, mtable)  : 
- 	# unable to find an inherited method for function 'choicemult' for signature '"Refpar"'
+# FIXME Error in .local(object, ...) : 
+#  unused arguments (label = "Qualitative feature", frameassign = "frame_parqual") verify
 	svalue(notebook)<-1	
+	gWidgets::add(ggroupboutons,group)
+	# ggroupboutons is attached to the original frame
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
@@ -76,9 +76,4 @@ interface_BilanMigrationPar = function()
 					label=gettext("Exit",domain="R-stacomiR")))
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	gWidgets::addSpring(group)
-	#graphes=ggraphics(width=600,height=400)
-	#add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	#assign("graphes",graphes,envir=envir_stacomi)
-
-	
 }

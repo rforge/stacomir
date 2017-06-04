@@ -118,7 +118,7 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 #' }
 setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 				label=gettext("Choice of a sample characteristic",domain="R-stacomiR"),
-				nomassign="refpar",
+				nomassign="refparqual",
 				frameassign="frame_par",
 				is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
@@ -127,7 +127,7 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 					object@data<-object@data[car_libelle%in%carchoisi ,]
 					object<-charge_complement(object)
 					assign(nomassign,object,envir_stacomi)
-					funout(gettext("Feature has been selected\n",domain="R-stacomiR"))
+					funout(gettext("Features have been selected\n",domain="R-stacomiR"))
 				}
 				assign(frameassign,gframe(label),envir= .GlobalEnv)
 				add(group,get(eval(frameassign),envir= .GlobalEnv))
@@ -135,4 +135,92 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
 			} else stop(gettext("Internal error : unable to load any feature to make the choice\n",domain="R-stacomiR"),arret=TRUE)
+		})
+
+
+#' Multiple Choice method for Refparqual referential objects internal use
+#' @note this methods rewrites that of the Refpar as it integrates a call to chargecomplement to load
+#' the list of possible values for a qualitative parameter
+#' @param object An object of class \link{Refparqual-class}
+#' @param objectBilan An object Bilan which includes the \link{Refparqual-class}, default NULL
+#' @param nomassign The name used when assigning the object Refparqual to the \code{envir_stacomi} environment
+#' @param label The name of the frame
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+setMethod("choicemult",signature=signature("Refparqual"),definition=function(object,
+				objectBilan=NULL,
+				nomassign="refparqual",
+				label=gettext("Qualitative",domain="R-stacomiR")) {			
+			if (nrow(object@data) > 0){
+				hpar=function(h,...){
+					parm=tbdestpar[,][tbdestpar[,]!=""]
+					if (length(parm)>0){
+					object@data<-object@data[car_libelle%in%parm ,]
+					# below the line that changes from the Refpar
+					object<-charge_complement(object)
+					assign(nomassign,object,envir_stacomi)
+					funout(gettext("Parameter selected\n",domain="R-stacomiR"))
+					} else {
+						funout(gettext("No Parameter selected\n",domain="R-stacomiR"))	
+					}
+					if (!is.null(objectBilan)) {
+						objectBilan@parqual<-object
+						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+						# suppresses all tab larger than current tab
+						qualtab<-svalue(notebook)
+						if (svalue(notebook)<length(notebook)){
+							svalue(notebook)<-qualtab+1	
+						}
+					}
+				}
+				# below the widget structure [=> within (=> type
+				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
+				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				car_libelle=fun_char_spe(object@data$par_nom)
+				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
+				grouppar<-ggroup() 
+				assign("gouppar",grouppar,envir=.GlobalEnv)
+				add(notebook,grouppar,label=gettext("Qualitative",domain="R-stacomiR"))
+				frameparsource<-gframe(gettext("Select here",domain="R-stacomiR"),container=grouppar)
+				tbsourcepar  = gtable(car_libelle,container=frameparsource,expand = TRUE, fill = TRUE)
+				size(tbsourcepar)<-c(160,300) 
+				framepardest<-gframe(gettext("drop here",domain="R-stacomiR"),container=grouppar)
+				# need for a fixed size data.frame otherwise errors when adding new lines
+				xx<-data.frame(choice=rep("",8))
+				xx$choice<-as.character(xx$choice)
+				tbdestpar=gtable(xx,container=framepardest,expand = TRUE, fill = TRUE)
+				size(tbdestpar)<-c(160,300)
+				adddropsource(tbsourcepar)
+				adddroptarget(tbdestpar)				
+				adddropmotion(tbdestpar,handler=function(h,...) {
+							valeurs<-tbdestpar[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcepar)%in%valeurs){
+								tbdestpar[length(valeurs)+1,1]<-svalue(tbsourcepar)
+							}
+						})
+				addHandlerDoubleclick(tbsourcepar,handler=function(h,...) {
+							valeurs<-tbdestpar[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcepar)%in%valeurs){
+								tbdestpar[length(valeurs)+1,1]<-svalue(h$obj)
+							}
+						})
+				adddropsource(tbdestpar)
+				adddroptarget(tbsourcepar)
+				removepar<-function(){
+					valeurs<-tbdestpar[,]
+					valeurs<-valeurs[valeurs!=""]
+					valeurs<-valeurs[-match(svalue(tbdestpar),valeurs)]
+					tbdestpar[,]<-c(valeurs,rep("",8-length(valeurs)))
+				}
+				adddropmotion(tbsourcepar,handler=function(h,...) {
+							removepar()
+						})
+				addHandlerDoubleclick(tbdestpar,handler=function(h,...) {
+							removepar()
+						})
+				gbutton("OK", container = grouppar, handler = hpar)
+			} else {
+				funout(gettext("Error : no qualitative parameters in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
+			}
 		})

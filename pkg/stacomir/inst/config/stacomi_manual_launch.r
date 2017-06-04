@@ -22,13 +22,12 @@ baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pw
 setwd(pgwd)
 # pour voir apparaitre toutes les requetes dans R
 # assign("showmerequest",1,envir=envir_stacomi)
-source ("F:/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
-<<<<<<< .mine
+source ("C:/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
 
-source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
-=======
+
+
 #source ("C:/Users/logrami/workspace/stacomir/pkg/stacomir/inst/config/libraries.r")
->>>>>>> .r359
+
 
 libraries()
 
@@ -68,9 +67,11 @@ source("BilanMigrationMult.r")
 source("BilanConditionEnv.r")
 source("BilanMigrationMultConditionEnv.r")
 source("Bilan_carlot.r")
+require(xtable)
 source("BilanMigrationCar.r")
 source("BilanMigrationInterAnnuelle.r")
-require(xtable)
+source("BilanMigrationCar.r")
+
 source("BilanAnnuels.r")
 source("BilanArgentee.r")
 
@@ -106,7 +107,7 @@ source("interface_BilanAnnuels.r")
 source("interface_BilanAgedemer.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
-setwd("F:/workspace/stacomir/pkg/stacomir")
-stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+setwd("C:/workspace/stacomir/pkg/stacomir")
+stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
 
 

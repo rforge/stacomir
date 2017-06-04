@@ -64,11 +64,11 @@ setValidity("BilanMigrationCar",function(object)
 #' command line interface for BilanMigrationCar class
 #' @param object An object of class \link{BilanMigrationCar-class}
 #' @param dc A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}
-#' @param taxons '2220=Salmo salar',
+#' @param taxons '2220=Salmo salar', can be a vector with several values
 #' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}
-#' @param stades TODO
-#' @param parquan quantitative parameter
-#' @param parqual qualitative parameter
+#' @param stades The stages selected, can be a vector with several values
+#' @param parquan Quantitative parameter
+#' @param parqual Qualitative parameter
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
 #' @param echantillon Default TRUE, 
@@ -274,7 +274,10 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 #' @param h handler
 #' @param ... Additional parameters
 hbmCcalc=function(h,...){
-	calcule(h$action)
+	bmC<-charge(h$action)
+	bmC<-connect(bmC)
+	bmC<-calcule(bmC)
+	# calcule will assign in envir_stacomi
 }			
 #' Turns a quantitative parameter into qualitative
 #' 
