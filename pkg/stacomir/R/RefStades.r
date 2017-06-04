@@ -170,13 +170,13 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 						objectBilan@stades<-object
 						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
 						
-						# suppresses all tab larger than 3 (stage))
-						if (length(notebook)>4){
-							for (i in 5:length(notebook)){
+						# suppresses all tab larger than current tab
+						currenttab<-svalue(notebook)
+						if (length(notebook)>currenttab){
+							for (i in length(notebook):(currenttab+1)){
 								svalue(notebook) <- i							
 								dispose(notebook) ## dispose current tab
-							}
-						}
+							}}
 						# par defaut la methode ne charge pas de maniere interactive  (par exemple en ne prenant que les stades des taxon du dc par la methode charge_avec_filtre
 						# elle est alors affichee des le debut par la methode choice e laquelle on ne passe pas d'objectBilan en parametre 
 						#il y a bien un object par dans l'object Bilan 

@@ -159,7 +159,100 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 			if (any(!concord)){
 				warning(paste(gettextf("No data for par %s",object@par_selectionne[!concord],domain="R-stacomiR")))
 			}
-				
+			
 			assign("refpar",object,envir=envir_stacomi)
 			return(object)
+		})
+
+
+#' Multiple Choice method for RefPar referential objects
+#' 
+#' @param object An object of class \link{RefPar-class}
+#' @param objectBilan An object Bilan which includes the \link{RefPar-class}, default NULL
+#' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples 
+#' \dontrun{
+#'  object=new("Refpar")
+#' win=gwindow()
+#' group=ggroup(container=win,horizontal=FALSE)
+#' object<-charge(object)
+#' bilanMigrationCar=new("BilanMigrationCar")
+#' objectBilan=bilan_taille # for other test
+#' choicemult(object,objectBilan=bilanMigrationCar)	
+#' }
+setMethod("choicemult",signature=signature("Refpar"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
+			
+			if (nrow(object@data) > 0){
+				hpar=function(h,...){
+					parm=tbdestpar[,][tbdestpar[,]!=""]
+					object@data<-object@data[car_libelle%in%parm ,]
+					assign("refPar",object,envir_stacomi)
+					funout(gettext("Parameter selected\n",domain="R-stacomiR"))
+					if (!is.null(objectBilan)) {
+						objectBilan@parm<-object
+						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
+						# suppresses all tab larger than current tab
+						currenttab<-svalue(notebook)
+						if (length(notebook)>currenttab){
+							for (i in length(notebook):(currenttab+1)){
+								svalue(notebook) <- i							
+								dispose(notebook) ## dispose current tab
+							}}
+						if (svalue(notebook)<length(notebook)){
+							svalue(notebook)<-svalue(notebook)+1	
+						}
+					}
+				}
+				# below the widget structure [=> within (=> type
+				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
+				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				car_libelle=fun_char_spe(object@data$par_nom)
+				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
+				grouppar<-ggroup() 
+				assign("gouppar",grouppar,envir=.GlobalEnv)
+				add(notebook,grouppar,label=gettext("Sample characteritic",domain="R-stacomiR"))
+				frameparsource<-gframe(gettext("Select here",domain="R-stacomiR"),container=grouppar)
+				tbsourcepar  = gtable(car_libelle,container=frameparsource,expand = TRUE, fill = TRUE)
+				size(tbsourcepar)<-c(160,300) 
+				framepardest<-gframe(gettext("drop here",domain="R-stacomiR"),container=grouppar)
+				# need for a fixed size data.frame otherwise errors when adding new lines
+				xx<-data.frame(choice=rep("",8))
+				xx$choice<-as.character(xx$choice)
+				tbdestpar=gtable(xx,container=framepardest,expand = TRUE, fill = TRUE)
+				size(tbdestpar)<-c(160,300)
+				adddropsource(tbsourcepar)
+				adddroptarget(tbdestpar)				
+				adddropmotion(tbdestpar,handler=function(h,...) {
+							valeurs<-tbdestpar[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcepar)%in%valeurs){
+								tbdestpar[length(valeurs)+1,1]<-svalue(tbsourcepar)
+							}
+						})
+				addHandlerDoubleclick(tbsourcepar,handler=function(h,...) {
+							valeurs<-tbdestpar[,]
+							valeurs<-valeurs[valeurs!=""]
+							if (!svalue(tbsourcepar)%in%valeurs){
+								tbdestpar[length(valeurs)+1,1]<-svalue(h$obj)
+							}
+						})
+				adddropsource(tbdestpar)
+				adddroptarget(tbsourcepar)
+				removepar<-function(){
+					valeurs<-tbdestpar[,]
+					valeurs<-valeurs[valeurs!=""]
+					valeurs<-valeurs[-match(svalue(tbdestpar),valeurs)]
+					tbdestpar[,]<-c(valeurs,rep("",8-length(valeurs)))
+				}
+				adddropmotion(tbsourcepar,handler=function(h,...) {
+							removepar()
+						})
+				addHandlerDoubleclick(tbdestpar,handler=function(h,...) {
+							removepar()
+						})
+				gbutton("OK", container = grouppar, handler = hpar)
+			} else {
+				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
+			}
 		})

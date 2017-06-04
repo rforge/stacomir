@@ -124,15 +124,16 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 						objectBilan@stades<-charge_avec_filtre(object=objectBilan@stades,
 								dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 								taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code
-								)
+						)
 						assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
 						# suppresses all tab larger than 3 (taxon)
-						if (length(notebook)>3){
-							for (i in 4:length(notebook)){
+						# suppresses all tab larger than (dc)
+						currenttab<-svalue(notebook)
+						if (length(notebook)>currenttab){
+							for (i in length(notebook):(currenttab+1)){
 								svalue(notebook) <- i							
 								dispose(notebook) ## dispose current tab
-							}
-						}
+							}}
 						choicemult(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 					# changing tab of notebook to next tab

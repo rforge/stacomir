@@ -195,9 +195,10 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 							# as I can't get the name from within the function (deparse(substitute(objectBilan does not return
 							# "bilanMigrationMult"
 							assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
-							# suppresses all tab larger than 1 (dc)
-							if (length(notebook)>2){
-								for (i in 3:length(notebook)){
+							# suppresses all tab larger than (dc)
+							currenttab<-svalue(notebook)
+							if (length(notebook)>currenttab){
+								for (i in length(notebook):(currenttab+1)){
 									svalue(notebook) <- i							
 									dispose(notebook) ## dispose current tab
 								}}
@@ -263,7 +264,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 			} else {
 				funout(gettext("Error : no counting device in the database (the query returns 0 entry)\n",domain="R-stacomiR"),arret=TRUE)
 			}
-			return(object)
+			#return(object)
 		})
 
 
