@@ -30,7 +30,7 @@ interface_BilanMigrationMult=function(){
 	assign("group",group,envir = .GlobalEnv)  
 	notebook <- gnotebook(container=group)	
 	assign("notebook",notebook,envir=.GlobalEnv)
-	size(notebook)<-c(400,300)
+	size(notebook)<-c(400,400)
 	add(ggroupboutons,group)
 	choicemult(bilanMigrationMult@pasDeTemps)
 	choicemult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
