@@ -131,6 +131,7 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 						
 					}
 				}
+				group<-get("group",envir=envir_stacomi)
 				frame_std<<-gframe(gettext("Stage selection",domain="R-stacomiR"))
 				add(group,frame_std)
 				std_libelle=fun_char_spe(object@data$std_libelle)
@@ -232,10 +233,11 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group)  else
+					notebook<-get("notebook",envir=envir_stacomi)				
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				groupstd<-ggroup() 
-				assign("goupstd",groupstd,envir=.GlobalEnv)
+				assign("goupstd",groupstd,envir=envir_stacomi)
 				add(notebook,groupstd,label="stade")
 				framestdsource<-gframe(gettext("Stage selection",domain="R-stacomiR"),container=groupstd)
 				tbsourcestd  = gtable(std_libelle,container=framestdsource,expand = TRUE, fill = TRUE)

@@ -88,7 +88,8 @@ setMethod("choice",signature=signature("RefTaxon"),
 						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 				}
-				frame_tax<<-gframe(gettext("Taxon selection",domain="R-stacomiR"))
+				group<-get("group",envir=envir_stacomi)
+				frame_tax<-gframe(gettext("Taxon selection",domain="R-stacomiR"))
 				add(group,frame_tax)
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				choice=gdroplist(tax_libelle,container=frame_tax,handler=htax)
@@ -147,10 +148,11 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[grouptaxon(ggroup&tab)[[frametaxonsource(gframe)[tbsourcetaxon(gtable)],frametaxondest(gframe)[tbdtaxondest(gtable)]],OKbutton]]
-				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group)  else
+					notebook<-get("notebook",envir=envir_stacomi)				
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				grouptaxon<-ggroup() 
-				assign("grouptaxon",grouptaxon,.GlobalEnv)
+				assign("grouptaxon",grouptaxon,envir_stacomi)
 				add(notebook,grouptaxon,label="taxon")
 				frametaxonsource<-gframe(gettext("Taxon selection",domain="R-stacomiR"),container=grouptaxon)
 				tbsourcetaxon  = gtable(tax_libelle,container=frametaxonsource,expand = TRUE, fill = TRUE)

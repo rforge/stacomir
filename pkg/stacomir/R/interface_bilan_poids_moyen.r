@@ -2,27 +2,28 @@
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_BilanPoidsMoyen = function()
 {
-    quitte()  # erase the interface
+	quitte()  # erase the interface
 	bilPM=new("Bilan_poids_moyen")
-    assign("bilan_poids_moyen",bilPM,envir = envir_stacomi)
-    bilPM@dc=charge(bilPM@dc)
-    bilPM@anneedebut=charge(bilPM@anneedebut)
-    bilPM@anneefin=charge(bilPM@anneefin)
-    bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1",gettext("all",domain="R-stacomiR")),label=gettext("choice of number in sample (one, several, both)",domain="R-stacomiR"))
+	assign("bilan_poids_moyen",bilPM,envir = envir_stacomi)
+	bilPM@dc=charge(bilPM@dc)
+	bilPM@anneedebut=charge(bilPM@anneedebut)
+	bilPM@anneefin=charge(bilPM@anneefin)
+	bilPM@liste=charge(object=bilPM@liste,listechoice=c("=1",">1",gettext("all",domain="R-stacomiR")),label=gettext("choice of number in sample (one, several, both)",domain="R-stacomiR"))
 	# choice of number type
-    group <- gWidgets::ggroup(horizontal=FALSE)   # must always be named group
-    assign("group",group,envir = .GlobalEnv)
-   gWidgets::add(ggroupboutons,group)
-    gl=glabel(text=gettext("Mean weight report",domain="R-stacomiR"),container=group)
-
-    ### first toobar    
-    gWidgets::addSpring(group)
-    choice(bilPM@liste)
-    choice(bilPM@dc,objectBilan=NULL,is.enabled=TRUE)
-    choice(bilPM@anneedebut,
+	group <- gWidgets::ggroup(horizontal=FALSE)   # must always be named group
+	assign("group",group,envir = envir_stacomi)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
+	gWidgets::add(ggroupboutons,group)
+	gl=glabel(text=gettext("Mean weight report",domain="R-stacomiR"),container=group)
+	
+	### first toobar    
+	gWidgets::addSpring(group)
+	choice(bilPM@liste)
+	choice(bilPM@dc,objectBilan=NULL,is.enabled=TRUE)
+	choice(bilPM@anneedebut,
 			nomassign="refAnneeDebut",
 			titleFrame=gettext("Beginning year",domain="R-stacomiR")) #annee debut
-    choice(bilPM@anneefin,
+	choice(bilPM@anneefin,
 			nomassign="refAnneeFin",
 			titleFrame=gettext("Ending year",domain="R-stacomiR"))#annee fin
 	aCalc=gWidgets::gaction(label=gettext("load",domain="R-stacomiR"),
@@ -56,9 +57,9 @@ interface_BilanPoidsMoyen = function()
 			tooltip=gettext("model.type='seasonal2', long term variation + seasonal component fitted with sine curve",domain="R-stacomiR"))
 	aExp=gWidgets::gaction(label=gettext("export",domain="R-stacomiR"),icon="gtk-harddisk",handler=hexp)    
 	toolbarlistgraph <- gmenu(list(gra=aGra,coe=aCoe,size=aSize))
-	assign("toolbarlistgraph",toolbarlistgraph,.GlobalEnv)
+	assign("toolbarlistgraph",toolbarlistgraph,envir_stacomi)
 	toolbarlistgraph1<-gmenu(list(reg=aReg,reg1=aReg1,reg2=aReg2,exp=aExp))
-	assign("toolbarlistgraph1",toolbarlistgraph1,.GlobalEnv)
+	assign("toolbarlistgraph1",toolbarlistgraph1,envir_stacomi)
 	add(group,toolbarlistgraph)
 	add(group,toolbarlistgraph1)  
 }

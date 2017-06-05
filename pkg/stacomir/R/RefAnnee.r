@@ -143,6 +143,7 @@ setMethod("choice",
 					assign(nomassign,object,envir_stacomi)
 					funout(funoutlabel)      
 				}    
+				group<-get("group",envir=envir_stacomi)
 				frame_annee<-gframe(titleFrame) 
 				assign("frame_annee",frame_annee,envir=envir_stacomi)
 				add(group,frame_annee)    

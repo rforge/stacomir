@@ -15,7 +15,8 @@ interface_BilanArgentee = function()
 	
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	
-	assign("group",group,envir = .GlobalEnv)
+	assign("group",group,envir = envir_stacomi)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,group)
 	gl=glabel(text=gettext("Silver eel summary",domain="R-stacomiR"),container=group)
 	# dans l'ordre 
@@ -73,6 +74,6 @@ interface_BilanArgentee = function()
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
+	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)	
 	gWidgets::addSpring(group)
 }

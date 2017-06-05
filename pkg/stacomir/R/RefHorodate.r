@@ -83,6 +83,7 @@ setMethod("choice",signature=signature("RefHorodate"),definition=function(object
 				}
 				object@horodate<-shiftyear(object@horodate,decal)
 			}
+			group<-get("group",envir=envir_stacomi)
 			winhor=gframe(label,container=group,horizontal=FALSE)
 			pg<-ggroup(horizontal=FALSE,container=winhor)
 			horodate<-gedit(getRefHorodate(object),container=pg,handler=hwinhor,width=20)
@@ -199,7 +200,8 @@ setMethod("choicemult",signature=signature("RefHorodate"),definition=function(ob
 					}
 					object@horodate<-shiftyear(object@horodate,decal)
 				}
-				if (!exists("notebook")) notebook <- gnotebook(container=group) 
+				if (!exists("notebook",envir_stacomi)) notebook <- gnotebook(container=group) else
+					notebook<-get("notebook",envir=envir_stacomi)
 				grouphorodate<-ggroup(container=notebook, label=label,horizontal=FALSE) 
 				horodate<-gedit(getRefHorodate(object),container=grouphorodate,handler=hhoro,width=20)			
 				gbutton("OK", container=grouphorodate,handler=hhoro,icon="execute")			

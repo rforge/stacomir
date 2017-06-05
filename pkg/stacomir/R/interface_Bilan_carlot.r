@@ -15,7 +15,8 @@ interface_Bilan_carlot = function()
 	
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
 	
-	assign("group",group,envir = .GlobalEnv)
+	assign("group",group,envir = envir_stacomi)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,group)
 	gl=glabel(text=gettext("Batch summary",domain="R-stacomiR"),container=group)
 	# dans l'ordre 
@@ -46,7 +47,6 @@ interface_Bilan_carlot = function()
 			icon="gWidgetsRGtk2-cloud",
 			handler=funpointBilan_carlot,
 			tooltip=gettext("dotplot",domain="R-stacomiR"))
-
 	aDensity=gWidgets::gaction(label=gettext("density",domain="R-stacomiR"),
 			icon="gWidgetsRGtk2-density",
 			handler=fundensityBilan_carlot,
@@ -72,6 +72,6 @@ interface_Bilan_carlot = function()
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)	
+	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)	
 	gWidgets::addSpring(group)
 }

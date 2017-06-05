@@ -47,15 +47,13 @@ setMethod("choice",signature=signature("RefCheckBox"),definition=function(object
 			hlist=function(h,...){
 				i=h$action
 				if (exists("refCheckBox",envir_stacomi)) {
-					# on recupere les valeurs de l'object assigne precedement
-					# car l'object dans .GlobalEnv n'est pas e jour...
 					object<-get("refCheckBox",envir_stacomi)
 				}
 				object@checked[i]<-svalue(the_choice[[i]])
 				assign("refCheckBox",object,envir_stacomi)
 				funout(paste("choice",object@labels[i],"\n"))
 			}
-			
+			group<-get("group",envir=envir_stacomi)
 			frame_check<-gframe(object@title)	
 			assign("frame_check",frame_check,envir=envir_stacomi)
 			##=>selection de plusieurs caracteristiques

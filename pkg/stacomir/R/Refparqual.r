@@ -129,11 +129,12 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 					assign(nomassign,object,envir_stacomi)
 					funout(gettext("Features have been selected\n",domain="R-stacomiR"))
 				}
-				assign(frameassign,gframe(label),envir= .GlobalEnv)
-				add(group,get(eval(frameassign),envir= .GlobalEnv))
+				group<-get("group",envir=envir_stacomi)
+				assign(frameassign,gframe(label),envir= envir_stacomi)
+				add(group,get(eval(frameassign),envir= envir_stacomi))
 				car_libelle=fun_char_spe(object@data$par_nom)
-				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= envir_stacomi),handler=hcar)
+				gbutton("OK", container=get(eval(frameassign),envir= envir_stacomi),handler=hcar)
 			} else stop(gettext("Internal error : unable to load any feature to make the choice\n",domain="R-stacomiR"),arret=TRUE)
 		})
 
@@ -174,11 +175,12 @@ setMethod("choicemult",signature=signature("Refparqual"),definition=function(obj
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group) else
+					notebook<-get("notebook",envir=envir_stacomi)
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				grouppar<-ggroup() 
-				assign("gouppar",grouppar,envir=.GlobalEnv)
+				assign("gouppar",grouppar,envir=envir_stacomi)
 				add(notebook,grouppar,label=gettext("Qualitative",domain="R-stacomiR"))
 				frameparsource<-gframe(gettext("Select here",domain="R-stacomiR"),container=grouppar)
 				tbsourcepar  = gtable(car_libelle,container=frameparsource,expand = TRUE, fill = TRUE)

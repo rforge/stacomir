@@ -13,7 +13,8 @@ interface_BilanMigrationInterAnnuelle = function()
 	bilanMigrationInterAnnuelle@stades=charge(bilanMigrationInterAnnuelle@stades)
 	
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)  
+	assign("group",group,envir = envir_stacomi)  
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	
 	# pour preselectionner une date on lui fournit l'indice de la date dans le RefAnnee. indice = 11 pour 2005
@@ -37,7 +38,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	### premiere toobar
 	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
+assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist1 = list(

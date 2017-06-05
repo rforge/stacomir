@@ -16,7 +16,7 @@ setClass(Class="RefChoix",representation= representation(listechoice="ANY",
 				selected="integer",
 				selectedvalue="ANY"),
 		prototype=list(
-		selectedvalue=vector()))
+				selectedvalue=vector()))
 
 #' Loading method for Rechoice referential objects
 #' 
@@ -59,13 +59,14 @@ setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 				assign("refchoice",object,envir_stacomi)
 				funout(paste(object@label,"\n"))
 			}
+			group<-get("group",envir=envir_stacomi)
 			frame_choice<-gframe(object@label)
 			assign("frame_choice",frame_choice,envir=envir_stacomi)
 			##=>selection de plusieurs caracteristiques
 			add(group,frame_choice)
 			list_libelle=fun_char_spe(object@listechoice)
 			choice=gradio(items=list_libelle,selected=object@selected,horizontal=TRUE,container=frame_choice,handler=hlist)
-			gbutton("OK", container=frame_list,handler=hlist)
+			gbutton("OK", container=frame_choice,handler=hlist)
 		})
 
 #' Choice_c method for Refchoix referential objects
@@ -111,8 +112,12 @@ setMethod("choicemult",signature=signature("RefChoix"),definition=function(objec
 					svalue(notebook)<-svalue(notebook)+1	
 				}
 			}
-						
-			if (!exists("notebook")) notebook <- gnotebook(container=group) 
+			
+			if (!exists("notebook",envir=envir_stacomi)){
+				notebook <- gnotebook(container=group)
+			} else {
+				notebook<-get("notebook",envir=envir_stacomi)
+			}
 			groupchoice<-ggroup(container=notebook, label=gettext("options",domain="R-stacomiR"),horizontal=FALSE) 
 			glabel(object@label,container=groupchoice)
 			list_libelle=fun_char_spe(object@listechoice)

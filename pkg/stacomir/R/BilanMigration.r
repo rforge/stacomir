@@ -429,6 +429,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 				################################################################
 				#                 step plot
 				################################################################
+				#FIXME problem with negative numbers
 			} else if (plot.type=="step"){
 				taxon= as.character(bilanMigration@taxons@data$tax_nom_latin)
 				stade= as.character(bilanMigration@stades@data$std_libelle)

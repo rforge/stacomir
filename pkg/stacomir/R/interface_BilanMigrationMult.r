@@ -27,16 +27,17 @@ interface_BilanMigrationMult=function(){
 	bilanMigrationMult@stades=charge(bilanMigrationMult@stades)
 	bilanMigrationMult@dc=charge(bilanMigrationMult@dc)   	
 	group = ggroup(horizontal=TRUE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)  
+	assign("group",group,envir = envir_stacomi)  
 	notebook <- gnotebook(container=group)	
-	assign("notebook",notebook,envir=.GlobalEnv)
+	assign("notebook",notebook,envir=envir_stacomi)
 	size(notebook)<-c(400,400)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	choicemult(bilanMigrationMult@pasDeTemps)
 	choicemult(bilanMigrationMult@dc,objectBilan=bilanMigrationMult,is.enabled=TRUE)
 	svalue(notebook)<-1
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hbilanMigrationMultcalc,  icon="new", 

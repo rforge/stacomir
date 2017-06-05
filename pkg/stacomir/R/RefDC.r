@@ -135,7 +135,8 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 					addSpring(bg)
 					gbutton(gettext("close",domain="R-stacomiR"), container=bg, handler = function(h,...) dispose(w))
 				}
-				frame_DC<<-gframe(gettext("Counting devices choice",domain="R-stacomiR"))
+				group<-get("group",envir=envir_stacomi)
+				frame_DC<-gframe(gettext("Counting devices choice",domain="R-stacomiR"))
 				add(group,frame_DC)
 				DC_identifiant=object@data$dc
 				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)
@@ -198,6 +199,7 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 								# "bilanMigrationMult"
 								assign(get("objectBilan",envir=envir_stacomi),objectBilan,envir=envir_stacomi)
 								# suppresses all tab larger than (dc)
+								
 								currenttab<-svalue(notebook)
 								if (length(notebook)>currenttab){
 									for (i in length(notebook):(currenttab+1)){
@@ -221,10 +223,10 @@ setMethod("choicemult",signature=signature("RefDC"),definition=function(object,o
 				# Handler d'affichage du tableau
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[nb(notebook)[groupdc(ggroup&tab)[[frameDCsource(gframe)[tbsourcedc(gtable)],frameDCdest(gframe)[tbdcdest(gtable)]],OKbutton]]
-				
+				notebook<-get("notebook",envir=envir_stacomi)
 				DC=object@data[,c("dc","dis_commentaires","type_dc")]
 				groupdc<-ggroup(container=notebook, label="dc")   ## "add" called by constructor this is a tab of the notebook
-				assign("groupdc",groupdc,envir=.GlobalEnv)
+				assign("groupdc",groupdc,envir=envir_stacomi)
 				frameDCsource<-gframe(gettext("Counting devices choice",domain="R-stacomiR"),container=groupdc)
 				size(frameDCsource)<-c(250,300)
 				tbsourcedc  = gtable(DC,container=frameDCsource,expand = TRUE, fill = TRUE)

@@ -71,6 +71,7 @@ setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=functi
 					funout(gettext("Time steps loaded\n",domain="R-stacomiR"))
 					#dispose(winpa)
 				}
+				group<-get("group",envir=envir_stacomi)
 				winpa=gframe(gettext("Time steps choice (1 year duration)",domain="R-stacomiR"),container=group,horizontal=FALSE)
 				pg<-glayout(container=winpa)
 				pg[1,1]<-glabel(gettext("Start date",domain="R-stacomiR"))

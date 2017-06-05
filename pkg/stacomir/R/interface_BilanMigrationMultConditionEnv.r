@@ -31,18 +31,19 @@ interface_BilanMigrationMultConditionEnv = function()
 	bmmCE@bilanMigrationMult@stades=charge(bmmCE@bilanMigrationMult@stades)
 	bmmCE@bilanMigrationMult@dc=charge(bmmCE@bilanMigrationMult@dc)
 	group = ggroup(horizontal=TRUE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)  
+	assign("group",group,envir = envir_stacomi)  
 	choice(bmmCE@bilanConditionEnv@stationMesure)
 	notebook <- gnotebook(container=group)	
-	assign("notebook",notebook,envir=.GlobalEnv)
+	assign("notebook",notebook,envir=envir_stacomi)
 	size(notebook)<-c(400,300)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	
 	choicemult(bmmCE@bilanMigrationMult@pasDeTemps)
 	choicemult(bmmCE@bilanMigrationMult@dc,objectBilan=bmmCE@bilanMigrationMult,is.enabled=TRUE)
 	svalue(notebook)<-1
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	
 	toolbarlist = list(
@@ -57,10 +58,10 @@ interface_BilanMigrationMultConditionEnv = function()
 			annuler=gWidgets::gaction(handler= quitte,
 					icon = "close",
 					label="quitter"))
-	assign("toolbarlist",toolbarlist,envir=.GlobalEnv)
+	assign("toolbarlist",toolbarlist,envir=envir_stacomi)
 	enabled(toolbarlist[["Graph"]])<-FALSE
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)	
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)	
 	gWidgets::addSpring(group)
 	return(invisible(NULL))
 }

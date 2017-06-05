@@ -47,9 +47,9 @@ setMethod("choice",signature=signature("RefTextBox"),definition=function(object,
 				assign(nomassign,object,envir_stacomi)
 				funout(paste("choice",object@label,"\n"))
 			}
-			
+			group<-get("group",envir=envir_stacomi)
 			frame_text<-gframe(object@title)	
-			assign("frame_text",frame_text,.GlobalEnv)
+			assign("frame_text",frame_text,envir_stacomi)
 			add(group,frame_text)
 			choice=glabel(text=object@label,container=frame_text,handler=hlist,editable=TRUE)
 			addhandlerchanged(choice,handler=hlist)

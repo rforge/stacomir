@@ -93,7 +93,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #' @param object An object of class \link{Refpar-class}
 #' @param label The label that will be displayed in the message frame or as output text
 #' @param nomassign The assignment name in envir_stacomi
-#' @param frameassign The name of the frame used for assignement in .GlobalEnv
+#' @param frameassign The name of the frame used for assignement in envir_stacomi
 #' @param is.enabled Default TRUE.
 #' @note the choice method assigns an object of class Refpar named refpar in the environment envir_stacomi
 #' @note this method choice is also on daughter classes Refparquan, hence the parameters, however it was redefined in refparqual
@@ -121,13 +121,14 @@ setMethod("choice",signature=signature("Refpar"),definition=function(object,
 					funout(gettext("Feature has been selected\n",domain="R-stacomiR"))
 				}
 				#frame_par<<-gframe(label)
-				assign(frameassign,gframe(label,horizontal=FALSE),envir= .GlobalEnv)
+				assign(frameassign,gframe(label,horizontal=FALSE),envir= envir_stacomi)
 				# pour pouvoir la supprimer ensuite
-				add(group,get(eval(frameassign),envir= .GlobalEnv))
+				group<-get("group",envir=envir_stacomi)
+				add(group,get(eval(frameassign),envir= envir_stacomi))
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
-				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
-				gbutton("OK", container=get(eval(frameassign),envir= .GlobalEnv),handler=hcar)
+				choice=gdroplist(items=car_libelle,container=get(eval(frameassign),envir= envir_stacomi),handler=hcar)
+				gbutton("OK", container=get(eval(frameassign),envir= envir_stacomi),handler=hcar)
 			} else funout(gettext("Internal error : unable to load any feature to make the choice\n",domain="R-stacomiR"),arret=TRUE)
 		})
 
@@ -209,11 +210,12 @@ setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook")) notebook <- gnotebook(container=group) 				
+				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group) else
+					notebook<-get("notebook",envir=envir_stacomi)
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				grouppar<-ggroup() 
-				assign("gouppar",grouppar,envir=.GlobalEnv)
+				assign("gouppar",grouppar,envir=envir_stacomi)
 				add(notebook,grouppar,label=label)
 				frameparsource<-gframe(gettext("Select here",domain="R-stacomiR"),container=grouppar)
 				tbsourcepar  = gtable(car_libelle,container=frameparsource,expand = TRUE, fill = TRUE)

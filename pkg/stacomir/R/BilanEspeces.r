@@ -252,7 +252,7 @@ hTableBilanEspeces=function(h,...) {
 #' @export
 interface_BilanEspeces=function(){
 	bilanEspeces=new("BilanEspeces")
-	assign("bilanEspeces",bilanEspeces,envir = .GlobalEnv)
+	assign("bilanEspeces",bilanEspeces,envir = envir_stacomi)
 	funout(gettext("Summary of encountered species for the counting device\n",domain="R-stacomiR"))
 	bilanEspeces@dc=charge(bilanEspeces@dc)   
 	bilanEspeces@liste=charge(object=bilanEspeces@liste,
@@ -260,8 +260,9 @@ interface_BilanEspeces=function(){
 			label=gettext("Choice of cutting",domain="R-stacomiR"))
 	quitte()
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)  
+	assign("group",group,envir = envir_stacomi)  
 	gl=glabel(text=gettext("Species summary",domain="R-stacomiR"),container=group)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	choice(bilanEspeces@horodate,
 			label=gettext("Start of timestamp",domain="R-stacomiR"),
@@ -278,7 +279,7 @@ interface_BilanEspeces=function(){
 	choice(bilanEspeces@dc,objectBilan=bilanEspeces,is.enabled=TRUE)
 	choice(bilanEspeces@liste)	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hBilanEspecescalc, action=bilanEspeces, icon="new", label="calcul", tooltip=gettext("Loading",domain="R-stacomiR")),
@@ -287,10 +288,4 @@ interface_BilanEspeces=function(){
 			Stat=gWidgets::gaction(handler=hTableBilanEspeces, icon="dataframe", label="stat", tooltip=gettext("Summary tables in .csv and XML",domain="R-stacomiR")),    
 			annuler=gWidgets::gaction(handler= quitte,icon = "close",label=gettext("exit",domain="R-stacomiR"))
 	)    
-	#gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
-	#gWidgets::addSpring(group)
-	#graphes=ggraphics(width=600,height=400)
-	add(ggrouptotal1,graphes )  # on ajoute au groupe horizontal
-	dev.new()
-	assign("graphes",graphes,envir=.GlobalEnv) 
 }

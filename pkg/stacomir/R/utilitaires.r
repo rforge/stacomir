@@ -22,7 +22,10 @@ quitte=function(...){
 #		delete(ggroupboutons,group) 
 #		rm(group,envir= .GlobalEnv)
 #	}
-	if (exists("win",envir=.GlobalEnv)) dispose(win)
+	if (exists("win",envir=envir_stacomi)){
+		win<-get("win",envir_stacomi)
+		dispose(win)
+	}
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
@@ -30,9 +33,9 @@ quitte=function(...){
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}
-	if (length(ls(pattern="frame",envir=.GlobalEnv))!=0) {
-		rm(list=ls(pattern="frame",envir=.GlobalEnv),envir=.GlobalEnv)
-	}
+#	if (length(ls(pattern="frame",envir=envir_stacomi))!=0) {
+#		rm(list=ls(pattern="frame",envir=envir_stacomi),envir=envir_stacomi)
+#	}
 	if (exists("g")) rm(g)
 	interface_graphique()
 }
@@ -82,24 +85,28 @@ fun_char_spe<-function(text){
 #' @param arret Should this cause the program to stop ?
 #' @param wash Should the console be cleared after displaying the message
 #' @param ... Additional parameters passed to print
-#' @return nblignes Assigned in .Global
+#' @return nblignes Assigned in envir_stacomi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
 #' @export
 # internal= funout is exported to ease debug during tests but not showns to users
 funout<-function(text,arret=FALSE,wash=FALSE,...){
-	if (exists("gSortie",envir=.GlobalEnv)) {
+	if (exists("gSortie",envir=envir_stacomi)) {
+		gSortie<-get("gSortie",envir=envir_stacomi)
+		nbligne<-get("nbligne",envir=envir_stacomi)
+		col.sortie<-get("col.sortie",envir_stacomi)
 		if (isExtant(gSortie)){
 			if (wash) dispose(gSortie)
+			
 			nbligne=nbligne+1
 			text<-fun_char_spe(text)
 			add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
 							col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
 			if (nbligne==20) nbligne=1
-			nbligne<<-nbligne
+			assign("nbligne",nbligne,envir=envir_stacomi)
 		} else {
 			# gSortie exists but has not been removed
-			rm("gSortie",envir=.GlobalEnv)
+			rm("gSortie",envir=envir_stacomi)
 		}
 	} 
 	# this is printed anyway
@@ -242,7 +249,7 @@ mygtkProgressBar<-function(title,progress_text,width=400,height=50,pulse=TRUE){
 	## Ensure that the dialog box is destroyed when the user responds.
 	RGtk2::gSignalConnect(.dialog, "response", RGtk2::gtkWidgetDestroy)	
 	progress_bar <- RGtk2::gtkProgressBar()
-	assign("progress_bar",progress_bar,.GlobalEnv)
+	assign("progress_bar",progress_bar,envir_stacomi)
 	RGtk2::gtkWidgetSetSizeRequest(progress_bar,width=width,height=height)
 	.dialog[["vbox"]]$add(progress_bar)
 	progress_bar$setText(progress_text)
@@ -377,10 +384,10 @@ funtraitementdate=function(data, # tableau de donnees e importer
 colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
 	if (is.null(color)) {
 		if (color_function=="brewer.pal") {
-		color=RColorBrewer::brewer.pal(length(vec),name=palette)[1:length(vec)]
-	} else if (color_function=="gray.colors"){
-		color=grDevices::gray.colors(length(vec))
-	}
+			color=RColorBrewer::brewer.pal(length(vec),name=palette)[1:length(vec)]
+		} else if (color_function=="gray.colors"){
+			color=grDevices::gray.colors(length(vec))
+		}
 		names(color)<-vec
 	} else if (length(color)!=length(vec)){
 		funout(gettextf("The color argument should have length %s",length(vec)),arret=TRUE)

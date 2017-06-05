@@ -71,6 +71,7 @@ setMethod("choice",signature=signature("RefStationMesure"),definition=function(o
 						funout(gettext("The monitoring stations have been selected\n",domain="R-stacomiR"))
 					}
 				}
+				group<-get("group",envir=envir_stacomi)
 				frame_stationMesure<<-gexpandgroup(title)
 				add(group,frame_stationMesure)
 				stm_libelle=fun_char_spe(object@data$stm_libelle)

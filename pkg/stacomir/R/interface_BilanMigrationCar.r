@@ -34,9 +34,9 @@ interface_BilanMigrationPar = function()
 	# Interface Graphique 
 	##########################
 	group <- gWidgets::ggroup(horizontal=TRUE)   # doit toujours s'appeller group	
-	assign("group",group,envir = .GlobalEnv)
+	assign("group",group,envir = envir_stacomi)
 	notebook <- gnotebook(container=group)	
-	assign("notebook",notebook,envir=.GlobalEnv)
+	assign("notebook",notebook,envir=envir_stacomi)
 	size(notebook)<-c(400,600)
 		
 
@@ -47,11 +47,12 @@ interface_BilanMigrationPar = function()
 # FIXME Error in .local(object, ...) : 
 #  unused arguments (label = "Qualitative feature", frameassign = "frame_parqual") verify
 	svalue(notebook)<-1	
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,group)
 	# ggroupboutons is attached to the original frame
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
-	assign("ggroupboutonsbas",ggroupboutonsbas, envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas, envir=envir_stacomi)
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler = hbmCcalc,
 					icon = "new",

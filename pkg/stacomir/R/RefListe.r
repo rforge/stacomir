@@ -55,6 +55,7 @@ setMethod("choice",signature=signature("RefListe"),definition=function(object,is
 				assign("refliste",object,envir_stacomi)
 				funout(paste(object@label,"\n"))
 			}
+			group<-get("group",envir=envir_stacomi)
 			frame_list<<-gframe(object@label)
 			add(group,frame_list)
 			list_libelle=fun_char_spe(object@listechoice)

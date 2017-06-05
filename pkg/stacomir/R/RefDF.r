@@ -98,6 +98,7 @@ setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 					addSpring(bg)
 					gbutton(gettext("close",domain="R-stacomiR"), container=bg, handler = function(h,...) dispose(w))
 				}
+				group<-get("group",envir=envir_stacomi)
 				frameDF=gframe(gettext("Fishway choice",domain="R-stacomiR"),container=group)
 				DF_identifiant=object@data$df
 				choice=gdroplist(DF_identifiant,container=frameDF,handler=hDF)

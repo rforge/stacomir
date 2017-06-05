@@ -108,6 +108,6 @@ source("interface_BilanAgedemer.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
 setwd("C:/workspace/stacomir/pkg/stacomir")
-stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
+stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 
 

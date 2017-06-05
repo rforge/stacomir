@@ -25,12 +25,13 @@ interface_BilanMigration=function(){
 	bilanMigration@stades=charge(bilanMigration@stades)
 	bilanMigration@dc=charge(bilanMigration@dc)  
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir = .GlobalEnv)  
+	assign("group",group,envir = envir_stacomi)  
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	choice(bilanMigration@pasDeTemps)
 	choice(object=bilanMigration@dc,objectBilan=bilanMigration,is.enabled=TRUE)	
 	ggroupboutonsbas = gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutonsbas",ggroupboutonsbas,envir=.GlobalEnv)
+	assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,ggroupboutonsbas)
 	toolbarlist = list(
 			Calc=gWidgets::gaction(handler=hbilanMigrationcalc, action=bilanMigration, icon="new", label=gettext("calculate",domain="R-stacomiR"), tooltip=gettext("Calculation of numbers by time step",domain="R-stacomiR")),

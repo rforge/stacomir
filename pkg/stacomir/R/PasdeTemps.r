@@ -279,6 +279,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							font.attr=c(foreground.colors="red") )
 					hwinpa(h)
 				}
+				group<-get("group",envir=envir_stacomi)
 				winpa=gframe(gettext("Time steps choice",domain="R-stacomiR"),container=group,horizontal=FALSE)
 				pg<-ggroup(horizontal=FALSE,container=winpa)
 				glabel(gettext("Starting date",domain="R-stacomiR"),container=pg)
@@ -327,9 +328,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 							nbStep=as.numeric(svalue(choicenbStep))
 							object@stepDuration<-as.numeric(LesPasDeTemps$ValeurPasDeTemps[LesPasDeTemps$LabelPasDeTemps%in%pas])
 							object@nbStep<-nbStep 
-							object=setdateDebut(object,svalue(datedeb))
-							#print(object@dateDebut)							
-							#assign("date",svalue(datedeb),envir = .GlobalEnv)     
+							object=setdateDebut(object,svalue(datedeb))  
 							add(datedefin,strftime(as.POSIXlt(DateFin(object)),format="%Y-%m-%d %H:%M:%S"),
 									font.attr=c(foreground.colors="red") )
 							hwinpa(h)
@@ -337,8 +336,9 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 						hchoicedatedebut=function(h,...){
 							# TODO to develop
 						}
+						notebook<-get("notebook",envir=envir_stacomi)
 						groupdate<-ggroup(container=notebook, label="periode")   ## "add" called by constructor this is a tab of the notebook
-						assign("groupdate",groupdate,envir=.GlobalEnv)
+						assign("groupdate",groupdate,envir=envir_stacomi)
 						winpa=gframe(gettext("Time steps choice",domain="R-stacomiR"),container=groupdate,horizontal=FALSE)
 						pg<-ggroup(horizontal=FALSE,container=winpa)
 						glabel(gettext("Starting date",domain="R-stacomiR"),container=pg)

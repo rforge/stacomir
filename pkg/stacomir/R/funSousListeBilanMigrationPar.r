@@ -18,13 +18,6 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	req=new("RequeteODBC")
 	req@open<-TRUE
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
-#	assign("progres",utils::winProgressBar(title = "cumul val. quant. par pas de temps",
-#					label = "progression %",
-#					min = 0,
-#					max = 1, 
-#					initial = 0,
-#					width = 400),
-#			envir = .GlobalEnv)
 	mygtkProgressBar(title="cumul val. quant. par pas de temps",
 			progress_text=gettext("Progress %",domain="R-stacomiR"))
 

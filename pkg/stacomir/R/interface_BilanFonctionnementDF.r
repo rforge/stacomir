@@ -9,7 +9,8 @@ interface_BilanFonctionnementDF = function()
 	funout(gettext("Loading of the list for fishways and choice of the time step\n",domain="R-stacomiR"))
 	bilanFonctionnementDF@df=charge(bilanFonctionnementDF@df)    
 	group <- gWidgets::ggroup(horizontal=FALSE)   # doit toujours s'appeller group
-	assign("group",group,envir=.GlobalEnv)    
+	assign("group",group,envir=envir_stacomi)
+	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	gWidgets::add(ggroupboutons,group)
 	
 	choice(bilanFonctionnementDF@df)

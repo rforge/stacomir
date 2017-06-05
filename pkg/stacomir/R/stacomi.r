@@ -5,14 +5,14 @@
 #' @param ... Other parameters
 hDF=function(h,...){
 	funout(gettext("Calculation of the operating fishway\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanFonctionnementDF(),envir = .GlobalEnv)
+	eval(interface_BilanFonctionnementDF(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hDC=function(h,...){
 	funout(gettext("Calculation of the operating counting device\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanFonctionnementDC(),envir = .GlobalEnv)
+	eval(interface_BilanFonctionnementDC(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
@@ -33,62 +33,62 @@ hDFDC=function(h,...){
 #' @param ... additional parameters
 hBilanMigration=function(h,...){
 	funout(gettext("Migration summary (for a species and a stage)\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigration(),envir = .GlobalEnv)
+	eval(interface_BilanMigration(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationMult=function(h,...){
 	funout(gettext("For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr, or mail stacomi@googlegroups.com.\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigrationMult(),envir = .GlobalEnv)
+	eval(interface_BilanMigrationMult(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationInterAnnuelle=function(h,...){
 	funout(gettext("Summary of interannual migration\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigrationInterAnnuelle(),envir = .GlobalEnv)
+	eval(interface_BilanMigrationInterAnnuelle(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationMultConditionEnv=function(h,...){
 	funout(gettext("Summary of migration environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigrationMultConditionEnv(),envir = .GlobalEnv)
+	eval(interface_BilanMigrationMultConditionEnv(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanMigrationPar=function(h,...){
 	funout(gettext("Summary of migration with parameters\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanMigrationPar(),envir = .GlobalEnv)
+	eval(interface_BilanMigrationPar(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanConditionEnv=function(h,...){
 	funout(gettext("Summary of the environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_ConditionEnv(),envir = .GlobalEnv)
+	eval(interface_ConditionEnv(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilan_carlot=function(h,...){
 	funout(gettext("Summary of samples characteristics (size, weight...) by calling the view vue_lot_ope\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_Bilan_carlot(),envir = .GlobalEnv)
+	eval(interface_Bilan_carlot(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hTail=function(h,...){
 	funout(gettext("Lengths summary\n",domain="R-stacomiR"),wash=TRUE)
-	#eval(interface_BilanTaille(),envir = .GlobalEnv)
+	#eval(interface_BilanTaille(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hpds=function(h,...){
-	eval(interface_BilanPoidsMoyen(),envir = .GlobalEnv)
+	eval(interface_BilanPoidsMoyen(),envir = envir_stacomi)
 	funout(gettext("Summary of average weight for the calculation of the relation between length and number.\n",domain="R-stacomiR"),wash=TRUE) 
 }
 #' handler function used by the main interface
@@ -97,33 +97,33 @@ hpds=function(h,...){
 hSt=function(h,...){
 	funout(gettext("Not adapted yet to version 0.5",domain="R-stacomiR"))
 	#funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
-	#eval(interface_Bilan_stades_pigm(),envir = .GlobalEnv)
+	#eval(interface_Bilan_stades_pigm(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hbilA=function(h,...){
-	eval(interface_BilanAnnuels(),envir = .GlobalEnv)
+	eval(interface_BilanAnnuels(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hsilver=function(h,...){
-	eval(interface_BilanArgentee(),envir = .GlobalEnv)
+	eval(interface_BilanArgentee(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hBilanEspeces=function(h,...){
 	funout(gettext("Species summary of the counting device\n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanEspeces(),envir = .GlobalEnv)
+	eval(interface_BilanEspeces(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
 hbilanagedemer=function(h,...){
 	funout(gettext("Age calculation from size limit \n",domain="R-stacomiR"),wash=TRUE)
-	eval(interface_BilanAgedemer(),envir = .GlobalEnv)
+	eval(interface_BilanAgedemer(),envir = envir_stacomi)
 }
 
 
@@ -139,12 +139,15 @@ husr=function(h,...){
 	gr_interface<-get("gr_interface",envir_stacomi) # logical true or false
 	database_expected<-get("database_expected",envir_stacomi) # logical true or false
 	login_window<-get("login_window",envir_stacomi) # logical true or false
+	usrname<-get("usrname",envir_stacomi)
+	usrpwd<-get("usrpwd",envir_stacomi)
 	# test de la connection
 	if (login_window & gr_interface&database_expected){	
 			baseODBC[2]<-svalue(usrname)
 			baseODBC[3]<-svalue(usrpwd)
 			assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
 			assign("baseODBC",baseODBC,envir=envir_stacomi)
+			logw<-get("logw",envir_stacomi)
 			dispose(logw)
 		} else {
 			# nothing sch and baseODBC have been assigned from default value in stacomi()	
@@ -337,7 +340,9 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 	# values assigned in the envir_stacomi
 	assign("datawd",datawd,envir=envir_stacomi)
 	assign("sqldf.options",sqldf.options,envir=envir_stacomi)
+	# default the usrname and usrpwd come from baseODBC
 	
+
 	# the following values may be overridden later in husr()
 	assign("baseODBC",baseODBC,envir=envir_stacomi)
 	assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
@@ -355,16 +360,16 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 				name="log",
 				parent=c(0,0),
 				width=100,height=100)
-		assign("logw",logw,envir=.GlobalEnv)
+		assign("logw",logw,envir=envir_stacomi)
 		logly=gWidgets::glayout(container=logw)
 		usrname<- gWidgets::gedit(text = baseODBC[2], 
 				width = 10, 
 				container = logly)
-		assign("usrname",usrname,.GlobalEnv)
+		assign("usrname",usrname,envir_stacomi)
 		usrpwd<- gWidgets::gedit(text = baseODBC[3], 
 				width = 10, 
 				container = logly)
-		assign("usrpwd",usrpwd,.GlobalEnv)
+		assign("usrpwd",usrpwd,envir_stacomi)
 		but=gWidgets::gbutton(text =  gettext("Login",domain="R-stacomiR"),
 				border=TRUE, 
 				handler = husr, 
@@ -375,6 +380,8 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 		logly[2,2]<-usrpwd
 		logly[3,2]<-but
 	} else {
+		assign("usrname",baseODBC[2],envir_stacomi)
+		assign("usrpwd",baseODBC[3],envir_stacomi)
 		husr(h=NULL)
 	}
 	invisible(NULL)
@@ -388,21 +395,20 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 #' are assigned in the user environment \code{.GlobalEnv}. 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 interface_graphique=function(){
-	if (exists("graphes"))  rm(list=c("graphes"),envir=.GlobalEnv)
-	if (exists("ggroupboutonsbas"))  rm(list=c("ggroupboutonsbas"),envir=.GlobalEnv) 
-	if (exists("group"))  rm(list=c("group"),envir=.GlobalEnv)
+	if (exists("ggroupboutonsbas"))  rm(list=c("ggroupboutonsbas"),envir=envir_stacomi) 
+	if (exists("group"))  rm(list=c("group"),envir=envir_stacomi)
 	if (!file.exists(path.expand(get("datawd",envir=envir_stacomi)))) {
 		dir.create(path.expand(get("datawd",envir=envir_stacomi)))
 	}
 	
 	col.sortie=rep(c("pink","purple","red","orange","green","blue","cyan","magenta"),20)  # couleurs pour le texte
 	# beware these must be standard colors usable by gWidgets
-	assign("col.sortie",col.sortie,.GlobalEnv)
+	assign("col.sortie",col.sortie,envir_stacomi)
 	nbligne=0
-	assign("nbligne",nbligne,.GlobalEnv)
+	assign("nbligne",nbligne,envir_stacomi)
 	
 	win <- gWidgets::gwindow(gettext("Migratory treatment",domain="R-stacomiR"), name="main",parent=c(0,0),width=100,height=100)
-	assign("win",win,envir=.GlobalEnv)
+	assign("win",win,envir=envir_stacomi)
 	
 	## Menubar is defined by a list
 	menubarlist = list()
@@ -449,23 +455,24 @@ interface_graphique=function(){
 	gWidgets::add(win, gmenu(menubarlist))
 	ggrouptotal<- gWidgets::ggroup(horizontal=FALSE)        
 	# gsortie is above the window
-	assign("ggrouptotal",ggrouptotal,envir=.GlobalEnv) 
+	assign("ggrouptotal",ggrouptotal,envir=envir_stacomi) 
 	
 	gWidgets::add(win,ggrouptotal)
 	
-	gSortie=gWidgets::gtext(gettext("Output of the program\n",domain="R-stacomiR"),width =100 , height = 100,font.attr=list(style="italic", col="blue",family="monospace",sizes="medium",domain="R-stacomiR"))
-	assign("gSortie",gSortie,envir=.GlobalEnv) 
+	gSortie=gWidgets::gtext(gettext("Output of the program\n",domain="R-stacomiR"),width =100 , height = 100,
+			font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
+	assign("gSortie",gSortie,envir=envir_stacomi) 
 	
 	gWidgets::add(ggrouptotal,  gSortie,  expand=FALSE)
 # un groupe en dessous mais cette fois horizontal
 	ggrouptotal1<- gWidgets::ggroup(horizontal=TRUE) 
-	assign("ggrouptotal1",ggrouptotal1,envir=.GlobalEnv) 
+	assign("ggrouptotal1",ggrouptotal1,envir=envir_stacomi) 
 	
 	gWidgets::add(ggrouptotal,ggrouptotal1,expand=FALSE)
 	
 # De nouveau un groupe vertical de boutons qui sera pousse a gauche quand le graphique sera insere
 	ggroupboutons=gWidgets::ggroup(horizontal=FALSE)
-	assign("ggroupboutons",ggroupboutons,envir=.GlobalEnv)
+	assign("ggroupboutons",ggroupboutons,envir=envir_stacomi)
 	
 	gWidgets::add(ggrouptotal1,ggroupboutons,expand=FALSE)
 }
@@ -492,11 +499,11 @@ utils::globalVariables(c("n0","newid","xmin","xmax"))
 # dataset used in the package
 utils::globalVariables(c("coef_Durif"))
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
-utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
-				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
-				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
-				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","refAnnee",
-				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))
+#utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
+#				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
+#				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
+#				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","refAnnee",
+#				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))
 # Progressbar
 utils::globalVariables(c("progres"))
 # environment
