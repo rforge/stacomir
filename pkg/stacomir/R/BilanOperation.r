@@ -19,7 +19,7 @@
 #' \code{\linkS4class{BilanMigrationCar}}
 #' @concept Bilan Object 
 #' @keywords classes
-#' @aliases BilanOperation bilanoperation bilanOperation 
+#' @aliases BilanOperation 
 #' @export 
 setClass(Class="BilanOperation",
 		representation= representation(data="data.frame",

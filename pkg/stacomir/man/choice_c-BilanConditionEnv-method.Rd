@@ -11,13 +11,13 @@
 \arguments{
 \item{object}{An object of class \link{BilanConditionEnv-class}}
 
+\item{stationMesure}{A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}}
+
 \item{datedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
 \item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
 
 \item{silent}{Boolean default FALSE, if TRUE information messages not displayed.}
-
-\item{stationmesure}{A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}}
 }
 \value{
 An object of class \link{BilanConditionEnv-class}

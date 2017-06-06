@@ -12,7 +12,7 @@
 #' @author cedric.briand"at"eptb-vilaine.fr marion.legrand"at"logrami.fr
 #' @family Bilan Objects
 #' @keywords classes
-#' @aliases BilanMigrationMultConditionEnv bilanmigrationmultconditionenv bmmCE
+#' @aliases BilanMigrationMultConditionEnv bilanmigrationmultconditionenv
 #' @keywords classes
 #' @example inst/examples/bilanMigrationMultConditionEnv_example.R
 #' @export
@@ -138,7 +138,7 @@ setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),defini
 
 #' internal method for graphical interface
 #' @param h A handler
-hbmmCEgraph = function(h=null,...){   
+hbmmCEgraph = function(h=null){   
 	bmmCE<-get("bmmCE",envir_stacomi)
 	bmmCE<-plot(bmmCE)
 	return(invisible(NULL))	

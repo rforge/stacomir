@@ -44,7 +44,6 @@ setMethod("charge",
 #' @param object An object of class \link{RefStationMesure-class}
 #' @param is.enabled A boolean parameter, if TRUE the frame is enabled when first displayed
 #' @param title The title of the frame, defaut to "Monitoring stations selection" 
-#' @param stationMesure A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples  
 #' \dontrun{

@@ -288,7 +288,6 @@ hreg = function(h,...) {
 #' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @param model.type default "seasonal", "seasonal1","seasonal2","manual". 
 #' @param silent Default FALSE, if TRUE the program should no display messages
-#' @usage model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FALSE)
 #' @details 
 #' Depending on model.type several models are produced
 #' \itemize{

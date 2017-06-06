@@ -7,17 +7,21 @@
 \usage{
 \S4method{choice_c}{BilanMigrationCar}(object, dc, taxons, stades,
   parquan = NULL, parqual = NULL, horodatedebut, horodatefin,
-  echantillon = TRUE, silent = FALSE)
+  echantillon = gettext("with", domain = "R-stacomiR"), silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigrationCar-class}}
 
 \item{dc}{A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}}
 
-\item{taxons}{'2220=Salmo salar',
+\item{taxons}{'2220=Salmo salar', can be a vector with several values
 these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}}
 
-\item{stades}{TODO}
+\item{stades}{The stages selected, can be a vector with several values}
+
+\item{parquan}{Quantitative parameter}
+
+\item{parqual}{Qualitative parameter}
 
 \item{horodatedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
@@ -26,8 +30,6 @@ these should match the ref.tr_taxon_tax referential table in the stacomi databas
 \item{echantillon}{Default TRUE,}
 
 \item{silent}{Default FALSE, if TRUE the program should no display messages}
-
-\item{car}{Sample TODO}
 }
 \value{
 An object of class \link{BilanAgedemer-class}

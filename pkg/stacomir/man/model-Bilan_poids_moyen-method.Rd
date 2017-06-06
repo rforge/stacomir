@@ -9,10 +9,11 @@
 this method uses samples collected over the season to model the variation in weight of
 glass eel or yellow eels.}
 \usage{
-model(object,model.type=c("seasonal","seasonal1","seasonal2","manual"),silent=FALSE)
+\S4method{model}{Bilan_poids_moyen}(object, model.type = "seasonal",
+  silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \link{Bilan_pois_moyen-class}}
+\item{object}{An object of class \link{Bilan_poids_moyen-class}}
 
 \item{model.type}{default "seasonal", "seasonal1","seasonal2","manual".}
 

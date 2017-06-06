@@ -25,7 +25,7 @@ color gradient functions and if a named vector of colors is provided}
 named vector of color is passed.}
 }
 \value{
-A dataframe with two columns, the vector and the color as a reordered factor
+A dataframe with two columns, the vector (name) and the color (color) as a reordered factor
 }
 \description{
 Builds a table with colors to merge with a dataframe for later

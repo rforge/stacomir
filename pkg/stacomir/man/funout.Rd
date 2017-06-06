@@ -17,7 +17,7 @@ console}
 \item{...}{Additional parameters passed to print}
 }
 \value{
-nblignes Assigned in .Global
+nblignes Assigned in envir_stacomi
 }
 \description{
 this function uses gfile, edits a text with info and changing colors

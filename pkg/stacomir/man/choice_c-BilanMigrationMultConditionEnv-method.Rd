@@ -11,13 +11,20 @@
 \arguments{
 \item{object}{An object of class \link{BilanConditionEnv-class}}
 
+\item{dc}{A numeric or integer, the code of the dc, coerced to integer,see \link{choice_c,RefDC-method}}
+
+\item{taxons}{'2038=Anguilla anguilla',
+these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,RefTaxon-method}}
+
+\item{stades}{'AGJ=Anguille jaune', 'AGG=Anguille argentee', 'CIV=civelle'}
+
+\item{stationMesure}{A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}}
+
 \item{datedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
 \item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
 
 \item{silent}{Boolean default FALSE, if TRUE information messages not displayed.}
-
-\item{stationmesure}{A character, the code of the monitoring station, which records environmental parameters \link{choice_c,RefStationMesure-method}}
 }
 \value{
 An object of class \link{BilanConditionEnv-class}

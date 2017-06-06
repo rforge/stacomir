@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigrationCar-class}}}
+
+\item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 }
 \description{
 calcule methode

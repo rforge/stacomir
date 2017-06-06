@@ -20,6 +20,7 @@ funSousListeBilanMigrationPar=function(bilanMigrationPar) {
 	req@baseODBC<-get("baseODBC", envir=envir_stacomi)
 	mygtkProgressBar(title="cumul val. quant. par pas de temps",
 			progress_text=gettext("Progress %",domain="R-stacomiR"))
+	progress_bar<-get("progress_bar",envir_stacomi)
 
 	##############################			
 	on.exit(dispose(progres))

@@ -7,7 +7,7 @@
 \usage{
 \S4method{choice}{Refparqual}(object,
   label = gettext("Choice of a sample characteristic", domain = "R-stacomiR"),
-  nomassign = "refpar", frameassign = "frame_par", is.enabled = TRUE)
+  nomassign = "refparqual", frameassign = "frame_par", is.enabled = TRUE)
 }
 \arguments{
 \item{object}{An object of class \link{Refparqual-class}}

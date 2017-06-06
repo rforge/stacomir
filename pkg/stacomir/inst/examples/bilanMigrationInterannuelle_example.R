@@ -40,9 +40,10 @@ plot(bmi,plot.type="density",silent=TRUE)
 
 if (requireNamespace("ggplot2", quietly = TRUE)&
 		requireNamespace("viridis", quietly = TRUE)){
-	g<-get("g",envir=envir_stacomi)	
-	g+ggplot2::scale_fill_manual(values=viridis::viridis(22))+
-			ggplot2::ggtitle("Saisonnalite de la migration aux Enfrenaux")
+g<-get("g",envir=envir_stacomi)	
+	g+
+	ggplot2::scale_fill_manual(values=viridis::viridis(22))+
+	ggplot2::ggtitle("Saisonnalite de la migration aux Enfrenaux")
 }
 # the standard plot is showing daily values
 plot(bmi,plot.type="standard",silent=TRUE)
@@ -50,35 +51,36 @@ plot(bmi,plot.type="standard",silent=TRUE)
 if (requireNamespace("ggplot2", quietly = TRUE)){
 	g1<-get("g1",envir=envir_stacomi)
 	g1<-g1+ggplot2::ggtitle("Les Enfrenaux")+
-			ggplot2::scale_fill_manual(name="Source", values=c("purple","#0A0C01"),
-					labels = c("historical set","2015 values"))+
-			ggplot2::scale_colour_manual(name="Source", values="#B8EA00",
+		ggplot2::scale_fill_manual(name="Source", 
+				values=c("purple","#0A0C01"),
+				labels = c("historical set","2015 values"))+
+		ggplot2::scale_colour_manual(name="Source", values="#B8EA00",
 					labels = c("historical mean"))	+
-			ggplot2::ylab("Nombre d'anguilles")
+		ggplot2::ylab("Nombre d'anguilles")
 	print(g1)
 }
 
 # Another graph from scratch
 if (requireNamespace("ggplot2", quietly = TRUE)&
 		requireNamespace("viridis", quietly = TRUE)){
-	dat<-funtraitementdate(bmi@data, # tableau de donnees a importer
+dat<-funtraitementdate(bmi@data, # tableau de donnees a importer
 			"bjo_jour", # nom de la colonne
 			annee=FALSE,
 			mois=TRUE,
 			semaine =TRUE,
 			jour_mois=FALSE)
 	# sum per month
-	res<-dplyr::select(dat,bjo_valeur,bjo_annee,semaine)
-	res<-dplyr::group_by(res,bjo_annee,semaine)
-	res<-dplyr::summarize(res,effectif=sum(bjo_valeur))
-	ggplot2::ggplot(res, ggplot2::aes(x = semaine, y = bjo_annee,fill=effectif)) +
-			ggplot2::geom_tile(colour="black") + ggplot2::coord_fixed() +
-			viridis::scale_fill_viridis(begin=0,option="D") + ggplot2::theme_bw()+
-			ggplot2::theme(panel.background= ggplot2::element_rect(fill = "#9360A9"),
-					panel.grid.major=ggplot2::element_line(colour="#C1DB39"),
-					panel.grid.minor=ggplot2::element_line(colour="#7DD632"))+
-			ggplot2::ylab("year")+ggplot2::xlab("week")+
-			ggplot2::ggtitle("Historical trend at Les Enfrenaux Eel trap")
+res<-dplyr::select(dat,bjo_valeur,bjo_annee,semaine)
+res<-dplyr::group_by(res,bjo_annee,semaine)
+res<-dplyr::summarize(res,effectif=sum(bjo_valeur))
+ggplot2::ggplot(res, ggplot2::aes(x = semaine, y = bjo_annee,fill=effectif)) +
+		ggplot2::geom_tile(colour="black") + ggplot2::coord_fixed() +
+		viridis::scale_fill_viridis(begin=0,option="D") + ggplot2::theme_bw()+
+		ggplot2::theme(panel.background= ggplot2::element_rect(fill = "#9360A9"),
+				panel.grid.major=ggplot2::element_line(colour="#C1DB39"),
+				panel.grid.minor=ggplot2::element_line(colour="#7DD632"))+
+		ggplot2::ylab("year")+ggplot2::xlab("week")+
+		ggplot2::ggtitle("Historical trend at Les Enfrenaux Eel trap")
 	
 }
 \dontrun{
@@ -94,10 +96,11 @@ if (requireNamespace("ggplot2", quietly = TRUE)&
 			requireNamespace("viridis", quietly = TRUE)){
 		g<-get("g",envir=envir_stacomi)	+ ggplot2::theme_minimal()
 		g+viridis::scale_color_viridis(discrete=TRUE)+
-				ggplot2::ggtitle("Cumulated migration step plot at les Enfrenaux eel trap")
+				ggplot2::ggtitle("Cumulated migration step plot 
+at les Enfrenaux eel trap")
 		
 	}
-}	
+	
 data("bmi_vichy")
 # statistics for seaonal migration, daily values
 bmi_vichy<-calcule(bmi_vichy,timesplit="jour",silent=TRUE)
@@ -113,7 +116,7 @@ plot(bmi_vichy,plot.type="seasonal",timesplit="mois",silent=TRUE)
 plot(bmi_vichy,plot.type="seasonal",timesplit="jour",silent=TRUE)
 
 
-\dontrun{
+
 	# A test with lampreys in the Descarte DF (Vienne)
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	baseODBC[c(2,3)]<-rep("logrami",2)

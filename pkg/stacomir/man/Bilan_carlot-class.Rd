@@ -76,6 +76,8 @@ if (requireNamespace("ggplot2", quietly = TRUE)){
 plot(b_carlot,plot.type="2",silent=TRUE)
 # A xyplot
 plot(b_carlot,plot.type="3",silent=TRUE)
+
+\dontrun{
 #####################################
 # an example graph created manually from data
 #####################################
@@ -102,7 +104,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)){
 }
 
 # get a simple summary using Hmisc::describe
-\dontrun{
+
 summary(b_carlot)
 # get the command line to create the object using choice_c 
 # when the graphical interface has been used

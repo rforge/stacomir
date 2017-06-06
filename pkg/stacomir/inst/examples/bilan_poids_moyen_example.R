@@ -27,7 +27,6 @@ stacomi(gr_interface=FALSE,
 data("bilPM")
 # the calculation will fill the slot calcdata
 bilPM<-calcule(bilPM)
-
 # A ggplot showing the trend in weight
 plot(bilPM, plot.type=1)
 # A plot showing both the data and the trend as recorded in the database
@@ -35,7 +34,6 @@ plot(bilPM, plot.type=2)
 # Same as plot.type=1 but with size according to size of the sample,
 # usefull for wet weights where weight are recorded on a number of glass eel
 plot(bilPM, plot.type=3)
-
 # First model with nls, see Guerault and Desaunay (1993) 
 model(bilPM,model.type="seasonal")
 model(bilPM,model.type="seasonal1")

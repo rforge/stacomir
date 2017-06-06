@@ -81,10 +81,18 @@ setMethod("choice",signature=signature("RefTaxon"),
 					funout(gettext("Taxon selected\n",domain="R-stacomiR"))
 					if (!is.null(objectBilan)) {
 						objectBilan@stades<<-charge_avec_filtre(object=objectBilan@stades,dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code)
-						if (exists("frame_std")) delete(group,frame_std)
-						if (exists("frame_par")) delete(group,frame_par)
-						if (exists("frame_parquan")) delete(group,frame_parquan)
-						if (exists("frame_parqual")) delete(group,frame_parqual)
+						if (exists("frame_std",envir_stacomi)){
+							delete(group,get("frame_std",envir_stacomi))
+						}
+						if (exists("frame_par")) {
+							delete(group,get("frame_par",envir_stacomi))
+						}
+						if (exists("frame_parquan")) {
+							delete(group,get("frame_parquan",envir_stacomi))
+						}
+						if (exists("frame_parqual")) {
+							delete(group,get("frame_parqual",envir_stacomi))
+						}
 						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
 					}
 				}
@@ -148,8 +156,12 @@ setMethod("choicemult",signature=signature("RefTaxon"),definition=function(objec
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[grouptaxon(ggroup&tab)[[frametaxonsource(gframe)[tbsourcetaxon(gtable)],frametaxondest(gframe)[tbdtaxondest(gtable)]],OKbutton]]
-				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group)  else
-					notebook<-get("notebook",envir=envir_stacomi)				
+				if (!exists("notebook",envir_stacomi)){ 
+					group<-get("group",envir_stacomi)
+					notebook <- gnotebook(container=group)} 
+				else {
+					notebook<-get("notebook",envir=envir_stacomi)
+				}			
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				grouptaxon<-ggroup() 
 				assign("grouptaxon",grouptaxon,envir_stacomi)

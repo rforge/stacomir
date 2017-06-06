@@ -2,9 +2,9 @@
 % Please edit documentation in R/BilanMigrationCar.r
 \docType{class}
 \name{BilanMigrationCar-class}
+\alias{BilanMigrationCar}
 \alias{BilanMigrationCar-class}
-\alias{BilanMigrationMult}
-\alias{bilanMigrationMult}
+\alias{bilanMigrationCar}
 \title{Migration report along with quantitative and
 qualitative characteristics}
 \description{
@@ -20,25 +20,25 @@ the operation is used to perform calculation.
 \describe{
 \item{\code{calcdata}}{A "list" of calculated data, filled in by the calcule method}
 
-\item{\code{parquan}}{An object of class \link{Refparquan-class}, quantitative parameter}
+\item{\code{data}}{A \code{data.frame} inherited from \link{Bilan_carlot-class}}
 
-\item{\code{parqual}}{An object of class \link{Refparqual-class}, quanlitative parameter}
+\item{\code{dc}}{an object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}}
+
+\item{\code{taxons}}{An object of class \link{RefTaxon-class} inherited from \link{Bilan_carlot-class}}
+
+\item{\code{stades}}{An object of class \link{RefStades-class} inherited from \link{Bilan_carlot-class}}
+
+\item{\code{horodatedebut}}{An object of class \link{RefHorodate-class} inherited from \link{Bilan_carlot-class}}
+
+\item{\code{horodatefin}}{An object of class \link{RefHorodate-class} inherited from \link{Bilan_carlot-class}}
+
+\item{\code{par}}{An object of class \link{Refpar-class} inherited from \link{Bilan_carlot-class}}
 
 \item{\code{echantillon}}{An object of class \link{RefChoix-class}, vector of choice}
 
-\item{\code{valeurs_possibles}}{A \code{data.frame} choice among possible choice of a qualitative parameter (discrete)}
+\item{\code{parquan}}{An object of class \link{Refparquan-class}, quantitative parameter}
 
-\item{\code{dc}}{an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}}
-
-\item{\code{taxons}}{An object of class \link{RefTaxon-class} inherited from \link{BilanMigration-class}}
-
-\item{\code{stades}}{An object of class \link{RefStades-class} inherited from \link{BilanMigration-class}}
-
-\item{\code{pasDeTemps}}{An object of class \link{PasDeTempsJournalier-class} inherited from \link{BilanMigration-class}}
-
-\item{\code{data}}{A \code{data.frame} inherited from \link{BilanMigration-class}, stores the results}
-
-\item{\code{time.sequence}}{An object of class "POSIXct" inherited from \link{BilanMigration-class}}
+\item{\code{parqual}}{An object of class \link{Refparqual-class}, quanlitative parameter}
 }}
 \note{
 The main difference between this class and \link{Bilan_carlot-class} is that this class allows to

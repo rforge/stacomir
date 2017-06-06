@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \link{RefListe-class}}
+
+\item{selectedvalue}{the value selected in the combo}
 }
 \description{
 Choice_c method for RefListe referential objects

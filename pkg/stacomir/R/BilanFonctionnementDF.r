@@ -197,6 +197,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 				mygtkProgressBar(
 						title=gettext("computing ...",domain="R-stacomiR"),
 						progress_text=gettext("Progress %",domain="R-stacomiR"))
+				progress_bar<-get("progress_bar",envir=envir_stacomi)
 				# this function assigns
 				z=0 # compteur tableau t_periodefonctdispositif_per_mois
 				for(j in 1:nrow(t_periodefonctdispositif_per)){

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilitaires.r
 \name{mygtkProgressBar}
 \alias{mygtkProgressBar}
-\title{Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
+\title{Progress bar using a gtkdialog, the progress bar is assigned in envir_stacomi
 This progress bar has a button to close.}
 \usage{
 mygtkProgressBar(title, progress_text, width = 400, height = 50,
@@ -23,18 +23,19 @@ mygtkProgressBar(title, progress_text, width = 400, height = 50,
 nothing but progress_bar and dialog gwidgets are assigned to .GlobalEnv
 }
 \description{
-Progress bar using a gtkdialog, the progress bar is assigned in .GlobalEnv
+Progress bar using a gtkdialog, the progress bar is assigned in envir_stacomi
 This progress bar has a button to close.
 }
 \note{
-The name of the progress bar is \code{progres}, it will be assigned in .GlobalEnv,
-it contains a progress bar widget named progress bar, also assigned in .GLobalEnv. See example for use.
+The name of the progress bar is \code{progres}, it will be assigned in envir_stacomi,
+it contains a progress bar widget named progress bar, also assigned in envir_stacomi See example for use.
 }
 \examples{
 \dontrun{
 mygtkProgressBar(title="Trial",progress_text="progress text")
 fraction_progressed=seq(0,1,length.out=50)
-for(i in fraction_progressed) {
+ progress_bar<-get("progress_bar",envir_stacomi)
+for(i in fraction_progressed){ 
      Sys.sleep(0.1)
    progress_bar$setText(sprintf("\%d\%\% progression",round(100*i)))
     progress_bar$setFraction(i)

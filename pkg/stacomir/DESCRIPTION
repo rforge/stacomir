@@ -6,9 +6,10 @@ Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
 	      person("Timothee", "Besse", role = "aut", email="tableau-ang-loire@logrami.fr"))
 Description: Graphical outputs and treatment for a database of fishway
-    monitoring. It is a part of the STACOMI open source project developed in France
-    by the French Agency for Biodiversity (AFB) institute to centralize data obtained by fishway monitoring.
-    Version 0.5.2 is available in French and English.
+    monitoring. It is a part of the STACOMI open source project developed in
+    France by the French Agency for Biodiversity (AFB) institute to centralize
+    data obtained by fishway monitoring. Version 0.5.2 is available in French and
+    English.
 License: GPL (>= 2)
 Collate:
     'create_generic.r'

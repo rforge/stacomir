@@ -4,7 +4,7 @@
 \alias{hbmmCEgraph}
 \title{internal method for graphical interface}
 \usage{
-hbmmCEgraph(h = null, ...)
+hbmmCEgraph(h = null)
 }
 \arguments{
 \item{h}{A handler}

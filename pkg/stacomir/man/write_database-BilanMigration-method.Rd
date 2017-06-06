@@ -10,14 +10,14 @@ t_bilanmigrationjournalier_bjo table}
   dbname = "bd_contmig_nat", check_for_bjo = TRUE)
 }
 \arguments{
+\item{object}{an object of class \code{\linkS4class{BilanMigration}}}
+
 \item{silent}{: TRUE to avoid messages}
 
 \item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
 
 \item{check_for_bjo}{: do you want to check if data are already present in the bjo table, and delete them,
 this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops}
-
-\item{bilanMigration}{an object of class \code{\linkS4class{BilanMigration}}}
 }
 \description{
 Daily values are needed to compare migrations from year to year, by the class \link{BilanMigrationInterAnnuelle-class}. They are added by

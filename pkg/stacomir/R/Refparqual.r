@@ -155,11 +155,11 @@ setMethod("choicemult",signature=signature("Refparqual"),definition=function(obj
 				hpar=function(h,...){
 					parm=tbdestpar[,][tbdestpar[,]!=""]
 					if (length(parm)>0){
-					object@par_selectionne<-object@data[car_libelle%in%parm ,"par_code"]
-					# below the line that changes from the Refpar
-					object<-charge_complement(object)
-					assign(nomassign,object,envir_stacomi)
-					funout(gettext("Parameter selected\n",domain="R-stacomiR"))
+						object@par_selectionne<-object@data[car_libelle%in%parm ,"par_code"]
+						# below the line that changes from the Refpar
+						object<-charge_complement(object)
+						assign(nomassign,object,envir_stacomi)
+						funout(gettext("Parameter selected\n",domain="R-stacomiR"))
 					} else {
 						funout(gettext("No Parameter selected\n",domain="R-stacomiR"))	
 					}
@@ -175,8 +175,12 @@ setMethod("choicemult",signature=signature("Refparqual"),definition=function(obj
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group) else
+				if (!exists("notebook",envir_stacomi)){ 
+					group<-get("group",envir_stacomi)
+					notebook <- gnotebook(container=group)} 
+				else {
 					notebook<-get("notebook",envir=envir_stacomi)
+				}
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				grouppar<-ggroup() 

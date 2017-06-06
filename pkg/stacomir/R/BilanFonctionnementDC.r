@@ -191,6 +191,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 				mygtkProgressBar(
 						title=gettext("time in hours",domain="R-stacomiR"),
 						progress_text=gettext("Working of the counting device",domain="R-stacomiR"))
+				progress_bar<-get("progress_bar",envir=envir_stacomi)
 				# this function assigns
 				z=0 # compteur tableau t_periodefonctdispositif_per_mois
 				for(j in 1:nrow(t_periodefonctdispositif_per)){

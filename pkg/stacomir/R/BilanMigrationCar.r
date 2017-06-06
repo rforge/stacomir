@@ -18,18 +18,18 @@
 #' \code{new("BilanMigrationCar", ...)}.  they are loaded by the interface
 #' using interface_BilanMigrationCar function.
 #' @slot calcdata A "list" of calculated data, filled in by the calcule method
+#' @slot data A \code{data.frame} inherited from \link{Bilan_carlot-class}
+#' @slot dc an object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}
+#' @slot taxons An object of class \link{RefTaxon-class} inherited from \link{Bilan_carlot-class}
+#' @slot stades An object of class \link{RefStades-class} inherited from \link{Bilan_carlot-class}
+#' @slot horodatedebut An object of class \link{RefHorodate-class} inherited from \link{Bilan_carlot-class}
+#' @slot horodatefin An object of class \link{RefHorodate-class} inherited from \link{Bilan_carlot-class}
+#' @slot par An object of class \link{Refpar-class} inherited from \link{Bilan_carlot-class}
+#' @slot echantillon An object of class \link{RefChoix-class}, vector of choice
 #' @slot parquan An object of class \link{Refparquan-class}, quantitative parameter 
 #' @slot parqual An object of class \link{Refparqual-class}, quanlitative parameter
-#' @slot echantillon An object of class \link{RefChoix-class}, vector of choice
-#' @slot valeurs_possibles A \code{data.frame} choice among possible choice of a qualitative parameter (discrete)
-#' @slot dc an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}
-#' @slot taxons An object of class \link{RefTaxon-class} inherited from \link{BilanMigration-class}
-#' @slot stades An object of class \link{RefStades-class} inherited from \link{BilanMigration-class}
-#' @slot pasDeTemps An object of class \link{PasDeTempsJournalier-class} inherited from \link{BilanMigration-class}
-#' @slot data A \code{data.frame} inherited from \link{BilanMigration-class}, stores the results
-#' @slot time.sequence An object of class "POSIXct" inherited from \link{BilanMigration-class}
 #' @family Bilan Objects
-#' @aliases BilanMigrationMult bilanMigrationMult
+#' @aliases BilanMigrationCar bilanMigrationCar
 #' @note program : default two parameter choice, checking box "none" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @concept Bilan Object 
@@ -406,7 +406,6 @@ hbmCstat=function(h){
 #' 
 #' 
 #' @param x An object of class BilanMigrationCar
-#' @param y not used there
 #' @param plot.type One of "qual", "quant" "crossed" default to qual
 #' @param color_parm A named vector for the colors of either parameters (if plot.type=quant) or levels for
 #' parameters (if plot.type=qual).
@@ -513,9 +512,15 @@ setMethod("summary",signature=signature(object="BilanMigrationCar"),definition=f
 #' @param caption, see xtable
 #' @param label, see xtable
 #' @param align, see xtable, overidden if NULL
+#' @param digits, see xtable
+#' @param display see xtable
+#' @param auto see xtable
 #' @param ... Additional parameters
 #' @export
-setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,caption=NULL, label=NULL,align=NULL,...){
+setMethod("xtable",signature=signature("BilanMigrationCar"),definition=function(x,
+				caption=NULL,
+				label=NULL,
+				align=NULL,...){
 			bmC<-x
 			dat=bmC@data
 			dc=stringr::str_c(bmC@dc@dc_selectionne,collapse=" ")

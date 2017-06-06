@@ -376,7 +376,6 @@ hbilanMigrationMult_graph=function(h=null,...){
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for BilanMigrationMult (multiple dc/taxa/stage in the same plot)}
 #' }
 #' @param x An object of class BilanMigrationMult
-#' @param y From the formals but missing
 #' @param plot.type One of "standard","step","multiple". Defaut to \code{standard} the standard BilanMigration with dc and operation displayed, can also be \code{step} or 
 #' \code{multiple} 
 #' @param silent Stops most messages from being displayed

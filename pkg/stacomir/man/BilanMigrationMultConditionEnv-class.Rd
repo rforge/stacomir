@@ -5,7 +5,6 @@
 \alias{BilanMigrationMultConditionEnv}
 \alias{BilanMigrationMultConditionEnv-class}
 \alias{bilanmigrationmultconditionenv}
-\alias{bmmCE}
 \title{Class "BilanMigrationMultConditionEnv"}
 \description{
 Enables to compute an annual overview of fish migration and environmental

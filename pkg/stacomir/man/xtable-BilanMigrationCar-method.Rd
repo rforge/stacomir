@@ -18,9 +18,13 @@ create an xtable objet to be later used by the print.xtable method.}
 
 \item{align, }{see xtable, overidden if NULL}
 
-\item{digits}{default 0}
+\item{digits, }{see xtable}
 
 \item{display}{see xtable}
+
+\item{auto}{see xtable}
+
+\item{...}{Additional parameters}
 }
 \description{
 xtable funciton for \link{BilanMigrationCar-class}

@@ -11,6 +11,8 @@
 \item{object}{An object of class \link{RefStades-class}}
 
 \item{stades}{the vector of stages chosen}
+
+\item{silent}{Boolean, if TRUE, information messages are not displayed}
 }
 \description{
 the choice_c method is intented to have the same behaviour as choice (which creates a

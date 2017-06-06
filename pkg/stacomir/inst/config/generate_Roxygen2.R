@@ -24,10 +24,10 @@ install.packages("Rd2roxygen") # reverse documentation
 ##use either :
 require(devtools)
 # uncomment lines in stacomi to run the program (calcmig and envir_stacomi necessary)
-document("F:/workspace/stacomir/pkg/stacomir")
+document("C:/workspace/stacomir/pkg/stacomir")
 ## or :
 ##vignette("roxygen2")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 #data("bMM_Arzal")
 #data("bM_Arzal")
 envir_stacomi <- new.env(parent = emptyenv())
@@ -37,7 +37,7 @@ stacomi(FALSE,FALSE,FALSE)
 require(roxygen2)
 
 #Pour Cédric
-roxygen2::roxygenise("F:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
+roxygen2::roxygenise("C:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
 
 #Pour Marion 
 #roxygen2::roxygenise("C:/Users/logrami/workspace/stacomir/pkg/stacomir");warnings()[1:10]

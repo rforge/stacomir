@@ -115,11 +115,26 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 						# pas non plus d'appel pour les bilanArgentee dont les slots taxon, stade ,et par sont fixes
 						if("RefTaxon"%in%as.character(getSlots(class(objectBilan)))&class(objectBilan)!="BilanArgentee"&class(objectBilan)!="BilanAgedemer"){
 							objectBilan@taxons<<-charge_avec_filtre(object=objectBilan@taxons,dc_selectionne=get("refDC",object,envir_stacomi)@dc_selectionne)
-							if (exists("frame_tax")) delete(group,frame_tax)
-							if (exists("frame_std")) delete(group,frame_std)
-							if (exists("frame_par")) delete(group,frame_par)
-							if (exists("frame_parquan")) delete(group,frame_parquan)
-							if (exists("frame_parqual")) delete(group,frame_parqual)
+							if (exists("frame_tax",envir=envir_stacomi)) {
+								frame_tax<-get("frame_tax",envir=envir_stacomi)
+								delete(group,frame_tax)
+							}
+							if (exists("frame_std",envir=envir_stacomi)) {
+								frame_std<-get("frame_std",envir=envir_stacomi)
+								delete(group,frame_std)
+							}
+							if (exists("frame_par",envir=envir_stacomi)) {
+								frame_par<-get("frame_par",envir=envir_stacomi)
+								delete(group,frame_par)
+							}
+							if (exists("frame_parquan",envir=envir_stacomi)) {
+								frame_parquan<-get("frame_parquan",envir=envir_stacomi)
+								delete(group,frame_parquan)
+							}
+							if (exists("frame_parqual",envir=envir_stacomi)) {
+								frame_parqual<-get("frame_parqual",envir=envir_stacomi)
+								delete(group,frame_parqual)
+							}
 							choice(objectBilan@taxons,objectBilan,is.enabled=TRUE)
 							funout(gettext("Select taxa for this counting device (for all periods)\n",domain="R-stacomiR"))
 						}

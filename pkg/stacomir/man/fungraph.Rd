@@ -4,7 +4,8 @@
 \alias{fungraph}
 \title{Function for BilanMigration graphes including numbers DF DC operations}
 \usage{
-fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc=NULL,silent,...)
+fungraph(bilanMigration, tableau, time.sequence, taxon, stade, dc = NULL,
+  silent, color = NULL, color_ope = NULL, ...)
 }
 \arguments{
 \item{bilanMigration}{An object of class \code{\linkS4class{BilanMigration}}}

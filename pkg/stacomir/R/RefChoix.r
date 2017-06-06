@@ -112,13 +112,15 @@ setMethod("choicemult",signature=signature("RefChoix"),definition=function(objec
 					svalue(notebook)<-svalue(notebook)+1	
 				}
 			}
-			
+			group<-get("group",envir=envir_stacomi)
 			if (!exists("notebook",envir=envir_stacomi)){
 				notebook <- gnotebook(container=group)
 			} else {
 				notebook<-get("notebook",envir=envir_stacomi)
 			}
-			groupchoice<-ggroup(container=notebook, label=gettext("options",domain="R-stacomiR"),horizontal=FALSE) 
+			groupchoice<-ggroup(container=notebook, 
+					label=gettext("options",domain="R-stacomiR"),
+					horizontal=FALSE) 
 			glabel(object@label,container=groupchoice)
 			list_libelle=fun_char_spe(object@listechoice)
 			choice=gradio(items=list_libelle,

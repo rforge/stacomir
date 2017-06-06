@@ -173,36 +173,42 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 #' @param label the name to write in the frame
 #' @param nomassign the name with which the frame will be assigned to envir_stacomi
 #' @param funoutlabel the sentence to write when the choice has been made
+#' @param decal Default year will be current year, use -1 to set the default value in the interface to the year before
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("choicemult",signature=signature("RefHorodate"),definition=function(object,
 				label="date",
 				nomassign="horodate",
 				funoutlabel="nous avons le choix dans la date\n",
 				decal=0
-				) {
-				hhoro=function(h,...){
-					object=setRefHorodate(object,svalue(horodate))
-					assign(nomassign,object@horodate,envir_stacomi)
-					funout(gettext("Horodate selected\n",domain="R-stacomiR"))				
-					# changing tab of notebook to next tab
-					if (svalue(notebook)<length(notebook)){
-						svalue(notebook)<-svalue(notebook)+1	
-					}
+		) {
+			hhoro=function(h,...){
+				object=setRefHorodate(object,svalue(horodate))
+				assign(nomassign,object@horodate,envir_stacomi)
+				funout(gettext("Horodate selected\n",domain="R-stacomiR"))				
+				# changing tab of notebook to next tab
+				if (svalue(notebook)<length(notebook)){
+					svalue(notebook)<-svalue(notebook)+1	
 				}
-				if (decal!=0){
-					# Returns the first horodate of a year shifted by decal
-					# @param horodate The horodate to shift (class POSIXt)
-					# @param decal number of year to shift
-					# @return A POSIXt
-					shiftyear<-function(horodate,decal){
-						anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
-						return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
-					}
-					object@horodate<-shiftyear(object@horodate,decal)
+			}
+			if (decal!=0){
+				# Returns the first horodate of a year shifted by decal
+				# @param horodate The horodate to shift (class POSIXt)
+				# @param decal number of year to shift
+				# @return A POSIXt
+				shiftyear<-function(horodate,decal){
+					anneeprec=as.numeric(strftime(horodate,"%Y"))+decal
+					return(strptime(paste(anneeprec,"-01-01",sep=""),format="%Y-%m-%d"))
 				}
-				if (!exists("notebook",envir_stacomi)) notebook <- gnotebook(container=group) else
-					notebook<-get("notebook",envir=envir_stacomi)
-				grouphorodate<-ggroup(container=notebook, label=label,horizontal=FALSE) 
-				horodate<-gedit(getRefHorodate(object),container=grouphorodate,handler=hhoro,width=20)			
-				gbutton("OK", container=grouphorodate,handler=hhoro,icon="execute")			
+				object@horodate<-shiftyear(object@horodate,decal)
+			}
+			
+			if (!exists("notebook",envir_stacomi)){ 
+				group<-get("group",envir_stacomi)
+				notebook <- gnotebook(container=group)} 
+			else {
+				notebook<-get("notebook",envir=envir_stacomi)
+			}
+			grouphorodate<-ggroup(container=notebook, label=label,horizontal=FALSE) 
+			horodate<-gedit(getRefHorodate(object),container=grouphorodate,handler=hhoro,width=20)			
+			gbutton("OK", container=grouphorodate,handler=hhoro,icon="execute")			
 		})

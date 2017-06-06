@@ -23,6 +23,8 @@ dataframe}
 
 \item{semaine}{logical, add column with weeks}
 
+\item{semaine_std}{logical, add column with standard weeks (using isoweek from lubridate)}
+
 \item{jour_an}{logical, add column with day of year}
 
 \item{jour_mois}{logical, add column with day of month}

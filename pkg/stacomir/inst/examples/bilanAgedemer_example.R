@@ -34,10 +34,10 @@ plot(bilan_adm, plot.type=1)
 
 # if there are several dc, data it split by dc
 plot(bilan_adm, plot.type=2)
-
+\dontrun{
 # print a summary statistic, and save the output in a list for later use
 stats<-summary(bilan_adm)
 
-\dontrun{
+
 write_database(bilan_adm)
 }

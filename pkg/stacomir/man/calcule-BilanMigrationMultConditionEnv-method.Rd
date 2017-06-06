@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigrationMultConditionEnv-class}}}
+
+\item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 }
 \value{
 \code{\link{BilanMigrationMultConditionEnv-class}}

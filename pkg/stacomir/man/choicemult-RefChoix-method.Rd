@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \link{RefChoix-class}}
+
+\item{selected_value}{the value selected in the combo}
 }
 \description{
 Multiple Choice method for RefChoix referential objects, to put together with notebook widgets

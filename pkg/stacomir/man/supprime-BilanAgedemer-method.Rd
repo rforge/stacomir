@@ -9,6 +9,8 @@
 }
 \arguments{
 \item{object}{An object of class \link{BilanAgedemer-class}}
+
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
 nothing

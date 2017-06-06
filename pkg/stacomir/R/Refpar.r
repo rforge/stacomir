@@ -166,10 +166,12 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 		})
 
 
-#' Multiple Choice method for Refpar referential objects
+#' Multiple Choice method for Refpar referential objects, internal use
 #' 
 #' @param object An object of class \link{Refpar-class}
 #' @param objectBilan An object Bilan which includes the \link{Refpar-class}, default NULL
+#' @param label The name for the frame
+#' @param nomassign The name by which the widget will be assigned in envir_stacomi 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -181,7 +183,8 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 #' objectBilan=bilan_taille # for other test
 #' choicemult(object,objectBilan=bilanMigrationCar)	
 #' }
-setMethod("choicemult",signature=signature("Refpar"),definition=function(object,objectBilan=NULL,
+setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
+				objectBilan=NULL,
 				label=gettext("Sample characteristic",domain="R-stacomiR"),
 				nomassign="refpar") {
 			
@@ -210,8 +213,12 @@ setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group) else
-					notebook<-get("notebook",envir=envir_stacomi)
+				if (!exists("notebook",envir_stacomi)){ 
+							group<-get("group",envir_stacomi)
+							notebook <- gnotebook(container=group)} 
+						else {
+							notebook<-get("notebook",envir=envir_stacomi)
+						}
 				car_libelle=fun_char_spe(object@data$par_nom)
 				car_libelle[nchar(car_libelle)>30]<-paste(substr(car_libelle[nchar(car_libelle)>30],1,30),".",sep="")
 				grouppar<-ggroup() 

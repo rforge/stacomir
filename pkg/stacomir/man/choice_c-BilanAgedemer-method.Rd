@@ -26,6 +26,10 @@ these should match the ref.tr_taxon_tax referential table in the stacomi databas
 
 \item{horodatefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
 
+\item{limit1hm}{Size limit of a salmon for an one sea winter fish}
+
+\item{limit2hm}{Size limit of a salmon for a two sea winter fish}
+
 \item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{

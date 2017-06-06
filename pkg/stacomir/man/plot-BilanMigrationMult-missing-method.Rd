@@ -22,8 +22,6 @@
 \item{silent}{Stops most messages from being displayed}
 
 \item{...}{Additional arguments passed to matplot or plot if plot.type="standard", see ... in \link{fungraph_civelle} and \link{fungraph}}
-
-\item{y}{From the formals but missing}
 }
 \description{
 \itemize{

@@ -3,7 +3,7 @@
 #' When daily bilan are written in the t_bilanjournalier_bjo table by the 
 #' \link{BilanMigration-class} they can be used by this class to display
 #' interannual comparisons of migration. Different charts are produced with different
-#' period grouping. See \link{fn_EcritBilanJournalier} for details about the writing to the
+#' period grouping. See \link{write_database,BilanMigration-method} for details about the writing to the
 #' t_bilanjournalier_bjo table.
 #' 
 #' @include RefAnnee.r

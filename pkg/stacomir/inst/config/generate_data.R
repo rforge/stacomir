@@ -16,14 +16,14 @@
 ##################################
 filecsv<-"C:/Program Files/stacomi/calcmig.csv"
 calcmig<-utils::read.csv(filecsv,header=TRUE,sep=";")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(calcmig,internal=FALSE,overwrite=TRUE)
 
 #################################
 # generates a dataset with Durif coefficients
 # source Laurent Beaulaton
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 coef_Durif = matrix(NA, nrow=5, ncol=6)
 colnames(coef_Durif) = c("I", "FII", "FIII", "FIV", "FV", "MII")
 rownames(coef_Durif) = c("Constant", "BL", "W", "MD", "FL")
@@ -59,7 +59,7 @@ bMM_Arzal@dc@data[,"type_dc"]<-iconv(bMM_Arzal@dc@data[,"type_dc"],from="latin1"
 bMM_Arzal@dc@data[,"dif_localisation"]<-iconv(bMM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bMM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bMM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bMM_Arzal@stades@data[,"std_libelle"]<-iconv(bMM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bMM_Arzal,internal=FALSE,overwrite=TRUE)
 bilanOperation<-get("bilanOperation",envir=envir_stacomi)
 bilanOperation@data$ope_commentaires<-iconv(bilanOperation@data$ope_commentaires,from="latin1",to="UTF8")
@@ -118,7 +118,7 @@ bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",t
 bM_Arzal@dc@data[,"dif_localisation"]<-iconv(bM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
 
 
@@ -175,14 +175,14 @@ bfDF@df@data[,"dif_localisation"]<-iconv(bfDF@df@data[,"dif_localisation"],from=
 bfDF@data$per_commentaires<-iconv(bfDF@data$per_commentaires,from="latin1",to="UTF8")
 #plot(bfDF,plot.type="1")
 #plot(bfDF,plot.type="2",title="A nice title")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bfDF,internal=FALSE,overwrite=TRUE)
 
 
 #################################
 # generates dataset for BilanFonctionnementDC
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -204,13 +204,13 @@ bfDC@dc@data[,"dif_localisation"]<-iconv(bfDC@dc@data[,"dif_localisation"],from=
 bfDC@data$per_commentaires<-iconv(bfDC@data$per_commentaires,from="latin1",to="UTF8")
 #plot(bfDC,plot.type="1")
 #plot(bfDC,plot.type="2",title="A nice title")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bfDC,internal=FALSE,overwrite=TRUE)
 
 #################################
 # generates dataset for Bilan_carlot
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -243,13 +243,13 @@ b_carlot@data$dev_libelle<-iconv(b_carlot@data$dev_libelle,from="latin1",to="UTF
 b_carlot@data$std_libelle<-iconv(b_carlot@data$std_libelle,from="latin1",to="UTF8")
 b_carlot@data$val_libelle<-iconv(b_carlot@data$val_libelle,from="latin1",to="UTF8")
 b_carlot@data$par_nom<-iconv(b_carlot@data$par_nom,from="latin1",to="UTF8")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)
 
 #################################
 # generates dataset for BilanMigrationInterAnnuelle
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -282,12 +282,12 @@ bmi@dc@data[,"type_df"]<-iconv(bmi@dc@data[,"type_df"],from="latin1",to="UTF8")
 bmi@dc@data[,"type_dc"]<-iconv(bmi@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bmi@dc@data[,"dif_localisation"]<-iconv(bmi@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bmi,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanAnnuels
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -313,7 +313,7 @@ bilA@dc@data[,"type_dc"]<-iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8"
 bilA@dc@data[,"dif_localisation"]<-iconv(bilA@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bilA@taxons@data[,"tax_nom_commun"]<-iconv(bilA@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bilA@stades@data[,"std_libelle"]<-iconv(bilA@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bilA,internal=FALSE,overwrite=TRUE)
 
 #################################
@@ -339,10 +339,11 @@ bilAM@dc@data[,"ouv_libelle"]<-iconv(bilAM@dc@data[,"ouv_libelle"],from="latin1"
 bilAM@dc@data[,"dis_commentaires"]<-iconv(bilAM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 bilAM@dc@data[,"type_df"]<-iconv(bilAM@dc@data[,"type_df"],from="latin1",to="UTF8")
 bilAM@dc@data[,"type_dc"]<-iconv(bilAM@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilAM@dc@data[,"dc_code"]<-iconv(bilAM@dc@data[,"dc_code"],from="latin1",to="UTF8")
 bilAM@dc@data[,"dif_localisation"]<-iconv(bilAM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bilAM@taxons@data[,"tax_nom_commun"]<-iconv(bilAM@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bilAM@stades@data[,"std_libelle"]<-iconv(bilAM@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)
 
 
@@ -350,7 +351,7 @@ devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanArgenture : fd80 the somme
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -386,7 +387,7 @@ devtools::use_data(bilanArg,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanPoidsMoyen : iav
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -416,7 +417,7 @@ devtools::use_data(bilPM,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanAgedemer bilan_adm
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -442,13 +443,20 @@ bilan_adm@dc@data[,"type_df"]<-iconv(bilan_adm@dc@data[,"type_df"],from="latin1"
 bilan_adm@dc@data[,"type_dc"]<-iconv(bilan_adm@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bilan_adm@dc@data[,"dif_localisation"]<-iconv(bilan_adm@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 bilan_adm@data[,"car_valeur_quantitatif"]<-bilan_adm@data[,"car_valeur_quantitatif"]*10
+bilan_adm@data[,"par_nom"]<-iconv(bilan_adm@data[,"par_nom"],from="latin1",to="UTF8")
+bilan_adm@data[,"dev_libelle"]<-iconv(bilan_adm@data[,"dev_libelle"],from="latin1",to="UTF8")
+bilan_adm@data[,"std_libelle"]<-iconv(bilan_adm@data[,"std_libelle"],from="latin1",to="UTF8")
+bilan_adm@taxons@data[,"tax_nom_commun"]<-iconv(bilan_adm@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bilan_adm@par@data[,"par_nom"]<-iconv(bilan_adm@par@data[,"par_nom"],from="latin1",to="UTF8")
+bilan_adm@stades@data[,"std_libelle"]<-iconv(bilan_adm@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+
 devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
 
 
 #################################
 # generates dataset for BilanMigrationInterannuelle with two dc
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -479,7 +487,7 @@ devtools::use_data(bmi_vichy,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for bilanConditionEnv
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -497,7 +505,7 @@ devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for bilanMigrationCar
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -531,7 +539,7 @@ devtools::use_data(bmC,internal=FALSE,overwrite=TRUE)
 #################################
 # generates dataset for BilanMigrationMultConditionEnv
 ##################################
-setwd("F:/workspace/stacomir/pkg/stacomir")
+setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -554,4 +562,7 @@ bmmCE@bilanMigrationMult@dc@data[,"dis_commentaires"]<-iconv(bmmCE@bilanMigratio
 bmmCE@bilanMigrationMult@dc@data[,"type_df"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_df"],from="latin1",to="UTF8")
 bmmCE@bilanMigrationMult@dc@data[,"type_dc"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bmmCE@bilanConditionEnv@stationMesure@data$stm_description<-iconv(bmmCE@bilanConditionEnv@stationMesure@data$stm_description,from="latin1",to="UTF8")
+bmmCE@bilanMigrationMult@stades@data[,"std_libelle"]<-iconv(bmmCE@bilanMigrationMult@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+
 devtools::use_data(bmmCE,internal=FALSE,overwrite=TRUE)

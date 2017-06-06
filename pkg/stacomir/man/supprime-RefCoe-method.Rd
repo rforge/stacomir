@@ -9,6 +9,12 @@
 }
 \arguments{
 \item{object}{An object of class \link{RefCoe-class}}
+
+\item{tax}{'2038=Anguilla anguilla'}
+
+\item{std}{'CIV=civelle'}
+
+\item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
 nothing

@@ -94,7 +94,10 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 									dc_selectionne=get("refDC",envir_stacomi)@dc_selectionne,
 									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
-							if (exists("frame_par")) delete(group,frame_par)
+							
+							if (exists("frame_par",envir_stacomi)){
+								delete(group,get("frame_par",envir_stacomi))
+							} 
 							choice(objectBilan@par,is.enabled=TRUE)
 						} 
 						#il y a bien un object parqual dans l'object Bilan						
@@ -104,7 +107,9 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 									taxon_selectionne=get("refTaxon",envir_stacomi)@data$tax_code,
 									stade_selectionne=get("refStades",envir_stacomi)@data$std_code)
 							
-							if (exists("frame_parqual")) delete(group,frame_parqual)
+							if (exists("frame_parqual",envir_stacomi)) {
+								delete(group,get("frame_parqual",envir_stacomi))
+							}
 							choice(objectBilan@parqual,label=gettext("Qualitative feature",domain="R-stacomiR"),
 									nomassign="refparqual",
 									frameassign="frame_parqual",is.enabled=TRUE)
@@ -123,7 +128,10 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 													is.na(objectBilan@parquan@data$par_code)|objectBilan@parquan@data$par_code=="C001",]     # aucune
 								}
 							}
-							if (exists("frame_parquan")) delete(group,frame_parquan)
+							if (exists("frame_parquan",envir_stacomi)){
+								delete(group,get("frame_parquan",envir_stacomi))
+							
+						} 
 							choice(objectBilan@parquan,label=gettext("Quantitative feature",domain="R-stacomiR"),
 									nomassign="refparquan",
 									frameassign="frame_parquan",is.enabled=TRUE)
@@ -233,8 +241,13 @@ setMethod("choicemult",signature=signature("RefStades"),definition=function(obje
 				}
 				# below the widget structure [=> within (=> type
 				# group(ggroup)[notebook(notebook)[groupstd(ggroup&tab)[[framestdsource(gframe)[tbsourcestd(gtable)],framestddest(gframe)[tbdeststd(gtable)]],OKbutton]]
-				if (!exists("notebook",envir=envir_stacomi)) notebook <- gnotebook(container=group)  else
-					notebook<-get("notebook",envir=envir_stacomi)				
+				
+				if (!exists("notebook",envir=envir_stacomi)) {
+					group<-get("group",envir_stacomi)
+					notebook <- gnotebook(container=group)
+				} else {
+					notebook<-get("notebook",envir=envir_stacomi)	
+					}
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				groupstd<-ggroup() 
 				assign("goupstd",groupstd,envir=envir_stacomi)

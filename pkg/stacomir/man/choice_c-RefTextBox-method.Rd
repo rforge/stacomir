@@ -11,6 +11,8 @@
 \item{object}{An object of class \link{RefTextBox-class}}
 
 \item{value}{The value to set}
+
+\item{nomassign}{The name with which the object will be assigned in envir_stacomi}
 }
 \description{
 Choice_c method for ReTextBox referential objects

@@ -34,7 +34,7 @@
 #' @family Bilan Objects
 #' @keywords classes
 #' @example inst/examples/bilanAgedemer_example.R
-#' @aliases BilanAgedemer bilA bilanagedemer bilanAgedeMer BilanAgeDeMer bilan_adm
+#' @aliases BilanAgedemer bilanagedemer bilanAgedeMer BilanAgeDeMer
 #' @export 
 setClass(Class="BilanAgedemer",
 		representation= representation(

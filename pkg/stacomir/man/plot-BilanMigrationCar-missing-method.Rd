@@ -11,16 +11,14 @@
 \arguments{
 \item{x}{An object of class BilanMigrationCar}
 
+\item{color_parm}{A named vector for the colors of either parameters (if plot.type=quant) or levels for
+parameters (if plot.type=qual).}
+
 \item{plot.type}{One of "qual", "quant" "crossed" default to qual}
 
 \item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 
 \item{...}{Additional parameters}
-
-\item{y}{not used there}
-
-\item{color}{A named vector for the colors of either parameters (if plot.type=quant) or levels for
-parameters (if plot.type=qual).}
 }
 \description{
 plot method for BilanMigrationCar

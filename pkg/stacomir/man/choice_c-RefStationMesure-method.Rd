@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{an object of class RefStationMesure}
 
-\item{stationmesure}{a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)}
+\item{stationMesure}{a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)}
 }
 \description{
 the choice_c method is intented to have the same behaviour as choice (which creates a

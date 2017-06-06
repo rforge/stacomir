@@ -7,7 +7,7 @@
 \usage{
 \S4method{choicemult}{RefHorodate}(object, label = "date",
   nomassign = "horodate",
-  funoutlabel = "nous avons le choix dans la date\\n")
+  funoutlabel = "nous avons le choix dans la date\\n", decal = 0)
 }
 \arguments{
 \item{object}{An object of class \link{RefHorodate-class}}
@@ -17,6 +17,8 @@
 \item{nomassign}{the name with which the frame will be assigned to envir_stacomi}
 
 \item{funoutlabel}{the sentence to write when the choice has been made}
+
+\item{decal}{Default year will be current year, use -1 to set the default value in the interface to the year before}
 }
 \description{
 Multiple Choice method for RefHorodate referential objects, to put together with notebook widgets

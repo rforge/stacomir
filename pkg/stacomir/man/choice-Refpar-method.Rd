@@ -16,7 +16,7 @@
 
 \item{nomassign}{The assignment name in envir_stacomi}
 
-\item{frameassign}{The name of the frame used for assignement in .GlobalEnv}
+\item{frameassign}{The name of the frame used for assignement in envir_stacomi}
 
 \item{is.enabled}{Default TRUE.}
 }
