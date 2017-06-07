@@ -77,31 +77,29 @@ test_that("Test that working environment is created",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 			expect_true(exists("envir_stacomi"))
-			dispose(logw)
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("Test that gWidget loginwindow is loaded ",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
-			expect_true(exists("logw"))
-			dispose(logw)
+			expect_true(exists("logw",envir_stacomi))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("Test that gWidget gr_interface is loaded, without database_expected, nor login window",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
-			expect_true(exists("win"))
-			dispose(win)
+			expect_true(exists("win",envir_stacomi))			
+			dispose(get("win",envir_stacomi))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=TRUE)
-			expect_true(exists("win"))
-			dispose(win)
+			expect_true(exists("win",envir_stacomi))
+			dispose(get("win",envir_stacomi))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

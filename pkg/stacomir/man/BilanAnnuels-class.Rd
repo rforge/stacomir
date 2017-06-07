@@ -63,7 +63,7 @@ path=file.path(path.expand(get("datawd",envir=envir_stacomi)),
 				bilA@anneefin@annee_selectionnee,".html",sep=""),fsep ="/")
 # here you can add an argument file=path
 print(xtbilA,type="html")
-}
+
 # the following uses the "addtorow" argument which creates nice column headings,
 # format.args creates a thousand separator
 # again this will need to be saved in a file using the file argument
@@ -90,6 +90,7 @@ barplot(bilAM,
 		beside=TRUE)
 }
 plot(bilAM)
+}
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
