@@ -59,7 +59,7 @@ test_that("Test example bilanMigrationInterAnnuelle_example",
 				
 		})
 
-test_that("Complement to example")
+test_that("Complement to example",
 {
 	data(bilA)
 	path=file.path(path.expand(get("datawd",envir=envir_stacomi)),
@@ -96,6 +96,6 @@ test_that("Complement to example")
 				col=RColorBrewer::brewer.pal(9,"Spectral"),
 				beside=TRUE)
 	}
-	plot(bilAM)
-}
+	plot(bilAM,silent=TRUE)
+})
 
