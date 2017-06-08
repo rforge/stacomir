@@ -157,7 +157,8 @@ test_that("Test that different sums are the same, for  BilanMigrationInterAnnuel
 					taxons=bmM@taxons@data$tax_code, 
 					stades=bmM@stades@data$std_code, 
 					datedebut=as.character(bmM@pasDeTemps@dateDebut),
-					datefin=as.character(as.POSIXlt(DateFin(bmM@pasDeTemps))))
+					datefin=as.character(as.POSIXlt(DateFin(bmM@pasDeTemps))),
+					silent=TRUE)
 			bmM<-charge(bmM,silent=TRUE)
 			bmM<-connect(bmM,silent=TRUE)
 			bmM<-calcule(bmM,silent=TRUE)

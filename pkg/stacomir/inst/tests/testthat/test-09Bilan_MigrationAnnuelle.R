@@ -41,8 +41,10 @@ test_that("Test methods in BilanAnnuels",{
 					anneedebut="1996",
 					anneefin="2015",
 					silent=TRUE)			
-			bilA<-connect(bilA,silent=TRUE)			
+			bilA<-connect(bilA,silent=TRUE)	
+			dev.new()
 			plot(bilA,silent=TRUE)
+			dev.new()
 			barplot(bilA)
 			rm("envir_stacomi",envir =.GlobalEnv)			
 		})
@@ -81,7 +83,9 @@ test_that("Complement to example",
 			format.args = list(big.mark = " ", decimal.mark = ",")
 	))
 # barplot transforms the data, further arguments can be passed as to barplot
+			dev.new()
 	barplot(bilA)
+	dev.new()
 	barplot(bilA,
 			args.legend=list(x="topleft",bty = "n"),
 			col=c("#CA003E","#1A9266","#E10168","#005327","#FF9194"))
@@ -96,6 +100,8 @@ test_that("Complement to example",
 				col=RColorBrewer::brewer.pal(9,"Spectral"),
 				beside=TRUE)
 	}
+	dev.new()
 	plot(bilAM,silent=TRUE)
+	graphics.off()
 })
 

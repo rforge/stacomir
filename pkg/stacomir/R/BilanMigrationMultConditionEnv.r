@@ -82,7 +82,8 @@ setMethod("choice_c",signature=signature("BilanMigrationMultConditionEnv"),defin
 							taxons=taxons,
 							stades=stades,
 							datedebut=datedebut,
-							datefin=datefin)
+							datefin=datefin,
+							silent=silent)
 			bmmCE@bilanConditionEnv=choice_c(bmmCE@bilanConditionEnv,
 					stationMesure=stationMesure,
 					datedebut=datedebut,
@@ -129,7 +130,7 @@ hbmmCEcalc=function(h=null,...){
 setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent=FALSE){ 
 			# silent=FALSE
 			bmmCE<-object
-			bmmCE@bilanMigrationMult<-calcule(bmmCE@bilanMigrationMult)			
+			bmmCE@bilanMigrationMult<-calcule(bmmCE@bilanMigrationMult,silent=silent)			
 			if (!silent) funout(gettext("bmmCE object is stocked into envir_stacomi environment\n",domain="R-stacomiR"))
 			return(bmmCE)
 		})

@@ -7,8 +7,7 @@ test_that("Test an instance of BilanMigration",{
 			baseODBC[c(2,3)]<-rep("iav",2)
 			assign("baseODBC",baseODBC,envir_stacomi)
 			sch<-get("sch",envir=envir_stacomi) # "iav."
-			assign("sch","iav.",envir_stacomi)
-			
+			assign("sch","iav.",envir_stacomi)			
 			bilanMigration<-new("BilanMigration")
 			options(warn = -1)
 			bilanMigration<-choice_c(bilanMigration,

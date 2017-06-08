@@ -77,6 +77,7 @@ test_that("Test that working environment is created",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 			expect_true(exists("envir_stacomi"))
+			dispose(get("logw",envir_stacomi))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

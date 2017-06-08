@@ -35,10 +35,10 @@ test_that("test plot method",{
 			bmmCE<-charge(bmmCE,silent=TRUE)
 			bmmCE<-connect(bmmCE,silent=TRUE)
 			bmmCE<-calcule(bmmCE,silent=TRUE)			
-			suppressWarnings(plot(bmmCE))
+			suppressWarnings(plot(bmmCE,silent=TRUE))
 			suppressWarnings(plot(bmmCE,
 					color_station=c("temp_gabion"="red","coef_maree"="blue","phases_lune"="pink"),
-					color_dc=c("5"="yellow","6"="orange","12"="purple")))
+					color_dc=c("5"="yellow","6"="orange","12"="purple"),silent=TRUE))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
