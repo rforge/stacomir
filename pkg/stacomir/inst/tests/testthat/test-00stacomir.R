@@ -84,6 +84,7 @@ test_that("Test that gWidget loginwindow is loaded ",{
 			require(stacomiR)
 			stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 			expect_true(exists("logw",envir_stacomi))
+			dispose(get("logw",envir_stacomi))
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 

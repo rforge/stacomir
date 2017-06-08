@@ -95,7 +95,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMultConditionEnv"),defin
 #' @param silent Should the function remain silent (boolean)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("charge",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent) {
+setMethod("charge",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent=FALSE) {
 			# silent=FALSE
 			bmmCE<-object
 			bmmCE@bilanMigrationMult<-charge(bmmCE@bilanMigrationMult,silent=silent)
@@ -126,11 +126,11 @@ hbmmCEcalc=function(h=null,...){
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @return \code{\link{BilanMigrationMultConditionEnv-class}}
 #' @export
-setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent){ 
+setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent=FALSE){ 
 			# silent=FALSE
 			bmmCE<-object
 			bmmCE@bilanMigrationMult<-calcule(bmmCE@bilanMigrationMult)			
-			funout(gettext("bmmCE object is stocked into envir_stacomi environment\n",domain="R-stacomiR"))
+			if (!silent) funout(gettext("bmmCE object is stocked into envir_stacomi environment\n",domain="R-stacomiR"))
 			return(bmmCE)
 		})
 
@@ -152,7 +152,8 @@ hbmmCEgraph = function(h=null){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.BilanMigrationMultConditionEnv plot.bmmCE
 #' @export
-setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing"), definition=function(x,  color_station=NULL,color_dc=NULL, silent=FALSE){ 
+setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing"), 
+		definition=function(x,  color_station=NULL,color_dc=NULL, silent=FALSE){ 
 			#color_station=NULL;color_dc=NULL
 			# color_station<-c("temp_gabion"="red","coef_maree"="blue","phases_lune"="green")
 			# color_dc=c("5"="#4D4D4D","6"="#E6E6E6","12"="#AEAEAE")
@@ -281,7 +282,7 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 					theme_bw()	
 			print(g)
 			assign("g",g,envir_stacomi)
-			funout(gettext("the ggplot object has been assigned to envir_stacomi, type g<-get('g',envir_stacomi)"))
+			if (!silent) funout(gettext("the ggplot object has been assigned to envir_stacomi, type g<-get('g',envir_stacomi)"))
 			
 		})# end function
 

@@ -5,7 +5,7 @@
 \alias{charge,BilanMigrationMultConditionEnv-method}
 \title{charge method for BilanMigrationMultConditionEnv class}
 \usage{
-\S4method{charge}{BilanMigrationMultConditionEnv}(object, silent)
+\S4method{charge}{BilanMigrationMultConditionEnv}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigrationMultConditionEnv-class}}

@@ -144,11 +144,12 @@ setMethod("charge",signature=signature("BilanMigrationMult"),definition=function
 #' @param stades A stage code matching the ref.tr_stadedeveloppement_std table in the stacomi database see \link{choice_c,RefStades-method}
 #' @param datedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param datefin The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.
+#' @param silent Should messages be hided default FALSE
 #' @return An object of class \link{BilanMigrationMult-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=function(object,
-				dc,taxons,stades,datedebut,datefin){
+				dc,taxons,stades,datedebut,datefin,silent=FALSE){
 			bilanMigrationMult<-object
 			bilanFonctionnementDF=new("BilanFonctionnementDF")
 			assign("bilanFonctionnementDF",bilanFonctionnementDF,envir = envir_stacomi)
@@ -166,7 +167,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 			bilanMigrationMult@stades<-choice_c(bilanMigrationMult@stades,stades)
 			bilanMigrationMult@pasDeTemps<-choice_c(bilanMigrationMult@pasDeTemps,datedebut,datefin)
 			assign("bilanMigrationMult",bilanMigrationMult,envir = envir_stacomi)
-			
+			if (! silent) funout(gettext("Choice made, and object bilanMigrationMult assigned in envir_stacomi"),domain="R-stacomiR")
 			return(bilanMigrationMult)
 		})
 
@@ -185,9 +186,7 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			# bilanMigrationMult<-bMM_Arzal
 			if (!silent) funout(gettext("Starting migration summary ... be patient\n",domain="R-stacomiR"))
-			bilanMigrationMult<-object
-			
-			
+			bilanMigrationMult<-object		
 			debut=bilanMigrationMult@pasDeTemps@dateDebut
 			fin=DateFin(bilanMigrationMult@pasDeTemps)
 			time.sequence<-seq.POSIXt(from=debut,to=fin,

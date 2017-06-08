@@ -6,7 +6,7 @@
 \title{command line interface for BilanMigrationMult class}
 \usage{
 \S4method{choice_c}{BilanMigrationMult}(object, dc, taxons, stades, datedebut,
-  datefin)
+  datefin, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanMigration-class}}
@@ -21,6 +21,8 @@ these should match the ref.tr_taxon_tax referential table in the stacomi databas
 \item{datedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
 \item{datefin}{The finishing date of the Bilan, for this class this will be used to calculate the number of daily steps.}
+
+\item{silent}{Should messages be hided default FALSE}
 }
 \value{
 An object of class \link{BilanMigrationMult-class}

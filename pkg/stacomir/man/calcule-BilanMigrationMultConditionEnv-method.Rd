@@ -5,7 +5,7 @@
 \alias{calcule,BilanMigrationMultConditionEnv-method}
 \title{Calculation for the BilanMigrationMultConditionEnv}
 \usage{
-\S4method{calcule}{BilanMigrationMultConditionEnv}(object, silent)
+\S4method{calcule}{BilanMigrationMultConditionEnv}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \code{\link{BilanMigrationMultConditionEnv-class}}}
