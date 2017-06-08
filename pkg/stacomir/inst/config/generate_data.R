@@ -3,7 +3,7 @@
 # In data :
 #For sets of data, set up a package to use lazy-loading of data. 
 #
-#For objects which are system data, for example lookup tables used in calculations
+#For objects which are system data, for example lookup tables used in bilcalculations
 #within the function, use a file ‘R/sysdata.rda’ in the package sources or create the 
 #objects by R code at package installation time. 
 #
@@ -389,6 +389,7 @@ devtools::use_data(bilanArg,internal=FALSE,overwrite=TRUE)
 # generates dataset for BilanPoidsMoyen : iav
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
+Sys.setenv(LANG = "EN")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
@@ -451,6 +452,8 @@ bilan_adm@data[,"std_libelle"]<-iconv(bilan_adm@data[,"std_libelle"],from="latin
 bilan_adm@taxons@data[,"tax_nom_commun"]<-iconv(bilan_adm@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bilan_adm@par@data[,"par_nom"]<-iconv(bilan_adm@par@data[,"par_nom"],from="latin1",to="UTF8")
 bilan_adm@stades@data[,"std_libelle"]<-iconv(bilan_adm@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]<-
+		bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]/10
 bilan_adm<-calcule(bilan_adm)
 devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
 

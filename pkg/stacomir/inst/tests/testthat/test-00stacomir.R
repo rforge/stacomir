@@ -41,6 +41,26 @@ test_that("Test that stacomirtools connects",{
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
+
+#test_that("testconnection to logrami serveur",{
+#			require(stacomiR)
+#			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+#			baseODBC<-get("baseODBC",envir=envir_stacomi)
+#			baseODBC[1]<- "BD_CONTMIG_SERVEUR"
+#			baseODBC[c(2,3)]<-rep('logrami',2)
+#			assign("baseODBC",baseODBC,envir_stacomi)
+#			sch<-get("sch",envir=envir_stacomi)
+#			assign("sch",paste('logrami',".", sep=""),envir_stacomi)
+#			con=new("ConnectionODBC")		
+#			con@baseODBC=baseODBC
+#			con<-connect(con)
+#			expect_is(connect(con),'ConnectionODBC')
+#			expect_equal(con@etat,"Connection in progress")
+#			odbcCloseAll()			
+#			rm("envir_stacomi",envir =.GlobalEnv)
+#		})
+
+
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 			require(stacomiR)
 			envir_stacomi <<- new.env(parent = emptyenv())

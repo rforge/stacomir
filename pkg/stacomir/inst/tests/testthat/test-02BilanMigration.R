@@ -93,7 +93,7 @@ test_that("Test connect method",{
 			assign("baseODBC",baseODBC,envir_stacomi)
 			sch<-get("sch",envir=envir_stacomi) # "iav."
 			assign("sch","iav.",envir_stacomi)
-	# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
+			# this chunk is not launched from examples but loads the bM_Arzal dataset if connection works	
 			bM_Arzal=new("BilanMigration")
 			bM_Arzal=choice_c(bM_Arzal,
 					dc=5,
@@ -106,7 +106,7 @@ test_that("Test connect method",{
 			
 			expect_length(bM_Arzal@data,11)
 			rm("envir_stacomi",envir =.GlobalEnv)
-})
+		})
 
 test_that("Test example 02_BilanMigration",
 		{
@@ -171,8 +171,8 @@ test_that("Test that different sums are the same, for BilanMigration, BilanMigra
 			data("bM_Arzal")
 			bM_Arzal<-calcule(bM_Arzal,silent=TRUE)
 			expect_equal(
-			sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),
-			sum(bM_Arzal@data[bM_Arzal@data$ope_dic_identifiant==5,"value"]))
+					sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),
+					sum(bM_Arzal@data[bM_Arzal@data$ope_dic_identifiant==5,"value"]))
 			write_database(object=bM_Arzal,silent=TRUE)
 			# using setAs to transform the bilanMigration into BilanMigrationInterAnnuelle
 			bili=as(bM_Arzal,"BilanMigrationInterAnnuelle")			
@@ -184,15 +184,15 @@ test_that("Test that different sums are the same, for BilanMigration, BilanMigra
 					sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),
 					bila@data$effectif,
 					label="The sum of number in the BilanMigration are different to the
-number in the BilanAnnuel class"
-					)
-		
+							number in the BilanAnnuel class"
+			)
+			
 			bili<-connect(bili,check=TRUE,silent=TRUE)
 			expect_equal(
-			sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),	
-			sum(bili@data$bjo_valeur[bili@data$bjo_labelquantite=="Effectif_total"]),			
-			label="The sum of number in the BilanMigration are different to the
-					number in the BilanMigrationInterAnnuelle")
+					sum(bM_Arzal@calcdata$dc_5$data$Effectif_total),	
+					sum(bili@data$bjo_valeur[bili@data$bjo_labelquantite=="Effectif_total"]),			
+					label="The sum of number in the BilanMigration are different to the
+							number in the BilanMigrationInterAnnuelle")
 			rm("envir_stacomi",envir =.GlobalEnv)
 		})
 
@@ -271,4 +271,56 @@ test_that("test example with glass eel",
 			plot(bM_Arzal_civ,silent=TRUE,bty="n")
 			summary(bM_Arzal_civ,silent=TRUE)
 			rm("envir_stacomi",envir =.GlobalEnv)
+		})
+# here require setting a connection to logrami server under the name BD_CONTMIG_NAT_SERVEUR
+test_that("test connexion to logrami server",
+		{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[1]<- "BD_CONTMIG_SERVEUR"
+			baseODBC[c(2,3)]<-rep('logrami',2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi)
+			assign("sch",paste('logrami',".", sep=""),envir_stacomi)		
+			sqldf.options<-get("sqldf.options",envir=envir_stacomi)
+			getpassword<-function(){  
+				require(tcltk);  
+				wnd<-tktoplevel();tclVar("")->passVar;  
+				#Label  
+				tkgrid(tklabel(wnd,text="Enter password:"));  
+				#Password box  
+				tkgrid(tkentry(wnd,textvariable=passVar,show="*")->passBox);  
+				#Hitting return will also submit password  
+				tkbind(passBox,"<Return>",function() tkdestroy(wnd));  
+				#OK button  
+				tkgrid(tkbutton(wnd,text="OK",command=function() tkdestroy(wnd)));  
+				#Wait for user to click OK  
+				tkwait.window(wnd);  
+				password<-tclvalue(passVar);  
+				return(password);  
+			}  
+			sqldf.options["sqldf.host"]<-getpassword()
+			sqldf.options["sqldf.port"]<-5432
+			assign("sqldf.options",sqldf.options,envir_stacomi)
+			bilanMigration=new('BilanMigration')
+			bilanMigration=choice_c(bilanMigration,
+					dc=23,
+					taxons=c("Petromyzon marinus"),
+					stades=c(5),
+					datedebut="2015-01-01",
+					datefin="2015-12-31")
+			bilanMigration<-charge(bilanMigration, silent=TRUE)
+			bilanMigration=connect(bilanMigration, silent=TRUE)
+			bilanMigration=calcule(bilanMigration, silent=TRUE)
+		
+			bmi<-new("BilanMigrationInterAnnuelle")
+			bmi<-choice_c(bmi,
+					dc=c(101,107),
+					taxons=c("Silurus glanis"),
+					stades=c(5),
+					anneedebut="2014",
+					anneefin="2016",
+					silent=TRUE)
+			bmi<-connect(bmi, silent=FALSE)			
 		})
