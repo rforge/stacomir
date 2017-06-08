@@ -69,7 +69,7 @@ plot(bmi,plot.type="line",silent=TRUE)
 # the y unit has little sense in this graph
 plot(bmi,plot.type="density",silent=TRUE)
 #install.packages("viridis")
-
+\dontrun{
 if (requireNamespace("ggplot2", quietly = TRUE)&
 		requireNamespace("viridis", quietly = TRUE)){
 g<-get("g",envir=envir_stacomi)	
@@ -115,7 +115,6 @@ ggplot2::ggplot(res, ggplot2::aes(x = semaine, y = bjo_annee,fill=effectif)) +
 		ggplot2::ggtitle("Historical trend at Les Enfrenaux Eel trap")
 	
 }
-\dontrun{
 # available arguments for timesplit are "quinzaine" and "mois" and "semaine"
 # with the silent=TRUE argument, it's always the latest year that is selected
 	plot(bmi,plot.type="barchart",timesplit="quinzaine",silent=TRUE)

@@ -243,6 +243,7 @@ b_carlot@data$dev_libelle<-iconv(b_carlot@data$dev_libelle,from="latin1",to="UTF
 b_carlot@data$std_libelle<-iconv(b_carlot@data$std_libelle,from="latin1",to="UTF8")
 b_carlot@data$val_libelle<-iconv(b_carlot@data$val_libelle,from="latin1",to="UTF8")
 b_carlot@data$par_nom<-iconv(b_carlot@data$par_nom,from="latin1",to="UTF8")
+b_carlot<-calcule(b_carlot)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)
 
@@ -411,6 +412,7 @@ bilPM@dc@data[,"dis_commentaires"]<-iconv(bilPM@dc@data[,"dis_commentaires"],fro
 bilPM@dc@data[,"type_df"]<-iconv(bilPM@dc@data[,"type_df"],from="latin1",to="UTF8")
 bilPM@dc@data[,"type_dc"]<-iconv(bilPM@dc@data[,"type_dc"],from="latin1",to="UTF8")
 bilPM@dc@data[,"dif_localisation"]<-iconv(bilPM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilPM<-calcule(bilPM)
 devtools::use_data(bilPM,internal=FALSE,overwrite=TRUE)
 
 
@@ -449,7 +451,7 @@ bilan_adm@data[,"std_libelle"]<-iconv(bilan_adm@data[,"std_libelle"],from="latin
 bilan_adm@taxons@data[,"tax_nom_commun"]<-iconv(bilan_adm@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 bilan_adm@par@data[,"par_nom"]<-iconv(bilan_adm@par@data[,"par_nom"],from="latin1",to="UTF8")
 bilan_adm@stades@data[,"std_libelle"]<-iconv(bilan_adm@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-
+bilan_adm<-calcule(bilan_adm)
 devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
 
 

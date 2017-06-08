@@ -98,7 +98,7 @@ plot(bMM_Arzal,plot.type="standard",
 				"#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
 		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
 		silent=TRUE)
-}
+
 
 #cumulated migration at the station (all stages and DC grouped)
 
@@ -111,8 +111,7 @@ plot(bMM_Arzal,plot.type="step",silent=TRUE)
 plot(bMM_Arzal,plot.type="multiple",silent=TRUE)
 # data will be written in the data directory specified in 
 # the stacomi/calcmig.csv file
-\dontrun{
-	summary(bMM_Arzal,silent=TRUE)
+summary(bMM_Arzal,silent=TRUE)
 }
 }
 \author{
