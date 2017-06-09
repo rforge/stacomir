@@ -117,6 +117,7 @@ hbmmCEcalc=function(h=null,...){
 	bmmCE<-connect(bmmCE)
 	bmmCE<-calcule(bmmCE)
 	assign("bmmCE",bmmCE,envir_stacomi)
+	toolbarlist<-get("toolbarlist",envir_stacomi)
 	enabled(toolbarlist[["Graph"]])<-TRUE
 	return(invisible(NULL))	
 }
