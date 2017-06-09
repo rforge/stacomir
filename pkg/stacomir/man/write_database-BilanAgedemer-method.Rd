@@ -6,19 +6,17 @@
 \title{Command line method to write the caracteristic "sea age" (car_par_code='A124')
 into the tj_caracteristiquelot_car table in the user's scheme}
 \usage{
-\S4method{write_database}{BilanAgedemer}(object, silent = TRUE,
-  dbname = "bd_contmig_nat")
+\S4method{write_database}{BilanAgedemer}(object, silent = TRUE)
 }
 \arguments{
 \item{object}{an object of class \link{BilanAgedemer-class}}
 
 \item{silent}{: Default FALSE, if TRUE the program should no display messages.}
-
-\item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
 }
 \description{
 The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
-defined by the user
+defined by the user . the name of the database is retreived from the odbc link
+defined in calcmig.csv
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

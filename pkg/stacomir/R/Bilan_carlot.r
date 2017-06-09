@@ -226,6 +226,7 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 			} else {      
 				if (!silent) funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
 			}
+			name_param<-bilan_carlot
 			if (plot.type==1){		
 				g<-ggplot(bilan_carlot@data,aes(x=car_valeur_quantitatif))
 				g<-g+stat_density(aes(ymax = ..density..,  ymin = -..density..),

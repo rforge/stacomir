@@ -171,7 +171,8 @@ if (any(is.na(compared_numbers$effectif_bjo))){
 	} # end for loop to write new bilans
 	# reloading everything
 	object@data<-fn_connect()			
-	compared_numbers<-fn_check()		
+	compared_numbers<-fn_check()
+	
 } # end if any...
 
 #-------------------------------------------------------------------------------------

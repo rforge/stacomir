@@ -349,17 +349,19 @@ setMethod("summary",signature=signature(object="BilanAgedemer"),definition=funct
 #' into the tj_caracteristiquelot_car table in the user's scheme
 #' 
 #' The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
-#' defined by the user  
+#' defined by the user . the name of the database is retreived from the odbc link
+#' defined in calcmig.csv
 #' @param object an object of class \link{BilanAgedemer-class}
 #' @param silent : Default FALSE, if TRUE the program should no display messages.
-#' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat"){
+setMethod("write_database",signature=signature("BilanAgedemer"),definition=function(object,silent=TRUE){
 			# dbname="bd_contmig_nat"
 			bilan_adm<-object
 			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
 			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
+			# getting the database name
+			dbname<-getdbname()		
 			calcdata<-bilan_adm@calcdata[["data"]]	
 			data_in_base<-bilan_adm@data
 			if (nrow(calcdata)==0) {   

@@ -578,12 +578,12 @@ hbilanMigrationwrite = function(h,...) {
 #' by this function.  
 #' @param object an object of class \code{\linkS4class{BilanMigration}}
 #' @param silent : TRUE to avoid messages
-#' @param dbname : the name of the database, defaults to "bd_contmig_nat"
 #' @param check_for_bjo : do you want to check if data are already present in the bjo table, and delete them,
 #' this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops
 #' @note the user is asked whether or not he wants to overwrite data, if no
 #' data are present in the database, the import is done anyway. The name of the database
-#' is not passed in odbc link, here defaults to "bd_contmig_nat"
+#' is retrieved from the odbc link
+#' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @examples 
 #' \dontrun{
@@ -593,13 +593,15 @@ hbilanMigrationwrite = function(h,...) {
 #' write_database(bilanMigration=bM_Arzal,silent=FALSE)
 #' }
 #' @export
-setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,dbname="bd_contmig_nat",check_for_bjo=TRUE){
+setMethod("write_database",signature=signature("BilanMigration"),definition=function(object,silent=TRUE,check_for_bjo=TRUE){
 			# dbname="bd_contmig_nat";host="localhost";silent=FALSE;port=5432
 			# object=bM
 			#host : the host for sqldf, defaults to "localhost"
 			 #port : the port, defaults to 5432
 			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
 			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
+			# getting the database name
+			dbname<-getdbname()			
 			bilanMigration<-object
 			if (class(bilanMigration)!="BilanMigration") stop("the bilanMigration should be of class BilanMigration")
 			if (class(silent)!="logical") stop("the silent argument should be a logical")
@@ -655,6 +657,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 			# check = FALSE tells the method not to check for missing data (we don't want that check when the
 			# write database is called from the bilanMigration class
 			if (check_for_bjo) bil=connect(bil,silent=silent,check=FALSE)
+
 			
 			hconfirm=function(h,...){			
 				# suppression des donnees actuellement presentes dans la base
@@ -707,6 +710,7 @@ setMethod("write_database",signature=signature("BilanMigration"),definition=func
 				sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
 						"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 						" SELECT * FROM  aat_bilanmigrationjournalier_bjo;")
+				
 				invisible(utils::capture.output(
 								sqldf::sqldf(x=sql,
 										drv="PostgreSQL",

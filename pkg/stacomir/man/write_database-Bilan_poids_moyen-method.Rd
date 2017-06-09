@@ -12,8 +12,6 @@
 \item{object}{An object of class \link{Bilan_poids_moyen-class}}
 
 \item{silent}{Boolean, if TRUE, information messages are not displayed}
-
-\item{dbname}{default "bd_contmig_nat"}
 }
 \value{
 An object of class \link{Bilan_poids_moyen-class}

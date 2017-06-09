@@ -7,14 +7,12 @@
 t_bilanmigrationjournalier_bjo table}
 \usage{
 \S4method{write_database}{BilanMigration}(object, silent = TRUE,
-  dbname = "bd_contmig_nat", check_for_bjo = TRUE)
+  check_for_bjo = TRUE)
 }
 \arguments{
 \item{object}{an object of class \code{\linkS4class{BilanMigration}}}
 
 \item{silent}{: TRUE to avoid messages}
-
-\item{dbname}{: the name of the database, defaults to "bd_contmig_nat"}
 
 \item{check_for_bjo}{: do you want to check if data are already present in the bjo table, and delete them,
 this param was added otherwise connect method when called from BilanMigrationInterAnnuelle runs in loops}
@@ -26,7 +24,7 @@ by this function.
 \note{
 the user is asked whether or not he wants to overwrite data, if no
 data are present in the database, the import is done anyway. The name of the database
-is not passed in odbc link, here defaults to "bd_contmig_nat"
+is retrieved from the odbc link
 }
 \examples{
 \dontrun{

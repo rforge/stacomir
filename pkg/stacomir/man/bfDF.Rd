@@ -6,7 +6,7 @@
 \title{Overview of the fishway operation at Arzal in (Vilaine France).}
 \format{An object of class BilanFonctionnementDF with 4 slots:
 \describe{
-#'   \item{data}{ A dataframe with 4261 obs. of  7 variables
+  \item{data}{ A dataframe with 4261 obs. of  7 variables
 			\describe{
   			\item{per_dis_identifiant}{The number of the DF}
   			\item{per_date_debut}{Starting time a POSIXct}
@@ -24,15 +24,15 @@
        }	
   \item{df}{the \code{RefDF} object with 3 slots filled with data corresponding to the iav postgres schema}
   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
-  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
+  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date}'   
 }}
 \usage{
 bfDF
 }
 \description{
-This data corresponds to the data collected at the vertical slot fishway
+This dataset corresponds to the data collected at the vertical slot fishway
 in 2015, the fishway is working daily with a cycle depending on tide. This dataset
-is used to show an example of acdetailed output for an object of class \link{BilanFonctionnementDF-class} with data loaded
+is used to show an example of detailed output for an object of class \link{BilanFonctionnementDF-class} with data loaded
 }
 \keyword{data}
 

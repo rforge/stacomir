@@ -407,3 +407,17 @@ colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
 	cs$color = factor(cs$color,levels(cs$color)[bonordre])
 	return(cs)
 }
+
+
+#' Retreives the dbnames from a connection using "baseOBC"
+#' @return A string with the name of the database
+getdbname<-function(){
+	req<-new("RequeteODBC")
+	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
+	req@sql<-str_c("select * from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo limit 1")
+	res<-connect(req)
+	odbc<-res@connection
+	aa<-strsplit(attributes(odbc)$connection.string,";")
+	dbname=gsub("DATABASE=","",aa[[1]][2])
+	return(dbname)
+}

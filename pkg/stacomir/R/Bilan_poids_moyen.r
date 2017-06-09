@@ -542,10 +542,9 @@ funtableBilan_poids_moyen = function(h,...) {
 #' Function to write data to the stacomi database for \link{Bilan_poids_moyen-class}
 #' 
 #' Data will be written in tj_coefficientconversion_coe table, if the class retrieves some data
-#' from the database, those will be deleted first.
+#' from the database, those will be deleted first. 
 #' @param object An object of class \link{Bilan_poids_moyen-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed
-#' @param dbname default "bd_contmig_nat"
 #' @return An object of class \link{Bilan_poids_moyen-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
@@ -553,6 +552,8 @@ setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=f
 			#silent=FALSE;dbname="bd_contmig_nat";host="localhost";port=5432
 			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
 			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		
+			# getting the database name
+			dbname<-getdbname()		
 			bilPM<-object
 			if (!"import_coe"%in% names(bilPM@calcdata)) funout(gettext("Attention, you must fit a model before trying to write the predictions in the database",domain="R-stacomiR"),arret=TRUE)
 			# first delete existing data from the database
