@@ -140,7 +140,8 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 					}
 				}
 				group<-get("group",envir=envir_stacomi)
-				frame_std<<-gframe(gettext("Stage selection",domain="R-stacomiR"))
+				frame_std<-gframe(gettext("Stage selection",domain="R-stacomiR"))
+				assign("frame_std",frame_std,envir_stacomi)
 				add(group,frame_std)
 				std_libelle=fun_char_spe(object@data$std_libelle)
 				choice=gcombobox(std_libelle,container=frame_std,handler=hstd)

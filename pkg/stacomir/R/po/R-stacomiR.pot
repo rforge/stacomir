@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: stacomiR 0.5.1\n"
-"POT-Creation-Date: 2017-04-03 15:18\n"
+"Project-Id-Version: stacomiR 0.5.2\n"
+"POT-Creation-Date: 2017-06-09 09:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,12 @@ msgstr ""
 msgid "You need to choose the ending date"
 msgstr ""
 
+msgid "you need to choose a value for limit1hm"
+msgstr ""
+
+msgid "you need to choose a value for limit2hm"
+msgstr ""
+
 msgid "limit1hm should be numeric or integer"
 msgstr ""
 
@@ -49,7 +55,7 @@ msgstr ""
 msgid "internal error"
 msgstr ""
 
-msgid "plot.type must be 1,2,3 or 4"
+msgid "plot.type must be 1,2"
 msgstr ""
 
 msgid "You need to launch computation first, clic on calc"
@@ -100,6 +106,9 @@ msgstr ""
 msgid "No data of silver or yellow eel on the selected period"
 msgstr ""
 
+msgid "plot.type must be 1,2,3 or 4"
+msgstr ""
+
 msgid "size (BL mm)"
 msgstr ""
 
@@ -115,7 +124,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-msgid "Number by pigmentation stage"
+msgid "Number by silvering stage"
 msgstr ""
 
 msgid "Size (mm)"
@@ -253,6 +262,9 @@ msgstr ""
 msgid "Shutdowns types for this counting device"
 msgstr ""
 
+msgid "No Shutdowns types for this pass"
+msgstr ""
+
 msgid "Writing of %s"
 msgstr ""
 
@@ -361,19 +373,64 @@ msgstr ""
 msgid "Writing daily summary in the database"
 msgstr ""
 
-msgid "Summary object is stocked into envir_stacomi environment"
+msgid "with"
 msgstr ""
 
-msgid "You don't have any environmental conditions within the time period"
+msgid "without"
 msgstr ""
 
-msgid "no selected station => simple graph"
+msgid "This bilan should be for just one taxa"
 msgstr ""
 
-msgid "Attention, on one station :%s there are several entries for the same day :%s only the first value will be incuded in the summary"
+msgid "length(object@parqual)==1|length(object@parquan)==1 not TRUE"
 msgstr ""
 
-msgid "The number of lines of the environmental conditions table (%s) doesn't fit the duration of the migration summary  (%s)"
+msgid "You need to choose at least one parameter qualitative or quantitative"
+msgstr ""
+
+msgid "You need to choose at least one quantitative or qualitative attribute"
+msgstr ""
+
+msgid "par should be a character"
+msgstr ""
+
+msgid "No data for quantitative parameter, perhaps you forgot to run the calcule method"
+msgstr ""
+
+msgid "The parameter %s is not in the selected parameters"
+msgstr ""
+
+msgid "No data for this parameter, nothing to do"
+msgstr ""
+
+msgid "%s lines have been converted from quantitative to qualitative parameters"
+msgstr ""
+
+msgid "cannot perform calcule method, no data in either qualitative or quantitative parameters"
+msgstr ""
+
+msgid "The calculated data are in slot calcdata"
+msgstr ""
+
+msgid "no data in calcdata, have you forgotten to run calculations"
+msgstr ""
+
+msgid "Classes"
+msgstr ""
+
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
+msgstr ""
+
+msgid "Param"
+msgstr ""
+
+msgid "No data in slot calcdata, did you forget to run the calcule method ?"
+msgstr ""
+
+msgid "Sum"
+msgstr ""
+
+msgid "Summary for dc %s, taxa %s, stage %s."
 msgstr ""
 
 msgid "BilanMigrationInterannuelle can only take one taxa"
@@ -451,7 +508,10 @@ msgstr ""
 msgid "Attention : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
 msgstr ""
 
-msgid "Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with i=%s"
+msgid "Migration for years"
+msgstr ""
+
+msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s"
 msgstr ""
 
 msgid "%s %s, Cumulated numbers %s"
@@ -466,7 +526,7 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-msgid "\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s"
+msgid "\"Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s"
 msgstr ""
 
 msgid "Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary"
@@ -481,10 +541,22 @@ msgstr ""
 msgid "plot.type argument invalid"
 msgstr ""
 
+msgid "Choice made, and object bilanMigrationMult assigned in envir_stacomi"
+msgstr ""
+
 msgid "The summary object is stored in environment envir_stacomi, write bilanMigrationMult=get(\"bilanMigrationMult\",envir_stacomi)"
 msgstr ""
 
 msgid "Raw data are stored in bilanMigrationMult@data, processed data in bilanMigrationMult@calcdata\\n"
+msgstr ""
+
+msgid "DC has length zero, are you connected to the right schema, do you use the right dc number ?"
+msgstr ""
+
+msgid "Taxa has length zero, are you connected to the right schema, do you use the right taxa ?"
+msgstr ""
+
+msgid "Stage has length zero, are you connected to the right schema, do you use the right stage ?"
 msgstr ""
 
 msgid "The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"
@@ -499,25 +571,37 @@ msgstr ""
 msgid "Careful sum=0, you didn't enter the coefficient of conversion"
 msgstr ""
 
-msgid "You need to choose a quantitative parameter"
+msgid "This function must have for argument an object of class BilanMigrationMult"
 msgstr ""
 
-msgid "You need to choose a qualitative parameter"
+msgid "bmmCE object is stocked into envir_stacomi environment"
 msgstr ""
 
-msgid "You need to choose at least one quantitative or qualitative attribute"
+msgid "You don't have any environmental conditions within the time period"
 msgstr ""
 
-msgid "Be careful, the processing doesnt take lot\"s quantities into account"
+msgid "Attention, on one station :%s there are several entries for the same day :%s we will calculate average for numeric\n\t\t\t\t\t\t\t\t\t\tand use the first value for qualitative parameter"
 msgstr ""
 
-msgid "Writing data into envir_stacomi environment : write data=get(\"data\",envir_stacomi)"
+msgid "Number, %s, %s"
 msgstr ""
 
-msgid "This shouldn't be possible"
+msgid "you have %s taxa in the bilan, those will be aggregated"
 msgstr ""
 
-msgid "Writing the graphical object into envir_stacomi environment : write g=get(\"g\",envir_stacomi)"
+msgid "you have %s stages in the bilan, those will be aggregated"
+msgstr ""
+
+msgid "DC"
+msgstr ""
+
+msgid "stations"
+msgstr ""
+
+msgid "Qualitative parm"
+msgstr ""
+
+msgid "the ggplot object has been assigned to envir_stacomi, type g<-get('g',envir_stacomi)"
 msgstr ""
 
 msgid "Loading data for operations"
@@ -601,7 +685,7 @@ msgstr ""
 msgid "gam model g2 assigned to envir_stacomi"
 msgstr ""
 
-msgid "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling\n\t\t\t\t\t\t\t\t\t\tof estuarine samples."
+msgid "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling of estuarine samples."
 msgstr ""
 
 msgid "summary_harmonic"
@@ -721,6 +805,21 @@ msgstr ""
 msgid "les longeur de 'labels' et 'checked' sont differentes"
 msgstr ""
 
+msgid "valeurchoisie should be a vector of length 1"
+msgstr ""
+
+msgid "The selected valeur,"
+msgstr ""
+
+msgid "not in the list of possible values :"
+msgstr ""
+
+msgid "choice made"
+msgstr ""
+
+msgid "options"
+msgstr ""
+
 msgid "%s rows deleted from table tj_coefficientconversion_coe"
 msgstr ""
 
@@ -743,6 +842,9 @@ msgid "Table"
 msgstr ""
 
 msgid "Error : no counting device in the database (the query returns 0 entry)"
+msgstr ""
+
+msgid "Counting device not selected"
 msgstr ""
 
 msgid "drop here"
@@ -769,19 +871,13 @@ msgstr ""
 msgid "horodate should not be null"
 msgstr ""
 
-msgid "Formatting problem, the character vector you are trying to pass as horodate could not\nbe parsed. Check example or documentation"
+msgid "Formatting problem, the character vector you are trying to pass as horodate could not\n\t\t\t\t\t\t\t\t\tbe parsed. Check example or documentation"
 msgstr ""
 
-msgid "valeurchoisie should be a vector of length 1"
+msgid "Formatting problem, the character vector you are trying to pass as horodate could not\n\t\t\t\t\t\t\t\tbe parsed. Check example or documentation"
 msgstr ""
 
-msgid "The selected valeur,"
-msgstr ""
-
-msgid "not in the list of possible values :"
-msgstr ""
-
-msgid "internal error, check messager and messagerlang length, they should match"
+msgid "Horodate selected"
 msgstr ""
 
 msgid "No data for this counting device and this taxon"
@@ -800,6 +896,21 @@ msgid "Stage selection"
 msgstr ""
 
 msgid "Stop internal error : load data to make a choice"
+msgstr ""
+
+msgid "Parm."
+msgstr ""
+
+msgid "Qualit. parm."
+msgstr ""
+
+msgid "Quant. parm."
+msgstr ""
+
+msgid "No Stage selected"
+msgstr ""
+
+msgid "Error : no stages in the database (the query returns 0 entry)"
 msgstr ""
 
 msgid "No value for argument stage"
@@ -838,7 +949,10 @@ msgstr ""
 msgid "Taxon selection"
 msgstr ""
 
-msgid "The taxa(s) have been selected"
+msgid "Taxa selected"
+msgstr ""
+
+msgid "No taxa selected"
 msgstr ""
 
 msgid "No value for argument taxon"
@@ -868,19 +982,43 @@ msgstr ""
 msgid "No data for par %s"
 msgstr ""
 
-msgid "Internal error : there must have one line in Refparqual@data, or nbligne= %s"
+msgid "Sample characteristic"
+msgstr ""
+
+msgid "Parameter selected"
+msgstr ""
+
+msgid "Select here"
+msgstr ""
+
+msgid "Error : no parameters in the database (the query returns 0 entry)"
 msgstr ""
 
 msgid "Choice of a sample characteristic"
 msgstr ""
 
+msgid "Features have been selected"
+msgstr ""
+
+msgid "Qualitative"
+msgstr ""
+
+msgid "No Parameter selected"
+msgstr ""
+
+msgid "Error : no qualitative parameters in the database (the query returns 0 entry)"
+msgstr ""
+
 msgid "Writing monthly summary in the database"
 msgstr ""
 
-msgid "Date"
+msgid "The length of color must be 11"
 msgstr ""
 
-msgid "estimated number, %s, %s, %s, %s"
+msgid "Glass eels graph %s, %s, %s, %s"
+msgstr ""
+
+msgid "Number of glass eels (x1000)"
 msgstr ""
 
 msgid "Sum of numbers =%s"
@@ -907,19 +1045,22 @@ msgstr ""
 msgid "minimum term = %s"
 msgstr ""
 
-msgid "working"
+msgid "Unknown working"
 msgstr ""
 
-msgid "stopped"
-msgstr ""
-
-msgid "normal operation"
+msgid "Unknow operation type"
 msgstr ""
 
 msgid "stop"
 msgstr ""
 
 msgid "CD"
+msgstr ""
+
+msgid "working"
+msgstr ""
+
+msgid "stopped"
 msgstr ""
 
 msgid "Op"
@@ -929,12 +1070,6 @@ msgid "Number (x1000)"
 msgstr ""
 
 msgid "Glass eels graph %s"
-msgstr ""
-
-msgid "Number of glass eels (x1000)"
-msgstr ""
-
-msgid "Glass eels graph %s, %s, %s, %s,..."
 msgstr ""
 
 msgid "weight of the daily number"
@@ -953,18 +1088,6 @@ msgid "maximum term = %sdays"
 msgstr ""
 
 msgid "minimum term = %sdays"
-msgstr ""
-
-msgid "work"
-msgstr ""
-
-msgid "Number %s"
-msgstr ""
-
-msgid "Number %s, %s, %s, %s"
-msgstr ""
-
-msgid "Writing of the graphical object in the environment envir_stacomi : write g=get(g,envir_stacomi)"
 msgstr ""
 
 msgid "Calculation of the monthly balance sheet"
@@ -1093,10 +1216,31 @@ msgstr ""
 msgid "quit"
 msgstr ""
 
-msgid "Loading of the lists for taxons, stages, counting devices and monitoring stations"
+msgid "Loading of the lists for taxons, stages, counting devices, qualitative and quantitative parameters"
 msgstr ""
 
-msgid "Calculation of environnemental conditions by time step"
+msgid "Choice of batch type, inclusion of samples ?"
+msgstr ""
+
+msgid "from"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "calculation"
+msgstr ""
+
+msgid "Plot for qualitative parm"
+msgstr ""
+
+msgid "plot for quantitative parm"
+msgstr ""
+
+msgid "Crossed graph for qualitative and quantitative parameter"
+msgstr ""
+
+msgid "Summary"
 msgstr ""
 
 msgid "Loading of the existing daily summaries"
@@ -1135,28 +1279,10 @@ msgstr ""
 msgid "gr(all)"
 msgstr ""
 
-msgid "Loading of the lists for taxons, stages, counting devices, qualitative and quantitative parameters"
+msgid "Loading of the lists for taxons, stages, counting devices and monitoring stations"
 msgstr ""
 
-msgid "with"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "Choice of batch type, inclusion of samples ?"
-msgstr ""
-
-msgid "calculation"
-msgstr ""
-
-msgid "Monthly graphic"
-msgstr ""
-
-msgid "Daily graphic"
-msgstr ""
-
-msgid "Summary in .csv"
+msgid "Calculation of environnemental conditions by time step"
 msgstr ""
 
 msgid "Loading of the view vue_ope_lot, and choice of the counting device and of the time steps"
@@ -1181,15 +1307,6 @@ msgid "boxplot"
 msgstr ""
 
 msgid "dataframe"
-msgstr ""
-
-msgid "Size report"
-msgstr ""
-
-msgid "First timestamp"
-msgstr ""
-
-msgid "crossed query length / qualitative feature"
 msgstr ""
 
 msgid "all"
@@ -1243,9 +1360,6 @@ msgstr ""
 msgid "export"
 msgstr ""
 
-msgid "choose language"
-msgstr ""
-
 msgid "Calculation of the operating fishway"
 msgstr ""
 
@@ -1285,7 +1399,7 @@ msgstr ""
 msgid "Summary of average weight for the calculation of the relation between length and number."
 msgstr ""
 
-msgid "Not adapted yet to version 0.5"
+msgid "Not adapted yet to version 0.5.2"
 msgstr ""
 
 msgid "Species summary of the counting device"
@@ -1315,7 +1429,7 @@ msgstr ""
 msgid "Problem when testing the ODBC connection"
 msgstr ""
 
-msgid "For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr or stacomi@googlegroups.com."
+msgid "Connection"
 msgstr ""
 
 msgid "Login"
@@ -1334,9 +1448,6 @@ msgid "Operation (TODO)"
 msgstr ""
 
 msgid "Fishway without counting device (TODO)"
-msgstr ""
-
-msgid "Summary"
 msgstr ""
 
 msgid "Migration"
@@ -1381,16 +1492,28 @@ msgstr ""
 msgid "Treatment size - age salmonids"
 msgstr ""
 
-msgid "Help"
+msgid "Output of the program"
 msgstr ""
 
-msgid "Output of the program"
+msgid "The vector passed to vector_to_listsql should not be null"
+msgstr ""
+
+msgid "The vector passed to vector_to_listsql should not be NA"
+msgstr ""
+
+msgid "The vector passed to vector_to_listsql should not be of lenght zero"
 msgstr ""
 
 msgid "horodatedebut not in column names for data"
 msgstr ""
 
 msgid "horodatefin not column names for data"
+msgstr ""
+
+msgid "The color argument should have length %s"
+msgstr ""
+
+msgid "The following name(s) %s do not match vector name: %s"
 msgstr ""
 
 msgid        "%d operation \n"

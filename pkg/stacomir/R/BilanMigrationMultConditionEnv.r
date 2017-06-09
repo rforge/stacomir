@@ -187,8 +187,8 @@ setMethod("plot", signature(x = "BilanMigrationMultConditionEnv", y = "missing")
 			tableauCEquan<-tableauCE[!qualitative,]
 			tableauCEqual<-tableauCE[qualitative,]
 			if (nrow(unique(cbind(tableauCE$date,tableauCE$stm_libelle)))!=	nrow(tableauCE)) {
-				funout(gettextf("Attention, on one station :%s there are several entries for the same day :%s we will calculate average for numeric
-										and use the first value for qualitative parameter",
+				# do not cut character chain below...
+				funout(gettextf("Attention, on one station :%s there are several entries for the same day :%s we will calculate average for numeric	and use the first value for qualitative parameter",
 								sta,
 								paste(unique(tableauCEst$env_date_debut[duplicated(tableauCEst$env_date_debut)]),sep="")),
 						arret=FALSE)	

@@ -414,7 +414,7 @@ hbmCstat=function(h){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("plot",signature=signature(x="BilanMigrationCar",y="missing"),definition=function(x,color_parm=NULL,plot.type="qual",silent=FALSE,...){ 
 			bmC<-x
-			if (nrow(bmC@calcdata)==0) stop("no data in calcdata, have you forgotten to run calculations")
+			if (nrow(bmC@calcdata)==0) stop("no data in calcdata, have you forgotten to run calculations ?")
 			# transformation du tableau de donnees
 			# color_parm<-c("age 1"="red","age 2"="blue","age 3"="green")
 			# color_parm<-c("C001"="red")

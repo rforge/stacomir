@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stacomiR 0.5.0\n"
-"POT-Creation-Date: 2017-04-03 15:22+0200\n"
-"PO-Revision-Date: 2017-04-11 15:37+0200\n"
+"POT-Creation-Date: 2017-06-09 09:46+0200\n"
+"PO-Revision-Date: 2017-06-09 10:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Data loaded"
@@ -33,6 +33,12 @@ msgstr "Vous devez choisir une date de début"
 msgid "You need to choose the ending date"
 msgstr "Vous devez choisir une date de fin"
 
+msgid "you need to choose a value for limit1hm"
+msgstr "vous devez choisir une valeur pour limit1hm"
+
+msgid "you need to choose a value for limit2hm"
+msgstr "vous devez choisir une valeur pour limit2hm"
+
 msgid "limit1hm should be numeric or integer"
 msgstr "limit1hm doit être un nombre ou un entier"
 
@@ -51,8 +57,8 @@ msgstr "vous êtes grave dans la merde"
 msgid "internal error"
 msgstr "Erreur interne"
 
-msgid "plot.type must be 1,2,3 or 4"
-msgstr "plot.type doit être 1,2,3 ou 4"
+msgid "plot.type must be 1,2"
+msgstr "plot.type doit être 1 ou 2"
 
 msgid "You need to launch computation first, clic on calc"
 msgstr "Il faut d'abord lancer le calcul, cliquer sur calc"
@@ -65,7 +71,7 @@ msgstr ""
 "envir=envir_stacomi)"
 
 msgid "the bilan_adm should be of class BilanAgedemer"
-msgstr ""
+msgstr "Le bilan_adm devrait avoir pour class BilanAgedemer"
 
 msgid "the silent argument should be a logical"
 msgstr "l’argument silent doit être booleen"
@@ -75,12 +81,15 @@ msgid ""
 "limit between 1 sea winter and 2 sea winter fish, and %s for the limit "
 "between 2 sea winter fish and 3 sea winter fish"
 msgstr ""
+"Age calculé à partir de la taille des poissons comparée à une valeur de "
+"référence %s pour la limite entre des poissons de un hiver de mer et de deux "
+"hiver, et %s pour la limite entre deux hiver de mer et trois hiver de mer."
 
 msgid "Writing  %s age values in the database"
-msgstr ""
+msgstr "Ecriture de %s valeur d'âge dans la base de données"
 
 msgid "No data to remove"
-msgstr ""
+msgstr "Aucun donnée à enlever"
 
 msgid "You need to choose the starting year"
 msgstr "Il faut choisir l'annee de debut"
@@ -118,6 +127,9 @@ msgid "No data of silver or yellow eel on the selected period"
 msgstr ""
 "Pas de données d'argentées ou d'anguilles jaunes sur la période demandée"
 
+msgid "plot.type must be 1,2,3 or 4"
+msgstr "plot.type doit être 1,2,3 ou 4"
+
 msgid "size (BL mm)"
 msgstr "taille (LT mm)"
 
@@ -133,7 +145,9 @@ msgstr "Mois"
 msgid "Number"
 msgstr "Effectif"
 
-msgid "Number by pigmentation stage"
+#, fuzzy
+#| msgid "Number by pigmentation stage"
+msgid "Number by silvering stage"
 msgstr "Effectif par stade d'Argenture"
 
 msgid "Size (mm)"
@@ -154,6 +168,8 @@ msgstr "Il faut choisir une station de mesure puis cliquer sur valider "
 
 msgid "Some monitoring stations lack associated values (no environmental data)"
 msgstr ""
+"Certaines stations de mesure n'ont pas de valeur associée (pas de données "
+"environnementales)"
 
 msgid ""
 "No environmental conditions values for selected monitoring stations "
@@ -284,11 +300,14 @@ msgstr "Opération du dispositif de comptage"
 msgid "Shutdowns types for this counting device"
 msgstr "Types d'arrêts du DC"
 
+msgid "No Shutdowns types for this pass"
+msgstr "Pas de données pour ce DF"
+
 msgid "Writing of %s"
 msgstr "Ecriture de %s"
 
 msgid "Writing of %s this might take a while, please be patient ..."
-msgstr ""
+msgstr "Ecriture de %s ceci peut être long, de grace soyez patient..."
 
 msgid "t_periodefonctdispositif_per_DC_%s_%s"
 msgstr "t_periodefonctdispositif_per_DC_%s_%s"
@@ -358,7 +377,7 @@ msgid ""
 "bilanMigration=get('bilanMigration',envir_stacomi)"
 msgstr ""
 "L'objet Bilan est stocke dans l'environnement envir_stacomi, écrire "
-"bilanMigration=get('bilanMigration',envir_stacomi (...)"
+"bilanMigration=get('bilanMigration',envir_stacomi)"
 
 msgid "To access calculated data, type bilanMigration@calcdata"
 msgstr "Pour accéder aux données calculées, écrire : bilanMigration@calcdata"
@@ -407,65 +426,130 @@ msgstr "Un résumé a déjà été écrit dans la base de données le %s : Ecras
 msgid "Writing daily summary in the database"
 msgstr "Ecriture du bilan journalier dans la base"
 
-msgid "Summary object is stocked into envir_stacomi environment"
-msgstr "L'objet Bilan est stocke dans l'environnement envir_stacomi"
+msgid "with"
+msgstr "avec"
 
-msgid "You don't have any environmental conditions within the time period"
+msgid "without"
+msgstr "sans"
+
+msgid "This bilan should be for just one taxa"
+msgstr "Ce bilan ne devrait être que pour un taxon"
+
+msgid "length(object@parqual)==1|length(object@parquan)==1 not TRUE"
 msgstr ""
-"Vous n'avez pas de conditions environnementales sur la periode de temps"
 
-msgid "no selected station => simple graph"
-msgstr "pas station sélectionnée => graphe simple"
+msgid "You need to choose at least one parameter qualitative or quantitative"
+msgstr ""
+"Il faut choisir au moins une caractéristique quantitative ou qualitative"
+
+msgid "You need to choose at least one quantitative or qualitative attribute"
+msgstr ""
+"Il faut choisir au moins une caractéristique quantitative ou qualitative"
+
+msgid "par should be a character"
+msgstr "pardoit être une chaine de caractères"
 
 msgid ""
-"Attention, on one station :%s there are several entries for the same day :%s "
-"only the first value will be incuded in the summary"
+"No data for quantitative parameter, perhaps you forgot to run the calcule "
+"method"
 msgstr ""
-"Attention, sur une station : %s il y a plusieurs entrées pour le même jour : "
-"%s. Le bilan n'inclura que la première valeur."
+"Pas de données pour les caractères quantitatifs, avez vous oublié de lancer "
+"la méthode calcule ?"
+
+msgid "The parameter %s is not in the selected parameters"
+msgstr "Le paramètre %s n'est pas dans les paramètres sélectionnés"
+
+msgid "No data for this parameter, nothing to do"
+msgstr "Pas de données pour ce paramètre, rien à faire"
 
 msgid ""
-"The number of lines of the environmental conditions table (%s) doesn't fit "
-"the duration of the migration summary  (%s)"
+"%s lines have been converted from quantitative to qualitative parameters"
 msgstr ""
-"Le nombre de lignes dans le tableau des conditions environnementales (%s) ne "
-"correspond pas à la durée du bilan de migration (%s)"
+"%s lignes ont été converties de caractéristique quantitative vers "
+"caractéristique qualitative"
+
+msgid ""
+"cannot perform calcule method, no data in either qualitative or quantitative "
+"parameters"
+msgstr ""
+"Ne peut pas lancer la méthode calcule, aucune données pour les paramètres "
+"quantitatifs ou qualitatifs"
+
+msgid "The calculated data are in slot calcdata"
+msgstr "Les données calculées sont dans le slot calcdata"
+
+msgid "no data in calcdata, have you forgotten to run calculations"
+msgstr "pas de données dans calcdata, auriez vous oublié de lancer le calcul ?"
+
+msgid "Classes"
+msgstr "Classes"
+
+msgid ""
+"Writing the graphical object into envir_stacomi environment : write g=get(\"g"
+"\",envir_stacomi)"
+msgstr ""
+"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+"g=get('g',envir_stacomi) "
+
+msgid "Param"
+msgstr "Param"
+
+msgid "No data in slot calcdata, did you forget to run the calcule method ?"
+msgstr ""
+"Pas de donnée dans le slot calcdata, avez-vous oublié de lancer la méthode "
+"calcule"
+
+msgid "Sum"
+msgstr "Bilan"
+
+msgid "Summary for dc %s, taxa %s, stage %s."
+msgstr "Summary pour dc %s, taxon %s, stade %s."
 
 msgid "BilanMigrationInterannuelle can only take one taxa"
-msgstr ""
+msgstr "la classe BilanMigrationInterannuelle ne peut prendre qu'un taxon"
 
 msgid "BilanMigrationInterannuelle can only take one stage"
-msgstr ""
+msgstr "la classe BilanMigrationInterannuelle ne peut prendre qu'un stade"
 
 msgid "DC with missing values : %s"
-msgstr ""
+msgstr "DC avec valeurs manquantes : %s"
 
 msgid "Years with no value : %s"
-msgstr ""
+msgstr "Années sans valeur : %s"
 
 msgid ""
 "Some years are missing in the t_bilanjournalier_bjo table, loading them now !"
 msgstr ""
+"Certaines années sont manquantes dans le tableau t_bilanjournalier_bjo, leur "
+"chargement est en cours !"
 
 msgid "Running Bilanmigration for year %s"
-msgstr ""
+msgstr "Calcul du BilanMigration pour l'année %s"
 
 msgid "For glass eel it is not possible to check that data are up to date"
 msgstr ""
+"Pour les civelles il n'est pas possible de vérifier que les données sont à "
+"jour"
 
 msgid ""
 "Years with values differing between t_bilanjournalier_bjo and bilanAnnuels : "
 "%s"
 msgstr ""
+"Années avec des valeurs différentes entre t_bilanjournalier_bjo et "
+"bilanAnnuels : %s"
 
 msgid "Running Bilanmigration to correct data for year %s"
-msgstr ""
+msgstr "Calcul du BilanMigration pour corriger les données de l'année %s"
 
 msgid ""
 "Some data differ between t_bilanjournalier_bjo table, this means that they "
 "have been changed after the last bilanmigration was run,  \n"
 "\t\t\t\t\t\t\t\tdo you want to load them again for calculation ?"
 msgstr ""
+"Certaines années diffèrent entre le tableau t_bilanjournalier_bjo et la "
+"base, ceci implique qu'il y a eu des changements dans la base après que le "
+"dernier bilanmigration ait tourn, \n"
+"\t\t\t\t\t\t\t\t voulez vous les recharger pour les intégrer au calcul ?"
 
 msgid "Attention, there is no migration summary for this year"
 msgstr "Attention il n'existe pas de bilan migration pour cette année "
@@ -517,6 +601,8 @@ msgstr ""
 msgid ""
 "No rows in bilanMigrationInterannuelle@data, nothing to run calculations on"
 msgstr ""
+"Pas de lignes dans le tableau bilanMigrationInterannuelle@data, rien à "
+"calculer"
 
 msgid ""
 "Attention : you have to complete a migration summary for at least one of the "
@@ -525,9 +611,12 @@ msgstr ""
 "ATTENTION : Veuillez effectuer un Bilan Migration pour au moins une des "
 "annees selectionnees avant de lancer un bilan interannuel"
 
+msgid "Migration for years"
+msgstr "Migration pour années"
+
 msgid ""
-"Writing the graphical object into envir_stacomi environment : write g=get(gi"
-"\",envir_stacomi) with i=%s"
+"Writing the graphical object into envir_stacomi environment : write "
+"g=get(\"gi\",envir_stacomi) with i=%s"
 msgstr ""
 "Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
 "g=get('gi',envir_stacomi) avec "
@@ -546,8 +635,10 @@ msgstr "année"
 
 msgid ""
 "\"Writing the graphical object into envir_stacomi environment : write "
-"g=get(gi\",envir_stacomi) with \" i=%s"
+"g=get(\"gi\",envir_stacomi) with i=%s"
 msgstr ""
+"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+"g=get('gi',envir_stacomi) avec i =%s"
 
 msgid ""
 "Warning : you have to complete a migration summary for at least one of the "
@@ -557,13 +648,16 @@ msgstr ""
 "années sélectionnées avant de lancer un bilan interannuel"
 
 msgid "Internal error, timesplit"
-msgstr ""
+msgstr "Erreur interne, timesplit"
 
 msgid "not working for seasonal plot"
-msgstr ""
+msgstr "ne marche pas pour graphique saisonnier"
 
 msgid "plot.type argument invalid"
 msgstr "argument plot.type non valide"
+
+msgid "Choice made, and object bilanMigrationMult assigned in envir_stacomi"
+msgstr "Choix effectué et objet bilanMigrationMult écrit dans envir_stacomi"
 
 msgid ""
 "The summary object is stored in environment envir_stacomi, write "
@@ -580,14 +674,39 @@ msgstr ""
 "sont stockés dans bilanMigrationMult@calcdata "
 
 msgid ""
+"DC has length zero, are you connected to the right schema, do you use the "
+"right dc number ?"
+msgstr ""
+"DC à pour longueur zéro, êtes vous connecté au bon schéma, utilisez vous le "
+"bon numéro de dc ?"
+
+msgid ""
+"Taxa has length zero, are you connected to the right schema, do you use the "
+"right taxa ?"
+msgstr ""
+"Taxon a pour longueur zéro, êtes vous connecté au bon schéma, utilisez vous "
+"le bon taxon ?"
+
+msgid ""
+"Stage has length zero, are you connected to the right schema, do you use the "
+"right stage ?"
+msgstr ""
+"Stade a pour longueur zéro, êtes vous connecté au bon schéma, utilisez vous "
+"le bon stade ?"
+
+msgid ""
 "The plot has been assigned to p in envir_stacomi,write p<-get('p',"
 "envir_stacomi) to retreive the object"
 msgstr ""
+"Le graphique a été écrite (assigned) comme \"p\" dans l'environnement "
+"envir_stacomi, écrire  p<-get('p',envir_stacomi) pour récupérer l'objet"
 
 msgid ""
 "The data for the plot have been assigned to envir_stacomi,write grdata<-"
 "get('grdata',envir_stacomi) to retreive the object"
 msgstr ""
+"Les données du graphique ont été écrites dans l'environnement stacomi, pour "
+"les récupérer écrire grdata<-get('grdata',envir_stacomi) "
 
 msgid "dc=%s Conversion weight / number"
 msgstr "dc=%s Conversion poids effectif "
@@ -596,35 +715,50 @@ msgid "Careful sum=0, you didn't enter the coefficient of conversion"
 msgstr ""
 "Attention somme =0,vous n'avez pas encore rentre les coef de conversion"
 
-msgid "You need to choose a quantitative parameter"
-msgstr "Il faut choisir un paramètre quantitatif"
+msgid ""
+"This function must have for argument an object of class BilanMigrationMult"
+msgstr "Cette fonction a comme argument un objet de classe BilanMigrationMult"
 
-msgid "You need to choose a qualitative parameter"
-msgstr "Il faut choisir un parametre qualitatif"
+msgid "bmmCE object is stocked into envir_stacomi environment"
+msgstr "L'objet Bilan bmmCE est stocke dans l'environnement envir_stacomi"
 
-msgid "You need to choose at least one quantitative or qualitative attribute"
+msgid "You don't have any environmental conditions within the time period"
 msgstr ""
-"Il faut choisir au moins une caracteristique quantitative ou qualitative"
-
-msgid "Be careful, the processing doesnt take lot\"s quantities into account"
-msgstr "Attention, ce traitement ne s'effectue pas sur les quantités de lots "
+"Vous n'avez pas de conditions environnementales sur la periode de temps"
 
 msgid ""
-"Writing data into envir_stacomi environment : write data=get(\"data\","
+"Attention, on one station :%s there are several entries for the same day :%s "
+"we will calculate average for numeric\n"
+"\t\t\t\t\t\t\t\t\t\tand use the first value for qualitative parameter"
+msgstr ""
+"Attention, sur une station : %s il y a plusieurs entrées pour le même jour : "
+"%s. Pour les numériques, utilisation de la moyenne, pour les paramètres "
+"qualitatifs utilisation de la première valeur "
+
+msgid "Number, %s, %s"
+msgstr "Effectif %s, %s"
+
+msgid "you have %s taxa in the bilan, those will be aggregated"
+msgstr "Vous avez %s taxons dans le bilan, ils seront aggrégés"
+
+msgid "you have %s stages in the bilan, those will be aggregated"
+msgstr "vous avez %s stades dans le bilan, ils seront agrégés"
+
+msgid "DC"
+msgstr "DC"
+
+msgid "stations"
+msgstr "Stations"
+
+msgid "Qualitative parm"
+msgstr "Caractéristique qualitative"
+
+msgid ""
+"the ggplot object has been assigned to envir_stacomi, type g<-get('g',"
 "envir_stacomi)"
 msgstr ""
-"Ecriture de data dans l'environnement envir_stacomi : écrire data=get('data',"
-"envir_stacomi) "
-
-msgid "This shouldn't be possible"
-msgstr "Normalement c'est impossible"
-
-msgid ""
-"Writing the graphical object into envir_stacomi environment : write g=get(\"g"
-"\",envir_stacomi)"
-msgstr ""
-"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
-"g=get('g',envir_stacomi) "
+"L'objet graphique est décrit dans envir_stacomi, écrire g<-get('g',"
+"envir=envir_stacomi)"
 
 msgid "Loading data for operations"
 msgstr "Chargement des données des opérations:"
@@ -711,21 +845,24 @@ msgstr "la date devrait être POSIXct"
 
 msgid "Model equations assigned to envir_stacomi (result)"
 msgstr ""
+"Les équations du modèle ont été écrites dans l'objet \"result\" dans "
+"l'environnement envir_stacomi "
 
 msgid "gam model g1 assigned to envir_stacomi"
 msgstr "le modèle gam g1 est attribué à envir_stacomi"
 
 msgid "One model per year, doy starts in august"
-msgstr ""
+msgstr "Un modèle par année, doy démarre en août"
 
 msgid "gam model g2 assigned to envir_stacomi"
 msgstr "le modèle gam g2 est attribué à envir_stacomi"
 
 msgid ""
 "Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} "
-"and in the present modelling\n"
-"\t\t\t\t\t\t\t\t\t\tof estuarine samples."
+"and in the present modelling of estuarine samples."
 msgstr ""
+"Comparaison des coefficients obtenus par \\citet{desaunay_seasonal_1997} et "
+"dans ce modèle des lots estuariens."
 
 msgid "summary_harmonic"
 msgstr "resumé_cyclique"
@@ -841,16 +978,16 @@ msgid "horodate should be a vector of length 1"
 msgstr "l'horodate doit être de longueur 1"
 
 msgid "no year"
-msgstr ""
+msgstr "pas d'année"
 
 msgid "Attention, year"
-msgstr ""
+msgstr "Attention, année"
 
 msgid "is not available in the database, available years :"
-msgstr ""
+msgstr "n'est pas disponible dans la base de données, données disponible :"
 
 msgid "none, were you lazy?"
-msgstr ""
+msgstr "aucune, avez vous été fainéant ?"
 
 msgid ","
 msgstr ","
@@ -858,8 +995,23 @@ msgstr ","
 msgid "les longeur de 'labels' et 'checked' sont differentes"
 msgstr "les longeur de 'labels' et 'checked' sont differentes"
 
+msgid "valeurchoisie should be a vector of length 1"
+msgstr "valeurchoisie doit être de longueur 1"
+
+msgid "The selected valeur,"
+msgstr "La valeur sélectionnée,"
+
+msgid "not in the list of possible values :"
+msgstr "n'est pas dans la liste des valeurs possibles :"
+
+msgid "choice made"
+msgstr "choix effectué"
+
+msgid "options"
+msgstr "options"
+
 msgid "%s rows deleted from table tj_coefficientconversion_coe"
-msgstr ""
+msgstr "%s lignes supprimées depuis la table tj_coefficientconversion_coe"
 
 msgid "Counting device selected"
 msgstr "Le DC a été sélectionné "
@@ -883,6 +1035,9 @@ msgid "Error : no counting device in the database (the query returns 0 entry)"
 msgstr ""
 "Erreur : Aucun DC n'est rentre dans la base (aucune ligne de retour de la "
 "requete)"
+
+msgid "Counting device not selected"
+msgstr "DC non sélectionné"
 
 msgid "drop here"
 msgstr "déposer ici"
@@ -912,26 +1067,23 @@ msgstr "l'horodate ne doit pas être NULL"
 msgid ""
 "Formatting problem, the character vector you are trying to pass as horodate "
 "could not\n"
-"be parsed. Check example or documentation"
+"\t\t\t\t\t\t\t\t\tbe parsed. Check example or documentation"
+msgstr ""
+"Problème de formatage, le vecteur de caractères que vous essayez de passer "
+"en horodate n'a pas pu\n"
+"être converti. Vérifier un exemple ou la documentation."
+
+msgid ""
+"Formatting problem, the character vector you are trying to pass as horodate "
+"could not\n"
+"\t\t\t\t\t\t\t\tbe parsed. Check example or documentation"
 msgstr ""
 "Problème de formatage, le vecteur de caractères que vous essayez de passer "
 "en horodate n'a pas\n"
 "être converti. Vérifier un exemple ou la documentation."
 
-msgid "valeurchoisie should be a vector of length 1"
-msgstr "valeurchoisie doit être de longueur 1"
-
-msgid "The selected valeur,"
-msgstr "La valeur sélectionnée,"
-
-msgid "not in the list of possible values :"
-msgstr "n'est pas dans la liste des valeurs possibles :"
-
-msgid ""
-"internal error, check messager and messagerlang length, they should match"
-msgstr ""
-"Erreur interne, vérifier les dimensions de messager et messagerlang, ils "
-"doivent correspondre"
+msgid "Horodate selected"
+msgstr "Horodate sélectionnée"
 
 msgid "No data for this counting device and this taxon"
 msgstr "Pas de données pour ce DC, et ce taxon "
@@ -950,6 +1102,21 @@ msgstr "Choix du Stade"
 
 msgid "Stop internal error : load data to make a choice"
 msgstr "Stop erreur interne : charger les données pour faire le choix "
+
+msgid "Parm."
+msgstr "Parm."
+
+msgid "Qualit. parm."
+msgstr "Qualit. parm"
+
+msgid "Quant. parm."
+msgstr "Quant. parm."
+
+msgid "No Stage selected"
+msgstr "Pas de stade sélectionné"
+
+msgid "Error : no stages in the database (the query returns 0 entry)"
+msgstr "Erreur : pas de stade dans la base (la requête renvoit 0 lignes)"
 
 msgid "No value for argument stage"
 msgstr "Pas de valeur pour l'argument stades"
@@ -979,15 +1146,15 @@ msgid ""
 msgstr "Stop il n'y  a aucune donnée de station de mesure (pb lien ODBC ?) "
 
 msgid "the stationmesure should be of class character"
-msgstr ""
+msgstr "stationmesure doit être une chaine de caractères"
 
 msgid "NA values for stationmesure"
-msgstr ""
+msgstr "valeurs NA pour stationmesure"
 
 msgid ""
 "stationmesure code not present :\n"
 " %s"
-msgstr ""
+msgstr "stationmesure code non présent: %s"
 
 msgid "Taxon selected"
 msgstr "Le taxon a été sélectionné "
@@ -995,8 +1162,13 @@ msgstr "Le taxon a été sélectionné "
 msgid "Taxon selection"
 msgstr "Choix du Taxon"
 
-msgid "The taxa(s) have been selected"
-msgstr "Le(s) Taxons(s) a(ont) ete selectionne(s) "
+msgid "Taxa selected"
+msgstr "Taxon sélectionné "
+
+#, fuzzy
+#| msgid "Stage selected"
+msgid "No taxa selected"
+msgstr "Le stade a été sélectionné "
 
 msgid "No value for argument taxon"
 msgstr "Pas de valeur pour l'argument taxon"
@@ -1033,23 +1205,67 @@ msgstr ""
 msgid "No data for par %s"
 msgstr "Pas de données pour par %s"
 
-msgid ""
-"Internal error : there must have one line in Refparqual@data, or nbligne= %s"
+#, fuzzy
+#| msgid "Sample characteristics"
+msgid "Sample characteristic"
+msgstr "Caractéristiques du lot"
+
+#, fuzzy
+#| msgid "Year selected"
+msgid "Parameter selected"
+msgstr "Année choisie"
+
+msgid "Select here"
 msgstr ""
-"Erreur interne : il devrait y avoir une ligne dans Refparqual@data, or "
-"nbligne= %s"
+
+#, fuzzy
+#| msgid ""
+#| "Error : no counting device in the database (the query returns 0 entry)"
+msgid "Error : no parameters in the database (the query returns 0 entry)"
+msgstr ""
+"Erreur : Aucun DC n'est rentre dans la base (aucune ligne de retour de la "
+"requete)"
 
 msgid "Choice of a sample characteristic"
 msgstr "Choix d'une caractéristique de lot"
 
+#, fuzzy
+#| msgid "Feature has been selected"
+msgid "Features have been selected"
+msgstr "La caractéristique a été sélectionnée "
+
+#, fuzzy
+#| msgid "Qualitative feature"
+msgid "Qualitative"
+msgstr "Caractéristique qualitative"
+
+#, fuzzy
+#| msgid "Year selected"
+msgid "No Parameter selected"
+msgstr "Année choisie"
+
+#, fuzzy
+#| msgid ""
+#| "Error : no counting device in the database (the query returns 0 entry)"
+msgid ""
+"Error : no qualitative parameters in the database (the query returns 0 entry)"
+msgstr ""
+"Erreur : Aucun DC n'est rentre dans la base (aucune ligne de retour de la "
+"requete)"
+
 msgid "Writing monthly summary in the database"
 msgstr "Ecriture du bilan mensuel dans la base"
 
-msgid "Date"
-msgstr "Date"
+msgid "The length of color must be 11"
+msgstr ""
 
-msgid "estimated number, %s, %s, %s, %s"
-msgstr "effectif estimé, %s, %s, %s, %s"
+#, fuzzy
+#| msgid "Glass eels graph %s, %s, %s, %s,..."
+msgid "Glass eels graph %s, %s, %s, %s"
+msgstr "Graph civelles %s, %s, %s, %s,..."
+
+msgid "Number of glass eels (x1000)"
+msgstr "Effectif de civelles (x1000)"
 
 msgid "Sum of numbers =%s"
 msgstr "Somme des effectifs = %s"
@@ -1075,13 +1291,14 @@ msgstr "duree max= %s"
 msgid "minimum term = %s"
 msgstr "durée min= %s"
 
-msgid "working"
-msgstr "Fonct."
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown working"
+msgstr "Inconnu"
 
-msgid "stopped"
-msgstr "Arrêté"
-
-msgid "normal operation"
+#, fuzzy
+#| msgid "normal operation"
+msgid "Unknow operation type"
 msgstr "fonct. normal"
 
 msgid "stop"
@@ -1089,6 +1306,12 @@ msgstr "arrêt"
 
 msgid "CD"
 msgstr "DC"
+
+msgid "working"
+msgstr "Fonct."
+
+msgid "stopped"
+msgstr "Arrêté"
 
 msgid "Op"
 msgstr "Op"
@@ -1098,12 +1321,6 @@ msgstr "Effectif (x1000)"
 
 msgid "Glass eels graph %s"
 msgstr "Graph civelles %s"
-
-msgid "Number of glass eels (x1000)"
-msgstr "Effectif de civelles (x1000)"
-
-msgid "Glass eels graph %s, %s, %s, %s,..."
-msgstr "Graph civelles %s, %s, %s, %s,..."
 
 msgid "weight of the daily number"
 msgstr "poids de l'effectif journalier"
@@ -1122,22 +1339,6 @@ msgstr "duree max= %s jours"
 
 msgid "minimum term = %sdays"
 msgstr "durée min= %s jours"
-
-msgid "work"
-msgstr "Fonct."
-
-msgid "Number %s"
-msgstr "Effectif %s"
-
-msgid "Number %s, %s, %s, %s"
-msgstr "Effectif %s, %s, %s, %s"
-
-msgid ""
-"Writing of the graphical object in the environment envir_stacomi : write "
-"g=get(g,envir_stacomi)"
-msgstr ""
-"Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
-"g=get('g',envir_stacomi) "
 
 msgid "Calculation of the monthly balance sheet"
 msgstr "calcul des bilans mensuels"
@@ -1272,12 +1473,43 @@ msgid "quit"
 msgstr "quitte"
 
 msgid ""
-"Loading of the lists for taxons, stages, counting devices and monitoring "
-"stations"
-msgstr "Chargement des listes taxons et stades et dc et stations de mesure "
+"Loading of the lists for taxons, stages, counting devices, qualitative and "
+"quantitative parameters"
+msgstr ""
+"Chargement des listes taxons, stades, dc, paramètres qualitatifs et "
+"quantitatifs  "
 
-msgid "Calculation of environnemental conditions by time step"
-msgstr "calcul des condition environnementales par pas de temps"
+msgid "Choice of batch type, inclusion of samples ?"
+msgstr "Choix du type de lot, inclusion des echantillons ?"
+
+msgid "from"
+msgstr ""
+
+#, fuzzy
+#| msgid "Stop"
+msgid "to"
+msgstr "Arrêt"
+
+msgid "calculation"
+msgstr "calcul"
+
+#, fuzzy
+#| msgid "You need to choose a qualitative parameter"
+msgid "Plot for qualitative parm"
+msgstr "Il faut choisir un parametre qualitatif"
+
+#, fuzzy
+#| msgid "You need to choose a quantitative parameter"
+msgid "plot for quantitative parm"
+msgstr "Il faut choisir un paramètre quantitatif"
+
+#, fuzzy
+#| msgid "You need to choose a quantitative parameter"
+msgid "Crossed graph for qualitative and quantitative parameter"
+msgstr "Il faut choisir un paramètre quantitatif"
+
+msgid "Summary"
+msgstr "Bilan"
 
 msgid "Loading of the existing daily summaries"
 msgstr "Chargement des bilans journaliers existants"
@@ -1316,32 +1548,12 @@ msgid "gr(all)"
 msgstr "gr(tous)"
 
 msgid ""
-"Loading of the lists for taxons, stages, counting devices, qualitative and "
-"quantitative parameters"
-msgstr ""
-"Chargement des listes taxons, stades, dc, paramètres qualitatifs et "
-"quantitatifs  "
+"Loading of the lists for taxons, stages, counting devices and monitoring "
+"stations"
+msgstr "Chargement des listes taxons et stades et dc et stations de mesure "
 
-msgid "with"
-msgstr "avec"
-
-msgid "without"
-msgstr "sans"
-
-msgid "Choice of batch type, inclusion of samples ?"
-msgstr "Choix du type de lot, inclusion des echantillons ?"
-
-msgid "calculation"
-msgstr "calcul"
-
-msgid "Monthly graphic"
-msgstr "Graphe mensuel"
-
-msgid "Daily graphic"
-msgstr "Graphe journalier"
-
-msgid "Summary in .csv"
-msgstr "Tables bilan en .csv"
+msgid "Calculation of environnemental conditions by time step"
+msgstr "calcul des condition environnementales par pas de temps"
 
 msgid ""
 "Loading of the view vue_ope_lot, and choice of the counting device and of "
@@ -1368,15 +1580,6 @@ msgstr "boxplot"
 
 msgid "dataframe"
 msgstr "dataframe"
-
-msgid "Size report"
-msgstr "Bilan des tailles"
-
-msgid "First timestamp"
-msgstr "Première horodate"
-
-msgid "crossed query length / qualitative feature"
-msgstr "requête croisée taille/ caract. qualitative"
 
 msgid "all"
 msgstr "tous"
@@ -1446,9 +1649,6 @@ msgstr ""
 msgid "export"
 msgstr "exporter"
 
-msgid "choose language"
-msgstr "Choisir la langue"
-
 msgid "Calculation of the operating fishway"
 msgstr "Calculs du fonctionnement du dispositif de franchissement"
 
@@ -1487,6 +1687,8 @@ msgid ""
 "Summary of samples characteristics (size, weight...) by calling the view "
 "vue_lot_ope"
 msgstr ""
+"Résumé des caractéristiques des échantillons (taille, poids...) par appel à "
+"la vue vue_lot_ope"
 
 msgid "Lengths summary"
 msgstr "Bilan des tailles"
@@ -1496,14 +1698,16 @@ msgid ""
 "and number."
 msgstr "Bilan des poids moyens en vue du calcul des relations poids effectif."
 
-msgid "Not adapted yet to version 0.5"
-msgstr ""
+#, fuzzy
+#| msgid "Not adapted yet to version 0.5"
+msgid "Not adapted yet to version 0.5.2"
+msgstr "Pas encore adapté pour la version 0.5.2"
 
 msgid "Species summary of the counting device"
 msgstr "Bilan espèces pour le dispositif de comptage"
 
 msgid "Age calculation from size limit"
-msgstr ""
+msgstr "Calcul de l'âge à partir de la limite de taille"
 
 msgid "Error when using the method connect of the ConnectionODBC class"
 msgstr ""
@@ -1531,12 +1735,10 @@ msgstr "Erreur du titre du cadre"
 msgid "Problem when testing the ODBC connection"
 msgstr "Problème lors du test de la connexion ODBC"
 
-msgid ""
-"For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-"
-"vilaine.fr or stacomi@googlegroups.com."
-msgstr ""
-"Pour de l'aide, contacter Cédric Briand - 02 99 90 88 44 - cedric."
-"briand@eptb-vilaine.fr or stacomi@googlegroups.com"
+#, fuzzy
+#| msgid "Taxon selection"
+msgid "Connection"
+msgstr "Choix du Taxon"
 
 msgid "Login"
 msgstr "Connexion"
@@ -1555,9 +1757,6 @@ msgstr "Opération (TODO)"
 
 msgid "Fishway without counting device (TODO)"
 msgstr "DF sans DC (TODO)"
-
-msgid "Summary"
-msgstr "Bilan"
 
 msgid "Migration"
 msgstr "Migration"
@@ -1601,11 +1800,17 @@ msgstr "Anguilles argentées"
 msgid "Treatment size - age salmonids"
 msgstr "Analyse taille - âge des salmonidés"
 
-msgid "Help"
-msgstr "Aide"
-
 msgid "Output of the program"
 msgstr "Sorties du programme"
+
+msgid "The vector passed to vector_to_listsql should not be null"
+msgstr ""
+
+msgid "The vector passed to vector_to_listsql should not be NA"
+msgstr ""
+
+msgid "The vector passed to vector_to_listsql should not be of lenght zero"
+msgstr ""
 
 msgid "horodatedebut not in column names for data"
 msgstr ""
@@ -1614,21 +1819,127 @@ msgstr ""
 msgid "horodatefin not column names for data"
 msgstr "horodatefin n'apparaît pas dans les noms de colonnes dans les données"
 
+#, fuzzy
+#| msgid "dc_name argument should have length"
+msgid "The color argument should have length %s"
+msgstr "l'argument dc_name doit avoir une longueur"
+
+msgid "The following name(s) %s do not match vector name: %s"
+msgstr ""
+
 msgid "%d operation \n"
 msgid_plural "%d operations \n"
 msgstr[0] "opération\n"
 msgstr[1] "opérations\n"
 
-#~ msgid "One model per year, doy starts in november"
-#~ msgstr "Un modèle par an, début en novembre"
+#~ msgid "no selected station => simple graph"
+#~ msgstr "pas station sélectionnée => graphe simple"
+
+#~ msgid ""
+#~ "The number of lines of the environmental conditions table (%s) doesn't "
+#~ "fit the duration of the migration summary  (%s)"
+#~ msgstr ""
+#~ "Le nombre de lignes dans le tableau des conditions environnementales (%s) "
+#~ "ne correspond pas à la durée du bilan de migration (%s)"
+
+#~ msgid ""
+#~ "\"Writing the graphical object into envir_stacomi environment : write "
+#~ "g=get(gi\",envir_stacomi) with \" i=%s"
+#~ msgstr ""
+#~ "\"Ecriture de l'objet graphique dans l'environnement envir_stacomi : "
+#~ "écrire g=get(gi\",envir_stacomi) avec i=%s"
+
+#~ msgid ""
+#~ "Be careful, the processing doesnt take lot\"s quantities into account"
+#~ msgstr ""
+#~ "Attention, ce traitement ne s'effectue pas sur les quantités de lots "
+
+#~ msgid ""
+#~ "Writing data into envir_stacomi environment : write data=get(\"data\","
+#~ "envir_stacomi)"
+#~ msgstr ""
+#~ "Ecriture de data dans l'environnement envir_stacomi : écrire "
+#~ "data=get('data',envir_stacomi) "
+
+#~ msgid "This shouldn't be possible"
+#~ msgstr "Normalement c'est impossible"
 
 #~ msgid ""
 #~ "Comparison of the coefficients obtained by "
 #~ "\\citet{desaunay_seasonal_1997} and in the present modelling\n"
-#~ "\t\t\t\t\t\t\t\tof estuarine samples."
+#~ "\t\t\t\t\t\t\t\t\t\tof estuarine samples."
 #~ msgstr ""
-#~ "Comparaison des coefficients obtenus par \\citet{desaunay_seasonal_1997} "
-#~ "et dans ce modèle des lots estuariens."
+#~ "Comparaison des coefficients obtenus par desaunay_seasonal_1997 et dans "
+#~ "modèle en cours pour les données estuariennes"
+
+#~ msgid ""
+#~ "internal error, check messager and messagerlang length, they should match"
+#~ msgstr ""
+#~ "Erreur interne, vérifier les dimensions de messager et messagerlang, ils "
+#~ "doivent correspondre"
+
+#~ msgid "The taxa(s) have been selected"
+#~ msgstr "Le(s) Taxons(s) a(ont) ete selectionne(s) "
+
+#~ msgid ""
+#~ "Internal error : there must have one line in Refparqual@data, or nbligne= "
+#~ "%s"
+#~ msgstr ""
+#~ "Erreur interne : il devrait y avoir une ligne dans Refparqual@data, or "
+#~ "nbligne= %s"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "estimated number, %s, %s, %s, %s"
+#~ msgstr "effectif estimé, %s, %s, %s, %s"
+
+#~ msgid "work"
+#~ msgstr "Fonct."
+
+#~ msgid "Number %s"
+#~ msgstr "Effectif %s"
+
+#~ msgid ""
+#~ "Writing of the graphical object in the environment envir_stacomi : write "
+#~ "g=get(g,envir_stacomi)"
+#~ msgstr ""
+#~ "Ecriture de l'objet graphique dans l'environnement envir_stacomi : écrire "
+#~ "g=get('g',envir_stacomi) "
+
+#~ msgid "Monthly graphic"
+#~ msgstr "Graphe mensuel"
+
+#~ msgid "Daily graphic"
+#~ msgstr "Graphe journalier"
+
+#~ msgid "Summary in .csv"
+#~ msgstr "Tables bilan en .csv"
+
+#~ msgid "Size report"
+#~ msgstr "Bilan des tailles"
+
+#~ msgid "First timestamp"
+#~ msgstr "Première horodate"
+
+#~ msgid "crossed query length / qualitative feature"
+#~ msgstr "requête croisée taille/ caract. qualitative"
+
+#~ msgid "choose language"
+#~ msgstr "Choisir la langue"
+
+#~ msgid ""
+#~ "For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-"
+#~ "vilaine.fr or stacomi@googlegroups.com."
+#~ msgstr ""
+#~ "Pour de l'aide, contacter Cédric Briand - 02 99 90 88 44 - cedric."
+#~ "briand@eptb-vilaine.fr or stacomi@googlegroups.com"
+
+#~ msgid "Help"
+#~ msgstr "Aide"
+
+#~ msgid "One model per year, doy starts in november"
+#~ msgstr "Un modèle par an, début en novembre"
 
 #~ msgid "Pigmentation stages loading query completed"
 #~ msgstr "La requete a été effectuée pour charger les stades pigmentaires"
@@ -1694,10 +2005,6 @@ msgstr[1] "opérations\n"
 
 #~ msgid "Title choice"
 #~ msgstr "Choix du titre"
-
-#~ msgid "You need to choose at least one quantitative or qualitative feature"
-#~ msgstr ""
-#~ "Il faut choisir au moins une caracteristique quantitative ou qualitative"
 
 #~ msgid "The query has been launched for Bilan_taille"
 #~ msgstr "La requête est lancée pour Bilan_taille"

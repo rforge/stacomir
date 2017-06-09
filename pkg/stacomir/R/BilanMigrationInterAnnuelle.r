@@ -620,7 +620,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+theme_bw()+ theme(legend.key = element_blank())
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						if (!silent) funout(gettextf("Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
 						
 						
 					} # end if					
@@ -754,7 +754,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					
@@ -829,7 +829,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 						g<-g+ theme_minimal() 
 						print(g, vp=vplayout(1,1)) 
 						assign(paste("g",1,sep=""),g,envir_stacomi)
-						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(gi\",envir_stacomi) with \" i=%s",paste(1:length(the_choice),collapse=",")))
+						if (!silent) funout(gettextf("\"Writing the graphical object into envir_stacomi environment : write g=get(\"gi\",envir_stacomi) with i=%s",paste(1:length(the_choice),collapse=",")))
 						
 					} # end if
 					#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

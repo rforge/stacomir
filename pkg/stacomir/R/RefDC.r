@@ -152,6 +152,7 @@ setMethod("choice",signature=signature("RefDC"),definition=function(object,objec
 				}
 				group<-get("group",envir=envir_stacomi)
 				frame_DC<-gframe(gettext("Counting devices choice",domain="R-stacomiR"))
+				assign("frame_DC",frame_DC,envir_stacomi)
 				add(group,frame_DC)
 				DC_identifiant=object@data$dc
 				choice=gdroplist(DC_identifiant,container=frame_DC,handler=hDC)

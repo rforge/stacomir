@@ -95,7 +95,7 @@ hpds=function(h,...){
 #' @param h handler
 #' @param ... additional parameters
 hSt=function(h,...){
-	funout(gettext("Not adapted yet to version 0.5",domain="R-stacomiR"))
+	funout(gettext("Not adapted yet to version 0.5.2",domain="R-stacomiR"))
 	#funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
 	#eval(interface_Bilan_stades_pigm(),envir = envir_stacomi)
 }

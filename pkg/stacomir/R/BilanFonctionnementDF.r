@@ -418,7 +418,7 @@ funbarchartDF = function(h,...) {
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
+		funout(gettext("No data for this fishway\n",domain="R-stacomiR"), arret=TRUE)
 	}		
 	plot(bilanFonctionnementDF,plot.type=1,silent=FALSE)
 }   
@@ -435,7 +435,7 @@ funbarchart1DF = function(h,...) {
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
+		funout(gettext("No data for this fishway\n",domain="R-stacomiR"), arret=TRUE)
 	}		
 	plot(bilanFonctionnementDF,plot.type=2,silent=FALSE)
 }   
@@ -450,7 +450,7 @@ funboxDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
+		funout(gettext("No data for this fishway\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	plot(bilanFonctionnementDF,plot.type=3,silent=FALSE)
 	
@@ -466,7 +466,7 @@ funchartDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
+		funout(gettext("No data for this fishway\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	plot(bilanFonctionnementDF,plot.type=4,silent=FALSE)
 	
@@ -482,7 +482,7 @@ funtableDF = function(h,...) {
 	bilanFonctionnementDF<-connect(bilanFonctionnementDF)
 	
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n",domain="R-stacomiR"), arret=TRUE)
+		funout(gettext("No data for this fishway\n",domain="R-stacomiR"), arret=TRUE)
 	}
 	summary(bilanFonctionnementDF)
 }

@@ -464,8 +464,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 				# need to repass colnames
 				colnames(summary_harmonic)=c("source","$\\gamma$","$s_0(cm)$","$\\phi$")
 				xt_summary_harmonic<-xtable( summary_harmonic,
-						caption=gettext("Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling
-										of estuarine samples.",domain="R-stacomiR"),
+						caption=gettext("Comparison of the coefficients obtained by \\citet{desaunay_seasonal_1997} and in the present modelling of estuarine samples.",domain="R-stacomiR"),
 						label=gettext("summary_harmonic",domain="R-stacomiR"),
 						digits=c(0,0,3,3,0))
 				tabname<-stringr::str_c(get("datawd",envir=envir_stacomi),"/summary_harmonic.tex")
@@ -508,7 +507,7 @@ setMethod("model",signature(object = "Bilan_poids_moyen"),definition=function(ob
 					funout(paste(gettextf("data directory :%s",fileout,domain="R-stacomiR")))
 				}
 				assign("import_coe",import_coe,envir=envir_stacomi)
-				funout(gettext("To obtain the table, type : import_coe=get(import_coe\",envir_stacomi",domain="R-stacomiR"))
+				funout(gettext("To obtain the table, type : import_coe=get(\"import_coe\",envir_stacomi)",domain="R-stacomiR"))
 				bilPM@calcdata[["import_coe"]]<-import_coe	
 			}
 			return(bilPM)

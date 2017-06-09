@@ -457,7 +457,7 @@ funbarchart1DC = function(h,...) {
 	bilanFonctionnementDC=charge(bilanFonctionnementDC)	
 	bilanFonctionnementDC<-connect(bilanFonctionnementDC)
 	if( nrow(bilanFonctionnementDF@data)==0 ) {
-		funout(gettext("Shutdowns types for this counting device\n"), arret=TRUE)
+		funout(gettext("No Shutdowns types for this pass\n"), arret=TRUE)
 	}		
 	plot(bilanFonctionnementDC,plot.type=2,silent=FALSE)
 }   

@@ -84,13 +84,13 @@ setMethod("choice",signature=signature("RefTaxon"),
 						if (exists("frame_std",envir_stacomi)){
 							delete(group,get("frame_std",envir_stacomi))
 						}
-						if (exists("frame_par")) {
+						if (exists("frame_par",envir_stacomi)) {
 							delete(group,get("frame_par",envir_stacomi))
 						}
-						if (exists("frame_parquan")) {
+						if (exists("frame_parquan",envir_stacomi)) {
 							delete(group,get("frame_parquan",envir_stacomi))
 						}
-						if (exists("frame_parqual")) {
+						if (exists("frame_parqual",envir_stacomi)) {
 							delete(group,get("frame_parqual",envir_stacomi))
 						}
 						choice(objectBilan@stades,objectBilan,is.enabled=TRUE)						
@@ -98,6 +98,9 @@ setMethod("choice",signature=signature("RefTaxon"),
 				}
 				group<-get("group",envir=envir_stacomi)
 				frame_tax<-gframe(gettext("Taxon selection",domain="R-stacomiR"))
+				# assignment in envir_stacomi to get it back and delete it when previous
+				# object (dc) is selected
+				assign("frame_tax",frame_tax,envir_stacomi)
 				add(group,frame_tax)
 				tax_libelle=fun_char_spe(object@data$tax_nom_latin)
 				choice=gdroplist(tax_libelle,container=frame_tax,handler=htax)
