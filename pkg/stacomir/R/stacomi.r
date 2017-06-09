@@ -407,7 +407,7 @@ interface_graphique=function(){
 	nbligne=0
 	assign("nbligne",nbligne,envir_stacomi)
 	
-	win <- gWidgets::gwindow(gettext("Migratory treatment",domain="R-stacomiR"), name="main",parent=c(0,0),width=100,height=100)
+	win <- gWidgets::gwindow(gettext("Migratory treatment",domain="R-stacomiR"), name="main",parent=c(0,0),width=400,height=100)
 	assign("win",win,envir=envir_stacomi)
 	
 	## Menubar is defined by a list
@@ -459,7 +459,7 @@ interface_graphique=function(){
 	
 	gWidgets::add(win,ggrouptotal)
 	
-	gSortie=gWidgets::gtext(gettext("Output of the program\n",domain="R-stacomiR"),width =100 , height = 100,
+	gSortie=gWidgets::gtext(gettext("Output of the program\n",domain="R-stacomiR"),width =400 , height = 100,
 			font.attr=list(style="italic", col="blue",family="monospace",sizes="medium"))
 	assign("gSortie",gSortie,envir=envir_stacomi) 
 	

@@ -565,7 +565,7 @@ hbilanMigrationwrite = function(h,...) {
 	# ecriture du bilan journalier, ecrit aussi le bilan mensuel
 	database_expected<-get("database_expected",envir=envir_stacomi)
 	if (database_expected) {
-		write_database(bilanMigration,silent=TRUE)
+		write_database(bilanMigration,silent=FALSE)
 	}	else {
 		funout(gettext("no bilan written to database : database_expected argument=FALSE",domain="R-stacomiR"))
 	}

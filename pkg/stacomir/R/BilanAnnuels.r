@@ -563,6 +563,8 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 			}	
 		})
 
+#TODO Add a csv export
+
 
 #' Barplot handler
 #' @param h handler

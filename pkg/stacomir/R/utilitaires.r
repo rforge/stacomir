@@ -29,7 +29,7 @@ quitte=function(...){
 	if (exists("envir_stacomi")){
 		miettes=ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
-			miettes=miettes[!miettes%in%c("datawd","sch","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window")]
+			miettes=miettes[!miettes%in%c("datawd","sch","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window","sqldf.options")]
 			rm(list=miettes,envir=envir_stacomi)
 		}      
 	}

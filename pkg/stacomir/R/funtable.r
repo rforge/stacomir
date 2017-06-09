@@ -29,7 +29,10 @@ funtable=function(tableau,time.sequence,taxon,stade,DC,resum,silent){
 	if( !is.null(resum) )
 	{
 		path2=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",DC,"_",taxon,"_",stade,"_",annee,".csv",sep=""),fsep ="/")
-		write.table(resum,path2,row.names=TRUE,col.names=TRUE,sep=";")
+		resum1<-resum
+		resum$id=rownames(resum)
+		write.table(resum1,path2,row.names=FALSE,col.names=TRUE,sep=";")
+		rm(resum1)
 		path2html=file.path(path.expand(get("datawd",envir=envir_stacomi)),paste("res",annee,".html",sep=""),fsep ="/")
 		if (!silent) funout(gettextf("writing of %s\n",path2))
 		suppressWarnings(funhtml(data=resum,

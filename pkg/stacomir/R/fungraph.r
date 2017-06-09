@@ -90,7 +90,7 @@ fungraph=function(bilanMigration,tableau,time.sequence,taxon,stade,dc=NULL,silen
 	# Graph annuel couvrant sequence >0
 	####################################
 	dots<-list(...)
-	if (!"main"%in%names(dots)) main=gettextf("Glass eels graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR")
+	if (!"main"%in%names(dots)) main=gettextf("Migration graph %s, %s, %s, %s",dis_commentaire,taxon,stade,annee,domain="R-stacomiR")
 	else main=dots[["main"]]
 	if (!"ylab"%in%names(dots)) ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR")
 	else ylab=dots[["ylab"]]
