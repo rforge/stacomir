@@ -105,6 +105,7 @@ source("interface_BilanMigrationMult.r")
 source("interface_BilanArgentee.r")
 source("interface_BilanAnnuels.r")
 source("interface_BilanAgedemer.r")
+source("interface_BilanEspeces.r")
 source("stacomi.r")
 # interface_BilanEspeces dans BilanEspeces
 setwd("C:/workspace/stacomir/pkg/stacomir")

@@ -548,7 +548,7 @@ funtableBilan_poids_moyen = function(h,...) {
 #' @return An object of class \link{Bilan_poids_moyen-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE,dbname="bd_contmig_nat"){
+setMethod("write_database",signature=signature("Bilan_poids_moyen"),definition=function(object,silent=FALSE){
 			#silent=FALSE;dbname="bd_contmig_nat";host="localhost";port=5432
 			host=get("sqldf.options",envir=envir_stacomi)["sqldf.host"]
 			port=get("sqldf.options",envir=envir_stacomi)["sqldf.port"]		

@@ -61,6 +61,7 @@ Collate:
     'interface_BilanAnnuels.r'
     'interface_BilanArgentee.r'
     'interface_BilanConditionEnv.r'
+    'interface_BilanEspeces.r'
     'interface_BilanFonctionnementDC.r'
     'interface_BilanFonctionnementDF.r'
     'interface_BilanMigration.r'

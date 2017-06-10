@@ -78,7 +78,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 				requete@sql=paste("select  DISTINCT ON (year) year from( select date_part('year', ope_date_debut) as year from ",
 						get("sch",envir=envir_stacomi),
 						"t_operation_ope) as tabletemp",sep="")
-			} else if (objectBilan=="BilanAnnuels") {
+			} else if (objectBilan=="BilanAnnuels"|objectBilan=="BilanEspeces") {
 				if (exists("refDC",envir_stacomi)) {
 					dc<-get("refDC",envir_stacomi)
 					and1<-paste(" AND ope_dic_identifiant in ",vector_to_listsql(dc@dc_selectionne))
@@ -104,8 +104,8 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 						get("sch",envir=envir_stacomi),
 						"t_lot_lot on lot_ope_identifiant=ope_identifiant",
 						" WHERE lot_lot_identifiant is null",
-						and1,and2,and3, ") as tabletemp", sep="")				
-			} else {
+						and1,and2,and3, ") as tabletemp", sep="")					
+			} else {	
 				funout(gettextf("Not implemented for objectBilan = %s",objectBilan),arret=TRUE)
 			}
 			requete<-stacomirtools::connect(requete)  # appel de la methode connect de l'object requeteODBC

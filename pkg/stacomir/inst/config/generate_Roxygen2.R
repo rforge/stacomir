@@ -31,7 +31,7 @@ setwd("C:/workspace/stacomir/pkg/stacomir")
 #data("bMM_Arzal")
 #data("bM_Arzal")
 envir_stacomi <- new.env(parent = emptyenv())
-#
+# Note la documentation doit se faire sur un "build" correct du package
 require(stacomiR)
 stacomi(FALSE,FALSE,FALSE)
 require(roxygen2)

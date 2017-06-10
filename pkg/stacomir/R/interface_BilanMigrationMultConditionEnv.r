@@ -59,6 +59,7 @@ interface_BilanMigrationMultConditionEnv = function()
 					icon = "close",
 					label="quitter"))
 	assign("toolbarlist",toolbarlist,envir=envir_stacomi)
+	enabled(toolbarlist[["Graph"]])<-FALSE
 	gWidgets::add(ggroupboutonsbas, gtoolbar(toolbarlist))
 	assign("ggroupboutonsbas",ggroupboutonsbas,envir=envir_stacomi)	
 	gWidgets::addSpring(group)

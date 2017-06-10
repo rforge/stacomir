@@ -3,33 +3,34 @@
 \docType{class}
 \name{BilanEspeces-class}
 \alias{BilanEspeces-class}
-\title{Class "BilanEspeces" Report of the species present at a counting device for
-a given period}
+\alias{bilanEspeces}
+\title{Class "BilanEspeces" simple migration / number report}
 \description{
-this class is used to make the assessment of all species, and their number,
-per month it writes either an histogram or a pie chart of number per
-year/week/month
+This class is used to make the assessment of all species, and their number. It is intended
+as a simple way to check what fishes are present (taxa + development stage). Unlike the BilanAnnuels,
+it is not restricted on chosen taxa or stages but gives counts for all species present. The taxa is reported unless 
+a taxa has several case, in which case the different stages for the taxa will be reported
+Using the split arguments
+the calc method of the class will count numbers, subsamples are not accounted for in the Overview.
+The split argument currently takes values year or month. The class is intended to be used over long periods
+e.g years. The plot method writes either an histogram or a pie chart of number per
+year/week/month.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{dc}}{an object of class \link{RefDC-class} inherited from \link{BilanMigration-class}}
+\item{\code{dc}}{an object of class \link{RefDC-class}}
 
-\item{\code{horodate}}{\link{RefHorodate-class}}
+\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}}
 
-\item{\code{datedebut}}{A \link[base]{-.POSIXt} value}
-
-\item{\code{datefin}}{A \link[base]{-.POSIXt} value}
+\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}}
 
 \item{\code{data}}{\code{data.frame}}
 
-\item{\code{liste}}{Object of class \code{\link{RefListe-class}} RefListe referential
-class choose within a list}
+\item{\code{calcdata}}{\code{data.frame} with data processed by the calc method}
+
+\item{\code{split}}{Object of class \code{\link{RefListe-class}} RefListe referential class choose within a list}
 }}
-\section{Objects from the Class}{
- Objects can be created by calls of the form
-\code{new("BilanEspeces", ...)}.
-}
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }

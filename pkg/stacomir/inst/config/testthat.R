@@ -35,3 +35,5 @@ test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-09Bilan_M
 test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-11BilanMigrationMultConditionEnv.R")
 test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-10BilanConditionEnv.R")
 test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-12BilanMigrationCar.R")
+test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-13BilanAnnuels.R")
+test_file("C:/workspace/stacomir/pkg/stacomir/inst/tests/testthat/test-14BilanEspeces.R")

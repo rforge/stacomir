@@ -195,7 +195,7 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 
 #' calcule method for BilanMigration
 #' 
-#'  does the calculation once data are filled,. It also performs conversion from weight to numbers
+#'  does the calculation once data are filled by the connect method. It also performs conversion from weight to numbers
 #' in with the connect method
 #' @param object An object of class \code{\link{BilanMigration-class}}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 

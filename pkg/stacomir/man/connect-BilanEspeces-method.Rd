@@ -5,13 +5,15 @@
 \alias{connect,BilanEspeces-method}
 \title{connect method for BilanEspeces}
 \usage{
-\S4method{connect}{BilanEspeces}(object)
+\S4method{connect}{BilanEspeces}(object, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \link{BilanEspeces-class}}
+\item{object}{An object of class BilanEspeces}
+
+\item{silent}{Boolean, if TRUE, information messages are not displayed}
 }
 \value{
-bilanEspeces instance with request corresponding to the user choices
+An object of class BilanEspeces with data slot filled
 }
 \description{
 connect method for BilanEspeces

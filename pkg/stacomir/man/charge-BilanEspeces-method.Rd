@@ -6,10 +6,12 @@
 \title{charge method for BilanEspeces
 verifies the content of objects and calls the connect method}
 \usage{
-\S4method{charge}{BilanEspeces}(object)
+\S4method{charge}{BilanEspeces}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{BilanEspeces-class}}
+
+\item{silent}{Stops displaying the messages.}
 }
 \value{
 BilanEspeces with slots filled by user choice

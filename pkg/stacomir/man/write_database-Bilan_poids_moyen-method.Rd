@@ -5,8 +5,7 @@
 \alias{write_database,Bilan_poids_moyen-method}
 \title{Function to write data to the stacomi database for \link{Bilan_poids_moyen-class}}
 \usage{
-\S4method{write_database}{Bilan_poids_moyen}(object, silent = FALSE,
-  dbname = "bd_contmig_nat")
+\S4method{write_database}{Bilan_poids_moyen}(object, silent = FALSE)
 }
 \arguments{
 \item{object}{An object of class \link{Bilan_poids_moyen-class}}

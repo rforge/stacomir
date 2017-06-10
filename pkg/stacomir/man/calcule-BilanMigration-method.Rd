@@ -20,7 +20,7 @@ different rows}
 BilanMigration with calcdata slot filled.
 }
 \description{
-does the calculation once data are filled,. It also performs conversion from weight to numbers
+does the calculation once data are filled by the connect method. It also performs conversion from weight to numbers
 in with the connect method
 }
 \note{
