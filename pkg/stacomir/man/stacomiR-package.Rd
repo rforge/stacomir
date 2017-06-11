@@ -16,7 +16,8 @@ LazyLoad: \tab yes\cr
 Depends: \tab methods\cr
 }
 To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal.
-The use of stacomi(gr_interface=FALSE) allows to launch stacomi without graphical interface from the command line.
+The use of stacomi(gr_interface=FALSE) allows to launch stacomi without graphical interface from the command line. The program is currently
+translated to French, to switch to english or french type \code{Sys.setenv(LANG = "en")} \code{Sys.setenv(LANG = "fr")}
 }
 \author{
 Author and Maintainer : \email{cedric.briand"at"eptb-vilaine.fr}

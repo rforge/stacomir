@@ -10,7 +10,8 @@ bilanFonctionnementDF
 }
 \description{
 This dataset corresponds to the data collected at three different fishways
-it is loaded along with \link{bMM_Arzal}
+it is loaded along with \link{bMM_Arzal} and used in demonstration for the
+\link{BilanMigrationMult-class}
 }
 \keyword{data}
 

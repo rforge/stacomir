@@ -1,8 +1,8 @@
 #' class BilanConditionEnv simple output of one or several environmental
 #' conditions...
 #' 
-#' Annual overview of environmental conditions. Enables to draw some plot. Mostly used to build
-#' joined graphs for BilanMigration in class BilanMigrationConditionEnv
+#' Annual overview of environmental conditions. This class enables to draw some plot, but will mostly used to build
+#' joined graphs crossing the information from \link{BilanMigrationMult-class} and \link{BilanMigrationConditionEnv-class}
 #' 
 #' @include RefHorodate.r 
 #' @include RefStationMesure.r

@@ -6,7 +6,7 @@
 \title{Counting Device (DC) operation from 2000 to 2015 at the Arzal dam (Vilaine, France)}
 \format{An object of class BilanFonctionnementDC with 4 slots:
 \describe{
-#'   \item{data}{ A dataframe with 544 obs. of  7 variables
+  \item{data}{ A dataframe with 544 obs. of  7 variables
 			\describe{
   			\item{per_dis_identifiant}{The number of the DC}
   			\item{per_date_debut}{Starting time a POSIXct}
@@ -25,7 +25,7 @@
        }	
   \item{df}{the \code{RefDC} object with 3 slots filled with data corresponding to the iav postgres schema}
   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
-  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
+  \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date}   
 }}
 \usage{
 bfDC

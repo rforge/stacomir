@@ -50,7 +50,8 @@ library(stacomiR)
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ## launches the application in the command line
 ## here an example of loading
-## not run as the program is possibly not installed
+## the following lines will only run if you have the program installed
+## and the iav scheme available in the database
 ## this example generates the bMM_Arzal dataset
 \dontrun{
 	stacomi(gr_interface=FALSE,
@@ -67,7 +68,7 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	bMM_Arzal<-connect(bMM_Arzal)
 }
 
-
+# Use this as example if you don't have a connexion to the database
 data("bMM_Arzal")
 # The following re-create the object at the time of loading
 # All three classes were created by the charge and connect 
@@ -98,18 +99,15 @@ plot(bMM_Arzal,plot.type="standard",
 				"#A66F24","#012746","#6C3E00","#DC7ED8","#8AA123"),
 		color_ope=c("#5589B5","#FFDB6E","#FF996E","#1C4D76"),
 		silent=TRUE)
-
-
-#cumulated migration at the station (all stages and DC grouped)
-
+#For the following plot, beware, all stages and DC are grouped. This can make sense
+# for instance if you want to display the cumulated migration for one species
+# in several counting devices located on the same dam...
 plot(bMM_Arzal,plot.type="step",silent=TRUE)
 
-#some plots are a mixture of french and english
-#changing the reference table names to english should shift all to english.
-#same for spanish.
-# combined plot for ggplot2
+
+# Combined plot for ggplot2
 plot(bMM_Arzal,plot.type="multiple",silent=TRUE)
-# data will be written in the data directory specified in 
+# Data will be written in the data directory specified in 
 # the stacomi/calcmig.csv file
 summary(bMM_Arzal,silent=TRUE)
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{bilAM}
 \alias{bilAM}
-\title{Annual migration of salmon by migradour}
+\title{Annual migration of salmon in the Adour and tributaries}
 \format{An object of class \link{BilanAnnuels-class} with data slot loaded.}
 \usage{
 bilAM

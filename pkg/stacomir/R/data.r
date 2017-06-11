@@ -75,7 +75,8 @@
 #' Fishway operation at the Arzal Dam (Vilaine France) (3 Fishways in 2011)
 #' 
 #' This dataset corresponds to the data collected at three different fishways
-#' it is loaded along with \link{bMM_Arzal}
+#' it is loaded along with \link{bMM_Arzal} and used in demonstration for the
+#' \link{BilanMigrationMult-class}
 #' @format An object of class BilanFonctionnementDF  \link{BilanFonctionnementDF-class}
 #' @keywords data
 "bilanFonctionnementDF"
@@ -83,10 +84,38 @@
 
 #' Counting device operation for three different counting device in Arzal (Vilaine, France)
 #' 
-#' This dataset corresponds to the data collected at three different control devices.
+#' This dataset corresponds to data collected at three different control devices.
 #' This object is of class \link{BilanFonctionnementDC-class} with data loaded
-#' it is loaded along with \link{bMM_Arzal}
-#' @format An object of class BilanFonctionnementDC 
+#' it is loaded along with \link{bMM_Arzal} and used in demonstration for the
+#' \link{BilanMigrationMult-class}
+#' @format An object of class BilanFonctionnementDC with 4 slots
+#' \describe{
+#'   \item{data}{ A dataframe with 25 rows and 7 variables
+#' 			\describe{
+#'   			\item{per_dis_identifiant}{the df or dc unique id}
+#'   			\item{per_date_debut}{the starting date of the counting device operation \code{POSIXct}}
+#'   			\item{per_date_fin}{the ending date of the counting device operation \code{POSIXct}}
+#'   			\item{per_commentaires}{comments on the counting device operation}
+#'   			\item{per_etat_fonctionnement}{Boolean, is the counting device working ?}
+#'   			\item{lot_std_code}{stage id}
+#'   			\item{per_tar_code}{The type of operation for the DC, 1 normal operation, 2 device stopped in normal
+#' 				operation (the stop is considered as normal, e.g. you don't monitor video if a cage has been placed to trap fishes), 
+#' 				3 stopped for maintenance or other problem, 4 the DC is working but not well (escapement in a tank, high turbidity preventing
+#' video counting...), 5 unknown operation.}
+#'   			\item{libelle}{The label for the type or operation}
+#'   			}
+#' 	}
+#'   \item{dc}{the \code{RefDC} the DC with 4 slots
+#' 			\describe{
+#'  	 			\item{dc_selectionne}{the selected device}
+#'  				\item{ouvrage}{the dam}
+#'  	 			\item{station}{the monitoring station, a section of river}
+#'  	 			\item{data}{A dataset of all dc present in the database with 10 observations}
+#' 			}
+#' 	}
+#'   \item{horodatedebut}{the beginning date, a \link{RefHorodate-class}}
+#'   \item{horodatefin}{the ending date, a \link{RefHorodate-class}}
+#' }
 #' @keywords data
 "bilanFonctionnementDC"
 
@@ -143,7 +172,7 @@
 #'
 #' @format An object of class BilanFonctionnementDC with 4 slots:
 #' \describe{
-#' #'   \item{data}{ A dataframe with 544 obs. of  7 variables
+#'   \item{data}{ A dataframe with 544 obs. of  7 variables
 #' 			\describe{
 #'   			\item{per_dis_identifiant}{The number of the DC}
 #'   			\item{per_date_debut}{Starting time a POSIXct}
@@ -162,25 +191,27 @@
 #'        }	
 #'   \item{df}{the \code{RefDC} object with 3 slots filled with data corresponding to the iav postgres schema}
 #'   \item{horodatedebut}{the \code{RefHorodate} with horodate set for starting date}
-#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date} #'   
+#'   \item{horodatefin}{the \code{RefHorodate} with horodate set for ending date}   
 #' }
 #' @keywords data
 "bfDC"
 
-#' An object of class \link{BilanFonctionnementDF-class} with data loaded
+#' Fishway operation for the vertical slot fishway (Arzal dam, Vilaine, France).
 #' 
-#' This dataset corresponds to the data collected at three different fishways
-#' it is loaded along with \link{bM_Arzal}
-#' @format An object of class BilanFonctionnementDF 
+#' This dataset corresponds to the data collected at in the vertical slot fishway
+#' it is loaded along with \link{bM_Arzal} and used to demonstrate the \link{BilanMigration-class}
+#' when the database is not installed. 
+#' @format An object of class \link{BilanFonctionnementDF-class} 
 #' @keywords data
 "bilanFonctionnementDF_bM"
 
 
-#' An object of class \link{BilanFonctionnementDC-class} with data loaded
+#' Counting device operation for the video recording (Arzal dam, Vilaine, France).
 #' 
-#' This dataset corresponds to the data collected at three different control devices
-#' it is loaded along with \link{bM_Arzal}
-#' @format An object of class BilanFonctionnementDC 
+#' This dataset corresponds to the data collected in the vertical slot fishway for the video 
+#'  recording operation. It is loaded along with \link{bM_Arzal} to
+#' demonstrate the use of the \link{BilanMigration-class} when the database is not loaded
+#' @format An object of class \link{BilanFonctionnementDC-class} 
 #' @keywords data
 "bilanFonctionnementDC_bM"
 
@@ -221,7 +252,7 @@
 #' @keywords data
 "bilA"
 
-#' Annual migration of salmon by migradour
+#' Annual migration of salmon in the Adour and tributaries
 #' 
 #' The dataset corresponds to the fishways DC=33:40 of the Adour for adult migrant salmons
 #' from 1996 to 2005 (annual counts). It has been kinly provided as an example set by the Migradour

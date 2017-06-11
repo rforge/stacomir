@@ -3,14 +3,15 @@
 \docType{data}
 \name{bilanFonctionnementDF_bM}
 \alias{bilanFonctionnementDF_bM}
-\title{An object of class \link{BilanFonctionnementDF-class} with data loaded}
-\format{An object of class BilanFonctionnementDF}
+\title{Fishway operation for the vertical slot fishway (Arzal dam, Vilaine, France).}
+\format{An object of class \link{BilanFonctionnementDF-class}}
 \usage{
 bilanFonctionnementDF_bM
 }
 \description{
-This dataset corresponds to the data collected at three different fishways
-it is loaded along with \link{bM_Arzal}
+This dataset corresponds to the data collected at in the vertical slot fishway
+it is loaded along with \link{bM_Arzal} and used to demonstrate the \link{BilanMigration-class}
+when the database is not installed.
 }
 \keyword{data}
 

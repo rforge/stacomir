@@ -1,4 +1,6 @@
 #' Class "BilanAnnuels"
+#' 
+#' This class displays annual migration counts, for several counting device, taxa or stages. 
 #' @include RefDC.r
 #' @include RefTaxon.r
 #' @include RefStades.r

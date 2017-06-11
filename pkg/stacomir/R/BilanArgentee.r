@@ -1,6 +1,8 @@
 #' Class "BilanArgentee"
 #' 
-#' the BilanArgentee class is used to calculate various statistics about the silver eel run
+#' the BilanArgentee class is used to calculate various statistics about the silver eel run. It comprises calculation
+#' of various maturation index such as Durif's stages and Pankhurst eye index. The objective is to provide standardized 
+#' output to the stations monitorin the silver eel run. 
 #' @include create_generic.r
 #' @include RefDC.r
 #' @include RefTaxon.r
@@ -19,11 +21,11 @@
 #' dev_libelle (text for destination of fish)
 #' }
 #' @slot dc Object of class \link{RefDC-class}: the control devices
-#' @slot taxons Object of class \link{RefTaxon-class}: the speciess
-#' @slot stades Object of class \link{RefStades-class} : the stages of the fish
-#' @slot par Object of class \link{Refpar-class}: the parameters used
-#' @slot horodatedebut An object of class \code{RefHorodate-class}
-#' @slot horodatefin An object of class \code{RefHorodate-class}
+#' @slot taxons An object of class \link{RefTaxon-class}: the speciess
+#' @slot stades An object of class \link{RefStades-class} : the stages of the fish
+#' @slot par An object of class \link{Refpar-class}: the parameters used
+#' @slot horodatedebut An object of class \link{RefHorodate-class}
+#' @slot horodatefin An object of class \link{RefHorodate-class}
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("BilanArgentee", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

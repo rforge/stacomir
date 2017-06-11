@@ -3,14 +3,15 @@
 \docType{data}
 \name{bilanFonctionnementDC_bM}
 \alias{bilanFonctionnementDC_bM}
-\title{An object of class \link{BilanFonctionnementDC-class} with data loaded}
-\format{An object of class BilanFonctionnementDC}
+\title{Counting device operation for the video recording (Arzal dam, Vilaine, France).}
+\format{An object of class \link{BilanFonctionnementDC-class}}
 \usage{
 bilanFonctionnementDC_bM
 }
 \description{
-This dataset corresponds to the data collected at three different control devices
-it is loaded along with \link{bM_Arzal}
+This dataset corresponds to the data collected in the vertical slot fishway for the video 
+ recording operation. It is loaded along with \link{bM_Arzal} to
+demonstrate the use of the \link{BilanMigration-class} when the database is not loaded
 }
 \keyword{data}
 

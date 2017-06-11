@@ -6,7 +6,7 @@
 #' of fish according to gender, number of fish per age class. This class does not split migration evenly over 
 #' time period. So, unlike calculations made in class BilanMigration and BilanMigrationMult
 #' the whole time span of the migration operation is not considered, only  the date of beginning of 
-#' the operation is used to perform calculation. 
+#' the operation is used to perform calculations. 
 #' 
 #' @include Refparquan.r
 #' @include Refparqual.r
@@ -19,7 +19,7 @@
 #' using interface_BilanMigrationCar function.
 #' @slot calcdata A "list" of calculated data, filled in by the calcule method
 #' @slot data A \code{data.frame} inherited from \link{Bilan_carlot-class}
-#' @slot dc an object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}
+#' @slot dc An object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}
 #' @slot taxons An object of class \link{RefTaxon-class} inherited from \link{Bilan_carlot-class}
 #' @slot stades An object of class \link{RefStades-class} inherited from \link{Bilan_carlot-class}
 #' @slot horodatedebut An object of class \link{RefHorodate-class} inherited from \link{Bilan_carlot-class}
@@ -30,7 +30,6 @@
 #' @slot parqual An object of class \link{Refparqual-class}, quanlitative parameter
 #' @family Bilan Objects
 #' @aliases BilanMigrationCar bilanMigrationCar
-#' @note program : default two parameter choice, checking box "none" will allow the program to ignore the parameter
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @concept Bilan Object 
 #' @keywords classes

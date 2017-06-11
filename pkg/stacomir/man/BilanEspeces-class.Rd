@@ -2,13 +2,14 @@
 % Please edit documentation in R/BilanEspeces.r
 \docType{class}
 \name{BilanEspeces-class}
+\alias{BilanEspeces}
 \alias{BilanEspeces-class}
 \alias{bilanEspeces}
-\title{Class "BilanEspeces" simple migration / number report}
+\title{Counts of number per taxa/stages}
 \description{
 This class is used to make the assessment of all species, and their number. It is intended
 as a simple way to check what fishes are present (taxa + development stage). Unlike the BilanAnnuels,
-it is not restricted on chosen taxa or stages but gives counts for all species present. The taxa is reported unless 
+it is not restricted to chosen taxa or stages but gives counts for all species present. The taxa is reported unless 
 a taxa has several case, in which case the different stages for the taxa will be reported
 Using the split arguments
 the calc method of the class will count numbers, subsamples are not accounted for in the Overview.
@@ -35,17 +36,6 @@ year/week/month.
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
-Other Bilan Classes 
-\code{\linkS4class{Bilan_carlot}},
-\code{\linkS4class{Bilan_poids_moyen}},
-\code{\linkS4class{BilanConditionEnv}}, \code{\linkS4class{BilanEspeces}},
-\code{\linkS4class{BilanFonctionnementDC}},
-\code{\linkS4class{BilanFonctionnementDF}},
-\code{\linkS4class{BilanMigration}},
-\code{\linkS4class{BilanMigrationMultConditionEnv}},
-\code{\linkS4class{BilanMigrationInterAnnuelle}},
-\code{\linkS4class{BilanMigrationCar}}
-
 Other Bilan.Objects: \code{\link{BilanAgedemer-class}},
   \code{\link{BilanAnnuels-class}},
   \code{\link{BilanArgentee-class}},

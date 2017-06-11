@@ -13,7 +13,7 @@ Migration along with qualitative or quantitative characteristics or both
 of fish according to gender, number of fish per age class. This class does not split migration evenly over 
 time period. So, unlike calculations made in class BilanMigration and BilanMigrationMult
 the whole time span of the migration operation is not considered, only  the date of beginning of 
-the operation is used to perform calculation.
+the operation is used to perform calculations.
 }
 \section{Slots}{
 
@@ -22,7 +22,7 @@ the operation is used to perform calculation.
 
 \item{\code{data}}{A \code{data.frame} inherited from \link{Bilan_carlot-class}}
 
-\item{\code{dc}}{an object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}}
+\item{\code{dc}}{An object of class \link{RefDC-class} inherited from \link{Bilan_carlot-class}}
 
 \item{\code{taxons}}{An object of class \link{RefTaxon-class} inherited from \link{Bilan_carlot-class}}
 
@@ -43,8 +43,6 @@ the operation is used to perform calculation.
 \note{
 The main difference between this class and \link{Bilan_carlot-class} is that this class allows to
 select (or not) the samples, and that it handles quantitative and qualitative parameters separately.
-
-program : default two parameter choice, checking box "none" will allow the program to ignore the parameter
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

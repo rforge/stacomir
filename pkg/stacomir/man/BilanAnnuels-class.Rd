@@ -5,7 +5,7 @@
 \alias{BilanAnnuels-class}
 \title{Class "BilanAnnuels"}
 \description{
-Class "BilanAnnuels"
+This class displays annual migration counts, for several counting device, taxa or stages.
 }
 \section{Slots}{
 

@@ -5,7 +5,9 @@
 \alias{BilanArgentee-class}
 \title{Class "BilanArgentee"}
 \description{
-the BilanArgentee class is used to calculate various statistics about the silver eel run
+the BilanArgentee class is used to calculate various statistics about the silver eel run. It comprises calculation
+of various maturation index such as Durif's stages and Pankhurst eye index. The objective is to provide standardized 
+output to the stations monitorin the silver eel run.
 }
 \section{Slots}{
 
@@ -24,15 +26,15 @@ dev_libelle (text for destination of fish)
 
 \item{\code{dc}}{Object of class \link{RefDC-class}: the control devices}
 
-\item{\code{taxons}}{Object of class \link{RefTaxon-class}: the speciess}
+\item{\code{taxons}}{An object of class \link{RefTaxon-class}: the speciess}
 
-\item{\code{stades}}{Object of class \link{RefStades-class} : the stages of the fish}
+\item{\code{stades}}{An object of class \link{RefStades-class} : the stages of the fish}
 
-\item{\code{par}}{Object of class \link{Refpar-class}: the parameters used}
+\item{\code{par}}{An object of class \link{Refpar-class}: the parameters used}
 
-\item{\code{horodatedebut}}{An object of class \code{RefHorodate-class}}
+\item{\code{horodatedebut}}{An object of class \link{RefHorodate-class}}
 
-\item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
+\item{\code{horodatefin}}{An object of class \link{RefHorodate-class}}
 }}
 \note{
 This class is displayed by interface_bilanArgentee

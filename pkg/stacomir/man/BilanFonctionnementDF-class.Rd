@@ -3,11 +3,16 @@
 \docType{class}
 \name{BilanFonctionnementDF-class}
 \alias{BilanFonctionnementDF-class}
-\title{Class "BilanFonctionnementDF" Report fishway work}
+\title{Report on fishway operation}
 \description{
-The DF (Dispositif de Franchissement) is a fishway. It may be automated and
-be operated only during certain periods. This report allows to see the detail of its work.
-In the database four types of operation are set,  "1"=normal operation,
+Fishways (DF) are of various nature, from very simple eel ladders fed by water discharged from the river,
+to more complex fishways with levels adjusted by the opening of various gates and regulators. 
+The objective of this class is to provide an assessment of the working status of a fishway throughout the year.
+A number of fishes ascending a fishway has meaning only if we know that the fishway is operational, and that the counting 
+orerated on the fishway has remained operational.
+In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
+The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
+the status of either the fishway or DC. In the database four types of operation are set,  "1"=normal operation,
 "2"=Device stopped in nomral operation (ie lift ascending, high tide...),
 "3"="Stopped for maintenance or other problem",
 "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
