@@ -344,6 +344,7 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{BilanMigrationInterAnnuelle-class}
 #' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
+#' @aliases choice_c.bmi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definition=function(object,
@@ -450,7 +451,7 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 #' function called for bilamMigrationInterannelle objects renames columns
 #' replaces nulls, and calculates reports with time period larger than day
 #' 
-#' @param dat a data frame
+#' @param dat a data frame with columns ("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur")
 #' @param annee The year to exclude from the historical series (it will be plotted against the historical series)
 #' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
 #' @return a data frame with mean, max, and min calculated for each timesplit

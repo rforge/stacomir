@@ -9,9 +9,10 @@
 
 #' Anguilla migration at the Arzal station (BilanMigrationMult-class)
 #' 
-#' This data corresponds to the data collected from three fishways
-#' and correspond to the migration station at Arzal in 2011 for all
-#' stages of eel (Anguilla anguilla)
+#' This data corresponds to data collected from three fishways
+#' and correspond to the migration station at Arzal (Vilaine estuary, France) in 2011 for 
+#' three continental stages of eel (Anguilla anguilla) : glass eel, yellow eel
+#' and silver eel.
 #'
 #' @format An object of class bilanMigrationMult with slots:
 #' \describe{
@@ -41,9 +42,9 @@
 "bMM_Arzal"
 
 
-#' Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)
+#' Video counting of thin lipped mullet (Liza ramada) in 2015 in the Vilaine (France)
 #' 
-#' This data corresponds to the data collected at the vertical slot fishway
+#' This dataset corresponds to the data collected at the vertical slot fishway
 #' in 2015, video recording of the thin lipped mullet Liza ramada migration
 #'
 #' @format An object of class bilanMigration with 8 slots:
@@ -128,9 +129,9 @@
 #' @keywords data
 "bilanOperation"
 
-#' dataframe containing the default connection arguments
-#' the program will use a file installed in c:/program files/stacomi but
-#' if not found will switch to the default
+#' A data frame containing the default connection arguments.
+#' The program will use a file installed in c:/program files/stacomi but
+#' if not found will switch to this default value
 "calcmig"
 
 #' Overview of the fishway operation at Arzal in (Vilaine France).
@@ -217,8 +218,9 @@
 
 #' An object of class \link{BilanOperation-class} with data loaded
 #' 
-#' This dataset corresponds to the data collected at three different control devices
-#' it is loaded along with \link{bM_Arzal}
+#' This dataset corresponds to the data collected at the vertical slot fishway in Arzal (Vilaine river
+#' estuary, France). The operation of the fishway is dependent on tide and is recorded every 10 minutes. This dataset has
+#' to be loaded along with \link{bM_Arzal} to demonstrate the use of the \link{BilanMigration-class}
 #' @format An object of class BilanOperation
 #' @keywords data
 "bilanOperation_bM"
@@ -239,7 +241,7 @@
 #' operational at the same location and provides one of the longest series of eel migration. 
 #' For this reason,
 #' the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class. It has been
-#' kindly given by the parc du Marais Poitevin.
+#' kindly provided by the parc du Marais Poitevin.
 #' @format An object of class \link{BilanMigrationInterAnnuelle-class} with data loaded.
 #' @keywords data
 "bmi"
@@ -284,9 +286,9 @@
 #'  \url{http://fishlarvae.org/common/SiteMedia/durif\%20et\%20al\%202009b.pdf}
 "coef_Durif"
 
-#' Wet weight of glass eel from the trapping ladder. 
+#' Wet weight of glass eel from the trapping ladder (Arzal, Vilaine France) 
 #' 
-#' The years selected are 2009 to 2012,
+#' Data correspond to glass eel collected in the VIlaine at the trapping ladder (Arzal, France). The years selected are 2009 to 2012,
 #' the query used in the \link{Bilan_poids_moyen-class} loads from 2008-08-01 to 2012-08-01
 #' Glass eel are too numerous to be counted. They are weighted and in the stacomi database,
 #' a table with daily coefficients (in  N glass eel/g) to transform weight into number.
@@ -295,7 +297,7 @@
 #' the seasonal evolution of wet weight.
 "bilPM"
 
-#' An object of class BilanMigrationInterAnnuelle with data loaded
+#' Seasonality of salmon migration at the Vichy counting station (Loire)
 #' 
 #' This data corresponds to the data collected at the Vichy fishway
 #' between 1997 and 2012, video recording of the Salmo salar upstream migration.
@@ -328,9 +330,9 @@
 
 #' An object of class BilanAgedemer with data loaded
 #' 
-#' This data corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
-#' Leger des Vignes fishways (respectively on the Allier and Loire river) in 2012 on the size structure of Salmo salar.
-#' This dataset has been kindly provided by Loire Grands Migrateurs.
+#' This dataset corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
+#' Leger des Vignes fishways (respectively on the Allier and Loire river, France) in 2012 on the size structure of Salmo salar.
+#' It has been kindly provided by the Loire Grands Migrateurs (LOGRAMI) association.
 #'
 #' @format An object of class \link{BilanAgedemer-class} with 8 slots:
 #' \describe{
@@ -370,7 +372,7 @@
 
 #' An object of class BilanConditionEnv with data loaded
 #' 
-#' The dataset corresponds to the dayly temperature at Gabion station during the year 2008. This environmental station is used to
+#' The dataset corresponds to the daily temperatures and moon phases in Arzal (Vilaine estuary, France). This environmental station is used to
 #'	analyse conditions in which fish migrated at Arzal dam
 #'
 #' @format An object of class \link{BilanConditionEnv-class} with data slot loaded:
@@ -393,14 +395,12 @@
 "bil_CE"
 
 
-#' An object of class BilanMigrationCar with data loaded
+#' Qualitative and quantitative parameters describing Salmon migration at Decize (Loire)
 #' 
 #' The dataset corresponds to the caracteristics (qualitative and quantitative) of salmo salar migrating
-#' at Decize (Loire river) and Vichy (Allier river) counting device in 2012.
-#' 
-#' the dataset has been loaded as an example for the BilanMigrationCar-class. It has been
-#' kindly given by Loire Grands Migrateurs.
-#' @format An object of class \link{BilanConditionEnv-class} with data slot loaded:
+#' at Decize (Loire river) and Vichy (Allier river) counting device in 2012. It has been loaded as 
+#' an example for the BilanMigrationCar-class and kindly provided by Loire Grands Migrateurs (LOGRAMI).
+#' @format An object of class \link{BilanMigrationCar-class} with data slot loaded:
 #' \describe{
 #'   \item{calcdata}{slot to be filled with the calcule method}
 #'   \item{data}{ A list of 2 elements
@@ -412,9 +412,9 @@
 #'  \item{dc}{the \code{RefDC} : the control devices selected}
 #'  \item{taxons}{the \code{RefTaxon} : Salmo salar selected}
 #'  \item{stades}{the \code{RefStades} : the stages selected}
-#'  \item{par}{Object of class \link{Refpar-class}: the parameters used}
-#'  \item{horodatedebut}{object of class \code{RefHorodate-class} : the start date selected}
-#'  \item{horodatefin}{object of class \code{RefHorodate-class} : the end date selected}
+#'  \item{par}{an object of class \link{Refpar-class}: the parameters used}
+#'  \item{horodatedebut}{an object of class \code{RefHorodate-class} : the start date selected}
+#'  \item{horodatefin}{an object of class \code{RefHorodate-class} : the end date selected}
 #' }
 #' @keywords data
 "bmC"
@@ -424,7 +424,7 @@
 #' An object of class BilanMigrationMultConditionEnv with data loaded
 #' 
 #' The dataset correspond to data loaded for the Arzal dam (Vilaine) in 2008, two quantitative
-#' parameters (temperature and tide coefficient and a qualitative parameter moon phase are loaded. 
+#' parameters (temperature and tide coefficient) and a qualitative parameter (moon phase) are loaded. 
 #' @format An object of class \link{BilanConditionEnv-class} with data slot loaded:
 #' \describe{
 #'   \item{bilanMigrationMult}{An object of class \link{BilanMigrationMult-class}}

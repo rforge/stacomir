@@ -8,7 +8,15 @@
 \title{Class "BilanMigrationMultConditionEnv"}
 \description{
 Enables to compute an annual overview of fish migration and environmental
-conditions in the same chart
+conditions in the same chart. Environmental conditions may trigger migration events, variation in flow
+or temperatures can  be plotted along migration to check graphically for a possible relation. To enable this, 
+environmental conditions are loaded from an "environmental monitoring station", which records environmental
+parameters and is attached to a migratory station in the database.
+This class enables both continuous output (temperature -flow) as well as discrete parameters (qualitative = moon 
+phase, type of operation of a gate, opening of a gate...) which will be displayed on the graph. Values are scaled so that 
+single plot can display migration numbers and environmental parameters. Environmental parameters when stored at a 
+time scale lower that a day are averaged per day, unless they are qualitative parameters, in which case only the first
+event of the day is displayed on the annual plot.
 }
 \section{Slots}{
 
@@ -22,6 +30,8 @@ require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
+# the following will load the data provided the user has access to the database
+# with data in the iav example scheme.
 \dontrun{
 	bmmCE<-new("BilanMigrationMultConditionEnv")
 	bmmCE<-choice_c(bmmCE,
@@ -39,6 +49,7 @@ stacomi(gr_interface=FALSE,
 
 data("bmmCE")
 bmmCE<-calcule(bmmCE,silent=TRUE)
+# An example of plot with custom colors.
 plot(bmmCE,
 		color_station=c("temp_gabion"="red","coef_maree"="blue","phases_lune"="pink"),
  		color_dc=c("5"="yellow","6"="orange","12"="purple")

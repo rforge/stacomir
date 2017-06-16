@@ -4,13 +4,14 @@
 \title{package Fish Migration Monitoring (stacomiR)- Stations de Controle des Migrations}
 \description{
 Stacomi enables to read informations in a database about fish migrations to build overviews of fish migrations and creating charts, plots, and summaries.
+The stacomi project comprises an open source Postgres database, and a java interface to fill in data. Please contact the author if you want to try it out.
 }
 \details{
 \tabular{ll}{
 Package: \tab stacomiR\cr
 Type: \tab Package\cr
-Version: \tab 0.5.0\cr
-Date: \tab 2013-01-17\cr
+Version: \tab 0.5.2\cr
+Date: \tab 2017-06-16\cr
 License: \tab  GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 Depends: \tab methods\cr

@@ -32,9 +32,10 @@
 bMM_Arzal
 }
 \description{
-This data corresponds to the data collected from three fishways
-and correspond to the migration station at Arzal in 2011 for all
-stages of eel (Anguilla anguilla)
+This data corresponds to data collected from three fishways
+and correspond to the migration station at Arzal (Vilaine estuary, France) in 2011 for 
+three continental stages of eel (Anguilla anguilla) : glass eel, yellow eel
+and silver eel.
 }
 \keyword{data}
 

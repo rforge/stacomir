@@ -40,9 +40,9 @@
 bilan_adm
 }
 \description{
-This data corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
-Leger des Vignes fishways (respectively on the Allier and Loire river) in 2012 on the size structure of Salmo salar.
-This dataset has been kindly provided by Loire Grands Migrateurs.
+This dataset corresponds to the data collected at Vichy (left and right bank fishways) and Decize-Saint 
+Leger des Vignes fishways (respectively on the Allier and Loire river, France) in 2012 on the size structure of Salmo salar.
+It has been kindly provided by the Loire Grands Migrateurs (LOGRAMI) association.
 }
 \keyword{data}
 

@@ -3,19 +3,23 @@
 \docType{methods}
 \name{calcule,BilanArgentee-method}
 \alias{calcule,BilanArgentee-method}
-\title{Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.}
+\title{Calculate individual silver eel parameters.}
 \usage{
 \S4method{calcule}{BilanArgentee}(object, silent)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanArgentee-class}}}
+\item{object}{An object of class \link{BilanArgentee-class}}
 
 \item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 }
+\value{
+An object of class \link{BilanArgentee-class} with slot calcdata filled, as a list
+for each counting device
+}
 \description{
-Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
+This calcule method for BilanArgentee, will transform data from long (one line per size characteristic,
+size, weight, eye diameter, pectoral fin measurement, lateral line and constrast) to wide format (one
+line per silver eel). It will also calculate Durif silvering index and Pankhurst and Fulton's K.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

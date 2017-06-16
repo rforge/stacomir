@@ -216,12 +216,17 @@ setMethod("choice_c",signature=signature("BilanAgedemer"),definition=function(ob
 			return(bilan_adm)
 		})
 
-#' Calcule method for BilanAgedemer, this method will split the data according to cut
+#' Split data according to the limits
+#' set in the limit1hm, and limit2hm arguments of the \link{BilanAgedemer-class}.
 #' 
+#' If no value are provided in the limit1hm slot, an error is returned, if
+#' no value is provided in the limit2hm slot a default upper value for salmon
+#' size is taken to ensure all salmon are either of age 1 or 2, but no age 3 are
+#' returned
 #' @param object An object of class \code{\link{BilanAgedemer-class}} 
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @return An object of class \link{BilanAgedemer-class}
+#' @return An object of class \link{BilanAgedemer-class} with calculated data in slot calcdata
 #' @export
 setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(object,silent) {
 			#bilan_adm<-b_carlot
@@ -237,9 +242,7 @@ setMethod("calcule",signature=signature("BilanAgedemer"),definition=function(obj
 			if (is.na(as.numeric(bilan_adm@limit2hm@label))) bilan_adm@limit2hm@label<-2000
 			lescoupes<-c(0,as.numeric(bilan_adm@limit1hm@label),as.numeric(bilan_adm@limit2hm@label),2001)
 			adm$age<-cut(x=adm$car_valeur_quantitatif,breaks=lescoupes,labels=FALSE)
-			bilan_adm@calcdata[["data"]]<-adm
-			
-			
+			bilan_adm@calcdata[["data"]]<-adm			
 			assign("bilan_adm",bilan_adm,envir_stacomi)
 			return(bilan_adm)
 		})

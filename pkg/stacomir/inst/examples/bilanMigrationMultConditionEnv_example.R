@@ -2,6 +2,8 @@ require(stacomiR)
 stacomi(gr_interface=FALSE,
 		login_window=FALSE,
 		database_expected=FALSE)
+# the following will load the data provided the user has access to the database
+# with data in the iav example scheme.
 \dontrun{
 	bmmCE<-new("BilanMigrationMultConditionEnv")
 	bmmCE<-choice_c(bmmCE,
@@ -19,6 +21,7 @@ stacomi(gr_interface=FALSE,
 
 data("bmmCE")
 bmmCE<-calcule(bmmCE,silent=TRUE)
+# An example of plot with custom colors.
 plot(bmmCE,
 		color_station=c("temp_gabion"="red","coef_maree"="blue","phases_lune"="pink"),
  		color_dc=c("5"="yellow","6"="orange","12"="purple")

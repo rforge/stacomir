@@ -3,6 +3,7 @@
 \docType{methods}
 \name{choice_c,BilanMigrationInterAnnuelle-method}
 \alias{choice_c,BilanMigrationInterAnnuelle-method}
+\alias{choice_c.bmi}
 \title{command line interface for BilanMigrationInterAnnuelle class}
 \usage{
 \S4method{choice_c}{BilanMigrationInterAnnuelle}(object, dc, taxons, stades,

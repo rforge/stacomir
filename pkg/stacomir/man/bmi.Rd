@@ -14,7 +14,7 @@ in the Sevre Niortaise, Marais Poitevin. Also refurbished several times since 19
 operational at the same location and provides one of the longest series of eel migration. 
 For this reason,
 the dataset has been loaded as an example for the BilanMigrationInterAnnuelle-class. It has been
-kindly given by the parc du Marais Poitevin.
+kindly provided by the parc du Marais Poitevin.
 }
 \keyword{data}
 

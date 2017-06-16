@@ -24,7 +24,7 @@
 bil_CE
 }
 \description{
-The dataset corresponds to the dayly temperature at Gabion station during the year 2008. This environmental station is used to
+The dataset corresponds to the daily temperatures and moon phases in Arzal (Vilaine estuary, France). This environmental station is used to
 analyse conditions in which fish migrated at Arzal dam
 }
 \keyword{data}

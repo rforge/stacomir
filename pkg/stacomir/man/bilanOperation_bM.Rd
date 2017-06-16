@@ -9,8 +9,9 @@
 bilanOperation_bM
 }
 \description{
-This dataset corresponds to the data collected at three different control devices
-it is loaded along with \link{bM_Arzal}
+This dataset corresponds to the data collected at the vertical slot fishway in Arzal (Vilaine river
+estuary, France). The operation of the fishway is dependent on tide and is recorded every 10 minutes. This dataset has
+to be loaded along with \link{bM_Arzal} to demonstrate the use of the \link{BilanMigration-class}
 }
 \keyword{data}
 

@@ -7,7 +7,7 @@
 fundat(dat, annee = NULL, timesplit = NULL)
 }
 \arguments{
-\item{dat}{a data frame}
+\item{dat}{a data frame with columns ("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur")}
 
 \item{annee}{The year to exclude from the historical series (it will be plotted against the historical series)}
 

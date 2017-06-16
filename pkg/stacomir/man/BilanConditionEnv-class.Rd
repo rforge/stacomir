@@ -9,7 +9,7 @@
 conditions...}
 \description{
 Annual overview of environmental conditions. This class enables to draw some plot, but will mostly used to build
-joined graphs crossing the information from \link{BilanMigrationMult-class} and \link{BilanMigrationConditionEnv-class}
+joined graphs crossing the information from \link{BilanMigrationMult-class} and \link{BilanMigrationMultConditionEnv-class}
 }
 \section{Slots}{
 

@@ -3,7 +3,7 @@
 \docType{data}
 \name{bM_Arzal}
 \alias{bM_Arzal}
-\title{Video counting of thin lipped mullet (Liza ramada) in 2015 on the Vilaine (France)}
+\title{Video counting of thin lipped mullet (Liza ramada) in 2015 in the Vilaine (France)}
 \format{An object of class bilanMigration with 8 slots:
 \describe{
   \item{dc}{the \code{RefDC} object with 4 slots filled with data corresponding to the iav postgres schema}
@@ -31,7 +31,7 @@
 bM_Arzal
 }
 \description{
-This data corresponds to the data collected at the vertical slot fishway
+This dataset corresponds to the data collected at the vertical slot fishway
 in 2015, video recording of the thin lipped mullet Liza ramada migration
 }
 \keyword{data}

@@ -3,7 +3,8 @@
 \docType{methods}
 \name{calcule,BilanAgedemer-method}
 \alias{calcule,BilanAgedemer-method}
-\title{Calcule method for BilanAgedemer, this method will split the data according to cut}
+\title{Split data according to the limits
+set in the limit1hm, and limit2hm arguments of the \link{BilanAgedemer-class}.}
 \usage{
 \S4method{calcule}{BilanAgedemer}(object, silent)
 }
@@ -13,10 +14,13 @@
 \item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \value{
-An object of class \link{BilanAgedemer-class}
+An object of class \link{BilanAgedemer-class} with calculated data in slot calcdata
 }
 \description{
-Calcule method for BilanAgedemer, this method will split the data according to cut
+If no value are provided in the limit1hm slot, an error is returned, if
+no value is provided in the limit2hm slot a default upper value for salmon
+size is taken to ensure all salmon are either of age 1 or 2, but no age 3 are
+returned
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

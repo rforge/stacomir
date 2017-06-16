@@ -14,7 +14,7 @@ bmmCE
 }
 \description{
 The dataset correspond to data loaded for the Arzal dam (Vilaine) in 2008, two quantitative
-parameters (temperature and tide coefficient and a qualitative parameter moon phase are loaded.
+parameters (temperature and tide coefficient) and a qualitative parameter (moon phase) are loaded.
 }
 \keyword{data}
 

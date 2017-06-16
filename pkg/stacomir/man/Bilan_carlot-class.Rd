@@ -5,29 +5,30 @@
 \alias{Bilan_carlot-class}
 \title{Class "Bilan_carlot"}
 \description{
-Bilan_carlot Bilan class calls the content of the postgres view vue_lot_ope_car, it displays the
-results of a categorical variable, or quantitative variable attached for lot, for instance,
-it can be used to analyse size or sex
+The Bilan_carlot class is used to load and display sample characteristics, which can be either
+continuous or discrete variable, for instance, it can be used to analyse size or sex structure during
+a given period.
 }
 \section{Slots}{
 
 \describe{
 \item{\code{data}}{A data frame}
 
-\item{\code{dc}}{Object of class \link{RefDC-class}: the control devices}
+\item{\code{dc}}{An object of class \link{RefDC-class}: the control devices}
 
-\item{\code{taxons}}{Object of class \link{RefTaxon-class}: the speciess}
+\item{\code{taxons}}{An object of class \link{RefTaxon-class}: the speciess}
 
-\item{\code{stades}}{Object of class \link{RefStades-class} : the stages of the fish}
+\item{\code{stades}}{An object of class \link{RefStades-class} : the stages of the fish}
 
-\item{\code{par}}{Object of class \link{Refpar-class}: the parameters used}
+\item{\code{par}}{An object of class \link{Refpar-class}: the parameters used}
 
-\item{\code{horodatedebut}}{An object of class \code{RefHorodate-class}}
+\item{\code{horodatedebut}}{An object of class \link{RefHorodate-class}}
 
-\item{\code{horodatefin}}{An object of class \code{RefHorodate-class}}
+\item{\code{horodatefin}}{An object of class \link{RefHorodate-class}}
 }}
 \note{
-This class is displayed by interface_bilan_carlot
+This class is displayed by interface_bilan_carlot, in the database, the class calls the content
+of the view vue_lot_ope_car
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form
@@ -56,6 +57,7 @@ stacomi(gr_interface=FALSE,
 			horodatefin="2013-12-31",
 			silent=FALSE)
 	# two warning produced, ignored if silent=TRUE
+	b_carlot<-charge(b_carlot) # don't forget this step otherwise dates are not loaded
 	b_carlot<-connect(b_carlot)
 	b_carlot<-calcule(b_carlot,silent=TRUE)
 	

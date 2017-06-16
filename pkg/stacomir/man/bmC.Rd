@@ -3,8 +3,8 @@
 \docType{data}
 \name{bmC}
 \alias{bmC}
-\title{An object of class BilanMigrationCar with data loaded}
-\format{An object of class \link{BilanConditionEnv-class} with data slot loaded:
+\title{Qualitative and quantitative parameters describing Salmon migration at Decize (Loire)}
+\format{An object of class \link{BilanMigrationCar-class} with data slot loaded:
 \describe{
   \item{calcdata}{slot to be filled with the calcule method}
   \item{data}{ A list of 2 elements
@@ -16,20 +16,17 @@
  \item{dc}{the \code{RefDC} : the control devices selected}
  \item{taxons}{the \code{RefTaxon} : Salmo salar selected}
  \item{stades}{the \code{RefStades} : the stages selected}
- \item{par}{Object of class \link{Refpar-class}: the parameters used}
- \item{horodatedebut}{object of class \code{RefHorodate-class} : the start date selected}
- \item{horodatefin}{object of class \code{RefHorodate-class} : the end date selected}
+ \item{par}{an object of class \link{Refpar-class}: the parameters used}
+ \item{horodatedebut}{an object of class \code{RefHorodate-class} : the start date selected}
+ \item{horodatefin}{an object of class \code{RefHorodate-class} : the end date selected}
 }}
 \usage{
 bmC
 }
 \description{
 The dataset corresponds to the caracteristics (qualitative and quantitative) of salmo salar migrating
-at Decize (Loire river) and Vichy (Allier river) counting device in 2012.
-}
-\details{
-the dataset has been loaded as an example for the BilanMigrationCar-class. It has been
-kindly given by Loire Grands Migrateurs.
+at Decize (Loire river) and Vichy (Allier river) counting device in 2012. It has been loaded as 
+an example for the BilanMigrationCar-class and kindly provided by Loire Grands Migrateurs (LOGRAMI).
 }
 \keyword{data}
 

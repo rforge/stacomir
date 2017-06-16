@@ -3,7 +3,7 @@
 \docType{data}
 \name{bmi_vichy}
 \alias{bmi_vichy}
-\title{An object of class BilanMigrationInterAnnuelle with data loaded}
+\title{Seasonality of salmon migration at the Vichy counting station (Loire)}
 \format{An object of class \link{BilanMigrationInterAnnuelle-class} with 7 slots:
 \describe{
   \item{dc}{the \code{RefDC} object with 4 slots filled with data corresponding to the iav postgres schema}

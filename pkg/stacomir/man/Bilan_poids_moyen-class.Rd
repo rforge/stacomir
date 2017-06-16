@@ -5,9 +5,17 @@
 \alias{Bilan_poids_moyen-class}
 \title{Class "Bilan_poids_moyen"}
 \description{
-Bilan_poids_moyen class The objective is to calculate mean weight of glass
-eel which are counted from weight measurements and to reintegrate weight to
-number coefficients
+In trapping ladders, glass eel are seldom counted, as they are too tiny to handle and too numerous to count.
+The usuall operation is to weight them, or to use a bucket to measure their volume. These weights or volumes will later
+need to be converted to numbers. The glass eel weight may follow a seasonal pattern. It's the case for Anguilla anguilla 
+glass eel in the Bay of Biscay. Weights can be modelled using sine wave curves, or more complex gam models. 
+This class has a model method to try those models, which can also be used to extact coefficients manually
+to manually test more complex models.
+Some plots are provided to display the coefficients stored in the database, and the model results. A parameter provided in 
+the graphical interface or in the command line (slot liste) takes values "1", ">1", "tous" wich mean respectively use
+only individual sample of glass eels, or use "group weights" which can be more close to the real weight of glass eel
+during counts as glass eel are not completely drained from their water during handling to preserve their muccus. The list choice
+"tous" means that both individual and group weights are selected.
 }
 \section{Slots}{
 
@@ -32,8 +40,8 @@ in the stacomi database are samples with a non null value for parent sample. Mig
 counts are never made on subsamples but those can be integrated to calculate mean weights.}
 }}
 \note{
-We have also tools available to import glass eel measurement from
-experimental fishing in the estuary For the charge method dates for the
+In this class some tools are avalaible to import glass eel measurement from
+experimental fishing in the estuary. For the charge method dates for the
 request are from august to august (a glass eel season)
 }
 \examples{

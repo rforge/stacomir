@@ -190,20 +190,23 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 			return(bilanArg)
 		})
 
-#' Calcule method for BilanArgentee, this method will pass the data from long to wide format 
-#' ( one line per individual) and calculate Durif silvering index and Pankhurst and Fulton's K.
+#' Calculate individual silver eel parameters.
 #' 
-#' @param object An object of class \code{\link{BilanArgentee-class}} 
+#' This calcule method for BilanArgentee, will transform data from long (one line per size characteristic,
+#' size, weight, eye diameter, pectoral fin measurement, lateral line and constrast) to wide format (one
+#' line per silver eel). It will also calculate Durif silvering index and Pankhurst and Fulton's K.
+#' 
+#' @param object An object of class \link{BilanArgentee-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
+#' @return An object of class \link{BilanArgentee-class} with slot calcdata filled, as a list
+#' for each counting device
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("BilanArgentee"),definition=function(object,silent) {
 			bilanArg<-object
 			if(nrow(bilanArg@data)==0) {
 				funout(gettext("No data of silver or yellow eel on the selected period",domain="R-stacomiR"), arret=TRUE)
 			}   
-			arg=bilanArg@data # on recupere le data.frame
-			
-			
+			arg=bilanArg@data 			
 			lesdc<-bilanArg@dc@dc_selectionne
 			parquant<-c("1786","A111","BBBB","CCCC","PECT")
 			parqual<-c("CONT","LINP")

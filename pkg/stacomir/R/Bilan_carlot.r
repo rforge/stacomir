@@ -1,17 +1,18 @@
 #' Class "Bilan_carlot"
 #' 
-#' Bilan_carlot Bilan class calls the content of the postgres view vue_lot_ope_car, it displays the
-#' results of a categorical variable, or quantitative variable attached for lot, for instance,
-#' it can be used to analyse size or sex
+#' The Bilan_carlot class is used to load and display sample characteristics, which can be either
+#' continuous or discrete variable, for instance, it can be used to analyse size or sex structure during
+#' a given period. 
 #' 
-#' @note This class is displayed by interface_bilan_carlot
+#' @note This class is displayed by interface_bilan_carlot, in the database, the class calls the content
+#' of the view vue_lot_ope_car
 #' @slot data A data frame
-#' @slot dc Object of class \link{RefDC-class}: the control devices
-#' @slot taxons Object of class \link{RefTaxon-class}: the speciess
-#' @slot stades Object of class \link{RefStades-class} : the stages of the fish
-#' @slot par Object of class \link{Refpar-class}: the parameters used
-#' @slot horodatedebut An object of class \code{RefHorodate-class}
-#' @slot horodatefin An object of class \code{RefHorodate-class}
+#' @slot dc An object of class \link{RefDC-class}: the control devices
+#' @slot taxons An object of class \link{RefTaxon-class}: the speciess
+#' @slot stades An object of class \link{RefStades-class} : the stages of the fish
+#' @slot par An object of class \link{Refpar-class}: the parameters used
+#' @slot horodatedebut An object of class \link{RefHorodate-class}
+#' @slot horodatefin An object of class \link{RefHorodate-class}
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("Bilan_carlot", ...)}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -236,21 +237,21 @@ setMethod("plot", signature(x = "Bilan_carlot", y = "missing"), definition=funct
 						coord_flip()
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n",domain="R-stacomiR"))				
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))				
 			} else if (plot.type==2){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_boxplot(aes(x=mois,y=car_valeur_quantitatif,fill=std_libelle))+
 						facet_grid(annee ~ .)				
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n",domain="R-stacomiR"))
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
 				
 			}else if (plot.type==3){
 				g<-ggplot(bilan_carlot@data)
 				g<-g+geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif))
 				print(g) 
 				assign("g",g,envir_stacomi)
-				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi), see http://trac.eptb-vilaine.fr:8066/tracstacomi/wiki/Recette%20BilanLot for help \n",domain="R-stacomiR"))
+				if (!silent) funout(gettext("To obtain the graphical object, type :  g<-get(\"g\",envir_stacomi)\n",domain="R-stacomiR"))
 			}
 			return(invisible(NULL))
 		})
