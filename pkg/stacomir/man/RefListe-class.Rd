@@ -35,5 +35,5 @@ Other Referential.objects: \code{\link{RefAnnee-class}},
   \code{\link{Refperiode-class}},
   \code{\link{charge,RefChoix-method}}
 }
-\keyword{classes}
+\keyword{internal}
 

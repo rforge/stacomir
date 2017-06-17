@@ -78,6 +78,7 @@ setMethod("charge_avec_filtre",signature=signature("RefStades"),definition=funct
 #' objectBilan=bilan_taille # for another test
 #' choice(object,objectBilan=bilanMigrationPar)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hstd=function(h,...){
@@ -168,6 +169,7 @@ setMethod("choice",signature=signature("RefStades"),definition=function(object,o
 #' objectBilan=bilan_taille # for other test
 #' choicemult(object,objectBilan=bilanMigrationPar)	
 #' }
+#' @keywords internal
 setMethod("choicemult",signature=signature("RefStades"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			
 			if (nrow(object@data) > 0){

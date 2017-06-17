@@ -107,6 +107,7 @@ setMethod("charge_avec_filtre",signature=signature("Refpar"),definition=function
 #'  object<-charge(object)
 #'  choice(object)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("Refpar"),definition=function(object,
 				label="Choix d'une caracteristique de lot",
 				nomassign="refpar",
@@ -183,6 +184,7 @@ setMethod("choice_c",signature=signature("Refpar"),definition=function(object,pa
 #' objectBilan=bilan_taille # for other test
 #' choicemult(object,objectBilan=bilanMigrationCar)	
 #' }
+#' @keywords internal
 setMethod("choicemult",signature=signature("Refpar"),definition=function(object,
 				objectBilan=NULL,
 				label=gettext("Sample characteristic",domain="R-stacomiR"),

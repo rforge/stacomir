@@ -14,4 +14,5 @@ getLibellesPas(object, ...)
 \description{
 Generic method to get the string value of time step
 }
+\keyword{internal}
 

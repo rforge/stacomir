@@ -45,6 +45,7 @@ setMethod("charge",
 #' @param is.enabled A boolean parameter, if TRUE the frame is enabled when first displayed
 #' @param title The title of the frame, defaut to "Monitoring stations selection" 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 #' @examples  
 #' \dontrun{
 #' object=new("RefStationMesure")

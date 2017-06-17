@@ -6,6 +6,7 @@
 #' @param object An object of class \code{\linkS4class{RefAnnee}}
 #' @return boolean The test for the object Refannee
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 validite_Annee=function(object)
 {
 	rep1= class(object@data)=="data.frame"
@@ -131,6 +132,7 @@ setMethod("charge",signature=signature("RefAnnee"),definition=function(object,ob
 #' choice(object,nomassign="refAnnee",funoutlabel="essai",titleFrame="essai RefAnnee",preselect=1)
 #' dispose(win)
 #' }
+#' @keywords internal
 setMethod("choice",
 		signature=signature("RefAnnee"),definition=function(object,
 				nomassign="refAnnee", 

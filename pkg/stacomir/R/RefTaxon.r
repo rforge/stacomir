@@ -60,6 +60,7 @@ setMethod("charge_avec_filtre",signature=signature("RefTaxon"),definition=functi
 #' @param objectBilan An object Bilan which includes the \link{RefTaxon-class}, default NULL
 #' @param is.enabled Sets if the frame is enabled at launch, defaut TRUE
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 #' @examples  \dontrun{
 #'  object=new("RefTaxon")
 #' win=gwindow()

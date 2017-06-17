@@ -26,4 +26,5 @@ Multiple Choice method for RefHorodate referential objects, to put together with
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

@@ -2,6 +2,7 @@
 #' 
 #' @param object A refHorodate object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 validite_RefHorodate=function(object)
 {
 	rep1= class(object@horodate)[2]=="POSIXt"
@@ -42,6 +43,7 @@ setGeneric("setRefHorodate",def=function(object,...) standardGeneric("setRefHoro
 #' @param string A string representing an horodate in the format "\%Y-\%m-\%d \%H:\%M:\%S"
 #' @return An Object of class "RefHorodate" 
 #' @author cedric.briand
+#' @keywords internal
 setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=function(object,string){
 			object@horodate=strptime(string,format="%Y-%m-%d %H:%M:%S")
 			return(object) 
@@ -59,6 +61,7 @@ setMethod("setRefHorodate",signature=signature("RefHorodate"),definition=functio
 #' @param nomassign The name assigned in environment envir_stacomi
 #' @param funoutlabel, text displayed by the interface
 #' @param decal Default 0, number of years to shift forward or backward 
+#' @keywords internal
 #' @return Selects the date in the graphical interface, and assigns an object of class POSIXt with name nomassign in envir_stacomi
 setMethod("choice",signature=signature("RefHorodate"),definition=function(object,
 				label="date",
@@ -175,6 +178,7 @@ setMethod("choice_c",signature=signature("RefHorodate"),definition=function(obje
 #' @param funoutlabel the sentence to write when the choice has been made
 #' @param decal Default year will be current year, use -1 to set the default value in the interface to the year before
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 setMethod("choicemult",signature=signature("RefHorodate"),definition=function(object,
 				label="date",
 				nomassign="horodate",

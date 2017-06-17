@@ -133,16 +133,19 @@ setGeneric("getnoPasCourant",def=function(object,...) standardGeneric("getnoPasC
 #' Gets the current time step of an object of class \link{PasDeTemps-class}
 #' @param object An object of class \link{PasDeTemps-class}
 #' @return the current time step of the object
+#' @keywords internal
 setMethod("getnoPasCourant",signature=signature("PasDeTemps"),definition=function(object) object@noPasCourant)
 
 #' Generic method for getting the final date
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("DateFin",def=function(object,...) standardGeneric("DateFin"))
 #' Gets the final horodate for an object of class \link{PasDeTemps-class}
 #' @param object An object of class \link{PasDeTemps-class}
 #' @return DateFin, The final date corresponding to nbStep*time duration + initial date
 #' @export
+#' @keywords internal
 setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(object){
 			DateFin=object@dateDebut+ object@stepDuration*(object@nbStep)
 			# pour les pb de changement d'heure
@@ -153,10 +156,12 @@ setMethod("DateFin",signature=signature("PasDeTemps"),definition=function(object
 #' Generic method for getting the beginning date for current time step
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("currentDateDebut",def=function(object,...) standardGeneric("currentDateDebut"))
 #' Gets the starting date of a time step for an object of class \link{PasDeTemps-class}
 #' @param object An object of class \link{PasDeTemps-class}
 #' @return CurrentDateDebut, The starting date for the current timestep
+#' @keywords internal
 setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=function(object){
 			CurrentDateDebut=object@dateDebut+ object@stepDuration*object@noPasCourant
 			# bug cht heure
@@ -169,6 +174,7 @@ setMethod("currentDateDebut",signature=signature("PasDeTemps"),definition=functi
 #' Generic method for getting the ending date for current time step
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("currentDateFin",def=function(object,...) standardGeneric("currentDateFin"))
 #' Gets the ending date of a time step for an object of class \link{PasDeTemps-class}
 #' @param object An object of class \link{PasDeTemps-class}
@@ -184,10 +190,12 @@ setMethod("currentDateFin",signature=signature("PasDeTemps"),definition=function
 #' Generic method next
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("suivant",def=function(object,...) standardGeneric("suivant"))
 #' Gets the next time step 
 #' @param object An object of class \link{PasDeTemps-class}
 #' @return An object of class \link{PasDeTemps-class} with current time step set
+#' @keywords internal
 setMethod("suivant",signature=signature("PasDeTemps"),definition=function(object){
 			object@noPasCourant =object@noPasCourant+as.integer(1)
 			if (currentDateFin(object)>DateFin(object)) {
@@ -199,10 +207,12 @@ setMethod("suivant",signature=signature("PasDeTemps"),definition=function(object
 #' Generic method the get starting date
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("getdateDebut",def=function(object,...) standardGeneric("getdateDebut"))
 #' Returns the starting date as character
 #' @param object An object of class \link{PasDeTemps-class}
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(object){
 			return ( strftime(as.POSIXlt(object@dateDebut),format="%Y-%m-%d %H:%M:%S") )
 		})
@@ -211,6 +221,7 @@ setMethod("getdateDebut",signature=signature("PasDeTemps"),definition=function(o
 #' Generic method to set the starting date
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("setdateDebut",def=function(object,...) standardGeneric("setdateDebut"))
 #' Sets starting date from a character
 #' 
@@ -219,6 +230,7 @@ setGeneric("setdateDebut",def=function(object,...) standardGeneric("setdateDebut
 #' @param string Character string of type"\%Y-\%m-\%d \%H:\%M:\%S" or "\%Y-\%m-\%d".
 #' this allows to use either horodate or date
 #' @return An object of class \link{PasDeTemps-class}
+#' @keywords internal
 setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(object,string){
 			object@dateDebut=if (!is.na(strptime(string,format="%Y-%m-%d %H:%M:%S"))) strptime(string,format="%Y-%m-%d %H:%M:%S") else
       strptime(string,format="%Y-%m-%d") 
@@ -228,6 +240,7 @@ setMethod("setdateDebut",signature=signature("PasDeTemps"),definition=function(o
 #' Generic method to get the string value of time step
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("getLibellesPas",def=function(object,...) standardGeneric("getLibellesPas"))
 
 
@@ -236,6 +249,7 @@ setGeneric("getLibellesPas",def=function(object,...) standardGeneric("getLibelle
 #' 
 #' @param object An object of class \link{PasDeTemps-class}
 #' @return A string corresponding to the value of current time step
+#' @keywords internal
 setMethod("getLibellesPas",signature=signature("PasDeTemps"),definition=function(object){
 			ret=paste(LesPasDeTemps$LabelPasDeTemps)
 			return (ret )
@@ -244,10 +258,12 @@ setMethod("getLibellesPas",signature=signature("PasDeTemps"),definition=function
 #' Generic method to get the years 
 #' @param object An object
 #' @param ... Additional parameters passed to the method
+#' @keywords internal
 setGeneric("getAnnees",def=function(object,...) standardGeneric("getAnnees"))
 
 #' Gets the year or a vector of years corresponding to the timestep ("PasDeTemps") object
 #' @param object An object of class \link{PasDeTemps-class}
+#' @keywords internal
 setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(object){
 			 dateFin=DateFin(object)
 			 dateDebut=object@dateDebut
@@ -259,6 +275,7 @@ setMethod("getAnnees",signature=signature("PasDeTemps"),definition=function(obje
 
 #' Method to select timesteps from the graphical interface
 #' @param object An object of class \link{PasDeTemps-class}
+#' @keywords internal
 setMethod("choice",signature=signature("PasDeTemps"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){
@@ -308,7 +325,7 @@ setMethod("choice",signature=signature("PasDeTemps"),definition=function(object)
 #' @note this method differs from choice as it is called within a notebook,
 #' it does not allow for multiple choice to be made
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
+#' @keywords internal
 		setMethod("choicemult",signature=signature("PasDeTemps"),definition=function(object) {
 					if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 						hwinpa=function(h,...){

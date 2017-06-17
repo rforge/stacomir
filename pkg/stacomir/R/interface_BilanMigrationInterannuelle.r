@@ -1,5 +1,6 @@
 #' interface for BilanMigrationInterannuelle class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanMigrationInterAnnuelle = function()
 {
 	quitte() # vidange de l'interface

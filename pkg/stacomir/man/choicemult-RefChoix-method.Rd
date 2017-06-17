@@ -18,4 +18,5 @@ Multiple Choice method for RefChoix referential objects, to put together with no
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

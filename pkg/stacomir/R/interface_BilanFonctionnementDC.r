@@ -1,8 +1,6 @@
-# Nom fichier :        interface_BilanFonctionnementDC.R   
-
-
 #' interface for BilanFonctionnementDC class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanFonctionnementDC = function()
 {
 	quitte()

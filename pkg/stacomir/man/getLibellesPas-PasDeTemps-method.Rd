@@ -16,4 +16,5 @@ A string corresponding to the value of current time step
 \description{
 Gets the string value of time step
 }
+\keyword{internal}
 

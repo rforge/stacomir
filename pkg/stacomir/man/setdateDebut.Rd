@@ -14,4 +14,5 @@ setdateDebut(object, ...)
 \description{
 Generic method to set the starting date
 }
+\keyword{internal}
 

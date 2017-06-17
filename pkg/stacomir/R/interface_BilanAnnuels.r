@@ -1,5 +1,6 @@
 #' interface for BilanAnnuels class 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanAnnuels = function()
 {
 	quitte() # vidange de l'interface

@@ -52,6 +52,7 @@ setMethod("charge",signature=signature("RefChoix"),definition=function(object,ve
 #' group=ggroup(container=win,horizontal=FALSE)
 #' choice(object) 
 #' dispose(win)}
+#' @keywords internal
 setMethod("choice",signature=signature("RefChoix"),definition=function(object) {
 			hlist=function(h,...){
 				valeurchoisie=svalue(choice)
@@ -100,6 +101,7 @@ setMethod("choice_c",signature=signature("RefChoix"),definition=function(object,
 #' @param object An object of class \link{RefChoix-class}
 #' @param selected_value the value selected in the combo
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 setMethod("choicemult",signature=signature("RefChoix"),definition=function(object,
 				selected_value
 		) {

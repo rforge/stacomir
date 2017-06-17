@@ -14,4 +14,5 @@ by a handler in the main graphical interface
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

@@ -20,4 +20,5 @@ it does not allow for multiple choice to be made
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

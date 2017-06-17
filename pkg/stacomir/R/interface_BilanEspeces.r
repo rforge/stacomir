@@ -1,5 +1,6 @@
 #' Interface for BilanEspece class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanEspeces=function(){
 	bilesp=new("BilanEspeces")
 	assign("bilesp",bilesp,envir = envir_stacomi)

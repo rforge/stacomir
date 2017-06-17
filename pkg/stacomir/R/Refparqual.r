@@ -116,6 +116,7 @@ setMethod("charge_complement",signature=signature("Refparqual"),definition=funct
 #' object<-charge(object)
 #' choice(object)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 				label=gettext("Choice of a sample characteristic",domain="R-stacomiR"),
 				nomassign="refparqual",
@@ -147,6 +148,7 @@ setMethod("choice",signature=signature("Refparqual"),definition=function(object,
 #' @param nomassign The name used when assigning the object Refparqual to the \code{envir_stacomi} environment
 #' @param label The name of the frame
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 setMethod("choicemult",signature=signature("Refparqual"),definition=function(object,
 				objectBilan=NULL,
 				nomassign="refparqual",

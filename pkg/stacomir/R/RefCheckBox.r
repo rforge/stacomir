@@ -43,6 +43,7 @@ setMethod("charge",signature=signature("RefCheckBox"),definition=function(object
 #' choice(object) 
 #' dispose(win)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("RefCheckBox"),definition=function(object) {
 			hlist=function(h,...){
 				i=h$action

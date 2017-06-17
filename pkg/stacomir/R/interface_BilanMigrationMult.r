@@ -3,6 +3,7 @@
 #' launches the graphical interface after the main gwidget dialog has been launched
 #' This function is called from a handler in the main graphical interface
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanMigrationMult=function(){
 	quitte() # quitte must be the first in interface methods 
 	#(destroys everything in envir_stacomi except stuff required at to level)

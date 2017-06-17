@@ -58,6 +58,7 @@ setValidity(Class="PasDeTempsJournalier",function(object)
 
 #' Method to select timesteps from the graphical interface
 #' @param object An object of class \link{PasDeTempsJournalier-class}
+#' @keywords internal
 setMethod("choice",signature=signature("PasDeTempsJournalier"),definition=function(object) {
 			if (length(LesPasDeTemps$LabelPasDeTemps) > 0){
 				hwinpa=function(h,...){

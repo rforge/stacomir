@@ -1,6 +1,7 @@
 #' Interface for BilanMigration class, internal use, this function is called
 #' by a handler in the main graphical interface
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_BilanMigration=function(){ 
 	# the quitte() method removes everything assigned in envir_stacomi by Bilan classes 
 	quitte()

@@ -79,6 +79,7 @@ setMethod("charge",signature=signature("RefDF"),definition=function(object) {
 #' object<-charge(object)
 #' choice(object)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("RefDF"),definition=function(object) {
 			if (nrow(object@data) > 0){
 				hDF=function(h,...){

@@ -14,4 +14,5 @@ getdateDebut(object, ...)
 \description{
 Generic method the get starting date
 }
+\keyword{internal}
 

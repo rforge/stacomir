@@ -12,4 +12,5 @@ interface for Bilan_poids_moyen class
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

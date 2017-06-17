@@ -99,6 +99,7 @@ setMethod("charge",signature=signature("RefDC"),definition=function(object) {
 #' objectBilan=new("BilanMigration")
 #' choice(object=object,objectBilan=objectBilan)
 #'}
+#' @keywords internal
 setMethod("choice",signature=signature("RefDC"),definition=function(object,objectBilan=NULL,is.enabled=TRUE) {
 			if (nrow(object@data) > 0){
 				hDC=function(h,...){

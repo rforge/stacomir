@@ -13,8 +13,7 @@
 #' of class \code{"character"}} \item{list("label")}{Object of class
 #' \code{"character"}}\item{:}{Object of class \code{"character"}} }
 #' @author cedric.briand"at"eptb-vilaine.fr
-
-#' @keywords classes
+#' @keywords internal
 #' @family Referential objects
 setClass(Class="RefListe",representation= representation(listechoice="character",selectedvalue="character",label="character"))
 
@@ -48,6 +47,7 @@ setMethod("charge",signature=signature("RefListe"),definition=function(object,li
 #' object<-charge(object,vecteur=c("choice1","choice2"),label="please choose")
 #' choice(object)
 #' }
+#' @keywords internal
 setMethod("choice",signature=signature("RefListe"),definition=function(object,is.enabled=TRUE) {
 			hlist=function(h,...){
 				valeurchoisie=svalue(choice)

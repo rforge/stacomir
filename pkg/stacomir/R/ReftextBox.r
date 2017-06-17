@@ -31,7 +31,7 @@ setMethod("charge",signature=signature("RefTextBox"),definition=function(object,
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @param object An object of class \link{RefTextBox-class}
 #' @param nomassign The name with which the object will be assigned in envir_stacomi
-
+#' @keywords internal
 #' @examples 
 #' \dontrun{
 #' object=new("RefTextBox")

@@ -26,4 +26,5 @@ Selects the date in the graphical interface, and assigns an object of class POSI
 \description{
 Graphical interface
 }
+\keyword{internal}
 
