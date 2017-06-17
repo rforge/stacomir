@@ -3,6 +3,7 @@
 \docType{methods}
 \name{calcule,BilanMigration-method}
 \alias{calcule,BilanMigration-method}
+\alias{calcule.BilanMigration}
 \alias{calcule.bilanmigration}
 \title{Transforms migration per period to daily migrations, and performs the conversion from weights to number is data
 are stored as weights (glass eel).}
@@ -20,22 +21,14 @@ different rows}
 \value{
 BilanMigration with calcdata slot filled. It is a list with one element per counting device containing
 \describe{
-\item{method}{ 
-In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_bilanMigrationMult} method and the value indicated in method is "sum".
+\item{method}{In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_bilanMigrationMult} method and the value indicated in method is "sum".
  If any migration monitoring period is longer than a day, then the migration is split using the \link{fun_bilanMigrationMult_Overlaps} function and the value indicated in the 
-method is "overlaps" as the latter method uses the overlap package to split migration period. 
-}
-\item{data} { 
-the calculated data.
-}
-\item{contient_poids} {
-A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
-to number coefficients in the database (see link{Bilan_poids_moyen}).
-}
-\item{negative} {A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
-not developped yet
-}
-}
+method is "overlaps" as the latter method uses the overlap package to split migration period.}
+\item{data}{the calculated data.}
+\item{contient_poids}{A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
+to number coefficients in the database (see link{Bilan_poids_moyen}).}
+\item{negative}{A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
+not developped yet}}
 }
 \description{
 The calculation must be launched once data are filled by the connect method. Currently the negative argument

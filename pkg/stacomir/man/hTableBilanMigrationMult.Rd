@@ -2,7 +2,7 @@
 % Please edit documentation in R/BilanMigrationMult.r
 \name{hTableBilanMigrationMult}
 \alias{hTableBilanMigrationMult}
-\title{handler function}
+\title{handler function table}
 \usage{
 hTableBilanMigrationMult(h = null, ...)
 }
@@ -14,7 +14,5 @@ hTableBilanMigrationMult(h = null, ...)
 \description{
 internal use
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
+\keyword{internal}
 

@@ -200,6 +200,7 @@ setMethod("choice_c",signature=signature("BilanArgentee"),definition=function(ob
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @return An object of class \link{BilanArgentee-class} with slot calcdata filled, as a list
 #' for each counting device
+#' @aliases calcule.BilanArgentee calcule.bilanargentee
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setMethod("calcule",signature=signature("BilanArgentee"),definition=function(object,silent) {
 			bilanArg<-object
@@ -693,7 +694,7 @@ setMethod("print",signature=signature("BilanArgentee"),definition=function(x,...
 #' @param h A handler, with action 1,2,3 or 4 
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 funplotBilanArgentee = function(h,...) {
 	bilanArg<-get(x="bilan_arg",envir=envir_stacomi)
 	bilanArg<-charge(bilanArg)
@@ -711,7 +712,7 @@ funplotBilanArgentee = function(h,...) {
 #' @param h hanlder passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 funtableBilanArgentee = function(h,...) {
 	bilanArg=charge(bilanArg)
 	bilanArg<-connect(bilanArg)

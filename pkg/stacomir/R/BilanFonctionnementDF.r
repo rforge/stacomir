@@ -410,6 +410,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDF", y = "ANY"),definition=fu
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funbarchartDF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)  
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
@@ -426,7 +427,7 @@ funbarchartDF = function(h,...) {
 #' @note The program cuts periods which overlap between two month
 #' @param h handler
 #' @param ... additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funbarchart1DF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)  
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)	
@@ -440,7 +441,7 @@ funbarchart1DF = function(h,...) {
 #' graphical interface handler
 #' @param h handler
 #' @param ... additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funboxDF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi) 
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)
@@ -456,7 +457,7 @@ funboxDF = function(h,...) {
 #' Handler fonction to plot calendar like graph, internal use
 #' @param h handler
 #' @param ... additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funchartDF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi) 
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)
@@ -472,7 +473,7 @@ funchartDF = function(h,...) {
 #' Table output for BilanFonctionnementDF class
 #' @param h handler
 #' @param ... additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funtableDF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi) 
 	bilanFonctionnementDF=charge(bilanFonctionnementDF)
@@ -487,7 +488,7 @@ funtableDF = function(h,...) {
 #' handler to print the command line
 #' @param h a handler
 #' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 houtDF = function(h,...) {
 	bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi) 
 	bilanFonctionnementDF<-charge(bilanFonctionnementDF)

@@ -16,7 +16,5 @@ funboxDF(h, ...)
 Internal use, rectangles to describe the DF work for BilanFonctionnementDF class, 
 graphical interface handler
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
+\keyword{internal}
 

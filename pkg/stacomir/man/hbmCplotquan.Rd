@@ -14,4 +14,5 @@ hbmCplotquan(h, ...)
 \description{
 handler for plot
 }
+\keyword{internal}
 

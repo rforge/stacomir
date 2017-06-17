@@ -14,4 +14,5 @@ hxtableBilanAnnuels(h, ...)
 \description{
 xtable handler
 }
+\keyword{internal}
 

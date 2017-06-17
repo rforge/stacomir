@@ -275,6 +275,7 @@ setMethod("connect",signature=signature("BilanMigrationCar"),definition=function
 #' handler for bilanmigrationpar
 #' @param h handler
 #' @param ... Additional parameters
+#' @keywords internal
 hbmCcalc=function(h,...){
 	bmC<-get("bmC",envir=envir_stacomi)
 	bmC<-charge(bmC)
@@ -323,11 +324,15 @@ setMethod("setasqualitative",signature=signature("BilanMigrationCar"),definition
 			return(bmC)
 		})
 
-#' calcule methode
+#' Computes data to a standard format for the summary and plot methods.
+#' 
+#' Merges the content of the list elements "parqual" and "parquan" in the data slot, and creates
+#' a single dataframe with one line per qualitative and quantitative pair. This methods allow to 
+#' cross one quantity (e.g. length) with a qualitative parameter (e.g. sex).
 #' 
 #' @param object An object of class \code{\link{BilanMigrationCar-class}} 
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
-
+#TODO create a dataframe with only one line per fish for all parameters
 setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
 			bmC<-object
 			qual<-bmC@data[["parqual"]]
@@ -355,6 +360,7 @@ setMethod("calcule",signature=signature("BilanMigrationCar"),definition=function
 #' 
 #' @param h handler
 #' @param ... Additional parameters
+#' @keywords internal
 hbmCplotquan = function(h,...) {
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
@@ -367,6 +373,7 @@ hbmCplotquan = function(h,...) {
 #' 
 #' @param h handler
 #' @param ... Additional parameters
+#' @keywords internal
 hbmCplotqual=function(h,...){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
@@ -379,6 +386,7 @@ hbmCplotqual=function(h,...){
 #' 
 #' @param h handler
 #' @param ... Additional parameters
+#' @keywords internal
 hbmCplotcrossed=function(h,...){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)
@@ -392,6 +400,7 @@ hbmCplotcrossed=function(h,...){
 #' 
 #' @param h handler
 #' @param ... Additional parameters
+#' @keywords internal
 hbmCstat=function(h){
 	if (exists("bmC",envir_stacomi)) {
 		bmC<-get("bmC",envir_stacomi)

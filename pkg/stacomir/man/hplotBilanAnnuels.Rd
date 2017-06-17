@@ -14,4 +14,5 @@ hplotBilanAnnuels(h, ...)
 \description{
 plot handler
 }
+\keyword{internal}
 

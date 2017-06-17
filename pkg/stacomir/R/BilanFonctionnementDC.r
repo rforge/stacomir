@@ -433,7 +433,7 @@ setMethod("plot",signature(x = "BilanFonctionnementDC", y = "ANY"), definition=
 #' @param h a handler
 #' @param ... Additional parameters
 #' @return assigns the data frame \code{periodeDC} allowing to build the lattice graph in the environment envir_stacomi
-#' 
+#' @keywords internal
 #' @author cedric.briand
 funbarchartDC = function(h,...) {
 	bilanFonctionnementDC=charge(bilanFonctionnementDC)
@@ -467,6 +467,7 @@ funbarchart1DC = function(h,...) {
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funboxDC = function(h,...) {  
 	bilanFonctionnementDC=charge(bilanFonctionnementDC)
 	bilanFonctionnementDC=connect(bilanFonctionnementDC)
@@ -481,6 +482,7 @@ funboxDC = function(h,...) {
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funchartDC = function(h,...) {
 	bilanFonctionnementDC<-get("bilanFonctionnementDC",envir=envir_stacomi) 
 	bilanFonctionnementDC=charge(bilanFonctionnementDC)
@@ -497,6 +499,7 @@ funchartDC = function(h,...) {
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 houtDC = function(h,...) {
 	bilanFonctionnementDC<-get("bilanFonctionnementDC",envir=envir_stacomi) 
 	bilanFonctionnementDC<-charge(bilanFonctionnementDC)
@@ -529,6 +532,7 @@ setMethod("print",signature=signature("BilanFonctionnementDC"),definition=functi
 #' @param h Handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funtableDC = function(h,...) {
 	bilanFonctionnementDC<-get("bilanFonctionnementDC",envir=envir_stacomi) 
 	bilanFonctionnementDC=charge(bilanFonctionnementDC)

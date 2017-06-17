@@ -128,6 +128,7 @@ setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanConditionEnvgraph = function(h,...) 
 {	
 	bilanConditionEnv<-get("bilanConditionEnv",envir=envir_stacomi)

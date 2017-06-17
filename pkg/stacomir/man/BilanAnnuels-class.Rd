@@ -3,6 +3,8 @@
 \docType{class}
 \name{BilanAnnuels-class}
 \alias{BilanAnnuels-class}
+\alias{calcule.BilanAnnuels}
+\alias{calcule.bilanannuels}
 \title{Class "BilanAnnuels"}
 \description{
 This class displays annual migration counts, for several counting device, taxa or stages.

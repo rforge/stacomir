@@ -119,6 +119,7 @@ setMethod("charge",signature=signature("BilanMigrationMultConditionEnv"),definit
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbmmCEcalc=function(h=null,...){
 	bmmCE<-get("bmmCE",envir_stacomi)	
 	bmmCE<-charge(bmmCE)
@@ -148,6 +149,7 @@ setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),defini
 
 #' internal method for graphical interface
 #' @param h A handler
+#' @keywords internal
 hbmmCEgraph = function(h=null){   
 	bmmCE<-get("bmmCE",envir_stacomi)
 	bmmCE<-plot(bmmCE)

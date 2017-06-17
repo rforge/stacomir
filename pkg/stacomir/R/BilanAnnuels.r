@@ -12,7 +12,7 @@
 #' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose year of beginning
 #' @slot anneefin Object of class \code{\link{RefAnnee-class}}
 #' RefAnnee allows to choose last year of the Bilan
-#' 
+#' @aliases calcule.BilanAnnuels calcule.bilanannuels
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
 #' @keywords classes
@@ -571,6 +571,7 @@ setMethod("plot",signature(x = "BilanAnnuels", y = "missing"),definition=functio
 #' Barplot handler
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hbarplotBilanAnnuels = function(h,...)
 {
 	bilA <- get("bilanAnnuels",envir=envir_stacomi)
@@ -582,6 +583,7 @@ hbarplotBilanAnnuels = function(h,...)
 #' plot handler
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hplotBilanAnnuels = function(h,...)
 {
 	bilA <- get("bilanAnnuels",envir=envir_stacomi)
@@ -594,6 +596,7 @@ hplotBilanAnnuels = function(h,...)
 #' xtable handler
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hxtableBilanAnnuels = function(h,...)
 {
 	bilA <- get("bilanAnnuels",envir=envir_stacomi)

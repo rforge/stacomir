@@ -16,4 +16,5 @@ hgraphBilanMigrationInterAnnuelle3(h, ...)
 Step plot with different years displayed on the same graph. One year
 can be highlighted against the others
 }
+\keyword{internal}
 

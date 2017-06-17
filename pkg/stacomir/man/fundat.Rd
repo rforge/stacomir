@@ -20,7 +20,4 @@ a data frame with mean, max, and min calculated for each timesplit
 function called for bilamMigrationInterannelle objects renames columns
 replaces nulls, and calculates reports with time period larger than day
 }
-\seealso{
-\code{\linkS4class{Bilan_poids_moyen}}
-}
 

@@ -14,4 +14,5 @@ hsummaryBilanMigrationInterannuelle(h, ...)
 \description{
 Summary handler internal method
 }
+\keyword{internal}
 

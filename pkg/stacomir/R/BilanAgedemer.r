@@ -442,6 +442,7 @@ setMethod("print",signature=signature("BilanAgedemer"),definition=function(x,...
 #' @param h A handler, with action 1,2,3 or 4 
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funplotBilanAgedemer = function(h,...) {
 	bilan_adm<-get(x="bilan_adm",envir=envir_stacomi)
 	bilan_adm<-charge(bilan_adm)
@@ -459,6 +460,7 @@ funplotBilanAgedemer = function(h,...) {
 #' @param h hanlder passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 funtableBilanAgedemer = function(h,...) {
 	bilan_adm=charge(bilan_adm)
 	bilan_adm<-connect(bilan_adm)

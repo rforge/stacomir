@@ -64,6 +64,7 @@ setValidity("BilanMigration",function(object)
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationcalc=function(h,...){
 	bilanMigration<-get("bilanMigration",envir=envir_stacomi)
 	bilanMigration<-charge(bilanMigration)
@@ -209,23 +210,15 @@ setMethod("charge",signature=signature("BilanMigration"),definition=function(obj
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled. It is a list with one element per counting device containing
 #' \describe{
-#' \item{method}{ 
-#' In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_bilanMigrationMult} method and the value indicated in method is "sum".
+#' \item{method}{In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_bilanMigrationMult} method and the value indicated in method is "sum".
 #'  If any migration monitoring period is longer than a day, then the migration is split using the \link{fun_bilanMigrationMult_Overlaps} function and the value indicated in the 
-#' method is "overlaps" as the latter method uses the overlap package to split migration period. 
-#' }
-#' \item{data} { 
-#' the calculated data.
-#' }
-#' \item{contient_poids} {
-#' A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
-#' to number coefficients in the database (see link{Bilan_poids_moyen}).
-#' }
-#' \item{negative} {A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
-#' not developped yet
-#' }
-#' }
-#' @aliases calcule.bilanmigration
+#' method is "overlaps" as the latter method uses the overlap package to split migration period.}
+#' \item{data}{the calculated data.}
+#' \item{contient_poids}{A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
+#' to number coefficients in the database (see link{Bilan_poids_moyen}).}
+#' \item{negative}{A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
+#' not developped yet}}
+#' @aliases calcule.bilanmigration calcule.BilanMigration
 #' @export
 setMethod("calcule",signature=signature("BilanMigration"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			#bilanMigration<-bM_Arzal
@@ -316,6 +309,7 @@ setMethod("calcule",signature=signature("BilanMigration"),definition=function(ob
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 houtBilanMigration=function(h=null,...) {
 	if (exists("refStades",envir_stacomi)) 	{
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -507,6 +501,7 @@ setMethod("plot",signature(x = "BilanMigration", y = "ANY"),definition=function(
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationgraph = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -523,6 +518,7 @@ hbilanMigrationgraph = function(h,...) {
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationgraph2 = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)
@@ -538,6 +534,7 @@ hbilanMigrationgraph2 = function(h,...) {
 #' @param h Handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hTableBilanMigration=function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) 
 	{
@@ -577,6 +574,7 @@ setMethod("summary",signature=signature(object="BilanMigration"),definition=func
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationwrite = function(h,...) {
 	if (exists("bilanMigration",envir_stacomi)) {
 		bilanMigration<-get("bilanMigration",envir_stacomi)

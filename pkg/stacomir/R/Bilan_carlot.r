@@ -294,7 +294,7 @@ setMethod("print",signature=signature("Bilan_carlot"),definition=function(x,...)
 #' @param h A handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 fundensityBilan_carlot = function(h,...) {
 	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
@@ -309,7 +309,7 @@ fundensityBilan_carlot = function(h,...) {
 #' @param h A handler passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 funboxplotBilan_carlot = function(h,...) {
 	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
@@ -325,7 +325,7 @@ funboxplotBilan_carlot = function(h,...) {
 #' @param h handler passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 funpointBilan_carlot = function(h,...) {
 	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot<-charge(bilan_carlot)
@@ -340,7 +340,7 @@ funpointBilan_carlot = function(h,...) {
 #' @param h hanlder passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @keywords internal
 funtableBilan_carlot = function(h,...) {
 	bilan_carlot<-get("bilan_carlot",envir=envir_stacomi)
 	bilan_carlot=charge(bilan_carlot)

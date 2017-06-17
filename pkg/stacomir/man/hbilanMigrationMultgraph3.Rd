@@ -14,7 +14,5 @@ hbilanMigrationMultgraph3(h = null, ...)
 \description{
 internal use
 }
-\author{
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-}
+\keyword{internal}
 

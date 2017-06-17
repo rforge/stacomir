@@ -3,7 +3,7 @@
 \docType{methods}
 \name{calcule,BilanMigrationCar-method}
 \alias{calcule,BilanMigrationCar-method}
-\title{calcule methode}
+\title{Computes data to a standard format for the summary and plot methods.}
 \usage{
 \S4method{calcule}{BilanMigrationCar}(object, silent = FALSE)
 }
@@ -13,6 +13,8 @@
 \item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 }
 \description{
-calcule methode
+Merges the content of the list elements "parqual" and "parquan" in the data slot, and creates
+a single dataframe with one line per qualitative and quantitative pair. This methods allow to 
+cross one quantity (e.g. length) with a qualitative parameter (e.g. sex).
 }
 

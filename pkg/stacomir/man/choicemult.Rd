@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_generic.r
 \name{choicemult}
 \alias{choicemult}
-\title{Generic method for multiple choice (using the gwidget graphical interface)}
+\title{Generic method for multiple choice (using the gwidget notebook for multiple choice)}
 \usage{
 choicemult(object, ...)
 }
@@ -12,9 +12,10 @@ choicemult(object, ...)
 \item{...}{Additional parms}
 }
 \description{
-Generic method for multiple choice (using the gwidget graphical interface)
+Generic method for multiple choice (using the gwidget notebook for multiple choice)
 }
 \author{
 cedric.briand
 }
+\keyword{internal}
 

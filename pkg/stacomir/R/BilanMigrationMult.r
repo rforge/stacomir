@@ -356,6 +356,7 @@ setMethod("connect",signature=signature("BilanMigrationMult"),definition=functio
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationMult_graph=function(h=null,...){
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
@@ -597,7 +598,7 @@ setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=f
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @seealso BilanMigrationMult
+#' @keywords internal
 hbilanMigrationMultcalc=function(h=null,...){
 	bilanMigrationMult<-get("bilanMigrationMult",envir=envir_stacomi)
 	bilanMigrationMult<-charge(bilanMigrationMult)
@@ -611,7 +612,7 @@ hbilanMigrationMultcalc=function(h=null,...){
 #' cumuls de migration au cours du temps
 #' @param h a handler
 #' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationMultgraph2 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
@@ -627,7 +628,7 @@ hbilanMigrationMultgraph2 = function(h=null,...) {
 #' internal use
 #' @param h a handler
 #' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilanMigrationMultgraph3 = function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) {
 		bilanMigrationMult<-get("bilanMigrationMult",envir_stacomi)
@@ -641,12 +642,12 @@ hbilanMigrationMultgraph3 = function(h=null,...) {
 #' 
 #' 
 
-#' handler function 
+#' handler function table 
 #' 
 #' internal use
 #' @param h a handler
 #' @param ... Additional parameters
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hTableBilanMigrationMult=function(h=null,...) {
 	if (exists("bilanMigrationMult",envir_stacomi)) 
 	{
@@ -725,6 +726,7 @@ setMethod("summary",signature=signature(object="BilanMigrationMult"),definition=
 		})
 
 #' handler to print the command line
+#' @keywords internal
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

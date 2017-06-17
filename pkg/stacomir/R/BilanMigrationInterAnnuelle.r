@@ -456,7 +456,6 @@ setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definitio
 #' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
 #' @return a data frame with mean, max, and min calculated for each timesplit
 #' @export
-#' @seealso \code{\linkS4class{Bilan_poids_moyen}}
 fundat=function(dat,annee=NULL,timesplit=NULL)
 {
 	
@@ -961,6 +960,7 @@ setMethod("plot",signature(x = "BilanMigrationInterAnnuelle", y = "missing"),def
 #' Plot of all interannual from top to bottom
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle = function(h,...)
 {
 	bilanMigrationInterAnnuelle <- get("bilanMigrationInterAnnuelle",envir=envir_stacomi)
@@ -973,6 +973,7 @@ hgraphBilanMigrationInterAnnuelle = function(h,...)
 #'Plot of daily migrations
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 {
 	bilanMigrationInterAnnuelle <- get("bilanMigrationInterAnnuelle",envir=envir_stacomi)
@@ -992,6 +993,7 @@ hgraphBilanMigrationInterAnnuelle2 = function(h,...)
 #' can be highlighted against the others
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 { 
 	bilanMigrationInterAnnuelle <- get("bilanMigrationInterAnnuelle",envir=envir_stacomi)
@@ -1008,6 +1010,7 @@ hgraphBilanMigrationInterAnnuelle3 = function(h,...)
 #' This function plots comparisions for periods of 1 week, 2 weeks, month
 #' @param h A handler
 #' @param ... Additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" timesplit="semaine" timesplit="mois"
@@ -1024,6 +1027,7 @@ hgraphBilanMigrationInterAnnuelle4 = function(h,...)
 #' This function plots comparisions for periods of 1 week, 2 weeks, month
 #' @param h A handler
 #' @param ... Additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 {
 	timesplit=h$action    # timesplit="quinzaine" # timesplit="mois"
@@ -1039,6 +1043,7 @@ hgraphBilanMigrationInterAnnuelle5 = function(h,...)
 #' 2 weeks period then centered and reduced
 #' @param h A handler
 #' @param ... Additional parameters
+#' @keywords internal
 hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 {
 	bilanMigrationInterAnnuelle <- get("bilanMigrationInterAnnuelle",envir=envir_stacomi)
@@ -1053,6 +1058,7 @@ hgraphBilanMigrationInterAnnuelle7 = function(h,...)
 #'Summary handler internal method
 #' @param h A handler
 #' @param ... Additional parameters
+#' @keywords internal
 hsummaryBilanMigrationInterannuelle<-function(h,...){
 	bilanMigrationInterAnnuelle <- get("bilanMigrationInterAnnuelle",envir=envir_stacomi)
 	bilanMigrationInterAnnuelle <- charge(bilanMigrationInterAnnuelle)

@@ -14,4 +14,5 @@ hbarplotBilanAnnuels(h, ...)
 \description{
 Barplot handler
 }
+\keyword{internal}
 

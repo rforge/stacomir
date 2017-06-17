@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_generic.r
 \name{choice_c}
 \alias{choice_c}
-\title{Generic method for manual choice}
+\title{Generic method for manual choice using the command line}
 \usage{
 choice_c(object, ...)
 }
@@ -12,9 +12,10 @@ choice_c(object, ...)
 \item{...}{Additional parms}
 }
 \description{
-Generic method for manual choice
+Generic method for manual choice using the command line
 }
 \author{
 cedric.briand
 }
+\keyword{internal}
 

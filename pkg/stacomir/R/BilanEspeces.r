@@ -126,6 +126,7 @@ setMethod("choice_c",signature=signature("BilanEspeces"),definition=function(obj
 #' @param h a handler
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hbilespcalc=function(h,...){
 	if (exists("bilesp",envir_stacomi)) {
 		bilesp<-get("bilesp",envir_stacomi)
@@ -178,6 +179,7 @@ setMethod("charge",signature=signature("BilanEspeces"),definition=function(objec
 #' handler for plot internal use
 #' @param h Handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hplotbilesp = function(h) {
 	bilesp<-get("bilesp",envir_stacomi)
 	plot(bilesp,plot.type=h$action)
@@ -296,6 +298,7 @@ setMethod("plot",signature(x = "BilanEspeces", y = "missing"),definition=functio
 #' handler for summary BilanEspeces, internal use
 #' @param h a handler
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 hsummarybilesp=function(h) {
 	if (exists("bilesp",envir_stacomi)) {
 		bilesp<-get("bilesp",envir_stacomi)

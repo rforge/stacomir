@@ -12,4 +12,5 @@ hbmmCEgraph(h = null)
 \description{
 internal method for graphical interface
 }
+\keyword{internal}
 

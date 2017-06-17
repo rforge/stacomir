@@ -14,4 +14,5 @@ hgraphBilanMigrationInterAnnuelle2(h, ...)
 \description{
 Plot of daily migrations
 }
+\keyword{internal}
 

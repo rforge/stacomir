@@ -3,6 +3,8 @@
 \docType{methods}
 \name{calcule,BilanArgentee-method}
 \alias{calcule,BilanArgentee-method}
+\alias{calcule.BilanArgentee}
+\alias{calcule.bilanargentee}
 \title{Calculate individual silver eel parameters.}
 \usage{
 \S4method{calcule}{BilanArgentee}(object, silent)

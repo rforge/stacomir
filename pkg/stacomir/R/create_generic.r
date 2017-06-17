@@ -3,17 +3,19 @@
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
-#' @export
+#' @keywords internal
 setGeneric("choice",def=function(object,...) standardGeneric("choice"))
-#' Generic method for multiple choice (using the gwidget graphical interface)
+#' Generic method for multiple choice (using the gwidget notebook for multiple choice)
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
+#' @keywords internal
 setGeneric("choicemult",def=function(object,...) standardGeneric("choicemult"))
-#' Generic method for manual choice
+#' Generic method for manual choice using the command line
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
+#' @keywords internal
 setGeneric("choice_c",def=function(object,...) standardGeneric("choice_c"))
 #' Generic method to load referentials
 #' @param object Object
