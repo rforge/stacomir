@@ -4,7 +4,7 @@
 \name{charge,BilanMigration-method}
 \alias{charge,BilanMigration-method}
 \alias{charge.bilanmigration}
-\title{charge method for BilanMigration}
+\title{Loads additional data on migration control operations, df (fishway) dc (counting device).}
 \usage{
 \S4method{charge}{BilanMigration}(object, silent = FALSE)
 }
@@ -18,7 +18,8 @@ An object of class \link{BilanMigration-class} with slots filled by user choice
 }
 \description{
 this method creates additional classes in envir_stacomi for later use in plot (operations, 
-DF operation, DC operation.
+DF operation, DC operation). So unlike in most Bilan classes where the charge method is only
+used by the graphical interface, it is necessary to run charge for BilanMigration.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

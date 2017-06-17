@@ -140,12 +140,16 @@ hbilespcalc=function(h,...){
 
 
 #' charge method for BilanEspeces
-#' verifies the content of objects and calls the connect method
+#' 
+#' Verifies the content of objects when the graphical interface is used, it is not necessary
+#' to call the charge method if the choice_c method has been used
 #' @param object An object of class \link{BilanEspeces-class}
 #' @param silent Stops displaying the messages. 
 #' @return BilanEspeces with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases charge.bilanespeces charge.BilanEspeces
 #' @export
+#' @keywords internal
 setMethod("charge",signature=signature("BilanEspeces"),definition=function(object, silent=FALSE){
 			if (!silent) funout(gettext("Checking objects and launching query\n",domain="R-stacomiR"))
 			bilesp<-object

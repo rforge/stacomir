@@ -16,8 +16,10 @@
 BilanMigrationMult with slots filled by user choice
 }
 \description{
-Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
-fills also the data slot by the connect method
+Unique the other Bilan classes where the charge method is only used by the graphical interface 
+to collect and test objects in the environment envir_stacomi, and see if the right choices have
+been made in the graphical interface, this method is used to load data on migration control operations
+fishway operations, and counting devices operations as data from those are displayed in the main plots.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

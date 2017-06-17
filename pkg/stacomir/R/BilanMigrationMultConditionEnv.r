@@ -100,6 +100,11 @@ setMethod("choice_c",signature=signature("BilanMigrationMultConditionEnv"),defin
 			return(bmmCE)
 		})
 #' charge method for BilanMigrationMultConditionEnv class
+#' 
+#' #' Unique the other Bilan classes where the charge method is only used by the graphical interface 
+#' to collect and test objects in the environment envir_stacomi, and see if the right choices have
+#' been made in the graphical interface, this methods runs the \link{charge,BilanMigrationMult-method}
+#' and needs to be called from the command line (see examples)
 #' @param object An object of class \link{BilanMigrationMultConditionEnv-class}
 #' @param silent Should the function remain silent (boolean)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -131,11 +136,12 @@ hbmmCEcalc=function(h=null,...){
 	return(invisible(NULL))	
 }
 
-#' Calculation for the BilanMigrationMultConditionEnv
+#' Calculations for migration in the class \link{BilanMigrationMultConditionEnv-class}
 #' 
-#' @param object An object of class \code{\link{BilanMigrationMultConditionEnv-class}}
+#' Runs the calcule method in \link{BilanMigrationMult-class}
+#' @param object An object of class \link{BilanMigrationMultConditionEnv-class}
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
-#' @return \code{\link{BilanMigrationMultConditionEnv-class}}
+#' @return \link{BilanMigrationMultConditionEnv-class} with data in slot bmmCE@bilanMigrationMult@calcdata
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMultConditionEnv"),definition=function(object,silent=FALSE){ 
 			# silent=FALSE

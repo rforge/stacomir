@@ -3,7 +3,7 @@
 \docType{class}
 \name{Bilan_poids_moyen-class}
 \alias{Bilan_poids_moyen-class}
-\title{Class "Bilan_poids_moyen"}
+\title{Trend of wet weight in glass eel}
 \description{
 In trapping ladders, glass eel are seldom counted, as they are too tiny to handle and too numerous to count.
 The usuall operation is to weight them, or to use a bucket to measure their volume. These weights or volumes will later

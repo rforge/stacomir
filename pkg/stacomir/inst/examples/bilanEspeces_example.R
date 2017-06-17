@@ -11,7 +11,7 @@ stacomi(gr_interface=FALSE,
 			anneedebut="2008",
 			anneefin="2012",
 			silent=FALSE)	
-	bilesp<-charge(bilesp)
+	#bilesp<-charge(bilesp) this is used by the graphical interface
 	bilesp<-connect(bilesp)
 	bilesp<-calcule(bilesp)
 	plot(bilesp,plot.type="pie",silent=FALSE)

@@ -65,8 +65,11 @@ setValidity("BilanMigrationMult",function(object)
 
 #' charge method for BilanMigrationMult
 #' 
-#' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
-#' fills also the data slot by the connect method
+#' Unique the other Bilan classes where the charge method is only used by the graphical interface 
+#' to collect and test objects in the environment envir_stacomi, and see if the right choices have
+#' been made in the graphical interface, this method is used to load data on migration control operations
+#' fishway operations, and counting devices operations as data from those are displayed in the main plots. 
+#' 
 #' @param object An object of class \link{BilanMigrationMult-class}
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return BilanMigrationMult with slots filled by user choice
@@ -171,17 +174,29 @@ setMethod("choice_c",signature=signature("BilanMigrationMult"),definition=functi
 			return(bilanMigrationMult)
 		})
 
-#' calcule method for BilanMigrationMult
+#' #' Transforms migration per period to daily migrations, and performs the conversion from weights to number is data
+#' are stored as weights (glass eel). This calculation is performed in a loop for all dc. 
 #' 
-#'  does the calculation once data are filled. 
+#'  The calculation must be launched once data are filled by the connect method. Currently the negative argument
+#' has no effect. 
 #'  
-#' @param object An object of class \code{\link{BilanMigrationMult-class}}
+#' @param object An object of class \link{BilanMigrationMult-class}
 #' @param negative a boolean indicating if a separate sum must be done for positive and negative values, if true, positive and negative counts return 
 #' different rows
 #' @param silent Default FALSE, should messages be stopped
-#' @note The class BilanMigrationMult does not handle  escapement rates. Use class BilanMigration if you want to handle them. The class does not handler
-#' 'devenir' i.e. the destination of the fishes.
-#' @return BilanMigrationMult with a list in calcdata, one for each triplet (dc/taxa/stage) with data
+#' @note The class does not handle escapement rates, though structurally those are present in the database. If you 
+#' want to use those you will have to do the calculation manually from the data in \code{BilanMigrationMult@data}
+#' @return BilanMigrationMult with a list in slot calcdata. For each dc one will find a list with the following elements
+#' \describe{
+#' \item{method}{In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_bilanMigrationMult} method and the value indicated in method is "sum".
+#'  If any migration monitoring period is longer than a day, then the migration is split using the \link{fun_bilanMigrationMult_Overlaps} function and the value indicated in the 
+#' method is "overlaps" as the latter method uses the overlap package to split migration period.}
+#' \item{data}{the calculated data.}
+#' \item{contient_poids}{A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
+#' to number coefficients in the database (see link{Bilan_poids_moyen}).}
+#' \item{negative}{A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
+#' not developped yet}}
+#' @aliases calcule.bilanmigrationMult calcule.BilanMigrationMult
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationMult"),definition=function(object,negative=FALSE,silent=FALSE){ 
 			# bilanMigrationMult<-bMM_Arzal

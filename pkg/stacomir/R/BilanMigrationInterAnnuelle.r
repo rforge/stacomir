@@ -294,6 +294,7 @@ setMethod("supprime",signature=signature("BilanMigrationInterAnnuelle"),
 #' @return An object of class  \link{BilanMigrationInterAnnuelle-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
+#' @keywords internal
 setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 		definition=function(object,silent=FALSE)
 		{ 
@@ -386,12 +387,19 @@ setMethod("choice_c",signature=signature("BilanMigrationInterAnnuelle"),definiti
 
 #' calcule method for BilanMigrationInterannuelle
 #' 
+#' Performs the calculation of seasonal coefficients for the plot(plot.type="seasonal") method. The numbers
+#' are split according to the period chosen, one of "day","week","month","2 weeks", french labels are also 
+#' accepted as arguments. Once this is done, the seasonality of the migration is displayed using the day when the 
+#' first fish was seen, then the days (or period) corresponding to 5, 50 , 95, and 100 percent of the migration.
+#' The duration of 90% of the migraton between Q5 and Q95 is also of interest.
+#' 
 #' @param object An object of class \code{\link{BilanMigrationInterAnnuelle-class}}
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @param timesplit One of "day","week","month","2 weeks", "jour","semaine","quinzaine","mois"
 #' @note The class BilanMigration does not handle escapement rates nor 
 #' 'devenir' i.e. the destination of the fishes.
 #' @return BilanMigration with calcdata slot filled.
+#' @author Marion Legrand
 #' @export
 setMethod("calcule",signature=signature("BilanMigrationInterAnnuelle"),definition=function(object,silent=FALSE,timesplit="mois"){ 
 			bilanMigrationInterAnnuelle<-object	

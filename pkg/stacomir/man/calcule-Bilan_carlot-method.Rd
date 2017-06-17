@@ -3,7 +3,7 @@
 \docType{methods}
 \name{calcule,Bilan_carlot-method}
 \alias{calcule,Bilan_carlot-method}
-\title{Calcule method for Bilan_carlot}
+\title{Calculation for Bilan_carlot}
 \usage{
 \S4method{calcule}{Bilan_carlot}(object, silent = FALSE)
 }
@@ -13,7 +13,7 @@
 \item{silent}{Boolean, if TRUE, information messages are not displayed, only warnings and errors}
 }
 \description{
-Calcule method for Bilan_carlot
+In that class, most treatments are done in the query, this method checks that data are available and fills information for year, month, two weeks, week, doy
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

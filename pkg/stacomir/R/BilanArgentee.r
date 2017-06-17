@@ -92,13 +92,15 @@ setMethod("connect",signature=signature("BilanArgentee"),definition=function(obj
 #' charge method for BilanArgentee class
 #' 
 #' this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
-#' envir_stacomi
+#' envir_stacomi. It is not necessary to run this method when loading from the command line using the
+#' choice_c method
 #' @param object An object of class \link{BilanArgentee-class} 
 #' @param h a handler
 #' @return An object of class \link{BilanArgentee-class} with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @return An object of the class
+#' @keywords internal
 setMethod("charge",signature=signature("BilanArgentee"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
@@ -120,13 +122,11 @@ setMethod("charge",signature=signature("BilanArgentee"),definition=function(obje
 			} else {
 				funout(gettext("You need to choose a parameter, clic on validate\n",domain="R-stacomiR"),arret=TRUE)
 			}		
-			# rem pas tres satisfaisant car ce nom est choisi dans l'interface
 			if (exists("bilan_arg_date_debut",envir_stacomi)) {
 				object@horodatedebut@horodate<-get("bilan_arg_date_debut",envir_stacomi)
 			} else {
 				funout(gettext("You need to choose the starting date\n",domain="R-stacomiR"),arret=TRUE)
 			}
-			# rem id
 			if (exists("bilan_arg_date_fin",envir_stacomi)) {
 				object@horodatefin@horodate<-get("bilan_arg_date_fin",envir_stacomi)
 			} else {

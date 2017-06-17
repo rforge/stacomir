@@ -82,8 +82,7 @@ setMethod("connect",signature=signature("BilanFonctionnementDF"),definition=func
 #' @param object An object of class \link{BilanFonctionnementDF-class}
 #' @param silent Keeps program silent
 #' @return  An object of class \link{BilanFonctionnementDF-class}
-#' 
-#' @author cedric.briand
+#' @keywords internal
 setMethod("charge",signature=signature("BilanFonctionnementDF"),definition=function(object,silent=FALSE) {
 			# object<-BfDF
 			if (exists("refDF",envir=envir_stacomi)) {

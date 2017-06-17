@@ -37,8 +37,12 @@ setClass(Class="BilanAnnuels",representation=
 )
 
 #' charge method for BilanAnnuels class
+#' 
+#' Method used by the graphical interface to load data and check that all choices have
+#' been made by the user
 #' @param object An object of class \link{BilanAnnuels-class}
 #' @param silent Stops messages from being displayed if silent=TRUE, default FALSE 
+#' @keywords internal
 setMethod("charge",signature=signature("BilanAnnuels"),
 		definition=function(object,silent=FALSE){
 			bilA<-object

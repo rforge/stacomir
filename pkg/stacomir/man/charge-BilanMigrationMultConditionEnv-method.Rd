@@ -13,7 +13,10 @@
 \item{silent}{Should the function remain silent (boolean)}
 }
 \description{
-charge method for BilanMigrationMultConditionEnv class
+#' Unique the other Bilan classes where the charge method is only used by the graphical interface 
+to collect and test objects in the environment envir_stacomi, and see if the right choices have
+been made in the graphical interface, this methods runs the \link{charge,BilanMigrationMult-method}
+and needs to be called from the command line (see examples)
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

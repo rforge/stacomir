@@ -19,7 +19,5 @@ An object of class \link{BilanFonctionnementDF-class}
 used by the graphical interface to retrieve the objects of Referential classes
 assigned to envir_stacomi
 }
-\author{
-cedric.briand
-}
+\keyword{internal}
 

@@ -96,15 +96,18 @@ setMethod("connect",signature=signature("BilanAgedemer"),definition=function(obj
 		})
 
 
-#' charge method for BilanAgedemer class
+#' Loads data and check that all choices in the graphical interface have been made. 
 #' 
-#' this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
+#' It is not necessary to run this method if the choice_c method has been run.  
+#' This method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
 #' envir_stacomi
 #' @param object An object of class \link{BilanAgedemer-class} 
 #' @param h a handler
 #' @return An object of class \link{BilanAgedemer-class} with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @aliases charge.BilanAgedemer charge.bilanagedemer
 #' @export
+#' @keywords internal
 setMethod("charge",signature=signature("BilanAgedemer"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
@@ -147,8 +150,7 @@ setMethod("charge",signature=signature("BilanAgedemer"),definition=function(obje
 				object@limit2hm<-get("limit2hm",envir_stacomi)
 			} else {
 				funout(gettext("you need to choose a value for limit2hm",domain="R-stacomiR"),arret=TRUE)
-			} 
-			
+			} 			
 			return(object)
 			validObject(object)
 			assign("bilan_adm",object,envir_stacomi)

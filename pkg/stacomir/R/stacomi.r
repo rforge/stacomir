@@ -3,6 +3,7 @@
 #' 
 #' @param h A handler
 #' @param ... Other parameters
+#' @keywords internal
 hDF=function(h,...){
 	funout(gettext("Calculation of the operating fishway\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanFonctionnementDF(),envir = envir_stacomi)
@@ -10,6 +11,7 @@ hDF=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hDC=function(h,...){
 	funout(gettext("Calculation of the operating counting device\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanFonctionnementDC(),envir = envir_stacomi)
@@ -17,13 +19,15 @@ hDC=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hOPE=function(h,...){
 	# TODO a developper
 	funout(text=gettext("Summary of the operations of a device ... to do\n",domain="R-stacomiR"),wash=TRUE)
 }
-#' handler function used by the main interface#' 
+#' handler function used by the main interface 
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hDFDC=function(h,...){
 	# TODO developper cette fonction
 	funout(gettext("Summary between the operating fishway and the counting device ... to do\n",domain="R-stacomiR"),wash=TRUE)
@@ -31,6 +35,7 @@ hDFDC=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanMigration=function(h,...){
 	funout(gettext("Migration summary (for a species and a stage)\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigration(),envir = envir_stacomi)
@@ -38,6 +43,7 @@ hBilanMigration=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanMigrationMult=function(h,...){
 	funout(gettext("For help, contact Cedric Briand - 0033 29 99 08 844 - cedric.briand@eptb-vilaine.fr, or mail stacomi@googlegroups.com.\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationMult(),envir = envir_stacomi)
@@ -45,6 +51,7 @@ hBilanMigrationMult=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanMigrationInterAnnuelle=function(h,...){
 	funout(gettext("Summary of interannual migration\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationInterAnnuelle(),envir = envir_stacomi)
@@ -52,6 +59,7 @@ hBilanMigrationInterAnnuelle=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanMigrationMultConditionEnv=function(h,...){
 	funout(gettext("Summary of migration environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationMultConditionEnv(),envir = envir_stacomi)
@@ -59,6 +67,7 @@ hBilanMigrationMultConditionEnv=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanMigrationPar=function(h,...){
 	funout(gettext("Summary of migration with parameters\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanMigrationPar(),envir = envir_stacomi)
@@ -66,6 +75,7 @@ hBilanMigrationPar=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanConditionEnv=function(h,...){
 	funout(gettext("Summary of the environnemental conditions\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_ConditionEnv(),envir = envir_stacomi)
@@ -73,6 +83,7 @@ hBilanConditionEnv=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilan_carlot=function(h,...){
 	funout(gettext("Summary of samples characteristics (size, weight...) by calling the view vue_lot_ope\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_Bilan_carlot(),envir = envir_stacomi)
@@ -80,6 +91,7 @@ hBilan_carlot=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hTail=function(h,...){
 	funout(gettext("Lengths summary\n",domain="R-stacomiR"),wash=TRUE)
 	#eval(interface_BilanTaille(),envir = envir_stacomi)
@@ -87,6 +99,7 @@ hTail=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hpds=function(h,...){
 	eval(interface_BilanPoidsMoyen(),envir = envir_stacomi)
 	funout(gettext("Summary of average weight for the calculation of the relation between length and number.\n",domain="R-stacomiR"),wash=TRUE) 
@@ -94,6 +107,7 @@ hpds=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hSt=function(h,...){
 	funout(gettext("Not adapted yet to version 0.5.2",domain="R-stacomiR"))
 	#funout(gettext("Calculation of the pigmentary stages\n",domain="R-stacomiR"),wash=TRUE)
@@ -102,18 +116,21 @@ hSt=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hbilA=function(h,...){
 	eval(interface_BilanAnnuels(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hsilver=function(h,...){
 	eval(interface_BilanArgentee(),envir = envir_stacomi)
 }
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hBilanEspeces=function(h,...){
 	funout(gettext("Species summary of the counting device\n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanEspeces(),envir = envir_stacomi)
@@ -121,6 +138,7 @@ hBilanEspeces=function(h,...){
 #' handler function used by the main interface
 #' @param h handler
 #' @param ... additional parameters
+#' @keywords internal
 hbilanagedemer=function(h,...){
 	funout(gettext("Age calculation from size limit \n",domain="R-stacomiR"),wash=TRUE)
 	eval(interface_BilanAgedemer(),envir = envir_stacomi)
@@ -133,6 +151,7 @@ hbilanagedemer=function(h,...){
 #' @param h A handler
 #' @param ... Other arguments
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 husr=function(h,...){
 	baseODBC<-get("baseODBC",envir=envir_stacomi)
 	# assigned when passing through stacomi
@@ -394,6 +413,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
 #' interface to stacomi. To be able to run, some widgets (win, grouptotal, group...) 
 #' are assigned in the user environment \code{.GlobalEnv}. 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 interface_graphique=function(){
 	if (exists("ggroupboutonsbas"))  rm(list=c("ggroupboutonsbas"),envir=envir_stacomi) 
 	if (exists("group"))  rm(list=c("group"),envir=envir_stacomi)

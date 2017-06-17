@@ -3,19 +3,19 @@
 \docType{methods}
 \name{calcule,BilanMigrationMultConditionEnv-method}
 \alias{calcule,BilanMigrationMultConditionEnv-method}
-\title{Calculation for the BilanMigrationMultConditionEnv}
+\title{Calculations for migration in the class \link{BilanMigrationMultConditionEnv-class}}
 \usage{
 \S4method{calcule}{BilanMigrationMultConditionEnv}(object, silent = FALSE)
 }
 \arguments{
-\item{object}{An object of class \code{\link{BilanMigrationMultConditionEnv-class}}}
+\item{object}{An object of class \link{BilanMigrationMultConditionEnv-class}}
 
 \item{silent}{Boolean default FALSE, if TRUE information messages not displayed}
 }
 \value{
-\code{\link{BilanMigrationMultConditionEnv-class}}
+\link{BilanMigrationMultConditionEnv-class} with data in slot bmmCE@bilanMigrationMult@calcdata
 }
 \description{
-Calculation for the BilanMigrationMultConditionEnv
+Runs the calcule method in \link{BilanMigrationMult-class}
 }
 

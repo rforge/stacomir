@@ -101,6 +101,7 @@ setMethod("choice_c",signature=signature("BilanConditionEnv"),definition=functio
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
+#' @keywords internal
 setMethod("charge",signature=signature("BilanConditionEnv"),definition=function(object,silent) {
 			
 			if (exists("refStationMesure",envir_stacomi)) {

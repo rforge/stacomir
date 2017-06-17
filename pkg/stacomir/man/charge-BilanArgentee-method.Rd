@@ -19,9 +19,11 @@ An object of the class
 }
 \description{
 this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
-envir_stacomi
+envir_stacomi. It is not necessary to run this method when loading from the command line using the
+choice_c method
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

@@ -131,11 +131,13 @@ setMethod("choice_c",signature=signature("BilanMigrationCar"),definition=functio
 #' charge method for BilanMigrationCar
 #' 
 #' Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
-#' fills also the data slot by the connect method
+#' fills also the data slot by the connect method. It is not necessary to run the charge method
+#' if the choice is made from the command line using the choice_c method.
 #' @param object An object of class \link{BilanMigrationCar-class}
 #' @param silent Default FALSE, if TRUE the program should not display messages
 #' @return \link{BilanMigrationCar-class} with slots filled by user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @keywords internal
 setMethod("charge",signature=signature("BilanMigrationCar"),definition=function(object,silent=FALSE){ 
 			bmC<-object 
 			if (exists("bmC_date_debut",envir_stacomi)) {

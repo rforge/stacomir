@@ -3,8 +3,9 @@
 \docType{methods}
 \name{charge,BilanEspeces-method}
 \alias{charge,BilanEspeces-method}
-\title{charge method for BilanEspeces
-verifies the content of objects and calls the connect method}
+\alias{charge.BilanEspeces}
+\alias{charge.bilanespeces}
+\title{charge method for BilanEspeces}
 \usage{
 \S4method{charge}{BilanEspeces}(object, silent = FALSE)
 }
@@ -17,10 +18,11 @@ verifies the content of objects and calls the connect method}
 BilanEspeces with slots filled by user choice
 }
 \description{
-charge method for BilanEspeces
-verifies the content of objects and calls the connect method
+Verifies the content of objects when the graphical interface is used, it is not necessary
+to call the charge method if the choice_c method has been used
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

@@ -3,7 +3,7 @@
 #' This class performs a migration summary. A migration monitoring operation can correspond to a single
 #' horodate (in the case of some video monitoring operation) or comprise a period which does not necessarily
 #' span a full day. The daily migration is calculated by splitting the operation between days, and the migration is either
-#' grouped or split according to the lenth of the different time spans.#' 
+#' grouped or split according to the lenth of the different time spans. 
 #' @include RefTaxon.r
 #' @include RefStades.r
 #' @include PasDeTempsJournalier.r
@@ -120,10 +120,11 @@ setMethod("choice_c",signature=signature("BilanMigration"),definition=function(o
 			return(bilanMigration)
 		})
 
-#' charge method for BilanMigration
+#' Loads additional data on migration control operations, df (fishway) dc (counting device).
 #' 
 #' this method creates additional classes in envir_stacomi for later use in plot (operations, 
-#' DF operation, DC operation.
+#' DF operation, DC operation). So unlike in most Bilan classes where the charge method is only
+#' used by the graphical interface, it is necessary to run charge for BilanMigration.
 #' @param object An object of class \code{\link{BilanMigration-class}}
 #' @param silent Should the program be returning messages
 #' @return An object of class \link{BilanMigration-class} with slots filled by user choice

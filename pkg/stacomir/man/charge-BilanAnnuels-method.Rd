@@ -13,6 +13,8 @@
 \item{silent}{Stops messages from being displayed if silent=TRUE, default FALSE}
 }
 \description{
-charge method for BilanAnnuels class
+Method used by the graphical interface to load data and check that all choices have
+been made by the user
 }
+\keyword{internal}
 

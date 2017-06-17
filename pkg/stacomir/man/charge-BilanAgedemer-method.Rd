@@ -3,7 +3,9 @@
 \docType{methods}
 \name{charge,BilanAgedemer-method}
 \alias{charge,BilanAgedemer-method}
-\title{charge method for BilanAgedemer class}
+\alias{charge.BilanAgedemer}
+\alias{charge.bilanagedemer}
+\title{Loads data and check that all choices in the graphical interface have been made.}
 \usage{
 \S4method{charge}{BilanAgedemer}(object, h)
 }
@@ -16,10 +18,12 @@
 An object of class \link{BilanAgedemer-class} with slots filled with user choice
 }
 \description{
-this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
+It is not necessary to run this method if the choice_c method has been run.  
+This method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
 envir_stacomi
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

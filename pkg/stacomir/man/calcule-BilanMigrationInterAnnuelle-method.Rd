@@ -19,10 +19,17 @@
 BilanMigration with calcdata slot filled.
 }
 \description{
-calcule method for BilanMigrationInterannuelle
+Performs the calculation of seasonal coefficients for the plot(plot.type="seasonal") method. The numbers
+are split according to the period chosen, one of "day","week","month","2 weeks", french labels are also 
+accepted as arguments. Once this is done, the seasonality of the migration is displayed using the day when the 
+first fish was seen, then the days (or period) corresponding to 5, 50 , 95, and 100 percent of the migration.
+The duration of 90% of the migraton between Q5 and Q95 is also of interest.
 }
 \note{
 The class BilanMigration does not handle escapement rates nor 
 'devenir' i.e. the destination of the fishes.
+}
+\author{
+Marion Legrand
 }
 

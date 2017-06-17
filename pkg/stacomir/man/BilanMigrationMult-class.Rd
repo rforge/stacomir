@@ -62,7 +62,7 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			dc=c(5,6,12),
 			taxons=c("Anguilla anguilla"),
 			stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-	bMM_Arzal<-charge(bMM_Arzal) 
+	bMM_Arzal<-charge(bMM_Arzal)
 	# launching charge will also load classes associated with the bilan
 	# e.g. BilanOperation, BilanFonctionnementDF, BilanFonctionnementDC
 	bMM_Arzal<-connect(bMM_Arzal)

@@ -26,6 +26,7 @@ setGeneric("charge",def=function(object,...) standardGeneric("charge"))
 #' @param object Object
 #' @param ... Additional parms
 #' @author cedric.briand
+#' @keywords internal
 setGeneric("charge_avec_filtre",def=function(object,...) standardGeneric("charge_avec_filtre"))
 #setGeneric("connect",def=function(object,...) standardGeneric("connect")) # package stacomirtools
 #setGeneric("plot",def=function(x,y,...) standardGeneric("plot"))

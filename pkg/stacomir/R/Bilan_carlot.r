@@ -76,6 +76,7 @@ setMethod("connect",signature=signature("Bilan_carlot"),definition=function(obje
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @return An object of the class
+#' @keywords internal
 setMethod("charge",signature=signature("Bilan_carlot"),definition=function(object,h) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
@@ -156,15 +157,17 @@ setMethod("choice_c",signature=signature("Bilan_carlot"),definition=function(obj
 					funoutlabel=gettext("Beginning date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatedebut, 
 					silent=silent)
-			bilanFonctionnementDC@horodatefin<-choice_c(bilanFonctionnementDC@horodatefin,
+			bilan_carlot@horodatefin<-choice_c(bilan_carlot@horodatefin,
 					nomassign="bilan_carlot_date_fin",
 					funoutlabel=gettext("Ending date has been chosen\n",domain="R-stacomiR"),
 					horodate=horodatefin,
 					silent=silent)
 			return(bilan_carlot)
 		})
-#' Calcule method for Bilan_carlot
+
+#' Calculation for Bilan_carlot
 #' 
+#' In that class, most treatments are done in the query, this method checks that data are available and fills information for year, month, two weeks, week, doy 
 #' @param object An object of class \code{\link{Bilan_carlot-class}} 
 #' @param silent Boolean, if TRUE, information messages are not displayed, only warnings and errors
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

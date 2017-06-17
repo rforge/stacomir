@@ -16,7 +16,6 @@ stacomi(gr_interface=FALSE,
 	Sys.setenv(TZ='GMT')
 	# This dataset formating is GMT. If this option is not set
 	# the dataset is tranformed from timestamp to date
-	bfDC<-charge(bfDC)
 	bfDC<-connect(bfDC)
 	# this dataset has been loaded by the previous lines
 ###########################################################	

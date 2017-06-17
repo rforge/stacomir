@@ -42,7 +42,7 @@ stacomi(gr_interface=FALSE,
 			datedebut="2008-01-01",
 			datefin="2008-12-31",
 			silent=FALSE)	
-	bmmCE<-charge(bmmCE)
+	bmmCE<-charge(bmmCE) # this is necessary to load operations, DF and DC
 	bmmCE<-connect(bmmCE)
 	
 }	

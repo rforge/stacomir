@@ -10,7 +10,7 @@
 This class performs a migration summary. A migration monitoring operation can correspond to a single
 horodate (in the case of some video monitoring operation) or comprise a period which does not necessarily
 span a full day. The daily migration is calculated by splitting the operation between days, and the migration is either
-grouped or split according to the lenth of the different time spans.#'
+grouped or split according to the lenth of the different time spans.
 }
 \section{Slots}{
 
@@ -56,6 +56,8 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			datedebut="2015-01-01",
 			datefin="2015-12-31")
 	bM_Arzal<-charge(bM_Arzal)
+	# launching charge will also load classes associated with the bilan
+	# e.g. BilanOperation, BilanFonctionnementDF, BilanFonctionnementDC
 	bM_Arzal<-connect(bM_Arzal)
 }
 ########################

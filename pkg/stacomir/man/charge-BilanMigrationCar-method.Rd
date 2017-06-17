@@ -17,9 +17,11 @@
 }
 \description{
 Used by the graphical interface to collect and test objects in the environment envir_stacomi, 
-fills also the data slot by the connect method
+fills also the data slot by the connect method. It is not necessary to run the charge method
+if the choice is made from the command line using the choice_c method.
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\keyword{internal}
 

@@ -17,6 +17,8 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 			datedebut="2015-01-01",
 			datefin="2015-12-31")
 	bM_Arzal<-charge(bM_Arzal)
+	# launching charge will also load classes associated with the bilan
+	# e.g. BilanOperation, BilanFonctionnementDF, BilanFonctionnementDC
 	bM_Arzal<-connect(bM_Arzal)
 }
 ########################

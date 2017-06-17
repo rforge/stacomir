@@ -61,7 +61,6 @@ stacomi(gr_interface=FALSE,
 			anneedebut="1990",
 			anneefin="2015",
 			silent=TRUE)
-	bmi<-charge(bmi,silent=TRUE)
 	bmi<-connect(bmi,silent=TRUE)	
 }	
 #############otherwise use this ######################
@@ -193,7 +192,6 @@ bmi_des<-choice_c(bmi_des,
 		anneedebut="2007",
 		anneefin="2014",
 		silent=TRUE)
-bmi_des<-charge(bmi_des)
 bmi_des<-connect(bmi_des)	
 bmi_des<-calcule(bmi_des,timesplit="semaine")
 plot(bmi_des,plot.type="seasonal",timesplit="semaine")

@@ -14,7 +14,6 @@ stacomi(gr_interface=FALSE,
 	# the times at Arzal are recorded continuously
 	# they are converted to date when a time appears while the hour is changing
 	# hence the following
-	bfDF<-charge(bfDF)
 	bfDF<-connect(bfDF)
 }
 

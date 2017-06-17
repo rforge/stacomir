@@ -72,6 +72,7 @@ setMethod("connect",signature=signature("BilanOperation"),definition=function(ob
 #' @return  An object of class \link{BilanOperation-class}
 #' 
 #' @author cedric.briand
+#' @keywords internal
 setMethod("charge",signature=signature("BilanOperation"),definition=function(object,silent=FALSE) {
 			# object<-bilanOperation
 			if (exists("refDC",envir=envir_stacomi)) {

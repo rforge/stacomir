@@ -57,7 +57,6 @@ stacomi(gr_interface=FALSE,
 			horodatefin="2013-12-31",
 			silent=FALSE)
 	# two warning produced, ignored if silent=TRUE
-	b_carlot<-charge(b_carlot) # don't forget this step otherwise dates are not loaded
 	b_carlot<-connect(b_carlot)
 	b_carlot<-calcule(b_carlot,silent=TRUE)
 	
