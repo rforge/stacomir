@@ -1,6 +1,6 @@
 setAs("BilanMigration","BilanMigrationInterAnnuelle",function(from){
-  anneeDebut=new("RefAnnee")
-   anneeFin=new("RefAnnee")
+  anneeDebut=new("Ref_year")
+   anneeFin=new("Ref_year")
   anneeDebut@annee_selectionnee=min(getAnnees(from@pasDeTemps))
   anneeFin@annee_selectionnee=max(getAnnees(from@pasDeTemps))
   bilanMigrationInterAnnuelle=new("BilanMigrationInterAnnuelle")

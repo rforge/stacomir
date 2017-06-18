@@ -18,9 +18,9 @@
 #' @slot data A \code{"data.frame"} data for bilan lot
 #' @slot calcdata  A list containing two processed data frames, data and coe
 #' @slot dc Object of class \code{\link{RefDC-class}}, the counting device
-#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose the year of beginning
-#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
-#' refAnnee allows to choose last year of the Bilan
+#' @slot anneedebut Object of class \code{\link{Ref_year-class}}. Ref_year allows to choose the year of beginning
+#' @slot anneefin Object of class \code{\link{Ref_year-class}}
+#' ref_year allows to choose last year of the Bilan
 #' @slot coe Object of class \code{\link{RefCoe-class}} class loading coefficient
 #' of conversion between quantity (weights or volumes of glass eel) and numbers
 #' @slot liste Object of class \code{\link{RefListe-class}} RefListe referential
@@ -36,15 +36,15 @@ setClass(Class="Bilan_poids_moyen",
 		representation= representation(data="data.frame",
 				calcdata="list",
 				dc="RefDC",
-				anneedebut="RefAnnee",
-				anneefin="RefAnnee",
+				anneedebut="Ref_year",
+				anneefin="Ref_year",
 				coe="RefCoe",
 				liste="RefListe"),
 		prototype=prototype(data=data.frame(),
 				calcdata=list(),
 				dc=new("RefDC"),
-				anneedebut=new("RefAnnee"),
-				anneefin=new("RefAnnee"),
+				anneedebut=new("Ref_year"),
+				anneefin=new("Ref_year"),
 				coe=new("RefCoe"),
 				liste=new("RefListe")))
 
@@ -107,13 +107,13 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 			} else {      
 				funout(gettext("You need to choose a counting device, clic on validate\n",domain="R-stacomiR"),arret=TRUE)          
 			}            
-			if (exists("refAnneeDebut",envir_stacomi)) {      
-				object@anneedebut<-get("refAnneeDebut",envir_stacomi)      
+			if (exists("ref_yearDebut",envir_stacomi)) {      
+				object@anneedebut<-get("ref_yearDebut",envir_stacomi)      
 			} else {      
 				funout(gettext("You need to choose the starting year\n",domain="R-stacomiR"),arret=TRUE)             
 			}
-			if (exists("refAnneeFin",envir_stacomi)) {      
-				object@anneefin<-get("refAnneeFin",envir_stacomi)      
+			if (exists("ref_yearFin",envir_stacomi)) {      
+				object@anneefin<-get("ref_yearFin",envir_stacomi)      
 			} else {      
 				funout(gettext("You need to choose the ending year\n",domain="R-stacomiR"),arret=TRUE)       
 			}                    
@@ -131,7 +131,7 @@ setMethod("charge",signature=signature("Bilan_poids_moyen"),definition=function(
 #' @param selectedvalue A character to select and object in the \link{RefListe-class}
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{Bilan_poids_moyen-class}
-#' The choice_c method fills in the data slot for classes \link{RefDC-class} \link{RefAnnee-class}
+#' The choice_c method fills in the data slot for classes \link{RefDC-class} \link{Ref_year-class}
 #' \link{RefCoe-class} \link{RefListe-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

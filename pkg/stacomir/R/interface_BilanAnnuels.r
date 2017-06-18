@@ -27,7 +27,7 @@ interface_BilanAnnuels = function()
 	notebook <- gnotebook(container=group)	
 	assign("notebook",notebook,envir=envir_stacomi)
 	size(notebook)<-c(400,300)
-	# pour preselectionner une date on lui fournit l'indice de la date dans le RefAnnee. indice = 11 pour 2005
+	# pour preselectionner une date on lui fournit l'indice de la date dans le Ref_year. indice = 11 pour 2005
 	
 	choice(bilanAnnuels@anneedebut,
 			nomassign="anneedebut",

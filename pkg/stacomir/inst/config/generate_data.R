@@ -47,9 +47,9 @@ assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","iav.",envir_stacomi)
 bMM_Arzal=choice_c(bMM_Arzal,
-		dc=c(5,6,12),
-		taxons=c("Anguilla anguilla"),
-		stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
+	dc=c(5,6,12),
+	taxons=c("Anguilla anguilla"),
+	stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
 bMM_Arzal<-charge(bMM_Arzal)
 bMM_Arzal<-connect(bMM_Arzal,silent=FALSE)
 # to avoid warnings at package checks
@@ -96,8 +96,8 @@ devtools::use_data(bilanFonctionnementDC,internal=FALSE,overwrite=TRUE)
 ##################################
 
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=TRUE)	
+	login_window=FALSE,
+	database_expected=TRUE)	
 bM_Arzal=new("BilanMigration")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
@@ -105,11 +105,11 @@ assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","iav.",envir_stacomi)
 bM_Arzal=choice_c(bM_Arzal,
-		dc=5,
-		taxons=c("Liza ramada"),
-		stades=c("IND"),
-		datedebut="2015-01-01",
-		datefin="2015-12-31")
+	dc=5,
+	taxons=c("Liza ramada"),
+	stades=c("IND"),
+	datedebut="2015-01-01",
+	datefin="2015-12-31")
 bM_Arzal<-charge(bM_Arzal)
 bM_Arzal<-connect(bM_Arzal)
 bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
@@ -156,14 +156,14 @@ devtools::use_data(bilanFonctionnementDC_bM,internal=FALSE,overwrite=TRUE)
 ##################################
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bfDF=new("BilanFonctionnementDF")
 bfDF<-choice_c(bfDF,
-		1,
-		horodatedebut="2015-01-01",
-		horodatefin="2015-12-31",
-		silent=TRUE)
+	1,
+	horodatedebut="2015-01-01",
+	horodatefin="2015-12-31",
+	silent=TRUE)
 Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
 bfDF<-charge(bfDF)
 bfDF<-connect(bfDF)
@@ -185,14 +185,14 @@ devtools::use_data(bfDF,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bfDC=new("BilanFonctionnementDC")
 bfDC<-choice_c(bfDC,
-		5,
-		horodatedebut="2000-01-01",
-		horodatefin="2015-12-31",
-		silent=TRUE)
+	5,
+	horodatedebut="2000-01-01",
+	horodatefin="2015-12-31",
+	silent=TRUE)
 Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
 bfDC<-charge(bfDC)
 bfDC<-connect(bfDC)
@@ -213,8 +213,8 @@ devtools::use_data(bfDC,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 b_carlot<-new("Bilan_carlot")
 # the following will load data for size, 
 # parameters  1786 (total size) and C001 (size at video control)
@@ -222,13 +222,13 @@ b_carlot<-new("Bilan_carlot")
 # dc 5 and 6 are fishways located on the Arzal dam
 # two stages are selected
 b_carlot<-choice_c(b_carlot,
-		dc=c(5,6),
-		taxons=c("Anguilla anguilla"),
-		stades=c("AGJ","CIV"),
-		par=c(1786,"C001"),
-		horodatedebut="2013-01-01",
-		horodatefin="2013-12-31",
-		silent=FALSE)
+	dc=c(5,6),
+	taxons=c("Anguilla anguilla"),
+	stades=c("AGJ","CIV"),
+	par=c(1786,"C001"),
+	horodatedebut="2013-01-01",
+	horodatefin="2013-12-31",
+	silent=FALSE)
 # two warning produced, ignored if silent=TRUE
 b_carlot<-connect(b_carlot)
 b_carlot<-calcule(b_carlot)
@@ -253,8 +253,8 @@ devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 require(stacomiR)
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 
@@ -266,12 +266,12 @@ assign("sch","pmp.",envir_stacomi)
 bmi<-new("BilanMigrationInterAnnuelle")
 
 bmi<-choice_c(bmi,
-		dc=16,
-		taxons=c("Anguilla anguilla"),
-		stades=c("AGJ"),
-		anneedebut=1984,
-		anneefin=2015,
-		silent=TRUE)
+	dc=16,
+	taxons=c("Anguilla anguilla"),
+	stades=c("AGJ"),
+	anneedebut=1984,
+	anneefin=2015,
+	silent=TRUE)
 # this will just test that the object is valid... not really a necessary step for this class
 #bmi<-charge(bmi,silent=TRUE)
 bmi<-connect(bmi,silent=TRUE)	
@@ -291,8 +291,8 @@ devtools::use_data(bmi,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
 assign("baseODBC",baseODBC,envir_stacomi)
@@ -300,20 +300,20 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","iav.",envir_stacomi)
 bilA<-new("BilanAnnuels")
 bilA<-choice_c(bilA,
-		dc=c(5,6,12),
-		taxons=c("Anguilla anguilla"),
-		stades=c("AGJ","AGG"),
-		anneedebut="1996",
-		anneefin="2015",
-		silent=FALSE)
-bilA<-connect(bilA)	
-bilA@dc@data[,"ouv_libelle"]<-iconv(bilA@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilA@dc@data[,"dis_commentaires"]<-iconv(bilA@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilA@dc@data[,"type_df"]<-iconv(bilA@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilA@dc@data[,"type_dc"]<-iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilA@dc@data[,"dif_localisation"]<-iconv(bilA@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilA@taxons@data[,"tax_nom_commun"]<-iconv(bilA@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bilA@stades@data[,"std_libelle"]<-iconv(bilA@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+	dc=c(5,6,12),
+	taxons=c("Anguilla anguilla"),
+	stades=c("AGJ","AGG"),
+	anneedebut="1996",
+	anneefin="2015",
+	silent=FALSE)
+bilA <- connect(bilA)
+bilA@dc@data[,"ouv_libelle"] <- iconv(bilA@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+bilA@dc@data[,"dis_commentaires"] <- iconv(bilA@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+bilA@dc@data[,"type_df"] <- iconv(bilA@dc@data[,"type_df"],from="latin1",to="UTF8")
+bilA@dc@data[,"type_dc"] <- iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8")
+bilA@dc@data[,"dif_localisation"] <- iconv(bilA@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+bilA@taxons@data[,"tax_nom_commun"] <- iconv(bilA@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+bilA@stades@data[,"std_libelle"] <- iconv(bilA@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(bilA,internal=FALSE,overwrite=TRUE)
 
@@ -329,12 +329,12 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","migradour.",envir_stacomi)
 bilanArg<-new("BilanAnnuels")
 bilAM<-choice_c(bilAM,
-		dc=c(33:40),
-		taxons=c("Salmo salar"),
-		stades=c(11),
-		anneedebut="1996",
-		anneefin="2015",
-		silent=FALSE)
+	dc=c(33:40),
+	taxons=c("Salmo salar"),
+	stades=c(11),
+	anneedebut="1996",
+	anneefin="2015",
+	silent=FALSE)
 bilAM<-connect(bilAM)
 bilAM@dc@data[,"ouv_libelle"]<-iconv(bilAM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilAM@dc@data[,"dis_commentaires"]<-iconv(bilAM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
@@ -355,8 +355,8 @@ devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bilanArg<-new("BilanArgentee")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("fd80",2)
@@ -364,10 +364,10 @@ assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","fd80.",envir_stacomi)
 bilanArg<-choice_c(bilanArg,
-		dc=c(2,6),			
-		horodatedebut="2010-09-01",
-		horodatefin="2016-10-04",
-		silent=FALSE)
+	dc=c(2,6),			
+	horodatedebut="2010-09-01",
+	horodatefin="2016-10-04",
+	silent=FALSE)
 # two warning produced, ignored if silent=TRUE
 bilanArg<-connect(bilanArg)
 bilanArg@dc@data[,"ouv_libelle"]<-iconv(bilanArg@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
@@ -392,8 +392,8 @@ setwd("C:/workspace/stacomir/pkg/stacomir")
 Sys.setenv(LANG = "EN")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bilPM<-new("Bilan_poids_moyen")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
@@ -402,11 +402,11 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","iav.",envir_stacomi)
 bilPM@liste<-charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label="")
 bilPM<-choice_c(bilPM,
-		dc=c(6),			
-		anneedebut="2009",
-		anneefin="2016",
-		selectedvalue=">1",
-		silent=FALSE)
+	dc=c(6),			
+	anneedebut="2009",
+	anneefin="2016",
+	selectedvalue=">1",
+	silent=FALSE)
 bilPM<-connect(bilPM)	
 bilPM@dc@data[,"ouv_libelle"]<-iconv(bilPM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilPM@dc@data[,"dis_commentaires"]<-iconv(bilPM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
@@ -423,8 +423,8 @@ devtools::use_data(bilPM,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bilan_adm<-new("BilanAgedemer")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
@@ -433,12 +433,12 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","logrami.",envir_stacomi)
 
 bilan_adm<-choice_c(bilan_adm,
-		dc=c(107,108,101),			
-		horodatedebut="2012-01-01",
-		horodatefin="2012-12-31",
-		limit1hm=675,
-		limit2hm=875,
-		silent=FALSE)
+	dc=c(107,108,101),			
+	horodatedebut="2012-01-01",
+	horodatefin="2012-12-31",
+	limit1hm=675,
+	limit2hm=875,
+	silent=FALSE)
 bilan_adm<-connect(bilan_adm)
 bilan_adm@dc@data[,"ouv_libelle"]<-iconv(bilan_adm@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 bilan_adm@dc@data[,"dis_commentaires"]<-iconv(bilan_adm@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
@@ -453,7 +453,7 @@ bilan_adm@taxons@data[,"tax_nom_commun"]<-iconv(bilan_adm@taxons@data[,"tax_nom_
 bilan_adm@par@data[,"par_nom"]<-iconv(bilan_adm@par@data[,"par_nom"],from="latin1",to="UTF8")
 bilan_adm@stades@data[,"std_libelle"]<-iconv(bilan_adm@stades@data[,"std_libelle"],from="latin1",to="UTF8")
 bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]<-
-		bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]/10
+	bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]/10
 bilan_adm<-calcule(bilan_adm)
 devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
 
@@ -464,8 +464,8 @@ devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bmi_vichy<-new("BilanMigrationInterAnnuelle")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
@@ -474,12 +474,12 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","logrami.",envir_stacomi)
 
 bmi_vichy<-choice_c(bmi_vichy,
-		dc=c(107,108),			
-		taxons=c("Salmo salar"),
-		stades=c("5"),
-		anneedebut="1997",
-		anneefin="2012",
-		silent=FALSE)
+	dc=c(107,108),			
+	taxons=c("Salmo salar"),
+	stades=c("5"),
+	anneedebut="1997",
+	anneefin="2012",
+	silent=FALSE)
 #bmi_vichy<-charge(bmi_vichy)
 bmi_vichy<-connect(bmi_vichy)
 bmi_vichy@dc@data[,"ouv_libelle"]<-iconv(bmi_vichy@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
@@ -495,14 +495,14 @@ devtools::use_data(bmi_vichy,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bil_CE<-new("BilanConditionEnv")
 bil_CE<-choice_c(bil_CE,
-		stationMesure=c("temp_gabion","coef_maree"),
-		datedebut="2008-01-01",
-		datefin="2008-12-31",
-		silent=FALSE)	
+	stationMesure=c("temp_gabion","coef_maree"),
+	datedebut="2008-01-01",
+	datefin="2008-12-31",
+	silent=FALSE)	
 bil_CE<-connect(bil_CE)
 bil_CE@stationMesure@data$stm_description<-iconv(bil_CE@stationMesure@data$stm_description,from="latin1",to="UTF8")
 devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
@@ -513,8 +513,8 @@ devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 bmC<-new("BilanMigrationCar")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
@@ -524,13 +524,13 @@ assign("sch","logrami.",envir_stacomi)
 # here parqual is not in the list
 # so this is equivalent to parqual=NULL
 bmC<-choice_c(bmC,
-		dc=c(107,108,101),
-		taxons=c("Salmo salar"),
-		stades=c('5','11','BEC','BER','IND'),
-		parquan=c('A124','C001','1786','1785'),
-		horodatedebut="2012-01-01",
-		horodatefin="2012-12-31",
-		silent=FALSE)
+	dc=c(107,108,101),
+	taxons=c("Salmo salar"),
+	stades=c('5','11','BEC','BER','IND'),
+	parquan=c('A124','C001','1786','1785'),
+	horodatedebut="2012-01-01",
+	horodatefin="2012-12-31",
+	silent=FALSE)
 # bmC<-charge(bmC) not necessary there
 bmC<-connect(bmC)
 bmC@dc@data[,"ouv_libelle"]<-iconv(bmC@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
@@ -547,18 +547,18 @@ devtools::use_data(bmC,internal=FALSE,overwrite=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
-		login_window=FALSE,
-		database_expected=FALSE)
+	login_window=FALSE,
+	database_expected=FALSE)
 
 bmmCE<-new("BilanMigrationMultConditionEnv")
 bmmCE<-choice_c(bmmCE,
-		dc=c(5,6,12),
-		taxon=c("Anguilla anguilla"),
-		stade=c("AGJ","AGG","CIV"),
-		stationMesure=c("temp_gabion","coef_maree","phases_lune"),
-		datedebut="2008-01-01",
-		datefin="2008-12-31",
-		silent=FALSE)	
+	dc=c(5,6,12),
+	taxon=c("Anguilla anguilla"),
+	stade=c("AGJ","AGG","CIV"),
+	stationMesure=c("temp_gabion","coef_maree","phases_lune"),
+	datedebut="2008-01-01",
+	datefin="2008-12-31",
+	silent=FALSE)	
 bmmCE<-charge(bmmCE)
 bmmCE<-connect(bmmCE)
 

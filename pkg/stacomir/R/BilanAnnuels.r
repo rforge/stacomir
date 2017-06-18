@@ -4,14 +4,14 @@
 #' @include RefDC.r
 #' @include RefTaxon.r
 #' @include RefStades.r
-#' @include RefAnnee.r
+#' @include Ref_year.r
 #' @slot dc Object of class \code{\link{RefDC-class}}, the counting device, multiple values allowed
 #' @slot data Object of class \code{"data.frame"} data for bilan lot
 #' @slot taxons An object of class \code{\link{RefTaxon-class}}, multiple values allowed
 #' @slot stades An object of class \code{\link{RefStades-class}}, multiple values allowed
-#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose year of beginning
-#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
-#' RefAnnee allows to choose last year of the Bilan
+#' @slot anneedebut Object of class \code{\link{Ref_year-class}}. Ref_year allows to choose year of beginning
+#' @slot anneefin Object of class \code{\link{Ref_year-class}}
+#' Ref_year allows to choose last year of the Bilan
 #' @aliases calcule.BilanAnnuels calcule.bilanannuels
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family Bilan Objects
@@ -24,15 +24,15 @@ setClass(Class="BilanAnnuels",representation=
 						taxons="RefTaxon",
 						stades="RefStades",
 						data="data.frame",
-						anneedebut="RefAnnee",
-						anneefin="RefAnnee"
+						anneedebut="Ref_year",
+						anneefin="Ref_year"
 				),
 		prototype=prototype(dc=new("RefDC"),
 				taxons=new("RefTaxon"),
 				stades=new("RefStades"),
 				data=data.frame(),
-				anneedebut=new("RefAnnee"),
-				anneefin=new("RefAnnee")
+				anneedebut=new("Ref_year"),
+				anneefin=new("Ref_year")
 		)
 )
 
@@ -188,7 +188,7 @@ setMethod("connect",signature=signature("BilanAnnuels"),
 #' @param anneefin the finishing year
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{BilanAnnuels-class}
-#' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
+#' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{Ref_year-class}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 setMethod("choice_c",signature=signature("BilanAnnuels"),definition=function(object,

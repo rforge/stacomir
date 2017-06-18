@@ -522,7 +522,7 @@ utils::globalVariables(c("coef_Durif"))
 #utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
 #				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
 #				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
-#				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","refAnnee",
+#				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","ref_year",
 #				"logw","bilan_stades_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))
 # Progressbar
 utils::globalVariables(c("progres"))

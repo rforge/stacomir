@@ -22,9 +22,9 @@ year/week/month.
 \describe{
 \item{\code{dc}}{an object of class \link{RefDC-class}}
 
-\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}}
+\item{\code{anneedebut}}{Object of class \code{\link{Ref_year-class}}}
 
-\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}}
+\item{\code{anneefin}}{Object of class \code{\link{Ref_year-class}}}
 
 \item{\code{data}}{\code{data.frame}}
 

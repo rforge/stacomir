@@ -42,3 +42,12 @@ roxygen2::roxygenise("C:/workspace/stacomir/pkg/stacomir");warnings()[1:10]
 #Pour Marion 
 #roxygen2::roxygenise("C:/Users/logrami/workspace/stacomir/pkg/stacomir");warnings()[1:10]
 
+
+setwd("C:/workspace/stacomir/pkg/stacomir")
+lintr::lint_package() 
+
+# Some things that goodpractice::gp() will flag might be necessary features of your package, but in general it’s a nice list to read.
+# Note: you can only run goodpractice::gp() once R CMD check passes.
+goodpractice::gp()
+
+devtools::release() # include devtools::spell_check()

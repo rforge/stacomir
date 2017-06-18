@@ -6,7 +6,15 @@ test_that("Test existence of csv file",{
 		}
 
 )
+# while crashing in some test for BilanFonctionnement DF or BilanFonctionnementDC, 
+#the program will set time to GMT, this will cause some errors hard to understand in some of 
+# the classes (BilanMigration, BilanMigrationMult), with the following you can check this problem
+test_that("Test that the program is running under the right locale",{
+			expect_equal(Sys.getlocale(category = "LC_TIME"),"French_France.1252")			
+		}
+)
 
+# some bugs due to sys.timezone=
 test_that("Test existence calcmig data within package",{
 			data("calcmig",package = "stacomiR")
 			calcmig<-calcmig
@@ -187,14 +195,14 @@ test_that("All foreign keys are present",
 			options(warn=0)
 			req@baseODBC<-baseODBC
 			req@sql=paste(stringr::str_c("SELECT
-							distinct on (tc.constraint_name) tc.constraint_name, tc.table_name							
-							FROM 
-							information_schema.table_constraints AS tc 
-							JOIN information_schema.key_column_usage AS kcu
-							ON tc.constraint_name = kcu.constraint_name
-							JOIN information_schema.constraint_column_usage AS ccu
-							ON ccu.constraint_name = tc.constraint_name
-							WHERE constraint_type = 'FOREIGN KEY' and  tc.constraint_schema='",gsub("\\.","",get("sch",envir=envir_stacomi)),"';"))
+									distinct on (tc.constraint_name) tc.constraint_name, tc.table_name							
+									FROM 
+									information_schema.table_constraints AS tc 
+									JOIN information_schema.key_column_usage AS kcu
+									ON tc.constraint_name = kcu.constraint_name
+									JOIN information_schema.constraint_column_usage AS ccu
+									ON ccu.constraint_name = tc.constraint_name
+									WHERE constraint_type = 'FOREIGN KEY' and  tc.constraint_schema='",gsub("\\.","",get("sch",envir=envir_stacomi)),"';"))
 			req<-stacomirtools::connect(req)
 			result<-req@query
 			fk<-structure(list(constraint_name = c("c_fk_act_lot_identifiant", 
@@ -255,9 +263,18 @@ test_that("All foreign keys are present",
 									"tj_tauxechappement_txe", "tj_tauxechappement_txe", "ts_taxonvideo_txv", 
 									"ts_taxonvideo_txv", "ts_taxonvideo_txv")), .Names = c("constraint_name", 
 							"table_name"), row.names = c(NA, 83L), class = "data.frame")
-					check_exist_fk=fk$constraint_name%in%result$constraint_name
-					for (i in 1:nrow(fk)){
-						expect_true(check_exist_fk[i],label=paste("Missing foreign key :",fk$constraint_name[i],"table :",fk$table_name[i]))
-					}
-					rm(list=ls(all=TRUE))	
+			check_exist_fk=fk$constraint_name%in%result$constraint_name
+			for (i in 1:nrow(fk)){
+				expect_true(check_exist_fk[i],label=paste("Missing foreign key :",fk$constraint_name[i],"table :",fk$table_name[i]))
+			}
+			rm(list=ls(all=TRUE))	
 		})
+
+
+
+if (requireNamespace("lintr", quietly = TRUE)) {
+	context(stringr::str_c("spell checking lints" ))		
+	test_that("Package Style", {
+				lintr::expect_lint_free()
+			})
+}

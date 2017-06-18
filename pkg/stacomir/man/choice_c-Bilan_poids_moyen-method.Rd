@@ -23,7 +23,7 @@
 }
 \value{
 An object of class \link{Bilan_poids_moyen-class}
-The choice_c method fills in the data slot for classes \link{RefDC-class} \link{RefAnnee-class}
+The choice_c method fills in the data slot for classes \link{RefDC-class} \link{Ref_year-class}
 \link{RefCoe-class} \link{RefListe-class}
 }
 \description{

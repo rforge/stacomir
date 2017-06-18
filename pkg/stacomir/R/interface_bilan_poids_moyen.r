@@ -22,10 +22,10 @@ interface_BilanPoidsMoyen = function()
 	choice(bilPM@liste)
 	choice(bilPM@dc,objectBilan=NULL,is.enabled=TRUE)
 	choice(bilPM@anneedebut,
-			nomassign="refAnneeDebut",
+			nomassign="ref_yearDebut",
 			titleFrame=gettext("Beginning year",domain="R-stacomiR")) #annee debut
 	choice(bilPM@anneefin,
-			nomassign="refAnneeFin",
+			nomassign="ref_yearFin",
 			titleFrame=gettext("Ending year",domain="R-stacomiR"))#annee fin
 	aCalc=gWidgets::gaction(label=gettext("load",domain="R-stacomiR"),
 			icon="lines",

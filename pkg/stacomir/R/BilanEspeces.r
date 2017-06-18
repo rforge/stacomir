@@ -10,8 +10,8 @@
 #' e.g years. The plot method writes either an histogram or a pie chart of number per
 #' year/week/month.
 #' @slot dc an object of class \link{RefDC-class} 
-#' @slot anneedebut Object of class \code{\link{RefAnnee-class}}
-#' @slot anneefin Object of class \code{\link{RefAnnee-class}}
+#' @slot anneedebut Object of class \code{\link{Ref_year-class}}
+#' @slot anneefin Object of class \code{\link{Ref_year-class}}
 #' @slot data \code{data.frame}
 #' @slot calcdata \code{data.frame} with data processed by the calc method
 #' @slot split Object of class \code{\link{RefListe-class}} RefListe referential class choose within a list
@@ -25,14 +25,14 @@
 setClass(Class="BilanEspeces",
 		representation=
 				representation(dc="RefDC",
-						anneedebut="RefAnnee",
-						anneefin="RefAnnee",
+						anneedebut="Ref_year",
+						anneefin="Ref_year",
 						data="data.frame",
 						calcdata="data.frame",
 						split="RefListe"),
 		prototype=prototype(dc=new("RefDC"),
-				anneedebut=new("RefAnnee"),
-				anneefin=new("RefAnnee"),
+				anneedebut=new("Ref_year"),
+				anneefin=new("Ref_year"),
 				data=data.frame(),
 				calcdata=data.frame(),
 				split=new("RefListe")
@@ -321,10 +321,12 @@ hsummarybilesp=function(h) {
 setMethod("summary",signature=signature(object="BilanEspeces"),definition=function(object,silent=FALSE){
 			bilesp<-object
 			if (nrow(bilesp@calcdata)==0) stop("No data in the calcdata slot, did you forget to run calculations ?")				
-			str_c(str_c(bilesp@dc@dc_selectionne,collapse="+"),
+			loc<-str_c(str_c(bilesp@dc@dc_selectionne,collapse="+"),
 					bilesp@anneedebut@annee_selectionnee,
 					bilesp@anneefin@annee_selectionnee,sep="_")
-			path=file.path(normalizePath(path.expand(get("datawd",envir=envir_stacomi))),paste("tableEspece",dc,".csv",sep=""),fsep ="\\")
+			
+			path=file.path(normalizePath(path.expand(get("datawd",envir=envir_stacomi))),
+					paste("tableEspece",loc,".csv",sep=""),fsep ="\\")
 			write.table(bilesp@calcdata,path,row.names=TRUE,col.names=TRUE,sep=";",append=FALSE)
 			if (!silent){
 			funout(gettextf("writing of %s \n",path))

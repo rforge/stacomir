@@ -11,14 +11,14 @@
 #' period grouping. See \link{write_database,BilanMigration-method} for details about how 
 #' this method inserts data in the t_bilanjournalier_bjo table.
 #' 
-#' @include RefAnnee.r
+#' @include Ref_year.r
 #' @slot dc An object of class \link{RefDC-class}, the counting device
 #' @slot data A \code{data.frame} data loaded from the daily migration table t_bilanmigrationjournalier_bjo
 #' @slot taxons An object of class \link{RefTaxon-class}
 #' @slot stades An object of class \link{RefStades-class}
-#' @slot anneeDebut An object of class \link{RefAnnee-class}. refAnnee allows to choose year of beginning
-#' @slot anneeFin An object of class \link{RefAnnee-class}
-#' refAnnee allows to choose last year of the Bilan
+#' @slot anneeDebut An object of class \link{Ref_year-class}. ref_year allows to choose year of beginning
+#' @slot anneeFin An object of class \link{Ref_year-class}
+#' ref_year allows to choose last year of the Bilan
 #' @slot calcdata A \code{list} of calculated data, filled in by the calcule method
 #' 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -32,16 +32,16 @@ setClass(Class="BilanMigrationInterAnnuelle",representation=
 						taxons="RefTaxon",
 						stades="RefStades",
 						data="data.frame",
-						anneeDebut="RefAnnee",
-						anneeFin="RefAnnee",
+						anneeDebut="Ref_year",
+						anneeFin="Ref_year",
 						calcdata="list"
 				),
 		prototype=prototype(dc=new("RefDC"),
 				taxons=new("RefTaxon"),
 				stades=new("RefStades"),
 				data=data.frame(),
-				anneeDebut=new("RefAnnee"),
-				anneeFin=new("RefAnnee"),
+				anneeDebut=new("Ref_year"),
+				anneeFin=new("Ref_year"),
 				calcdata=list()				
 		)
 )
@@ -344,7 +344,7 @@ setMethod("charge",signature=signature("BilanMigrationInterAnnuelle"),
 #' @param anneefin the finishing year
 #' @param silent Boolean, if TRUE, information messages are not displayed
 #' @return An object of class \link{BilanMigrationInterAnnuelle-class}
-#' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
+#' The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{Ref_year-class}
 #' @aliases choice_c.bmi
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export

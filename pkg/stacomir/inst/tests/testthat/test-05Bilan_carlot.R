@@ -69,6 +69,35 @@ test_that("Test methods in Bilan_carlot",{
 			
 		})
 
+test_that("Test charge method for Bilan_carlot",{
+			require(stacomiR)
+			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+			# overriding user schema to point to iav
+			baseODBC<-get("baseODBC",envir=envir_stacomi)
+			baseODBC[c(2,3)]<-rep("iav",2)
+			assign("baseODBC",baseODBC,envir_stacomi)
+			sch<-get("sch",envir=envir_stacomi) # "iav."
+			assign("sch","iav.",envir_stacomi)
+			
+			b_carlot<-new("Bilan_carlot")
+			#options(warn = 2)
+			b_carlot<-suppressWarnings(choice_c(b_carlot,
+							dc=c(5,6),
+							taxons=c("Anguilla anguilla"),
+							stades=c("AGJ","CIV"),
+							par=c(1785,1786,1787,"C001"),
+							horodatedebut="2013-01-01",
+							horodatefin="2013-12-31",
+							silent=TRUE))
+			# two warning produced: No data for par 1785 No data for par 1787
+			#options(warn = 0)
+			b_carlot<-connect(b_carlot,silent=TRUE)
+			b_carlot<-charge(b_carlot)
+			b_carlot<-calcule(b_carlot,silent=TRUE)
+			rm("envir_stacomi",envir =.GlobalEnv)
+			
+		})
+
 test_that("Test example bilancarlot_example",
 		{
 			# check if built with examples (Rtools install --example)

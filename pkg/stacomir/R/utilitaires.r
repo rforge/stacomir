@@ -27,7 +27,7 @@ quitte=function(...){
 		dispose(win)
 	}
 	if (exists("envir_stacomi")){
-		miettes=ls(envir=envir_stacomi)
+		miettes <- ls(envir=envir_stacomi)
 		if (length(miettes)> 0 ) {
 			miettes=miettes[!miettes%in%c("datawd","sch","baseODBC","usrname","usrpwd","database_expected","gr_interface","login_window","sqldf.options")]
 			rm(list=miettes,envir=envir_stacomi)
@@ -45,8 +45,8 @@ quitte=function(...){
 #' @return vectordate (without class)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 graphdate<-function(vectordate){
-	vectordate<-as.POSIXct(vectordate)
-	attributes(vectordate)<-NULL
+	vectordate <- as.POSIXct(vectordate)
+	attributes(vectordate) <- NULL
 	unclass(vectordate)
 	return(vectordate)
 }
@@ -66,10 +66,10 @@ graphdate<-function(vectordate){
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_char_spe<-function(text){
-	text=gsub("\u00e9","e",text) 
-	text=gsub("\u00e8","e",text) 
-	text=gsub("\u00ea","e",text) 
-	text=gsub("\u00e0","a",text) 
+	text <- gsub("\u00e9","e",text) 
+	text <- gsub("\u00e8","e",text) 
+	text <- gsub("\u00ea","e",text) 
+	text <- gsub("\u00e0","a",text) 
 	return(text)}
 
 
@@ -100,9 +100,15 @@ funout<-function(text,arret=FALSE,wash=FALSE,...){
 			
 			nbligne=nbligne+1
 			text<-fun_char_spe(text)
-			add(gSortie,text,do.newline=FALSE,font.attr=list(style="italic", 
-							col=col.sortie[nbligne],family="monospace",sizes="medium"),where="beginning")
-			if (nbligne==20) nbligne=1
+			add(gSortie,
+					text,
+					do.newline=FALSE,font.attr=list(
+							style="italic", 
+							col=col.sortie[nbligne],
+							family="monospace",
+							sizes="medium"),
+					where="beginning")
+			if (nbligne==20) nbligne <- 1
 			assign("nbligne",nbligne,envir=envir_stacomi)
 		} else {
 			# gSortie exists but has not been removed
@@ -346,19 +352,22 @@ funtraitementdate=function(data, # tableau de donnees e importer
 		jour_mois=TRUE,
 		heure=FALSE                           
 ){
-	if (annee) data$annee=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%Y"))                        
-	if (mois) data$mois= as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%m"))
+	if (annee) data$annee <- as.factor(strftime(as.POSIXlt(data[,nom_coldt]), format="%Y"))                        
+	if (mois) data$mois <- as.factor(strftime(as.POSIXlt(data[,nom_coldt]), format="%m"))
 	# %b Abbreviated month name in the current locale. (Also matches full name on input.)
-	if (quinzaine) {data$quinzaine=ceiling(as.numeric(strftime(as.POSIXlt(data[,nom_coldt]),format="%W"))/2)
-		data$quinzaine=as.character(data$quinzaine)
-		data$quinzaine[as.numeric(data$quinzaine)<10]= paste("0",data$quinzaine[as.numeric(data$quinzaine)<10],sep="")
-		data$quinzaine=as.factor(data$quinzaine)}
-	if (semaine) data$semaine=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%W"))
+	if (quinzaine) {
+		data$quinzaine=ceiling(as.numeric(strftime(as.POSIXlt(data[,nom_coldt]),
+								format="%W"))/2)
+		data$quinzaine <- as.character(data$quinzaine)
+		data$quinzaine[as.numeric(data$quinzaine)<10] <- paste("0", data$quinzaine[as.numeric(data$quinzaine)<10],sep="")
+		data$quinzaine <- as.factor(data$quinzaine)
+	}
+	if (semaine) data$semaine <- as.factor(strftime(as.POSIXlt(data[,nom_coldt]), format="%W"))
 	#%W : Week of the year as decimal number (00e53) using Monday as the first day of week (and typically with the first Monday of the year as day 1 of week 1). The UK convention
-	if (jour_an) data$jour_365=strftime(as.POSIXlt(data[,nom_coldt]),format="%j")                          
-	if (jour_mois)data$jour_mois=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%d"))  
+	if (jour_an) data$jour_365 <- strftime(as.POSIXlt(data[,nom_coldt]), format="%j")                          
+	if (jour_mois) data$jour_mois <- as.factor(strftime(as.POSIXlt(data[,nom_coldt]), format="%d"))  
 	# %d :  Day of the month as decimal number (01e31).
-	if (heure)data$jour_mois=as.factor(strftime(as.POSIXlt(data[,nom_coldt]),format="%H"))  
+	if (heure) data$jour_mois <- as.factor(strftime(as.POSIXlt(data[,nom_coldt]), format="%H"))  
 	#%H     Hours as decimal number (00e23).    
 	if (semaine_std) data$semaine_std=lubridate::isoweek(as.POSIXlt(data[,nom_coldt]))
 	return(data)
@@ -383,16 +392,16 @@ funtraitementdate=function(data, # tableau de donnees e importer
 #' @return A dataframe with two columns, the vector (name) and the color (color) as a reordered factor
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
-colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
+colortable<-function(color=NULL, vec, palette="Set2", color_function="brewer.pal"){
 	if (is.null(color)) {
-		if (color_function=="brewer.pal") {
-			color=RColorBrewer::brewer.pal(length(vec),name=palette)[1:length(vec)]
-		} else if (color_function=="gray.colors"){
+		if (color_function == "brewer.pal") {
+			color <- RColorBrewer::brewer.pal(length(vec),name=palette)[1:length(vec)]
+		} else if (color_function == "gray.colors"){
 			color=grDevices::gray.colors(length(vec))
 		}
 		names(color)<-vec
-	} else if (length(color)!=length(vec)){
-		funout(gettextf("The color argument should have length %s",length(vec)),arret=TRUE)
+	} else if (length(color) != length(vec)){
+		funout(gettextf("The color argument should have length %s", length(vec)), arret=TRUE)
 	}
 	if (!all(names(color)%in%vec)) {
 		stop (gettextf("The following name(s) %s do not match vector name: %s",
@@ -400,11 +409,11 @@ colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
 						paste(vec, collapse=", ")))
 	}
 	# creating a data frame to pass to merge later (to get the color in the data frame)
-	cs<-data.frame(name=names(color),color=color)
+	cs <- data.frame(name=names(color), color=color)
 	# problem with different order (set by color name) implying different order
 	# in the graph (ie by color not by car_val_identifiant
-	bonordre<-match(cs$color,levels(cs$color))
-	cs$color = factor(cs$color,levels(cs$color)[bonordre])
+	bonordre <- match(cs$color, levels(cs$color))
+	cs$color  <-  factor(cs$color, levels(cs$color)[bonordre])
 	return(cs)
 }
 
@@ -412,12 +421,14 @@ colortable<-function(color=NULL,vec,palette="Set2",color_function="brewer.pal"){
 #' Retreives the dbnames from a connection using "baseOBC"
 #' @return A string with the name of the database
 getdbname<-function(){
-	req<-new("RequeteODBC")
-	req@baseODBC<-get("baseODBC",envir=envir_stacomi)
-	req@sql<-str_c("select * from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo limit 1")
-	res<-connect(req)
-	odbc<-res@connection
-	aa<-strsplit(attributes(odbc)$connection.string,";")
-	dbname=gsub("DATABASE=","",aa[[1]][2])
+	req <- new("RequeteODBC")
+	req@baseODBC <- get("baseODBC",envir=envir_stacomi)
+	req@sql <- str_c("select * from ", 
+			get("sch",envir=envir_stacomi), 
+			"t_bilanmigrationjournalier_bjo limit 1")
+	res <- connect(req)
+	odbc <- res@connection
+	aa <- strsplit(attributes(odbc)$connection.string, ";")
+	dbname <- gsub("DATABASE=","",aa[[1]][2])
 	return(dbname)
 }

@@ -18,7 +18,7 @@ interface_BilanMigrationInterAnnuelle = function()
 	ggroupboutons<-get("ggroupboutons",envir=envir_stacomi)
 	add(ggroupboutons,group)
 	
-	# pour preselectionner une date on lui fournit l'indice de la date dans le RefAnnee. indice = 11 pour 2005
+	# pour preselectionner une date on lui fournit l'indice de la date dans le Ref_year. indice = 11 pour 2005
 	
 	choice(bilanMigrationInterAnnuelle@anneeDebut,
 			nomassign="anneeDebut",

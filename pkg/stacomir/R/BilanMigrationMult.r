@@ -407,7 +407,7 @@ hbilanMigrationMult_graph=function(h=null,...){
 setMethod("plot",signature(x = "BilanMigrationMult", y = "missing"),definition=function(x, plot.type="standard",color=NULL, color_ope=NULL,silent=FALSE,...){ 
 			#browser()
 			#print("entering plot function")
-			#bilanMigrationMult<-bMM_Arzal
+			#bilanMigrationMult<-bMM_Arzal;silent=FALSE
 			bilanMigrationMult<-x
 			lestaxons= bilanMigrationMult@taxons@data
 			lesstades= bilanMigrationMult@stades@data

@@ -27,10 +27,10 @@ this method inserts data in the t_bilanjournalier_bjo table.
 
 \item{\code{stades}}{An object of class \link{RefStades-class}}
 
-\item{\code{anneeDebut}}{An object of class \link{RefAnnee-class}. refAnnee allows to choose year of beginning}
+\item{\code{anneeDebut}}{An object of class \link{Ref_year-class}. ref_year allows to choose year of beginning}
 
-\item{\code{anneeFin}}{An object of class \link{RefAnnee-class}
-refAnnee allows to choose last year of the Bilan}
+\item{\code{anneeFin}}{An object of class \link{Ref_year-class}
+ref_year allows to choose last year of the Bilan}
 
 \item{\code{calcdata}}{A \code{list} of calculated data, filled in by the calcule method}
 }}

@@ -27,7 +27,7 @@ it should match the ref.tr_taxon_tax referential table in the stacomi database, 
 }
 \value{
 An object of class \link{BilanMigrationInterAnnuelle-class}
-The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{RefAnnee-class}
+The choice_c method fills in the data slot for classes \link{RefDC-class}, \link{RefTaxon-class}, \link{RefStades-class} and two slots of \link{Ref_year-class}
 }
 \description{
 command line interface for BilanMigrationInterAnnuelle class

@@ -20,10 +20,10 @@ This class displays annual migration counts, for several counting device, taxa o
 
 \item{\code{stades}}{An object of class \code{\link{RefStades-class}}, multiple values allowed}
 
-\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose year of beginning}
+\item{\code{anneedebut}}{Object of class \code{\link{Ref_year-class}}. Ref_year allows to choose year of beginning}
 
-\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
-RefAnnee allows to choose last year of the Bilan}
+\item{\code{anneefin}}{Object of class \code{\link{Ref_year-class}}
+Ref_year allows to choose last year of the Bilan}
 }}
 \examples{
 require(stacomiR)

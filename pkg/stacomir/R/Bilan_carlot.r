@@ -71,13 +71,12 @@ setMethod("connect",signature=signature("Bilan_carlot"),definition=function(obje
 #' this method verifies that boxes have been clicked in the user interface and gets the objects pasted in 
 #' envir_stacomi
 #' @param object An object of class \link{Bilan_carlot-class} 
-#' @param h a handler
 #' @return An object of class \link{Bilan_carlot-class} with slots filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 #' @return An object of the class
 #' @keywords internal
-setMethod("charge",signature=signature("Bilan_carlot"),definition=function(object,h) {
+setMethod("charge",signature=signature("Bilan_carlot"),definition=function(object) {
 			if (exists("refDC",envir_stacomi)) {
 				object@dc<-get("refDC",envir_stacomi)
 			} else {

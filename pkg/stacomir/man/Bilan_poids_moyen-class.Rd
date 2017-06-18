@@ -26,10 +26,10 @@ during counts as glass eel are not completely drained from their water during ha
 
 \item{\code{dc}}{Object of class \code{\link{RefDC-class}}, the counting device}
 
-\item{\code{anneedebut}}{Object of class \code{\link{RefAnnee-class}}. RefAnnee allows to choose the year of beginning}
+\item{\code{anneedebut}}{Object of class \code{\link{Ref_year-class}}. Ref_year allows to choose the year of beginning}
 
-\item{\code{anneefin}}{Object of class \code{\link{RefAnnee-class}}
-refAnnee allows to choose last year of the Bilan}
+\item{\code{anneefin}}{Object of class \code{\link{Ref_year-class}}
+ref_year allows to choose last year of the Bilan}
 
 \item{\code{coe}}{Object of class \code{\link{RefCoe-class}} class loading coefficient
 of conversion between quantity (weights or volumes of glass eel) and numbers}
