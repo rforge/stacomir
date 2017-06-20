@@ -79,7 +79,7 @@ assign("report_dc",r_mig_dc,envir=envir_stacomi)
 ########################
 # calculations
 ########################
-
+r_mig<-calcule(r_mig,silent=TRUE)
 #Individual plot for all DC (standard), taxa and stage where data present
 #silent argument to stop all messages
 plot(r_mig,plot.type="standard",silent=TRUE)

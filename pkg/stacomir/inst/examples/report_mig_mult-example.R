@@ -19,8 +19,8 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
   # launching charge will also load classes associated with the report
   # e.g. report_ope, report_df, report_dc
   r_mig_mult<-connect(r_mig_mult)
-  # calculations (fails in linux, failing to load tcltk on R-forge)
-  r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
+ 
+
 }
 
 # Use this as example if you don't have a connexion to the database
@@ -36,8 +36,8 @@ data("r_mig_mult_dc")
 assign("report_dc",r_mig_mult_dc,envir=envir_stacomi)
 # use the following to get the raw data loaded by the connect method
 # not shown there as the database and program might not be installed
-
-
+# calculations 
+r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
 #Individual plot for all DC, taxa and stage where data present
 #Silent=TRUE to turn off messages
 # not run because of multiple graphical devices
