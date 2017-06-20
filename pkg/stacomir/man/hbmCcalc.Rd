@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_mig_char.R
 \name{hbmCcalc}
 \alias{hbmCcalc}
-\title{handler for reportmigrationpar}
+\title{handler for report_mig_char}
 \usage{
 hbmCcalc(h, ...)
 }
@@ -12,7 +12,7 @@ hbmCcalc(h, ...)
 \item{...}{Additional parameters}
 }
 \description{
-handler for reportmigrationpar
+internal use
 }
 \keyword{internal}
 

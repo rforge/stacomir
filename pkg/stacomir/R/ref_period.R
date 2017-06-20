@@ -8,7 +8,7 @@
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("ref_period", ...)}.
 #' @keywords classes
-#' @slot data="data.frame" providing correspondance between period and their english names
+#' @slot data="data.frame" providing correspondance between period and their English names
 #' @family referential objects
 setClass(Class="ref_period",representation=
               representation(

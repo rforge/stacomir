@@ -2,7 +2,7 @@
 #' comptage
 #' 
 #' The counting device is not always working. It may me stopped either
-#' following a monitoring protocol, or due to misfunction of the device, this
+#' following a monitoring protocol, or due to malfunction of the device, this
 #' class allows to draw graphics allowing an overview of the device operation
 #' @slot data A data frame 
 #' @slot dc An object of class \code{ref_dc-class}
@@ -169,12 +169,9 @@ setMethod("plot",signature(x = "report_dc", y = "ANY"), definition=
 		funout(gettext("No data for this counting device\n",domain="R-stacomiR"),arret=TRUE)
 	  if (plot.type=="1"|plot.type=="2"){
 		t_periodefonctdispositif_per=report_dc@data # on recupere le data.frame   
-		# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
-		tempsdebut<-t_periodefonctdispositif_per$per_date_debut
+			tempsdebut<-t_periodefonctdispositif_per$per_date_debut
 		tempsfin<-t_periodefonctdispositif_per$per_date_fin
-		# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
 		tempsdebut[tempsdebut<report_dc@horodatedebut@horodate]<-report_dc@horodatedebut@horodate
-		# id pour fin
 		tempsfin[tempsfin>report_dc@horodatefin@horodate]<-report_dc@horodatefin@horodate
 		t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin)
 		seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
@@ -182,8 +179,6 @@ setMethod("plot",signature(x = "report_dc", y = "ANY"), definition=
 		# adding one month at the end to get a complete coverage of the final month
 		seqmois<-c(seqmois,
 			seqmois[length(seqmois)]%m+%months(1))
-		
-		#seqmois<-c(seqmois,seqmois[length(seqmois)]+months(1))
 		t_periodefonctdispositif_per_mois=t_periodefonctdispositif_per[1,]
 		############################
 		#progress bar
@@ -478,7 +473,7 @@ funboxDC = function(h,...) {
   plot(report_dc,plot.type=3)
 }
 
-#' Handler fonction to plot calendar like graph, internal use
+#' Handler function to plot calendar like graph, internal use
 #' @param h handler
 #' @param ... additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

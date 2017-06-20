@@ -159,7 +159,6 @@ setMethod("charge",signature=signature("report_mig"),definition=function(object,
 	  }
 	  if (exists("timestep",envir_stacomi)){
 		report_mig@timestep<-get("timestep",envir_stacomi)
-		# pour permettre le fonctionnement de Fonctionnement DC
 	  } else {
 		funout(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"),arret=FALSE)
 		warning(gettext("Attention, no time step selected, compunting with default value\n",domain="R-stacomiR"))
@@ -221,7 +220,7 @@ setMethod("charge",signature=signature("report_mig"),definition=function(object,
 #' \item{contient_poids}{A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
 #' to number coefficients in the database (see link{report_ge_weight}).}
 #' \item{negative}{A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
-#' not developped yet}}
+#' not developed yet}}
 #' @aliases calcule.report_mig
 #' @export
 setMethod("calcule",signature=signature("report_mig"),definition=function(object,negative=FALSE,silent=FALSE){ 
@@ -385,8 +384,6 @@ setMethod("plot",signature(x = "report_mig", y = "ANY"),definition=function(x, y
 		taxa=report_mig@taxa@data[1,"tax_nom_latin"]
 		stage=report_mig@stage@data[1,"std_libelle"]
 		dc=as.numeric(report_mig@dc@dc_selectionne)[1]
-		# preparation du jeu de donnees pour la fonction fungraph_civ
-		#developpee pour la classe report_mig
 		data<-report_mig@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 		if (!is.null(data)){
 		  if	(nrow(data)>0){						

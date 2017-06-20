@@ -1,4 +1,4 @@
-#' function used to clean the objects within the group and the graphes and
+#' function used to clean the objects within the group and the graphs and
 #' also elements remaining in the envir_stacomi environment
 #' 
 #' 
@@ -40,7 +40,7 @@ quitte=function(...){
   interface_graphique()
 }
 
-#' function used for some lattice graphes with dates 
+#' function used for some lattice graphs with dates 
 #' @param vectordate date or POSIXt 
 #' @return vectordate (without class)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -381,7 +381,7 @@ fun_date_extraction=function(data, # tableau de donnees e importer
 
 #' 
 #' @param color Either null (default) or a named vector of colors, the
-#' names should correspond to the elements of namedvector. 
+#' names should correspond to the values of vec 
 #' @param  vec The vector to match the color with, if a named vector
 #' or color is supplied the names should match
 #' @param palette, the name of the RColorBrewer palette, defaults to "Set2", ignored for other

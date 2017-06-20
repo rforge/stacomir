@@ -405,7 +405,7 @@ hbmCplotcrossed=function(h,...){
 	funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
   }
 }
-#' This handler calls the generic method graphe on object plot.type 3
+#' This handler calls the generic method stat 
 #' 
 #' 
 #' @param h handler
@@ -527,7 +527,7 @@ setMethod("summary",signature=signature(object="report_mig_char"),definition=fun
 	})
 
 
-#' xtable funciton for \link{report_mig_char-class}
+#' xtable function for \link{report_mig_char-class}
 #' create an xtable objet to be later used by the print.xtable method.
 #' @param x, an object of class "report_mig_char"
 #' @param caption, see xtable

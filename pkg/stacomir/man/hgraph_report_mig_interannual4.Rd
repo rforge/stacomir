@@ -4,7 +4,7 @@
 \alias{hgraph_report_mig_interannual4}
 \title{Plot comparing the migration  to the migration  
 computed for all years available in the daily migration table.
-This function plots comparisions for periods of 1 week, 2 weeks, month}
+This function plots comparisons for periods of 1 week, 2 weeks, month}
 \usage{
 hgraph_report_mig_interannual4(h, ...)
 }
@@ -16,7 +16,7 @@ hgraph_report_mig_interannual4(h, ...)
 \description{
 Plot comparing the migration  to the migration  
 computed for all years available in the daily migration table.
-This function plots comparisions for periods of 1 week, 2 weeks, month
+This function plots comparisons for periods of 1 week, 2 weeks, month
 }
 \keyword{internal}
 

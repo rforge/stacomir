@@ -8,7 +8,7 @@
 \description{
 the report_silver_eel class is used to calculate various statistics about the silver eel run. It comprises calculation
 of various maturation index such as Durif's stages and Pankhurst eye index. The objective is to provide standardized 
-output to the stations monitorin the silver eel run.
+output to the stations monitoring the silver eel run.
 }
 \section{Slots}{
 

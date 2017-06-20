@@ -15,11 +15,11 @@
 \item{plot.type}{Default standard}
 
 \item{timesplit}{Used for plot.type barchart or dotplot, Default mois (month) other possible values are semaine (week), quinzaine (2 weeks),
-english values within parenthesis are also accepted.}
+English values within parenthesis are also accepted.}
 
 \item{silent}{Stops displaying the messages.
 \itemize{
-        \item{plot.type="line": one line per daily reportmigration}
+        \item{plot.type="line": one line per daily report_mig}
         \item{plot.type="standard": the current year is displayed against a ribbon of historical values"}
         \item{plot.type="density": creates density plot to compare seasonality, data computed by 15 days period}
         \item{plot.type="step" : creates step plots to compare seasonality, the year chosen in the interface is the

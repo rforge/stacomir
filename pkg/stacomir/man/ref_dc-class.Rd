@@ -15,7 +15,7 @@ Description of a control device.
 \item{\code{ouvrage}}{Object of class \code{"integer"}, the attached dam}
 
 \item{\code{station}}{Object of class \code{"character"}, the attached migration monitoring station, this is necessary to join the
-table of escapments calculated at the station level.}
+table of escapements calculated at the station level.}
 
 \item{\code{data}}{Object of class \code{"data.frame"} data pertaining to the control device}
 }}

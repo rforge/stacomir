@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_mig_char.R
 \name{hbmCstat}
 \alias{hbmCstat}
-\title{This handler calls the generic method graphe on object plot.type 3}
+\title{This handler calls the generic method stat}
 \usage{
 hbmCstat(h)
 }
@@ -12,7 +12,7 @@ hbmCstat(h)
 \item{...}{Additional parameters}
 }
 \description{
-This handler calls the generic method graphe on object plot.type 3
+This handler calls the generic method stat
 }
 \keyword{internal}
 

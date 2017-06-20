@@ -33,8 +33,7 @@ require('stacomirtools')
 #require('RPostgreSQL')
 
 }
- # pour sa fonction Calendar
-#require('sma')# fonction is.odd
+#require('sma')# function is.odd
 
 
 

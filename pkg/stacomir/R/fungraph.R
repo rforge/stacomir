@@ -1,4 +1,4 @@
-#' Function for report_mig graphes including numbers DF DC operations
+#' Function for report_mig graphs including numbers DF DC operations
 #' 
 #' This graph is for species other than glass eel
 #' 
@@ -192,7 +192,7 @@ fungraph=function(report_mig,tableau,time.sequence,taxa,stage,dc=NULL,silent,col
 	  cex=cex+0.2)
   
   ###################################         
-  # temps de fonctionnement du DF
+  # time for DF (fishway) operation
   ###################################
   
   if (dim(report_df@data)[1]==0 ) {
@@ -294,7 +294,7 @@ fungraph=function(report_mig,tableau,time.sequence,taxa,stage,dc=NULL,silent,col
 	  cex=cex+0.2
   )             
   ###################################         
-  # temps de fonctionnement du DC
+  # time for DC (counting device) operation
   ###################################                 
   
   

@@ -197,7 +197,7 @@ setMethod("choice_c",signature=signature("report_mig_mult"),definition=function(
 #' \item{contient_poids}{A boolean which indicates, in the case of glass eel, that the function \link{fun_weight_conversion} has been run to convert the weights to numbers using the weight
 #' to number coefficients in the database (see link{report_ge_weight}).}
 #' \item{negative}{A parameter indicating if negative migration (downstream in the case of upstream migration devices) have been converted to positive numbers,
-#' not developped yet}}
+#' not developed yet}}
 #' @aliases calcule.report_mig_mult
 #' @export
 setMethod("calcule",signature=signature("report_mig_mult"),definition=function(object,negative=FALSE,silent=FALSE){ 
@@ -368,7 +368,7 @@ setMethod("connect",signature=signature("report_mig_mult"),definition=function(o
 
 
 
-#' handler for graphe method in report_mig_mult class
+#' handler for plot method in report_mig_mult class
 #' 
 #' internal use
 #' @param h a handler
@@ -426,9 +426,6 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 			  taxa=lestaxa[taxanum,"tax_nom_latin"]
 			  stage=lesstage[stagenum,"std_libelle"]
 			  dc=lesdc[dcnum]
-			  #print(paste(taxa,stage,dc))
-			  # preparation du jeu de donnees pour la fonction fungraph_civ
-			  #developpee pour la classe report_mig
 			  data<-report_mig_mult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 			  data<-data[data$lot_tax_code==lestaxa[taxanum,"tax_code"] &
 					  data$lot_std_code==lesstage[stagenum,"std_code"],]
@@ -638,7 +635,7 @@ h_report_mig_multgraph2 = function(h=null,...) {
 }
 
 
-#' hanler
+#' handler
 #' 
 #' internal use
 #' @param h a handler

@@ -13,15 +13,6 @@ of them. It inherits from 'ref_par', uses its 'choice' method
 \describe{
 \item{\code{valqual="data.frame"}}{the list of qualitative parameters}
 }}
-\section{Objects from the Class}{
- Objects can be created by calls of the form
-\code{new("ref_parqual", ...)}.  \describe{ \item{list("valqual")}{Object of
-class \code{"data.frame"} Values of qualitatives parameters}\item{:}{Object
-of class \code{"data.frame"} Values of qualitatives parameters}
-\item{list("data")}{Object of class \code{"data.frame"} Qualitatives
-parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
-parameters } }
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

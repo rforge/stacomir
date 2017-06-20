@@ -29,7 +29,7 @@ h_report_ope=function(h,...){
 #' @param ... additional parameters
 #' @keywords internal
 h_report_dfdc=function(h,...){
-  # TODO developper cette fonction
+  # TODO develop this
   funout(gettext("Summary between the operating fishway and the counting device ... to do\n",domain="R-stacomiR"),wash=TRUE)
 }
 #' handler function used by the main interface
@@ -513,7 +513,7 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 		"..density..","Cumsum","Date","Effectif","Effectif_total",
 		"annee","car_val_identifiant","car_valeur_quantitatif","coef","date_format",
 		"debut_pas","effectif","effectif_CALCULE","effectif_EXPERT","effectif_MESURE","effectif_PONCTUEL",
-		"effectif_total","fonctionnement","report_df","quantite_CALCULE",
+		"effectif_total","report_df","quantite_CALCULE",
 		"quantite_EXPERT","quantite_MESURE","quantite_PONCTUEL","libelle","null","type",
 		'val_libelle','lot_effectif','lot_identifiant','ope_dic_identifiant','ope_identifiant','dev_code',
 		'dev_libelle','ope_date_fin','report_stage_pigm','ope_date_debut','p','g','poids_moyen',
@@ -531,7 +531,7 @@ utils::globalVariables(c("n0","newid","xmin","xmax"))
 utils::globalVariables(c("coef_durif"))
 # Assignation in global environment for the use of gWidget interface (there is no way arround this)
 #utils::globalVariables(c("win","group","nbligne","ggrouptotal","ggrouptotal1","gSortie",
-#				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc","graphes",
+#				"col.sortie","ggroupboutons","ggroupboutonsbas","groupdate","groupdc",
 #				"frame_annee","frame_check","frame_choice","frame_par","frame_parqual","frame_parquan",
 #				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","ref_year",
 #				"logw","report_stage_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))

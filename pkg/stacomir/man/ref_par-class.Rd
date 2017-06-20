@@ -18,10 +18,6 @@ Class enabling to load the list of parameters and select one of them
 }}
 \section{Objects from the Class}{
  Objects can be created by calls of the form
-\code{new("ref_par", data)}.  \describe{ \item{list("data")}{Object of class
-\code{"data.frame"} ~ All the parameters stored in the
-database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
-stored in the database} }
 }
 \author{
 cedric.briand"at"eptb-vilaine.fr

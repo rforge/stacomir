@@ -113,7 +113,7 @@ setMethod("choice",signature=signature("ref_df"),definition=function(object) {
 
 #' Command line interface to choose a fishway
 #' 
-#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' the choice_c method is intendedto have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  The parameters for dF are transformed to integer as the ref_df only 
 #' takes integer in the df slots. 
 #' DF are third in hierarchy in the stacomi database Station>ouvrage>DF>DC>operation. This class is only used in the

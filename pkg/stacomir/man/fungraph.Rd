@@ -2,7 +2,7 @@
 % Please edit documentation in R/fungraph.R
 \name{fungraph}
 \alias{fungraph}
-\title{Function for report_mig graphes including numbers DF DC operations}
+\title{Function for report_mig graphs including numbers DF DC operations}
 \usage{
 fungraph(report_mig, tableau, time.sequence, taxa, stage, dc = NULL, silent,
   color = NULL, color_ope = NULL, ...)

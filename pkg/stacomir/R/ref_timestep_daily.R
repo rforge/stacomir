@@ -18,7 +18,7 @@
 #' Class "ref_timestep_daily"
 #' 
 #' Representation of a ref_timestep object with a step length equal to one day.
-#' It receives an heritance from ref_timestep
+#' It receives an inheritance from ref_timestep
 #' 
 #' validite_ref_timestep_daily
 #' @include ref_timestep.R
@@ -98,7 +98,7 @@ setMethod("choice",signature=signature("ref_timestep_daily"),definition=function
 
 #' choice_c method for class ref_timestep_daily
 #' 
-#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' the choice_c method is intendedto have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  
 #' @param object An object of class \link{ref_timestep_daily-class}
 #' @param datedebut A character (format \code{"15/01/1996"} or \code{"1996-01-15"} or \code{"15-01-1996"}), or POSIXct object

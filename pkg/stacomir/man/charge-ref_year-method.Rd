@@ -16,7 +16,7 @@
 object An object of class ref_year with slot data filled with the selected value
 }
 \description{
-Selects year available either in the bjo table (if Objetreport==report_migInterannelle) or in the t_operation_ope table
+Selects year available either in the bjo table (if report_object==report_migInterannelle) or in the t_operation_ope table
 }
 \examples{
   

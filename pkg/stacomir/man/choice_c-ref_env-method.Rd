@@ -13,7 +13,7 @@
 \item{stationMesure}{a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)}
 }
 \description{
-the choice_c method is intented to have the same behaviour as choice (which creates a
+the choice_c method is intendedto have the same behaviour as choice (which creates a
 widget in the graphical interface) but from the command line.
 }
 \author{

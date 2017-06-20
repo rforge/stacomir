@@ -155,7 +155,6 @@ setMethod("plot", signature(x = "report_env", y = "missing"), definition=functio
 		vplayout <- function(x, y) { grid::viewport(layout.pos.row = x, layout.pos.col = y)   }
 		grid::grid.newpage()
 		grid::pushViewport(grid::viewport(layout = grid::grid.layout(length(unique(dat$env_stm_identifiant)),1,just="center")))
-		# la liste des graphes calcules
 		lesGraphes=list()
 		if(length(unique(dat$env_stm_identifiant))!= nrow(r_env@stationMesure@data))
 		{

@@ -5,7 +5,7 @@ assign("envir_stacomi",envir_stacomi,.GlobalEnv)
 
 ## lancement du programme proprement dit
 #  if (exists("group")) {rm(group)}
-#  if (exists("graphes")) {rm(graphes) }
+#  if (exists("graphs")) {rm(graphs) }
 #ci dessous en lancement manuel il est necessaire d'indiquer le chemin du repertoire de travail
 # avant toute chose
 #require(XML)

@@ -13,7 +13,7 @@
 \item{dc}{a character vector of dc chosen}
 }
 \description{
-the choice_c method is intented to have the same behaviour as choice (which creates a
+the choice_c method is intendedto have the same behaviour as choice (which creates a
 widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the ref_dc only 
 takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
 The values passed to the choice_c method are then checked with the setValidty method.

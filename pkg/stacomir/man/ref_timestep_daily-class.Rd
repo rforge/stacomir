@@ -6,7 +6,7 @@
 \title{Class "ref_timestep_daily"}
 \description{
 Representation of a ref_timestep object with a step length equal to one day.
-It receives an heritance from ref_timestep
+It receives an inheritance from ref_timestep
 }
 \details{
 validite_ref_timestep_daily

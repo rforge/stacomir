@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_mig_mult.R
 \name{h_report_mig_mult_graph}
 \alias{h_report_mig_mult_graph}
-\title{handler for graphe method in report_mig_mult class}
+\title{handler for plot method in report_mig_mult class}
 \usage{
 h_report_mig_mult_graph(h = null, ...)
 }

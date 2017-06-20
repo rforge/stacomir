@@ -8,7 +8,7 @@
 comptage}
 \description{
 The counting device is not always working. It may me stopped either
-following a monitoring protocol, or due to misfunction of the device, this
+following a monitoring protocol, or due to malfunction of the device, this
 class allows to draw graphics allowing an overview of the device operation
 }
 \section{Slots}{

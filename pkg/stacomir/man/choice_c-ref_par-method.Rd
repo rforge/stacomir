@@ -18,7 +18,7 @@
 An object of class \link{ref_par-class}
 }
 \description{
-the choice_c method is intented to have the same behaviour as choice (which creates a
+the choice_c method is intendedto have the same behaviour as choice (which creates a
 widget in the graphical interface) but from the command line. 
 If an objectreport is passed as a parameter, the method will do a charge_with_filter to select only the taxa present in the counting devices
 }

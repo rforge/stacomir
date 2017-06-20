@@ -161,7 +161,7 @@ setMethod("charge",signature=signature("report_sea_age"),definition=function(obj
 #' @param taxa '2220=Salmo salar',
 #' these should match the ref.tr_taxon_tax referential table in the stacomi database, see \link{choice_c,ref_taxa-method}
 #' @param stage '5','11','BEC','BER','IND'
-#' @param par Parameters chosen for the report are mesured body size (1786), mesured fork length (1785),video size (C001) and number of year at sea (A124)
+#' @param par Parameters chosen for the report are measured body size (1786), measured fork length (1785),video size (C001) and number of year at sea (A124)
 #' @param horodatedebut The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input
 #' @param horodatefin The finishing date of the report, for this class this will be used to calculate the number of daily steps.
 #' @param limit1hm Size limit of a salmon for an one sea winter fish
@@ -351,10 +351,10 @@ setMethod("summary",signature=signature(object="report_sea_age"),definition=func
 	  return(result)		
 	})
 
-#' Command line method to write the caracteristic "sea age" (car_par_code='A124')
+#' Command line method to write the characteristic "sea age" (car_par_code='A124')
 #' into the tj_caracteristiquelot_car table in the user's scheme
 #' 
-#' The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
+#' The sea age characteristic is calculated from the measured or calculated size of salmon and with a size/age rule
 #' defined by the user . the name of the database is retrieved from the odbc link
 #' defined in calcmig.csv
 #' @param object an object of class \link{report_sea_age-class}
@@ -462,7 +462,7 @@ funplotreport_sea_age = function(h,...) {
 #' table function
 #' 
 #' funtablereport_sea_age shows a table of results in gdf
-#' @param h hanlder passed by the graphical interface
+#' @param h handler passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal

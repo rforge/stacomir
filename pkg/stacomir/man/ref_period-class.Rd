@@ -10,7 +10,7 @@ ref_period referential class to choose a period
 \section{Slots}{
 
 \describe{
-\item{\code{data="data.frame"}}{providing correspondance between period and their english names}
+\item{\code{data="data.frame"}}{providing correspondance between period and their English names}
 }}
 \note{
 pgval are used by seq.POSIXt

@@ -7,7 +7,7 @@
 funtablereport_sample_char(h, ...)
 }
 \arguments{
-\item{h}{hanlder passed by the graphical interface}
+\item{h}{handler passed by the graphical interface}
 
 \item{...}{Additional parameters}
 }

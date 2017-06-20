@@ -34,7 +34,7 @@ setClass(Class="ref_year",representation=
 
 #' Loading method for ref_year referential objects
 #' 
-#' Selects year available either in the bjo table (if Objetreport==report_migInterannelle) or in the t_operation_ope table
+#' Selects year available either in the bjo table (if report_object==report_migInterannelle) or in the t_operation_ope table
 #' @param object An object of class ref_year
 #' @param objectreport The object report, default "report_ge_weight" other possible value report_mig_interannual
 #' @return object An object of class ref_year with slot data filled with the selected value

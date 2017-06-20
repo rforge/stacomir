@@ -15,7 +15,7 @@
 \item{datefin}{A character}
 }
 \description{
-the choice_c method is intented to have the same behaviour as choice (which creates a
+the choice_c method is intendedto have the same behaviour as choice (which creates a
 widget in the graphical interface) but from the command line.
 }
 \examples{

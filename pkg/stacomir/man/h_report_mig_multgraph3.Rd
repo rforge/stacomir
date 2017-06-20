@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_mig_mult.R
 \name{h_report_mig_multgraph3}
 \alias{h_report_mig_multgraph3}
-\title{hanler}
+\title{handler}
 \usage{
 h_report_mig_multgraph3(h = null, ...)
 }

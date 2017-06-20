@@ -12,7 +12,7 @@ colortable(color = NULL, vec, palette = "Set2",
 }
 \arguments{
 \item{color}{Either null (default) or a named vector of colors, the
-names should correspond to the elements of namedvector.}
+names should correspond to the values of vec}
 
 \item{vec}{The vector to match the color with, if a named vector
 or color is supplied the names should match}

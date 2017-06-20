@@ -8,7 +8,7 @@
 #' In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
 #' The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
 #' the status of either the fishway or DC. In the database four types of operation are set,  "1"=normal operation,
-#' "2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+#' "2"=Device stopped in normal operation (ie lift ascending, high tide...),
 #' "3"="Stopped for maintenance or other problem",
 #' "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
 #' "5"="Not known")
@@ -174,12 +174,9 @@ setMethod("plot",signature(x = "report_df", y = "ANY"),definition=function(x, y,
 		funout(gettext("No data for this fishway\n",domain="R-stacomiR"),arret=TRUE)
 	  if (plot.type=="1"|plot.type=="2"){
 		t_periodefonctdispositif_per=report_df@data # on recupere le data.frame   
-		# l'objectif du programme ci dessous est de calculer la time.sequence mensuelle de fonctionnement du dispositif.
 		tempsdebut<-t_periodefonctdispositif_per$per_date_debut
 		tempsfin<-t_periodefonctdispositif_per$per_date_fin
-		# test la premiere horodate peut etre avant le choix de temps de debut, remplacer cette date par requete@datedebut
 		tempsdebut[tempsdebut<report_df@horodatedebut@horodate]<-report_df@horodatedebut@horodate
-		# id pour fin
 		tempsfin[tempsfin>report_df@horodatefin@horodate]<-report_df@horodatefin@horodate
 		t_periodefonctdispositif_per=cbind(t_periodefonctdispositif_per,tempsdebut,tempsfin)
 		seqmois=seq(from=tempsdebut[1],to=tempsfin[nrow(t_periodefonctdispositif_per)],by="month",tz = "GMT")
@@ -456,7 +453,7 @@ funboxDF = function(h,...) {
   
 }   
 
-#' Handler fonction to plot calendar like graph, internal use
+#' Handler function to plot calendar like graph, internal use
 #' @param h handler
 #' @param ... additional parameters
 #' @keywords internal

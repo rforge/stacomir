@@ -86,7 +86,7 @@ setMethod("choice",signature=signature("ref_env"),definition=function(object,
 
 #' Command line interface to select a monitoring  station
 #' 
-#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' the choice_c method is intendedto have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line. 
 #' @param object an object of class ref_env
 #' @param stationMesure a character vector of the monitoring station code (corresponds to stm_libelle in the tj_stationmesure_stm table)

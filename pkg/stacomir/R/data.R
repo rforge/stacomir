@@ -257,7 +257,7 @@
 #' Annual migration of salmon in the Adour and tributaries
 #' 
 #' The dataset corresponds to the fishways DC=33:40 of the Adour for adult migrant salmons
-#' from 1996 to 2005 (annual counts). It has been kinly provided as an example set by the Migradour
+#' from 1996 to 2005 (annual counts). It has been kindly provided as an example set by the Migradour
 #' association.
 #' @format An object of class \link{report_annual-class} with data slot loaded.
 #' @keywords data
@@ -397,7 +397,7 @@
 
 #' Qualitative and quantitative parameters describing Salmon migration at Decize (Loire)
 #' 
-#' The dataset corresponds to the caracteristics (qualitative and quantitative) of salmo salar migrating
+#' The dataset corresponds to the characteristics (qualitative and quantitative) of salmo salar migrating
 #' at Decize (Loire river) and Vichy (Allier river) counting device in 2012. It has been loaded as 
 #' an example for the report_mig_char-class and kindly provided by Loire Grands Migrateurs (LOGRAMI).
 #' @format An object of class \link{report_mig_char-class} with data slot loaded:

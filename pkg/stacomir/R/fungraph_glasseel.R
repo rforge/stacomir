@@ -14,7 +14,7 @@
 #' @param dc the counting device, default to null, only necessary for \link{report_mig_mult-class}
 #' @param silent Message displayed or not
 #' @param color Default NULL, a vector of length 11 of color in the following order, numbers, weight, working, stopped, 1...5 types of operation,
-#' the 2 latest colors are not used but keeped for consistency with fungraph
+#' the 2 latest colors are not used but kept for consistency with fungraph
 #' for the fishway, if null will be set to brewer.pal(12,"Paired")[c(4,6,1,2,3,5,7,8,10,11,12)]
 #' @param color_ope Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")
 #' @param ... additional parameters passed to plot, main, ylab, cex.main, font.main, type, xlim, ylim, lty, bty, pch
@@ -70,7 +70,7 @@ fungraph_glasseel=function(report_mig,table,time.sequence,taxa,stage,dc=null,sil
   eff.p=table$Effectif_total.p
   debut=unclass(as.Date(time.sequence[min(index)]))[[1]]
   fin=unclass(as.Date(time.sequence[max(index)]))[[1]]
-  eff[eff==0]<-NA #pour les besoins du graphe
+  eff[eff==0]<-NA #for graph need
   eff.p[eff.p==0]<-NA
   dis_commentaire=  as.character(report_mig@dc@data$dis_commentaires[report_mig@dc@data$dc%in%dc])
   if (!silent) funout(gettextf("Glass eels graph %s\n",dis_commentaire))
@@ -220,7 +220,7 @@ fungraph_glasseel=function(report_mig,table,time.sequence,taxa,stage,dc=null,sil
 	  cex=cex+0.2)
   
   ###################################         
-  # temps de fonctionnement du DF
+  # Time for dc operation
   ###################################
   
   if (dim(report_df@data)[1]==0 ) {
@@ -322,7 +322,7 @@ fungraph_glasseel=function(report_mig,table,time.sequence,taxa,stage,dc=null,sil
 	  bty="n",
 	  cex=cex+0.2)             
   ###################################         
-  # temps de fonctionnement du DC
+  # time for DC (counting device) operation
   ###################################                 
   
   

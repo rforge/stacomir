@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_df.R
 \name{funchartDF}
 \alias{funchartDF}
-\title{Handler fonction to plot calendar like graph, internal use}
+\title{Handler function to plot calendar like graph, internal use}
 \usage{
 funchartDF(h, ...)
 }
@@ -12,7 +12,7 @@ funchartDF(h, ...)
 \item{...}{additional parameters}
 }
 \description{
-Handler fonction to plot calendar like graph, internal use
+Handler function to plot calendar like graph, internal use
 }
 \keyword{internal}
 

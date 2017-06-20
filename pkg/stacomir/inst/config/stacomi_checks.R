@@ -11,5 +11,14 @@ devtools::release() # include devtools::spell_check()
 
 devtools::spell_check()
 
+#The formatR package, by Yihui Xie, makes it easier to clean up poorly formatted code. It can’t do everything, but it can quickly get your code from terrible to pretty good. Make sure to read the notes on the website before using it. It’s as easy as:
+    
+ install.packages("formatR")
+formatR::tidy_dir("R")
+#A complementary approach is to use a code linter. Rather than automatically fixing problems, a linter just warns you about them. The lintr package by Jim Hester checks for compliance with this style guide and lets you know where you’ve missed something. Compared to formatR, it picks up more potential problems (because it doesn’t need to also fix them), but you will still see false positives.
+
+install.packages("lintr")
+lintr::lint_package()
+
 devtools::use_readme_rmd()
 devtools::release() # include devtools::spell_check()

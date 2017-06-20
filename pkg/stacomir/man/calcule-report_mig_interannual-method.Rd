@@ -21,7 +21,7 @@ report_mig with calcdata slot filled.
 }
 \description{
 Performs the calculation of seasonal coefficients for the plot(plot.type="seasonal") method. The numbers
-are split according to the period chosen, one of "day","week","month","2 weeks", french labels are also 
+are split according to the period chosen, one of "day","week","month","2 weeks", French labels are also 
 accepted as arguments. Once this is done, the seasonality of the migration is displayed using the day when the 
 first fish was seen, then the days (or period) corresponding to 5, 50 , 95, and 100 percent of the migration.
 The duration of 90% of the migraton between Q5 and Q95 is also of interest.

@@ -2,8 +2,8 @@
 % Please edit documentation in R/report_mig_interannual.R
 \name{hgraph_report_mig_interannual5}
 \alias{hgraph_report_mig_interannual5}
-\title{Function displaying comparaison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
-This function plots comparisions for periods of 1 week, 2 weeks, month}
+\title{Function displaying comparison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
+This function plots comparisons for periods of 1 week, 2 weeks, month}
 \usage{
 hgraph_report_mig_interannual5(h, ...)
 }
@@ -13,8 +13,8 @@ hgraph_report_mig_interannual5(h, ...)
 \item{...}{Additional parameters}
 }
 \description{
-Function displaying comparaison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
-This function plots comparisions for periods of 1 week, 2 weeks, month
+Function displaying comparison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
+This function plots comparisons for periods of 1 week, 2 weeks, month
 }
 \keyword{internal}
 

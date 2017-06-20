@@ -25,7 +25,7 @@ object of class \link{report_mig_mult-class}}
 \item{silent}{Message displayed or not}
 
 \item{color}{Default NULL, a vector of length 11 of color in the following order, numbers, weight, working, stopped, 1...5 types of operation,
-the 2 latest colors are not used but keeped for consistency with fungraph
+the 2 latest colors are not used but kept for consistency with fungraph
 for the fishway, if null will be set to brewer.pal(12,"Paired")[c(4,6,1,2,3,5,7,8,10,11,12)]}
 
 \item{color_ope}{Default NULL, a vector of color for the operations. Default to brewer.pal(4,"Paired")}

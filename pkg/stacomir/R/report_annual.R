@@ -86,7 +86,7 @@ setMethod("charge",signature=signature("report_annual"),
 #' not count subsamples.
 #' @param object An object of class \link{report_annual-class}
 #' @param silent Stops messages from being displayed if silent=TRUE, default FALSE
-#' @return An instantianted object with values filled with user choice
+#' @return An instantiated object with values filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @return A dataframe with column effectif, comprising the sum of report_mig counts
 #' @aliases connect.report_annual
@@ -229,7 +229,7 @@ setMethod("choice_c",signature=signature("report_annual"),definition=function(ob
 	  return(r_ann)
 	})
 
-#' xtable funciton for \link{report_annual-class}
+#' xtable function for \link{report_annual-class}
 #' create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
 #' for later use by the print.xtable method.
 #' @param x, an object of class "report_annual"

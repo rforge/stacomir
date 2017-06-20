@@ -14,7 +14,7 @@ operated on the fishway has remained operational.
 In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
 The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
 the status of either the fishway or DC. In the database four types of operation are set,  "1"=normal operation,
-"2"=Device stopped in nomral operation (ie lift ascending, high tide...),
+"2"=Device stopped in normal operation (ie lift ascending, high tide...),
 "3"="Stopped for maintenance or other problem",
 "4"="Works but not fully operational, ie flow problem, flood, clogged with debris...",
 "5"="Not known")

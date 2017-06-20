@@ -4,7 +4,7 @@
 \name{charge,report_env-method}
 \alias{charge,report_env-method}
 \alias{charge.report_env}
-\title{charge method for reportCondtionEnv class}
+\title{charge method for report_env class}
 \usage{
 \S4method{charge}{report_env}(object, silent)
 }
@@ -14,7 +14,7 @@
 \item{silent}{Default FALSE, if TRUE the program should no display messages}
 }
 \description{
-charge method for reportCondtionEnv class
+charge method for report_env class
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

@@ -24,7 +24,7 @@
 r_mig_char
 }
 \description{
-The dataset corresponds to the caracteristics (qualitative and quantitative) of salmo salar migrating
+The dataset corresponds to the characteristics (qualitative and quantitative) of salmo salar migrating
 at Decize (Loire river) and Vichy (Allier river) counting device in 2012. It has been loaded as 
 an example for the report_mig_char-class and kindly provided by Loire Grands Migrateurs (LOGRAMI).
 }

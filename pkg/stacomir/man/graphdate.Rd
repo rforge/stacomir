@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{graphdate}
 \alias{graphdate}
-\title{function used for some lattice graphes with dates}
+\title{function used for some lattice graphs with dates}
 \usage{
 graphdate(vectordate)
 }
@@ -13,7 +13,7 @@ graphdate(vectordate)
 vectordate (without class)
 }
 \description{
-function used for some lattice graphes with dates
+function used for some lattice graphs with dates
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

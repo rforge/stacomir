@@ -2,12 +2,12 @@
 % Please edit documentation in R/interface_report_species.R
 \name{interface_report_species}
 \alias{interface_report_species}
-\title{Interface for reportEspece class}
+\title{Interface for report_species class}
 \usage{
 interface_report_species()
 }
 \description{
-Interface for reportEspece class
+Interface for report_species class
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

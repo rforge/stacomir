@@ -4,7 +4,7 @@
 \name{write_database,report_sea_age-method}
 \alias{write_database,report_sea_age-method}
 \alias{write_database.report_sea_age}
-\title{Command line method to write the caracteristic "sea age" (car_par_code='A124')
+\title{Command line method to write the characteristic "sea age" (car_par_code='A124')
 into the tj_caracteristiquelot_car table in the user's scheme}
 \usage{
 \S4method{write_database}{report_sea_age}(object, silent = TRUE)
@@ -15,7 +15,7 @@ into the tj_caracteristiquelot_car table in the user's scheme}
 \item{silent}{: Default FALSE, if TRUE the program should no display messages.}
 }
 \description{
-The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
+The sea age characteristic is calculated from the measured or calculated size of salmon and with a size/age rule
 defined by the user . the name of the database is retrieved from the odbc link
 defined in calcmig.csv
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_dc.R
 \name{funchartDC}
 \alias{funchartDC}
-\title{Handler fonction to plot calendar like graph, internal use}
+\title{Handler function to plot calendar like graph, internal use}
 \usage{
 funchartDC(h, ...)
 }
@@ -12,7 +12,7 @@ funchartDC(h, ...)
 \item{...}{additional parameters}
 }
 \description{
-Handler fonction to plot calendar like graph, internal use
+Handler function to plot calendar like graph, internal use
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

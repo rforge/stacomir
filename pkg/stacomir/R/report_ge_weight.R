@@ -9,7 +9,7 @@
 #' Some plots are provided to display the coefficients stored in the database, and the model results. A parameter provided in 
 #' the graphical interface or in the command line (slot liste) takes values "1", ">1", "tous" wich mean respectively use
 #' only individual sample of glass eels, or use "group weights" which can be more close to the real weight of glass eel
-#' during counts as glass eel are not completely drained from their water during handling to preserve their muccus. The list choice
+#' during counts as glass eel are not completely drained from their water during handling to preserve their mucus. The list choice
 #' "tous" means that both individual and group weights are selected.
 #' @include ref_coe.R
 #' @note In this class some tools are available to import glass eel measurement from

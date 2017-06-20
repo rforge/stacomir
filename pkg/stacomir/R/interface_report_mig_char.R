@@ -8,7 +8,7 @@ interface_report_mig_char = function()
   r_mig_char=new("report_mig_char")
   assign("r_mig_char",r_mig_char,envir=envir_stacomi)
   
-  report_dc=new("report_dc") # appel ici pour pouvoir utiliser les fonctions graphiques associees sur fonctionnement du DC
+  report_dc=new("report_dc") 
   assign("report_dc",report_dc,envir=envir_stacomi)
   
   objectreport="r_mig_char"

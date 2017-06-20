@@ -346,7 +346,7 @@ funpointreport_sample_char = function(h,...) {
 #' table function
 #' 
 #' funtablereport_sample_char shows a table of results in gdf
-#' @param h hanlder passed by the graphical interface
+#' @param h handler passed by the graphical interface
 #' @param ... Additional parameters
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal

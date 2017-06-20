@@ -4,7 +4,7 @@
 \name{xtable,report_annual-method}
 \alias{xtable,report_annual-method}
 \alias{xtable.report_annual}
-\title{xtable funciton for \link{report_annual-class}
+\title{xtable function for \link{report_annual-class}
 create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
 for later use by the print.xtable method.}
 \usage{
@@ -35,7 +35,7 @@ if not provided DC codes are used.}
 \item{std_name}{A string indicating the stages names, if not provided then std_libelle are used}
 }
 \description{
-xtable funciton for \link{report_annual-class}
+xtable function for \link{report_annual-class}
 create an xtable objet but also assigns an add.to.column argument in envir_stacomi,
 for later use by the print.xtable method.
 }

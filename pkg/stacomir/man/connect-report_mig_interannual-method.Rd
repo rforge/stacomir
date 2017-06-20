@@ -17,13 +17,13 @@
 \item{check}{Checks that data are corresponding between report_annual and report_mig}
 }
 \value{
-report_mig_interannual an instantianted object with values filled with user choice
+report_mig_interannual an instantiated object with values filled with user choice
 }
 \description{
 This method will check if the data in the t_reportjournalier_bjo table has no missing data,
 if missing the program will load missing data. As a second step,
 the program will check if the numbers in the table  t_reportjournalier_bjo differ from those in the database,
-and propose to re-run the reportmigration (which has a write_database methode to write daily reports) for those years.
+and propose to re-run the report_mig (which has a write_database methode to write daily reports) for those years.
 }
 \note{
 We expect different results between daily reports from the t_reportjournalier_bjo table and the annual sums

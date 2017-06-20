@@ -6,7 +6,7 @@
 #' @slot dc_selectionne Object of class \code{"integer"}, The selected device
 #' @slot ouvrage Object of class \code{"integer"}, the attached dam
 #' @slot station Object of class \code{"character"}, the attached migration monitoring station, this is necessary to join the
-#' table of escapments calculated at the station level.
+#' table of escapements calculated at the station level.
 #' @slot data Object of class \code{"data.frame"} data pertaining to the control device
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("ref_dc", dc_selectionne=integer(), ouvrage=integer(),
@@ -295,7 +295,7 @@ setMethod("choicemult",signature=signature("ref_dc"),definition=function(object,
 
 #' Command line interface to select a counting device
 #' 
-#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' the choice_c method is intendedto have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line.  The parameters for dc are transformed to integer as the ref_dc only 
 #' takes integer in the dc slots. The method also loads the stations and ouvrages (dams) associated with the counting device (dc).
 #' The values passed to the choice_c method are then checked with the setValidty method.

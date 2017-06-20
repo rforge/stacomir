@@ -49,7 +49,7 @@ setClass(Class="report_mig_interannual",representation=
 setValidity("report_mig_interannual",function(object)
 	{
 	  # if more than one taxa, the connect method will fail when trying to run the write_database for missing data
-	  # also plots have not been developped accordingly
+	  # also plots have not been developed accordingly
 	  rep1=ifelse(length(object@taxa@data$tax_code)==1,TRUE,gettext("report_migInterannuelle can only take one taxa", domain="R-stacomiR"))
 	  # same for stage
 	  rep2=ifelse(length(object@stage@data$std_code)==1,TRUE,gettext("report_migInterannuelle can only take one stage", domain="R-stacomiR"))
@@ -71,7 +71,7 @@ setValidity("report_mig_interannual",function(object)
 #' @param object An object of class \link{report_mig_interannual-class}
 #' @param silent Stops messages from being displayed if silent=TRUE, default FALSE
 #' @param check Checks that data are corresponding between report_annual and report_mig
-#' @return report_mig_interannual an instantianted object with values filled with user choice
+#' @return report_mig_interannual an instantiated object with values filled with user choice
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases connect.report_mig_interannual
 #' @export
@@ -371,7 +371,7 @@ setMethod("choice_c",signature=signature("report_mig_interannual"),definition=fu
 	  report_mig_interannual@taxa<-choice_c(report_mig_interannual@taxa,taxa)
 	  report_mig_interannual@stage<-charge_with_filter(object=report_mig_interannual@stage,report_mig_interannual@dc@dc_selectionne,report_mig_interannual@taxa@data$tax_code)	
 	  report_mig_interannual@stage<-choice_c(report_mig_interannual@stage,stage)
-	  # depending on objetreport the method will load data and issue a warning if data are not present
+	  # depending on report_object the method will load data and issue a warning if data are not present
 	  # this is the first step, the second verification will be done in method connect
 	  report_mig_interannual@start_year<-charge(object=report_mig_interannual@start_year,
 		  objectreport="report_mig_interannual")
@@ -392,7 +392,7 @@ setMethod("choice_c",signature=signature("report_mig_interannual"),definition=fu
 #' calcule method for report_migInterannuelle
 #' 
 #' Performs the calculation of seasonal coefficients for the plot(plot.type="seasonal") method. The numbers
-#' are split according to the period chosen, one of "day","week","month","2 weeks", french labels are also 
+#' are split according to the period chosen, one of "day","week","month","2 weeks", French labels are also 
 #' accepted as arguments. Once this is done, the seasonality of the migration is displayed using the day when the 
 #' first fish was seen, then the days (or period) corresponding to 5, 50 , 95, and 100 percent of the migration.
 #' The duration of 90% of the migraton between Q5 and Q95 is also of interest.
@@ -412,7 +412,7 @@ setMethod("calcule",signature=signature("report_mig_interannual"),definition=fun
 	  #require(dplyr)
 	  if (!timesplit%in%c("jour","day","month","mois","week","semaine","quinzaine","2 weeks")) stop (
 			stringr::str_c("timesplit should be one of :","jour ","day ","month ","mois ","week ","semaine ","month ","mois ","quinzaine ","2 weeks "))
-	  # back to french labels for consistency with fun_report_mig_interannual code
+	  # back to French labels for consistency with fun_report_mig_interannual code
 	  timesplit<-switch(timesplit,"day"="jour_365","jour"="jour_365","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
 	  # there should be just one station, this will be tested
 	  station<-report_mig_interannual@dc@station
@@ -543,7 +543,7 @@ fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
 #' @param x An object of class report_migInterannuelle
 #' @param plot.type Default standard
 #' @param timesplit Used for plot.type barchart or dotplot, Default mois (month) other possible values are semaine (week), quinzaine (2 weeks),
-#' english values within parenthesis are also accepted.
+#' English values within parenthesis are also accepted.
 #' @param silent Stops displaying the messages.
 #' \itemize{
 #' 		\item{plot.type="line": one line per daily report_mig}
@@ -564,7 +564,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 	  report_mig_interannual <- x
 	  if (!timesplit%in%c("jour","day","month","mois","week","semaine","month","mois","quinzaine","2 weeks")) stop (
 			stringr::str_c("timesplit should be one of :","jour ","day ","month ","mois ","week ","semaine ","month ","mois ","quinzaine ","2 weeks "))
-	  # back to french labels for consistency with fun_report_mig_interannual code
+	  # back to French labels for consistency with fun_report_mig_interannual code
 	  timesplit <- switch(timesplit,"day"="jour","week"="semaine","month"="mois","2 weeks"="quinzaine",timesplit)
 	  # plot.type="line";require(ggplot2)
 	  if(nrow(report_mig_interannual@data)>0){
@@ -1039,7 +1039,7 @@ hgraph_report_mig_interannual3 = function(h,...)
 
 #' Plot comparing the migration  to the migration  
 #' computed for all years available in the daily migration table.
-#' This function plots comparisions for periods of 1 week, 2 weeks, month
+#' This function plots comparisons for periods of 1 week, 2 weeks, month
 #' @param h A handler
 #' @param ... Additional parameters
 #' @keywords internal
@@ -1055,8 +1055,8 @@ hgraph_report_mig_interannual4 = function(h,...)
 
 
 
-#' Function displaying comparaison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
-#' This function plots comparisions for periods of 1 week, 2 weeks, month
+#' Function displaying comparison similar to \link{hgraph_report_mig_interannual4} but using pointrange and geom_bar
+#' This function plots comparisons for periods of 1 week, 2 weeks, month
 #' @param h A handler
 #' @param ... Additional parameters
 #' @keywords internal

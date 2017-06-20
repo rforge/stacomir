@@ -4,7 +4,7 @@
 \name{xtable,report_mig_char-method}
 \alias{xtable,report_mig_char-method}
 \alias{xtable.report_mig_char}
-\title{xtable funciton for \link{report_mig_char-class}
+\title{xtable function for \link{report_mig_char-class}
 create an xtable objet to be later used by the print.xtable method.}
 \usage{
 \S4method{xtable}{report_mig_char}(x, caption = NULL, label = NULL,
@@ -28,7 +28,7 @@ create an xtable objet to be later used by the print.xtable method.}
 \item{...}{Additional parameters}
 }
 \description{
-xtable funciton for \link{report_mig_char-class}
+xtable function for \link{report_mig_char-class}
 create an xtable objet to be later used by the print.xtable method.
 }
 

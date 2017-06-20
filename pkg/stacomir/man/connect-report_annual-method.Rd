@@ -16,7 +16,7 @@ not count subsamples.}
 \item{silent}{Stops messages from being displayed if silent=TRUE, default FALSE}
 }
 \value{
-An instantianted object with values filled with user choice
+An instantiated object with values filled with user choice
 
 A dataframe with column effectif, comprising the sum of report_mig counts
 }

@@ -132,7 +132,7 @@ setMethod("choice",signature=signature("ref_par"),definition=function(object,
 
 #' Command line interface to select a parameter
 #' 
-#' the choice_c method is intented to have the same behaviour as choice (which creates a
+#' the choice_c method is intendedto have the same behaviour as choice (which creates a
 #' widget in the graphical interface) but from the command line. 
 #' If an objectreport is passed as a parameter, the method will do a charge_with_filter to select only the taxa present in the counting devices
 #' @param object an object of class  \link{ref_par-class}

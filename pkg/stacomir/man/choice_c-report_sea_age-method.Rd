@@ -20,7 +20,7 @@ these should match the ref.tr_taxon_tax referential table in the stacomi databas
 
 \item{stage}{'5','11','BEC','BER','IND'}
 
-\item{par}{Parameters chosen for the report are mesured body size (1786), mesured fork length (1785),video size (C001) and number of year at sea (A124)}
+\item{par}{Parameters chosen for the report are measured body size (1786), measured fork length (1785),video size (C001) and number of year at sea (A124)}
 
 \item{horodatedebut}{The starting date as a character, formats like \code{\%Y-\%m-\%d} or \code{\%d-\%m-\%Y} can be used as input}
 
