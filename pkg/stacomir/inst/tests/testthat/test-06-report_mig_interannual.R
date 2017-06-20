@@ -1,4 +1,4 @@
-context("report_annual")
+context("report_mig_interannual")
 
 
 test_that("Test an instance of report_mig_interannual loaded with choice_c",{

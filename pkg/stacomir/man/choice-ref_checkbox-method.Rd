@@ -3,7 +3,7 @@
 \docType{methods}
 \name{choice,ref_checkbox-method}
 \alias{choice,ref_checkbox-method}
-\title{Choice method for ReCheckBox referential objects}
+\title{Choice method for ref_checkbox referential objects}
 \usage{
 \S4method{choice}{ref_checkbox}(object)
 }
@@ -11,7 +11,7 @@
 \item{object}{An object of class \link{ref_checkbox-class}}
 }
 \description{
-Choice method for ReCheckBox referential objects
+Choice method for ref_checkbox referential objects
 }
 \examples{
 \dontrun{

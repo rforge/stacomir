@@ -351,7 +351,7 @@ setMethod("print",signature=signature("report_mig"),definition=function(x,...){
 #' Plots of various type for report_mig.
 #' 
 #' \itemize{
-#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_glasseel}} functions to plot as many "reportmigration"
+#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_glasseel}} functions to plot as many "report_mig"
 #' 			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
 #' 		\item{plot.type="step"}{creates Cumulated graphs for report_mig_mult.  Data are summed per day for different dc taxa and stages}
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for report_mig_mult (multiple dc/taxa/stage in the same plot)}
@@ -684,8 +684,6 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
       
 	  
 	  hconfirm=function(h,...){			
-		# suppression des donnees actuellement presentes dans la base
-		# reportjournalier et reportmensuel
 		if (check_for_bjo) supprime(bil)			
 		baseODBC<-get("baseODBC",envir=envir_stacomi)
 		sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			

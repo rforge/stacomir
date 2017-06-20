@@ -2,15 +2,6 @@
 #' 
 #' Class enabling to load the list of qualitative parameters and to select one
 #' of them. It inherits from 'ref_par', uses its 'choice' method
-#' 
-#' 
-#' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("ref_parqual", ...)}.  \describe{ \item{list("valqual")}{Object of
-#' class \code{"data.frame"} Values of qualitatives parameters}\item{:}{Object
-#' of class \code{"data.frame"} Values of qualitatives parameters}
-#' \item{list("data")}{Object of class \code{"data.frame"} Qualitatives
-#' parameters }\item{:}{Object of class \code{"data.frame"} Qualitatives
-#' parameters } }
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @slot valqual="data.frame" the list of qualitative parameters
 #' @include ref_par.R
@@ -89,7 +80,7 @@ setMethod("charge_complement",signature=signature("ref_parqual"),definition=func
 	  requete=new("RequeteODBC")
 	  requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 	  requete@sql= paste("select * from ref.tr_valeurparametrequalitatif_val",
-		  " WHERE val_qal_code in ", vector_to_listsql(object@par_selectionne),
+		  " WHERE val_qal_code in ", vector_to_listsql(object@par_selected),
 		  " ORDER BY val_rang",sep="")
 	  requete<-stacomirtools::connect(requete)
 	  #funout(gettext("The query to load parameters is done \n",domain="R-stacomiR"))
@@ -157,7 +148,7 @@ setMethod("choicemult",signature=signature("ref_parqual"),definition=function(ob
 		hpar=function(h,...){
 		  parm=tbdestpar[,][tbdestpar[,]!=""]
 		  if (length(parm)>0){
-			object@par_selectionne<-object@data[car_libelle%in%parm ,"par_code"]
+			object@par_selected<-object@data[car_libelle%in%parm ,"par_code"]
 			# below the line that changes from the ref_par
 			object<-charge_complement(object)
 			assign(nomassign,object,envir_stacomi)

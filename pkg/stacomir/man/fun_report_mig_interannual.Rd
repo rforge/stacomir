@@ -11,7 +11,7 @@ fun_report_mig_interannual(dat, annee = NULL, timesplit = NULL)
 
 \item{annee}{The year to exclude from the historical series (it will be plotted against the historical series)}
 
-\item{timesplit}{"week" "2 week" "month" as provided to seq.POSIXT, default NULL}
+\item{timesplit}{"week" "2 week" "month" as provided to seq.POSIXt, default NULL}
 }
 \value{
 a data frame with mean, max, and min calculated for each timesplit

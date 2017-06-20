@@ -98,7 +98,7 @@ setMethod("choice_c",signature=signature("report_env"),definition=function(objec
 		  silent=silent)
 	  return(r_env)
 	})
-#' charge method for reportCondtionEnv class
+#' charge method for report_env class
 #' @param object An object of class \link{report_env-class}
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

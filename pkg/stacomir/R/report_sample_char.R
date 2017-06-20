@@ -8,7 +8,7 @@
 #' of the view vue_lot_ope_car
 #' @slot data A data frame
 #' @slot dc An object of class \link{ref_dc-class}: the control devices
-#' @slot taxa An object of class \link{ref_taxa-class}: the speciess
+#' @slot taxa An object of class \link{ref_taxa-class}: the species
 #' @slot stage An object of class \link{ref_stage-class} : the stages of the fish
 #' @slot par An object of class \link{ref_par-class}: the parameters used
 #' @slot horodatedebut An object of class \link{ref_horodate-class}
@@ -60,7 +60,7 @@ setMethod("connect",signature=signature("report_sample_char"),definition=functio
 	  requete@and=paste(" AND ope_dic_identifiant in ",vector_to_listsql(object@dc@dc_selectionne),
 		  " AND lot_tax_code in ", vector_to_listsql(object@taxa@data$tax_code),
 		  " AND lot_std_code in ", vector_to_listsql(object@stage@data$std_code),
-		  " AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
+		  " AND car_par_code in ", vector_to_listsql(object@par@par_selected), sep="")
 	  requete<-stacomirtools::connect(requete) 
 	  object@data<-requete@query
 	  if (!silent) funout(gettext("Sample characteristics have been loaded from the database\n",domain="R-stacomiR"))
@@ -182,7 +182,7 @@ setMethod("calcule",signature=signature("report_sample_char"),definition=functio
 		funout(gettext("No information for these samples during the selected period\n",domain="R-stacomiR"), arret=TRUE)
 	  }   
 	  vue_ope_lot=report_sample_char@data # on recupere le data.frame
-	  nom_variable=report_sample_char@par@data$par_nom[report_sample_char@par@data$par_code%in%report_sample_char@par@par_selectionne]
+	  nom_variable=report_sample_char@par@data$par_nom[report_sample_char@par@data$par_code%in%report_sample_char@par@par_selected]
 	  #stopifnot(length(nom_variable)==1)
 	  vue_ope_lot$ope_dic_identifiant=as.factor(vue_ope_lot$ope_dic_identifiant)
 	  vue_ope_lot$dev_code=as.factor(vue_ope_lot$dev_code)
@@ -287,7 +287,7 @@ setMethod("print",signature=signature("report_sample_char"),definition=function(
 		  "dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 		  "taxa=c(",stringr::str_c(shQuote(x@taxa@data$tax_nom_latin),collapse=","),"),",
 		  "stage=c(",stringr::str_c(shQuote(x@stage@data$std_code),collapse=","),"),",	
-		  "par=c(",stringr::str_c(shQuote(x@par@par_selectionne),collapse=","),"),",	
+		  "par=c(",stringr::str_c(shQuote(x@par@par_selected),collapse=","),"),",	
 		  "horodatedebut=",shQuote(strftime(x@horodatedebut@horodate,format="%d/%m/%Y %H-%M-%S")),
 		  ",horodatefin=",shQuote(strftime(x@horodatefin@horodate,format="%d/%m/%Y %H-%M-%S")),")")
 	  # removing backslashes

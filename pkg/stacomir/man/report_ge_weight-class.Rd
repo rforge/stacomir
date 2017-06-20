@@ -7,7 +7,7 @@
 \title{Trend of wet weight in glass eel}
 \description{
 In trapping ladders, glass eel are seldom counted, as they are too tiny to handle and too numerous to count.
-The usuall operation is to weight them, or to use a bucket to measure their volume. These weights or volumes will later
+The usual operation is to weight them, or to use a bucket to measure their volume. These weights or volumes will later
 need to be converted to numbers. The glass eel weight may follow a seasonal pattern. It's the case for Anguilla anguilla 
 glass eel in the Bay of Biscay. Weights can be modelled using sine wave curves, or more complex gam models. 
 This class has a model method to try those models, which can also be used to extact coefficients manually
@@ -36,7 +36,7 @@ ref_year allows to choose last year of the report}
 of conversion between quantity (weights or volumes of glass eel) and numbers}
 
 \item{\code{liste}}{Object of class \code{\link{ref_list-class}} ref_list referential
-class choose within a list, here the choice is wether subsamples or not. Subsamples
+class choose within a list, here the choice is whether subsamples or not. Subsamples
 in the stacomi database are samples with a non null value for parent sample. Migration
 counts are never made on subsamples but those can be integrated to calculate mean weights.}
 }}

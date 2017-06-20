@@ -1,4 +1,4 @@
-#' Interface for reportEspece class
+#' Interface for report_species class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
 interface_report_species=function(){

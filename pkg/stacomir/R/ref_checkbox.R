@@ -12,7 +12,7 @@
 setClass(Class="ref_checkbox",representation= representation(title="character",labels="character",checked="logical"),
 	prototype=prototype(title="liste de choice",labels="choice",checked=FALSE))
 
-#' Loading method for ReCheckBox referential objects
+#' Loading method for ref_checkbox referential objects
 #' @param object An object of class \link{ref_checkbox-class}
 #' @param title Title of the frame
 #' @param labels Labels for checked
@@ -31,7 +31,7 @@ setMethod("charge",signature=signature("ref_checkbox"),definition=function(objec
 	  object@checked=checked
 	  return(object)
 	})
-#' Choice method for ReCheckBox referential objects
+#' Choice method for ref_checkbox referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @param object An object of class \link{ref_checkbox-class}
 #' @examples 

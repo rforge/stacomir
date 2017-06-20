@@ -17,7 +17,7 @@
 An object of class \link{report_dc-class}
 }
 \description{
-used by the graphical interface to retreive the objects of referential classes
+used by the graphical interface to retrieve the objects of referential classes
 assigned to envir_stacomi
 }
 \keyword{internal}

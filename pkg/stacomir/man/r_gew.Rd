@@ -9,7 +9,7 @@
 r_gew
 }
 \description{
-Data correspond to glass eel collected in the VIlaine at the trapping ladder (Arzal, France). The years selected are 2009 to 2012,
+Data correspond to glass eel collected in the Vilaine at the trapping ladder (Arzal, France). The years selected are 2009 to 2012,
 the query used in the \link{report_ge_weight-class} loads from 2008-08-01 to 2012-08-01
 Glass eel are too numerous to be counted. They are weighted and in the stacomi database,
 a table with daily coefficients (in  N glass eel/g) to transform weight into number.

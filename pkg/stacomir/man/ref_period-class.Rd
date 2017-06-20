@@ -13,7 +13,7 @@ ref_period referential class to choose a period
 \item{\code{data="data.frame"}}{providing correspondance between period and their english names}
 }}
 \note{
-pgval are used by seq.POSIXT
+pgval are used by seq.POSIXt
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

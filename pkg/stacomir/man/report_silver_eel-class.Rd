@@ -27,7 +27,7 @@ dev_libelle (text for destination of fish)
 
 \item{\code{dc}}{Object of class \link{ref_dc-class}: the control devices}
 
-\item{\code{taxa}}{An object of class \link{ref_taxa-class}: the speciess}
+\item{\code{taxa}}{An object of class \link{ref_taxa-class}: the species}
 
 \item{\code{stage}}{An object of class \link{ref_stage-class} : the stages of the fish}
 

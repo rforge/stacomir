@@ -27,7 +27,7 @@
 #' @slot par An object of class \link{ref_par-class} inherited from \link{report_sample_char-class}
 #' @slot echantillon An object of class \link{ref_choice-class}, vector of choice
 #' @slot parquan An object of class \link{ref_parquan-class}, quantitative parameter 
-#' @slot parqual An object of class \link{ref_parqual-class}, quanlitative parameter
+#' @slot parqual An object of class \link{ref_parqual-class}, qualitative parameter
 #' @family report Objects
 #' @aliases report_mig_char
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
@@ -211,8 +211,8 @@ setMethod("connect",signature=signature("report_mig_char"),definition=function(o
 		echantillons=""      
 	  } 
 	  # data can be selected but not in the database or the inverse
-	  parquan<-intersect(r_mig_char@parquan@par_selectionne,r_mig_char@parquan@data$par_code)
-	  parqual<-intersect(r_mig_char@parqual@par_selectionne,r_mig_char@parqual@data$par_code)
+	  parquan<-intersect(r_mig_char@parquan@par_selected,r_mig_char@parquan@data$par_code)
+	  parqual<-intersect(r_mig_char@parqual@par_selected,r_mig_char@parqual@data$par_code)
 	  if (length(parquan)==0 & length(parqual)==0) {
 		stop("You need to choose at least one quantitative or qualitative attribute")
 	  } else {
@@ -278,7 +278,9 @@ setMethod("connect",signature=signature("report_mig_char"),definition=function(o
 	})
 
 
-#' handler for reportmigrationpar
+#' handler for report_mig_char
+#' 
+#' internal use
 #' @param h handler
 #' @param ... Additional parameters
 #' @keywords internal
@@ -303,7 +305,7 @@ setMethod("setasqualitative",signature=signature("report_mig_char"),definition=f
 	  #========= initial checks ================
 	  if (class(par)!="character") stop("par should be a character")
 	  if (nrow(r_mig_char@data[["parquan"]])==0)  funout(gettext("No data for quantitative parameter, perhaps you forgot to run the calcule method"))
-	  if (!par%in%r_mig_char@parquan@par_selectionne) funout(gettextf("The parameter %s is not in the selected parameters",par),arret=TRUE)
+	  if (!par%in%r_mig_char@parquan@par_selected) funout(gettextf("The parameter %s is not in the selected parameters",par),arret=TRUE)
 	  if (!par%in%r_mig_char@parquan@data$par_code) funout(gettextf("No data for this parameter, nothing to do",par),arret=TRUE)
 	  #=============================================
 	  tab<-r_mig_char@data[["parquan"]]
@@ -315,9 +317,9 @@ setMethod("setasqualitative",signature=signature("report_mig_char"),definition=f
 	  r_mig_char@data[["parquan"]]<-r_mig_char@data[["parquan"]][!lignes_du_par,]
 	  r_mig_char@data[["parqual"]]<-rbind(r_mig_char@data[["parqual"]],tab)
 	  # Adding the par to parqual
-	  r_mig_char@parqual@par_selectionne<-c(r_mig_char@parqual@par_selectionne,par)
+	  r_mig_char@parqual@par_selected<-c(r_mig_char@parqual@par_selected,par)
 	  # removing from parquan
-	  r_mig_char@parquan@par_selectionne<-r_mig_char@parquan@par_selectionne[-match(par,r_mig_char@parquan@par_selectionne)]
+	  r_mig_char@parquan@par_selected<-r_mig_char@parquan@par_selected[-match(par,r_mig_char@parquan@par_selected)]
 	  # resetting the right values for valqual
 	  r_mig_char@parqual@valqual<-rbind(r_mig_char@parqual@valqual,
 		  data.frame(val_identifiant=levels(tab$car_val_identifiant),

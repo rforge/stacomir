@@ -16,7 +16,7 @@ into the tj_caracteristiquelot_car table in the user's scheme}
 }
 \description{
 The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
-defined by the user . the name of the database is retreived from the odbc link
+defined by the user . the name of the database is retrieved from the odbc link
 defined in calcmig.csv
 }
 \author{

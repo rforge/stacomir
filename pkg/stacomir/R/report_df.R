@@ -4,7 +4,7 @@
 #' to more complex fishways with levels adjusted by the opening of various gates and regulators. 
 #' The objective of this class is to provide an assessment of the working status of a fishway throughout the year.
 #' A number of fishes ascending a fishway has meaning only if we know that the fishway is operational, and that the counting 
-#' orerated on the fishway has remained operational.
+#' operated on the fishway has remained operational.
 #' In the database the operation of the fishway (DF) and counting device (DC) is agregated in one table (t_periodefonctdispositif_per).
 #' The column  per_etat_fonctionnement indicates whether the fishway is operational (with a boolean) and the column per_tar_code indicates
 #' the status of either the fishway or DC. In the database four types of operation are set,  "1"=normal operation,

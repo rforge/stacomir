@@ -37,7 +37,7 @@ the operation is used to perform calculations.
 
 \item{\code{parquan}}{An object of class \link{ref_parquan-class}, quantitative parameter}
 
-\item{\code{parqual}}{An object of class \link{ref_parqual-class}, quanlitative parameter}
+\item{\code{parqual}}{An object of class \link{ref_parqual-class}, qualitative parameter}
 }}
 \note{
 The main difference between this class and \link{report_sample_char-class} is that this class allows to

@@ -8,31 +8,27 @@
 #' Class enabling to load the list of parameters and select one of them
 #' @include create_generic.R
 #' @slot data A data.frame
-#' @slot par_selectionne A character vector corresponding to par_code
+#' @slot par_selected A character vector corresponding to par_code
 #' @section Objects from the Class: Objects can be created by calls of the form
-#' \code{new("ref_par", data)}.  \describe{ \item{list("data")}{Object of class
-#' \code{"data.frame"} ~ All the parameters stored in the
-#' database}\item{:}{Object of class \code{"data.frame"} ~ All the parameters
-#' stored in the database} }
 #' @author cedric.briand"at"eptb-vilaine.fr
 #' @keywords classes
 #' @slot data="data.frame" the list of parameters
 #' @family referential objects
-setClass(Class="ref_par",representation= representation(data="data.frame",par_selectionne="character"))
+setClass(Class="ref_par",representation= representation(data="data.frame",par_selected="character"))
 
 
 setValidity("ref_par",method=function(object){
-	  if (length(object@par_selectionne)!=0){		
+	  if (length(object@par_selected)!=0){		
 		if (nrow(object@data)>0) {
-		  concord<-object@par_selectionne%in%object@data$par_code					
+		  concord<-object@par_selected%in%object@data$par_code					
 		  if (any(!concord)){
-			return(paste("No data for par",object@par_selectionne[!concord]))
+			return(paste("No data for par",object@par_selected[!concord]))
 			
 		  } else {
 			return(TRUE)
 		  }
 		} else {
-		  return("You tried to set a value for par_selectionne without initializing the data slot")
+		  return("You tried to set a value for par_selected without initializing the data slot")
 		}
 	  }  else return(TRUE)
 	  
@@ -116,7 +112,7 @@ setMethod("choice",signature=signature("ref_par"),definition=function(object,
 	  if (nrow(object@data) > 0){
 		hcar=function(h,...){
 		  carchoisi=svalue(choice)
-		  object@par_selectionne<-object@data[car_libelle%in%carchoisi ,"par_code"]
+		  object@par_selected<-object@data[car_libelle%in%carchoisi ,"par_code"]
 		  #object@data<-object@data[car_libelle%in%carchoisi ,"par_code"]
 		  assign(nomassign,object,envir_stacomi)
 		  funout(gettext("Feature has been selected\n",domain="R-stacomiR"))
@@ -149,17 +145,17 @@ setMethod("choice_c",signature=signature("ref_par"),definition=function(object,p
 		par<-as.character(par) 
 	  }
 	  if (any(is.na(par))) stop ("NA values par")			
-	  object@par_selectionne<-par				
+	  object@par_selected<-par				
 	  if (nrow(object@data)==0){
-		stop ("Internal error : tried to set a value for par_selectionne without initializing the data slot")
+		stop ("Internal error : tried to set a value for par_selected without initializing the data slot")
 	  }
 	  #validObject(object,test=FALSE) 
 	  #here I don't want to generate an error if parm is not present
 	  #so I'm not using the validObject which will throw and error
-	  concord<-object@par_selectionne%in%object@data$par_code	
+	  concord<-object@par_selected%in%object@data$par_code	
 	  
 	  if (any(!concord)){
-		warning(paste(gettextf("No data for par %s",object@par_selectionne[!concord],domain="R-stacomiR")))
+		warning(paste(gettextf("No data for par %s",object@par_selected[!concord],domain="R-stacomiR")))
 	  }
 	  
 	  assign("ref_par",object,envir=envir_stacomi)
@@ -193,7 +189,7 @@ setMethod("choicemult",signature=signature("ref_par"),definition=function(object
 	  if (nrow(object@data) > 0){
 		hpar=function(h,...){
 		  parm=tbdestpar[,][tbdestpar[,]!=""]
-		  object@par_selectionne<-object@data[car_libelle%in%parm,"par_code"]
+		  object@par_selected<-object@data[car_libelle%in%parm,"par_code"]
 		  assign(nomassign,object,envir_stacomi)
 		  funout(gettext("Parameter selected\n",domain="R-stacomiR"))
 		  if (!is.null(objectreport)) {

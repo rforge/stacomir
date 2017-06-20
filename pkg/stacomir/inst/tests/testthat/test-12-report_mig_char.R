@@ -60,8 +60,8 @@ test_that("test setasqualitative method",{
 		  silent=TRUE,
 		  breaks=c(0,1.5,2.5,10),
 		  label=c("age 1","age 2","age 3"))
-	  expect_true(r_mig_char@parqual@par_selectionne=='A124', label="Test passing quant parm A124 to qualitative failed")
-	  expect_false(r_mig_char@parquan@par_selectionne=='A124', label="The parameter A124 should have been removed from quant parm")
+	  expect_true(r_mig_char@parqual@par_selected=='A124', label="Test passing quant parm A124 to qualitative failed")
+	  expect_false(r_mig_char@parquan@par_selected=='A124', label="The parameter A124 should have been removed from quant parm")
 	  expect_true('A124'%in%r_mig_char@data$parqual$car_par_code)
 	  expect_false('A124'%in%r_mig_char@data$parquan$car_par_code)
 	  rm("envir_stacomi",envir =.GlobalEnv)

@@ -4,7 +4,7 @@
 #' 
 #' ref_period referential class to choose a period
 #' 
-#' @note pgval are used by seq.POSIXT
+#' @note pgval are used by seq.POSIXt
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("ref_period", ...)}.
 #' @keywords classes

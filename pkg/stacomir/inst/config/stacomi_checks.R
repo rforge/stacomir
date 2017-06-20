@@ -8,3 +8,8 @@ goodpractice::gp()
 
 
 devtools::release() # include devtools::spell_check()
+
+devtools::spell_check()
+
+devtools::use_readme_rmd()
+devtools::release() # include devtools::spell_check()

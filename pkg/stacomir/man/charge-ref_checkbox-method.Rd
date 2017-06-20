@@ -3,7 +3,7 @@
 \docType{methods}
 \name{charge,ref_checkbox-method}
 \alias{charge,ref_checkbox-method}
-\title{Loading method for ReCheckBox referential objects}
+\title{Loading method for ref_checkbox referential objects}
 \usage{
 \S4method{charge}{ref_checkbox}(object, title, labels, checked)
 }
@@ -20,7 +20,7 @@
 An object of class \link{ref_checkbox-class}
 }
 \description{
-Loading method for ReCheckBox referential objects
+Loading method for ref_checkbox referential objects
 }
 \examples{
 \dontrun{

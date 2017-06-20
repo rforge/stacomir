@@ -67,7 +67,7 @@ setMethod("connect",signature=signature("report_dc"),definition=function(object,
 
 #' charge method for report_dc
 #' 
-#' used by the graphical interface to retreive the objects of referential classes
+#' used by the graphical interface to retrieve the objects of referential classes
 #' assigned to envir_stacomi
 #' @param object An object of class \link{report_dc-class}
 #' @param silent boolean, default FALSE, if TRUE messages are not displayed.

@@ -21,7 +21,7 @@
 #' dev_libelle (text for destination of fish)
 #' }
 #' @slot dc Object of class \link{ref_dc-class}: the control devices
-#' @slot taxa An object of class \link{ref_taxa-class}: the speciess
+#' @slot taxa An object of class \link{ref_taxa-class}: the species
 #' @slot stage An object of class \link{ref_stage-class} : the stages of the fish
 #' @slot par An object of class \link{ref_par-class}: the parameters used
 #' @slot horodatedebut An object of class \link{ref_horodate-class}
@@ -83,7 +83,7 @@ setMethod("connect",signature=signature("report_silver_eel"),definition=function
 	  requete@and=paste(" AND ope_dic_identifiant in ",vector_to_listsql(object@dc@dc_selectionne),
 		  " AND lot_tax_code in ", vector_to_listsql(object@taxa@data$tax_code),
 		  " AND lot_std_code in ", vector_to_listsql(object@stage@data$std_code),
-		  " AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
+		  " AND car_par_code in ", vector_to_listsql(object@par@par_selected), sep="")
 	  requete<-stacomirtools::connect(requete) 
 	  object@data<-requete@query
 	  if (!silent) funout(gettext("Data loaded",domain="R-stacomiR"))
@@ -604,7 +604,7 @@ setMethod("plot", signature(x = "report_silver_eel", y = "missing"), definition=
 			strip.border=list(col="black")
 		)
 		lattice::trellis.par.set(my.settings)
-		
+		datdc<-datdc[complete.cases(datdc[,c("Pankhurst","W","BL","ouv","stage")]),]
 		ccc<-lattice::cloud(Pankhurst ~ W * BL|ouv, data = datdc,group=stage,
 			screen = list(x = -90, y = 70), distance = .4, zoom = .6,strip = lattice::strip.custom(par.strip.text=list(col="white")))
 		return(ccc)
@@ -630,12 +630,12 @@ setMethod("summary",signature=signature(object="report_silver_eel"),definition=f
 	  dat<-r_silver@calcdata
 	  # cols are using viridis::inferno(6,alpha=0.9)
 	  
-	  printstat<-function(vec){
+	  printstat<-function(vec,silent){
 		moy<-mean(vec,na.rm=TRUE)
 		sd<- sd(vec,na.rm=TRUE) # sample standard deviation 
 		n<-length(vec[!is.na(vec)])
 		SE = sd/sqrt(n)
-		print(noquote(stringr::str_c("mean=",round(moy,2),",SD=",round(sd,2),",N=",n,",SE=",round(SE,2))))
+		if (!silent) print(noquote(stringr::str_c("mean=",round(moy,2),",SD=",round(sd,2),",N=",n,",SE=",round(SE,2))))
 		return(list("mean"=moy,"SD"=sd,"N"=n,"SE"=SE))
 	  }
 	  result<-list()
@@ -646,27 +646,37 @@ setMethod("summary",signature=signature(object="report_silver_eel"),definition=f
 		dc<-as.character(unique(datdc$ope_dic_identifiant))
 		result[[dc]]<-list()
 		result[[dc]][["ouvrage"]]<-ouvrage
-		print(noquote(stringr::str_c("Statistics for dam : ",ouvrage)))
-		print(noquote("========================"))
-		print(noquote("Stages Durif"))
-		print(table(datdc$stage))
+		if (! silent){
+                  print(noquote(stringr::str_c("Statistics for dam : ",ouvrage)))
+		          print(noquote("========================"))
+		          print(noquote("Stages Durif"))
+		          print(table(datdc$stage))
+        }
 		result[[dc]][["Stages"]]<-table(datdc$stage)
-		print(noquote("-----------------------"))
-		print(noquote("Pankhurst"))
-		print(noquote("-----------------------"))
-		result[[dc]][["Pankhurst"]]<-printstat(datdc$Pankhurst)		
-		print(noquote("-----------------------"))
-		print(noquote('Eye diameter (mm)'))		
-		print(noquote("-----------------------"))
-		result[[dc]][["MD"]]<-printstat(datdc$MD)				
-		print(noquote("-----------------------"))
-		print(noquote('Length (mm)'))	
-		print(noquote("-----------------------"))
-		result[[dc]][["BL"]]<-printstat(datdc$BL)	
-		print(noquote("-----------------------"))
-		print(noquote('Weight (g)'))	
-		print(noquote("-----------------------"))
-		result[[dc]][["W"]]<-printstat(datdc$W)	
+        if (! silent){
+		          print(noquote("-----------------------"))
+		          print(noquote("Pankhurst"))
+		          print(noquote("-----------------------"))
+        }
+		result[[dc]][["Pankhurst"]]<-printstat(datdc$Pankhurst,silent=silent)	
+	    if (! silent){    
+		          print(noquote("-----------------------"))
+		          print(noquote('Eye diameter (mm)'))		
+		          print(noquote("-----------------------"))
+        }
+		result[[dc]][["MD"]]<-printstat(datdc$MD,silent=silent)		
+		if (! silent){
+		          print(noquote("-----------------------"))
+		          print(noquote('Length (mm)'))	
+		          print(noquote("-----------------------"))
+        }
+		result[[dc]][["BL"]]<-printstat(datdc$BL,silent=silent)	
+        if (! silent){
+		          print(noquote("-----------------------"))
+		          print(noquote('Weight (g)'))	
+		          print(noquote("-----------------------"))
+        }
+		result[[dc]][["W"]]<-printstat(datdc$W,silent=silent)	
 	  }
 	  return(result)		
 	})
@@ -684,7 +694,7 @@ setMethod("print",signature=signature("report_silver_eel"),definition=function(x
 		  "dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 		  "taxa=c(",stringr::str_c(shQuote(x@taxa@data$tax_nom_latin),collapse=","),"),",
 		  "stage=c(",stringr::str_c(shQuote(x@stage@data$std_code),collapse=","),"),",	
-		  "par=c(",stringr::str_c(shQuote(x@par@par_selectionne),collapse=","),"),",	
+		  "par=c(",stringr::str_c(shQuote(x@par@par_selected),collapse=","),"),",	
 		  "horodatedebut=",shQuote(strftime(x@horodatedebut@horodate,format="%d/%m/%Y %H-%M-%S")),
 		  ",horodatefin=",shQuote(strftime(x@horodatefin@horodate,format="%d/%m/%Y %H-%M-%S")),")")
 	  # removing backslashes

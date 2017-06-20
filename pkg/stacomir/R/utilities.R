@@ -1,4 +1,4 @@
-#' function used to clean the objects whithin the group and the graphes and
+#' function used to clean the objects within the group and the graphes and
 #' also elements remaining in the envir_stacomi environment
 #' 
 #' 

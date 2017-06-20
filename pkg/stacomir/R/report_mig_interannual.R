@@ -64,7 +64,7 @@ setValidity("report_mig_interannual",function(object)
 #' This method will check if the data in the t_reportjournalier_bjo table has no missing data,
 #' if missing the program will load missing data. As a second step,
 #' the program will check if the numbers in the table  t_reportjournalier_bjo differ from those in the database,
-#' and propose to re-run the reportmigration (which has a write_database methode to write daily reports) for those years.
+#' and propose to re-run the report_mig (which has a write_database methode to write daily reports) for those years.
 #' @note We expect different results between daily reports from the t_reportjournalier_bjo table and the annual sums
 #' from report_annual for glass eels as those may have been weighted and not only counted. The t_reportjournalier_bjo table used by report_mig_interannual
 #' contains the sum of glass eel numbers converted from weights and those directly counted. The report_annual does not.
@@ -158,7 +158,7 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 	        for (y in 1:length(missing_years)){
 		      Y<-missing_years[y]
 		      bM=new("report_mig")
-		      if (!silent) funout(gettextf("Running reportmigration for year %s",Y,domain="R-StacomiR"))
+		      if (!silent) funout(gettextf("Running report_mig for year %s",Y,domain="R-StacomiR"))
 		      bM=choice_c(bM,
 				  dc=dic[i],
 				  taxa=object@taxa@data$tax_nom_latin,
@@ -202,7 +202,7 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 		      bM=new("report_mig")
 		      for (Y in differing_years){
 			    # Y=differing_years[1]
-			    funout(gettextf("Running reportmigration to correct data for year %s",Y))
+			    funout(gettextf("Running report_mig to correct data for year %s",Y))
 			    bM=choice_c(bM,
 					dc=dic[i],
 					taxa=object@taxa@data$tax_nom_latin,
@@ -226,7 +226,7 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 	        #==================================
 	        
 	        if (!silent){
-		      choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_reportjournalier_bjo table, this means that they have been changed after the last reportmigration was run,  
+		      choice2<-gWidgets::gconfirm(gettextf("Some data differ between t_reportjournalier_bjo table, this means that they have been changed after the last report_mig was run,  
 						  do you want to load them again for calculation ?",domain="R-StacomiR"),
 				  handler=reload_years_with_error)
 	        } else {
@@ -466,7 +466,7 @@ setMethod("calcule",signature=signature("report_mig_interannual"),definition=fun
 #' 
 #' @param dat a data frame with columns ("bjo_annee","bjo_jour","bjo_labelquantite","bjo_valeur")
 #' @param annee The year to exclude from the historical series (it will be plotted against the historical series)
-#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXT, default NULL
+#' @param timesplit "week" "2 week" "month" as provided to seq.POSIXt, default NULL
 #' @return a data frame with mean, max, and min calculated for each timesplit
 #' @export
 fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
@@ -546,7 +546,7 @@ fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
 #' english values within parenthesis are also accepted.
 #' @param silent Stops displaying the messages.
 #' \itemize{
-#' 		\item{plot.type="line": one line per daily reportmigration}
+#' 		\item{plot.type="line": one line per daily report_mig}
 #' 		\item{plot.type="standard": the current year is displayed against a ribbon of historical values"}
 #' 		\item{plot.type="density": creates density plot to compare seasonality, data computed by 15 days period}
 #' 		\item{plot.type="step" : creates step plots to compare seasonality, the year chosen in the interface is the

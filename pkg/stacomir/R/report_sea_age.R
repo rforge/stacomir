@@ -86,7 +86,7 @@ setMethod("connect",signature=signature("report_sea_age"),definition=function(ob
 	  requete@and=paste(" AND ope_dic_identifiant in ",vector_to_listsql(object@dc@dc_selectionne),
 		  " AND lot_tax_code in ", vector_to_listsql(object@taxa@data$tax_code),
 		  " AND lot_std_code in ", vector_to_listsql(object@stage@data$std_code),
-		  " AND car_par_code in ", vector_to_listsql(object@par@par_selectionne), sep="")
+		  " AND car_par_code in ", vector_to_listsql(object@par@par_selected), sep="")
 	  requete<-stacomirtools::connect(requete) 
 	  object@data<-requete@query
 	  if (!silent) funout(gettext("Data loaded",domain="R-stacomiR"))
@@ -355,7 +355,7 @@ setMethod("summary",signature=signature(object="report_sea_age"),definition=func
 #' into the tj_caracteristiquelot_car table in the user's scheme
 #' 
 #' The sea age caracteristic is calculated from the mesured or calculated size of salmon and with a size/age rule
-#' defined by the user . the name of the database is retreived from the odbc link
+#' defined by the user . the name of the database is retrieved from the odbc link
 #' defined in calcmig.csv
 #' @param object an object of class \link{report_sea_age-class}
 #' @param silent : Default FALSE, if TRUE the program should no display messages.
@@ -431,7 +431,7 @@ setMethod("print",signature=signature("report_sea_age"),definition=function(x,..
 		  "dc=c(",stringr::str_c(x@dc@dc_selectionne,collapse=","),"),",
 		  "taxa=c(",stringr::str_c(shQuote(x@taxa@data$tax_nom_latin),collapse=","),"),",
 		  "stage=c(",stringr::str_c(shQuote(x@stage@data$std_code),collapse=","),"),",	
-		  "par=c(",stringr::str_c(shQuote(x@par@par_selectionne),collapse=","),"),",	
+		  "par=c(",stringr::str_c(shQuote(x@par@par_selected),collapse=","),"),",	
 		  "horodatedebut=",shQuote(strftime(x@horodatedebut@horodate,format="%d/%m/%Y %H-%M-%S")),
 		  ",horodatefin=",shQuote(strftime(x@horodatefin@horodate,format="%d/%m/%Y %H-%M-%S")),")")
 	  # removing backslashes

@@ -388,7 +388,7 @@ h_report_mig_mult_graph=function(h=null,...){
 #' Plots of various type for report_mig_mult
 #' 
 #' \itemize{
-#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_glasseel}} functions to plot as many "reportmigration"
+#' 		\item{plot.type="standard"}{calls \code{\link{fungraph}} and \code{\link{fungraph_glasseel}} functions to plot as many "report_mig"
 #' 			as needed, the function will test for the existence of data for one dc, one taxa, and one stage}
 #' 		\item{plot.type="step"}{creates Cumulated graphs for report_mig_mult.  Data are summed per day for different dc taxa and stages}
 #' 		\item{plot.type="multiple"}{Method to overlay graphs for report_mig_mult (multiple dc/taxa/stage in the same plot)}
@@ -568,8 +568,8 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 		print(p)	
 		assign("p",p,envir=envir_stacomi)
 		assign("grdata",grdata_without_hole,envir_stacomi)
-		if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
-		if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+		if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retrieve the object"))
+		if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retrieve the object"))
 		
 	  }
 #==========================type=3=============================
@@ -598,9 +598,9 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 		
 		print(p)	
 		assign("p",p,envir=envir_stacomi)				
-		if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retreive the object"))
+		if (!silent) funout(gettext("The plot has been assigned to p in envir_stacomi,write p<-get('p',envir_stacomi) to retrieve the object"))
 		assign("grdata",grdata,envir_stacomi)	
-		if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retreive the object"))
+		if (!silent) funout(gettext("The data for the plot have been assigned to envir_stacomi,write grdata<-get('grdata',envir_stacomi) to retrieve the object"))
 		
 	  }
 #==========================end / type=3=============================			
