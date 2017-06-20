@@ -460,7 +460,7 @@ devtools::use_data(r_seaa,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for report_migInterannuelle with two dc
+# generates dataset for report_mig_interannual with two dc
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)

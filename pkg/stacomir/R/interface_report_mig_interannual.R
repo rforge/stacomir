@@ -1,4 +1,4 @@
-#' interface for report_migInterannuelle class
+#' interface for report_mig_interannual class
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
 interface_report_mig_interannual = function()

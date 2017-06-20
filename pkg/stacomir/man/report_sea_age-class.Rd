@@ -38,7 +38,7 @@ statistics, the results are to be written to the database.
 \item{\code{limit2hm}}{The size limit, in mm between 2 sea winter fishes and 3 sea winter fishes}
 }}
 \note{
-This class is displayed by interface_report_agedemer
+This class is displayed by interface_report_sea_age
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

@@ -50,9 +50,9 @@ setValidity("report_mig_interannual",function(object)
 	{
 	  # if more than one taxa, the connect method will fail when trying to run the write_database for missing data
 	  # also plots have not been developed accordingly
-	  rep1=ifelse(length(object@taxa@data$tax_code)==1,TRUE,gettext("report_migInterannuelle can only take one taxa", domain="R-stacomiR"))
+	  rep1=ifelse(length(object@taxa@data$tax_code)==1,TRUE,gettext("report_mig_interannual can only take one taxa", domain="R-stacomiR"))
 	  # same for stage
-	  rep2=ifelse(length(object@stage@data$std_code)==1,TRUE,gettext("report_migInterannuelle can only take one stage", domain="R-stacomiR"))
+	  rep2=ifelse(length(object@stage@data$std_code)==1,TRUE,gettext("report_mig_interannual can only take one stage", domain="R-stacomiR"))
 	  # multiple DC are allowed
 	  return(ifelse(rep1 & rep2 , TRUE ,c(1:2)[!c(rep1, rep2)]))
 	}   
@@ -332,7 +332,7 @@ setMethod("charge",signature=signature("report_mig_interannual"),
 	  # this will test that only one taxa and one stage have been loaded (multiple dc are allowed)
 	  validObject(report_mig_interannual)
 	  assign("report_mig_interannual",report_mig_interannual,envir_stacomi)
-	  if (!silent) funout(gettext("Writing report_migInterannuelle in the environment envir_stacomi : write r_mig_interannual=get('report_migInterannuelle',envir_stacomi) ",domain="R-stacomiR"))
+	  if (!silent) funout(gettext("Writing report_mig_interannual in the environment envir_stacomi : write r_mig_interannual=get('report_mig_interannual',envir_stacomi) ",domain="R-stacomiR"))
 	  
 	  return(report_mig_interannual)
 	}
@@ -389,7 +389,7 @@ setMethod("choice_c",signature=signature("report_mig_interannual"),definition=fu
 	})
 
 
-#' calcule method for report_migInterannuelle
+#' calcule method for report_mig_interannual
 #' 
 #' Performs the calculation of seasonal coefficients for the plot(plot.type="seasonal") method. The numbers
 #' are split according to the period chosen, one of "day","week","month","2 weeks", French labels are also 
@@ -419,7 +419,7 @@ setMethod("calcule",signature=signature("report_mig_interannual"),definition=fun
 	  taxa<-report_mig_interannual@taxa@data$tax_code
 	  stage<-report_mig_interannual@stage@data$std_code
 	  if(length(unique(report_mig_interannual@dc@station))!=1) stop("You have more than one station in the report, the dc from the report should belong to the same station")
-	  if(nrow(report_mig_interannual@data)==0) stop("No rows in report_migInterannuelle@data, nothing to run calculations on")
+	  if(nrow(report_mig_interannual@data)==0) stop("No rows in report_mig_interannual@data, nothing to run calculations on")
 	  
 	  datadic<-report_mig_interannual@data[
 		  report_mig_interannual@data$bjo_labelquantite=="Effectif_total",]
@@ -540,7 +540,7 @@ fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
 #' Several of these plots are scaled against the same year, ie the comparison is based on
 #' year 2000, meaning that day 1 would correspond to the first date of 2000,  which is also a
 #' saturday, the last day of the week.
-#' @param x An object of class report_migInterannuelle
+#' @param x An object of class report_mig_interannual
 #' @param plot.type Default standard
 #' @param timesplit Used for plot.type barchart or dotplot, Default mois (month) other possible values are semaine (week), quinzaine (2 weeks),
 #' English values within parenthesis are also accepted.

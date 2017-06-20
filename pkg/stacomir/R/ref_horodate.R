@@ -3,7 +3,7 @@
 #' @param object A ref_horodate object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
-validite_ref_horodate=function(object)
+validity_ref_horodate=function(object)
 {
   rep1= class(object@horodate)[2]=="POSIXt"
   
@@ -23,7 +23,7 @@ validite_ref_horodate=function(object)
 #' @family referential objects
 setClass(Class="ref_horodate",representation=
 		representation(horodate="POSIXt"),
-	validity=validite_ref_horodate,
+	validity=validity_ref_horodate,
 	prototype=prototype(horodate=Hmisc::round.POSIXt(Sys.time(),"years")))
 # date= new("Horodate")
 #retourne la date en format character

@@ -97,7 +97,7 @@ test_that("Test that loading two taxa will fail",
 	})
 
 
-test_that("Test that report_migInterannuelle loads missing data with correct warning",
+test_that("Test that report_mig_interannual loads missing data with correct warning",
 	{
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)

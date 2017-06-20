@@ -4,7 +4,7 @@
 \name{supprime,report_sea_age-method}
 \alias{supprime,report_sea_age-method}
 \alias{supprime.report_sea_age}
-\title{supprime method for report_migInterannuelle class}
+\title{supprime method for report_mig_interannual class}
 \usage{
 \S4method{supprime}{report_sea_age}(object, silent = FALSE)
 }
@@ -17,7 +17,7 @@
 nothing
 }
 \description{
-supprime method for report_migInterannuelle class
+supprime method for report_mig_interannual class
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}

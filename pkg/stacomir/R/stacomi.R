@@ -324,6 +324,7 @@ load_stacomi=function(h,...){
 #' @importFrom grDevices dev.new
 #' @importFrom grDevices gray.colors
 #' @importFrom stats sd
+#' @importFrom stats complete.cases
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
 #' @importFrom lattice barchart trellis.par.get trellis.par.set simpleKey

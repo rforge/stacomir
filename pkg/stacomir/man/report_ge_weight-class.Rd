@@ -13,7 +13,7 @@ glass eel in the Bay of Biscay. Weights can be modelled using sine wave curves, 
 This class has a model method to try those models, which can also be used to extact coefficients manually
 to manually test more complex models.
 Some plots are provided to display the coefficients stored in the database, and the model results. A parameter provided in 
-the graphical interface or in the command line (slot liste) takes values "1", ">1", "tous" wich mean respectively use
+the graphical interface or in the command line (slot liste) takes values "1", ">1", "tous" which mean respectively use
 only individual sample of glass eels, or use "group weights" which can be more close to the real weight of glass eel
 during counts as glass eel are not completely drained from their water during handling to preserve their mucus. The list choice
 "tous" means that both individual and group weights are selected.

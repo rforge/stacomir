@@ -20,7 +20,7 @@
 #' Representation of a ref_timestep object with a step length equal to one day.
 #' It receives an inheritance from ref_timestep
 #' 
-#' validite_ref_timestep_daily
+#' validity_ref_timestep_daily
 #' @include ref_timestep.R
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("ref_timestep_daily",
@@ -46,7 +46,7 @@ setClass(Class="ref_timestep_daily",contains="ref_timestep",
 setValidity(Class="ref_timestep_daily",function(object)
 	{
 	  retValue<-NULL
-	  rep1 = validite_ref_timestep(object)
+	  rep1 = validity_ref_timestep(object)
 	  if (!is.logical(rep1)) retValue<-rep1
 	  rep2 = (object@step_duration==86400)
 	  if (!rep2) retValue=paste(retValue,gettext("Time step duration should be daily",domain="R-stacomiR"))

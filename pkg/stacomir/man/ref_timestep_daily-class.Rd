@@ -9,7 +9,7 @@ Representation of a ref_timestep object with a step length equal to one day.
 It receives an inheritance from ref_timestep
 }
 \details{
-validite_ref_timestep_daily
+validity_ref_timestep_daily
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

@@ -39,7 +39,7 @@ rm(UNE_SECONDE,UNE_MINUTE,DIX_MINUTES,QUINZE_MINUTES,TRENTE_MINUTES,UNE_HEURE,DO
 	UN_JOUR,UNE_SEMAINE,DEUX_SEMAINES,UN_MOIS,TROIS_MOIS,SIX_MOIS,UN_AN,Labelref_timestep)
 
 
-validite_ref_timestep=function(object)
+validity_ref_timestep=function(object)
 {
   retValue=NULL
   rep1= class(object@dateDebut)[1]=="POSIXlt"
@@ -77,7 +77,7 @@ validite_ref_timestep=function(object)
 #' @concept report Object
 setClass(Class="ref_timestep",representation=
 		representation(dateDebut="POSIXlt",step_duration="numeric",nb_step="numeric",nocurrent_step="integer"),
-	validity=validite_ref_timestep,
+	validity=validity_ref_timestep,
 	prototype=prototype(dateDebut=as.POSIXlt(Hmisc::trunc.POSIXt(Sys.time(),"year")),
 		step_duration=as.numeric(86400),
 		nb_step=as.numeric(1),
@@ -85,7 +85,7 @@ setClass(Class="ref_timestep",representation=
 # timestep= new("ref_timestep")
 
 
-validite_ref_timestepChar=function(object)
+validity_ref_timestepChar=function(object)
 {
   rep1= class(object@dateDebut)[1]=="POSIXlt"
   rep2=length(object@step_duration)==1
@@ -110,7 +110,7 @@ validite_ref_timestepChar=function(object)
 #' 
 setClass(Class="ref_timestepChar",representation=
 		representation(dateDebut="POSIXlt",step_duration="character",nb_step="numeric",nocurrent_step="integer"),
-	validity=validite_ref_timestepChar,
+	validity=validity_ref_timestepChar,
 	prototype=prototype(dateDebut=as.POSIXlt(strptime("2008-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S"),tz="GMT"),
 		step_duration=as.character("1 jour"),
 		nb_step=as.numeric(1),

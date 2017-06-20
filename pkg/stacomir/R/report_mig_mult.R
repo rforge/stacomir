@@ -839,7 +839,7 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
   overlapping_samples_between_year<-FALSE
   imat3<-imat1[1,]	
   listei3<-intervals::interval_overlap(imat2,imat3)
-  # vector of samples (lot) wich are overlapping between two years
+  # vector of samples (lot) which are overlapping between two years
   lots_across<-names(listei3)[vapply(listei3,function(X)length(X)>0,NA)]
   if (length(lots_across)>0){
 	overlapping_samples_between_year<-TRUE
@@ -863,8 +863,7 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
   mat3<-as.data.frame(cbind(as.numeric(time.sequence[le]+as.difftime(1,units="days")),as.numeric(time.sequence[le]+as.difftime(2,units="days"))))
   imat3<-intervals::Intervals(mat3)
   listei3<-intervals::interval_overlap(imat2,imat3)
-# vector of samples (lot) wich are overlapping between two years
-# vector of samples (lot) wich are overlapping between two years
+# vector of samples (lot) which are overlapping between two years
   lots_across<-names(listei3)[vapply(listei3,function(X)length(X)>0,NA)]
   if (length(lots_across)>0){
 	overlapping_samples_between_year<-TRUE

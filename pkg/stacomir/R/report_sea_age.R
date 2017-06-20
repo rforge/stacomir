@@ -10,7 +10,7 @@
 #' @include ref_stage.R
 #' @include ref_horodate.R
 #' @include ref_par.R
-#' @note This class is displayed by interface_report_agedemer
+#' @note This class is displayed by interface_report_sea_age
 #' @slot data A data frame with data generated from the database
 #' @slot calcdata A list of dc with processed data. This lists consists of two elements
 #' \itemize{
@@ -475,7 +475,7 @@ funtablereport_sea_age = function(h,...) {
 
 
 
-#' supprime method for report_migInterannuelle class
+#' supprime method for report_mig_interannual class
 #' @param object An object of class \link{report_sea_age-class}
 #' @param silent Default FALSE, if TRUE the program should no display messages
 #' @return nothing

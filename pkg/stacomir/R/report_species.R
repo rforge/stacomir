@@ -73,7 +73,7 @@ setMethod("connect",signature=signature("report_species"),definition=function(ob
 	  requete<-stacomirtools::connect(requete)	
 	  if (requete@etat!="success") funout(gettext("Query failed for the view vue_ope_lot_car \n",domain="R-stacomiR"),arret=TRUE)
 	  bilesp@data<-requete@query
-	  if (!silent) funout(gettext("data loaded from the database for reportEspece"))
+	  if (!silent) funout(gettext("data loaded from the database for report_species"))
 	  assign("bilesp",bilesp,envir=envir_stacomi)
 	  return(bilesp)
 	})

@@ -4,7 +4,7 @@
 \name{calcule,report_mig_interannual-method}
 \alias{calcule,report_mig_interannual-method}
 \alias{calcule.report_mig_interannual}
-\title{calcule method for report_migInterannuelle}
+\title{calcule method for report_mig_interannual}
 \usage{
 \S4method{calcule}{report_mig_interannual}(object, silent = FALSE,
   timesplit = "mois")

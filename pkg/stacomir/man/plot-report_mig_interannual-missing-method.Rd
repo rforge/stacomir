@@ -10,7 +10,7 @@
   timesplit = "mois", silent = FALSE)
 }
 \arguments{
-\item{x}{An object of class report_migInterannuelle}
+\item{x}{An object of class report_mig_interannual}
 
 \item{plot.type}{Default standard}
 

@@ -8,7 +8,7 @@
 #**********************************************************************
 
 #validation function
-validite_ODBC=function(object)
+validity_ODBC=function(object)
 {
 	rep1= class(object@baseODBC[1])=="Character"
 	rep2=class(object@baseODBC[2])=="Character"
@@ -36,7 +36,7 @@ validite_ODBC=function(object)
 setClass(Class="ConnectionODBC",
 		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connection="ANY"),
 		prototype = list(silent=TRUE),
-		validity=validite_ODBC)
+		validity=validity_ODBC)
 setGeneric("connect",def=function(object,...) standardGeneric("connect"))
 
 #' connect method for ConnectionODBC class

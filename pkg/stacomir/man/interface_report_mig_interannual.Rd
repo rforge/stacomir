@@ -2,12 +2,12 @@
 % Please edit documentation in R/interface_report_mig_interannual.R
 \name{interface_report_mig_interannual}
 \alias{interface_report_mig_interannual}
-\title{interface for report_migInterannuelle class}
+\title{interface for report_mig_interannual class}
 \usage{
 interface_report_mig_interannual()
 }
 \description{
-interface for report_migInterannuelle class
+interface for report_mig_interannual class
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
