@@ -194,7 +194,6 @@ setMethod("plot",signature(x = "report_df", y = "ANY"),definition=function(x, y,
 			title=gettext("computing ...",domain="R-stacomiR"),
 			progress_text=gettext("Progress %",domain="R-stacomiR"))
 		progress_bar<-get("progress_bar",envir=envir_stacomi)
-		# this function assigns
 		z=0 # compteur tableau t_periodefonctdispositif_per_mois
 		for(j in 1:nrow(t_periodefonctdispositif_per)){
 		  #cat( j 
@@ -252,7 +251,7 @@ setMethod("plot",signature(x = "report_df", y = "ANY"),definition=function(x, y,
 		assign("periodeDF",t_periodefonctdispositif_per_mois,envir_stacomi)
 		if (!silent) funout(gettext("Writing the table into envir_stacomi environment : write periodeDF=get('periodeDF',envir_stacomi)\n",domain="R-stacomiR"))
 		# the progress bar has been assigned in envir_stacomi, we destroy it
-		gtkWidgetDestroy(get("progres",envir=envir_stacomi))
+		gtkWidgetDestroy(get("progress_bar",envir=envir_stacomi))
 		#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		#           PLOT OF TYPE BOX (plot.type=3)
 		#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

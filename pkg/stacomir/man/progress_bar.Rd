@@ -19,7 +19,7 @@ progress_bar(title, progress_text, width = 400, height = 50, pulse = TRUE)
 \item{pulse}{Do you want the widget to pulse}
 }
 \value{
-nothing but progress_bar and dialog gwidgets are assigned to .GlobalEnv
+nothing
 }
 \description{
 Progress bar using a gtkdialog, the progress bar is assigned in envir_stacomi

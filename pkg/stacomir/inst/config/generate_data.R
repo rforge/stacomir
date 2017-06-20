@@ -112,12 +112,14 @@ r_mig=choice_c(r_mig,
 	datefin="2015-12-31")
 r_mig<-charge(r_mig)
 r_mig<-connect(r_mig)
+
 r_mig@dc@data[,"dis_commentaires"]<-iconv(r_mig@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
 r_mig@dc@data[,"type_df"]<-iconv(r_mig@dc@data[,"type_df"],from="latin1",to="UTF8")
 r_mig@dc@data[,"type_dc"]<-iconv(r_mig@dc@data[,"type_dc"],from="latin1",to="UTF8")
 r_mig@dc@data[,"dif_localisation"]<-iconv(r_mig@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 r_mig@taxa@data[,"tax_nom_commun"]<-iconv(r_mig@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 r_mig@stage@data[,"std_libelle"]<-iconv(r_mig@stage@data[,"std_libelle"],from="latin1",to="UTF8")
+r_mig<-calcule(r_mig,silent=TRUE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(r_mig,internal=FALSE,overwrite=TRUE)
 

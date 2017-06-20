@@ -8,13 +8,6 @@
 Class enabling to load the list of quantitative parameters and to select one
 of them. It inherits from 'ref_par', uses its 'choice' method
 }
-\section{Objects from the Class}{
- Objects can be created by calls of the form
-\code{new("ref_parquan", data=data.frame())}.  \describe{
-\item{list("data")}{Object of class \code{"data.frame"} ~ Quantitative
-parameters }\item{:}{Object of class \code{"data.frame"} ~ Quantitative
-parameters } }
-}
 \author{
 cedric.briand"at"eptb-vilaine.fr
 }

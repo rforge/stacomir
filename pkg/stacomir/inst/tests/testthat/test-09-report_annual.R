@@ -49,7 +49,7 @@ test_that("Test methods in report_annual",{
 	  rm("envir_stacomi",envir =.GlobalEnv)			
 	})
 
-test_that("Test example report_mig_interannual-example",
+test_that("Test example report_mig_annual-example",
 	{
 	  # check if built with examples (Rtools install --example)
 	  # the file is generate it examples but later loaded to examples from the class using @example
@@ -63,46 +63,53 @@ test_that("Test example report_mig_interannual-example",
 
 test_that("Complement to example",
     {
-	      data(r_ann)
-	      path=file.path(path.expand(get("datawd",envir=envir_stacomi)),
+      require(stacomiR)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  data(r_ann)
+      xtr_ann<-stacomiR::xtable(r_ann,
+	      dc_name=c("Passe bassins","Piege anguille RG","Piege anguille RD"),
+	      tax_name="Anguille",
+	      std_name=c("Arg.","Jaun."))   
+	  path=file.path(path.expand(get("datawd",envir=envir_stacomi)),
 		  paste(paste(r_ann@dc@dc_selectionne,collapse="+"),"_",
 			  paste(r_ann@taxa@data$tax_code,collapse="+"),"_",
 			  paste(r_ann@stage@data$std_code,collapse="+"),"_",
 			  r_ann@anneedebut@annee_selectionnee,":",
 			  r_ann@anneefin@annee_selectionnee,".html",sep=""),fsep ="/")
+      
 # here you can add an argument file=path
-	      expect_output(print(xtr_mig_annual,type="html"))
-	      
+	  expect_output(print(xtr_ann,type="html"))
+	  
 # the following uses the "addtorow" argument which creates nice column headings,
 # format.args creates a thousand separator
 # again this will need to be saved in a file using the file argument
-	      expect_output(print(xtr_mig_annual,
-			              add.to.row=get("addtorow",envir_stacomi),
-			              include.rownames = TRUE,
-			              include.colnames = FALSE,
-			              format.args = list(big.mark = " ", decimal.mark = ",")
-	          ))
+	  expect_output(print(xtr_ann,
+			  add.to.row=get("addtorow",envir_stacomi),
+			  include.rownames = TRUE,
+			  include.colnames = FALSE,
+			  format.args = list(big.mark = " ", decimal.mark = ",")
+	      ))
 # barplot transforms the data, further arguments can be passed as to barplot
 	  dev.new()
-	      barplot(r_ann)
-	      dev.new()
-	      barplot(r_ann,
+	  barplot(r_ann)
+	  dev.new()
+	  barplot(r_ann,
 		  args.legend=list(x="topleft",bty = "n"),
 		  col=c("#CA003E","#1A9266","#E10168","#005327","#FF9194"))
-	      
+	  
 # An example with custom arguments for legend.text (overriding plot defauts)
-	      data(r_ann_adour)
-	      if (requireNamespace("RColorBrewer", quietly = TRUE)){
+	  data(r_ann_adour)
+	  if (requireNamespace("RColorBrewer", quietly = TRUE)){
 		lesdc<-r_ann_adour@dc@data$dc_code[r_ann_adour@dc@data$dc%in%r_ann_adour@dc@dc_selectionne]
 		barplot(r_ann_adour,
 			legend.text=lesdc,
 			args.legend=list(x="topleft",bty = "n"),
 			col=RColorBrewer::brewer.pal(9,"Spectral"),
 			beside=TRUE)
-	      }
-	      dev.new()
-	      plot(r_ann_adour,silent=TRUE)
-	      graphics.off()
+	  }
+	  dev.new()
+	  plot(r_ann_adour,silent=TRUE)
+	  graphics.off()
     })
 
 test_that("test xtable method for report_annual",{
@@ -126,12 +133,13 @@ test_that("test xtable method for report_annual",{
 		  silent=TRUE)
 	  r_ann<-connect(r_ann)	
 	  data(r_ann)
-	  xtr_mig_annual<-xtable(r_ann,
+      # if xtable is loaded to namespace, the function is masked ?
+	  xtr_mig_annual<-stacomiR::xtable(r_ann,
 		  dc_name=c("Passe bassins","Piege anguille RG","Piege anguille RD"),
 		  tax_name="Anguille",
 		  std_name=c("Arg.","Jaun."))
 	  expect_equal(class(xtr_mig_annual)[1],"xtable","report_annual should have an xtable method")
-	  xtr_mig_annual<-xtable(r_ann,
+	  xtr_mig_annual<-stacomiR::xtable(r_ann,
 		  dc_name=c("Passe bassins","Piege anguille RG","Piege anguille RD"),
 		  tax_name="Anguille",
 		  std_name=c("Arg.","Jaun."))

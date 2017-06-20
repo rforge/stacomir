@@ -6,7 +6,6 @@
 #' @slot checked A boolean vector
 #' @section Objects from the Class: Objects can be created by calls of the form
 #' \code{new("ref_checkbox", ...)}.
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @family referential objects
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 setClass(Class="ref_checkbox",representation= representation(title="character",labels="character",checked="logical"),

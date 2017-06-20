@@ -22,8 +22,6 @@ referential class allows to choose for several parms with checkbox
 }
 \author{
 Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-
-Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
 \seealso{
 Other referential.objects: \code{\link{charge,ref_choice-method}},

@@ -271,7 +271,7 @@ setMethod("plot",signature(x = "report_dc", y = "ANY"), definition=
 		assign("periodeDC",t_periodefonctdispositif_per_mois,envir_stacomi)
 		if (!silent) funout(gettext("Writing the table into envir_stacomi environment : write periodeDC=get('periodeDC',envir_stacomi)\n",domain="R-stacomiR"))
 		# the progress bar has been assigned in envir_stacomi, we destroy it
-		gtkWidgetDestroy(get("progres",envir=envir_stacomi))
+		gtkWidgetDestroy(get("progress_bar",envir=envir_stacomi))
 		#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		#           PLOT OF TYPE BOX (plot.type=3)
 		#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
