@@ -1,6 +1,6 @@
 Package: stacomiR
-Version: 0.5.2
-Date: 2017-06-10
+Version: 0.5.3
+Date: 2017-06-19
 Title: Fish Migration Monitoring (stacomiR)
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
@@ -8,71 +8,69 @@ Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.
 Description: Graphical outputs and treatment for a database of fishway
     monitoring. It is a part of the STACOMI open source project developed in
     France by the French Agency for Biodiversity (AFB) institute to centralize
-    data obtained by fishway monitoring. Version 0.5.2 is available in French and
+    data obtained by fishway monitoring. Version 0.5.3 is available in French and
     English.
 License: GPL (>= 2)
 Collate:
-    'create_generic.r'
-    'Refpar.r'
-    'RefHorodate.r'
-    'RefStades.r'
-    'RefTaxon.r'
-    'RefDC.r'
-    'ReftextBox.r'
-    'BilanAgedemer.r'
-    'RefAnnee.r'
-    'BilanAnnuels.r'
-    'BilanArgentee.r'
-    'utilitaires.r'
-    'RefStationMesure.r'
-    'BilanConditionEnv.r'
-    'RefListe.r'
-    'BilanEspeces.r'
-    'BilanFonctionnementDC.r'
-    'RefDF.r'
-    'BilanFonctionnementDF.r'
-    'PasdeTemps.r'
-    'PasDeTempsJournalier.r'
-    'BilanMigration.r'
-    'Bilan_carlot.r'
-    'RefChoix.r'
-    'Refparqual.r'
-    'Refparquan.r'
-    'BilanMigrationCar.r'
-    'BilanMigrationInterAnnuelle.r'
-    'BilanMigrationMult.r'
-    'BilanMigrationMultConditionEnv.r'
-    'BilanOperation.r'
-    'RefCoe.r'
-    'Bilan_poids_moyen.r'
-    'RefCheckBox.r'
-    'Refperiode.r'
-    'data.r'
-    'fn_EcritBilanMensuel.r'
-    'fn_table_per_dis.r'
-    'funSousListeBilanMigrationPar.r'
-    'fungraph.r'
-    'fungraph_civelle.r'
-    'funstat.r'
-    'funstatJournalier.r'
-    'funtable.r'
-    'funtraitement_poids.r'
-    'interface_BilanAgedemer.r'
-    'interface_BilanAnnuels.r'
-    'interface_BilanArgentee.r'
-    'interface_BilanConditionEnv.r'
-    'interface_BilanEspeces.r'
-    'interface_BilanFonctionnementDC.r'
-    'interface_BilanFonctionnementDF.r'
-    'interface_BilanMigration.r'
-    'interface_BilanMigrationCar.r'
-    'interface_BilanMigrationInterannuelle.r'
-    'interface_BilanMigrationMult.r'
-    'interface_BilanMigrationMultConditionEnv.r'
-    'interface_Bilan_carlot.r'
-    'interface_bilan_poids_moyen.r'
-    'setAs.r'
-    'stacomi.r'
+    'create_generic.R'
+    'data.R'
+    'fun_table_per_dis.R'
+    'fun_write_monthly.R'
+    'fungraph.R'
+    'fungraph_glasseel.R'
+    'funstat.R'
+    'funstat_daily.R'
+    'funtable.R'
+    'interface_report_annual.R'
+    'interface_report_dc.R'
+    'interface_report_df.R'
+    'interface_report_env.R'
+    'interface_report_ge_weight.R'
+    'interface_report_mig.R'
+    'interface_report_mig_char.R'
+    'interface_report_mig_env.R'
+    'interface_report_mig_interannual.R'
+    'interface_report_mig_mult.R'
+    'interface_report_sample_char.R'
+    'interface_report_sea_age.R'
+    'interface_report_silver_eel.R'
+    'interface_report_species.R'
+    'ref_checkbox.R'
+    'ref_choice.R'
+    'ref_coe.R'
+    'ref_dc.R'
+    'ref_df.R'
+    'ref_env.R'
+    'ref_horodate.R'
+    'ref_list.R'
+    'ref_par.R'
+    'ref_parqual.R'
+    'ref_parquan.R'
+    'ref_period.R'
+    'ref_stage.R'
+    'ref_taxa.R'
+    'ref_textbox.R'
+    'ref_timestep.R'
+    'ref_timestep_daily.R'
+    'ref_year.R'
+    'report_annual.R'
+    'report_dc.R'
+    'report_df.R'
+    'utilities.R'
+    'report_env.R'
+    'report_ge_weight.R'
+    'report_ope.R'
+    'report_mig.R'
+    'report_sample_char.R'
+    'report_mig_char.R'
+    'report_mig_mult.R'
+    'report_mig_env.R'
+    'report_mig_interannual.R'
+    'report_sea_age.R'
+    'report_silver_eel.R'
+    'report_species.R'
+    'setAs.R'
+    'stacomi.R'
 LazyLoad: yes
 LazyData: true
 Depends:
@@ -81,6 +79,7 @@ Depends:
     stacomirtools,
     RODBC
 Imports:
+	magrittr,
     intervals,
     RColorBrewer,
     stringr,

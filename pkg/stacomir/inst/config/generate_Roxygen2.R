@@ -28,8 +28,8 @@ document("C:/workspace/stacomir/pkg/stacomir")
 ## or :
 ##vignette("roxygen2")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-#data("bMM_Arzal")
-#data("bM_Arzal")
+#data("r_mig_mult")
+#data("r_mig")
 envir_stacomi <- new.env(parent = emptyenv())
 # Note la documentation doit se faire sur un "build" correct du package
 require(stacomiR)
@@ -51,3 +51,8 @@ lintr::lint_package()
 goodpractice::gp()
 
 devtools::release() # include devtools::spell_check()
+
+devtools::spell_check()
+
+devtools::use_readme_rmd()
+    

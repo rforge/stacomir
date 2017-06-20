@@ -24,73 +24,73 @@ devtools::use_data(calcmig,internal=FALSE,overwrite=TRUE)
 # source Laurent Beaulaton
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
-coef_Durif = matrix(NA, nrow=5, ncol=6)
-colnames(coef_Durif) = c("I", "FII", "FIII", "FIV", "FV", "MII")
-rownames(coef_Durif) = c("Constant", "BL", "W", "MD", "FL")
-coef_Durif[,1] = c(-61.276, 0.242, -0.108, 5.546, 0.614)
-coef_Durif[,2] = c(-87.995, 0.286, -0.125, 6.627, 0.838)
-coef_Durif[,3] = c(-109.014, 0.280, -0.127, 9.108, 1.182)
-coef_Durif[,4] = c(-113.556, 0.218, -0.103, 12.187, 1.230)
-coef_Durif[,5] = c(-128.204, 0.242, -0.136, 12.504, 1.821)
-coef_Durif[,6] = c(-84.672, 0.176, -0.116, 12.218, 1.295)
-devtools::use_data(coef_Durif,internal=FALSE,overwrite=TRUE)
+coef_durif = matrix(NA, nrow=5, ncol=6)
+colnames(coef_durif) = c("I", "FII", "FIII", "FIV", "FV", "MII")
+rownames(coef_durif) = c("Constant", "BL", "W", "MD", "FL")
+coef_durif[,1] = c(-61.276, 0.242, -0.108, 5.546, 0.614)
+coef_durif[,2] = c(-87.995, 0.286, -0.125, 6.627, 0.838)
+coef_durif[,3] = c(-109.014, 0.280, -0.127, 9.108, 1.182)
+coef_durif[,4] = c(-113.556, 0.218, -0.103, 12.187, 1.230)
+coef_durif[,5] = c(-128.204, 0.242, -0.136, 12.504, 1.821)
+coef_durif[,6] = c(-84.672, 0.176, -0.116, 12.218, 1.295)
+devtools::use_data(coef_durif,internal=FALSE,overwrite=TRUE)
 #################################
-# generates dataset for BilanMigrationMult
+# generates dataset for report_mig_mult
 # from iav three dc with eels
 ##################################
 require(stacomiR)
 stacomi(FALSE,FALSE,FALSE)
-bMM_Arzal=new("BilanMigrationMult")
+r_mig_mult=new("report_mig_mult")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","iav.",envir_stacomi)
-bMM_Arzal=choice_c(bMM_Arzal,
+r_mig_mult=choice_c(r_mig_mult,
 	dc=c(5,6,12),
-	taxons=c("Anguilla anguilla"),
-	stades=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
-bMM_Arzal<-charge(bMM_Arzal)
-bMM_Arzal<-connect(bMM_Arzal,silent=FALSE)
+	taxa=c("Anguilla anguilla"),
+	stage=c("AGG","AGJ","CIV"),datedebut="2011-01-01",datefin="2011-12-31")
+r_mig_mult<-charge(r_mig_mult)
+r_mig_mult<-connect(r_mig_mult,silent=FALSE)
 # to avoid warnings at package checks
-bMM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bMM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"type_df"]<-iconv(bMM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"type_dc"]<-iconv(bMM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bMM_Arzal@dc@data[,"dif_localisation"]<-iconv(bMM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bMM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bMM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bMM_Arzal@stades@data[,"std_libelle"]<-iconv(bMM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+r_mig_mult@dc@data[,"dis_commentaires"]<-iconv(r_mig_mult@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_mult@dc@data[,"type_df"]<-iconv(r_mig_mult@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_mult@dc@data[,"type_dc"]<-iconv(r_mig_mult@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_mult@dc@data[,"dif_localisation"]<-iconv(r_mig_mult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_mult@taxa@data[,"tax_nom_commun"]<-iconv(r_mig_mult@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_mig_mult@stage@data[,"std_libelle"]<-iconv(r_mig_mult@stage@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bMM_Arzal,internal=FALSE,overwrite=TRUE)
-bilanOperation<-get("bilanOperation",envir=envir_stacomi)
-bilanOperation@data$ope_commentaires<-iconv(bilanOperation@data$ope_commentaires,from="latin1",to="UTF8")
-bilanOperation@data$ope_operateur<-iconv(bilanOperation@data$ope_operateur,from="latin1",to="UTF8")
-bilanOperation@dc@data[,"dis_commentaires"]<-iconv(bilanOperation@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanOperation@dc@data[,"type_df"]<-iconv(bilanOperation@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilanOperation@dc@data[,"type_dc"]<-iconv(bilanOperation@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilanOperation@dc@data[,"dif_localisation"]<-iconv(bilanOperation@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-devtools::use_data(bilanOperation,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig_mult,internal=FALSE,overwrite=TRUE)
+r_mig_mult_ope<-get("report_ope",envir=envir_stacomi)
+r_mig_mult_ope@data$ope_commentaires<-iconv(r_mig_mult_ope@data$ope_commentaires,from="latin1",to="UTF8")
+r_mig_mult_ope@data$ope_operateur<-iconv(r_mig_mult_ope@data$ope_operateur,from="latin1",to="UTF8")
+r_mig_mult_ope@dc@data[,"dis_commentaires"]<-iconv(r_mig_mult_ope@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_mult_ope@dc@data[,"type_df"]<-iconv(r_mig_mult_ope@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_mult_ope@dc@data[,"type_dc"]<-iconv(r_mig_mult_ope@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_mult_ope@dc@data[,"dif_localisation"]<-iconv(r_mig_mult_ope@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(r_mig_mult_ope,internal=FALSE,overwrite=TRUE)
 
 
-bilanFonctionnementDF<-get("bilanFonctionnementDF",envir=envir_stacomi)
-bilanFonctionnementDF@df@data[,"dis_commentaires"]<-iconv(bilanFonctionnementDF@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanFonctionnementDF@df@data[,"type_df"]<-iconv(bilanFonctionnementDF@df@data[,"type_df"],from="latin1",to="UTF8")
-#bilanFonctionnementDF@df@data[,"type_dc"]<-iconv(bilanFonctionnementDF@df@data[,"type_dc"],from="latin1",to="UTF8")
-bilanFonctionnementDF@df@data[,"dif_localisation"]<-iconv(bilanFonctionnementDF@df@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilanFonctionnementDF@data$per_commentaires<-iconv(bilanFonctionnementDF@data$per_commentaires,from="latin1",to="UTF8")
-devtools::use_data(bilanFonctionnementDF,internal=FALSE,overwrite=TRUE)
+r_mig_mult_df<-get("report_df",envir=envir_stacomi)
+r_mig_mult_df@df@data[,"dis_commentaires"]<-iconv(r_mig_mult_df@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_mult_df@df@data[,"type_df"]<-iconv(r_mig_mult_df@df@data[,"type_df"],from="latin1",to="UTF8")
+#r_mig_mult_df@df@data[,"type_dc"]<-iconv(r_mig_mult_df@df@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_mult_df@df@data[,"dif_localisation"]<-iconv(r_mig_mult_df@df@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_mult_df@data$per_commentaires<-iconv(r_mig_mult_df@data$per_commentaires,from="latin1",to="UTF8")
+devtools::use_data(r_mig_mult_df,internal=FALSE,overwrite=TRUE)
 
 
-bilanFonctionnementDC<-get("bilanFonctionnementDC",envir=envir_stacomi)
-bilanFonctionnementDC@dc@data[,"dis_commentaires"]<-iconv(bilanFonctionnementDC@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanFonctionnementDC@dc@data[,"ouv_libelle"]<-iconv(bilanFonctionnementDC@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilanFonctionnementDC@dc@data[,"type_dc"]<-iconv(bilanFonctionnementDC@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilanFonctionnementDC@dc@data[,"type_df"]<-iconv(bilanFonctionnementDC@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilanFonctionnementDC@dc@data[,"dif_localisation"]<-iconv(bilanFonctionnementDC@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilanFonctionnementDC@data$per_commentaires<-iconv(bilanFonctionnementDC@data$per_commentaires,from="latin1",to="UTF8")
+r_mig_mult_dc<-get("report_dc",envir=envir_stacomi)
+r_mig_mult_dc@dc@data[,"dis_commentaires"]<-iconv(r_mig_mult_dc@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_mult_dc@dc@data[,"ouv_libelle"]<-iconv(r_mig_mult_dc@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_mult_dc@dc@data[,"type_dc"]<-iconv(r_mig_mult_dc@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_mult_dc@dc@data[,"type_df"]<-iconv(r_mig_mult_dc@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_mult_dc@dc@data[,"dif_localisation"]<-iconv(r_mig_mult_dc@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_mult_dc@data$per_commentaires<-iconv(r_mig_mult_dc@data$per_commentaires,from="latin1",to="UTF8")
 
-devtools::use_data(bilanFonctionnementDC,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig_mult_dc,internal=FALSE,overwrite=TRUE)
 #################################
-# generates dataset for BilanMigration
+# generates dataset for report_mig
 # from the vertical slot fishway located at the estuary of the Vilaine (Brittany)
 # Taxa Liza Ramada (Thinlip grey mullet) in 2015
 ##################################
@@ -98,157 +98,158 @@ devtools::use_data(bilanFonctionnementDC,internal=FALSE,overwrite=TRUE)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=TRUE)	
-bM_Arzal=new("BilanMigration")
+r_mig=new("report_mig")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi) # "iav."
 assign("sch","iav.",envir_stacomi)
-bM_Arzal=choice_c(bM_Arzal,
+r_mig=choice_c(r_mig,
 	dc=5,
-	taxons=c("Liza ramada"),
-	stades=c("IND"),
+	taxa=c("Liza ramada"),
+	stage=c("IND"),
 	datedebut="2015-01-01",
 	datefin="2015-12-31")
-bM_Arzal<-charge(bM_Arzal)
-bM_Arzal<-connect(bM_Arzal)
-bM_Arzal@dc@data[,"dis_commentaires"]<-iconv(bM_Arzal@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"type_df"]<-iconv(bM_Arzal@dc@data[,"type_df"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"type_dc"]<-iconv(bM_Arzal@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bM_Arzal@dc@data[,"dif_localisation"]<-iconv(bM_Arzal@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bM_Arzal@taxons@data[,"tax_nom_commun"]<-iconv(bM_Arzal@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bM_Arzal@stades@data[,"std_libelle"]<-iconv(bM_Arzal@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+r_mig<-charge(r_mig)
+r_mig<-connect(r_mig)
+r_mig@dc@data[,"dis_commentaires"]<-iconv(r_mig@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig@dc@data[,"type_df"]<-iconv(r_mig@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig@dc@data[,"type_dc"]<-iconv(r_mig@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig@dc@data[,"dif_localisation"]<-iconv(r_mig@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig@taxa@data[,"tax_nom_commun"]<-iconv(r_mig@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_mig@stage@data[,"std_libelle"]<-iconv(r_mig@stage@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bM_Arzal,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig,internal=FALSE,overwrite=TRUE)
 
 
 
-bilanOperation_bM<-get("bilanOperation",envir=envir_stacomi)
-bilanOperation_bM@data$ope_commentaires<-iconv(bilanOperation_bM@data$ope_commentaires,from="latin1",to="UTF8")
-bilanOperation_bM@data$ope_operateur<-iconv(bilanOperation_bM@data$ope_operateur,from="latin1",to="UTF8")
-bilanOperation_bM@dc@data[,"dis_commentaires"]<-iconv(bilanOperation_bM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanOperation_bM@dc@data[,"type_df"]<-iconv(bilanOperation_bM@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilanOperation_bM@dc@data[,"type_dc"]<-iconv(bilanOperation_bM@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilanOperation_bM@dc@data[,"dif_localisation"]<-iconv(bilanOperation_bM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_ope<-get("report_ope",envir=envir_stacomi)
+r_mig_ope@data$ope_commentaires<-iconv(r_mig_ope@data$ope_commentaires,from="latin1",to="UTF8")
+r_mig_ope@data$ope_operateur<-iconv(r_mig_ope@data$ope_operateur,from="latin1",to="UTF8")
+r_mig_ope@dc@data[,"dis_commentaires"]<-iconv(r_mig_ope@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_ope@dc@data[,"type_df"]<-iconv(r_mig_ope@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_ope@dc@data[,"type_dc"]<-iconv(r_mig_ope@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_ope@dc@data[,"dif_localisation"]<-iconv(r_mig_ope@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 
-devtools::use_data(bilanOperation_bM,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig_ope,internal=FALSE,overwrite=TRUE)
 
 
-bilanFonctionnementDF_bM<-get("bilanFonctionnementDF",envir=envir_stacomi)
-bilanFonctionnementDF_bM@df@data[,"dis_commentaires"]<-iconv(bilanFonctionnementDF_bM@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanFonctionnementDF_bM@df@data[,"type_df"]<-iconv(bilanFonctionnementDF_bM@df@data[,"type_df"],from="latin1",to="UTF8")
-#bilanFonctionnementDF_bM@df@data[,"type_dc"]<-iconv(bilanFonctionnementDF_bM@df@data[,"type_dc"],from="latin1",to="UTF8")
-bilanFonctionnementDF_bM@df@data[,"dif_localisation"]<-iconv(bilanFonctionnementDF_bM@df@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilanFonctionnementDF_bM@data$per_commentaires<-iconv(bilanFonctionnementDF_bM@data$per_commentaires,from="latin1",to="UTF8")
-devtools::use_data(bilanFonctionnementDF_bM,internal=FALSE,overwrite=TRUE)
+r_mig_df<-get("report_df",envir=envir_stacomi)
+r_mig_df@df@data[,"dis_commentaires"]<-iconv(r_mig_df@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_df@df@data[,"type_df"]<-iconv(r_mig_df@df@data[,"type_df"],from="latin1",to="UTF8")
+#r_mig_df@df@data[,"type_dc"]<-iconv(r_mig_df@df@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_df@df@data[,"dif_localisation"]<-iconv(r_mig_df@df@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_df@data$per_commentaires<-iconv(r_mig_df@data$per_commentaires,from="latin1",to="UTF8")
+devtools::use_data(r_mig_df,internal=FALSE,overwrite=TRUE)
 
-bilanFonctionnementDC_bM<-get("bilanFonctionnementDC",envir=envir_stacomi)
-bilanFonctionnementDC_bM@dc@data[,"ouv_libelle"]<-iconv(bilanFonctionnementDC_bM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilanFonctionnementDC_bM@dc@data[,"dis_commentaires"]<-iconv(bilanFonctionnementDC_bM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanFonctionnementDC_bM@dc@data[,"type_dc"]<-iconv(bilanFonctionnementDC_bM@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilanFonctionnementDC_bM@dc@data[,"type_df"]<-iconv(bilanFonctionnementDC_bM@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilanFonctionnementDC_bM@dc@data[,"dif_localisation"]<-iconv(bilanFonctionnementDC_bM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilanFonctionnementDC_bM@data$per_commentaires<-iconv(bilanFonctionnementDC_bM@data$per_commentaires,from="latin1",to="UTF8")
-devtools::use_data(bilanFonctionnementDC_bM,internal=FALSE,overwrite=TRUE)
+r_mig_dc<-get("report_dc",envir=envir_stacomi)
+r_mig_dc@dc@data[,"ouv_libelle"]<-iconv(r_mig_dc@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_dc@dc@data[,"dis_commentaires"]<-iconv(r_mig_dc@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_dc@dc@data[,"type_dc"]<-iconv(r_mig_dc@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_dc@dc@data[,"type_df"]<-iconv(r_mig_dc@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_dc@dc@data[,"dif_localisation"]<-iconv(r_mig_dc@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_dc@data$per_commentaires<-iconv(r_mig_dc@data$per_commentaires,from="latin1",to="UTF8")
+devtools::use_data(r_mig_dc,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for BilanFonctionnementDF
+# generates dataset for report_df
 ##################################
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bfDF=new("BilanFonctionnementDF")
-bfDF<-choice_c(bfDF,
+r_df=new("report_df")
+r_df<-choice_c(r_df,
 	1,
 	horodatedebut="2015-01-01",
 	horodatefin="2015-12-31",
 	silent=TRUE)
+tz<-Sys.timezone()
 Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
-bfDF<-charge(bfDF)
-bfDF<-connect(bfDF)
+r_df<-charge(r_df)
+r_df<-connect(r_df)
 
-bfDF@df@data[,"dis_commentaires"]<-iconv(bfDF@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bfDF@df@data[,"type_df"]<-iconv(bfDF@df@data[,"type_df"],from="latin1",to="UTF8")
-#bfDF@df@data[,"type_dc"]<-iconv(bfDF@df@data[,"type_dc"],from="latin1",to="UTF8")
-bfDF@df@data[,"dif_localisation"]<-iconv(bfDF@df@data[,"dif_localisation"],from="latin1",to="UTF8")
-bfDF@data$per_commentaires<-iconv(bfDF@data$per_commentaires,from="latin1",to="UTF8")
-#plot(bfDF,plot.type="1")
-#plot(bfDF,plot.type="2",title="A nice title")
+r_df@df@data[,"dis_commentaires"]<-iconv(r_df@df@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_df@df@data[,"type_df"]<-iconv(r_df@df@data[,"type_df"],from="latin1",to="UTF8")
+#r_df@df@data[,"type_dc"]<-iconv(r_df@df@data[,"type_dc"],from="latin1",to="UTF8")
+r_df@df@data[,"dif_localisation"]<-iconv(r_df@df@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_df@data$per_commentaires<-iconv(r_df@data$per_commentaires,from="latin1",to="UTF8")
+#plot(r_df,plot.type="1")
+#plot(r_df,plot.type="2",title="A nice title")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bfDF,internal=FALSE,overwrite=TRUE)
+Sys.setenv(TZ=tz)
+devtools::use_data(r_df,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for BilanFonctionnementDC
+# generates dataset for report_dc
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bfDC=new("BilanFonctionnementDC")
-bfDC<-choice_c(bfDC,
+r_dc=new("report_dc")
+r_dc<-choice_c(r_dc,
 	5,
 	horodatedebut="2000-01-01",
 	horodatefin="2015-12-31",
 	silent=TRUE)
+tz<-Sys.timezone()
 Sys.setenv(TZ='GMT') # there are data when hour shift, without this the graph will fail
-bfDC<-charge(bfDC)
-bfDC<-connect(bfDC)
-bfDC@dc@data[,"ouv_libelle"]<-iconv(bfDC@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bfDC@dc@data[,"dis_commentaires"]<-iconv(bfDC@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bfDC@dc@data[,"type_df"]<-iconv(bfDC@dc@data[,"type_df"],from="latin1",to="UTF8")
-bfDC@dc@data[,"type_dc"]<-iconv(bfDC@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bfDC@dc@data[,"dif_localisation"]<-iconv(bfDC@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bfDC@data$per_commentaires<-iconv(bfDC@data$per_commentaires,from="latin1",to="UTF8")
-#plot(bfDC,plot.type="1")
-#plot(bfDC,plot.type="2",title="A nice title")
+r_dc<-charge(r_dc)
+r_dc<-connect(r_dc)
+r_dc@dc@data[,"ouv_libelle"]<-iconv(r_dc@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_dc@dc@data[,"dis_commentaires"]<-iconv(r_dc@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_dc@dc@data[,"type_df"]<-iconv(r_dc@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_dc@dc@data[,"type_dc"]<-iconv(r_dc@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_dc@dc@data[,"dif_localisation"]<-iconv(r_dc@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_dc@data$per_commentaires<-iconv(r_dc@data$per_commentaires,from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bfDC,internal=FALSE,overwrite=TRUE)
-
+devtools::use_data(r_dc,internal=FALSE,overwrite=TRUE)
+Sys.setenv(TZ=tz)
 #################################
-# generates dataset for Bilan_carlot
+# generates dataset for report_sample_char
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-b_carlot<-new("Bilan_carlot")
+r_sample_char<-new("report_sample_char")
 # the following will load data for size, 
 # parameters  1786 (total size) and C001 (size at video control)
 # are all size measures
 # dc 5 and 6 are fishways located on the Arzal dam
 # two stages are selected
-b_carlot<-choice_c(b_carlot,
+r_sample_char<-choice_c(r_sample_char,
 	dc=c(5,6),
-	taxons=c("Anguilla anguilla"),
-	stades=c("AGJ","CIV"),
+	taxa=c("Anguilla anguilla"),
+	stage=c("AGJ","CIV"),
 	par=c(1786,"C001"),
 	horodatedebut="2013-01-01",
 	horodatefin="2013-12-31",
 	silent=FALSE)
 # two warning produced, ignored if silent=TRUE
-b_carlot<-connect(b_carlot)
-b_carlot<-calcule(b_carlot)
+r_sample_char<-connect(r_sample_char)
+r_sample_char<-calcule(r_sample_char)
 
-b_carlot@dc@data[,"ouv_libelle"]<-iconv(b_carlot@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-b_carlot@dc@data[,"dis_commentaires"]<-iconv(b_carlot@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-b_carlot@dc@data[,"type_df"]<-iconv(b_carlot@dc@data[,"type_df"],from="latin1",to="UTF8")
-b_carlot@dc@data[,"type_dc"]<-iconv(b_carlot@dc@data[,"type_dc"],from="latin1",to="UTF8")
-b_carlot@dc@data[,"dif_localisation"]<-iconv(b_carlot@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-b_carlot@par@data[,"par_nom"]<-iconv(b_carlot@par@data[,"par_nom"],from="latin1",to="UTF8")
-b_carlot@data$dev_libelle<-iconv(b_carlot@data$dev_libelle,from="latin1",to="UTF8")
-b_carlot@data$std_libelle<-iconv(b_carlot@data$std_libelle,from="latin1",to="UTF8")
-b_carlot@data$val_libelle<-iconv(b_carlot@data$val_libelle,from="latin1",to="UTF8")
-b_carlot@data$par_nom<-iconv(b_carlot@data$par_nom,from="latin1",to="UTF8")
-b_carlot<-calcule(b_carlot)
+r_sample_char@dc@data[,"ouv_libelle"]<-iconv(r_sample_char@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_sample_char@dc@data[,"dis_commentaires"]<-iconv(r_sample_char@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_sample_char@dc@data[,"type_df"]<-iconv(r_sample_char@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_sample_char@dc@data[,"type_dc"]<-iconv(r_sample_char@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_sample_char@dc@data[,"dif_localisation"]<-iconv(r_sample_char@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_sample_char@par@data[,"par_nom"]<-iconv(r_sample_char@par@data[,"par_nom"],from="latin1",to="UTF8")
+r_sample_char@data$dev_libelle<-iconv(r_sample_char@data$dev_libelle,from="latin1",to="UTF8")
+r_sample_char@data$std_libelle<-iconv(r_sample_char@data$std_libelle,from="latin1",to="UTF8")
+r_sample_char@data$val_libelle<-iconv(r_sample_char@data$val_libelle,from="latin1",to="UTF8")
+r_sample_char@data$par_nom<-iconv(r_sample_char@data$par_nom,from="latin1",to="UTF8")
+r_sample_char<-calcule(r_sample_char)
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(b_carlot,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_sample_char,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for BilanMigrationInterAnnuelle
+# generates dataset for report_mig_interannual
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
@@ -263,30 +264,30 @@ baseODBC[c(2,3)]<-rep("pmp",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","pmp.",envir_stacomi)
-bmi<-new("BilanMigrationInterAnnuelle")
+r_mig_interannual<-new("report_mig_interannual")
 
-bmi<-choice_c(bmi,
+r_mig_interannual<-choice_c(r_mig_interannual,
 	dc=16,
-	taxons=c("Anguilla anguilla"),
-	stades=c("AGJ"),
+	taxa=c("Anguilla anguilla"),
+	stage=c("AGJ"),
 	anneedebut=1984,
 	anneefin=2015,
 	silent=TRUE)
 # this will just test that the object is valid... not really a necessary step for this class
-#bmi<-charge(bmi,silent=TRUE)
-bmi<-connect(bmi,silent=TRUE)	
+#r_mig_interannual<-charge(r_mig_interannual,silent=TRUE)
+r_mig_interannual<-connect(r_mig_interannual,silent=TRUE)	
 
 
-bmi@dc@data[,"ouv_libelle"]<-iconv(bmi@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bmi@dc@data[,"dis_commentaires"]<-iconv(bmi@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bmi@dc@data[,"type_df"]<-iconv(bmi@dc@data[,"type_df"],from="latin1",to="UTF8")
-bmi@dc@data[,"type_dc"]<-iconv(bmi@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bmi@dc@data[,"dif_localisation"]<-iconv(bmi@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_interannual@dc@data[,"ouv_libelle"]<-iconv(r_mig_interannual@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_interannual@dc@data[,"dis_commentaires"]<-iconv(r_mig_interannual@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_interannual@dc@data[,"type_df"]<-iconv(r_mig_interannual@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_interannual@dc@data[,"type_dc"]<-iconv(r_mig_interannual@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_interannual@dc@data[,"dif_localisation"]<-iconv(r_mig_interannual@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bmi,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig_interannual,internal=FALSE,overwrite=TRUE)
 #################################
-# generates dataset for BilanAnnuels
+# generates dataset for report_annual
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
@@ -298,27 +299,27 @@ baseODBC[c(2,3)]<-rep("iav",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","iav.",envir_stacomi)
-bilA<-new("BilanAnnuels")
-bilA<-choice_c(bilA,
+r_ann<-new("report_annual")
+r_ann<-choice_c(r_ann,
 	dc=c(5,6,12),
-	taxons=c("Anguilla anguilla"),
-	stades=c("AGJ","AGG"),
+	taxa=c("Anguilla anguilla"),
+	stage=c("AGJ","AGG"),
 	anneedebut="1996",
 	anneefin="2015",
 	silent=FALSE)
-bilA <- connect(bilA)
-bilA@dc@data[,"ouv_libelle"] <- iconv(bilA@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilA@dc@data[,"dis_commentaires"] <- iconv(bilA@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilA@dc@data[,"type_df"] <- iconv(bilA@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilA@dc@data[,"type_dc"] <- iconv(bilA@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilA@dc@data[,"dif_localisation"] <- iconv(bilA@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilA@taxons@data[,"tax_nom_commun"] <- iconv(bilA@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bilA@stades@data[,"std_libelle"] <- iconv(bilA@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+r_ann <- connect(r_ann)
+r_ann@dc@data[,"ouv_libelle"] <- iconv(r_ann@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_ann@dc@data[,"dis_commentaires"] <- iconv(r_ann@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_ann@dc@data[,"type_df"] <- iconv(r_ann@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_ann@dc@data[,"type_dc"] <- iconv(r_ann@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_ann@dc@data[,"dif_localisation"] <- iconv(r_ann@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_ann@taxa@data[,"tax_nom_commun"] <- iconv(r_ann@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_ann@stage@data[,"std_libelle"] <- iconv(r_ann@stage@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bilA,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_ann,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for BilanAnnuels : migradour
+# generates dataset for report_annual : migradour
 ##################################
 
 
@@ -327,66 +328,66 @@ baseODBC[c(2,3)]<-rep("migradour",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","migradour.",envir_stacomi)
-bilanArg<-new("BilanAnnuels")
-bilAM<-choice_c(bilAM,
+r_ann_adour<-new("report_annual")
+r_ann_adour<-choice_c(r_ann_adour,
 	dc=c(33:40),
-	taxons=c("Salmo salar"),
-	stades=c(11),
+	taxa=c("Salmo salar"),
+	stage=c(11),
 	anneedebut="1996",
 	anneefin="2015",
 	silent=FALSE)
-bilAM<-connect(bilAM)
-bilAM@dc@data[,"ouv_libelle"]<-iconv(bilAM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilAM@dc@data[,"dis_commentaires"]<-iconv(bilAM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilAM@dc@data[,"type_df"]<-iconv(bilAM@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilAM@dc@data[,"type_dc"]<-iconv(bilAM@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilAM@dc@data[,"dc_code"]<-iconv(bilAM@dc@data[,"dc_code"],from="latin1",to="UTF8")
-bilAM@dc@data[,"dif_localisation"]<-iconv(bilAM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilAM@taxons@data[,"tax_nom_commun"]<-iconv(bilAM@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bilAM@stades@data[,"std_libelle"]<-iconv(bilAM@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+r_ann_adour<-connect(r_ann_adour)
+r_ann_adour@dc@data[,"ouv_libelle"]<-iconv(r_ann_adour@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_ann_adour@dc@data[,"dis_commentaires"]<-iconv(r_ann_adour@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_ann_adour@dc@data[,"type_df"]<-iconv(r_ann_adour@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_ann_adour@dc@data[,"type_dc"]<-iconv(r_ann_adour@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_ann_adour@dc@data[,"dc_code"]<-iconv(r_ann_adour@dc@data[,"dc_code"],from="latin1",to="UTF8")
+r_ann_adour@dc@data[,"dif_localisation"]<-iconv(r_ann_adour@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_ann_adour@taxa@data[,"tax_nom_commun"]<-iconv(r_ann_adour@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_ann_adour@stage@data[,"std_libelle"]<-iconv(r_ann_adour@stage@data[,"std_libelle"],from="latin1",to="UTF8")
 setwd("C:/workspace/stacomir/pkg/stacomir")
-devtools::use_data(bilAM,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_ann_adour,internal=FALSE,overwrite=TRUE)
 
 
 
 #################################
-# generates dataset for BilanArgenture : fd80 the somme
+# generates dataset for reportArgenture : fd80 the somme
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bilanArg<-new("BilanArgentee")
+r_silver<-new("report_silver_eel")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("fd80",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","fd80.",envir_stacomi)
-bilanArg<-choice_c(bilanArg,
+r_silver<-choice_c(r_silver,
 	dc=c(2,6),			
 	horodatedebut="2010-09-01",
 	horodatefin="2016-10-04",
 	silent=FALSE)
 # two warning produced, ignored if silent=TRUE
-bilanArg<-connect(bilanArg)
-bilanArg@dc@data[,"ouv_libelle"]<-iconv(bilanArg@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilanArg@dc@data[,"dis_commentaires"]<-iconv(bilanArg@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilanArg@dc@data[,"type_df"]<-iconv(bilanArg@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilanArg@dc@data[,"type_dc"]<-iconv(bilanArg@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilanArg@dc@data[,"dif_localisation"]<-iconv(bilanArg@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilanArg@taxons@data[,"tax_nom_commun"]<-iconv(bilanArg@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bilanArg@stades@data[,"std_libelle"]<-iconv(bilanArg@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-bilanArg@par@data[,"par_nom"]<-iconv(bilanArg@par@data[,"par_nom"],from="latin1",to="UTF8")
-bilanArg@data$dev_libelle<-iconv(bilanArg@data$dev_libelle,from="latin1",to="UTF8")
-bilanArg@data$std_libelle<-iconv(bilanArg@data$std_libelle,from="latin1",to="UTF8")
-bilanArg@data$val_libelle<-iconv(bilanArg@data$val_libelle,from="latin1",to="UTF8")
-bilanArg@data$par_nom<-iconv(bilanArg@data$par_nom,from="latin1",to="UTF8")
+r_silver<-connect(r_silver)
+r_silver@dc@data[,"ouv_libelle"]<-iconv(r_silver@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_silver@dc@data[,"dis_commentaires"]<-iconv(r_silver@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_silver@dc@data[,"type_df"]<-iconv(r_silver@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_silver@dc@data[,"type_dc"]<-iconv(r_silver@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_silver@dc@data[,"dif_localisation"]<-iconv(r_silver@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_silver@taxa@data[,"tax_nom_commun"]<-iconv(r_silver@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_silver@stage@data[,"std_libelle"]<-iconv(r_silver@stage@data[,"std_libelle"],from="latin1",to="UTF8")
+r_silver@par@data[,"par_nom"]<-iconv(r_silver@par@data[,"par_nom"],from="latin1",to="UTF8")
+r_silver@data$dev_libelle<-iconv(r_silver@data$dev_libelle,from="latin1",to="UTF8")
+r_silver@data$std_libelle<-iconv(r_silver@data$std_libelle,from="latin1",to="UTF8")
+r_silver@data$val_libelle<-iconv(r_silver@data$val_libelle,from="latin1",to="UTF8")
+r_silver@data$par_nom<-iconv(r_silver@data$par_nom,from="latin1",to="UTF8")
 
-devtools::use_data(bilanArg,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_silver,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for BilanPoidsMoyen : iav
+# generates dataset for report_ge_weight : iav
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 Sys.setenv(LANG = "EN")
@@ -394,128 +395,128 @@ require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bilPM<-new("Bilan_poids_moyen")
+r_gew<-new("report_ge_weight")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("iav",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","iav.",envir_stacomi)
-bilPM@liste<-charge(object=bilPM@liste,listechoice=c("=1",">1","tous"),label="")
-bilPM<-choice_c(bilPM,
+r_gew@liste<-charge(object=r_gew@liste,listechoice=c("=1",">1","tous"),label="")
+r_gew<-choice_c(r_gew,
 	dc=c(6),			
 	anneedebut="2009",
 	anneefin="2016",
 	selectedvalue=">1",
 	silent=FALSE)
-bilPM<-connect(bilPM)	
-bilPM@dc@data[,"ouv_libelle"]<-iconv(bilPM@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilPM@dc@data[,"dis_commentaires"]<-iconv(bilPM@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilPM@dc@data[,"type_df"]<-iconv(bilPM@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilPM@dc@data[,"type_dc"]<-iconv(bilPM@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilPM@dc@data[,"dif_localisation"]<-iconv(bilPM@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilPM<-calcule(bilPM)
-devtools::use_data(bilPM,internal=FALSE,overwrite=TRUE)
+r_gew<-connect(r_gew)	
+r_gew@dc@data[,"ouv_libelle"]<-iconv(r_gew@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_gew@dc@data[,"dis_commentaires"]<-iconv(r_gew@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_gew@dc@data[,"type_df"]<-iconv(r_gew@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_gew@dc@data[,"type_dc"]<-iconv(r_gew@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_gew@dc@data[,"dif_localisation"]<-iconv(r_gew@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_gew<-calcule(r_gew)
+devtools::use_data(r_gew,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for BilanAgedemer bilan_adm
+# generates dataset for report_sea_age r_seaa
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bilan_adm<-new("BilanAgedemer")
+r_seaa<-new("report_sea_age")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","logrami.",envir_stacomi)
 
-bilan_adm<-choice_c(bilan_adm,
+r_seaa<-choice_c(r_seaa,
 	dc=c(107,108,101),			
 	horodatedebut="2012-01-01",
 	horodatefin="2012-12-31",
 	limit1hm=675,
 	limit2hm=875,
 	silent=FALSE)
-bilan_adm<-connect(bilan_adm)
-bilan_adm@dc@data[,"ouv_libelle"]<-iconv(bilan_adm@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bilan_adm@dc@data[,"dis_commentaires"]<-iconv(bilan_adm@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bilan_adm@dc@data[,"type_df"]<-iconv(bilan_adm@dc@data[,"type_df"],from="latin1",to="UTF8")
-bilan_adm@dc@data[,"type_dc"]<-iconv(bilan_adm@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bilan_adm@dc@data[,"dif_localisation"]<-iconv(bilan_adm@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bilan_adm@data[,"car_valeur_quantitatif"]<-bilan_adm@data[,"car_valeur_quantitatif"]*10
-bilan_adm@data[,"par_nom"]<-iconv(bilan_adm@data[,"par_nom"],from="latin1",to="UTF8")
-bilan_adm@data[,"dev_libelle"]<-iconv(bilan_adm@data[,"dev_libelle"],from="latin1",to="UTF8")
-bilan_adm@data[,"std_libelle"]<-iconv(bilan_adm@data[,"std_libelle"],from="latin1",to="UTF8")
-bilan_adm@taxons@data[,"tax_nom_commun"]<-iconv(bilan_adm@taxons@data[,"tax_nom_commun"],from="latin1",to="UTF8")
-bilan_adm@par@data[,"par_nom"]<-iconv(bilan_adm@par@data[,"par_nom"],from="latin1",to="UTF8")
-bilan_adm@stades@data[,"std_libelle"]<-iconv(bilan_adm@stades@data[,"std_libelle"],from="latin1",to="UTF8")
-bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]<-
-	bilan_adm@data$car_valeur_quantitatif[bilan_adm@data$car_par_code=="C001"]/10
-bilan_adm<-calcule(bilan_adm)
-devtools::use_data(bilan_adm,internal=FALSE,overwrite=TRUE)
+r_seaa<-connect(r_seaa)
+r_seaa@dc@data[,"ouv_libelle"]<-iconv(r_seaa@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_seaa@dc@data[,"dis_commentaires"]<-iconv(r_seaa@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_seaa@dc@data[,"type_df"]<-iconv(r_seaa@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_seaa@dc@data[,"type_dc"]<-iconv(r_seaa@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_seaa@dc@data[,"dif_localisation"]<-iconv(r_seaa@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_seaa@data[,"car_valeur_quantitatif"]<-r_seaa@data[,"car_valeur_quantitatif"]*10
+r_seaa@data[,"par_nom"]<-iconv(r_seaa@data[,"par_nom"],from="latin1",to="UTF8")
+r_seaa@data[,"dev_libelle"]<-iconv(r_seaa@data[,"dev_libelle"],from="latin1",to="UTF8")
+r_seaa@data[,"std_libelle"]<-iconv(r_seaa@data[,"std_libelle"],from="latin1",to="UTF8")
+r_seaa@taxa@data[,"tax_nom_commun"]<-iconv(r_seaa@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
+r_seaa@par@data[,"par_nom"]<-iconv(r_seaa@par@data[,"par_nom"],from="latin1",to="UTF8")
+r_seaa@stage@data[,"std_libelle"]<-iconv(r_seaa@stage@data[,"std_libelle"],from="latin1",to="UTF8")
+r_seaa@data$car_valeur_quantitatif[r_seaa@data$car_par_code=="C001"]<-
+	r_seaa@data$car_valeur_quantitatif[r_seaa@data$car_par_code=="C001"]/10
+r_seaa<-calcule(r_seaa)
+devtools::use_data(r_seaa,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for BilanMigrationInterannuelle with two dc
+# generates dataset for report_migInterannuelle with two dc
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bmi_vichy<-new("BilanMigrationInterAnnuelle")
+r_mig_interannual_vichy<-new("report_mig_interannual")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
 assign("baseODBC",baseODBC,envir_stacomi)
 sch<-get("sch",envir=envir_stacomi)
 assign("sch","logrami.",envir_stacomi)
 
-bmi_vichy<-choice_c(bmi_vichy,
+r_mig_interannual_vichy<-choice_c(r_mig_interannual_vichy,
 	dc=c(107,108),			
-	taxons=c("Salmo salar"),
-	stades=c("5"),
+	taxa=c("Salmo salar"),
+	stage=c("5"),
 	anneedebut="1997",
 	anneefin="2012",
 	silent=FALSE)
-#bmi_vichy<-charge(bmi_vichy)
-bmi_vichy<-connect(bmi_vichy)
-bmi_vichy@dc@data[,"ouv_libelle"]<-iconv(bmi_vichy@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bmi_vichy@dc@data[,"dis_commentaires"]<-iconv(bmi_vichy@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bmi_vichy@dc@data[,"type_df"]<-iconv(bmi_vichy@dc@data[,"type_df"],from="latin1",to="UTF8")
-bmi_vichy@dc@data[,"type_dc"]<-iconv(bmi_vichy@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bmi_vichy@dc@data[,"dif_localisation"]<-iconv(bmi_vichy@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-devtools::use_data(bmi_vichy,internal=FALSE,overwrite=TRUE)
+#r_mig_interannual_vichy<-charge(r_mig_interannual_vichy)
+r_mig_interannual_vichy<-connect(r_mig_interannual_vichy)
+r_mig_interannual_vichy@dc@data[,"ouv_libelle"]<-iconv(r_mig_interannual_vichy@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_interannual_vichy@dc@data[,"dis_commentaires"]<-iconv(r_mig_interannual_vichy@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_interannual_vichy@dc@data[,"type_df"]<-iconv(r_mig_interannual_vichy@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_interannual_vichy@dc@data[,"type_dc"]<-iconv(r_mig_interannual_vichy@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_interannual_vichy@dc@data[,"dif_localisation"]<-iconv(r_mig_interannual_vichy@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(r_mig_interannual_vichy,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for bilanConditionEnv
+# generates dataset for report_env
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bil_CE<-new("BilanConditionEnv")
-bil_CE<-choice_c(bil_CE,
+r_env<-new("report_env")
+r_env<-choice_c(r_env,
 	stationMesure=c("temp_gabion","coef_maree"),
 	datedebut="2008-01-01",
 	datefin="2008-12-31",
 	silent=FALSE)	
-bil_CE<-connect(bil_CE)
-bil_CE@stationMesure@data$stm_description<-iconv(bil_CE@stationMesure@data$stm_description,from="latin1",to="UTF8")
-devtools::use_data(bil_CE,internal=FALSE,overwrite=TRUE)
+r_env<-connect(r_env)
+r_env@stationMesure@data$stm_description<-iconv(r_env@stationMesure@data$stm_description,from="latin1",to="UTF8")
+devtools::use_data(r_env,internal=FALSE,overwrite=TRUE)
 
 #################################
-# generates dataset for bilanMigrationCar
+# generates dataset for report_mig_char
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
 stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
-bmC<-new("BilanMigrationCar")
+r_mig_char<-new("report_mig_char")
 baseODBC<-get("baseODBC",envir=envir_stacomi)
 baseODBC[c(2,3)]<-rep("logrami",2)
 assign("baseODBC",baseODBC,envir_stacomi)
@@ -523,26 +524,26 @@ sch<-get("sch",envir=envir_stacomi)
 assign("sch","logrami.",envir_stacomi)
 # here parqual is not in the list
 # so this is equivalent to parqual=NULL
-bmC<-choice_c(bmC,
+r_mig_char<-choice_c(r_mig_char,
 	dc=c(107,108,101),
-	taxons=c("Salmo salar"),
-	stades=c('5','11','BEC','BER','IND'),
+	taxa=c("Salmo salar"),
+	stage=c('5','11','BEC','BER','IND'),
 	parquan=c('A124','C001','1786','1785'),
 	horodatedebut="2012-01-01",
 	horodatefin="2012-12-31",
 	silent=FALSE)
-# bmC<-charge(bmC) not necessary there
-bmC<-connect(bmC)
-bmC@dc@data[,"ouv_libelle"]<-iconv(bmC@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bmC@dc@data[,"dis_commentaires"]<-iconv(bmC@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bmC@dc@data[,"type_df"]<-iconv(bmC@dc@data[,"type_df"],from="latin1",to="UTF8")
-bmC@dc@data[,"type_dc"]<-iconv(bmC@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bmC@dc@data[,"dif_localisation"]<-iconv(bmC@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-devtools::use_data(bmC,internal=FALSE,overwrite=TRUE)
+# r_mig_char<-charge(r_mig_char) not necessary there
+r_mig_char<-connect(r_mig_char)
+r_mig_char@dc@data[,"ouv_libelle"]<-iconv(r_mig_char@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_char@dc@data[,"dis_commentaires"]<-iconv(r_mig_char@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_char@dc@data[,"type_df"]<-iconv(r_mig_char@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_char@dc@data[,"type_dc"]<-iconv(r_mig_char@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_char@dc@data[,"dif_localisation"]<-iconv(r_mig_char@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+devtools::use_data(r_mig_char,internal=FALSE,overwrite=TRUE)
 
 
 #################################
-# generates dataset for BilanMigrationMultConditionEnv
+# generates dataset for report_mig_env
 ##################################
 setwd("C:/workspace/stacomir/pkg/stacomir")
 require(stacomiR)
@@ -550,24 +551,24 @@ stacomi(gr_interface=FALSE,
 	login_window=FALSE,
 	database_expected=FALSE)
 
-bmmCE<-new("BilanMigrationMultConditionEnv")
-bmmCE<-choice_c(bmmCE,
+r_mig_env<-new("report_mig_env")
+r_mig_env<-choice_c(r_mig_env,
 	dc=c(5,6,12),
-	taxon=c("Anguilla anguilla"),
-	stade=c("AGJ","AGG","CIV"),
+	taxa=c("Anguilla anguilla"),
+	stage=c("AGJ","AGG","CIV"),
 	stationMesure=c("temp_gabion","coef_maree","phases_lune"),
 	datedebut="2008-01-01",
 	datefin="2008-12-31",
 	silent=FALSE)	
-bmmCE<-charge(bmmCE)
-bmmCE<-connect(bmmCE)
+r_mig_env<-charge(r_mig_env)
+r_mig_env<-connect(r_mig_env)
 
-bmmCE@bilanMigrationMult@dc@data[,"ouv_libelle"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
-bmmCE@bilanMigrationMult@dc@data[,"dis_commentaires"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
-bmmCE@bilanMigrationMult@dc@data[,"type_df"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_df"],from="latin1",to="UTF8")
-bmmCE@bilanMigrationMult@dc@data[,"type_dc"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"type_dc"],from="latin1",to="UTF8")
-bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"]<-iconv(bmmCE@bilanMigrationMult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
-bmmCE@bilanConditionEnv@stationMesure@data$stm_description<-iconv(bmmCE@bilanConditionEnv@stationMesure@data$stm_description,from="latin1",to="UTF8")
-bmmCE@bilanMigrationMult@stades@data[,"std_libelle"]<-iconv(bmmCE@bilanMigrationMult@stades@data[,"std_libelle"],from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@dc@data[,"ouv_libelle"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@dc@data[,"dis_commentaires"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@dc@data[,"type_df"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"type_df"],from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@dc@data[,"type_dc"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"type_dc"],from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@dc@data[,"dif_localisation"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
+r_mig_env@report_env@stationMesure@data$stm_description<-iconv(r_mig_env@report_env@stationMesure@data$stm_description,from="latin1",to="UTF8")
+r_mig_env@report_mig_mult@stage@data[,"std_libelle"]<-iconv(r_mig_env@report_mig_mult@stage@data[,"std_libelle"],from="latin1",to="UTF8")
 
-devtools::use_data(bmmCE,internal=FALSE,overwrite=TRUE)
+devtools::use_data(r_mig_env,internal=FALSE,overwrite=TRUE)
