@@ -513,12 +513,13 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 		  grdata<-rbind(grdata,data)
 		}
 		names(grdata)<-tolower(names(grdata))
-		grdata<-sqldf::sqldf("select sum(effectif_total) as effectif_total,
+		grdata<-sqldf::sqldf(x="select sum(effectif_total) as effectif_total,
 				\"no.pas\",
 				debut_pas
 				from grdata
 				group by debut_pas,\"no.pas\"
-				order by debut_pas")
+				order by debut_pas",
+                    drv="PostgreSQL")
 		grdata_without_hole<-merge(
 			data.frame(no.pas=as.numeric(strftime(report_mig_mult@time.sequence,format="%j"))-1,
 				debut_pas=report_mig_mult@time.sequence),
@@ -893,10 +894,10 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 	  ts_id=as.numeric(strftime(time.sequence,format="%j")),stringsAsFactors =FALSE)
   dfts<-merge(df.ts,df,by="ts_id")
   datasub1<-merge(dfts,datasub,by="lot_identifiant")
-# ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
+# to do a group by it is good to use sqldf
   datasub1$value<-as.numeric(datasub1$value) # sinon arrondis e des entiers
   if (negative){
-	datasub2<-sqldf::sqldf("SELECT  debut_pas,
+	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
 			fin_pas,
 			sum(value*coef) as value,
 			type_de_quantite,
@@ -920,10 +921,11 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 			FROM datasub1 		
 			where value>=0
 			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite"
+			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite",
+        drv="PostgreSQL"
 	)
   } else {
-	datasub2<-sqldf::sqldf("SELECT  debut_pas,
+	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
 			fin_pas,
 			sum(value*coef) as value,
 			type_de_quantite,
@@ -933,7 +935,8 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 			lot_methode_obtention 	
 			FROM datasub1 		
 			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
+			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ",
+        drv="PostgreSQL")
   }
   # if some samples overlap between the current year and the year arround the current year,
   # then the calculation will have hampered our numbers of a small amount
@@ -970,6 +973,7 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
+  sqldf.options<-get("sqldf.options",envir_stacomi)
   df.ts=data.frame(debut_pas=time.sequence,
 	  fin_pas=time.sequence+as.difftime(1,units="days"),
 	  ts_id=strftime(time.sequence,format="%j"),stringsAsFactors =FALSE)
@@ -977,7 +981,7 @@ fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
   datasub1<-merge(df.ts,datasub,by="ts_id")
   # ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
   if (negative){
-	datasub2<-sqldf::sqldf("SELECT  debut_pas,
+	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
 			fin_pas,
 			sum(value) as value,
 			type_de_quantite,
@@ -1001,9 +1005,10 @@ fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
 			FROM datasub1 
 			WHERE value<0
 			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ")
+			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ",
+        drv="PostgreSQL")
   } else {
-	datasub2<-sqldf::sqldf("SELECT  debut_pas,
+	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
 			fin_pas,
 			sum(value) as value,
 			type_de_quantite,
@@ -1013,7 +1018,8 @@ fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
 			lot_methode_obtention
 			FROM datasub1 
 			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite")
+			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite",
+        drv="PostgreSQL")
   }
   stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
   datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")

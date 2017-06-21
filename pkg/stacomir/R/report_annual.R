@@ -147,14 +147,15 @@ setMethod("connect",signature=signature("report_annual"),
 			as.numeric(end_of_the_year)/as.numeric(operation_duration)
 		data_end_of_the_year$ope_date_fin<-round_years
 		final_data<-rbind(data_not_to_cut,data_beginning_of_the_year,data_end_of_the_year)
-		r_ann@data<-sqldf(" select sum(lot_effectif) as effectif, annee_debut as annee, 
+		r_ann@data<-sqldf(x=" select sum(lot_effectif) as effectif, annee_debut as annee, 
 				ope_dic_identifiant,
 				lot_tax_code, 
 				lot_std_code  
 				from 
 				final_data							
 				group by annee, ope_dic_identifiant, lot_tax_code, lot_std_code 
-				order by ope_dic_identifiant, annee, lot_tax_code, lot_std_code; ")
+				order by ope_dic_identifiant, annee, lot_tax_code, lot_std_code; ",
+                    drv="PostgreSQL")
 		
 	  }
 	  #If we have dc and years with no difference in the years of start and end for the same operation we calculate the "classical" sum by year
