@@ -565,6 +565,7 @@ r_mig_env<-choice_c(r_mig_env,
 	silent=FALSE)	
 r_mig_env<-charge(r_mig_env)
 r_mig_env<-connect(r_mig_env)
+r_mig_env<-calcule(r_mig_env,silent=TRUE)
 
 r_mig_env@report_mig_mult@dc@data[,"ouv_libelle"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"ouv_libelle"],from="latin1",to="UTF8")
 r_mig_env@report_mig_mult@dc@data[,"dis_commentaires"]<-iconv(r_mig_env@report_mig_mult@dc@data[,"dis_commentaires"],from="latin1",to="UTF8")

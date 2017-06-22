@@ -16,7 +16,7 @@ stacomi(gr_interface=FALSE,
 	  silent=FALSE)	
   r_mig_env<-charge(r_mig_env) # this is necessary to load operations, DF and DC
   r_mig_env<-connect(r_mig_env)
-  
+  r_mig_env<-calcule(r_mig_env,silent=TRUE)
 }	
 
 data("r_mig_env")
