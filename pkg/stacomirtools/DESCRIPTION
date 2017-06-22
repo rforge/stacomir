@@ -6,8 +6,8 @@ Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.
 Author: Cedric Briand [aut, cre]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
 Description: This package provides S4 class wrappers for the ODBC connection, it also provides some 
-utilities to paste small datasets to clipboard, rename columns. It is used by the package stacomiR for
-connections to the database. 
+    utilities to paste small datasets to clipboard, rename columns. It is used by the package stacomiR for
+    connections to the database. 
 License: GPL (>= 2)
 Collate:
     'ConnectionODBC.r'
