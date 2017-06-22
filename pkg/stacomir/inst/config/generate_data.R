@@ -59,6 +59,7 @@ r_mig_mult@dc@data[,"type_dc"]<-iconv(r_mig_mult@dc@data[,"type_dc"],from="latin
 r_mig_mult@dc@data[,"dif_localisation"]<-iconv(r_mig_mult@dc@data[,"dif_localisation"],from="latin1",to="UTF8")
 r_mig_mult@taxa@data[,"tax_nom_commun"]<-iconv(r_mig_mult@taxa@data[,"tax_nom_commun"],from="latin1",to="UTF8")
 r_mig_mult@stage@data[,"std_libelle"]<-iconv(r_mig_mult@stage@data[,"std_libelle"],from="latin1",to="UTF8")
+r_mig_mult<-calcule(r_mig_mult,silent=FALSE)
 setwd("C:/workspace/stacomir/pkg/stacomir")
 devtools::use_data(r_mig_mult,internal=FALSE,overwrite=TRUE)
 r_mig_mult_ope<-get("report_ope",envir=envir_stacomi)

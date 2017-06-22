@@ -69,7 +69,11 @@ setValidity("report_mig",function(object)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @keywords internal
 h_report_migcalc=function(h,...){
-  report_mig<-get("report_mig",envir=envir_stacomi)
+  if (exists("report_mig",envir_stacomi)) {
+	report_mig<-get("report_mig",envir_stacomi)
+  } else {      
+	funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
+  }
   report_mig<-charge(report_mig)
   report_mig<-connect(report_mig)
   report_mig<-calcule(report_mig)
@@ -369,12 +373,7 @@ setMethod("print",signature=signature("report_mig"),definition=function(x,...){
 #' @export
 setMethod("plot",signature(x = "report_mig", y = "ANY"),definition=function(x, y,plot.type="standard",color=NULL, color_ope=NULL,silent=FALSE,...){ 
 	  #report_mig<-r_mig
-	  #report_mig<-x
-	  if (exists("report_mig",envir_stacomi)) {
-		report_mig<-get("report_mig",envir_stacomi)
-	  } else {      
-		funout(gettext("You need to launch computation first, clic on calc\n",domain="R-stacomiR"),arret=TRUE)
-	  }
+	  report_mig<-x
 	  ################################################################
 	  #                 standard plot
 	  ################################################################

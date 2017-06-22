@@ -187,7 +187,10 @@ setMethod("choice_c",signature=signature("report_mig_mult"),definition=function(
 #' different rows
 #' @param silent Default FALSE, should messages be stopped
 #' @note The class does not handle escapement rates, though structurally those are present in the database. If you 
-#' want to use those you will have to do the calculation manually from the data in \code{report_mig_mult@data}
+#' want to use those you will have to do the calculation manually from the data in \code{report_mig_mult@data}.
+#' Note also that running the calcule method requires to have a database called test in postgres, and empty
+#' database in which all sqldf group by queries are run. The user and password for the test database are taken 
+#' from the calcmig.csv configuration file.
 #' @return report_mig_mult with a list in slot calcdata. For each dc one will find a list with the following elements
 #' \describe{
 #' \item{method}{In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_report_mig_mult} method and the value indicated in method is "sum".
@@ -967,6 +970,8 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 #' @param time.sequence the time sequence to be filled in with new data
 #' @param datasub the initial dataset
 #' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
+#' @note The method uses sqldf, configured to access a postgres database, and runs caclulations on a database called
+#' test (the username and password for test are set in the calcmig.csv configuration file). 
 #' @return A data.frame with number summed over over the time.sequence. 
 #' The function returns the same output than \link{fun_report_mig_mult_overlaps}
 #' but is intended to work faster

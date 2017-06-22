@@ -58,6 +58,10 @@ stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
   # launching charge will also load classes associated with the report
   # e.g. report_ope, report_df, report_dc
   r_mig<-connect(r_mig)
+  ########################
+# calculations
+# note this requires to have a database test configured in postgres for use with sqldf  
+  ########################
   r_mig<-calcule(r_mig,silent=TRUE)
 }
 ########################
@@ -76,10 +80,7 @@ assign("report_df",r_mig_df,envir=envir_stacomi)
 data("r_mig_dc")
 assign("report_dc",r_mig_dc,envir=envir_stacomi)
 
-########################
-# calculations
-########################
-r_mig<-calcule(r_mig,silent=TRUE)
+
 #Individual plot for all DC (standard), taxa and stage where data present
 #silent argument to stop all messages
 plot(r_mig,plot.type="standard",silent=TRUE)
