@@ -20,7 +20,6 @@ stacomi(gr_interface=FALSE,
 }	
 
 data("r_mig_env")
-r_mig_env<-calcule(r_mig_env,silent=TRUE)
 # An example of plot with custom colors.
 plot(r_mig_env,
 	color_station=c("temp_gabion"="red","coef_maree"="blue","phases_lune"="pink"),
