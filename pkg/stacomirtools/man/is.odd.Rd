@@ -17,4 +17,7 @@
 \author{
   Adapted from Henrik Bengtsson       
 }
-
+\examples{
+is.odd(1)
+is.odd(2)
+}

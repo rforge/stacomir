@@ -59,10 +59,42 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 			msg6<-gettext("success")
 			verbose<-exists("showmerequest",envir=envir_stacomi)
 			
+
+
+#' Function loaded in this package to avoid errors, if the package is called
+#' without stacomiR
+#' 
+#' This function will be replaced by a longer function using gWidgets if the
+#' package stacomiR is loaded. It is provided there to avoid to pointing to an
+#' undefined global function. Normally the program tests for the existence of
+#' and environment envir_stacomi which indicates that the messages are to be
+#' displayed in the gWidget interface, so this code is to avoid notes in
+#' R.check.
+#' 
+#' 
+#' @param text The text to display
+#' @param arret If true calls the program to stop and the message to be
+#' displayed
+#' @param wash Only used when called from within stacomiR, and there is a
+#' widget interface, kept there for consistency
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 			funout<-function(text,arret=FALSE){
 				if(arret) stop(text) else print(text)
 				return(NULL)
 			}
+
+
+#' very usefull function remove factor that appear, noticeably after loading
+#' with ODBC
+#' 
+#' function used to remove factors that appear, noticeably after loading with
+#' ODBC
+#' 
+#' 
+#' @param df a data.frame
+#' @return df
+#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export killfactor
 			killfactor=function(df){
 				for (i in 1:ncol(df))
 				{

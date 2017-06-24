@@ -14,4 +14,8 @@
 \author{
   Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-
+\examples{
+df <- data.frame("var1" = c("blue","red"), "var2" = c("nice","ugly"))
+ftdf <- ftable(df)
+tab2df(ftdf)
+}

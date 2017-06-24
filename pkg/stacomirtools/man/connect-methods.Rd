@@ -22,8 +22,9 @@ the connection may send message in the native language if stacomiR package is in
 \keyword{methods}
 \examples{
  showMethods("connect")
-## 
-#object<-new("RequeteODBCwhere")
-#connect(object)
+\dontrun{
+object<-new("RequeteODBCwhere")
+connect(object)
+}
 }
 

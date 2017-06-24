@@ -5,16 +5,25 @@
 #############################################
 # functions copied from Hmisc
 #############################################
+
+
 #' function used to print the html tables of output (see xtable documentation)
+#' 
+#' see \pkg{xtable} for further description, an xtable is created and printed
+#' to html format
+#' 
+#' 
 #' @param data a data frame
 #' @param caption the caption
-#' @param top of top the caption is placed on top
-#' @param outfile outfile is the path to the file
+#' @param top a logical, if true the caption is placed on top
+#' @param outfile the path to the file
 #' @param clipboard if clipboard TRUE, a copy to the clipboard is made
 #' @param append is the file appended to the previous one ?
-#' @param digits 
-#' @param ... 
+#' @param digits the number of digits
+#' @param ...  additional parameters to be passed to the function
+#' @return an xtable
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @export funhtml
 funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=TRUE,digits=NULL,...){
 	
 	xt=xtable::xtable(data, caption=caption,digits=digits)
@@ -25,13 +34,19 @@ funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=
 ###########################################
 # special functions (exported as they are usefull)
 #############################################
+
+
 #' This function replaces the variable names in a data.frame
+#' 
+#' This function replaces the variable names in a data.frame
+#' 
+#' 
 #' @param object a data frame
-#' @param old_variable_name 
-#' @param new_variable_name 
+#' @param old_variable_name a character vector with old variables names
+#' @param new_variable_name a character vector with new variables names
 #' @return object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @export chnames
 chnames=function(object,
 		old_variable_name,
 		new_variable_name){
@@ -43,14 +58,20 @@ chnames=function(object,
 	return(object)
 }
 
-# fonction qui retourne l'index des valeurs repetees d'un vecteur
-# see duplicated
 
-#' fonction qui renvoit l'index des valeurs apparaissant une seule fois
-#' @param a 
-#' @return the index unique  values within a vector
+
+
+#' unique values of a vector
+#' 
+#' returns the index of values appearing only once in a vector :
+#' match(unique(a),a), replicated values are not returned on their second
+#' occurence
+#' 
+#' 
+#' @param a a vector
+#' @return the index unique values within a vector
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @export induk
 induk=function(a){
 	sol=match(unique(a),a)     #index des valeurs uniques
 	return(sol)   
@@ -71,10 +92,16 @@ killfactor=function(df){
 	return(df)
 }
 
-#' ex fonction to write to excel, not used within the program but can still be used
-#' @param d 
+
+
+#' ex fonction to write to the clipboard
+#' 
+#' ex fonction to write to the clipboard
+#' 
+#' 
+#' @param d a dataframe
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @export ex
 ex<-function(d=NULL){
 	if (is.null(d)){
 		xl=utils::select.list(choices=ls(envir=globalenv()), preselect = NULL, multiple = FALSE, title = "choisir l'object")
@@ -86,11 +113,18 @@ ex<-function(d=NULL){
 
 
 
-#' id.odd function modified from package sma (which did not verify that the entry was indeed an integer)
-#' @param x 
+
+
+#' id.odd function modified from package sma
+#' 
+#' id.odd function modified from package sma (which did not verify that the
+#' entry was indeed an integer)
+#' 
+#' 
+#' @param x integer
 #' @return a logical
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @author Adapted from Henrik Bengtsson
+#' @export is.odd
 is.odd=function (x) 
 {
     if (x==as.integer(x)) {
@@ -105,11 +139,18 @@ is.odd=function (x)
         stop("is.odd should be used with an integer")
     }
 }
-#' is.even function modified from package sma (which did not verified that the entry was indeed an integer)
-#' @param x 
+
+
+#' is.even function modified from package sma
+#' 
+#' is.even function modified from package sma (which did not verify that the
+#' entry was indeed an integer)
+#' 
+#' 
+#' @param x integer
 #' @return a logical
-#' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @author Adapted from Henrik Bengtsson
+#' @export is.even
 is.even=function (x) 
 {
     if (x==as.integer(x)) {
@@ -125,10 +166,18 @@ is.even=function (x)
     }
 }
 
-#' Function to transform a ftable into dataframe but just keeping the counts works with ftable of dim 2
-#' @param tab 
+
+
+#' Function to transform a ftable into dataframe but just keeping the counts,
+#' works with ftable of dim 2
+#' 
+#' Function to transform a ftable into dataframe but just keeping the counts
+#' works with ftable of dim 2
+#' 
+#' 
+#' @param tab a flat table
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @export
+#' @export tab2df
 tab2df<-function(tab){
 	if (length((attributes(tab)$dim))>2) stop("only works with tables of dim 2")
 	df=as.data.frame(matrix(as.vector(tab),nrow(tab),ncol(tab)))

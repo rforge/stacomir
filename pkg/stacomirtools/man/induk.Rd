@@ -16,4 +16,6 @@ returns the index of values appearing only once in a vector : match(unique(a),a)
 \author{
   Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
-
+\examples{
+induk(c(1,1,2,2,2,3))
+}

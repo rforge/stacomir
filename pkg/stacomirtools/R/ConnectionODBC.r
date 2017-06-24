@@ -19,21 +19,29 @@ validity_ODBC=function(object)
 #' @slot query="data.frame"
 #' @return connectionODBC an S4 object of class connectionODBC
 #' @examples 
+#' ##this wont be run as the user need to manually configure the connection before using it
+#' \dontrun{
 #' object=new("ConnectionODBC")
 #' object@baseODBC=c("myODBCconnection","myusername","mypassword")
 #' object@silent=FALSE
 #' object<-connect(object)
 #' odbcClose(object@connection)
+#' }
 setClass(Class="ConnectionODBC",
 		representation= representation(baseODBC="vector",silent="logical",etat="ANY",connection="ANY"),
 		prototype = list(silent=TRUE),
 		validity=validity_ODBC)
+    
+#' generic connect function for baseODBC
+#' @export   
 setGeneric("connect",def=function(object,...) standardGeneric("connect"))
 
 #' connect method for ConnectionODBC class
 #' @return a connection with slot filled
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
-#' @examples object=new("ConnectionODBC")
+#' @examples 
+#' object=new("ConnectionODBC")
+#' 
 #' object@baseODBC=baseODBC
 #' connect(object)
 setMethod("connect",signature=signature("ConnectionODBC"),definition=function(object) {     

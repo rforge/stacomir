@@ -20,4 +20,16 @@
 \author{
   Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 }
+\examples{
+df <- data.frame("var1" = c("blue","red"), "var2" = c("nice","ugly"))
+colnames(df) # "var1" "var2"
+df <- chnames(object = df, old_variable_name = c("var1","var2"), 
+"new_variable_name" = c("color","beauty"))
+colnames(df) # "color"  "beauty"
+# the following will return an error, as the variable wrong_name is not in variable names
+\dontrun{
+chnames(object = df, old_variable_name = c("wrong_name"), 
+"new_variable_name" = c("color")))
+}
+}
 

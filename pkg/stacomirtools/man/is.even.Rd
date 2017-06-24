@@ -18,4 +18,8 @@
   Adapted from Henrik Bengtsson       
 
 }
+\examples{
+is.even(1)
+is.even(2)
+}
 
