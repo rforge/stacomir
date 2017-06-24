@@ -26,7 +26,6 @@ test_that("Test an instance of report_mig_interannual loaded with choice_c",{
 	  # three warning produced, none shown due to silent=TRUE
 	  options(warn = 0)
 	  expect_s4_class(r_mig_interannual,"report_mig_interannual")
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 
@@ -54,7 +53,6 @@ test_that("Test method summary in report_mig_interannual",{
 	  r_mig_interannual<-connect(r_mig_interannual,silent=TRUE)	
 	  summary(object=r_mig_interannual,silent=TRUE)
 	  # two warning produced
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	  
 	})
 
@@ -180,5 +178,4 @@ test_that("Test that different sums are the same, for  report_mig_interannual, r
 		  label="The sum of number in the report_mig are different to the
 			  number in the report_annual class"
 	  )		
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})

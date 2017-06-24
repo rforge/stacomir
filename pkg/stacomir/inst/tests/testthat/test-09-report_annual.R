@@ -20,7 +20,6 @@ test_that("Test an instance of report_annual loaded with choice_c",{
 		  silent=TRUE)
 	  r_ann<-connect(r_ann,silent=TRUE)	
 	  expect_s4_class(r_ann,"report_annual")
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 
@@ -45,8 +44,7 @@ test_that("Test methods in report_annual",{
 	  dev.new()
 	  plot(r_ann,silent=TRUE)
 	  dev.new()
-	  barplot(r_ann)
-	  rm("envir_stacomi",envir =.GlobalEnv)			
+	  barplot(r_ann)			
 	})
 
 test_that("Test example report_mig_annual-example",

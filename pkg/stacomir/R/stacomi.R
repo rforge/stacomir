@@ -358,8 +358,7 @@ load_stacomi=function(h,...){
 stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
   # first loading of connection and odbc info using chargexml()
   # trois variables passees a interface graphique via envir_stacomi :
-  envir_stacomi <- new.env(parent = emptyenv())
-  assign("envir_stacomi",envir_stacomi,.GlobalEnv)
+  #envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
   assign("gr_interface",gr_interface,envir=envir_stacomi)	
   assign("database_expected",database_expected,envir=envir_stacomi)
   assign("login_window",login_window,envir=envir_stacomi)
@@ -537,9 +536,9 @@ utils::globalVariables(c("coef_durif"))
 #				"frame_std","frame_tax","frame_annee","frame_check","frame_choice","ref_year",
 #				"logw","report_stage_pigm","usrname","usrpwd","notebook","values","ind","progress_bar","progres"))
 # Progressbar
-utils::globalVariables(c("progres"))
+#utils::globalVariables(c("progres"))
 # environment
-utils::globalVariables(c("envir_stacomi"))
+#utils::globalVariables(c("envir_stacomi"))
 # reoxygenize fails if data are not loaded
 #setwd("F:/workspace/stacomir/branch0.5/stacomir")
 
@@ -559,5 +558,5 @@ utils::globalVariables(c("envir_stacomi"))
 #						"uid", "pwd", "sqldf.uid", "sqldf.pwd", "sqldf.dbname", "sqldf.host", 
 #						"sqldf.port", "pgwd", "datawd", "lang"), class = "data.frame", row.names = c(NA, 
 #						-1L))
-#envir_stacomi <- new.env(parent = emptyenv())
+envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 #calcmig<-data.frame()

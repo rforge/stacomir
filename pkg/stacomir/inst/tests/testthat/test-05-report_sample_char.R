@@ -36,7 +36,6 @@ test_that("Test an instance of report_sample_char loaded with choice_c",{
 	  #options(warn = 0)
 	  expect_s4_class(r_sample_char,
 		  "report_sample_char")
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 
@@ -65,7 +64,6 @@ test_that("Test methods in report_sample_char",{
 	  r_sample_char<-connect(r_sample_char,silent=TRUE)
 	  expect_true(nrow(r_sample_char@data)>0,label="No data for r_sample_char")
 	  r_sample_char<-calcule(r_sample_char,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	  
 	})
 
@@ -94,7 +92,6 @@ test_that("Test charge method for report_sample_char",{
 	  r_sample_char<-connect(r_sample_char,silent=TRUE)
 	  r_sample_char<-charge(r_sample_char)
 	  r_sample_char<-calcule(r_sample_char,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	  
 	})
 

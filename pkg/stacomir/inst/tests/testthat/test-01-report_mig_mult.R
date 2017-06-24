@@ -68,7 +68,7 @@ test_that("Test charge method for report_mig_mult",
 		  silent=TRUE)
 	  options(warn = 0)
 	  report_mig_mult<-charge(report_mig_mult,silent=TRUE)
-	  
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test connect method for report_mig_mult",
@@ -107,6 +107,7 @@ test_that("Test example 01_report_mig_mult",
 	  source(example_path)
 	  options(warn = 0)
 	  summary(r_mig_mult,silent=TRUE)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 

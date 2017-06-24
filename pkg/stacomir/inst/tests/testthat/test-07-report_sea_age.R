@@ -21,7 +21,6 @@ test_that("test creating an instance of report_sea_age with data loaded (logrami
 		  ))
 	  # warnings No data for par 1786No data for par 1785
 	  r_seaa<-connect(r_seaa,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 test_that("test that loading bad limits fails",{

@@ -12,7 +12,6 @@ test_that("test creating an instance of report_env",{
 		  silent=TRUE)	
 	  r_env<-connect(r_env,silent=TRUE)
 	  expect_true(nrow(r_env@data)>0,"The is a problem when loading data in the data slot" )
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 test_that("test plot method",{
@@ -26,7 +25,6 @@ test_that("test plot method",{
 		  silent=TRUE)	
 	  r_env<-connect(r_env,silent=TRUE)
 	  r_env<-plot(r_env)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 

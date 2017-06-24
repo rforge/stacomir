@@ -72,8 +72,7 @@ test_that("test that plot method works",{
 		  mycolorrampyellow(5),
 		  mycolorrampred(5))
 	  plot(bilesp,plot.type="barplot",color=color,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
-	})
+	  })
 
 test_that("test that summary method works",{
 	  require(stacomiR)
@@ -93,6 +92,5 @@ test_that("test that summary method works",{
 	  bilesp<-connect(bilesp,silent=TRUE)
 	  bilesp<-calcule(bilesp,silent=TRUE)
 	  summary(bilesp,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 

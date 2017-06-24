@@ -1,14 +1,14 @@
 Package: stacomiR
 Version: 0.5.3
-Date: 2017-06-19
-Title: Fish Migration Monitoring (stacomiR)
+Date: 2017-06-24
+Title: Fish Migration Monitoring ('stacomiR')
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
 	      person("Timothee", "Besse", role = "aut", email="tableau-ang-loire@logrami.fr"))
-Description: Graphical outputs and treatment for a database of fishway
-    monitoring. It is a part of the STACOMI open source project developed in
+Description: Graphical outputs and treatment for a database of fish pass
+    monitoring. It is a part of the 'STACOMI' open source project developed in
     France by the French Agency for Biodiversity (AFB) institute to centralize
-    data obtained by fishway monitoring. Version 0.5.3 is available in French and
+    data obtained by fish pass monitoring. Version 0.5.3 is available in French and
     English.
 License: GPL (>= 2)
 Collate:

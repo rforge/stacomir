@@ -49,7 +49,7 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 				if (exists("baseODBC",envir=envir_stacomi)){ 
 					object@baseODBC<-get("baseODBC",envir=envir_stacomi) 
 				} else {
-					if(exists("envir_stacomi")){# the program is called within stacomiR
+					if (exists("envir_stacomi")){# the program is called within stacomiR
 						funout(gettext("You need to define a baseODBC vector with the 'ODBC' link, the user and the password\n"),arret=TRUE)
 					} else	  {
 						stop("you need to define a vector baseODBC with the 'ODBC' link, user and password")
@@ -62,14 +62,14 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 							case = "tolower",
 							believeNRows = FALSE))
 			if (!exists("odbcConnect")) {
-				if(exists("envir_stacomi")){
+				if (exists("envir_stacomi")){
 					funout("The RODBC library is necessary, please load the package",arret=TRUE)
 				} else	  {
 					stop("the RODBC library is necessary, please load the package")
 				}
 			}
 			if (!object@silent) {
-				if(exists("envir_stacomi")){
+				if (exists("envir_stacomi")){
 					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
 				} else {
 					print(paste("connection trial, warning this class should only be used for test: ",object@baseODBC[1]))
@@ -77,7 +77,7 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 			}	
 			# sends the result of a trycatch connection in the
 			#l'object (current connection), e.g. a character vector
-			connection_error<-if(exists("envir_stacomi")){
+			connection_error<-if (exists("envir_stacomi")){
 						error=paste(gettext("Connection failed :\n",object@baseODBC[1]))
 					} else {
 						error="impossible connection"

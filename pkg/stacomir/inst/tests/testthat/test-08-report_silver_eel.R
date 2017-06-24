@@ -26,7 +26,6 @@ test_that("test creating an instance of report_silver_eel with data loaded (fd80
       plot(r_silver, plot.type=4)
 # print a summary statistic, and save the output in a list for later use
       stats<-summary(r_silver,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 

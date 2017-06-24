@@ -19,7 +19,7 @@ test_that("Test an instance of report_mig",{
 	  options(warn = 0)
 	  expect_s4_class(report_mig,
 		  "report_mig")
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	   rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -50,7 +50,7 @@ test_that("Test an instance of report_mig, check that operations accross two yea
 	  # the rest are in 1998
 	  expect_equal(round(sum(report_mig@calcdata[["dc_6"]][["data"]]$Effectif_total)),
 		  8614)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test another instance of report_mig, check that operations accross two years are split correcly",{
@@ -80,7 +80,7 @@ test_that("Test another instance of report_mig, check that operations accross tw
 	  # the rest are in 1998
 	  expect_equal(round(sum(report_mig@calcdata[["dc_6"]][["data"]]$Effectif_total)),
 		  26454)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	   rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test connect method",{
@@ -105,7 +105,7 @@ test_that("Test connect method",{
 	  r_mig<-connect(r_mig,silent=TRUE)
 	  
 	  expect_length(r_mig@data,11)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	   rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test example 02_report_mig",
@@ -135,7 +135,7 @@ test_that("Summary method works",
 	  data("r_mig")
 	  r_mig<-calcule(r_mig,silent=TRUE)
 	  summary(r_mig,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test writing an example to the database",
@@ -153,7 +153,7 @@ test_that("Test writing an example to the database",
 	  data("r_mig")
 	  r_mig<-calcule(r_mig,silent=TRUE)
 	  write_database(object=r_mig,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test that different sums are the same, for report_mig, report_mig_interannual, report_annual",
@@ -193,7 +193,7 @@ test_that("Test that different sums are the same, for report_mig, report_mig_int
 		  sum(bili@data$bjo_valeur[bili@data$bjo_labelquantite=="Effectif_total"]),			
 		  label="The sum of number in the report_mig are different to the
 			  number in the report_mig_interannual")
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -211,7 +211,7 @@ test_that("print method works",
 	  # this chunk is not launched from examples but loads the r_mig dataset if connection works	
 	  data("r_mig")
 	  expect_output(print(r_mig), "report_mig=choice_c",info = NULL)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -240,7 +240,7 @@ test_that("test example for fd80",
 	  bM_EclusierVaux<-calcule(bM_EclusierVaux,silent=TRUE)
 	  plot(bM_EclusierVaux,silent=TRUE)
 	  summary(bM_EclusierVaux,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -270,7 +270,7 @@ test_that("test example with glass eel",
 	  # some additional arguments passed to plot via ...
 	  plot(bM_Arzal_civ,silent=TRUE,bty="n")
 	  summary(bM_Arzal_civ,silent=TRUE)
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 # here require setting a connection to logrami server under the name BD_CONTMIG_NAT_SERVEUR
 #test_that("test connexion to logrami server",

@@ -37,7 +37,7 @@ context("Database connection")
 
 test_that("Test that stacomirtools connects",{
 	  require(stacomiR)
-	  envir_stacomi <<- new.env(parent = emptyenv())
+      envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
 	  con=new("ConnectionODBC")	
@@ -46,7 +46,7 @@ test_that("Test that stacomirtools connects",{
 	  expect_is(connect(con),'ConnectionODBC')
 	  expect_equal(con@etat,"Connection in progress")
 	  odbcCloseAll()
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm("envir_stacomi")
 	})
 
 
@@ -65,13 +65,13 @@ test_that("Test that stacomirtools connects",{
 #			expect_is(connect(con),'ConnectionODBC')
 #			expect_equal(con@etat,"Connection in progress")
 #			odbcCloseAll()			
-#			rm("envir_stacomi",envir =.GlobalEnv)
+#			rm("envir_stacomi")
 #		})
 
 
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 	  require(stacomiR)
-	  envir_stacomi <<- new.env(parent = emptyenv())
+      envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
 	  requete=new("RequeteODBC")
@@ -80,12 +80,12 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 	  requete<-stacomirtools::connect(requete)
 	  expect_true(as.numeric(requete@query)>0)	
 	  odbcCloseAll()
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm("envir_stacomi")
 	})
 
 test_that("Tests positive count for sch.t_operation_ope",{
 	  require(stacomiR)
-	  envir_stacomi <<- new.env(parent = emptyenv())
+      envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
 	  sch<-paste(baseODBC[2],".",sep="")
@@ -95,7 +95,7 @@ test_that("Tests positive count for sch.t_operation_ope",{
 	  requete<-stacomirtools::connect(requete)
 	  expect_true(as.numeric(requete@query)>0)	
 	  odbcCloseAll()
-	  rm("envir_stacomi",envir =.GlobalEnv)
+	  rm("envir_stacomi")
 	})
 
 context("Loading program")
@@ -106,7 +106,6 @@ test_that("Test that working environment is created",{
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("envir_stacomi"))
 	  dispose(get("logw",envir_stacomi))
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 test_that("Test that gWidget loginwindow is loaded ",{
@@ -114,7 +113,6 @@ test_that("Test that gWidget loginwindow is loaded ",{
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("logw",envir_stacomi))
 	  dispose(get("logw",envir_stacomi))
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 test_that("Test that gWidget gr_interface is loaded, without database_expected, nor login window",{
@@ -122,7 +120,6 @@ test_that("Test that gWidget gr_interface is loaded, without database_expected, 
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
 	  expect_true(exists("win",envir_stacomi))			
 	  dispose(get("win",envir_stacomi))
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
@@ -130,7 +127,6 @@ test_that("gWidget gr_interface is loaded, with pre launch_test, but without log
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=TRUE)
 	  expect_true(exists("win",envir_stacomi))
 	  dispose(get("win",envir_stacomi))
-	  rm("envir_stacomi",envir =.GlobalEnv)
 	})
 
 
