@@ -78,7 +78,7 @@ induk=function(a){
 }
 
 
-#' very usefull function used to "kill" the factors, noticeably after loading with odbc
+#' very usefull function used to "kill" the factors, noticeably after loading with 'ODBC'
 #' 
 #' @param df a data.frame
 #' @return df

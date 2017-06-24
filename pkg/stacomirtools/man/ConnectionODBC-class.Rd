@@ -29,8 +29,8 @@ Objects can be created by calls of the form \code{new("ConnectionODBC", ...)}.
 }
 \note{
 Opens the connection but does not close it.
-This function is intended to be used with stacomiR package, where the error message are collected from the database
-It has also been programmed to work without the stacomiR package, as it will test for the existence of envir_stacomi environment.
+This function is intended to be used with 'stacomiR' package, where the error message are collected from the database
+It has also been programmed to work without the 'stacomiR' package, as it will test for the existence of envir_stacomi environment.
 }
 \author{cedric.briand"at"eptb-vilaine.fr}
 

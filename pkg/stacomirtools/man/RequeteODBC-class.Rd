@@ -3,7 +3,7 @@
 \alias{RequeteODBC-class}
 \alias{RequeteODBC}
 \title{Class "RequeteODBC"}
-\description{ODBC Query. This class enables to retrieve data from the database. 
+\description{'ODBC' Query. This class enables to retrieve data from the database. 
 This class is inherited by RequeteODBCwhere and RequeteODBCwheredate
 }
 \note{
@@ -45,7 +45,7 @@ showClass("RequeteODBC")
  object@open=TRUE 
  ## this will leave the connection open, 
  ## by default it closes after the query is sent
- ## the following will work only if you have configured and ODBC link
+ ## the following will work only if you have configured and 'ODBC' link
  object@baseODBC=c("myODBCconnection","myusername","mypassword")
  object@sql= "select * from mytable limit 100"
  object<-connect(object)

@@ -51,7 +51,7 @@ setClass(Class="RequeteODBC",
 #'}
 
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(object) {     
-			msg1<-gettext("ODBC error =>you have to define a vector baseODBC with the ODBC link name, user and password")
+			msg1<-gettext("'ODBC' error =>you have to define a vector baseODBC with the 'ODBC' link name, user and password")
 			msg2<-gettext("connection trial :")
 			msg3<-gettext("connection impossible")
 			msg4<-gettext("connection successfull")
@@ -85,10 +85,10 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 
 
 #' very usefull function remove factor that appear, noticeably after loading
-#' with ODBC
+#' with 'ODBC'
 #' 
 #' function used to remove factors that appear, noticeably after loading with
-#' ODBC
+#' 'ODBC'
 #' 
 #' 
 #' @param df a data.frame
@@ -112,7 +112,7 @@ setMethod("connect",signature=signature("RequeteODBC"),definition=function(objec
 						funout(msg1,arret=TRUE)
 					}
 				}
-				# opening of ODBC connection
+				# opening of 'ODBC' connection
 				e=expression(channel <-odbcConnect(object@baseODBC[1],
 								uid = object@baseODBC[2],
 								pwd = object@baseODBC[3],

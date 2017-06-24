@@ -50,9 +50,9 @@ setMethod("connect",signature=signature("ConnectionODBC"),definition=function(ob
 					object@baseODBC<-get("baseODBC",envir=envir_stacomi) 
 				} else {
 					if(exists("envir_stacomi")){# the program is called within stacomiR
-						funout(gettext("You need to define a baseODBC vector with the ODBC link, the user and the password\n"),arret=TRUE)
+						funout(gettext("You need to define a baseODBC vector with the 'ODBC' link, the user and the password\n"),arret=TRUE)
 					} else	  {
-						stop("you need to define a vector baseODBC with the ODBC link, user and password")
+						stop("you need to define a vector baseODBC with the 'ODBC' link, user and password")
 					}
 				}
 			}
