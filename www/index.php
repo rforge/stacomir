@@ -53,6 +53,29 @@ echo $contents; } ?>
 
 <p> The <strong>project summary page</strong> is here <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 
-<p> </p>
+<p>Migratory fishes move upstream or downsteam in the rivers. Monitoring stations, often located on fishways installed on dams, provide counts of migrants, and those are usefull to stock management.</p>
+
+<p>The objective of the STACOMI project is to provide a database along with data treatment and a tool to import or type down fishes number.  The stacomiR package offers standardized treatments for migration monitoring stations</p>
+
+<ul>
+<li>Migration overview for one or several species, and stages.</li>
+<li>Migration analysed with environmental conditions</li>
+<li>Weight / number conversion for glass eel</li>
+<li>Silver eel migration analysis, along with maturation analysis</li>
+<li>Size-age conversion for salmon</li>
+<li>Analysis of fish characteristics (size, weight, sex…)</li>
+<li>Crossed analysis of quantitative and/or qualitative characteristics and migration</li>
+<li>Seasonality analysis, comparison of the annual migration with historical values</li>
+<li>Fishway and counting device operation</li>
+</ul>
+
+<p>To work with stacomi, you’ll need a database, and an installation of the program and java interface. Please contact the authors if you are interested in the project.<p>
+
+<p>Cédric Briand EPTB Vilaine <a href="mailto:cedric.briand@eptb-vilaine.fr">cedric.briand@eptb-vilaine.fr</a><br/>
+Timothée Besse LOGRAMI <a href="mailto:timothee.besse@logrami.fr">timothee.besse@logrami.fr</a><br/>
+Marion Legrand LOGRAMI <a href="mailto:marion.legrand@logrami.fr">marion.legrand@logrami.fr</a></p>
+
+<p><img src="stacomi.png"></p>
+
 </body>
 </html>
