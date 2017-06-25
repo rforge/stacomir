@@ -10,6 +10,7 @@ test_that("Test that view lot_ope_car exists",{
 	  req<-stacomirtools::connect(req)
 	  result<-req@query	
 	  expect_true(nrow(result)>0)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test an instance of report_sample_char loaded with choice_c",{
@@ -36,6 +37,7 @@ test_that("Test an instance of report_sample_char loaded with choice_c",{
 	  #options(warn = 0)
 	  expect_s4_class(r_sample_char,
 		  "report_sample_char")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -64,6 +66,7 @@ test_that("Test methods in report_sample_char",{
 	  r_sample_char<-connect(r_sample_char,silent=TRUE)
 	  expect_true(nrow(r_sample_char@data)>0,label="No data for r_sample_char")
 	  r_sample_char<-calcule(r_sample_char,silent=TRUE)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  
 	})
 
@@ -92,7 +95,7 @@ test_that("Test charge method for report_sample_char",{
 	  r_sample_char<-connect(r_sample_char,silent=TRUE)
 	  r_sample_char<-charge(r_sample_char)
 	  r_sample_char<-calcule(r_sample_char,silent=TRUE)
-	  
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test example reportcarlot-example",
@@ -104,6 +107,7 @@ test_that("Test example reportcarlot-example",
 	  test<-file.access(example_path,0)
 	  if (test[1]!=0) warnings("Package example dir not created ?") else
 		source(example_path)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 

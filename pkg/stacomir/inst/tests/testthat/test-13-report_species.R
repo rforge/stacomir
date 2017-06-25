@@ -21,6 +21,7 @@ test_that("test creating an instance of report_species",{
 	  bilesp<-connect(bilesp,silent=TRUE)
 	  expect_s4_class(bilesp,
 		  "report_species")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("test calcule method report_species",{
@@ -42,6 +43,7 @@ test_that("test calcule method report_species",{
 	  bilesp<-connect(bilesp,silent=TRUE)
 	  bilesp<-calcule(bilesp,silent=TRUE)
 	  expect_gt(nrow(bilesp@calcdata),0,"No data in calcdata after running calculations")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("test that plot method works",{
@@ -72,6 +74,7 @@ test_that("test that plot method works",{
 		  mycolorrampyellow(5),
 		  mycolorrampred(5))
 	  plot(bilesp,plot.type="barplot",color=color,silent=TRUE)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  })
 
 test_that("test that summary method works",{
@@ -92,5 +95,6 @@ test_that("test that summary method works",{
 	  bilesp<-connect(bilesp,silent=TRUE)
 	  bilesp<-calcule(bilesp,silent=TRUE)
 	  summary(bilesp,silent=TRUE)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 

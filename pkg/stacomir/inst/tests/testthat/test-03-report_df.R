@@ -26,7 +26,7 @@ test_that("Test an instance of report_df",{
 			  horodatedebut="2013 01 011",
 			  horodatefin="2013-12-31",
 			  silent=TRUE))			
-	  
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("report_df charge method works",{
@@ -47,7 +47,8 @@ test_that("report_df charge method works",{
 		  silent=TRUE)
 	  r_df<-charge(r_df,silent=TRUE)
 	  r_df<-connect(r_df,silent=TRUE)
-	  expect_equal(nrow(r_df@data),5)			
+	  expect_equal(nrow(r_df@data),5)		
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)    
 	})
 
 
@@ -60,6 +61,7 @@ test_that("report_df plot method works",{
 	  plot(r_df,plot.type="2",silent=TRUE,main="An example title")
 	  plot(r_df,plot.type="3",silent=TRUE,main="An example title")	
 	  plot(r_df,plot.type="4",silent=TRUE,main="An example title")	
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -69,6 +71,7 @@ test_that("report_df summary method works",{
 	  data(r_df)
 	  r_df<-r_df
 	  expect_output(summary(r_df,silent=FALSE),"summary")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -78,4 +81,5 @@ test_that("report_df print method works",{
 	  data(r_df)
 	  r_df<-r_df
 	  expect_output(print(r_df))
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})

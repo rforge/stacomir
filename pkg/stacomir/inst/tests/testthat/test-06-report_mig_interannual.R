@@ -26,6 +26,7 @@ test_that("Test an instance of report_mig_interannual loaded with choice_c",{
 	  # three warning produced, none shown due to silent=TRUE
 	  options(warn = 0)
 	  expect_s4_class(r_mig_interannual,"report_mig_interannual")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -53,6 +54,7 @@ test_that("Test method summary in report_mig_interannual",{
 	  r_mig_interannual<-connect(r_mig_interannual,silent=TRUE)	
 	  summary(object=r_mig_interannual,silent=TRUE)
 	  # two warning produced
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  
 	})
 
@@ -65,7 +67,7 @@ test_that("Test example report_mig_interannual-example",
 	  test<-file.access(example_path,0)
 	  if (test[1]!=0) warnings("Package example dir not created ?") else
 		suppressWarnings(source(example_path))
-	  
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test that loading two taxa will fail",
@@ -91,6 +93,7 @@ test_that("Test that loading two taxa will fail",
 			  anneefin=2015,
 			  silent=TRUE))
 	  expect_error(charge(r_mig_interannual))
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  
 	})
 
@@ -119,7 +122,7 @@ test_that("Test that report_mig_interannual loads missing data with correct warn
 # deleting all data to ensure everything is loaded
 	  supprime(bmi_cha)
 	  bmi_cha<-connect(bmi_cha,silent=TRUE)
-	  
+	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test that different sums are the same, for  report_mig_interannual, report_mig_mult",
@@ -178,4 +181,5 @@ test_that("Test that different sums are the same, for  report_mig_interannual, r
 		  label="The sum of number in the report_mig are different to the
 			  number in the report_annual class"
 	  )		
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})

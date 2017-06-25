@@ -27,6 +27,7 @@ test_that("test creating an instance of report_mig_char and connect method (logr
 	  r_mig_char<-connect(r_mig_char)
 	  expect_true(is.null(r_mig_char@data$parqual),label="there should be no data in parqual when not qualitative parm are selected")
 	  expect_true(nrow(r_mig_char@data$parquan)>0,"There should be data in the parquan slot when quantitative parm are selected" )
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("test setasqualitative method",{
@@ -63,6 +64,7 @@ test_that("test setasqualitative method",{
 	  expect_false(r_mig_char@parquan@par_selected=='A124', label="The parameter A124 should have been removed from quant parm")
 	  expect_true('A124'%in%r_mig_char@data$parqual$car_par_code)
 	  expect_false('A124'%in%r_mig_char@data$parquan$car_par_code)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -97,7 +99,7 @@ test_that("test calcule method",{
 		  silent=TRUE,breaks=c(0,1.5,2.5,10),label=c("age 1","age 2","age 3"))
 	  r_mig_char<-calcule(r_mig_char,silent=TRUE)
 	  expect_true(any(!is.na(r_mig_char@calcdata$car_par_code_qual))&any(!is.na(r_mig_char@calcdata$car_par_code_quan)), label="The merge function works and returns both qualitative and quantitative parameters")
-
+        rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 

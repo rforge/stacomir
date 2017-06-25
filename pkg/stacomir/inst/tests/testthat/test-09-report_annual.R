@@ -20,6 +20,7 @@ test_that("Test an instance of report_annual loaded with choice_c",{
 		  silent=TRUE)
 	  r_ann<-connect(r_ann,silent=TRUE)	
 	  expect_s4_class(r_ann,"report_annual")
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
@@ -45,6 +46,7 @@ test_that("Test methods in report_annual",{
 	  plot(r_ann,silent=TRUE)
 	  dev.new()
 	  barplot(r_ann)			
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("Test example report_mig_annual-example",
@@ -56,6 +58,7 @@ test_that("Test example report_mig_annual-example",
 	  test<-file.access(example_path,0)
 	  if (test[1]!=0) warnings("Package example dir not created ?") else
 		suppressWarnings(source(example_path))
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  
 	})
 
@@ -108,6 +111,7 @@ test_that("Complement to example",
 	  dev.new()
 	  plot(r_ann_adour,silent=TRUE)
 	  graphics.off()
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
     })
 
 test_that("test xtable method for report_annual",{
@@ -155,6 +159,7 @@ test_that("test xtable method for report_annual",{
 			  include.rownames = TRUE,
 			  include.colnames = FALSE,
 			  format.args = list(big.mark = " ", decimal.mark = ",")))
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 test_that("test plot methods for report_annual",{
@@ -171,5 +176,6 @@ test_that("test plot methods for report_annual",{
 	  dev.new()
 	  plot(r_ann_adour,silent=TRUE)
 	  graphics.off()		
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	  
 	})

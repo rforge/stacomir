@@ -19,13 +19,14 @@ test_that("test creating an instance of report_silver_eel with data loaded (fd80
         r_silver<-connect(r_silver,silent=TRUE)
 	  # warnings No data for par 1786No data for par 1785
 	  r_silver<-connect(r_silver,silent=TRUE)
-      r_silver<-calcule(r_silver,silent=TRUE)
+      r_silver<-suppressWarnings(calcule(r_silver,silent=TRUE))
       plot(r_silver, plot.type=1)
       plot(r_silver, plot.type=2)
       plot(r_silver, plot.type=3)      
       plot(r_silver, plot.type=4)
 # print a summary statistic, and save the output in a list for later use
       stats<-summary(r_silver,silent=TRUE)
+      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 

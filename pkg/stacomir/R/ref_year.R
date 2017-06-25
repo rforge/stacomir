@@ -191,7 +191,7 @@ setMethod("choice_c",
 	  if ( !annee %in% object@data[,1] ) {
 		
 		warning(stringr::str_c("Attention, year ",annee," is not available in the database, available years :",
-				ifelse(length(object@data$bjo_annee)==0,gettext(" none, were you lazy?",domain="R-stacomiR"),
+				ifelse(length(object@data$bjo_annee)==0,gettext(" none", domain="R-stacomiR"),
 					stringr::str_c(object@data$bjo_annee,collapse=","))))
 	  }
 	  object@annee_selectionnee<-annee
