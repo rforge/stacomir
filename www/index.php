@@ -75,7 +75,7 @@ echo $contents; } ?>
 Timothée Besse LOGRAMI <a href="mailto:timothee.besse@logrami.fr">timothee.besse@logrami.fr</a><br/>
 Marion Legrand LOGRAMI <a href="mailto:marion.legrand@logrami.fr">marion.legrand@logrami.fr</a></p>
 
-<p><img src="stacomi.png"></p>
+<p><img src="images/stacomi.png"></p>
 
 </body>
 </html>
