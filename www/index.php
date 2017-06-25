@@ -49,10 +49,6 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
-<p>Welcome to StacomiR - Fish Migration Monitoring</p>
-
-<blockquote>stacomiR stands for migratory control stations. It enables to read informations in a database dedicated to the monitoring of fish migrations.It allows to build overviews of fish migrations and create charts with data.</blockquote>
-
 <p>Migratory fishes move upstream or downsteam in the rivers. Monitoring stations, often located on fishways installed on dams, provide counts of migrants, and those are usefull to stock management.</p>
 
 <p>The objective of the STACOMI project is to provide a database along with data treatment and a tool to import or type down fishes number.  The stacomiR package offers standardized treatments for migration monitoring stations</p>
