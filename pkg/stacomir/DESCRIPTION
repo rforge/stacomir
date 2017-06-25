@@ -1,7 +1,7 @@
 Package: stacomiR
 Version: 0.5.3
 Date: 2017-06-24
-Title: Fish Migration Monitoring ('stacomiR')
+Title: Fish Migration Monitoring
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
 	      person("Timothee", "Besse", role = "aut", email="tableau-ang-loire@logrami.fr"))
@@ -11,7 +11,7 @@ Description: Graphical outputs and treatment for a database of fish pass
     data obtained by fish pass monitoring. Version 0.5.3 is available in French and
     English. 
 License: GPL (>= 2)
-URL: http://stacomir.r-forge.r-project.org/
+URL: <http://stacomir.r-forge.r-project.org/>
 Collate:
     'create_generic.R'
     'data.R'
