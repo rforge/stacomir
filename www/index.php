@@ -26,7 +26,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 <!-- R-Forge Logo -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 <tr><td>
-<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/images/logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
+<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/images/Logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
+</table>
+
+<!-- Stacomi Logo -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr><td>
+<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/images/stacomi_logo.png" border="0" alt="Stacomi Logo" /> </a> </td> </tr>
 </table>
 
 
