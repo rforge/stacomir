@@ -71,7 +71,7 @@ echo $contents; } ?>
 Timothée Besse LOGRAMI <a href="mailto:timothee.besse@logrami.fr">timothee.besse@logrami.fr</a><br/>
 Marion Legrand LOGRAMI <a href="mailto:marion.legrand@logrami.fr">marion.legrand@logrami.fr</a></p>
 
-<p><img src="images/stacomi.png" alt="Stacomi"></p>
+<p><img src="images/stacomi.png" alt="Stacomi" style="max-width: 100%;"></p>
 
 <p> The <strong>project summary page</strong> is <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 
