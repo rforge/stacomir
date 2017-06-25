@@ -43,9 +43,10 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
-<p>Bienvenue sur la page du package StacomiR</p>
+<p>Welcome to StacomiR - Fish Migration Monitoring</p>
 
-<p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
+<p> The <strong>project summary page</strong> is here <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 
+<p> </p>
 </body>
 </html>
