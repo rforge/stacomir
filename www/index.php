@@ -26,13 +26,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 <!-- R-Forge Logo -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 <tr><td>
-<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/images/Logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
+<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>images/Logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
 </table>
 
 <!-- Stacomi Logo -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 <tr><td>
-<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/images/stacomi_logo.png" border="0" alt="Stacomi Logo" /> </a> </td> </tr>
+<a href="http://r-forge.r-project.org/"><img src="images/stacomi_logo.png" border="0" alt="Stacomi Logo" /> </a> </td> </tr>
 </table>
 
 
@@ -51,7 +51,7 @@ echo $contents; } ?>
 
 <p>Welcome to StacomiR - Fish Migration Monitoring</p>
 
-<p> The <strong>project summary page</strong> is here <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
+<blockquote>stacomiR stands for migratory control stations. It enables to read informations in a database dedicated to the monitoring of fish migrations.It allows to build overviews of fish migrations and create charts with data.</blockquote>
 
 <p>Migratory fishes move upstream or downsteam in the rivers. Monitoring stations, often located on fishways installed on dams, provide counts of migrants, and those are usefull to stock management.</p>
 
@@ -75,7 +75,9 @@ echo $contents; } ?>
 Timothée Besse LOGRAMI <a href="mailto:timothee.besse@logrami.fr">timothee.besse@logrami.fr</a><br/>
 Marion Legrand LOGRAMI <a href="mailto:marion.legrand@logrami.fr">marion.legrand@logrami.fr</a></p>
 
-<p><img src="images/stacomi.png"></p>
+<p><img src="images/stacomi.png" alt="Stacomi"></p>
+
+<p> The <strong>project summary page</strong> is <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 
 </body>
 </html>
