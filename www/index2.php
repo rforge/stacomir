@@ -1,44 +1,33 @@
-<!doctype html>
-<!--
-	Material Design Lite
-	Copyright 2015 Google Inc. All rights reserved.
-	
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
-	
-	https://www.apache.org/licenses/LICENSE-2.0
-	
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License
--->
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-		<title>StacomiR package homepage</title>
+
+<!-- This is the project specific website template -->
+<!-- It can be changed as liked or replaced by other content -->
+
+<?php
+
+$domain=ereg_replace('[^\.]*\.(.*)$','\1',$_SERVER['HTTP_HOST']);
+$group_name=ereg_replace('([^\.]*)\..*$','\1',$_SERVER['HTTP_HOST']);
+$themeroot='http://r-forge.r-project.org/themes/rforge/';
+
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   ">
+
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><?php echo $group_name; ?></title>
+	<link href="<?php echo $themeroot; ?>styles/estilo1.css" rel="stylesheet" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 		
-		<link rel="shortcut icon" href="images/favicon.png">
-		
-		<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-		<!--
-			<link rel="canonical" href="http://www.example.com/">
-		-->
-		
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="$$hosted_libs_prefix$$/$$version$$/material.cyan-light_blue.min.css">
-		<link rel="stylesheet" href="styles.css">
-		
-		<!-- Style Material Design -->
+<!-- Style Material Design -->
 		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+		<link rel="stylesheet" href="styles.css">
 		<style>
 			#view-source {
 			position: fixed;
@@ -51,6 +40,7 @@
 			}
 		</style>
 	</head>
+	
 	<body>
 		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 			<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
@@ -134,7 +124,7 @@
 									<?PHP
 										include('rssclass.php');
 										$feedlist = new rss('http://www.migrateurs-loire.fr/feed/');
-										echo $feedlist->display(9,"TRAC RSS");
+										echo $feedlist->display(9,"Activity");
 									?>
 									<div class="mdl-card__actions mdl-card--border">
 										<a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Open TRAC</a>
