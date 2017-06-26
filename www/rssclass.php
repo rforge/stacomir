@@ -29,7 +29,7 @@
 			
 			$i = 0;
 			$rss_data = '
-			<div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+			<div class="mdl-card__title mdl-card--expand mdl-color--blue-grey-400">
 			<h2 class="mdl-card__title-text">'.$head.'</h2>
 			</div>
 			<div class="mdl-card__supporting-text mdl-color-text--grey-600">

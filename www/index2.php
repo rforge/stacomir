@@ -56,24 +56,14 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 					</ul>
 				</div>
 			</header>
-			<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+			<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-50 mdl-color-text--blue-grey-900">
 				<header class="demo-drawer-header">
-					<img src="images/icon.png" class="demo-avatar">
-					<div class="demo-avatar-dropdown">
-						<span>stacomiR</span>
-						<div class="mdl-layout-spacer"></div>
-						<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-							<i class="material-icons" role="presentation">arrow_drop_down</i>
-							<span class="visuallyhidden">Packages CRAN</span>
-						</button>
-						<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-							<li class="mdl-menu__item"><a href="https://cran.r-project.org/package=stacomirtools">stacomirtools</a></li>
-						</ul>
-					</div>
+					<img src="images/stacomi_logo.png">
 				</header>
 				<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/projects/stacomir/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>R-forge page</a>
-					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/scm/?group_id=1019"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>SCM</a>
+					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/R/?group_id=1019"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">archive</i>R packages</a>
+					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/scm/?group_id=1019"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">autorenew</i>SCM</a>
 					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/forum/?group_id=1019"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
 					<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
 					<a class="mdl-navigation__link" href="https://r-forge.r-project.org/project/memberlist.php?group_id=1019"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Members</a>
@@ -99,16 +89,16 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 							<p>Migratory fishes move upstream or downsteam in the rivers. Monitoring stations, often located on fishways installed on dams, provide counts of migrants, and those are usefull to stock management.</p>
 							<p>The objective of the STACOMI project is to provide a database along with data treatment and a tool to import or type down fishes number.  The stacomiR package offers standardized treatments for migration monitoring stations</p>
 							
-							<ul>
-								<li>Migration overview for one or several species, and stages.</li>
-								<li>Migration analysed with environmental conditions</li>
-								<li>Weight / number conversion for glass eel</li>
-								<li>Silver eel migration analysis, along with maturation analysis</li>
-								<li>Size-age conversion for salmon</li>
-								<li>Analysis of fish characteristics (size, weight, sex…)</li>
-								<li>Crossed analysis of quantitative and/or qualitative characteristics and migration</li>
-								<li>Seasonality analysis, comparison of the annual migration with historical values</li>
-								<li>Fishway and counting device operation</li>
+							<ul class="mdl-list">
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">compare_arrows</i> Migration overview for one or several species, and stages.</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">multiline_chart</i> Migration analysed with environmental conditions</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">line_weight</i> Weight / number conversion for glass eel</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">show_chart</i> Silver eel migration analysis, along with maturation analysis</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">straighten</i> Size-age conversion for salmon</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">insert_chart</i> Analysis of fish characteristics (size, weight, sex…)</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">functions</i> Crossed analysis of quantitative and/or qualitative characteristics and migration</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">timeline</i> Seasonality analysis, comparison of the annual migration with historical values</span></li>
+								<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class=" mdl-list__item-icon material-icons" role="presentation">switch_video</i> Fishway and counting device operation</span></li>
 							</ul>
 							
 							<p>To work with stacomi, you’ll need a database, and an installation of the program and java interface. Please contact the authors if you are interested in the project.<p>
@@ -127,10 +117,20 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 										echo $feedlist->display(9,"Activity");
 									?>
 									<div class="mdl-card__actions mdl-card--border">
-										<a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Open TRAC</a>
+										<a href="http://w3.eptb-vilaine.fr:8080/tracstacomi/wiki" class="mdl-button mdl-js-button mdl-js-ripple-effect">Open TRAC</a>
 									</div>
 								</div>
-								
+																<div class="demo-separator mdl-cell--1-col"></div>
+								<div class="demo-options mdl-card mdl-color--blue-grey-800 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+									<div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+										<h3>Links</h3>
+										<ul class="mdl-list">
+											<li class="mdl-list__item">
+												<a href="http://www.eptb-vilaine.fr/site/index.php/les-migrateurs/stacomi/presentation" target="_blank">EPTB Vilaine</a>
+											</li>
+										</ul>
+									</div>
+								</div>								
 							</div>
 						</div>
 					</main>
