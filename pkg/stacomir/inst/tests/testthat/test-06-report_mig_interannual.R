@@ -183,3 +183,30 @@ test_that("Test that different sums are the same, for  report_mig_interannual, r
 	  )		
       rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
+    
+    test_that("Test bmi step plot",{
+	            require(stacomiR)
+	            stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	            # overriding user schema to point to iav
+	            baseODBC<-get("baseODBC",envir=envir_stacomi)
+	            baseODBC[c(2,3)]<-rep("iav",2)
+	            assign("baseODBC",baseODBC,envir_stacomi)
+	            sch<-get("sch",envir=envir_stacomi) # "iav."
+	            assign("sch","iav.",envir_stacomi)
+	            r_mig_interannual<-new("report_mig_interannual")
+	            # the following will load data for size, 
+	            # parameters 1786 (total size) C001 (size at video control)
+	            # dc 5 and 6 are fishways located on the Arzal dam
+	            # two stages are selected
+	            r_mig_interannual<-choice_c(r_mig_interannual,
+		                dc=6,
+		                taxa=c("Anguilla anguilla"),
+		                stage=c("AGJ"),
+		                anneedebut=1996,
+		                anneefin=2015,
+		                silent=TRUE)
+	            r_mig_interannual<-connect(r_mig_interannual,silent=TRUE)	
+	            plot(r_mig_interannual,plot.type="step",silent=TRUE)
+                rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
+	        })
+              

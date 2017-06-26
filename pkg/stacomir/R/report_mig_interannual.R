@@ -651,7 +651,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 		  } else {
 			the_choice <- max(as.numeric(as.character(dat$annee)))
 		  }
-		  amplitud <- paste(min(as.numeric(as.character(dat$annee))),
+		  amplitude <- paste(min(as.numeric(as.character(dat$annee))),
               "-",max(as.numeric(as.character(dat$annee))),sep="")      
 		  #################
 		  # calculation of cumusums
