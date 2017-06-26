@@ -11,7 +11,7 @@ Description: Graphical outputs and treatment for a database of fish pass
     data obtained by fish pass monitoring. Version 0.5.3 is available in French and
     English. See <http://stacomir.r-forge.r-project.org/> for more information on 'STACOMI'.
 License: GPL (>= 2)
-URL: <http://stacomir.r-forge.r-project.org/>
+URL: http://stacomir.r-forge.r-project.org/
 Collate:
     'create_generic.R'
     'data.R'

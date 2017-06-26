@@ -22,3 +22,8 @@ lintr::lint_package()
 
 devtools::use_readme_rmd()
 devtools::release() # include devtools::spell_check()
+
+# BOF, ne marche pas avec testthat, ne marche pas sur les \dontrun, ... , a voir
+install.packages('formatR')
+library(formatR)
+tidy_source("C:/workspace/stacomir/pkg/stacomir/R/create_generic.R",file="clipboard")
