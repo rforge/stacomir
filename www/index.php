@@ -128,17 +128,30 @@
 										<h3><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">archive</i> StacomiR</h3>										
 										Fish Migration Monitoring
 										<ul class="mdl-list">
-											<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="https://r-forge.r-project.org/R/?group_id=1019">Latest (R-forge)</a></span></li>
-											<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="http://cran.at.r-project.org/package=stacomiR" target="_blank">Stable (CRAN)</a></span></li>
+											<li class="mdl-list__item mdl-list__item--two-line"><span class="mdl-list__item-primary-content">
+												<span><a href="https://r-forge.r-project.org/R/?group_id=1019">Latest</a></span>
+											<span class="mdl-list__item-sub-title">R-forge</span></span>
+											</li>
+											<li class="mdl-list__item mdl-list__item--two-line"><span class="mdl-list__item-primary-content">
+												<span><a href="http://cran.at.r-project.org/package=stacomiR" target="_blank">Stable</a></span>
+												<span class="mdl-list__item-sub-title">CRAN</span>
+											</span></li>
 											<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="https://cran.r-project.org/web/packages/stacomiR/stacomiR.pdf" target="_blank">Reference manual</a></span></li>
 										</li>
 									</ul>
 									
 									<h3><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">archive</i> Stacomirtools</h3>
 									ODBC Connection Class for Package stacomiR
-									<ul class="mdl-list">
-										<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="https://r-forge.r-project.org/R/?group_id=1019">Latest (R-forge)</a></span></li>
-										<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="http://cran.at.r-project.org/package=stacomirtools" target="_blank">Stable (CRAN)</a></span></li>
+									<ul class="demo-list-two mdl-list">
+										<li class="mdl-list__item mdl-list__item--two-line">
+											<span class="mdl-list__item-primary-content">
+												<span><a href="https://r-forge.r-project.org/R/?group_id=1019">Latest</a></span>
+												<span class="mdl-list__item-sub-title">R-forge</span>
+											</span>
+										</li>
+										<li class="mdl-list__item mdl-list__item--two-line"><span class="mdl-list__item-primary-content">
+											<span><a href="http://cran.at.r-project.org/package=stacomirtools" target="_blank">Stable</a></span>
+										<span class="mdl-list__item-sub-title">CRAN</span></span></li>
 										<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><a href="https://cran.r-project.org/web/packages/stacomirtools/stacomirtools.pdf" target="_blank">Reference manual</a></span></li>
 									</ul>
 								</div>
