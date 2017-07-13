@@ -493,7 +493,7 @@ fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
 	  dat[,timesplit]<-dat$jour #
 	  for (j in 1:(length(seq_timesplit)-1)){
 		dat[dat$jour >= seq_timesplit[j] & dat$jour < seq_timesplit[j+1], timesplit] <-
-             seq_timesplit[j]
+            seq_timesplit[j]
 	  }
 	  dat[dat$jour>=seq_timesplit[length(seq_timesplit)],timesplit]<-seq_timesplit[length(seq_timesplit)]
 	  dat[,"interv"]<-paste(dat[,"annee"],dat[,timesplit])
@@ -514,7 +514,7 @@ fun_report_mig_interannual=function(dat,annee=NULL,timesplit=NULL)
 		dat=rbind(dat,dat0)
 	  } # end for
 	}
-		
+	
 	maxdat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),max,na.rm=TRUE))
 	mindat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),min,na.rm=TRUE))
 	meandat<-suppressWarnings(tapply(dat$valeur,as.character(dat[,timesplit]),mean,na.rm=TRUE))
@@ -591,7 +591,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 		  print(g)
 		  assign("g",g,envir=envir_stacomi)
 		  if (!silent) funout(gettext("Writing the graphical object into envir_stacomi environment : write g=get('g',envir_stacomi)\n",domain="R-stacomiR"))
-		#----------------------------------------------
+		          #----------------------------------------------
 		} else if (plot.type=="standard"){
 		  dat=report_mig_interannual@data
 		  if (silent==FALSE){
@@ -656,7 +656,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 		  #################
 		  # calculation of cumusums
 		  ###################
-		  		 
+		  
 		  for (an in unique(dat$annee)){
 			# an=as.character(unique(dat$annee)) ;an<-an[1]
 			dat[dat$annee==an,"cumsum"] <- cumsum(dat[dat$annee==an,"valeur"])
@@ -665,7 +665,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 		  dat$cumsum <- dat$cumsum/dat$total_annuel
 		  dat$jour <- as.Date(dat$jour)
 		  dat$annee <- as.factor(dat$annee)
-		  		  
+		  
 		  #################
 		  # plot
 		  ###################
@@ -765,19 +765,19 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 			# pb the limit truncs the value
 			g <- g+ylab("effectif")
 			cols <- c( "max" = "#000080",
-                       "min" = "#BF0000",
-                     ">=moy" = "darkgreen",
-                      "<moy" = "darkorange",
-                  "hist_mean"="black",
-                 "hist_range"="grey",
-                          "?"="darkviolet")
+                "min" = "#BF0000",
+                ">=moy" = "darkgreen",
+                "<moy" = "darkorange",
+                "hist_mean"="black",
+                "hist_range"="grey",
+                "?"="darkviolet")
 			fills <- c("max" = "blue",
-                       "min" = "red",
-                     ">=moy" = "green",
-                      "<moy" = "orange",
-                  "hist_mean"="black",
-                 "hist_range"="grey",
-                          "?"="violet")
+                "min" = "red",
+                ">=moy" = "green",
+                "<moy" = "orange",
+                "hist_mean"="black",
+                "hist_range"="grey",
+                "?"="violet")
 			
 			g <- g+scale_colour_manual(name=the_choice,values=cols,
                 limits=c("min","max","<moy",">=moy","hist_mean","hist_range","?"))
@@ -1107,6 +1107,7 @@ hsummaryreport_migInterannuelle<-function(h,...){
 #' @param ... Additional parameters (not used there)
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases summary.report_mig_interannual
+#' @return A list, one element per DC
 #' @export
 setMethod("summary",signature=signature(object="report_mig_interannual"),definition=function(object,silent=FALSE,...){
 	  # table generated with funtable
@@ -1119,32 +1120,39 @@ setMethod("summary",signature=signature(object="report_mig_interannual"),definit
 	  dat = dat[,-1]
 	  tmp = dat$Jour
 	  DC = object@dc@dc_selectionne
+      dat<-chnames(dat,"Jour","debut_pas")
 	  # debut_pas must be column name in tableau
-	  dat<-chnames(dat,"Jour","debut_pas")
-	  funtable(tableau=dat,
-		  time.sequence=tmp,
-		  taxa=object@taxa@data$tax_nom_latin,
-		  stage=object@stage@data$std_libelle,
-		  DC,
-		  resum=NULL,
-		  silent=silent)
-	  # Summary statistics
-	  dat=object@data
-	  if (silent==FALSE){
-		the_choice=as.numeric(select.list(choices=as.character(unique(dat$bjo_annee )[order(unique(dat$bjo_annee ))]),
-				preselect=as.character(max(dat$bjo_annee )),
-				"choice annee",multiple=FALSE))
-	  } else {
-		the_choice=max((dat$bjo_annee))
-	  }
-	  dat<-fun_report_mig_interannual(dat,timesplit="mois")
-	  colnames(dat)[colnames(dat)=="maxtab"]<-"max"
-	  colnames(dat)[colnames(dat)=="mintab"]<-"min"
-	  dat<-dat[dat$annee==the_choice,]
-	  dat$mois=strftime(dat$mois,"%b")
-	  dat$moyenne<-round(dat$moyenne)
-	  dat<-dat[,c("annee","mois","min","moyenne","max","valeur")]
-	  colnames(dat)<-c("annee","mois","min","mean","max","valeur")
-	  return(dat)
+      listDC<-list()
+      for (i in 1:length(DC)){
+        # this table will write an html table of data
+	         funtable(tableau=dat[dat$bjo_dis_identifiant==DC,],
+		              time.sequence=tmp,
+		              taxa=object@taxa@data$tax_nom_latin,
+		              stage=object@stage@data$std_libelle,
+		              DC[i],
+		              resum=NULL,
+		              silent=silent)
+	          # Summary statistics
+	          dat=object@data
+	          if (silent==FALSE){
+		          the_choice=as.numeric(select.list(choices=as.character(unique(dat$bjo_annee )[order(unique(dat$bjo_annee ))]),
+				                  preselect=as.character(max(dat$bjo_annee )),
+				                  "choice annee",multiple=FALSE))
+	          } else {
+		          the_choice=max((dat$bjo_annee))
+	          }
+              # we use the function that split data per time stamp to generate the full sequence of monthly data
+	          dat<-fun_report_mig_interannual(dat[dat$bjo_dis_identifiant==DC[i],],timesplit="mois")
+              # then we extract only current year for summary
+	          colnames(dat)[colnames(dat)=="maxtab"]<-"max"
+	          colnames(dat)[colnames(dat)=="mintab"]<-"min"
+	          dat<-dat[dat$annee==the_choice,]
+	          dat$mois=strftime(dat$mois,"%b")
+	          dat$moyenne<-round(dat$moyenne)
+	          dat<-dat[,c("annee","mois","min","moyenne","max","valeur")]
+	          colnames(dat)<-c("annee","mois","min","mean","max","valeur")
+              listDC[[as.character(DC[i])]]<-dat
+          }# end for
+	  return(listDC)
 	})
 

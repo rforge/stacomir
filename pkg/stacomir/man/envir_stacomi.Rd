@@ -5,7 +5,7 @@
 \alias{envir_stacomi}
 \title{Environment where most objects from the package are stored and then loaded
 by the charge method}
-\format{An object of class \code{environment} of length 9.}
+\format{An object of class \code{environment} of length 0.}
 \usage{
 envir_stacomi
 
