@@ -7,6 +7,8 @@
 #############################################
 
 
+
+
 #' function used to print the html tables of output (see xtable documentation)
 #' 
 #' see \pkg{xtable} for further description, an xtable is created and printed
@@ -36,6 +38,8 @@ funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=
 #############################################
 
 
+
+
 #' This function replaces the variable names in a data.frame
 #' 
 #' This function replaces the variable names in a data.frame
@@ -46,6 +50,19 @@ funhtml=function(data,caption=NULL,top=TRUE,outfile=NULL,clipboard=FALSE,append=
 #' @param new_variable_name a character vector with new variables names
 #' @return object
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
+#' 
+#' df <- data.frame("var1" = c("blue","red"), "var2" = c("nice","ugly"))
+#' colnames(df) # "var1" "var2"
+#' df <- chnames(object = df, old_variable_name = c("var1","var2"), 
+#' "new_variable_name" = c("color","beauty"))
+#' colnames(df) # "color"  "beauty"
+#' # the following will return an error, as the variable wrong_name is not in variable names
+#' \dontrun{
+#' chnames(object = df, old_variable_name = c("wrong_name"), 
+#' "new_variable_name" = c("color")))
+#' }
+#' 
 #' @export chnames
 chnames=function(object,
 		old_variable_name,
@@ -61,6 +78,8 @@ chnames=function(object,
 
 
 
+
+
 #' unique values of a vector
 #' 
 #' returns the index of values appearing only once in a vector :
@@ -71,6 +90,10 @@ chnames=function(object,
 #' @param a a vector
 #' @return the index unique values within a vector
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
+#' 
+#' induk(c(1,1,2,2,2,3))
+#' 
 #' @export induk
 induk=function(a){
 	sol=match(unique(a),a)     #index des valeurs uniques
@@ -91,6 +114,8 @@ killfactor=function(df){
 	}
 	return(df)
 }
+
+
 
 
 
@@ -115,6 +140,8 @@ ex<-function(d=NULL){
 
 
 
+
+
 #' id.odd function modified from package sma
 #' 
 #' id.odd function modified from package sma (which did not verify that the
@@ -124,6 +151,11 @@ ex<-function(d=NULL){
 #' @param x integer
 #' @return a logical
 #' @author Adapted from Henrik Bengtsson
+#' @examples
+#' 
+#' is.odd(1)
+#' is.odd(2)
+#' 
 #' @export is.odd
 is.odd=function (x) 
 {
@@ -141,6 +173,8 @@ is.odd=function (x)
 }
 
 
+
+
 #' is.even function modified from package sma
 #' 
 #' is.even function modified from package sma (which did not verify that the
@@ -150,6 +184,11 @@ is.odd=function (x)
 #' @param x integer
 #' @return a logical
 #' @author Adapted from Henrik Bengtsson
+#' @examples
+#' 
+#' is.even(1)
+#' is.even(2)
+#' 
 #' @export is.even
 is.even=function (x) 
 {
@@ -168,6 +207,8 @@ is.even=function (x)
 
 
 
+
+
 #' Function to transform a ftable into dataframe but just keeping the counts,
 #' works with ftable of dim 2
 #' 
@@ -177,6 +218,12 @@ is.even=function (x)
 #' 
 #' @param tab a flat table
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
+#' @examples
+#' 
+#' df <- data.frame("var1" = c("blue","red"), "var2" = c("nice","ugly"))
+#' ftdf <- ftable(df)
+#' tab2df(ftdf)
+#' 
 #' @export tab2df
 tab2df<-function(tab){
 	if (length((attributes(tab)$dim))>2) stop("only works with tables of dim 2")
