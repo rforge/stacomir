@@ -558,5 +558,11 @@ utils::globalVariables(c("coef_durif"))
 #						"uid", "pwd", "sqldf.uid", "sqldf.pwd", "sqldf.dbname", "sqldf.host", 
 #						"sqldf.port", "pgwd", "datawd", "lang"), class = "data.frame", row.names = c(NA, 
 #						-1L))
+#' Working environment for stacomiR created when launching stacomi()
+#' 
+#' This is where the graphical interface stores its objects
+#' try \code{ls(envir=envir_stacomi)}
+#' @keywords environment
+#' @export
 envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 #calcmig<-data.frame()
