@@ -227,6 +227,7 @@ setMethod("calcule",signature=signature("report_mig_mult"),definition=function(o
 		  lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"overlaps"
 		  contient_poids<-"poids"%in%datasub$type_de_quantite
 		  lestableaux[[stringr::str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
+         
 		  lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 		  if (contient_poids){
 			coe<-report_mig_mult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
@@ -898,7 +899,7 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
   dfts<-merge(df.ts,df,by="ts_id")
   datasub1<-merge(dfts,datasub,by="lot_identifiant")
 # to do a group by it is good to use sqldf
-  datasub1$value<-as.numeric(datasub1$value) # sinon arrondis e des entiers
+  datasub1$value<-as.numeric(datasub1$value) # sinon arrondis a des entiers
   if (negative){
 	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
 			fin_pas,
@@ -1051,8 +1052,8 @@ fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
 fun_weight_conversion=function(tableau,time.sequence,silent) { 
   if (!silent) funout(gettextf("dc=%s Conversion weight / number\n",unique(tableau$ope_dic_identifiant)))
   nr<-nrow(unique(tableau[,c("debut_pas","lot_tax_code","lot_std_code")]))
-  tableaupoids=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[2])
-  tableaueffectif=subset(tableau,tableau$type_de_quantite==unique(tableau$type_de_quantite)[1])
+  tableaupoids=subset(tableau,tableau$type_de_quantite=="poids")
+  tableaueffectif=subset(tableau,tableau$type_de_quantite=="effectif")
   tableaueffectif= tableaueffectif[,c("No.pas", "lot_tax_code","lot_std_code","CALCULE","MESURE","EXPERT","PONCTUEL","Effectif_total")]       
   tableaudesdeux=tableau[,c("No.pas","debut_pas","fin_pas","ope_dic_identifiant","lot_tax_code","lot_std_code","coe_valeur_coefficient")]
   tableaudesdeux=tableaudesdeux[!duplicated(tableaudesdeux[,c("No.pas","lot_tax_code","lot_std_code")]),]

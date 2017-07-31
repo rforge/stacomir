@@ -920,7 +920,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 		  }    else     {
 			if (!silent) funout(gettext("Warning : you have to complete a migration summary for at least one of the selected year before launching a inter-annual summary",domain="R-stacomiR"))
 		  }
-		  
+		#####################################################################  
 		} else if (plot.type=="seasonal"){
 		  if (! silent) funout("Seasonal graph to show the phenology of migration")
 		  #report_mig_interannual<-r_mig_interannual_vichy;silent=FALSE;timesplit="mois";require(ggplot2)
@@ -965,7 +965,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 			  scale_fill_distiller(palette = "Spectral", name="Effectif")+
 			  geom_path(aes(x=Q50,y=year),col="black",lty=2,data=dat3)+
 			  geom_point(aes(x=Q50,y=year),col="black",size=2,data=dat3)+
-			  geom_errorbarh(aes(x=Q50,y=year,xmin = Q5,xmax = Q95), height=0,data=dat3)+
+			  geom_errorbarh(aes(x=Q50,y=year,xmin = Q5,xmax = Q95), height=0,data=dat3,col="black")+
 			  ylab(Hmisc::capitalize(gettext("year",domain="R-stacomiR")))+
 			  xlab(Hmisc::capitalize(timesplit))+
 			  scale_x_date(name=timesplit,date_breaks="month",
