@@ -21,6 +21,18 @@ knitr::opts_chunk$set(
 library(stacomiR)
 
 ```
+Introduction
+--------------------------
+
+Migratory fishes population are vulnerable as they are often more prone to human
+impact when migrating in rivers and to the ocean. They are often counted at
+stations when they perform the migrations at some of their lifestages, and these
+counts provide valuable indices to the population size and trend. The objective
+of the stacomi project is to provide a common database for people monitoring
+fish migration, so that data from watershed are shared, and stocks exchanging
+between different basins are better managed. The stacomi database, is an
+open-source database, it managed with a JAVA interface,and results from that
+database are treated directly with the stacomiR project.
 
 
 Installation
@@ -47,42 +59,41 @@ The program can be launched to use from the command line
 ```{r example2, eval=FALSE}
 stacomi(gr_interface = TRUE, login_window = TRUE, database_expected = FALSE)
 ```
-Introduction
----------------------------
-Link with open source database, 
-objective evaluation and sharing stock indicators for migratory fishes. 
-No R package
-JAVA + postgres + R
-
 
 
 Data structure
 -------------------    
-The structure of the data contained in the open source postgresql database
-"bd_contmig_nat" is based on the following concepts.
+The open source postgresql database was built on the following concepts.
 
-### Station
-Station is a fish migration monitoring and in general, it is considered to be a
-section of a watercourse allowing the evaluation of fish upstream or downstream
-migration.
-Station may extend to the whole section of the migration axis to evaluate a
-migratory flow on a section subdivided into several natural or artificial
-channels. A station consists physically of as many weirs as hydrographic
-sections monitored (river, channels, etc.).
+### Infrastructure
+A migration report is always built on a section of a river. However, dam and
+fishways can have a complex structure, with the river divided into several
+branches, arriving at different dams. A fishway or river section can also be
+monitored by different counting devices (DC).
 
-### Weir
+#### Station
+A station of fish migration monitoring is considered to be
+a section of a watercourse where fish upstream or
+downstream migration is monitored.
+The station covers the whole section of a single river, but can extend to
+several natural or artificial channels. A station consists physically of as many
+weirs as hydrographic sections monitored (river, channels, etc.). According to
+the local settings, it corresponds to one river location with a counting device,
+or to one or several dams.
+
+#### Weir
 The concept of weir used in the context of fish migration monitoring database
 refers to a system blocking or guiding the migratory flow like : (i) dam, (ii)
 electric guide barrier, (iii) netting dam, etc.
 
-### Crossing device   
+#### Crossing device   
 A crossing device is a passageway that allows and concentrates the migratory
 flow between upstream and downstream of a weir. We can have several types like
 :(i) fishway, (ii) spillway, (iii) fish elevator, etc.
 
 It is possible to have more than one crossing device on a same weir.
 
-### Counting device
+#### Counting device
 A couting device is a set of equipment installed on a crossing devise used to
 monitor the migratory flow that passes through it.
 
@@ -93,6 +104,25 @@ monitor the migratory flow that passes through it.
 
  Package structure
 --------------------
+The package relies on S4 classes. *Referential classes* are used to access data
+from the database (taxa, stages, counting devices...).
+*Report classes* are built from referential classes and have different methods
+to access the database *connect methods*, generate calculations *calcule
+method*, or plot results. 
+For instance, the migration report class comprises slots for :
+***
+* DC The counting device (camera, trap, acoustic device...)
+* taxa The species list from the database and the taxa selected
+* stage The stages list from the database and the stage selected
+* starting date The date of beginning
+* ending date The last date of the report
+***
+| Class         | Report type    | description| 
+| ------------- |:----------| ---------------------------------: | 
+|report_mig    | Annual migration | Annual migration report  | 
+| report_mig_mult| Annual migration| Annual migration (several DC, taxa...) |
+
+
 
 Working examples
 -------------------------
@@ -103,4 +133,5 @@ Working examples
 
 License
 -------
-Released under GPL-2.
+
+The STACOMI project is released under GPL-2.
