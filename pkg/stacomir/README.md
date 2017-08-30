@@ -48,19 +48,52 @@ objective evaluation and sharing stock indicators for migratory fishes.
 No R package
 JAVA + postgres + R
 
-## Presentation
 
-### Data structure
-    
-    
 
-### Package structure
+Data structure
+-------------------    
+The structure of the data contained in the open source postgresql database
+"bd_contmig_nat" is based on the following concepts.
 
-###    Working examples
+### Station
+Station is a fish migration monitoring and in general, it is considered to be a
+section of a watercourse allowing the evaluation of fish upstream or downstream
+migration.
+Station may extend to the whole section of the migration axis to evaluate a
+migratory flow on a section subdivided into several natural or artificial
+channels. A station consists physically of as many weirs as hydrographic
+sections monitored (river, channels, etc.).
 
-####        Interface
+### Weir
+The concept of weir used in the context of fish migration monitoring database
+refers to a system blocking or guiding the migratory flow like : (i) dam, (ii)
+electric guide barrier, (iii) netting dam, etc.
 
-####        Command line
+### Crossing device   
+A crossing device is a passageway that allows and concentrates the migratory
+flow between upstream and downstream of a weir. We can have several types like
+:(i) fishway, (ii) spillway, (iii) fish elevator, etc.
+
+It is possible to have more than one crossing device on a same weir.
+
+### Counting device
+A couting device is a set of equipment installed on a crossing devise used to
+monitor the migratory flow that passes through it.
+
+### Operation
+
+### Fishes
+
+
+ Package structure
+--------------------
+
+Working examples
+-------------------------
+
+###        Interface
+
+###        Command line
 
 License
 -------
