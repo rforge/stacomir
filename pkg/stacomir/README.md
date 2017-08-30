@@ -63,37 +63,62 @@ The open source postgresql database was built on the following concepts.
 A migration report is always built on a section of a river. However, dam and
 fishways can have a complex structure, with the river divided into several
 branches, arriving at different dams. A fishway or river section can also be
-monitored by different counting devices (DC).
+monitored by different counting devices.
 
 #### Station
-Station is a fish migration monitoring and in general, it is considered to be a
-section of a watercourse allowing the evaluation of fish upstream or downstream
-migration.
-Station may extend to the whole section of the migration axis to evaluate a
-migratory flow on a section subdivided into several natural or artificial
-channels. A station consists physically of as many weirs as hydrographic
-sections monitored (river, channels, etc.).
+A station of fish migration monitoring is considered to be
+a section of a watercourse where fish upstream or
+downstream migration is monitored.
+The station covers the whole section of a single river, but can extend to
+several natural or artificial channels. A station consists physically of as many
+weirs as hydrographic sections monitored (river, channels, etc.). According to
+the local settings, it corresponds to one river location with a counting device,
+or to one or several dams.
 
 #### Weir
 The concept of weir used in the context of fish migration monitoring database
-refers to a system blocking or guiding the migratory flow like : (i) dam, (ii)
-electric guide barrier, (iii) netting dam, etc.
+refers to a system blocking or guiding the migratory flow like : 
+* dam, 
+* electric guide barrier, 
+* netting dam, 
+* etc.
 
 #### Crossing device   
 A crossing device is a passageway that allows and concentrates the migratory
 flow between upstream and downstream of a weir. We can have several types like
-:(i) fishway, (ii) spillway, (iii) fish elevator, etc.
+:
+* fishway, 
+* spillway, 
+* fish elevator, 
+* etc.
 
 It is possible to have more than one crossing device on a same weir.
 
 #### Counting device
 A couting device is a set of equipment installed on a crossing devise used to
 monitor the migratory flow that passes through it.
+It can be :
+* a video counting device, 
+* a trap pass, 
+* an acoustic counting device, 
+* etc.
 
-### Operation
+#### Environmental monitoring station
 
-### Fishes
 
+### Migration
+Whatever infrastructure is all fishes passing through a counting device are
+monitored.
+
+#### Monitoring operation
+An operation represents a monitoring varying duration of a counting device. It
+therefore includes a start and end date for a specific counting device.
+
+#### Fishes
+Fishes passing a counting device during a monitoring operation are
+species and stage determined and counted.
+
+#### Other features
 
  Package structure
 --------------------
