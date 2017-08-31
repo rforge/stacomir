@@ -57,59 +57,72 @@ stacomi(gr_interface = FALSE, login_window = TRUE, database_expected = TRUE)
 
 Data structure
 -------------------    
+<<<<<<< .mine
+The open source postgresql database comprises a common schema with dictionaries,
+and different schema for different users. Each user can save its own schema and
+send it to others. *Contact the authors to get a copy of the database*. The
+database comprises tables related to infrastructure, operations and fish
+samples. 
+||||||| .r454
+The open source postgresql database was built on the following concepts.
+*Contact the authors to get a copy of the database*.
+=======
 The open source postgresql database was built on the following concepts.
 *Contact the authors to get a copy of the structure of the database*.
+>>>>>>> .r455
 
 ### Infrastructure
-A migration report is always built on a section of a river. However, dam and
-fishways can have a complex structure, with the river divided into several
-branches, arriving at different dams. A fishway or river section can also be
-monitored by different counting devices.
+
 
 #### Station
-A station of fish migration monitoring is considered to be
-a section of a watercourse where fish upstream or
-downstream migration is monitored.
-The station covers the whole section of a single river, but can extend to
-several natural or artificial channels. A station consists physically of as many
-weirs as hydrographic sections monitored (river, channels, etc.). According to
-the local settings, it corresponds to one river location with a counting device,
-or to one or several dams.
+A migration report is always built on a section of a river, this is called the
+station. A station of fish migration monitoring is a section of a watercourse
+where fish upstream or downstream migration is monitored. The station covers the
+whole section of a single river, but can extend to several natural or artificial
+channels. A station consists physically of as many dams as hydrographic sections
+monitored (river, channels, etc.). According to the local settings, it
+corresponds to one river location with a counting device, or to one or several
+dams.
 
-#### Weir
-The concept of weir used in the context of fish migration monitoring database
+#### dams
+The concept of dam used in the context of fish migration monitoring database
 refers to a system blocking or guiding the migratory flow like : 
-* dam, 
+* weir, 
 * electric guide barrier, 
 * netting dam, 
 * etc.
 
 #### Crossing device   
 A crossing device (DF) is a passageway that allows and concentrates the
-migratory flow between upstream and downstream sections of a weir. They can be
-of various type
+migratory flow between upstream and downstream sections of a dam. They can be of
+various type
 * fishway, 
 * spillway, 
-* fish elevator, 
+* fish elevator,
+* eel trapping ladder, 
 * etc.
 
-It is possible to have more than one crossing device on a same weir.
+It is possible to have more than one crossing device on a same dam.
 
 #### Counting device
-A couting device (DC) is a set of equipment installed on a crossing devise 
-to monitor fish migration.
-It can be :
+A counting device (DC) is a set of equipment installed on a crossing device used
+to monitor fish migration. It can be :
 * a video counting device, 
-* a trap pass, 
+* a trap, 
 * an acoustic counting device, 
-* etc.
+* ...
 
+<<<<<<< .mine
+||||||| .r454
+#### Environmental monitoring station
+=======
 #### Operating periods of the devices
 Both counting and crossing devices are monitored to have clear indications of
 operating periods. These informations are really important to better interpret
 fish migration data.
  
 #### Environmental monitoring station
+>>>>>>> .r455
 To better understand migration of fish the database allow to insert information
 about environmental condition at a fish monitoring station. Different
 environmental parameters are available like :
@@ -120,25 +133,46 @@ environmental parameters are available like :
 * lunar cycle,
 * etc.
 
+<<<<<<< .mine
+||||||| .r454
+
 ### Migration
 Whatever infrastructure is all fishes passing through a counting device are
 monitored.
 
-#### Monitoring operation
-An operation represents a monitoring varying duration of a counting device. It
-therefore includes a start and end date for a specific counting device.
+=======
+### Migration
+Whatever infrastructure is all fishes passing through a counting device are
+monitored.
 
-#### Fishes
-Fishes passing a counting device during a monitoring operation are
-species and stage determined and counted.
+>>>>>>> .r455
+#### Monitoring operation
+An operation corresponds to a monitoring of a counting device during a time
+span. 
+
+#### Sample
+A sample corresponds to a batch of fishes passing during a monitoring operation.
+Sample characteristics (length, weight, sex, body measurements) are attached to
+the sample. For each sample the species and the stage (which corresponds to a
+maturation stage and is related to migratory behaviour) is recorded. 
 
 #### Other features
+<<<<<<< .mine
+The database also handles, marking-recapture operations, pathologies, samples
+collection (scale, fin sample for genetic...), fate of fishes (released, death,
+farmed, etc.), etc... 
+Some tables are also used to insert information
+about environmental condition such as turbidity, atmospheric pressure,
+temperature, flow ...
+||||||| .r454
+=======
 For each fish passing the counting device features like size, weight, sex, age,
 etc. can be monitored as well as :
 * the futur of the fish (released, death, farmed, etc.),
 * tagging (2 possibilities : read of existing tag or lay of new tag),
 * pathologies,
 * genetic samples.
+>>>>>>> .r455
 
 
  Package structure
@@ -219,8 +253,8 @@ weight in numbers.
   r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
  ```
 The previous line generates data not only about the report_mig_mult class,
-but also describing how the fishway (DF) and counting devices (DC) have been operated.
-Sometimes there is no migration but only because the camera was jammed. There are also information
+but also run dependent classes which describe how the fishway (DF) and counting devices (DC) have been operated.
+Sometimes there is no data but only because the camera was not working. There are also information
 about the operations (e.g. periods at wich a trap content has been evaluated). Here we load what
 would have been generated if we had run the previous lines.
 
@@ -234,23 +268,23 @@ would have been generated if we had run the previous lines.
  data("r_mig_mult_dc")
  assign("report_dc",r_mig_mult_dc,envir=envir_stacomi)
  r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
- #> Error in (function (classes, fdef, mtable) : unable to find an inherited method for function 'calcule' for signature '"report_mig_mult"'
  ```
 
-Individual plot for all DC, taxa and stage where data present
-Silent=TRUE to turn off messages
+One graph per DC, taxa and stage. 
+Below as an example, the glass eel migration in weight and number (top),
+the periods and type of operation for DF and DC, and the operation (trapping
+periods) (middle), a summary of migration per month (bottom).
 
 
 
-```
-#> Error in as.double(y): cannot coerce type 'S4' to vector of type 'double'
-```
-Ci dessous ne marche pas générer à la main puis expliquer et lien
 
-```
-#> Error in as.double(y): cannot coerce type 'S4' to vector of type 'double'
-```
-![plot of chunk rmmmult](man/figures/README-rmmstd-1.png)
+![plot of chunk rmmmult](man/figures/README-rmmstandard-1.png)
+
+Summary of migration for different stages and counting devices
+
+![plot of chunk rmmmult](man/figures/README-rmmmult-1.png)
+
+
 
 
 ### R-GTK2 graphical interface
