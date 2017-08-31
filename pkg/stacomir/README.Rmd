@@ -42,7 +42,8 @@ The package is available from CRAN, a development version is available from
 R-Forge.
 
 ```{r , eval=FALSE}
-install.packages("stacomiR", repos="http://R-Forge.R-project.org")
+install.packages("stacomiR") # get the package from CRAN
+install.packages("stacomiR", repos="http://R-Forge.R-project.org") # get the development version
 ```
 
 Usage
@@ -108,7 +109,7 @@ A counting device (DC) is a set of equipment installed on a crossing device used
 to monitor fish migration. It can be :
 * a video counting device, 
 * a trap, 
-* an acoustic counting device, 
+* an accoustic counting device, 
 * ...
 
 
@@ -146,18 +147,32 @@ For instance, the migration report class comprises slots for :
 * starting date The date of beginning
 * ending date The last date of the report
 ***
+Read the help files e.g. `? report_mig` to get documentation on the following
+classes.
 
-| Class         | Report type    | description| 
-| ------------- |:----------| ---------------------------------: | 
-|report_mig    | Annual migration | Annual migration report  | 
-| report_mig_mult| Annual migration| Annual migration (several DC, taxa...) |
-
+| Class         | Command    | description| 
+| ------------- |:----------|:--------------------------------------- | 
+|report_mig    | `new("report_mig")` | Migration report (single) | 
+| report_mig_mult| `new("report_mig_mult")`| Migr. (several DC,taxa...) |
+| report_annual| `new("report_annual")`| Multi year migration counts     |
+| report_dc   | `new("report_dc")`| Counting device operation     |
+| report_df   | `new("report_df")`| Fishway operation     |
+| report_mig_env  | `new("report_env")`| Migration crossed with env. factors |
+| report_mig_char | `new("report_df")`| Migration with fish characteristics |
+|report_mig_interannual  | `new("report_mig_interannual")`| Comp. between years|
+|report_sample_char | `new("report_sample_char")`| Sample characteristics  |
+|report_ge_weight | `new("report_ge_weight")`| Trend in glass eel weight |
+|report_silver_eel | `new("report_siver_eel")`| Silver eel migration & stage|
+|report_sea_age | `new("report_sea_age")`| Set sea age for Salmon    |
+|report_species | `new("report_species")`| Species composition    |
 
 
 Working examples
 -------------------------
 
 ###        Command line
+
+#### Migration report
 
 Examples are provided with each of the class, you can access them simply by
 typing `? report_mig_mult`
@@ -231,7 +246,7 @@ periods) (middle), a summary of migration per month (bottom).
 
 ```{r rmmstd,eval=FALSE,echo=FALSE,fig.keep="last"}
 # chunk not evaluated as it produces 5 plot with dev.new() called in a loop
-Sys.setlocale("LC_ALL","English")
+Sys.setenv(LANG = "fr")
   plot(r_mig_mult,plot.type="standard",silent=TRUE)
 ```
 
@@ -243,11 +258,40 @@ Summary of migration for different stages and counting devices
   plot(r_mig_mult,plot.type="multiple",silent=TRUE)
 ```
 
+#### Silver eels
 
+This section provides a short example for the function
+calculating Durif's stages. Those maturity stages for silver eels are
+calculated from body characteristics. The dataset `coef_durif`
+corresponds to classification scores are calculated by multiplying the metrics
+BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of
+the pectoral fin, with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The
+function `fun_stage_durif` choose the stage achieving the highest
+score ([Durif et al.,
+2009](http://fishlarvae.org/common/SiteMedia/durif%20et%20al%202009b.pdf))
 
-
+```{r silver,eval=TRUE,echo=TRUE,fig.keep="all"}
+require(stacomiR)
+data("coef_durif")
+# load a dataset of class report_silver_eel with data slot already prepared
+# here is an example of output 
+data("r_silver")
+r_silver <- calcule(r_silver)
+plot(r_silver, plot.type=3)
+#######################################
+# To use the function fun_stage_durif manually
+# create a matrix with columns BL","W","Dv","Dh","FL"
+#############################################
+# here it is extracted from the data at hand
+silver_eel<-as.matrix(r_silver@calcdata[[1]][,c("BL","W","Dv","Dh","FL")])
+head(silver_eel) # to see the first lines
+stage <- fun_stage_durif(silver_eel) # apply the function to the matrix
+stage[1:10] # look at the first 10 elements in vector silver
+```
 ### R-GTK2 graphical interface
 
+The program is intended to be used by 'non experienced' R users. Launching
+`stacomi()` will create the interface.
 
 License
 -------

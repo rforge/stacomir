@@ -34,7 +34,8 @@ R-Forge.
 
 
 ```r
-install.packages("stacomiR", repos="http://R-Forge.R-project.org")
+install.packages("stacomiR") # get the package from CRAN
+install.packages("stacomiR", repos="http://R-Forge.R-project.org") # get the development version
 ```
 
 Usage
@@ -57,19 +58,12 @@ stacomi(gr_interface = FALSE, login_window = TRUE, database_expected = TRUE)
 
 Data structure
 -------------------    
-<<<<<<< .mine
 The open source postgresql database comprises a common schema with dictionaries,
 and different schema for different users. Each user can save its own schema and
 send it to others. *Contact the authors to get a copy of the database*. The
 database comprises tables related to infrastructure, operations and fish
 samples. 
-||||||| .r454
-The open source postgresql database was built on the following concepts.
 *Contact the authors to get a copy of the database*.
-=======
-The open source postgresql database was built on the following concepts.
-*Contact the authors to get a copy of the structure of the database*.
->>>>>>> .r455
 
 ### Infrastructure
 
@@ -109,43 +103,10 @@ A counting device (DC) is a set of equipment installed on a crossing device used
 to monitor fish migration. It can be :
 * a video counting device, 
 * a trap, 
-* an acoustic counting device, 
+* an accoustic counting device, 
 * ...
 
-<<<<<<< .mine
-||||||| .r454
-#### Environmental monitoring station
-=======
-#### Operating periods of the devices
-Both counting and crossing devices are monitored to have clear indications of
-operating periods. These informations are really important to better interpret
-fish migration data.
- 
-#### Environmental monitoring station
->>>>>>> .r455
-To better understand migration of fish the database allow to insert information
-about environmental condition at a fish monitoring station. Different
-environmental parameters are available like :
-* turbidity,
-* atmospheric pressure,
-* temperature (both of the river and of the air),
-* flow,
-* lunar cycle,
-* etc.
 
-<<<<<<< .mine
-||||||| .r454
-
-### Migration
-Whatever infrastructure is all fishes passing through a counting device are
-monitored.
-
-=======
-### Migration
-Whatever infrastructure is all fishes passing through a counting device are
-monitored.
-
->>>>>>> .r455
 #### Monitoring operation
 An operation corresponds to a monitoring of a counting device during a time
 span. 
@@ -157,22 +118,12 @@ the sample. For each sample the species and the stage (which corresponds to a
 maturation stage and is related to migratory behaviour) is recorded. 
 
 #### Other features
-<<<<<<< .mine
 The database also handles, marking-recapture operations, pathologies, samples
 collection (scale, fin sample for genetic...), fate of fishes (released, death,
 farmed, etc.), etc... 
 Some tables are also used to insert information
 about environmental condition such as turbidity, atmospheric pressure,
 temperature, flow ...
-||||||| .r454
-=======
-For each fish passing the counting device features like size, weight, sex, age,
-etc. can be monitored as well as :
-* the futur of the fish (released, death, farmed, etc.),
-* tagging (2 possibilities : read of existing tag or lay of new tag),
-* pathologies,
-* genetic samples.
->>>>>>> .r455
 
 
  Package structure
@@ -190,18 +141,32 @@ For instance, the migration report class comprises slots for :
 * starting date The date of beginning
 * ending date The last date of the report
 ***
+Read the help files e.g. `? report_mig` to get documentation on the following
+classes.
 
-| Class         | Report type    | description| 
-| ------------- |:----------| ---------------------------------: | 
-|report_mig    | Annual migration | Annual migration report  | 
-| report_mig_mult| Annual migration| Annual migration (several DC, taxa...) |
-
+| Class         | Command    | description| 
+| ------------- |:----------|:--------------------------------------- | 
+|report_mig    | `new("report_mig")` | Migration report (single) | 
+| report_mig_mult| `new("report_mig_mult")`| Migr. (several DC,taxa...) |
+| report_annual| `new("report_annual")`| Multi year migration counts     |
+| report_dc   | `new("report_dc")`| Counting device operation     |
+| report_df   | `new("report_df")`| Fishway operation     |
+| report_mig_env  | `new("report_env")`| Migration crossed with env. factors |
+| report_mig_char | `new("report_df")`| Migration with fish characteristics |
+|report_mig_interannual  | `new("report_mig_interannual")`| Comp. between years|
+|report_sample_char | `new("report_sample_char")`| Sample characteristics  |
+|report_ge_weight | `new("report_ge_weight")`| Trend in glass eel weight |
+|report_silver_eel | `new("report_siver_eel")`| Silver eel migration & stage|
+|report_sea_age | `new("report_sea_age")`| Set sea age for Salmon    |
+|report_species | `new("report_species")`| Species composition    |
 
 
 Working examples
 -------------------------
 
 ###        Command line
+
+#### Migration report
 
 Examples are provided with each of the class, you can access them simply by
 typing `? report_mig_mult`
@@ -221,7 +186,7 @@ vertical slot fishway, and 6 and 12 are two glass eel trapping ladder located
 at the Arzal dam in the
 Vilaine river (France).
 We are evaluating the migration
-of all stages of eel (glass eel CIV, yellow eel AGJ and silver eel AGJ).
+of all stages of eel (glass eel CIV, yellow eel AGJ and silver eel AGG).
 Glass
 eel and yellow eel migrate to the watershed while silver eel
 are migrating back
@@ -284,11 +249,56 @@ Summary of migration for different stages and counting devices
 
 ![plot of chunk rmmmult](man/figures/README-rmmmult-1.png)
 
+#### Silver eels
+
+This section provides a short example for the function
+calculating Durif's stages. Those maturity stages for silver eels are
+calculated from body characteristics. The dataset `coef_durif`
+corresponds to classification scores are calculated by multiplying the metrics
+BL = body length, W = weight, MD = mean eye diameter (Dv+Dh)/2, and FL length of
+the pectoral fin, with each parameter p as S=Constant+BL*p(bl)+W*p(W)... The
+function `fun_stage_durif` choose the stage achieving the highest
+score ([Durif et al.,
+2009](http://fishlarvae.org/common/SiteMedia/durif%20et%20al%202009b.pdf))
 
 
+```r
+require(stacomiR)
+data("coef_durif")
+# load a dataset of class report_silver_eel with data slot already prepared
+# here is an example of output 
+data("r_silver")
+r_silver <- calcule(r_silver)
+plot(r_silver, plot.type=3)
+#> Warning in predict.lm(rlmmodb, newdata = newdata, se.fit = TRUE, type = "response", : Assuming constant prediction variance even though model fit is weighted
+```
 
+![plot of chunk silver](man/figures/README-silver-1.png)
+
+```r
+#######################################
+# To use the function fun_stage_durif manually
+# create a matrix with columns BL","W","Dv","Dh","FL"
+#############################################
+# here it is extracted from the data at hand
+silver_eel<-as.matrix(r_silver@calcdata[[1]][,c("BL","W","Dv","Dh","FL")])
+head(silver_eel) # to see the first lines
+#>        BL    W    Dv    Dh    FL
+#> 25710 830 1074  8.14  8.70 39.79
+#> 25711 714  740  8.24  8.52 38.04
+#> 25712 720  755  6.92  6.87 34.01
+#> 25713 860 1101 10.53 10.43 44.47
+#> 25714 716  752  7.42  8.76 33.78
+#> 25715 690  622  7.83  9.25 29.58
+stage <- fun_stage_durif(silver_eel) # apply the function to the matrix
+stage[1:10] # look at the first 10 elements in vector silver
+#>  25710  25711  25712  25713  25714  25715  25716  25717  25718  25719 
+#> "FIII" "FIII" "FIII"  "FIV" "FIII" "FIII"   "FV"   "FV" "FIII" "FIII"
+```
 ### R-GTK2 graphical interface
 
+The program is intended to be used by 'non experienced' R users. Launching
+`stacomi()` will create the interface.
 
 License
 -------
