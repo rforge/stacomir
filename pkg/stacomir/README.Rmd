@@ -64,7 +64,7 @@ stacomi(gr_interface = FALSE, login_window = TRUE, database_expected = TRUE)
 Data structure
 -------------------    
 The open source postgresql database was built on the following concepts.
-*Contact the authors to get a copy of the database*.
+*Contact the authors to get a copy of the structure of the database*.
 
 ### Infrastructure
 A migration report is always built on a section of a river. However, dam and
@@ -192,7 +192,7 @@ vertical slot fishway, and 6 and 12 are two glass eel trapping ladder located
 at the Arzal dam in the
 Vilaine river (France).
 We are evaluating the migration
-of all stages of eel (glass eel CIV, yellow eel AGJ and silver eel AGJ).
+of all stages of eel (glass eel CIV, yellow eel AGJ and silver eel AGG).
 Glass
 eel and yellow eel migrate to the watershed while silver eel
 are migrating back

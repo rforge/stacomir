@@ -58,7 +58,7 @@ stacomi(gr_interface = FALSE, login_window = TRUE, database_expected = TRUE)
 Data structure
 -------------------    
 The open source postgresql database was built on the following concepts.
-*Contact the authors to get a copy of the database*.
+*Contact the authors to get a copy of the structure of the database*.
 
 ### Infrastructure
 A migration report is always built on a section of a river. However, dam and
@@ -104,8 +104,21 @@ It can be :
 * an acoustic counting device, 
 * etc.
 
+#### Operating periods of the devices
+Both counting and crossing devices are monitored to have clear indications of
+operating periods. These informations are really important to better interpret
+fish migration data.
+ 
 #### Environmental monitoring station
-
+To better understand migration of fish the database allow to insert information
+about environmental condition at a fish monitoring station. Different
+environmental parameters are available like :
+* turbidity,
+* atmospheric pressure,
+* temperature (both of the river and of the air),
+* flow,
+* lunar cycle,
+* etc.
 
 ### Migration
 Whatever infrastructure is all fishes passing through a counting device are
@@ -120,6 +133,13 @@ Fishes passing a counting device during a monitoring operation are
 species and stage determined and counted.
 
 #### Other features
+For each fish passing the counting device features like size, weight, sex, age,
+etc. can be monitored as well as :
+* the futur of the fish (released, death, farmed, etc.),
+* tagging (2 possibilities : read of existing tag or lay of new tag),
+* pathologies,
+* genetic samples.
+
 
  Package structure
 --------------------
