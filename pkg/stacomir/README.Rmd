@@ -110,8 +110,21 @@ It can be :
 * an acoustic counting device, 
 * etc.
 
+#### Operating periods of the devices
+Both counting and crossing devices are monitored to have clear indications of
+operating periods. These informations are really important to better interpret
+fish migration data.
+ 
 #### Environmental monitoring station
-
+To better understand migration of fish the database allow to insert information
+about environmental condition at a fish monitoring station. Different
+environmental parameters are available like :
+* turbidity,
+* atmospheric pressure,
+* temperature (both of the river and of the air),
+* flow,
+* lunar cycle,
+* etc.
 
 ### Migration
 Whatever infrastructure is all fishes passing through a counting device are
@@ -126,6 +139,13 @@ Fishes passing a counting device during a monitoring operation are
 species and stage determined and counted.
 
 #### Other features
+For each fish passing the counting device features like size, weight, sex, age,
+etc. can be monitored as well as :
+* the futur of the fish (released, death, farmed, etc.),
+* tagging (2 possibilities : read of existing tag or lay of new tag),
+* pathologies,
+* genetic samples.
+
 
  Package structure
 --------------------

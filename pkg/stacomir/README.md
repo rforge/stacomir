@@ -214,15 +214,22 @@ would have been generated if we had run the previous lines.
  data("r_mig_mult_dc")
  assign("report_dc",r_mig_mult_dc,envir=envir_stacomi)
  r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
+ #> Error in (function (classes, fdef, mtable) : unable to find an inherited method for function 'calcule' for signature '"report_mig_mult"'
  ```
 
 Individual plot for all DC, taxa and stage where data present
 Silent=TRUE to turn off messages
 
 
-![plot of chunk rmmmult](man/figures/README-rmmmult-1.png)
+
+```
+#> Error in as.double(y): cannot coerce type 'S4' to vector of type 'double'
+```
 Ci dessous ne marche pas générer à la main puis expliquer et lien
 
+```
+#> Error in as.double(y): cannot coerce type 'S4' to vector of type 'double'
+```
 ![plot of chunk rmmmult](man/figures/README-rmmstd-1.png)
 
 
