@@ -203,7 +203,6 @@ setMethod("charge",signature=signature("report_mig_char"),definition=function(ob
 #' @param object An object of class \link{report_mig_char-class}
 #' @param silent Boolean default FALSE, if TRUE information messages not displayed
 #' @return report_mig_char with slot @data filled from the database
-#' @note 
 #' @aliases connect.report_mig_char
 #' @export
 setMethod("connect",signature=signature("report_mig_char"),definition=function(object,silent=FALSE){

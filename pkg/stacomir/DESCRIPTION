@@ -1,6 +1,6 @@
 Package: stacomiR
 Version: 0.5.3
-Date: 2017-06-24
+Date: 2017-08-31
 Title: Fish Migration Monitoring
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"),
 	      person("Marion", "Legrand", role = "aut", email="tableau-salt-loire@logrami.fr"),
