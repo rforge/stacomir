@@ -1,5 +1,6 @@
 ^README\.Rmd$
 ^README-.*\.png$
+^README\.md$
 ^logo\.png$
 ^NEWS.md$
 ^NEWS.md.html$
