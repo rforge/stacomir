@@ -66,7 +66,7 @@ Data structure
 -------------------    
 The open source postgresql database comprises a common schema with dictionaries,
 and different schema for different users. Each user can save its own schema and
-send it to others. *Contact the authors to get a copy of the database*. The
+send it to others. The
 database comprises tables related to infrastructure, operations and fish
 samples. 
 *Contact the authors to get a copy of the database*.
@@ -193,7 +193,7 @@ Vilaine river (France).
 We are evaluating the migration
 of all stages of eel (glass eel CIV, yellow eel AGJ and silver eel AGG).
 Glass
-eel and yellow eel migrate to the watershed while silver eel
+eel and yellow eel migrate to the watershed while silver eels
 are migrating back
 to the ocean.
 Data are loaded from the database with the `charge` method and the `calcule`
@@ -291,7 +291,9 @@ stage[1:10] # look at the first 10 elements in vector silver
 ### R-GTK2 graphical interface
 
 The program is intended to be used by 'non experienced' R users. Launching
-`stacomi()` will create the interface.
+`stacomi()` will create the interface. The interface looks like :
+[Durif et al.,
+2009](http://fishlarvae.org/common/SiteMedia/durif%20et%20al%202009b.pdf))
 
 License
 -------

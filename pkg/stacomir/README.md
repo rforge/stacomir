@@ -60,7 +60,7 @@ Data structure
 -------------------    
 The open source postgresql database comprises a common schema with dictionaries,
 and different schema for different users. Each user can save its own schema and
-send it to others. *Contact the authors to get a copy of the database*. The
+send it to others. The
 database comprises tables related to infrastructure, operations and fish
 samples. 
 *Contact the authors to get a copy of the database*.
