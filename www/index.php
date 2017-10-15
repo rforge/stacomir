@@ -162,7 +162,7 @@
 									<h3>Projects using StacomiR</h3>
 									<ul class="mdl-list">
 										<li class="mdl-list__item">
-											<span class="mdl-list__item-primary-content"><a href="http://www.eptb-vilaine.fr/site/telechargement/migrateurs/Pechelec_2014-2015.pdf" target="_blank"><i class="material-icons">description</i>Briand, Sauvaget, Eriau 2016</a></span>
+											<span class="mdl-list__item-primary-content"><a href="http://www.eptb-vilaine.fr/_BDU/20171015092229_rapport_anguille_2016_avecpagegarde.pdf" target="_blank"><i class="material-icons">description</i>Briand, Sauvaget, Eriau 2017</a></span>
 											<li class="mdl-list__item">
 												<span class="mdl-list__item-primary-content"><a href="mailto:cedric.briand@eptb-vilaine.fr" target="_blank"><i class="material-icons">note_add</i>I'm using it</a></span>
 											</li>
