@@ -52,7 +52,7 @@ chnames=function(object,
 		new_variable_name){
 		if (length(old_variable_name)!=length(new_variable_name)) stop("les variables de remplacement doivent avoir le meme nombre que les variables de depart")
 		if (!all(!is.na(match(old_variable_name,colnames(object))))) {
-		   stop(paste("les noms",paste(is.na(match(old_variable_name,colnames(object))),collapse="/"),"ne correspondent pas aux variables du tableau"))
+		   stop(paste("les noms",paste(match(old_variable_name,colnames(object))[is.na(match(old_variable_name,colnames(object)))],collapse="/"),"ne correspondent pas aux variables du tableau"))
     }
 	colnames(object)[match(old_variable_name,colnames(object))]<- new_variable_name
 	return(object)
