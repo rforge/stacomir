@@ -78,7 +78,7 @@ validity_ref_timestep=function(object)
 setClass(Class="ref_timestep",representation=
 		representation(dateDebut="POSIXlt",step_duration="numeric",nb_step="numeric",nocurrent_step="integer"),
 	validity=validity_ref_timestep,
-	prototype=prototype(dateDebut=as.POSIXlt(Hmisc::trunc.POSIXt(Sys.time(),"year")),
+	prototype=prototype(dateDebut=as.POSIXlt(Hmisc::truncPOSIXt(Sys.time(),"year")),
 		step_duration=as.numeric(86400),
 		nb_step=as.numeric(1),
 		nocurrent_step=as.integer(0) ) )
