@@ -23,5 +23,5 @@ In addition this version adds :
 
 My Windows machine.
 Win Builder -- current and development.
-Travis-CI.
+R-forge.
 
