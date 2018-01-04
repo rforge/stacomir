@@ -1,5 +1,8 @@
 # stacomiR 0.5.3.9000
 
+
+# stacomiR 0.5.3.1
+
 * added and edited readme.Rmd file (@cedric and @marion #447-#452)
 
 * compilation of messages, fixes bug for for some year in report\_mig\_mult (@cedric #444)
