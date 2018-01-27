@@ -5,6 +5,7 @@ output: github_document
 toc: true
 ---  
 
+
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stacomiR)](https://cran.r-project.org/package=stacomiR)
 
 ```{r echo = FALSE}

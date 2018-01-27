@@ -5,3 +5,7 @@
 ^NEWS.md$
 ^NEWS.md.html$
 ^README.md.html$
+^.NEWS.md.html$
+^.README.md.html$
+^cran-comments.md$
+^cran-comments$
