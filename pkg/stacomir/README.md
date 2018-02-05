@@ -1,6 +1,6 @@
 StacomiR
 ================
-Marion Legrand, Cédric Briand
+Marion Legrand, CÃ©dric Briand
 
 true
 
@@ -8,18 +8,23 @@ true
 
 # stacomiR <img src="man/figures/logo.png" align="right" />
 
+    #> Warning: package 'stacomiR' was built under R version 3.4.3
+    #> Loading required package: stacomirtools
+    #> Loading required package: RODBC
+
 ## Introduction
 
 Migratory fishes population are vulnerable as they are often more prone
-to human impact when migrating in rivers and to the ocean. They are
-often counted at stations when they perform the migrations at some of
-their lifestages, and these counts provide valuable indices to the
-population size and trend. The objective of the stacomi project is to
-provide a common database for people monitoring fish migration, so that
-data from watershed are shared, and stocks exchanging between different
-basins are better managed. The stacomi database, is an open-source
-database, it managed with a JAVA interface, and results from that
-database are treated directly with the stacomiR project.
+to human impact when migrating in rivers and to the ocean ([McDowall,
+1992](http://onlinelibrary.wiley.com.inee.bib.cnrs.fr/doi/10.1002/aqc.3270020405/pdf)).
+They are often counted at stations when they perform the migrations at
+some of their lifestages, and these counts provide valuable indices to
+the population size and trend. The objective of the stacomi project is
+to provide a common database for people monitoring fish migration, so
+that data from watershed are shared, and stocks exchanging between
+different basins are better managed. The stacomi database, is an
+open-source database, it managed with a JAVA interface, and results from
+that database are treated directly with the stacomiR project.
 
 ## Installation
 
@@ -65,9 +70,15 @@ monitored. The station covers the whole section of a single river, but
 can extend to several natural or artificial channels. A station consists
 physically of as many dams as hydrographic sections monitored (river,
 channels, etc.). According to the local settings, it corresponds to one
-river location with a counting device, or to one or several dams.
+river location with a counting device, or to one or several dams. For
+example, in the figure below we can see a station with three crossing
+device (DF 1 to 3) and two counting device (DC 1 to 2), the first one
+beeing a trap counting device (DC1) and the other a video-counting
+device (DC2).
 
-#### dams
+![plot](man/figures/StationComptage.png)
+
+#### Dams
 
 The concept of dam used in the context of fish migration monitoring
 database refers to a system blocking or guiding the migratory flow like
@@ -149,11 +160,14 @@ classes.
 Examples are provided with each of the class, you can access them simply
 by typing `? report_mig_mult` The program is intented to be used in
 conjuntion with the database, to test it without access, use the
-arguments `login_windows=FALSE` and `database_expected=FALSE`
+arguments `login_windows=FALSE` and
+`database_expected=FALSE`
 
-`r ## launches the application in the command line without connection to
-the database
-stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)`
+``` r
+## launches the application in the command line without connection to the database
+stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
+```
+
 The following code is only run when there is a connection to the
 database. The program will create an object of the class
 report\_mig\_mult, and run it for several DC, here 5 is a vertical slot
@@ -166,28 +180,44 @@ migrating back to the ocean. Data are loaded from the database with the
 migration from monitoring operations which do not necessarily span a
 day, and convert the glass eel weight in numbers.
 
-`r stacomi(gr_interface=FALSE, login_window=FALSE,
-database_expected=TRUE) r_mig_mult=new("report_mig_mult")
-r_mig_mult=choice_c(r_mig_mult, dc=c(5,6,12), taxa=c("Anguilla
-anguilla"), stage=c("AGG","AGJ","CIV"), datedebut="2011-01-01",
-datefin="2011-12-31") r_mig_mult<-charge(r_mig_mult) # launching charge
-will also load classes associated with the report # e.g. report_ope,
-report_df, report_dc r_mig_mult<-connect(r_mig_mult) # calculations
-r_mig_mult<-calcule(r_mig_mult,silent=TRUE)` The previous line generates
-data not only about the report\_mig\_mult class, but also run dependent
-classes which describe how the fishway (DF) and counting devices (DC)
-have been operated. Sometimes there is no data but only because the
-camera was not working. There are also information about the operations
-(e.g. periods at wich a trap content has been evaluated). Here we load
-what would have been generated if we had run the previous lines.
+``` r
+   stacomi(gr_interface=FALSE,
+      login_window=FALSE,
+      database_expected=TRUE)   
+  r_mig_mult=new("report_mig_mult")
+  r_mig_mult=choice_c(r_mig_mult,
+      dc=c(5,6,12),
+      taxa=c("Anguilla anguilla"),
+      stage=c("AGG","AGJ","CIV"),
+      datedebut="2011-01-01",
+      datefin="2011-12-31")
+  r_mig_mult<-charge(r_mig_mult)
+  # launching charge will also load classes associated with the report
+  # e.g. report_ope, report_df, report_dc
+  r_mig_mult<-connect(r_mig_mult)
+  # calculations 
+  r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
+```
 
-`r data("r_mig_mult") data("r_mig_mult_ope")
+The previous line generates data not only about the report\_mig\_mult
+class, but also run dependent classes which describe how the fishway
+(DF) and counting devices (DC) have been operated. Sometimes there is no
+data but only because the camera was not working. There are also
+information about the operations (e.g. periods at wich a trap content
+has been evaluated). Here we load what would have been generated if we
+had run the previous lines.
+
+``` r
+data("r_mig_mult")
+data("r_mig_mult_ope")
 assign("report_ope",r_mig_mult_ope,envir=envir_stacomi)
 data("r_mig_mult_df")
 assign("report_df",r_mig_mult_df,envir=envir_stacomi)
 data("r_mig_mult_dc")
 assign("report_dc",r_mig_mult_dc,envir=envir_stacomi)
-r_mig_mult<-calcule(r_mig_mult,silent=TRUE)`
+r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
+#> Loading required package: DBI
+```
 
 One graph per DC, taxa and stage. Below as an example, the glass eel
 migration in weight and number (top), the periods and type of operation
@@ -250,8 +280,9 @@ stage[1:10] # look at the first 10 elements in vector silver
 
 The program is intended to be used by ‘non experienced’ R users.
 Launching `stacomi()` will create the interface. The interface looks
-like : [Durif et al.,
-2009](http://fishlarvae.org/common/SiteMedia/durif%20et%20al%202009b.pdf))
+like :
+
+![plot](man/figures/interface_graph_taille_sat.png)
 
 ## License
 
