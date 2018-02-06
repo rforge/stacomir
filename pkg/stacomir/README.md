@@ -1,8 +1,6 @@
 StacomiR
 ================
-Marion Legrand, CÃ©dric Briand
-
-true
+Marion Legrand, Cédric Briand
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stacomiR)](https://cran.r-project.org/package=stacomiR)
 
@@ -82,22 +80,46 @@ device (DC2).
 
 The concept of dam used in the context of fish migration monitoring
 database refers to a system blocking or guiding the migratory flow like
-: \* weir, \* electric guide barrier, \* netting dam, \* etc.
+:
+
+  - weir,
+
+  - electric guide barrier,
+
+  - netting dam,
+
+  - etc.
 
 #### Crossing device
 
 A crossing device (DF) is a passageway that allows and concentrates the
 migratory flow between upstream and downstream sections of a dam. They
-can be of various type \* fishway, \* spillway, \* fish elevator, \* eel
-trapping ladder, \* etc.
+can be of various type :
+
+  - fishway,
+
+  - spillway,
+
+  - fish elevator,
+
+  - eel trapping ladder,
+
+  - etc.
 
 It is possible to have more than one crossing device on a same dam.
 
 #### Counting device
 
 A counting device (DC) is a set of equipment installed on a crossing
-device used to monitor fish migration. It can be : \* a video counting
-device, \* a trap, \* an accoustic counting device, \* …
+device used to monitor fish migration. It can be :
+
+  - a video counting device,
+
+  - a trap,
+
+  - an accoustic counting device,
+
+  - …
 
 #### Monitoring operation
 
@@ -127,12 +149,22 @@ access data from the database (taxa, stages, counting devices…). *Report
 classes* are built from referential classes and have different methods
 to access the database *connect methods*, generate calculations *calcule
 method*, or plot results. For instance, the migration report class
-comprises slots for : *** * DC The counting device (camera, trap,
-acoustic device…) \* taxa The species list from the database and the
-taxa selected \* stage The stages list from the database and the stage
-selected \* starting date The date of beginning \* ending date The last
-date of the report **\* Read the help files e.g. `? report_mig` to get
-documentation on the following
+comprises slots for : \*\*\*
+
+  - DC The counting device (camera, trap, acoustic device…)
+
+  - taxa The species list from the database and the taxa selected
+
+  - stage The stages list from the database and the stage selected
+
+  - starting date The date of beginning
+
+  - ending date The last date of the report
+
+-----
+
+Read the help files e.g. `? report_mig` to get documentation on the
+following
 classes.
 
 | Class                    | Command                         | description                         |
