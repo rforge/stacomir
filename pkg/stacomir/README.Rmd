@@ -1,6 +1,6 @@
 ---
 title: StacomiR
-author: Marion Legrand, Cédric Briand
+author: Marion Legrand, Cï¿½dric Briand
 output: github_document
 
 ---  
@@ -208,7 +208,8 @@ The program is intented to be used in conjuntion with the database, to test it
 without access, use the arguments `login_windows=FALSE` and
 `database_expected=FALSE`
 
-```{r , eval=TRUE, echo=TRUE}
+
+ ```{r , eval=TRUE, echo=TRUE}
 ## launches the application in the command line without connection to the database
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ```
@@ -255,16 +256,7 @@ Sometimes there is no data but only because the camera was not working. There ar
 about the operations (e.g. periods at wich a trap content has been evaluated). Here we load what
 would have been generated if we had run the previous lines.
 
-```{r ,eval=TRUE,echo=TRUE}
-data("r_mig_mult")
-data("r_mig_mult_ope")
-assign("report_ope",r_mig_mult_ope,envir=envir_stacomi)
-data("r_mig_mult_df")
-assign("report_df",r_mig_mult_df,envir=envir_stacomi)
-data("r_mig_mult_dc")
-assign("report_dc",r_mig_mult_dc,envir=envir_stacomi)
-r_mig_mult<-calcule(r_mig_mult,silent=TRUE)
-```
+
 
 One graph per DC, taxa and stage. 
 Below as an example, the glass eel migration in weight and number (top),
