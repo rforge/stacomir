@@ -1,12 +1,16 @@
 ---
 title: StacomiR
-author: Marion Legrand, C�dric Briand
+author: Marion Legrand, Cédric Briand
 output: github_document
-
 ---  
 
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stacomiR)](https://cran.r-project.org/package=stacomiR)
+
+```{r knitropt, include=FALSE}
+ require(knitr)
+opts_knit$set(message=FALSE, warnings=FALSE,error=FALSE,include=FALSE) 
+```
 
 ```{r echo = FALSE}
 knitr::opts_chunk$set(
@@ -162,7 +166,6 @@ from the database (taxa, stages, counting devices...).
 to access the database *connect methods*, generate calculations *calcule
 method*, or plot results. 
 For instance, the migration report class comprises slots for :
-***
 
 * DC The counting device (camera, trap, acoustic device...)
 
@@ -174,7 +177,6 @@ For instance, the migration report class comprises slots for :
 
 * ending date The last date of the report
 
-***
 Read the help files e.g. `? report_mig` to get documentation on the following
 classes.
 
@@ -209,7 +211,7 @@ without access, use the arguments `login_windows=FALSE` and
 `database_expected=FALSE`
 
 
- ```{r , eval=TRUE, echo=TRUE}
+```{r , eval=TRUE, echo=TRUE}
 ## launches the application in the command line without connection to the database
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ```
@@ -232,7 +234,8 @@ interpolate
 daily
 migration from monitoring operations which do not necessarily span a day, and convert the glass eel
 weight in numbers.
-```{r ,eval=FALSE,echo=TRUE}
+
+```{r ,eval=TRUE,echo=TRUE}
    stacomi(gr_interface=FALSE,
 	  login_window=FALSE,
 	  database_expected=TRUE)	
