@@ -235,7 +235,7 @@ daily
 migration from monitoring operations which do not necessarily span a day, and convert the glass eel
 weight in numbers.
 
-```{r ,eval=TRUE,echo=TRUE}
+```{r ,eval=TRUE,echo=TRUE,error=TRUE}
    stacomi(gr_interface=FALSE,
 	  login_window=FALSE,
 	  database_expected=TRUE)	
