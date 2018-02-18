@@ -1,6 +1,6 @@
 ---
 title: "StacomiR"
-author: "Marion Legrand, Cédric Briand"
+author: "Marion Legrand, CÃ©dric Briand"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -21,7 +21,7 @@ opts_knit$set(message=FALSE, warnings=FALSE,error=FALSE,include=FALSE)
 
 # stacomiR <img src="../man/figures/logo.png" align="right" />
 
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE}
 library(stacomiR)
 
 ```
@@ -139,14 +139,16 @@ to monitor fish migration. It can be :
 
 
 #### Monitoring operation
-An operation corresponds to a monitoring of a counting device during a time
+An operation corresponds to the monitoring of a counting device during a time
 span. 
 
 #### Sample
 A sample corresponds to a batch of fishes passing during a monitoring operation.
 Sample characteristics (length, weight, sex, body measurements) are attached to
 the sample. For each sample the species and the stage (which corresponds to a
-maturation stage and is related to migratory behaviour) is recorded. 
+maturation stage and is related to migratory behaviour) is recorded. Samples
+correspond to multiple fish of the same species and stage or to individual
+records.
 
 #### Other features
 The database also handles, marking-recapture operations, pathologies, samples
@@ -255,9 +257,10 @@ weight in numbers.
 ```
 
 The previous line generates data not only about the report_mig_mult class,
-but also run dependent classes which describe how the fishway (DF) and counting devices (DC) have been operated.
-Sometimes there is no data but only because the camera was not working. There are also information
-about the operations (e.g. periods at wich a trap content has been evaluated). Here we load what
+but also runs dependent classes which describe how the fishway (DF) and counting
+devices (DC) have been operated. Sometimes there are no data but only because
+the camera was not working. There are also information about the operations
+(e.g. periods at wich a trap content has been evaluated). Here we load what
 would have been generated if we had run the previous lines.
 
 
