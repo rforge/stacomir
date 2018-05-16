@@ -10,7 +10,7 @@ Description: Graphical outputs and treatment for a database of fish pass
     France by the French Agency for Biodiversity (AFB) institute to centralize
     data obtained by fish pass monitoring. Version 0.5.3.1 is available in French and
     English. See <http://stacomir.r-forge.r-project.org/> for more information on
-    'STACOMI'.
+    'STACOMI'.     
 License: GPL (>= 2)
 URL: http://stacomir.r-forge.r-project.org/
 Collate:
