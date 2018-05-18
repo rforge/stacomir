@@ -128,7 +128,7 @@ various type :
 
 * etc.
 
-It is possible to have more than one crossing device on a same dam.
+It is possible to have more than one crossing device on the same dam.
 
 #### Counting device
 A counting device (DC) is a set of equipment installed on a crossing device used
@@ -211,10 +211,10 @@ Working examples
 #### Migration report
 
 Examples are provided with each of the class, you can access them simply by
-typing `? report_mig_mult`
+typing `? report_mig_mult`.
 The program is intented to be used in conjuntion with the database, to test it
 without access, use the arguments `login_windows=FALSE` and
-`database_expected=FALSE`
+`database_expected=FALSE`.
 
 
 ```{r , eval=TRUE, echo=TRUE}
