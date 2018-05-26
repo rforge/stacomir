@@ -7,8 +7,8 @@
 }
 \description{
 \packageDescription{stacomiR}
+}
 \details{
-The DESCRIPTION file:
 \packageDESCRIPTION{stacomiR}
 \packageIndices{stacomiR}
 To use the stacomiR package, simply load the library using \code{library(stacomiR)}. Once done, type \code{stacomi()} in R terminal.

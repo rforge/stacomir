@@ -1,5 +1,10 @@
 # stacomiR 0.5.3.9000
 
+* developped vignette for package (@marion)
+
+* changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share
+
+* bug in interface report_dc corrected
 
 # stacomiR 0.5.3.1
 
