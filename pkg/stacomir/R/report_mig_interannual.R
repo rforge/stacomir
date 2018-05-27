@@ -761,7 +761,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 			g <- g+geom_bar(stat="identity",aes_string(ymin="valeur",ymax="valeur",fill="comp"),alpha=0.5,width=0.6)
 			#g <- g+scale_x_date(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("ref_period"),label=date_format("%b"),timesplit))
 			#lim=as.POSIXct(c(Hmisc::truncPOSIXt((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
-			#				Hmisc::ceilPOSIXt((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
+			#				Hmisc::ceil((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
 			# pb the limit truncs the value
 			g <- g+ylab("effectif")
 			cols <- c( "max" = "#000080",
@@ -906,7 +906,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 			g <- g+scale_x_datetime(name=paste("mois"),date_breaks="month",
 				date_minor_breaks=getvalue(new("ref_period"),timesplit),
 				date_labels="%b",
-				limits=as.POSIXct(c(Hmisc::truncPOSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),Hmisc::ceilPOSIXt((max(dat[dat$valeur!="0",timesplit])),"month")))) 
+				limits=as.POSIXct(c(Hmisc::truncPOSIXt((min(dat[dat$valeur!=0,timesplit])),"month"),Hmisc::ceil((max(dat[dat$valeur!="0",timesplit])),"month")))) 
 			g <- g+scale_y_continuous(name="Somme des pourcentages annuels de migration par quinzaine")
 			cols <- grDevices::rainbow(length(levels(dat$annee)))
 			g <- g+scale_fill_manual(name="annee",values=cols)
