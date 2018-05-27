@@ -1,10 +1,12 @@
 # stacomiR 0.5.3.9000
 
-* developped vignette for package (@marion)
+* developped vignette for package (@marion 480-484)
 
-* changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share
+* changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share (@cedric 481)
 
-* bug in interface report_dc corrected
+* bug in interface report_dc corrected (@cedric # 489)
+
+* Problem with ceilPOSIXt now named only ceil in package Hmisc. (@cedric # 489)
 
 # stacomiR 0.5.3.1
 
