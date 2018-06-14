@@ -487,7 +487,7 @@ setMethod("plot",signature=signature(x="report_mig_char",y="missing"),definition
 		g<-ggplot(calcdata)+
 			geom_point(aes(x=ope_date_debut,y=car_valeur_quantitatif,col=color),stat='identity')+
 			xlab(gettext("Month"))+
-			ylab(gettext("Number"))+
+			ylab(r_mig_char@parqual@par_selected)+
 			scale_colour_identity(name=gettext("Param"),
 				labels=cs[,"car_val_identifiant"],
 				breaks=cs[,"color"],
