@@ -1,12 +1,12 @@
 # stacomiR 0.5.3.9000
 
-* developped vignette for package (@marion 480-484)
+* developped vignette for package (@marion #480-484)
 
-* changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share (@cedric 481)
+* changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share (@cedric #481)
 
-* bug in interface report_dc corrected (@cedric # 489)
+* bug in interface report_dc corrected (@cedric #489)
 
-* Problem with ceilPOSIXt now named only ceil in package Hmisc. (@cedric # 489)
+* Problem with ceilPOSIXt now named only ceil in package Hmisc. (@cedric #489)
 
 # stacomiR 0.5.3.1
 
@@ -36,9 +36,9 @@
 
 # stacomiR 0.5.2 (R-Forge)
 
-* Development of the command line interface (@ cedric)
+* Development of the command line interface (@cedric)
 
-* Adaptation to the database change to adapt French SANDRE directives (@ cedric)
+* Adaptation to the database change to adapt French SANDRE directives (@cedric)
 
 * added 4 new report (silver eel, sea age, report\_mig\_mult, report_annual) and adapted all old script to use in both command line and graphical interface. (@ cedric and @marion)
 
