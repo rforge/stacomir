@@ -20,7 +20,6 @@ knitr::opts_chunk$set(
 )
 opts_knit$set(message=FALSE, warnings=FALSE,error=FALSE,include=FALSE) 
 ```
-[comment]: <>[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stacomiR)](https://cran.r-project.org/package=stacomiR)
 
 # stacomiR <img src="../man/figures/logo.png" align="right" />
 
