@@ -11,3 +11,5 @@
 ^.README.md.html$
 ^cran-comments.md$
 ^cran-comments$
+^paper\.bib$
+^paper\.md$
