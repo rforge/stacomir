@@ -188,9 +188,6 @@ setMethod("choice_c",signature=signature("report_mig_mult"),definition=function(
 #' @param silent Default FALSE, should messages be stopped
 #' @note The class does not handle escapement rates, though structurally those are present in the database. If you 
 #' want to use those you will have to do the calculation manually from the data in \code{report_mig_mult@data}.
-#' Note also that running the calcule method requires to have a database called test in postgres, and empty
-#' database in which all sqldf group by queries are run. The user and password for the test database are taken 
-#' from the calcmig.csv configuration file.
 #' @return report_mig_mult with a list in slot calcdata. For each dc one will find a list with the following elements
 #' \describe{
 #' \item{method}{In the case of instantaneous periods (video counting) the sum of daily values is done by the \link{fun_report_mig_mult} method and the value indicated in method is "sum".
@@ -231,7 +228,7 @@ setMethod("calcule",signature=signature("report_mig_mult"),definition=function(o
 		  lestableaux[[stringr::str_c("dc_",dic)]][["method"]]<-"overlaps"
 		  contient_poids<-"poids"%in%datasub$type_de_quantite
 		  lestableaux[[stringr::str_c("dc_",dic)]][["contient_poids"]]<-contient_poids
-         
+          
 		  lestableaux[[stringr::str_c("dc_",dic)]][["negative"]]<-negative
 		  if (contient_poids){
 			coe<-report_mig_mult@coef_conversion[,c("coe_date_debut","coe_valeur_coefficient")]
@@ -430,11 +427,11 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 		for (dcnum in 1:length(lesdc)){
 		  for (taxanum in 1:nrow(lestaxa)){
 			for (stagenum in 1:nrow(lesstage)){
-			  
-			  taxa=lestaxa[taxanum,"tax_nom_latin"]
-			  stage=lesstage[stagenum,"std_libelle"]
-			  dc=lesdc[dcnum]
-			  data<-report_mig_mult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+			  #dcnum=1;taxnum=1;stagenum=1
+			  taxa <- lestaxa[taxanum,"tax_nom_latin"]
+			  stage <- lesstage[stagenum,"std_libelle"]
+			  dc <- lesdc[dcnum]
+			  data <- report_mig_mult@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 			  data<-data[data$lot_tax_code==lestaxa[taxanum,"tax_code"] &
 					  data$lot_std_code==lesstage[stagenum,"std_code"],]
 			  
@@ -521,13 +518,10 @@ setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=func
 		  grdata<-rbind(grdata,data)
 		}
 		names(grdata)<-tolower(names(grdata))
-		grdata<-sqldf::sqldf(x="select sum(effectif_total) as effectif_total,
-				\"no.pas\",
-				debut_pas
-				from grdata
-				group by debut_pas,\"no.pas\"
-				order by debut_pas",
-                    drv="PostgreSQL")
+        grdata <- as.data.frame(grdata %>% 
+                dplyr::group_by(debut_pas,no.pas) %>% 
+                dplyr::summarize(effectif_total=sum(effectif_total))%>%
+                dplyr::arrange(debut_pas))	
 		grdata_without_hole<-merge(
 			data.frame(no.pas=as.numeric(strftime(report_mig_mult@time.sequence,format="%j"))-1,
 				debut_pas=report_mig_mult@time.sequence),
@@ -902,49 +896,54 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 	  ts_id=as.numeric(strftime(time.sequence,format="%j")),stringsAsFactors =FALSE)
   dfts<-merge(df.ts,df,by="ts_id")
   datasub1<-merge(dfts,datasub,by="lot_identifiant")
-# to do a group by it is good to use sqldf
-  datasub1$value<-as.numeric(datasub1$value) # sinon arrondis a des entiers
+  datasub1$value<-as.numeric(datasub1$value) # Otherwise rounded to integer
+  # If negative negative and positive are treated separately and return one row for each positive or negative value
   if (negative){
-	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
-			fin_pas,
-			sum(value*coef) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention 	
-			FROM datasub1 
-			where value<0		
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite 
-			UNION
-			SELECT  debut_pas,
-			fin_pas,
-			sum(value*coef) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention 	
-			FROM datasub1 		
-			where value>=0
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite",
-        drv="PostgreSQL"
-	)
+    
+    the_negative <- datasub1 %>% dplyr::select(debut_pas,
+		    fin_pas,
+		    value,
+            coef,
+		    type_de_quantite,
+		    ope_dic_identifiant,
+		    lot_tax_code,
+		    lot_std_code,
+		    lot_methode_obtention) %>%
+        dplyr::filter(value<0) %>%
+        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	    dplyr::summarize(value=sum(value*coef))%>%
+        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite)
+    
+    the_positive <- datasub1 %>% dplyr::select(debut_pas,
+		    fin_pas,
+		    value,
+            coef,
+		    type_de_quantite,
+		    ope_dic_identifiant,
+		    lot_tax_code,
+		    lot_std_code,
+		    lot_methode_obtention) %>%
+        dplyr::filter(value>=0) %>%
+        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	    dplyr::summarize(value=sum(value*coef))%>%
+        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite)
+    
+    datasub2 <- as.data.frame(rbind(the_negative,the_positive))
+    
   } else {
-	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
-			fin_pas,
-			sum(value*coef) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention 	
-			FROM datasub1 		
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ",
-        drv="PostgreSQL")
+	datasub2<- as.data.frame(datasub1 %>% dplyr::select(debut_pas,
+		    fin_pas,
+		    value,
+            coef,
+		    type_de_quantite,
+		    ope_dic_identifiant,
+		    lot_tax_code,
+		    lot_std_code,
+		    lot_methode_obtention) %>%
+        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	    dplyr::summarize(value=sum(value*coef))%>%
+        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite))
+    
   }
   # if some samples overlap between the current year and the year arround the current year,
   # then the calculation will have hampered our numbers of a small amount
