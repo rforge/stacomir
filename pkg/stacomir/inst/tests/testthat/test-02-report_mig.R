@@ -300,8 +300,8 @@ test_that("test example with glass eel",
 #				password<-tclvalue(passVar);  
 #				return(password);  
 #			}  
-#			sqldf.options["sqldf.host"]<-getpassword()
-#			sqldf.options["sqldf.port"]<-5432
+#			sqldf.options["sqldf.RPostgreSQL.host"]<-getpassword()
+#			sqldf.options["sqldf.RPostgreSQL.port"]<-5432
 #			assign("sqldf.options",sqldf.options,envir_stacomi)
 #			report_mig=new('report_mig')
 #			report_mig=choice_c(report_mig,

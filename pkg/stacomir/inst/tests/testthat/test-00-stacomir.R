@@ -18,10 +18,8 @@ test_that("Test that the program is running under the right locale",{
 test_that("Test existence calcmig data within package",{
 	  data("calcmig",package = "stacomiR")
 	  calcmig<-calcmig
-	  expect_equal(length(calcmig),11)
-	  
+	  expect_equal(length(calcmig),9)	  
 	}
-
 )
 
 test_that("Test that ODBC link exists and has the right length",{

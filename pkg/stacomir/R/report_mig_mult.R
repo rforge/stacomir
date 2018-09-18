@@ -205,7 +205,8 @@ setMethod("choice_c",signature=signature("report_mig_mult"),definition=function(
 #' @aliases calcule.report_mig_mult
 #' @export
 setMethod("calcule",signature=signature("report_mig_mult"),definition=function(object,negative=FALSE,silent=FALSE){ 
-	  # report_mig_mult<-r_mig_mult
+	  
+      # report_mig_mult<-r_mig_mult; negative=FALSE
 	  if (!silent) funout(gettext("Starting migration summary ... be patient\n",domain="R-stacomiR"))
 	  report_mig_mult<-object		
 	  debut=report_mig_mult@timestep@dateDebut
@@ -410,7 +411,6 @@ h_report_mig_mult_graph=function(h=null,...){
 #' @aliases plot.report_mig_mult
 #' @export
 setMethod("plot",signature(x = "report_mig_mult", y = "missing"),definition=function(x, plot.type="standard",color=NULL, color_ope=NULL,silent=FALSE,...){ 
-	  #browser()
 	  #print("entering plot function")
 	  #report_mig_mult<-r_mig_mult;silent=FALSE
 	  report_mig_mult<-x
@@ -792,6 +792,7 @@ setMethod("print",signature=signature("report_mig_mult"),definition=function(x,.
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) {
+  #browser()
   mat1<-as.data.frame(cbind(as.numeric(time.sequence),as.numeric(time.sequence+as.difftime(1,units="days"))))
   mat2<-as.data.frame(cbind(as.numeric(datasub$ope_date_debut),as.numeric(datasub$ope_date_fin)))
   rownames(mat1)<-as.character(time.sequence)
@@ -898,6 +899,7 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
   datasub1<-merge(dfts,datasub,by="lot_identifiant")
   datasub1$value<-as.numeric(datasub1$value) # Otherwise rounded to integer
   # If negative negative and positive are treated separately and return one row for each positive or negative value
+  # below coef is the part of the operation within the current year
   if (negative){
     
     the_negative <- datasub1 %>% dplyr::select(debut_pas,
@@ -932,17 +934,17 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
     
   } else {
 	datasub2<- as.data.frame(datasub1 %>% dplyr::select(debut_pas,
-		    fin_pas,
-		    value,
-            coef,
-		    type_de_quantite,
-		    ope_dic_identifiant,
-		    lot_tax_code,
-		    lot_std_code,
-		    lot_methode_obtention) %>%
-        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
-	    dplyr::summarize(value=sum(value*coef))%>%
-        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite))
+		                    fin_pas,
+		                    value,
+                            coef,
+		                    type_de_quantite,
+		                    ope_dic_identifiant,
+		                    lot_tax_code,
+		                    lot_std_code,
+		                    lot_methode_obtention) %>%
+                    dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	                dplyr::summarize(value=sum(value*coef))%>%
+                    dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite))
     
   }
   # if some samples overlap between the current year and the year arround the current year,
@@ -974,8 +976,6 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 #' @param time.sequence the time sequence to be filled in with new data
 #' @param datasub the initial dataset
 #' @param negative "boolean", default FALSE, TRUE indicates a separate sum for negative and positive migrations
-#' @note The method uses sqldf, configured to access a postgres database, and runs caclulations on a database called
-#' test (the username and password for test are set in the calcmig.csv configuration file). 
 #' @return A data.frame with number summed over over the time.sequence. 
 #' The function returns the same output than \link{fun_report_mig_mult_overlaps}
 #' but is intended to work faster. In the data.frame, the total number is 
@@ -984,53 +984,56 @@ fun_report_mig_mult_overlaps <- function(time.sequence, datasub,negative=FALSE) 
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @export
 fun_report_mig_mult <- function(time.sequence, datasub,negative=FALSE) {
-  sqldf.options<-get("sqldf.options",envir_stacomi)
+  #sqldf.options<-get("sqldf.options",envir_stacomi)
+  #browser()
   df.ts=data.frame(debut_pas=time.sequence,
 	  fin_pas=time.sequence+as.difftime(1,units="days"),
 	  ts_id=strftime(time.sequence,format="%j"),stringsAsFactors =FALSE)
   datasub$ts_id<-strftime(datasub$ope_date_debut,format="%j")
   datasub1<-merge(df.ts,datasub,by="ts_id")
-  # ci dessous pour faire du group by c'est quand meme bien de passer par sqldf
   if (negative){
-	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
-			fin_pas,
-			sum(value) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention
-			FROM datasub1 
-			WHERE value>=0
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite 
-			UNION
-			SELECT  debut_pas,
-			fin_pas,
-			sum(value) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention
-			FROM datasub1 
-			WHERE value<0
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite ",
-        drv="PostgreSQL")
+    
+    the_negative <- datasub1 %>% dplyr::select(debut_pas,
+		    fin_pas,
+		    value,
+		    type_de_quantite,
+		    ope_dic_identifiant,
+		    lot_tax_code,
+		    lot_std_code,
+		    lot_methode_obtention) %>%
+        dplyr::filter(value<0) %>%
+        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	    dplyr::summarize(value=sum(value))%>%
+        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite)
+    
+    the_positive <- datasub1 %>% dplyr::select(debut_pas,
+		    fin_pas,
+		    value,
+		    type_de_quantite,
+		    ope_dic_identifiant,
+		    lot_tax_code,
+		    lot_std_code,
+		    lot_methode_obtention) %>%
+        dplyr::filter(value>=0) %>%
+        dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	    dplyr::summarize(value=sum(value))%>%
+        dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite)
+    
+    datasub2 <- as.data.frame(rbind(the_negative,the_positive))
+    
   } else {
-	datasub2<-sqldf::sqldf(x="SELECT  debut_pas,
-			fin_pas,
-			sum(value) as value,
-			type_de_quantite,
-			ope_dic_identifiant,
-			lot_tax_code,
-			lot_std_code,
-			lot_methode_obtention
-			FROM datasub1 
-			GROUP BY ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite
-			ORDER BY ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite",
-        drv="PostgreSQL")
+	datasub2<- as.data.frame(datasub1 %>% dplyr::select(debut_pas,
+		        fin_pas,
+		        value,
+		        type_de_quantite,
+		        ope_dic_identifiant,
+		        lot_tax_code,
+		        lot_std_code,
+		        lot_methode_obtention) %>%
+            dplyr::group_by(ope_dic_identifiant,lot_tax_code, lot_std_code, lot_methode_obtention, debut_pas,fin_pas,type_de_quantite) %>%
+	        dplyr::summarize(value=sum(value))%>%
+            dplyr::arrange(ope_dic_identifiant,debut_pas, lot_tax_code, lot_std_code,type_de_quantite))
+    
   }
   stopifnot(all.equal(sum(datasub$value,na.rm=TRUE),sum(datasub2$value,na.rm=TRUE)))
   datasub3<-reshape2::dcast(datasub2, debut_pas+fin_pas+ope_dic_identifiant+lot_tax_code+lot_std_code+type_de_quantite~lot_methode_obtention,value.var="value")

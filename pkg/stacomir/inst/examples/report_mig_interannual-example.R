@@ -18,8 +18,8 @@ stacomi(gr_interface=FALSE,
   assign("sch","pmp.",envir_stacomi)
   # Note in some cases you will want to change host and port setting
 #   sqldf.options<-get("sqldf.options",envir=envir_stacomi)  
-#   sqldf.options["sqldf.host"]<-"www.myhostname.com"
-#   sqldf.options["sqldf.port"]<-5433  
+#   sqldf.options["sqldf.RPostgreSQL.host"]<-"www.myhostname.com"
+#   sqldf.options["sqldf.RPostgreSQL.port"]<-5433  
 #   assign("sqldf.options",sqldf.options,envir_stacomi)  
   r_mig_interannual<-new("report_mig_interannual")
   r_mig_interannual<-choice_c(r_mig_interannual,
