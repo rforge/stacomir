@@ -1,6 +1,13 @@
-# stacomiR 0.5.3.9000
+# stacomiR 0.5.4.0
+
+* removed reference to test database, and use of dplyr for internal calculations. 
+Trying to launch as test database with postgres failed on distant computers for tests.... (@marion #484-502)
+
+* Updated testhat tests (@marion  @cedric #502-506)
 
 * developped vignette for package (@marion #480-484)
+
+# stacomiR 0.5.3.2
 
 * changed stacomiR-package.md according to Kurt Hornik (CRAN) demand to use macro in share (@cedric #481)
 

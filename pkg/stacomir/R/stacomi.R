@@ -530,7 +530,8 @@ utils::globalVariables(c("quinzaine", "mois","val_quant","time.sequence","Effect
 		"env_valeur_quantitatif","env_val_identifiant","DC","color"))
 
 # variable used by dplyr
-utils::globalVariables(c("n0","newid","xmin","xmax"))
+utils::globalVariables(c("n0","newid","xmin","xmax","fin_pas","value","type_de_quantite","lot_tax_code","lot_std_code",
+						"lot_methode_obtention","no.pas"))
 
 # dataset used in the package
 utils::globalVariables(c("coef_durif"))
