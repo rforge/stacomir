@@ -176,7 +176,7 @@ chargecsv=function(database_expected){
 #pgwd=tableau_config["pgwd",]
   baseODBC=c(tableau_config["lienODBC",],tableau_config["uid",],tableau_config["pwd",])
   if (!"dbname"%in%dimnames(tableau_config)[[1]])
-  stop("From version 0.5.4 you need to change C:/program files/calcmig.csv, rename 
+  stop("From version 0.5.4 you need to change C:/program files/stacomi/calcmig.csv, rename 
  sqldf.dbname to dbname, sqldf.port to port and remove columns sqldf.uid and sqldf.pwd")
   sqldf.options=c("sqldf.RPostgreSQL.user" = as.character(tableau_config["uid",]),
       "sqldf.RPostgreSQL.password" = as.character(tableau_config["pwd",]),
