@@ -16,6 +16,7 @@ if(getUsername() == 'marion.legrand')
   setwd("C:/Users/logrami/workspace/stacomir/")
 }
 
+
 # to launch all
 
 
