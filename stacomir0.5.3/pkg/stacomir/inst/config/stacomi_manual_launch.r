@@ -79,7 +79,7 @@ source("report_sea_age.R")
 source("setAs.R")
 
 # functions
-source("fun_report_mig_char.R")
+#source("fun_report_mig_char.R")
 source("fungraph_glasseel.R")
 source("fungraph.R")
 source("funstat.R")
