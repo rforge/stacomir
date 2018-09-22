@@ -68,6 +68,9 @@ test_that("Test charge method for report_mig_mult",
 		  silent=TRUE)
 	  options(warn = 0)
 	  report_mig_mult<-charge(report_mig_mult,silent=TRUE)
+      expect_is(get("report_df",envir=envir_stacomi),"report_df")
+	  expect_is(get("report_dc",envir=envir_stacomi),"report_dc")
+	  expect_is(get("report_ope",envir=envir_stacomi),"report_ope")
 	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
@@ -100,13 +103,13 @@ test_that("Test connect method for report_mig_mult",
 test_that("Test example 01_report_mig_mult",
 	{
 	  # check if built with examples (Rtools install --example
-	  example_path<-file.path(.libPaths(),"stacomiR","R-ex","report_mig_mult-class.R")
+	  example_path<-file.path(.libPaths()[1],"stacomiR","R-ex","report_mig_mult-class.R")
 	  test<-file.access(example_path,0)
 	  if (test[1]!=0) warnings("Package example dir not created ?") else
 		options(warn = -1)
 	  source(example_path)
 	  options(warn = 0)
-	  summary(r_mig_mult,silent=TRUE)
+	  expect_output(summary(r_mig_mult,silent=FALSE))      
       rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 

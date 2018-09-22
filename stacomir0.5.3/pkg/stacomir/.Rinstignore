@@ -1,5 +1,0 @@
-inst/config/generate_ROxygen2.R
-inst/config/libraries.r
-inst/stacomi_manual_launch.r
-inst/test_vignette.R
-inst/testthat.R

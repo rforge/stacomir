@@ -15,6 +15,7 @@ Trying to launch as test database with postgres failed on distant computers for 
 
 * Problem with ceilPOSIXt now named only ceil in package Hmisc. (@cedric #489)
 
+
 # stacomiR 0.5.3.1
 
 * added and edited readme.Rmd file (@cedric and @marion #447-#452)

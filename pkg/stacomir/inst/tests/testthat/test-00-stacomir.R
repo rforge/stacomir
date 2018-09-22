@@ -183,9 +183,7 @@ test_that("All foreign keys are present",
 	  req<-new("RequeteODBC")
 	  baseODBC<-get("baseODBC", envir=envir_stacomi)
 	  options(warn=-1)
-	  #warning : Coercing LHS to a list
-	  baseODBC["uid"]=relax::readline(prompt="Enter superuser name: ")
-	  baseODBC["pwd"]=relax::readline(prompt="Enter superuser password: ")	
+	  #warning : Coercing LHS to a list	 	
 	  options(warn=0)
 	  req@baseODBC<-baseODBC
 	  req@sql=paste(stringr::str_c("SELECT
