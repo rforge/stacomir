@@ -50,7 +50,7 @@ setClass(Class="RequeteODBC",
 #'  ## the connection is already closed, the query is printed
 #'}
 setMethod("connect",signature=signature("RequeteODBC"),definition=function(object) {     
-	  msg1<-gettext("'ODBC' error =>you have to define a vector baseODBC with the 'ODBC' link name, user and password")
+      msg1<-gettext("'ODBC' error =>you have to define a vector baseODBC with the 'ODBC' link name, user and password")
 	  msg2<-gettext("connection trial :")
 	  msg3<-gettext("connection impossible")
 	  msg4<-gettext("connection successfull")

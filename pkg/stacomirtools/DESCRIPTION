@@ -1,11 +1,11 @@
 Package: stacomirtools
-Version: 0.5.2
-Date: 2018-01-04
+Version: 0.5.2.1
+Date: 2018-01-09
 Title: 'ODBC' Connection Class for Package stacomiR
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"))
 Author: Cedric Briand [aut, cre]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
-Description:S4 class wrappers for the 'ODBC' connection, also provides some 
+Description: S4 class wrappers for the 'ODBC' connection, also provides some 
     utilities to paste small datasets to clipboard, rename columns. It is used by the package 'stacomiR' for
     connections to the database. Development versions of 'stacomiR' are available in R-forge.
 License: GPL (>= 2)
@@ -18,5 +18,6 @@ Collate:
     'stacomirtools.r'
     'stacomirtools-package.R' 
 LazyLoad: yes
-Depends:RODBC
+Depends: RODBC
 Imports: methods,xtable,utils
+Suggests: testthat
