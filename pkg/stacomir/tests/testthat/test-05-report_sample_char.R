@@ -1,6 +1,7 @@
 context("report_sample_char")
 
 test_that("Test that view lot_ope_car exists",{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 	  req<-new("RequeteODBC")

@@ -54,7 +54,6 @@ test_that("Tests one instance with error (dc does not exist)",
 
 test_that("Test charge method for report_mig_mult",
 	{
-	  
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")

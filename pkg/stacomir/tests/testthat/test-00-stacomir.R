@@ -48,26 +48,8 @@ test_that("Test that stacomirtools connects",{
 	})
 
 
-#test_that("testconnection to logrami serveur",{
-#			require(stacomiR)
-#			stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
-#			baseODBC<-get("baseODBC",envir=envir_stacomi)
-#			baseODBC[1]<- "BD_CONTMIG_SERVEUR"
-#			baseODBC[c(2,3)]<-rep('logrami',2)
-#			assign("baseODBC",baseODBC,envir_stacomi)
-#			sch<-get("sch",envir=envir_stacomi)
-#			assign("sch",paste('logrami',".", sep=""),envir_stacomi)
-#			con=new("ConnectionODBC")		
-#			con@baseODBC=baseODBC
-#			con<-connect(con)
-#			expect_is(connect(con),'ConnectionODBC')
-#			expect_equal(con@etat,"Connection in progress")
-#			odbcCloseAll()			
-#			rm("envir_stacomi")
-#		})
-
-
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
+	  skip_on_cran()
 	  require(stacomiR)
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
@@ -82,6 +64,7 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 	})
 
 test_that("Tests positive count for sch.t_operation_ope",{
+	  skip_on_cran()
 	  require(stacomiR)
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
@@ -134,6 +117,7 @@ context(stringr::str_c("Database integrity"))
 
 test_that("Test that tickets have been launched",
 	{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  req<-new("RequeteODBC")
@@ -178,6 +162,7 @@ test_that("Test that tickets have been launched",
 # test on current schema
 test_that("All foreign keys are present",
 	{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  req<-new("RequeteODBC")
