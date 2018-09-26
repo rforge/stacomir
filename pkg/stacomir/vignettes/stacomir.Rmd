@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 opts_knit$set(message=FALSE, warnings=FALSE,error=FALSE,include=FALSE) 
 ```
 
+
+
 # stacomiR <img src="../man/figures/logo.png" align="right" />
 
 ```{r echo=FALSE, include=FALSE}
@@ -216,7 +218,7 @@ without access, use the arguments `login_windows=FALSE` and
 `database_expected=FALSE`.
 
 
-```{r , eval=TRUE, echo=TRUE}
+```{r , eval=FALSE, echo=TRUE}
 ## launches the application in the command line without connection to the database
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ```
@@ -320,7 +322,7 @@ function `fun_stage_durif` choose the stage achieving the highest
 score ([Durif et al.,
 2009](http://fishlarvae.org/common/SiteMedia/durif%20et%20al%202009b.pdf))
 
-```{r silver,eval=TRUE,echo=TRUE,warning=FALSE,fig.height = 4, fig.width = 6,fig.keep="all"}
+```{r silver,eval=TRUE,echo=TRUE,message=FALSE,warning=FALSE,fig.height = 4, fig.width = 6,fig.keep="all"}
 require(stacomiR)
 data("coef_durif")
 # load a dataset of class report_silver_eel with data slot already prepared
