@@ -13,7 +13,7 @@ Description: Graphical outputs and treatment for a database of fish pass
     'STACOMI'.     
 License: GPL (>= 2)
 URL: http://stacomir.r-forge.r-project.org/
-BugReports: https://github.com/MarionLegrandLogrami/stacomiR/tree/master/issues
+BugReports: https://github.com/MarionLegrandLogrami/stacomiR/issues
 Collate:
     'create_generic.R'
     'data.R'
