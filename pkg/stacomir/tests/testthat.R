@@ -22,13 +22,13 @@ if(getUsername() == 'marion.legrand')
 
 if(getUsername() == 'cedric.briand')
 {
+  skip_on_cran()	
   test_dir("C:/workspace/stacomir/pkg/stacomir/tests/testthat")
-} else if(getUsername() == 'marion.legrand')
+}
+if(getUsername() == 'marion.legrand')
 {
+  skip_on_cran()
   test_dir("C:/Users/logrami/workspace/stacomir/pkg/stacomir/tests/testthat")
-} else
-{
-	test_dir("./tests/testthat")
 }
 
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-stacomir.R"))
