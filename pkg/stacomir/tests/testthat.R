@@ -1,7 +1,7 @@
 #install.packages("testthat",dependencies=c("Depends", "Imports"))
 #install.packages("relax")
 require(testthat)
-
+require(stacomiR)
 
 getUsername <- function(){
   name <- Sys.info()[["user"]]
@@ -31,6 +31,9 @@ if(getUsername() == 'marion.legrand')
   test_dir("C:/Users/logrami/workspace/stacomir/pkg/stacomir/tests/testthat")
 }
 
+test_check("stacomiR")
+
+\donttest{
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-stacomir.R"))
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-zrefclasses.R"))
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-01-report_mig_mult.R"))
@@ -51,3 +54,4 @@ test_file(stringr::str_c(getwd(),"/tests/testthat/test-10-report_env.R"))
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-11-report_mig_env.R"))
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-12-report_mig_char.R"))
 test_file(stringr::str_c(getwd(),"/tests/testthat/test-13-report_species.R"))
+}
