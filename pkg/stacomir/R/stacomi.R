@@ -377,7 +377,7 @@ stacomi=function(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE){
   # the following values may be overridden later in load_stacomi()
   assign("baseODBC",baseODBC,envir=envir_stacomi)
   assign("sch",paste(baseODBC[2],".",sep=""),envir=envir_stacomi)
-  dbname<-getdbname()	
+  if (database_expected) dbname<-getdbname()	
   #libraries()
   # change 2018 the test database is no longer used, we use usernames and
   # password from the local baseODBC string
