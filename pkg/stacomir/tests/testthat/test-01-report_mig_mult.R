@@ -101,6 +101,7 @@ test_that("Test connect method for report_mig_mult",
 
 test_that("Test example 01_report_mig_mult",
 	{
+	  skip_on_cran()
 	  # check if built with examples (Rtools install --example
 	  example_path<-file.path(.libPaths()[1],"stacomiR","R-ex","report_mig_mult-class.R")
 	  test<-file.access(example_path,0)
