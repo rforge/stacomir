@@ -1,7 +1,7 @@
 #install.packages("testthat",dependencies=c("Depends", "Imports"))
 #install.packages("relax")
-require(testthat)
-require(stacomiR)
+library(testthat)
+library(stacomiR)
 
 #getUsername <- function(){
 #  name <- Sys.info()[["user"]]

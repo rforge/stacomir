@@ -86,6 +86,7 @@ context("Loading program")
 
 
 test_that("Test that working environment is created",{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("envir_stacomi"))
