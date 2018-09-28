@@ -36,6 +36,7 @@ context("ref_df")
 
 test_that("Test that ref_df choice_c method loads character, numeric, but not rubbish",
 	{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  ref_df<-new("ref_df")

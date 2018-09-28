@@ -1,6 +1,7 @@
 context("stacomi base connection")
 
 test_that("Test existence of csv file",{
+	  skip_on_cran()
 	  filecsv<-"C:/Program Files/stacomi/calcmig.csv";
 	  expect_equivalent(file.access(filecsv,0),0)
 	}
@@ -10,6 +11,7 @@ test_that("Test existence of csv file",{
 #the program will set time to GMT, this will cause some errors hard to understand in some of 
 # the classes (report_mig, report_mig_mult), with the following you can check this problem
 test_that("Test that the program is running under the right locale",{
+	  skip_on_cran()
 	  expect_equal(Sys.getlocale(category = "LC_TIME"),"French_France.1252")			
 	}
 )
@@ -34,6 +36,7 @@ test_that("Test that ODBC link exists and has the right length",{
 context("Database connection")
 
 test_that("Test that stacomirtools connects",{
+	  skip_on_cran()
 	  require(stacomiR)
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
@@ -90,6 +93,7 @@ test_that("Test that working environment is created",{
 	})
 
 test_that("Test that gWidget loginwindow is loaded ",{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("logw",envir_stacomi))
@@ -97,6 +101,7 @@ test_that("Test that gWidget loginwindow is loaded ",{
 	})
 
 test_that("Test that gWidget gr_interface is loaded, without database_expected, nor login window",{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
 	  expect_true(exists("win",envir_stacomi))			
@@ -104,6 +109,7 @@ test_that("Test that gWidget gr_interface is loaded, without database_expected, 
 	})
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
+	  skip_on_cran()
 	  require(stacomiR)
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=TRUE)
 	  expect_true(exists("win",envir_stacomi))
