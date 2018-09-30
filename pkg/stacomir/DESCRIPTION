@@ -112,6 +112,6 @@ Author: Cedric Briand [aut, cre],
     Marion Legrand [aut],
     Timothee Besse [aut]
 Maintainer: Cedric Briand <cedric.briand00@gmail.com>
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0.9000
 NeedsCompilation: no
 VignetteBuilder: knitr
