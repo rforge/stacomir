@@ -22,12 +22,10 @@ library(stacomiR)
 #
 #if(getUsername() == 'cedric.briand')
 #{
-#  skip_on_cran()	
 #  test_dir("C:/workspace/stacomir/pkg/stacomir/tests/testthat")
 #}
 #if(getUsername() == 'marion.legrand')
 #{
-#  skip_on_cran()
 #  test_dir("C:/Users/logrami/workspace/stacomir/pkg/stacomir/tests/testthat")
 #}
 
