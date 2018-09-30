@@ -446,3 +446,10 @@ getdbname<-function(){
   dbname <- gsub("DATABASE=","",aa[[1]][2])
   return(dbname)
 }
+#' Test that the program is installed. 
+#' @return A logical checking if there is calcmig.csv folder
+stacomi_installed <- function (){
+filecsv<-"C:/Program Files/stacomi/calcmig.csv"
+test<-file.access(filecsv,0)==0
+return(test)
+}
