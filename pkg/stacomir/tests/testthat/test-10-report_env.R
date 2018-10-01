@@ -3,7 +3,13 @@ context("report_env")
 
 test_that("test creating an instance of report_env",{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  r_env<-new("report_env")
 	  r_env<-choice_c(r_env,
 		  stationMesure=c("temp_gabion","coef_maree"),
@@ -17,7 +23,13 @@ test_that("test creating an instance of report_env",{
 
 test_that("test plot method",{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  r_env<-new("report_env")
 	  r_env<-choice_c(r_env,
 		  stationMesure=c("temp_gabion","coef_maree"),

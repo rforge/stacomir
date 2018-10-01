@@ -6,7 +6,13 @@ test_that("test creating an instance of report_species",{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
-		  database_expected=FALSE)
+		  database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  bilesp<-new("report_species")
 	  # split is one of "none", "year", "week", "month
 	  
@@ -29,7 +35,13 @@ test_that("test calcule method report_species",{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
-		  database_expected=FALSE)
+		  database_expected=TRUE)
+  # overriding user schema
+  baseODBC<-get("baseODBC",envir=envir_stacomi)
+  baseODBC[c(2,3)]<-rep("iav",2)
+  assign("baseODBC",baseODBC,envir_stacomi)
+  sch<-get("sch",envir=envir_stacomi) # "iav."
+  assign("sch","iav.",envir_stacomi)
 	  bilesp<-new("report_species")
 	  # split is one of "none", "year", "week", "month
 	  

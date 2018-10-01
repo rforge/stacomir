@@ -10,13 +10,9 @@ There is also a fix to an error : the maintainer of Hmisc Frank E Harrell has as
 
 In addition this version adds :
 
-
-* compilation of messages, fixes bug for for some year in report\_mig\_mult
-* Editing translation messages 
-* fix bug for setasqualitative method in report\_sea__age
-* updated documentation 
-* Modification in glass eel graph
-* changes to the summary-report\_mig\_interannual-method 
+* the removal of calls to the database named "test", and use of dplyr for internal calculations. 
+* the update of tests
+* the developpement of a vignette to present the package
 
 #Testing Environments
 

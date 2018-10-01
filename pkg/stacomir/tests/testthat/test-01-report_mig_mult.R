@@ -1,7 +1,13 @@
 context("report_mig_mult")
 test_that("Test an instance of report_mig_mult",{
       skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  report_mig_mult<-new("report_mig_mult")
 	  #options(warn = -1)
 	  report_mig_mult<-suppressWarnings(choice_c(report_mig_mult,
@@ -20,7 +26,13 @@ test_that("Test an instance of report_mig_mult",{
 ## This test check that the code above works with numeric and a different formating for date
 test_that("Test another instance of report_mig_mult",{
       skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  report_mig_mult<-new("report_mig_mult")
 	  #options(warn = -1)
 	  report_mig_mult<-suppressWarnings(choice_c(report_mig_mult,
@@ -38,7 +50,13 @@ test_that("Test another instance of report_mig_mult",{
 test_that("Tests one instance with error (dc does not exist)",
 	{
       skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
 	  expect_error(choice_c(report_mig_mult,
@@ -55,7 +73,13 @@ test_that("Tests one instance with error (dc does not exist)",
 test_that("Test charge method for report_mig_mult",
 	{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
 	  report_mig_mult<-choice_c(report_mig_mult,
@@ -76,7 +100,13 @@ test_that("Test charge method for report_mig_mult",
 test_that("Test connect method for report_mig_mult",
 	{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  # overriding user schema
+	  baseODBC<-get("baseODBC",envir=envir_stacomi)
+	  baseODBC[c(2,3)]<-rep("iav",2)
+	  assign("baseODBC",baseODBC,envir_stacomi)
+	  sch<-get("sch",envir=envir_stacomi) # "iav."
+	  assign("sch","iav.",envir_stacomi)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
 	  report_mig_mult<-choice_c(report_mig_mult,
