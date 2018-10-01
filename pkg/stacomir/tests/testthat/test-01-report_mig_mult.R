@@ -1,6 +1,6 @@
 context("report_mig_mult")
 test_that("Test an instance of report_mig_mult",{
-	  require(stacomiR)
+      skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")
 	  #options(warn = -1)
@@ -19,7 +19,7 @@ test_that("Test an instance of report_mig_mult",{
 
 ## This test check that the code above works with numeric and a different formating for date
 test_that("Test another instance of report_mig_mult",{
-	  require(stacomiR)
+      skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")
 	  #options(warn = -1)
@@ -37,7 +37,7 @@ test_that("Test another instance of report_mig_mult",{
 	})
 test_that("Tests one instance with error (dc does not exist)",
 	{
-	  require(stacomiR)
+      skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
@@ -54,7 +54,7 @@ test_that("Tests one instance with error (dc does not exist)",
 
 test_that("Test charge method for report_mig_mult",
 	{
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
@@ -75,7 +75,7 @@ test_that("Test charge method for report_mig_mult",
 
 test_that("Test connect method for report_mig_mult",
 	{
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  report_mig_mult<-new("report_mig_mult")
 	  options(warn = -1)
@@ -99,18 +99,18 @@ test_that("Test connect method for report_mig_mult",
 	  rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
-test_that("Test example 01_report_mig_mult",
-	{
-	  skip_on_cran()
-	  # check if built with examples (Rtools install --example
-	  example_path<-file.path(.libPaths()[1],"stacomiR","R-ex","report_mig_mult-class.R")
-	  test<-file.access(example_path,0)
-	  if (test[1]!=0) warnings("Package example dir not created ?") else
-		options(warn = -1)
-	  source(example_path)
-	  options(warn = 0)
-	  expect_output(summary(r_mig_mult,silent=FALSE))      
-      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
-	})
+#test_that("Test example 01_report_mig_mult",
+#	{
+#	  #skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+#	  # check if built with examples (Rtools install --example
+#	  example_path<-file.path(.libPaths()[1],"stacomiR","R-ex","report_mig_mult-class.R")
+#	  test<-file.access(example_path,0)
+#	  if (test[1]!=0) warnings("Package example dir not created ?") else
+#		options(warn = -1)
+#	  source(example_path)
+#	  options(warn = 0)
+#	  expect_output(summary(r_mig_mult,silent=FALSE))      
+#      rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
+#	})
 
 

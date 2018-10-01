@@ -2,8 +2,8 @@ context("report_env")
 
 
 test_that("test creating an instance of report_env",{
-	  require(stacomiR)
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  r_env<-new("report_env")
 	  r_env<-choice_c(r_env,
 		  stationMesure=c("temp_gabion","coef_maree"),
@@ -16,8 +16,8 @@ test_that("test creating an instance of report_env",{
 	})
 
 test_that("test plot method",{
-	  require(stacomiR)
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  r_env<-new("report_env")
 	  r_env<-choice_c(r_env,
 		  stationMesure=c("temp_gabion","coef_maree"),

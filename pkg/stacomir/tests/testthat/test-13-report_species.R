@@ -3,7 +3,7 @@ context("report_species")
 
 test_that("test creating an instance of report_species",{
 	  
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
 		  database_expected=FALSE)
@@ -26,7 +26,7 @@ test_that("test creating an instance of report_species",{
 
 test_that("test calcule method report_species",{
 	  
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
 		  database_expected=FALSE)
@@ -47,7 +47,7 @@ test_that("test calcule method report_species",{
 	})
 
 test_that("test that plot method works",{
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
 		  database_expected=FALSE)
@@ -78,7 +78,7 @@ test_that("test that plot method works",{
 	  })
 
 test_that("test that summary method works",{
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,
 		  login_window=FALSE,
 		  database_expected=FALSE)

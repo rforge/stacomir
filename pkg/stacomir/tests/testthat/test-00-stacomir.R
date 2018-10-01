@@ -1,7 +1,7 @@
 context("stacomi base connection")
 
 test_that("Test existence of csv file",{
-	  skip_on_cran()
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  filecsv<-"C:/Program Files/stacomi/calcmig.csv";
 	  expect_equivalent(file.access(filecsv,0),0)
 	}
@@ -11,7 +11,7 @@ test_that("Test existence of csv file",{
 #the program will set time to GMT, this will cause some errors hard to understand in some of 
 # the classes (report_mig, report_mig_mult), with the following you can check this problem
 test_that("Test that the program is running under the right locale",{
-	  skip_on_cran()
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  expect_equal(Sys.getlocale(category = "LC_TIME"),"French_France.1252")			
 	}
 )
@@ -25,7 +25,7 @@ test_that("Test existence calcmig data within package",{
 )
 
 test_that("Test that ODBC link exists and has the right length",{
-	  require(stacomiR)
+      skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  result<-chargecsv(database_expected=TRUE);
 	  expect_equal(length(result),4)
 	  expect_equal(length(result$baseODBC),3)
@@ -36,8 +36,7 @@ test_that("Test that ODBC link exists and has the right length",{
 context("Database connection")
 
 test_that("Test that stacomirtools connects",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
@@ -52,8 +51,7 @@ test_that("Test that stacomirtools connects",{
 
 
 test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
@@ -67,8 +65,7 @@ test_that("Test that positive count for nrow(ref.tr_taxon_tax)",{
 	})
 
 test_that("Tests positive count for sch.t_operation_ope",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
       envir_stacomi <- new.env(parent = asNamespace("stacomiR"))
 	  mylinks=chargecsv(database_expected=TRUE)
 	  baseODBC=mylinks[["baseODBC"]]	
@@ -86,32 +83,28 @@ context("Loading program")
 
 
 test_that("Test that working environment is created",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("envir_stacomi"))
 	  dispose(get("logw",envir_stacomi))
 	})
 
 test_that("Test that gWidget loginwindow is loaded ",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=TRUE,login_window=TRUE,database_expected=TRUE)
 	  expect_true(exists("logw",envir_stacomi))
 	  dispose(get("logw",envir_stacomi))
 	})
 
 test_that("Test that gWidget gr_interface is loaded, without database_expected, nor login window",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=FALSE)
 	  expect_true(exists("win",envir_stacomi))			
 	  dispose(get("win",envir_stacomi))
 	})
 
 test_that("gWidget gr_interface is loaded, with pre launch_test, but without login window",{
-	  skip_on_cran()
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=TRUE,login_window=FALSE,database_expected=TRUE)
 	  expect_true(exists("win",envir_stacomi))
 	  dispose(get("win",envir_stacomi))
@@ -124,7 +117,7 @@ context(stringr::str_c("Database integrity"))
 
 test_that("Test that tickets have been launched",
 	{
-	  skip_on_cran()
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  require(stacomiR)
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  req<-new("RequeteODBC")
@@ -153,7 +146,7 @@ test_that("Test that tickets have been launched",
 				  "ajout de la notion de cohorte pour les saumons passant très précocément", 
 				  "Mise à jour des localisations anatomiques", 
 				  "Mise à jour vers la version 0.4 alpha, mise à jour des référentiels du SANDRE, script ticjet81_mise_en_conformite_sandre, révision 98", 
-				  "Mise à jour vers la version 0.4 alpha, mise à jour ds constraintes stationmesure modification limites coordonnées géographiques", 
+				  "Mise à jour vers la version 0.4 alpha, mise à jour des constraintes stationmesure modification limites coordonnées géographiques", 
 				  "Mise à jour vers la version 0.4 alpha, problèmes de clé étrangères, script total", 
 				  "Mise à jour vers la version 0.4 alpha, creation des masques"
 			  )), 
@@ -169,9 +162,8 @@ test_that("Test that tickets have been launched",
 # test on current schema
 test_that("All foreign keys are present",
 	{
-	  skip_on_cran()
-	  require(stacomiR)
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 	  req<-new("RequeteODBC")
 	  baseODBC<-get("baseODBC", envir=envir_stacomi)
 	  options(warn=-1)
@@ -193,7 +185,7 @@ test_that("All foreign keys are present",
 				  "c_fk_act_mqe_reference", "c_fk_act_org_code", "c_fk_bjo_org_code", 
 				  "c_fk_bjo_std_code", "c_fk_bjo_tax_code", "c_fk_bme_std_code", 
 				  "c_fk_bme_tax_code", "c_fk_car_lot_identifiant", "c_fk_car_org_code", 
-				  "c_fk_car_par_code", "c_fk_car_val_identifiant", "c_fk_coe_org_code", 
+				  "c_fk_car_par_code", "c_fk_car_val_par_identifiant", "c_fk_coe_org_code", 
 				  "c_fk_coe_qte_code", "c_fk_coe_std_code", "c_fk_coe_tax_code", 
 				  "c_fk_dft_df_identifiant", "c_fk_dft_org_code", "c_fk_dft_tdf_code", 
 				  "c_fk_dic_dif_identifiant", "c_fk_dic_dis_identifiant", "c_fk_dic_org_code", 

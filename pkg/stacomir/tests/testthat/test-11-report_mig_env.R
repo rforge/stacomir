@@ -2,8 +2,8 @@ context("report_mig_env")
 
 
 test_that("test creating an instance of report_mig_env",{
-	  require(stacomiR)
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  r_mig_env<-new("report_mig_env")
 	  r_mig_env<-choice_c(r_mig_env,
 		  dc=c(5,6,12),
@@ -21,8 +21,8 @@ test_that("test creating an instance of report_mig_env",{
 	})
 
 test_that("test plot method",{
-	  require(stacomiR)
-	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
+	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  r_mig_env<-new("report_mig_env")
 	  r_mig_env<-choice_c(r_mig_env,
 		  dc=c(5,6,12),
