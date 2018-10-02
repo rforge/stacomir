@@ -34,7 +34,7 @@ test_check("stacomiR")
 
 #test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-stacomir.R"))
 #test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-zrefclasses.R"))
-test_file(stringr::str_c(getwd(),"/tests/testthat/test-01-report_mig_mult.R"))
+#test_file(stringr::str_c(getwd(),"/tests/testthat/test-01-report_mig_mult.R"))
 ## warning we don't need to be worried about
 ##Quoted identifiers should have class SQL, use DBI::SQL() if the caller performs the quoting.
 ## this comes from incompatibility between  RSQLite 1.1-1 and sqldf
