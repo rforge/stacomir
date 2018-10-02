@@ -24,6 +24,7 @@ test_that("Test an instance of report_mig",{
 
 
 test_that("Test an instance of report_mig, check that operations accross two years are split correcly",{
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 	  # overriding user schema to point to iav
 	  baseODBC<-get("baseODBC",envir=envir_stacomi)

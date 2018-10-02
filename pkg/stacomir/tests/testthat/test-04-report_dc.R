@@ -65,16 +65,17 @@ test_that("report_dc plot method works",{
 
 
 test_that("report_dc summary method works",{
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  data(r_dc)
 	  r_dc<-r_dc
-	  expect_output(summary(r_dc,silent=FALSE),"summary")
+	  expect_output(summary(r_dc,silent=TRUE),"summary")
       rm(list=ls(envir=envir_stacomi),envir=envir_stacomi)
 	})
 
 
 test_that("report_dc print method works",{
-	  require(stacomiR)
+	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE)
 	  data(r_dc)
 	  r_dc<-r_dc
