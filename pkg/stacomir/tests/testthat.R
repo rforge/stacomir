@@ -30,7 +30,7 @@ library(stacomiR)
 #}
 
 test_check("stacomiR")
-
+devtools::test()
 
 #test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-stacomir.R"))
 #test_file(stringr::str_c(getwd(),"/tests/testthat/test-00-zrefclasses.R"))

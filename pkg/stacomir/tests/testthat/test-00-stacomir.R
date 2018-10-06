@@ -160,12 +160,16 @@ test_that("Test that tickets have been launched",
 	  }					
 	})
 # test on current schema
+
 test_that("All foreign keys are present",
 	{
 	  skip_if_not(stacomi_installed(),"skipping as the program is not installed on this computer")
 	  stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=TRUE)
 	  req<-new("RequeteODBC")
 	  baseODBC<-get("baseODBC", envir=envir_stacomi)
+      # ATTENTION local user may not have the rights to  connect information schema
+      # baseODBC[2] <- userlocal
+      # baseODBC[3] <- passwordlocal
 	  options(warn=-1)
 	  #warning : Coercing LHS to a list	 	
 	  options(warn=0)
