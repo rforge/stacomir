@@ -218,7 +218,7 @@ without access, use the arguments `login_windows=FALSE` and
 `database_expected=FALSE`.
 
 
-```{r , eval=FALSE, echo=TRUE}
+```{r , eval=TRUE, echo=TRUE}
 ## launches the application in the command line without connection to the database
 stacomi(gr_interface=FALSE,login_window=FALSE,database_expected=FALSE) 
 ```
@@ -277,7 +277,7 @@ the periods and type of operation for DF and DC, and the operation (trapping
 periods) (middle), a summary of migration per month (bottom).
 
 
-```{r rmmstd,eval=FALSE,echo=TRUE,message=FALSE}
+```{r rmmstd,eval=TRUE,echo=TRUE,message=FALSE}
 # Without a connection at the database we can launch these lines to generate the graph
 # To obtain titles in french use Sys.setenv(LANG = "fr")
 stacomi(gr_interface=FALSE,
@@ -304,7 +304,7 @@ plot(r_mig_mult,plot.type="standard",silent=TRUE)
 
 Summary of migration for different stages and counting devices
 
-```{r rmmmult,eval=FALSE,echo=TRUE,fig.height = 4, fig.width = 6}
+```{r rmmmult,eval=TRUE,echo=TRUE,fig.height = 4, fig.width = 6}
 
   plot(r_mig_mult,plot.type="multiple",silent=TRUE)
 ```
