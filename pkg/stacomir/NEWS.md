@@ -1,3 +1,7 @@
+# stacomiR 0.5.4.1
+
+* fixed issue with prototype generating check warning on CRAN
+
 # stacomiR 0.5.4.0
 
 * removed reference to test database, and use of dplyr for internal calculations. 

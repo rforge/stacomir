@@ -1,1 +1,9 @@
-inst/config/test.R
+Dear Cran Adminstrator
+
+# stacomitools 0.5.3
+
+This is a maintenance version of the package with following changes
+
+* added unit tests
+
+* removed bug, file not working when envir_stacomi not present, this environment is added when used with stacomir package.
