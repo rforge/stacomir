@@ -1,3 +1,7 @@
+# stacomiR 0.5.4.2
+
+* fixed new issues with rounding error when building vignette
+
 # stacomiR 0.5.4.1
 
 * fixed issue with prototype generating check warning on CRAN
