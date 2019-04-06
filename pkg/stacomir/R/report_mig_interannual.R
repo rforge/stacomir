@@ -95,7 +95,7 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 		requete=new("RequeteODBCwhere")
 		requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
 		requete@where=paste("WHERE bjo_annee IN ",vector_to_listsql(les_annees)," AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant in",vector_to_listsql(dic),sep="")
-		requete@select=paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo",sep="")
+		requete@select=paste("SELECT * FROM ",rlang::env_get(envir_stacomi, "sch"),"t_bilanmigrationjournalier_bjo",sep="")
 		requete@order_by=" ORDER BY bjo_jour "
 		requete<-stacomirtools::connect(requete)
 		data<- stacomirtools::killfactor(requete@query)
@@ -276,13 +276,13 @@ setMethod("supprime",signature=signature("report_mig_interannual"),
 	  dic= object@dc@dc_selectionne
 	  requete=new("RequeteODBCwhere")
 	  requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-	  requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo ")
+	  requete@select=stringr::str_c("DELETE from ",rlang::env_get(envir_stacomi, "sch"),"t_bilanmigrationjournalier_bjo ")
 	  requete@where=paste("WHERE bjo_annee IN (",paste(les_annees,collapse=","),") AND bjo_tax_code='",tax,"' AND bjo_std_code='",std,"' AND bjo_dis_identifiant=",dic,sep="")
 	  invisible(utils::capture.output(requete<-stacomirtools::connect(requete)))
 	  
 	  requete=new("RequeteODBCwhere")
 	  requete@baseODBC<-get("baseODBC",envir=envir_stacomi)
-	  requete@select=stringr::str_c("DELETE from ",get("sch",envir=envir_stacomi),"t_reportmigrationmensuel_bme ")
+	  requete@select=stringr::str_c("DELETE from ",rlang::env_get(envir_stacomi, "sch"),"t_reportmigrationmensuel_bme ")
 	  requete@where=paste("WHERE bme_annee IN (",paste(les_annees,collapse=","),") AND bme_tax_code='",tax,"' AND bme_std_code='",std,"' AND bme_dis_identifiant=",dic,sep="")
 	  invisible(utils::capture.output(requete<-stacomirtools::connect(requete)))
 	  

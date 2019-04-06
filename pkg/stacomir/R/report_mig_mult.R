@@ -308,7 +308,7 @@ setMethod("connect",signature=signature("report_mig_mult"),definition=function(o
 	  tax=vector_to_listsql(report_mig_mult@taxa@data$tax_code)
 	  if (length(report_mig_mult@stage@data$std_code)==0) stop("Stage has length zero, are you connected to the right schema, do you use the right stage ?")
 	  std=vector_to_listsql(report_mig_mult@stage@data$std_code)
-	  sch=get("sch",envir=envir_stacomi)
+	  sch=rlang::env_get(envir_stacomi, "sch")
 	  req@select = stringr::str_c("SELECT 
 			  ope_identifiant,
 			  lot_identifiant,

@@ -651,7 +651,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 			rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","Effectif_total.p","Effectif_total.e","poids_depuis_effectifs","Poids_total","taux_d_echappement","coe_valeur_coefficient")])),
 			utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","Effectif_total.p","Effectif_total.e","poids_depuis_effectifs","Poids_total","taux_d_echappement","coe_valeur_coefficient")]),  
 			Sys.time(),
-			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+			substr(toupper(rlang::env_get(envir_stacomi, "sch")),1,nchar(toupper(rlang::env_get(envir_stacomi, "sch")))-1)
 		)	
 	  } else{
 		aat_reportmigrationjournalier_bjo=cbind(
@@ -662,7 +662,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 			rep(jour_dans_lannee_non_nuls,ncol(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")])),
 			utils::stack(data[,c("MESURE","CALCULE","EXPERT","PONCTUEL","Effectif_total","taux_d_echappement","coe_valeur_coefficient")]),  
 			Sys.time(),
-			substr(toupper(get("sch",envir=envir_stacomi)),1,nchar(toupper(get("sch",envir=envir_stacomi)))-1)
+			substr(toupper(rlang::env_get(envir_stacomi, "sch")),1,nchar(toupper(rlang::env_get(envir_stacomi, "sch")))-1)
 		)	
 	  }
 	  aat_reportmigrationjournalier_bjo= stacomirtools::killfactor(aat_reportmigrationjournalier_bjo[!is.na(aat_reportmigrationjournalier_bjo$values),])
@@ -682,7 +682,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 	  hconfirm=function(h,...){			
 		if (check_for_bjo) supprime(bil)			
 		baseODBC<-get("baseODBC",envir=envir_stacomi)
-		sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
+		sql<-stringr::str_c("INSERT INTO ",rlang::env_get(envir_stacomi, "sch"),"t_bilanmigrationjournalier_bjo (",			
 			"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 			" SELECT * FROM  aat_reportmigrationjournalier_bjo;")
 		invisible(utils::capture.output(
@@ -725,7 +725,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 	  {
 		
 		baseODBC<-get("baseODBC",envir=envir_stacomi)
-		sql<-stringr::str_c("INSERT INTO ",get("sch",envir=envir_stacomi),"t_bilanmigrationjournalier_bjo (",			
+		sql<-stringr::str_c("INSERT INTO ",rlang::env_get(envir_stacomi, "sch"),"t_bilanmigrationjournalier_bjo (",			
 			"bjo_dis_identifiant,bjo_tax_code,bjo_std_code,bjo_annee,bjo_jour,bjo_valeur,bjo_labelquantite,bjo_horodateexport,bjo_org_code)",
 			" SELECT * FROM  aat_reportmigrationjournalier_bjo;")
 		

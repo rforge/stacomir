@@ -51,7 +51,7 @@ setClass(Class="report_sample_char",
 setMethod("connect",signature=signature("report_sample_char"),definition=function(object,silent=FALSE) {
 	  requete<-new("RequeteODBCwheredate")
 	  requete@baseODBC=get("baseODBC",envir=envir_stacomi)
-	  requete@select= paste("SELECT * FROM ",get("sch",envir=envir_stacomi),"vue_lot_ope_car",sep="")
+	  requete@select= paste("SELECT * FROM ",rlang::env_get(envir_stacomi, "sch"),"vue_lot_ope_car",sep="")
 	  requete@colonnedebut="ope_date_debut"
 	  requete@colonnefin="ope_date_fin"
 	  requete@datedebut<-object@horodatedebut@horodate
