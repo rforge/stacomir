@@ -101,6 +101,10 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 		data<- stacomirtools::killfactor(requete@query)
 	  }
 	  object@data<-fn_connect()
+		if (nrow(object@data)==0) {
+			funout(gettextf("No data in table t_bilanmigrationjournalier_bjo",domain="R-StacomiR"))
+			check=TRUE
+		}
 	  #browser()
 	  if (check){
 		#----------------------------------------------------------------------
@@ -120,12 +124,14 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 		  # in the t_reportjournalier_bjo table
 		  ###########################################
 		  #==========================================
-		  fn_check<-function(){
+		 
+		fn_check<-function(){
 			data1<-report_annual@data[report_annual@data$ope_dic_identifiant==dic[i],c("effectif","annee")] 
 			# data from report_migInterannuel
 			data2<-object@data[object@data$bjo_dis_identifiant==dic[i],]
 			data21<-dplyr::select(data2,bjo_annee,bjo_valeur,bjo_labelquantite)
 			data22<-dplyr::group_by(data21,bjo_annee,bjo_labelquantite)
+			if (nrow(data22)==0) data22$bjo_valeur <- as.numeric(data22$bjo_valeur)
 			data23<-dplyr::summarize(data22,total=sum(bjo_valeur))
 			data24<-dplyr::filter(dplyr::ungroup(data23),bjo_labelquantite=="Effectif_total")
 			data24<-dplyr::select(data24,bjo_annee,total)
