@@ -628,8 +628,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 	  dc=as.numeric(report_mig@dc@dc_selectionne)[1]
 	  data=report_mig@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
 		# keep one line if there is one species in one day with as much up as down...
-		if (nrow(data)>1)
-	  data=data[data$Effectif_total!=0,]
+		if (nrow(data)>1) 	  data=data[data$Effectif_total!=0,]
 	  jour_dans_lannee_non_nuls=data$debut_pas	
 	  col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
 	  col_a_retirer=col_a_retirer[!is.na(col_a_retirer)] # as in the case of glass eel and weight
@@ -643,7 +642,7 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 		data$coe_valeur_coefficient[data$"coe_valeur_coefficient"==1]<-NA 
 	  }else {data$coe_valeur_coefficient<-NA}
 	  cannotbenull=match(c("taux_d_echappement","coe_valeur_coefficient"),colnames(data))
-	  data[,-cannotbenull][data[,-cannotbenull]==0]<-NA
+		if (nrow(data)>1) data[,-cannotbenull][data[,-cannotbenull]==0]<-NA
 	  annee<-as.numeric(unique(strftime(as.POSIXlt(report_mig@time.sequence),"%Y"))[1])
 	  if ("Poids_total"%in%colnames(data)){
 		aat_reportmigrationjournalier_bjo=cbind(
