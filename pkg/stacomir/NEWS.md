@@ -1,3 +1,10 @@
+# stacomiR 0.5.4.XXX
+
+* fixed problem when report with just one line in one year where total number is zero
+* fixed bug in monthly report when there is just a single month
+* fixed new bug in report_interannual where no value returned from the database created a character which 
+was crashing the program
+
 # stacomiR 0.5.4.2
 
 * fixed new issues with rounding error when building vignette
