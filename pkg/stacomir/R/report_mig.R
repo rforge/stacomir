@@ -627,12 +627,15 @@ setMethod("write_database",signature=signature("report_mig"),definition=function
 	  if (class(silent)!="logical") stop("the silent argument should be a logical")
 	  dc=as.numeric(report_mig@dc@dc_selectionne)[1]
 	  data=report_mig@calcdata[[stringr::str_c("dc_",dc)]][["data"]]
+		# keep one line if there is one species in one day with as much up as down...
+		if (nrow(data)>1)
 	  data=data[data$Effectif_total!=0,]
 	  jour_dans_lannee_non_nuls=data$debut_pas	
 	  col_a_retirer=match(c("No.pas","type_de_quantite","debut_pas","fin_pas"),colnames(data))
 	  col_a_retirer=col_a_retirer[!is.na(col_a_retirer)] # as in the case of glass eel and weight
 	  # the columns are not the same
 	  data=data[,-col_a_retirer]
+
 	  # below again the taux_d_echappement not there if glass eel and weights
 	  if (is.null(data$taux_d_echappement)) data$taux_d_echappement<-NA
 	  data$taux_d_echappement[data$taux_d_echappement==-1]<-NA 

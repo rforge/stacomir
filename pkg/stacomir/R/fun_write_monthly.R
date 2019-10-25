@@ -12,9 +12,6 @@ fun_write_monthly<-function(report_mig,resum,silent){
   # voir essai_table_reportmensuel.sql pour le format du tableau
   # below not the most elegant way to do it but efficient
   
-  # bug 2019 the function does not work if only one month is reported
-  # for this reason we only launch the fun_write_month with col >3
-  # TODO manage this bug
  t_reportmigrationmensuel_bme=stacomirtools::killfactor(
 	  cbind(report_mig@dc@dc_selectionne,
 		  report_mig@taxa@data$tax_code,
