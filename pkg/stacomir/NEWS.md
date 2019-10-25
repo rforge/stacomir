@@ -4,6 +4,7 @@
 * fixed bug in monthly report when there is just a single month
 * fixed new bug in report_interannual where no value returned from the database created a character which 
 was crashing the program
+* fixed bug in bilan interannual when quantiles were calculated on a single line, now reports exactly the value of that line for all quantiles and avoid crashes.
 
 # stacomiR 0.5.4.2
 
