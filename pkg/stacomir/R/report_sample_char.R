@@ -219,7 +219,6 @@ setMethod("calcule",signature=signature("report_sample_char"),definition=functio
 #' @param plot.type One of "1","violin plot". Defaut to \code{1} , can also be \code{2} boxplot or 
 #' \code{3} points. 
 #' @param silent Stops displaying the messages.
-#' @param ... Additional arguments, see \code{plot}, \code{plot.default} and \code{par}
 #' @author Cedric Briand \email{cedric.briand"at"eptb-vilaine.fr}
 #' @aliases plot.report_sample_char
 #' @export
