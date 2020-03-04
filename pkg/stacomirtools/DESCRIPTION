@@ -1,6 +1,6 @@
 Package: stacomirtools
-Version: 0.5.3
-Date: 2018-10-05
+Version: 0.5.4
+Date: 2020-04-03
 Title: 'ODBC' Connection Class for Package stacomiR
 Authors@R: c(person("Cedric", "Briand", role = c("aut", "cre"), email = "cedric.briand00@gmail.com"))
 Author: Cedric Briand [aut, cre]
