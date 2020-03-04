@@ -1,17 +1,18 @@
 # stacomiR 0.5.4.XXX
 
-* The vignette crashes as the program finds difference between rounded numbers, I don't understand why, 
-    round(sum(datasub$value, na.rm = TRUE), 2) and round(sum(datasub2$value, na.rm = TRUE), 2) are not equal: 0.000996741
-    I don't see how this is possible but I'm changing the test.
+
 
 # stacomiR 0.5.4.3
+
 
 * fixed problem when report with just one line in one year where total number is zero
 * fixed bug in monthly report when there is just a single month
 * fixed new bug in report_interannual where no value returned from the database created a character which 
 was crashing the program
 * fixed bug in bilan interannual when quantiles were calculated on a single line, now reports exactly the value of that line for all quantiles and avoid crashes.
-* fixed problem in plot,report_sample_char,missing-method, a ... additional was documented but not present 
+* fixed problem in plot,report_sample_char,missing-method, a ... additional was documented but not present (sent from CRAN)
+* The vignette crashes as the program finds difference between rounded numbers, while I don't understand why, 
+    round(sum(datasub$value, na.rm = TRUE), 2) and round(sum(datasub2$value, na.rm = TRUE), 2) are not equal: and provide a difference that is not rounded (e.g. 0.000996741) I have changed the test.
 
 # stacomiR 0.5.4.2
 
