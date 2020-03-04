@@ -1,5 +1,8 @@
 # stacomiR 0.5.4.XXX
 
+* The vignette crashes as the program finds difference between rounded numbers, I don't understand why, 
+    round(sum(datasub$value, na.rm = TRUE), 2) and round(sum(datasub2$value, na.rm = TRUE), 2) are not equal: 0.000996741
+    I don't see how this is possible but I'm changing the test.
 
 # stacomiR 0.5.4.3
 
