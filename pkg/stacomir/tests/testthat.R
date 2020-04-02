@@ -2,7 +2,7 @@
 #install.packages("relax")
 library(testthat)
 library(stacomiR)
-
+library(rlang)
 #getUsername <- function(){
 #  name <- Sys.info()[["user"]]
 #  return(name)

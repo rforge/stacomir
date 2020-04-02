@@ -394,7 +394,7 @@ setMethod("plot", signature(x = "report_silver_eel", y = "missing"), definition=
 	  if (plot.type=="2"){	
 		datdc1<-dplyr::select(datdc,ouv,annee,mois,stage)
 		datdc1<-dplyr::group_by(datdc1,ouv,annee,mois,stage)
-		datdc1<-dplyr::summarize(datdc1,N=n())
+		datdc1<-dplyr::summarize(datdc1,N=dplyr::n())
 		datdc1<-as.data.frame(datdc1)
 		# show.settings()
 		my.settings <- list(

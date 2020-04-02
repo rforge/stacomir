@@ -1,5 +1,9 @@
 # stacomiR 0.5.4.XXX
 
+## Minor improvement and bug fix
+* added import to package  `rlang` 
+* Change to adapt to new dplyr format `dplyr:n()` instead of `n()` see dplyr breaking change in version 1.0.0
+
 
 
 # stacomiR 0.5.4.3
