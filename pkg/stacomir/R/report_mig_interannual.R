@@ -86,7 +86,21 @@ setMethod("connect",signature=signature("report_mig_interannual"),
 			#---------------------------------------------------------------------------------------
 			# this function will be run several times if missing data or mismatching data are found
 			# later in the script (hence the encapsulation)
-			#---------------------------------------------------------------------------------------
+			
+			# if not silent display information about the connection 
+			if (!silent){
+				host <- get("sqldf.options",envir=envir_stacomi)["sqldf.RPostgreSQL.host"]
+				funout(gettextf("host:%s",host,domain="R-StacomiR"))
+				port <- get("sqldf.options",envir=envir_stacomi)["sqldf.RPostgreSQL.port"]		
+				funout(gettextf("port:%s",port,hostdomain="R-StacomiR"))
+				# getting the database name
+				dbname <- get("sqldf.options",envir=envir_stacomi)["sqldf.RPostgreSQL.dbname"]
+				funout(gettextf("dbname:%s",dbname,hostdomain="R-StacomiR"))				
+			}
+				
+				#---------------------------------------------------------------------------------------
+			
+			
 			fn_connect<-function(){
 				les_annees = (object@start_year@annee_selectionnee):(object@end_year@annee_selectionnee)
 				tax = object@taxa@data$tax_code
@@ -773,8 +787,8 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 						g <- g+geom_crossbar(data=newdat,aes_string(x=timesplit, 
 										y="moyenne",
 										ymin="mintab",ymax="maxtab"),fill="grey60",alpha=0.5,size=0.5,fatten=3,col="grey60")
-						g <- g+geom_bar(stat="identity",aes_string(ymin="valeur",ymax="valeur",col="comp"),fill=NA,width=0.6)
-						g <- g+geom_bar(stat="identity",aes_string(ymin="valeur",ymax="valeur",fill="comp"),alpha=0.5,width=0.6)
+						g <- g+geom_bar(stat="identity",aes_string(y="valeur",col="comp"),fill=NA,width=0.6)
+						g <- g+geom_bar(stat="identity",aes_string(y="valeur",fill="comp"),alpha=0.5,width=0.6)
 						#g <- g+scale_x_date(name=paste("mois"),breaks="month",minor_breaks=getvalue(new("ref_period"),label=date_format("%b"),timesplit))
 						#lim=as.POSIXct(c(Hmisc::truncPOSIXt((min(tmp[tmp$com!="0",timesplit])),"month")-delai,
 						#				Hmisc::ceil((max(tmp[tmp$com!="0",timesplit])),"month")+delai)) 
@@ -802,7 +816,7 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 						
 						g <- g+labs(title=paste(report_mig_interannual@taxa@data$tax_nom_latin, ",", 
 										report_mig_interannual@stage@data$std_libelle,
-										", report par", 
+										", bilan par", 
 										timesplit, 
 										unique(as.character(tmp$annee)), "/", amplitude))
 						g <- g+ theme_minimal() 
