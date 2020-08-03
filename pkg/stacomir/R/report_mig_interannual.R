@@ -985,11 +985,11 @@ setMethod("plot",signature(x = "report_mig_interannual", y = "missing"),definiti
 					dat3<-fn_getbacktodate(dat=dat3,
 							col=c("Q0","Q5","Q50","Q95","Q100","d90"),
 							timesplit_=timesplit)
-					datadic1<-dplyr::select_(datadic,timesplit,"bjo_annee","bjo_valeur")
-					datadic1<-dplyr::group_by_(datadic1, "bjo_annee",timesplit)
+					datadic1<-dplyr::select_(datadic,timesplit,"bjo_annee","bjo_valeur","bjo_labelquantite")
+					datadic1<-dplyr::group_by_(datadic1, "bjo_annee",timesplit,"bjo_labelquantite")
 					datadic1<-dplyr::summarize(datadic1,bjo_valeur=sum(bjo_valeur))
-					datadic1<-dplyr::ungroup(datadic1)
-					g<-ggplot(data=datadic1)+
+					datadic1<-dplyr::ungroup(datadic1) %>% dplyr::filter(bjo_labelquantite=="Effectif_total")
+					g <- ggplot(data=datadic1)+
 							geom_rect(aes(xmin = Q0,xmax = Q100,ymin=year-0.5,ymax=year+0.5),fill="grey90",data=dat3)+
 							geom_tile(aes_string(x=timesplit,y="bjo_annee", fill = "bjo_valeur"),color=ifelse(timesplit=="jour","transparent","grey80"))+ 
 							scale_fill_distiller(palette = "Spectral", name="Effectif")+
