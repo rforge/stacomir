@@ -92,7 +92,7 @@ fungraph=function(report_mig,tableau,time.sequence,taxa,stage,dc=NULL,silent,col
   dots<-list(...)
   if (!"main"%in%names(dots)) main=gettextf("Migration graph %s, %s, %s, %s",dis_commentaire,taxa,stage,annee,domain="R-stacomiR")
   else main=dots[["main"]]
-  if (!"ylab"%in%names(dots)) ylab=gettext("Number of glass eels (x1000)",domain="R-stacomiR")
+  if (!"ylab"%in%names(dots)) ylab=gettext("Number",domain="R-stacomiR")
   else ylab=dots[["ylab"]]
   if (!"cex.main"%in%names(dots)) cex.main=1
   else cex.main=dots[["cex.main"]]
